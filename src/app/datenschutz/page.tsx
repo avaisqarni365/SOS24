@@ -61,9 +61,9 @@ export default function DatenschutzPage() {
       <section>
         <h2>4. Speicherung in Ihrem Browser</h2>
         <p>
-          Wenn Sie die Sprache der Website umstellen, merkt sich Ihr Browser diese Auswahl (Eintrag „sos_lang“ im
-          lokalen Speicher). Der Eintrag verlässt Ihr Gerät nicht und wird nicht an uns übertragen. Er ist für die von
-          Ihnen gewünschte Funktion erforderlich (§ 25 Abs. 2 Nr. 2 TDDDG). Sie können ihn jederzeit über die
+          Wenn Sie die Sprache, die Darstellung (hell oder dunkel) oder die Schriftgröße umstellen, merkt sich Ihr
+          Browser diese Auswahl (Einträge „sos_lang“, „sos_theme“ und „sos_text“ im lokalen Speicher). Diese Einträge verlassen Ihr Gerät nicht und werden nicht an uns übertragen. Sie sind für die von
+          Ihnen gewünschte Funktion erforderlich (§ 25 Abs. 2 Nr. 2 TDDDG). Sie können sie jederzeit über die
           Einstellungen Ihres Browsers löschen.
         </p>
       </section>

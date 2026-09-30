@@ -9,7 +9,7 @@ import { useLanguage } from "@/i18n/LanguageContext";
 const WallInjection3D = dynamic(() => import("@/components/3d/WallInjection3D"), {
   ssr: false,
   loading: () => (
-    <div className="w-full h-[460px] bg-landing-ink2 border border-white/[0.08] rounded-3xl animate-pulse flex items-center justify-center text-landing-bone/50 font-mono text-xs">
+    <div className="w-full h-[460px] bg-landing-ink2 border border-line/[0.08] rounded-3xl animate-pulse flex items-center justify-center text-landing-bone/50 font-mono text-xs">
       3D-Simulationsmodell wird initialisiert...
     </div>
   )
@@ -56,7 +56,7 @@ export default function InjectionProcess() {
         </div>
 
         {/* 4 Steps - Kontai24 Exact Interactive Step Grid */}
-        <div className="mt-16 pt-12 border-t border-white/[0.08]">
+        <div className="mt-16 pt-12 border-t border-line/[0.08]">
           <p className="text-[11px] font-semibold uppercase tracking-[0.18em] mb-3 text-landing-emerald font-mono">
             {t("pipe.secSub")}
           </p>
@@ -64,7 +64,7 @@ export default function InjectionProcess() {
             {t("pipe.secH3")}
           </h3>
 
-          <ol className="grid gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/10 sm:grid-cols-2">
+          <ol className="grid gap-px overflow-hidden rounded-2xl border border-line/10 bg-line/10 sm:grid-cols-2">
             {PROCESS_PIPELINE.map((p, idx) => {
               const isActive = idx === activeStepIndex;
               return (
@@ -107,7 +107,7 @@ export default function InjectionProcess() {
                     {p.desc}
                   </p>
 
-                  <div className="mt-6 flex items-center justify-between pt-4 border-t border-white/5">
+                  <div className="mt-6 flex items-center justify-between pt-4 border-t border-line/5">
                     <span
                       className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-[11px] font-mono transition-colors duration-500 ${
                         isActive

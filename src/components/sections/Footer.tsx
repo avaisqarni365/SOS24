@@ -6,7 +6,7 @@ import Logo from "@/components/brand/Logo";
 
 export default function Footer() {
   return (
-    <footer className="border-t border-white/[0.07] bg-[var(--ink)] py-16 text-[var(--bone)]/70">
+    <footer className="theme-dark border-t border-line/[0.07] bg-[var(--ink)] py-16 text-[var(--bone)]/70">
       <div className="mx-auto max-w-7xl px-6 sm:px-8">
         <div className="grid grid-cols-1 gap-10 md:grid-cols-12">
           <div className="space-y-4 md:col-span-4">
@@ -76,7 +76,7 @@ export default function Footer() {
             </ul>
           </nav>
         </div>
-        <div className="mt-12 flex flex-col items-start justify-between gap-3 border-t border-white/5 pt-8 font-mono text-[11px] text-[var(--bone)]/55 sm:flex-row">
+        <div className="mt-12 flex flex-col items-start justify-between gap-3 border-t border-line/5 pt-8 font-mono text-[11px] text-[var(--bone)]/55 sm:flex-row">
           <p className="no-justify">© 2026 sos-abdichtung · Inh. {COMPANY_INFO.owner}</p>
           <p className="no-justify">SchimmelPeter® ist eine Marke der SchimmelPeter GmbH.</p>
         </div>

@@ -92,7 +92,7 @@ export default function CityPage({ params }: { params: { city: string } }) {
                 <a href="#kontakt" className="inline-flex min-h-[48px] items-center rounded-full bg-[var(--bone)] px-6 text-sm font-semibold text-[var(--ink)] hover:bg-white">
                   Kostenlose Feuchtemessung anfragen <span aria-hidden="true">&nbsp;→</span>
                 </a>
-                <a href={`tel:${COMPANY_INFO.phoneTel}`} className="inline-flex min-h-[48px] items-center rounded-full border border-white/20 px-6 text-sm font-semibold hover:border-[var(--mint)]">
+                <a href={`tel:${COMPANY_INFO.phoneTel}`} className="inline-flex min-h-[48px] items-center rounded-full border border-line/20 px-6 text-sm font-semibold hover:border-[var(--mint)]">
                   {COMPANY_INFO.phoneDisplay}
                 </a>
               </div>

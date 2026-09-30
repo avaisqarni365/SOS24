@@ -68,7 +68,7 @@ export default function RegionalPLZ() {
               onChange={(e) => setSearchPlz(e.target.value)}
               placeholder={t("reg.searchPlaceholder")}
               maxLength={5}
-              className="flex-1 px-5 py-3.5 rounded-full border border-white/10 text-xs sm:text-sm font-mono text-landing-bone bg-landing-ink2 focus:outline-none focus:border-landing-mint placeholder:text-landing-bone/30"
+              className="flex-1 px-5 py-3.5 rounded-full border border-line/10 text-xs sm:text-sm font-mono text-landing-bone bg-landing-ink2 focus:outline-none focus:border-landing-mint placeholder:text-landing-bone/30"
             />
             <button
               type="submit"
@@ -104,7 +104,7 @@ export default function RegionalPLZ() {
           {REGIONAL_CITIES.map((city) => (
             <div
               key={city.name}
-              className="p-6 rounded-2xl bg-landing-ink2 border border-white/5 hover:border-white/15 transition-all flex flex-col justify-between group"
+              className="p-6 rounded-2xl bg-landing-ink2 border border-line/5 hover:border-line/15 transition-all flex flex-col justify-between group"
             >
               <div>
                 <div className="flex items-center justify-between mb-3">
@@ -120,12 +120,12 @@ export default function RegionalPLZ() {
                   {city.highlight}
                 </p>
 
-                <div className="mt-4 pt-3 border-t border-white/5 text-[11px] font-mono text-landing-bone/40">
+                <div className="mt-4 pt-3 border-t border-line/5 text-[11px] font-mono text-landing-bone/40">
                   {city.districts.slice(0, 3).join(", ")}
                 </div>
               </div>
 
-              <div className="mt-6 pt-3 border-t border-white/5 flex items-center justify-between">
+              <div className="mt-6 pt-3 border-t border-line/5 flex items-center justify-between">
                 <span className="text-[11px] font-mono text-landing-emerald">{city.responseHours}</span>
                 <a
                   href="#kontakt"

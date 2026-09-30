@@ -1,50 +1,48 @@
 /**
- * sos-abdichtung mark: a wall section of three brick courses, a mint
- * horizontal barrier across its foot, and a water drop below it that the
- * barrier cuts flat. The whole trade in one glyph: water stops at the line.
+ * sos-abdichtung mark: a wall section of brick courses on an emerald tile, a
+ * luminous horizontal barrier across its foot, and a water drop below it that
+ * the barrier cuts flat. The whole trade in one glyph: water stops at the
+ * line. Reads the same on light and dark grounds.
  */
 export function LogoMark({ size = 32, className = "" }: { size?: number; className?: string }) {
   return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 48 48"
-      className={className}
-      aria-hidden="true"
-      focusable="false"
-    >
-      <rect width="48" height="48" rx="11" fill="#0e1310" />
-      <rect x="0.75" y="0.75" width="46.5" height="46.5" rx="10.25" fill="none" stroke="#62c4ac" strokeOpacity="0.28" strokeWidth="1.5" />
-      {/* brick courses */}
-      <g fill="#f3f1ec">
-        <rect x="9" y="9" width="14" height="5.5" rx="1.2" />
-        <rect x="25" y="9" width="14" height="5.5" rx="1.2" />
-        <rect x="9" y="16.5" width="7" height="5.5" rx="1.2" opacity="0.8" />
-        <rect x="18" y="16.5" width="14" height="5.5" rx="1.2" opacity="0.8" />
-        <rect x="34" y="16.5" width="5" height="5.5" rx="1.2" opacity="0.8" />
-        <rect x="9" y="24" width="14" height="5.5" rx="1.2" opacity="0.6" />
-        <rect x="25" y="24" width="14" height="5.5" rx="1.2" opacity="0.6" />
+    <svg width={size} height={size} viewBox="0 0 48 48" className={className} aria-hidden="true" focusable="false">
+      <defs>
+        <linearGradient id="sos-tile" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stopColor="#2a9a80" />
+          <stop offset="1" stopColor="#15594b" />
+        </linearGradient>
+      </defs>
+      <rect width="48" height="48" rx="12" fill="url(#sos-tile)" />
+      <rect x="0.75" y="0.75" width="46.5" height="46.5" rx="11.25" fill="none" stroke="#ffffff" strokeOpacity="0.18" strokeWidth="1.5" />
+      <g fill="#ffffff">
+        <rect x="9" y="9" width="14" height="5.5" rx="1.4" />
+        <rect x="25" y="9" width="14" height="5.5" rx="1.4" />
+        <rect x="9" y="16.5" width="7" height="5.5" rx="1.4" opacity="0.85" />
+        <rect x="18" y="16.5" width="14" height="5.5" rx="1.4" opacity="0.85" />
+        <rect x="34" y="16.5" width="5" height="5.5" rx="1.4" opacity="0.85" />
+        <rect x="9" y="24" width="14" height="5.5" rx="1.4" opacity="0.7" />
+        <rect x="25" y="24" width="14" height="5.5" rx="1.4" opacity="0.7" />
       </g>
-      {/* the barrier */}
-      <rect x="6" y="31.5" width="36" height="3.5" rx="1.75" fill="#62c4ac" />
-      {/* the drop, cut flat by the barrier */}
-      <path d="M24 44.5c-3.3 0-5.8-2.4-5.8-5.5 0-1.1.4-2.2 1-3.2h9.6c.6 1 1 2.1 1 3.2 0 3.1-2.5 5.5-5.8 5.5z" fill="#3b82c4" />
+      <rect x="6" y="31.5" width="36" height="3.5" rx="1.75" fill="#8ff0d6" />
+      <path d="M24 44.5c-3.3 0-5.8-2.4-5.8-5.5 0-1.1.4-2.2 1-3.2h9.6c.6 1 1 2.1 1 3.2 0 3.1-2.5 5.5-5.8 5.5z" fill="#7cc4ff" />
     </svg>
   );
 }
 
-export default function Logo({ tone = "light", sub }: { tone?: "light" | "dark"; sub?: string }) {
-  const ink = tone === "light" ? "text-[var(--bone)]" : "text-[var(--head-on-bone)]";
+export default function Logo({ tone = "auto", sub }: { tone?: "auto" | "light" | "dark"; sub?: string }) {
+  const ink =
+    tone === "dark" ? "text-[var(--head-on-bone)]" : tone === "light" ? "text-[#f3f1ec]" : "text-[var(--bone)]";
   return (
     <span className="inline-flex items-center gap-2.5">
-      <LogoMark size={34} />
+      <LogoMark size={38} />
       <span className={`flex flex-col leading-none ${ink}`}>
-        <span className="font-sans text-[1.05rem] font-semibold tracking-[-0.01em]">
-          <span className="font-extrabold tracking-[0.06em]">sos</span>
-          <span className="text-[var(--mint)]">-</span>abdichtung
+        <span className="font-sans text-[1.12rem] font-semibold tracking-[-0.01em]">
+          <span className="font-extrabold tracking-[0.04em] text-[var(--mint)]">sos</span>
+          <span className="opacity-50">-</span>abdichtung
         </span>
         {sub ? (
-          <span className="mt-1 font-mono text-[0.62rem] uppercase tracking-[0.16em] opacity-60 max-[379px]:hidden">{sub}</span>
+          <span className="mt-1 font-mono text-[0.62rem] uppercase tracking-[0.14em] opacity-70 max-[379px]:hidden">{sub}</span>
         ) : null}
       </span>
     </span>

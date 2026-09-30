@@ -17,7 +17,7 @@ export default function Hero() {
       aria-labelledby="hero-title"
       data-sc-act="pin"
       data-sc-span="1.3"
-      data-sc-drift="#0e1310"
+     
       style={{ ["--sc-span" as string]: 1.3 }}
     >
       <div data-sc-stage className="hero__stage">
@@ -46,7 +46,7 @@ export default function Hero() {
             </a>
             <a
               href={`tel:${COMPANY_INFO.phoneTel}`}
-              className="inline-flex min-h-[48px] items-center gap-2 rounded-full border border-white/20 px-6 py-3 text-sm font-semibold text-[var(--bone)] hover:border-[var(--mint)]"
+              className="inline-flex min-h-[48px] items-center gap-2 rounded-full border border-line/20 px-6 py-3 text-sm font-semibold text-[var(--bone)] hover:border-[var(--mint)]"
             >
               {COMPANY_INFO.phoneDisplay}
             </a>
@@ -66,7 +66,7 @@ export default function Hero() {
               fetchPriority="high"
               decoding="async"
             />
-            <figcaption className="hero__marks" aria-hidden="true">
+            <figcaption className="hero__marks theme-dark" aria-hidden="true">
               <span className="hero__mark" style={{ left: "43%", top: "73%" }}>
                 Wasser am Boden
               </span>

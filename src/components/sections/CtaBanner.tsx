@@ -41,7 +41,7 @@ export default function CtaBanner() {
             href={COMPANY_INFO.whatsappUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 rounded-full px-6 py-3.5 text-xs font-mono font-medium text-landing-bone hover:text-landing-mint border border-white/15 hover:border-landing-mint/50 transition-all"
+            className="inline-flex items-center gap-2 rounded-full px-6 py-3.5 text-xs font-mono font-medium text-landing-bone hover:text-landing-mint border border-line/15 hover:border-landing-mint/50 transition-all"
           >
             <MessageSquare className="w-4 h-4 text-landing-mint" />
             <span>{t("cta.whatsapp")}</span>

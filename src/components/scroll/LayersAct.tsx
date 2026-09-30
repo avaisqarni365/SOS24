@@ -105,10 +105,10 @@ export default function LayersAct() {
   return (
     <section
       id="schicht-fuer-schicht"
-      className="sc-section viewer-sec"
+      className="sc-section viewer-sec band-stone"
       aria-labelledby="layers-title"
       data-sc-act="flow"
-      data-sc-drift="#0b0f0d"
+     
     >
       <div className="sc-wrap">
         <div className="grid gap-6 lg:grid-cols-[1fr_1fr] lg:items-end">

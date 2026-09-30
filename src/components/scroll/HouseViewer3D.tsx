@@ -79,7 +79,7 @@ export default function HouseViewer3D({
 
   return (
     <div className="hv">
-      <div className={`hv__stage${ready ? " is-3d" : ""}`}>
+      <div className={`hv__stage theme-dark${ready ? " is-3d" : ""}`}>
         <div className="hv__poster">{poster}</div>
         <div ref={hostRef} className="hv__canvas" />
         {ready && (

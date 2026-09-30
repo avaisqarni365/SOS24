@@ -6,9 +6,9 @@ import { COMPANY_INFO } from "@/data/content-data";
 
 export default function TrustPartner() {
   return (
-    <section className="py-20 bg-dark-900 border-t border-white/10">
+    <section className="py-20 bg-dark-900 border-t border-line/10">
       <div className="max-w-7xl mx-auto px-4 sm:px-6">
-        <div className="bg-dark-850 rounded-3xl border border-white/10 p-8 sm:p-12 overflow-hidden shadow-card-dark">
+        <div className="bg-dark-850 rounded-3xl border border-line/10 p-8 sm:p-12 overflow-hidden shadow-card-dark">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center">
             {/* Left Partner Info Column */}
             <div className="lg:col-span-7">
@@ -33,7 +33,7 @@ export default function TrustPartner() {
               {/* Certification Grid */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-8">
                 {COMPANY_INFO.certifications.map((c, i) => (
-                  <div key={i} className="flex items-start gap-3 p-3.5 rounded-xl bg-dark-800 border border-white/10">
+                  <div key={i} className="flex items-start gap-3 p-3.5 rounded-xl bg-dark-800 border border-line/10">
                     <div className="w-8 h-8 rounded-lg bg-emerald-500/10 text-emerald-400 flex items-center justify-center shrink-0 mt-0.5 border border-emerald-500/20">
                       <ShieldCheck className="w-5 h-5" />
                     </div>
@@ -48,8 +48,8 @@ export default function TrustPartner() {
 
             {/* Right Contact & Partner Card */}
             <div className="lg:col-span-5">
-              <div className="bg-dark-900 rounded-2xl border border-white/10 p-6 sm:p-8 shadow-card-dark">
-                <div className="flex items-center gap-3.5 pb-5 border-b border-white/10">
+              <div className="bg-dark-900 rounded-2xl border border-line/10 p-6 sm:p-8 shadow-card-dark">
+                <div className="flex items-center gap-3.5 pb-5 border-b border-line/10">
                   <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-cyan-500 to-hydro-700 text-dark-950 font-black flex items-center justify-center text-xl shadow-glow-cyan-sm">
                     SOS
                   </div>
@@ -87,7 +87,7 @@ export default function TrustPartner() {
                   </div>
                 </div>
 
-                <div className="pt-4 border-t border-white/10">
+                <div className="pt-4 border-t border-line/10">
                   <a
                     href={`tel:${COMPANY_INFO.phoneTel}`}
                     className="w-full py-3 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-dark-950 text-xs font-mono font-bold flex items-center justify-center gap-2 shadow-glow-cyan-sm transition-all"

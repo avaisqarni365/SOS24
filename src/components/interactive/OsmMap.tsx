@@ -14,7 +14,7 @@ const FULL = "https://www.openstreetmap.org/?mlat=51.256&mlon=7.151#map=11/51.24
 export default function OsmMap() {
   const [on, setOn] = useState(false);
   return (
-    <div className="osm-map">
+    <div className="osm-map theme-dark">
       {on ? (
         <iframe
           src={EMBED}

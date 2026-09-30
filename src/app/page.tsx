@@ -11,6 +11,7 @@ import LayersAct from "@/components/scroll/LayersAct";
 import { ScannerSection, ServicesRail, RegionSection, FaqSection } from "@/components/scroll/HomeSections";
 import ProofSection from "@/components/science/ProofSection";
 import ScrollSectionRail from "@/components/navigation/ScrollSectionRail";
+import AudienceSection from "@/components/sections/AudienceSection";
 import ScrollEngine, { SC_BOOT } from "@/components/scroll/ScrollEngine";
 import JsonLd from "@/components/seo/JsonLd";
 import { FAQS } from "@/data/content-data";
@@ -67,6 +68,7 @@ export default function Home() {
       <ScrollSectionRail />
       <main id="main">
         <Hero />
+        <AudienceSection />
         <Tension />
         <ScannerSection />
         <LayersAct />

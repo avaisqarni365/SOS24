@@ -24,7 +24,7 @@ export function ScannerSection() {
       className="sc-section"
       aria-labelledby="scanner-title"
       data-sc-act="flow"
-      data-sc-drift="#101613"
+     
     >
       <div className="sc-wrap">
         <div className="mb-10 grid gap-6 lg:grid-cols-[1fr_1fr] lg:items-end" data-sc-in>
@@ -48,10 +48,10 @@ export function ServicesRail() {
   return (
     <section
       id="leistungen"
-      className="sc-section"
+      className="sc-section band-mint"
       aria-labelledby="leistungen-title"
       data-sc-act="flow"
-      data-sc-drift="#0e1310"
+     
     >
       <div className="sc-wrap">
         <div className="grid gap-6 lg:grid-cols-[1fr_1fr] lg:items-end" data-sc-in>
@@ -142,10 +142,10 @@ export function RegionSection() {
   return (
     <section
       id="servicegebiet"
-      className="sc-section"
+      className="sc-section band-mint"
       aria-labelledby="region-title"
       data-sc-act="flow"
-      data-sc-drift="#0e1310"
+     
     >
       <div className="sc-wrap">
         <div className="grid gap-6 lg:grid-cols-[1fr_1fr] lg:items-end" data-sc-in>
@@ -160,7 +160,7 @@ export function RegionSection() {
           </p>
         </div>
         <div className="mt-10 grid gap-6 lg:grid-cols-[1.2fr_1fr] lg:items-start">
-          <figure className="region-map__frame">
+          <figure className="region-map__frame theme-dark">
             <RegionMap />
             <figcaption className="no-justify">
               <span className="region-map__key region-map__key--area" aria-hidden="true" /> Einsatzgebiet
@@ -174,7 +174,7 @@ export function RegionSection() {
                 <li key={c.slug}>
                   <a
                     href={`/kellersanierung/${c.slug}/`}
-                    className="flex min-h-[56px] flex-col justify-center rounded-2xl border border-white/10 bg-[var(--ink-2)] px-4 py-3 hover:border-[var(--mint)]"
+                    className="flex min-h-[56px] flex-col justify-center rounded-2xl border border-line/10 bg-[var(--ink-2)] px-4 py-3 hover:border-[var(--mint)]"
                   >
                     <span className="font-semibold">{c.name}</span>
                     <span className="font-mono text-[0.7rem] text-[var(--sc-ink-soft)]">Vor Ort in {c.responseTime}</span>

@@ -47,7 +47,7 @@ export default function ScrollSectionRail() {
   // A slim dot rail inside the page margin: it never covers content. The
   // label of each stop shows on hover and keyboard focus.
   return (
-    <nav aria-label="Seitenabschnitte" className="section-rail">
+    <nav aria-label="Seitenabschnitte" className="section-rail theme-dark">
       <ul>
         {sectionStops.map((stop) => {
           const isActive = activeId === stop.id;

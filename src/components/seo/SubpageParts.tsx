@@ -31,7 +31,7 @@ export function LayerStack({ layers, title }: { layers: LayerNote[]; title: stri
   const palette = ["#7a6146", "#9a6b4b", "#62c4ac", "#8f9a96", "#d9d2c1", "#f3f1ec"];
   const ordered = [...layers].reverse();
   return (
-    <figure className="m-0 rounded-3xl border border-white/10 bg-[var(--ink-2)] p-5 sm:p-6">
+    <figure className="m-0 rounded-3xl border border-line/10 bg-[var(--ink-2)] p-5 sm:p-6">
       <figcaption className="sc-label mb-4 no-justify">{title}</figcaption>
       <ol className="grid gap-2.5" reversed>
         {ordered.map((l, i) => {
@@ -39,7 +39,7 @@ export function LayerStack({ layers, title }: { layers: LayerNote[]; title: stri
           return (
             <li
               key={l.name}
-              className="grid grid-cols-[0.9rem_1fr] gap-3 rounded-2xl border border-white/5 bg-[var(--ink-3)] p-3.5"
+              className="grid grid-cols-[0.9rem_1fr] gap-3 rounded-2xl border border-line/5 bg-[var(--ink-3)] p-3.5"
               style={{ transform: `translateX(${i * 6}px)` }}
             >
               <span className="mt-1 h-full min-h-[2.2rem] w-3 rounded-full" style={{ background: c }} aria-hidden="true" />
