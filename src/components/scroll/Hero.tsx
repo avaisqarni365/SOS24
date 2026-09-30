@@ -207,7 +207,7 @@ export default function Hero() {
             <em className="text-[var(--mint)]">Trocken, Schicht für Schicht.</em>
           </h1>
           <p className="sc-lede mt-6 text-[var(--sc-ink-soft)]">
-            {hy("Wir stoppen aufsteigende Feuchtigkeit dort, wo sie entsteht: von innen, ohne Bagger und ohne aufgerissenen Garten. Mit kostenloser Feuchtemessung vor Ort, 10 Jahren Garantie auf unsere Arbeit und bis zu 25 Jahren Produktgarantie von SchimmelPeter.")}
+            {hy("Wir stoppen aufsteigende Feuchtigkeit dort, wo sie entsteht: von innen, ohne Bagger und ohne aufgerissenen Garten. Mit kostenloser Feuchtemessung vor Ort, 10 Jahren Garantie auf unsere Arbeit und 25 Jahren Produktgarantie von SchimmelPeter.")}
           </p>
           <div className="mt-9 flex flex-wrap items-center gap-3">
             <a

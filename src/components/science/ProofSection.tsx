@@ -46,7 +46,7 @@ export default function ProofSection() {
           </div>
           <div className="rounded-[18px] border border-white/10 bg-[var(--ink-2)] p-5">
             <dt className="font-mono text-[0.7rem] uppercase tracking-wider text-[var(--sc-ink-soft)]">Produktgarantie SchimmelPeter</dt>
-            <dd className="mt-1 font-editorial text-3xl text-[var(--bone)]">bis 25 Jahre</dd>
+            <dd className="mt-1 font-editorial text-3xl text-[var(--bone)]">25 Jahre</dd>
           </div>
           <div className="rounded-[18px] border border-white/10 bg-[var(--ink-2)] p-5">
             <dt className="font-mono text-[0.7rem] uppercase tracking-wider text-[var(--sc-ink-soft)]">Erdarbeiten</dt>

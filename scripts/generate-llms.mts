@@ -19,7 +19,7 @@ const lines: string[] = [
   `- E-Mail: ${COMPANY_INFO.email}`,
   `- Servicegebiet: ${CITY_PAGES.map((c) => c.name).join(", ")}`,
   "- Feuchtemessung vor Ort: kostenlos",
-  "- Garantie: 10 Jahre von sos-abdichtung auf die ausgeführten Arbeiten; zusätzlich bis zu 25 Jahre Produktgarantie des Herstellers SchimmelPeter GmbH",
+  "- Garantie: 10 Jahre von sos-abdichtung auf die ausgeführten Arbeiten; zusätzlich 25 Jahre Produktgarantie des Herstellers SchimmelPeter GmbH",
   "- Verfahren: Horizontalsperre per Injektion (in Paraffin gelöster Kunststoff, Bohrlöcher im Abstand bis 20 cm, meist ohne Vortrocknung), Innenabdichtung, Schimmelsanierung",
   "- Qualifikation: geschult in den SchimmelPeter-Schulungszentren, Schimmelsanierung mit Prüfung beim TÜV Süd",
   "- Ausführung von innen, keine Erdarbeiten",

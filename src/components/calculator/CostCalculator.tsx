@@ -42,7 +42,7 @@ export default function CostCalculator() {
             </div>
             <div className="flex items-center gap-2 text-xs font-mono text-landing-emerald font-semibold bg-white px-3 py-1.5 rounded-full border border-black/5 shadow-xs">
               <ShieldCheck className="w-4 h-4" />
-              <span>10 J. Garantie + bis 25 J. Produktgarantie</span>
+              <span>10 J. Garantie + 25 J. Produktgarantie</span>
             </div>
           </div>
 
@@ -181,7 +181,7 @@ export default function CostCalculator() {
                   </li>
                   <li className="flex items-center gap-2">
                     <CheckCircle2 className="w-3.5 h-3.5 text-landing-emerald shrink-0" />
-                    <span>10 Jahre Garantie auf die Arbeit, bis zu 25 Jahre Produktgarantie des Herstellers</span>
+                    <span>10 Jahre Garantie auf die Arbeit, 25 Jahre Produktgarantie des Herstellers</span>
                   </li>
                 </ul>
               </div>

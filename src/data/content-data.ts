@@ -31,7 +31,7 @@ export const COMPANY_INFO = {
   whatsappUrl: "https://wa.me/491722064177?text=Hallo%20Herr%20Mahmood%2C%20ich%20habe%20ein%20Feuchtigkeitsproblem%20in%20meinem%20Geb%C3%A4ude%20im%20Raum%20Wuppertal%20(PLZ%2042)%20und%20w%C3%BCnsche%20eine%20kostenlose%20Beratung.",
   certifications: [
     { label: "Geschult bei SchimmelPeter®", desc: "Ausbildung in den SchimmelPeter-Schulungszentren, mehrmals jährlich Weiterbildung" },
-    { label: "Bis zu 25 Jahre Produktgarantie", desc: "Garantie des Herstellers SchimmelPeter GmbH auf die Wirksamkeit" },
+    { label: "25 Jahre Produktgarantie", desc: "Garantie des Herstellers SchimmelPeter GmbH auf die Wirksamkeit" },
     { label: "10 Jahre Garantie auf die Arbeit", desc: "Garantie von sos-abdichtung auf die ausgeführten Arbeiten" },
     { label: "SchimmelPeter® Partner", desc: "Bundesweites Qualitätsnetzwerk" },
   ]
@@ -161,7 +161,7 @@ export const PROCESS_PIPELINE = [
     title: "Gemeinsame Abnahme",
     icon: "☀️",
     time: "Schritt 4",
-    desc: "Nach der Sanierung nehmen Sie die Arbeiten gemeinsam mit uns ab, die Baustelle wird sauber übergeben. Dazu 10 Jahre Garantie auf unsere Arbeit und bis zu 25 Jahre Produktgarantie von SchimmelPeter."
+    desc: "Nach der Sanierung nehmen Sie die Arbeiten gemeinsam mit uns ab, die Baustelle wird sauber übergeben. Dazu 10 Jahre Garantie auf unsere Arbeit und 25 Jahre Produktgarantie von SchimmelPeter."
   }
 ];
 
@@ -188,6 +188,6 @@ export const FAQS = [
   },
   {
     q: "Gibt es eine Garantie auf die ausgeführten Arbeiten?",
-    a: "Ja, und zwar zweifach. sos-abdichtung gibt Ihnen 10 Jahre Garantie auf die ausgeführten Arbeiten. Zusätzlich garantiert der Hersteller SchimmelPeter GmbH die Wirksamkeit seiner Produkte bis zu 25 Jahre."
+    a: "Ja, und zwar zweifach. sos-abdichtung gibt Ihnen 10 Jahre Garantie auf die ausgeführten Arbeiten. Zusätzlich garantiert der Hersteller SchimmelPeter GmbH 25 Jahre lang die Wirksamkeit seiner Produkte."
   }
 ];
