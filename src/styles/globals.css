@@ -659,3 +659,12 @@ figcaption {
   text-align: start;
   hyphens: manual;
 }
+
+/* Large justified lede on a phone: a touch smaller so each line holds
+   enough words to justify without gaps. */
+@media (max-width: 640px) {
+  .sc-lede {
+    font-size: 1.06rem;
+    line-height: 1.55;
+  }
+}

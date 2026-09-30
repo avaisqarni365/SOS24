@@ -1,5 +1,6 @@
 import { WALL_LAYERS } from "@/data/layers";
 import ExplodedWall from "./ExplodedWall";
+import { hy } from "@/lib/hyphenate";
 
 /** Static money shot: the same exploded stack the 3D scene holds at its peak. */
 function LayersPoster() {
@@ -98,7 +99,7 @@ export default function LayersAct() {
             Ihre Kellerwand, <em className="text-[var(--mint)]">Schicht für Schicht.</em>
           </h2>
           <p className="sc-body mt-4 max-w-md">
-            Jede Schicht hat eine Aufgabe. Wir sanieren von innen, also bleibt die äußerste Schicht, wie sie ist.
+            {hy("Jede Schicht hat eine Aufgabe. Wir sanieren von innen, also bleibt die äußerste Schicht, wie sie ist.")}
           </p>
         </div>
         <figure className="layers__figure">
@@ -110,11 +111,11 @@ export default function LayersAct() {
           {WALL_LAYERS.map((l) => (
             <li key={l.id} className="layer-note" data-layer={l.id} style={{ ["--swatch" as string]: l.color }}>
               <h3>{l.name}</h3>
-              <p>{l.text}</p>
+              <p>{hy(l.text)}</p>
             </li>
           ))}
         </ol>
-        <p className="layers__caption">Schematische Darstellung. Schichtaufbau und Verfahren richten sich nach der Messung vor Ort.</p>
+        <p className="layers__caption">{hy("Schematische Darstellung. Schichtaufbau und Verfahren richten sich nach der Messung vor Ort.")}</p>
       </div>
     </section>
   );

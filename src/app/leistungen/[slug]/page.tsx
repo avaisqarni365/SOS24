@@ -10,6 +10,7 @@ import { SERVICE_PAGES, CITY_PAGES } from "@/data/seo-pages";
 import { SERVICE_CARDS } from "@/data/services";
 import { COMPANY_INFO } from "@/data/content-data";
 import { BUSINESS_ID, WEBSITE_ID, abs, businessNode, websiteNode, breadcrumbNode, faqNode } from "@/lib/site";
+import { hy } from "@/lib/hyphenate";
 
 const DAMAGE_BY_SLUG: Record<string, string> = {
   kellersanierung: "Nasser Keller / Drückendes Hangwasser",
@@ -93,7 +94,7 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
               <h1 id="page-title" className="sc-display mt-6 text-[2.4rem] leading-[1.04] sm:text-5xl lg:text-[3.8rem]">
                 {page.h1}
               </h1>
-              <p className="sc-lede mt-6 text-[var(--sc-ink-soft)]">{page.lede}</p>
+              <p className="sc-lede mt-6 text-[var(--sc-ink-soft)]">{hy(page.lede)}</p>
               <div className="mt-8 flex flex-wrap gap-3">
                 <a href="#kontakt" className="inline-flex min-h-[48px] items-center rounded-full bg-[var(--bone)] px-6 text-sm font-semibold text-[var(--ink)] hover:bg-white">
                   Kostenlose Feuchtemessung anfragen <span aria-hidden="true">&nbsp;→</span>
@@ -138,7 +139,7 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
                       </span>
                       <div>
                         <h3 className="font-semibold text-[var(--head-on-bone)]">{s.title}</h3>
-                        <p className="mt-1 text-sm text-[var(--text-on-bone)]">{s.text}</p>
+                        <p className="mt-1 text-sm text-[var(--text-on-bone)]">{hy(s.text)}</p>
                       </div>
                     </li>
                   ))}

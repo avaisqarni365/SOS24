@@ -3,6 +3,7 @@ import { PROCESS_PIPELINE, FAQS, COMPANY_INFO } from "@/data/content-data";
 import { CITY_PAGES } from "@/data/seo-pages";
 import ServiceArt from "@/components/brand/ServiceArt";
 import FeuchteScanner from "@/components/interactive/FeuchteScanner";
+import { hy } from "@/lib/hyphenate";
 
 /* ------------------------------------------------------------- scanner -- */
 export function ScannerSection() {
@@ -20,9 +21,7 @@ export function ScannerSection() {
             Erst messen. <em className="text-[var(--mint)]">Dann bohren.</em>
           </h2>
           <p className="sc-body">
-            Frisch gestrichen sieht jede Wand trocken aus. Führen Sie die Sonde über die Wand und sehen Sie, was eine
-            Feuchtemessung sichtbar macht: aufsteigende Nässe im Sockel, Kondensat in der kalten Ecke, ein Riss, der
-            Wasser führt. Jede Ursache braucht ein anderes Verfahren.
+            {hy("Frisch gestrichen sieht jede Wand trocken aus. Führen Sie die Sonde über die Wand und sehen Sie, was eine Feuchtemessung sichtbar macht: aufsteigende Nässe im Sockel, Kondensat in der kalten Ecke, ein Riss, der Wasser führt. Jede Ursache braucht ein anderes Verfahren.")}
           </p>
         </div>
         <FeuchteScanner />
@@ -50,7 +49,7 @@ export function ServicesRail() {
               Sechs Verfahren. Eine Ursache nach der anderen.
             </h2>
             <p className="sc-body mt-4">
-              Welche Leistung Ihr Keller braucht, entscheidet die Messung. Hier ist, was wir einsetzen.
+              {hy("Welche Leistung Ihr Keller braucht, entscheidet die Messung. Hier ist, was wir einsetzen.")}
             </p>
           </div>
           {SERVICE_CARDS.map((s) => (
@@ -60,7 +59,7 @@ export function ServicesRail() {
               </div>
               <div className="service-card__body">
                 <h3>{s.title}</h3>
-                <p>{s.text}</p>
+                <p>{hy(s.text)}</p>
                 <span className="service-card__more">
                   Mehr zu {s.title.split(" ")[0]} <span aria-hidden="true">→</span>
                 </span>
@@ -87,8 +86,7 @@ export function ProcessSection() {
               Vom ersten Anruf zur trockenen Wand.
             </h2>
             <p className="mt-5 max-w-md text-[var(--text-on-bone)]">
-              {COMPANY_INFO.owner} kommt selbst zur Messung. Danach wissen Sie, was die Ursache ist, was die Sanierung
-              kostet und wie lange sie dauert.
+              {hy(`${COMPANY_INFO.owner} kommt selbst zur Messung. Danach wissen Sie, was die Ursache ist, was die Sanierung kostet und wie lange sie dauert.`)}
             </p>
             <dl className="mt-8 grid grid-cols-2 gap-4">
               <div className="rounded-2xl bg-white p-5 shadow-sm">
@@ -112,7 +110,7 @@ export function ProcessSection() {
                     {s.time}
                   </span>
                 </div>
-                <p className="mt-3 text-[var(--text-on-bone)]">{s.desc}</p>
+                <p className="mt-3 text-[var(--text-on-bone)]">{hy(s.desc)}</p>
                 <div
                   className="absolute bottom-0 left-8 h-1 rounded-full bg-[var(--mint)]"
                   style={{ width: `${(i + 1) * 20}%` }}
@@ -150,8 +148,7 @@ export function RegionSection() {
             Wuppertal und das Bergische Land.
           </h2>
           <p className="sc-body mt-5">
-            Hanglagen, Grundwasser im Tal der Wupper, viel Altbau aus Ziegel und Bruchstein ohne zeitgemäße
-            Horizontalsperre: Die Region hat ihre eigenen Kellerprobleme. Wählen Sie Ihre Stadt.
+            {hy("Hanglagen, Grundwasser im Tal der Wupper, viel Altbau aus Ziegel und Bruchstein ohne zeitgemäße Horizontalsperre: Die Region hat ihre eigenen Kellerprobleme. Wählen Sie Ihre Stadt.")}
           </p>
           <ul className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3">
             {CITY_PAGES.map((c) => (
@@ -256,7 +253,7 @@ export function FaqSection() {
                   +
                 </span>
               </summary>
-              <p className="mt-3 text-[var(--text-on-bone)]">{f.a}</p>
+              <p className="mt-3 text-[var(--text-on-bone)]">{hy(f.a)}</p>
             </details>
           ))}
         </div>

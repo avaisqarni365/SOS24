@@ -9,6 +9,7 @@ import { CITY_PAGES } from "@/data/seo-pages";
 import { SERVICE_CARDS } from "@/data/services";
 import { COMPANY_INFO } from "@/data/content-data";
 import { BUSINESS_ID, WEBSITE_ID, abs, businessNode, websiteNode, breadcrumbNode, faqNode } from "@/lib/site";
+import { hy } from "@/lib/hyphenate";
 
 export const dynamicParams = false;
 
@@ -86,7 +87,7 @@ export default function CityPage({ params }: { params: { city: string } }) {
               <h1 id="page-title" className="sc-display mt-6 text-[2.4rem] leading-[1.04] sm:text-5xl lg:text-[3.8rem]">
                 {page.h1}
               </h1>
-              <p className="sc-lede mt-6 text-[var(--sc-ink-soft)]">{page.lede}</p>
+              <p className="sc-lede mt-6 text-[var(--sc-ink-soft)]">{hy(page.lede)}</p>
               <div className="mt-8 flex flex-wrap gap-3">
                 <a href="#kontakt" className="inline-flex min-h-[48px] items-center rounded-full bg-[var(--bone)] px-6 text-sm font-semibold text-[var(--ink)] hover:bg-white">
                   Kostenlose Feuchtemessung anfragen <span aria-hidden="true">&nbsp;→</span>

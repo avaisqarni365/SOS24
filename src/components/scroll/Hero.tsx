@@ -1,4 +1,5 @@
 import { COMPANY_INFO } from "@/data/content-data";
+import { hy } from "@/lib/hyphenate";
 
 export const CTA_LABEL = "Kostenlose Feuchtemessung anfragen";
 
@@ -206,8 +207,7 @@ export default function Hero() {
             <em className="text-[var(--mint)]">Trocken, Schicht für Schicht.</em>
           </h1>
           <p className="sc-lede mt-6 text-[var(--sc-ink-soft)]">
-            Wir stoppen aufsteigende Feuchtigkeit dort, wo sie entsteht: von innen, ohne Bagger und ohne
-            aufgerissenen Garten. Mit kostenloser Feuchtemessung vor Ort und 10 Jahren Garantie.
+            {hy("Wir stoppen aufsteigende Feuchtigkeit dort, wo sie entsteht: von innen, ohne Bagger und ohne aufgerissenen Garten. Mit kostenloser Feuchtemessung vor Ort und 10 Jahren Garantie.")}
           </p>
           <div className="mt-9 flex flex-wrap items-center gap-3">
             <a

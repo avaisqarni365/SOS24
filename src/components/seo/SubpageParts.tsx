@@ -1,4 +1,5 @@
 import type { Faq, LayerNote, PageSection } from "@/data/seo-pages";
+import { hy, keep } from "@/lib/hyphenate";
 
 export function Breadcrumbs({ items }: { items: { name: string; path: string }[] }) {
   return (
@@ -44,7 +45,7 @@ export function LayerStack({ layers, title }: { layers: LayerNote[]; title: stri
               <span className="mt-1 h-full min-h-[2.2rem] w-3 rounded-full" style={{ background: c }} aria-hidden="true" />
               <div>
                 <h3 className="text-[0.98rem] font-semibold text-[var(--bone)]">{l.name}</h3>
-                <p className="mt-1 text-sm leading-relaxed text-[var(--sc-ink-soft)]">{l.text}</p>
+                <p className="mt-1 text-sm leading-relaxed text-[var(--sc-ink-soft)]">{hy(l.text)}</p>
               </div>
             </li>
           );
@@ -59,15 +60,15 @@ export function Prose({ sections }: { sections: PageSection[] }) {
     <div className="prose-sos grid gap-12">
       {sections.map((s) => (
         <section key={s.heading}>
-          <h2 className="font-editorial text-3xl leading-tight text-[var(--head-on-bone)] sm:text-4xl">{s.heading}</h2>
+          <h2 className="font-editorial text-3xl leading-tight text-[var(--head-on-bone)] sm:text-4xl">{keep(s.heading)}</h2>
           <div className="mt-5">
             {s.paragraphs.map((p, i) => (
-              <p key={i}>{p}</p>
+              <p key={i}>{hy(p)}</p>
             ))}
             {s.bullets && s.bullets.length > 0 && (
               <ul>
                 {s.bullets.map((b) => (
-                  <li key={b}>{b}</li>
+                  <li key={b}>{hy(b)}</li>
                 ))}
               </ul>
             )}
@@ -93,7 +94,7 @@ export function FaqList({ faqs, title }: { faqs: Faq[]; title: string }) {
                 +
               </span>
             </summary>
-            <p className="mt-3 text-[var(--text-on-bone)]">{f.a}</p>
+            <p className="mt-3 text-[var(--text-on-bone)]">{hy(f.a)}</p>
           </details>
         ))}
       </div>
