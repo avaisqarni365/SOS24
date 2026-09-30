@@ -33,6 +33,9 @@ export default function Navbar() {
             <span>{t("nav.process3d")}</span>
             <span className="h-1.5 w-1.5 rounded-full bg-landing-mint"></span>
           </a>
+          <a href="#galerie" className="hover:text-landing-bone transition-colors">
+            {t("nav.gallery") || "Galerie"}
+          </a>
           <a href="#rechner" className="hover:text-landing-bone transition-colors">
             {t("nav.calculator")}
           </a>
@@ -88,6 +91,13 @@ export default function Navbar() {
           >
             <span>{t("nav.process3d")}</span>
             <span className="text-[10px] font-mono text-landing-mint">WTA</span>
+          </a>
+          <a
+            href="#galerie"
+            onClick={() => setMobileMenuOpen(false)}
+            className="py-2.5 hover:text-landing-bone transition-colors"
+          >
+            {t("nav.gallery") || "Galerie"}
           </a>
           <a
             href="#rechner"

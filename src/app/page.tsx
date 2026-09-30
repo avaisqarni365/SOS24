@@ -4,6 +4,7 @@ import Hero from "@/components/sections/Hero";
 import Schadensbilder from "@/components/sections/Schadensbilder";
 import InjectionProcess from "@/components/sections/InjectionProcess";
 import ComplianceTrust from "@/components/sections/ComplianceTrust";
+import PictureGallery from "@/components/sections/PictureGallery";
 import CostCalculator from "@/components/calculator/CostCalculator";
 import RegionalPLZ from "@/components/sections/RegionalPLZ";
 import FAQ from "@/components/sections/FAQ";
@@ -35,7 +36,10 @@ export default function Home() {
         {/* 4. ZERTIFIZIERUNG: Soft Snow White Bone2 WTA & 10 Jahre Garantie Badges */}
         <ComplianceTrust />
 
-        {/* 5. RECHNER: Snow White Bone Cost & Savings Calculator */}
+        {/* 5. GALERIE: Dark Forest Ink Real Project Photo Gallery & Lightbox */}
+        <PictureGallery />
+
+        {/* 6. RECHNER: Snow White Bone Cost & Savings Calculator */}
         <CostCalculator />
 
         {/* 6. SERVICEGEBIET: Dark Forest Ink PLZ 42 Region Hub */}

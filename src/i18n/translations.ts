@@ -22,6 +22,7 @@ export const TRANSLATIONS: Record<SupportedLocale, Record<string, string>> = {
     // Nav
     "nav.services": "Fachleistungen",
     "nav.process3d": "3D-Verfahren",
+    "nav.gallery": "Bildgalerie",
     "nav.calculator": "Kostenrechner",
     "nav.region": "Servicegebiet PLZ 42",
     "nav.faq": "Häufige Fragen",
@@ -120,12 +121,28 @@ export const TRANSLATIONS: Record<SupportedLocale, Record<string, string>> = {
     "contact.damage": "Art des Schadens",
     "contact.msg": "Ihre Nachricht / Details zum Objekt",
     "contact.submit": "Anfrage senden & WhatsApp öffnen",
+
+    // Gallery
+    "gallery.eyebrow": "PRAXIS & BILDGALERIE",
+    "gallery.h1": "Echte Sanierungsprojekte.",
+    "gallery.accent": "Dokumentierte Qualität vor Ort.",
+    "gallery.sub": "Einblicke in die handwerkliche Sanierungspraxis von SchimmelPeter® Fachpartner Shahzad Mahmood im Raum Wuppertal, Solingen, Remscheid und dem Bergischen Land.",
+    "gallery.filterAll": "Alle Projekte",
+    "gallery.filterHorizontal": "Horizontalsperre",
+    "gallery.filterKeller": "Keller & Mauerwerk",
+    "gallery.filterDrainage": "Drainagesysteme",
+    "gallery.filterSchimmel": "Schimmelbeseitigung",
+    "gallery.filterTeam": "Diagnose & Team",
+    "gallery.modalClose": "Schließen",
+    "gallery.tagVerified": "WTA-Geprüft",
+    "gallery.zoomHint": "Vergrößern →",
   },
 
   en: {
     // Nav
     "nav.services": "Services",
     "nav.process3d": "3D Process",
+    "nav.gallery": "Gallery",
     "nav.calculator": "Cost Calculator",
     "nav.region": "Service Area PLZ 42",
     "nav.faq": "FAQ",
@@ -224,12 +241,28 @@ export const TRANSLATIONS: Record<SupportedLocale, Record<string, string>> = {
     "contact.damage": "Type of Damage",
     "contact.msg": "Your Message / Details about the Property",
     "contact.submit": "Send Request & Open WhatsApp",
+
+    // Gallery
+    "gallery.eyebrow": "FIELD PRACTICE & PHOTO GALLERY",
+    "gallery.h1": "Real Remediation Projects.",
+    "gallery.accent": "Documented Quality On Site.",
+    "gallery.sub": "Insights into expert waterproofing craftsmanship led by SchimmelPeter® certified partner Shahzad Mahmood in Wuppertal, Solingen, Remscheid, and the Bergisches Land region.",
+    "gallery.filterAll": "All Projects",
+    "gallery.filterHorizontal": "Horizontal Barrier",
+    "gallery.filterKeller": "Basement & Masonry",
+    "gallery.filterDrainage": "Drainage Systems",
+    "gallery.filterSchimmel": "Mould Remediation",
+    "gallery.filterTeam": "Diagnostics & Team",
+    "gallery.modalClose": "Close",
+    "gallery.tagVerified": "WTA-Certified",
+    "gallery.zoomHint": "Expand →",
   },
 
   tr: {
     // Nav
     "nav.services": "Hizmetlerimiz",
     "nav.process3d": "3D Yöntem",
+    "nav.gallery": "Galeri",
     "nav.calculator": "Maliyet Hesaplayıcı",
     "nav.region": "Hizmet Bölgesi PLZ 42",
     "nav.faq": "Sıkça Sorulanlar",
@@ -328,12 +361,28 @@ export const TRANSLATIONS: Record<SupportedLocale, Record<string, string>> = {
     "contact.damage": "Hasar Türü",
     "contact.msg": "Mesajınız / Bina Detayları",
     "contact.submit": "Talebi Gönder & WhatsApp'ı Aç",
+
+    // Gallery
+    "gallery.eyebrow": "SAHA UYGULAMALARI VE FOTOĞRAF GALERİSİ",
+    "gallery.h1": "Gerçek Yalıtım Projeleri.",
+    "gallery.accent": "Sahada Belgelenmiş Kalite.",
+    "gallery.sub": "SchimmelPeter® yetkili ortağı Shahzad Mahmood tarafından Wuppertal, Solingen, Remscheid ve Bergisches Land bölgesinde uygulanan profesyonel su yalıtımı ve nem giderme projeleri.",
+    "gallery.filterAll": "Tüm Projeler",
+    "gallery.filterHorizontal": "Yatay Bariyer",
+    "gallery.filterKeller": "Bodrum ve Duvar",
+    "gallery.filterDrainage": "Drenaj Sistemleri",
+    "gallery.filterSchimmel": "Küf Giderme",
+    "gallery.filterTeam": "Keşif ve Ekip",
+    "gallery.modalClose": "Kapat",
+    "gallery.tagVerified": "WTA Sertifikalı",
+    "gallery.zoomHint": "Büyüt →",
   },
 
   ru: {
     // Nav
     "nav.services": "Услуги",
     "nav.process3d": "3D-Метод",
+    "nav.gallery": "Галерея",
     "nav.calculator": "Калькулятор",
     "nav.region": "Регион PLZ 42",
     "nav.faq": "Вопросы и ответы",
@@ -432,12 +481,28 @@ export const TRANSLATIONS: Record<SupportedLocale, Record<string, string>> = {
     "contact.damage": "Тип повреждения",
     "contact.msg": "Ваше сообщение / детали объекта",
     "contact.submit": "Отправить заявку и открыть WhatsApp",
+
+    // Gallery
+    "gallery.eyebrow": "ПРАКТИКА И ФОТОГАЛЕРЕЯ ОБЪЕКТОВ",
+    "gallery.h1": "Реальные Проекты Реновации.",
+    "gallery.accent": "Задокументированное Качество.",
+    "gallery.sub": "Примеры выполненных работ сертифицированного партнера SchimmelPeter® Шахзада Махмуда в Вуппертале, Золингене, Ремшайде и регионе Бергишес-Ланд.",
+    "gallery.filterAll": "Все проекты",
+    "gallery.filterHorizontal": "Горизонтальная отсечка",
+    "gallery.filterKeller": "Подвал и стены",
+    "gallery.filterDrainage": "Дренажные системы",
+    "gallery.filterSchimmel": "Удаление плесени",
+    "gallery.filterTeam": "Диагностика и команда",
+    "gallery.modalClose": "Закрыть",
+    "gallery.tagVerified": "Сертификат WTA",
+    "gallery.zoomHint": "Увеличить →",
   },
 
   ar: {
     // Nav
     "nav.services": "خدماتنا المتخصصة",
     "nav.process3d": "تقنية 3D",
+    "nav.gallery": "معرض الأعمال",
     "nav.calculator": "حاسبة التكلفة",
     "nav.region": "منطقة الخدمة PLZ 42",
     "nav.faq": "الأسئلة الشائعة",
@@ -536,12 +601,28 @@ export const TRANSLATIONS: Record<SupportedLocale, Record<string, string>> = {
     "contact.damage": "نوع الضرر أو المشكلة",
     "contact.msg": "رسالتك / تفاصيل العقار",
     "contact.submit": "إرسال الطلب وفتح واتساب",
+
+    // Gallery
+    "gallery.eyebrow": "مشاريع حية ومعرض الصور",
+    "gallery.h1": "مشاريع عزل حقيقية وموثقة.",
+    "gallery.accent": "جودة هندسية معتمدة على أرض الواقع.",
+    "gallery.sub": "نظرة على مشاريع العزل وترميم السراديب بإشراف الشريك المعتمد لـ SchimmelPeter® شهزاد محمود في فوبرتال، زولينغن، رمشايد والمنطقة المحيطة.",
+    "gallery.filterAll": "كافة المشاريع",
+    "gallery.filterHorizontal": "الحاجز الأفقي والحقن",
+    "gallery.filterKeller": "عزل الأقبية والجدران",
+    "gallery.filterDrainage": "أنظمة تصريف المياه",
+    "gallery.filterSchimmel": "مكافحة العفن والرطوبة",
+    "gallery.filterTeam": "الفحص الهندسي والفريق",
+    "gallery.modalClose": "إغلاق",
+    "gallery.tagVerified": "معتمد وفق معايير WTA",
+    "gallery.zoomHint": "تكبير الصورة ←",
   },
 
   pl: {
     // Nav
     "nav.services": "Usługi",
     "nav.process3d": "Metoda 3D",
+    "nav.gallery": "Galeria",
     "nav.calculator": "Kalkulator",
     "nav.region": "Obszar PLZ 42",
     "nav.faq": "Częste pytania",
@@ -640,5 +721,20 @@ export const TRANSLATIONS: Record<SupportedLocale, Record<string, string>> = {
     "contact.damage": "Rodzaj uszkodzenia",
     "contact.msg": "Twoja wiadomość / Szczegóły obiektu",
     "contact.submit": "Wyślij zapytanie i otwórz WhatsApp",
+
+    // Gallery
+    "gallery.eyebrow": "REALIZACJE I GALERIA ZDJĘĆ",
+    "gallery.h1": "Rzeczywiste Projekty Renowacji.",
+    "gallery.accent": "Udokumentowana Jakość w Terenie.",
+    "gallery.sub": "Przegląd realizacji hydroizolacji prowadzonych przez certyfikowanego partnera SchimmelPeter® Shahzada Mahmooda w Wuppertalu, Solingen, Remscheid i regionie Bergisches Land.",
+    "gallery.filterAll": "Wszystkie realizacje",
+    "gallery.filterHorizontal": "Przepona pozioma",
+    "gallery.filterKeller": "Piwnice i mury",
+    "gallery.filterDrainage": "Systemy drenażowe",
+    "gallery.filterSchimmel": "Usuwanie pleśni",
+    "gallery.filterTeam": "Diagnostyka i zespół",
+    "gallery.modalClose": "Zamknij",
+    "gallery.tagVerified": "Certyfikat WTA",
+    "gallery.zoomHint": "Powiększ →",
   }
 };

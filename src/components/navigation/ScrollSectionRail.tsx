@@ -12,6 +12,7 @@ const SECTION_STOPS: SectionStop[] = [
   { id: "leistungen", label: "Fachleistungen" },
   { id: "3d-injektion", label: "3D-Verfahren" },
   { id: "zertifizierung", label: "WTA & Garantie" },
+  { id: "galerie", label: "Bildgalerie" },
   { id: "rechner", label: "Kostenrechner" },
   { id: "servicegebiet", label: "Servicegebiet 42" },
   { id: "faq", label: "Häufige Fragen" },
