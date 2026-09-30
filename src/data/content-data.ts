@@ -137,10 +137,10 @@ export const REGIONAL_CITIES: RegionCity[] = [
 export const PROCESS_PIPELINE = [
   {
     step: "01",
-    title: "Schadensanalyse",
+    title: "Unverbindliche Schadensanalyse",
     icon: "🔍",
     time: "Schritt 1",
-    desc: "Außen- und Innenbesichtigung mit präzisen Messungen. Herr Mahmood ermittelt die genaue Ursache, zum Beispiel kapillar aufsteigende Feuchte, Kondensat, eine undichte Leitung oder mangelhafte Drainage."
+    desc: "Außen- und Innenbesichtigung mit Feuchtemessung. Herr Mahmood ermittelt die genaue Ursache, zum Beispiel kapillar aufsteigende Feuchte, Kondensat, eine undichte Leitung oder mangelhafte Drainage."
   },
   {
     step: "02",
@@ -158,20 +158,24 @@ export const PROCESS_PIPELINE = [
   },
   {
     step: "04",
-    title: "Dauerhafte Trocknung",
+    title: "Gemeinsame Abnahme",
     icon: "☀️",
-    time: "Ergebnis",
-    desc: "Das Mauerwerk trocknet aus, die Baustelle wird sauber übergeben. Dazu 10 Jahre Garantie auf unsere Arbeit und bis zu 25 Jahre Produktgarantie von SchimmelPeter."
+    time: "Schritt 4",
+    desc: "Nach der Sanierung nehmen Sie die Arbeiten gemeinsam mit uns ab, die Baustelle wird sauber übergeben. Dazu 10 Jahre Garantie auf unsere Arbeit und bis zu 25 Jahre Produktgarantie von SchimmelPeter."
   }
 ];
 
 export const FAQS = [
   {
     q: "Wie erkenne ich, ob mein Keller in Wuppertal von aufsteigender Feuchtigkeit betroffen ist?",
-    a: "Typische Anzeichen sind abblätternde Farbe, sandender Putz, modriger Geruch und weiße Ausblühungen (Salzkristalle) im unteren Drittel der Wände. Gerade in Wuppertals Hanglagen dringt oft unkontrollierte Feuchtigkeit von unten ins Mauerwerk ein. Bei unserer Vor-Ort-Analyse messen wir die Feuchte tiefenwirksam im Baustoff."
+    a: "Typisch sind dunkle Feuchteränder im unteren Wandbereich, abblätternde Farbe, aufgequollener Putz, weiße Salzausblühungen, Schimmel an Sockelleisten und ein muffiger Geruch. Steigt die Feuchte gleichmäßig von unten nach oben, spricht vieles für kapillar aufsteigende Feuchte und eine defekte Horizontalsperre. Einzelne, klar abgegrenzte Flecken kommen dagegen meist von Rohrschäden oder Wasser von außen. Sicher ist erst die Messung im Mauerwerk."
   },
   {
-    q: "Wie funktioniert die chemische Horizontalsperre per Injektionsverfahren?",
+    q: "Was sind die häufigsten Ursachen für einen nassen Keller?",
+    a: "Meist ist es eine von vier Ursachen: eine defekte Kapillarwassersperre, durch die Bodenfeuchte aufsteigt, eine undichte Vertikalsperre, durch die Wasser seitlich eindringt, ein fehlendes oder defektes Drainagesystem oder Risse und undichte Stellen in Wänden und Boden. Oft wirken mehrere zusammen. Deshalb steht bei uns die Messung vor jedem Angebot."
+  },
+  {
+    q: "Wie funktioniert die Horizontalsperre im Injektionsverfahren?",
     a: "In das feuchte Mauerwerk werden Bohrlöcher im Abstand von bis zu 20 cm gesetzt, eine Vortrocknung ist in der Regel nicht nötig. Dann bringen wir eine genau berechnete Menge des SchimmelPeter-Injektionsmittels ein, eines in Paraffin gelösten Kunststoffs. Er verteilt sich im Injektionsbereich und legt sich als wasserabweisendes Polymer an die Kapillarwände: eine neue Sperrschicht, die aufsteigende Feuchte zuverlässig stoppt. Weil diese Schicht nur wenige Moleküle dick ist, bleiben die Poren offen und die Wand bleibt diffusionsfähig."
   },
   {
