@@ -5,7 +5,7 @@ import { COMPANY_INFO, FAQS } from "../src/data/content-data.ts";
 import { SERVICE_PAGES, CITY_PAGES } from "../src/data/seo-pages.ts";
 import { PHASES } from "../src/data/proof.ts";
 
-const SITE = "https://www.sos-abdichtung.de";
+const SITE = "https://sos-abdichtung.de";
 
 const lines: string[] = [
   "# sos-abdichtung",
