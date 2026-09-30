@@ -7,7 +7,7 @@ import { hy } from "@/lib/hyphenate";
  */
 export default function ZoomAct() {
   return (
-    <section id="vom-keller-zur-pore" className="zoom-act theme-dark bg-[var(--ink)]" aria-labelledby="zoom-title">
+    <section id="vom-keller-zur-pore" className="zoom-act border-t border-line/10" aria-labelledby="zoom-title">
       <div className="sc-wrap zoom-act__head">
         <p className="sc-label">Warum der Keller nass wird</p>
         <h2 id="zoom-title" className="sc-display mt-3 max-w-4xl text-4xl sm:text-5xl lg:text-6xl">

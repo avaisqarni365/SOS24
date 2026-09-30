@@ -14,15 +14,18 @@ const ICONS: Record<SceneId, typeof Layers> = {
 
 /**
  * "Jeder Ort, Schicht für Schicht": four cut-away places, each with its
- * treatment as steps. The visitor switches scene, turns the model 360°,
- * zooms, steps through material and procedure, and picks layers. three.js
- * loads when the section is near; without WebGL the poster and all texts
- * stay usable.
+ * treatment as steps. Every step first shows a light still picture (rendered
+ * from the same model, with the step's layer labelled), so the section costs
+ * one small image. The 360° model (three.js) loads only when the visitor asks
+ * for it; then the scene turns, zooms and its layers can be picked.
  */
-export default function HouseViewer3D({ scenes, poster }: { scenes: SceneDef[]; poster: React.ReactNode }) {
+export default function HouseViewer3D({ scenes }: { scenes: SceneDef[] }) {
   const hostRef = useRef<HTMLDivElement>(null);
   const viewer = useRef<SceneViewer | null>(null);
   const [ready, setReady] = useState(false);
+  const [canGL, setCanGL] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [touchUI, setTouchUI] = useState(false);
   const [touched, setTouched] = useState(false);
   const [sceneIdx, setSceneIdx] = useState(0);
   const [stepIdx, setStepIdx] = useState(0);
@@ -33,36 +36,29 @@ export default function HouseViewer3D({ scenes, poster }: { scenes: SceneDef[]; 
   const layer = layers.find((l) => l.id === (layerId ?? step.layer)) ?? layers[0];
 
   useEffect(() => {
-    const host = hostRef.current;
-    if (!host) return;
-    const probe = document.createElement("canvas");
-    if (!probe.getContext("webgl2")) return;
-    let disposed = false;
-    const io = new IntersectionObserver(
-      (entries) => {
-        if (!entries.some((e) => e.isIntersecting)) return;
-        io.disconnect();
-        import("./sceneViewer")
-          .then(({ createSceneViewer }) => {
-            if (disposed) return;
-            viewer.current = createSceneViewer(host, {
-              onPick: (id) => setLayerId(id),
-              onInteract: () => setTouched(true),
-            });
-            setReady(true);
-          })
-          .catch(() => setReady(false));
-      },
-      { rootMargin: "120% 0px" }
-    );
-    io.observe(host);
+    setCanGL(!!document.createElement("canvas").getContext("webgl2"));
+    setTouchUI(window.matchMedia("(pointer: coarse)").matches);
     return () => {
-      disposed = true;
-      io.disconnect();
       viewer.current?.dispose();
       viewer.current = null;
     };
   }, []);
+
+  const load3d = () => {
+    const host = hostRef.current;
+    if (!host || viewer.current || loading) return;
+    setLoading(true);
+    import("./sceneViewer")
+      .then(({ createSceneViewer }) => {
+        viewer.current = createSceneViewer(host, {
+          onPick: (id) => setLayerId(id),
+          onInteract: () => setTouched(true),
+        });
+        setReady(true);
+      })
+      .catch(() => setCanGL(false))
+      .finally(() => setLoading(false));
+  };
 
   // a new scene (or the viewer becoming ready) loads the scene; steps and
   // layer picks follow
@@ -102,12 +98,38 @@ export default function HouseViewer3D({ scenes, poster }: { scenes: SceneDef[]; 
 
       <div className="hv__body">
         <div className={`hv__stage theme-dark${ready ? " is-3d" : ""}`}>
-          <div className="hv__poster">{sceneIdx === 0 ? poster : <p className="hv__nogl">{def.title}</p>}</div>
+          <div className="hv__poster">
+            <img
+              key={`${def.id}-${stepIdx}`}
+              src={`/img/3d/${def.id}-${stepIdx + 1}-1280.webp`}
+              srcSet={`/img/3d/${def.id}-${stepIdx + 1}-640.webp 640w, /img/3d/${def.id}-${stepIdx + 1}-1280.webp 1280w`}
+              sizes="(max-width: 1023px) 92vw, 60vw"
+              width={1280}
+              height={900}
+              alt={`${def.label}, Schritt ${stepIdx + 1}: ${step.title}. Im Bild markiert: ${
+                (layers.find((l) => l.id === step.layer) ?? layers[0]).name
+              }.`}
+              loading="lazy"
+              decoding="async"
+            />
+          </div>
           <div ref={hostRef} className="hv__canvas" />
+          <p className="hv__caption">
+            <span>
+              {stepIdx + 1}/{def.steps.length}
+            </span>
+            {step.title}
+          </p>
+          {!ready && canGL && (
+            <button type="button" className="hv__load" onClick={load3d} disabled={loading}>
+              <span aria-hidden="true">⟲</span>
+              {loading ? "3D-Modell lädt …" : "In 3D drehen (360°)"}
+            </button>
+          )}
           {ready && (
             <>
               <p className={`hv__hint${touched ? " is-gone" : ""}`} aria-hidden="true">
-                <span className="hv__hint-icon">⟲</span> 360° drehen: ziehen
+                <span className="hv__hint-icon">⟲</span> {touchUI ? "1 Finger: drehen · 2 Finger: zoomen" : "Ziehen: drehen · Mausrad oder +/−: zoomen"}
               </p>
               <div className="hv__tools">
                 <button type="button" onClick={() => viewer.current?.zoom(0.8)} aria-label="Heranzoomen">

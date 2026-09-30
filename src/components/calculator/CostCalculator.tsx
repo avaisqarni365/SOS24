@@ -27,7 +27,7 @@ export default function CostCalculator() {
         <h2 className="font-editorial font-normal tracking-[-0.02em] leading-[1.04] text-[2.25rem] sm:text-5xl lg:text-[3.5rem] text-[#1A1D1B]">
           {t("calc.h1")}
           <br />
-          <span className="italic text-landing-mint">{t("calc.accent")}</span>
+          <span className="text-[var(--emerald-deep)]">{t("calc.accent")}</span>
         </h2>
         <p className="mt-6 max-w-2xl text-base sm:text-lg leading-relaxed text-[#444945]">
           {t("calc.sub")}

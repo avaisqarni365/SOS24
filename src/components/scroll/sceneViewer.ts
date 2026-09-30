@@ -878,8 +878,11 @@ export function createSceneViewer(
   controls.rotateSpeed = 0.7;
   controls.autoRotate = true;
   controls.autoRotateSpeed = 0.55;
-  // sideways drags turn the model; vertical swipes on a phone keep scrolling the page
-  renderer.domElement.style.touchAction = "pan-y";
+  // The model loads only on request, so on the stage every gesture belongs
+  // to it: one finger turns (all directions), two fingers zoom. The page
+  // still scrolls outside the stage.
+  renderer.domElement.style.touchAction = "none";
+  controls.touches = { ONE: THREE.TOUCH.ROTATE, TWO: THREE.TOUCH.DOLLY_ROTATE };
   let userTouched = false;
   let goalTarget = new THREE.Vector3();
   let goalDist: number | null = null;
@@ -905,6 +908,8 @@ export function createSceneViewer(
   let goal: State = {};
   let firstView = "";
   let selected: string | null = null;
+  // the layer the current step works on: always labelled
+  let stepLayer: string | null = null;
   let pulse = 0;
   const chips = new Map<string, HTMLButtonElement>();
 
@@ -950,6 +955,7 @@ export function createSceneViewer(
       chips.set(l.id, b);
     });
     selected = null;
+    stepLayer = first.layer;
     rt.apply(cur);
     dirty = true;
   }
@@ -1020,6 +1026,8 @@ export function createSceneViewer(
   function placeChips() {
     if (!rt) return;
     const visible = new Set(rt.labels(cur));
+    if (stepLayer) visible.add(stepLayer);
+    if (selected) visible.add(selected);
     offset.copy(camera.position).sub(controls.target).normalize();
     const facing = offset.dot(rt.front) > 0.15;
     const placed: { x: number; y: number; w: number; h: number }[] = [];
@@ -1118,6 +1126,7 @@ export function createSceneViewer(
     setStep(step) {
       if (!rt) return;
       goal = { ...step.state };
+      stepLayer = step.layer;
       const v = rt.views[step.view] ?? rt.views[firstView];
       goalTarget = v.target.clone();
       goalDist = v.dist;

@@ -4,8 +4,8 @@
 
 /* ---------------------------------------------------------------------------
    Theme. Colours are RGB channels so Tailwind can add opacity to them.
-   Light is the default: stone-white ground, near-black text, deep emerald
-   accent. Dark is the forest-ink original. A visitor's choice (header
+   Light is the default: one flat British-white ground (no tinted bands, no
+   glow, no grain), white cards, near-black text, deep emerald accent. Dark is the forest-ink original. A visitor's choice (header
    switch, stored as "sos_theme") sets data-theme on <html>; without a
    choice the device setting decides.
    Roles keep their historic names: --ink is the ground (and the text that
@@ -13,20 +13,39 @@
    buttons), --mint is the accent.
    ------------------------------------------------------------------------- */
 :root {
-  --c-ink: 247 246 242;
+  --c-ink: 248 247 243;
   --c-ink2: 255 255 255;
-  --c-ink3: 234 239 235;
-  --c-bone: 22 32 27;
-  --c-bone2: 44 56 50;
+  --c-ink3: 240 239 234;
+  --c-bone: 26 28 26;
+  --c-bone2: 46 49 46;
   --c-mint: 30 120 100;
   --c-emerald: 23 97 81;
-  --c-soft: 72 84 78;
-  --c-line: 22 32 27;
-  --band-stone: #eeece6;
-  --band-mint: #e4f0ea;
-  --nav-bg: rgb(250 249 246 / 0.92);
-  --hero-glow: rgba(30, 120, 100, 0.14);
+  --c-soft: 60 64 61;
+  --c-line: 26 28 26;
+  --band-stone: #f8f7f3;
+  --band-mint: #f8f7f3;
+  --nav-bg: rgb(248 247 243 / 0.96);
+  --hero-glow: transparent;
   color-scheme: light;
+}
+/* Page-level only (a dark stage inside a light page does not change them):
+   paper grain, the water glow in the hero, the 3D stage. */
+:root {
+  --grain: 0;
+  --hero-water: transparent;
+  --stage-bg: radial-gradient(70% 60% at 55% 45%, #ffffff, transparent 70%), linear-gradient(180deg, #f1f0eb 0%, #e5e4de 100%);
+}
+[data-theme="dark"] {
+  --grain: 0.045;
+  --hero-water: rgba(59, 110, 168, 0.12);
+  --stage-bg: radial-gradient(70% 60% at 55% 45%, rgba(98, 196, 172, 0.14), transparent 70%), linear-gradient(180deg, #16211c 0%, #0f1612 100%);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --grain: 0.045;
+    --hero-water: rgba(59, 110, 168, 0.12);
+    --stage-bg: radial-gradient(70% 60% at 55% 45%, rgba(98, 196, 172, 0.14), transparent 70%), linear-gradient(180deg, #16211c 0%, #0f1612 100%);
+  }
 }
 /* dark: the visitor chose it, or the device prefers it and no choice was made */
 [data-theme="dark"],
@@ -91,7 +110,7 @@
   --line: rgb(var(--c-line) / 0.12);
 }
 :root {
-  --sc-font-display: var(--font-editorial), "Newsreader", Georgia, serif;
+  --sc-font-display: var(--font-sans), "Inter", system-ui, sans-serif;
   --sc-font-text: var(--font-sans), "Inter", system-ui, sans-serif;
   --sc-font-mono: var(--font-mono), ui-monospace, monospace;
   --sc-shadow-color: 150 20% 3%;
@@ -99,8 +118,8 @@
   --emerald-deep: #2c7466;
   --damp: #3b6ea8;
   --salt: #e8e1cf;
-  --paper: #f3f1ec;
-  --paper-2: #ece9e2;
+  --paper: #f8f7f3;
+  --paper-2: #f1f0eb;
   --text-on-bone: #444945;
   --head-on-bone: #1a1d1b;
 }
@@ -197,7 +216,7 @@
   pointer-events: none;
   background:
     radial-gradient(60% 70% at 74% 58%, var(--hero-glow), transparent 70%),
-    radial-gradient(40% 40% at 70% 92%, rgba(59, 110, 168, 0.12), transparent 70%),
+    radial-gradient(40% 40% at 70% 92%, var(--hero-water), transparent 70%),
     linear-gradient(180deg, var(--ink) 0%, var(--band-mint) 70%, var(--ink) 100%);
 }
 .hero__grid {
@@ -363,7 +382,6 @@
 }
 .tension__lines .turn {
   color: var(--mint);
-  font-style: italic;
 }
 .sc-js .tension__stage {
   min-height: 0;
@@ -441,13 +459,6 @@
     grid-template-columns: minmax(0, 1fr);
   }
 }
-.hv__nogl {
-  margin: 0;
-  font-family: var(--sc-font-display);
-  font-size: 1.6rem;
-  color: var(--bone);
-  text-align: center;
-}
 .hv__scene-intro h3 {
   margin: 0;
   font-family: var(--sc-font-display);
@@ -469,38 +480,88 @@
   font-size: 0.88rem;
   font-weight: 600;
 }
+/* The stage has the stills' shape (1280 x 900), so picture and live model
+   frame the same. */
 .hv__stage {
   position: relative;
-  height: clamp(22rem, 72svh, 44rem);
+  aspect-ratio: 1280 / 900;
+  max-height: 82svh;
   border-radius: 26px;
   overflow: hidden;
-  border: 1px solid color-mix(in oklab, var(--bone) 10%, transparent);
-  background:
-    radial-gradient(70% 60% at 55% 45%, rgba(98, 196, 172, 0.14), transparent 70%),
-    linear-gradient(180deg, #16211c 0%, #0f1612 100%);
-}
-@media (max-width: 1023px) {
-  .hv__stage {
-    height: clamp(20rem, 58svh, 34rem);
-  }
+  border: 1px solid rgb(26 28 26 / 0.1);
+  background: var(--stage-bg);
 }
 .hv__poster {
   position: absolute;
   inset: 0;
-  display: grid;
-  place-items: center;
-  padding: 1rem;
   transition: opacity 400ms var(--sc-ease-out);
+}
+.hv__poster img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
 }
 .hv__stage.is-3d .hv__poster {
   opacity: 0;
   pointer-events: none;
 }
-.layers__poster {
-  width: 100%;
-  max-width: 58rem;
-  height: auto;
-  max-height: 100%;
+/* step caption (bottom left) and the load button (bottom right); once the
+   model runs, the gesture hint sits at the top */
+.hv__caption {
+  position: absolute;
+  left: 0.8rem;
+  bottom: 0.8rem;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: fit-content;
+  max-width: calc(100% - 1.6rem);
+  padding: 0.35rem 0.75rem 0.35rem 0.35rem;
+  border-radius: 999px;
+  background: rgb(14 19 16 / 0.86);
+  color: #f3f1ec;
+  font-size: 0.85rem;
+  font-weight: 600;
+  line-height: 1.25;
+  text-align: start;
+  pointer-events: none;
+}
+.hv__caption span {
+  flex: none;
+  padding: 0.2rem 0.5rem;
+  border-radius: 999px;
+  background: #62c4ac;
+  color: #0e1310;
+  font: 700 0.72rem/1.2 var(--sc-font-mono, ui-monospace, monospace);
+}
+.hv__load {
+  position: absolute;
+  right: 0.9rem;
+  bottom: 0.9rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 2.9rem;
+  padding: 0.6rem 1.1rem;
+  border-radius: 999px;
+  background: #1e7864;
+  color: #fff;
+  font-size: 0.92rem;
+  font-weight: 700;
+  box-shadow: 0 8px 24px rgb(0 0 0 / 0.18);
+}
+.hv__load:hover,
+.hv__load:focus-visible {
+  background: #176151;
+}
+.hv__load:disabled {
+  opacity: 0.8;
+  cursor: progress;
+}
+.hv__load span {
+  font-size: 1.15rem;
 }
 .hv__canvas {
   position: absolute;
@@ -518,8 +579,9 @@
 .hv__hint {
   position: absolute;
   left: 50%;
-  top: 1rem;
+  top: 0.8rem;
   transform: translateX(-50%);
+  white-space: nowrap;
   margin: 0;
   padding: 0.45rem 0.9rem;
   border-radius: 999px;
@@ -1107,25 +1169,19 @@
   transform: translate3d(0, calc(var(--sc-p, 0) * -6vh), 0);
 }
 
-/* Body text is left-aligned for easy reading (even word spacing, no
-   rivers), with German hyphenation. Only the long article paragraphs on
-   the service and city pages are justified, and only on wide screens where
-   a line holds enough words. */
+/* Body text is fully justified, with German hyphenation (soft hyphens from
+   hy() plus the browser's own) so the word spacing stays even. Headings,
+   labels, buttons and navigation keep a ragged edge. */
 p,
 li,
 dd,
 figcaption {
-  text-align: start;
+  text-align: justify;
+  text-justify: inter-word;
   hyphens: auto;
   -webkit-hyphens: auto;
-  hyphenate-limit-chars: 7 3 3;
+  hyphenate-limit-chars: 6 3 2;
   text-wrap: pretty;
-}
-@media (min-width: 1024px) {
-  .prose-sos p {
-    text-align: justify;
-    text-justify: inter-word;
-  }
 }
 :is(h1, h2, h3, h4, .sc-label, button, label, summary, nav, .no-justify) :is(p, li, span),
 .sc-label,
@@ -1146,8 +1202,8 @@ figcaption {
   hyphens: manual;
 }
 
-/* Large justified lede on a phone: a touch smaller so each line holds
-   enough words to justify without gaps. */
+/* Large lede on a phone: a touch smaller so each justified line holds
+   enough words to spread evenly. */
 @media (max-width: 640px) {
   .sc-lede {
     font-size: 1.06rem;
@@ -1430,4 +1486,52 @@ html[data-text="xl"] {
 .zoom-act__head {
   padding-top: clamp(4rem, 9vh, 6rem);
   padding-bottom: 0.5rem;
+}
+
+/* Upright type only (no italics anywhere): accents are carried by colour and
+   weight. Headings in Inter, a little tighter and heavier than body text. */
+em,
+i,
+cite,
+var,
+dfn,
+address,
+.italic {
+  font-style: normal !important;
+}
+.sc-display {
+  font-weight: 650;
+  letter-spacing: -0.025em;
+  line-height: 1.06;
+}
+.sc-display em {
+  font-weight: 650;
+}
+
+/* Phones: the stage runs edge to edge; the step title is right below it in
+   the panel, so the caption steps aside for the picture. */
+@media (max-width: 639px) {
+  .hv__stage {
+    margin-inline: calc(-1 * var(--sc-gutter));
+    border-radius: 0;
+    border-inline: 0;
+  }
+  .hv__caption {
+    display: none;
+  }
+  .hv__hint {
+    font-size: 0.72rem;
+    padding: 0.35rem 0.7rem;
+  }
+  .hv__load {
+    min-height: 2.6rem;
+    padding: 0.5rem 0.9rem;
+    font-size: 0.85rem;
+  }
+}
+/* Headings that still carry the old editorial class: same upright Inter
+   weight as .sc-display. */
+.font-editorial {
+  font-weight: 650;
+  letter-spacing: -0.02em;
 }

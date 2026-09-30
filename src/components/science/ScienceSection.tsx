@@ -24,7 +24,7 @@ export default function ScienceSection({ slug }: { slug: string }) {
   if (!chapter || !entry) return null;
   const { Visual, padded } = entry;
   return (
-    <section className="science theme-dark bg-[var(--ink)] border-t border-line/5" aria-labelledby={`science-${slug}`}>
+    <section className="science border-t border-line/10" aria-labelledby={`science-${slug}`}>
       <div className="mx-auto max-w-7xl px-6 pb-10 pt-16 sm:px-8 sm:pt-24">
         <p className="sc-label">Wissen, Schicht für Schicht</p>
         <h2 id={`science-${slug}`} className="sc-display mt-3 max-w-4xl text-4xl sm:text-5xl lg:text-6xl">
