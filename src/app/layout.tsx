@@ -42,7 +42,11 @@ export const metadata: Metadata = {
     "Kellersanierung Wuppertal ohne Aufgraben: nasse Keller trockenlegen. SchimmelPeter® Partner, kostenlose Messung, 10 Jahre Garantie auf die Arbeit.",
   applicationName: "sos-abdichtung",
   authors: [{ name: "Shahzad Mahmood" }],
-  robots: { index: true, follow: true, "max-image-preview": "large" },
+  // The GitHub Pages preview (served under a base path) must not be indexed:
+  // it would duplicate the real domain. The domain build has no base path.
+  robots: process.env.PAGES_BASE_PATH
+    ? { index: false, follow: false }
+    : { index: true, follow: true, "max-image-preview": "large" },
   formatDetection: { telephone: true },
   openGraph: {
     type: "website",
