@@ -1,6 +1,6 @@
 import { COMPANY_INFO } from "@/data/content-data";
 
-export const SITE_URL = "https://www.sos-abdichtung.de";
+export const SITE_URL = "https://sos-abdichtung.de";
 export const SITE_NAME = "sos-abdichtung";
 export const PARTNER_URL = "https://www.schimmelpeter.de/partner/wuppertal-kellersanierung";
 
