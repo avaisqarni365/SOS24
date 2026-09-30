@@ -8,7 +8,7 @@ import { Breadcrumbs, LayerStack, Prose, FaqList, LinkGrid } from "@/components/
 import { CITY_PAGES } from "@/data/seo-pages";
 import { SERVICE_CARDS } from "@/data/services";
 import { COMPANY_INFO } from "@/data/content-data";
-import { BUSINESS_ID, WEBSITE_ID, abs, businessNode, websiteNode, breadcrumbNode, faqNode } from "@/lib/site";
+import { BUSINESS_ID, WEBSITE_ID, abs, businessNode, websiteNode, breadcrumbNode, faqNode, OG_IMAGE } from "@/lib/site";
 import { hy } from "@/lib/hyphenate";
 
 export const dynamicParams = false;
@@ -25,7 +25,7 @@ export function generateMetadata({ params }: { params: { city: string } }): Meta
     title: page.title,
     description: page.metaDescription,
     alternates: { canonical: path },
-    openGraph: { title: page.title, description: page.metaDescription, url: path, type: "website", locale: "de_DE", siteName: "sos-abdichtung" },
+    openGraph: { title: page.title, description: page.metaDescription, url: path, type: "website", locale: "de_DE", siteName: "sos-abdichtung", images: [OG_IMAGE] },
   };
 }
 

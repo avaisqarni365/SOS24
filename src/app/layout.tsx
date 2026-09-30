@@ -3,7 +3,7 @@ import localFont from "next/font/local";
 // Engine floor first, brand tokens second: the brand must win the :root cascade.
 import "@/styles/scrollcraft.css";
 import "@/styles/globals.css";
-import { SITE_URL } from "@/lib/site";
+import { SITE_URL, OG_IMAGE } from "@/lib/site";
 import { LanguageProvider } from "@/i18n/LanguageContext";
 
 // Self-hosted variable fonts: no request to Google at runtime (DSGVO) and no build-time fetch.
@@ -52,7 +52,9 @@ export const metadata: Metadata = {
     type: "website",
     locale: "de_DE",
     siteName: "sos-abdichtung",
+    images: [OG_IMAGE],
   },
+  twitter: { card: "summary_large_image", images: [OG_IMAGE.url] },
   icons: { icon: "/icon.svg" },
 };
 

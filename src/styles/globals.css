@@ -139,7 +139,7 @@
   margin: 0;
   justify-self: center;
   width: 100%;
-  max-width: min(100%, calc((100svh - 7rem) * 0.874));
+  max-width: min(100%, calc((100svh - 7rem) * 1.02));
 }
 .hero__house img {
   display: block;
@@ -268,187 +268,291 @@
   opacity: calc(var(--sc-p, 0) * 1.4 - 0.35);
 }
 
-/* ========================================================= LAYERS =======
-   The peak. Static: poster + ordered list, a real document. 3D mode adds
-   .is-3d on the section: the canvas fills the stage and the same list items
-   become labels projected next to their layer. */
-.layers__stage {
-  position: relative;
-  min-height: 100svh;
-  padding: 6rem var(--sc-gutter) 3rem;
+/* ================================================= 3D HOUSE VIEWER ====
+   The interactive house: a stage card (canvas over the static poster) and a
+   panel with the procedure steps and the wall layers. Without WebGL the
+   poster stays and the panel still works as plain text controls. */
+.hv {
   display: grid;
-  gap: 2rem;
-  align-content: center;
-  overflow: clip;
+  gap: clamp(1rem, 2vw, 1.5rem);
+  grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr);
+  align-items: start;
 }
-.layers__head {
-  position: relative;
-  z-index: 5;
-  max-width: 34rem;
+@media (max-width: 1023px) {
+  .hv {
+    grid-template-columns: minmax(0, 1fr);
+  }
 }
-.layers__figure {
-  margin: 0;
+.hv__stage {
   position: relative;
+  height: clamp(22rem, 72svh, 44rem);
+  border-radius: 26px;
+  overflow: hidden;
+  border: 1px solid color-mix(in oklab, var(--bone) 10%, transparent);
+  background:
+    radial-gradient(70% 60% at 55% 45%, rgba(98, 196, 172, 0.14), transparent 70%),
+    linear-gradient(180deg, #16211c 0%, #0f1612 100%);
+}
+@media (max-width: 1023px) {
+  .hv__stage {
+    height: clamp(20rem, 58svh, 34rem);
+  }
+}
+.hv__poster {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  transition: opacity 400ms var(--sc-ease-out);
+}
+.hv__stage.is-3d .hv__poster {
+  opacity: 0;
+  pointer-events: none;
 }
 .layers__poster {
   width: 100%;
   max-width: 58rem;
   height: auto;
-  margin-inline: auto;
+  max-height: 100%;
 }
-.layers__canvas {
-  display: none;
-}
-.layers__list {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-  display: grid;
-  gap: 0.9rem;
-  counter-reset: layer;
-  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
-}
-.layer-note {
-  position: relative;
-  padding: 0.9rem 1rem 1rem 3rem;
-  border-radius: 14px;
-  background: color-mix(in oklab, var(--ink-2) 88%, transparent);
-  border: 1px solid color-mix(in oklab, var(--bone) 10%, transparent);
-  box-shadow: var(--sc-e2);
-  counter-increment: layer;
-}
-.layer-note::before {
-  content: counter(layer);
+.hv__canvas {
   position: absolute;
-  left: 0.9rem;
-  top: 0.9rem;
-  width: 1.5rem;
-  height: 1.5rem;
+  inset: 0;
+  cursor: grab;
+}
+.hv__canvas:active {
+  cursor: grabbing;
+}
+.hv__canvas canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.hv__hint {
+  position: absolute;
+  left: 50%;
+  top: 1rem;
+  transform: translateX(-50%);
+  margin: 0;
+  padding: 0.45rem 0.9rem;
   border-radius: 999px;
-  display: grid;
-  place-items: center;
-  font: 600 0.72rem/1 var(--sc-font-mono);
-  background: var(--swatch, var(--mint));
-  color: var(--ink);
-}
-.layer-note h3 {
-  margin: 0;
-  font-size: 0.98rem;
-  font-weight: 600;
+  background: color-mix(in oklab, #0e1310 80%, transparent);
+  border: 1px solid color-mix(in oklab, var(--bone) 14%, transparent);
   color: var(--bone);
-}
-.layer-note__short {
-  display: none;
-  font-size: 0.86rem;
+  font-size: 0.8rem;
   font-weight: 600;
-  line-height: 1.5rem;
-  color: var(--bone);
-}
-.layer-note p {
-  margin: 0.25rem 0 0;
-  font-size: 0.86rem;
-  line-height: 1.5;
-  color: var(--sc-ink-soft);
-}
-.layers__caption {
-  font-size: 0.78rem;
-  color: var(--sc-ink-soft);
-  margin: 0;
-}
-
-.layers.is-3d .layers__stage {
-  display: block;
-  padding: 0;
-  height: 100svh;
-}
-.layers.is-3d .layers__head {
-  position: absolute;
-  left: var(--sc-gutter);
-  top: clamp(5rem, 12vh, 8rem);
-}
-.layers.is-3d .layers__poster {
-  display: none;
-}
-.layers.is-3d .layers__figure {
-  position: static;
-}
-.layers.is-3d .layers__canvas {
-  display: block;
-  position: absolute;
-  inset: 0;
-}
-.layers.is-3d .layers__canvas canvas {
-  width: 100% !important;
-  height: 100% !important;
-}
-.layers.is-3d .layers__list {
-  position: absolute;
-  inset: 0;
-  display: block;
   pointer-events: none;
+  transition: opacity 500ms var(--sc-ease-out);
 }
-.layers.is-3d .layer-note {
+.hv__hint.is-gone {
+  opacity: 0;
+}
+.hv__hint-icon {
+  color: var(--mint);
+  margin-right: 0.25rem;
+}
+.hv__tools {
+  position: absolute;
+  right: 0.9rem;
+  bottom: 0.9rem;
+  display: grid;
+  gap: 0.4rem;
+}
+.hv__tools button {
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 999px;
+  background: color-mix(in oklab, #0e1310 82%, transparent);
+  border: 1px solid color-mix(in oklab, var(--bone) 16%, transparent);
+  color: var(--bone);
+  font-size: 1.2rem;
+  line-height: 1;
+}
+.hv__tools button:hover,
+.hv__tools button:focus-visible {
+  border-color: var(--mint);
+  color: var(--mint);
+}
+.hv-chip {
   position: absolute;
   left: 0;
   top: 0;
-  width: min(17rem, 44vw);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.3rem 0.65rem 0.3rem 0.3rem;
+  border-radius: 999px;
+  background: color-mix(in oklab, #0e1310 86%, transparent);
+  border: 1px solid color-mix(in oklab, var(--bone) 16%, transparent);
+  color: var(--bone);
+  font-size: 0.78rem;
+  font-weight: 600;
+  white-space: nowrap;
   opacity: 0;
-  transition: opacity 260ms var(--sc-ease-out);
-  will-change: transform, opacity;
+  pointer-events: none;
+  transition: opacity 260ms var(--sc-ease-out), border-color 200ms;
 }
-.layers.is-3d .layer-note.is-on {
+.hv-chip span {
+  display: grid;
+  place-items: center;
+  width: 1.3rem;
+  height: 1.3rem;
+  border-radius: 999px;
+  background: var(--mint);
+  color: var(--ink);
+  font-family: var(--sc-font-mono, ui-monospace, monospace);
+  font-size: 0.7rem;
+}
+.hv-chip.is-on {
   opacity: 1;
+  pointer-events: auto;
 }
-.layers.is-3d .layer-note.is-compact {
-  width: max-content;
-  max-width: 15rem;
-  padding: 0.55rem 0.8rem 0.55rem 2.5rem;
+.hv-chip.is-selected {
+  border-color: var(--mint);
 }
-.layers.is-3d .layer-note.is-compact::before {
-  top: 0.5rem;
-  left: 0.6rem;
+.hv__panel {
+  display: grid;
+  gap: 1rem;
 }
-.layers.is-3d .layer-note.is-compact p {
-  display: none;
+.hv__steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(8, minmax(0, 1fr));
+  gap: 0.4rem;
 }
-.layers.is-3d .layers__caption {
-  position: absolute;
-  right: var(--sc-gutter);
-  bottom: 1.25rem;
-  max-width: 22rem;
-  text-align: right;
+.hv__steps button {
+  width: 100%;
+  min-height: 2.75rem;
+  border-radius: 12px;
+  background: var(--ink-2);
+  border: 1px solid color-mix(in oklab, var(--bone) 10%, transparent);
+  color: var(--bone);
+  font-family: var(--sc-font-mono, ui-monospace, monospace);
+  font-weight: 700;
 }
-@media (max-width: 860px) {
-  .layers.is-3d .layers__head {
-    top: 4.5rem;
-    right: var(--sc-gutter);
-  }
-  .layers.is-3d .layer-note {
-    width: min(13.5rem, 56vw);
-    padding: 0.6rem 0.7rem 0.7rem 2.4rem;
-  }
-  .layers.is-3d .layer-note::before {
-    left: 0.6rem;
-    top: 0.65rem;
-  }
-  .layers.is-3d .layer-note p {
-    display: none;
-  }
-  /* several labels at once on a phone: short names, so they sit side by side */
-  .layers.is-3d .layer-note.is-compact {
-    width: max-content;
-    padding: 0.4rem 0.65rem 0.4rem 2.2rem;
-  }
-  .layers.is-3d .layer-note.is-compact::before {
-    top: 0.35rem;
-    left: 0.45rem;
-  }
-  .layers.is-3d .layer-note.is-compact h3 {
-    display: none;
-  }
-  .layers.is-3d .layer-note.is-compact .layer-note__short {
-    display: block;
-  }
+.hv__steps button:hover {
+  border-color: color-mix(in oklab, var(--mint) 60%, transparent);
+}
+.hv__steps button[aria-pressed="true"] {
+  background: var(--mint);
+  border-color: var(--mint);
+  color: var(--ink);
+}
+.hv__step,
+.hv__layers {
+  border-radius: 22px;
+  background: var(--ink-2);
+  border: 1px solid color-mix(in oklab, var(--bone) 10%, transparent);
+  padding: 1.25rem 1.35rem;
+}
+.hv__kicker {
+  margin: 0;
+  font-family: var(--sc-font-mono, ui-monospace, monospace);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--mint);
+}
+.hv__step h3 {
+  margin: 0.4rem 0 0;
+  font-family: var(--sc-font-display);
+  font-weight: 500;
+  font-size: 1.7rem;
+  line-height: 1.1;
+  color: var(--bone);
+}
+.hv__material {
+  margin: 0.8rem 0 0;
+  padding: 0.65rem 0.8rem;
+  border-radius: 12px;
+  background: var(--ink-3);
+  color: var(--bone);
+  font-size: 0.9rem;
+}
+.hv__material span {
+  display: block;
+  font-family: var(--sc-font-mono, ui-monospace, monospace);
+  font-size: 0.66rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--sc-ink-soft);
+}
+.hv__text {
+  margin: 0.8rem 0 0;
+  color: var(--sc-ink-soft);
+  font-size: 0.93rem;
+  line-height: 1.6;
+}
+.hv__nav {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.6rem;
+  margin-top: 1rem;
+}
+.hv__nav button {
+  min-height: 2.75rem;
+  padding: 0 1.1rem;
+  border-radius: 999px;
+  border: 1px solid color-mix(in oklab, var(--bone) 18%, transparent);
+  color: var(--bone);
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+.hv__nav button.is-primary {
+  background: var(--bone);
+  border-color: var(--bone);
+  color: var(--ink);
+}
+.hv__layers ul {
+  list-style: none;
+  margin: 0.7rem 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.4rem;
+}
+.hv__layers li button {
+  width: 100%;
+  min-height: 2.6rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.35rem 0.6rem;
+  border-radius: 12px;
+  border: 1px solid color-mix(in oklab, var(--bone) 10%, transparent);
+  color: var(--bone);
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-align: left;
+}
+.hv__layers li button[aria-pressed="true"] {
+  border-color: var(--mint);
+  background: color-mix(in oklab, var(--mint) 12%, transparent);
+}
+.hv__num {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 1.4rem;
+  height: 1.4rem;
+  border-radius: 999px;
+  background: var(--swatch);
+  color: #0e1310;
+  font-family: var(--sc-font-mono, ui-monospace, monospace);
+  font-size: 0.7rem;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.25);
+}
+.hv__layer-text {
+  margin: 0.8rem 0 0;
+  color: var(--sc-ink-soft);
+  font-size: 0.88rem;
+  line-height: 1.55;
+}
+.hv__layer-text strong {
+  color: var(--bone);
 }
 
 /* ====================================================== SERVICES ====== */
@@ -999,4 +1103,35 @@ figcaption {
 }
 .legal__body address {
   font-style: normal;
+}
+.hero__3d {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin-top: 1.1rem;
+  color: var(--mint);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+.hero__3d:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* On a phone the hero (copy + house) is taller than the screen, so it must
+   not pin: it scrolls as a normal section and keeps the whole picture. */
+@media (max-width: 860px) {
+  .sc-js .hero[style*="--sc-span"] {
+    height: auto;
+  }
+  .sc-js .hero .hero__stage {
+    position: relative;
+    height: auto;
+    min-height: 0;
+  }
+  .sc-js .hero__copy,
+  .sc-js .hero [data-hero-plane] {
+    opacity: 1;
+    transform: none;
+  }
 }

@@ -51,6 +51,9 @@ export default function Hero() {
               {COMPANY_INFO.phoneDisplay}
             </a>
           </div>
+          <a href="#schicht-fuer-schicht" className="hero__3d">
+            <span aria-hidden="true">⟲</span> Das Haus in 3D drehen, Schicht für Schicht
+          </a>
         </div>
           <figure className="hero__house" data-hero-plane="subject">
             <img
@@ -58,16 +61,16 @@ export default function Hero() {
               srcSet="/img/hero-house-760.webp 760w, /img/hero-house-1400.webp 1400w"
               sizes="(max-width: 860px) 88vw, 46vw"
               width={1400}
-              height={1601}
+              height={1367}
               alt="Schnittmodell eines Hauses mit nassem Keller: Wasser steht auf dem Kellerboden, die Wand ist bis zu einem weißen Salzrand durchfeuchtet."
               fetchPriority="high"
               decoding="async"
             />
             <figcaption className="hero__marks" aria-hidden="true">
-              <span className="hero__mark" style={{ left: "46%", top: "81%" }}>
+              <span className="hero__mark" style={{ left: "43%", top: "73%" }}>
                 Wasser am Boden
               </span>
-              <span className="hero__mark hero__mark--left" style={{ left: "15%", top: "66%" }}>
+              <span className="hero__mark hero__mark--left" style={{ left: "20%", top: "58%" }}>
                 Salzrand in der Wand
               </span>
             </figcaption>

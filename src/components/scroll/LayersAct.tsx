@@ -1,5 +1,6 @@
 import { WALL_LAYERS } from "@/data/layers";
-import ExplodedWall from "./ExplodedWall";
+import HouseViewer3D from "./HouseViewer3D";
+import { PROCEDURE } from "@/data/procedure";
 import { hy } from "@/lib/hyphenate";
 
 /**
@@ -99,43 +100,36 @@ function LayersPoster() {
 }
 
 export default function LayersAct() {
+  const steps = PROCEDURE.map((s) => ({ ...s, text: hy(s.text), material: hy(s.material) }));
+  const layers = WALL_LAYERS.map((l) => ({ ...l, text: hy(l.text) }));
   return (
     <section
       id="schicht-fuer-schicht"
-      className="layers"
+      className="sc-section viewer-sec"
       aria-labelledby="layers-title"
-      data-sc-act="pin"
-      data-sc-span="4.2"
+      data-sc-act="flow"
       data-sc-drift="#0b0f0d"
-      style={{ ["--sc-span" as string]: 4.2 }}
     >
-      <div data-sc-stage className="layers__stage">
-        <div className="layers__head">
-          <p className="sc-label">Das Verfahren im Querschnitt</p>
-          <h2 id="layers-title" className="sc-display mt-3 text-4xl sm:text-5xl lg:text-6xl">
-            Ihre Kellerwand, <em className="text-[var(--mint)]">Schicht für Schicht.</em>
-          </h2>
-          <p className="sc-body mt-4 max-w-md">
-            {hy("Jede Schicht hat eine Aufgabe. Wir sanieren von innen, also bleibt die äußerste Schicht, wie sie ist.")}
+      <div className="sc-wrap">
+        <div className="grid gap-6 lg:grid-cols-[1fr_1fr] lg:items-end">
+          <div>
+            <p className="sc-label">Das Verfahren in 3D</p>
+            <h2 id="layers-title" className="sc-display mt-3 text-4xl sm:text-5xl lg:text-6xl">
+              Ihr Keller, <em className="text-[var(--mint)]">Schicht für Schicht.</em>
+            </h2>
+          </div>
+          <p className="sc-body">
+            {hy(
+              "Drehen Sie das Haus in alle Richtungen und gehen Sie die Sanierung Schritt für Schritt durch: vom nassen Keller über die Horizontalsperre bis zur fertigen Wand. Zu jedem Schritt sehen Sie Material und Ausführung."
+            )}
           </p>
         </div>
-        <figure className="layers__figure">
-          <LayersPoster />
-          <ExplodedWall />
-          <figcaption className="visually-hidden">Explosionsansicht einer sanierten Kellerwand</figcaption>
-        </figure>
-        <ol className="layers__list">
-          {WALL_LAYERS.map((l) => (
-            <li key={l.id} className="layer-note" data-layer={l.id} style={{ ["--swatch" as string]: l.color }}>
-              <h3>{l.name}</h3>
-              <span className="layer-note__short" aria-hidden="true">
-                {l.short}
-              </span>
-              <p>{hy(l.text)}</p>
-            </li>
-          ))}
-        </ol>
-        <p className="layers__caption">{hy("Schematische Darstellung. Schichtaufbau und Verfahren richten sich nach der Messung vor Ort.")}</p>
+        <div className="mt-10">
+          <HouseViewer3D steps={steps} layers={layers} poster={<LayersPoster />} />
+        </div>
+        <p className="mt-4 text-xs text-[var(--sc-ink-soft)]">
+          {hy("Schematische Darstellung. Schichtaufbau und Verfahren richten sich nach der Messung vor Ort.")}
+        </p>
       </div>
     </section>
   );
