@@ -3,6 +3,7 @@
 import { writeFileSync } from "node:fs";
 import { COMPANY_INFO, FAQS } from "../src/data/content-data.ts";
 import { SERVICE_PAGES, CITY_PAGES } from "../src/data/seo-pages.ts";
+import { PHASES } from "../src/data/proof.ts";
 
 const SITE = "https://www.sos-abdichtung.de";
 
@@ -26,6 +27,9 @@ const lines: string[] = [
   "",
   "## Leistungen",
   ...SERVICE_PAGES.map((s) => `- [${s.navTitle}](${SITE}/leistungen/${s.slug}/): ${s.lede}`),
+  "",
+  "## Nachweis in jeder Phase",
+  ...PHASES.map((p) => `${p.n}. ${p.title}: ${p.measure} Dokument: ${p.proof}. Prüfkriterium: ${p.criterion}`),
   "",
   "## Servicegebiet",
   ...CITY_PAGES.map(

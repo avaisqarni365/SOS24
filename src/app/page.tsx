@@ -8,7 +8,9 @@ import GrokLeadBot from "@/components/ai/GrokLeadBot";
 import Hero from "@/components/scroll/Hero";
 import Tension from "@/components/scroll/Tension";
 import LayersAct from "@/components/scroll/LayersAct";
-import { ScannerSection, ServicesRail, ProcessSection, RegionSection, FaqSection } from "@/components/scroll/HomeSections";
+import { ScannerSection, ServicesRail, RegionSection, FaqSection } from "@/components/scroll/HomeSections";
+import ProofSection from "@/components/science/ProofSection";
+import ScrollSectionRail from "@/components/navigation/ScrollSectionRail";
 import ScrollEngine, { SC_BOOT } from "@/components/scroll/ScrollEngine";
 import JsonLd from "@/components/seo/JsonLd";
 import { FAQS } from "@/data/content-data";
@@ -62,13 +64,14 @@ export default function Home() {
       <span data-sc-progress aria-hidden="true" />
       <div className="sc-grain" aria-hidden="true" />
       <Navbar />
+      <ScrollSectionRail />
       <main id="main">
         <Hero />
         <Tension />
         <ScannerSection />
         <LayersAct />
         <ServicesRail />
-        <ProcessSection />
+        <ProofSection />
         <PictureGallery />
         <CostCalculator />
         <RegionSection />

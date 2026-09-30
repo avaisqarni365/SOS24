@@ -1,5 +1,5 @@
 import { SERVICE_CARDS } from "@/data/services";
-import { PROCESS_PIPELINE, FAQS, COMPANY_INFO } from "@/data/content-data";
+import { FAQS } from "@/data/content-data";
 import { CITY_PAGES } from "@/data/seo-pages";
 import { PHOTOS, type PhotoKey } from "@/data/photos";
 
@@ -82,59 +82,6 @@ export function ServicesRail() {
               </div>
             </a>
           ))}
-        </div>
-      </div>
-    </section>
-  );
-}
-
-/* -------------------------------------------------------------- process -- */
-export function ProcessSection() {
-  return (
-    <section id="ablauf" className="surface-bone sc-section" aria-labelledby="ablauf-title" data-sc-act="flow">
-      <div className="sc-wrap">
-        <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr]">
-          <div className="lg:sticky lg:top-28 lg:self-start" data-sc-in>
-            <p className="sc-label" style={{ color: "var(--emerald-deep)" }}>
-              Ablauf
-            </p>
-            <h2 id="ablauf-title" className="sc-display mt-3 text-4xl sm:text-5xl lg:text-6xl text-[var(--head-on-bone)]">
-              Vom ersten Anruf zur trockenen Wand.
-            </h2>
-            <p className="mt-5 max-w-md text-[var(--text-on-bone)]">
-              {hy(`${COMPANY_INFO.owner} kommt selbst zur Messung. Danach wissen Sie, was die Ursache ist, was die Sanierung kostet und wie lange sie dauert.`)}
-            </p>
-            <dl className="mt-8 grid grid-cols-2 gap-4">
-              <div className="rounded-2xl bg-white p-5 shadow-sm">
-                <dt className="text-xs font-semibold uppercase tracking-wider text-[var(--text-on-bone)]">Garantie</dt>
-                <dd className="mt-1 font-editorial text-4xl text-[var(--head-on-bone)]">
-                  10 Jahre
-                </dd>
-              </div>
-              <div className="rounded-2xl bg-white p-5 shadow-sm">
-                <dt className="text-xs font-semibold uppercase tracking-wider text-[var(--text-on-bone)]">Erdarbeiten</dt>
-                <dd className="mt-1 font-editorial text-4xl text-[var(--head-on-bone)]">keine</dd>
-              </div>
-            </dl>
-          </div>
-          <ol className="grid gap-5" data-sc-stagger="90">
-            {PROCESS_PIPELINE.map((s, i) => (
-              <li key={s.step} className="relative rounded-3xl border border-black/5 bg-white p-7 shadow-sm sm:p-8">
-                <div className="flex items-baseline justify-between gap-4">
-                  <h3 className="font-editorial text-2xl text-[var(--head-on-bone)] sm:text-3xl">{s.title}</h3>
-                  <span className="shrink-0 font-mono text-xs uppercase tracking-wider text-[var(--emerald-deep)]">
-                    {s.time}
-                  </span>
-                </div>
-                <p className="mt-3 text-[var(--text-on-bone)]">{hy(s.desc)}</p>
-                <div
-                  className="absolute bottom-0 left-8 h-1 rounded-full bg-[var(--mint)]"
-                  style={{ width: `${(i + 1) * 20}%` }}
-                  aria-hidden="true"
-                />
-              </li>
-            ))}
-          </ol>
         </div>
       </div>
     </section>

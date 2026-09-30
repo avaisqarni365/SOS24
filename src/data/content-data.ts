@@ -126,11 +126,11 @@ export const REGIONAL_CITIES: RegionCity[] = [
     highlight: "Fachmännische Innenabdichtung und Horizontalsperren"
   },
   {
-    name: "Haan & Mettmann",
-    plzPrefix: ["42781", "40822"],
-    districts: ["Haan-Mitte", "Gruiten", "Mettmann-Zentrum"],
+    name: "Haan",
+    plzPrefix: ["42781"],
+    districts: ["Haan-Mitte", "Gruiten"],
     responseHours: "24-48 Std.",
-    highlight: "Sanierung von Souterrain & Kellerwohnungen"
+    highlight: "Sanierung von Souterrain & Kellerwohnungen im Raum 42"
   }
 ];
 

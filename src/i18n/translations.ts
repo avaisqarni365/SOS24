@@ -21,9 +21,12 @@ export const TRANSLATIONS: Record<SupportedLocale, Record<string, string>> = {
   de: {
     // Nav
     "nav.services": "Leistungen",
-    "nav.process3d": "Verfahren",
+    "nav.process3d": "3D-Verfahren",
     "nav.gallery": "Galerie",
-    "nav.calculator": "Kosten",
+    "nav.proof": "Nachweis",
+    "rail.proof": "Nachweis",
+    "rail.layers": "3D-Wand",
+    "nav.calculator": "Kostenrechner",
     "nav.region": "Servicegebiet",
     "nav.faq": "Häufige Fragen",
     "nav.cta": "Feuchtemessung anfragen",
@@ -136,6 +139,13 @@ export const TRANSLATIONS: Record<SupportedLocale, Record<string, string>> = {
     "gallery.modalClose": "Schließen",
     "gallery.tagVerified": "SchimmelPeter® Verfahren",
     "gallery.zoomHint": "Vergrößern",
+
+    // Rail
+    "rail.start": "Start",
+    "rail.warranty": "Garantie",
+    "rail.calc": "Rechner",
+    "rail.region": "PLZ 42",
+    "rail.contact": "Kontakt",
   },
 
   en: {
@@ -143,8 +153,11 @@ export const TRANSLATIONS: Record<SupportedLocale, Record<string, string>> = {
     "nav.services": "Services",
     "nav.process3d": "3D Process",
     "nav.gallery": "Gallery",
+    "nav.proof": "Proof",
+    "rail.proof": "Proof",
+    "rail.layers": "3D wall",
     "nav.calculator": "Cost Calculator",
-    "nav.region": "Service Area PLZ 42",
+    "nav.region": "Service Area",
     "nav.faq": "FAQ",
     "nav.cta": "Request Diagnosis →",
     "nav.phone": "Available by phone",
@@ -256,15 +269,25 @@ export const TRANSLATIONS: Record<SupportedLocale, Record<string, string>> = {
     "gallery.modalClose": "Close",
     "gallery.tagVerified": "SchimmelPeter® method",
     "gallery.zoomHint": "Expand →",
+
+    // Rail
+    "rail.start": "Start",
+    "rail.warranty": "Warranty",
+    "rail.calc": "Calculator",
+    "rail.region": "PLZ 42",
+    "rail.contact": "Contact",
   },
 
   tr: {
     // Nav
-    "nav.services": "Hizmetlerimiz",
+    "nav.services": "Hizmetler",
     "nav.process3d": "3D Yöntem",
     "nav.gallery": "Galeri",
-    "nav.calculator": "Maliyet Hesaplayıcı",
-    "nav.region": "Hizmet Bölgesi PLZ 42",
+    "nav.proof": "Kanıt",
+    "rail.proof": "Kanıt",
+    "rail.layers": "3D duvar",
+    "nav.calculator": "Maliyet",
+    "nav.region": "Hizmet Bölgesi",
     "nav.faq": "Sıkça Sorulanlar",
     "nav.cta": "Teşhis Talep Et →",
     "nav.phone": "Telefonla Ulaşın",
@@ -376,6 +399,13 @@ export const TRANSLATIONS: Record<SupportedLocale, Record<string, string>> = {
     "gallery.modalClose": "Kapat",
     "gallery.tagVerified": "SchimmelPeter® yöntemi",
     "gallery.zoomHint": "Büyüt →",
+
+    // Rail
+    "rail.start": "Başlangıç",
+    "rail.warranty": "Garanti",
+    "rail.calc": "Hesaplayıcı",
+    "rail.region": "PLZ 42",
+    "rail.contact": "İletişim",
   },
 
   ru: {
@@ -383,8 +413,11 @@ export const TRANSLATIONS: Record<SupportedLocale, Record<string, string>> = {
     "nav.services": "Услуги",
     "nav.process3d": "3D-Метод",
     "nav.gallery": "Галерея",
+    "nav.proof": "Доказательство",
+    "rail.proof": "Замеры",
+    "rail.layers": "3D-стена",
     "nav.calculator": "Калькулятор",
-    "nav.region": "Регион PLZ 42",
+    "nav.region": "Регион 42",
     "nav.faq": "Вопросы и ответы",
     "nav.cta": "Заказать диагностику →",
     "nav.phone": "Консультация по телефону",
@@ -496,15 +529,25 @@ export const TRANSLATIONS: Record<SupportedLocale, Record<string, string>> = {
     "gallery.modalClose": "Закрыть",
     "gallery.tagVerified": "Метод SchimmelPeter®",
     "gallery.zoomHint": "Увеличить →",
+
+    // Rail
+    "rail.start": "Старт",
+    "rail.warranty": "Гарантия",
+    "rail.calc": "Калькулятор",
+    "rail.region": "Регион 42",
+    "rail.contact": "Контакты",
   },
 
   ar: {
     // Nav
-    "nav.services": "خدماتنا المتخصصة",
+    "nav.services": "الخدمات",
     "nav.process3d": "تقنية 3D",
-    "nav.gallery": "معرض الأعمال",
-    "nav.calculator": "حاسبة التكلفة",
-    "nav.region": "منطقة الخدمة PLZ 42",
+    "nav.gallery": "المعرض",
+    "nav.proof": "الإثبات",
+    "rail.proof": "الإثبات",
+    "rail.layers": "الجدار 3D",
+    "nav.calculator": "الحاسبة",
+    "nav.region": "منطقة الخدمة",
     "nav.faq": "الأسئلة الشائعة",
     "nav.cta": "طلب فحص مجاني ←",
     "nav.phone": "اتصال هاتفي مباشر",
@@ -616,6 +659,13 @@ export const TRANSLATIONS: Record<SupportedLocale, Record<string, string>> = {
     "gallery.modalClose": "إغلاق",
     "gallery.tagVerified": "طريقة SchimmelPeter®",
     "gallery.zoomHint": "تكبير الصورة ←",
+
+    // Rail
+    "rail.start": "البداية",
+    "rail.warranty": "الضمان",
+    "rail.calc": "الحاسبة",
+    "rail.region": "المنطقة 42",
+    "rail.contact": "الاتصال",
   },
 
   pl: {
@@ -623,8 +673,11 @@ export const TRANSLATIONS: Record<SupportedLocale, Record<string, string>> = {
     "nav.services": "Usługi",
     "nav.process3d": "Metoda 3D",
     "nav.gallery": "Galeria",
+    "nav.proof": "Dowód",
+    "rail.proof": "Pomiary",
+    "rail.layers": "Ściana 3D",
     "nav.calculator": "Kalkulator",
-    "nav.region": "Obszar PLZ 42",
+    "nav.region": "Obszar 42",
     "nav.faq": "Częste pytania",
     "nav.cta": "Zamów diagnozę →",
     "nav.phone": "Kontakt telefoniczny",
@@ -736,5 +789,12 @@ export const TRANSLATIONS: Record<SupportedLocale, Record<string, string>> = {
     "gallery.modalClose": "Zamknij",
     "gallery.tagVerified": "Metoda SchimmelPeter®",
     "gallery.zoomHint": "Powiększ →",
+
+    // Rail
+    "rail.start": "Start",
+    "rail.warranty": "Gwarancja",
+    "rail.calc": "Kalkulator",
+    "rail.region": "Obszar 42",
+    "rail.contact": "Kontakt",
   }
 };
