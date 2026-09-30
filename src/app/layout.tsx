@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     template: "%s",
   },
   description:
-    "Kellersanierung Wuppertal ohne Aufgraben: nasse Keller und feuchte Wände trockenlegen. SchimmelPeter® Partner, kostenlose Feuchtemessung, 10 Jahre Garantie.",
+    "Kellersanierung Wuppertal ohne Aufgraben: nasse Keller trockenlegen. SchimmelPeter® Partner, kostenlose Messung, 10 Jahre Garantie auf die Arbeit.",
   applicationName: "sos-abdichtung",
   authors: [{ name: "Shahzad Mahmood" }],
   robots: { index: true, follow: true, "max-image-preview": "large" },

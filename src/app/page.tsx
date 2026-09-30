@@ -16,7 +16,7 @@ import { SITE_URL, BUSINESS_ID, WEBSITE_ID, abs, businessNode, websiteNode, brea
 
 const TITLE = "Kellersanierung Wuppertal ohne Aufgraben | sos-abdichtung";
 const DESCRIPTION =
-  "Kellersanierung Wuppertal ohne Aufgraben: nasse Keller und feuchte Wände trockenlegen. SchimmelPeter® Partner, kostenlose Feuchtemessung, 10 Jahre Garantie.";
+  "Kellersanierung Wuppertal ohne Aufgraben: nasse Keller trockenlegen. SchimmelPeter® Partner, kostenlose Messung, 10 Jahre Garantie auf die Arbeit.";
 
 export const metadata: Metadata = {
   title: TITLE,

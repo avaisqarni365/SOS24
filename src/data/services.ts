@@ -16,7 +16,7 @@ export const SERVICE_CARDS: ServiceCard[] = [
   {
     slug: "horizontalsperre",
     title: "Feuchte Wände & Horizontalsperre",
-    text: "Aufsteigende Feuchte stoppen: Bohrlochkette, drucklose Silan-Mikroemulsion nach WTA-Merkblatt 4-4-04.",
+    text: "Aufsteigende Feuchte stoppen: neue Sperrschicht per Injektion, ohne Erdarbeiten und meist ohne Vortrocknung.",
     art: "sperre",
   },
   {

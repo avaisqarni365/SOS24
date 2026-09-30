@@ -38,11 +38,11 @@ export default function CostCalculator() {
           <div className="p-6 sm:p-8 bg-landing-bone2/60 border-b border-black/5 flex flex-wrap items-center justify-between gap-4">
             <div className="flex items-center gap-2 text-xs font-mono text-[#1A1D1B]">
               <span className="w-2 h-2 rounded-full bg-landing-emerald" />
-              <span>WTA Merkblatt 4-4-04 · Festpreis-Garantie</span>
+              <span>SchimmelPeter® Verfahren · Verbindliches Angebot nach Messung</span>
             </div>
             <div className="flex items-center gap-2 text-xs font-mono text-landing-emerald font-semibold bg-white px-3 py-1.5 rounded-full border border-black/5 shadow-xs">
               <ShieldCheck className="w-4 h-4" />
-              <span>10 Jahre Garantie</span>
+              <span>10 J. Garantie + bis 25 J. Produktgarantie</span>
             </div>
           </div>
 
@@ -149,7 +149,7 @@ export default function CostCalculator() {
                     ab {estimatedInjectionCost.toLocaleString("de-DE")} €*
                   </div>
                   <p className="text-xs text-[#444945] mt-1 font-mono">
-                    inkl. Bohrung, Silan-Injektion & Versiegelung
+                    inkl. Bohrung, SchimmelPeter-Injektion & Versiegelung
                   </p>
                 </div>
 
@@ -181,7 +181,7 @@ export default function CostCalculator() {
                   </li>
                   <li className="flex items-center gap-2">
                     <CheckCircle2 className="w-3.5 h-3.5 text-landing-emerald shrink-0" />
-                    <span>10 Jahre Gewährleistung mit Garantiezertifikat</span>
+                    <span>10 Jahre Garantie auf die Arbeit, bis zu 25 Jahre Produktgarantie des Herstellers</span>
                   </li>
                 </ul>
               </div>

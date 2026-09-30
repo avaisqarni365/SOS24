@@ -128,7 +128,7 @@ export function ProcessSection() {
 /* --------------------------------------------------------------- region -- */
 const project = (lat: number, lng: number) => ({
   x: ((lng - 6.9) / 0.42) * 600,
-  y: ((51.48 - lat) / 0.34) * 420,
+  y: ((51.48 - lat) / 0.37) * 420,
 });
 
 export function RegionSection() {

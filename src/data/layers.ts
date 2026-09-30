@@ -30,7 +30,7 @@ export const WALL_LAYERS: WallLayer[] = [
     id: "horizontalsperre",
     name: "Horizontalsperre",
     short: "Sperre",
-    text: "Bohrlochkette im Abstand von 10 bis 12 cm, drucklos mit Silan-Mikroemulsion geflutet. Aufsteigende Feuchte kommt nicht mehr durch.",
+    text: "Bohrlöcher im Abstand von bis zu 20 cm, gefüllt mit in Paraffin gelöstem Kunststoff. Er legt sich wasserabweisend an die Kapillaren, die Wand bleibt diffusionsfähig.",
     color: "#62c4ac",
     t: 0.42,
   },

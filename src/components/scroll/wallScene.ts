@@ -240,7 +240,7 @@ export function createWallScene(
   packerGeo.rotateZ(Math.PI / 2);
   const capGeo = new THREE.CylinderGeometry(0.022, 0.022, 0.025, 12);
   capGeo.rotateZ(Math.PI / 2);
-  for (let z = z0 + 0.07; z < z1 - 0.03; z += 0.11) {
+  for (let z = z0 + 0.1; z < z1 - 0.05; z += 0.2) { // SchimmelPeter: holes up to 20 cm apart
     const g = new THREE.Group();
     const body = new THREE.Mesh(packerGeo, packerMat);
     body.position.set(0.03, (BAR_Y0 + BAR_Y1) / 2, z);

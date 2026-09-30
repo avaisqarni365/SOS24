@@ -55,7 +55,7 @@ export default function GrokLeadBot() {
 
       if (lower.includes("keller") || lower.includes("wand")) {
         botResponse =
-          "Feuchte Kellerwände entstehen meist durch aufsteigende Feuchte oder undichte Wand-Boden-Anschlüsse. Unsere WTA-zertifizierte chemische Injektion stoppt dies dauerhaft ohne Aufgraben. In welcher Stadt bzw. PLZ befindet sich das Objekt?";
+          "Feuchte Kellerwände entstehen meist durch aufsteigende Feuchte oder undichte Wand-Boden-Anschlüsse. Eine neue Horizontalsperre per SchimmelPeter-Injektion stoppt das dauerhaft, ohne Aufgraben. In welcher Stadt bzw. PLZ befindet sich das Objekt?";
         replies = ["42103 Wuppertal", "42651 Solingen", "42853 Remscheid", "42549 Velbert"];
       } else if (lower.includes("schimmel") || lower.includes("sporen")) {
         botResponse =
@@ -131,7 +131,7 @@ export default function GrokLeadBot() {
                   <span className="w-1.5 h-1.5 rounded-full bg-landing-mint"></span>
                 </h4>
                 <p className="text-[10px] text-landing-bone/50 font-mono">
-                  WTA-Expertenwissen Wuppertal
+                  SchimmelPeter® Partner Wuppertal
                 </p>
               </div>
             </div>
