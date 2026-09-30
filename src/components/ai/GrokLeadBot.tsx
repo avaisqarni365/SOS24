@@ -98,22 +98,17 @@ export default function GrokLeadBot() {
     <>
       {/* Floating Toggle Button */}
       {!isOpen && (
-        <div className="fixed bottom-6 right-6 z-40 flex flex-col items-end gap-2">
-          <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-full bg-landing-ink2 border border-white/10 shadow-lg text-xs text-landing-bone/80 font-mono animate-pulse">
-            <span className="w-2 h-2 rounded-full bg-landing-mint"></span>
-            <span>24/7 Sanierungs-Bot</span>
-          </div>
-
-          <button
-            onClick={() => setIsOpen(true)}
-            className="flex items-center gap-2 px-5 py-3 rounded-full bg-landing-ink text-landing-bone border border-landing-mint/40 shadow-xl hover:border-landing-mint transition-all active:scale-[0.98] group"
-          >
-            <div className="w-6 h-6 rounded-full bg-landing-mint/20 text-landing-mint flex items-center justify-center">
-              <Sparkles className="w-3.5 h-3.5" />
-            </div>
-            <span className="text-xs font-semibold">Sanierungs-Assistent</span>
-          </button>
-        </div>
+        <button
+          onClick={() => setIsOpen(true)}
+          aria-label="Sanierungs-Assistent öffnen"
+          className="fixed bottom-4 right-4 z-40 flex h-12 items-center gap-2 rounded-full border border-landing-mint/40 bg-landing-ink px-3 text-landing-bone shadow-xl transition-colors hover:border-landing-mint sm:bottom-6 sm:right-6 sm:px-4"
+          style={{ marginBottom: "env(safe-area-inset-bottom)" }}
+        >
+          <span className="flex h-7 w-7 items-center justify-center rounded-full bg-landing-mint/20 text-landing-mint">
+            <Sparkles className="h-4 w-4" />
+          </span>
+          <span className="hidden text-xs font-semibold sm:inline">Sanierungs-Assistent</span>
+        </button>
       )}
 
       {/* Chat Window */}
