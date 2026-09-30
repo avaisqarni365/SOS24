@@ -65,7 +65,7 @@ export default function CausesHouseClient({ causes: CAUSES }: { causes: Cause[] 
   const c = CAUSES[active];
   const p = PHOTOS[c.photo];
   return (
-    <div className="mx-auto max-w-7xl px-6 pb-20 sm:px-8">
+    <div className="sc-wrap pb-12 sm:pb-16">
       <div className="grid gap-6 lg:grid-cols-[1.25fr_1fr]">
         <div className="relative self-start overflow-hidden rounded-[22px] border border-line/10">
           <Section active={active} causes={CAUSES} />

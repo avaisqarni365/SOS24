@@ -80,8 +80,8 @@ export default function CityPage({ params }: { params: { city: string } }) {
       <JsonLd graph={graph} />
       <Navbar />
       <main id="main">
-        <section className="pb-16 pt-28 sm:pb-24 sm:pt-36" aria-labelledby="page-title">
-          <div className="mx-auto grid max-w-7xl gap-12 px-6 sm:px-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
+        <section className="sc-page-top" aria-labelledby="page-title">
+          <div className="sc-wrap grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
             <div>
               <Breadcrumbs items={crumbs} />
               <h1 id="page-title" className="sc-display mt-6 text-[2.4rem] leading-[1.04] sm:text-5xl lg:text-[3.8rem]">
@@ -115,14 +115,14 @@ export default function CityPage({ params }: { params: { city: string } }) {
           </div>
         </section>
 
-        <section className="surface-bone py-20 sm:py-28">
-          <div className="mx-auto max-w-4xl px-6 sm:px-8">
+        <section className="surface-bone sc-section">
+          <div className="sc-wrap">
             <Prose sections={page.sections} />
           </div>
         </section>
 
-        <section className="surface-bone-2 py-20 sm:py-24">
-          <div className="mx-auto grid max-w-5xl gap-16 px-6 sm:px-8">
+        <section className="surface-bone-2 sc-section">
+          <div className="sc-wrap grid gap-12">
             <LinkGrid
               title={`Leistungen in ${page.name}`}
               links={SERVICE_CARDS.map((s) => ({ href: `/leistungen/${s.slug}/`, label: s.title }))}

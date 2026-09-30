@@ -5,8 +5,8 @@ export const CTA_LABEL = "Kostenlose Feuchtemessung anfragen";
 
 /**
  * Hero: the promise on the left, the problem on the right: a Keller in
- * section with the damage marked. Scrolling zooms into the Sockel, and the
- * next act ("Vom Keller bis in die Pore") carries on from the wall photo.
+ * section with the damage marked. A static first frame; the next section
+ * ("Vom Keller bis in die Pore") goes from the Sockel down to the pore.
  * Planes: a calm back glow, the Keller (subject), the copy on top.
  */
 export default function Hero() {
@@ -15,11 +15,8 @@ export default function Hero() {
       id="top"
       className="hero"
       aria-labelledby="hero-title"
-      data-sc-act="pin"
-      data-sc-span="1.3"
-      style={{ ["--sc-span" as string]: 1.3 }}
     >
-      <div data-sc-stage className="hero__stage">
+      <div className="hero__stage">
         <div className="hero__back" data-hero-plane="back" aria-hidden="true" />
         <div className="hero__grid">
           <div className="hero__copy">
@@ -65,9 +62,7 @@ export default function Hero() {
               fetchPriority="high"
               decoding="async"
             />
-            {/* Callouts in the picture's own pixel grid (1400 x 1032). The
-                Sockel box is where the scroll zoom goes in; the next act
-                carries on from the wall photo. */}
+            {/* Callouts in the picture's own pixel grid (1400 x 1032). */}
             <svg className="hero__callouts" viewBox="0 0 1400 1032" aria-hidden="true">
               <g className="hero__callout hero__callout--a">
                 <rect x="120" y="264" width="276" height="112" rx="10" />

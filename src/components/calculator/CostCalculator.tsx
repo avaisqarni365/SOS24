@@ -19,7 +19,7 @@ export default function CostCalculator() {
 
   return (
     <section id="rechner" className="surface-bone relative bg-landing-bone text-[#1A1D1B]">
-      <div className="relative max-w-6xl mx-auto px-6 py-24 sm:py-32">
+      <div className="relative sc-wrap sc-section">
         {/* Section Header */}
         <p className="text-[11px] font-semibold uppercase tracking-[0.18em] mb-5 text-landing-emerald font-mono">
           {t("calc.eyebrow")}

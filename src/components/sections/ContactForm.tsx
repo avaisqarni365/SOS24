@@ -116,7 +116,7 @@ export default function ContactForm({ defaultDamage, place }: { defaultDamage?: 
 
   return (
     <section id="kontakt" className="surface-bone-2 relative" aria-labelledby="kontakt-title">
-      <div className="relative mx-auto max-w-6xl px-6 py-24 sm:py-32">
+      <div className="relative sc-wrap sc-section">
         <p className="mb-5 font-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-[var(--emerald-deep)]">
           {t("contact.eyebrow")}
         </p>

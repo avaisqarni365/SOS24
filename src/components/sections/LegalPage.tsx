@@ -21,7 +21,7 @@ export default function LegalPage({ title, updated, children }: { title: string;
         </div>
       </header>
       <main id="main" className="surface-bone legal">
-        <div className="mx-auto max-w-3xl px-5 py-14 sm:px-8 sm:py-20">
+        <div className="mx-auto max-w-3xl px-5 py-12 sm:px-8 sm:py-16">
           <h1 className="sc-display text-4xl text-[var(--head-on-bone)] sm:text-5xl">{title}</h1>
           <p className="mt-3 font-mono text-xs uppercase tracking-wider text-[var(--text-on-bone)]/70">Stand: {updated}</p>
           <div className="legal__body mt-10">{children}</div>

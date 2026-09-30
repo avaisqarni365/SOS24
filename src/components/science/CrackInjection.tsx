@@ -7,8 +7,8 @@ import "./CrackInjection.css";
  * the wall thickness showing boreholes, packers and the resin filling the
  * crack from wall centre to both faces.
  *
- * Static (no JS, reduced motion, crawlers): the finished state, crack filled,
- * packers removed and boreholes closed, every label visible.
+ * Shown in its finished state (crack filled, packers removed, boreholes
+ * closed, every label visible); nothing is tied to scrolling.
  */
 
 type Pt = readonly [number, number];
@@ -91,12 +91,9 @@ export default function CrackInjection() {
     <div className="crackinj">
       <section
         className="crackinj__act"
-        data-sc-act="pin"
-        data-sc-span="2.6"
-        style={{ ["--sc-span" as string]: 2.6 }}
         aria-label="Rissverpressung: ein wasserführender Riss wird über die ganze Wanddicke mit Harz gefüllt"
       >
-        <div data-sc-stage className="crackinj__stage">
+        <div className="crackinj__stage">
           <figure className="ci-figure">
             <p className="sc-label ci-kicker">Ansicht und Schnitt einer Beton-Kellerwand</p>
             <svg

@@ -4,10 +4,8 @@ import "./NegativeSeal.css";
 /**
  * Keller von innen abdichten: a section through soil, basement wall and room.
  * The sealing sits on the negative side, so the water pushes it away from the
- * wall; the build-up is shown layer by layer as the act scrolls.
- *
- * Static (no JS, reduced motion, crawlers): the finished state with every
- * layer and label visible. Under html.sc-js the phases are driven by --sc-p.
+ * wall. Shown as the finished build-up with every layer and label visible,
+ * followed by the legend; nothing is tied to scrolling.
  */
 
 /** Pressure arrows in the saturated soil: longer and heavier with depth. */
@@ -58,12 +56,9 @@ export default function NegativeSeal() {
   return (
     <section
       className="negseal"
-      data-sc-act="pin"
-      data-sc-span="2.6"
-      style={{ ["--sc-span" as string]: 2.6 }}
       aria-label="Keller von innen abdichten: Aufbau der Innenabdichtung Schicht für Schicht"
     >
-      <div data-sc-stage className="negseal__stage">
+      <div className="negseal__stage">
         <figure className="ns-figure">
           <p className="sc-label ns-kicker">Schnitt: Erdreich, Kellerwand, Raum</p>
           <svg

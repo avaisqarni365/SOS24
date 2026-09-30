@@ -2,8 +2,8 @@ import CapillaryZoom from "@/components/science/CapillaryZoom";
 import { hy } from "@/lib/hyphenate";
 
 /**
- * Second frame of the homepage: the hero zooms into the salt rim of the
- * Keller, this act carries on from the wall photo down to one pore wall.
+ * Second frame of the homepage: from the Keller in the hero to the wall
+ * photo, the masonry, the pores and one pore wall, as four still figures.
  */
 export default function ZoomAct() {
   return (
@@ -15,7 +15,7 @@ export default function ZoomAct() {
         </h2>
         <p className="sc-body mt-5 max-w-2xl">
           {hy(
-            "Scrollen Sie in die Wand hinein: vom Feuchterand im Sockel über Stein und Fuge bis zur einzelnen Pore. Und was die Injektion der Horizontalsperre dort verändert."
+            "Vier Bilder, vier Maßstäbe: vom Feuchterand im Sockel über Stein und Fuge bis zur einzelnen Pore. Und was die Injektion der Horizontalsperre dort verändert."
           )}
         </p>
       </div>
