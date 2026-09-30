@@ -1,28 +1,45 @@
 import type { Metadata } from "next";
+import { Inter, Newsreader, JetBrains_Mono } from "next/font/google";
 import "@/styles/globals.css";
 
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-sans",
+  display: "swap",
+});
+
+const newsreader = Newsreader({
+  subsets: ["latin"],
+  style: ["normal", "italic"],
+  variable: "--font-editorial",
+  display: "swap",
+});
+
+const mono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-mono",
+  display: "swap",
+});
+
 export const metadata: Metadata = {
-  title: "Kellersanierung & feuchte Wände Wuppertal | sos-abdichtung — SchimmelPeter® Partner",
-  description: "sos-abdichtung ist Ihr SchimmelPeter® Fachbetrieb für Kellersanierung, chemische Horizontalsperren & Schimmelbeseitigung in Wuppertal, Solingen, Remscheid, Velbert (PLZ 42). 10 Jahre Garantie.",
+  title: "sos-abdichtung — Kellersanierung & Horizontalsperren Wuppertal (PLZ 42)",
+  description: "Zertifizierter SchimmelPeter® Fachbetrieb für Kellersanierung, chemische Horizontalsperren & Schimmelbeseitigung im Raum Wuppertal (PLZ 42). 10 Jahre Garantie.",
   keywords: [
     "kellersanierung wuppertal",
     "feuchte wände trockenlegen wuppertal",
     "schimmelbeseitigung wuppertal",
     "schimmelsanierung wuppertal",
+    "horizontalsperre wuppertal",
     "keller trockenlegen solingen",
     "kellersanierung remscheid",
     "kellersanierung velbert",
-    "horizontalsperre injektionsverfahren",
     "keller von innen abdichten",
-    "schimmel im keller was tun",
-    "keller trockenlegen kosten",
-    "schimmelpeter wuppertal",
-    "sos-abdichtung"
+    "schimmelpeter wuppertal"
   ],
   authors: [{ name: "Shahzad Mahmood", url: "https://www.schimmelpeter.de" }],
   robots: "index, follow",
   openGraph: {
-    title: "Kellersanierung & feuchte Wände Wuppertal | sos-abdichtung",
+    title: "sos-abdichtung — Kellersanierung & Horizontalsperren Wuppertal",
     description: "Zertifizierter SchimmelPeter® Partnerbetrieb im Raum Wuppertal & PLZ 42. Feuchte Wände & nasse Keller dauerhaft trockenlegen ohne Aufgraben. 10 Jahre Garantie.",
     type: "website",
     locale: "de_DE",
@@ -63,30 +80,21 @@ export default function RootLayout({
           { "@type": "City", "name": "Solingen" },
           { "@type": "City", "name": "Remscheid" },
           { "@type": "City", "name": "Velbert" },
-          { "@type": "City", "name": "Haan" },
-          { "@type": "City", "name": "Mettmann" },
           { "@type": "AdministrativeArea", "name": "Bergisches Land" }
-        ],
-        "priceRange": "$$",
-        "openingHoursSpecification": {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-          "opens": "07:30",
-          "closes": "19:00"
-        }
+        ]
       }
     ]
   };
 
   return (
-    <html lang="de" className="scroll-smooth">
+    <html lang="de" className={`${inter.variable} ${newsreader.variable} ${mono.variable} scroll-smooth`}>
       <head>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaJsonLd) }}
         />
       </head>
-      <body className="min-h-screen bg-white text-sand-900 antialiased">
+      <body className="min-h-screen bg-landing-ink text-landing-bone font-sans antialiased selection:bg-landing-mint selection:text-landing-ink">
         {children}
       </body>
     </html>

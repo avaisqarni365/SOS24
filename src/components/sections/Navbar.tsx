@@ -2,111 +2,122 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { Phone, Menu, X, ArrowUpRight } from "lucide-react";
+import { Phone, Menu, X } from "lucide-react";
 import { COMPANY_INFO } from "@/data/content-data";
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   return (
-    <nav className="sticky top-0 z-50 bg-[#0b0e14]/85 backdrop-blur-xl border-b border-white/[0.08] transition-all">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 sm:h-20 flex items-center justify-between">
-        {/* Brand Logo - Minimalist Kontai24 Style */}
-        <Link href="/" className="flex items-center gap-2.5 group">
-          <div className="w-8 h-8 rounded-lg bg-white/[0.08] border border-white/[0.15] flex items-center justify-center text-white font-mono font-bold text-xs tracking-wider group-hover:border-cyan-400/50 transition-colors">
-            SOS
-          </div>
-          <div className="flex items-baseline gap-1.5">
-            <span className="text-base font-bold text-white tracking-tight">
-              SOS-Abdichtung
-            </span>
-            <span className="text-[10px] font-mono text-slate-400 hidden sm:inline">
-              · SchimmelPeter® Partner
-            </span>
-          </div>
+    <nav className="sticky top-0 z-50 bg-landing-ink/85 backdrop-blur-lg border-b border-white/5 transition-colors">
+      <div className="max-w-6xl mx-auto px-6 h-16 sm:h-20 flex items-center justify-between">
+        {/* Brand Logo - 100% Kontai24 Exact Style */}
+        <Link href="/" className="flex items-center gap-2 group">
+          <span className="font-editorial text-lg sm:text-xl tracking-[0.14em] text-landing-bone uppercase font-normal">
+            sos-abdichtung<span className="text-landing-mint font-bold">.</span>
+          </span>
+          <span className="hidden sm:inline-block font-mono text-[10px] uppercase tracking-[0.16em] text-landing-bone/40 ml-1">
+            Wuppertal
+          </span>
         </Link>
 
-        {/* Minimalist Desktop Nav Links - Only 4 items like Kontai24 */}
-        <div className="hidden md:flex items-center gap-8 text-xs font-medium text-slate-300">
-          <a href="#leistungen" className="hover:text-white transition-colors">
-            Leistungen
+        {/* Minimalist Nav Links - Only 4 items like Kontai24 */}
+        <div className="hidden md:flex items-center gap-8 text-sm text-landing-bone/60">
+          <a href="#leistungen" className="hover:text-landing-bone transition-colors">
+            Fachleistungen
           </a>
-          <a href="#3d-injektion" className="hover:text-white transition-colors flex items-center gap-1.5">
+          <a href="#3d-injektion" className="hover:text-landing-bone transition-colors flex items-center gap-1.5">
             <span>3D-Verfahren</span>
-            <span className="w-1.5 h-1.5 rounded-full bg-cyan-400"></span>
+            <span className="h-1.5 w-1.5 rounded-full bg-landing-mint"></span>
           </a>
-          <a href="#servicegebiet" className="hover:text-white transition-colors">
-            Servicegebiet PLZ 42
-          </a>
-          <a href="#rechner" className="hover:text-white transition-colors">
+          <a href="#rechner" className="hover:text-landing-bone transition-colors">
             Kostenrechner
+          </a>
+          <a href="#servicegebiet" className="hover:text-landing-bone transition-colors">
+            Servicegebiet PLZ 42
           </a>
         </div>
 
         {/* Minimalist Right Action - Direct Phone + Clean Button */}
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-5">
           <a
             href={`tel:${COMPANY_INFO.phoneTel}`}
-            className="hidden sm:flex items-center gap-2 text-xs font-mono text-slate-300 hover:text-white transition-colors"
+            className="hidden sm:inline text-sm text-landing-bone/60 hover:text-landing-bone transition-colors font-mono"
           >
-            <Phone className="w-3.5 h-3.5 text-cyan-400" />
-            <span>{COMPANY_INFO.phoneDisplay}</span>
+            {COMPANY_INFO.phoneDisplay}
           </a>
 
           <a
             href="#kontakt"
-            className="px-4 py-2 text-xs font-medium text-white bg-white/[0.08] hover:bg-white/[0.12] border border-white/[0.15] hover:border-cyan-400/40 rounded-lg transition-all flex items-center gap-1"
+            className="hidden sm:inline-flex items-center rounded-full bg-landing-bone px-4 py-2 text-[13px] sm:text-sm font-semibold text-[#0E1310] hover:bg-white transition-colors whitespace-nowrap shadow-sm"
           >
-            <span>Termin anfragen</span>
-            <ArrowUpRight className="w-3.5 h-3.5 text-slate-400" />
+            Diagnose anfragen →
           </a>
 
           {/* Mobile Menu Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden p-2 rounded-lg text-slate-400 hover:text-white border border-white/10"
+            className="md:hidden -mr-1 inline-flex h-9 w-9 items-center justify-center rounded-full text-landing-bone/70 hover:text-landing-bone hover:bg-white/5 transition-colors"
             aria-label="Menü öffnen"
           >
-            {mobileMenuOpen ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
+            {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
           </button>
         </div>
       </div>
 
       {/* Mobile Menu Dropdown */}
       {mobileMenuOpen && (
-        <div className="md:hidden bg-[#0b0e14] border-b border-white/[0.08] px-6 py-5 space-y-4">
-          <div className="flex flex-col gap-3 text-sm font-medium text-slate-300">
-            <a href="#leistungen" onClick={() => setMobileMenuOpen(false)} className="hover:text-white">
-              Leistungen
-            </a>
-            <a href="#3d-injektion" onClick={() => setMobileMenuOpen(false)} className="hover:text-white flex items-center justify-between">
-              <span>3D-Verfahren</span>
-              <span className="text-[10px] font-mono text-cyan-400">WTA</span>
-            </a>
-            <a href="#servicegebiet" onClick={() => setMobileMenuOpen(false)} className="hover:text-white">
-              Servicegebiet PLZ 42
-            </a>
-            <a href="#rechner" onClick={() => setMobileMenuOpen(false)} className="hover:text-white">
-              Kostenrechner
-            </a>
-            <a href="#faq" onClick={() => setMobileMenuOpen(false)} className="hover:text-white">
-              FAQ
-            </a>
-          </div>
+        <div className="md:hidden border-t border-white/5 bg-landing-ink/95 backdrop-blur-lg px-6 py-4 flex flex-col gap-1 text-sm text-landing-bone/70">
+          <a
+            href="#leistungen"
+            onClick={() => setMobileMenuOpen(false)}
+            className="py-2.5 hover:text-landing-bone transition-colors"
+          >
+            Fachleistungen
+          </a>
+          <a
+            href="#3d-injektion"
+            onClick={() => setMobileMenuOpen(false)}
+            className="py-2.5 hover:text-landing-bone transition-colors flex items-center justify-between"
+          >
+            <span>3D-Verfahren</span>
+            <span className="text-[10px] font-mono text-landing-mint">WTA</span>
+          </a>
+          <a
+            href="#rechner"
+            onClick={() => setMobileMenuOpen(false)}
+            className="py-2.5 hover:text-landing-bone transition-colors"
+          >
+            Kostenrechner
+          </a>
+          <a
+            href="#servicegebiet"
+            onClick={() => setMobileMenuOpen(false)}
+            className="py-2.5 hover:text-landing-bone transition-colors"
+          >
+            Servicegebiet PLZ 42
+          </a>
+          <a
+            href="#faq"
+            onClick={() => setMobileMenuOpen(false)}
+            className="py-2.5 hover:text-landing-bone transition-colors"
+          >
+            Häufige Fragen
+          </a>
 
-          <div className="pt-4 border-t border-white/[0.08] flex flex-col gap-2">
+          <div className="pt-4 border-t border-white/5 flex flex-col gap-2 mt-2">
             <a
               href={`tel:${COMPANY_INFO.phoneTel}`}
-              className="py-2.5 text-center text-xs font-mono font-medium text-slate-300 bg-white/[0.04] border border-white/10 rounded-lg"
+              className="py-2.5 text-center text-xs font-mono font-medium text-landing-bone/80 bg-white/5 rounded-full"
             >
-              Tel: {COMPANY_INFO.phoneDisplay}
+              📞 {COMPANY_INFO.phoneDisplay}
             </a>
             <a
               href="#kontakt"
               onClick={() => setMobileMenuOpen(false)}
-              className="py-2.5 text-center text-xs font-medium text-[#0b0e14] bg-cyan-400 rounded-lg font-bold"
+              className="inline-flex items-center justify-center rounded-full bg-landing-bone px-4 py-3 text-sm font-semibold text-[#0E1310] hover:bg-white transition-colors"
             >
-              Kostenlose Vor-Ort-Analyse
+              Kostenlose Vor-Ort-Diagnose
             </a>
           </div>
         </div>

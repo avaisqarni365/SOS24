@@ -1,7 +1,8 @@
 "use client";
 
 import React, { useState } from "react";
-import { Search, CheckCircle2, Clock, ArrowRight, ArrowUpRight } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
+import AmbientGlow from "@/components/ui/AmbientGlow";
 import { REGIONAL_CITIES } from "@/data/content-data";
 
 export default function RegionalPLZ() {
@@ -27,69 +28,69 @@ export default function RegionalPLZ() {
       setCheckResult({
         covered: true,
         city: matchedCity,
-        message: `Hervorragend! Die Postleitzahl ${clean} liegt in unserem Kern-Servicegebiet ${matchedCity}. Herr Mahmood kann in 24–48h eine kostenlose Feuchtigkeitsmessung vor Ort durchführen.`
+        message: `Hervorragend! Die Postleitzahl ${clean} liegt in unserem Kern-Servicegebiet ${matchedCity}. Herr Mahmood führt innerhalb von 24–48h eine kostenlose Feuchtigkeitsmessung vor Ort durch.`
       });
     } else {
       setCheckResult({
         covered: false,
-        message: `Die PLZ ${clean} liegt außerhalb des Kerngebiets 42xxx. Als SchimmelPeter® Partnerbetrieb prüfen wir gerne eine Sonderanfahrt für Ihr Objekt.`
+        message: `Die PLZ ${clean} liegt außerhalb des Kerngebiets 42xxx. Als SchimmelPeter® Partner prüfen wir gerne eine Sonderanfahrt für Ihr Objekt.`
       });
     }
   };
 
   return (
-    <section id="servicegebiet" className="py-24 bg-[#0b0e14] border-t border-white/[0.08]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6">
-        {/* Section Header - Kontai24 Style */}
-        <div className="max-w-3xl mb-16">
-          <div className="text-xs font-mono text-cyan-400 uppercase tracking-widest mb-3">
-            Servicegebiet PLZ 42
-          </div>
-          <h2 className="text-3xl sm:text-5xl font-bold text-white tracking-tight leading-[1.15]">
-            Das Tal der Wupper.
-            <br />
-            <span className="text-slate-400">Unser Kern-Einsatzgebiet.</span>
-          </h2>
-          <p className="mt-6 text-base text-slate-400 leading-relaxed">
-            Wuppertal, Solingen, Remscheid, Velbert und das Bergische Land sind durch Schiefer, Bruchstein, Ziegelaltbauten und steile Hanglagen geprägt. 
-            Hier braucht es erfahrene Bautenschutz-Fachleute, die die lokale Bausubstanz kennen. Zuständig für alle Postleitzahlen beginnend mit 42.
-          </p>
-        </div>
+    <section id="servicegebiet" className="relative bg-landing-ink text-landing-bone overflow-hidden">
+      <AmbientGlow />
+
+      <div className="relative max-w-6xl mx-auto px-6 py-24 sm:py-32">
+        {/* Section Header */}
+        <p className="text-[11px] font-semibold uppercase tracking-[0.18em] mb-5 text-landing-mint font-mono">
+          Servicegebiet Raum Wuppertal & Bergisches Land
+        </p>
+        <h2 className="font-editorial font-normal tracking-[-0.02em] leading-[1.04] text-[2.25rem] sm:text-5xl lg:text-[3.5rem] text-landing-bone">
+          Das Tal der Wupper.
+          <br />
+          <span className="italic text-landing-mint">Unser Kern-Einsatzgebiet.</span>
+        </h2>
+        <p className="mt-6 max-w-2xl text-base sm:text-lg leading-relaxed text-landing-bone/70">
+          Wuppertal, Solingen, Remscheid, Velbert und das gesamte Bergische Land sind durch Schiefer- und Ziegelaltbauten an steilen Hanglagen geprägt. 
+          Hier braucht es erfahrene Bautenschutz-Fachleute, die die lokale Bausubstanz kennen. Zuständig für alle Postleitzahlen beginnend mit 42.
+        </p>
 
         {/* Minimalist PLZ Search Bar */}
-        <div className="max-w-xl mb-16">
+        <div className="mt-12 max-w-xl">
           <form onSubmit={handlePlzCheck} className="flex gap-2">
             <input
               type="text"
               value={searchPlz}
               onChange={(e) => setSearchPlz(e.target.value)}
-              placeholder="Ihre 5-stellige PLZ eingeben (z.B. 42103)..."
+              placeholder="Ihre 5-stellige PLZ (z.B. 42103)..."
               maxLength={5}
-              className="flex-1 px-4 py-3 rounded-xl border border-white/[0.12] text-xs sm:text-sm font-mono text-white focus:outline-none focus:border-cyan-400 bg-white/[0.03]"
+              className="flex-1 px-5 py-3.5 rounded-full border border-white/10 text-xs sm:text-sm font-mono text-landing-bone bg-landing-ink2 focus:outline-none focus:border-landing-mint placeholder:text-landing-bone/30"
             />
             <button
               type="submit"
-              className="px-5 py-3 rounded-xl bg-white/[0.08] hover:bg-white/[0.12] border border-white/[0.15] text-white text-xs font-mono font-medium transition-all shrink-0"
+              className="px-6 py-3.5 rounded-full bg-landing-bone hover:bg-white text-[#0E1310] text-xs font-mono font-semibold transition-all shrink-0 active:scale-[0.98]"
             >
-              Verfügbarkeit prüfen
+              Prüfen
             </button>
           </form>
 
           {checkResult && (
             <div
-              className={`mt-4 p-4 rounded-xl text-xs font-mono leading-relaxed border ${
+              className={`mt-4 p-5 rounded-2xl text-xs font-mono leading-relaxed border ${
                 checkResult.covered
-                  ? "bg-emerald-500/10 text-emerald-300 border-emerald-500/30"
-                  : "bg-amber-500/10 text-amber-300 border-amber-500/30"
+                  ? "bg-landing-mint/10 text-landing-mint border-landing-mint/30"
+                  : "bg-amber-400/10 text-amber-300 border-amber-400/30"
               }`}
             >
-              <div className="font-bold">
-                {checkResult.covered ? "✓ Volle Abdeckung im Raum 42" : "Erweitertes Servicegebiet"}
+              <div className="font-bold text-sm">
+                {checkResult.covered ? "✓ Volle Abdeckung im Raum 42" : "Erweitertes Einsatzgebiet"}
               </div>
-              <div className="mt-1">{checkResult.message}</div>
+              <div className="mt-1 text-landing-bone/80">{checkResult.message}</div>
               {checkResult.covered && (
-                <a href="#kontakt" className="inline-block mt-2 text-cyan-400 underline">
-                  Jetzt Vor-Ort-Termin anfragen &rarr;
+                <a href="#kontakt" className="inline-block mt-3 text-landing-mint underline font-bold">
+                  Jetzt Vor-Ort-Termin anfragen →
                 </a>
               )}
             </div>
@@ -97,32 +98,39 @@ export default function RegionalPLZ() {
         </div>
 
         {/* Regional City Matrix */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          {REGIONAL_CITIES.slice(0, 4).map((c) => (
+        <div className="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+          {REGIONAL_CITIES.map((city) => (
             <div
-              key={c.name}
-              className="p-6 rounded-2xl bg-white/[0.02] border border-white/[0.08] hover:border-white/[0.16] transition-all flex flex-col justify-between"
+              key={city.name}
+              className="p-6 rounded-2xl bg-landing-ink2 border border-white/5 hover:border-white/15 transition-all flex flex-col justify-between group"
             >
               <div>
                 <div className="flex items-center justify-between mb-3">
-                  <h3 className="text-lg font-bold text-white">{c.name}</h3>
-                  <span className="text-[11px] font-mono text-slate-400">
-                    {c.responseHours}
+                  <span className="text-base font-editorial font-normal text-landing-bone group-hover:text-landing-mint transition-colors">
+                    {city.name}
+                  </span>
+                  <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-landing-emerald/15 text-landing-mint">
+                    PLZ {city.plzPrefix[0]}
                   </span>
                 </div>
-                <p className="text-xs text-slate-400 mb-4 leading-relaxed">
-                  {c.highlight}
+
+                <p className="text-xs text-landing-bone/60 leading-relaxed">
+                  {city.highlight}
                 </p>
-                <div className="text-[11px] font-mono text-slate-500">
-                  PLZ: {c.plzPrefix.slice(0, 3).join(", ")}...
+
+                <div className="mt-4 pt-3 border-t border-white/5 text-[11px] font-mono text-landing-bone/40">
+                  {city.districts.slice(0, 3).join(", ")}
                 </div>
               </div>
 
-              <div className="pt-4 mt-4 border-t border-white/[0.06] flex items-center justify-between text-xs font-mono">
-                <span className="text-emerald-400">24-48h Vor Ort</span>
-                <a href="#kontakt" className="text-slate-400 hover:text-white flex items-center gap-1">
+              <div className="mt-6 pt-3 border-t border-white/5 flex items-center justify-between">
+                <span className="text-[11px] font-mono text-landing-emerald">{city.responseHours}</span>
+                <a
+                  href="#kontakt"
+                  className="flex items-center gap-1 text-xs font-mono text-landing-bone/70 group-hover:text-landing-mint transition-colors"
+                >
                   <span>Anfragen</span>
-                  <ArrowUpRight className="w-3 h-3" />
+                  <ArrowUpRight className="w-3.5 h-3.5" />
                 </a>
               </div>
             </div>

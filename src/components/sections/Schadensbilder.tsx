@@ -2,91 +2,98 @@
 
 import React from "react";
 import { ArrowUpRight } from "lucide-react";
-import { SERVICES } from "@/data/content-data";
 
 export default function Schadensbilder() {
+  const cards = [
+    {
+      n: "01",
+      eyebrow: "Mauerwerk & Sockel",
+      title: "Horizontalsperre ohne Aufgraben",
+      desc: "Drucklose Injektion mit WTA-zertifizierter Silan-Mikroemulsion. Das Mauerwerk wird porentief durchdrungen, bildet eine dauerhafte wasserabweisende Barriere und stoppt aufsteigende Feuchte zu 100%.",
+      badge: "Kein Bagger nötig",
+      href: "#3d-injektion",
+      linkText: "3D-Verfahren ansehen"
+    },
+    {
+      n: "02",
+      eyebrow: "Keller & Sohle",
+      title: "Kellerinnenabdichtung & Hohlkehle",
+      desc: "Mineralische Dichtungsschlämmen (MDS), druckwasserdichte Wand-Sohlen-Anschlüsse und hochbelastbare Sanierputzsysteme sichern Keller auch bei drückendem Hangwasser im Bergischen Land ab.",
+      badge: "100% Wasserdicht",
+      href: "#kontakt",
+      linkText: "Messung anfragen"
+    },
+    {
+      n: "03",
+      eyebrow: "Gesundheit & Raumklima",
+      title: "Schimmelsanierung & Ursachenanalyse",
+      desc: "Keine giftigen Chlorbomben: Wir ermitteln die genaue Feuchte- und Taupunktursache, entfernen Schimmelbefall sporensicher und verhindern Neubildung durch diffusionsoffene Calciumsilikat-Dämmung.",
+      badge: "Messtechnisch belegt",
+      href: "#kontakt",
+      linkText: "Ursache klären"
+    }
+  ];
+
   return (
-    <section id="leistungen" className="py-24 bg-[#0b0e14] border-t border-white/[0.08]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6">
-        {/* Kontai24 Section Header Pattern */}
-        <div className="max-w-3xl mb-16">
-          <div className="text-xs font-mono text-cyan-400 uppercase tracking-widest mb-3">
-            Die Fachleistungen
-          </div>
-          <h2 className="text-3xl sm:text-5xl font-bold text-white tracking-tight leading-[1.15]">
-            Das ganze Gebäude.
-            <br />
-            <span className="text-slate-400">Eine dauerhafte Lösung.</span>
-          </h2>
-          <p className="mt-6 text-base text-slate-400 leading-relaxed">
-            Die meisten Sanierungsversuche scheitern an falschen Wandfarben oder oberflächlichen Spachtelarbeiten. sos-abdichtung packt das physikalische Problem an der Wurzel — messtechnisch erfasst, nach WTA-Norm saniert und mit 10 Jahren Garantie abgesichert.
-          </p>
-        </div>
+    <section id="leistungen" className="relative bg-landing-bone text-[#1A1D1B]">
+      <div className="relative max-w-6xl mx-auto px-6 py-24 sm:py-32">
+        {/* Section Eyebrow - Kontai24 Style */}
+        <p className="text-[11px] font-semibold uppercase tracking-[0.18em] mb-5 text-landing-emerald">
+          Fachleistungen
+        </p>
 
-        {/* Kontai24 3-Card Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="p-8 rounded-2xl bg-white/[0.02] border border-white/[0.08] hover:border-cyan-400/30 transition-all flex flex-col justify-between group">
-            <div>
-              <div className="text-[11px] font-mono text-cyan-400 uppercase tracking-wider mb-2">
-                Mauerwerk & Sockel
-              </div>
-              <h3 className="text-xl font-bold text-white group-hover:text-cyan-300 transition-colors">
-                Horizontalsperre ohne Aufgraben
-              </h3>
-              <p className="mt-4 text-xs sm:text-sm text-slate-400 leading-relaxed">
-                Drucklose Injektion mit WTA-zertifizierter Silan-Mikroemulsion. Das Mauerwerk wird porentief durchdrungen, bildet eine dauerhafte wasserabweisende Barriere und stoppt aufsteigende Feuchte zu 100%.
-              </p>
-            </div>
-            <div className="pt-6 mt-6 border-t border-white/[0.06] flex items-center justify-between text-xs font-mono text-slate-400">
-              <span>Kein Bagger nötig</span>
-              <a href="#3d-injektion" className="flex items-center gap-1 text-cyan-400 hover:text-cyan-300">
-                <span>3D-Ablauf</span>
-                <ArrowUpRight className="w-3.5 h-3.5" />
-              </a>
-            </div>
-          </div>
+        {/* Section Heading */}
+        <h2 className="font-editorial font-normal tracking-[-0.02em] leading-[1.04] text-[2.25rem] sm:text-5xl lg:text-[3.5rem] text-[#1A1D1B]">
+          Das ganze Gebäude.
+          <br />
+          <span className="italic text-landing-mint">Eine dauerhafte Lösung.</span>
+        </h2>
 
-          <div className="p-8 rounded-2xl bg-white/[0.02] border border-white/[0.08] hover:border-cyan-400/30 transition-all flex flex-col justify-between group">
-            <div>
-              <div className="text-[11px] font-mono text-cyan-400 uppercase tracking-wider mb-2">
-                Keller & Sohle
-              </div>
-              <h3 className="text-xl font-bold text-white group-hover:text-cyan-300 transition-colors">
-                Kellerinnenabdichtung & Hohlkehle
-              </h3>
-              <p className="mt-4 text-xs sm:text-sm text-slate-400 leading-relaxed">
-                Mineralische Dichtungsschlämmen (MDS), Wand-Sohlen-Anschlüsse und hochbelastbare Sanierputzsysteme sichern Keller auch bei drückendem Hangwasser im Raum Wuppertal ab.
-              </p>
-            </div>
-            <div className="pt-6 mt-6 border-t border-white/[0.06] flex items-center justify-between text-xs font-mono text-slate-400">
-              <span>100% Wasserdicht</span>
-              <a href="#kontakt" className="flex items-center gap-1 text-cyan-400 hover:text-cyan-300">
-                <span>Anfragen</span>
-                <ArrowUpRight className="w-3.5 h-3.5" />
-              </a>
-            </div>
-          </div>
+        {/* Section Lede */}
+        <p className="mt-6 max-w-2xl text-base sm:text-lg leading-relaxed text-[#444945]">
+          Die meisten Sanierungsversuche scheitern an oberflächlichen Spachtelarbeiten oder falscher Farbe. 
+          sos-abdichtung packt das physikalische Feuchteproblem an der Wurzel — messtechnisch erfasst, nach WTA-Norm saniert und mit 10 Jahren Garantie abgesichert.
+        </p>
 
-          <div className="p-8 rounded-2xl bg-white/[0.02] border border-white/[0.08] hover:border-cyan-400/30 transition-all flex flex-col justify-between group">
-            <div>
-              <div className="text-[11px] font-mono text-cyan-400 uppercase tracking-wider mb-2">
-                Gesundheit & Raumklima
+        {/* Kontai24 3-Card Platform Grid */}
+        <div className="mt-14 grid gap-5 md:grid-cols-3">
+          {cards.map((c) => (
+            <div
+              key={c.n}
+              className="rounded-2xl p-7 border bg-white/60 border-black/5 hover:bg-white/80 transition-all flex flex-col justify-between"
+            >
+              <div>
+                {/* Header: Emerald Dot Icon + Monospace Number */}
+                <div className="flex items-start justify-between mb-6">
+                  <div className="w-10 h-10 rounded-xl flex items-center justify-center bg-landing-emerald/10">
+                    <span className="w-2 h-2 rounded-full bg-landing-emerald" />
+                  </div>
+                  <span className="font-mono text-xs text-black/25 font-bold">{c.n}</span>
+                </div>
+
+                <p className="text-[10px] font-semibold uppercase tracking-[0.16em] mb-2 text-landing-emerald/80 font-mono">
+                  {c.eyebrow}
+                </p>
+                <h3 className="font-editorial text-xl mb-3 text-[#1A1D1B] leading-snug">
+                  {c.title}
+                </h3>
+                <p className="text-sm leading-relaxed text-[#444945]">{c.desc}</p>
               </div>
-              <h3 className="text-xl font-bold text-white group-hover:text-cyan-300 transition-colors">
-                Schimmelsanierung & Ursachenanalyse
-              </h3>
-              <p className="mt-4 text-xs sm:text-sm text-slate-400 leading-relaxed">
-                Keine giftigen Chlorbomben: Wir ermitteln die genaue Feuchte- und Taupunktursache, entfernen Schimmelbefall sporensicher und verhindern Neubildung durch Calciumsilikat-Dämmung.
-              </p>
+
+              <div className="mt-8 pt-4 border-t border-black/5 flex items-center justify-between">
+                <span className="text-[11px] font-mono text-landing-emerald font-semibold">
+                  {c.badge}
+                </span>
+                <a
+                  href={c.href}
+                  className="inline-flex items-center gap-1 text-xs font-semibold text-[#1A1D1B] hover:text-landing-emerald transition-colors"
+                >
+                  <span>{c.linkText}</span>
+                  <ArrowUpRight className="w-3.5 h-3.5" />
+                </a>
+              </div>
             </div>
-            <div className="pt-6 mt-6 border-t border-white/[0.06] flex items-center justify-between text-xs font-mono text-slate-400">
-              <span>Messtechnisch geprüft</span>
-              <a href="#kontakt" className="flex items-center gap-1 text-cyan-400 hover:text-cyan-300">
-                <span>Messung buchen</span>
-                <ArrowUpRight className="w-3.5 h-3.5" />
-              </a>
-            </div>
-          </div>
+          ))}
         </div>
       </div>
     </section>
