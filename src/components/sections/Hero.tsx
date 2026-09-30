@@ -65,7 +65,7 @@ export default function Hero() {
       </div>
 
       {/* Kontai24 4-Column Border-Divided Stat Grid */}
-      <div className="relative border-t border-white/[0.07] bg-landing-ink">
+      <div className="relative border-t border-line/[0.07] bg-landing-ink">
         <div className="max-w-6xl mx-auto px-6">
           <dl className="grid grid-cols-2 lg:grid-cols-4">
             {stats.map((s, idx) => (
@@ -73,11 +73,11 @@ export default function Hero() {
                 key={s.label}
                 className={[
                   "py-8 sm:py-10 px-4 sm:px-6 text-center",
-                  idx % 2 === 0 ? "border-r border-white/[0.07]" : "",
-                  idx < 2 ? "border-b border-white/[0.07] lg:border-b-0" : "",
+                  idx % 2 === 0 ? "border-r border-line/[0.07]" : "",
+                  idx < 2 ? "border-b border-line/[0.07] lg:border-b-0" : "",
                   "lg:border-b-0",
                   idx === 3 ? "lg:border-r-0" : "lg:border-r",
-                  "lg:border-white/[0.07]"
+                  "lg:border-line/[0.07]"
                 ].join(" ")}
               >
                 <dd className="font-editorial font-normal text-landing-bone text-[2rem] sm:text-[2.5rem] leading-none tracking-[-0.01em]">

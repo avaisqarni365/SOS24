@@ -270,7 +270,7 @@ export default function MoisturePatterns() {
             className={`min-h-[44px] rounded-full border px-4 py-2 text-sm font-semibold motion-safe:transition-colors ${
               active === i
                 ? "border-[var(--mint)] bg-[var(--mint)] text-[var(--ink)]"
-                : "border-white/20 text-[var(--bone)] hover:border-[var(--mint)]"
+                : "border-line/20 text-[var(--bone)] hover:border-[var(--mint)]"
             }`}
           >
             {t.label}
@@ -284,7 +284,7 @@ export default function MoisturePatterns() {
         aria-labelledby={`${uid}-tab-${active}`}
         className="grid gap-6 lg:grid-cols-[1.35fr_1fr] lg:items-start"
       >
-        <figure className="rounded-[22px] border border-white/10 bg-[var(--ink-2)] p-4 sm:p-6">
+        <figure className="rounded-[22px] border border-line/10 bg-[var(--ink-2)] p-4 sm:p-6">
           <WallSvg active={active} title={`Schematische Kellerwand mit Feuchtebild: ${p.label}`} />
           <div className="mt-4" aria-hidden="true">
             <div className="h-2 rounded-full" style={{ background: "linear-gradient(90deg,#62c4ac,#e8b04c,#3b6ea8)" }} />
@@ -299,7 +299,7 @@ export default function MoisturePatterns() {
           </figcaption>
         </figure>
 
-        <div className="rounded-[22px] border border-white/10 bg-[var(--ink-2)] p-5 sm:p-8" aria-live="polite">
+        <div className="rounded-[22px] border border-line/10 bg-[var(--ink-2)] p-5 sm:p-8" aria-live="polite">
           <p className="sc-label">Feuchtebild</p>
           <h3 className="mt-2 font-editorial text-2xl leading-tight sm:text-3xl">{p.label}</h3>
           <p className="mt-3 text-[var(--sc-ink-soft)]">{p.diagnosis}</p>
@@ -325,7 +325,7 @@ export default function MoisturePatterns() {
         </div>
       </div>
 
-      <div className="grid gap-6 rounded-[22px] border border-white/10 bg-[var(--ink-2)] p-5 sm:p-8 md:grid-cols-2 md:items-center">
+      <div className="grid gap-6 rounded-[22px] border border-line/10 bg-[var(--ink-2)] p-5 sm:p-8 md:grid-cols-2 md:items-center">
         <div>
           <p className="sc-label">Messtiefe</p>
           <p className="mt-2 text-sm text-[var(--sc-ink-soft)]">
@@ -342,7 +342,7 @@ export default function MoisturePatterns() {
               <li
                 key={m.key}
                 className={`flex gap-3 rounded-2xl border p-3 motion-safe:transition-colors ${
-                  on ? "border-[var(--mint)] bg-[var(--ink-3)]" : "border-white/10"
+                  on ? "border-[var(--mint)] bg-[var(--ink-3)]" : "border-line/10"
                 }`}
                 style={{ textAlign: "start" }}
               >

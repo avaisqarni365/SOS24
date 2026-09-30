@@ -11,11 +11,12 @@ import LayersAct from "@/components/scroll/LayersAct";
 import { ScannerSection, ServicesRail, RegionSection, FaqSection } from "@/components/scroll/HomeSections";
 import ProofSection from "@/components/science/ProofSection";
 import ScrollSectionRail from "@/components/navigation/ScrollSectionRail";
+import AudienceSection from "@/components/sections/AudienceSection";
 import ScrollEngine, { SC_BOOT } from "@/components/scroll/ScrollEngine";
 import JsonLd from "@/components/seo/JsonLd";
 import { FAQS } from "@/data/content-data";
 import { SERVICE_CARDS } from "@/data/services";
-import { SITE_URL, BUSINESS_ID, WEBSITE_ID, abs, businessNode, websiteNode, breadcrumbNode, faqNode } from "@/lib/site";
+import { SITE_URL, BUSINESS_ID, WEBSITE_ID, abs, businessNode, websiteNode, breadcrumbNode, faqNode, OG_IMAGE } from "@/lib/site";
 
 const TITLE = "Kellersanierung Wuppertal ohne Aufgraben | sos-abdichtung";
 const DESCRIPTION =
@@ -25,7 +26,7 @@ export const metadata: Metadata = {
   title: TITLE,
   description: DESCRIPTION,
   alternates: { canonical: "/" },
-  openGraph: { title: TITLE, description: DESCRIPTION, url: "/", type: "website", locale: "de_DE", siteName: "sos-abdichtung" },
+  openGraph: { title: TITLE, description: DESCRIPTION, url: "/", type: "website", locale: "de_DE", siteName: "sos-abdichtung", images: [OG_IMAGE] },
 };
 
 export default function Home() {
@@ -67,6 +68,7 @@ export default function Home() {
       <ScrollSectionRail />
       <main id="main">
         <Hero />
+        <AudienceSection />
         <Tension />
         <ScannerSection />
         <LayersAct />

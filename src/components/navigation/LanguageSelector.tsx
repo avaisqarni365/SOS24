@@ -24,7 +24,7 @@ export default function LanguageSelector() {
     <div ref={containerRef} className="relative inline-block text-left">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-landing-ink2 hover:bg-landing-ink3 border border-white/10 hover:border-landing-mint/40 text-xs font-mono text-landing-bone transition-all shadow-xs"
+        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-landing-ink2 hover:bg-landing-ink3 border border-line/10 hover:border-landing-mint/40 text-xs font-mono text-landing-bone transition-all shadow-xs"
         aria-label="Sprache auswählen"
         aria-expanded={isOpen}
       >
@@ -38,8 +38,8 @@ export default function LanguageSelector() {
       </button>
 
       {isOpen && (
-        <div className="absolute right-0 mt-2 w-44 rounded-2xl bg-landing-ink2 border border-white/10 shadow-2xl py-1.5 z-50 animate-in fade-in zoom-in-95 duration-150">
-          <div className="px-3 py-1 text-[10px] font-mono uppercase tracking-[0.16em] text-landing-bone/40 border-b border-white/5 mb-1">
+        <div className="absolute right-0 mt-2 w-44 rounded-2xl bg-landing-ink2 border border-line/10 shadow-2xl py-1.5 z-50 animate-in fade-in zoom-in-95 duration-150">
+          <div className="px-3 py-1 text-[10px] font-mono uppercase tracking-[0.16em] text-landing-bone/40 border-b border-line/5 mb-1">
             Sprache / Language
           </div>
           {SUPPORTED_LOCALES.map((locale) => {
@@ -54,7 +54,7 @@ export default function LanguageSelector() {
                 className={`w-full flex items-center justify-between px-3.5 py-2 text-xs text-left transition-colors font-mono ${
                   isSelected
                     ? "bg-landing-mint/15 text-landing-mint font-bold"
-                    : "text-landing-bone/80 hover:bg-white/5 hover:text-white"
+                    : "text-landing-bone/80 hover:bg-line/5 hover:text-[var(--bone)]"
                 }`}
               >
                 <div className="flex items-center gap-2">

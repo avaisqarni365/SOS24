@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
-import { Phone, MapPin, CheckCircle2, MessageSquare, ArrowRight } from "lucide-react";
+import { Phone, MapPin, CheckCircle2, MessageSquare, ArrowRight, Mail } from "lucide-react";
 import { COMPANY_INFO } from "@/data/content-data";
 import { useLanguage } from "@/i18n/LanguageContext";
 
@@ -23,9 +23,18 @@ type Enquiry = {
   message: string;
 };
 
+function enquiryText(d: Enquiry) {
+  return `Hallo Herr Mahmood, hier ist eine Sanierungsanfrage über sos-abdichtung.de:\n\nName: ${d.name}\nTelefon: ${d.phone}\nE-Mail: ${d.email}\nPLZ: ${d.plz}\nSchadensbild: ${d.damageType}\nNachricht: ${d.message}`;
+}
+
 function whatsappLink(d: Enquiry) {
-  const text = `Hallo Herr Mahmood, hier ist eine Sanierungsanfrage über sos-abdichtung.de:\n\nName: ${d.name}\nTelefon: ${d.phone}\nE-Mail: ${d.email}\nPLZ: ${d.plz}\nSchadensbild: ${d.damageType}\nNachricht: ${d.message}`;
-  return `https://wa.me/${COMPANY_INFO.phoneTel.replace("+", "")}?text=${encodeURIComponent(text)}`;
+  return `https://wa.me/${COMPANY_INFO.phoneTel.replace("+", "")}?text=${encodeURIComponent(enquiryText(d))}`;
+}
+
+/** Same enquiry for people without WhatsApp: opens their own mail program. */
+function mailLink(d: Enquiry) {
+  const subject = `Anfrage Feuchtemessung, PLZ ${d.plz}`;
+  return `mailto:${COMPANY_INFO.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(enquiryText(d))}`;
 }
 
 const field =
@@ -43,6 +52,7 @@ export default function ContactForm({ defaultDamage, place }: { defaultDamage?: 
     message: "",
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [channel, setChannel] = useState<"whatsapp" | "mail">("whatsapp");
 
   // WebMCP, imperative: the same action the form performs, for AI agents in the browser.
   // The agent tool is registered once; it reads the live form state through this ref.
@@ -85,9 +95,14 @@ export default function ContactForm({ defaultDamage, place }: { defaultDamage?: 
   const set = (k: keyof Enquiry) => (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) =>
     setFormData({ ...formData, [k]: e.target.value });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  // Two submit buttons share the form's validation; the one pressed picks the channel.
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    window.open(whatsappLink(formData), "_blank");
+    const submitter = (e.nativeEvent as SubmitEvent).submitter as HTMLButtonElement | null;
+    const via = submitter?.value === "mail" ? "mail" : "whatsapp";
+    setChannel(via);
+    if (via === "mail") window.location.href = mailLink(formData);
+    else window.open(whatsappLink(formData), "_blank");
     setIsSubmitted(true);
   };
 
@@ -126,8 +141,10 @@ export default function ContactForm({ defaultDamage, place }: { defaultDamage?: 
                 </div>
                 <h3 className="font-editorial text-2xl text-[var(--head-on-bone)]">Anfrage vorbereitet</h3>
                 <p className="mx-auto max-w-md text-sm text-[var(--text-on-bone)]">
-                  Die Nachricht ist in WhatsApp vorbereitet. Bitte dort absenden. Herr Mahmood meldet sich zur
-                  Terminabstimmung.
+                  {channel === "mail"
+                    ? "Die E-Mail ist in Ihrem E-Mail-Programm vorbereitet. Bitte dort absenden."
+                    : "Die Nachricht ist in WhatsApp vorbereitet. Bitte dort absenden."}{" "}
+                  Herr Mahmood meldet sich zur Terminabstimmung.
                 </p>
                 <a
                   href={`tel:${COMPANY_INFO.phoneTel}`}
@@ -185,15 +202,29 @@ export default function ContactForm({ defaultDamage, place }: { defaultDamage?: 
                   </label>
                   <textarea id="f-msg" name="message" rows={3} value={formData.message} onChange={set("message")} placeholder="z. B. Altbau von 1912, feuchte Raumecke seit Starkregen" className={field} {...p("Kurze Beschreibung des Problems")} />
                 </div>
-                <button
-                  type="submit"
-                  className="inline-flex min-h-[52px] w-full items-center justify-center gap-2 rounded-full bg-[var(--head-on-bone)] px-7 py-4 text-sm font-semibold text-[var(--bone)] shadow-sm hover:bg-black"
-                >
-                  {t("contact.submit")}
-                  <ArrowRight className="h-4 w-4 text-[var(--mint)]" aria-hidden="true" />
-                </button>
+                <div className="grid gap-3 sm:grid-cols-2">
+                  <button
+                    type="submit"
+                    name="via"
+                    value="whatsapp"
+                    className="inline-flex min-h-[52px] w-full items-center justify-center gap-2 rounded-full bg-[var(--head-on-bone)] px-6 py-4 text-sm font-semibold text-[var(--bone)] shadow-sm hover:bg-black"
+                  >
+                    {t("contact.viaWhatsapp")}
+                    <ArrowRight className="h-4 w-4 text-[var(--mint)]" aria-hidden="true" />
+                  </button>
+                  <button
+                    type="submit"
+                    name="via"
+                    value="mail"
+                    className="inline-flex min-h-[52px] w-full items-center justify-center gap-2 rounded-full border border-black/20 px-6 py-4 text-sm font-semibold text-[var(--head-on-bone)] hover:border-[var(--emerald-deep)]"
+                  >
+                    {t("contact.viaMail")}
+                    <Mail className="h-4 w-4 text-[var(--emerald-deep)]" aria-hidden="true" />
+                  </button>
+                </div>
                 <p className="text-center font-mono text-[11px] text-[var(--text-on-bone)]">
-                  Öffnet WhatsApp mit Ihrer vorbereiteten Nachricht. Ihre Daten werden nicht gespeichert.
+                  Öffnet WhatsApp oder Ihr E-Mail-Programm mit der vorbereiteten Nachricht. Auf unserer Website wird
+                  nichts gespeichert.
                 </p>
               </form>
             )}

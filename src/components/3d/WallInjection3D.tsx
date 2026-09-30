@@ -469,9 +469,9 @@ export default function WallInjection3D() {
   return (
     <div ref={trackRef} className="relative w-full h-[230vh]">
       {/* Pinned Stage Container */}
-      <div className="sticky top-20 w-full bg-landing-ink2 rounded-3xl border border-white/[0.08] shadow-card overflow-hidden">
+      <div className="sticky top-20 w-full bg-landing-ink2 rounded-3xl border border-line/[0.08] shadow-card overflow-hidden">
         {/* Top Control Bar */}
-        <div className="px-6 py-4 bg-landing-ink/90 backdrop-blur-md border-b border-white/[0.08] flex flex-wrap items-center justify-between gap-4">
+        <div className="px-6 py-4 bg-landing-ink/90 backdrop-blur-md border-b border-line/[0.08] flex flex-wrap items-center justify-between gap-4">
           <div className="flex items-center gap-3">
             <div className="w-8 h-8 rounded-lg bg-landing-mint/10 border border-landing-mint/30 flex items-center justify-center text-landing-mint font-mono text-xs font-bold">
               3D
@@ -497,14 +497,14 @@ export default function WallInjection3D() {
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-mono transition-all border ${
                 isExploded
                   ? "bg-landing-mint/20 text-landing-mint border-landing-mint/50"
-                  : "bg-white/[0.04] text-landing-bone/70 border-white/[0.1] hover:text-white"
+                  : "bg-line/[0.04] text-landing-bone/70 border-line/[0.1] hover:text-[var(--bone)]"
               }`}
             >
               <Layers className="w-3.5 h-3.5" />
               <span>{isExploded ? "Schichten schließen" : "Schichten explodieren"}</span>
             </button>
 
-            <div className="px-3 py-1.5 rounded-full bg-white/[0.04] border border-white/[0.08] text-xs font-mono flex items-center gap-2">
+            <div className="px-3 py-1.5 rounded-full bg-line/[0.04] border border-line/[0.08] text-xs font-mono flex items-center gap-2">
               <span className="text-landing-bone/50">Feuchte:</span>
               <span className={`font-bold ${activeStep === 4 ? "text-landing-mint" : "text-amber-300"}`}>
                 {currentPhase.moisture}
@@ -521,7 +521,7 @@ export default function WallInjection3D() {
 
             {/* Scrubber Progress Badge */}
             <div className="absolute top-4 left-4 pointer-events-none">
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-landing-ink/90 backdrop-blur-md border border-white/[0.1] text-[11px] font-mono text-landing-bone/70 shadow-sm">
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-landing-ink/90 backdrop-blur-md border border-line/[0.1] text-[11px] font-mono text-landing-bone/70 shadow-sm">
                 <span className="w-2 h-2 rounded-full bg-landing-mint animate-pulse"></span>
                 <span>Scrub-Fortschritt: {Math.round(scrollProgress * 100)}%</span>
               </div>
@@ -529,7 +529,7 @@ export default function WallInjection3D() {
 
             {/* 360 Rotation Hint */}
             <div className="absolute bottom-4 left-4 pointer-events-none">
-              <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-landing-ink/80 border border-white/[0.08] text-[11px] font-mono text-landing-bone/50">
+              <div className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-lg bg-landing-ink/80 border border-line/[0.08] text-[11px] font-mono text-landing-bone/50">
                 <RotateCcw className="w-3 h-3 text-landing-mint" />
                 <span>360° interaktiv drehbar</span>
               </div>
@@ -544,7 +544,7 @@ export default function WallInjection3D() {
           </div>
 
           {/* Sidebar */}
-          <div className="lg:col-span-4 p-7 bg-landing-ink2 border-t lg:border-t-0 lg:border-l border-white/[0.08] flex flex-col justify-between">
+          <div className="lg:col-span-4 p-7 bg-landing-ink2 border-t lg:border-t-0 lg:border-l border-line/[0.08] flex flex-col justify-between">
             <div>
               <div className="text-xs font-mono text-landing-mint uppercase tracking-wider mb-1">
                 Phase 0{currentPhase.step} / 04
@@ -556,16 +556,16 @@ export default function WallInjection3D() {
                 {currentPhase.desc}
               </p>
 
-              <div className="mt-8 space-y-2.5 pt-4 border-t border-white/[0.06] text-xs font-mono">
-                <div className="flex items-center justify-between p-2.5 rounded-xl bg-landing-ink border border-white/[0.04]">
+              <div className="mt-8 space-y-2.5 pt-4 border-t border-line/[0.06] text-xs font-mono">
+                <div className="flex items-center justify-between p-2.5 rounded-xl bg-landing-ink border border-line/[0.04]">
                   <span className="text-landing-bone/50">Standard:</span>
                   <span className="text-landing-bone font-medium">WTA Merkblatt 4-4-04</span>
                 </div>
-                <div className="flex items-center justify-between p-2.5 rounded-xl bg-landing-ink border border-white/[0.04]">
+                <div className="flex items-center justify-between p-2.5 rounded-xl bg-landing-ink border border-line/[0.04]">
                   <span className="text-landing-bone/50">Wirkstoff:</span>
                   <span className="text-landing-mint font-medium">Silan-Mikroemulsion</span>
                 </div>
-                <div className="flex items-center justify-between p-2.5 rounded-xl bg-landing-ink border border-white/[0.04]">
+                <div className="flex items-center justify-between p-2.5 rounded-xl bg-landing-ink border border-line/[0.04]">
                   <span className="text-landing-bone/50">Garantie:</span>
                   <span className="text-landing-bone font-medium">10 Jahre Verbundgarantie</span>
                 </div>
@@ -573,7 +573,7 @@ export default function WallInjection3D() {
             </div>
 
             {/* Phase Selector Buttons */}
-            <div className="mt-8 pt-4 border-t border-white/[0.06]">
+            <div className="mt-8 pt-4 border-t border-line/[0.06]">
               <div className="grid grid-cols-2 gap-2 font-mono text-xs">
                 {PHASES.map((p) => (
                   <button
@@ -582,7 +582,7 @@ export default function WallInjection3D() {
                     className={`p-2.5 rounded-xl text-left transition-all border ${
                       activeStep === p.step
                         ? "bg-landing-mint/15 text-landing-mint border-landing-mint/40"
-                        : "bg-white/[0.02] text-landing-bone/60 border-white/[0.06] hover:text-white"
+                        : "bg-line/[0.02] text-landing-bone/60 border-line/[0.06] hover:text-[var(--bone)]"
                     }`}
                   >
                     Phase {p.step}

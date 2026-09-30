@@ -1,68 +1,82 @@
-import React from "react";
-import { ArrowLeft } from "lucide-react";
+import type { Metadata } from "next";
 import { COMPANY_INFO } from "@/data/content-data";
+import LegalPage from "@/components/sections/LegalPage";
 
-export const metadata = {
+export const metadata: Metadata = {
   alternates: { canonical: "/impressum/" },
   title: "Impressum | sos-abdichtung",
-  description: "Impressum und rechtliche Angaben gemäß § 5 TMG für sos-abdichtung.",
+  description: "Impressum von sos-abdichtung, Inhaber Shahzad Mahmood, Essen: Angaben nach § 5 DDG.",
 };
 
 export default function ImpressumPage() {
   return (
-    <div className="min-h-screen bg-[#0b0e14] py-16 px-4 sm:px-6 text-slate-300">
-      <div className="max-w-3xl mx-auto bg-white/[0.02] rounded-3xl p-8 sm:p-12 border border-white/[0.08]">
-        <a
-          href="/"
-          className="inline-flex items-center gap-2 text-xs font-mono text-cyan-400 hover:underline mb-8"
-        >
-          <ArrowLeft className="w-4 h-4" />
-          <span>Zurück zur Startseite</span>
-        </a>
+    <LegalPage title="Impressum" updated="September 2026">
+      <section>
+        <h2>Angaben nach § 5 DDG</h2>
+        <address>
+          sos-abdichtung
+          <br />
+          Inhaber: {COMPANY_INFO.owner}
+          <br />
+          {COMPANY_INFO.street}
+          <br />
+          {COMPANY_INFO.city}
+        </address>
+      </section>
 
-        <h1 className="text-3xl font-extrabold text-white tracking-tight mb-8">
-          Impressum
-        </h1>
+      <section>
+        <h2>Kontakt</h2>
+        <p>
+          Telefon: <a href={`tel:${COMPANY_INFO.phoneTel}`}>{COMPANY_INFO.phoneDisplay}</a>
+          <br />
+          E-Mail: <a href={`mailto:${COMPANY_INFO.email}`}>{COMPANY_INFO.email}</a>
+        </p>
+      </section>
 
-        <div className="space-y-6 text-sm text-slate-400 leading-relaxed">
-          <section>
-            <h2 className="text-base font-bold text-white mb-2">Angaben gemäß § 5 TMG:</h2>
-            <p className="font-semibold text-white">sos-abdichtung</p>
-            <p className="text-slate-400">SchimmelPeter® Partnerbetrieb</p>
-            <p>Inhaber: Shahzad Mahmood</p>
-            <p>{COMPANY_INFO.street}</p>
-            <p>{COMPANY_INFO.city}</p>
-          </section>
+      <section>
+        <h2>Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV</h2>
+        <address>
+          {COMPANY_INFO.owner}
+          <br />
+          {COMPANY_INFO.street}, {COMPANY_INFO.city}
+        </address>
+      </section>
 
-          <section>
-            <h2 className="text-base font-bold text-white mb-2">Kontakt:</h2>
-            <p>Telefon: {COMPANY_INFO.phoneDisplay}</p>
-            <p>E-Mail: {COMPANY_INFO.email}</p>
-            <p>Einsatzgebiet: Wuppertal, Solingen, Remscheid, Velbert und Bergisches Land (PLZ 42xxx)</p>
-          </section>
+      <section>
+        <h2>Partnerschaft</h2>
+        <p>
+          sos-abdichtung ist ein selbstständiger Partnerbetrieb im Netzwerk der SchimmelPeter GmbH. SchimmelPeter® ist
+          eine eingetragene Marke der SchimmelPeter GmbH. Vertragspartner für Aufträge über diese Website ist
+          sos-abdichtung, Inhaber {COMPANY_INFO.owner}.
+        </p>
+      </section>
 
-          <section>
-            <h2 className="text-base font-bold text-white mb-2">Haftung für Inhalte:</h2>
-            <p>
-              Als Diensteanbieter sind wir gemäß § 7 Abs.1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Nach §§ 8 bis 10 TMG sind wir als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen.
-            </p>
-          </section>
+      <section>
+        <h2>Bildnachweise</h2>
+        <p>
+          Fotos und Infografiken: SchimmelPeter GmbH, Nutzung im Rahmen der Partnerschaft. 3D-Modell und Grafiken:
+          sos-abdichtung. Gemeindegrenzen der Servicegebiet-Karte: Land Nordrhein-Westfalen, über den Datensatz
+          „click_that_hood“ von Code for Germany. Interaktive Karte: © OpenStreetMap-Mitwirkende.
+        </p>
+      </section>
 
-          <section>
-            <h2 className="text-base font-bold text-white mb-2">Haftung für Links:</h2>
-            <p>
-              Unser Angebot enthält Links zu externen Websites Dritter, auf deren Inhalte wir keinen Einfluss haben. Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich.
-            </p>
-          </section>
+      <section>
+        <h2>Verbraucherstreitbeilegung</h2>
+        <p>
+          Wir sind nicht bereit und nicht verpflichtet, an Streitbeilegungsverfahren vor einer
+          Verbraucherschlichtungsstelle teilzunehmen.
+        </p>
+      </section>
 
-          <section>
-            <h2 className="text-base font-bold text-white mb-2">Verbraucherstreitbeilegung / Universalschlichtungsstelle:</h2>
-            <p>
-              Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.
-            </p>
-          </section>
-        </div>
-      </div>
-    </div>
+      <section>
+        <h2>Haftung für Inhalte und Links</h2>
+        <p>
+          Die Inhalte dieser Website wurden mit Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität
+          können wir jedoch keine Gewähr übernehmen. Diese Website enthält Links zu Websites Dritter, auf deren Inhalte
+          wir keinen Einfluss haben; für diese Inhalte ist der jeweilige Anbieter verantwortlich. Werden uns
+          Rechtsverletzungen bekannt, entfernen wir die betreffenden Inhalte oder Links umgehend.
+        </p>
+      </section>
+    </LegalPage>
   );
 }

@@ -1,31 +1,27 @@
 name: Deploy Static Site to GitHub Pages
 
+# Pull requests: the full check (types, build, SEO and link gate).
+# Pushes to main: the same check, then build for GitHub Pages and deploy.
+# Locally the same gate runs with `pnpm check`; `pnpm release` checks and
+# pushes main, which triggers this workflow.
 on:
   push:
     branches: ["main"]
+  pull_request:
   workflow_dispatch:
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
-
-concurrency:
-  group: "pages"
-  cancel-in-progress: false
 
 jobs:
-  build-and-deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
+  check:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Setup pnpm
-        uses: pnpm/action-setup@v3
+        uses: pnpm/action-setup@v4
         with:
           version: 10
 
@@ -38,9 +34,44 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      # configure-pages reports the site's base path: "/SOS24" while it is
-      # served from avaisqarni365.github.io/SOS24/, empty once a custom
-      # domain (sos-abdichtung.de) is set. The build follows it.
+      - name: Types, build, SEO and link gate
+        run: pnpm check
+
+  deploy:
+    needs: check
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    concurrency:
+      group: "pages"
+      cancel-in-progress: false
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "pnpm"
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      # configure-pages reports the site's base path: empty with the custom
+      # domain sos-abdichtung.de, "/SOS24" if the site ever runs from
+      # avaisqarni365.github.io/SOS24/ again. The build follows it.
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v5

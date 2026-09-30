@@ -101,7 +101,7 @@ export default function GrokLeadBot() {
         <button
           onClick={() => setIsOpen(true)}
           aria-label="Sanierungs-Assistent öffnen"
-          className="fixed bottom-4 right-4 z-40 flex h-12 items-center gap-2 rounded-full border border-landing-mint/40 bg-landing-ink px-3 text-landing-bone shadow-xl transition-colors hover:border-landing-mint sm:bottom-6 sm:right-6 sm:px-4"
+          className="fixed bottom-[5.25rem] right-3 z-40 flex h-12 items-center gap-2 rounded-full border border-landing-mint/40 bg-landing-ink px-3 text-landing-bone shadow-xl transition-colors hover:border-landing-mint sm:bottom-6 sm:right-6 sm:px-4"
           style={{ marginBottom: "env(safe-area-inset-bottom)" }}
         >
           <span className="flex h-7 w-7 items-center justify-center rounded-full bg-landing-mint/20 text-landing-mint">
@@ -113,9 +113,9 @@ export default function GrokLeadBot() {
 
       {/* Chat Window */}
       {isOpen && (
-        <div className="fixed bottom-6 right-6 z-50 w-[92vw] sm:w-[380px] h-[520px] bg-landing-ink rounded-3xl border border-white/10 shadow-2xl flex flex-col overflow-hidden animate-in fade-in slide-in-from-bottom-4 duration-300">
+        <div className="fixed bottom-6 right-6 z-50 w-[92vw] sm:w-[380px] h-[520px] bg-landing-ink rounded-3xl border border-line/10 shadow-2xl flex flex-col overflow-hidden animate-in fade-in slide-in-from-bottom-4 duration-300">
           {/* Header */}
-          <div className="p-4 bg-landing-ink2 border-b border-white/10 flex items-center justify-between">
+          <div className="p-4 bg-landing-ink2 border-b border-line/10 flex items-center justify-between">
             <div className="flex items-center gap-2.5">
               <div className="w-8 h-8 rounded-full bg-landing-mint/20 text-landing-mint flex items-center justify-center border border-landing-mint/30">
                 <Bot className="w-4 h-4" />
@@ -133,7 +133,7 @@ export default function GrokLeadBot() {
 
             <button
               onClick={() => setIsOpen(false)}
-              className="w-7 h-7 rounded-full text-landing-bone/60 hover:text-white hover:bg-white/10 flex items-center justify-center transition-colors"
+              className="w-7 h-7 rounded-full text-landing-bone/60 hover:text-[var(--bone)] hover:bg-line/10 flex items-center justify-center transition-colors"
             >
               <X className="w-4 h-4" />
             </button>
@@ -149,8 +149,8 @@ export default function GrokLeadBot() {
                 <div
                   className={`p-3 rounded-2xl max-w-[85%] leading-relaxed ${
                     m.sender === "user"
-                      ? "bg-landing-bone text-[#0E1310] font-medium"
-                      : "bg-landing-ink2 text-landing-bone/90 border border-white/10"
+                      ? "bg-landing-bone text-landing-ink font-medium"
+                      : "bg-landing-ink2 text-landing-bone/90 border border-line/10"
                   }`}
                 >
                   {m.text}
@@ -173,7 +173,7 @@ export default function GrokLeadBot() {
             ))}
 
             {isTyping && (
-              <div className="flex items-center gap-1.5 p-3 rounded-2xl bg-landing-ink2 border border-white/10 w-fit text-landing-mint text-xs font-mono">
+              <div className="flex items-center gap-1.5 p-3 rounded-2xl bg-landing-ink2 border border-line/10 w-fit text-landing-mint text-xs font-mono">
                 <span className="w-1.5 h-1.5 rounded-full bg-landing-mint animate-bounce"></span>
                 <span className="w-1.5 h-1.5 rounded-full bg-landing-mint animate-bounce [animation-delay:0.2s]"></span>
                 <span className="w-1.5 h-1.5 rounded-full bg-landing-mint animate-bounce [animation-delay:0.4s]"></span>
@@ -183,7 +183,7 @@ export default function GrokLeadBot() {
           </div>
 
           {/* Input Box */}
-          <div className="p-3 bg-landing-ink2 border-t border-white/10">
+          <div className="p-3 bg-landing-ink2 border-t border-line/10">
             <form
               onSubmit={(e) => {
                 e.preventDefault();
@@ -196,11 +196,11 @@ export default function GrokLeadBot() {
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 placeholder="Ihre Frage zur Sanierung..."
-                className="flex-1 px-4 py-2.5 rounded-full bg-landing-ink border border-white/10 text-xs text-landing-bone focus:outline-none focus:border-landing-mint placeholder:text-landing-bone/30"
+                className="flex-1 px-4 py-2.5 rounded-full bg-landing-ink border border-line/10 text-xs text-landing-bone focus:outline-none focus:border-landing-mint placeholder:text-landing-bone/30"
               />
               <button
                 type="submit"
-                className="w-9 h-9 rounded-full bg-landing-bone text-[#0E1310] hover:bg-white flex items-center justify-center transition-colors shrink-0"
+                className="w-9 h-9 rounded-full bg-landing-bone text-landing-ink hover:bg-white flex items-center justify-center transition-colors shrink-0"
               >
                 <Send className="w-4 h-4" />
               </button>

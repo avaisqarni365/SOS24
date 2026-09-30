@@ -6,11 +6,11 @@
 export default function Tension() {
   return (
     <section
-      className="tension"
+      className="tension theme-dark"
       aria-labelledby="tension-title"
       data-sc-act="pin"
       data-sc-span="1.6"
-      data-sc-drift="#121714"
+     
       style={{ ["--sc-span" as string]: 1.6 }}
     >
       <div data-sc-stage className="tension__stage">

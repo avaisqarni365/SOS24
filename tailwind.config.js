@@ -8,18 +8,20 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        // Kontai24 Exact Official Palette
+        // Theme-aware brand palette: RGB channels from globals.css, so the
+        // same class works in light and dark and takes opacity modifiers.
         landing: {
-          ink: '#0e1310',       // rgb(14 19 16) - Deep Forest Ink background
-          ink2: '#141b17',      // rgb(20 27 23) - Elevated Card background
-          ink3: '#1b241f',      // rgb(27 36 31) - Hover Card background
-          bone: '#f3f1ec',      // rgb(243 241 236) - Warm Bone White
-          bone2: '#ece9e2',     // rgb(236 233 226) - Muted Bone
-          mint: '#62c4ac',      // rgb(98 196 172) - Signature Luminous Mint
-          emerald: '#3f9a87',   // rgb(63 154 135) - Precision Emerald Green
-          text: '#444945',      // rgb(68 73 69) - Body text on bone
-          darkText: '#1a1d1b',  // rgb(26 29 27) - Headings on bone
+          ink: 'rgb(var(--c-ink) / <alpha-value>)',
+          ink2: 'rgb(var(--c-ink2) / <alpha-value>)',
+          ink3: 'rgb(var(--c-ink3) / <alpha-value>)',
+          bone: 'rgb(var(--c-bone) / <alpha-value>)',
+          bone2: 'rgb(var(--c-bone2) / <alpha-value>)',
+          mint: 'rgb(var(--c-mint) / <alpha-value>)',
+          emerald: 'rgb(var(--c-emerald) / <alpha-value>)',
+          text: '#444945',
+          darkText: '#1a1d1b',
         },
+        line: 'rgb(var(--c-line) / <alpha-value>)',
       },
       fontFamily: {
         editorial: ['var(--font-editorial)', 'Newsreader', 'Georgia', 'serif'],

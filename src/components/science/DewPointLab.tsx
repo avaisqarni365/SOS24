@@ -146,7 +146,7 @@ export default function DewPointLab() {
 
   return (
     <div className="grid gap-6 lg:grid-cols-[1fr_1.35fr] lg:items-start">
-      <div className="rounded-[22px] border border-white/10 bg-[var(--ink-2)] p-5 sm:p-8">
+      <div className="rounded-[22px] border border-line/10 bg-[var(--ink-2)] p-5 sm:p-8">
         <p className="sc-label">Ihre Werte</p>
         <h3 className="mt-2 font-editorial text-2xl leading-tight sm:text-3xl">Raumklima und Wand</h3>
         <div className="mt-6 flex flex-col gap-5">
@@ -188,7 +188,7 @@ export default function DewPointLab() {
               id={`${uid}-wall`}
               value={wall}
               onChange={(e) => setWall(e.target.value as WallKey)}
-              className="mt-2 min-h-[44px] w-full rounded-full border border-white/20 bg-[var(--ink-3)] px-4 py-2 text-sm text-[var(--bone)] hover:border-[var(--mint)]"
+              className="mt-2 min-h-[44px] w-full rounded-full border border-line/20 bg-[var(--ink-3)] px-4 py-2 text-sm text-[var(--bone)] hover:border-[var(--mint)]"
             >
               {WALLS.map((w) => (
                 <option key={w.key} value={w.key}>
@@ -200,7 +200,7 @@ export default function DewPointLab() {
         </div>
       </div>
 
-      <div className="rounded-[22px] border border-white/10 bg-[var(--ink-2)] p-5 sm:p-8">
+      <div className="rounded-[22px] border border-line/10 bg-[var(--ink-2)] p-5 sm:p-8">
         <div aria-live="polite" aria-atomic="true">
           <dl className="grid grid-cols-3 gap-3">
             {[

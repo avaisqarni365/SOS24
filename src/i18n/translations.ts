@@ -124,6 +124,8 @@ export const TRANSLATIONS: Record<SupportedLocale, Record<string, string>> = {
     "contact.damage": "Art des Schadens",
     "contact.msg": "Ihre Nachricht",
     "contact.submit": "Kostenlose Feuchtemessung anfragen",
+    "contact.viaWhatsapp": "Per WhatsApp senden",
+    "contact.viaMail": "Per E-Mail senden",
 
     // Gallery
     "gallery.eyebrow": "AUS DER PRAXIS",
@@ -254,6 +256,8 @@ export const TRANSLATIONS: Record<SupportedLocale, Record<string, string>> = {
     "contact.damage": "Type of Damage",
     "contact.msg": "Your Message / Details about the Property",
     "contact.submit": "Send Request & Open WhatsApp",
+    "contact.viaWhatsapp": "Send via WhatsApp",
+    "contact.viaMail": "Send by e-mail",
 
     // Gallery
     "gallery.eyebrow": "FROM THE FIELD",
@@ -384,6 +388,8 @@ export const TRANSLATIONS: Record<SupportedLocale, Record<string, string>> = {
     "contact.damage": "Hasar Türü",
     "contact.msg": "Mesajınız / Bina Detayları",
     "contact.submit": "Talebi Gönder & WhatsApp'ı Aç",
+    "contact.viaWhatsapp": "WhatsApp ile gönder",
+    "contact.viaMail": "E-posta ile gönder",
 
     // Gallery
     "gallery.eyebrow": "SAHADAN",
@@ -514,6 +520,8 @@ export const TRANSLATIONS: Record<SupportedLocale, Record<string, string>> = {
     "contact.damage": "Тип повреждения",
     "contact.msg": "Ваше сообщение / детали объекта",
     "contact.submit": "Отправить заявку и открыть WhatsApp",
+    "contact.viaWhatsapp": "Отправить через WhatsApp",
+    "contact.viaMail": "Отправить по e-mail",
 
     // Gallery
     "gallery.eyebrow": "ИЗ ПРАКТИКИ",
@@ -644,6 +652,8 @@ export const TRANSLATIONS: Record<SupportedLocale, Record<string, string>> = {
     "contact.damage": "نوع الضرر أو المشكلة",
     "contact.msg": "رسالتك / تفاصيل العقار",
     "contact.submit": "إرسال الطلب وفتح واتساب",
+    "contact.viaWhatsapp": "إرسال عبر واتساب",
+    "contact.viaMail": "إرسال بالبريد الإلكتروني",
 
     // Gallery
     "gallery.eyebrow": "من الواقع العملي",
@@ -774,6 +784,8 @@ export const TRANSLATIONS: Record<SupportedLocale, Record<string, string>> = {
     "contact.damage": "Rodzaj uszkodzenia",
     "contact.msg": "Twoja wiadomość / Szczegóły obiektu",
     "contact.submit": "Wyślij zapytanie i otwórz WhatsApp",
+    "contact.viaWhatsapp": "Wyślij przez WhatsApp",
+    "contact.viaMail": "Wyślij e-mailem",
 
     // Gallery
     "gallery.eyebrow": "Z PRAKTYKI",

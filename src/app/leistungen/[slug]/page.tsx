@@ -13,7 +13,7 @@ import { Breadcrumbs, LayerStack, Prose, FaqList, LinkGrid } from "@/components/
 import { SERVICE_PAGES, CITY_PAGES } from "@/data/seo-pages";
 import { SERVICE_CARDS } from "@/data/services";
 import { COMPANY_INFO } from "@/data/content-data";
-import { BUSINESS_ID, WEBSITE_ID, abs, businessNode, websiteNode, breadcrumbNode, faqNode } from "@/lib/site";
+import { BUSINESS_ID, WEBSITE_ID, abs, businessNode, websiteNode, breadcrumbNode, faqNode, OG_IMAGE } from "@/lib/site";
 import { hy } from "@/lib/hyphenate";
 
 const DAMAGE_BY_SLUG: Record<string, string> = {
@@ -49,7 +49,7 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
     title: page.title,
     description: page.metaDescription,
     alternates: { canonical: path },
-    openGraph: { title: page.title, description: page.metaDescription, url: path, type: "article", locale: "de_DE", siteName: "sos-abdichtung" },
+    openGraph: { title: page.title, description: page.metaDescription, url: path, type: "article", locale: "de_DE", siteName: "sos-abdichtung", images: [OG_IMAGE] },
   };
 }
 
@@ -117,14 +117,14 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
                 <a href="#kontakt" className="inline-flex min-h-[48px] items-center rounded-full bg-[var(--bone)] px-6 text-sm font-semibold text-[var(--ink)] hover:bg-white">
                   Kostenlose Feuchtemessung anfragen <span aria-hidden="true">&nbsp;→</span>
                 </a>
-                <a href={`tel:${COMPANY_INFO.phoneTel}`} className="inline-flex min-h-[48px] items-center rounded-full border border-white/20 px-6 text-sm font-semibold hover:border-[var(--mint)]">
+                <a href={`tel:${COMPANY_INFO.phoneTel}`} className="inline-flex min-h-[48px] items-center rounded-full border border-line/20 px-6 text-sm font-semibold hover:border-[var(--mint)]">
                   {COMPANY_INFO.phoneDisplay}
                 </a>
               </div>
               <h2 className="sc-label mt-12">Typische Anzeichen</h2>
               <ul className="mt-4 flex flex-wrap gap-2">
                 {page.symptoms.map((s) => (
-                  <li key={s} className="no-justify rounded-full border border-white/10 bg-[var(--ink-2)] px-4 py-2 text-sm text-[var(--bone)]/85">
+                  <li key={s} className="no-justify rounded-full border border-line/10 bg-[var(--ink-2)] px-4 py-2 text-sm text-[var(--bone)]/85">
                     {s}
                   </li>
                 ))}
@@ -132,7 +132,7 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
             </div>
             <div className="grid gap-5">
               {photo ? (
-                <figure className="m-0 overflow-hidden rounded-3xl border border-white/10 bg-[var(--ink-2)]">
+                <figure className="m-0 overflow-hidden rounded-3xl border border-line/10 bg-[var(--ink-2)]">
                   <img
                     src={photo.src}
                     srcSet={photo.src2x ? `${photo.src} ${photo.w}w, ${photo.src2x} 960w` : undefined}
@@ -148,7 +148,7 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
                 </figure>
               ) : (
                 card && (
-                  <div className="overflow-hidden rounded-3xl border border-white/10" aria-hidden="true">
+                  <div className="overflow-hidden rounded-3xl border border-line/10" aria-hidden="true">
                     <div className="aspect-[16/10]">
                       <ServiceArt kind={card.art} />
                     </div>

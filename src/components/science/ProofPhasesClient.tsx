@@ -95,7 +95,7 @@ function Chart({ heights, barrier, base, phase }: { heights: number[]; barrier: 
       </svg>
       {hover !== null && (
         <div
-          className="pointer-events-none absolute right-3 rounded-xl border border-white/10 bg-[#0e1310]/95 px-3 py-2 font-mono text-xs"
+          className="pointer-events-none absolute right-3 rounded-xl border border-line/10 bg-[#0e1310]/95 px-3 py-2 font-mono text-xs"
           style={{ top: `${(y(heights[hover]) / H) * 100}%`, transform: "translateY(-120%)" }}
           role="status"
         >
@@ -136,13 +136,13 @@ export default function ProofPhasesClient({
                 onClick={() => setActive(i)}
                 aria-pressed={on}
                 className={`w-full rounded-[18px] border p-5 text-left transition-colors ${
-                  on ? "border-[var(--mint)] bg-[var(--ink-3)]" : "border-white/10 bg-[var(--ink-2)] hover:border-white/25"
+                  on ? "border-[var(--mint)] bg-[var(--ink-3)]" : "border-line/10 bg-[var(--ink-2)] hover:border-line/25"
                 }`}
               >
                 <span className="flex items-baseline gap-3">
                   <span
                     className={`grid h-8 w-8 shrink-0 place-items-center rounded-full font-mono text-sm font-bold ${
-                      on ? "bg-[var(--mint)] text-[var(--ink)]" : "bg-white/10 text-[var(--bone)]"
+                      on ? "bg-[var(--mint)] text-[var(--ink)]" : "bg-line/10 text-[var(--bone)]"
                     }`}
                   >
                     {p.n}
@@ -166,7 +166,7 @@ export default function ProofPhasesClient({
       </ol>
 
       <div className="lg:sticky lg:top-24">
-        <div className="rounded-[22px] border border-white/10 bg-[var(--ink-2)] p-5 sm:p-6">
+        <div className="theme-dark rounded-[22px] border border-line/10 bg-[var(--ink-2)] p-5 sm:p-6">
           <div className="flex flex-wrap items-center justify-between gap-3">
             <p className="sc-label">Feuchteprofil der Wand</p>
             <ul className="flex flex-wrap gap-4 text-xs text-[var(--sc-ink-soft)]" aria-label="Legende">
@@ -205,7 +205,7 @@ export default function ProofPhasesClient({
               </thead>
               <tbody>
                 {heights.map((cm, i) => (
-                  <tr key={cm} className="border-t border-white/5">
+                  <tr key={cm} className="border-t border-line/5">
                     <th scope="row" className="py-1 text-left font-normal">
                       {cm} cm
                     </th>

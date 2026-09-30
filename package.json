@@ -7,9 +7,13 @@
     "llms": "node --experimental-strip-types --no-warnings scripts/generate-llms.mts",
     "prebuild": "npm run llms",
     "build": "next build",
-    "start": "next start",
+    "start": "node scripts/serve.mjs",
+    "preview": "node scripts/serve.mjs",
     "lint": "next lint",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "verify": "node --experimental-strip-types --no-warnings scripts/verify-site.mts",
+    "check": "pnpm typecheck && pnpm build && pnpm verify",
+    "release": "node scripts/deploy.mjs"
   },
   "dependencies": {
     "hyphen": "^1.14.1",

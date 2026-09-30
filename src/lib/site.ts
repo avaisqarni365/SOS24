@@ -4,6 +4,15 @@ export const SITE_URL = "https://sos-abdichtung.de";
 export const SITE_NAME = "sos-abdichtung";
 export const PARTNER_URL = "https://www.schimmelpeter.de/partner/wuppertal-kellersanierung";
 
+/** Share preview (WhatsApp, Facebook, LinkedIn, X): JPEG, because not every
+    messenger renders WebP previews. */
+export const OG_IMAGE = {
+  url: "/og-image.jpg",
+  width: 1200,
+  height: 630,
+  alt: "sos-abdichtung: Kellersanierung Wuppertal, Haus mit nassem Keller im Schnitt",
+};
+
 export const abs = (path: string) => `${SITE_URL}${path.startsWith("/") ? path : `/${path}`}`;
 
 export const BUSINESS_ID = `${SITE_URL}/#business`;

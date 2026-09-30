@@ -3,7 +3,9 @@ import localFont from "next/font/local";
 // Engine floor first, brand tokens second: the brand must win the :root cascade.
 import "@/styles/scrollcraft.css";
 import "@/styles/globals.css";
-import { SITE_URL } from "@/lib/site";
+import { SITE_URL, OG_IMAGE } from "@/lib/site";
+import MobileContactBar from "@/components/sections/MobileContactBar";
+import { APPEARANCE_BOOT } from "@/components/navigation/AppearanceMenu";
 import { LanguageProvider } from "@/i18n/LanguageContext";
 
 // Self-hosted variable fonts: no request to Google at runtime (DSGVO) and no build-time fetch.
@@ -52,7 +54,9 @@ export const metadata: Metadata = {
     type: "website",
     locale: "de_DE",
     siteName: "sos-abdichtung",
+    images: [OG_IMAGE],
   },
+  twitter: { card: "summary_large_image", images: [OG_IMAGE.url] },
   icons: { icon: "/icon.svg" },
 };
 
@@ -60,7 +64,10 @@ export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
-  themeColor: "#0e1310",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#f7f6f2" },
+    { media: "(prefers-color-scheme: dark)", color: "#0e1310" },
+  ],
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -70,8 +77,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       className={`${inter.variable} ${newsreader.variable} ${mono.variable}`}
       suppressHydrationWarning
     >
+      <head>
+        {/* theme and text size before first paint (see AppearanceMenu) */}
+        <script dangerouslySetInnerHTML={{ __html: APPEARANCE_BOOT }} />
+      </head>
       <body className="min-h-screen font-sans antialiased">
-        <LanguageProvider>{children}</LanguageProvider>
+        <LanguageProvider>
+          {children}
+          <MobileContactBar />
+        </LanguageProvider>
       </body>
     </html>
   );

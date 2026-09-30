@@ -67,7 +67,7 @@ export default function CausesHouseClient({ causes: CAUSES }: { causes: Cause[] 
   return (
     <div className="mx-auto max-w-7xl px-6 pb-20 sm:px-8">
       <div className="grid gap-6 lg:grid-cols-[1.25fr_1fr]">
-        <div className="relative self-start overflow-hidden rounded-[22px] border border-white/10">
+        <div className="relative self-start overflow-hidden rounded-[22px] border border-line/10">
           <Section active={active} causes={CAUSES} />
           {/* real buttons over the hotspots, for mouse, touch and keyboard */}
           {CAUSES.map((cause, i) => (
@@ -82,7 +82,7 @@ export default function CausesHouseClient({ causes: CAUSES }: { causes: Cause[] 
             />
           ))}
         </div>
-        <div className="flex flex-col gap-5 rounded-[22px] border border-white/10 bg-[var(--ink-2)] p-6 sm:p-7" aria-live="polite">
+        <div className="flex flex-col gap-5 rounded-[22px] border border-line/10 bg-[var(--ink-2)] p-6 sm:p-7" aria-live="polite">
           <figure className="m-0 overflow-hidden rounded-2xl">
             <img src={p.src} width={p.w} height={p.h} alt={p.alt} loading="lazy" decoding="async" className="h-auto w-full" />
             <figcaption className="mt-1 text-right text-[0.7rem] text-[var(--sc-ink-soft)]">Foto: SchimmelPeter®</figcaption>
@@ -96,7 +96,7 @@ export default function CausesHouseClient({ causes: CAUSES }: { causes: Cause[] 
             <p className="font-mono text-xs uppercase tracking-wider text-[var(--bone)]">Woran Sie es erkennen</p>
             <ul className="mt-2 flex flex-wrap gap-2">
               {c.signs.map((s) => (
-                <li key={s} className="no-justify rounded-full border border-white/10 px-3 py-1.5 text-sm">
+                <li key={s} className="no-justify rounded-full border border-line/10 px-3 py-1.5 text-sm">
                   {s}
                 </li>
               ))}
@@ -117,7 +117,7 @@ export default function CausesHouseClient({ causes: CAUSES }: { causes: Cause[] 
               type="button"
               onClick={() => setActive(i)}
               aria-pressed={active === i}
-              className={`flex h-full w-full items-start gap-3 rounded-2xl border p-4 text-left ${active === i ? "border-[var(--mint)] bg-[var(--ink-3)]" : "border-white/10 bg-[var(--ink-2)]"}`}
+              className={`flex h-full w-full items-start gap-3 rounded-2xl border p-4 text-left ${active === i ? "border-[var(--mint)] bg-[var(--ink-3)]" : "border-line/10 bg-[var(--ink-2)]"}`}
             >
               <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-[var(--bone)] font-mono text-sm font-bold text-[var(--ink)]">{cause.n}</span>
               <span>

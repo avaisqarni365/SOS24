@@ -54,7 +54,7 @@ export default function PictureGallery() {
   const cur = open === null ? null : items[open];
 
   return (
-    <section id="galerie" className="sc-section border-t border-white/5" aria-labelledby="galerie-title">
+    <section id="galerie" className="sc-section band-stone" aria-labelledby="galerie-title">
       <div className="sc-wrap">
         <div className="grid gap-6 lg:grid-cols-[1fr_1fr] lg:items-end">
           <div>
@@ -79,7 +79,7 @@ export default function PictureGallery() {
               className={`min-h-[44px] rounded-full border px-4 text-sm font-semibold ${
                 category === c.id
                   ? "border-[var(--mint)] bg-[var(--mint)] text-[var(--ink)]"
-                  : "border-white/15 text-[var(--bone)]/80 hover:border-[var(--mint)]"
+                  : "border-line/15 text-[var(--bone)]/80 hover:border-[var(--mint)]"
               }`}
             >
               {c.label}
@@ -96,7 +96,7 @@ export default function PictureGallery() {
                   lastTrigger.current = e.currentTarget;
                   setOpen(i);
                 }}
-                className="group flex h-full w-full flex-col overflow-hidden rounded-[22px] border border-white/10 bg-[var(--ink-2)] text-left hover:border-[var(--mint)]"
+                className="group flex h-full w-full flex-col overflow-hidden rounded-[22px] border border-line/10 bg-[var(--ink-2)] text-left hover:border-[var(--mint)]"
                 aria-label={`${it.title}: ${t("gallery.zoomHint")}`}
               >
                 <span className="relative block aspect-[16/11] overflow-hidden bg-[var(--ink-3)]">
@@ -136,7 +136,7 @@ export default function PictureGallery() {
           role="dialog"
           aria-modal="true"
           aria-labelledby="galerie-dialog-title"
-          className="fixed inset-0 z-[70] flex items-center justify-center bg-[#0e1310]/95 p-4 backdrop-blur-sm sm:p-8"
+          className="theme-dark fixed inset-0 z-[70] flex items-center justify-center bg-[#0e1310]/95 p-4 backdrop-blur-sm sm:p-8"
           onClick={close}
         >
           <div className="relative flex w-full max-w-4xl flex-col items-center gap-4" onClick={(e) => e.stopPropagation()}>
@@ -145,7 +145,7 @@ export default function PictureGallery() {
               width={cur.src2x ? 960 : cur.w}
               height={cur.src2x ? Math.round((960 / cur.w) * cur.h) : cur.h}
               alt={cur.alt}
-              className="max-h-[68vh] w-auto rounded-xl border border-white/10 object-contain"
+              className="max-h-[68vh] w-auto rounded-xl border border-line/10 object-contain"
               style={{ maxWidth: `min(100%, ${(cur.src2x ? 960 : cur.w) * 1.6}px)` }}
             />
             <div className="max-w-2xl text-center">
@@ -158,13 +158,13 @@ export default function PictureGallery() {
               <p className="mt-1 text-sm text-[var(--sc-ink-soft)]">{cur.text}</p>
             </div>
             <div className="flex gap-3">
-              <button type="button" onClick={() => step(-1)} className="min-h-[44px] rounded-full border border-white/20 px-5 text-sm" aria-label="Vorheriges Bild">
+              <button type="button" onClick={() => step(-1)} className="min-h-[44px] rounded-full border border-line/20 px-5 text-sm" aria-label="Vorheriges Bild">
                 ←
               </button>
               <button ref={closeRef} type="button" onClick={close} className="min-h-[44px] rounded-full bg-[var(--bone)] px-5 text-sm font-semibold text-[var(--ink)]">
                 {t("gallery.modalClose")}
               </button>
-              <button type="button" onClick={() => step(1)} className="min-h-[44px] rounded-full border border-white/20 px-5 text-sm" aria-label="Nächstes Bild">
+              <button type="button" onClick={() => step(1)} className="min-h-[44px] rounded-full border border-line/20 px-5 text-sm" aria-label="Nächstes Bild">
                 →
               </button>
             </div>
