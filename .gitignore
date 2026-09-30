@@ -33,3 +33,6 @@ pnpm-debug.log*
 # TypeScript
 *.tsbuildinfo
 next-env.d.ts
+
+# Raw asset sources
+/assets-source/schimmelpeter/
