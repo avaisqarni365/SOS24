@@ -20,11 +20,11 @@ export const SUPPORTED_LOCALES: LocaleMeta[] = [
 export const TRANSLATIONS: Record<SupportedLocale, Record<string, string>> = {
   de: {
     // Nav
-    "nav.services": "Fachleistungen",
+    "nav.services": "Leistungen",
     "nav.process3d": "3D-Verfahren",
-    "nav.gallery": "Bildgalerie",
+    "nav.gallery": "Galerie",
     "nav.calculator": "Kostenrechner",
-    "nav.region": "Servicegebiet PLZ 42",
+    "nav.region": "Servicegebiet",
     "nav.faq": "Häufige Fragen",
     "nav.cta": "Diagnose anfragen →",
     "nav.phone": "Telefonisch erreichbar",
@@ -136,6 +136,13 @@ export const TRANSLATIONS: Record<SupportedLocale, Record<string, string>> = {
     "gallery.modalClose": "Schließen",
     "gallery.tagVerified": "WTA-Geprüft",
     "gallery.zoomHint": "Vergrößern →",
+
+    // Rail
+    "rail.start": "Start",
+    "rail.warranty": "Garantie",
+    "rail.calc": "Rechner",
+    "rail.region": "PLZ 42",
+    "rail.contact": "Kontakt",
   },
 
   en: {
@@ -144,7 +151,7 @@ export const TRANSLATIONS: Record<SupportedLocale, Record<string, string>> = {
     "nav.process3d": "3D Process",
     "nav.gallery": "Gallery",
     "nav.calculator": "Cost Calculator",
-    "nav.region": "Service Area PLZ 42",
+    "nav.region": "Service Area",
     "nav.faq": "FAQ",
     "nav.cta": "Request Diagnosis →",
     "nav.phone": "Available by phone",
@@ -256,15 +263,22 @@ export const TRANSLATIONS: Record<SupportedLocale, Record<string, string>> = {
     "gallery.modalClose": "Close",
     "gallery.tagVerified": "WTA-Certified",
     "gallery.zoomHint": "Expand →",
+
+    // Rail
+    "rail.start": "Start",
+    "rail.warranty": "Warranty",
+    "rail.calc": "Calculator",
+    "rail.region": "PLZ 42",
+    "rail.contact": "Contact",
   },
 
   tr: {
     // Nav
-    "nav.services": "Hizmetlerimiz",
+    "nav.services": "Hizmetler",
     "nav.process3d": "3D Yöntem",
     "nav.gallery": "Galeri",
-    "nav.calculator": "Maliyet Hesaplayıcı",
-    "nav.region": "Hizmet Bölgesi PLZ 42",
+    "nav.calculator": "Maliyet",
+    "nav.region": "Hizmet Bölgesi",
     "nav.faq": "Sıkça Sorulanlar",
     "nav.cta": "Teşhis Talep Et →",
     "nav.phone": "Telefonla Ulaşın",
@@ -376,6 +390,13 @@ export const TRANSLATIONS: Record<SupportedLocale, Record<string, string>> = {
     "gallery.modalClose": "Kapat",
     "gallery.tagVerified": "WTA Sertifikalı",
     "gallery.zoomHint": "Büyüt →",
+
+    // Rail
+    "rail.start": "Başlangıç",
+    "rail.warranty": "Garanti",
+    "rail.calc": "Hesaplayıcı",
+    "rail.region": "PLZ 42",
+    "rail.contact": "İletişim",
   },
 
   ru: {
@@ -384,7 +405,7 @@ export const TRANSLATIONS: Record<SupportedLocale, Record<string, string>> = {
     "nav.process3d": "3D-Метод",
     "nav.gallery": "Галерея",
     "nav.calculator": "Калькулятор",
-    "nav.region": "Регион PLZ 42",
+    "nav.region": "Регион 42",
     "nav.faq": "Вопросы и ответы",
     "nav.cta": "Заказать диагностику →",
     "nav.phone": "Консультация по телефону",
@@ -496,15 +517,22 @@ export const TRANSLATIONS: Record<SupportedLocale, Record<string, string>> = {
     "gallery.modalClose": "Закрыть",
     "gallery.tagVerified": "Сертификат WTA",
     "gallery.zoomHint": "Увеличить →",
+
+    // Rail
+    "rail.start": "Старт",
+    "rail.warranty": "Гарантия",
+    "rail.calc": "Калькулятор",
+    "rail.region": "Регион 42",
+    "rail.contact": "Контакты",
   },
 
   ar: {
     // Nav
-    "nav.services": "خدماتنا المتخصصة",
+    "nav.services": "الخدمات",
     "nav.process3d": "تقنية 3D",
-    "nav.gallery": "معرض الأعمال",
-    "nav.calculator": "حاسبة التكلفة",
-    "nav.region": "منطقة الخدمة PLZ 42",
+    "nav.gallery": "المعرض",
+    "nav.calculator": "الحاسبة",
+    "nav.region": "منطقة الخدمة",
     "nav.faq": "الأسئلة الشائعة",
     "nav.cta": "طلب فحص مجاني ←",
     "nav.phone": "اتصال هاتفي مباشر",
@@ -616,6 +644,13 @@ export const TRANSLATIONS: Record<SupportedLocale, Record<string, string>> = {
     "gallery.modalClose": "إغلاق",
     "gallery.tagVerified": "معتمد وفق معايير WTA",
     "gallery.zoomHint": "تكبير الصورة ←",
+
+    // Rail
+    "rail.start": "البداية",
+    "rail.warranty": "الضمان",
+    "rail.calc": "الحاسبة",
+    "rail.region": "المنطقة 42",
+    "rail.contact": "الاتصال",
   },
 
   pl: {
@@ -624,7 +659,7 @@ export const TRANSLATIONS: Record<SupportedLocale, Record<string, string>> = {
     "nav.process3d": "Metoda 3D",
     "nav.gallery": "Galeria",
     "nav.calculator": "Kalkulator",
-    "nav.region": "Obszar PLZ 42",
+    "nav.region": "Obszar 42",
     "nav.faq": "Częste pytania",
     "nav.cta": "Zamów diagnozę →",
     "nav.phone": "Kontakt telefoniczny",
@@ -736,5 +771,12 @@ export const TRANSLATIONS: Record<SupportedLocale, Record<string, string>> = {
     "gallery.modalClose": "Zamknij",
     "gallery.tagVerified": "Certyfikat WTA",
     "gallery.zoomHint": "Powiększ →",
+
+    // Rail
+    "rail.start": "Start",
+    "rail.warranty": "Gwarancja",
+    "rail.calc": "Kalkulator",
+    "rail.region": "Obszar 42",
+    "rail.contact": "Kontakt",
   }
 };

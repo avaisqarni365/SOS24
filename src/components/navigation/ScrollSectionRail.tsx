@@ -1,32 +1,26 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-
-interface SectionStop {
-  id: string;
-  label: string;
-}
-
-const SECTION_STOPS: SectionStop[] = [
-  { id: "top", label: "Start" },
-  { id: "leistungen", label: "Fachleistungen" },
-  { id: "3d-injektion", label: "3D-Verfahren" },
-  { id: "zertifizierung", label: "WTA & Garantie" },
-  { id: "galerie", label: "Bildgalerie" },
-  { id: "rechner", label: "Kostenrechner" },
-  { id: "servicegebiet", label: "Servicegebiet 42" },
-  { id: "faq", label: "Häufige Fragen" },
-  { id: "kontakt", label: "Kontakt" }
-];
+import { useLanguage } from "@/i18n/LanguageContext";
 
 export default function ScrollSectionRail() {
+  const { t } = useLanguage();
   const [activeId, setActiveId] = useState<string>("top");
-  const [isLightSection, setIsLightSection] = useState<boolean>(false);
 
-  const lightSections = new Set(["leistungen", "zertifizierung", "rechner", "faq", "kontakt"]);
+  const sectionStops = [
+    { id: "top", label: t("rail.start") || "Start" },
+    { id: "leistungen", label: t("nav.services") || "Leistungen" },
+    { id: "3d-injektion", label: t("nav.process3d") || "3D-Verfahren" },
+    { id: "zertifizierung", label: t("rail.warranty") || "Garantie" },
+    { id: "galerie", label: t("nav.gallery") || "Galerie" },
+    { id: "rechner", label: t("rail.calc") || "Rechner" },
+    { id: "servicegebiet", label: t("rail.region") || "PLZ 42" },
+    { id: "faq", label: "FAQ" },
+    { id: "kontakt", label: t("rail.contact") || "Kontakt" }
+  ];
 
   useEffect(() => {
-    const elements = SECTION_STOPS.map((s) => document.getElementById(s.id)).filter(Boolean) as HTMLElement[];
+    const elements = sectionStops.map((s) => document.getElementById(s.id)).filter(Boolean) as HTMLElement[];
     if (!elements.length) return;
 
     const observer = new IntersectionObserver(
@@ -36,14 +30,12 @@ export default function ScrollSectionRail() {
           .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
 
         if (visible?.target?.id) {
-          const currentId = visible.target.id;
-          setActiveId(currentId);
-          setIsLightSection(lightSections.has(currentId));
+          setActiveId(visible.target.id);
         }
       },
       {
-        rootMargin: "-40% 0px -40% 0px",
-        threshold: [0, 0.05, 0.2, 0.5, 0.8, 1.0]
+        rootMargin: "-30% 0px -30% 0px",
+        threshold: [0, 0.1, 0.25, 0.5, 0.75, 1.0]
       }
     );
 
@@ -54,46 +46,41 @@ export default function ScrollSectionRail() {
   return (
     <nav
       aria-label="Seitenabschnitte"
-      className="fixed right-6 top-1/2 z-50 hidden -translate-y-1/2 lg:block select-none"
+      className="fixed right-4 top-1/2 z-50 hidden -translate-y-1/2 lg:block select-none"
     >
-      <ul className="flex flex-col items-end gap-3.5">
-        {SECTION_STOPS.map((stop) => {
-          const isActive = activeId === stop.id;
-          return (
-            <li key={stop.id}>
-              <a
-                href={`#${stop.id}`}
-                aria-current={isActive ? "true" : undefined}
-                className="group flex items-center justify-end gap-2.5 py-1 px-1"
-              >
-                {/* Expanding Pill Badge with Adaptive Contrast */}
-                <span
-                  className={`whitespace-nowrap rounded-full px-3 py-1 text-[11px] font-medium backdrop-blur-md transition-all duration-300 font-mono shadow-sm ${
+      {/* High-Contrast Frosted Glass Dock - 100% Readable Over Light & Dark Backgrounds */}
+      <div className="rounded-2xl bg-[#0E1310]/90 backdrop-blur-2xl border border-white/15 p-2 shadow-[0_16px_40px_rgba(0,0,0,0.6)]">
+        <ul className="flex flex-col gap-1.5">
+          {sectionStops.map((stop) => {
+            const isActive = activeId === stop.id;
+            return (
+              <li key={stop.id}>
+                <a
+                  href={`#${stop.id}`}
+                  aria-current={isActive ? "true" : undefined}
+                  className={`group flex items-center justify-between gap-3 px-3 py-1.5 rounded-xl text-[11px] font-mono transition-all duration-200 ${
                     isActive
-                      ? "bg-landing-ink text-landing-mint border border-landing-mint/40 opacity-100 translate-x-0"
-                      : isLightSection
-                      ? "bg-white/80 text-[#1A1D1B] border border-black/10 opacity-0 translate-x-2 group-hover:opacity-100 group-hover:translate-x-0"
-                      : "bg-landing-ink/80 text-landing-bone border border-white/10 opacity-0 translate-x-2 group-hover:opacity-100 group-hover:translate-x-0"
+                      ? "bg-landing-mint text-[#0E1310] font-semibold shadow-[0_0_14px_rgba(98,196,172,0.45)]"
+                      : "text-white/70 hover:text-white hover:bg-white/[0.08]"
                   }`}
                 >
-                  {stop.label}
-                </span>
+                  <span className="whitespace-nowrap tracking-wide">
+                    {stop.label}
+                  </span>
 
-                {/* Point / Indicator Dot */}
-                <span
-                  className={`block rounded-full transition-all duration-300 ${
-                    isActive
-                      ? "h-2.5 w-2.5 bg-landing-mint shadow-[0_0_12px_rgba(98,196,172,0.9)] ring-2 ring-landing-mint/30"
-                      : isLightSection
-                      ? "h-1.5 w-1.5 bg-black/30 group-hover:bg-black/70 group-hover:scale-125"
-                      : "h-1.5 w-1.5 bg-white/30 group-hover:bg-white/80 group-hover:scale-125"
-                  }`}
-                />
-              </a>
-            </li>
-          );
-        })}
-      </ul>
+                  <span
+                    className={`block rounded-full transition-all duration-200 ${
+                      isActive
+                        ? "h-2 w-2 bg-[#0E1310] ring-2 ring-[#0E1310]/40"
+                        : "h-1.5 w-1.5 bg-white/40 group-hover:bg-landing-mint group-hover:scale-125"
+                    }`}
+                  />
+                </a>
+              </li>
+            );
+          })}
+        </ul>
+      </div>
     </nav>
   );
 }

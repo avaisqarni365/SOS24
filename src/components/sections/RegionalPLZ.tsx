@@ -20,22 +20,23 @@ export default function RegionalPLZ() {
     const clean = searchPlz.trim();
     if (!clean) return;
 
-    if (clean.startsWith("42") || clean.startsWith("583") || clean.startsWith("582") || clean.startsWith("408")) {
+    if (clean.startsWith("42")) {
       let matchedCity = "Raum Wuppertal / Bergisches Land";
       if (clean.startsWith("421") || clean.startsWith("422") || clean.startsWith("423")) matchedCity = "Wuppertal";
-      else if (clean.startsWith("426") || clean.startsWith("427")) matchedCity = "Solingen / Haan";
+      else if (clean.startsWith("426")) matchedCity = "Solingen";
+      else if (clean.startsWith("427")) matchedCity = "Haan";
       else if (clean.startsWith("428")) matchedCity = "Remscheid";
       else if (clean.startsWith("425")) matchedCity = "Velbert";
 
       setCheckResult({
         covered: true,
         city: matchedCity,
-        message: `Hervorragend! Die Postleitzahl ${clean} liegt in unserem Kern-Servicegebiet ${matchedCity}. Herr Mahmood führt innerhalb von 24–48h eine kostenlose Feuchtigkeitsmessung vor Ort durch.`
+        message: `Hervorragend! Die Postleitzahl ${clean} liegt direkt in unserem Zuständigkeitsbereich ${matchedCity} (Region 42). Herr Mahmood führt eine kostenlose Vor-Ort-Feuchtigkeitsmessung für Ihr Objekt durch.`
       });
     } else {
       setCheckResult({
         covered: false,
-        message: `Die PLZ ${clean} liegt außerhalb des Kerngebiets 42xxx. Als SchimmelPeter® Partner prüfen wir gerne eine Sonderanfahrt für Ihr Objekt.`
+        message: `Die Postleitzahl ${clean} liegt außerhalb unseres Zuständigkeitsbereichs. Unser Fachbetrieb betreut exklusiv den PLZ-Bereich 42 (Wuppertal, Solingen, Remscheid, Velbert und Haan).`
       });
     }
   };
@@ -98,8 +99,8 @@ export default function RegionalPLZ() {
           )}
         </div>
 
-        {/* Regional City Matrix */}
-        <div className="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+        {/* Regional City Matrix - 5 Core Cities in PLZ 42 */}
+        <div className="mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
           {REGIONAL_CITIES.map((city) => (
             <div
               key={city.name}
