@@ -87,9 +87,22 @@ export const SERVICE_PAGES: ServicePage[] = [
         ],
       },
       {
+        heading: "Vier typische Ursachen für einen nassen Keller",
+        paragraphs: [
+          "Hinter einem nassen Keller steckt selten nur ein einzelner Fehler. Häufig hat die Kapillarwassersperre versagt, also die waagerechte Sperrschicht im Mauerwerk, die meist aus Bitumen oder Kunststoff besteht und Bodenfeuchte am Aufsteigen hindern soll. Ebenso oft ist die Vertikalsperre undicht geworden. Sie schützt die erdberührten Kellerwände vor Feuchte, die seitlich aus dem Erdreich eindringt, und besteht aus Beschichtungen oder Dichtungsbahnen auf der Außenseite. Beide Schichten altern mit der Zeit, und in vielen alten Kellern wurden sie nie nach heutigem Verständnis eingebaut.",
+          "Die dritte Ursache ist ein fehlerhaftes oder fehlendes Drainagesystem. Drainagerohre und Drainagematten rund um das Fundament leiten Niederschlagswasser von den Kellerwänden ab und senken den Wasserdruck deutlich. Fehlen sie oder sind sie defekt, steht das Wasser direkt an der Wand. Viertens lassen Risse und undichte Stellen in Wänden und Boden Feuchte gezielt eindringen. Welche dieser Ursachen bei Ihnen zusammenkommen, zeigt die Außen- und Innenbesichtigung mit genauen Messungen. Davon hängt ab, welche Maßnahmen Ihr Keller wirklich braucht und welche Sie sich sparen können.",
+        ],
+        bullets: [
+          "Defekte Kapillarwassersperre aus Bitumen oder Kunststoff",
+          "Undichte Vertikalsperre gegen seitlich eindringende Feuchte",
+          "Fehlerhaftes oder fehlendes Drainagesystem am Fundament",
+          "Risse und undichte Stellen in Kellerwänden und Boden",
+        ],
+      },
+      {
         heading: "Sanierung von innen statt Außenaufgrabung",
         paragraphs: [
-          "Die klassische Außenabdichtung verlangt, dass das Erdreich rund um das Haus bis zum Fundament ausgehoben wird. In Wuppertal heißt das oft: Reihenhaus mit Nachbarwand, Hanglage mit Stützmauer, Vorgarten mit Treppe und gepflasterte Einfahrt. Solche Erdarbeiten sind teuer, laut und in vielen Fällen schlicht nicht möglich. Wir arbeiten deshalb von der Rauminnenseite. Horizontalsperre, Innenabdichtung und Sanierputz werden im Keller selbst eingebaut, und draußen bleibt alles so, wie es ist.",
+          "Fachlich betrachtet ist eine vollständige Außenabdichtung oft die wirksamste Methode, denn sie hält das Wasser dort auf, wo es ankommt. Dafür muss aber das Erdreich rund um das Haus bis zum Fundament ausgehoben werden. In Wuppertal heißt das oft: Reihenhaus mit Nachbarwand, Hanglage mit Stützmauer, Vorgarten mit Treppe und gepflasterte Einfahrt. Wo Aufgraben nicht möglich oder unverhältnismäßig ist, sind Innenabdichtung und Injektion die bewährte Alternative. Welcher Weg der richtige ist, entscheidet die Messung. Bei der Innensanierung bleibt draußen alles so, wie es ist.",
           "Gegenüber einer Außenaufgrabung sparen Sie auf diesem Weg bis zu 60 Prozent der Kosten. Das liegt nicht an billigeren Materialien, sondern am Wegfall von Bagger, Verbau, Entsorgung und Wiederherstellung der Außenanlagen. Wichtig ist, dass die Innensanierung als System geplant wird. Eine Innenabdichtung allein hält zwar das Wasser aus dem Raum, das Mauerwerk dahinter bleibt aber nass. Erst zusammen mit einer Horizontalsperre und abgedichteten Anschlüssen an den Querwänden entsteht ein trockener, dauerhaft nutzbarer Keller.",
         ],
         bullets: [
@@ -110,20 +123,20 @@ export const SERVICE_PAGES: ServicePage[] = [
     ],
     steps: [
       {
-        title: "Schadensanalyse vor Ort",
-        text: "Herr Mahmood begeht Haus und Keller außen und innen, misst kostenlos und präzise die Feuchte im Mauerwerk und ermittelt die genaue Ursache.",
+        title: "Schadensanalyse mit Feuchtemessung",
+        text: "Herr Mahmood besichtigt Haus und Keller außen und innen, misst kostenlos und unverbindlich die Feuchte im Mauerwerk und ermittelt die genaue Ursache.",
       },
       {
         title: "Verbindliches Angebot",
-        text: "Sie erhalten ein verbindliches Angebot, aus dem hervorgeht, welche Wand welche Maßnahme braucht, ohne versteckte Mehrkosten.",
+        text: "Auf Basis der Analyse erhalten Sie ein verbindliches Angebot, aus dem hervorgeht, welche Wand welche Maßnahme braucht, ohne versteckte Mehrkosten.",
       },
       {
-        title: "Sanierungsplan mit Ihnen",
-        text: "Gemeinsam mit Ihnen legen wir fest, in welcher Reihenfolge Horizontalsperre, Hohlkehle, Innenabdichtung und Sanierputz eingebaut werden.",
+        title: "Sanierungsplan und Sanierung",
+        text: "Nach Ihrem Auftrag legen wir gemeinsam die Reihenfolge von Horizontalsperre, Hohlkehle, Innenabdichtung und Sanierputz fest und sanieren dann von innen.",
       },
       {
-        title: "Sanierung und saubere Übergabe",
-        text: "Wir sanieren von innen, begleiten die Austrocknung bei Bedarf mit einer Schutzentfeuchtung und hinterlassen den Arbeitsplatz sauber.",
+        title: "Gemeinsame Abnahme",
+        text: "Nach der Sanierung nehmen Sie die Arbeiten gemeinsam mit uns ab. Wir übergeben die Baustelle sauber und begleiten die Austrocknung bei Bedarf mit einer Schutzentfeuchtung.",
       },
     ],
     faqs: [
@@ -192,8 +205,24 @@ export const SERVICE_PAGES: ServicePage[] = [
         heading: "Ursachen feuchter Wände und wie aufsteigende Feuchte entsteht",
         paragraphs: [
           "Feuchte Wände haben ganz unterschiedliche Ursachen. Häufig sind es Schäden am Dach, undichte Wasser- oder Abwasserleitungen, eine unzureichende Drainage oder Kondenswasser in schlecht belüfteten oder schlecht gedämmten Räumen. Eine Horizontalsperre hilft gegen eine ganz bestimmte Ursache: kapillar aufsteigende Feuchtigkeit aus dem Fundament, die vor allem altes, poröses Mauerwerk betrifft. Deshalb steht am Anfang jeder Sanierung eine Schadensanalyse. Erst wenn feststeht, dass die Nässe tatsächlich von unten kommt, ist die Injektion die richtige Maßnahme und kein teurer Versuch ins Blaue.",
-          "Mauerwerk aus Ziegel, Kalksandstein oder Naturstein ist von feinen Kapillaren durchzogen. Steht der Wandfuß in feuchtem Erdreich, saugen diese Poren Wasser an und transportieren es nach oben, ähnlich wie ein Docht. Wie hoch die Feuchte steigt, hängt vom Porengefüge, von der Verdunstung an der Oberfläche und vom Salzgehalt ab. Fehlt eine Sperrschicht oder hat die alte Bitumenpappe in der Fuge ihre Wirkung verloren, sind durchfeuchtete Zonen bis weit ins Erdgeschoss keine Seltenheit.",
+          "Beim Neubau wird unter dem Mauerwerk eine Horizontalsperre eingebaut, die in der DIN 18533 Querschnittsabdichtung heißt. Sie soll verhindern, dass Feuchtigkeit aus dem Erdreich in der Wand nach oben wandert. Denn Mauerwerk aus Ziegel, Kalksandstein oder Naturstein ist von feinen Kapillaren durchzogen, die Wasser ähnlich wie ein Docht ansaugen. Fehlt diese Sperre oder hat die alte Bitumenpappe in der Fuge ihre Wirkung verloren, steigt die Feuchte ungehindert auf. Wie hoch, hängt vom Porengefüge, von der Verdunstung an der Oberfläche und vom Salzgehalt ab.",
           "Mit dem Wasser wandern gelöste Salze aus Boden und Baustoff in die Wand. Wo das Wasser an der Oberfläche verdunstet, bleiben sie zurück und kristallisieren. Diese Kristalle brauchen mehr Platz, als die Poren bieten, sprengen den Putz ab und zerstören nach und nach auch Fugen und Steine. Außerdem ziehen die Salze Feuchtigkeit aus der Raumluft an. Deshalb bleibt eine versalzene Wand auch dann feucht, wenn der Nachschub von unten längst gestoppt wäre.",
+        ],
+      },
+      {
+        heading: "Anzeichen und Folgen einer defekten Horizontalsperre",
+        paragraphs: [
+          "Eine defekte Sperrschicht zeigt sich meist an einem typischen Schadensbild in Bodennähe. Für die Einordnung hilft eine einfache Regel: Steigt die Feuchtigkeit gleichmäßig von unten nach oben, spricht das für kapillar aufsteigende Feuchte und damit für eine defekte oder fehlende Horizontalsperre. Einzelne, klar begrenzte Feuchtstellen deuten dagegen eher auf ein undichtes Rohr oder auf Wasser, das von außen eindringt. Sicher beurteilen lässt sich das allerdings erst mit Feuchte- und Materialmessungen im Mauerwerk, nicht allein mit dem Auge.",
+          "Bleibt die Sperre unsaniert, zieht das Wasser immer weiter nach oben, und die feuchten Zonen wachsen. Die mitgeführten Salze kristallisieren beim Austrocknen aus und sprengen den Putz ab. Im Winter gefriert Wasser in den Poren und verursacht Abplatzungen und Risse, durch die noch mehr Feuchte eindringt. Dauerhaft nasse Wände bieten Schimmel ideale Bedingungen, und die Sporen belasten die Raumluft. Dazu kommt ein muffiger Geruch, der sich auch durch Lüften nicht vertreiben lässt.",
+          "Oft unterschätzt wird der Energieverlust. Nasses Mauerwerk dämmt deutlich schlechter als trockenes: Schon 5 % Feuchte im Baustoff können den Wärmedämmwert um bis zu 50 % verschlechtern. Die Folge sind kühle Wände trotz Heizung und höhere Heizkosten. Nicht zuletzt verliert die Immobilie an Wert, denn bei Verkauf oder Vermietung wird ein feuchter Keller schnell zum Ausschlusskriterium. Je früher Sie die Ursache klären lassen, desto kleiner bleiben Schaden und Trocknungszeit und desto günstiger fällt die Sanierung aus.",
+        ],
+        bullets: [
+          "Dunkle, feuchte Ränder oder Flecken, vor allem in Bodennähe",
+          "Salzausblühungen als weiße, kristalline Ablagerungen auf Putz oder Ziegel",
+          "Abblätternde Farbe und aufgequollener Putz",
+          "Muffiger Geruch oder ein dauerhaft kühles, klammes Kellerklima",
+          "Schimmel an Sockelleisten oder hinter Möbeln",
+          "Messbar erhöhte Feuchte im Mauerwerk unterhalb des Erdgeschosses",
         ],
       },
       {
@@ -201,6 +230,7 @@ export const SERVICE_PAGES: ServicePage[] = [
         paragraphs: [
           "Als SchimmelPeter® Partnerbetrieb erneuern wir defekte Horizontalsperren ohne aufwendige Erdarbeiten. Dazu setzen wir im feuchten Mauerwerk eine Reihe von Bohrlöchern im Abstand von bis zu 20 cm. In diese Bohrlöcher bringen wir eine genau berechnete Menge Injektionsmittel ein. Der Wirkstoff ist ein in Paraffin gelöster Kunststoff, der sich im Mauerwerk wie ein flüssiger Schutzschild verhält. Wie viel Material eine Wand braucht, ermitteln wir vorher bei der Schadensanalyse, denn Baustoff, Wandstärke und Durchfeuchtung unterscheiden sich von Haus zu Haus.",
           "Im Mauerwerk verteilt sich das Mittel vollständig innerhalb der Injektionszone. Dort verbindet es sich als hydrophobes, also wasserabweisendes Polymer mit den Kapillarwänden des Baustoffs. So entsteht eine neue, wasserabweisende Sperrschicht, an der das von unten aufsteigende Wasser nicht mehr vorbeikommt. Die aufsteigende Feuchtigkeit wird zuverlässig gestoppt, und das Mauerwerk oberhalb der Sperre erhält keinen Nachschub mehr. Für Sie bedeutet das: kein Bagger vor dem Haus, keine aufgerissenen Beete und keine Arbeiten auf dem Grundstück des Nachbarn.",
+          "Anders als Verfahren, die die Poren verstopfen, lässt die SchimmelPeter-Injektion die Wand atmungsaktiv. Die wirksame Polymerschicht ist nur wenige Moleküle dick und kleidet die Kapillaren lediglich aus, statt sie zu füllen. Flüssiges Wasser wird an der Sperrschicht zurückgehalten, Wasserdampf kann dagegen weiterhin durch das diffusionsfähige Mauerwerk wandern. So entweicht die Feuchte, die bereits in der Wand steckt, nach und nach, und mit ihr verdunstet das Paraffinöl, das als Träger gedient hat. Zurück bleibt eine trockene Wand, die ihre natürliche Wärmedämmfähigkeit wiedergewinnt.",
         ],
         bullets: [
           "Keine aufwendigen Erdarbeiten rund um das Haus",
@@ -208,13 +238,6 @@ export const SERVICE_PAGES: ServicePage[] = [
           "Vortrocknung in der Regel nicht notwendig",
           "Bis zu 25 Jahre Produktgarantie des Herstellers SchimmelPeter GmbH",
           "10 Jahre Garantie von sos-abdichtung auf die ausgeführten Arbeiten",
-        ],
-      },
-      {
-        heading: "Warum die Wand atmungsaktiv bleibt",
-        paragraphs: [
-          "Manche Verfahren gegen aufsteigende Feuchte verstopfen die Poren im Mauerwerk. Das hält zwar das Wasser auf, nimmt der Wand aber auch die Möglichkeit, Feuchtigkeit als Dampf abzugeben. Bei der SchimmelPeter-Injektion ist das anders. Die wirksame Polymerschicht ist nur wenige Moleküle dick und kleidet die Kapillaren lediglich aus, statt sie zu füllen. Die Poren bleiben offen, das Mauerwerk bleibt diffusionsfähig. Flüssiges Wasser wird an der Sperrschicht zurückgehalten, Wasserdampf kann dagegen weiterhin durch die Wand wandern.",
-          "Für die Zeit nach der Sanierung ist das entscheidend. Die Feuchtigkeit, die bereits in der Wand steckt, muss irgendwohin, und aus einem diffusionsfähigen Mauerwerk kann sie nach und nach entweichen. Gemeinsam mit der Feuchtigkeit verdunstet auch das Paraffinöl, das als Träger für den Kunststoff gedient hat. Zurück bleibt eine trockene Wand, die ihre natürliche Wärmedämmfähigkeit wiedergewinnt. Ein trockenes Mauerwerk dämmt besser als ein nasses, und das kommt dem Raumklima im Keller wie im Erdgeschoss zugute.",
         ],
       },
       {
@@ -228,20 +251,20 @@ export const SERVICE_PAGES: ServicePage[] = [
     ],
     steps: [
       {
-        title: "Schadensanalyse",
-        text: "Bei einer Begehung außen und innen messen wir präzise, wie die Feuchte verteilt ist, und ermitteln die genaue Ursache der nassen Wand.",
+        title: "Schadensanalyse mit Feuchtemessung",
+        text: "Bei einer unverbindlichen Besichtigung außen und innen messen wir genau, wie die Feuchte verteilt ist, und klären, ob sie kapillar aufsteigt.",
       },
       {
         title: "Verbindliches Angebot",
-        text: "Steigt die Feuchte kapillar auf, erhalten Sie ein verbindliches Angebot für die Horizontalsperre und alle begleitenden Maßnahmen.",
+        text: "Auf Basis der Analyse erhalten Sie ein verbindliches Angebot für die Horizontalsperre und alle begleitenden Maßnahmen.",
       },
       {
-        title: "Sanierungsplan",
-        text: "Gemeinsam mit Ihnen legen wir den Sanierungsplan fest: welche Wände behandelt werden, in welcher Reihenfolge und mit welchem Putz.",
+        title: "Sanierungsplan und Injektion",
+        text: "Nach Ihrem Auftrag legen wir gemeinsam Wände, Reihenfolge und Putz fest. Dann setzen wir Bohrlöcher im Abstand von bis zu 20 cm und injizieren die berechnete Menge.",
       },
       {
-        title: "Injektion und saubere Übergabe",
-        text: "Wir setzen die Bohrlöcher im Abstand von bis zu 20 cm, injizieren die berechnete Menge und hinterlassen den Arbeitsplatz sauber.",
+        title: "Gemeinsame Abnahme",
+        text: "Nach der Sanierung nehmen Sie die Arbeiten gemeinsam mit uns ab, und wir übergeben Ihnen die Baustelle sauber.",
       },
     ],
     faqs: [
@@ -336,20 +359,20 @@ export const SERVICE_PAGES: ServicePage[] = [
     ],
     steps: [
       {
-        title: "Schadensanalyse",
-        text: "Bei einer Begehung außen und innen messen wir die Feuchte, prüfen den Untergrund und klären, ob Bodenfeuchte oder drückendes Wasser anliegt.",
+        title: "Schadensanalyse mit Feuchtemessung",
+        text: "Bei einer unverbindlichen Besichtigung außen und innen messen wir die Feuchte, prüfen den Untergrund und klären, ob Bodenfeuchte oder drückendes Wasser anliegt.",
       },
       {
         title: "Verbindliches Angebot",
-        text: "Sie erhalten ein verbindliches Angebot für Innenabdichtung und Hohlkehle und, falls nötig, für eine ergänzende Horizontalsperre.",
+        text: "Auf Basis der Analyse erhalten Sie ein verbindliches Angebot für Innenabdichtung und Hohlkehle und, falls nötig, für eine ergänzende Horizontalsperre.",
       },
       {
-        title: "Sanierungsplan mit Ihnen",
-        text: "Gemeinsam mit Ihnen legen wir Ablauf und Reihenfolge der Arbeiten fest, damit Sie den Keller gezielt ausräumen können.",
+        title: "Sanierungsplan und Abdichtung",
+        text: "Nach Ihrem Auftrag legen wir gemeinsam den Ablauf fest, damit Sie den Keller gezielt ausräumen können. Dann bauen wir Hohlkehle, Dichtschlämme und Sanierputz ein.",
       },
       {
-        title: "Abdichtung und saubere Übergabe",
-        text: "Wir bereiten den Untergrund vor, bauen Hohlkehle, Dichtschlämme und Sanierputz ein und hinterlassen den Arbeitsplatz sauber.",
+        title: "Gemeinsame Abnahme",
+        text: "Nach der Sanierung nehmen Sie die Abdichtung gemeinsam mit uns ab, und wir übergeben Ihnen den Keller sauber.",
       },
     ],
     faqs: [
@@ -415,6 +438,13 @@ export const SERVICE_PAGES: ServicePage[] = [
         paragraphs: [
           "Schimmel ist kein eigenständiges Problem, sondern das sichtbare Zeichen für zu viel Feuchtigkeit an einer Oberfläche. Sporen sind in jeder Raumluft vorhanden. Sie keimen erst aus, wenn sie auf einer Fläche landen, die über längere Zeit feucht bleibt. Eine Schimmelbeseitigung ohne Ursachenanalyse behandelt also nur das Symptom. In den meisten Fällen steht man nach wenigen Monaten wieder vor demselben Fleck, weil sich an der Feuchtequelle nichts geändert hat.",
           "Bei der Ursachenanalyse messen wir die Feuchte im Wandbaustoff, die Oberflächentemperatur der betroffenen Stelle, die Raumtemperatur und die relative Luftfeuchte. Aus diesen Werten ergibt sich, ob an der Wand der Taupunkt unterschritten wird oder ob die Nässe aus dem Mauerwerk selbst kommt. Diese Unterscheidung ist entscheidend: Kondensat an einer kalten Außenecke verlangt eine andere Lösung als aufsteigende Feuchte oder ein undichter Boden-Wand-Anschluss im Keller.",
+          "In der Praxis begegnen uns vier Ursachen besonders oft. Zu hohe Luftfeuchtigkeit zeigt sich zuerst als leichter Befall, die sogenannten Stockflecken, die ebenfalls sofort behandelt werden sollten. Hier spielt das Heiz- und Lüftungsverhalten eine große Rolle. Ein undichtes Rohr in der Wand verteilt Wasser weit im Bauteil, solche Schäden sind meist versichert und sollten schnell behoben werden. Über eine undichte Außenwand dringt Regen ein, etwa durch defekte Fallrohre, alten, abbröckelnden Anstrich oder Fassadenrisse. Und im nassen Keller ist oft die gealterte oder rissige Außenabdichtung im Erdreich der Auslöser.",
+        ],
+        bullets: [
+          "Hohe Luftfeuchtigkeit mit Stockflecken, oft durch Heiz- und Lüftungsverhalten",
+          "Undichtes Rohr in der Wand, meist ein Versicherungsfall, schnell handeln",
+          "Undichte Außenwand durch Fallrohre, alten Anstrich oder Fassadenrisse",
+          "Nasser Keller, weil die Außenabdichtung im Erdreich gealtert oder gerissen ist",
         ],
       },
       {
@@ -436,26 +466,26 @@ export const SERVICE_PAGES: ServicePage[] = [
         heading: "Schimmel in der Mietwohnung",
         paragraphs: [
           "Bei Schimmel in der Mietwohnung stehen sich häufig zwei Sichtweisen gegenüber: Der Vermieter vermutet falsches Lüften, der Mieter einen Baumangel. Beides kommt vor, und oft wirkt beides zusammen. Eine neutrale Messung schafft hier Klarheit. Wir dokumentieren Feuchtewerte im Mauerwerk, Oberflächentemperaturen und Raumklima so, dass nachvollziehbar wird, ob die Ursache im Gebäude, in der Nutzung oder in einer Kombination aus beidem liegt.",
-          "Für Eigentümer und Mieter erstellen wir rechtssichere Gutachten, die als Grundlage für Sanierungsentscheidungen und für Gespräche mit der Gegenseite oder einer Versicherung dienen. Mieter sollten einen Befall zuerst mit Fotos und Datum festhalten und den Vermieter schriftlich informieren. Eine Rechtsberatung ersetzen wir nicht, aber belastbare Messwerte machen jede Auseinandersetzung sachlicher und führen deutlich schneller zu einer Lösung, mit der beide Seiten leben können.",
+          "Für Eigentümer und Mieter erstellen wir eine nachvollziehbare schriftliche Dokumentation, die als Grundlage für Sanierungsentscheidungen und für Gespräche mit der Gegenseite oder einer Versicherung dienen. Mieter sollten einen Befall zuerst mit Fotos und Datum festhalten und den Vermieter schriftlich informieren. Eine Rechtsberatung ersetzen wir nicht, aber belastbare Messwerte machen jede Auseinandersetzung sachlicher und führen deutlich schneller zu einer Lösung, mit der beide Seiten leben können.",
         ],
       },
     ],
     steps: [
       {
-        title: "Schadensanalyse",
-        text: "Wir begehen das Gebäude außen und innen, erfassen Ausmaß und Lage des Befalls und messen Materialfeuchte, Oberflächentemperatur und Raumklima.",
+        title: "Schadensanalyse mit Feuchtemessung",
+        text: "Bei einer unverbindlichen Besichtigung außen und innen erfassen wir Ausmaß und Lage des Befalls und messen Materialfeuchte, Oberflächentemperatur und Raumklima.",
       },
       {
         title: "Verbindliches Angebot",
-        text: "Aus den Messwerten leiten wir die genaue Feuchtequelle ab, und Sie erhalten ein verbindliches Angebot für Entfernung und Ursachenbehebung.",
+        text: "Auf Basis der Analyse leiten wir die genaue Feuchtequelle ab, und Sie erhalten ein verbindliches Angebot für Entfernung und Ursachenbehebung.",
       },
       {
-        title: "Sanierungsplan mit Ihnen",
-        text: "Gemeinsam mit Ihnen legen wir fest, welche Räume wann bearbeitet werden und welche baulichen Maßnahmen dauerhaft helfen.",
+        title: "Sanierungsplan und Sanierung",
+        text: "Nach Ihrem Auftrag planen wir gemeinsam Räume und Termine. Dann entfernen wir befallene Schichten sporensicher und ohne Chlor und bauen die Fläche neu auf.",
       },
       {
-        title: "Sanierung und Vorbeugung",
-        text: "Befallene Schichten werden sporensicher und ohne Chlor entfernt, die Fläche neu aufgebaut und der Arbeitsplatz sauber hinterlassen.",
+        title: "Gemeinsame Abnahme",
+        text: "Nach der Sanierung nehmen Sie die Arbeiten gemeinsam mit uns ab, besprechen mit uns das richtige Heizen und Lüften und erhalten die Räume sauber zurück.",
       },
     ],
     faqs: [
@@ -523,24 +553,32 @@ export const SERVICE_PAGES: ServicePage[] = [
           "Ein Sonderfall ist die hygroskopische Feuchte. Salze, die sich über Jahre im Putz angereichert haben, ziehen Wasser aus der Raumluft an. Eine solche Wand kann feucht wirken, obwohl längst keine Nässe mehr von unten nachkommt, etwa weil bereits eine Horizontalsperre eingebaut wurde. Wer das nicht unterscheidet, lässt womöglich eine zweite Sperre einbauen, die gar nicht gebraucht wird. Umgekehrt nützt neuer Putz nichts, solange noch kapillares Wasser aufsteigt.",
         ],
         bullets: [
-          "Schäden am Dach",
+          "Undichtes oder beschädigtes Dach",
           "Kapillar aufsteigende Feuchtigkeit, vor allem in altem, porösem Mauerwerk",
-          "Undichte Wasser- und Abwasserleitungen",
-          "Unzureichende Drainage",
+          "Undichte Sanitärinstallationen, also Wasser- und Abwasserleitungen",
+          "Unzureichende oder defekte Drainage rund um das Haus",
           "Kondenswasser in schlecht belüfteten oder schlecht gedämmten Räumen",
         ],
       },
       {
         heading: "Wie wir messen",
         paragraphs: [
-          "Jede Schadensanalyse beginnt mit einer Begehung außen und innen, denn Dach, Fallrohre, Gelände und Leitungsverlauf liefern oft schon wichtige Hinweise. Handliche Feuchtemessgeräte arbeiten mit elektrischem Widerstand oder kapazitiv. Sie zeigen, wo eine Wand feuchter ist als an anderer Stelle, liefern aber keinen belastbaren Wassergehalt, weil Salze und unterschiedliche Baustoffe das Ergebnis stark verfälschen. Wir nutzen solche Geräte deshalb nur für einen ersten Überblick und zur Kartierung der Feuchteverteilung über die Wandfläche und in verschiedenen Höhen.",
-          "Für eine belastbare Aussage messen wir die Feuchte tiefenwirksam im Baustoff und entnehmen, wo nötig, Bohrmehlproben aus dem Mauerwerk. Daran lässt sich der tatsächliche Feuchtegehalt bestimmen und abschätzen, welcher Anteil auf Salze zurückgeht. Parallel erfassen wir Oberflächentemperaturen, Raumtemperatur und relative Luftfeuchte, um das Taupunktrisiko zu bewerten. Erst das Zusammenspiel dieser Werte zeigt, ob Horizontalsperre, Innenabdichtung, Dämmung einer Wärmebrücke oder ein anderes Lüftungsverhalten die richtige Antwort ist.",
+          "Jede Schadensanalyse beginnt mit einer Besichtigung außen und innen und einer genauen Sichtprüfung, denn schon das Schadensbild verrät viel. Waagerecht verlaufende Feuchtelinien im Sockelbereich, unten nass und weiter oben trocken, sind ein klassisches Zeichen für aufsteigende Feuchte. Flecken rund um Fenster oder Rohrdurchführungen deuten dagegen meist auf eine Undichtigkeit von außen hin. Auch Dach, Fallrohre, Gelände und Leitungsverlauf liefern wichtige Hinweise. Mit dem Auge allein lässt sich die Ursache aber nicht sicher bestimmen, deshalb folgt immer die Messung.",
+          "Mit kapazitiven Messgeräten bestimmen wir den Feuchtegehalt der Wand in verschiedenen Höhen. Nehmen die Werte zum Boden hin zu, ist das ein klarer Hinweis auf kapillare Feuchte. Weil Salze und unterschiedliche Baustoffe solche Anzeigen verfälschen können, ermitteln wir den tatsächlichen Feuchtegrad bei Bedarf zusätzlich per CM-Messung oder Bohrkernanalyse. Parallel erfassen wir Oberflächentemperaturen, Raumtemperatur und relative Luftfeuchte, um das Taupunktrisiko zu bewerten und Kondensat sicher von Nässe aus dem Mauerwerk zu unterscheiden.",
+          "Ebenso wichtig ist der Baustoff selbst. Ziegel, Kalksandstein und Naturstein nehmen unterschiedlich viel Wasser auf, und davon hängt ab, welches Sanierungssystem passt. Aus allen Werten ergibt sich eine fachliche Bewertung: Fehlt die Horizontalsperre ganz, hat sie nur in Teilbereichen versagt, oder sind andere Ursachen wie seitlich eindringende Feuchte verantwortlich? Darauf baut unser Sanierungsvorschlag auf. Weil die Messung vor der Wahl des Verfahrens steht, ist das Angebot herstellerunabhängig und richtet sich nach dem Befund, nicht nach einem bestimmten Produkt.",
         ],
         bullets: [
-          "Feuchtekartierung über Wandfläche und Höhe",
-          "Bestimmung des Feuchtegehalts in der Tiefe",
-          "Unterscheidung kapillarer und hygroskopischer Feuchte",
-          "Taupunktbewertung aus Oberflächen- und Raumklimawerten",
+          "Sichtprüfung: Feuchtelinien im Sockel oder Flecken an Fenstern und Rohren",
+          "Messung in verschiedenen Höhen, kapazitiv und bei Bedarf per CM-Messung oder Bohrkern",
+          "Materialanalyse von Ziegel, Kalksandstein oder Naturstein",
+          "Bewertung mit Taupunktprüfung und konkretem Sanierungsvorschlag",
+        ],
+      },
+      {
+        heading: "Feuchte-Check beim Immobilienkauf",
+        paragraphs: [
+          "Feuchte Wände sind für Laien oft nicht auf den ersten Blick zu erkennen, schon gar nicht bei einer kurzen Besichtigung. Wer ein Haus oder eine Wohnung kaufen möchte, sollte deshalb vor der Entscheidung wissen, wie es um Keller und Wände steht. Wir prüfen die Immobilie mit denselben Verfahren wie bei jeder Schadensanalyse: Sichtprüfung, Feuchtemessung in mehreren Räumen und Höhen und, falls vorhanden, die Erfassung von Schimmelbefall und seinem Ausmaß. So wissen Sie, worauf Sie sich einlassen, statt die Katze im Sack zu kaufen.",
+          "Noch vor Ort erhalten Sie einen schriftlichen Befund zum Zustand der Immobilie hinsichtlich Feuchtigkeit und gegebenenfalls Schimmel. Das Angebot richtet sich an Kaufinteressenten ebenso wie an Immobilienmakler, die ihren Kunden Sicherheit geben und den Zustand eines Objekts belegen möchten. Zeigt die Messung Handlungsbedarf, erhalten Sie auf Wunsch ein verbindliches Angebot für die Sanierung. Der Befund ist eine fachliche Bestandsaufnahme und kein gerichtsfestes Gutachten, gibt Ihnen aber eine sachliche Grundlage für Ihre Kaufentscheidung.",
         ],
       },
       {
@@ -553,20 +591,20 @@ export const SERVICE_PAGES: ServicePage[] = [
     ],
     steps: [
       {
-        title: "Vorgespräch",
-        text: "Sie schildern das Schadensbild am Telefon oder schicken Fotos per WhatsApp, danach vereinbaren wir einen Termin vor Ort.",
+        title: "Schadensanalyse mit Feuchtemessung",
+        text: "Nach Ihrer Anfrage, gern mit Fotos per WhatsApp, besichtigen wir das Gebäude außen und innen und messen genau. Die Erstmessung ist kostenlos und unverbindlich.",
       },
       {
-        title: "Schadensanalyse vor Ort",
-        text: "Die Erstmessung ist kostenlos: Wir begehen das Gebäude außen und innen, messen präzise Feuchte und Raumklima und nehmen bei Bedarf Proben.",
+        title: "Verbindliches Angebot",
+        text: "Sie erhalten die Ergebnisse mit einer klaren Empfehlung und auf Basis der Analyse ein verbindliches Angebot für die Sanierung.",
       },
       {
-        title: "Ursache und Empfehlung",
-        text: "Aus den Werten ergibt sich die genaue Ursache, und Sie erhalten die Ergebnisse mit einer klaren Sanierungsempfehlung.",
+        title: "Sanierungsplan und Sanierung",
+        text: "Nach Ihrem Auftrag erstellen wir gemeinsam mit Ihnen den Sanierungsplan und führen die Sanierung wie vereinbart aus.",
       },
       {
-        title: "Angebot und Sanierungsplan",
-        text: "Auf Wunsch folgen ein verbindliches Angebot und ein Sanierungsplan, den wir gemeinsam mit Ihnen erstellen.",
+        title: "Gemeinsame Abnahme",
+        text: "Nach der Sanierung nehmen Sie die Arbeiten gemeinsam mit uns ab, und wir übergeben Ihnen die Baustelle sauber.",
       },
     ],
     faqs: [
@@ -639,7 +677,7 @@ export const SERVICE_PAGES: ServicePage[] = [
         heading: "PU-Harz oder Epoxid: das richtige Harz für den Riss",
         paragraphs: [
           "Für wasserführende Risse setzen wir Polyurethanharze ein. Steht Wasser unter Druck im Riss, stoppt ein schnell reagierendes, schäumendes PU-Harz zunächst den Wasserfluss. Unmittelbar danach wird ein elastisches PU-Harz nachinjiziert, das den Riss dauerhaft füllt und kleine Bewegungen des Bauteils mitmacht, etwa durch Temperaturwechsel. So bleibt der Riss auch dann dicht, wenn sich seine Breite im Lauf des Jahres leicht verändert.",
-          "Epoxidharz verwenden wir, wenn der Riss nicht nur dicht, sondern auch kraftschlüssig geschlossen werden soll. Es verklebt die Rissufer fest miteinander und stellt die Tragfähigkeit des Bauteils wieder her. Dafür muss der Riss allerdings zur Ruhe gekommen und weitgehend trocken sein, denn Epoxid ist starr und würde bei weiteren Bewegungen daneben erneut reißen. Welches Harz passt, entscheiden wir nach Rissbreite, Feuchtezustand und Bewegungsverhalten.",
+          "Epoxidharz verwenden wir, wenn der Riss nicht nur dicht, sondern auch kraftschlüssig geschlossen werden soll. Es verklebt die Rissufer fest miteinander und stellt die Tragfähigkeit des Bauteils wieder her. Dafür muss der Riss allerdings zur Ruhe gekommen und weitgehend trocken sein, denn Epoxid ist starr und würde bei weiteren Bewegungen daneben erneut reißen. Neben den Injektionsharzen setzen wir an undichten Stellen je nach Befund auch spezielle Dichtungsmassen ein. Welches Material passt, entscheiden wir nach Rissbreite, Feuchtezustand und Bewegungsverhalten.",
         ],
         bullets: [
           "Sofortiger Stopp von fließendem Wassereintritt",
@@ -658,20 +696,20 @@ export const SERVICE_PAGES: ServicePage[] = [
     ],
     steps: [
       {
-        title: "Schadensanalyse",
-        text: "Bei einer Begehung außen und innen erfassen wir Verlauf, Breite und Wasserführung des Risses und klären, ob er noch in Bewegung ist.",
+        title: "Schadensanalyse mit Feuchtemessung",
+        text: "Bei einer unverbindlichen Besichtigung außen und innen erfassen wir Verlauf, Breite und Wasserführung des Risses, messen die Feuchte und klären, ob er noch arbeitet.",
       },
       {
-        title: "Angebot und Sanierungsplan",
-        text: "Sie erhalten ein verbindliches Angebot, danach stimmen wir Harzwahl und Ablauf gemeinsam mit Ihnen im Sanierungsplan ab.",
+        title: "Verbindliches Angebot",
+        text: "Auf Basis der Analyse erhalten Sie ein verbindliches Angebot mit dem passenden Harz für Ihren Riss.",
       },
       {
-        title: "Bohren und Hochdruck-Injektion",
-        text: "Über versetzte Schrägbohrungen mit Packern injizieren wir PU-Harz oder Epoxid, bis der Riss über den ganzen Querschnitt gefüllt ist.",
+        title: "Sanierungsplan und Verpressung",
+        text: "Nach Ihrem Auftrag stimmen wir den Ablauf gemeinsam ab. Dann injizieren wir über versetzte Schrägbohrungen mit Packern PU-Harz oder Epoxid, bis der Riss im ganzen Querschnitt gefüllt ist.",
       },
       {
-        title: "Nacharbeit und saubere Übergabe",
-        text: "Packer werden entfernt, Bohrlöcher verschlossen, die Fläche für Putz oder Anstrich vorbereitet und der Arbeitsplatz sauber hinterlassen.",
+        title: "Gemeinsame Abnahme",
+        text: "Packer werden entfernt und Bohrlöcher verschlossen. Danach nehmen Sie die Arbeiten gemeinsam mit uns ab und erhalten eine saubere, für Putz oder Anstrich vorbereitete Fläche.",
       },
     ],
     faqs: [

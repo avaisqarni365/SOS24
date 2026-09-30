@@ -34,9 +34,12 @@
 
 ## Häufige Fragen
 ### Wie erkenne ich, ob mein Keller in Wuppertal von aufsteigender Feuchtigkeit betroffen ist?
-Typische Anzeichen sind abblätternde Farbe, sandender Putz, modriger Geruch und weiße Ausblühungen (Salzkristalle) im unteren Drittel der Wände. Gerade in Wuppertals Hanglagen dringt oft unkontrollierte Feuchtigkeit von unten ins Mauerwerk ein. Bei unserer Vor-Ort-Analyse messen wir die Feuchte tiefenwirksam im Baustoff.
+Typisch sind dunkle Feuchteränder im unteren Wandbereich, abblätternde Farbe, aufgequollener Putz, weiße Salzausblühungen, Schimmel an Sockelleisten und ein muffiger Geruch. Steigt die Feuchte gleichmäßig von unten nach oben, spricht vieles für kapillar aufsteigende Feuchte und eine defekte Horizontalsperre. Einzelne, klar abgegrenzte Flecken kommen dagegen meist von Rohrschäden oder Wasser von außen. Sicher ist erst die Messung im Mauerwerk.
 
-### Wie funktioniert die chemische Horizontalsperre per Injektionsverfahren?
+### Was sind die häufigsten Ursachen für einen nassen Keller?
+Meist ist es eine von vier Ursachen: eine defekte Kapillarwassersperre, durch die Bodenfeuchte aufsteigt, eine undichte Vertikalsperre, durch die Wasser seitlich eindringt, ein fehlendes oder defektes Drainagesystem oder Risse und undichte Stellen in Wänden und Boden. Oft wirken mehrere zusammen. Deshalb steht bei uns die Messung vor jedem Angebot.
+
+### Wie funktioniert die Horizontalsperre im Injektionsverfahren?
 In das feuchte Mauerwerk werden Bohrlöcher im Abstand von bis zu 20 cm gesetzt, eine Vortrocknung ist in der Regel nicht nötig. Dann bringen wir eine genau berechnete Menge des SchimmelPeter-Injektionsmittels ein, eines in Paraffin gelösten Kunststoffs. Er verteilt sich im Injektionsbereich und legt sich als wasserabweisendes Polymer an die Kapillarwände: eine neue Sperrschicht, die aufsteigende Feuchte zuverlässig stoppt. Weil diese Schicht nur wenige Moleküle dick ist, bleiben die Poren offen und die Wand bleibt diffusionsfähig.
 
 ### Muss für die Sanierung der Garten oder das Pflaster aufgegraben werden?
