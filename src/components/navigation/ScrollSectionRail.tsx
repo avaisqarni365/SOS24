@@ -44,44 +44,23 @@ export default function ScrollSectionRail() {
     return () => observer.disconnect();
   }, []);
 
+  // A slim dot rail inside the page margin: it never covers content. The
+  // label of each stop shows on hover and keyboard focus.
   return (
-    <nav
-      aria-label="Seitenabschnitte"
-      className="fixed right-4 top-1/2 z-50 hidden -translate-y-1/2 lg:block select-none"
-    >
-      {/* High-Contrast Frosted Glass Dock - 100% Readable Over Light & Dark Backgrounds */}
-      <div className="rounded-2xl bg-[#0E1310]/90 backdrop-blur-2xl border border-white/15 p-2 shadow-[0_16px_40px_rgba(0,0,0,0.6)]">
-        <ul className="flex flex-col gap-1.5">
-          {sectionStops.map((stop) => {
-            const isActive = activeId === stop.id;
-            return (
-              <li key={stop.id}>
-                <a
-                  href={`#${stop.id}`}
-                  aria-current={isActive ? "true" : undefined}
-                  className={`group flex items-center justify-between gap-3 px-3 py-1.5 rounded-xl text-[11px] font-mono transition-all duration-200 ${
-                    isActive
-                      ? "bg-landing-mint text-[#0E1310] font-semibold shadow-[0_0_14px_rgba(98,196,172,0.45)]"
-                      : "text-white/70 hover:text-white hover:bg-white/[0.08]"
-                  }`}
-                >
-                  <span className="whitespace-nowrap tracking-wide">
-                    {stop.label}
-                  </span>
-
-                  <span
-                    className={`block rounded-full transition-all duration-200 ${
-                      isActive
-                        ? "h-2 w-2 bg-[#0E1310] ring-2 ring-[#0E1310]/40"
-                        : "h-1.5 w-1.5 bg-white/40 group-hover:bg-landing-mint group-hover:scale-125"
-                    }`}
-                  />
-                </a>
-              </li>
-            );
-          })}
-        </ul>
-      </div>
+    <nav aria-label="Seitenabschnitte" className="section-rail">
+      <ul>
+        {sectionStops.map((stop) => {
+          const isActive = activeId === stop.id;
+          return (
+            <li key={stop.id}>
+              <a href={`#${stop.id}`} aria-current={isActive ? "true" : undefined} className="section-rail__stop">
+                <span className="section-rail__label">{stop.label}</span>
+                <span className="section-rail__dot" aria-hidden="true" />
+              </a>
+            </li>
+          );
+        })}
+      </ul>
     </nav>
   );
 }

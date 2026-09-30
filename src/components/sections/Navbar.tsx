@@ -25,7 +25,7 @@ export default function Navbar() {
       <a href="#main" className="skip-link">
         Zum Inhalt springen
       </a>
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 sm:h-[4.5rem] sm:px-6 lg:gap-8 lg:px-8">
+      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-2 px-3 min-[380px]:gap-4 min-[380px]:px-4 sm:h-[4.5rem] sm:px-6 lg:gap-8 lg:px-8">
         <a href="/" aria-label="sos-abdichtung, zur Startseite" className="shrink-0">
           <Logo sub="Wuppertal · Region 42" />
         </a>

@@ -1,15 +1,17 @@
-import { SERVICE_CARDS } from "@/data/services";
+import { SERVICE_CARDS, type ServiceCard } from "@/data/services";
 import { FAQS } from "@/data/content-data";
 import { CITY_PAGES } from "@/data/seo-pages";
-import { PHOTOS, type PhotoKey } from "@/data/photos";
+import { MAP_AREAS, MAP_ESSEN, MAP_H, MAP_W } from "@/data/region-map";
+import OsmMap from "@/components/interactive/OsmMap";
+import { Home, Layers, ShieldCheck, SprayCan, Gauge, Wrench, type LucideIcon } from "lucide-react";
 
-const CARD_PHOTO: Record<string, PhotoKey> = {
-  kellersanierung: "mouldTideMark",
-  horizontalsperre: "risingDamp",
-  kellerinnenabdichtung: "plastering",
-  schimmelbeseitigung: "mouldCorner",
-  feuchtemessung: "infographic",
-  rissverpressung: "crackRepair",
+const CARD_ICON: Record<ServiceCard["art"], LucideIcon> = {
+  keller: Home,
+  sperre: Layers,
+  innen: ShieldCheck,
+  schimmel: SprayCan,
+  messung: Gauge,
+  riss: Wrench,
 };
 import FeuchteScanner from "@/components/interactive/FeuchteScanner";
 import { hy } from "@/lib/hyphenate";
@@ -40,62 +42,103 @@ export function ScannerSection() {
 }
 
 /* ------------------------------------------------------------- services -- */
+/** Six services as one calm grid. The photos live in the gallery below, so
+    this section carries no images and nothing moves sideways. */
 export function ServicesRail() {
   return (
     <section
       id="leistungen"
+      className="sc-section"
       aria-labelledby="leistungen-title"
-      data-sc-act="pan"
-      data-sc-span="3.2"
+      data-sc-act="flow"
       data-sc-drift="#0e1310"
-      style={{ ["--sc-span" as string]: 3.2 }}
     >
-      <div data-sc-stage className="rail-stage">
-        <div className="rail" data-sc-pan="0.08">
-          <div className="rail__lead">
+      <div className="sc-wrap">
+        <div className="grid gap-6 lg:grid-cols-[1fr_1fr] lg:items-end" data-sc-in>
+          <div>
             <p className="sc-label">Leistungen</p>
-            <h2 id="leistungen-title" className="sc-display mt-3 text-4xl sm:text-5xl">
-              Sechs Verfahren. Eine Ursache nach der anderen.
+            <h2 id="leistungen-title" className="sc-display mt-3 text-4xl sm:text-5xl lg:text-6xl">
+              Sechs Verfahren. <em className="text-[var(--mint)]">Eine Ursache nach der anderen.</em>
             </h2>
-            <p className="sc-body mt-4">
-              {hy("Welche Leistung Ihr Keller braucht, entscheidet die Messung. Hier ist, was wir einsetzen.")}
-            </p>
           </div>
-          {SERVICE_CARDS.map((s) => (
-            <a key={s.slug} className="service-card" href={`/leistungen/${s.slug}/`}>
-              <div className="service-card__art" data-sc-tilt="5">
-                <img
-                  src={PHOTOS[CARD_PHOTO[s.slug]].src}
-                  width={PHOTOS[CARD_PHOTO[s.slug]].w}
-                  height={PHOTOS[CARD_PHOTO[s.slug]].h}
-                  alt={PHOTOS[CARD_PHOTO[s.slug]].alt}
-                  loading="lazy"
-                  decoding="async"
-                />
-              </div>
-              <div className="service-card__body">
-                <h3>{s.title}</h3>
-                <p>{hy(s.text)}</p>
-                <span className="service-card__more">
-                  Mehr zu {s.title.split(" ")[0]} <span aria-hidden="true">→</span>
-                </span>
-              </div>
-            </a>
-          ))}
+          <p className="sc-body">
+            {hy("Welche Leistung Ihr Keller braucht, entscheidet die Messung. Jedes Verfahren hat eine eigene Seite mit Ablauf, Kosten und Fragen.")}
+          </p>
         </div>
+        <ul className="services-grid mt-12">
+          {SERVICE_CARDS.map((s) => {
+            const Icon = CARD_ICON[s.art];
+            return (
+              <li key={s.slug}>
+                <a className="service-card" href={`/leistungen/${s.slug}/`}>
+                  <span className="service-card__icon" aria-hidden="true">
+                    <Icon strokeWidth={1.6} />
+                  </span>
+                  <h3>{s.title}</h3>
+                  <p>{hy(s.text)}</p>
+                  <span className="service-card__more">
+                    Zum Verfahren <span aria-hidden="true">→</span>
+                  </span>
+                </a>
+              </li>
+            );
+          })}
+        </ul>
       </div>
     </section>
   );
 }
 
 /* --------------------------------------------------------------- region -- */
-const project = (lat: number, lng: number) => ({
-  x: ((lng - 6.9) / 0.42) * 600,
-  y: ((51.48 - lat) / 0.37) * 420,
-});
+/** The service area on real municipal boundaries: the six PLZ-42 towns are
+    filled and linked, the neighbours give context, Essen marks the office. */
+function RegionMap() {
+  const byslug = Object.fromEntries(CITY_PAGES.map((c) => [c.slug, c]));
+  return (
+    <svg
+      viewBox={`0 0 ${MAP_W} ${MAP_H}`}
+      className="region-map"
+      role="img"
+      aria-labelledby="region-map-title"
+    >
+      <title id="region-map-title">
+        Karte des Servicegebiets: Wuppertal, Solingen, Remscheid, Velbert, Haan und Wermelskirchen, Sitz in Essen
+      </title>
+      <rect width={MAP_W} height={MAP_H} className="region-map__bg" />
+      <g className="region-map__context">
+        {MAP_AREAS.filter((a) => !a.slug).map((a) => (
+          <path key={a.name} d={a.d} />
+        ))}
+      </g>
+      {MAP_AREAS.filter((a) => a.slug).map((a) => {
+        const city = byslug[a.slug!];
+        const big = a.slug === "wuppertal";
+        return (
+          <a key={a.name} href={`/kellersanierung/${a.slug}/`} className="region-map__area">
+            <path d={a.d} />
+            <text x={a.cx} y={a.cy} textAnchor="middle" className={big ? "is-big" : undefined}>
+              {a.name}
+            </text>
+            {city && (
+              <text x={a.cx} y={a.cy + (big ? 30 : 24)} textAnchor="middle" className="region-map__sub">
+                {city.responseTime}
+              </text>
+            )}
+          </a>
+        );
+      })}
+      {/* Essen lies north of the frame: an arrow at the edge points to it */}
+      <g className="region-map__hq" transform={`translate(${MAP_ESSEN.x} 0)`}>
+        <path d="M0 10 L9 26 L-9 26 Z" />
+        <text x="16" y="25">
+          Essen (Sitz)
+        </text>
+      </g>
+    </svg>
+  );
+}
 
 export function RegionSection() {
-  const hq = project(51.455, 7.011);
   return (
     <section
       id="servicegebiet"
@@ -104,96 +147,44 @@ export function RegionSection() {
       data-sc-act="flow"
       data-sc-drift="#0e1310"
     >
-      <div className="sc-wrap grid gap-12 lg:grid-cols-[1fr_1.1fr] lg:items-center">
-        <div data-sc-in>
-          <p className="sc-label">Servicegebiet</p>
-          <h2 id="region-title" className="sc-display mt-3 text-4xl sm:text-5xl lg:text-6xl">
-            Wuppertal und das Bergische Land.
-          </h2>
-          <p className="sc-body mt-5">
-            {hy("Hanglagen, Grundwasser im Tal der Wupper, viel Altbau aus Ziegel und Bruchstein ohne zeitgemäße Horizontalsperre: Die Region hat ihre eigenen Kellerprobleme. Wählen Sie Ihre Stadt.")}
+      <div className="sc-wrap">
+        <div className="grid gap-6 lg:grid-cols-[1fr_1fr] lg:items-end" data-sc-in>
+          <div>
+            <p className="sc-label">Servicegebiet PLZ 42</p>
+            <h2 id="region-title" className="sc-display mt-3 text-4xl sm:text-5xl lg:text-6xl">
+              Wuppertal und das Bergische Land.
+            </h2>
+          </div>
+          <p className="sc-body">
+            {hy("Hanglagen, Grundwasser im Tal der Wupper, viel Altbau aus Ziegel und Bruchstein ohne zeitgemäße Horizontalsperre: Die Region hat ihre eigenen Kellerprobleme. Klicken Sie auf Ihre Stadt.")}
           </p>
-          <ul className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3">
-            {CITY_PAGES.map((c) => (
-              <li key={c.slug}>
-                <a
-                  href={`/kellersanierung/${c.slug}/`}
-                  className="flex min-h-[48px] flex-col justify-center rounded-2xl border border-white/10 bg-[var(--ink-2)] px-4 py-3 hover:border-[var(--mint)]"
-                >
-                  <span className="font-semibold">{c.name}</span>
-                  <span className="font-mono text-[0.7rem] text-[var(--sc-ink-soft)]">{c.responseTime}</span>
-                </a>
-              </li>
-            ))}
-          </ul>
         </div>
-        <figure className="m-0" data-sc-reveal="iris" data-sc-reveal-at="0.1 0.5">
-          <svg
-            viewBox="0 0 600 420"
-            className="region-map h-auto w-full rounded-3xl bg-[var(--ink-2)]"
-            role="img"
-            aria-labelledby="region-map-title"
-          >
-            <title id="region-map-title">Karte des Servicegebiets rund um Wuppertal mit Sitz in Essen</title>
-            <defs>
-              <radialGradient id="rg" cx="0.6" cy="0.65" r="0.6">
-                <stop offset="0" stopColor="#62c4ac" stopOpacity="0.16" />
-                <stop offset="1" stopColor="#62c4ac" stopOpacity="0" />
-              </radialGradient>
-            </defs>
-            <rect width="600" height="420" fill="url(#rg)" />
-            <g stroke="#f3f1ec" strokeOpacity="0.05">
-              {Array.from({ length: 12 }).map((_, i) => (
-                <path key={`v${i}`} d={`M${i * 50} 0 V420`} />
+        <div className="mt-10 grid gap-6 lg:grid-cols-[1.2fr_1fr] lg:items-start">
+          <figure className="region-map__frame">
+            <RegionMap />
+            <figcaption className="no-justify">
+              <span className="region-map__key region-map__key--area" aria-hidden="true" /> Einsatzgebiet
+              <span className="region-map__key region-map__key--hq" aria-hidden="true" /> Sitz
+              <span className="region-map__credit">Gemeindegrenzen: Land NRW, via Code for Germany</span>
+            </figcaption>
+          </figure>
+          <div className="grid gap-6">
+            <ul className="grid grid-cols-2 gap-3">
+              {CITY_PAGES.map((c) => (
+                <li key={c.slug}>
+                  <a
+                    href={`/kellersanierung/${c.slug}/`}
+                    className="flex min-h-[56px] flex-col justify-center rounded-2xl border border-white/10 bg-[var(--ink-2)] px-4 py-3 hover:border-[var(--mint)]"
+                  >
+                    <span className="font-semibold">{c.name}</span>
+                    <span className="font-mono text-[0.7rem] text-[var(--sc-ink-soft)]">Vor Ort in {c.responseTime}</span>
+                  </a>
+                </li>
               ))}
-              {Array.from({ length: 9 }).map((_, i) => (
-                <path key={`h${i}`} d={`M0 ${i * 50} H600`} />
-              ))}
-            </g>
-            <path
-              d="M600 219 C540 230 470 241 420 248 C390 253 370 257 357 256 C320 262 300 276 305 303 C310 331 280 349 250 420"
-              stroke="#3b82c4"
-              strokeWidth="4"
-              fill="none"
-              strokeLinecap="round"
-              opacity="0.8"
-            />
-            <text x="480" y="228" fill="#5a8fc4" fontSize="13" fontStyle="italic">
-              Wupper
-            </text>
-            {CITY_PAGES.map((c) => {
-              const p = project(c.geo.lat, c.geo.lng);
-              return (
-                <path
-                  key={`l-${c.slug}`}
-                  d={`M${hq.x} ${hq.y} L${p.x} ${p.y}`}
-                  stroke="#62c4ac"
-                  strokeOpacity="0.18"
-                  strokeDasharray="4 6"
-                />
-              );
-            })}
-            <g>
-              <rect x={hq.x - 7} y={hq.y - 7} width="14" height="14" rx="3" fill="#f3f1ec" />
-              <text x={hq.x + 14} y={hq.y + 5} fill="#f3f1ec" fontSize="14">
-                Essen (Sitz)
-              </text>
-            </g>
-            {CITY_PAGES.map((c) => {
-              const p = project(c.geo.lat, c.geo.lng);
-              const big = c.slug === "wuppertal";
-              return (
-                <a key={c.slug} href={`/kellersanierung/${c.slug}/`}>
-                  {big && <circle cx={p.x} cy={p.y} r="34" fill="#62c4ac" opacity="0.12" />}
-                  <circle className="pin" cx={p.x} cy={p.y} r={big ? 9 : 6} fill={big ? "#62c4ac" : "#f3f1ec"} />
-                  <text x={p.x + 12} y={p.y + 5} fill="#f3f1ec" fontSize={big ? 18 : 14} fontWeight={big ? 700 : 500}>
-                    {c.name}
-                  </text>
-                </a>
-              );
-            })}
-          </svg>
-        </figure>
+            </ul>
+            <OsmMap />
+          </div>
+        </div>
       </div>
     </section>
   );

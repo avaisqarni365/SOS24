@@ -44,7 +44,7 @@ export default function Logo({ tone = "light", sub }: { tone?: "light" | "dark";
           <span className="text-[var(--mint)]">-</span>abdichtung
         </span>
         {sub ? (
-          <span className="mt-1 font-mono text-[0.62rem] uppercase tracking-[0.16em] opacity-60">{sub}</span>
+          <span className="mt-1 font-mono text-[0.62rem] uppercase tracking-[0.16em] opacity-60 max-[379px]:hidden">{sub}</span>
         ) : null}
       </span>
     </span>
