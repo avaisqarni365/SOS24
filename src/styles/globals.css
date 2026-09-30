@@ -234,7 +234,7 @@
   margin: 0;
   justify-self: center;
   width: 100%;
-  max-width: min(100%, calc((100svh - 7rem) * 1.02));
+  max-width: min(100%, calc((100svh - 8rem) * 1.36));
 }
 .hero__house img {
   display: block;
@@ -369,14 +369,88 @@
    poster stays and the panel still works as plain text controls. */
 .hv {
   display: grid;
+  gap: 1rem;
+}
+.hv__scenes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.hv__scenes button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 2.9rem;
+  padding: 0 1.1rem;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--ink-2);
+  color: var(--bone);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+.hv__scenes button svg {
+  width: 1.1rem;
+  height: 1.1rem;
+  color: var(--mint);
+}
+.hv__scenes button[aria-selected="true"] {
+  background: var(--mint);
+  border-color: var(--mint);
+  color: var(--ink);
+}
+.hv__scenes button[aria-selected="true"] svg {
+  color: var(--ink);
+}
+@media (max-width: 639px) {
+  .hv__scenes {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  .hv__scenes button {
+    justify-content: center;
+    padding: 0 0.6rem;
+    font-size: 0.82rem;
+  }
+}
+.hv__body {
+  display: grid;
   gap: clamp(1rem, 2vw, 1.5rem);
   grid-template-columns: minmax(0, 1.55fr) minmax(0, 1fr);
   align-items: start;
 }
 @media (max-width: 1023px) {
-  .hv {
+  .hv__body {
     grid-template-columns: minmax(0, 1fr);
   }
+}
+.hv__nogl {
+  margin: 0;
+  font-family: var(--sc-font-display);
+  font-size: 1.6rem;
+  color: var(--bone);
+  text-align: center;
+}
+.hv__scene-intro h3 {
+  margin: 0;
+  font-family: var(--sc-font-display);
+  font-weight: 500;
+  font-size: 1.55rem;
+  line-height: 1.15;
+  color: var(--bone);
+}
+.hv__scene-intro p {
+  margin: 0.4rem 0 0;
+  color: var(--sc-ink-soft);
+  font-size: 0.92rem;
+  line-height: 1.55;
+}
+.hv__more {
+  display: inline-block;
+  margin-top: 0.8rem;
+  color: var(--mint);
+  font-size: 0.88rem;
+  font-weight: 600;
 }
 .hv__stage {
   position: relative;
@@ -515,7 +589,7 @@
   margin: 0;
   padding: 0;
   display: grid;
-  grid-template-columns: repeat(8, minmax(0, 1fr));
+  grid-template-columns: repeat(var(--n, 8), minmax(0, 1fr));
   gap: 0.4rem;
 }
 .hv__steps button {
@@ -551,7 +625,7 @@
   letter-spacing: 0.08em;
   color: var(--mint);
 }
-.hv__step h3 {
+.hv__step h4 {
   margin: 0.4rem 0 0;
   font-family: var(--sc-font-display);
   font-weight: 500;

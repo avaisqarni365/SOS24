@@ -1,6 +1,6 @@
 import { WALL_LAYERS } from "@/data/layers";
 import HouseViewer3D from "./HouseViewer3D";
-import { PROCEDURE } from "@/data/procedure";
+import { SCENES } from "@/data/scenes3d";
 import { hy } from "@/lib/hyphenate";
 
 /**
@@ -100,35 +100,38 @@ function LayersPoster() {
 }
 
 export default function LayersAct() {
-  const steps = PROCEDURE.map((s) => ({ ...s, text: hy(s.text), material: hy(s.material) }));
-  const layers = WALL_LAYERS.map((l) => ({ ...l, text: hy(l.text) }));
+  const scenes = SCENES.map((sc) => ({
+    ...sc,
+    intro: hy(sc.intro),
+    layers: sc.layers.map((l) => ({ ...l, text: hy(l.text) })),
+    steps: sc.steps.map((st) => ({ ...st, text: hy(st.text), material: hy(st.material) })),
+  }));
   return (
     <section
       id="schicht-fuer-schicht"
       className="sc-section viewer-sec band-stone"
       aria-labelledby="layers-title"
       data-sc-act="flow"
-     
     >
       <div className="sc-wrap">
         <div className="grid gap-6 lg:grid-cols-[1fr_1fr] lg:items-end">
           <div>
             <p className="sc-label">Das Verfahren in 3D</p>
             <h2 id="layers-title" className="sc-display mt-3 text-4xl sm:text-5xl lg:text-6xl">
-              Ihr Keller, <em className="text-[var(--mint)]">Schicht für Schicht.</em>
+              Jeder Ort, <em className="text-[var(--mint)]">Schicht für Schicht.</em>
             </h2>
           </div>
           <p className="sc-body">
             {hy(
-              "Drehen Sie das Haus in alle Richtungen und gehen Sie die Sanierung Schritt für Schritt durch: vom nassen Keller über die Horizontalsperre bis zur fertigen Wand. Zu jedem Schritt sehen Sie Material und Ausführung."
+              "Keller von innen, Keller von außen, Garage und Wohnraum: Wählen Sie den Ort, drehen Sie das Modell in alle Richtungen und gehen Sie die Sanierung Schritt für Schritt durch, mit Material und Ausführung zu jedem Schritt."
             )}
           </p>
         </div>
         <div className="mt-10">
-          <HouseViewer3D steps={steps} layers={layers} poster={<LayersPoster />} />
+          <HouseViewer3D scenes={scenes} poster={<LayersPoster />} />
         </div>
         <p className="mt-4 text-xs text-[var(--sc-ink-soft)]">
-          {hy("Schematische Darstellung. Schichtaufbau und Verfahren richten sich nach der Messung vor Ort.")}
+          {hy("Schematische Darstellung. Welches Verfahren Ihr Objekt braucht, entscheidet die Messung vor Ort.")}
         </p>
       </div>
     </section>
