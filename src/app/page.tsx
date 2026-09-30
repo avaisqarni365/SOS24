@@ -5,7 +5,6 @@ import Schadensbilder from "@/components/sections/Schadensbilder";
 import InjectionProcess from "@/components/sections/InjectionProcess";
 import CostCalculator from "@/components/calculator/CostCalculator";
 import RegionalPLZ from "@/components/sections/RegionalPLZ";
-import TrustPartner from "@/components/sections/TrustPartner";
 import ContactForm from "@/components/sections/ContactForm";
 import FAQ from "@/components/sections/FAQ";
 import Footer from "@/components/sections/Footer";
@@ -13,44 +12,41 @@ import GrokLeadBot from "@/components/ai/GrokLeadBot";
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-white text-sand-900 selection:bg-hydro-500 selection:text-white">
-      {/* Sticky Glassmorphic Header */}
+    <div className="min-h-screen bg-[#0b0e14] text-slate-100 selection:bg-cyan-500 selection:text-black">
+      {/* Minimalist Kontai24 Header */}
       <Navbar />
 
       <main>
-        {/* Hero with Emergency Dial, Trust Proofs & Problem Paths */}
+        {/* Kontai24 Hero: "Gedichtet. Injiziert. Getrocknet. Dauerhaft." */}
         <Hero />
 
-        {/* ACCA-Style Service & Damage Carousel */}
+        {/* Kontai24 3-Card Platform Grid: Mauerwerk, Keller, Schimmel */}
         <Schadensbilder />
 
-        {/* Interactive 3D Chemical Wall Injection Simulation & 4-Step Pipeline */}
+        {/* 3D Exploded-Layer Injektionsverfahren & 4-Step Pipeline */}
         <InjectionProcess />
 
-        {/* Interactive Cost & Savings Calculator */}
-        <section id="kostenrechner" className="py-20 bg-sand-50/50">
+        {/* Cost & Savings Calculator */}
+        <section id="rechner" className="py-24 bg-[#0b0e14] border-t border-white/[0.08]">
           <div className="max-w-7xl mx-auto px-4 sm:px-6">
             <CostCalculator />
           </div>
         </section>
 
-        {/* Regional Focus: Wuppertal, Schwebebahn, Solingen, Remscheid & PLZ 42 Checker */}
+        {/* Regional Focus: Wuppertal, Solingen, Remscheid & PLZ 42 Checker */}
         <RegionalPLZ />
 
-        {/* Official SchimmelPeter® Partner Certification & Inhaber Info */}
-        <TrustPartner />
-
-        {/* High-Converting Lead Generation Form with WhatsApp Fallback */}
-        <ContactForm />
-
-        {/* High-Intent SEO Accordion FAQ */}
+        {/* High-Intent SEO FAQ */}
         <FAQ />
+
+        {/* Minimalist Contact Section & Direct WhatsApp Channel */}
+        <ContactForm />
       </main>
 
-      {/* Polish ACCA-Styled Footer with Impressum & Privacy */}
+      {/* Kontai24 Minimalist Footer */}
       <Footer />
 
-      {/* 24/7 Floating AI / Grok Diagnostic Bot */}
+      {/* 24/7 Dark Cyber AI Diagnostic Bot */}
       <GrokLeadBot />
     </div>
   );
