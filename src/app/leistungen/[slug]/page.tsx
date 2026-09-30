@@ -5,6 +5,10 @@ import Footer from "@/components/sections/Footer";
 import ContactForm from "@/components/sections/ContactForm";
 import JsonLd from "@/components/seo/JsonLd";
 import ServiceArt from "@/components/brand/ServiceArt";
+import ScienceSection from "@/components/science/ScienceSection";
+import ScrollEngine, { SC_BOOT } from "@/components/scroll/ScrollEngine";
+import { SCIENCE } from "@/data/science";
+import { PHOTOS, type PhotoKey } from "@/data/photos";
 import { Breadcrumbs, LayerStack, Prose, FaqList, LinkGrid } from "@/components/seo/SubpageParts";
 import { SERVICE_PAGES, CITY_PAGES } from "@/data/seo-pages";
 import { SERVICE_CARDS } from "@/data/services";
@@ -19,6 +23,16 @@ const DAMAGE_BY_SLUG: Record<string, string> = {
   schimmelbeseitigung: "Schimmelbefall & Geruch",
   feuchtemessung: "Allgemeine Feuchtigkeitsmessung",
   rissverpressung: "Wasserführender Riss",
+};
+
+/** Header photo per service: the damage the page is about (SchimmelPeter partner photos). */
+const HEADER_PHOTO: Record<string, PhotoKey> = {
+  kellersanierung: "mouldTideMark",
+  horizontalsperre: "risingDamp",
+  kellerinnenabdichtung: "plastering",
+  schimmelbeseitigung: "mouldCorner",
+  feuchtemessung: "infographic",
+  rissverpressung: "crackRepair",
 };
 
 export const dynamicParams = false;
@@ -44,6 +58,8 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
   if (!page) notFound();
   const card = SERVICE_CARDS.find((c) => c.slug === page.slug);
   const path = `/leistungen/${page.slug}/`;
+  const faqs = [...page.faqs, ...(SCIENCE[page.slug]?.faqs ?? [])];
+  const photo = PHOTOS[HEADER_PHOTO[page.slug]];
   const crumbs = [
     { name: "Startseite", path: "/" },
     { name: "Leistungen", path: "/#leistungen" },
@@ -74,7 +90,7 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
       provider: { "@id": BUSINESS_ID },
       areaServed: CITY_PAGES.map((c) => ({ "@type": "City", name: c.name })),
     },
-    faqNode(page.faqs),
+    faqNode(faqs),
   ];
 
   const related = page.related
@@ -84,7 +100,9 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
 
   return (
     <>
+      <script dangerouslySetInnerHTML={{ __html: SC_BOOT }} />
       <JsonLd graph={graph} />
+      <span data-sc-progress aria-hidden="true" />
       <Navbar />
       <main id="main">
         <section className="relative overflow-hidden pb-16 pt-28 sm:pb-24 sm:pt-36" aria-labelledby="page-title">
@@ -113,17 +131,36 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
               </ul>
             </div>
             <div className="grid gap-5">
-              {card && (
-                <div className="overflow-hidden rounded-3xl border border-white/10" aria-hidden="true">
-                  <div className="aspect-[16/10]">
-                    <ServiceArt kind={card.art} />
+              {photo ? (
+                <figure className="m-0 overflow-hidden rounded-3xl border border-white/10 bg-[var(--ink-2)]">
+                  <img
+                    src={photo.src}
+                    srcSet={photo.src2x ? `${photo.src} ${photo.w}w, ${photo.src2x} 960w` : undefined}
+                    sizes="(max-width: 1024px) 92vw, 40vw"
+                    width={photo.w}
+                    height={photo.h}
+                    alt={photo.alt}
+                    fetchPriority="high"
+                    decoding="async"
+                    className="h-auto w-full"
+                  />
+                  <figcaption className="px-4 py-2 text-right text-[0.7rem] text-[var(--sc-ink-soft)]">Foto: SchimmelPeter®</figcaption>
+                </figure>
+              ) : (
+                card && (
+                  <div className="overflow-hidden rounded-3xl border border-white/10" aria-hidden="true">
+                    <div className="aspect-[16/10]">
+                      <ServiceArt kind={card.art} />
+                    </div>
                   </div>
-                </div>
+                )
               )}
               <LayerStack layers={page.layers} title="Schicht für Schicht" />
             </div>
           </div>
         </section>
+
+        <ScienceSection slug={page.slug} />
 
         <section className="surface-bone py-20 sm:py-28">
           <div className="mx-auto grid max-w-7xl gap-16 px-6 sm:px-8 lg:grid-cols-[1fr_22rem]">
@@ -151,7 +188,7 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
 
         <section className="surface-bone-2 py-20 sm:py-24">
           <div className="mx-auto grid max-w-5xl gap-16 px-6 sm:px-8">
-            <FaqList faqs={page.faqs} title={`Fragen zu ${page.navTitle}`} />
+            <FaqList faqs={faqs} title={`Fragen zu ${page.navTitle}`} />
             <LinkGrid title="Verwandte Leistungen" links={related} />
             <LinkGrid
               title={`${page.navTitle} in Ihrer Stadt`}
@@ -163,6 +200,7 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
         <ContactForm defaultDamage={DAMAGE_BY_SLUG[page.slug]} />
       </main>
       <Footer />
+      <ScrollEngine />
     </>
   );
 }

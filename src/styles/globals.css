@@ -668,3 +668,29 @@ figcaption {
     line-height: 1.55;
   }
 }
+
+/* Real damp wall behind the tension lines (SchimmelPeter partner photo):
+   darkened for contrast, slowly pushing in towards the tide mark. */
+.tension__wall img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 78%;
+  filter: saturate(0.85) brightness(0.55);
+}
+.tension__wall::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(120% 90% at 50% 45%, rgba(14, 19, 16, 0.55), rgba(14, 19, 16, 0.92));
+}
+.sc-js .tension__wall img {
+  transform: scale(calc(1.05 + var(--sc-p, 0) * 0.35));
+  transform-origin: 50% 80%;
+}
+.service-card__art img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}

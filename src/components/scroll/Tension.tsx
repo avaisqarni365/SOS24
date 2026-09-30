@@ -15,44 +15,17 @@ export default function Tension() {
     >
       <div data-sc-stage className="tension__stage">
         <div className="tension__wall" aria-hidden="true">
-          <svg viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMax slice">
-            <defs>
-              <linearGradient id="t-wall" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="0" stopColor="#1a211d" />
-                <stop offset="1" stopColor="#121714" />
-              </linearGradient>
-              <linearGradient id="t-stain" x1="0" y1="1" x2="0" y2="0">
-                <stop offset="0" stopColor="#2c4d6e" stopOpacity="0.85" />
-                <stop offset="0.55" stopColor="#2c4d6e" stopOpacity="0.35" />
-                <stop offset="0.8" stopColor="#6b6247" stopOpacity="0.25" />
-                <stop offset="1" stopColor="#6b6247" stopOpacity="0" />
-              </linearGradient>
-            </defs>
-            <rect width="1600" height="1000" fill="url(#t-wall)" />
-            <path
-              className="stain"
-              d="M0 1000 L0 640 C120 610 200 660 320 626 C460 588 560 650 700 618 C860 582 960 646 1120 610 C1260 580 1380 640 1600 604 L1600 1000 Z"
-              fill="url(#t-stain)"
-            />
-            <g className="salt" fill="#e8e1cf">
-              {Array.from({ length: 70 }).map((_, i) => {
-                const x = (i * 211) % 1600;
-                const y = 560 + ((i * 97) % 140);
-                return <circle key={i} cx={x} cy={y} r={1.5 + (i % 3)} opacity={0.35 + (i % 4) * 0.12} />;
-              })}
-            </g>
-            <g className="mould" fill="#2a3a2c">
-              <circle cx="1450" cy="180" r="38" opacity="0.55" />
-              <circle cx="1500" cy="150" r="22" opacity="0.5" />
-              <circle cx="1410" cy="140" r="16" opacity="0.45" />
-              <circle cx="1530" cy="210" r="14" opacity="0.4" />
-              <circle cx="140" cy="220" r="26" opacity="0.4" />
-              <circle cx="180" cy="190" r="12" opacity="0.4" />
-            </g>
-            <rect y="960" width="1600" height="40" fill="#0e1310" />
-          </svg>
+          <img
+            src="/img/sp/feuchte-wand-aufsteigende-feuchtigkeit-960.webp"
+            srcSet="/img/sp/feuchte-wand-aufsteigende-feuchtigkeit-480.webp 480w, /img/sp/feuchte-wand-aufsteigende-feuchtigkeit-960.webp 960w"
+            sizes="100vw"
+            width={960}
+            height={640}
+            alt=""
+            loading="lazy"
+            decoding="async"
+          />
         </div>
-
         <div className="tension__lines">
           <h2 id="tension-title" className="visually-hidden">
             Typische Anzeichen für einen feuchten Keller

@@ -1,7 +1,16 @@
 import { SERVICE_CARDS } from "@/data/services";
 import { PROCESS_PIPELINE, FAQS, COMPANY_INFO } from "@/data/content-data";
 import { CITY_PAGES } from "@/data/seo-pages";
-import ServiceArt from "@/components/brand/ServiceArt";
+import { PHOTOS, type PhotoKey } from "@/data/photos";
+
+const CARD_PHOTO: Record<string, PhotoKey> = {
+  kellersanierung: "mouldTideMark",
+  horizontalsperre: "risingDamp",
+  kellerinnenabdichtung: "plastering",
+  schimmelbeseitigung: "mouldCorner",
+  feuchtemessung: "infographic",
+  rissverpressung: "crackRepair",
+};
 import FeuchteScanner from "@/components/interactive/FeuchteScanner";
 import { hy } from "@/lib/hyphenate";
 
@@ -55,7 +64,14 @@ export function ServicesRail() {
           {SERVICE_CARDS.map((s) => (
             <a key={s.slug} className="service-card" href={`/leistungen/${s.slug}/`}>
               <div className="service-card__art" data-sc-tilt="5">
-                <ServiceArt kind={s.art} />
+                <img
+                  src={PHOTOS[CARD_PHOTO[s.slug]].src}
+                  width={PHOTOS[CARD_PHOTO[s.slug]].w}
+                  height={PHOTOS[CARD_PHOTO[s.slug]].h}
+                  alt={PHOTOS[CARD_PHOTO[s.slug]].alt}
+                  loading="lazy"
+                  decoding="async"
+                />
               </div>
               <div className="service-card__body">
                 <h3>{s.title}</h3>
