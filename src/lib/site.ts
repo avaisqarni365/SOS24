@@ -37,7 +37,7 @@ export function businessNode() {
       postalCode: "45144",
       addressCountry: "DE",
     },
-    areaServed: ["Wuppertal", "Solingen", "Remscheid", "Velbert", "Haan", "Mettmann", "Wermelskirchen"].map(
+    areaServed: ["Wuppertal", "Solingen", "Remscheid", "Velbert", "Haan", "Wermelskirchen"].map(
       (name) => ({ "@type": "City", name })
     ),
     memberOf: { "@type": "Organization", name: "SchimmelPeter®", url: "https://www.schimmelpeter.de" },

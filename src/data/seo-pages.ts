@@ -998,7 +998,7 @@ export const CITY_PAGES: CityPage[] = [
         a: "Ja, in vielen Fällen. Entscheidend ist, ob Bodenfeuchte oder zeitweise drückendes Wasser anliegt. Dafür gibt es mehrlagige Innenabdichtungen, die auch Druckwasser standhalten, kombiniert mit einer Horizontalsperre im Mauerwerk.",
       },
     ],
-    nearby: ["wuppertal", "mettmann", "haan"],
+    nearby: ["wuppertal", "haan"],
   },
 
   // Haan
@@ -1056,66 +1056,9 @@ export const CITY_PAGES: CityPage[] = [
         a: "Er macht sie nicht schwieriger, aber anders. Im verkarsteten Kalk fließt Wasser über Spalten und tritt oft punktuell an der Kellerwand aus, statt die Wand gleichmäßig zu durchfeuchten. Diese Stellen finden wir bei der Messung und dichten sie gezielt ab.",
       },
     ],
-    nearby: ["solingen", "mettmann", "wuppertal"],
+    nearby: ["solingen", "wuppertal"],
   },
 
-  // Mettmann
-  {
-    slug: "mettmann",
-    name: "Mettmann",
-    keyword: "Kellersanierung Mettmann",
-    title: "Kellersanierung Mettmann | Feuchte Keller & Schimmel",
-    metaDescription:
-      "Kellersanierung Mettmann: feuchte Keller in Oberstadt, Metzkausen und Obschwarzbach von innen abdichten. Kostenlose Feuchtemessung, Festpreis.",
-    h1: "Kellersanierung Mettmann: von der Oberstadt bis ans Neandertal",
-    lede:
-      "Mettmann ist Kreisstadt, Fachwerkstadt und Tor zum Neandertal. Die Keller reichen vom Gewölbe unter einem Fachwerkhaus bis zum Betonkeller im Wohngebiet, und jeder braucht eine eigene Antwort auf Feuchtigkeit.",
-    plz: ["40822"],
-    districts: ["Innenstadt", "Oberstadt", "Metzkausen", "Obschwarzbach"],
-    geo: { lat: 51.250, lng: 6.975 },
-    responseTime: "24 bis 48 Stunden",
-    localFactors: [
-      {
-        name: "Fachwerk in der Oberstadt",
-        text: "Die historische Oberstadt rund um St. Lambertus ist von Fachwerkhäusern geprägt, deren Bruchsteinkeller keine Abdichtung besitzen.",
-      },
-      {
-        name: "Kalkgestein am Neandertal",
-        text: "Das Neandertal ist ein Kalksteintal der Düssel, das im 19. Jahrhundert durch Steinbrüche stark verändert wurde. Im Kalk fließt Wasser über Klüfte und Spalten.",
-      },
-      {
-        name: "Bachtäler im Stadtgebiet",
-        text: "Der Mettmanner Bach durchfließt die Stadt. In den Tallagen sind Böden und Keller feuchter als auf den Anhöhen.",
-      },
-    ],
-    sections: [
-      {
-        heading: "Oberstadt: Fachwerk über Bruchstein",
-        paragraphs: [
-          "Die Mettmanner Oberstadt mit ihren Fachwerkhäusern rund um St. Lambertus ist der älteste Teil der Stadt. Viele dieser Häuser stehen auf Sockeln und Kellern aus Bruchstein, gebaut in einer Zeit, als Keller vor allem kühl sein sollten. Heute werden diese Räume als Lager, Hobbykeller oder Teil eines Ladengeschäfts genutzt, und mit der Nutzung steigen die Ansprüche. Feuchte Wände, Salzränder und muffiger Geruch passen nicht mehr dazu.",
-          "Bei Fachwerkhäusern kommt hinzu, dass aufsteigende Feuchte aus dem Keller langfristig auch die Holzkonstruktion darüber gefährdet. Die Schwelle, auf der das Fachwerk ruht, liegt direkt auf dem Sockelmauerwerk. Bleibt dieses dauerhaft feucht, leidet das Holz. Eine Horizontalsperre im Sockel unterbricht diesen Feuchtetransport. Wir setzen sie von innen, ohne die Fassade anzufassen, und verwenden anschließend einen diffusionsoffenen Sanierputz, damit das Mauerwerk austrocknen kann.",
-        ],
-      },
-      {
-        heading: "Metzkausen und die Wohngebiete: Betonkeller mit Schwachstellen",
-        paragraphs: [
-          "In Metzkausen und den übrigen Wohngebieten stehen viele Häuser aus der zweiten Hälfte des 20. Jahrhunderts. Ihre Keller sind meist aus Beton oder Kalksandstein gebaut und außen mit einem Bitumenanstrich abgedichtet. Nach Jahrzehnten ist dieser Anstrich oft spröde, und Wasser findet seinen Weg über Arbeitsfugen, Rohrdurchführungen und Risse. Die Schäden sind dann eher punktuell als großflächig, zeigen sich aber bei jedem stärkeren Regen erneut.",
-          "Für diese Keller ist die Rissverpressung mit PU-Harz oft der wichtigste Baustein. Sie stoppt das eindringende Wasser genau dort, wo es in den Keller gelangt. Ergänzend dichten wir den Boden-Wand-Anschluss mit einer Hohlkehle und mineralischen Dichtungsschlämmen ab. So bleibt der Aufwand überschaubar, und der Keller wird trotzdem dauerhaft trocken. Welche Stellen tatsächlich betroffen sind, zeigt die kostenlose Messung vor Ort.",
-        ],
-      },
-    ],
-    faqs: [
-      {
-        q: "Schadet ein feuchter Keller meinem Fachwerkhaus?",
-        a: "Auf Dauer ja. Steigt Feuchte im Sockelmauerwerk auf, erreicht sie die hölzerne Schwelle und die unteren Hölzer des Fachwerks. Eine Horizontalsperre im Sockel unterbricht diesen Weg, ohne dass Fassade oder Fachwerk verändert werden müssen.",
-      },
-      {
-        q: "Wie schnell sind Sie in Mettmann vor Ort?",
-        a: "Mettmann erreichen wir in der Regel innerhalb von 24 bis 48 Stunden. Die erste Feuchtemessung ist kostenlos, und im Anschluss erhalten Sie ein verbindliches Festpreisangebot.",
-      },
-    ],
-    nearby: ["haan", "velbert", "wuppertal"],
-  },
 
   // Wermelskirchen
   {
