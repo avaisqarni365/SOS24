@@ -1,5 +1,4 @@
 import React from "react";
-import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { COMPANY_INFO } from "@/data/content-data";
 
@@ -13,13 +12,13 @@ export default function ImpressumPage() {
   return (
     <div className="min-h-screen bg-[#0b0e14] py-16 px-4 sm:px-6 text-slate-300">
       <div className="max-w-3xl mx-auto bg-white/[0.02] rounded-3xl p-8 sm:p-12 border border-white/[0.08]">
-        <Link
+        <a
           href="/"
           className="inline-flex items-center gap-2 text-xs font-mono text-cyan-400 hover:underline mb-8"
         >
           <ArrowLeft className="w-4 h-4" />
           <span>Zurück zur Startseite</span>
-        </Link>
+        </a>
 
         <h1 className="text-3xl font-extrabold text-white tracking-tight mb-8">
           Impressum

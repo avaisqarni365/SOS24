@@ -36,13 +36,24 @@ jobs:
           cache: "pnpm"
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile --trust-lockfile
+        run: pnpm install --frozen-lockfile
+
+      # configure-pages reports the site's base path: "/SOS24" while it is
+      # served from avaisqarni365.github.io/SOS24/, empty once a custom
+      # domain (sos-abdichtung.de) is set. The build follows it.
+      - name: Setup Pages
+        id: pages
+        uses: actions/configure-pages@v5
 
       - name: Build static export
         run: pnpm run build
+        env:
+          PAGES_BASE_PATH: ${{ steps.pages.outputs.base_path }}
 
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
+      - name: Prefix site paths for a sub-folder preview
+        run: node scripts/apply-base-path.mjs
+        env:
+          PAGES_BASE_PATH: ${{ steps.pages.outputs.base_path }}
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
