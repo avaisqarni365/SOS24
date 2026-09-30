@@ -957,3 +957,46 @@ figcaption {
     transform: translate(0, -50%);
   }
 }
+
+/* ========================================================== LEGAL ======= */
+.legal__body {
+  color: var(--text-on-bone);
+  font-size: 0.98rem;
+  line-height: 1.7;
+}
+.legal__body section + section {
+  margin-top: 2.25rem;
+}
+.legal__body h2 {
+  margin: 0 0 0.6rem;
+  font-family: var(--sc-font-display);
+  font-size: 1.45rem;
+  font-weight: 500;
+  color: var(--head-on-bone);
+}
+.legal__body h3 {
+  margin: 1.2rem 0 0.35rem;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--head-on-bone);
+}
+.legal__body p,
+.legal__body li {
+  text-align: start;
+}
+.legal__body p + p {
+  margin-top: 0.6rem;
+}
+.legal__body ul {
+  margin: 0.5rem 0 0;
+  padding-left: 1.2rem;
+  list-style: disc;
+}
+.legal__body a {
+  color: var(--emerald-deep);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.legal__body address {
+  font-style: normal;
+}
