@@ -2,9 +2,10 @@
 
 import React, { useState } from "react";
 import { Calculator, ShieldCheck, ArrowRight, CheckCircle2, TrendingDown } from "lucide-react";
-import { COMPANY_INFO } from "@/data/content-data";
+import { useLanguage } from "@/i18n/LanguageContext";
 
 export default function CostCalculator() {
+  const { t } = useLanguage();
   const [damageType, setDamageType] = useState<"wand" | "keller" | "schimmel">("wand");
   const [meters, setMeters] = useState<number>(10);
   const [wallType, setWallType] = useState<"altbau" | "beton">("altbau");
@@ -21,15 +22,15 @@ export default function CostCalculator() {
       <div className="relative max-w-6xl mx-auto px-6 py-24 sm:py-32">
         {/* Section Header */}
         <p className="text-[11px] font-semibold uppercase tracking-[0.18em] mb-5 text-landing-emerald font-mono">
-          Kosten & Ersparnisrechner
+          {t("calc.eyebrow")}
         </p>
         <h2 className="font-editorial font-normal tracking-[-0.02em] leading-[1.04] text-[2.25rem] sm:text-5xl lg:text-[3.5rem] text-[#1A1D1B]">
-          Transparente Kosten.
+          {t("calc.h1")}
           <br />
-          <span className="italic text-landing-mint">Bis zu 60% günstiger als Aufgraben.</span>
+          <span className="italic text-landing-mint">{t("calc.accent")}</span>
         </h2>
         <p className="mt-6 max-w-2xl text-base sm:text-lg leading-relaxed text-[#444945]">
-          Vergleichen Sie das schonende chemische Injektionsverfahren von der Innenseite mit einer aufwändigen und teuren Außenaufgrabung für Ihr Gebäude in Wuppertal und Umgebung.
+          {t("calc.sub")}
         </p>
 
         {/* Snow White Bright Calculator Card */}
@@ -37,7 +38,7 @@ export default function CostCalculator() {
           <div className="p-6 sm:p-8 bg-landing-bone2/60 border-b border-black/5 flex flex-wrap items-center justify-between gap-4">
             <div className="flex items-center gap-2 text-xs font-mono text-[#1A1D1B]">
               <span className="w-2 h-2 rounded-full bg-landing-emerald" />
-              <span>Richtwerte nach WTA-Norm · Festpreis-Garantie ohne Überraschungen</span>
+              <span>WTA Merkblatt 4-4-04 · Festpreis-Garantie</span>
             </div>
             <div className="flex items-center gap-2 text-xs font-mono text-landing-emerald font-semibold bg-white px-3 py-1.5 rounded-full border border-black/5 shadow-xs">
               <ShieldCheck className="w-4 h-4" />
@@ -50,7 +51,7 @@ export default function CostCalculator() {
             <div className="lg:col-span-7 space-y-7">
               <div>
                 <label className="block text-xs font-mono font-bold text-[#1A1D1B] uppercase tracking-wider mb-3">
-                  1. Schadensbild auswählen
+                  {t("calc.step1")}
                 </label>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                   {[
@@ -80,10 +81,10 @@ export default function CostCalculator() {
               <div>
                 <div className="flex items-center justify-between mb-3">
                   <label className="text-xs font-mono font-bold text-[#1A1D1B] uppercase tracking-wider">
-                    2. Betroffene Wandlänge:
+                    {t("calc.step2")}
                   </label>
                   <span className="text-sm font-mono font-bold text-landing-emerald bg-landing-emerald/10 px-3.5 py-1 rounded-full border border-landing-emerald/20">
-                    {meters} Laufmeter
+                    {meters} m
                   </span>
                 </div>
                 <input
@@ -96,15 +97,15 @@ export default function CostCalculator() {
                   className="w-full h-2 bg-black/10 rounded-lg appearance-none cursor-pointer accent-landing-emerald"
                 />
                 <div className="flex justify-between text-[11px] font-mono text-[#444945] mt-2">
-                  <span>3 m (Teilabschnitt)</span>
-                  <span>15 m (Halber Keller)</span>
-                  <span>35 m (Komplettes Haus)</span>
+                  <span>3 m</span>
+                  <span>15 m</span>
+                  <span>35 m</span>
                 </div>
               </div>
 
               <div>
                 <label className="block text-xs font-mono font-bold text-[#1A1D1B] uppercase tracking-wider mb-2.5">
-                  3. Mauerwerkstyp
+                  {t("calc.step3")}
                 </label>
                 <div className="grid grid-cols-2 gap-3">
                   <button
@@ -136,7 +137,7 @@ export default function CostCalculator() {
               <div>
                 <div className="flex items-center justify-between mb-4">
                   <span className="text-[11px] font-mono uppercase tracking-wider text-landing-emerald font-semibold">
-                    Kalkulierter Richtpreis
+                    {t("calc.estTitle")}
                   </span>
                   <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-landing-emerald/15 text-landing-emerald border border-landing-emerald/25 font-bold">
                     ca. -60% Ersparnis
@@ -190,7 +191,7 @@ export default function CostCalculator() {
                   href="#kontakt"
                   className="w-full inline-flex items-center justify-center gap-2 rounded-full px-6 py-3.5 text-sm font-semibold transition-all active:scale-[0.98] bg-[#1A1D1B] text-landing-bone hover:bg-black shadow-sm"
                 >
-                  <span>Verbindliches Festpreisangebot anfragen</span>
+                  <span>{t("calc.cta")}</span>
                   <ArrowRight className="w-4 h-4 text-landing-mint" />
                 </a>
                 <p className="text-[10px] text-center text-black/40 mt-2 font-mono">

@@ -3,8 +3,10 @@
 import React, { useState } from "react";
 import { ChevronDown, PhoneCall } from "lucide-react";
 import { FAQS, COMPANY_INFO } from "@/data/content-data";
+import { useLanguage } from "@/i18n/LanguageContext";
 
 export default function FAQ() {
+  const { t } = useLanguage();
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   const toggle = (idx: number) => {
@@ -16,15 +18,15 @@ export default function FAQ() {
       <div className="relative max-w-4xl mx-auto px-6 py-24 sm:py-32">
         {/* Section Header */}
         <p className="text-[11px] font-semibold uppercase tracking-[0.18em] mb-5 text-landing-emerald font-mono">
-          Häufige Fragen & Antworten
+          {t("faq.eyebrow")}
         </p>
         <h2 className="font-editorial font-normal tracking-[-0.02em] leading-[1.04] text-[2.25rem] sm:text-5xl lg:text-[3.5rem] text-[#1A1D1B]">
-          Wissenswertes zur Kellersanierung.
+          {t("faq.h1")}
           <br />
-          <span className="italic text-landing-mint">Präzise Antworten.</span>
+          <span className="italic text-landing-mint">{t("faq.accent")}</span>
         </h2>
         <p className="mt-6 max-w-2xl text-base sm:text-lg leading-relaxed text-[#444945]">
-          Kompakte Antworten auf die wichtigsten Fragen rund um feuchte Kellerwände, Kosten und chemische Horizontalsperren im Raum Wuppertal.
+          {t("faq.sub")}
         </p>
 
         {/* Snow White Accordion Cards */}

@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from "react";
 import { Phone, MapPin, CheckCircle2, MessageSquare, ArrowRight } from "lucide-react";
 import { COMPANY_INFO } from "@/data/content-data";
+import { useLanguage } from "@/i18n/LanguageContext";
 
 const DAMAGE_OPTIONS = [
   "Feuchte Kellerwände / Horizontalsperre",
@@ -32,6 +33,7 @@ const field =
 const lbl = "block text-xs font-mono font-bold text-[var(--head-on-bone)] mb-2";
 
 export default function ContactForm({ defaultDamage, place }: { defaultDamage?: string; place?: string }) {
+  const { t, lang } = useLanguage();
   const [formData, setFormData] = useState<Enquiry>({
     name: "",
     phone: "",
@@ -97,19 +99,18 @@ export default function ContactForm({ defaultDamage, place }: { defaultDamage?: 
     <section id="kontakt" className="surface-bone-2 relative" aria-labelledby="kontakt-title">
       <div className="relative mx-auto max-w-6xl px-6 py-24 sm:py-32">
         <p className="mb-5 font-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-[var(--emerald-deep)]">
-          Kontakt & Vor-Ort-Analyse
+          {t("contact.eyebrow")}
         </p>
         <h2
           id="kontakt-title"
           className="font-editorial text-[2.25rem] font-normal leading-[1.04] tracking-[-0.02em] text-[var(--head-on-bone)] sm:text-5xl lg:text-[3.5rem]"
         >
-          Sprechen wir über Ihr Objekt{place ? ` in ${place}` : ""}.
+          {place && lang === "de" ? `Sprechen wir über Ihr Objekt in ${place}.` : t("contact.h1")}
           <br />
-          <span className="italic text-[var(--emerald-deep)]">Die Feuchtemessung ist kostenlos.</span>
+          <span className="italic text-[var(--emerald-deep)]">{t("contact.accent")}</span>
         </h2>
         <p className="mt-6 max-w-2xl text-base leading-relaxed text-[var(--text-on-bone)] sm:text-lg">
-          Vereinbaren Sie Ihren unverbindlichen Termin. {COMPANY_INFO.owner} misst die Feuchtigkeit im Mauerwerk und
-          erstellt Ihnen ein transparentes Festpreisangebot.
+          {t("contact.sub")}
         </p>
 
         <div className="mt-14 grid grid-cols-1 gap-10 lg:grid-cols-12">
@@ -137,13 +138,13 @@ export default function ContactForm({ defaultDamage, place }: { defaultDamage?: 
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                   <div>
                     <label htmlFor="f-name" className={lbl}>
-                      Name *
+                      {t("contact.name")}
                     </label>
                     <input id="f-name" name="name" type="text" required autoComplete="name" value={formData.name} onChange={set("name")} placeholder="z. B. Markus Schmidt" className={field} {...p("Name der anfragenden Person")} />
                   </div>
                   <div>
                     <label htmlFor="f-phone" className={lbl}>
-                      Telefon für Rückruf *
+                      {t("contact.phone")}
                     </label>
                     <input id="f-phone" name="phone" type="tel" required autoComplete="tel" value={formData.phone} onChange={set("phone")} placeholder="z. B. 0170 1234567" className={field} {...p("Telefonnummer für den Rückruf")} />
                   </div>
@@ -151,20 +152,20 @@ export default function ContactForm({ defaultDamage, place }: { defaultDamage?: 
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                   <div>
                     <label htmlFor="f-email" className={lbl}>
-                      E-Mail
+                      {t("contact.email")}
                     </label>
                     <input id="f-email" name="email" type="email" autoComplete="email" value={formData.email} onChange={set("email")} placeholder="name@beispiel.de" className={field} {...p("E-Mail-Adresse, optional")} />
                   </div>
                   <div>
                     <label htmlFor="f-plz" className={lbl}>
-                      PLZ des Objekts *
+                      {t("contact.plz")}
                     </label>
                     <input id="f-plz" name="plz" type="text" inputMode="numeric" pattern="[0-9]{5}" required maxLength={5} autoComplete="postal-code" value={formData.plz} onChange={set("plz")} placeholder="z. B. 42103" className={field} {...p("Fünfstellige Postleitzahl des Objekts")} />
                   </div>
                 </div>
                 <div>
                   <label htmlFor="f-damage" className={lbl}>
-                    Art des Schadens
+                    {t("contact.damage")}
                   </label>
                   <select id="f-damage" name="damageType" value={formData.damageType} onChange={set("damageType")} className={field} {...p("Art des Schadens")}>
                     {DAMAGE_OPTIONS.map((o) => (
@@ -176,7 +177,7 @@ export default function ContactForm({ defaultDamage, place }: { defaultDamage?: 
                 </div>
                 <div>
                   <label htmlFor="f-msg" className={lbl}>
-                    Ihre Nachricht
+                    {t("contact.msg")}
                   </label>
                   <textarea id="f-msg" name="message" rows={3} value={formData.message} onChange={set("message")} placeholder="z. B. Altbau von 1912, feuchte Raumecke seit Starkregen" className={field} {...p("Kurze Beschreibung des Problems")} />
                 </div>
@@ -184,7 +185,7 @@ export default function ContactForm({ defaultDamage, place }: { defaultDamage?: 
                   type="submit"
                   className="inline-flex min-h-[52px] w-full items-center justify-center gap-2 rounded-full bg-[var(--head-on-bone)] px-7 py-4 text-sm font-semibold text-[var(--bone)] shadow-sm hover:bg-black"
                 >
-                  Kostenlose Feuchtemessung anfragen
+                  {t("contact.submit")}
                   <ArrowRight className="h-4 w-4 text-[var(--mint)]" aria-hidden="true" />
                 </button>
                 <p className="text-center font-mono text-[11px] text-[var(--text-on-bone)]">

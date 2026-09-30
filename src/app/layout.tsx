@@ -4,6 +4,7 @@ import localFont from "next/font/local";
 import "@/styles/scrollcraft.css";
 import "@/styles/globals.css";
 import { SITE_URL } from "@/lib/site";
+import { LanguageProvider } from "@/i18n/LanguageContext";
 
 // Self-hosted variable fonts: no request to Google at runtime (DSGVO) and no build-time fetch.
 const inter = localFont({
@@ -65,7 +66,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       className={`${inter.variable} ${newsreader.variable} ${mono.variable}`}
       suppressHydrationWarning
     >
-      <body className="min-h-screen font-sans antialiased">{children}</body>
+      <body className="min-h-screen font-sans antialiased">
+        <LanguageProvider>{children}</LanguageProvider>
+      </body>
     </html>
   );
 }

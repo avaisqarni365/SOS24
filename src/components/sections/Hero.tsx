@@ -3,14 +3,16 @@
 import React from "react";
 import AmbientGlow from "@/components/ui/AmbientGlow";
 import WireframeOrb from "@/components/ui/WireframeOrb";
-import { COMPANY_INFO } from "@/data/content-data";
+import { useLanguage } from "@/i18n/LanguageContext";
 
 export default function Hero() {
+  const { t } = useLanguage();
+
   const stats = [
-    { value: "42", label: "PLZ-Region Wuppertal · Solingen · Remscheid" },
-    { value: "100%", label: "Drucklose Silan-Mikroemulsion nach WTA" },
-    { value: "10 J.", label: "Gewährleistung auf Mauerwerksdichtigkeit" },
-    { value: "24h", label: "Reaktionszeit für Vor-Ort-Feuchtemessung" }
+    { value: t("hero.stat1Val"), label: t("hero.stat1Label") },
+    { value: t("hero.stat2Val"), label: t("hero.stat2Label") },
+    { value: t("hero.stat3Val"), label: t("hero.stat3Label") },
+    { value: t("hero.stat4Val"), label: t("hero.stat4Label") }
   ];
 
   return (
@@ -21,21 +23,20 @@ export default function Hero() {
 
       <div className="relative max-w-6xl mx-auto px-6 pt-24 pb-12 sm:pt-32 sm:pb-16 text-center">
         {/* Eyebrow - Kontai24 Signature Tagline */}
-        <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-landing-mint mb-7">
-          Kellersanierung & Horizontalsperren Wuppertal
+        <p className="text-[11px] font-semibold uppercase tracking-[0.2em] text-landing-mint mb-7 font-mono">
+          {t("hero.tagline")}
         </p>
 
         {/* Headline - Exact Editorial Serif & Luminous Mint Accent */}
         <h1 className="mx-auto max-w-3xl font-editorial font-normal tracking-[-0.025em] leading-[1.05] text-landing-bone text-[2.15rem] sm:text-5xl lg:text-[3.4rem]">
-          Gedichtet. Injiziert. Getrocknet.
+          {t("hero.h1")}
           <br />
-          <span className="italic text-landing-mint">Dauerhaft.</span>
+          <span className="italic text-landing-mint">{t("hero.accent")}</span>
         </h1>
 
         {/* Lede Text */}
         <p className="mt-8 mx-auto max-w-2xl text-base sm:text-lg leading-relaxed text-landing-bone/70">
-          sos-abdichtung stoppt aufsteigende Feuchtigkeit, saniert nasse Kellerwände und beseitigt Schimmel im Raum Wuppertal und Bergisches Land. 
-          Das WTA-Injektionsverfahren verdrängt Wasser auf molekularer Ebene — sauber von der Innenseite, ohne Baggerarbeiten und mit 10 Jahren Garantie.
+          {t("hero.sub")}
         </p>
 
         {/* Buttons - Pill Shape Hierarchy from Kontai24 */}
@@ -44,7 +45,7 @@ export default function Hero() {
             href="#kontakt"
             className="inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition-all active:scale-[0.98] bg-landing-bone text-[#0E1310] hover:bg-white shadow-sm"
           >
-            <span>Kostenlose Vor-Ort-Analyse anfragen</span>
+            <span>{t("hero.ctaPrimary")}</span>
             <span aria-hidden="true">→</span>
           </a>
 
@@ -52,14 +53,14 @@ export default function Hero() {
             href="#3d-injektion"
             className="inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition-all active:scale-[0.98] text-landing-bone hover:text-landing-mint"
           >
-            <span>3D-Injektionsmodell ansehen</span>
+            <span>{t("hero.ctaSecondary")}</span>
             <span aria-hidden="true">↓</span>
           </a>
         </div>
 
         {/* Trust Strip */}
         <p className="mt-10 text-xs text-landing-bone/70 font-mono tracking-wider">
-          WTA-MERKBLATT 4-4-04 · TÜV-GEPRÜFTE BAUSTOFFE · 10 JAHRE GARANTIE · OHNE AUFGRABEN · PLZ 42
+          {t("hero.trustStrip")}
         </p>
       </div>
 

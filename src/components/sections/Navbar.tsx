@@ -4,16 +4,19 @@ import React, { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { COMPANY_INFO } from "@/data/content-data";
 import Logo from "@/components/brand/Logo";
+import LanguageSelector from "@/components/navigation/LanguageSelector";
+import { useLanguage } from "@/i18n/LanguageContext";
 
 const LINKS = [
-  { href: "/#schicht-fuer-schicht", label: "Verfahren" },
-  { href: "/#leistungen", label: "Leistungen" },
-  { href: "/#rechner", label: "Kosten" },
-  { href: "/#servicegebiet", label: "Servicegebiet" },
+  { href: "/#schicht-fuer-schicht", key: "nav.process3d" },
+  { href: "/#leistungen", key: "nav.services" },
+  { href: "/#rechner", key: "nav.calculator" },
+  { href: "/#servicegebiet", key: "nav.region" },
 ];
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
+  const { t } = useLanguage();
 
   return (
     <header className="fixed inset-x-0 top-0 z-50 border-b border-white/5 bg-[#0e1310]/85 backdrop-blur-lg">
@@ -29,13 +32,14 @@ export default function Navbar() {
           {LINKS.map((l) => (
             <li key={l.href}>
               <a href={l.href} className="hover:text-[var(--bone)]">
-                {l.label}
+                {t(l.key)}
               </a>
             </li>
           ))}
         </ul>
 
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-3 sm:gap-4">
+          <LanguageSelector />
           <a href={`tel:${COMPANY_INFO.phoneTel}`} className="hidden font-mono text-sm text-[var(--bone)]/70 hover:text-[var(--bone)] lg:inline">
             {COMPANY_INFO.phoneDisplay}
           </a>
@@ -43,7 +47,7 @@ export default function Navbar() {
             href="/#kontakt"
             className="hidden min-h-[44px] items-center rounded-full bg-[var(--bone)] px-4 text-sm font-semibold text-[var(--ink)] hover:bg-white sm:inline-flex"
           >
-            Feuchtemessung anfragen
+            {t("nav.cta")}
           </a>
           <button
             type="button"
@@ -64,13 +68,13 @@ export default function Navbar() {
             {LINKS.map((l) => (
               <li key={l.href}>
                 <a href={l.href} onClick={() => setOpen(false)} className="block py-3">
-                  {l.label}
+                  {t(l.key)}
                 </a>
               </li>
             ))}
             <li>
               <a href="/#faq" onClick={() => setOpen(false)} className="block py-3">
-                Häufige Fragen
+                {t("nav.faq")}
               </a>
             </li>
           </ul>
@@ -79,7 +83,7 @@ export default function Navbar() {
               {COMPANY_INFO.phoneDisplay}
             </a>
             <a href="/#kontakt" onClick={() => setOpen(false)} className="rounded-full bg-[var(--bone)] py-3 text-center text-sm font-semibold text-[var(--ink)]">
-              Kostenlose Feuchtemessung anfragen
+              {t("contact.submit")}
             </a>
           </div>
         </div>
