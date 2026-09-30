@@ -188,14 +188,14 @@ export function RegionSection() {
               ))}
             </g>
             <path
-              d="M600 238 C540 250 470 262 420 270 C390 275 370 280 357 282 C320 290 300 300 305 330 C310 360 280 380 250 420"
+              d="M600 219 C540 230 470 241 420 248 C390 253 370 257 357 256 C320 262 300 276 305 303 C310 331 280 349 250 420"
               stroke="#3b82c4"
               strokeWidth="4"
               fill="none"
               strokeLinecap="round"
               opacity="0.8"
             />
-            <text x="470" y="255" fill="#5a8fc4" fontSize="13" fontStyle="italic">
+            <text x="480" y="228" fill="#5a8fc4" fontSize="13" fontStyle="italic">
               Wupper
             </text>
             {CITY_PAGES.map((c) => {

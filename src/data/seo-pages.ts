@@ -44,7 +44,7 @@ export const SERVICE_PAGES: ServicePage[] = [
     keyword: "Keller trockenlegen",
     title: "Keller trockenlegen ohne Aufgraben | Kellersanierung",
     metaDescription:
-      "Keller trockenlegen ohne Aufgraben: Ursache messen, von innen sanieren, Festpreisangebot und 10 Jahre Garantie. Kostenlose Feuchtemessung vor Ort.",
+      "Keller trockenlegen ohne Aufgraben: Ursache messen, von innen sanieren, verbindliches Angebot, 10 Jahre Garantie auf die Arbeit. Messung kostenlos.",
     h1: "Keller trockenlegen: nasse Keller dauerhaft sanieren, ohne Aufgraben",
     lede:
       "Ob muffiger Geruch, Salzränder oder Schimmel in der Ecke: Ein feuchter Keller hat fast immer eine messbare Ursache. Wir finden sie und sanieren von innen, damit Garten, Einfahrt und Pflaster unberührt bleiben.",
@@ -96,7 +96,8 @@ export const SERVICE_PAGES: ServicePage[] = [
           "Keine Erdarbeiten, Garten und Einfahrt bleiben unberührt",
           "Bis zu 60 Prozent günstiger als eine Außenaufgrabung",
           "Verbindliches Festpreisangebot nach der Messung",
-          "10 Jahre Garantie auf die Injektionssperre",
+          "Bis zu 25 Jahre Produktgarantie des Herstellers SchimmelPeter GmbH",
+          "10 Jahre Garantie von sos-abdichtung auf die ausgeführten Arbeiten",
         ],
       },
       {
@@ -109,20 +110,20 @@ export const SERVICE_PAGES: ServicePage[] = [
     ],
     steps: [
       {
-        title: "Feuchtemessung vor Ort",
-        text: "Herr Mahmood misst kostenlos die Feuchte im Mauerwerk und unterscheidet kapillare, seitlich eindringende und hygroskopische Feuchte sowie Kondensat.",
+        title: "Schadensanalyse vor Ort",
+        text: "Herr Mahmood begeht Haus und Keller außen und innen, misst kostenlos und präzise die Feuchte im Mauerwerk und ermittelt die genaue Ursache.",
       },
       {
-        title: "Sanierungskonzept zum Festpreis",
-        text: "Sie erhalten ein schriftliches Konzept, welche Wand welche Maßnahme braucht, mit einem verbindlichen Festpreis ohne versteckte Mehrkosten.",
+        title: "Verbindliches Angebot",
+        text: "Sie erhalten ein verbindliches Angebot, aus dem hervorgeht, welche Wand welche Maßnahme braucht, ohne versteckte Mehrkosten.",
       },
       {
-        title: "Abdichten von innen",
-        text: "Alter Putz wird entfernt, die Horizontalsperre injiziert und am Boden-Wand-Anschluss eine Hohlkehle mit Dichtungsschlämme eingebaut.",
+        title: "Sanierungsplan mit Ihnen",
+        text: "Gemeinsam mit Ihnen legen wir fest, in welcher Reihenfolge Horizontalsperre, Hohlkehle, Innenabdichtung und Sanierputz eingebaut werden.",
       },
       {
-        title: "Sanierputz und Trocknung",
-        text: "Ein Sanierputzsystem und bei Bedarf eine Schutzentfeuchtung sorgen dafür, dass die Wand kontrolliert und dauerhaft austrocknet.",
+        title: "Sanierung und saubere Übergabe",
+        text: "Wir sanieren von innen, begleiten die Austrocknung bei Bedarf mit einer Schutzentfeuchtung und hinterlassen den Arbeitsplatz sauber.",
       },
     ],
     faqs: [
@@ -153,10 +154,10 @@ export const SERVICE_PAGES: ServicePage[] = [
     keyword: "Feuchte Wände trockenlegen",
     title: "Feuchte Wände trockenlegen | Horizontalsperre Wuppertal",
     metaDescription:
-      "Feuchte Wände trockenlegen ohne Aufgraben: Horizontalsperre per Injektion nach WTA-Merkblatt 4-4-04 mit 10 Jahren Garantie. Raum Wuppertal.",
+      "Feuchte Wände trockenlegen ohne Aufgraben: Horizontalsperre per SchimmelPeter-Injektion, keine Vortrocknung, 10 Jahre Garantie auf die Arbeit.",
     h1: "Feuchte Wände trockenlegen mit einer Horizontalsperre im Injektionsverfahren",
     lede:
-      "Steigt Feuchtigkeit aus dem Fundament im Mauerwerk auf, hilft kein Anstrich und kein neuer Putz. Eine injizierte Horizontalsperre stoppt den kapillaren Wassertransport direkt in der Wand, ohne dass außen ein Spaten angesetzt werden muss.",
+      "Steigt Feuchtigkeit aus dem Fundament im Mauerwerk auf, hilft kein Anstrich und kein neuer Putz. Mit der Injektion von SchimmelPeter erneuern wir eine defekte Horizontalsperre direkt in der Wand, ohne aufwendige Erdarbeiten und in der Regel ohne Vortrocknung.",
     symptoms: [
       "Feuchtezone, die vom Boden aus nach oben zieht und in einer deutlichen Linie endet",
       "Weiße, kristalline Salzausblühungen im unteren Wandbereich",
@@ -166,89 +167,99 @@ export const SERVICE_PAGES: ServicePage[] = [
     ],
     layers: [
       {
-        name: "Fundament",
-        text: "Aus dem feuchten Erdreich unter dem Haus saugt das Mauerwerk Wasser über seine feinen Poren an.",
+        name: "Fundament und Erdreich",
+        text: "Aus dem feuchten Erdreich unter dem Haus saugt das Mauerwerk über seine feinen Kapillaren Wasser an und leitet es nach oben.",
       },
       {
-        name: "Bohrlochkette",
-        text: "Im unteren Wandbereich setzen wir schräge Bohrungen im Abstand von 10 bis 12 cm, die bis kurz vor die Außenseite reichen.",
+        name: "Bohrlochreihe",
+        text: "Im feuchten Mauerwerk setzen wir Bohrlöcher im Abstand von bis zu 20 cm und bringen eine genau berechnete Menge Injektionsmittel ein.",
       },
       {
-        name: "Horizontalsperre",
-        text: "Die injizierte Silan-Mikroemulsion kleidet die Poren wasserabweisend aus und bildet eine durchgehende Sperrschicht.",
+        name: "Injektionszone",
+        text: "Der in Paraffin gelöste Kunststoff verteilt sich vollständig in der Injektionszone und wirkt im Mauerwerk wie ein flüssiger Schutzschild.",
+      },
+      {
+        name: "Wasserabweisende Sperrschicht",
+        text: "Das Polymer verbindet sich hydrophob mit den Kapillarwänden. Die Schicht ist nur wenige Moleküle dick, deshalb bleiben die Poren offen.",
       },
       {
         name: "Mauerwerk oberhalb",
-        text: "Oberhalb der Sperre kann die Wand austrocknen, weil von unten kein Wasser mehr nachgeliefert wird.",
-      },
-      {
-        name: "Sanierputz",
-        text: "Ein Sanierputzsystem lagert die verbliebenen Mauersalze ein und verhindert neue Ausblühungen an der Oberfläche.",
+        text: "Ohne Nachschub von unten trocknet die Wand aus. Mit der Feuchtigkeit verdunstet das Paraffinöl, und die natürliche Wärmedämmfähigkeit kehrt zurück.",
       },
     ],
     sections: [
       {
-        heading: "Wie aufsteigende Feuchte entsteht",
+        heading: "Ursachen feuchter Wände und wie aufsteigende Feuchte entsteht",
         paragraphs: [
-          "Mauerwerk aus Ziegel, Kalksandstein oder Naturstein ist von feinen Kapillaren durchzogen. Steht der Wandfuß in feuchtem Erdreich, saugen diese Poren Wasser an und transportieren es nach oben, ähnlich wie ein Docht. Wie hoch die Feuchte steigt, hängt vom Porengefüge, von der Verdunstung an der Oberfläche und vom Salzgehalt ab. In Altbauten ohne funktionierende Sperrschicht sind durchfeuchtete Zonen bis weit ins Erdgeschoss keine Seltenheit.",
+          "Feuchte Wände haben ganz unterschiedliche Ursachen. Häufig sind es Schäden am Dach, undichte Wasser- oder Abwasserleitungen, eine unzureichende Drainage oder Kondenswasser in schlecht belüfteten oder schlecht gedämmten Räumen. Eine Horizontalsperre hilft gegen eine ganz bestimmte Ursache: kapillar aufsteigende Feuchtigkeit aus dem Fundament, die vor allem altes, poröses Mauerwerk betrifft. Deshalb steht am Anfang jeder Sanierung eine Schadensanalyse. Erst wenn feststeht, dass die Nässe tatsächlich von unten kommt, ist die Injektion die richtige Maßnahme und kein teurer Versuch ins Blaue.",
+          "Mauerwerk aus Ziegel, Kalksandstein oder Naturstein ist von feinen Kapillaren durchzogen. Steht der Wandfuß in feuchtem Erdreich, saugen diese Poren Wasser an und transportieren es nach oben, ähnlich wie ein Docht. Wie hoch die Feuchte steigt, hängt vom Porengefüge, von der Verdunstung an der Oberfläche und vom Salzgehalt ab. Fehlt eine Sperrschicht oder hat die alte Bitumenpappe in der Fuge ihre Wirkung verloren, sind durchfeuchtete Zonen bis weit ins Erdgeschoss keine Seltenheit.",
           "Mit dem Wasser wandern gelöste Salze aus Boden und Baustoff in die Wand. Wo das Wasser an der Oberfläche verdunstet, bleiben sie zurück und kristallisieren. Diese Kristalle brauchen mehr Platz, als die Poren bieten, sprengen den Putz ab und zerstören nach und nach auch Fugen und Steine. Außerdem ziehen die Salze Feuchtigkeit aus der Raumluft an. Deshalb bleibt eine versalzene Wand auch dann feucht, wenn der Nachschub von unten längst gestoppt wäre.",
         ],
       },
       {
-        heading: "Das Injektionsverfahren nach WTA-Merkblatt 4-4-04",
+        heading: "So wirkt die SchimmelPeter-Injektion",
         paragraphs: [
-          "Für die nachträgliche Horizontalsperre arbeiten wir nach dem WTA-Merkblatt 4-4-04 zur Mauerwerksinjektion gegen kapillare Feuchtigkeit. In die betroffene Wand wird dicht über dem Kellerboden oder dem Außengelände eine Bohrlochkette gesetzt, mit einem Bohrlochabstand von 10 bis 12 cm. Bei dicken Wänden oder stark durchfeuchtetem Mauerwerk kann eine zweite, versetzte Reihe nötig sein. Hohlräume und offene Fugen, wie sie in Bruchsteinwänden typisch sind, verfüllen wir vorher, damit der Wirkstoff nicht ungenutzt versickert.",
-          "Anschließend injizieren wir eine hochviskose Silan-/Siloxan-Mikroemulsion drucklos in die Bohrlöcher. Der Wirkstoff verteilt sich kapillar im Porengefüge, reagiert mit dem Baustoff und macht die Porenwände dauerhaft wasserabweisend. Der Mauerquerschnitt wird dabei nicht wie beim Mauersägeverfahren durchtrennt, die Wand wird also statisch nicht geschwächt. Auf die Funktionsfähigkeit der chemischen Sperrschicht gewähren wir als SchimmelPeter® Partnerbetrieb 10 Jahre Garantie, schriftlich und bezogen auf die ausgeführten Wände.",
+          "Als SchimmelPeter® Partnerbetrieb erneuern wir defekte Horizontalsperren ohne aufwendige Erdarbeiten. Dazu setzen wir im feuchten Mauerwerk eine Reihe von Bohrlöchern im Abstand von bis zu 20 cm. In diese Bohrlöcher bringen wir eine genau berechnete Menge Injektionsmittel ein. Der Wirkstoff ist ein in Paraffin gelöster Kunststoff, der sich im Mauerwerk wie ein flüssiger Schutzschild verhält. Wie viel Material eine Wand braucht, ermitteln wir vorher bei der Schadensanalyse, denn Baustoff, Wandstärke und Durchfeuchtung unterscheiden sich von Haus zu Haus.",
+          "Im Mauerwerk verteilt sich das Mittel vollständig innerhalb der Injektionszone. Dort verbindet es sich als hydrophobes, also wasserabweisendes Polymer mit den Kapillarwänden des Baustoffs. So entsteht eine neue, wasserabweisende Sperrschicht, an der das von unten aufsteigende Wasser nicht mehr vorbeikommt. Die aufsteigende Feuchtigkeit wird zuverlässig gestoppt, und das Mauerwerk oberhalb der Sperre erhält keinen Nachschub mehr. Für Sie bedeutet das: kein Bagger vor dem Haus, keine aufgerissenen Beete und keine Arbeiten auf dem Grundstück des Nachbarn.",
         ],
         bullets: [
-          "Keine Aufgrabung, Arbeit komplett von innen",
-          "Keine statische Schwächung des Mauerwerks",
-          "Schutz vor weiteren Mauersalzen und Ausblühungen",
-          "10 Jahre Garantie auf die Injektionssperre",
+          "Keine aufwendigen Erdarbeiten rund um das Haus",
+          "Bohrlöcher im Abstand von bis zu 20 cm",
+          "Vortrocknung in der Regel nicht notwendig",
+          "Bis zu 25 Jahre Produktgarantie des Herstellers SchimmelPeter GmbH",
+          "10 Jahre Garantie von sos-abdichtung auf die ausgeführten Arbeiten",
         ],
       },
       {
-        heading: "Was nach der Injektion passiert",
+        heading: "Warum die Wand atmungsaktiv bleibt",
         paragraphs: [
-          "Die Horizontalsperre stoppt den Nachschub. Das Wasser, das bereits in der Wand steckt, ist damit aber noch nicht verschwunden. Das Mauerwerk oberhalb der Sperre trocknet über Monate aus, je nach Wandstärke und Baustoff unterschiedlich schnell. In dieser Zeit darf die Oberfläche nicht mit dichten Materialien wie Dispersionsfarbe oder Zementputz verschlossen werden, sonst staut sich die Feuchte hinter der Schicht und der Schaden zeigt sich an anderer Stelle erneut.",
-          "Den alten, versalzenen Putz schlagen wir deshalb großzügig ab und ersetzen ihn durch ein Sanierputzsystem. Sanierputz ist so porös, dass er Salze in seinem Gefüge einlagert, während Wasserdampf ungehindert nach außen entweichen kann. Bei Bedarf beschleunigt eine Schutzentfeuchtung die Trocknung. Zum Abschluss genügt ein diffusionsoffener Anstrich auf Silikat- oder Kalkbasis, damit die Wand weiterhin Feuchte an die Raumluft abgeben kann.",
+          "Manche Verfahren gegen aufsteigende Feuchte verstopfen die Poren im Mauerwerk. Das hält zwar das Wasser auf, nimmt der Wand aber auch die Möglichkeit, Feuchtigkeit als Dampf abzugeben. Bei der SchimmelPeter-Injektion ist das anders. Die wirksame Polymerschicht ist nur wenige Moleküle dick und kleidet die Kapillaren lediglich aus, statt sie zu füllen. Die Poren bleiben offen, das Mauerwerk bleibt diffusionsfähig. Flüssiges Wasser wird an der Sperrschicht zurückgehalten, Wasserdampf kann dagegen weiterhin durch die Wand wandern.",
+          "Für die Zeit nach der Sanierung ist das entscheidend. Die Feuchtigkeit, die bereits in der Wand steckt, muss irgendwohin, und aus einem diffusionsfähigen Mauerwerk kann sie nach und nach entweichen. Gemeinsam mit der Feuchtigkeit verdunstet auch das Paraffinöl, das als Träger für den Kunststoff gedient hat. Zurück bleibt eine trockene Wand, die ihre natürliche Wärmedämmfähigkeit wiedergewinnt. Ein trockenes Mauerwerk dämmt besser als ein nasses, und das kommt dem Raumklima im Keller wie im Erdgeschoss zugute.",
+        ],
+      },
+      {
+        heading: "Keine Vortrocknung und was nach der Injektion passiert",
+        paragraphs: [
+          "Viele Eigentümer rechnen damit, dass eine nasse Wand erst wochenlang getrocknet werden muss, bevor die eigentliche Sanierung beginnt. Bei der SchimmelPeter-Injektion ist eine Vortrocknung in der Regel nicht notwendig. Das Verfahren wirkt auch in stark durchfeuchtetem Mauerwerk mit einem Durchfeuchtungsgrad von über 90 %. Gerade in den alten Bruchstein- und Ziegelkellern im Bergischen Land, die oft seit Jahrzehnten nass sind, ist das ein großer Vorteil. Die Injektion kann direkt nach der gemeinsamen Planung erfolgen, ohne Trocknungsgeräte als Vorstufe.",
+          "Die Horizontalsperre stoppt den Nachschub, das Wasser in der Wand verschwindet aber nicht über Nacht. Das Mauerwerk oberhalb der Sperre trocknet über Monate aus, je nach Wandstärke und Baustoff unterschiedlich schnell. In dieser Zeit darf die Oberfläche nicht mit dichten Materialien wie Dispersionsfarbe oder Zementputz verschlossen werden. Den alten, versalzenen Putz ersetzen wir deshalb durch ein Sanierputzsystem, das Salze einlagert und Wasserdampf entweichen lässt. Oft ist eine Kombination sinnvoll, etwa mit einer Innenabdichtung an erdberührten Wänden.",
+          "Ausgeführt wird die Injektion von Mitarbeitern, die in den Schulungszentren von SchimmelPeter ausgebildet wurden und mehrmals im Jahr an Schulungen teilnehmen, um auf dem aktuellen Stand zu bleiben. Für die Wirksamkeit des Produkts gibt es bis zu 25 Jahre Produktgarantie des Herstellers SchimmelPeter GmbH. Unabhängig davon übernimmt sos-abdichtung 10 Jahre Garantie auf die ausgeführten Arbeiten. Beide Zusagen stehen nebeneinander und decken unterschiedliche Dinge ab: die eine das Produkt, die andere die handwerkliche Ausführung bei Ihnen vor Ort.",
         ],
       },
     ],
     steps: [
       {
-        title: "Feuchte- und Salzanalyse",
-        text: "Wir messen die Feuchteverteilung und die Durchfeuchtung in der Tiefe und prüfen, ob die Nässe tatsächlich kapillar aufsteigt.",
+        title: "Schadensanalyse",
+        text: "Bei einer Begehung außen und innen messen wir präzise, wie die Feuchte verteilt ist, und ermitteln die genaue Ursache der nassen Wand.",
       },
       {
-        title: "Putz abschlagen und bohren",
-        text: "Versalzener Putz wird entfernt, danach setzen wir die Bohrlochkette im Abstand von 10 bis 12 cm und verfüllen Hohlräume.",
+        title: "Verbindliches Angebot",
+        text: "Steigt die Feuchte kapillar auf, erhalten Sie ein verbindliches Angebot für die Horizontalsperre und alle begleitenden Maßnahmen.",
       },
       {
-        title: "Drucklose Injektion",
-        text: "Die Silan-/Siloxan-Mikroemulsion läuft über Vorratsbehälter in die Bohrlöcher, bis das Mauerwerk im Sperrbereich gesättigt ist.",
+        title: "Sanierungsplan",
+        text: "Gemeinsam mit Ihnen legen wir den Sanierungsplan fest: welche Wände behandelt werden, in welcher Reihenfolge und mit welchem Putz.",
       },
       {
-        title: "Bohrlöcher schließen, Sanierputz",
-        text: "Die Bohrlöcher werden mit Mörtel verschlossen, danach folgt der Sanierputz als Trocknungs- und Salzspeicherschicht.",
+        title: "Injektion und saubere Übergabe",
+        text: "Wir setzen die Bohrlöcher im Abstand von bis zu 20 cm, injizieren die berechnete Menge und hinterlassen den Arbeitsplatz sauber.",
       },
     ],
     faqs: [
       {
         q: "Hilft eine Horizontalsperre auch gegen Feuchte, die seitlich durch die Kellerwand kommt?",
-        a: "Nein, die Horizontalsperre unterbricht nur den Wassertransport von unten nach oben. Dringt Feuchte seitlich aus dem Erdreich durch die Kelleraußenwand, braucht es zusätzlich eine Flächenabdichtung auf der Innenseite. Welche Kombination nötig ist, zeigt die Messung vor Ort.",
+        a: "Nein, die Horizontalsperre unterbricht nur den Wassertransport von unten nach oben. Dringt Feuchte seitlich aus dem Erdreich durch die Kelleraußenwand, braucht es zusätzlich eine Flächenabdichtung auf der Innenseite. Oft ist genau diese Kombination sinnvoll, und welche Maßnahmen Ihre Wand braucht, zeigt die Schadensanalyse vor Ort.",
       },
       {
-        q: "Wann ist die Wand nach der Injektion wieder trocken?",
-        a: "Das hängt von Wandstärke, Baustoff und Ausgangsfeuchte ab. Eine dünne Ziegelwand trocknet deutlich schneller als eine massive Bruchsteinmauer. Entscheidend ist, die Oberfläche in dieser Zeit offen zu halten und nicht mit dichten Farben zu verschließen.",
+        q: "Muss die Wand vor der Injektion erst getrocknet werden?",
+        a: "Nein, eine Vortrocknung ist in der Regel nicht notwendig. Das SchimmelPeter-Verfahren wirkt auch in stark durchfeuchtetem Mauerwerk mit einem Durchfeuchtungsgrad von über 90 %. Damit eignet es sich auch für alte Bruchstein- und Ziegelkeller, die seit Jahrzehnten nass sind.",
       },
       {
-        q: "Funktioniert das Verfahren auch bei Bruchsteinmauerwerk?",
-        a: "Ja, allerdings ist Bruchstein anspruchsvoller als Ziegel, weil Hohlräume und Fugen den Wirkstoff unkontrolliert ableiten können. Wir verfüllen diese Hohlräume deshalb vor der Injektion und passen Bohrraster und Bohrtiefe an die jeweilige Wand an. In den alten Kellern im Bergischen Land ist das häufig nötig.",
+        q: "Kann die Wand nach der Injektion noch atmen?",
+        a: "Ja. Die wirksame Polymerschicht ist nur wenige Moleküle dick, deshalb werden die Kapillarporen nicht verstopft und das Mauerwerk bleibt diffusionsfähig. Die Feuchtigkeit in der Wand kann so nach und nach entweichen, und mit ihr verdunstet auch das Paraffinöl.",
       },
       {
-        q: "Ist das Injektionsmittel im Wohnhaus unbedenklich?",
-        a: "Wir verwenden geprüfte Spezialprodukte auf Silan-/Siloxan-Basis, die nach der Reaktion fest im Porengefüge gebunden sind. Während der Arbeiten sollte der Raum gut gelüftet werden. Kinder und Haustiere halten sich am besten vom Arbeitsbereich fern, bis die Bohrlöcher verschlossen sind.",
+        q: "Welche Garantie erhalte ich auf die Horizontalsperre?",
+        a: "Sie erhalten zwei getrennte Zusagen. Auf die Wirksamkeit des Produkts gibt es bis zu 25 Jahre Produktgarantie des Herstellers SchimmelPeter GmbH. Zusätzlich gibt sos-abdichtung 10 Jahre Garantie auf die ausgeführten Arbeiten.",
       },
     ],
     related: ["kellersanierung", "kellerinnenabdichtung", "feuchtemessung"],
@@ -299,7 +310,7 @@ export const SERVICE_PAGES: ServicePage[] = [
         heading: "Wann eine Innenabdichtung die richtige Wahl ist",
         paragraphs: [
           "Nach der reinen Lehre gehört eine Abdichtung auf die Außenseite der Kellerwand, dorthin, wo das Wasser ankommt. In der Praxis ist die Außenseite aber oft nicht erreichbar: Das Nachbarhaus steht direkt an der Grenze, eine Garage oder Terrasse ist angebaut, oder das Haus steht am Hang mit Stützmauern und Treppen. In all diesen Fällen ist die Innenabdichtung die wirtschaftliche und technisch sinnvolle Lösung. Sie spart die Erdarbeiten und damit bis zu 60 Prozent der Kosten einer Außenaufgrabung.",
-          "Voraussetzung ist ein tragfähiger Untergrund. Die Dichtungsschlämme wird von innen gegen den Wasserdruck aufgebracht und muss deshalb fest mit dem Mauerwerk verbunden sein. Mürbe Fugen, lose Steine und alte Beschichtungen entfernen wir vollständig. Bruchsteinwände, wie sie in vielen Altbauten im Bergischen Land stehen, werden zunächst mit Sperrmörtel egalisiert. Erst auf einer geschlossenen, festen Fläche kann die Abdichtung ihre volle Wirkung entfalten und dauerhaft haften.",
+          "Eingesetzt werden Dichtschlämmen und mineralische Dichtsysteme, die fest mit dem Mauerwerk verbunden sein müssen. Mürbe Fugen, lose Steine und alte Beschichtungen entfernen wir deshalb vollständig, Bruchsteinwände egalisieren wir mit Sperrmörtel. Eine aufwendige Vortrocknung ist nicht nötig: Die Lösung von SchimmelPeter hat eine sehr geringe Oberflächenspannung und verteilt sich selbst in wassergesättigtem Mauerwerk mit über 90 % Durchfeuchtung. Steigt zusätzlich Feuchte kapillar auf, ergänzen wir eine Horizontalsperre, denn oft ist erst die Kombination beider Verfahren die dauerhafte Lösung.",
         ],
       },
       {
@@ -325,20 +336,20 @@ export const SERVICE_PAGES: ServicePage[] = [
     ],
     steps: [
       {
-        title: "Untergrund prüfen",
-        text: "Wir messen die Feuchte, prüfen Festigkeit und Salzbelastung der Wand und klären, ob Bodenfeuchte oder drückendes Wasser anliegt.",
+        title: "Schadensanalyse",
+        text: "Bei einer Begehung außen und innen messen wir die Feuchte, prüfen den Untergrund und klären, ob Bodenfeuchte oder drückendes Wasser anliegt.",
       },
       {
-        title: "Freilegen und vorbereiten",
-        text: "Putz und alte Anstriche kommen vollständig herunter, Fugen werden ausgekratzt und mit Sperrmörtel geschlossen.",
+        title: "Verbindliches Angebot",
+        text: "Sie erhalten ein verbindliches Angebot für Innenabdichtung und Hohlkehle und, falls nötig, für eine ergänzende Horizontalsperre.",
       },
       {
-        title: "Hohlkehle und MDS",
-        text: "Am Boden-Wand-Anschluss entsteht die Hohlkehle, danach folgen die Lagen der mineralischen Dichtungsschlämme bis über das Erdniveau.",
+        title: "Sanierungsplan mit Ihnen",
+        text: "Gemeinsam mit Ihnen legen wir Ablauf und Reihenfolge der Arbeiten fest, damit Sie den Keller gezielt ausräumen können.",
       },
       {
-        title: "Sanierputz und Anstrich",
-        text: "Auf die ausgehärtete Abdichtung kommt ein Sanierputzsystem, abschließend ein diffusionsoffener Anstrich.",
+        title: "Abdichtung und saubere Übergabe",
+        text: "Wir bereiten den Untergrund vor, bauen Hohlkehle, Dichtschlämme und Sanierputz ein und hinterlassen den Arbeitsplatz sauber.",
       },
     ],
     faqs: [
@@ -411,6 +422,7 @@ export const SERVICE_PAGES: ServicePage[] = [
         paragraphs: [
           "Oberflächlich abgewischter Schimmel ist meist nur optisch verschwunden. Das Pilzgeflecht sitzt in Tapete, Putz und Fugen, und beim trockenen Abbürsten werden massenhaft Sporen in der Wohnung verteilt. Wir schotten den Arbeitsbereich deshalb ab, entfernen befallene Tapeten und Putze kontrolliert und saugen den Staub mit geeigneten Filtergeräten ab. Möbel und angrenzende Räume bleiben so weitgehend frei von zusätzlicher Sporenbelastung, auch wenn Sie während der Arbeiten in der Wohnung bleiben.",
           "Auf chlorhaltige Schimmelentferner aus dem Baumarkt verzichten wir bewusst. Chlor bleicht den Befall zwar aus, sodass er verschwunden scheint, belastet aber die Raumluft und kann auf mineralischen Untergründen Salze hinterlassen. Wir arbeiten mit Mitteln, die Sporen abtöten, ohne toxische Chlorrückstände zu hinterlassen. Anschließend wird die Fläche mit mineralischen Materialien neu aufgebaut, die Schimmel keinen Nährboden bieten und Feuchte aufnehmen und wieder abgeben können.",
+          "Unser Team wurde in den Schulungszentren von SchimmelPeter ausgebildet. Die Mitarbeiter, die bei uns Schimmel sanieren, haben die entsprechenden Schulungen absolviert und eine Prüfung beim TÜV Süd bestanden. Mehrmals im Jahr nehmen wir an weiteren Schulungen teil, um fachlich auf dem aktuellen Stand zu bleiben. Für Sie heißt das: Die Arbeiten in Ihrer Wohnung übernehmen Fachleute, die wissen, wie man befallene Schichten kontrolliert abträgt, Sporen sicher entfernt und angrenzende Räume schützt, auch wenn Sie während der Sanierung weiter dort wohnen.",
         ],
       },
       {
@@ -430,20 +442,20 @@ export const SERVICE_PAGES: ServicePage[] = [
     ],
     steps: [
       {
-        title: "Befund und Messung",
-        text: "Wir erfassen Ausmaß und Lage des Befalls und messen Materialfeuchte, Oberflächentemperatur und Raumklima.",
+        title: "Schadensanalyse",
+        text: "Wir begehen das Gebäude außen und innen, erfassen Ausmaß und Lage des Befalls und messen Materialfeuchte, Oberflächentemperatur und Raumklima.",
       },
       {
-        title: "Ursache und Konzept",
-        text: "Aus den Messwerten leiten wir die Feuchtequelle ab und legen fest, welche baulichen Maßnahmen dauerhaft helfen.",
+        title: "Verbindliches Angebot",
+        text: "Aus den Messwerten leiten wir die genaue Feuchtequelle ab, und Sie erhalten ein verbindliches Angebot für Entfernung und Ursachenbehebung.",
       },
       {
-        title: "Sporensichere Entfernung",
-        text: "Der Arbeitsbereich wird abgeschottet, befallene Schichten werden entfernt und die Fläche ohne Chlor behandelt.",
+        title: "Sanierungsplan mit Ihnen",
+        text: "Gemeinsam mit Ihnen legen wir fest, welche Räume wann bearbeitet werden und welche baulichen Maßnahmen dauerhaft helfen.",
       },
       {
-        title: "Neuaufbau und Vorbeugung",
-        text: "Mineralischer Putz oder Calciumsilikatplatten schließen die Fläche, dazu erhalten Sie konkrete Hinweise zum Heizen und Lüften.",
+        title: "Sanierung und Vorbeugung",
+        text: "Befallene Schichten werden sporensicher und ohne Chlor entfernt, die Fläche neu aufgebaut und der Arbeitsplatz sauber hinterlassen.",
       },
     ],
     faqs: [
@@ -507,14 +519,21 @@ export const SERVICE_PAGES: ServicePage[] = [
       {
         heading: "Kapillar, hygroskopisch oder Kondensat?",
         paragraphs: [
-          "Eine Wand kann aus ganz verschiedenen Gründen feucht sein, und jede Ursache verlangt eine andere Sanierung. Kapillare Feuchte steigt aus dem Erdreich im Mauerwerk auf und zeigt ein typisches Profil: unten am nassesten, nach oben abnehmend. Seitlich eindringende Feuchte betrifft die erdberührten Wandflächen. Kondensat entsteht an der Oberfläche kalter Bauteile und ist im Kern der Wand oft kaum nachweisbar. Dazu kommen Leckagen aus Leitungen, die sich als örtlich begrenzte, nasse Zonen zeigen.",
+          "Eine Wand kann aus ganz verschiedenen Gründen feucht sein, und jede Ursache verlangt eine andere Sanierung. Häufig sind Schäden am Dach, kapillar aufsteigende Feuchtigkeit vor allem in altem, porösem Mauerwerk, undichte Wasser- oder Abwasserleitungen, eine unzureichende Drainage oder Kondenswasser in schlecht belüfteten oder schlecht gedämmten Räumen. Aufsteigende Feuchte zeigt ein typisches Profil: unten am nassesten, nach oben abnehmend. Kondensat entsteht an der Oberfläche kalter Bauteile und ist im Kern der Wand oft kaum nachweisbar. Leckagen aus Leitungen zeigen sich dagegen als örtlich begrenzte, nasse Zonen.",
           "Ein Sonderfall ist die hygroskopische Feuchte. Salze, die sich über Jahre im Putz angereichert haben, ziehen Wasser aus der Raumluft an. Eine solche Wand kann feucht wirken, obwohl längst keine Nässe mehr von unten nachkommt, etwa weil bereits eine Horizontalsperre eingebaut wurde. Wer das nicht unterscheidet, lässt womöglich eine zweite Sperre einbauen, die gar nicht gebraucht wird. Umgekehrt nützt neuer Putz nichts, solange noch kapillares Wasser aufsteigt.",
+        ],
+        bullets: [
+          "Schäden am Dach",
+          "Kapillar aufsteigende Feuchtigkeit, vor allem in altem, porösem Mauerwerk",
+          "Undichte Wasser- und Abwasserleitungen",
+          "Unzureichende Drainage",
+          "Kondenswasser in schlecht belüfteten oder schlecht gedämmten Räumen",
         ],
       },
       {
         heading: "Wie wir messen",
         paragraphs: [
-          "Handliche Feuchtemessgeräte arbeiten mit elektrischem Widerstand oder kapazitiv. Sie zeigen, wo eine Wand feuchter ist als an anderer Stelle, liefern aber keinen belastbaren Wassergehalt, weil Salze und unterschiedliche Baustoffe das Ergebnis stark verfälschen. Wir nutzen solche Geräte deshalb nur für einen ersten Überblick und zur Kartierung der Feuchteverteilung über die Wandfläche und in verschiedenen Höhen. Für eine Sanierungsentscheidung reicht das allein nicht aus.",
+          "Jede Schadensanalyse beginnt mit einer Begehung außen und innen, denn Dach, Fallrohre, Gelände und Leitungsverlauf liefern oft schon wichtige Hinweise. Handliche Feuchtemessgeräte arbeiten mit elektrischem Widerstand oder kapazitiv. Sie zeigen, wo eine Wand feuchter ist als an anderer Stelle, liefern aber keinen belastbaren Wassergehalt, weil Salze und unterschiedliche Baustoffe das Ergebnis stark verfälschen. Wir nutzen solche Geräte deshalb nur für einen ersten Überblick und zur Kartierung der Feuchteverteilung über die Wandfläche und in verschiedenen Höhen.",
           "Für eine belastbare Aussage messen wir die Feuchte tiefenwirksam im Baustoff und entnehmen, wo nötig, Bohrmehlproben aus dem Mauerwerk. Daran lässt sich der tatsächliche Feuchtegehalt bestimmen und abschätzen, welcher Anteil auf Salze zurückgeht. Parallel erfassen wir Oberflächentemperaturen, Raumtemperatur und relative Luftfeuchte, um das Taupunktrisiko zu bewerten. Erst das Zusammenspiel dieser Werte zeigt, ob Horizontalsperre, Innenabdichtung, Dämmung einer Wärmebrücke oder ein anderes Lüftungsverhalten die richtige Antwort ist.",
         ],
         bullets: [
@@ -538,16 +557,16 @@ export const SERVICE_PAGES: ServicePage[] = [
         text: "Sie schildern das Schadensbild am Telefon oder schicken Fotos per WhatsApp, danach vereinbaren wir einen Termin vor Ort.",
       },
       {
-        title: "Messung vor Ort",
-        text: "Die Erstmessung ist kostenlos: Wir kartieren die Feuchte, messen Oberflächen- und Raumklimawerte und nehmen bei Bedarf Proben.",
+        title: "Schadensanalyse vor Ort",
+        text: "Die Erstmessung ist kostenlos: Wir begehen das Gebäude außen und innen, messen präzise Feuchte und Raumklima und nehmen bei Bedarf Proben.",
       },
       {
-        title: "Auswertung",
-        text: "Aus den Werten ergibt sich, welche Feuchteart vorliegt und welche Ursache dahintersteckt.",
+        title: "Ursache und Empfehlung",
+        text: "Aus den Werten ergibt sich die genaue Ursache, und Sie erhalten die Ergebnisse mit einer klaren Sanierungsempfehlung.",
       },
       {
-        title: "Bericht und Empfehlung",
-        text: "Sie erhalten die Ergebnisse mit einer Sanierungsempfehlung und auf Wunsch einem verbindlichen Festpreisangebot.",
+        title: "Angebot und Sanierungsplan",
+        text: "Auf Wunsch folgen ein verbindliches Angebot und ein Sanierungsplan, den wir gemeinsam mit Ihnen erstellen.",
       },
     ],
     faqs: [
@@ -639,20 +658,20 @@ export const SERVICE_PAGES: ServicePage[] = [
     ],
     steps: [
       {
-        title: "Rissaufnahme",
-        text: "Wir erfassen Verlauf, Breite und Wasserführung des Risses und klären, ob er noch in Bewegung ist.",
+        title: "Schadensanalyse",
+        text: "Bei einer Begehung außen und innen erfassen wir Verlauf, Breite und Wasserführung des Risses und klären, ob er noch in Bewegung ist.",
       },
       {
-        title: "Bohren und Packer setzen",
-        text: "Beidseitig des Risses werden versetzte Schrägbohrungen gesetzt und mit Injektionspackern bestückt.",
+        title: "Angebot und Sanierungsplan",
+        text: "Sie erhalten ein verbindliches Angebot, danach stimmen wir Harzwahl und Ablauf gemeinsam mit Ihnen im Sanierungsplan ab.",
       },
       {
-        title: "Hochdruck-Injektion",
-        text: "Je nach Befund injizieren wir PU-Harz oder Epoxid, bis der Riss über den ganzen Querschnitt gefüllt ist.",
+        title: "Bohren und Hochdruck-Injektion",
+        text: "Über versetzte Schrägbohrungen mit Packern injizieren wir PU-Harz oder Epoxid, bis der Riss über den ganzen Querschnitt gefüllt ist.",
       },
       {
-        title: "Nacharbeit",
-        text: "Packer werden entfernt, Bohrlöcher und Rissoberfläche verschlossen und die Fläche für Putz oder Anstrich vorbereitet.",
+        title: "Nacharbeit und saubere Übergabe",
+        text: "Packer werden entfernt, Bohrlöcher verschlossen, die Fläche für Putz oder Anstrich vorbereitet und der Arbeitsplatz sauber hinterlassen.",
       },
     ],
     faqs: [
@@ -769,7 +788,7 @@ export const CITY_PAGES: CityPage[] = [
     keyword: "Kellersanierung Solingen",
     title: "Kellersanierung Solingen | Feuchte Keller trockenlegen",
     metaDescription:
-      "Kellersanierung Solingen: feuchte Keller von Gräfrath bis Ohligs von innen trockenlegen. Kostenlose Messung, Festpreis, 10 Jahre Garantie.",
+      "Kellersanierung Solingen: feuchte Keller von Gräfrath bis Ohligs von innen trockenlegen. Kostenlose Messung, 10 Jahre Garantie auf die Arbeit.",
     h1: "Kellersanierung Solingen: von der Wupper bis zur Ohligser Heide",
     lede:
       "Die Klingenstadt reicht vom steilen Wuppertal bei Burg bis in die flacheren Lagen im Westen. Entsprechend unterschiedlich sind die Ursachen feuchter Keller, und entsprechend genau muss man hinschauen.",
@@ -800,7 +819,7 @@ export const CITY_PAGES: CityPage[] = [
         heading: "Gräfrath, Burg und die alten Kotten",
         paragraphs: [
           "Gräfrath mit seinem Marktplatz, den verschieferten Fassaden und dem Deutschen Klingenmuseum gehört zu den schönsten historischen Ortskernen im Bergischen Land. Unter den Häusern liegen Keller, die aus Bruchstein und Kalkmörtel errichtet wurden. Sie waren als kühle Vorratsräume gedacht, nie als trockene Nutzräume. Ähnlich sieht es in den Hofschaften und alten Schleifkotten entlang der Bachtäler aus, in denen früher die Solinger Klingen geschliffen wurden.",
-          "In solchen Wänden steigt die Feuchte über die Mörtelfugen auf, und Hohlräume zwischen den unregelmäßigen Steinen erschweren jede Abdichtung. Wir verfüllen diese Hohlräume vor der Injektion, damit die Silan-Mikroemulsion dort ankommt, wo sie wirken soll, und nicht ins Leere läuft. Weil die Fassaden erhalten bleiben sollen, findet die gesamte Sanierung im Keller statt. Schieferkleid und Fachwerk bleiben unangetastet, und außen ist kein Spatenstich nötig.",
+          "In solchen Wänden steigt die Feuchte über die Mörtelfugen auf, und Hohlräume zwischen den unregelmäßigen Steinen erschweren jede Abdichtung. Wir verfüllen diese Hohlräume vor der Injektion, damit das Injektionsmittel dort ankommt, wo es wirken soll, und nicht ins Leere läuft. Eine Vortrocknung der oft seit Generationen nassen Wände ist dabei in der Regel nicht notwendig. Weil die Fassaden erhalten bleiben sollen, findet die gesamte Sanierung im Keller statt. Schieferkleid und Fachwerk bleiben unangetastet, und außen ist kein Spatenstich nötig.",
         ],
       },
       {
@@ -821,7 +840,7 @@ export const CITY_PAGES: CityPage[] = [
         a: "Ja. Horizontalsperre, Innenabdichtung und Sanierputz werden ausschließlich im Keller eingebaut. Schieferkleid und Fachwerk bleiben vollständig erhalten, und außen sind keine Erdarbeiten nötig.",
       },
     ],
-    nearby: ["wuppertal", "remscheid", "haan"],
+    nearby: ["wuppertal", "remscheid", "wermelskirchen"],
   },
 
   // Remscheid
@@ -862,7 +881,7 @@ export const CITY_PAGES: CityPage[] = [
         heading: "Lennep und Lüttringhausen: Schiefer, Fachwerk und Bruchsteinkeller",
         paragraphs: [
           "Die Altstadt von Lennep, Geburtsort von Wilhelm Conrad Röntgen, ist ein weitgehend geschlossen erhaltenes historisches Ensemble. Häuser in den bergischen Farben, mit schwarzem Schiefer, weißen Fenstern und grünen Läden, stehen dicht an dicht in engen Gassen. Auch in Lüttringhausen ist der alte Ortskern erhalten. Unter diesen Häusern liegen Keller aus Bruchstein, oft mit Gewölbe, die über Generationen als Vorratsräume dienten und heute als Werkstatt, Lager oder Hobbyraum genutzt werden sollen.",
-          "Die engen Gassen lassen eine Außenaufgrabung praktisch nicht zu, und oft teilen sich Nachbarhäuser eine Wand. Wir sanieren diese Keller deshalb vollständig von innen. Im Bruchstein verfüllen wir zunächst Hohlräume und offene Fugen, danach setzen wir die Bohrlochkette für die Horizontalsperre im Abstand von 10 bis 12 cm. Gewölbekeller erhalten einen diffusionsoffenen Sanierputz, damit das Mauerwerk in der langen Trocknungsphase weiter Feuchte abgeben kann.",
+          "Die engen Gassen lassen eine Außenaufgrabung praktisch nicht zu, und oft teilen sich Nachbarhäuser eine Wand. Wir sanieren diese Keller deshalb vollständig von innen. Im Bruchstein verfüllen wir zunächst Hohlräume und offene Fugen, danach setzen wir die Bohrlöcher für die Horizontalsperre im Abstand von bis zu 20 cm. Eine Vortrocknung ist in der Regel nicht notwendig, auch wenn das Mauerwerk nach einem Remscheider Regenwinter sehr nass ist. Gewölbekeller erhalten einen diffusionsoffenen Sanierputz, damit das Mauerwerk in der langen Trocknungsphase weiter Feuchte abgeben kann.",
         ],
       },
       {
@@ -883,7 +902,7 @@ export const CITY_PAGES: CityPage[] = [
         a: "In Remscheid regnet es das ganze Jahr über viel, im Winterhalbjahr verdunstet jedoch deutlich weniger. Der Boden bleibt länger gesättigt, und Sickerwasser steht länger an der Kellerwand an. Ob es sich um eindringendes Wasser oder Kondensat handelt, zeigt die Messung vor Ort.",
       },
     ],
-    nearby: ["wuppertal", "solingen"],
+    nearby: ["wuppertal", "solingen", "wermelskirchen"],
   },
 
   // Velbert
@@ -1058,5 +1077,78 @@ export const CITY_PAGES: CityPage[] = [
       },
     ],
     nearby: ["haan", "velbert", "wuppertal"],
+  },
+
+  // Wermelskirchen
+  {
+    slug: "wermelskirchen",
+    name: "Wermelskirchen",
+    keyword: "Kellersanierung Wermelskirchen",
+    title: "Kellersanierung Wermelskirchen | Dabringhausen & Dhünn",
+    metaDescription:
+      "Kellersanierung Wermelskirchen: feuchte Keller in der Innenstadt, Dabringhausen und Dhünn von innen trockenlegen. Kostenlose Messung vor Ort.",
+    h1: "Kellersanierung Wermelskirchen: trockene Keller auf der bergischen Hochfläche",
+    lede:
+      "Wermelskirchen liegt auf einer Hochfläche zwischen Wupper und Dhünn, umgeben von tief eingeschnittenen Bachtälern wie dem Eifgental. Wir sanieren feuchte Keller in der Innenstadt ebenso wie in Dabringhausen und Dhünn, von innen und ohne Aufgraben.",
+    plz: ["42929"],
+    districts: ["Wermelskirchen-Mitte", "Dabringhausen", "Dhünn", "Tente", "Hünger"],
+    geo: { lat: 51.139, lng: 7.216 },
+    responseTime: "24 bis 48 Stunden",
+    localFactors: [
+      {
+        name: "Regenreiche Höhenlage",
+        text: "Wie die Nachbarstädte Remscheid und Wuppertal bekommt Wermelskirchen viel Regen von den feuchten Westwinden ab. Die Böden bleiben dadurch oft über Wochen gesättigt.",
+      },
+      {
+        name: "Bachtäler von Eifgenbach und Dhünn",
+        text: "Rund um die Hochfläche haben sich Eifgenbach, Dhünn und ihre Zuflüsse tief eingeschnitten. Häuser an den Talhängen bekommen von der Bergseite Hang- und Sickerwasser ab.",
+      },
+      {
+        name: "Schiefer und Fachwerk in den alten Ortskernen",
+        text: "In den alten Kernen von Wermelskirchen und Dabringhausen stehen bergische Häuser mit Schieferbehang oder Fachwerk auf Bruchsteinsockeln, deren Keller keine Sperrschicht besitzen.",
+      },
+      {
+        name: "Klüftiger Fels im Untergrund",
+        text: "Unter oft dünnen Verwitterungsböden liegt das Gestein des Rheinischen Schiefergebirges. Sickerwasser folgt den Klüften und tritt häufig genau an der erdberührten Kellerwand aus.",
+      },
+    ],
+    sections: [
+      {
+        heading: "Innenstadt und Dabringhausen: Schieferhäuser auf Bruchsteinsockeln",
+        paragraphs: [
+          "Wer durch die Wermelskirchener Innenstadt oder den alten Ortskern von Dabringhausen geht, sieht das typische Bild des Bergischen Landes: Häuser mit Schieferbehang, weißen Fensterrahmen und grünen Läden, dazwischen Fachwerk. Unter vielen dieser Häuser liegen Keller aus Bruchstein, verfugt mit Kalkmörtel und gebaut als kühle Vorratsräume. Eine Sperrschicht gegen aufsteigende Feuchte gab es damals nicht. Entsprechend häufig finden wir hier Salzränder, sandenden Putz und einen muffigen Geruch, der bis ins Treppenhaus zieht.",
+          "Diese Keller sanieren wir vollständig von innen, damit Schieferfassade und Fachwerk unberührt bleiben. Die Horizontalsperre setzen wir im Injektionsverfahren von SchimmelPeter, mit Bohrlöchern im Abstand von bis zu 20 cm. Eine Vortrocknung ist in der Regel nicht notwendig, selbst wenn das alte Mauerwerk nach einem nassen Winter stark durchfeuchtet ist. Anschließend nimmt ein Sanierputz die über Generationen eingelagerten Salze auf. Weil das Mauerwerk diffusionsfähig bleibt, kann es in den folgenden Monaten in Ruhe austrocknen.",
+        ],
+      },
+      {
+        heading: "Dhünn und das Eifgental: Häuser am Talhang",
+        paragraphs: [
+          "Zu den Rändern hin fällt die Wermelskirchener Hochfläche in die Täler von Dhünn und Eifgenbach ab. Der Ortsteil Dhünn liegt nahe der Großen Dhünntalsperre, und in den Hofschaften entlang der Bachläufe stehen viele Häuser in Hanglage. Nach Regen sickert das Wasser im Hang abwärts, folgt den Klüften im Fels und trifft auf die bergseitige Kellerwand. Typisch ist dann ein Keller, dessen Hangseite nach jeder Regenperiode dunkle Feuchtefelder zeigt, während die Talseite weitgehend trocken bleibt.",
+          "Für diese einseitige Belastung planen wir nicht pauschal, sondern Wand für Wand. Die bergseitige Wand erhält häufig eine Innenabdichtung mit Dichtschlämmen und einer sauber ausgebildeten Hohlkehle, weil hier Wasser seitlich eindringt. An den übrigen Wänden genügt oft eine Horizontalsperre mit Sanierputz. Welche Kombination sinnvoll ist, zeigt die Schadensanalyse mit Begehung außen und innen. Danach erhalten Sie ein verbindliches Angebot und einen Sanierungsplan, den wir gemeinsam mit Ihnen abstimmen.",
+        ],
+      },
+      {
+        heading: "Jüngere Wohngebiete: punktuelle Schäden statt nasser Wände",
+        paragraphs: [
+          "Neben den alten Ortskernen prägen Ein- und Zweifamilienhäuser aus der zweiten Hälfte des 20. Jahrhunderts viele Straßen in Wermelskirchen und den Ortsteilen. Ihre Keller sind meist aus Beton oder Kalksandstein gebaut und außen mit einem Bitumenanstrich abgedichtet, der nach Jahrzehnten spröde geworden ist. Feuchte dringt dann an Arbeitsfugen, Rohrdurchführungen oder Rissen ein, meist punktuell und vor allem nach längeren Regenperioden, wie sie auf der Hochfläche häufig vorkommen.",
+          "Für diese Keller ist eine flächige Sanierung selten nötig. Häufig reicht es, wasserführende Risse mit PU-Harz zu verpressen und den Boden-Wand-Anschluss gezielt von innen abzudichten. Nicht jede nasse Stelle kommt allerdings aus dem Erdreich. Undichte Wasser- oder Abwasserleitungen, eine unzureichende Drainage oder Kondenswasser in schlecht belüfteten Räumen können ganz ähnlich aussehen. Die kostenlose Messung vor Ort klärt, welche Ursache vorliegt und ob ein punktueller Eingriff genügt.",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        q: "Wie schnell sind Sie in Wermelskirchen vor Ort?",
+        a: "Die Innenstadt, Dabringhausen und Dhünn erreichen wir in der Regel innerhalb von 24 bis 48 Stunden. Schicken Sie vorab gern Fotos per WhatsApp, dann kann Herr Mahmood den Schaden schon vor dem Termin grob einschätzen. Die Feuchtemessung vor Ort ist kostenlos.",
+      },
+      {
+        q: "Lässt sich ein Schieferhaus in Wermelskirchen sanieren, ohne die Fassade anzufassen?",
+        a: "Ja. Horizontalsperre, Innenabdichtung und Sanierputz werden ausschließlich im Keller eingebaut. Schieferbehang und Fachwerk bleiben vollständig erhalten, und außen sind keine aufwendigen Erdarbeiten nötig.",
+      },
+      {
+        q: "Welche Garantie erhalte ich auf die Kellersanierung?",
+        a: "Auf die Wirksamkeit des Injektionsmittels gibt es bis zu 25 Jahre Produktgarantie des Herstellers SchimmelPeter GmbH. Unabhängig davon gibt sos-abdichtung 10 Jahre Garantie auf die ausgeführten Arbeiten.",
+      },
+    ],
+    nearby: ["remscheid", "solingen", "wuppertal"],
   },
 ];
