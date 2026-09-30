@@ -55,7 +55,7 @@ export default function GrokLeadBot() {
 
       if (lower.includes("keller") || lower.includes("wand")) {
         botResponse =
-          "Feuchte Kellerwände entstehen meist durch aufsteigende Feuchte oder undichte Wand-Boden-Anschlüsse. Unsere WTA-zertifizierte chemische Injektion stoppt dies dauerhaft ohne Aufgraben. In welcher Stadt bzw. PLZ befindet sich das Objekt?";
+          "Feuchte Kellerwände entstehen meist durch aufsteigende Feuchte oder undichte Wand-Boden-Anschlüsse. Eine neue Horizontalsperre per SchimmelPeter-Injektion stoppt das dauerhaft, ohne Aufgraben. In welcher Stadt bzw. PLZ befindet sich das Objekt?";
         replies = ["42103 Wuppertal", "42651 Solingen", "42853 Remscheid", "42549 Velbert"];
       } else if (lower.includes("schimmel") || lower.includes("sporen")) {
         botResponse =
@@ -67,7 +67,7 @@ export default function GrokLeadBot() {
         replies = ["Ja, bitte Rückruf", "Direkt per WhatsApp"];
       } else if (lower.includes("42") || lower.includes("wuppertal") || lower.includes("solingen") || lower.includes("remscheid")) {
         botResponse =
-          "Hervorragend! Unser Einsatzgebiet deckt Ihren Ort vollständig ab. In Wuppertal und Umgebung sind wir in der Regel innerhalb von 24–48 Stunden vor Ort. Möchten Sie einen Termin vereinbaren?";
+          "Hervorragend! Unser Einsatzgebiet deckt Ihren Ort vollständig ab. In Wuppertal und Umgebung sind wir in der Regel innerhalb von 24 bis 48 Stunden vor Ort. Möchten Sie einen Termin vereinbaren?";
         replies = ["Termin vereinbaren", "Rückruf anfordern"];
       } else if (lower.includes("termin") || lower.includes("rückruf") || lower.includes("ja")) {
         botResponse = `Gerne! Bitte hinterlassen Sie uns kurz Ihre Telefonnummer oder rufen Sie Herrn Mahmood direkt an unter ${COMPANY_INFO.phoneDisplay}. Alternativ können Sie uns direkt auf WhatsApp schreiben.`;
@@ -131,7 +131,7 @@ export default function GrokLeadBot() {
                   <span className="w-1.5 h-1.5 rounded-full bg-landing-mint"></span>
                 </h4>
                 <p className="text-[10px] text-landing-bone/50 font-mono">
-                  WTA-Expertenwissen Wuppertal
+                  SchimmelPeter® Partner Wuppertal
                 </p>
               </div>
             </div>

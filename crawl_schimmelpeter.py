@@ -22,7 +22,7 @@ START_URLS = [
     "https://www.schimmelpeter.de/kellersanierung"
 ]
 
-IMG_DIR = "D:/SOS24/public/images/schimmelpeter"
+IMG_DIR = "D:/SOS24/assets-source/schimmelpeter"
 os.makedirs(IMG_DIR, exist_ok=True)
 
 HEADERS = {
@@ -131,7 +131,7 @@ def download_image(img_url, alt=""):
                     print(f"  ✓ Downloaded: {base_name} ({len(data)} bytes)")
                     return {
                         "filename": base_name,
-                        "rel_path": f"/images/schimmelpeter/{base_name}",
+                        "rel_path": f"/assets-source/schimmelpeter/{base_name}",
                         "source": img_url,
                         "alt": alt,
                         "size": len(data)
@@ -139,7 +139,7 @@ def download_image(img_url, alt=""):
         else:
             return {
                 "filename": base_name,
-                "rel_path": f"/images/schimmelpeter/{base_name}",
+                "rel_path": f"/assets-source/schimmelpeter/{base_name}",
                 "source": img_url,
                 "alt": alt,
                 "size": os.path.getsize(target_path)
@@ -181,7 +181,7 @@ while queue and len(visited_urls) < 18:
                 queue.append(l)
 
 print(f"\nCrawled {len(pages_data)} pages. Found {len(all_image_urls)} unique image URLs.")
-print("\nDownloading images to D:/SOS24/public/images/schimmelpeter/ ...")
+print("\nDownloading images to D:/SOS24/assets-source/schimmelpeter/ ...")
 
 for img_url, alt in sorted(all_image_urls):
     info = download_image(img_url, alt)
@@ -197,14 +197,14 @@ with open(md_path, "w", encoding="utf-8") as f:
     f.write(f"- Source Domain: `https://www.schimmelpeter.de/`\n")
     f.write(f"- Total Pages Archived: {len(pages_data)}\n")
     f.write(f"- Total Downloaded Images: {len(downloaded_images)}\n")
-    f.write(f"- Local Image Directory: `D:/SOS24/public/images/schimmelpeter/`\n\n")
+    f.write(f"- Local Image Directory: `D:/SOS24/assets-source/schimmelpeter/`\n\n")
     
     f.write("## 1. Image Gallery Catalog\n\n")
     f.write("| Image | File Name | Size (KB) | Alt Text / Description |\n")
     f.write("| :--- | :--- | :--- | :--- |\n")
     for img in downloaded_images[:60]: # list top 60
         kb = round(img["size"] / 1024, 1)
-        f.write(f"| ![{img['alt'] or img['filename']}](file:///D:/SOS24/public/images/schimmelpeter/{img['filename']}) | `{img['filename']}` | {kb} KB | {img['alt'] or 'SchimmelPeter Fachbild'} |\n")
+        f.write(f"| ![{img['alt'] or img['filename']}](file:///D:/SOS24/assets-source/schimmelpeter/{img['filename']}) | `{img['filename']}` | {kb} KB | {img['alt'] or 'SchimmelPeter Fachbild'} |\n")
     f.write("\n---\n\n")
     
     f.write("## 2. Archived Page Contents\n\n")

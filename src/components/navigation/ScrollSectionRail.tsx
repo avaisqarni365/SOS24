@@ -7,11 +7,12 @@ export default function ScrollSectionRail() {
   const { t } = useLanguage();
   const [activeId, setActiveId] = useState<string>("top");
 
+  // Anchors of the scroll-site homepage, in page order
   const sectionStops = [
     { id: "top", label: t("rail.start") || "Start" },
+    { id: "schicht-fuer-schicht", label: t("rail.layers") || "3D-Wand" },
     { id: "leistungen", label: t("nav.services") || "Leistungen" },
-    { id: "3d-injektion", label: t("nav.process3d") || "3D-Verfahren" },
-    { id: "zertifizierung", label: t("rail.warranty") || "Garantie" },
+    { id: "nachweis", label: t("rail.proof") || "Nachweis" },
     { id: "galerie", label: t("nav.gallery") || "Galerie" },
     { id: "rechner", label: t("rail.calc") || "Rechner" },
     { id: "servicegebiet", label: t("rail.region") || "PLZ 42" },

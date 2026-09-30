@@ -18,7 +18,7 @@ export interface RegionCity {
 
 export const COMPANY_INFO = {
   name: "sos-abdichtung",
-  fullName: "sos-abdichtung — SchimmelPeter® Partnerbetrieb",
+  fullName: "sos-abdichtung, SchimmelPeter® Partnerbetrieb",
   network: "SchimmelPeter® Deutschland",
   owner: "Shahzad Mahmood",
   title: "Inhaber & Bautenschutz-Experte",
@@ -30,9 +30,9 @@ export const COMPANY_INFO = {
   email: "s.mahmood@schimmelpeter.de",
   whatsappUrl: "https://wa.me/491722064177?text=Hallo%20Herr%20Mahmood%2C%20ich%20habe%20ein%20Feuchtigkeitsproblem%20in%20meinem%20Geb%C3%A4ude%20im%20Raum%20Wuppertal%20(PLZ%2042)%20und%20w%C3%BCnsche%20eine%20kostenlose%20Beratung.",
   certifications: [
-    { label: "WTA-Zertifiziert", desc: "Verfahren nach WTA-Merkblatt 4-4-04" },
-    { label: "10 Jahre Garantie", desc: "Langfristige Sicherheit auf Injektionssperren" },
-    { label: "TÜV-geprüfte Baustoffe", desc: "Zertifizierte Spezialprodukte" },
+    { label: "Geschult bei SchimmelPeter®", desc: "Ausbildung in den SchimmelPeter-Schulungszentren, mehrmals jährlich Weiterbildung" },
+    { label: "25 Jahre Produktgarantie", desc: "Garantie des Herstellers SchimmelPeter GmbH auf die Wirksamkeit" },
+    { label: "10 Jahre Garantie auf die Arbeit", desc: "Garantie von sos-abdichtung auf die ausgeführten Arbeiten" },
     { label: "SchimmelPeter® Partner", desc: "Bundesweites Qualitätsnetzwerk" },
   ]
 };
@@ -45,8 +45,8 @@ export const SERVICES: ServiceItem[] = [
     badge: "Bestseller Wuppertal",
     shortDesc: "Aufsteigende Bodenfeuchtigkeit dauerhaft stoppen mittels moderner chemischer Injektionstechnik ohne Aufgraben.",
     benefits: [
-      "Drucklose Injektion mit Silan-Mikroemulsion",
-      "WTA-zertifiziert & hydrophobierend",
+      "Injektion mit in Paraffin gelöstem Kunststoff",
+      "Keine Vortrocknung nötig, Mauerwerk bleibt diffusionsfähig",
       "Keine statische Schwächung des Mauerwerks",
       "Schutz vor Mauersalzen und Ausblühungen"
     ],
@@ -137,42 +137,46 @@ export const REGIONAL_CITIES: RegionCity[] = [
 export const PROCESS_PIPELINE = [
   {
     step: "01",
-    title: "Vor-Ort-Diagnose",
+    title: "Unverbindliche Schadensanalyse",
     icon: "🔍",
-    time: "Tag 1",
-    desc: "Exakte Feuchtigkeitsmessung (kapillar vs. hygroskopisch) und Ermittlung der Schadensursache durch Herrn Mahmood."
+    time: "Schritt 1",
+    desc: "Außen- und Innenbesichtigung mit Feuchtemessung. Herr Mahmood ermittelt die genaue Ursache, zum Beispiel kapillar aufsteigende Feuchte, Kondensat, eine undichte Leitung oder mangelhafte Drainage."
   },
   {
     step: "02",
-    title: "Festpreis-Angebot",
+    title: "Verbindliches Angebot",
     icon: "📋",
-    time: "Tag 2",
-    desc: "Transparentes, verbindliches Sanierungskonzept ohne versteckte Mehrkosten mit individuellem Sanierungsplan."
+    time: "Schritt 2",
+    desc: "Auf Basis der Analyse erhalten Sie ein verbindliches Angebot mit der empfohlenen Lösung, ohne versteckte Mehrkosten."
   },
   {
     step: "03",
-    title: "Chemische Injektion",
+    title: "Sanierung nach Plan",
     icon: "💉",
-    time: "Tag 3-4",
-    desc: "WTA-zertifiziertes Injektionsverfahren zur Bildung einer lückenlosen Horizontalsperre gegen aufsteigende Nässe."
+    time: "Schritt 3",
+    desc: "Wir erstellen den Sanierungsplan gemeinsam mit Ihnen und sanieren von innen, zum Beispiel mit einer neuen Horizontalsperre per Injektion, ohne Erdarbeiten."
   },
   {
     step: "04",
-    title: "Dauerhafte Trocknung",
+    title: "Gemeinsame Abnahme",
     icon: "☀️",
-    time: "Ergebnis",
-    desc: "10 Jahre Garantie, Schutzentfeuchtung, Sanierputzauftrag und vollständige Werterhaltung Ihrer Immobilie."
+    time: "Schritt 4",
+    desc: "Nach der Sanierung nehmen Sie die Arbeiten gemeinsam mit uns ab, die Baustelle wird sauber übergeben. Dazu 10 Jahre Garantie auf unsere Arbeit und 25 Jahre Produktgarantie von SchimmelPeter."
   }
 ];
 
 export const FAQS = [
   {
     q: "Wie erkenne ich, ob mein Keller in Wuppertal von aufsteigender Feuchtigkeit betroffen ist?",
-    a: "Typische Anzeichen sind abblätternde Farbe, sandender Putz, modriger Geruch und weiße Ausblühungen (Salzkristalle) im unteren Drittel der Wände. Gerade in Wuppertals Hanglagen dringt oft unkontrollierte Feuchtigkeit von unten ins Mauerwerk ein. Bei unserer Vor-Ort-Analyse messen wir die Feuchte tiefenwirksam im Baustoff."
+    a: "Typisch sind dunkle Feuchteränder im unteren Wandbereich, abblätternde Farbe, aufgequollener Putz, weiße Salzausblühungen, Schimmel an Sockelleisten und ein muffiger Geruch. Steigt die Feuchte gleichmäßig von unten nach oben, spricht vieles für kapillar aufsteigende Feuchte und eine defekte Horizontalsperre. Einzelne, klar abgegrenzte Flecken kommen dagegen meist von Rohrschäden oder Wasser von außen. Sicher ist erst die Messung im Mauerwerk."
   },
   {
-    q: "Wie funktioniert die chemische Horizontalsperre per Injektionsverfahren?",
-    a: "In die betroffene Kellerwand wird im Abstand von ca. 10–12 cm eine Bohrlochkette eingebracht. Anschließend wird eine hochviskose Silan-/Siloxan-Mikroemulsion drucklos injiziert. Der Wirkstoff verteilt sich kapillar im Porengefüge des Mauerwerks, reagiert mit dem Baustoff und bildet eine dauerhaft wasserabweisende (hydrophobe) Barriere, die aufsteigendes Wasser zu 100% stoppt."
+    q: "Was sind die häufigsten Ursachen für einen nassen Keller?",
+    a: "Meist ist es eine von vier Ursachen: eine defekte Kapillarwassersperre, durch die Bodenfeuchte aufsteigt, eine undichte Vertikalsperre, durch die Wasser seitlich eindringt, ein fehlendes oder defektes Drainagesystem oder Risse und undichte Stellen in Wänden und Boden. Oft wirken mehrere zusammen. Deshalb steht bei uns die Messung vor jedem Angebot."
+  },
+  {
+    q: "Wie funktioniert die Horizontalsperre im Injektionsverfahren?",
+    a: "In das feuchte Mauerwerk werden Bohrlöcher im Abstand von bis zu 20 cm gesetzt, eine Vortrocknung ist in der Regel nicht nötig. Dann bringen wir eine genau berechnete Menge des SchimmelPeter-Injektionsmittels ein, eines in Paraffin gelösten Kunststoffs. Er verteilt sich im Injektionsbereich und legt sich als wasserabweisendes Polymer an die Kapillarwände: eine neue Sperrschicht, die aufsteigende Feuchte zuverlässig stoppt. Weil diese Schicht nur wenige Moleküle dick ist, bleiben die Poren offen und die Wand bleibt diffusionsfähig."
   },
   {
     q: "Muss für die Sanierung der Garten oder das Pflaster aufgegraben werden?",
@@ -180,10 +184,14 @@ export const FAQS = [
   },
   {
     q: "Wie hoch sind die Kosten für eine Kellersanierung im Raum Wuppertal / PLZ 42?",
-    a: "Die Kosten hängen vom Wandbaustoff (Ziegel, Bruchstein, Beton), der Mauerstärke und dem Durchfeuchtungsgrad ab. Eine Injektionssperre ist um ein Vielfaches wirtschaftlicher als eine Außenaufgrabung. Wir bieten Ihnen nach der kostenlosen Erstmessung ein verbindliches Festpreisangebot."
+    a: "Die Kosten hängen vom Wandbaustoff (Ziegel, Bruchstein, Beton), der Mauerstärke und dem Durchfeuchtungsgrad ab. Eine Horizontalsperre per Injektion von innen ist deutlich günstiger als eine Außenabdichtung mit Aufgraben. Wir bieten Ihnen nach der kostenlosen Erstmessung ein verbindliches Festpreisangebot."
   },
   {
     q: "Gibt es eine Garantie auf die ausgeführten Arbeiten?",
-    a: "Ja, als offizieller SchimmelPeter® Partnerbetrieb gewähren wir Ihnen auf unsere Horizontalsperren-Systeme eine langfristige Garantie von bis zu 10 Jahren auf die Funktionsfähigkeit der chemischen Sperrschicht."
+    a: "Ja, und zwar zweifach. sos-abdichtung gibt Ihnen 10 Jahre Garantie auf die ausgeführten Arbeiten. Zusätzlich garantiert der Hersteller SchimmelPeter GmbH 25 Jahre lang die Wirksamkeit seiner Produkte."
+  },
+  {
+    q: "Bekomme ich die Messergebnisse schriftlich?",
+    a: "Ja, immer. Nach jeder Phase erhalten Sie das Protokoll: die Nullmessung mit Messpunktplan, das Injektionsprotokoll, die Kontrollmessungen und das Abnahmeprotokoll mit den Vorher-nachher-Werten. So können Sie den Erfolg der Sanierung jederzeit selbst nachvollziehen."
   }
 ];

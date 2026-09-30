@@ -20,6 +20,8 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
       const stored = localStorage.getItem("sos_lang") as SupportedLocale;
       if (stored && TRANSLATIONS[stored]) {
         setLangState(stored);
+        document.documentElement.lang = stored;
+        document.documentElement.dir = stored === "ar" ? "rtl" : "ltr";
       }
     } catch (e) {
       // Ignore storage errors in restricted iframe

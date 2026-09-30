@@ -1,169 +1,101 @@
 "use client";
 
 import React, { useState } from "react";
-import Link from "next/link";
-import { Phone, Menu, X, ArrowRight } from "lucide-react";
+import { Menu, Phone, X } from "lucide-react";
 import { COMPANY_INFO } from "@/data/content-data";
+import Logo from "@/components/brand/Logo";
 import LanguageSelector from "@/components/navigation/LanguageSelector";
 import { useLanguage } from "@/i18n/LanguageContext";
 
+const LINKS = [
+  { href: "/#schicht-fuer-schicht", key: "nav.process3d" },
+  { href: "/#leistungen", key: "nav.services" },
+  { href: "/#nachweis", key: "nav.proof" },
+  { href: "/#galerie", key: "nav.gallery" },
+  { href: "/#rechner", key: "nav.calculator" },
+  { href: "/#servicegebiet", key: "nav.region" },
+];
+
 export default function Navbar() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [open, setOpen] = useState(false);
   const { t } = useLanguage();
 
   return (
-    <header className="sticky top-0 z-50 bg-[#0E1310]/95 backdrop-blur-xl border-b border-white/[0.08] transition-colors">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-18 sm:h-20 flex items-center justify-between gap-4 lg:gap-8">
-        
-        {/* Brand Logo - 100% Kontai24 Clean Editorial Architecture */}
-        <Link href="/" className="flex items-center gap-2.5 shrink-0 group select-none">
-          <div className="flex flex-col">
-            <div className="flex items-center gap-1 whitespace-nowrap">
-              <span className="font-editorial text-lg sm:text-xl lg:text-[22px] tracking-[0.12em] text-landing-bone uppercase font-normal whitespace-nowrap">
-                sos-abdichtung
-              </span>
-              <span className="h-1.5 w-1.5 rounded-full bg-landing-mint shadow-[0_0_8px_rgba(98,196,172,0.9)]" />
-            </div>
-            <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-landing-bone/45 -mt-0.5 whitespace-nowrap">
-              Wuppertal · Region 42
-            </span>
-          </div>
-        </Link>
+    <header className="fixed inset-x-0 top-0 z-50 border-b border-white/[0.08] bg-[#0e1310]/95 backdrop-blur-xl">
+      <a href="#main" className="skip-link">
+        Zum Inhalt springen
+      </a>
+      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-4 px-4 sm:h-[4.5rem] sm:px-6 lg:gap-8 lg:px-8">
+        <a href="/" aria-label="sos-abdichtung, zur Startseite" className="shrink-0">
+          <Logo sub="Wuppertal · Region 42" />
+        </a>
 
-        {/* Minimalist Centered Nav Links - Uncluttered, Single Line, No Wrapping */}
-        <nav aria-label="Hauptnavigation" className="hidden lg:flex items-center gap-6 xl:gap-8 text-xs xl:text-[13px] font-medium text-landing-bone/70 shrink-0">
-          <a
-            href="#leistungen"
-            className="hover:text-landing-bone transition-colors whitespace-nowrap py-1"
-          >
-            {t("nav.services") || "Leistungen"}
-          </a>
-          <a
-            href="#3d-injektion"
-            className="hover:text-landing-bone transition-colors whitespace-nowrap flex items-center gap-1.5 py-1"
-          >
-            <span>{t("nav.process3d") || "3D-Verfahren"}</span>
-            <span className="h-1.5 w-1.5 rounded-full bg-landing-mint animate-pulse" />
-          </a>
-          <a
-            href="#galerie"
-            className="hover:text-landing-bone transition-colors whitespace-nowrap py-1"
-          >
-            {t("nav.gallery") || "Galerie"}
-          </a>
-          <a
-            href="#rechner"
-            className="hover:text-landing-bone transition-colors whitespace-nowrap py-1"
-          >
-            {t("nav.calculator") || "Kostenrechner"}
-          </a>
-          <a
-            href="#servicegebiet"
-            className="hover:text-landing-bone transition-colors whitespace-nowrap py-1"
-          >
-            {t("nav.region") || "Servicegebiet"}
-          </a>
+        {/* single line from large screens up, never wraps */}
+        <nav aria-label="Hauptnavigation" className="hidden shrink-0 lg:block">
+          <ul className="flex items-center gap-5 text-[13px] font-medium text-[var(--bone)]/75 xl:gap-7">
+            {LINKS.map((l) => (
+              <li key={l.href}>
+                <a href={l.href} className="whitespace-nowrap py-1 hover:text-[var(--bone)]">
+                  {t(l.key)}
+                </a>
+              </li>
+            ))}
+          </ul>
         </nav>
 
-        {/* Right Action Cluster - Organized, Spacious, Never Overlapping */}
-        <div className="flex items-center gap-2.5 sm:gap-4 shrink-0">
-          {/* 6-Language Dropdown Selector */}
+        <div className="flex shrink-0 items-center gap-2.5 sm:gap-3">
           <LanguageSelector />
-
-          {/* Clean Phone Capsule (Visible on wide screens, never wraps) */}
           <a
             href={`tel:${COMPANY_INFO.phoneTel}`}
-            className="hidden xl:inline-flex items-center gap-2 px-3.5 py-2 rounded-full border border-white/10 hover:border-landing-mint/40 bg-white/[0.03] text-xs font-mono text-landing-bone/80 hover:text-landing-mint transition-all whitespace-nowrap shrink-0"
-            title="Direkter Telefonkontakt"
+            className="hidden items-center gap-2 whitespace-nowrap rounded-full border border-white/10 bg-white/[0.03] px-3.5 py-2 font-mono text-xs text-[var(--bone)]/85 hover:border-[var(--mint)] 2xl:inline-flex"
           >
-            <Phone className="w-3 h-3 text-landing-mint shrink-0" />
-            <span className="whitespace-nowrap">{COMPANY_INFO.phoneDisplay}</span>
+            <Phone className="h-3 w-3 text-[var(--mint)]" aria-hidden="true" />
+            {COMPANY_INFO.phoneDisplay}
           </a>
-
-          {/* High-Converting CTA Button */}
           <a
-            href="#kontakt"
-            className="hidden sm:inline-flex items-center justify-center rounded-full bg-landing-bone hover:bg-white px-4 py-2 sm:px-5 sm:py-2.5 text-xs sm:text-[13px] font-semibold text-[#0E1310] transition-all whitespace-nowrap shadow-sm hover:shadow-[0_0_20px_rgba(255,255,255,0.3)] hover:scale-[1.02] active:scale-[0.98] shrink-0"
+            href="/#kontakt"
+            className="hidden min-h-[44px] items-center whitespace-nowrap rounded-full bg-[var(--bone)] px-5 text-[13px] font-semibold text-[var(--ink)] hover:bg-white sm:inline-flex"
           >
             {t("nav.cta")}
           </a>
-
-          {/* Mobile Menu Hamburger */}
           <button
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden inline-flex h-9 w-9 items-center justify-center rounded-full text-landing-bone/80 hover:text-landing-bone hover:bg-white/5 transition-colors shrink-0"
-            aria-label="Menü öffnen"
-            aria-expanded={mobileMenuOpen}
+            type="button"
+            onClick={() => setOpen(!open)}
+            className="inline-flex h-11 w-11 items-center justify-center rounded-full text-[var(--bone)]/85 hover:bg-white/5 lg:hidden"
+            aria-label={open ? "Menü schließen" : "Menü öffnen"}
+            aria-expanded={open}
+            aria-controls="mobile-menu"
           >
-            {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            {open ? <X className="h-5 w-5" aria-hidden="true" /> : <Menu className="h-5 w-5" aria-hidden="true" />}
           </button>
         </div>
       </div>
 
-      {/* Mobile Drawer Dropdown */}
-      {mobileMenuOpen && (
-        <div className="lg:hidden border-t border-white/10 bg-[#0E1310]/98 backdrop-blur-2xl px-6 py-6 flex flex-col gap-1 text-sm text-landing-bone/80 animate-in fade-in slide-in-from-top-2 duration-200">
-          <a
-            href="#leistungen"
-            onClick={() => setMobileMenuOpen(false)}
-            className="py-3 hover:text-landing-bone transition-colors border-b border-white/[0.04]"
-          >
-            {t("nav.services") || "Leistungen"}
-          </a>
-          <a
-            href="#3d-injektion"
-            onClick={() => setMobileMenuOpen(false)}
-            className="py-3 hover:text-landing-bone transition-colors flex items-center justify-between border-b border-white/[0.04]"
-          >
-            <span>{t("nav.process3d") || "3D-Verfahren"}</span>
-            <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-landing-mint/15 text-landing-mint border border-landing-mint/30">
-              WTA 4-4
-            </span>
-          </a>
-          <a
-            href="#galerie"
-            onClick={() => setMobileMenuOpen(false)}
-            className="py-3 hover:text-landing-bone transition-colors border-b border-white/[0.04]"
-          >
-            {t("nav.gallery") || "Galerie"}
-          </a>
-          <a
-            href="#rechner"
-            onClick={() => setMobileMenuOpen(false)}
-            className="py-3 hover:text-landing-bone transition-colors border-b border-white/[0.04]"
-          >
-            {t("nav.calculator") || "Kostenrechner"}
-          </a>
-          <a
-            href="#servicegebiet"
-            onClick={() => setMobileMenuOpen(false)}
-            className="py-3 hover:text-landing-bone transition-colors border-b border-white/[0.04]"
-          >
-            {t("nav.region") || "Servicegebiet"}
-          </a>
-          <a
-            href="#faq"
-            onClick={() => setMobileMenuOpen(false)}
-            className="py-3 hover:text-landing-bone transition-colors"
-          >
-            {t("nav.faq") || "Häufige Fragen"}
-          </a>
-
-          <div className="pt-4 flex flex-col gap-2.5 mt-2">
+      {open && (
+        <div id="mobile-menu" className="border-t border-white/10 bg-[#0e1310] px-6 py-5 lg:hidden">
+          <ul className="flex flex-col text-sm text-[var(--bone)]/85">
+            {[...LINKS, { href: "/#faq", key: "nav.faq" }].map((l) => (
+              <li key={l.href} className="border-b border-white/[0.05] last:border-0">
+                <a href={l.href} onClick={() => setOpen(false)} className="block py-3 hover:text-[var(--bone)]">
+                  {t(l.key)}
+                </a>
+              </li>
+            ))}
+          </ul>
+          <div className="mt-4 flex flex-col gap-2.5">
             <a
               href={`tel:${COMPANY_INFO.phoneTel}`}
-              className="py-3 px-4 text-center text-xs font-mono font-medium text-landing-bone/90 bg-white/[0.04] hover:bg-white/[0.08] rounded-full border border-white/10 flex items-center justify-center gap-2"
+              className="flex items-center justify-center gap-2 rounded-full border border-white/10 bg-white/[0.04] py-3 font-mono text-xs"
             >
-              <Phone className="w-3.5 h-3.5 text-landing-mint" />
-              <span>{COMPANY_INFO.phoneDisplay}</span>
+              <Phone className="h-3.5 w-3.5 text-[var(--mint)]" aria-hidden="true" />
+              {COMPANY_INFO.phoneDisplay}
             </a>
             <a
-              href="#kontakt"
-              onClick={() => setMobileMenuOpen(false)}
-              className="inline-flex items-center justify-center gap-2 rounded-full bg-landing-bone px-4 py-3.5 text-sm font-semibold text-[#0E1310] hover:bg-white transition-all shadow-md"
+              href="/#kontakt"
+              onClick={() => setOpen(false)}
+              className="rounded-full bg-[var(--bone)] py-3.5 text-center text-sm font-semibold text-[var(--ink)]"
             >
-              <span>{t("nav.cta")}</span>
-              <ArrowRight className="w-4 h-4" />
+              {t("contact.submit")}
             </a>
           </div>
         </div>
