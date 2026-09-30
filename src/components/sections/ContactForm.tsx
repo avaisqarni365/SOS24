@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Phone, MapPin, CheckCircle2, MessageSquare, ArrowRight } from "lucide-react";
 import { COMPANY_INFO } from "@/data/content-data";
 import { useLanguage } from "@/i18n/LanguageContext";
@@ -45,6 +45,10 @@ export default function ContactForm({ defaultDamage, place }: { defaultDamage?: 
   const [isSubmitted, setIsSubmitted] = useState(false);
 
   // WebMCP, imperative: the same action the form performs, for AI agents in the browser.
+  // The agent tool is registered once; it reads the live form state through this ref.
+  const formRef = useRef(formData);
+  formRef.current = formData;
+
   useEffect(() => {
     const mc = (navigator as unknown as { modelContext?: { registerTool?: (t: unknown) => void } }).modelContext;
     if (!mc?.registerTool) return;
@@ -66,7 +70,7 @@ export default function ContactForm({ defaultDamage, place }: { defaultDamage?: 
           required: ["name", "phone", "plz"],
         },
         execute: async (input: Partial<Enquiry>) => {
-          const d = { ...formData, ...input } as Enquiry;
+          const d = { ...formRef.current, ...input } as Enquiry;
           window.open(whatsappLink(d), "_blank");
           return { content: [{ type: "text", text: "WhatsApp-Nachricht vorbereitet. Senden muss die Person selbst." }] };
         },

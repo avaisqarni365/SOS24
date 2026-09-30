@@ -184,7 +184,7 @@ export const FAQS = [
   },
   {
     q: "Wie hoch sind die Kosten für eine Kellersanierung im Raum Wuppertal / PLZ 42?",
-    a: "Die Kosten hängen vom Wandbaustoff (Ziegel, Bruchstein, Beton), der Mauerstärke und dem Durchfeuchtungsgrad ab. Eine Injektionssperre ist um ein Vielfaches wirtschaftlicher als eine Außenaufgrabung. Wir bieten Ihnen nach der kostenlosen Erstmessung ein verbindliches Festpreisangebot."
+    a: "Die Kosten hängen vom Wandbaustoff (Ziegel, Bruchstein, Beton), der Mauerstärke und dem Durchfeuchtungsgrad ab. Eine Horizontalsperre per Injektion von innen ist deutlich günstiger als eine Außenabdichtung mit Aufgraben. Wir bieten Ihnen nach der kostenlosen Erstmessung ein verbindliches Festpreisangebot."
   },
   {
     q: "Gibt es eine Garantie auf die ausgeführten Arbeiten?",

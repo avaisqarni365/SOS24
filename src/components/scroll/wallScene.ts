@@ -107,10 +107,12 @@ export function createWallScene(
   let dirty = true;
   const tex = (url: string, color = true) => {
     pending++;
-    const t = loader.load(url, () => {
+    const done = () => {
       pending--;
       dirty = true;
-    });
+    };
+    // on error the material simply renders without that map
+    const t = loader.load(url, done, undefined, done);
     t.wrapS = t.wrapT = THREE.RepeatWrapping;
     t.anisotropy = Math.min(8, renderer.capabilities.getMaxAnisotropy());
     if (color) t.colorSpace = THREE.SRGBColorSpace;

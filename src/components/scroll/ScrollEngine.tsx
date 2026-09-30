@@ -24,11 +24,17 @@ export default function ScrollEngine() {
     window.__scMounted = true;
 
     let mounted = false;
-    const bail = () => html.classList.remove("sc-js");
+    let bailed = false;
+    const bail = () => {
+      bailed = true;
+      html.classList.remove("sc-js");
+    };
     const s = document.createElement("script");
     s.src = "/scrollcraft/scrollcraft.min.js";
     s.async = true;
     s.onload = () => {
+      // Too late: the page already fell back to the static layout.
+      if (bailed) return;
       try {
         window.ScrollCraft?.mount(document.body);
         mounted = true;

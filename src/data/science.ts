@@ -63,6 +63,10 @@ export const SCIENCE: Record<string, ScienceChapter> = {
         a: "Maßgeblich ist nicht die Raumluft, sondern die relative Feuchte direkt an der Wandoberfläche. Liegt sie über längere Zeit bei rund 80 Prozent oder mehr, können Schimmelpilze wachsen. Das passiert an kalten Außenwänden schon bei normaler Raumluftfeuchte.",
       },
       {
+        q: "Kann ich Schimmel an der Wand selbst entfernen?",
+        a: "Kleine, oberflächliche Flecken lassen sich mit geeignetem Mittel und Schutzmaske selbst entfernen, trocken abbürsten sollten Sie nicht, weil sich dabei Sporen verteilen. Bei größeren Flächen, wiederkehrendem Befall oder Schimmel im Putz gehört die Entfernung in die Hände einer Fachfirma. Entscheidend ist ohnehin die Ursache, sonst kommt der Schimmel zurück.",
+      },
+      {
         q: "Wer ist bei Schimmel in der Mietwohnung verantwortlich?",
         a: "Das hängt von der Ursache ab: Baumängel wie undichte Außenwände oder Wärmebrücken liegen meist beim Vermieter, falsches Heiz- und Lüftungsverhalten beim Mieter. Eine Messung der Oberflächentemperatur und Feuchte schafft hier eine sachliche Grundlage für beide Seiten.",
       },
