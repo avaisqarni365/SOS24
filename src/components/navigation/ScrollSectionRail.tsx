@@ -10,6 +10,7 @@ export default function ScrollSectionRail() {
   // Anchors of the scroll-site homepage, in page order
   const sectionStops = [
     { id: "top", label: t("rail.start") || "Start" },
+    { id: "vom-keller-zur-pore", label: t("rail.zoom") },
     { id: "schicht-fuer-schicht", label: t("rail.layers") || "3D-Wand" },
     { id: "leistungen", label: t("nav.services") || "Leistungen" },
     { id: "nachweis", label: t("rail.proof") || "Nachweis" },
