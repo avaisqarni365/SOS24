@@ -52,6 +52,8 @@ export const viewport = {
   initialScale: 1,
 };
 
+import { LanguageProvider } from "@/i18n/LanguageContext";
+
 export default function RootLayout({
   children,
 }: {
@@ -95,7 +97,9 @@ export default function RootLayout({
         />
       </head>
       <body className="min-h-screen bg-landing-ink text-landing-bone font-sans antialiased selection:bg-landing-mint selection:text-landing-ink">
-        {children}
+        <LanguageProvider>
+          {children}
+        </LanguageProvider>
       </body>
     </html>
   );

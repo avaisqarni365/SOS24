@@ -3,8 +3,10 @@
 import React, { useState } from "react";
 import { Phone, Mail, MapPin, CheckCircle2, MessageSquare, ArrowRight } from "lucide-react";
 import { COMPANY_INFO } from "@/data/content-data";
+import { useLanguage } from "@/i18n/LanguageContext";
 
 export default function ContactForm() {
+  const { t } = useLanguage();
   const [formData, setFormData] = useState({
     name: "",
     phone: "",
@@ -29,15 +31,15 @@ export default function ContactForm() {
       <div className="relative max-w-6xl mx-auto px-6 py-24 sm:py-32">
         {/* Section Header */}
         <p className="text-[11px] font-semibold uppercase tracking-[0.18em] mb-5 text-landing-emerald font-mono">
-          Kontakt & Vor-Ort-Analyse
+          {t("contact.eyebrow")}
         </p>
         <h2 className="font-editorial font-normal tracking-[-0.02em] leading-[1.04] text-[2.25rem] sm:text-5xl lg:text-[3.5rem] text-[#1A1D1B]">
-          Sprechen wir über Ihr Objekt.
+          {t("contact.h1")}
           <br />
-          <span className="italic text-landing-mint">Wir antworten innerhalb weniger Stunden.</span>
+          <span className="italic text-landing-mint">{t("contact.accent")}</span>
         </h2>
         <p className="mt-6 max-w-2xl text-base sm:text-lg leading-relaxed text-[#444945]">
-          Vereinbaren Sie Ihren unverbindlichen Besichtigungstermin. Herr Mahmood misst die Feuchtigkeit im Mauerwerk und erstellt Ihnen ein transparentes Festpreisangebot ohne Folgekosten.
+          {t("contact.sub")}
         </p>
 
         <div className="mt-14 grid grid-cols-1 lg:grid-cols-12 gap-10">
@@ -67,28 +69,28 @@ export default function ContactForm() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-xs font-mono font-bold text-[#1A1D1B] mb-2">
-                      Name / Ansprechpartner *
+                      {t("contact.name")}
                     </label>
                     <input
                       type="text"
                       required
                       value={formData.name}
                       onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      placeholder="z.B. Markus Schmidt"
+                      placeholder="Markus Schmidt"
                       className="w-full px-4 py-3 rounded-xl border border-black/10 bg-landing-bone2/40 text-sm text-[#1A1D1B] focus:outline-none focus:border-landing-emerald focus:bg-white placeholder:text-black/30"
                     />
                   </div>
 
                   <div>
                     <label className="block text-xs font-mono font-bold text-[#1A1D1B] mb-2">
-                      Telefonnummer für Rückruf *
+                      {t("contact.phone")}
                     </label>
                     <input
                       type="tel"
                       required
                       value={formData.phone}
                       onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                      placeholder="z.B. 0170 1234567"
+                      placeholder="0170 1234567"
                       className="w-full px-4 py-3 rounded-xl border border-black/10 bg-landing-bone2/40 text-sm font-mono text-[#1A1D1B] focus:outline-none focus:border-landing-emerald focus:bg-white placeholder:text-black/30"
                     />
                   </div>
@@ -97,7 +99,7 @@ export default function ContactForm() {
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
                     <label className="block text-xs font-mono font-bold text-[#1A1D1B] mb-2">
-                      E-Mail-Adresse
+                      {t("contact.email")}
                     </label>
                     <input
                       type="email"
@@ -110,7 +112,7 @@ export default function ContactForm() {
 
                   <div>
                     <label className="block text-xs font-mono font-bold text-[#1A1D1B] mb-2">
-                      Postleitzahl des Objekts *
+                      {t("contact.plz")}
                     </label>
                     <input
                       type="text"
@@ -118,7 +120,7 @@ export default function ContactForm() {
                       maxLength={5}
                       value={formData.plz}
                       onChange={(e) => setFormData({ ...formData, plz: e.target.value })}
-                      placeholder="z.B. 42103"
+                      placeholder="42103"
                       className="w-full px-4 py-3 rounded-xl border border-black/10 bg-landing-bone2/40 text-sm font-mono text-[#1A1D1B] focus:outline-none focus:border-landing-emerald focus:bg-white placeholder:text-black/30"
                     />
                   </div>
@@ -126,7 +128,7 @@ export default function ContactForm() {
 
                 <div>
                   <label className="block text-xs font-mono font-bold text-[#1A1D1B] mb-2">
-                    Art des Schadens
+                    {t("contact.damage")}
                   </label>
                   <select
                     value={formData.damageType}
@@ -151,13 +153,13 @@ export default function ContactForm() {
 
                 <div>
                   <label className="block text-xs font-mono font-bold text-[#1A1D1B] mb-2">
-                    Ihre Nachricht / Details zum Objekt
+                    {t("contact.msg")}
                   </label>
                   <textarea
                     rows={3}
                     value={formData.message}
                     onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    placeholder="Beschreiben Sie kurz das Problem (z.B. Altbau von 1912, feuchte Raumecke seit Starkregen)..."
+                    placeholder="Beschreiben Sie kurz das Problem (z.B. Altbau von 1912, feuchte Wand seit Starkregen)..."
                     className="w-full px-4 py-3 rounded-xl border border-black/10 bg-landing-bone2/40 text-sm text-[#1A1D1B] focus:outline-none focus:border-landing-emerald focus:bg-white placeholder:text-black/30"
                   />
                 </div>
@@ -166,7 +168,7 @@ export default function ContactForm() {
                   type="submit"
                   className="w-full inline-flex items-center justify-center gap-2 rounded-full px-7 py-4 text-sm font-semibold transition-all active:scale-[0.98] bg-[#1A1D1B] text-landing-bone hover:bg-black shadow-sm"
                 >
-                  <span>Anfrage senden & WhatsApp öffnen</span>
+                  <span>{t("contact.submit")}</span>
                   <ArrowRight className="w-4 h-4 text-landing-mint" />
                 </button>
 

@@ -4,6 +4,7 @@ import React, { useState, useRef, useEffect } from "react";
 import dynamic from "next/dynamic";
 import AmbientGlow from "@/components/ui/AmbientGlow";
 import { PROCESS_PIPELINE } from "@/data/content-data";
+import { useLanguage } from "@/i18n/LanguageContext";
 
 const WallInjection3D = dynamic(() => import("@/components/3d/WallInjection3D"), {
   ssr: false,
@@ -15,11 +16,12 @@ const WallInjection3D = dynamic(() => import("@/components/3d/WallInjection3D"),
 });
 
 export default function InjectionProcess() {
+  const { t } = useLanguage();
   const [activeStepIndex, setActiveStepIndex] = useState(0);
   const isHovered = useRef(false);
   const isVisible = useRef(true);
 
-  // Kontai24 automatic 2.2s step cycle
+  // Kontai24 automatic 2.4s step cycle
   useEffect(() => {
     const timer = setInterval(() => {
       if (!isHovered.current && isVisible.current && !document.hidden) {
@@ -37,17 +39,15 @@ export default function InjectionProcess() {
       <div className="relative max-w-6xl mx-auto px-6 py-24 sm:py-32">
         {/* Section Header - Kontai24 Exact Style */}
         <p className="text-[11px] font-semibold uppercase tracking-[0.18em] mb-5 text-landing-mint font-mono">
-          Das WTA-Injektionsverfahren
+          {t("pipe.eyebrow")}
         </p>
         <h2 className="font-editorial font-normal tracking-[-0.02em] leading-[1.04] text-[2.25rem] sm:text-5xl lg:text-[3.5rem] text-landing-bone">
-          Ein Bohrloch.
+          {t("pipe.h1")}
           <br />
-          <span className="italic text-landing-mint">4 Phasen zur molekularen Dichtigkeit.</span>
+          <span className="italic text-landing-mint">{t("pipe.accent")}</span>
         </h2>
         <p className="mt-6 max-w-2xl text-base sm:text-lg leading-relaxed text-landing-bone/70">
-          Dies ist der tatsächliche physikalische Weg im Mauerwerk — keine bloße Illustration. 
-          Jedes Bohrloch wird im 60°-Winkel gesetzt und drucklos mit hochviskoser Silan-Mikroemulsion geflutet. 
-          Die Wirkstoffmoleküle durchwandern das Kapillarnetzwerk, verdrängen Feuchtigkeit und härten zu einer dauerhaft wasserabweisenden Sperre aus.
+          {t("pipe.sub")}
         </p>
 
         {/* Scroll-Driven Pinned 3D Visualizer Model */}
@@ -58,10 +58,10 @@ export default function InjectionProcess() {
         {/* 4 Steps - Kontai24 Exact Interactive Step Grid */}
         <div className="mt-16 pt-12 border-t border-white/[0.08]">
           <p className="text-[11px] font-semibold uppercase tracking-[0.18em] mb-3 text-landing-emerald font-mono">
-            Der Sanierungsablauf
+            {t("pipe.secSub")}
           </p>
           <h3 className="font-editorial font-normal text-2xl sm:text-4xl text-landing-bone mb-12">
-            Von der Erstbesichtigung zur trockenen Wand in 4 Schritten.
+            {t("pipe.secH3")}
           </h3>
 
           <ol className="grid gap-px overflow-hidden rounded-2xl border border-white/10 bg-white/10 sm:grid-cols-2">
@@ -128,7 +128,7 @@ export default function InjectionProcess() {
               href="#kontakt"
               className="inline-flex items-center gap-2 rounded-full px-7 py-3.5 text-sm font-semibold text-[#0E1310] bg-landing-bone hover:bg-white transition-all shadow-sm active:scale-[0.98]"
             >
-              <span>Kostenlose Vor-Ort-Diagnose buchen</span>
+              <span>{t("pipe.btn")}</span>
               <span aria-hidden="true">→</span>
             </a>
           </div>

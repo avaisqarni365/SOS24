@@ -2,8 +2,11 @@
 
 import React from "react";
 import { ShieldCheck, Award, FileCheck2, Clock } from "lucide-react";
+import { useLanguage } from "@/i18n/LanguageContext";
 
 export default function ComplianceTrust() {
+  const { t } = useLanguage();
+
   const points = [
     {
       icon: ShieldCheck,
@@ -40,15 +43,15 @@ export default function ComplianceTrust() {
       <div className="relative max-w-6xl mx-auto px-6 py-24 sm:py-32">
         {/* Section Header */}
         <p className="text-[11px] font-semibold uppercase tracking-[0.18em] mb-5 text-landing-emerald font-mono">
-          Zertifizierung & Garantie
+          {t("comp.eyebrow")}
         </p>
         <h2 className="font-editorial font-normal tracking-[-0.02em] leading-[1.04] text-[2.25rem] sm:text-5xl lg:text-[3.5rem] text-[#1A1D1B]">
-          Geprüfte Bauphysik.
+          {t("comp.h1")}
           <br />
-          <span className="italic text-landing-mint">10 Jahre schriftliche Garantie.</span>
+          <span className="italic text-landing-mint">{t("comp.accent")}</span>
         </h2>
         <p className="mt-6 max-w-2xl text-base sm:text-lg leading-relaxed text-[#444945]">
-          Bei der Bausubstanz gibt es keinen Raum für Experimente. Jede chemische Injektion wird mit lückenlosem Prüfprotokoll und bauaufsichtlich zugelassenen Wirkstoffen ausgeführt.
+          {t("comp.sub")}
         </p>
 
         {/* 4 Cards in Snow White Bright Grid */}

@@ -2,33 +2,36 @@
 
 import React from "react";
 import { ArrowUpRight } from "lucide-react";
+import { useLanguage } from "@/i18n/LanguageContext";
 
 export default function Schadensbilder() {
+  const { t } = useLanguage();
+
   const cards = [
     {
       n: "01",
       eyebrow: "Mauerwerk & Sockel",
-      title: "Horizontalsperre ohne Aufgraben",
-      desc: "Drucklose Injektion mit WTA-zertifizierter Silan-Mikroemulsion. Das Mauerwerk wird porentief durchdrungen, bildet eine dauerhafte wasserabweisende Barriere und stoppt aufsteigende Feuchte zu 100%.",
-      badge: "Kein Bagger nötig",
+      title: t("services.card1Title"),
+      desc: t("services.card1Desc"),
+      badge: t("services.card1Badge"),
       href: "#3d-injektion",
-      linkText: "3D-Verfahren ansehen"
+      linkText: "3D-Verfahren"
     },
     {
       n: "02",
       eyebrow: "Keller & Sohle",
-      title: "Kellerinnenabdichtung & Hohlkehle",
-      desc: "Mineralische Dichtungsschlämmen (MDS), druckwasserdichte Wand-Sohlen-Anschlüsse und hochbelastbare Sanierputzsysteme sichern Keller auch bei drückendem Hangwasser im Bergischen Land ab.",
-      badge: "100% Wasserdicht",
+      title: t("services.card2Title"),
+      desc: t("services.card2Desc"),
+      badge: t("services.card2Badge"),
       href: "#kontakt",
       linkText: "Messung anfragen"
     },
     {
       n: "03",
       eyebrow: "Gesundheit & Raumklima",
-      title: "Schimmelsanierung & Ursachenanalyse",
-      desc: "Keine giftigen Chlorbomben: Wir ermitteln die genaue Feuchte- und Taupunktursache, entfernen Schimmelbefall sporensicher und verhindern Neubildung durch diffusionsoffene Calciumsilikat-Dämmung.",
-      badge: "Messtechnisch belegt",
+      title: t("services.card3Title"),
+      desc: t("services.card3Desc"),
+      badge: t("services.card3Badge"),
       href: "#kontakt",
       linkText: "Ursache klären"
     }
@@ -38,21 +41,20 @@ export default function Schadensbilder() {
     <section id="leistungen" className="relative bg-landing-bone text-[#1A1D1B]">
       <div className="relative max-w-6xl mx-auto px-6 py-24 sm:py-32">
         {/* Section Eyebrow - Kontai24 Style */}
-        <p className="text-[11px] font-semibold uppercase tracking-[0.18em] mb-5 text-landing-emerald">
-          Fachleistungen
+        <p className="text-[11px] font-semibold uppercase tracking-[0.18em] mb-5 text-landing-emerald font-mono">
+          {t("services.eyebrow")}
         </p>
 
         {/* Section Heading */}
         <h2 className="font-editorial font-normal tracking-[-0.02em] leading-[1.04] text-[2.25rem] sm:text-5xl lg:text-[3.5rem] text-[#1A1D1B]">
-          Das ganze Gebäude.
+          {t("services.h1")}
           <br />
-          <span className="italic text-landing-mint">Eine dauerhafte Lösung.</span>
+          <span className="italic text-landing-mint">{t("services.accent")}</span>
         </h2>
 
         {/* Section Lede */}
         <p className="mt-6 max-w-2xl text-base sm:text-lg leading-relaxed text-[#444945]">
-          Die meisten Sanierungsversuche scheitern an oberflächlichen Spachtelarbeiten oder falscher Farbe. 
-          sos-abdichtung packt das physikalische Feuchteproblem an der Wurzel — messtechnisch erfasst, nach WTA-Norm saniert und mit 10 Jahren Garantie abgesichert.
+          {t("services.sub")}
         </p>
 
         {/* Kontai24 3-Card Platform Grid */}

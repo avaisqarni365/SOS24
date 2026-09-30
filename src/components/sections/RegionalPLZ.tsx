@@ -4,8 +4,10 @@ import React, { useState } from "react";
 import { ArrowUpRight } from "lucide-react";
 import AmbientGlow from "@/components/ui/AmbientGlow";
 import { REGIONAL_CITIES } from "@/data/content-data";
+import { useLanguage } from "@/i18n/LanguageContext";
 
 export default function RegionalPLZ() {
+  const { t } = useLanguage();
   const [searchPlz, setSearchPlz] = useState("");
   const [checkResult, setCheckResult] = useState<{
     covered: boolean;
@@ -45,16 +47,15 @@ export default function RegionalPLZ() {
       <div className="relative max-w-6xl mx-auto px-6 py-24 sm:py-32">
         {/* Section Header */}
         <p className="text-[11px] font-semibold uppercase tracking-[0.18em] mb-5 text-landing-mint font-mono">
-          Servicegebiet Raum Wuppertal & Bergisches Land
+          {t("reg.eyebrow")}
         </p>
         <h2 className="font-editorial font-normal tracking-[-0.02em] leading-[1.04] text-[2.25rem] sm:text-5xl lg:text-[3.5rem] text-landing-bone">
-          Das Tal der Wupper.
+          {t("reg.h1")}
           <br />
-          <span className="italic text-landing-mint">Unser Kern-Einsatzgebiet.</span>
+          <span className="italic text-landing-mint">{t("reg.accent")}</span>
         </h2>
         <p className="mt-6 max-w-2xl text-base sm:text-lg leading-relaxed text-landing-bone/70">
-          Wuppertal, Solingen, Remscheid, Velbert und das gesamte Bergische Land sind durch Schiefer- und Ziegelaltbauten an steilen Hanglagen geprägt. 
-          Hier braucht es erfahrene Bautenschutz-Fachleute, die die lokale Bausubstanz kennen. Zuständig für alle Postleitzahlen beginnend mit 42.
+          {t("reg.sub")}
         </p>
 
         {/* Minimalist PLZ Search Bar */}
@@ -64,7 +65,7 @@ export default function RegionalPLZ() {
               type="text"
               value={searchPlz}
               onChange={(e) => setSearchPlz(e.target.value)}
-              placeholder="Ihre 5-stellige PLZ (z.B. 42103)..."
+              placeholder={t("reg.searchPlaceholder")}
               maxLength={5}
               className="flex-1 px-5 py-3.5 rounded-full border border-white/10 text-xs sm:text-sm font-mono text-landing-bone bg-landing-ink2 focus:outline-none focus:border-landing-mint placeholder:text-landing-bone/30"
             />
@@ -72,7 +73,7 @@ export default function RegionalPLZ() {
               type="submit"
               className="px-6 py-3.5 rounded-full bg-landing-bone hover:bg-white text-[#0E1310] text-xs font-mono font-semibold transition-all shrink-0 active:scale-[0.98]"
             >
-              Prüfen
+              {t("reg.btn")}
             </button>
           </form>
 

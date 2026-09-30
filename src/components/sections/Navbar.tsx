@@ -4,9 +4,12 @@ import React, { useState } from "react";
 import Link from "next/link";
 import { Phone, Menu, X } from "lucide-react";
 import { COMPANY_INFO } from "@/data/content-data";
+import LanguageSelector from "@/components/navigation/LanguageSelector";
+import { useLanguage } from "@/i18n/LanguageContext";
 
 export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { t } = useLanguage();
 
   return (
     <nav className="sticky top-0 z-50 bg-landing-ink/85 backdrop-blur-lg border-b border-white/5 transition-colors">
@@ -24,25 +27,28 @@ export default function Navbar() {
         {/* Minimalist Nav Links - Only 4 items like Kontai24 */}
         <div className="hidden md:flex items-center gap-8 text-sm text-landing-bone/60">
           <a href="#leistungen" className="hover:text-landing-bone transition-colors">
-            Fachleistungen
+            {t("nav.services")}
           </a>
           <a href="#3d-injektion" className="hover:text-landing-bone transition-colors flex items-center gap-1.5">
-            <span>3D-Verfahren</span>
+            <span>{t("nav.process3d")}</span>
             <span className="h-1.5 w-1.5 rounded-full bg-landing-mint"></span>
           </a>
           <a href="#rechner" className="hover:text-landing-bone transition-colors">
-            Kostenrechner
+            {t("nav.calculator")}
           </a>
           <a href="#servicegebiet" className="hover:text-landing-bone transition-colors">
-            Servicegebiet PLZ 42
+            {t("nav.region")}
           </a>
         </div>
 
-        {/* Minimalist Right Action - Direct Phone + Clean Button */}
-        <div className="flex items-center gap-5">
+        {/* Minimalist Right Action - Direct Phone + Language Selector + Clean Button */}
+        <div className="flex items-center gap-4 sm:gap-5">
+          {/* 6-Language Dropdown Selector */}
+          <LanguageSelector />
+
           <a
             href={`tel:${COMPANY_INFO.phoneTel}`}
-            className="hidden sm:inline text-sm text-landing-bone/60 hover:text-landing-bone transition-colors font-mono"
+            className="hidden lg:inline text-sm text-landing-bone/60 hover:text-landing-bone transition-colors font-mono"
           >
             {COMPANY_INFO.phoneDisplay}
           </a>
@@ -51,7 +57,7 @@ export default function Navbar() {
             href="#kontakt"
             className="hidden sm:inline-flex items-center rounded-full bg-landing-bone px-4 py-2 text-[13px] sm:text-sm font-semibold text-[#0E1310] hover:bg-white transition-colors whitespace-nowrap shadow-sm"
           >
-            Diagnose anfragen →
+            {t("nav.cta")}
           </a>
 
           {/* Mobile Menu Button */}
@@ -73,14 +79,14 @@ export default function Navbar() {
             onClick={() => setMobileMenuOpen(false)}
             className="py-2.5 hover:text-landing-bone transition-colors"
           >
-            Fachleistungen
+            {t("nav.services")}
           </a>
           <a
             href="#3d-injektion"
             onClick={() => setMobileMenuOpen(false)}
             className="py-2.5 hover:text-landing-bone transition-colors flex items-center justify-between"
           >
-            <span>3D-Verfahren</span>
+            <span>{t("nav.process3d")}</span>
             <span className="text-[10px] font-mono text-landing-mint">WTA</span>
           </a>
           <a
@@ -88,21 +94,21 @@ export default function Navbar() {
             onClick={() => setMobileMenuOpen(false)}
             className="py-2.5 hover:text-landing-bone transition-colors"
           >
-            Kostenrechner
+            {t("nav.calculator")}
           </a>
           <a
             href="#servicegebiet"
             onClick={() => setMobileMenuOpen(false)}
             className="py-2.5 hover:text-landing-bone transition-colors"
           >
-            Servicegebiet PLZ 42
+            {t("nav.region")}
           </a>
           <a
             href="#faq"
             onClick={() => setMobileMenuOpen(false)}
             className="py-2.5 hover:text-landing-bone transition-colors"
           >
-            Häufige Fragen
+            {t("nav.faq")}
           </a>
 
           <div className="pt-4 border-t border-white/5 flex flex-col gap-2 mt-2">
@@ -117,7 +123,7 @@ export default function Navbar() {
               onClick={() => setMobileMenuOpen(false)}
               className="inline-flex items-center justify-center rounded-full bg-landing-bone px-4 py-3 text-sm font-semibold text-[#0E1310] hover:bg-white transition-colors"
             >
-              Kostenlose Vor-Ort-Diagnose
+              {t("nav.cta")}
             </a>
           </div>
         </div>
