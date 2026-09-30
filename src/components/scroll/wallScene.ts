@@ -11,10 +11,12 @@
  *   0.30-0.42  the barrier floods along the chain (mint)
  *   0.38-0.52  the Keller dries down to the barrier, puddle and mould go
  *   0.46-0.58  sealing slurry, renovation plaster and board go on
- *   0.50-0.58  the rest of the house steps back
- *   0.58-0.76  the wall fans apart, the barrier lifts out: the money shot
- *   0.76-0.90  hold, camera pushes in
- *   0.90-1.00  it settles, the house returns, dry, and the camera pulls out
+ *   0.58-0.76  the camera steps back so the whole house is in frame, and
+ *              the Keller wall fans apart inside it, the barrier lifts out
+ *   0.76-0.90  hold
+ *   0.90-1.00  it settles and the camera pulls out to the dry house
+ * The house stays standing the whole time, so the scene always reads as a
+ * house with a Keller being repaired, never as a loose wall.
  */
 import * as THREE from "three";
 import { RoomEnvironment } from "three/examples/jsm/environments/RoomEnvironment.js";
@@ -25,7 +27,7 @@ const L = 4.0; // basement depth along the cut wall
 const ROOM = 4.6; // basement width
 const BAR_Y0 = 0.14;
 const BAR_Y1 = 0.26;
-const GAP = 0.62;
+const GAP = 0.95; // explosion spacing: the layers fan out across the Keller floor
 
 const clamp01 = (x: number) => (x < 0 ? 0 : x > 1 ? 1 : x);
 const smooth = (x: number) => {
@@ -282,22 +284,17 @@ export function createWallScene(
   // explosion and returns, repaired, at the end.
   const house = new THREE.Group();
   root.add(house);
-  const fadeMats: THREE.Material[] = [];
-  const fm = <T extends THREE.Material>(m: T) => {
-    m.transparent = true;
-    fadeMats.push(m);
-    return m;
-  };
-  const houseBrick = fm(new THREE.MeshStandardMaterial({ map: brickMap, bumpMap: brickBump, bumpScale: 1.4, roughnessMap: brickRough, roughness: 1 }));
+  // the house stays opaque; only the puddle and the mould fade as the Keller dries
+  const houseBrick = new THREE.MeshStandardMaterial({ map: brickMap, bumpMap: brickBump, bumpScale: 1.4, roughnessMap: brickRough, roughness: 1 });
   dampify(houseBrick);
-  const houseSoil = fm(new THREE.MeshStandardMaterial({ map: soilMap, roughness: 1 }));
-  const grass = fm(new THREE.MeshStandardMaterial({ color: 0x3f5b37, roughness: 1 }));
-  const slab = fm(new THREE.MeshStandardMaterial({ map: mdsMap, color: 0x9a9e9a, roughness: 0.9 }));
-  const facade = fm(new THREE.MeshStandardMaterial({ map: plasterMap, color: 0xf1ede3, roughness: 0.95 }));
-  const roofMat = fm(new THREE.MeshStandardMaterial({ color: 0x2c3431, roughness: 0.7, metalness: 0.1 }));
-  const glass = fm(new THREE.MeshStandardMaterial({ color: 0x2a2416, emissive: 0xf1cf7a, emissiveIntensity: 0.9 }));
-  const puddleMat = fm(new THREE.MeshStandardMaterial({ color: 0x3b6ea8, roughness: 0.05, metalness: 0.2, opacity: 0.7 }));
-  const mouldMat = fm(new THREE.MeshStandardMaterial({ color: 0x223024, roughness: 1 }));
+  const houseSoil = new THREE.MeshStandardMaterial({ map: soilMap, roughness: 1 });
+  const grass = new THREE.MeshStandardMaterial({ color: 0x3f5b37, roughness: 1 });
+  const slab = new THREE.MeshStandardMaterial({ map: mdsMap, color: 0x9a9e9a, roughness: 0.9 });
+  const facade = new THREE.MeshStandardMaterial({ map: plasterMap, color: 0xf1ede3, roughness: 0.95 });
+  const roofMat = new THREE.MeshStandardMaterial({ color: 0x2c3431, roughness: 0.7, metalness: 0.1 });
+  const glass = new THREE.MeshStandardMaterial({ color: 0x2a2416, emissive: 0xf1cf7a, emissiveIntensity: 0.9 });
+  const puddleMat = new THREE.MeshStandardMaterial({ color: 0x3b6ea8, roughness: 0.05, metalness: 0.2, transparent: true, opacity: 0.7 });
+  const mouldMat = new THREE.MeshStandardMaterial({ color: 0x223024, roughness: 1, transparent: true });
   const zB = z0 - tM; // outer face of the back wall
   const top = H + 0.22; // ground-floor level
   const up = H + 2.9; // eaves
@@ -331,6 +328,17 @@ export function createWallScene(
   const roofGeo = new THREE.ExtrudeGeometry(ridge, { depth: z1 - zB + 0.6, bevelEnabled: false });
   roofGeo.translate(0, up + 0.16, zB - 0.3);
   mesh(roofGeo, roofMat, house);
+  // chimney through the back roof slope and white frames round the windows,
+  // so the silhouette reads as a house at every camera distance
+  const chimneyMat = new THREE.MeshStandardMaterial({ map: brickMap, color: 0xb8a89c, roughness: 1 });
+  mesh(worldBox(3.3, 3.8, up + 0.6, up + 2.45, zB + 0.3, zB + 0.8, 0.8), chimneyMat, house);
+  mesh(worldBox(3.24, 3.86, up + 2.45, up + 2.55, zB + 0.24, zB + 0.86, 1), slab, house);
+  const frameMat = new THREE.MeshStandardMaterial({ color: 0xf3f1ec, roughness: 0.6 });
+  for (const [zc, w] of [[-1.0, 0.9], [0.8, 0.9]] as const) {
+    mesh(worldBox(ROOM + tM, ROOM + tM + 0.05, top + 0.84, top + 0.9, zc - w / 2 - 0.08, zc + w / 2 + 0.08, 1), frameMat, house);
+    mesh(worldBox(ROOM + tM, ROOM + tM + 0.04, top + 2.1, top + 2.16, zc - w / 2 - 0.06, zc + w / 2 + 0.06, 1), frameMat, house);
+    mesh(worldBox(ROOM + tM, ROOM + tM + 0.035, top + 0.9, top + 2.1, zc - 0.02, zc + 0.02, 1), frameMat, house);
+  }
   // what is wrong with this Keller: standing water and mould in the cold corner
   const puddle = new THREE.Mesh(new THREE.CircleGeometry(1, 40), puddleMat);
   puddle.rotation.x = -Math.PI / 2;
@@ -411,13 +419,11 @@ export function createWallScene(
 
     const e = seg(p, 0.58, 0.76) * (1 - seg(p, 0.9, 0.97));
 
-    const houseIn = Math.max(1 - seg(p, 0.5, 0.58), seg(p, 0.92, 1));
-    house.visible = houseIn > 0.01;
-    fadeMats.forEach((m) => (m.opacity = houseIn * (m === puddleMat ? 0.7 : 1)));
+    // the house never leaves: the wall is taken apart inside it
     puddle.visible = dry < 0.99;
     puddle.scale.set(1.3 * (1 - dry * 0.9), 0.8 * (1 - dry * 0.9), 1);
     mould.visible = dry < 0.98;
-    mouldMat.opacity = houseIn * (1 - dry);
+    mouldMat.opacity = 1 - dry;
     const hold = seg(p, 0.72, 0.86) * (1 - seg(p, 0.9, 1));
     gSoil.position.x = -GAP * 0.9 * e;
     gMasonry.position.x = 0;
@@ -431,20 +437,25 @@ export function createWallScene(
     // the exploded stack, and back out to the repaired house
     const portrait = w / h < 0.9;
     const zoom = seg(p, 0.14, 0.32) * (1 - seg(p, 0.9, 1));
-    const Rc = lerp(7.8, 6.4, hold);
-    const ac = lerp(0.72, 0.42, seg(p, 0.2, 0.7)) + 0.06 * hold;
+    // close on the wall for the injection, then far enough back during the
+    // explosion that roof, chimney and ground floor frame the fanned layers
+    // wide stays at 1 once reached, so the house keeps its roof in frame
+    // while the layers settle back at the end
+    const wide = seg(p, 0.58, 0.76);
+    const Rc = lerp(8.4, lerp(17.5, 16.5, hold), wide);
+    const ac = lerp(0.72, 0.42, seg(p, 0.2, 0.5)) + lerp(0, 0.12, wide);
     const Ro = 19;
     const ao = 0.62;
     const R = lerp(Ro, Rc, zoom) * (portrait ? 1.7 : 1);
     const a = lerp(ao, ac, zoom);
     target.set(
-      lerp(2.1, lerp(-0.25, 0.55, e), zoom),
-      lerp(3.1, lerp(1.05, 1.35, e), zoom),
-      lerp(-0.4, 0, zoom)
+      lerp(2.1, lerp(-0.1, 1.9, wide), zoom),
+      lerp(3.1, lerp(1.2, 3.2, wide), zoom),
+      lerp(-0.4, lerp(0, -0.3, wide), zoom)
     );
     camera.position.set(
       target.x + Math.sin(a) * R,
-      target.y + lerp(3.4, lerp(1.4, 2.0, e), zoom),
+      target.y + lerp(3.4, lerp(1.6, 3.2, wide), zoom),
       target.z + Math.cos(a) * R
     );
     camera.lookAt(target);
@@ -496,7 +507,8 @@ export function createWallScene(
         if (!hit) break;
         y = hit.y + hit.h + 8;
       }
-      y = Math.min(y, h - lh - 8);
+      // on a phone keep clear of the floating assistant button at the bottom
+      y = Math.min(y, h - lh - (portrait ? 84 : 8));
       placed.push({ x, y, w: lw, h: lh });
       it.el.style.transform = `translate3d(${x.toFixed(1)}px, ${y.toFixed(1)}px, 0)`;
     }

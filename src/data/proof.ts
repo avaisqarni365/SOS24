@@ -87,5 +87,5 @@ export const RULES = [
   { title: "Nullmessung vor dem Eingriff", text: "Ohne Ausgangswert gibt es keinen Vergleich. Gemessen wird, bevor gebohrt wird." },
   { title: "Gleiche Punkte, gleiches Verfahren", text: "Nur Messungen an denselben markierten Punkten mit derselben Methode sind vergleichbar." },
   { title: "Ein Referenzpunkt", text: "Ein Messpunkt unterhalb der Sperre bleibt bewusst im feuchten Bereich und belegt die Trennwirkung." },
-  { title: "Alles schriftlich", text: "Messwerte, Mengen und Abnahme stehen im Protokoll, nicht nur im Gedächtnis." },
+  { title: "Jedes Protokoll für Sie", text: "Messwerte, Mengen und Abnahme stehen im Protokoll, und Sie erhalten es immer schriftlich, nach jeder Phase." },
 ];

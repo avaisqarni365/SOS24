@@ -29,7 +29,8 @@ const lines: string[] = [
   ...SERVICE_PAGES.map((s) => `- [${s.navTitle}](${SITE}/leistungen/${s.slug}/): ${s.lede}`),
   "",
   "## Nachweis in jeder Phase",
-  ...PHASES.map((p) => `${p.n}. ${p.title}: ${p.measure} Dokument: ${p.proof}. Prüfkriterium: ${p.criterion}`),
+  "Jedes Messprotokoll wird dem Kunden immer schriftlich übergeben, nach jeder Phase.",
+  ...PHASES.map((p) => `${p.n}. ${p.title}: ${p.measure} Kunde erhält: ${p.proof}. Prüfkriterium: ${p.criterion}`),
   "",
   "## Servicegebiet",
   ...CITY_PAGES.map(

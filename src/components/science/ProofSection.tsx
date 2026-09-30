@@ -21,7 +21,7 @@ export default function ProofSection() {
           </div>
           <p className="sc-body">
             {hy(
-              "Ob eine Sanierung wirkt, entscheidet nicht der Eindruck, sondern die Messung. Deshalb beginnt jede Sanierung mit einer Nullmessung an festen Punkten und endet mit einer Vergleichsmessung an denselben Punkten. Dazwischen ist jeder Schritt dokumentiert."
+              "Ob eine Sanierung wirkt, entscheidet nicht der Eindruck, sondern die Messung. Deshalb beginnt jede Sanierung mit einer Nullmessung an festen Punkten und endet mit einer Vergleichsmessung an denselben Punkten. Dazwischen ist jeder Schritt dokumentiert, und jedes Messprotokoll erhalten Sie schriftlich."
             )}
           </p>
         </div>

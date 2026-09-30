@@ -305,6 +305,13 @@
   font-weight: 600;
   color: var(--bone);
 }
+.layer-note__short {
+  display: none;
+  font-size: 0.86rem;
+  font-weight: 600;
+  line-height: 1.5rem;
+  color: var(--bone);
+}
 .layer-note p {
   margin: 0.25rem 0 0;
   font-size: 0.86rem;
@@ -394,6 +401,21 @@
   }
   .layers.is-3d .layer-note p {
     display: none;
+  }
+  /* several labels at once on a phone: short names, so they sit side by side */
+  .layers.is-3d .layer-note.is-compact {
+    width: max-content;
+    padding: 0.4rem 0.65rem 0.4rem 2.2rem;
+  }
+  .layers.is-3d .layer-note.is-compact::before {
+    top: 0.35rem;
+    left: 0.45rem;
+  }
+  .layers.is-3d .layer-note.is-compact h3 {
+    display: none;
+  }
+  .layers.is-3d .layer-note.is-compact .layer-note__short {
+    display: block;
   }
 }
 

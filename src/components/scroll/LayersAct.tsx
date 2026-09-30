@@ -2,28 +2,30 @@ import { WALL_LAYERS } from "@/data/layers";
 import ExplodedWall from "./ExplodedWall";
 import { hy } from "@/lib/hyphenate";
 
-/** Static money shot: the same exploded stack the 3D scene holds at its peak. */
+/**
+ * Static fallback for the 3D scene (no WebGL, reduced motion, no JS): the same
+ * house cut open, its Keller wall taken apart inside the basement.
+ */
 function LayersPoster() {
-  const H = 300;
-  const base = 540;
-  const dx = 110;
-  const dy = -70;
-  const gap = 46;
-  let x = 170;
-  const slots = WALL_LAYERS.filter((l) => l.id !== "horizontalsperre").map((l) => {
-    const w = Math.max(16, l.t * 150);
-    const slot = { ...l, x, w };
-    x += w + gap;
-    return slot;
-  });
-  const masonry = slots.find((s) => s.id === "mauerwerk")!;
-  const barrier = WALL_LAYERS.find((l) => l.id === "horizontalsperre")!;
-
-  const box = (bx: number, by: number, w: number, h: number, fill: string, key: string, opacity = 1) => (
-    <g key={key} opacity={opacity}>
-      <path d={`M${bx} ${by - h} L${bx + dx} ${by - h + dy} L${bx + w + dx} ${by - h + dy} L${bx + w} ${by - h} Z`} fill={fill} opacity="0.92" />
-      <path d={`M${bx + w} ${by - h} L${bx + w + dx} ${by - h + dy} L${bx + w + dx} ${by + dy} L${bx + w} ${by} Z`} fill={fill} opacity="0.7" />
-      <rect x={bx} y={by - h} width={w} height={h} fill={fill} />
+  const byId = Object.fromEntries(WALL_LAYERS.map((l) => [l.id, l]));
+  const ground = 300; // top of the soil
+  const floor = 560; // Keller floor
+  const wx = 290; // outer face of the cut Keller wall
+  const ww = 40; // wall thickness
+  const bar = 522; // barrier, just above the floor
+  // the interior layers, fanned out across the Keller floor
+  const panels = (["innenabdichtung", "sanierputz", "klimaplatte"] as const).map((id, i) => ({
+    ...byId[id],
+    x: wx + ww + 28 + i * 62,
+    w: 10,
+  }));
+  const num = (id: string) => WALL_LAYERS.findIndex((l) => l.id === id) + 1;
+  const marker = (id: string, cx: number, cy: number) => (
+    <g key={`m-${id}`}>
+      <circle cx={cx} cy={cy} r="15" fill={byId[id].color} stroke="#0e1310" strokeWidth="3" />
+      <text x={cx} y={cy + 5} textAnchor="middle" fontSize="14" fontWeight="700" fill="#0e1310" fontFamily="ui-monospace, monospace">
+        {num(id)}
+      </text>
     </g>
   );
 
@@ -37,7 +39,7 @@ function LayersPoster() {
       aria-labelledby="layers-poster-title"
     >
       <title id="layers-poster-title">
-        Explosionszeichnung einer Kellerwand: Erdreich, Mauerwerk, Horizontalsperre, Innenabdichtung, Sanierputz und
+        Querschnitt durch ein Haus mit Keller: Erdreich, Mauerwerk mit Horizontalsperre, Innenabdichtung, Sanierputz und
         Calciumsilikat-Platte, von außen nach innen.
       </title>
       <defs>
@@ -45,38 +47,53 @@ function LayersPoster() {
           <stop offset="0" stopColor="#3b6ea8" stopOpacity="0.85" />
           <stop offset="1" stopColor="#3b6ea8" stopOpacity="0" />
         </linearGradient>
+        <pattern id="lp-brick" width="20" height="12" patternUnits="userSpaceOnUse">
+          <rect width="20" height="12" fill={byId.mauerwerk.color} />
+          <path d="M0 11.5H20M10 0V6M0 6H20M0 6V12M20 6V12" stroke="#6e4a33" strokeWidth="1.2" />
+        </pattern>
       </defs>
-      <ellipse cx="520" cy="560" rx="420" ry="26" fill="#000" opacity="0.28" />
-      {slots.map((s) => box(s.x, base, s.w, H, s.color, s.id))}
-      {/* damp below the barrier, bricks courses on the masonry */}
-      <rect x={masonry.x} y={base - 60} width={masonry.w} height={60} fill="url(#lp-damp)" />
-      <g stroke="#6e4a33" strokeWidth="1.4">
-        {Array.from({ length: 12 }).map((_, i) => (
-          <path key={i} d={`M${masonry.x} ${base - 25 * (i + 1)} H${masonry.x + masonry.w}`} />
-        ))}
-      </g>
-      <path
-        d={`M${masonry.x - 8} ${base - 28} H${masonry.x + masonry.w + dx + 8}`}
-        stroke="#62c4ac"
-        strokeDasharray="6 6"
-        strokeWidth="2"
-      />
-      {/* the barrier, lifted out of the masonry */}
-      {box(masonry.x, base - H - 70, masonry.w, 22, barrier.color, "barrier")}
-      <path d={`M${masonry.x + masonry.w / 2} ${base - H - 66} V${base - 34}`} stroke="#62c4ac" strokeOpacity="0.5" strokeDasharray="3 6" />
-      {WALL_LAYERS.map((l, i) => {
-        const s = slots.find((q) => q.id === l.id);
-        const cx = s ? s.x + s.w / 2 + dx / 2 : masonry.x + masonry.w / 2 + dx / 2;
-        const cy = s ? base - H + dy / 2 - 36 : base - H - 70 + dy / 2 - 52;
-        return (
-          <g key={l.id}>
-            <circle cx={cx} cy={cy} r="15" fill={l.color} stroke="#0e1310" strokeWidth="3" />
-            <text x={cx} y={cy + 5} textAnchor="middle" fontSize="14" fontWeight="700" fill="#0e1310" fontFamily="ui-monospace, monospace">
-              {i + 1}
-            </text>
-          </g>
-        );
-      })}
+      {/* soil and groundwater around the Keller */}
+      <rect x="30" y={ground} width="940" height={600 - ground} fill={byId.erdreich.color} opacity="0.75" />
+      <rect x="30" y="566" width="940" height="34" fill="#3b6ea8" opacity="0.35" />
+      <rect x="30" y={ground - 6} width="940" height="8" fill="#3f5b37" />
+      {/* Keller: the cut wall on the left, the far wall on the right, floor */}
+      <rect x={wx + ww} y={ground + 12} width={880 - wx - ww} height={floor - ground - 12} fill="#141b17" />
+      <rect x={wx} y={ground + 12} width={ww} height={floor - ground - 12} fill="url(#lp-brick)" />
+      <rect x={wx} y={bar + 10} width={ww} height={floor - bar - 10} fill="url(#lp-damp)" />
+      <rect x={wx - 4} y={bar} width={ww + 8} height="10" fill={byId.horizontalsperre.color} />
+      <rect x="880" y={ground + 12} width={ww} height={floor - ground - 12} fill="url(#lp-brick)" />
+      <rect x={wx} y={floor} width={920 - wx} height="16" fill="#6f7572" />
+      {/* the interior layers, fanned out inside the Keller */}
+      {panels.map((pn) => (
+        <g key={pn.id}>
+          <path
+            d={`M${pn.x} ${ground + 30} l18 -12 h${pn.w} v${floor - ground - 38} l-18 12 Z`}
+            fill={pn.color}
+            opacity="0.7"
+          />
+          <rect x={pn.x} y={ground + 30} width={pn.w} height={floor - ground - 30} fill={pn.color} />
+        </g>
+      ))}
+      <path d={`M${wx + ww + 6} ${floor - 2} H${panels[2].x + 40}`} stroke="#62c4ac" strokeOpacity="0.5" strokeDasharray="3 6" />
+      {/* ceiling slab, ground floor, roof and chimney */}
+      <rect x="280" y={ground - 4} width="650" height="16" fill="#6f7572" />
+      <rect x="784" y="46" width="34" height="70" fill="url(#lp-brick)" />
+      <rect x="778" y="40" width="46" height="10" fill="#6f7572" />
+      <rect x={wx} y="150" width={920 - wx} height={ground - 150 - 4} fill="#e9e4d8" />
+      <path d="M255 152 L605 28 L955 152 Z" fill="#2c3431" />
+      {[360, 740].map((x) => (
+        <g key={x}>
+          <rect x={x - 5} y="187" width="80" height="80" fill="#f3f1ec" />
+          <rect x={x} y="192" width="70" height="70" fill="#f1cf7a" />
+          <path d={`M${x + 35} 192 V262 M${x} 227 H${x + 70}`} stroke="#f3f1ec" strokeWidth="4" />
+        </g>
+      ))}
+      <rect x="570" y="202" width="62" height={ground - 202 - 4} rx="4" fill="#2c3431" />
+      {/* numbered markers, matching the list */}
+      {marker("erdreich", 180, 420)}
+      {marker("mauerwerk", wx + ww / 2, 380)}
+      {marker("horizontalsperre", wx - 34, bar + 5)}
+      {panels.map((pn) => marker(pn.id, pn.x + pn.w / 2 + 9, ground + 2))}
     </svg>
   );
 }
@@ -111,6 +128,9 @@ export default function LayersAct() {
           {WALL_LAYERS.map((l) => (
             <li key={l.id} className="layer-note" data-layer={l.id} style={{ ["--swatch" as string]: l.color }}>
               <h3>{l.name}</h3>
+              <span className="layer-note__short" aria-hidden="true">
+                {l.short}
+              </span>
               <p>{hy(l.text)}</p>
             </li>
           ))}

@@ -156,7 +156,7 @@ export default function ProofPhasesClient({
                   {p.measure}
                 </span>
                 <span className="mt-3 block text-sm">
-                  <span className="font-mono text-[0.7rem] uppercase tracking-wider text-[var(--mint)]">Dokument </span>
+                  <span className="font-mono text-[0.7rem] uppercase tracking-wider text-[var(--mint)]">Sie erhalten </span>
                   <span className="text-[var(--bone)]/85">{p.proof}</span>
                 </span>
               </button>
@@ -220,7 +220,7 @@ export default function ProofPhasesClient({
             </table>
           </details>
           <p className="mt-2 text-xs text-[var(--sc-ink-soft)]">
-            Beispielwerte, schematisch. Die tatsächlichen Werte Ihres Objekts stehen im Messprotokoll.
+            Beispielwerte, schematisch. Die tatsächlichen Werte Ihres Objekts stehen im Messprotokoll, das Sie nach jeder Phase erhalten.
           </p>
         </div>
       </div>

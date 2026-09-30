@@ -189,5 +189,9 @@ export const FAQS = [
   {
     q: "Gibt es eine Garantie auf die ausgeführten Arbeiten?",
     a: "Ja, und zwar zweifach. sos-abdichtung gibt Ihnen 10 Jahre Garantie auf die ausgeführten Arbeiten. Zusätzlich garantiert der Hersteller SchimmelPeter GmbH 25 Jahre lang die Wirksamkeit seiner Produkte."
+  },
+  {
+    q: "Bekomme ich die Messergebnisse schriftlich?",
+    a: "Ja, immer. Nach jeder Phase erhalten Sie das Protokoll: die Nullmessung mit Messpunktplan, das Injektionsprotokoll, die Kontrollmessungen und das Abnahmeprotokoll mit den Vorher-nachher-Werten. So können Sie den Erfolg der Sanierung jederzeit selbst nachvollziehen."
   }
 ];
