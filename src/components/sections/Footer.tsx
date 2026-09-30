@@ -1,63 +1,84 @@
-"use client";
-
-import React from "react";
-import Link from "next/link";
 import { COMPANY_INFO } from "@/data/content-data";
+import { SERVICE_CARDS } from "@/data/services";
+import { CITY_PAGES } from "@/data/seo-pages";
+import { PARTNER_URL } from "@/lib/site";
+import Logo from "@/components/brand/Logo";
 
 export default function Footer() {
   return (
-    <footer className="bg-landing-ink text-landing-bone/60 py-16 border-t border-white/[0.07]">
-      <div className="max-w-6xl mx-auto px-6">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-10 mb-12">
-          {/* Brand Col */}
-          <div className="md:col-span-2 space-y-4">
-            <div className="flex items-center gap-2">
-              <span className="font-editorial text-xl tracking-[0.14em] text-landing-bone uppercase font-normal">
-                sos-abdichtung<span className="text-landing-mint font-bold">.</span>
-              </span>
-              <span className="font-mono text-[10px] uppercase tracking-[0.16em] text-landing-bone/40">
-                Wuppertal
-              </span>
-            </div>
-            <p className="text-xs text-landing-bone/60 max-w-sm leading-relaxed">
-              Zertifizierter SchimmelPeter® Partnerbetrieb für Kellersanierung, chemische Horizontalsperren und Schimmelbeseitigung im Raum Wuppertal und Bergisches Land (PLZ 42xxx).
+    <footer className="border-t border-white/[0.07] bg-[var(--ink)] py-16 text-[var(--bone)]/70">
+      <div className="mx-auto max-w-7xl px-6 sm:px-8">
+        <div className="grid grid-cols-1 gap-10 md:grid-cols-12">
+          <div className="space-y-4 md:col-span-4">
+            <Logo sub="Wuppertal · PLZ 42" />
+            <p className="max-w-sm text-sm leading-relaxed">
+              Fachbetrieb für Kellersanierung, Horizontalsperren und Schimmelbeseitigung in Wuppertal und dem
+              Bergischen Land. Offizieller{" "}
+              <a href={PARTNER_URL} className="underline hover:text-[var(--bone)]" rel="noopener">
+                SchimmelPeter® Partnerbetrieb
+              </a>
+              .
             </p>
-            <p className="text-[11px] font-mono text-landing-bone/40">
-              WTA-zertifiziert · 10 Jahre Systemgarantie · Ohne Aufgraben · Inhaber: {COMPANY_INFO.owner}
-            </p>
+            <address className="text-sm not-italic">
+              {COMPANY_INFO.owner}
+              <br />
+              {COMPANY_INFO.street}, {COMPANY_INFO.city}
+              <br />
+              <a href={`tel:${COMPANY_INFO.phoneTel}`} className="hover:text-[var(--bone)]">
+                {COMPANY_INFO.phoneDisplay}
+              </a>
+              <br />
+              <a href={`mailto:${COMPANY_INFO.email}`} className="hover:text-[var(--bone)]">
+                {COMPANY_INFO.email}
+              </a>
+            </address>
           </div>
 
-          {/* Links Col */}
-          <div>
-            <h4 className="text-xs font-mono uppercase tracking-wider text-landing-bone mb-4">
-              Fachleistungen
-            </h4>
-            <ul className="space-y-2.5 text-xs text-landing-bone/60">
-              <li><a href="#leistungen" className="hover:text-landing-bone transition-colors">Horizontalsperre</a></li>
-              <li><a href="#3d-injektion" className="hover:text-landing-bone transition-colors">3D-Injektionsverfahren</a></li>
-              <li><a href="#leistungen" className="hover:text-landing-bone transition-colors">Kellerinnenabdichtung</a></li>
-              <li><a href="#leistungen" className="hover:text-landing-bone transition-colors">Schimmelbeseitigung</a></li>
-              <li><a href="#servicegebiet" className="hover:text-landing-bone transition-colors">Servicegebiet PLZ 42</a></li>
+          <nav className="md:col-span-3" aria-label="Leistungen">
+            <p className="mb-4 font-mono text-xs uppercase tracking-wider text-[var(--bone)]">Leistungen</p>
+            <ul className="space-y-1 text-sm">
+              {SERVICE_CARDS.map((s) => (
+                <li key={s.slug}>
+                  <a href={`/leistungen/${s.slug}/`} className="inline-block py-1.5 hover:text-[var(--bone)]">
+                    {s.title}
+                  </a>
+                </li>
+              ))}
             </ul>
-          </div>
+          </nav>
 
-          {/* Legal Col */}
-          <div>
-            <h4 className="text-xs font-mono uppercase tracking-wider text-landing-bone mb-4">
-              Rechtliches
-            </h4>
-            <ul className="space-y-2.5 text-xs text-landing-bone/60">
-              <li><Link href="/impressum" className="hover:text-landing-bone transition-colors">Impressum (§ 5 TMG)</Link></li>
-              <li><Link href="/datenschutz" className="hover:text-landing-bone transition-colors">Datenschutzerklärung (DSGVO)</Link></li>
-              <li><a href="#faq" className="hover:text-landing-bone transition-colors">Häufige Fragen (FAQ)</a></li>
-              <li><a href={`tel:${COMPANY_INFO.phoneTel}`} className="hover:text-landing-bone transition-colors">Telefon: {COMPANY_INFO.phoneDisplay}</a></li>
+          <nav className="md:col-span-3" aria-label="Servicegebiet">
+            <p className="mb-4 font-mono text-xs uppercase tracking-wider text-[var(--bone)]">Kellersanierung in</p>
+            <ul className="space-y-1 text-sm">
+              {CITY_PAGES.map((c) => (
+                <li key={c.slug}>
+                  <a href={`/kellersanierung/${c.slug}/`} className="inline-block py-1.5 hover:text-[var(--bone)]">
+                    {c.name}
+                  </a>
+                </li>
+              ))}
             </ul>
-          </div>
+          </nav>
+
+          <nav className="md:col-span-2" aria-label="Rechtliches">
+            <p className="mb-4 font-mono text-xs uppercase tracking-wider text-[var(--bone)]">Rechtliches</p>
+            <ul className="space-y-1 text-sm">
+              <li>
+                <a href="/impressum/" className="inline-block py-1.5 hover:text-[var(--bone)]">
+                  Impressum
+                </a>
+              </li>
+              <li>
+                <a href="/datenschutz/" className="inline-block py-1.5 hover:text-[var(--bone)]">
+                  Datenschutz
+                </a>
+              </li>
+            </ul>
+          </nav>
         </div>
-
-        <div className="pt-8 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4 text-[11px] font-mono text-landing-bone/40">
-          <p>© 2026 sos-abdichtung Wuppertal · Alle Rechte vorbehalten.</p>
-          <p>SchimmelPeter® Partnerbetrieb für das Bergische Land</p>
+        <div className="mt-12 flex flex-col items-start justify-between gap-3 border-t border-white/5 pt-8 font-mono text-[11px] text-[var(--bone)]/55 sm:flex-row">
+          <p className="no-justify">© 2026 sos-abdichtung · Inh. {COMPANY_INFO.owner}</p>
+          <p className="no-justify">SchimmelPeter® ist eine Marke der SchimmelPeter GmbH.</p>
         </div>
       </div>
     </footer>

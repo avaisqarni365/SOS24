@@ -18,7 +18,7 @@ export interface RegionCity {
 
 export const COMPANY_INFO = {
   name: "sos-abdichtung",
-  fullName: "sos-abdichtung — SchimmelPeter® Partnerbetrieb",
+  fullName: "sos-abdichtung, SchimmelPeter® Partnerbetrieb",
   network: "SchimmelPeter® Deutschland",
   owner: "Shahzad Mahmood",
   title: "Inhaber & Bautenschutz-Experte",
@@ -131,13 +131,6 @@ export const REGIONAL_CITIES: RegionCity[] = [
     districts: ["Haan-Mitte", "Gruiten", "Mettmann-Zentrum"],
     responseHours: "24-48 Std.",
     highlight: "Sanierung von Souterrain & Kellerwohnungen"
-  },
-  {
-    name: "Schwelm & Ennepetal",
-    plzPrefix: ["58332", "58256"],
-    districts: ["Schwelm-Nord", "Schwelm-Süd", "Ennepetal-Milspe", "Voerde"],
-    responseHours: "24-48 Std.",
-    highlight: "Direkte Anbindung an den Raum Wuppertal-Ost"
   }
 ];
 
@@ -179,7 +172,7 @@ export const FAQS = [
   },
   {
     q: "Wie funktioniert die chemische Horizontalsperre per Injektionsverfahren?",
-    a: "In die betroffene Kellerwand wird im Abstand von ca. 10–12 cm eine Bohrlochkette eingebracht. Anschließend wird eine hochviskose Silan-/Siloxan-Mikroemulsion drucklos injiziert. Der Wirkstoff verteilt sich kapillar im Porengefüge des Mauerwerks, reagiert mit dem Baustoff und bildet eine dauerhaft wasserabweisende (hydrophobe) Barriere, die aufsteigendes Wasser zu 100% stoppt."
+    a: "In die betroffene Kellerwand wird im Abstand von ca. 10 bis 12 cm eine Bohrlochkette eingebracht. Anschließend wird eine hochviskose Silan-/Siloxan-Mikroemulsion drucklos injiziert. Der Wirkstoff verteilt sich kapillar im Porengefüge des Mauerwerks, reagiert mit dem Baustoff und bildet eine dauerhaft wasserabweisende (hydrophobe) Barriere, die aufsteigendes Wasser zuverlässig stoppt."
   },
   {
     q: "Muss für die Sanierung der Garten oder das Pflaster aufgegraben werden?",

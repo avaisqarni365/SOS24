@@ -1,61 +1,81 @@
-import React from "react";
+import type { Metadata } from "next";
 import Navbar from "@/components/sections/Navbar";
-import Hero from "@/components/sections/Hero";
-import Schadensbilder from "@/components/sections/Schadensbilder";
-import InjectionProcess from "@/components/sections/InjectionProcess";
-import ComplianceTrust from "@/components/sections/ComplianceTrust";
-import CostCalculator from "@/components/calculator/CostCalculator";
-import RegionalPLZ from "@/components/sections/RegionalPLZ";
-import FAQ from "@/components/sections/FAQ";
-import CtaBanner from "@/components/sections/CtaBanner";
-import ContactForm from "@/components/sections/ContactForm";
 import Footer from "@/components/sections/Footer";
-import ScrollSectionRail from "@/components/navigation/ScrollSectionRail";
+import ContactForm from "@/components/sections/ContactForm";
+import CostCalculator from "@/components/calculator/CostCalculator";
 import GrokLeadBot from "@/components/ai/GrokLeadBot";
+import Hero from "@/components/scroll/Hero";
+import Tension from "@/components/scroll/Tension";
+import LayersAct from "@/components/scroll/LayersAct";
+import { ScannerSection, ServicesRail, ProcessSection, RegionSection, FaqSection } from "@/components/scroll/HomeSections";
+import ScrollEngine, { SC_BOOT } from "@/components/scroll/ScrollEngine";
+import JsonLd from "@/components/seo/JsonLd";
+import { FAQS } from "@/data/content-data";
+import { SERVICE_CARDS } from "@/data/services";
+import { SITE_URL, BUSINESS_ID, WEBSITE_ID, abs, businessNode, websiteNode, breadcrumbNode, faqNode } from "@/lib/site";
+
+const TITLE = "Kellersanierung Wuppertal ohne Aufgraben | sos-abdichtung";
+const DESCRIPTION =
+  "Kellersanierung Wuppertal ohne Aufgraben: nasse Keller und feuchte Wände trockenlegen. SchimmelPeter® Partner, kostenlose Feuchtemessung, 10 Jahre Garantie.";
+
+export const metadata: Metadata = {
+  title: TITLE,
+  description: DESCRIPTION,
+  alternates: { canonical: "/" },
+  openGraph: { title: TITLE, description: DESCRIPTION, url: "/", type: "website", locale: "de_DE", siteName: "sos-abdichtung" },
+};
 
 export default function Home() {
+  const graph = [
+    businessNode(),
+    websiteNode(),
+    {
+      "@type": "WebPage",
+      "@id": `${SITE_URL}/#webpage`,
+      url: abs("/"),
+      name: TITLE,
+      description: DESCRIPTION,
+      inLanguage: "de-DE",
+      isPartOf: { "@id": WEBSITE_ID },
+      about: { "@id": BUSINESS_ID },
+      breadcrumb: { "@id": `${SITE_URL}/#breadcrumb` },
+    },
+    { ...breadcrumbNode([{ name: "Startseite", path: "/" }]), "@id": `${SITE_URL}/#breadcrumb` },
+    {
+      "@type": "ItemList",
+      name: "Leistungen",
+      itemListElement: SERVICE_CARDS.map((s, i) => ({
+        "@type": "ListItem",
+        position: i + 1,
+        url: abs(`/leistungen/${s.slug}/`),
+        name: s.title,
+      })),
+    },
+    faqNode(FAQS),
+  ];
+
   return (
-    <div className="min-h-screen overflow-x-hidden bg-landing-ink font-sans antialiased text-landing-bone selection:bg-landing-mint selection:text-[#0E1310]">
-      {/* 100% Kontai24 Minimalist Navbar */}
+    <>
+      <script dangerouslySetInnerHTML={{ __html: SC_BOOT }} />
+      <JsonLd graph={graph} />
+      <span data-sc-progress aria-hidden="true" />
+      <div className="sc-grain" aria-hidden="true" />
       <Navbar />
-
-      {/* Floating Adaptive Side Navigation with Section Points & Pills */}
-      <ScrollSectionRail />
-
-      <main>
-        {/* 1. TOP: Dark Forest Ink Hero + 3D Wireframe Orb + 4-Col Stat Grid */}
+      <main id="main">
         <Hero />
-
-        {/* 2. LEISTUNGEN: Snow White Bone Platform (3 Cards with Emerald Dots) */}
-        <Schadensbilder />
-
-        {/* 3. 3D-INJEKTION: Dark Forest Ink 3D Wall Injection Model + 4-Step Interactive Process */}
-        <InjectionProcess />
-
-        {/* 4. ZERTIFIZIERUNG: Soft Snow White Bone2 WTA & 10 Jahre Garantie Badges */}
-        <ComplianceTrust />
-
-        {/* 5. RECHNER: Snow White Bone Cost & Savings Calculator */}
+        <Tension />
+        <ScannerSection />
+        <LayersAct />
+        <ServicesRail />
+        <ProcessSection />
         <CostCalculator />
-
-        {/* 6. SERVICEGEBIET: Dark Forest Ink PLZ 42 Region Hub */}
-        <RegionalPLZ />
-
-        {/* 7. FAQ: Snow White Bone Accordion Q&A */}
-        <FAQ />
-
-        {/* 8. START: Dark Forest Ink Sofort-Diagnose Call to Action Banner */}
-        <CtaBanner />
-
-        {/* 9. KONTAKT: Snow White Bone2 Fast WhatsApp & Phone Channel */}
+        <RegionSection />
+        <FaqSection />
         <ContactForm />
       </main>
-
-      {/* Minimalist Dark Forest Ink Footer */}
       <Footer />
-
-      {/* 24/7 Sanierungs-Bot Widget */}
       <GrokLeadBot />
-    </div>
+      <ScrollEngine />
+    </>
   );
 }

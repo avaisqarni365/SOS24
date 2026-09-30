@@ -1,102 +1,71 @@
-import type { Metadata } from "next";
-import { Inter, Newsreader, JetBrains_Mono } from "next/font/google";
+import type { Metadata, Viewport } from "next";
+import localFont from "next/font/local";
+// Engine floor first, brand tokens second: the brand must win the :root cascade.
+import "@/styles/scrollcraft.css";
 import "@/styles/globals.css";
+import { SITE_URL } from "@/lib/site";
 
-const inter = Inter({
-  subsets: ["latin"],
+// Self-hosted variable fonts: no request to Google at runtime (DSGVO) and no build-time fetch.
+const inter = localFont({
+  src: "../fonts/inter-latin-wght-normal.woff2",
   variable: "--font-sans",
+  weight: "100 900",
   display: "swap",
 });
 
-const newsreader = Newsreader({
-  subsets: ["latin"],
-  style: ["normal", "italic"],
+const newsreader = localFont({
+  src: [
+    { path: "../fonts/newsreader-latin-wght-normal.woff2", style: "normal" },
+    { path: "../fonts/newsreader-latin-wght-italic.woff2", style: "italic" },
+  ],
   variable: "--font-editorial",
+  weight: "200 800",
   display: "swap",
 });
 
-const mono = JetBrains_Mono({
-  subsets: ["latin"],
+const mono = localFont({
+  src: "../fonts/jetbrains-mono-latin-wght-normal.woff2",
   variable: "--font-mono",
+  weight: "100 800",
   display: "swap",
+  preload: false,
 });
 
 export const metadata: Metadata = {
-  title: "sos-abdichtung — Kellersanierung & Horizontalsperren Wuppertal (PLZ 42)",
-  description: "Zertifizierter SchimmelPeter® Fachbetrieb für Kellersanierung, chemische Horizontalsperren & Schimmelbeseitigung im Raum Wuppertal (PLZ 42). 10 Jahre Garantie.",
-  keywords: [
-    "kellersanierung wuppertal",
-    "feuchte wände trockenlegen wuppertal",
-    "schimmelbeseitigung wuppertal",
-    "schimmelsanierung wuppertal",
-    "horizontalsperre wuppertal",
-    "keller trockenlegen solingen",
-    "kellersanierung remscheid",
-    "kellersanierung velbert",
-    "keller von innen abdichten",
-    "schimmelpeter wuppertal"
-  ],
-  authors: [{ name: "Shahzad Mahmood", url: "https://www.schimmelpeter.de" }],
-  robots: "index, follow",
+  metadataBase: new URL(SITE_URL),
+  title: {
+    default: "Kellersanierung Wuppertal ohne Aufgraben | sos-abdichtung",
+    template: "%s",
+  },
+  description:
+    "Kellersanierung Wuppertal ohne Aufgraben: nasse Keller und feuchte Wände trockenlegen. SchimmelPeter® Partner, kostenlose Feuchtemessung, 10 Jahre Garantie.",
+  applicationName: "sos-abdichtung",
+  authors: [{ name: "Shahzad Mahmood" }],
+  robots: { index: true, follow: true, "max-image-preview": "large" },
+  formatDetection: { telephone: true },
   openGraph: {
-    title: "sos-abdichtung — Kellersanierung & Horizontalsperren Wuppertal",
-    description: "Zertifizierter SchimmelPeter® Partnerbetrieb im Raum Wuppertal & PLZ 42. Feuchte Wände & nasse Keller dauerhaft trockenlegen ohne Aufgraben. 10 Jahre Garantie.",
     type: "website",
     locale: "de_DE",
-    siteName: "sos-abdichtung Wuppertal",
+    siteName: "sos-abdichtung",
   },
+  icons: { icon: "/icon.svg" },
 };
 
-export const viewport = {
+export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
+  viewportFit: "cover",
+  themeColor: "#0e1310",
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  const schemaJsonLd = {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "LocalBusiness",
-        "@id": "https://www.sos-abdichtung.de/#business",
-        "name": "sos-abdichtung — SchimmelPeter® Partnerbetrieb",
-        "legalName": "sos-abdichtung, Inh. Shahzad Mahmood",
-        "description": "Zertifizierter Fachbetrieb für Kellersanierung, chemische Horizontalsperren und Schimmelbeseitigung in Wuppertal und Umgebung (PLZ 42).",
-        "telephone": "+491722064177",
-        "email": "s.mahmood@schimmelpeter.de",
-        "address": {
-          "@type": "PostalAddress",
-          "streetAddress": "Niebuhrstraße 46",
-          "addressLocality": "Essen",
-          "postalCode": "45144",
-          "addressCountry": "DE"
-        },
-        "areaServed": [
-          { "@type": "City", "name": "Wuppertal" },
-          { "@type": "City", "name": "Solingen" },
-          { "@type": "City", "name": "Remscheid" },
-          { "@type": "City", "name": "Velbert" },
-          { "@type": "AdministrativeArea", "name": "Bergisches Land" }
-        ]
-      }
-    ]
-  };
-
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="de" className={`${inter.variable} ${newsreader.variable} ${mono.variable} scroll-smooth`}>
-      <head>
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify(schemaJsonLd) }}
-        />
-      </head>
-      <body className="min-h-screen bg-landing-ink text-landing-bone font-sans antialiased selection:bg-landing-mint selection:text-landing-ink">
-        {children}
-      </body>
+    <html
+      lang="de"
+      className={`${inter.variable} ${newsreader.variable} ${mono.variable}`}
+      suppressHydrationWarning
+    >
+      <body className="min-h-screen font-sans antialiased">{children}</body>
     </html>
   );
 }

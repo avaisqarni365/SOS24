@@ -1,243 +1,233 @@
 "use client";
 
-import React, { useState } from "react";
-import { Phone, Mail, MapPin, CheckCircle2, MessageSquare, ArrowRight } from "lucide-react";
+import React, { useEffect, useState } from "react";
+import { Phone, MapPin, CheckCircle2, MessageSquare, ArrowRight } from "lucide-react";
 import { COMPANY_INFO } from "@/data/content-data";
 
-export default function ContactForm() {
-  const [formData, setFormData] = useState({
+const DAMAGE_OPTIONS = [
+  "Feuchte Kellerwände / Horizontalsperre",
+  "Nasser Keller / Drückendes Hangwasser",
+  "Schimmelbefall & Geruch",
+  "Salzausblühungen / Abplatzender Putz",
+  "Wasserführender Riss",
+  "Allgemeine Feuchtigkeitsmessung",
+];
+
+type Enquiry = {
+  name: string;
+  phone: string;
+  email: string;
+  plz: string;
+  damageType: string;
+  message: string;
+};
+
+function whatsappLink(d: Enquiry) {
+  const text = `Hallo Herr Mahmood, hier ist eine Sanierungsanfrage über sos-abdichtung.de:\n\nName: ${d.name}\nTelefon: ${d.phone}\nE-Mail: ${d.email}\nPLZ: ${d.plz}\nSchadensbild: ${d.damageType}\nNachricht: ${d.message}`;
+  return `https://wa.me/${COMPANY_INFO.phoneTel.replace("+", "")}?text=${encodeURIComponent(text)}`;
+}
+
+const field =
+  "w-full min-h-[48px] px-4 py-3 rounded-xl border border-black/15 bg-[var(--bone)] text-sm text-[var(--head-on-bone)] focus:outline-none focus:border-[var(--emerald-deep)] focus:bg-white placeholder:text-black/40";
+const lbl = "block text-xs font-mono font-bold text-[var(--head-on-bone)] mb-2";
+
+export default function ContactForm({ defaultDamage, place }: { defaultDamage?: string; place?: string }) {
+  const [formData, setFormData] = useState<Enquiry>({
     name: "",
     phone: "",
     email: "",
     plz: "",
-    damageType: "Feuchte Kellerwände / Horizontalsperre",
-    message: ""
+    damageType: defaultDamage && DAMAGE_OPTIONS.includes(defaultDamage) ? defaultDamage : DAMAGE_OPTIONS[0],
+    message: "",
   });
   const [isSubmitted, setIsSubmitted] = useState(false);
 
+  // WebMCP, imperative: the same action the form performs, for AI agents in the browser.
+  useEffect(() => {
+    const mc = (navigator as unknown as { modelContext?: { registerTool?: (t: unknown) => void } }).modelContext;
+    if (!mc?.registerTool) return;
+    try {
+      mc.registerTool({
+        name: "anfrage_feuchtemessung",
+        description:
+          "Bereitet eine Anfrage für eine kostenlose Feuchtemessung bei sos-abdichtung vor und öffnet WhatsApp mit der ausgefüllten Nachricht an Shahzad Mahmood. Es wird nichts automatisch versendet.",
+        inputSchema: {
+          type: "object",
+          properties: {
+            name: { type: "string", description: "Name der anfragenden Person" },
+            phone: { type: "string", description: "Telefonnummer für den Rückruf" },
+            email: { type: "string", description: "E-Mail-Adresse (optional)" },
+            plz: { type: "string", description: "Postleitzahl des Objekts, z. B. 42103" },
+            damageType: { type: "string", enum: DAMAGE_OPTIONS, description: "Art des Schadens" },
+            message: { type: "string", description: "Beschreibung des Problems" },
+          },
+          required: ["name", "phone", "plz"],
+        },
+        execute: async (input: Partial<Enquiry>) => {
+          const d = { ...formData, ...input } as Enquiry;
+          window.open(whatsappLink(d), "_blank");
+          return { content: [{ type: "text", text: "WhatsApp-Nachricht vorbereitet. Senden muss die Person selbst." }] };
+        },
+      });
+    } catch {
+      /* browsers without WebMCP ignore this */
+    }
+    // register once
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const set = (k: keyof Enquiry) => (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) =>
+    setFormData({ ...formData, [k]: e.target.value });
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // 100% static client-side submission: Opens WhatsApp with pre-filled message
-    const text = `Hallo Herr Mahmood, hier ist eine Sanierungsanfrage über sos-abdichtung.de:\n\nName: ${formData.name}\nTelefon: ${formData.phone}\nE-Mail: ${formData.email}\nPLZ: ${formData.plz}\nSchadensbild: ${formData.damageType}\nNachricht: ${formData.message}`;
-    const whatsappUrl = `https://wa.me/491722064177?text=${encodeURIComponent(text)}`;
-    window.open(whatsappUrl, "_blank");
+    window.open(whatsappLink(formData), "_blank");
     setIsSubmitted(true);
   };
 
+  // Declarative WebMCP attributes are not in React's DOM typings.
+  const tool = {
+    toolname: "anfrage_feuchtemessung",
+    tooldescription:
+      "Anfrage für eine kostenlose Feuchtemessung vor Ort vorbereiten. Öffnet WhatsApp mit der ausgefüllten Nachricht.",
+  } as Record<string, string>;
+  const p = (d: string) => ({ toolparamdescription: d }) as Record<string, string>;
+
   return (
-    <section id="kontakt" className="relative bg-landing-bone2 text-[#1A1D1B]">
-      <div className="relative max-w-6xl mx-auto px-6 py-24 sm:py-32">
-        {/* Section Header */}
-        <p className="text-[11px] font-semibold uppercase tracking-[0.18em] mb-5 text-landing-emerald font-mono">
+    <section id="kontakt" className="surface-bone-2 relative" aria-labelledby="kontakt-title">
+      <div className="relative mx-auto max-w-6xl px-6 py-24 sm:py-32">
+        <p className="mb-5 font-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-[var(--emerald-deep)]">
           Kontakt & Vor-Ort-Analyse
         </p>
-        <h2 className="font-editorial font-normal tracking-[-0.02em] leading-[1.04] text-[2.25rem] sm:text-5xl lg:text-[3.5rem] text-[#1A1D1B]">
-          Sprechen wir über Ihr Objekt.
+        <h2
+          id="kontakt-title"
+          className="font-editorial text-[2.25rem] font-normal leading-[1.04] tracking-[-0.02em] text-[var(--head-on-bone)] sm:text-5xl lg:text-[3.5rem]"
+        >
+          Sprechen wir über Ihr Objekt{place ? ` in ${place}` : ""}.
           <br />
-          <span className="italic text-landing-mint">Wir antworten innerhalb weniger Stunden.</span>
+          <span className="italic text-[var(--emerald-deep)]">Die Feuchtemessung ist kostenlos.</span>
         </h2>
-        <p className="mt-6 max-w-2xl text-base sm:text-lg leading-relaxed text-[#444945]">
-          Vereinbaren Sie Ihren unverbindlichen Besichtigungstermin. Herr Mahmood misst die Feuchtigkeit im Mauerwerk und erstellt Ihnen ein transparentes Festpreisangebot ohne Folgekosten.
+        <p className="mt-6 max-w-2xl text-base leading-relaxed text-[var(--text-on-bone)] sm:text-lg">
+          Vereinbaren Sie Ihren unverbindlichen Termin. {COMPANY_INFO.owner} misst die Feuchtigkeit im Mauerwerk und
+          erstellt Ihnen ein transparentes Festpreisangebot.
         </p>
 
-        <div className="mt-14 grid grid-cols-1 lg:grid-cols-12 gap-10">
-          {/* Left Form in Snow White Card */}
-          <div className="lg:col-span-7 bg-white rounded-3xl border border-black/5 p-8 sm:p-10 shadow-sm">
+        <div className="mt-14 grid grid-cols-1 gap-10 lg:grid-cols-12">
+          <div className="rounded-3xl border border-black/5 bg-white p-8 shadow-sm sm:p-10 lg:col-span-7">
             {isSubmitted ? (
-              <div className="text-center py-10 space-y-4">
-                <div className="w-14 h-14 rounded-full bg-landing-emerald/10 text-landing-emerald flex items-center justify-center mx-auto">
-                  <CheckCircle2 className="w-8 h-8" />
+              <div className="space-y-4 py-10 text-center" role="status">
+                <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-[var(--mint)]/15 text-[var(--emerald-deep)]">
+                  <CheckCircle2 className="h-8 w-8" aria-hidden="true" />
                 </div>
-                <h3 className="font-editorial text-2xl text-[#1A1D1B]">Anfrage übermittelt</h3>
-                <p className="text-sm text-[#444945] max-w-md mx-auto">
-                  Vielen Dank! Die Nachricht wurde vorbereitet. Herr Mahmood meldet sich umgehend bei Ihnen zur Terminabstimmung.
+                <h3 className="font-editorial text-2xl text-[var(--head-on-bone)]">Anfrage vorbereitet</h3>
+                <p className="mx-auto max-w-md text-sm text-[var(--text-on-bone)]">
+                  Die Nachricht ist in WhatsApp vorbereitet. Bitte dort absenden. Herr Mahmood meldet sich zur
+                  Terminabstimmung.
                 </p>
-                <div className="pt-4">
-                  <a
-                    href={`tel:${COMPANY_INFO.phoneTel}`}
-                    className="inline-flex items-center gap-2 rounded-full px-6 py-3 text-xs font-mono font-semibold bg-[#1A1D1B] text-landing-bone hover:bg-black transition-colors"
-                  >
-                    <Phone className="w-3.5 h-3.5 text-landing-mint" />
-                    <span>Dringend? Direkt anrufen: {COMPANY_INFO.phoneDisplay}</span>
-                  </a>
-                </div>
+                <a
+                  href={`tel:${COMPANY_INFO.phoneTel}`}
+                  className="inline-flex min-h-[48px] items-center gap-2 rounded-full bg-[var(--head-on-bone)] px-6 py-3 font-mono text-xs font-semibold text-[var(--bone)] hover:bg-black"
+                >
+                  <Phone className="h-3.5 w-3.5 text-[var(--mint)]" aria-hidden="true" />
+                  Dringend? Direkt anrufen: {COMPANY_INFO.phoneDisplay}
+                </a>
               </div>
             ) : (
-              <form onSubmit={handleSubmit} className="space-y-5">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <form onSubmit={handleSubmit} className="space-y-5" {...tool}>
+                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                   <div>
-                    <label className="block text-xs font-mono font-bold text-[#1A1D1B] mb-2">
-                      Name / Ansprechpartner *
+                    <label htmlFor="f-name" className={lbl}>
+                      Name *
                     </label>
-                    <input
-                      type="text"
-                      required
-                      value={formData.name}
-                      onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                      placeholder="z.B. Markus Schmidt"
-                      className="w-full px-4 py-3 rounded-xl border border-black/10 bg-landing-bone2/40 text-sm text-[#1A1D1B] focus:outline-none focus:border-landing-emerald focus:bg-white placeholder:text-black/30"
-                    />
+                    <input id="f-name" name="name" type="text" required autoComplete="name" value={formData.name} onChange={set("name")} placeholder="z. B. Markus Schmidt" className={field} {...p("Name der anfragenden Person")} />
                   </div>
-
                   <div>
-                    <label className="block text-xs font-mono font-bold text-[#1A1D1B] mb-2">
-                      Telefonnummer für Rückruf *
+                    <label htmlFor="f-phone" className={lbl}>
+                      Telefon für Rückruf *
                     </label>
-                    <input
-                      type="tel"
-                      required
-                      value={formData.phone}
-                      onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                      placeholder="z.B. 0170 1234567"
-                      className="w-full px-4 py-3 rounded-xl border border-black/10 bg-landing-bone2/40 text-sm font-mono text-[#1A1D1B] focus:outline-none focus:border-landing-emerald focus:bg-white placeholder:text-black/30"
-                    />
+                    <input id="f-phone" name="phone" type="tel" required autoComplete="tel" value={formData.phone} onChange={set("phone")} placeholder="z. B. 0170 1234567" className={field} {...p("Telefonnummer für den Rückruf")} />
                   </div>
                 </div>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                   <div>
-                    <label className="block text-xs font-mono font-bold text-[#1A1D1B] mb-2">
-                      E-Mail-Adresse
+                    <label htmlFor="f-email" className={lbl}>
+                      E-Mail
                     </label>
-                    <input
-                      type="email"
-                      value={formData.email}
-                      onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                      placeholder="name@beispiel.de"
-                      className="w-full px-4 py-3 rounded-xl border border-black/10 bg-landing-bone2/40 text-sm font-mono text-[#1A1D1B] focus:outline-none focus:border-landing-emerald focus:bg-white placeholder:text-black/30"
-                    />
+                    <input id="f-email" name="email" type="email" autoComplete="email" value={formData.email} onChange={set("email")} placeholder="name@beispiel.de" className={field} {...p("E-Mail-Adresse, optional")} />
                   </div>
-
                   <div>
-                    <label className="block text-xs font-mono font-bold text-[#1A1D1B] mb-2">
-                      Postleitzahl des Objekts *
+                    <label htmlFor="f-plz" className={lbl}>
+                      PLZ des Objekts *
                     </label>
-                    <input
-                      type="text"
-                      required
-                      maxLength={5}
-                      value={formData.plz}
-                      onChange={(e) => setFormData({ ...formData, plz: e.target.value })}
-                      placeholder="z.B. 42103"
-                      className="w-full px-4 py-3 rounded-xl border border-black/10 bg-landing-bone2/40 text-sm font-mono text-[#1A1D1B] focus:outline-none focus:border-landing-emerald focus:bg-white placeholder:text-black/30"
-                    />
+                    <input id="f-plz" name="plz" type="text" inputMode="numeric" pattern="[0-9]{5}" required maxLength={5} autoComplete="postal-code" value={formData.plz} onChange={set("plz")} placeholder="z. B. 42103" className={field} {...p("Fünfstellige Postleitzahl des Objekts")} />
                   </div>
                 </div>
-
                 <div>
-                  <label className="block text-xs font-mono font-bold text-[#1A1D1B] mb-2">
+                  <label htmlFor="f-damage" className={lbl}>
                     Art des Schadens
                   </label>
-                  <select
-                    value={formData.damageType}
-                    onChange={(e) => setFormData({ ...formData, damageType: e.target.value })}
-                    className="w-full px-4 py-3 rounded-xl border border-black/10 bg-landing-bone2/40 text-sm text-[#1A1D1B] focus:outline-none focus:border-landing-emerald focus:bg-white"
-                  >
-                    <option value="Feuchte Kellerwände / Horizontalsperre">
-                      Feuchte Kellerwände / Horizontalsperre
-                    </option>
-                    <option value="Nasser Keller / Drückendes Hangwasser">
-                      Nasser Keller / Drückendes Hangwasser
-                    </option>
-                    <option value="Schimmelbefall & Geruch">Schimmelbefall & Geruch</option>
-                    <option value="Salzausblühungen / Abplatzender Putz">
-                      Salzausblühungen / Abplatzender Putz
-                    </option>
-                    <option value="Allgemeine Feuchtigkeitsmessung">
-                      Allgemeine Feuchtigkeitsmessung
-                    </option>
+                  <select id="f-damage" name="damageType" value={formData.damageType} onChange={set("damageType")} className={field} {...p("Art des Schadens")}>
+                    {DAMAGE_OPTIONS.map((o) => (
+                      <option key={o} value={o}>
+                        {o}
+                      </option>
+                    ))}
                   </select>
                 </div>
-
                 <div>
-                  <label className="block text-xs font-mono font-bold text-[#1A1D1B] mb-2">
-                    Ihre Nachricht / Details zum Objekt
+                  <label htmlFor="f-msg" className={lbl}>
+                    Ihre Nachricht
                   </label>
-                  <textarea
-                    rows={3}
-                    value={formData.message}
-                    onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                    placeholder="Beschreiben Sie kurz das Problem (z.B. Altbau von 1912, feuchte Raumecke seit Starkregen)..."
-                    className="w-full px-4 py-3 rounded-xl border border-black/10 bg-landing-bone2/40 text-sm text-[#1A1D1B] focus:outline-none focus:border-landing-emerald focus:bg-white placeholder:text-black/30"
-                  />
+                  <textarea id="f-msg" name="message" rows={3} value={formData.message} onChange={set("message")} placeholder="z. B. Altbau von 1912, feuchte Raumecke seit Starkregen" className={field} {...p("Kurze Beschreibung des Problems")} />
                 </div>
-
                 <button
                   type="submit"
-                  className="w-full inline-flex items-center justify-center gap-2 rounded-full px-7 py-4 text-sm font-semibold transition-all active:scale-[0.98] bg-[#1A1D1B] text-landing-bone hover:bg-black shadow-sm"
+                  className="inline-flex min-h-[52px] w-full items-center justify-center gap-2 rounded-full bg-[var(--head-on-bone)] px-7 py-4 text-sm font-semibold text-[var(--bone)] shadow-sm hover:bg-black"
                 >
-                  <span>Anfrage senden & WhatsApp öffnen</span>
-                  <ArrowRight className="w-4 h-4 text-landing-mint" />
+                  Kostenlose Feuchtemessung anfragen
+                  <ArrowRight className="h-4 w-4 text-[var(--mint)]" aria-hidden="true" />
                 </button>
-
-                <p className="text-[11px] font-mono text-center text-[#444945] mt-2">
-                  🔒 Ihre Daten werden vertraulich behandelt und nicht weitergegeben.
+                <p className="text-center font-mono text-[11px] text-[var(--text-on-bone)]">
+                  Öffnet WhatsApp mit Ihrer vorbereiteten Nachricht. Ihre Daten werden nicht gespeichert.
                 </p>
               </form>
             )}
           </div>
 
-          {/* Right Direct Contact Card */}
-          <div className="lg:col-span-5 space-y-6">
-            <div className="p-8 rounded-3xl bg-white border border-black/5 shadow-sm space-y-6">
+          <div className="space-y-6 lg:col-span-5">
+            <div className="space-y-6 rounded-3xl border border-black/5 bg-white p-8 shadow-sm">
               <div>
-                <span className="text-[11px] font-mono uppercase tracking-wider text-landing-emerald font-semibold">
+                <p className="font-mono text-[11px] font-semibold uppercase tracking-wider text-[var(--emerald-deep)]">
                   Direkter Ansprechpartner
-                </span>
-                <h3 className="font-editorial text-2xl text-[#1A1D1B] mt-1">
-                  Shahzad Mahmood
-                </h3>
-                <p className="text-xs text-[#444945] font-mono mt-0.5">
-                  Zertifizierter SchimmelPeter® Partnerbetrieb
                 </p>
+                <h3 className="mt-1 font-editorial text-2xl text-[var(--head-on-bone)]">{COMPANY_INFO.owner}</h3>
+                <p className="mt-0.5 font-mono text-xs text-[var(--text-on-bone)]">SchimmelPeter® Partnerbetrieb</p>
               </div>
-
-              <div className="space-y-4 pt-4 border-t border-black/5 text-xs font-mono text-[#1A1D1B]">
-                <a
-                  href={`tel:${COMPANY_INFO.phoneTel}`}
-                  className="flex items-center gap-3 p-3.5 rounded-2xl bg-landing-bone hover:bg-landing-bone2 transition-colors border border-black/5"
-                >
-                  <div className="w-8 h-8 rounded-xl bg-landing-emerald/10 text-landing-emerald flex items-center justify-center">
-                    <Phone className="w-4 h-4" />
-                  </div>
-                  <div>
-                    <div className="text-[10px] text-[#444945]">Telefonisch erreichbar:</div>
-                    <div className="font-bold text-sm text-[#1A1D1B]">{COMPANY_INFO.phoneDisplay}</div>
-                  </div>
+              <div className="space-y-4 border-t border-black/5 pt-4 font-mono text-xs text-[var(--head-on-bone)]">
+                <a href={`tel:${COMPANY_INFO.phoneTel}`} className="flex items-center gap-3 rounded-2xl border border-black/5 bg-[var(--bone)] p-3.5 hover:bg-[var(--bone-2)]">
+                  <Phone className="h-4 w-4 text-[var(--emerald-deep)]" aria-hidden="true" />
+                  <span>
+                    <span className="block text-[10px] text-[var(--text-on-bone)]">Telefon</span>
+                    <span className="block text-sm font-bold">{COMPANY_INFO.phoneDisplay}</span>
+                  </span>
                 </a>
-
-                <a
-                  href={COMPANY_INFO.whatsappUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-3 p-3.5 rounded-2xl bg-landing-bone hover:bg-landing-bone2 transition-colors border border-black/5"
-                >
-                  <div className="w-8 h-8 rounded-xl bg-landing-mint/20 text-landing-mint flex items-center justify-center">
-                    <MessageSquare className="w-4 h-4 text-landing-emerald" />
-                  </div>
-                  <div>
-                    <div className="text-[10px] text-[#444945]">Direkter WhatsApp-Chat:</div>
-                    <div className="font-bold text-sm text-[#1A1D1B]">Jetzt Nachricht senden →</div>
-                  </div>
+                <a href={COMPANY_INFO.whatsappUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 rounded-2xl border border-black/5 bg-[var(--bone)] p-3.5 hover:bg-[var(--bone-2)]">
+                  <MessageSquare className="h-4 w-4 text-[var(--emerald-deep)]" aria-hidden="true" />
+                  <span>
+                    <span className="block text-[10px] text-[var(--text-on-bone)]">WhatsApp</span>
+                    <span className="block text-sm font-bold">Fotos schicken, Einschätzung bekommen</span>
+                  </span>
                 </a>
-
-                <div className="flex items-center gap-3 p-3.5 rounded-2xl bg-landing-bone border border-black/5">
-                  <div className="w-8 h-8 rounded-xl bg-landing-emerald/10 text-landing-emerald flex items-center justify-center">
-                    <MapPin className="w-4 h-4" />
-                  </div>
-                  <div>
-                    <div className="text-[10px] text-[#444945]">Zuständig für:</div>
-                    <div className="font-bold text-xs text-[#1A1D1B]">PLZ-Bereich 42 (Wuppertal & Bergisches Land)</div>
-                  </div>
+                <div className="flex items-center gap-3 rounded-2xl border border-black/5 bg-[var(--bone)] p-3.5">
+                  <MapPin className="h-4 w-4 text-[var(--emerald-deep)]" aria-hidden="true" />
+                  <span>
+                    <span className="block text-[10px] text-[var(--text-on-bone)]">Sitz</span>
+                    <span className="block text-xs font-bold">
+                      {COMPANY_INFO.street}, {COMPANY_INFO.city}
+                    </span>
+                  </span>
                 </div>
               </div>
-            </div>
-
-            <div className="p-6 rounded-2xl bg-landing-bone border border-black/5 text-xs text-[#444945] space-y-2 font-mono">
-              <div className="font-bold text-[#1A1D1B]">✓ Vor-Ort-Garantie:</div>
-              <p>
-                Herr Mahmood führt jede Besichtigung und Messung persönlich mit professionellen CM-Feuchtemessgeräten durch.
-              </p>
             </div>
           </div>
         </div>

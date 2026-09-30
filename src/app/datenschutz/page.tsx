@@ -4,7 +4,8 @@ import { ArrowLeft } from "lucide-react";
 import { COMPANY_INFO } from "@/data/content-data";
 
 export const metadata = {
-  title: "Datenschutzerklärung — sos-abdichtung | SchimmelPeter® Partnerbetrieb",
+  alternates: { canonical: "/datenschutz/" },
+  title: "Datenschutzerklärung | sos-abdichtung",
   description: "Datenschutzerklärung nach der DSGVO für sos-abdichtung.",
 };
 

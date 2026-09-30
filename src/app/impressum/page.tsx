@@ -4,7 +4,8 @@ import { ArrowLeft } from "lucide-react";
 import { COMPANY_INFO } from "@/data/content-data";
 
 export const metadata = {
-  title: "Impressum — sos-abdichtung | SchimmelPeter® Partnerbetrieb Wuppertal",
+  alternates: { canonical: "/impressum/" },
+  title: "Impressum | sos-abdichtung",
   description: "Impressum und rechtliche Angaben gemäß § 5 TMG für sos-abdichtung.",
 };
 

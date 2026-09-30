@@ -1,127 +1,89 @@
 "use client";
 
 import React, { useState } from "react";
-import Link from "next/link";
-import { Phone, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { COMPANY_INFO } from "@/data/content-data";
+import Logo from "@/components/brand/Logo";
+
+const LINKS = [
+  { href: "/#schicht-fuer-schicht", label: "Verfahren" },
+  { href: "/#leistungen", label: "Leistungen" },
+  { href: "/#rechner", label: "Kosten" },
+  { href: "/#servicegebiet", label: "Servicegebiet" },
+];
 
 export default function Navbar() {
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [open, setOpen] = useState(false);
 
   return (
-    <nav className="sticky top-0 z-50 bg-landing-ink/85 backdrop-blur-lg border-b border-white/5 transition-colors">
-      <div className="max-w-6xl mx-auto px-6 h-16 sm:h-20 flex items-center justify-between">
-        {/* Brand Logo - 100% Kontai24 Exact Style */}
-        <Link href="/" className="flex items-center gap-2 group">
-          <span className="font-editorial text-lg sm:text-xl tracking-[0.14em] text-landing-bone uppercase font-normal">
-            sos-abdichtung<span className="text-landing-mint font-bold">.</span>
-          </span>
-          <span className="hidden sm:inline-block font-mono text-[10px] uppercase tracking-[0.16em] text-landing-bone/40 ml-1">
-            Wuppertal
-          </span>
-        </Link>
+    <header className="fixed inset-x-0 top-0 z-50 border-b border-white/5 bg-[#0e1310]/85 backdrop-blur-lg">
+      <a href="#main" className="skip-link">
+        Zum Inhalt springen
+      </a>
+      <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 sm:h-[4.5rem] sm:px-8" aria-label="Hauptnavigation">
+        <a href="/" aria-label="sos-abdichtung, zur Startseite">
+          <Logo sub="Wuppertal · PLZ 42" />
+        </a>
 
-        {/* Minimalist Nav Links - Only 4 items like Kontai24 */}
-        <div className="hidden md:flex items-center gap-8 text-sm text-landing-bone/60">
-          <a href="#leistungen" className="hover:text-landing-bone transition-colors">
-            Fachleistungen
-          </a>
-          <a href="#3d-injektion" className="hover:text-landing-bone transition-colors flex items-center gap-1.5">
-            <span>3D-Verfahren</span>
-            <span className="h-1.5 w-1.5 rounded-full bg-landing-mint"></span>
-          </a>
-          <a href="#rechner" className="hover:text-landing-bone transition-colors">
-            Kostenrechner
-          </a>
-          <a href="#servicegebiet" className="hover:text-landing-bone transition-colors">
-            Servicegebiet PLZ 42
-          </a>
-        </div>
+        <ul className="hidden items-center gap-8 text-sm text-[var(--bone)]/70 md:flex">
+          {LINKS.map((l) => (
+            <li key={l.href}>
+              <a href={l.href} className="hover:text-[var(--bone)]">
+                {l.label}
+              </a>
+            </li>
+          ))}
+        </ul>
 
-        {/* Minimalist Right Action - Direct Phone + Clean Button */}
-        <div className="flex items-center gap-5">
-          <a
-            href={`tel:${COMPANY_INFO.phoneTel}`}
-            className="hidden sm:inline text-sm text-landing-bone/60 hover:text-landing-bone transition-colors font-mono"
-          >
+        <div className="flex items-center gap-4">
+          <a href={`tel:${COMPANY_INFO.phoneTel}`} className="hidden font-mono text-sm text-[var(--bone)]/70 hover:text-[var(--bone)] lg:inline">
             {COMPANY_INFO.phoneDisplay}
           </a>
-
           <a
-            href="#kontakt"
-            className="hidden sm:inline-flex items-center rounded-full bg-landing-bone px-4 py-2 text-[13px] sm:text-sm font-semibold text-[#0E1310] hover:bg-white transition-colors whitespace-nowrap shadow-sm"
+            href="/#kontakt"
+            className="hidden min-h-[44px] items-center rounded-full bg-[var(--bone)] px-4 text-sm font-semibold text-[var(--ink)] hover:bg-white sm:inline-flex"
           >
-            Diagnose anfragen →
+            Feuchtemessung anfragen
           </a>
-
-          {/* Mobile Menu Button */}
           <button
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden -mr-1 inline-flex h-9 w-9 items-center justify-center rounded-full text-landing-bone/70 hover:text-landing-bone hover:bg-white/5 transition-colors"
-            aria-label="Menü öffnen"
+            type="button"
+            onClick={() => setOpen(!open)}
+            className="inline-flex h-11 w-11 items-center justify-center rounded-full text-[var(--bone)]/80 hover:bg-white/5 md:hidden"
+            aria-label={open ? "Menü schließen" : "Menü öffnen"}
+            aria-expanded={open}
+            aria-controls="mobile-menu"
           >
-            {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            {open ? <X className="h-5 w-5" aria-hidden="true" /> : <Menu className="h-5 w-5" aria-hidden="true" />}
           </button>
         </div>
-      </div>
+      </nav>
 
-      {/* Mobile Menu Dropdown */}
-      {mobileMenuOpen && (
-        <div className="md:hidden border-t border-white/5 bg-landing-ink/95 backdrop-blur-lg px-6 py-4 flex flex-col gap-1 text-sm text-landing-bone/70">
-          <a
-            href="#leistungen"
-            onClick={() => setMobileMenuOpen(false)}
-            className="py-2.5 hover:text-landing-bone transition-colors"
-          >
-            Fachleistungen
-          </a>
-          <a
-            href="#3d-injektion"
-            onClick={() => setMobileMenuOpen(false)}
-            className="py-2.5 hover:text-landing-bone transition-colors flex items-center justify-between"
-          >
-            <span>3D-Verfahren</span>
-            <span className="text-[10px] font-mono text-landing-mint">WTA</span>
-          </a>
-          <a
-            href="#rechner"
-            onClick={() => setMobileMenuOpen(false)}
-            className="py-2.5 hover:text-landing-bone transition-colors"
-          >
-            Kostenrechner
-          </a>
-          <a
-            href="#servicegebiet"
-            onClick={() => setMobileMenuOpen(false)}
-            className="py-2.5 hover:text-landing-bone transition-colors"
-          >
-            Servicegebiet PLZ 42
-          </a>
-          <a
-            href="#faq"
-            onClick={() => setMobileMenuOpen(false)}
-            className="py-2.5 hover:text-landing-bone transition-colors"
-          >
-            Häufige Fragen
-          </a>
-
-          <div className="pt-4 border-t border-white/5 flex flex-col gap-2 mt-2">
-            <a
-              href={`tel:${COMPANY_INFO.phoneTel}`}
-              className="py-2.5 text-center text-xs font-mono font-medium text-landing-bone/80 bg-white/5 rounded-full"
-            >
-              📞 {COMPANY_INFO.phoneDisplay}
+      {open && (
+        <div id="mobile-menu" className="border-t border-white/5 bg-[var(--ink)] px-6 py-4 md:hidden">
+          <ul className="flex flex-col text-[var(--bone)]/80">
+            {LINKS.map((l) => (
+              <li key={l.href}>
+                <a href={l.href} onClick={() => setOpen(false)} className="block py-3">
+                  {l.label}
+                </a>
+              </li>
+            ))}
+            <li>
+              <a href="/#faq" onClick={() => setOpen(false)} className="block py-3">
+                Häufige Fragen
+              </a>
+            </li>
+          </ul>
+          <div className="mt-3 flex flex-col gap-2 border-t border-white/5 pt-4">
+            <a href={`tel:${COMPANY_INFO.phoneTel}`} className="rounded-full bg-white/5 py-3 text-center font-mono text-sm">
+              {COMPANY_INFO.phoneDisplay}
             </a>
-            <a
-              href="#kontakt"
-              onClick={() => setMobileMenuOpen(false)}
-              className="inline-flex items-center justify-center rounded-full bg-landing-bone px-4 py-3 text-sm font-semibold text-[#0E1310] hover:bg-white transition-colors"
-            >
-              Kostenlose Vor-Ort-Diagnose
+            <a href="/#kontakt" onClick={() => setOpen(false)} className="rounded-full bg-[var(--bone)] py-3 text-center text-sm font-semibold text-[var(--ink)]">
+              Kostenlose Feuchtemessung anfragen
             </a>
           </div>
         </div>
       )}
-    </nav>
+    </header>
   );
 }

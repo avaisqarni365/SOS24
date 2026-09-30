@@ -5,7 +5,7 @@
 * **Unternehmen:** sos-abdichtung (Offizieller SchimmelPeter® Partnerbetrieb)
 * **Inhaber & Experte:** Shahzad Mahmood
 * **Haupt-Servicegebiet:** Raum Wuppertal & Bergisches Land
-* **PLZ-Bereiche:** `42xxx` (Wuppertal, Solingen, Remscheid, Velbert, Haan, Mettmann, Schwelm, Ennepetal)
+* **PLZ-Bereiche:** `42xxx` (Wuppertal, Solingen, Remscheid, Velbert, Haan, Mettmann)
 * **Regionale Besonderheiten:** 
   * Wuppertals Topografie (steile Hanglagen, Grundwasserströme im Tal der Wupper).
   * Großer Altbaubestand mit Naturstein-, Bruchstein- und Ziegelmauerwerk ohne zeitgemäße Horizontalsperren.

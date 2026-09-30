@@ -67,7 +67,7 @@ export default function GrokLeadBot() {
         replies = ["Ja, bitte Rückruf", "Direkt per WhatsApp"];
       } else if (lower.includes("42") || lower.includes("wuppertal") || lower.includes("solingen") || lower.includes("remscheid")) {
         botResponse =
-          "Hervorragend! Unser Einsatzgebiet deckt Ihren Ort vollständig ab. In Wuppertal und Umgebung sind wir in der Regel innerhalb von 24–48 Stunden vor Ort. Möchten Sie einen Termin vereinbaren?";
+          "Hervorragend! Unser Einsatzgebiet deckt Ihren Ort vollständig ab. In Wuppertal und Umgebung sind wir in der Regel innerhalb von 24 bis 48 Stunden vor Ort. Möchten Sie einen Termin vereinbaren?";
         replies = ["Termin vereinbaren", "Rückruf anfordern"];
       } else if (lower.includes("termin") || lower.includes("rückruf") || lower.includes("ja")) {
         botResponse = `Gerne! Bitte hinterlassen Sie uns kurz Ihre Telefonnummer oder rufen Sie Herrn Mahmood direkt an unter ${COMPANY_INFO.phoneDisplay}. Alternativ können Sie uns direkt auf WhatsApp schreiben.`;
