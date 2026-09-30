@@ -22,7 +22,14 @@ export function businessNode() {
     url: SITE_URL,
     telephone: COMPANY_INFO.phoneTel,
     email: COMPANY_INFO.email,
-    founder: { "@type": "Person", name: COMPANY_INFO.owner, jobTitle: COMPANY_INFO.title },
+    founder: {
+      "@type": "Person",
+      name: COMPANY_INFO.owner,
+      jobTitle: COMPANY_INFO.title,
+      image: `${SITE_URL}/img/gallery/shahzad-mahmood-480.webp`,
+    },
+    image: `${SITE_URL}/img/gallery/shahzad-mahmood-480.webp`,
+    logo: `${SITE_URL}/logo.svg`,
     address: {
       "@type": "PostalAddress",
       streetAddress: COMPANY_INFO.street,

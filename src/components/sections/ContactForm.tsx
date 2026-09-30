@@ -202,11 +202,31 @@ export default function ContactForm({ defaultDamage, place }: { defaultDamage?: 
           <div className="space-y-6 lg:col-span-5">
             <div className="space-y-6 rounded-3xl border border-black/5 bg-white p-8 shadow-sm">
               <div>
-                <p className="font-mono text-[11px] font-semibold uppercase tracking-wider text-[var(--emerald-deep)]">
-                  Direkter Ansprechpartner
-                </p>
-                <h3 className="mt-1 font-editorial text-2xl text-[var(--head-on-bone)]">{COMPANY_INFO.owner}</h3>
-                <p className="mt-0.5 font-mono text-xs text-[var(--text-on-bone)]">SchimmelPeter® Partnerbetrieb</p>
+                <div className="flex items-center gap-4">
+                  <img
+                    src="/img/gallery/shahzad-mahmood-160.webp"
+                    width={160}
+                    height={176}
+                    alt={`Porträt von ${COMPANY_INFO.owner}`}
+                    loading="lazy"
+                    className="h-20 w-[4.5rem] shrink-0 rounded-2xl object-cover object-top"
+                  />
+                  <div>
+                    <p className="font-mono text-[11px] font-semibold uppercase tracking-wider text-[var(--emerald-deep)]">
+                      Direkter Ansprechpartner
+                    </p>
+                    <h3 className="mt-1 font-editorial text-2xl text-[var(--head-on-bone)]">{COMPANY_INFO.owner}</h3>
+                    <p className="mt-0.5 font-mono text-xs text-[var(--text-on-bone)]">Inhaber, SchimmelPeter® Partnerbetrieb</p>
+                  </div>
+                </div>
+                <img
+                  src="/img/gallery/schimmelpeter-fachbetrieb.svg"
+                  width={225}
+                  height={82}
+                  alt="SchimmelPeter® Zertifizierter Fachbetrieb"
+                  loading="lazy"
+                  className="mt-5 h-12 w-auto"
+                />
               </div>
               <div className="space-y-4 border-t border-black/5 pt-4 font-mono text-xs text-[var(--head-on-bone)]">
                 <a href={`tel:${COMPANY_INFO.phoneTel}`} className="flex items-center gap-3 rounded-2xl border border-black/5 bg-[var(--bone)] p-3.5 hover:bg-[var(--bone-2)]">

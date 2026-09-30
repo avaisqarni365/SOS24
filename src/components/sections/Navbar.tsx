@@ -10,6 +10,7 @@ import { useLanguage } from "@/i18n/LanguageContext";
 const LINKS = [
   { href: "/#schicht-fuer-schicht", key: "nav.process3d" },
   { href: "/#leistungen", key: "nav.services" },
+  { href: "/#galerie", key: "nav.gallery" },
   { href: "/#rechner", key: "nav.calculator" },
   { href: "/#servicegebiet", key: "nav.region" },
 ];

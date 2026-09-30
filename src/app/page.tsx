@@ -3,6 +3,7 @@ import Navbar from "@/components/sections/Navbar";
 import Footer from "@/components/sections/Footer";
 import ContactForm from "@/components/sections/ContactForm";
 import CostCalculator from "@/components/calculator/CostCalculator";
+import PictureGallery from "@/components/sections/PictureGallery";
 import GrokLeadBot from "@/components/ai/GrokLeadBot";
 import Hero from "@/components/scroll/Hero";
 import Tension from "@/components/scroll/Tension";
@@ -68,6 +69,7 @@ export default function Home() {
         <LayersAct />
         <ServicesRail />
         <ProcessSection />
+        <PictureGallery />
         <CostCalculator />
         <RegionSection />
         <FaqSection />
