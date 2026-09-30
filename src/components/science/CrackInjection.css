@@ -1,0 +1,341 @@
+/* ================================================ CRACK INJECTION ======
+   Static (no .sc-js): the finished repair as a normal document. Under
+   .sc-js the stage pins and --sc-p drives five phases. Only transform,
+   opacity and stroke-dashoffset are animated. The resin comparison sits
+   after the pinned act, in normal flow, in every mode. */
+
+.crackinj__stage {
+  max-width: 80rem;
+  margin-inline: auto;
+  padding: 0 1.5rem 3rem;
+  display: grid;
+  gap: 2rem;
+  overflow: clip;
+}
+@media (min-width: 640px) {
+  .crackinj__stage {
+    padding-inline: 2rem;
+  }
+}
+@media (min-width: 1024px) {
+  .crackinj__stage {
+    grid-template-columns: minmax(0, 1.45fr) minmax(17rem, 1fr);
+    align-items: center;
+    gap: 2.5rem;
+  }
+}
+
+.ci-figure {
+  margin: 0;
+  display: grid;
+  gap: 0.75rem;
+  min-width: 0;
+}
+.ci-kicker {
+  margin: 0;
+}
+.ci-svg {
+  width: 100%;
+  height: auto;
+  border-radius: 14px;
+  border: 1px solid color-mix(in oklab, var(--bone) 10%, transparent);
+  background: var(--ink);
+}
+.ci-caption {
+  margin: 0;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  color: var(--sc-ink-soft);
+}
+
+/* SVG type: 19 to 22 units at the 1200 wide viewBox */
+.crackinj .ci-t {
+  font-family: var(--sc-font-text);
+  font-size: 21px;
+  fill: var(--bone);
+}
+.crackinj .ci-t--mono {
+  font-family: var(--sc-font-mono);
+  font-size: 19px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  fill: var(--sc-ink-soft);
+}
+.crackinj .ci-t--dark {
+  fill: #121814;
+  font-weight: 600;
+}
+.crackinj .ci-t--tag {
+  font-family: var(--sc-font-mono);
+  font-size: 20px;
+}
+.crackinj .ci-t--small {
+  font-size: 19px;
+}
+.crackinj .ci-t--soft {
+  fill: var(--sc-ink-soft);
+  font-size: 19px;
+}
+.crackinj .ci-t--mint {
+  fill: var(--mint);
+  font-weight: 600;
+  font-size: 22px;
+}
+
+/* static final state: water gone, packers pulled, resin cleaned off the face */
+.crackinj .ci-water,
+.crackinj .ci-trickle,
+.crackinj .ci-e-wet,
+.crackinj .ci-packer,
+.crackinj .ci-e-head,
+.crackinj .ci-e-emerge {
+  opacity: 0;
+}
+.crackinj .ci-ghost {
+  opacity: 0.7;
+}
+.crackinj .ci-e-ghost {
+  opacity: 0.8;
+}
+
+/* legend */
+.ci-side {
+  display: grid;
+  gap: 0.9rem;
+  min-width: 0;
+}
+.ci-side > .sc-label {
+  margin: 0;
+}
+.ci-legend {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.85rem;
+  counter-reset: cistep;
+}
+.ci-legend > li {
+  position: relative;
+  padding-left: 2.6rem;
+  counter-increment: cistep;
+}
+.ci-legend > li::before {
+  content: counter(cistep);
+  position: absolute;
+  left: 0;
+  top: 0.05rem;
+  width: 1.7rem;
+  height: 1.7rem;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  font: 600 0.75rem/1 var(--sc-font-mono);
+  background: var(--ink-3);
+  color: var(--mint);
+  box-shadow: 0 0 0 1.5px var(--mint);
+}
+.ci-legend strong {
+  display: block;
+  font-weight: 600;
+  font-size: 0.98rem;
+  line-height: 1.3;
+  color: var(--bone);
+}
+.ci-legend p {
+  margin: 0.2rem 0 0;
+  font-size: 0.88rem;
+  line-height: 1.5;
+  color: var(--sc-ink-soft);
+}
+
+/* resin comparison, always in normal flow */
+.ci-compare-wrap {
+  max-width: 80rem;
+  margin-inline: auto;
+  padding: 0 1.5rem 5rem;
+}
+@media (min-width: 640px) {
+  .ci-compare-wrap {
+    padding-inline: 2rem;
+  }
+}
+.ci-compare {
+  display: grid;
+  gap: 1px;
+  grid-template-columns: 1fr;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid color-mix(in oklab, var(--bone) 10%, transparent);
+  background: color-mix(in oklab, var(--bone) 10%, transparent);
+}
+@media (min-width: 640px) {
+  .ci-compare {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+.ci-compare__col {
+  background: var(--ink-2);
+  padding: 1.1rem 1.25rem 1.25rem;
+  border-top: 3px solid var(--sw, var(--mint));
+}
+.ci-compare__col h3 {
+  margin: 0;
+  font-family: var(--sc-font-display);
+  font-weight: 500;
+  font-size: 1.35rem;
+  line-height: 1.15;
+  color: var(--bone);
+}
+.ci-compare__col p {
+  margin: 0.4rem 0 0;
+  font-size: 0.92rem;
+  line-height: 1.55;
+  color: var(--sc-ink-soft);
+}
+
+/* ============================================================ MOTION == */
+.sc-js .crackinj__act {
+  --ci-a: clamp(0, var(--sc-p, 0) * 5, 1);
+  --ci-b: clamp(0, (var(--sc-p, 0) - 0.2) * 5, 1);
+  --ci-c: clamp(0, (var(--sc-p, 0) - 0.4) * 6.667, 1);
+  --ci-d: clamp(0, (var(--sc-p, 0) - 0.55) * 3.334, 1);
+  --ci-f: clamp(0, (var(--sc-p, 0) - 0.85) * 8, 1);
+}
+.sc-js .crackinj__stage {
+  min-height: 100svh;
+  padding-top: 5rem;
+  padding-bottom: 1.25rem;
+  align-content: center;
+  gap: 1.25rem 2.5rem;
+}
+.sc-js .ci-svg {
+  max-height: calc(100svh - 12rem);
+}
+
+/* 0 to 0.2: water runs through the crack, soil side to room side */
+.sc-js .crackinj .ci-water {
+  stroke-dasharray: 1;
+  stroke-dashoffset: calc(1 - var(--ci-a));
+  opacity: calc(1 - var(--ci-d));
+}
+.sc-js .crackinj .ci-trickle {
+  transform-box: fill-box;
+  transform-origin: 50% 0%;
+  transform: scaleY(clamp(0, (var(--sc-p, 0) - 0.12) * 12.5, 1));
+  opacity: calc(1 - var(--ci-d));
+}
+.sc-js .crackinj .ci-e-wet {
+  opacity: calc(var(--ci-a) * (1 - var(--ci-d)) * 0.6);
+}
+
+/* 0.2 to 0.4: boreholes drilled from the room face to the wall centre */
+.sc-js .crackinj .ci-bore {
+  stroke-dasharray: 1;
+  stroke-dashoffset: calc(1 - var(--ci-b));
+}
+/* the elevation projection is dashed, so it fades in instead of drawing */
+.sc-js .crackinj .ci-e-bore {
+  opacity: var(--ci-b);
+}
+.sc-js .crackinj .ci-e-hole,
+.sc-js .crackinj .ci-l-bore {
+  opacity: var(--ci-b);
+}
+
+/* 0.4 to 0.55: packers slide in; 0.85 to 1 they come out again */
+.sc-js .crackinj .ci-packer {
+  transform: translateX(calc((1 - var(--ci-c) + var(--ci-f)) * -120px));
+  opacity: calc(var(--ci-c) - var(--ci-f));
+}
+.sc-js .crackinj .ci-e-head {
+  opacity: calc(var(--ci-c) - var(--ci-f));
+}
+.sc-js .crackinj .ci-l-packer {
+  opacity: var(--ci-c);
+}
+
+/* 0.55 to 0.85: resin fills the bores, then the crack from the centre out */
+.sc-js .crackinj .ci-bore-resin {
+  stroke-dasharray: 1;
+  stroke-dashoffset: calc(1 - clamp(0, var(--ci-d) * 4, 1));
+}
+.sc-js .crackinj .ci-resin {
+  stroke-dasharray: 1;
+  stroke-dashoffset: calc(1 - clamp(0, (var(--ci-d) - 0.15) * 1.18, 1));
+}
+.sc-js .crackinj .ci-e-resin {
+  stroke-dasharray: 1;
+  stroke-dashoffset: calc(1 - var(--ci-d));
+}
+.sc-js .crackinj .ci-l-resin,
+.sc-js .crackinj .ci-l-emerge {
+  opacity: clamp(0, (var(--ci-d) - 0.25) * 6, 1);
+}
+/* resin shows at the next packer as the front passes it, then is cleaned off */
+.sc-js .crackinj .ci-e-emerge--1 { opacity: calc(clamp(0, (var(--ci-d) - 0.1) * 12, 1) * 0.9 * (1 - var(--ci-f))); }
+.sc-js .crackinj .ci-e-emerge--2 { opacity: calc(clamp(0, (var(--ci-d) - 0.38) * 12, 1) * 0.9 * (1 - var(--ci-f))); }
+.sc-js .crackinj .ci-e-emerge--3 { opacity: calc(clamp(0, (var(--ci-d) - 0.6) * 12, 1) * 0.9 * (1 - var(--ci-f))); }
+.sc-js .crackinj .ci-e-emerge--4 { opacity: calc(clamp(0, (var(--ci-d) - 0.82) * 12, 1) * 0.9 * (1 - var(--ci-f))); }
+
+/* 0.85 to 1: bores closed, water stopped */
+.sc-js .crackinj .ci-plug,
+.sc-js .crackinj .ci-stop {
+  opacity: var(--ci-f);
+}
+.sc-js .crackinj .ci-ghost {
+  opacity: calc(var(--ci-f) * 0.7);
+}
+.sc-js .crackinj .ci-e-ghost {
+  opacity: calc(var(--ci-f) * 0.8);
+}
+
+/* Legend follows the steps: reached ones full, upcoming ones dimmed. */
+.sc-js .ci-legend > li {
+  opacity: calc(0.4 + 0.6 * var(--ci-on, 1));
+}
+.sc-js .ci-legend > li:nth-child(1) { --ci-on: var(--ci-a); }
+.sc-js .ci-legend > li:nth-child(2) { --ci-on: var(--ci-b); }
+.sc-js .ci-legend > li:nth-child(3) { --ci-on: var(--ci-c); }
+.sc-js .ci-legend > li:nth-child(4) { --ci-on: var(--ci-d); }
+.sc-js .ci-legend > li:nth-child(5) { --ci-on: var(--ci-f); }
+
+@media (min-width: 1024px) and (max-height: 800px) {
+  .sc-js .ci-legend { gap: 0.55rem; }
+  .sc-js .ci-legend p { font-size: 0.8rem; line-height: 1.42; }
+  .sc-js .ci-caption { font-size: 0.74rem; }
+}
+
+/* Narrow and pinned: figure on top, one step at a time below it. */
+@media (max-width: 1023.98px) {
+  .sc-js .crackinj__stage {
+    padding-top: 4.5rem;
+    align-content: start;
+  }
+  .sc-js .ci-svg {
+    max-height: 46svh;
+  }
+  .sc-js .ci-legend {
+    grid-template-areas: "step";
+  }
+  .sc-js .ci-legend > li {
+    grid-area: step;
+    --w-in: 1;
+    --w-out: 1;
+    opacity: calc(var(--w-in) * var(--w-out));
+  }
+  .sc-js .ci-legend > li:nth-child(1) { --w-out: clamp(0, (0.22 - var(--sc-p, 0)) * 25, 1); }
+  .sc-js .ci-legend > li:nth-child(2) {
+    --w-in: clamp(0, (var(--sc-p, 0) - 0.18) * 25, 1);
+    --w-out: clamp(0, (0.42 - var(--sc-p, 0)) * 25, 1);
+  }
+  .sc-js .ci-legend > li:nth-child(3) {
+    --w-in: clamp(0, (var(--sc-p, 0) - 0.38) * 25, 1);
+    --w-out: clamp(0, (0.57 - var(--sc-p, 0)) * 25, 1);
+  }
+  .sc-js .ci-legend > li:nth-child(4) {
+    --w-in: clamp(0, (var(--sc-p, 0) - 0.53) * 25, 1);
+    --w-out: clamp(0, (0.87 - var(--sc-p, 0)) * 25, 1);
+  }
+  .sc-js .ci-legend > li:nth-child(5) { --w-in: clamp(0, (var(--sc-p, 0) - 0.83) * 25, 1); }
+}
