@@ -4,10 +4,10 @@ import { hy } from "@/lib/hyphenate";
 export const CTA_LABEL = "Kostenlose Feuchtemessung anfragen";
 
 /**
- * Hero: the promise on the left, the problem on the right. The house is a
- * render of the same 3D model the "Schicht für Schicht" act takes apart
- * further down, so the page stays in one visual world from the first frame.
- * Planes: a calm back glow, the house (subject), the copy on top.
+ * Hero: the promise on the left, the problem on the right: a Keller in
+ * section with the damage marked. Scrolling zooms into the Sockel, and the
+ * next act ("Vom Keller bis in die Pore") carries on from the wall photo.
+ * Planes: a calm back glow, the Keller (subject), the copy on top.
  */
 export default function Hero() {
   return (
@@ -17,7 +17,6 @@ export default function Hero() {
       aria-labelledby="hero-title"
       data-sc-act="pin"
       data-sc-span="1.3"
-     
       style={{ ["--sc-span" as string]: 1.3 }}
     >
       <div data-sc-stage className="hero__stage">
@@ -66,12 +65,32 @@ export default function Hero() {
               fetchPriority="high"
               decoding="async"
             />
-            <figcaption className="hero__marks theme-dark" aria-hidden="true">
-              <span className="hero__mark" style={{ left: "45%", top: "61%" }}>
+            {/* Callouts in the picture's own pixel grid (1400 x 1032). The
+                Sockel box is where the scroll zoom goes in; the next act
+                carries on from the wall photo. */}
+            <svg className="hero__callouts" viewBox="0 0 1400 1032" aria-hidden="true">
+              <g className="hero__callout hero__callout--a">
+                <rect x="120" y="264" width="276" height="112" rx="10" />
+                <path d="M190 264 L150 176" />
+              </g>
+              <g className="hero__callout hero__callout--b">
+                <ellipse cx="646" cy="630" rx="170" ry="84" />
+                <path d="M580 712 L540 820" />
+              </g>
+              <g className="hero__callout hero__callout--c">
+                <rect x="814" y="520" width="100" height="86" rx="8" />
+                <path d="M914 580 L956 604" />
+              </g>
+            </svg>
+            <figcaption className="hero__tags theme-dark" aria-hidden="true">
+              <span className="hero__tag hero__tag--a" style={{ left: "3%", top: "13%" }}>
+                Salzrand in der Wand
+              </span>
+              <span className="hero__tag hero__tag--b" style={{ left: "27%", top: "80%" }}>
                 Wasser am Boden
               </span>
-              <span className="hero__mark hero__mark--left" style={{ left: "15%", top: "31%" }}>
-                Salzrand in der Wand
+              <span className="hero__tag hero__tag--c" style={{ left: "68.3%", top: "57%" }}>
+                Sockel, 0 bis 1 m
               </span>
             </figcaption>
           </figure>

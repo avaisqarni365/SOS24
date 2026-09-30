@@ -24,7 +24,7 @@ module.exports = {
         line: 'rgb(var(--c-line) / <alpha-value>)',
       },
       fontFamily: {
-        editorial: ['var(--font-editorial)', 'Newsreader', 'Georgia', 'serif'],
+        editorial: ['var(--font-sans)', 'Inter', '-apple-system', 'sans-serif'],
         sans: ['var(--font-sans)', 'Inter', '-apple-system', 'sans-serif'],
         mono: ['var(--font-mono)', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'monospace'],
       },

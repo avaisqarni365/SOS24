@@ -35,6 +35,7 @@ function LevelWall() {
       <svg viewBox="0 0 480 320" aria-hidden="true" className="cz-overlay">
         <rect x="150" y="186" width="92" height="62" fill="none" stroke="#62c4ac" strokeWidth="3" rx="4" />
         <path d="M242 186 L300 120" stroke="#62c4ac" strokeWidth="2" strokeDasharray="5 5" />
+        <rect x="298" y="97" width="178" height="27" rx="4" fill="#0e1310" fillOpacity="0.84" />
         <text x="306" y="116" fill="#f3f1ec" fontSize="16" fontFamily="ui-monospace, monospace">
           Sockel, 0 bis 1 m
         </text>
@@ -84,6 +85,7 @@ function LevelMasonry() {
           <path key={x} d={`M${x} 590 V240`} stroke="#8fb9e8" strokeWidth="4" strokeDasharray="10 14" className="cz-flow" />
         ))}
         <circle cx="560" cy="400" r="70" fill="none" stroke="#62c4ac" strokeWidth="4" />
+        <rect x="638" y="300" width="242" height="42" rx="6" fill="#0e1310" fillOpacity="0.84" />
         <text x="650" y="330" fill="#f3f1ec" fontSize="26" fontFamily="ui-monospace, monospace">
           Stein und Fuge
         </text>

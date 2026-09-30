@@ -9,20 +9,11 @@ import { APPEARANCE_BOOT } from "@/components/navigation/AppearanceMenu";
 import { LanguageProvider } from "@/i18n/LanguageContext";
 
 // Self-hosted variable fonts: no request to Google at runtime (DSGVO) and no build-time fetch.
+// Upright type only: Inter for headings and text, JetBrains Mono for labels and figures.
 const inter = localFont({
   src: "../fonts/inter-latin-wght-normal.woff2",
   variable: "--font-sans",
   weight: "100 900",
-  display: "swap",
-});
-
-const newsreader = localFont({
-  src: [
-    { path: "../fonts/newsreader-latin-wght-normal.woff2", style: "normal" },
-    { path: "../fonts/newsreader-latin-wght-italic.woff2", style: "italic" },
-  ],
-  variable: "--font-editorial",
-  weight: "200 800",
   display: "swap",
 });
 
@@ -65,7 +56,7 @@ export const viewport: Viewport = {
   initialScale: 1,
   viewportFit: "cover",
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#f7f6f2" },
+    { media: "(prefers-color-scheme: light)", color: "#f8f7f3" },
     { media: "(prefers-color-scheme: dark)", color: "#0e1310" },
   ],
 };
@@ -74,7 +65,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html
       lang="de"
-      className={`${inter.variable} ${newsreader.variable} ${mono.variable}`}
+      className={`${inter.variable} ${mono.variable}`}
       suppressHydrationWarning
     >
       <head>

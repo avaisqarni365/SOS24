@@ -126,7 +126,7 @@ export default function ContactForm({ defaultDamage, place }: { defaultDamage?: 
         >
           {place && lang === "de" ? `Sprechen wir über Ihr Objekt in ${place}.` : t("contact.h1")}
           <br />
-          <span className="italic text-[var(--emerald-deep)]">{t("contact.accent")}</span>
+          <span className="text-[var(--emerald-deep)]">{t("contact.accent")}</span>
         </h2>
         <p className="mt-6 max-w-2xl text-base leading-relaxed text-[var(--text-on-bone)] sm:text-lg">
           {t("contact.sub")}
