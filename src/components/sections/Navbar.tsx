@@ -27,88 +27,79 @@ export default function Navbar() {
   const { t } = useLanguage();
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50 border-b border-line/10 bg-[var(--nav-bg)] backdrop-blur-xl">
+    <header className="site-header fixed inset-x-0 top-0 z-50">
       <a href="#main" className="skip-link">
         Zum Inhalt springen
       </a>
 
-      {/* info bar: who we are, who it is for, direct lines (desktop) */}
-      <div className="hidden border-b border-line/[0.07] lg:block">
-        <div className="mx-auto flex h-9 max-w-7xl items-center justify-between gap-6 px-8 text-[0.78rem] text-[var(--sc-ink-soft)]">
-          <p className="no-justify flex items-center gap-2">
-            <ShieldCheck className="h-3.5 w-3.5 text-[var(--mint)]" aria-hidden="true" />
+      {/* emerald strip: who we are, who it is for, direct lines (desktop) */}
+      <div className="site-header__strip hidden lg:block">
+        <div className="site-wrap flex h-9 items-center justify-between gap-6 text-[0.8125rem]">
+          <p className="no-justify flex items-center gap-2 font-medium">
+            <ShieldCheck className="h-4 w-4" aria-hidden="true" />
             SchimmelPeter® Partnerbetrieb · Kostenlose Feuchtemessung vor Ort
           </p>
           <nav aria-label="Zielgruppen" className="flex items-center gap-5">
             {AUDIENCE.map((a) => (
-              <a key={a.href} href={a.href} className="hover:text-[var(--bone)]">
+              <a key={a.href} href={a.href}>
                 {a.label}
               </a>
             ))}
-            <span aria-hidden="true" className="h-4 w-px bg-line/20" />
-            <a href={`tel:${COMPANY_INFO.phoneTel}`} className="flex items-center gap-1.5 font-semibold text-[var(--bone)] hover:text-[var(--mint)]">
-              <Phone className="h-3.5 w-3.5 text-[var(--mint)]" aria-hidden="true" />
+            <span aria-hidden="true" className="h-4 w-px bg-white/30" />
+            <a href={`tel:${COMPANY_INFO.phoneTel}`} className="flex items-center gap-1.5 font-semibold">
+              <Phone className="h-3.5 w-3.5" aria-hidden="true" />
               {COMPANY_INFO.phoneDisplay}
             </a>
-            <a
-              href={COMPANY_INFO.whatsappUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-1.5 font-semibold text-[var(--bone)] hover:text-[var(--mint)]"
-            >
-              <MessageCircle className="h-3.5 w-3.5 text-[var(--mint)]" aria-hidden="true" />
+            <a href={COMPANY_INFO.whatsappUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 font-semibold">
+              <MessageCircle className="h-3.5 w-3.5" aria-hidden="true" />
               WhatsApp
             </a>
           </nav>
         </div>
       </div>
 
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-2 px-3 min-[380px]:gap-4 min-[380px]:px-4 sm:h-[4.5rem] sm:px-6 lg:gap-6 lg:px-8">
-        <a href="/" aria-label="sos-abdichtung, zur Startseite" className="shrink-0">
-          <Logo sub="SchimmelPeter® Partner · Wuppertal" />
-        </a>
-
-        <nav aria-label="Hauptnavigation" className="hidden shrink-0 lg:block">
-          <ul className="flex items-center gap-1 text-[0.86rem] font-medium text-[var(--bone)]/80">
-            {LINKS.map((l) => (
-              <li key={l.href}>
-                <a
-                  href={l.href}
-                  className="block whitespace-nowrap rounded-full px-3 py-2 hover:bg-line/[0.06] hover:text-[var(--bone)]"
-                >
-                  {t(l.key)}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </nav>
-
-        <div className="flex shrink-0 items-center gap-2 sm:gap-2.5">
-          <AppearanceMenu />
-          <div className="hidden sm:block">
-            <LanguageSelector />
-          </div>
-          <a
-            href="/#kontakt"
-            className="hidden min-h-[44px] items-center whitespace-nowrap rounded-full bg-[var(--mint)] px-5 text-[0.86rem] font-semibold text-[var(--ink)] shadow-sm hover:opacity-90 sm:inline-flex"
-          >
-            {t("nav.cta")}
+      <div className="site-header__bar">
+        <div className="site-wrap flex h-16 items-center justify-between gap-3 sm:h-[4.5rem] lg:gap-6">
+          <a href="/" aria-label="sos-abdichtung, zur Startseite" className="shrink-0">
+            <Logo sub="SchimmelPeter® Partner · Wuppertal" />
           </a>
-          <button
-            type="button"
-            onClick={() => setOpen(!open)}
-            className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-line/15 text-[var(--bone)] hover:border-[var(--mint)] lg:hidden"
-            aria-label={open ? "Menü schließen" : "Menü öffnen"}
-            aria-expanded={open}
-            aria-controls="mobile-menu"
-          >
-            {open ? <X className="h-5 w-5" aria-hidden="true" /> : <Menu className="h-5 w-5" aria-hidden="true" />}
-          </button>
+
+          <nav aria-label="Hauptnavigation" className="site-nav hidden shrink-0 min-[1360px]:block">
+            <ul className="flex items-center">
+              {LINKS.map((l) => (
+                <li key={l.href}>
+                  <a href={l.href} className="block whitespace-nowrap">
+                    {t(l.key)}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+
+          <div className="flex shrink-0 items-center gap-2 sm:gap-2.5">
+            <AppearanceMenu />
+            <div className="hidden sm:block">
+              <LanguageSelector />
+            </div>
+            <a href="/#kontakt" className="btn-shine hidden min-h-[44px] items-center gap-2 whitespace-nowrap rounded-full px-5 text-[0.9375rem] font-semibold sm:inline-flex">
+              {t("nav.cta")} <span aria-hidden="true">→</span>
+            </a>
+            <button
+              type="button"
+              onClick={() => setOpen(!open)}
+              className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-line/15 bg-[var(--ink)] text-[var(--bone)] hover:border-[var(--mint)] min-[1360px]:hidden"
+              aria-label={open ? "Menü schließen" : "Menü öffnen"}
+              aria-expanded={open}
+              aria-controls="mobile-menu"
+            >
+              {open ? <X className="h-5 w-5" aria-hidden="true" /> : <Menu className="h-5 w-5" aria-hidden="true" />}
+            </button>
+          </div>
         </div>
       </div>
 
       {open && (
-        <div id="mobile-menu" className="max-h-[calc(100svh-4rem)] overflow-y-auto border-t border-line/10 bg-[var(--ink)] px-6 py-5 lg:hidden">
+        <div id="mobile-menu" className="max-h-[calc(100svh-4rem)] overflow-y-auto border-t border-line/10 bg-[var(--ink)] px-6 py-5 shadow-lg min-[1360px]:hidden">
           <ul className="flex flex-col text-base text-[var(--bone)]">
             {[...LINKS, { href: "/#faq", key: "nav.faq" }].map((l) => (
               <li key={l.href} className="border-b border-line/[0.08] last:border-0">
@@ -142,7 +133,7 @@ export default function Navbar() {
             <a
               href="/#kontakt"
               onClick={() => setOpen(false)}
-              className="rounded-full bg-[var(--mint)] py-3.5 text-center text-sm font-semibold text-[var(--ink)]"
+              className="btn-shine rounded-full py-3.5 text-center text-[0.9375rem] font-semibold"
             >
               {t("contact.submit")}
             </a>
