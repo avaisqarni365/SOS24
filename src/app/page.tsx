@@ -2,13 +2,11 @@ import type { Metadata } from "next";
 import Navbar from "@/components/sections/Navbar";
 import Footer from "@/components/sections/Footer";
 import ContactForm from "@/components/sections/ContactForm";
-import CostCalculator from "@/components/calculator/CostCalculator";
-import PictureGallery from "@/components/sections/PictureGallery";
 import GrokLeadBot from "@/components/ai/GrokLeadBot";
 import Hero from "@/components/scroll/Hero";
 import LayersAct from "@/components/scroll/LayersAct";
-import ZoomAct from "@/components/scroll/ZoomAct";
-import { ScannerSection, ServicesRail, RegionSection, FaqSection } from "@/components/scroll/HomeSections";
+import { ServicesRail, RegionSection, FaqSection } from "@/components/scroll/HomeSections";
+import FactsStrip from "@/components/sections/FactsStrip";
 import ProofSection from "@/components/science/ProofSection";
 import ScrollSectionRail from "@/components/navigation/ScrollSectionRail";
 import AudienceSection from "@/components/sections/AudienceSection";
@@ -68,14 +66,11 @@ export default function Home() {
       <ScrollSectionRail />
       <main id="main">
         <Hero />
-        <ZoomAct />
-        <AudienceSection />
-        <ScannerSection />
-        <LayersAct />
+        <FactsStrip />
         <ServicesRail />
+        <LayersAct />
         <ProofSection />
-        <PictureGallery />
-        <CostCalculator />
+        <AudienceSection />
         <RegionSection />
         <FaqSection />
         <ContactForm />

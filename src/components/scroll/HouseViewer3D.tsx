@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { Layers, Shovel, Warehouse, Sofa } from "lucide-react";
 import type { SceneDef, SceneId } from "@/data/scenes3d";
+import CountUp from "@/components/ui/CountUp";
 import type { SceneViewer } from "./sceneViewer";
 
 const ICONS: Record<SceneId, typeof Layers> = {
@@ -84,7 +85,7 @@ export default function HouseViewer3D({ scenes }: { scenes: SceneDef[] }) {
 
   return (
     <div className="hv">
-      <div className="hv__scenes" role="tablist" aria-label="Ort der Sanierung">
+      <div className="hv__scenes" role="tablist" aria-label="Ort der Sanierung" hidden={scenes.length < 2}>
         {scenes.map((s, i) => {
           const Icon = ICONS[s.id];
           return (
@@ -114,6 +115,18 @@ export default function HouseViewer3D({ scenes }: { scenes: SceneDef[] }) {
             />
           </div>
           <div ref={hostRef} className="hv__canvas" />
+          {step.reading ? (
+            <div className="hv__reading" aria-live="polite">
+              <span className="hv__reading-label">{step.reading.label}</span>
+              <span className="hv__reading-value">
+                <CountUp value={step.reading.value} />
+              </span>
+              <span className="hv__meter" aria-hidden="true">
+                <i style={{ width: `${Math.round(step.reading.level * 100)}%` }} />
+              </span>
+              <span className="hv__reading-note">Beispielwert</span>
+            </div>
+          ) : null}
           <p className="hv__caption">
             <span>
               {stepIdx + 1}/{def.steps.length}
@@ -177,6 +190,18 @@ export default function HouseViewer3D({ scenes }: { scenes: SceneDef[] }) {
               {step.material}
             </p>
             <p className="hv__text">{step.text}</p>
+            {step.facts?.length ? (
+              <dl className="hv__facts">
+                {step.facts.map((f) => (
+                  <div key={f.label}>
+                    <dt>{f.label}</dt>
+                    <dd>
+                      <CountUp value={f.value} />
+                    </dd>
+                  </div>
+                ))}
+              </dl>
+            ) : null}
             <div className="hv__nav">
               <button type="button" onClick={() => go(stepIdx - 1)}>
                 <span aria-hidden="true">←</span> Zurück

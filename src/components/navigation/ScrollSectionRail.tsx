@@ -10,12 +10,9 @@ export default function ScrollSectionRail() {
   // Anchors of the scroll-site homepage, in page order
   const sectionStops = [
     { id: "top", label: t("rail.start") || "Start" },
-    { id: "vom-keller-zur-pore", label: t("rail.zoom") },
-    { id: "schicht-fuer-schicht", label: t("rail.layers") || "3D-Wand" },
     { id: "leistungen", label: t("nav.services") || "Leistungen" },
+    { id: "schicht-fuer-schicht", label: t("rail.layers") || "3D" },
     { id: "nachweis", label: t("rail.proof") || "Nachweis" },
-    { id: "galerie", label: t("nav.gallery") || "Galerie" },
-    { id: "rechner", label: t("rail.calc") || "Rechner" },
     { id: "servicegebiet", label: t("rail.region") || "PLZ 42" },
     { id: "faq", label: "FAQ" },
     { id: "kontakt", label: t("rail.contact") || "Kontakt" }

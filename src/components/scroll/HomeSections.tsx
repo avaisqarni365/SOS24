@@ -62,7 +62,7 @@ export function ServicesRail() {
             </h2>
           </div>
           <p className="sc-body">
-            {hy("Welche Leistung Ihr Keller braucht, entscheidet die Messung. Jedes Verfahren hat eine eigene Seite mit Ablauf, Kosten und Fragen.")}
+            {hy("Welche Leistung Ihr Keller braucht, entscheidet die Messung. Jedes Verfahren hat eine eigene Seite: mit 3D-Modell, der Physik dahinter, Zahlen, Ablauf und Fragen.")}
           </p>
         </div>
         <ul className="services-grid mt-12">
@@ -71,13 +71,21 @@ export function ServicesRail() {
             return (
               <li key={s.slug}>
                 <a className="service-card" href={`/leistungen/${s.slug}/`}>
-                  <span className="service-card__icon" aria-hidden="true">
-                    <Icon strokeWidth={1.6} />
+                  <span className={`service-card__media service-card__media--${s.image.fit}`}>
+                    <img src={s.image.src} alt={s.image.alt} width={640} height={450} loading="lazy" decoding="async" />
+                    <span className="service-card__badge">{s.image.fit === "contain" ? "3D · Wissen" : "Messung · Wissen"}</span>
                   </span>
-                  <h3>{s.title}</h3>
-                  <p>{hy(s.text)}</p>
-                  <span className="service-card__more">
-                    Zum Verfahren <span aria-hidden="true">→</span>
+                  <span className="service-card__body">
+                    <span className="service-card__title">
+                      <span className="service-card__icon" aria-hidden="true">
+                        <Icon strokeWidth={1.6} />
+                      </span>
+                      <h3>{s.title}</h3>
+                    </span>
+                    <p>{hy(s.text)}</p>
+                    <span className="service-card__more">
+                      Details, 3D-Modell und Wissenschaft <span aria-hidden="true">→</span>
+                    </span>
                   </span>
                 </a>
               </li>

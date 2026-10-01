@@ -16,6 +16,20 @@ export interface SceneLayer {
   text: string;
 }
 
+/** A figure shown with a step: value (counts up when it starts with a number) and what it means. */
+export interface SceneFact {
+  value: string;
+  label: string;
+}
+
+/** A measured value shown live on the stage (example values, labelled as such). */
+export interface SceneReading {
+  label: string;
+  value: string;
+  /** 0 = dry, 1 = wet: drives the little meter */
+  level: number;
+}
+
 export interface SceneStep {
   id: string;
   title: string;
@@ -24,6 +38,8 @@ export interface SceneStep {
   layer: string;
   view: string;
   state: Record<string, number>;
+  facts?: SceneFact[];
+  reading?: SceneReading;
 }
 
 export interface SceneDef {
@@ -61,6 +77,8 @@ export const SCENES: SceneDef[] = [
         layer: "mauerwerk",
         view: "room",
         state: { damp: 1 },
+        facts: [{ value: "5", label: "Messhöhen je Messpunkt, von 5 bis 150 cm" }, { value: "85 %", label: "Durchfeuchtung bei 30 cm (Beispiel)" }, { value: "0", label: "Erdarbeiten: der Garten bleibt unberührt" }],
+        reading: { label: "Nullmessung · 30 cm", value: "85 %", level: 0.85 },
       },
       {
         id: "bohren",
@@ -70,6 +88,8 @@ export const SCENES: SceneDef[] = [
         layer: "horizontalsperre",
         view: "wall",
         state: { damp: 1, packers: 1 },
+        facts: [{ value: "20 cm", label: "höchster Abstand der Bohrlöcher" }, { value: "15 cm", label: "Höhe der Sperre über dem Boden (Beispiel)" }, { value: "1", label: "Bohrlochkette über die ganze Wandlänge" }],
+        reading: { label: "Nullmessung · 30 cm", value: "85 %", level: 0.85 },
       },
       {
         id: "injektion",
@@ -79,6 +99,8 @@ export const SCENES: SceneDef[] = [
         layer: "horizontalsperre",
         view: "wall",
         state: { damp: 1, packers: 1, barrier: 1 },
+        facts: [{ value: "100 %", label: "Sollmenge je Abschnitt, Ist gegen Soll protokolliert" }, { value: "25 Jahre", label: "Produktgarantie von SchimmelPeter" }, { value: "0", label: "Bagger, Baugrube oder Erdarbeiten" }],
+        reading: { label: "Nach der Injektion · 30 cm", value: "84 %", level: 0.84 },
       },
       {
         id: "trocknung",
@@ -88,6 +110,8 @@ export const SCENES: SceneDef[] = [
         layer: "mauerwerk",
         view: "wall",
         state: { barrier: 1 },
+        facts: [{ value: "58 %", label: "Durchfeuchtung bei 30 cm nach einigen Wochen (Beispiel)" }, { value: "1", label: "Referenzpunkt unter der Sperre bleibt feucht" }, { value: "5", label: "Messhöhen, immer dieselben Punkte" }],
+        reading: { label: "Kontrollmessung · 30 cm", value: "58 %", level: 0.58 },
       },
       {
         id: "abdichtung",
@@ -97,6 +121,8 @@ export const SCENES: SceneDef[] = [
         layer: "innenabdichtung",
         view: "wall",
         state: { barrier: 1, seal: 1 },
+        facts: [{ value: "2", label: "Lagen mineralische Dichtungsschlämme" }, { value: "1", label: "Hohlkehle am Boden-Wand-Anschluss" }, { value: "32 %", label: "Durchfeuchtung bei 30 cm zur Abnahme (Beispiel)" }],
+        reading: { label: "Abnahme · 30 cm", value: "32 %", level: 0.32 },
       },
       {
         id: "sanierputz",
@@ -106,6 +132,8 @@ export const SCENES: SceneDef[] = [
         layer: "sanierputz",
         view: "wall",
         state: { barrier: 1, seal: 1, plaster: 1 },
+        facts: [{ value: "2", label: "Schichten: Grund- und Oberputz" }, { value: "0", label: "neue Ausblühungen: der Putz lagert Salze ein" }, { value: "32 %", label: "Durchfeuchtung bei 30 cm zur Abnahme (Beispiel)" }],
+        reading: { label: "Abnahme · 30 cm", value: "32 %", level: 0.32 },
       },
       {
         id: "klimaplatte",
@@ -115,6 +143,7 @@ export const SCENES: SceneDef[] = [
         layer: "klimaplatte",
         view: "room",
         state: { barrier: 1, seal: 1, plaster: 1, board: 1 },
+        facts: [{ value: "10", label: "pH-Wert um 10: alkalisch, schimmelhemmend" }, { value: "1", label: "Platte, kapillaraktiv, vollflächig verklebt" }, { value: "10 Jahre", label: "Garantie auf unsere Arbeit" }],
       },
       {
         id: "schichten",
@@ -124,6 +153,7 @@ export const SCENES: SceneDef[] = [
         layer: "horizontalsperre",
         view: "explode",
         state: { barrier: 1, seal: 1, plaster: 1, board: 1, explode: 1 },
+        facts: [{ value: "6", label: "Schichten von außen nach innen" }, { value: "10 Jahre", label: "Garantie auf die Arbeit" }, { value: "25 Jahre", label: "Produktgarantie von SchimmelPeter" }],
       },
     ],
   },
@@ -151,6 +181,8 @@ export const SCENES: SceneDef[] = [
         layer: "mauerwerk",
         view: "overview",
         state: { damp: 1 },
+        facts: [{ value: "1", label: "Messung innen und außen vor jeder Empfehlung" }, { value: "seitlich", label: "drückt das Wasser gegen die Wand" }],
+        reading: { label: "Messung innen · 30 cm", value: "85 %", level: 0.85 },
       },
       {
         id: "freilegen",
@@ -160,6 +192,7 @@ export const SCENES: SceneDef[] = [
         layer: "mauerwerk",
         view: "trench",
         state: { damp: 1, dig: 1 },
+        facts: [{ value: "1", label: "Baugrube entlang der Wand bis zum Fundament" }, { value: "100 %", label: "der Wandfläche liegt frei" }],
       },
       {
         id: "grundierung",
@@ -169,6 +202,7 @@ export const SCENES: SceneDef[] = [
         layer: "grundierung",
         view: "trench",
         state: { damp: 0.5, dig: 1, prime: 1 },
+        facts: [{ value: "1", label: "Kratzspachtelung schließt Poren und Fugen" }, { value: "0", label: "lose Teile bleiben auf der Wand" }],
       },
       {
         id: "abdichtung",
@@ -178,6 +212,7 @@ export const SCENES: SceneDef[] = [
         layer: "abdichtung",
         view: "trench",
         state: { dig: 1, prime: 1, coat: 1 },
+        facts: [{ value: "2", label: "Lagen Bitumendickbeschichtung" }, { value: "1", label: "Hohlkehle am Fundament" }],
       },
       {
         id: "schutz",
@@ -187,6 +222,7 @@ export const SCENES: SceneDef[] = [
         layer: "schutz",
         view: "trench",
         state: { dig: 1, prime: 1, coat: 1, protect: 1 },
+        facts: [{ value: "1", label: "Noppenbahn oder Schutzplatte vor der Abdichtung" }],
       },
       {
         id: "drainage",
@@ -196,6 +232,7 @@ export const SCENES: SceneDef[] = [
         layer: "drainage",
         view: "trench",
         state: { dig: 1, prime: 1, coat: 1, protect: 1, drain: 1 },
+        facts: [{ value: "1", label: "Drainagerohr im Kiesbett, mit Filtervlies" }, { value: "0", label: "Stauwasser am Fundament" }],
       },
       {
         id: "verfuellen",
@@ -205,6 +242,7 @@ export const SCENES: SceneDef[] = [
         layer: "erdreich",
         view: "overview",
         state: { prime: 1, coat: 1, protect: 1, drain: 1 },
+        facts: [{ value: "lagenweise", label: "verfüllt und verdichtet" }],
       },
       {
         id: "schichten",
@@ -214,6 +252,7 @@ export const SCENES: SceneDef[] = [
         layer: "abdichtung",
         view: "explode",
         state: { dig: 1, prime: 1, coat: 1, protect: 1, drain: 1, explode: 1 },
+        facts: [{ value: "6", label: "Schichten von der Wand bis zum Erdreich" }],
       },
     ],
   },
@@ -239,6 +278,8 @@ export const SCENES: SceneDef[] = [
         layer: "riss",
         view: "wall",
         state: { wet: 1 },
+        facts: [{ value: "1", label: "Riss, der durch die ganze Wand geht" }, { value: "100 %", label: "des Rissverlaufs dokumentiert" }],
+        reading: { label: "Riss · Wasserführung", value: "nass", level: 0.9 },
       },
       {
         id: "bohren",
@@ -248,6 +289,8 @@ export const SCENES: SceneDef[] = [
         layer: "packer",
         view: "close",
         state: { wet: 1, packers: 1 },
+        facts: [{ value: "45°", label: "schräge Bohrungen zum Riss (typisch)" }, { value: "2", label: "Seiten: wechselseitig links und rechts" }],
+        reading: { label: "Riss · Wasserführung", value: "nass", level: 0.9 },
       },
       {
         id: "injektion",
@@ -257,6 +300,8 @@ export const SCENES: SceneDef[] = [
         layer: "harz",
         view: "close",
         state: { wet: 0.6, packers: 1, resin: 1 },
+        facts: [{ value: "2", label: "Harze: PU elastisch, EP kraftschlüssig" }, { value: "100 %", label: "des Risses von innen gefüllt" }],
+        reading: { label: "Riss · Wasserführung", value: "stoppt", level: 0.4 },
       },
       {
         id: "abschluss",
@@ -266,6 +311,8 @@ export const SCENES: SceneDef[] = [
         layer: "beton",
         view: "wall",
         state: { resin: 1, finish: 1 },
+        facts: [{ value: "0", label: "Packer bleiben in der Wand" }, { value: "0", label: "sichtbare Bohrlöcher nach dem Verschließen" }],
+        reading: { label: "Riss · Wasserführung", value: "trocken", level: 0.05 },
       },
     ],
   },
@@ -291,6 +338,8 @@ export const SCENES: SceneDef[] = [
         layer: "aussenwand",
         view: "room",
         state: { mould: 1, cold: 1 },
+        facts: [{ value: "9,3 °C", label: "Taupunkt bei 20 °C und 50 % Luftfeuchte" }, { value: "12,6 °C", label: "kritische Oberflächentemperatur (80 % rF an der Wand)" }, { value: "11,8 °C", label: "gemessen in der Ecke (Beispiel)" }],
+        reading: { label: "Ecke · Oberfläche", value: "11,8 °C", level: 0.85 },
       },
       {
         id: "entfernen",
@@ -300,6 +349,8 @@ export const SCENES: SceneDef[] = [
         layer: "schimmel",
         view: "corner",
         state: { mould: 0, cold: 1, strip: 1 },
+        facts: [{ value: "100 %", label: "der befallenen Fläche abgetragen" }, { value: "0", label: "Überstreichen: das allein löst nichts" }],
+        reading: { label: "Ecke · Oberfläche", value: "11,8 °C", level: 0.85 },
       },
       {
         id: "klimaplatte",
@@ -309,6 +360,8 @@ export const SCENES: SceneDef[] = [
         layer: "klimaplatte",
         view: "corner",
         state: { cold: 0.2, strip: 1, board: 1 },
+        facts: [{ value: "10", label: "pH-Wert um 10: alkalisch, schimmelhemmend" }, { value: "14,2 °C", label: "in der Ecke nach der Sanierung (Beispiel)" }],
+        reading: { label: "Ecke · Oberfläche", value: "14,2 °C", level: 0.3 },
       },
       {
         id: "anstrich",
@@ -318,6 +371,8 @@ export const SCENES: SceneDef[] = [
         layer: "anstrich",
         view: "room",
         state: { strip: 1, board: 1, paint: 1 },
+        facts: [{ value: "40–60 %", label: "Luftfeuchte im Raum als Ziel" }, { value: "3–4 ×", label: "am Tag 5 bis 10 Minuten stoßlüften" }],
+        reading: { label: "Ecke · Oberfläche", value: "14,2 °C", level: 0.25 },
       },
     ],
   },

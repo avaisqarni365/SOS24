@@ -758,23 +758,69 @@ export function createSceneViewer(
     mesh(box(0.14, 1.56, 2.15, 2.21, Z0 - 0.02, Z0 + 0.03), frame, root);
     mesh(box(0.83, 0.87, 0.95, 2.15, Z0 - 0.02, Z0 + 0.03), frame, root);
     mesh(box(0.25, 1.45, 0.25, 0.8, Z0 + 0.05, Z0 + 0.15), frame, root);
-    // the cold corner: a thermal-image overlay on both walls
-    // cold along the whole corner edge, coldest at ceiling and floor
-    const coldTex = canvasTex(128, (g, s) => {
-      const gr = g.createLinearGradient(0, 0, s, 0);
-      gr.addColorStop(0, "rgba(40,110,220,0.9)");
-      gr.addColorStop(0.45, "rgba(80,170,220,0.35)");
-      gr.addColorStop(1, "rgba(80,170,220,0)");
-      g.fillStyle = gr;
-      g.fillRect(0, 0, s, s);
-      const v = g.createLinearGradient(0, 0, 0, s);
-      v.addColorStop(0, "rgba(40,110,220,0.45)");
-      v.addColorStop(0.3, "rgba(40,110,220,0)");
-      v.addColorStop(0.8, "rgba(40,110,220,0)");
-      v.addColorStop(1, "rgba(40,110,220,0.35)");
-      g.globalCompositeOperation = "source-atop";
-      g.fillStyle = v;
-      g.fillRect(0, 0, s * 0.5, s);
+    // a lived-in room: skirting, rug, sofa along the side wall, a picture
+    const skirt = new THREE.MeshStandardMaterial({ color: 0xf7f5f0, roughness: 0.5 });
+    mesh(box(X0, X1, 0, 0.07, Z0, Z0 + 0.018), skirt, root);
+    mesh(box(X0, X0 + 0.018, 0, 0.07, Z0, Z1), skirt, root);
+    const rug = new THREE.MeshStandardMaterial({ color: 0xcfc5b4, roughness: 1 });
+    mesh(box(-0.6, 1.6, 0, 0.012, -0.6, 1.4), rug, root, false);
+    const fabric = new THREE.MeshStandardMaterial({ color: 0x6f8478, roughness: 0.95 });
+    const fabric2 = new THREE.MeshStandardMaterial({ color: 0x7f9488, roughness: 0.95 });
+    const legs = new THREE.MeshStandardMaterial({ color: 0x5a4636, roughness: 0.6 });
+    const sx0 = X0 + 0.14;
+    const sz0 = -0.35;
+    const sz1 = 1.75;
+    mesh(box(sx0, sx0 + 0.9, 0.1, 0.42, sz0, sz1), fabric, root);
+    mesh(box(sx0, sx0 + 0.22, 0.42, 0.88, sz0, sz1), fabric2, root);
+    mesh(box(sx0, sx0 + 0.9, 0.42, 0.62, sz0, sz0 + 0.16), fabric2, root);
+    mesh(box(sx0, sx0 + 0.9, 0.42, 0.62, sz1 - 0.16, sz1), fabric2, root);
+    mesh(box(sx0 + 0.24, sx0 + 0.86, 0.42, 0.5, sz0 + 0.18, (sz0 + sz1) / 2 - 0.02), fabric, root);
+    mesh(box(sx0 + 0.24, sx0 + 0.86, 0.42, 0.5, (sz0 + sz1) / 2 + 0.02, sz1 - 0.18), fabric, root);
+    for (const [lx, lz] of [[sx0 + 0.05, sz0 + 0.05], [sx0 + 0.8, sz0 + 0.05], [sx0 + 0.05, sz1 - 0.1], [sx0 + 0.8, sz1 - 0.1]]) {
+      mesh(box(lx, lx + 0.05, 0, 0.1, lz, lz + 0.05), legs, root, false);
+    }
+    const pictureFrame = new THREE.MeshStandardMaterial({ color: 0x2f3a35, roughness: 0.5 });
+    const picture = new THREE.MeshStandardMaterial({ color: 0xa9c6b8, roughness: 0.7 });
+    mesh(box(X0 + 0.05, X0 + 0.08, 1.25, 1.95, 0.2, 1.2), pictureFrame, root);
+    mesh(box(X0 + 0.08, X0 + 0.085, 1.31, 1.89, 0.26, 1.14), picture, root, false);
+    // the cold corner as a thermal image: warm (orange) far from the corner,
+    // cold (blue) along the corner edge and along ceiling and floor
+    const coldTex = canvasTex(256, (g, s) => {
+      const img = g.createImageData(s, s);
+      const ramp = (c: number): [number, number, number, number] => {
+        // 0 warm .. 1 cold
+        const stops: [number, [number, number, number]][] = [
+          [0, [242, 152, 64]],
+          [0.35, [246, 214, 92]],
+          [0.55, [110, 205, 220]],
+          [0.75, [58, 132, 228]],
+          [1, [44, 62, 186]],
+        ];
+        let i = 0;
+        while (i < stops.length - 2 && c > stops[i + 1][0]) i++;
+        const [c0, a] = stops[i];
+        const [c1, b] = stops[i + 1];
+        const k = Math.min(1, Math.max(0, (c - c0) / (c1 - c0)));
+        const alpha = 0.12 + 0.6 * Math.min(1, c * 1.15);
+        return [a[0] + (b[0] - a[0]) * k, a[1] + (b[1] - a[1]) * k, a[2] + (b[2] - a[2]) * k, alpha * 255];
+      };
+      for (let y = 0; y < s; y++) {
+        for (let x = 0; x < s; x++) {
+          const u = x / s; // 0 at the corner edge
+          const v = y / s; // 0 at the ceiling
+          const c = Math.min(1, Math.exp(-u / 0.2) * 0.95 + Math.exp(-v / 0.1) * 0.45 + Math.exp(-(1 - v) / 0.08) * 0.4 * Math.exp(-u / 0.5));
+          const [r, gg, b, a0] = ramp(c);
+          // fade out towards the far edge so the image has no hard border
+          const fade = Math.min(1, Math.max(0, (1 - u) / 0.45));
+          const a = a0 * fade * fade * (3 - 2 * fade);
+          const o = (y * s + x) * 4;
+          img.data[o] = r;
+          img.data[o + 1] = gg;
+          img.data[o + 2] = b;
+          img.data[o + 3] = a;
+        }
+      }
+      g.putImageData(img, 0, 0);
     });
     const coldMat = new THREE.MeshBasicMaterial({ map: coldTex, transparent: true, depthWrite: false });
     const coldBack = new THREE.Mesh(new THREE.PlaneGeometry(2.4, 2.6), coldMat);
@@ -1027,7 +1073,6 @@ export function createSceneViewer(
     if (!rt) return;
     const visible = new Set(rt.labels(cur));
     if (stepLayer) visible.add(stepLayer);
-    if (selected) visible.add(selected);
     offset.copy(camera.position).sub(controls.target).normalize();
     const facing = offset.dot(rt.front) > 0.15;
     const placed: { x: number; y: number; w: number; h: number }[] = [];
