@@ -105,8 +105,8 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
       <span data-sc-progress aria-hidden="true" />
       <Navbar />
       <main id="main">
-        <section className="relative overflow-hidden pb-16 pt-28 sm:pb-24 sm:pt-36" aria-labelledby="page-title">
-          <div className="mx-auto grid max-w-7xl gap-12 px-6 sm:px-8 lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
+        <section className="sc-page-top relative overflow-hidden" aria-labelledby="page-title">
+          <div className="sc-wrap grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
             <div>
               <Breadcrumbs items={crumbs} />
               <h1 id="page-title" className="sc-display mt-6 text-[2.4rem] leading-[1.04] sm:text-5xl lg:text-[3.8rem]">
@@ -162,8 +162,8 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
 
         <ScienceSection slug={page.slug} />
 
-        <section className="surface-bone py-20 sm:py-28">
-          <div className="mx-auto grid max-w-7xl gap-16 px-6 sm:px-8 lg:grid-cols-[1fr_22rem]">
+        <section className="surface-bone sc-section">
+          <div className="sc-wrap grid gap-12 lg:grid-cols-[1fr_22rem]">
             <Prose sections={page.sections} />
             <aside className="lg:sticky lg:top-28 lg:self-start">
               <div className="rounded-3xl bg-white p-7 shadow-sm">
@@ -186,8 +186,8 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
           </div>
         </section>
 
-        <section className="surface-bone-2 py-20 sm:py-24">
-          <div className="mx-auto grid max-w-5xl gap-16 px-6 sm:px-8">
+        <section className="surface-bone-2 sc-section">
+          <div className="sc-wrap grid gap-12">
             <FaqList faqs={faqs} title={`Fragen zu ${page.navTitle}`} />
             <LinkGrid title="Verwandte Leistungen" links={related} />
             <LinkGrid

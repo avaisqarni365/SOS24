@@ -3,8 +3,7 @@ import "./CapillaryZoom.css";
 
 /**
  * Horizontalsperre, layer by layer: four zoom levels from the wall to one pore
- * wall. Scroll drives the zoom (--sc-p); without JS or with reduced motion the
- * four levels are a plain figure series.
+ * wall, as a plain series of four figures (two per row on wide screens).
  *
  * Physics (Jurin): h = 2σ·cosθ / (ρ·g·r). Water at 20 °C: σ = 0,0728 N/m,
  * ρ·g ≈ 9810 N/m³, so with a fully wetting pore (cosθ ≈ 1): h ≈ 1,48·10⁻⁵ m² / r.
@@ -207,11 +206,8 @@ export default function CapillaryZoom() {
     <section
       className="cz"
       aria-label="Kapillar-Zoom: von der Wand bis zur Porenwand"
-      data-sc-act="pin"
-      data-sc-span="3.6"
-      style={{ ["--sc-span" as string]: 3.6 }}
     >
-      <div data-sc-stage className="cz__stage">
+      <div className="cz__stage">
         <ol className="cz__levels">
           {LEVELS.map(({ n, title, text, Art }) => (
             <li key={n} className={`cz-level cz-level--${n}`}>

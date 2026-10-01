@@ -1,12 +1,11 @@
-/* Kapillar-Zoom. Static document by default (four figures in a grid);
-   under .sc-js the four levels stack in one pinned stage and scroll zooms
-   from one into the next. */
+/* Kapillar-Zoom: four figures side by side (two per row on tablets, one on
+   phones). Plain document flow, no scroll pinning. */
 
 .cz {
-  padding: 1rem var(--sc-gutter) 3rem;
+  padding: 0 var(--sc-gutter) var(--sc-section);
 }
 .cz__stage {
-  max-width: 82rem;
+  max-width: calc(var(--sc-maxw) - 2 * var(--sc-gutter));
   margin-inline: auto;
 }
 .cz__levels {
@@ -14,8 +13,8 @@
   margin: 0;
   padding: 0;
   display: grid;
-  gap: 1.5rem;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 24rem), 1fr));
+  gap: 2rem 2.5rem;
 }
 .cz-figure {
   margin: 0;
@@ -58,8 +57,8 @@
   gap: 0.7rem;
   align-items: start;
   color: var(--sc-ink-soft);
-  font-size: 0.98rem;
-  line-height: 1.6;
+  font-size: 1rem;
+  line-height: 1.65;
 }
 .cz-caption strong {
   color: var(--bone);
@@ -89,139 +88,26 @@
 }
 
 /* ------------------------------------------------------------ cinematic */
-.sc-js .cz {
-  padding: 0;
-}
-.sc-js .cz__stage {
-  max-width: none;
-  min-height: 100svh;
-  overflow: clip;
-}
-.sc-js .cz__levels {
-  display: block;
-  position: absolute;
-  inset: clamp(4.5rem, 10vh, 6rem) var(--sc-gutter) 3.5rem;
-}
-.sc-js .cz-level {
-  position: absolute;
-  inset: 0;
-  will-change: opacity, transform;
-  transform-origin: 40% 70%;
-}
-.sc-js .cz-figure {
-  height: 100%;
-  grid-template-columns: minmax(0, 1.6fr) minmax(16rem, 1fr);
-  align-items: center;
-  gap: clamp(1rem, 3vw, 3rem);
-}
-.sc-js .cz-art {
-  max-height: 100%;
-}
-.sc-js .cz-caption {
-  font-size: clamp(1rem, 0.9rem + 0.35vw, 1.2rem);
-}
 
 /* p windows: L1 0 to .3, L2 .2 to .55, L3 .45 to .76, L4 .68 to 1 */
-.sc-js .cz-level--1 {
-  --in: 1;
-  --out: clamp(0, (var(--sc-p, 0) - 0.2) * 10, 1);
-}
-.sc-js .cz-level--2 {
-  --in: clamp(0, (var(--sc-p, 0) - 0.2) * 10, 1);
-  --out: clamp(0, (var(--sc-p, 0) - 0.45) * 10, 1);
-}
-.sc-js .cz-level--3 {
-  --in: clamp(0, (var(--sc-p, 0) - 0.45) * 10, 1);
-  --out: clamp(0, (var(--sc-p, 0) - 0.68) * 12.5, 1);
-}
-.sc-js .cz-level--4 {
-  --in: clamp(0, (var(--sc-p, 0) - 0.68) * 12.5, 1);
-  --out: 0;
-}
+
 /* zoom: the incoming level grows into place, the outgoing one flies past the camera */
-.sc-js .cz-level {
-  opacity: calc(var(--in) - var(--out));
-  transform: scale(calc(0.8 + var(--in) * 0.2 + var(--out) * 0.7));
-}
-.sc-js .cz-level--1 {
-  opacity: calc(1 - var(--out));
-}
 
 /* level 2: damp climbs, salt appears, flow lines run */
-.sc-js .cz-rise {
-  transform-box: fill-box;
-  transform-origin: 50% 100%;
-  transform: scaleY(calc(0.25 + clamp(0, (var(--sc-p, 0) - 0.22) * 4, 1) * 0.75));
-}
-.sc-js .cz-salt {
-  opacity: clamp(0, (var(--sc-p, 0) - 0.3) * 8, 1);
-}
-.sc-js .cz-flow {
-  stroke-dashoffset: calc(var(--sc-p, 0) * -900);
-}
+
 /* level 3: columns rise to their Jurin height */
-.sc-js .cz-column {
-  transform-box: fill-box;
-  transform-origin: 50% 100%;
-  transform: scaleY(clamp(0.02, (var(--sc-p, 0) - 0.47) * 7, 1));
-}
+
 /* level 4: film forms, the meniscus flips, vapour escapes */
-.sc-js .cz-film {
-  opacity: clamp(0, (var(--sc-p, 0) - 0.76) * 12, 1);
-}
-.sc-js .cz-before {
-  opacity: calc(1 - clamp(0, (var(--sc-p, 0) - 0.82) * 12, 1));
-}
-.sc-js .cz-after {
-  opacity: clamp(0, (var(--sc-p, 0) - 0.82) * 12, 1);
-}
-.sc-js .cz-vapour {
-  transform: translateY(calc(clamp(0, (var(--sc-p, 0) - 0.86) * 7, 1) * -60px));
-}
 
 /* zoom scale on the right edge */
-.sc-js .cz__scale {
-  display: flex;
-  gap: 0.4rem;
-  position: absolute;
-  left: var(--sc-gutter);
-  bottom: 1.1rem;
-  font: 600 0.72rem/1 var(--sc-font-mono);
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-}
+
 .cz-tick {
   padding: 0.4rem 0.6rem;
   border-radius: 999px;
   border: 1px solid color-mix(in oklab, var(--bone) 18%, transparent);
   color: var(--sc-ink-soft);
 }
-.sc-js .cz-tick--1 { background: color-mix(in oklab, var(--mint) calc((1 - clamp(0, (var(--sc-p, 0) - 0.25) * 20, 1)) * 45%), transparent); }
-.sc-js .cz-tick--2 { background: color-mix(in oklab, var(--mint) calc(clamp(0, (var(--sc-p, 0) - 0.25) * 20, 1) * (1 - clamp(0, (var(--sc-p, 0) - 0.5) * 20, 1)) * 45%), transparent); }
-.sc-js .cz-tick--3 { background: color-mix(in oklab, var(--mint) calc(clamp(0, (var(--sc-p, 0) - 0.5) * 20, 1) * (1 - clamp(0, (var(--sc-p, 0) - 0.72) * 20, 1)) * 45%), transparent); }
-.sc-js .cz-tick--4 { background: color-mix(in oklab, var(--mint) calc(clamp(0, (var(--sc-p, 0) - 0.72) * 20, 1) * 45%), transparent); }
 
-.sc-js .cz-credit {
-  position: absolute;
-  right: var(--sc-gutter);
-  bottom: 1.2rem;
-  margin: 0;
-  max-width: 22rem;
-  text-align: right;
-}
-
-@media (max-width: 860px) {
-  .sc-js .cz-figure {
-    grid-template-columns: 1fr;
-    align-content: center;
-  }
-  .sc-js .cz-caption {
-    font-size: 0.95rem;
-  }
-  .sc-js .cz-credit {
-    display: none;
-  }
-}
 @media (prefers-reduced-motion: reduce) {
   .cz-level {
     transform: none !important;

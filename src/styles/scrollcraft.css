@@ -37,8 +37,8 @@
      with 0 tracking reads loose; this is optical correction, not decoration. */
   --sc-t-xs:   clamp(0.75rem, 0.72rem + 0.15vw, 0.82rem);
   --sc-t-sm:   clamp(0.875rem, 0.84rem + 0.18vw, 0.95rem);
-  --sc-t-base: clamp(1rem, 0.96rem + 0.22vw, 1.125rem);
-  --sc-t-lg:   clamp(1.2rem, 1.1rem + 0.5vw, 1.5rem);
+  --sc-t-base: 1rem;
+  --sc-t-lg:   1rem;
   --sc-t-xl:   clamp(1.6rem, 1.35rem + 1.2vw, 2.25rem);
   --sc-t-2xl:  clamp(2.1rem, 1.6rem + 2.4vw, 3.4rem);
   --sc-t-3xl:  clamp(2.8rem, 1.9rem + 4.2vw, 5rem);
@@ -61,9 +61,9 @@
   --sc-9: 6rem;     --sc-10: 8rem;    --sc-11: 12rem;
 
   /* Section rhythm is fluid so a phone doesn't inherit desktop air. */
-  --sc-section: clamp(4.5rem, 9vw, 11rem);
-  --sc-gutter:  clamp(1.25rem, 5vw, 5.5rem);
-  --sc-maxw:    82rem;
+  --sc-section: clamp(3rem, 2rem + 3vw, 4.5rem);
+  --sc-gutter:  clamp(1.25rem, 4vw, 3rem);
+  --sc-maxw:    76rem;
 
   /* --- radius. Pick one scale for the page and hold it. ------------------- */
   --sc-r-sm: 6px;  --sc-r-md: 12px;  --sc-r-lg: 20px;  --sc-r-pill: 999px;

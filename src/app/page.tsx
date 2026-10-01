@@ -6,7 +6,6 @@ import CostCalculator from "@/components/calculator/CostCalculator";
 import PictureGallery from "@/components/sections/PictureGallery";
 import GrokLeadBot from "@/components/ai/GrokLeadBot";
 import Hero from "@/components/scroll/Hero";
-import Tension from "@/components/scroll/Tension";
 import LayersAct from "@/components/scroll/LayersAct";
 import ZoomAct from "@/components/scroll/ZoomAct";
 import { ScannerSection, ServicesRail, RegionSection, FaqSection } from "@/components/scroll/HomeSections";
@@ -71,7 +70,6 @@ export default function Home() {
         <Hero />
         <ZoomAct />
         <AudienceSection />
-        <Tension />
         <ScannerSection />
         <LayersAct />
         <ServicesRail />

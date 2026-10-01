@@ -6,8 +6,8 @@ import Logo from "@/components/brand/Logo";
 
 export default function Footer() {
   return (
-    <footer className="border-t border-line/10 bg-[var(--ink)] py-16 text-[var(--bone)]/70">
-      <div className="mx-auto max-w-7xl px-6 sm:px-8">
+    <footer className="border-t border-line/10 bg-[var(--ink)] py-12 text-[var(--bone)]/70">
+      <div className="sc-wrap">
         <div className="grid grid-cols-1 gap-10 md:grid-cols-12">
           <div className="space-y-4 md:col-span-4">
             <Logo sub="Wuppertal · PLZ 42" />

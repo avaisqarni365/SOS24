@@ -1,19 +1,18 @@
 /* ================================================= NEGATIVE SEAL ======
-   Static (no .sc-js): the finished build-up as a normal document, figure
-   then legend. Under .sc-js the stage pins and --sc-p drives seven phases.
-   Only transform, opacity and stroke-dashoffset are animated. */
+   The finished build-up as a normal document, figure then legend. No
+   scroll pinning. */
 
 .negseal__stage {
-  max-width: 80rem;
+  max-width: var(--sc-maxw);
   margin-inline: auto;
-  padding: 0 1.5rem 5rem;
+  padding: 0 var(--sc-gutter) var(--sc-section);
   display: grid;
   gap: 2rem;
   overflow: clip;
 }
 @media (min-width: 640px) {
   .negseal__stage {
-    padding-inline: 2rem;
+    padding-inline: var(--sc-gutter);
   }
 }
 @media (min-width: 1024px) {
@@ -146,151 +145,18 @@
 
 /* ============================================================ MOTION ==
    Phase windows, resolved once on the act element and inherited. */
-.sc-js .negseal {
-  --ns-a: clamp(0, var(--sc-p, 0) * 5, 1);
-  --ns-b: clamp(0, (var(--sc-p, 0) - 0.2) * 5, 1);
-  --ns-c: clamp(0, (var(--sc-p, 0) - 0.4) * 5, 1);
-  --ns-d1: clamp(0, (var(--sc-p, 0) - 0.55) * 10, 1);
-  --ns-d2: clamp(0, (var(--sc-p, 0) - 0.65) * 10, 1);
-  --ns-e: clamp(0, (var(--sc-p, 0) - 0.75) * 6.667, 1);
-  --ns-f: clamp(0, (var(--sc-p, 0) - 0.85) * 8, 1);
-}
-.sc-js .negseal__stage {
-  min-height: 100svh;
-  padding-top: 5rem;
-  padding-bottom: 1.25rem;
-  align-content: center;
-  gap: 1.25rem 2.5rem;
-}
-.sc-js .ns-svg {
-  max-height: calc(100svh - 12rem);
-}
 
 /* 0 to 0.2: water pressure grows in, damp spreads into the wall */
-.sc-js .negseal .ns-arrow {
-  transform-box: fill-box;
-  transform-origin: 0% 50%;
-  transform: scaleX(var(--ns-a));
-}
-.sc-js .negseal .ns-arrow--up {
-  transform-origin: 50% 100%;
-  transform: scaleY(var(--ns-a));
-}
-.sc-js .negseal .ns-damp-wall {
-  transform-box: fill-box;
-  transform-origin: 0% 50%;
-  transform: scaleX(var(--ns-a));
-}
-.sc-js .negseal .ns-l-pressure {
-  opacity: var(--ns-a);
-}
-.sc-js .negseal .ns-damp-room {
-  opacity: calc(var(--ns-a) * (1 - var(--ns-f)));
-}
 
 /* 0.2 to 0.4: old plaster comes off, keyed substrate appears */
-.sc-js .negseal .ns-oldplaster {
-  opacity: calc(1 - var(--ns-b));
-  transform: translateX(calc(var(--ns-b) * 70px));
-}
-.sc-js .negseal .ns-prep,
-.sc-js .negseal .ns-step--3 {
-  opacity: var(--ns-b);
-}
 
 /* 0.4 to 0.6: Hohlkehle */
-.sc-js .negseal .ns-cove {
-  transform-box: fill-box;
-  transform-origin: 0% 100%;
-  transform: scale(var(--ns-c));
-  opacity: var(--ns-c);
-}
-.sc-js .negseal .ns-step--4 {
-  opacity: var(--ns-c);
-}
 
 /* 0.55 to 0.75: slurry, first coat then second */
-.sc-js .negseal .ns-coat {
-  stroke-dasharray: 1;
-}
-.sc-js .negseal .ns-coat--1 {
-  stroke-dashoffset: calc(1 - var(--ns-d1));
-}
-.sc-js .negseal .ns-coat--2 {
-  stroke-dashoffset: calc(1 - var(--ns-d2));
-}
-.sc-js .negseal .ns-step--5 {
-  opacity: var(--ns-d1);
-}
 
 /* 0.75 to 0.9: Sanierputz */
-.sc-js .negseal .ns-putz {
-  transform-box: fill-box;
-  transform-origin: 50% 0%;
-  transform: scaleY(var(--ns-e));
-}
-.sc-js .negseal .ns-step--6 {
-  opacity: var(--ns-e);
-}
 
 /* 0.85 to 1: pressure stops at the sealing, room reads dry */
-.sc-js .negseal .ns-blocked,
-.sc-js .negseal .ns-dry {
-  opacity: var(--ns-f);
-}
 
 /* Legend follows the build: reached layers full, upcoming ones dimmed. */
-.sc-js .ns-legend > li {
-  opacity: calc(0.4 + 0.6 * var(--ns-on, 1));
-}
-.sc-js .ns-legend > li:nth-child(1),
-.sc-js .ns-legend > li:nth-child(2) { --ns-on: var(--ns-a); }
-.sc-js .ns-legend > li:nth-child(3) { --ns-on: var(--ns-b); }
-.sc-js .ns-legend > li:nth-child(4) { --ns-on: var(--ns-c); }
-.sc-js .ns-legend > li:nth-child(5) { --ns-on: var(--ns-d1); }
-.sc-js .ns-legend > li:nth-child(6) { --ns-on: var(--ns-e); }
 
-@media (min-width: 1024px) and (max-height: 800px) {
-  .sc-js .ns-legend { gap: 0.55rem; }
-  .sc-js .ns-legend p { font-size: 0.8rem; line-height: 1.42; }
-  .sc-js .ns-caption { font-size: 0.74rem; }
-}
-
-/* Narrow and pinned: the figure on top, one legend entry at a time below it,
-   all six stacked in one grid cell and cross-faded by phase. */
-@media (max-width: 1023.98px) {
-  .sc-js .negseal__stage {
-    padding-top: 4.5rem;
-    align-content: start;
-  }
-  .sc-js .ns-svg {
-    max-height: 46svh;
-  }
-  .sc-js .ns-legend {
-    grid-template-areas: "step";
-  }
-  .sc-js .ns-legend > li {
-    grid-area: step;
-    --w-in: 1;
-    --w-out: 1;
-    opacity: calc(var(--w-in) * var(--w-out));
-  }
-  .sc-js .ns-legend > li:nth-child(1) { --w-out: clamp(0, (0.12 - var(--sc-p, 0)) * 25, 1); }
-  .sc-js .ns-legend > li:nth-child(2) {
-    --w-in: clamp(0, (var(--sc-p, 0) - 0.08) * 25, 1);
-    --w-out: clamp(0, (0.22 - var(--sc-p, 0)) * 25, 1);
-  }
-  .sc-js .ns-legend > li:nth-child(3) {
-    --w-in: clamp(0, (var(--sc-p, 0) - 0.18) * 25, 1);
-    --w-out: clamp(0, (0.42 - var(--sc-p, 0)) * 25, 1);
-  }
-  .sc-js .ns-legend > li:nth-child(4) {
-    --w-in: clamp(0, (var(--sc-p, 0) - 0.38) * 25, 1);
-    --w-out: clamp(0, (0.59 - var(--sc-p, 0)) * 25, 1);
-  }
-  .sc-js .ns-legend > li:nth-child(5) {
-    --w-in: clamp(0, (var(--sc-p, 0) - 0.55) * 25, 1);
-    --w-out: clamp(0, (0.77 - var(--sc-p, 0)) * 25, 1);
-  }
-  .sc-js .ns-legend > li:nth-child(6) { --w-in: clamp(0, (var(--sc-p, 0) - 0.73) * 25, 1); }
-}
