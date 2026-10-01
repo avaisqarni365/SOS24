@@ -1576,7 +1576,12 @@ main :is(a, button)[class*="rounded-full"]:not([class*="h-"]):not([class*="w-"])
   padding-inline: clamp(1rem, 3vw, 2.5rem);
 }
 .site-nav a {
-  padding-inline: 0.85rem;
+  padding-inline: 0.7rem;
+  font-size: 0.9rem;
+}
+/* the load button keeps its place in the stage corner */
+.hv__load {
+  position: absolute;
 }
 
 /* Hero picture: the looping video in the light theme; the still picture in
@@ -1629,4 +1634,10 @@ main :is(a, button)[class*="rounded-full"]:not([class*="h-"]):not([class*="w-"])
   height: 0.7rem;
   border-radius: 999px;
   box-shadow: 0 0 0 1px rgb(17 24 21 / 0.15);
+}
+
+/* Short titles in bold and small mono labels are never stretched. */
+:is(p, li, dd, figcaption, span, div):is([class*="font-mono"], [class*="font-semibold"], [class*="font-bold"]),
+p.no-justify {
+  text-align: start;
 }

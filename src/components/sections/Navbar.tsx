@@ -59,12 +59,12 @@ export default function Navbar() {
       </div>
 
       <div className="site-header__bar">
-        <div className="site-wrap flex h-16 items-center justify-between gap-3 sm:h-[4.5rem] lg:gap-6">
+        <div className="site-wrap flex h-16 items-center justify-between gap-3 sm:h-[4.5rem] lg:gap-4">
           <a href="/" aria-label="sos-abdichtung, zur Startseite" className="shrink-0">
             <Logo sub="SchimmelPeter® Partner · Wuppertal" />
           </a>
 
-          <nav aria-label="Hauptnavigation" className="site-nav hidden shrink-0 min-[1360px]:block">
+          <nav aria-label="Hauptnavigation" className="site-nav hidden shrink-0 min-[1440px]:block">
             <ul className="flex items-center">
               {LINKS.map((l) => (
                 <li key={l.href}>
@@ -82,12 +82,12 @@ export default function Navbar() {
               <LanguageSelector />
             </div>
             <a href="/#kontakt" className="btn-shine hidden min-h-[44px] items-center gap-2 whitespace-nowrap rounded-full px-5 text-[0.9375rem] font-semibold sm:inline-flex">
-              {t("nav.cta")} <span aria-hidden="true">→</span>
+              {t("nav.cta")}
             </a>
             <button
               type="button"
               onClick={() => setOpen(!open)}
-              className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-line/15 bg-[var(--ink)] text-[var(--bone)] hover:border-[var(--mint)] min-[1360px]:hidden"
+              className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-line/15 bg-[var(--ink)] text-[var(--bone)] hover:border-[var(--mint)] min-[1440px]:hidden"
               aria-label={open ? "Menü schließen" : "Menü öffnen"}
               aria-expanded={open}
               aria-controls="mobile-menu"
@@ -99,7 +99,7 @@ export default function Navbar() {
       </div>
 
       {open && (
-        <div id="mobile-menu" className="max-h-[calc(100svh-4rem)] overflow-y-auto border-t border-line/10 bg-[var(--ink)] px-6 py-5 shadow-lg min-[1360px]:hidden">
+        <div id="mobile-menu" className="max-h-[calc(100svh-4rem)] overflow-y-auto border-t border-line/10 bg-[var(--ink)] px-6 py-5 shadow-lg min-[1440px]:hidden">
           <ul className="flex flex-col text-base text-[var(--bone)]">
             {[...LINKS, { href: "/#faq", key: "nav.faq" }].map((l) => (
               <li key={l.href} className="border-b border-line/[0.08] last:border-0">
