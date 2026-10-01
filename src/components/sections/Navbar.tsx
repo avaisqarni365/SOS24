@@ -17,6 +17,16 @@ const LINKS = [
   { href: "/#servicegebiet", key: "nav.region" },
 ];
 
+/** The six towns of the service area (kept small here: no page texts in the menu bundle). */
+const CITIES = [
+  { slug: "wuppertal", name: "Wuppertal" },
+  { slug: "solingen", name: "Solingen" },
+  { slug: "remscheid", name: "Remscheid" },
+  { slug: "velbert", name: "Velbert" },
+  { slug: "haan", name: "Haan" },
+  { slug: "wermelskirchen", name: "Wermelskirchen" },
+];
+
 const AUDIENCE = [
   { href: "/#fuer-hausbesitzer", label: "Für Hausbesitzer" },
   { href: "/#fuer-unternehmen", label: "Für Hausverwaltungen & Unternehmen" },
@@ -156,43 +166,64 @@ export default function Navbar() {
       </div>
 
       {open && (
-        <div id="mobile-menu" className="max-h-[calc(100svh-4rem)] overflow-y-auto border-t border-line/10 bg-[var(--ink)] px-6 py-5 shadow-lg min-[1440px]:hidden">
-          <p className="sc-label">{t("nav.services")}</p>
-          <ul className="mt-2 grid gap-1 text-[0.9375rem] text-[var(--bone)] sm:grid-cols-2">
-            {SERVICE_CARDS.map((sv) => (
-              <li key={sv.slug}>
-                <a href={`/leistungen/${sv.slug}/`} onClick={() => setOpen(false)} className="flex items-center gap-3 rounded-xl px-2 py-2 hover:bg-line/[0.05]">
-                  <span className={`services-menu__img services-menu__img--${sv.image.fit}`}>
-                    <img src={sv.image.src} alt="" width={64} height={45} loading="lazy" decoding="async" />
-                  </span>
-                  <span className="font-semibold">{sv.title}</span>
+        <div id="mobile-menu" className="mnav min-[1440px]:hidden">
+          {/* drill-down: each group opens on tap and lists every page in it */}
+          <details className="mnav__group" open>
+            <summary>{t("nav.services")}</summary>
+            <ul>
+              {SERVICE_CARDS.map((sv) => (
+                <li key={sv.slug}>
+                  <a href={`/leistungen/${sv.slug}/`} onClick={() => setOpen(false)} className="mnav__item">
+                    <span className={`services-menu__img services-menu__img--${sv.image.fit}`}>
+                      <img src={sv.image.src} alt="" width={64} height={44} loading="lazy" decoding="async" />
+                    </span>
+                    {sv.title}
+                  </a>
+                </li>
+              ))}
+              <li>
+                <a href="/leistungen/" onClick={() => setOpen(false)} className="mnav__more">
+                  Alle Leistungen im Überblick →
                 </a>
               </li>
-            ))}
-            <li className="sm:col-span-2">
-              <a href="/leistungen/" onClick={() => setOpen(false)} className="block px-2 py-2 font-semibold text-[var(--brick)]">
-                Alle Leistungen im Überblick →
-              </a>
-            </li>
-          </ul>
-          <ul className="mt-3 flex flex-col border-t border-line/10 pt-2 text-base text-[var(--bone)]">
-            {[...LINKS, { href: "/#faq", key: "nav.faq" }].map((l) => (
-              <li key={l.href} className="border-b border-line/[0.08] last:border-0">
-                <a href={l.href} onClick={() => setOpen(false)} className="block py-3 hover:text-[var(--mint)]">
-                  {t(l.key)}
-                </a>
-              </li>
-            ))}
-          </ul>
-          <ul className="mt-3 grid gap-2 text-sm">
-            {AUDIENCE.map((a) => (
-              <li key={a.href}>
-                <a href={a.href} onClick={() => setOpen(false)} className="block rounded-xl bg-line/[0.05] px-4 py-3 font-semibold text-[var(--bone)]">
-                  {a.label}
-                </a>
-              </li>
-            ))}
-          </ul>
+            </ul>
+          </details>
+          <details className="mnav__group">
+            <summary>Kellersanierung in Ihrer Stadt</summary>
+            <ul className="mnav__grid">
+              {CITIES.map((c) => (
+                <li key={c.slug}>
+                  <a href={`/kellersanierung/${c.slug}/`} onClick={() => setOpen(false)} className="mnav__item">
+                    {c.name}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </details>
+          <details className="mnav__group">
+            <summary>Mehr entdecken</summary>
+            <ul>
+              {[...LINKS, { href: "/#faq", key: "nav.faq" }, { href: "/#kontakt", key: "rail.contact" }].map((l) => (
+                <li key={l.href}>
+                  <a href={l.href} onClick={() => setOpen(false)} className="mnav__item">
+                    {t(l.key)}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </details>
+          <details className="mnav__group">
+            <summary>Für wen wir arbeiten</summary>
+            <ul>
+              {AUDIENCE.map((a) => (
+                <li key={a.href}>
+                  <a href={a.href} onClick={() => setOpen(false)} className="mnav__item">
+                    {a.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </details>
           <div className="mt-4 flex items-center justify-between gap-3">
             <span className="text-sm text-[var(--sc-ink-soft)]">Sprache</span>
             <LanguageSelector />

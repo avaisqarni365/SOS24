@@ -2658,3 +2658,129 @@ figure > .layer-ruler {
   padding: 0.65rem 0.6rem 0.35rem;
   font-size: 0.875rem;
 }
+
+/* ======================================================== PHONE MENU ===
+   Drill-down: groups open on tap; white panel, dark text. */
+.mnav {
+  max-height: calc(100svh - 4rem);
+  overflow-y: auto;
+  padding: 0.75rem 1.25rem 1.25rem;
+  border-top: 1px solid var(--frame-line, rgb(17 24 21 / 0.09));
+  background: rgb(var(--c-ink2));
+  color: var(--bone);
+  box-shadow: 0 24px 40px -24px rgb(0 0 0 / 0.35);
+}
+.mnav__group {
+  border-bottom: 1px solid var(--frame-line, rgb(17 24 21 / 0.09));
+}
+.mnav__group summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 3.25rem;
+  font-weight: 650;
+  font-size: 1.0625rem;
+  cursor: pointer;
+  list-style: none;
+}
+.mnav__group summary::-webkit-details-marker {
+  display: none;
+}
+.mnav__group summary::after {
+  content: "";
+  width: 0.55rem;
+  height: 0.55rem;
+  border-right: 2px solid var(--mint);
+  border-bottom: 2px solid var(--mint);
+  transform: rotate(45deg) translate(-2px, -2px);
+  transition: transform 180ms;
+}
+.mnav__group[open] summary::after {
+  transform: rotate(-135deg) translate(-2px, -2px);
+}
+.mnav__group[open] summary {
+  color: var(--brick);
+}
+.mnav__group ul {
+  list-style: none;
+  margin: 0 0 0.75rem;
+  padding: 0;
+  display: grid;
+  gap: 0.15rem;
+}
+.mnav__grid {
+  grid-template-columns: 1fr 1fr;
+}
+.mnav__item {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-height: 2.9rem;
+  padding: 0.35rem 0.5rem;
+  border-radius: 12px;
+  font-size: 0.9375rem;
+  font-weight: 500;
+}
+.mnav__item:hover,
+.mnav__item:focus-visible {
+  background: rgb(var(--c-mint) / 0.07);
+  color: var(--brick);
+}
+.mnav__item .services-menu__img {
+  width: 2.75rem;
+  border-radius: 8px;
+}
+.mnav__more {
+  display: block;
+  padding: 0.6rem 0.5rem;
+  font-weight: 650;
+  color: var(--brick);
+}
+
+/* ============================================ LABELS JUSTIFIED TOO ====
+   Every running text, labels and small captions included, is justified;
+   only headings, buttons, menus, chips and centred elements keep their
+   own alignment. */
+.sc-label,
+.hv__kicker,
+.hv__material,
+.hv__material *,
+.proof-card__k,
+main dt,
+.facts__item dt,
+.hv__facts dt,
+.proof-kpis dt,
+.city-card__time,
+.hero__legend span,
+:is(p, li, dd, figcaption, div):is([class*="font-mono"], [class*="font-semibold"], [class*="font-bold"]):not([class*="text-center"]):not(.hv__reading),
+p.no-justify {
+  text-align: justify !important;
+  text-justify: inter-word;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+}
+
+/* ===================================== LIGHT CHIPS ON THE PICTURES =====
+   Labels over photos and stills: white glass with dark text instead of
+   black pills. */
+.layer-ruler li,
+.service-card__badge,
+.hv__caption,
+.hv__reading {
+  background: rgb(255 255 255 / 0.93) !important;
+  color: #0b0f0d !important;
+  border: 1px solid rgb(17 24 21 / 0.1);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+}
+.hv__reading-label,
+.hv__reading-note {
+  color: #4a524e !important;
+}
+.hv__caption span {
+  background: var(--mint) !important;
+  color: #fff !important;
+}
+.hv__meter i {
+  border-right-color: #0b0f0d !important;
+}
