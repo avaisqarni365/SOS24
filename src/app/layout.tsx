@@ -8,19 +8,24 @@ import MobileContactBar from "@/components/sections/MobileContactBar";
 import { APPEARANCE_BOOT } from "@/components/navigation/AppearanceMenu";
 import { LanguageProvider } from "@/i18n/LanguageContext";
 
-// Self-hosted variable fonts: no request to Google at runtime (DSGVO) and no build-time fetch.
-// Upright type only: Inter for headings and text, JetBrains Mono for labels and figures.
-const inter = localFont({
-  src: "../fonts/inter-latin-wght-normal.woff2",
+// Self-hosted fonts: no request to Google at runtime (DSGVO) and no build-time fetch.
+// Upright type only: IBM Plex Sans for headings and text, IBM Plex Mono for
+// labels and figures. Latin-ext and Cyrillic come from public/fonts by
+// unicode-range (globals.css) and load only when a page needs them.
+const plex = localFont({
+  src: "../fonts/ibm-plex-sans-latin-wght-normal.woff2",
   variable: "--font-sans",
-  weight: "100 900",
+  weight: "100 700",
   display: "swap",
 });
 
 const mono = localFont({
-  src: "../fonts/jetbrains-mono-latin-wght-normal.woff2",
+  src: [
+    { path: "../fonts/ibm-plex-mono-latin-400-normal.woff2", weight: "400" },
+    { path: "../fonts/ibm-plex-mono-latin-500-normal.woff2", weight: "500" },
+    { path: "../fonts/ibm-plex-mono-latin-600-normal.woff2", weight: "600" },
+  ],
   variable: "--font-mono",
-  weight: "100 800",
   display: "swap",
   preload: false,
 });
@@ -56,7 +61,7 @@ export const viewport: Viewport = {
   initialScale: 1,
   viewportFit: "cover",
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#f8f7f3" },
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
     { media: "(prefers-color-scheme: dark)", color: "#0e1310" },
   ],
 };
@@ -65,7 +70,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html
       lang="de"
-      className={`${inter.variable} ${mono.variable}`}
+      className={`${plex.variable} ${mono.variable}`}
       suppressHydrationWarning
     >
       <head>

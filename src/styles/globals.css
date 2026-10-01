@@ -2,6 +2,23 @@
 @tailwind components;
 @tailwind utilities;
 
+/* IBM Plex Sans beyond Latin (Polish, Turkish, Russian): loaded only when a
+   page uses those characters. Latin itself comes from next/font. */
+@font-face {
+  font-family: "IBM Plex Sans Ext";
+  src: url("/fonts/ibm-plex-sans-latin-ext-wght-normal.woff2") format("woff2");
+  font-weight: 100 700;
+  font-display: swap;
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+@font-face {
+  font-family: "IBM Plex Sans Ext";
+  src: url("/fonts/ibm-plex-sans-cyrillic-wght-normal.woff2") format("woff2");
+  font-weight: 100 700;
+  font-display: swap;
+  unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+}
+
 /* ---------------------------------------------------------------------------
    Theme. Colours are RGB channels so Tailwind can add opacity to them.
    Light is the default: one flat British-white ground (no tinted bands, no
@@ -13,35 +30,43 @@
    buttons), --mint is the accent.
    ------------------------------------------------------------------------- */
 :root {
-  --c-ink: 248 247 243;
+  --c-ink: 255 255 255;
   --c-ink2: 255 255 255;
-  --c-ink3: 240 239 234;
-  --c-bone: 26 28 26;
-  --c-bone2: 46 49 46;
-  --c-mint: 30 120 100;
-  --c-emerald: 23 97 81;
-  --c-soft: 60 64 61;
-  --c-line: 26 28 26;
-  --band-stone: #f8f7f3;
-  --band-mint: #f8f7f3;
-  --nav-bg: rgb(248 247 243 / 0.96);
+  --c-ink3: 244 247 246;
+  --c-bone: 17 24 21;
+  --c-bone2: 38 46 42;
+  --c-mint: 22 122 98;
+  --c-emerald: 17 99 79;
+  --c-soft: 61 70 66;
+  --c-line: 17 24 21;
+  --band-stone: #ffffff;
+  --band-mint: #ffffff;
+  --nav-bg: rgb(255 255 255 / 0.92);
   --hero-glow: transparent;
   color-scheme: light;
 }
 /* Page-level only (a dark stage inside a light page does not change them):
    paper grain, the water glow in the hero, the 3D stage. */
 :root {
+  --frame-line: rgb(17 24 21 / 0.09);
+  --frame-shadow: 0 1px 2px rgb(16 40 30 / 0.04), 0 12px 32px -14px rgb(16 40 30 / 0.16);
+  --grad: linear-gradient(135deg, #1c9174 0%, #13755d 55%, #0e5f4b 100%);
+  --grad-text: linear-gradient(92deg, #127a60 0%, #1fa283 100%);
   --grain: 0;
   --hero-water: transparent;
-  --stage-bg: radial-gradient(70% 60% at 55% 45%, #ffffff, transparent 70%), linear-gradient(180deg, #f1f0eb 0%, #e5e4de 100%);
+  --stage-bg: radial-gradient(70% 60% at 50% 40%, #ffffff, transparent 72%), linear-gradient(180deg, #f3f6f5 0%, #e6ecea 100%);
 }
 [data-theme="dark"] {
+  --frame-line: rgb(243 241 236 / 0.1);
+  --frame-shadow: none;
   --grain: 0.045;
   --hero-water: rgba(59, 110, 168, 0.12);
   --stage-bg: radial-gradient(70% 60% at 55% 45%, rgba(98, 196, 172, 0.14), transparent 70%), linear-gradient(180deg, #16211c 0%, #0f1612 100%);
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
+    --frame-line: rgb(243 241 236 / 0.1);
+    --frame-shadow: none;
     --grain: 0.045;
     --hero-water: rgba(59, 110, 168, 0.12);
     --stage-bg: radial-gradient(70% 60% at 55% 45%, rgba(98, 196, 172, 0.14), transparent 70%), linear-gradient(180deg, #16211c 0%, #0f1612 100%);
@@ -110,16 +135,16 @@
   --line: rgb(var(--c-line) / 0.12);
 }
 :root {
-  --sc-font-display: var(--font-sans), "Inter", system-ui, sans-serif;
-  --sc-font-text: var(--font-sans), "Inter", system-ui, sans-serif;
+  --sc-font-display: var(--font-sans), "IBM Plex Sans Ext", system-ui, sans-serif;
+  --sc-font-text: var(--font-sans), "IBM Plex Sans Ext", system-ui, sans-serif;
   --sc-font-mono: var(--font-mono), ui-monospace, monospace;
   --sc-shadow-color: 150 20% 3%;
   /* fixed: the light bands (FAQ, contact) and water/salt colours */
   --emerald-deep: #2c7466;
   --damp: #3b6ea8;
   --salt: #e8e1cf;
-  --paper: #f8f7f3;
-  --paper-2: #f8f7f3;
+  --paper: #ffffff;
+  --paper-2: #ffffff;
   --text-on-bone: #444945;
   --head-on-bone: #1a1d1b;
 }
@@ -252,49 +277,12 @@
   width: 100%;
   max-width: 36rem;
 }
-.hero__house img {
+.hero__house img,
+.hero__video video {
   display: block;
   width: 100%;
   height: auto;
   filter: drop-shadow(0 30px 40px rgba(0, 0, 0, 0.45));
-}
-/* Callouts: mint box, dashed leader, mono tag (the same language as the
-   wall photo in the next act). Strokes stay thin while the picture zooms. */
-.hero__callouts {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  pointer-events: none;
-  overflow: visible;
-}
-.hero__callout rect,
-.hero__callout ellipse {
-  fill: none;
-  stroke: #62c4ac;
-  stroke-width: 3;
-  vector-effect: non-scaling-stroke;
-}
-.hero__callout path {
-  fill: none;
-  stroke: #62c4ac;
-  stroke-width: 2;
-  stroke-dasharray: 5 5;
-  vector-effect: non-scaling-stroke;
-}
-.hero__tags {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-}
-.hero__tag {
-  position: absolute;
-  padding: 0.3rem 0.55rem;
-  border-radius: 6px;
-  background: color-mix(in oklab, #0e1310 84%, transparent);
-  color: #f3f1ec;
-  font: 600 0.8rem/1.2 var(--sc-font-mono, ui-monospace, monospace);
-  white-space: nowrap;
 }
 @media (max-width: 860px) {
   .hero__grid {
@@ -307,10 +295,6 @@
   }
   .hero__house {
     max-width: min(100%, 26rem);
-  }
-  .hero__tag {
-    font-size: 0.66rem;
-    padding: 0.22rem 0.4rem;
   }
 }
 
@@ -402,9 +386,10 @@
   position: relative;
   aspect-ratio: 1280 / 900;
   max-height: 82svh;
-  border-radius: 26px;
+  border-radius: 20px;
   overflow: hidden;
-  border: 1px solid rgb(26 28 26 / 0.1);
+  border: 1px solid var(--frame-line, rgb(17 24 21 / 0.09));
+  box-shadow: var(--frame-shadow);
   background: var(--stage-bg);
 }
 .hv__poster {
@@ -1066,7 +1051,6 @@
   color: var(--emerald);
 }
 
-
 /* Body text is fully justified, with German hyphenation (soft hyphens from
    hy() plus the browser's own) so the word spacing stays even. Headings,
    labels, buttons and navigation keep a ragged edge. */
@@ -1097,6 +1081,13 @@ figcaption {
 :is(h1, h2, h3, h4, h5, h6, summary, button, label) {
   text-align: start;
   hyphens: manual;
+}
+/* number and tab buttons read centred */
+.hv__steps button,
+.hv__scenes button,
+.hv__nav button {
+  text-align: center;
+  justify-content: center;
 }
 
 /* Large lede on a phone: a touch smaller so each justified line holds
@@ -1345,7 +1336,7 @@ html[data-text="xl"] {
 }
 
 /* Upright type only (no italics anywhere): accents are carried by colour and
-   weight. Headings in Inter, a little tighter and heavier than body text. */
+   weight. Headings in IBM Plex Sans, a little tighter and heavier than body text. */
 em,
 i,
 cite,
@@ -1385,7 +1376,7 @@ address,
     font-size: 0.85rem;
   }
 }
-/* Headings that still carry the old editorial class: same upright Inter
+/* Headings that still carry the old editorial class: same upright Plex
    weight as .sc-display. */
 .font-editorial {
   font-weight: 650;
@@ -1399,7 +1390,7 @@ address,
 :root {
   --fs-h1: clamp(1.75rem, 1.4rem + 1.3vw, 2.5rem);
   --fs-h2: clamp(1.375rem, 1.2rem + 0.75vw, 1.875rem);
-  --fs-h3: clamp(1.05rem, 1rem + 0.2vw, 1.175rem);
+  --fs-h3: 1.125rem;
 }
 body {
   font-size: 1rem;
@@ -1459,4 +1450,194 @@ main dd[class*="text-4xl"] {
 
 .sc-lede {
   line-height: 1.65;
+}
+
+/* ============================================= LOOK: WHITE AND SHINE ===
+   Pure white ground, every card in the same frame (hairline, soft shadow,
+   20 px corners), emerald gradients with a light sheen on the accent words
+   and the primary buttons, and one strict size scale:
+   12 labels · 13 fine print · 15 buttons · 16 text · 18 card titles ·
+   22-30 section titles · 28-40 page title (--fs-h* in ONE SCALE above). */
+main [class*="bg-[var(--ink-2)]"]:not(a):not(button):not(span) {
+  border-color: var(--frame-line) !important;
+  border-radius: 20px;
+  box-shadow: var(--frame-shadow);
+}
+main :is(h1, h2) :is(em, span[class*="emerald"], span[class*="mint"]),
+main h2 em {
+  background: var(--grad-text);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent !important;
+}
+main :is(a, button)[class*="bg-[var(--bone)]"],
+main :is(a, button)[class*="bg-[var(--mint)]"],
+main :is(a, button)[class*="bg-landing-emerald"],
+.hv__load,
+.btn-shine {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  background: var(--grad) !important;
+  color: #fff !important;
+  border-color: transparent !important;
+  box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.22), 0 8px 20px -10px rgb(13 92 74 / 0.7);
+}
+main :is(a, button)[class*="bg-[var(--bone)]"]::after,
+main :is(a, button)[class*="bg-[var(--mint)]"]::after,
+main :is(a, button)[class*="bg-landing-emerald"]::after,
+.hv__load::after,
+.btn-shine::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(110deg, transparent 30%, rgb(255 255 255 / 0.28) 50%, transparent 70%);
+  transform: translateX(-130%);
+  transition: transform 700ms var(--sc-ease-out);
+}
+main :is(a, button)[class*="bg-[var(--bone)]"]:hover::after,
+main :is(a, button)[class*="bg-[var(--mint)]"]:hover::after,
+main :is(a, button)[class*="bg-landing-emerald"]:hover::after,
+.hv__load:hover::after,
+.btn-shine:hover::after {
+  transform: translateX(130%);
+}
+@media (prefers-reduced-motion: reduce) {
+  :is(main a, main button, .hv__load, .btn-shine)::after {
+    transition: none;
+  }
+}
+/* size scale */
+.sc-label,
+main [class*="font-mono"][class*="uppercase"] {
+  font-size: 0.75rem !important;
+  letter-spacing: 0.12em;
+}
+main :is(p, li, dd, blockquote):not(.sc-label):not([class*="font-mono"]):not([class*="text-xs"]):not([class*="text-[1"]):not([class*="text-[0.6"]):not([class*="text-[0.7"]):not([class*="text-[0.8"]) {
+  font-size: 1rem !important;
+}
+main [class*="text-xs"],
+main [class*="text-[0.7"],
+main [class*="text-[0.8"] {
+  font-size: 0.8125rem !important;
+}
+main :is(a, button)[class*="rounded-full"]:not([class*="h-"]):not([class*="w-"]) {
+  font-size: 0.9375rem !important;
+}
+/* short facts read as a list, not as justified prose */
+.hv__material,
+.hv__material * {
+  text-align: start !important;
+}
+
+/* ================================================= HEADER ============== */
+.site-header__strip {
+  background: var(--grad);
+  color: #e9fbf4;
+}
+.site-header__strip a:hover {
+  color: #fff;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.site-header__bar {
+  background: var(--nav-bg);
+  -webkit-backdrop-filter: blur(16px) saturate(1.4);
+  backdrop-filter: blur(16px) saturate(1.4);
+  border-bottom: 1px solid var(--frame-line, rgb(17 24 21 / 0.09));
+  box-shadow: 0 10px 30px -22px rgb(16 40 30 / 0.45);
+}
+.site-nav ul {
+  gap: 0.15rem;
+  padding: 0.3rem;
+  border-radius: 999px;
+  border: 1px solid var(--frame-line, rgb(17 24 21 / 0.09));
+  background: rgb(var(--c-line) / 0.03);
+}
+.site-nav a {
+  padding: 0.5rem 0.95rem;
+  border-radius: 999px;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: rgb(var(--c-bone) / 0.82);
+  transition: background-color 160ms, color 160ms, box-shadow 160ms;
+}
+.site-nav a:hover,
+.site-nav a:focus-visible {
+  background: rgb(var(--c-ink2));
+  color: var(--mint);
+  box-shadow: 0 1px 2px rgb(16 40 30 / 0.06), 0 4px 12px -6px rgb(16 40 30 / 0.2);
+}
+.site-wrap {
+  width: 100%;
+  max-width: 88rem;
+  margin-inline: auto;
+  padding-inline: clamp(1rem, 3vw, 2.5rem);
+}
+.site-nav a {
+  padding-inline: 0.7rem;
+  font-size: 0.9rem;
+}
+/* the load button keeps its place in the stage corner */
+.hv__load {
+  position: absolute;
+}
+
+/* Hero picture: the looping video in the light theme; the still picture in
+   dark mode and with reduced motion. A legend names what to look for. */
+.hero__video video {
+  filter: none;
+}
+.hero__still {
+  display: none !important;
+}
+[data-theme="dark"] .hero__video {
+  display: none;
+}
+[data-theme="dark"] .hero__still {
+  display: block !important;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .hero__video {
+    display: none;
+  }
+  :root:not([data-theme="light"]) .hero__still {
+    display: block !important;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero__video {
+    display: none;
+  }
+  .hero__still {
+    display: block !important;
+  }
+}
+.hero__legend {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem 1.1rem;
+  margin-top: 0.9rem;
+  font-size: 0.875rem;
+  color: var(--sc-ink-soft);
+  text-align: center;
+}
+.hero__legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+.hero__legend i {
+  width: 0.7rem;
+  height: 0.7rem;
+  border-radius: 999px;
+  box-shadow: 0 0 0 1px rgb(17 24 21 / 0.15);
+}
+
+/* Short titles in bold and small mono labels are never stretched. */
+:is(p, li, dd, figcaption, span, div):is([class*="font-mono"], [class*="font-semibold"], [class*="font-bold"]),
+p.no-justify {
+  text-align: start;
 }

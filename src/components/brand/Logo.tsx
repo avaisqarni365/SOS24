@@ -35,10 +35,10 @@ export default function Logo({ tone = "auto", sub }: { tone?: "auto" | "light" |
     tone === "dark" ? "text-[var(--head-on-bone)]" : tone === "light" ? "text-[#f3f1ec]" : "text-[var(--bone)]";
   return (
     <span className="inline-flex items-center gap-2.5">
-      <LogoMark size={38} />
+      <LogoMark size={42} />
       <span className={`flex flex-col leading-none ${ink}`}>
-        <span className="font-sans text-[1.12rem] font-semibold tracking-[-0.01em]">
-          <span className="font-extrabold tracking-[0.04em] text-[var(--mint)]">sos</span>
+        <span className="font-sans text-[1.25rem] font-semibold tracking-[-0.015em]">
+          <span className="font-bold tracking-[0.02em] text-[var(--mint)]">sos</span>
           <span className="opacity-50">-</span>abdichtung
         </span>
         {sub ? (

@@ -52,40 +52,40 @@ export default function Hero() {
           </a>
         </div>
           <figure className="hero__house" data-hero-plane="subject">
+            {/* A short loop rendered from the same 3D model (white ground, so it
+                sits in the light page). Dark mode and reduced motion show the
+                still picture. Written as HTML so "muted" is in the markup and
+                the loop starts before hydration. */}
+            <div
+              className="hero__video"
+              dangerouslySetInnerHTML={{
+                __html:
+                  '<video autoplay muted loop playsinline preload="auto" width="1152" height="850" poster="/img/hero-keller-poster.webp" aria-label="Schnittmodell eines nassen Kellers, langsam gedreht: Wasser auf dem Boden, Wände bis zum Salzrand durchfeuchtet."><source src="/video/hero-keller.webm" type="video/webm"><source src="/video/hero-keller.mp4" type="video/mp4"></video>',
+              }}
+            />
             <img
+              className="hero__still"
               src="/img/hero-house-1400.webp"
               srcSet="/img/hero-house-760.webp 760w, /img/hero-house-1400.webp 1400w"
-              sizes="(max-width: 860px) 88vw, 46vw"
+              sizes="(max-width: 860px) 88vw, 36rem"
               width={1400}
               height={1032}
               alt="Schnittmodell eines nassen Kellers: Wasser steht auf dem Boden, die Wände sind bis zu einem weißen Salzrand durchfeuchtet."
-              fetchPriority="high"
+              loading="lazy"
               decoding="async"
             />
-            {/* Callouts in the picture's own pixel grid (1400 x 1032). */}
-            <svg className="hero__callouts" viewBox="0 0 1400 1032" aria-hidden="true">
-              <g className="hero__callout hero__callout--a">
-                <rect x="120" y="264" width="276" height="112" rx="10" />
-                <path d="M190 264 L150 176" />
-              </g>
-              <g className="hero__callout hero__callout--b">
-                <ellipse cx="646" cy="630" rx="170" ry="84" />
-                <path d="M580 712 L540 820" />
-              </g>
-              <g className="hero__callout hero__callout--c">
-                <rect x="814" y="520" width="100" height="86" rx="8" />
-                <path d="M914 580 L956 604" />
-              </g>
-            </svg>
-            <figcaption className="hero__tags theme-dark" aria-hidden="true">
-              <span className="hero__tag hero__tag--a" style={{ left: "3%", top: "13%" }}>
+            <figcaption className="hero__legend">
+              <span>
+                <i style={{ background: "#e8e1cf" }} aria-hidden="true" />
                 Salzrand in der Wand
               </span>
-              <span className="hero__tag hero__tag--b" style={{ left: "27%", top: "80%" }}>
+              <span>
+                <i style={{ background: "#3b6ea8" }} aria-hidden="true" />
                 Wasser am Boden
               </span>
-              <span className="hero__tag hero__tag--c" style={{ left: "68.3%", top: "57%" }}>
-                Sockel, 0 bis 1 m
+              <span>
+                <i style={{ background: "#9a6b4b" }} aria-hidden="true" />
+                Sockel, 0 bis 1 m durchfeuchtet
               </span>
             </figcaption>
           </figure>
