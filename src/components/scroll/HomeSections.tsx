@@ -1,7 +1,7 @@
 import { SERVICE_CARDS, type ServiceCard } from "@/data/services";
-import { FAQS } from "@/data/content-data";
+import { FAQS, COMPANY_INFO } from "@/data/content-data";
 import { CITY_PAGES, SERVICE_PAGES } from "@/data/seo-pages";
-import { LayerRuler } from "@/components/seo/SubpageParts";
+import { LayerRuler, FaqCards } from "@/components/seo/SubpageParts";
 import { MAP_AREAS, MAP_ESSEN, MAP_H, MAP_W } from "@/data/region-map";
 import OsmMap from "@/components/interactive/OsmMap";
 import { Home, Layers, ShieldCheck, SprayCan, Gauge, Wrench, type LucideIcon } from "lucide-react";
@@ -136,7 +136,7 @@ function RegionMap() {
         const city = byslug[a.slug!];
         const big = a.slug === "wuppertal";
         return (
-          <a key={a.name} href={`/kellersanierung/${a.slug}/`} className="region-map__area">
+          <a key={a.name} href={`/kellersanierung/${a.slug}/`} className={`region-map__area${big ? " is-main" : ""}`}>
             <path d={a.d} />
             <text x={a.cx} y={a.cy} textAnchor="middle" className={big ? "is-big" : undefined}>
               {a.name}
@@ -182,7 +182,7 @@ export function RegionSection() {
           </p>
         </div>
         <div className="mt-10 grid gap-6 lg:grid-cols-[1.2fr_1fr] lg:items-start">
-          <figure className="region-map__frame theme-dark">
+          <figure className="region-map__frame">
             <RegionMap />
             <figcaption className="no-justify">
               <span className="region-map__key region-map__key--area" aria-hidden="true" /> Einsatzgebiet
@@ -194,12 +194,12 @@ export function RegionSection() {
             <ul className="grid grid-cols-2 gap-3">
               {CITY_PAGES.map((c) => (
                 <li key={c.slug}>
-                  <a
-                    href={`/kellersanierung/${c.slug}/`}
-                    className="flex min-h-[56px] flex-col justify-center rounded-2xl border border-line/10 bg-[var(--ink-2)] px-4 py-3 hover:border-[var(--mint)]"
-                  >
-                    <span className="font-semibold">{c.name}</span>
-                    <span className="font-mono text-[0.7rem] text-[var(--sc-ink-soft)]">Vor Ort in {c.responseTime}</span>
+                  <a href={`/kellersanierung/${c.slug}/`} className="city-card">
+                    <span className="city-card__name">{c.name}</span>
+                    <span className="city-card__time">Vor Ort in {c.responseTime}</span>
+                    <span className="city-card__go" aria-hidden="true">
+                      →
+                    </span>
                   </a>
                 </li>
               ))}
@@ -215,24 +215,35 @@ export function RegionSection() {
 /* ------------------------------------------------------------------ faq -- */
 export function FaqSection() {
   return (
-    <section id="faq" className="surface-bone sc-section" aria-labelledby="faq-title" data-sc-act="flow">
-      <div className="sc-wrap max-w-4xl">
-        <h2 id="faq-title" className="sc-display text-4xl sm:text-5xl text-[var(--head-on-bone)]" data-sc-in>
-          Häufige Fragen zur Kellersanierung
-        </h2>
-        <div className="mt-10 divide-y divide-black/10 border-y border-black/10">
-          {FAQS.map((f) => (
-            <details key={f.q} className="faq-item group py-5">
-              <summary className="flex min-h-[44px] items-start justify-between gap-6 text-left text-lg font-semibold text-[var(--head-on-bone)]">
-                <span>{f.q}</span>
-                <span className="faq-plus mt-1 text-2xl leading-none text-[var(--emerald-deep)]" aria-hidden="true">
-                  +
-                </span>
-              </summary>
-              <p className="mt-3 text-[var(--text-on-bone)]">{hy(f.a)}</p>
-            </details>
-          ))}
+    <section id="faq" className="sc-section border-t border-line/10" aria-labelledby="faq-title" data-sc-act="flow">
+      <div className="sc-wrap faq-layout">
+        <div className="faq-intro">
+          <p className="sc-label">Häufige Fragen</p>
+          <h2 id="faq-title" className="sc-display mt-3">
+            Was Hausbesitzer <em>uns am häufigsten fragen.</em>
+          </h2>
+          <p className="sc-body mt-4">
+            {hy("Ursache, Ablauf, Kosten und Garantie: die Antworten auf die Fragen, die bei jeder Besichtigung kommen. Tippen Sie eine Frage an, um die Antwort zu lesen.")}
+          </p>
+          <div className="faq-ask">
+            <p className="faq-ask__t">Ihre Frage ist nicht dabei?</p>
+            <p className="faq-ask__d">{hy("Shahzad Mahmood antwortet persönlich, meist noch am selben Tag.")}</p>
+            <div className="mt-4 flex flex-wrap gap-2">
+              <a href={`tel:${COMPANY_INFO.phoneTel}`} className="btn-shine inline-flex min-h-[44px] items-center rounded-full px-5 text-[0.9375rem] font-semibold">
+                {COMPANY_INFO.phoneDisplay}
+              </a>
+              <a
+                href={COMPANY_INFO.whatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex min-h-[44px] items-center rounded-full border border-line/15 px-5 text-[0.9375rem] font-semibold hover:border-[var(--mint)]"
+              >
+                WhatsApp
+              </a>
+            </div>
+          </div>
         </div>
+        <FaqCards faqs={FAQS} />
       </div>
     </section>
   );

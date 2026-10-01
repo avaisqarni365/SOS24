@@ -14,7 +14,7 @@ const FULL = "https://www.openstreetmap.org/?mlat=51.256&mlon=7.151#map=11/51.24
 export default function OsmMap() {
   const [on, setOn] = useState(false);
   return (
-    <div className="osm-map theme-dark">
+    <div className="osm-map">
       {on ? (
         <iframe
           src={EMBED}
@@ -28,7 +28,7 @@ export default function OsmMap() {
             Die interaktive Karte wird von OpenStreetMap geladen. Dabei wird Ihre IP-Adresse an die OpenStreetMap
             Foundation übertragen.
           </p>
-          <button type="button" className="inline-flex min-h-[48px] items-center gap-2 rounded-full bg-[var(--bone)] px-6 py-3 text-sm font-semibold text-[var(--ink)] hover:bg-white" onClick={() => setOn(true)}>
+          <button type="button" className="btn-shine inline-flex min-h-[48px] items-center gap-2 rounded-full px-6 py-3 text-[0.9375rem] font-semibold" onClick={() => setOn(true)}>
             Interaktive Karte laden
           </button>
         </div>
