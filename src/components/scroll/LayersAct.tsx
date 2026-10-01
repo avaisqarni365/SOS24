@@ -16,7 +16,7 @@ export default function LayersAct({
       Jeder Ort, <em className="text-[var(--mint)]">Schicht für Schicht.</em>
     </>
   ),
-  intro = "Keller von innen, Keller von außen, Garage und Wohnraum: Wählen Sie den Ort und gehen Sie die Sanierung Schritt für Schritt durch. Jeder Schritt zeigt im Bild, welche Schicht entsteht, mit Material, Zahlen und Messwerten. Mit „In 3D drehen“ lädt das Modell, das Sie dann in alle Richtungen drehen können.",
+  intro = "Wohnraum, Keller von innen, Keller von außen und Garage: Wählen Sie den Ort und gehen Sie die Sanierung Schritt für Schritt durch. Jeder Schritt zeigt im Bild, welche Schicht entsteht, mit Material, Zahlen und Messwerten. Mit „In 3D drehen“ lädt das Modell, das Sie dann in alle Richtungen drehen können.",
 }: {
   ids?: SceneId[];
   id?: string;
@@ -24,7 +24,9 @@ export default function LayersAct({
   title?: ReactNode;
   intro?: string;
 }) {
-  const scenes = (ids ? ids.map((i) => SCENES.find((s) => s.id === i)!).filter(Boolean) : SCENES).map((sc) => ({
+  // homepage order: the living room first, then the Keller, garage last
+  const order: SceneId[] = ids ?? ["wohnraum", "keller-innen", "keller-aussen", "garage"];
+  const scenes = order.map((i) => SCENES.find((s) => s.id === i)!).filter(Boolean).map((sc) => ({
     ...sc,
     intro: hy(sc.intro),
     layers: sc.layers.map((l) => ({ ...l, text: hy(l.text) })),

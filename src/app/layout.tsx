@@ -70,6 +70,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html
       lang="de"
+      data-theme="light"
       className={`${plex.variable} ${mono.variable}`}
       suppressHydrationWarning
     >

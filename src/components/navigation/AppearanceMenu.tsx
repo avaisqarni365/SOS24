@@ -8,7 +8,9 @@ type TextSize = "md" | "lg" | "xl";
 
 /** Script for <head>: applies the stored choice before first paint, so the
     page never flashes in the wrong theme or text size. */
-export const APPEARANCE_BOOT = `(function(){try{var d=document.documentElement,t=localStorage.getItem('sos_theme'),z=localStorage.getItem('sos_text');if(t==='light'||t==='dark')d.setAttribute('data-theme',t);if(z==='lg'||z==='xl')d.setAttribute('data-text',z)}catch(e){}})();`;
+// White is the default on every device; dark only when the visitor picks it
+// ("auto" follows the device, and only when chosen).
+export const APPEARANCE_BOOT = `(function(){var d=document.documentElement;d.setAttribute('data-theme','light');try{var t=localStorage.getItem('sos_theme'),z=localStorage.getItem('sos_text');if(t==='dark')d.setAttribute('data-theme','dark');else if(t==='auto')d.removeAttribute('data-theme');if(z==='lg'||z==='xl')d.setAttribute('data-text',z)}catch(e){}})();`;
 
 const THEMES: { id: Theme; label: string; Icon: typeof Sun }[] = [
   { id: "light", label: "Hell", Icon: Sun },
@@ -33,7 +35,7 @@ function save(key: string, value: string | null) {
 /** "Ansicht": light, dark or automatic theme and three text sizes. */
 export default function AppearanceMenu() {
   const [open, setOpen] = useState(false);
-  const [theme, setTheme] = useState<Theme>("auto");
+  const [theme, setTheme] = useState<Theme>("light");
   const [size, setSize] = useState<TextSize>("md");
   const box = useRef<HTMLDivElement>(null);
 
@@ -41,6 +43,7 @@ export default function AppearanceMenu() {
     const d = document.documentElement;
     const t = d.getAttribute("data-theme");
     setTheme(t === "light" || t === "dark" ? t : "auto");
+
     const z = d.getAttribute("data-text");
     setSize(z === "lg" || z === "xl" ? z : "md");
   }, []);
@@ -64,7 +67,7 @@ export default function AppearanceMenu() {
     const d = document.documentElement;
     if (t === "auto") d.removeAttribute("data-theme");
     else d.setAttribute("data-theme", t);
-    save("sos_theme", t === "auto" ? null : t);
+    save("sos_theme", t === "light" ? null : t);
   };
   const pickSize = (z: TextSize) => {
     setSize(z);
