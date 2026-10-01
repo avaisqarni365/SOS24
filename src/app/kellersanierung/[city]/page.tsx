@@ -96,18 +96,18 @@ export default function CityPage({ params }: { params: { city: string } }) {
                   {COMPANY_INFO.phoneDisplay}
                 </a>
               </div>
-              <dl className="mt-12 grid gap-6 sm:grid-cols-3">
-                <div>
-                  <dt className="sc-label">Vor Ort in</dt>
-                  <dd className="mt-2 font-editorial text-3xl">{page.responseTime}</dd>
+              <dl className="mt-12 grid gap-4 sm:grid-cols-3">
+                <div className="rounded-2xl border border-line/12 bg-white p-4 shadow-sm">
+                  <dt className="sc-label text-[#55605c]">Vor Ort in</dt>
+                  <dd className="mt-1 font-editorial text-2xl sm:text-3xl font-bold text-[#0b0f0d]">{page.responseTime}</dd>
                 </div>
-                <div className="sm:col-span-2">
-                  <dt className="sc-label">Stadtteile</dt>
-                  <dd className="no-justify mt-2 text-sm text-[var(--bone)]/85">{page.districts.join(" · ")}</dd>
+                <div className="rounded-2xl border border-line/12 bg-white p-4 shadow-sm sm:col-span-2">
+                  <dt className="sc-label text-[#55605c]">Stadtteile</dt>
+                  <dd className="mt-1 text-sm font-medium text-[#2c3631] leading-relaxed">{page.districts.join(" · ")}</dd>
                 </div>
-                <div className="sm:col-span-3">
-                  <dt className="sc-label">Postleitzahlen</dt>
-                  <dd className="no-justify mt-2 font-mono text-sm text-[var(--bone)]/75">{page.plz.join(" ")}</dd>
+                <div className="rounded-2xl border border-line/12 bg-white p-4 shadow-sm sm:col-span-3">
+                  <dt className="sc-label text-[#55605c]">Postleitzahlen</dt>
+                  <dd className="mt-1 font-mono text-xs font-semibold text-[#3b4641] leading-relaxed tracking-wider">{page.plz.join(" ")}</dd>
                 </div>
               </dl>
             </div>

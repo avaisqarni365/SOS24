@@ -3,19 +3,19 @@ import { hy, keep } from "@/lib/hyphenate";
 
 export function Breadcrumbs({ items }: { items: { name: string; path: string }[] }) {
   return (
-    <nav aria-label="Brotkrumen" className="font-mono text-xs text-[var(--sc-ink-soft)]">
+    <nav aria-label="Brotkrumen" className="font-mono text-xs text-[#55605c]">
       <ol className="flex flex-wrap items-center gap-2">
         {items.map((it, i) => (
           <li key={it.path} className="flex items-center gap-2">
             {i < items.length - 1 ? (
               <>
-                <a href={it.path} className="hover:text-[var(--bone)]">
+                <a href={it.path} className="hover:text-[#0b0f0d] transition-colors">
                   {it.name}
                 </a>
-                <span aria-hidden="true">/</span>
+                <span aria-hidden="true" className="text-black/30">/</span>
               </>
             ) : (
-              <span aria-current="page" className="text-[var(--bone)]">
+              <span aria-current="page" className="text-[#0b0f0d] font-semibold">
                 {it.name}
               </span>
             )}
@@ -57,23 +57,23 @@ export function LayerStack({ layers, title }: { layers: LayerNote[]; title: stri
   const palette = LAYER_PALETTE;
   const ordered = [...layers].reverse();
   return (
-    <figure className="m-0 rounded-3xl border border-line/10 bg-[var(--ink-2)] p-5 sm:p-6">
-      <figcaption className="sc-label mb-4 no-justify">{title}</figcaption>
+    <figure className="m-0 rounded-3xl border border-line/10 bg-white p-5 shadow-sm sm:p-6">
+      <figcaption className="sc-label mb-4 text-[#0b0f0d]">{title}</figcaption>
       <ol className="grid gap-2.5" reversed>
         {ordered.map((l, i) => {
           const c = palette[(layers.length - 1 - i) % palette.length];
           return (
             <li
               key={l.name}
-              className="grid grid-cols-[1.6rem_1fr] gap-3 rounded-2xl border border-line/5 bg-[var(--ink-3)] p-3.5"
+              className="grid grid-cols-[1.6rem_1fr] gap-3 rounded-2xl border border-line/8 bg-[#f7faf9] p-3.5"
               style={{ transform: `translateX(${i * 6}px)` }}
             >
               <span className="layer-stack__n" style={{ background: c }} aria-hidden="true">
                 {layers.length - i}
               </span>
               <div>
-                <h3 className="text-[0.98rem] font-semibold text-[var(--bone)]">{l.name}</h3>
-                <p className="mt-1 text-sm leading-relaxed text-[var(--sc-ink-soft)]">{hy(l.text)}</p>
+                <h3 className="text-[0.98rem] font-semibold text-[#0b0f0d]">{l.name}</h3>
+                <p className="mt-1 text-sm leading-relaxed text-[#3b4641]">{hy(l.text)}</p>
               </div>
             </li>
           );
@@ -85,18 +85,18 @@ export function LayerStack({ layers, title }: { layers: LayerNote[]; title: stri
 
 export function Prose({ sections }: { sections: PageSection[] }) {
   return (
-    <div className="prose-sos grid gap-12">
+    <div className="prose-sos grid gap-12 text-left">
       {sections.map((s) => (
         <section key={s.heading}>
-          <h2 className="font-editorial text-3xl leading-tight text-[var(--head-on-bone)] sm:text-4xl">{keep(s.heading)}</h2>
+          <h2 className="font-editorial text-3xl leading-tight text-[#0b0f0d] sm:text-4xl text-left">{keep(s.heading)}</h2>
           <div className="mt-5">
             {s.paragraphs.map((p, i) => (
-              <p key={i}>{hy(p)}</p>
+              <p key={i} className="text-left text-[#2c3631] text-base leading-relaxed">{hy(p)}</p>
             ))}
             {s.bullets && s.bullets.length > 0 && (
-              <ul>
+              <ul className="mt-4 list-disc pl-5">
                 {s.bullets.map((b) => (
-                  <li key={b}>{hy(b)}</li>
+                  <li key={b} className="text-left text-[#2c3631] my-1">{hy(b)}</li>
                 ))}
               </ul>
             )}
@@ -133,7 +133,7 @@ export function FaqList({ faqs, title }: { faqs: Faq[]; title: string }) {
   return (
     <section aria-labelledby="faq-sub-title">
       <p className="sc-label">Häufige Fragen</p>
-      <h2 id="faq-sub-title" className="sc-display mt-3">
+      <h2 id="faq-sub-title" className="sc-display mt-3 text-left">
         {title}
       </h2>
       <div className="mt-8">
@@ -152,13 +152,13 @@ export function LinkGrid({ title, links }: { title: string; links: { href: strin
           <li key={l.href}>
             <a
               href={l.href}
-              className="flex min-h-[56px] items-center justify-between gap-3 rounded-2xl border border-black/10 bg-white px-5 py-4 font-semibold text-[var(--head-on-bone)] hover:border-[var(--emerald-deep)]"
+              className="flex min-h-[56px] items-center justify-between gap-3 rounded-2xl border border-line/12 bg-white px-5 py-4 font-semibold text-[#0b0f0d] shadow-sm hover:border-[var(--emerald-deep)] hover:shadow-md transition-all"
             >
               <span>
                 {l.label}
-                {l.sub ? <span className="block text-xs font-normal text-[var(--text-on-bone)]">{l.sub}</span> : null}
+                {l.sub ? <span className="block text-xs font-normal text-[#55605c]">{l.sub}</span> : null}
               </span>
-              <span aria-hidden="true" className="text-[var(--emerald-deep)]">
+              <span aria-hidden="true" className="text-[var(--emerald-deep)] font-bold">
                 →
               </span>
             </a>

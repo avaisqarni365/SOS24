@@ -24,22 +24,22 @@ export default function LanguageSelector() {
     <div ref={containerRef} className="relative inline-block text-left">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-landing-ink2 hover:bg-landing-ink3 border border-line/10 hover:border-landing-mint/40 text-xs font-mono text-landing-bone transition-all shadow-xs"
+        className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white hover:bg-[#f7faf9] border border-line/15 hover:border-[#13755d]/40 text-xs font-mono text-[#0b0f0d] transition-all shadow-xs"
         aria-label="Sprache auswählen"
         aria-expanded={isOpen}
       >
         <span className="text-sm leading-none">{currentLocale.flag}</span>
         <span className="font-semibold uppercase tracking-wider">{currentLocale.code}</span>
         <ChevronDown
-          className={`w-3.5 h-3.5 text-landing-bone/60 transition-transform duration-200 ${
-            isOpen ? "rotate-180 text-landing-mint" : ""
+          className={`w-3.5 h-3.5 text-[#55605c] transition-transform duration-200 ${
+            isOpen ? "rotate-180 text-[#13755d]" : ""
           }`}
         />
       </button>
 
       {isOpen && (
-        <div className="absolute right-0 mt-2 w-44 rounded-2xl bg-landing-ink2 border border-line/10 shadow-2xl py-1.5 z-50 animate-in fade-in zoom-in-95 duration-150">
-          <div className="px-3 py-1 text-[10px] font-mono uppercase tracking-[0.16em] text-landing-bone/40 border-b border-line/5 mb-1">
+        <div className="absolute right-0 mt-2 w-44 rounded-2xl bg-white border border-line/12 shadow-xl py-1.5 z-50 animate-in fade-in zoom-in-95 duration-150">
+          <div className="px-3 py-1 text-[10px] font-mono uppercase tracking-[0.16em] text-[#55605c] border-b border-line/8 mb-1">
             Sprache / Language
           </div>
           {SUPPORTED_LOCALES.map((locale) => {
@@ -53,8 +53,8 @@ export default function LanguageSelector() {
                 }}
                 className={`w-full flex items-center justify-between px-3.5 py-2 text-xs text-left transition-colors font-mono ${
                   isSelected
-                    ? "bg-landing-mint/15 text-landing-mint font-bold"
-                    : "text-landing-bone/80 hover:bg-line/5 hover:text-[var(--bone)]"
+                    ? "bg-[#13755d]/10 text-[#0f5c49] font-bold"
+                    : "text-[#2c3631] hover:bg-[#f7faf9] hover:text-[#0b0f0d]"
                 }`}
               >
                 <div className="flex items-center gap-2">
@@ -62,7 +62,7 @@ export default function LanguageSelector() {
                   <span>{locale.nativeName}</span>
                 </div>
                 {isSelected && (
-                  <span className="text-landing-mint text-xs">✓</span>
+                  <span className="text-[#13755d] text-xs">✓</span>
                 )}
               </button>
             );

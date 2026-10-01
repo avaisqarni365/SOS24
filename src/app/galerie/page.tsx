@@ -43,7 +43,7 @@ export default function GaleriePage() {
             </p>
           </div>
         </section>
-        <PictureGallery />
+        <PictureGallery hideHeader />
         <ContactForm />
       </main>
       <Footer />

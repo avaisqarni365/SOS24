@@ -84,7 +84,7 @@ export default function AppearanceMenu() {
         onClick={() => setOpen((o) => !o)}
         aria-expanded={open}
         aria-controls="appearance-panel"
-        className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-line/15 text-[var(--bone)] hover:border-[var(--mint)]"
+        className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-line/15 bg-white text-[#0b0f0d] hover:border-[#13755d] shadow-2xs transition-colors"
         title="Ansicht: Hell/Dunkel und Schriftgröße"
       >
         <SunMoon className="h-5 w-5" aria-hidden="true" />
@@ -93,9 +93,9 @@ export default function AppearanceMenu() {
       {open && (
         <div
           id="appearance-panel"
-          className="absolute right-0 top-[calc(100%+0.6rem)] z-[60] w-[17.5rem] max-sm:fixed max-sm:inset-x-3 max-sm:top-[4.4rem] max-sm:w-auto rounded-2xl border border-line/15 bg-[var(--ink-2)] p-4 text-[var(--bone)] shadow-[0_18px_40px_-12px_rgba(0,0,0,0.35)]"
+          className="absolute right-0 top-[calc(100%+0.6rem)] z-[60] w-[17.5rem] max-sm:fixed max-sm:inset-x-3 max-sm:top-[4.4rem] max-sm:w-auto rounded-2xl border border-line/12 bg-white p-4 text-[#0b0f0d] shadow-xl"
         >
-          <p className="font-mono text-[0.68rem] uppercase tracking-wider text-[var(--sc-ink-soft)]">Darstellung</p>
+          <p className="font-mono text-[0.68rem] uppercase tracking-wider text-[#55605c]">Darstellung</p>
           <div className="mt-2 grid grid-cols-3 gap-1.5" role="group" aria-label="Darstellung">
             {THEMES.map(({ id, label, Icon }) => (
               <button
@@ -103,8 +103,8 @@ export default function AppearanceMenu() {
                 type="button"
                 aria-pressed={theme === id}
                 onClick={() => pickTheme(id)}
-                className={`flex min-h-[3.5rem] flex-col items-center justify-center gap-1 rounded-xl border text-[0.72rem] font-semibold ${
-                  theme === id ? "border-[var(--mint)] bg-[var(--mint)] text-[var(--ink)]" : "border-line/15 hover:border-[var(--mint)]"
+                className={`flex min-h-[3.5rem] flex-col items-center justify-center gap-1 rounded-xl border text-[0.72rem] font-semibold transition-all ${
+                  theme === id ? "border-transparent bg-[var(--grad)] text-white shadow-sm" : "border-line/15 bg-[#f7faf9] text-[#0b0f0d] hover:border-[#13755d] hover:bg-white"
                 }`}
               >
                 <Icon className="h-4 w-4" aria-hidden="true" />
@@ -112,7 +112,7 @@ export default function AppearanceMenu() {
               </button>
             ))}
           </div>
-          <p className="mt-4 flex items-center gap-1.5 font-mono text-[0.68rem] uppercase tracking-wider text-[var(--sc-ink-soft)]">
+          <p className="mt-4 flex items-center gap-1.5 font-mono text-[0.68rem] uppercase tracking-wider text-[#55605c]">
             <Type className="h-3.5 w-3.5" aria-hidden="true" /> Schriftgröße
           </p>
           <div className="mt-2 grid grid-cols-3 gap-1.5" role="group" aria-label="Schriftgröße">
@@ -123,8 +123,8 @@ export default function AppearanceMenu() {
                 aria-pressed={size === z.id}
                 aria-label={z.label}
                 onClick={() => pickSize(z.id)}
-                className={`min-h-[3rem] rounded-xl border font-semibold ${
-                  size === z.id ? "border-[var(--mint)] bg-[var(--mint)] text-[var(--ink)]" : "border-line/15 hover:border-[var(--mint)]"
+                className={`min-h-[3rem] rounded-xl border font-semibold transition-all ${
+                  size === z.id ? "border-transparent bg-[var(--grad)] text-white shadow-sm" : "border-line/15 bg-[#f7faf9] text-[#0b0f0d] hover:border-[#13755d] hover:bg-white"
                 }`}
                 style={{ fontSize: `${0.85 + i * 0.18}rem` }}
               >

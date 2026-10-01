@@ -41,8 +41,8 @@ function mailLink(d: Enquiry, place?: string) {
 }
 
 const field =
-  "w-full min-h-[48px] px-4 py-3 rounded-xl border border-black/15 bg-[var(--bone)] text-sm text-[var(--head-on-bone)] focus:outline-none focus:border-[var(--emerald-deep)] focus:bg-white placeholder:text-black/40";
-const lbl = "block text-xs font-mono font-bold text-[var(--head-on-bone)] mb-2";
+  "w-full min-h-[48px] px-4 py-3 rounded-xl border border-line/15 bg-white text-sm text-[#0b0f0d] shadow-2xs focus:outline-none focus:border-[var(--emerald-deep)] focus:ring-1 focus:ring-[var(--emerald-deep)] placeholder:text-black/40";
+const lbl = "block text-xs font-mono font-bold text-[#0b0f0d] mb-2";
 
 export default function ContactForm({ defaultDamage, place }: { defaultDamage?: string; place?: string }) {
   const { t, lang } = useLanguage();
@@ -151,9 +151,9 @@ export default function ContactForm({ defaultDamage, place }: { defaultDamage?: 
                 </p>
                 <a
                   href={`tel:${COMPANY_INFO.phoneTel}`}
-                  className="inline-flex min-h-[48px] items-center gap-2 rounded-full bg-[var(--head-on-bone)] px-6 py-3 font-mono text-xs font-semibold text-[var(--bone)] hover:bg-black"
+                  className="btn-shine inline-flex min-h-[48px] items-center gap-2 rounded-full px-6 py-3 font-mono text-xs font-semibold text-white shadow-sm"
                 >
-                  <Phone className="h-3.5 w-3.5 text-[var(--mint)]" aria-hidden="true" />
+                  <Phone className="h-3.5 w-3.5" aria-hidden="true" />
                   Dringend? Direkt anrufen: {COMPANY_INFO.phoneDisplay}
                 </a>
               </div>
@@ -210,16 +210,16 @@ export default function ContactForm({ defaultDamage, place }: { defaultDamage?: 
                     type="submit"
                     name="via"
                     value="whatsapp"
-                    className="inline-flex min-h-[52px] w-full items-center justify-center gap-2 rounded-full bg-[var(--head-on-bone)] px-6 py-4 text-sm font-semibold text-[var(--bone)] shadow-sm hover:bg-black"
+                    className="btn-shine inline-flex min-h-[52px] w-full items-center justify-center gap-2 rounded-full px-6 py-4 text-sm font-semibold text-white shadow-md active:scale-[0.98]"
                   >
                     {t("contact.viaWhatsapp")}
-                    <ArrowRight className="h-4 w-4 text-[var(--mint)]" aria-hidden="true" />
+                    <ArrowRight className="h-4 w-4" aria-hidden="true" />
                   </button>
                   <button
                     type="submit"
                     name="via"
                     value="mail"
-                    className="inline-flex min-h-[52px] w-full items-center justify-center gap-2 rounded-full border border-black/20 px-6 py-4 text-sm font-semibold text-[var(--head-on-bone)] hover:border-[var(--emerald-deep)]"
+                    className="inline-flex min-h-[52px] w-full items-center justify-center gap-2 rounded-full border border-line/20 bg-white px-6 py-4 text-sm font-semibold text-[#0b0f0d] hover:border-[var(--emerald-deep)] hover:bg-[#f7faf9] active:scale-[0.98]"
                   >
                     {t("contact.viaMail")}
                     <Mail className="h-4 w-4 text-[var(--emerald-deep)]" aria-hidden="true" />
@@ -262,26 +262,26 @@ export default function ContactForm({ defaultDamage, place }: { defaultDamage?: 
                   className="mt-5 h-12 w-auto"
                 />
               </div>
-              <div className="space-y-4 border-t border-black/5 pt-4 font-mono text-xs text-[var(--head-on-bone)]">
-                <a href={`tel:${COMPANY_INFO.phoneTel}`} className="flex items-center gap-3 rounded-2xl border border-black/5 bg-[var(--bone)] p-3.5 hover:bg-[var(--bone-2)]">
+              <div className="space-y-4 border-t border-line/10 pt-4 font-mono text-xs text-[#0b0f0d]">
+                <a href={`tel:${COMPANY_INFO.phoneTel}`} className="flex items-center gap-3 rounded-2xl border border-line/10 bg-[#f7faf9] p-3.5 text-[#0b0f0d] hover:bg-white hover:border-[var(--emerald-deep)] transition-all">
                   <Phone className="h-4 w-4 text-[var(--emerald-deep)]" aria-hidden="true" />
                   <span>
-                    <span className="block text-[10px] text-[var(--text-on-bone)]">Telefon</span>
-                    <span className="block text-sm font-bold">{COMPANY_INFO.phoneDisplay}</span>
+                    <span className="block text-[10px] text-[#55605c]">Telefon</span>
+                    <span className="block text-sm font-bold text-[#0b0f0d]">{COMPANY_INFO.phoneDisplay}</span>
                   </span>
                 </a>
-                <a href={COMPANY_INFO.whatsappUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 rounded-2xl border border-black/5 bg-[var(--bone)] p-3.5 hover:bg-[var(--bone-2)]">
+                <a href={COMPANY_INFO.whatsappUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 rounded-2xl border border-line/10 bg-[#f7faf9] p-3.5 text-[#0b0f0d] hover:bg-white hover:border-[var(--emerald-deep)] transition-all">
                   <MessageSquare className="h-4 w-4 text-[var(--emerald-deep)]" aria-hidden="true" />
                   <span>
-                    <span className="block text-[10px] text-[var(--text-on-bone)]">WhatsApp</span>
-                    <span className="block text-sm font-bold">Fotos schicken, Einschätzung bekommen</span>
+                    <span className="block text-[10px] text-[#55605c]">WhatsApp</span>
+                    <span className="block text-sm font-bold text-[#0b0f0d]">Fotos schicken, Einschätzung bekommen</span>
                   </span>
                 </a>
-                <div className="flex items-center gap-3 rounded-2xl border border-black/5 bg-[var(--bone)] p-3.5">
+                <div className="flex items-center gap-3 rounded-2xl border border-line/10 bg-[#f7faf9] p-3.5 text-[#0b0f0d]">
                   <MapPin className="h-4 w-4 text-[var(--emerald-deep)]" aria-hidden="true" />
                   <span>
-                    <span className="block text-[10px] text-[var(--text-on-bone)]">Sitz</span>
-                    <span className="block text-xs font-bold">
+                    <span className="block text-[10px] text-[#55605c]">Sitz</span>
+                    <span className="block text-xs font-bold text-[#0b0f0d]">
                       {COMPANY_INFO.street}, {COMPANY_INFO.city}
                     </span>
                   </span>

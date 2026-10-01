@@ -8,7 +8,7 @@ import { GALLERY, type GalleryCategory } from "@/data/gallery";
  * Photo gallery with category filters and a lightbox (keyboard: Esc, arrows).
  * Captions come from src/data/gallery.ts; UI labels are translated.
  */
-export default function PictureGallery() {
+export default function PictureGallery({ hideHeader = false }: { hideHeader?: boolean }) {
   const { t } = useLanguage();
   const [category, setCategory] = useState<"all" | GalleryCategory>("all");
   const [open, setOpen] = useState<number | null>(null);
@@ -54,19 +54,21 @@ export default function PictureGallery() {
   const cur = open === null ? null : items[open];
 
   return (
-    <section id="galerie" className="sc-section band-stone" aria-labelledby="galerie-title">
+    <section id="galerie" className="sc-section bg-white" aria-labelledby="galerie-title">
       <div className="sc-wrap">
-        <div className="grid gap-6 lg:grid-cols-[1fr_1fr] lg:items-end">
-          <div>
-            <p className="sc-label">{t("gallery.eyebrow")}</p>
-            <h2 id="galerie-title" className="sc-display mt-3 text-4xl sm:text-5xl lg:text-6xl">
-              {t("gallery.h1")} <em className="text-[var(--mint)]">{t("gallery.accent")}</em>
-            </h2>
+        {!hideHeader && (
+          <div className="grid gap-6 lg:grid-cols-[1fr_1fr] lg:items-end mb-10">
+            <div>
+              <p className="sc-label text-[#0f5c49]">{t("gallery.eyebrow")}</p>
+              <h2 id="galerie-title" className="sc-display mt-3 text-4xl sm:text-5xl lg:text-6xl text-[#0b0f0d]">
+                {t("gallery.h1")} <em className="text-[var(--brick)]">{t("gallery.accent")}</em>
+              </h2>
+            </div>
+            <p className="sc-body text-[#3b4641]">{t("gallery.sub")}</p>
           </div>
-          <p className="sc-body">{t("gallery.sub")}</p>
-        </div>
+        )}
 
-        <div className="mt-10 flex flex-wrap gap-2" role="group" aria-label={t("gallery.eyebrow")}>
+        <div className="flex flex-wrap gap-2" role="group" aria-label={t("gallery.eyebrow")}>
           {categories.map((c) => (
             <button
               key={c.id}
@@ -76,10 +78,10 @@ export default function PictureGallery() {
                 setCategory(c.id);
                 setOpen(null);
               }}
-              className={`min-h-[44px] rounded-full border px-4 text-sm font-semibold ${
+              className={`min-h-[44px] rounded-full border px-4 text-sm font-semibold transition-all ${
                 category === c.id
-                  ? "border-[var(--mint)] bg-[var(--mint)] text-[var(--ink)]"
-                  : "border-line/15 text-[var(--bone)]/80 hover:border-[var(--mint)]"
+                  ? "border-transparent bg-[var(--grad)] text-white shadow-sm"
+                  : "border-line/15 bg-white text-[#0b0f0d] hover:border-[var(--emerald-deep)] hover:bg-[#f7faf9]"
               }`}
             >
               {c.label}
@@ -96,10 +98,10 @@ export default function PictureGallery() {
                   lastTrigger.current = e.currentTarget;
                   setOpen(i);
                 }}
-                className="group flex h-full w-full flex-col overflow-hidden rounded-[22px] border border-line/10 bg-[var(--ink-2)] text-left hover:border-[var(--mint)]"
+                className="group flex h-full w-full flex-col overflow-hidden rounded-[22px] border border-line/12 bg-white text-left shadow-sm hover:border-[var(--emerald-deep)] hover:shadow-md transition-all"
                 aria-label={`${it.title}: ${t("gallery.zoomHint")}`}
               >
-                <span className="relative block aspect-[16/11] overflow-hidden bg-[var(--ink-3)]">
+                <span className="relative block aspect-[16/11] overflow-hidden bg-[#f7faf9]">
                   <img
                     src={it.src}
                     srcSet={it.src2x ? `${it.src} ${it.w}w, ${it.src2x} 960w` : undefined}
@@ -118,11 +120,11 @@ export default function PictureGallery() {
                   </span>
                 </span>
                 <span className="flex flex-1 flex-col gap-2 p-5">
-                  <span className="font-editorial text-2xl leading-tight text-[var(--bone)]">{it.title}</span>
-                  <span className="text-sm leading-relaxed text-[var(--sc-ink-soft)]">{it.text}</span>
-                  <span className="mt-auto flex items-center justify-between pt-3 font-mono text-[0.7rem] text-[var(--sc-ink-soft)]">
+                  <span className="font-editorial text-2xl leading-tight text-[#0b0f0d]">{it.title}</span>
+                  <span className="text-sm leading-relaxed text-[#3b4641]">{it.text}</span>
+                  <span className="mt-auto flex items-center justify-between pt-3 font-mono text-[0.7rem] text-[#55605c]">
                     <span>Foto: SchimmelPeter®</span>
-                    <span className="text-[var(--mint)]">{t("gallery.zoomHint")} →</span>
+                    <span className="text-[#0f5c49] font-semibold">{t("gallery.zoomHint")} →</span>
                   </span>
                 </span>
               </button>

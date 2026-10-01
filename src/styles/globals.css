@@ -35,15 +35,14 @@
   --c-ink3: 244 247 246;
   --c-bone: 11 15 13;
   --c-bone2: 30 36 33;
-  /* accent (historic name "mint"): a deep maroon in the light theme; the
-     primary buttons keep their green gradient (--grad) */
-  --c-mint: 125 37 51;
-  --c-emerald: 100 28 40;
-  --c-soft: 36 42 39;
+  /* accent: premium emerald green across light theme */
+  --c-mint: 19 117 93;
+  --c-emerald: 15 92 73;
+  --c-soft: 59 70 65;
   --c-line: 11 15 13;
   --band-stone: #ffffff;
-  --band-mint: #ffffff;
-  --nav-bg: rgb(255 255 255 / 0.92);
+  --band-mint: #f7faf9;
+  --nav-bg: rgb(255 255 255 / 0.94);
   --hero-glow: transparent;
   color-scheme: light;
 }
@@ -67,21 +66,10 @@
   --hero-water: rgba(59, 110, 168, 0.12);
   --stage-bg: radial-gradient(70% 60% at 55% 45%, rgba(98, 196, 172, 0.14), transparent 70%), linear-gradient(180deg, #16211c 0%, #0f1612 100%);
 }
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --frame-line: rgb(243 241 236 / 0.1);
-    --frame-shadow: none;
-    --grain: 0.045;
-    --hero-water: rgba(59, 110, 168, 0.12);
-    --stage-bg: radial-gradient(70% 60% at 55% 45%, rgba(98, 196, 172, 0.14), transparent 70%), linear-gradient(180deg, #16211c 0%, #0f1612 100%);
-  }
-}
-/* dark: the visitor chose it, or the device prefers it and no choice was made */
+/* dark: only when the visitor explicitly chose it in the appearance menu */
 [data-theme="dark"],
 .theme-dark,
-.scanner__readout,
-.surface-bone,
-.surface-bone-2 {
+.scanner__readout {
   --c-ink: 14 19 16;
   --c-ink2: 20 27 23;
   --c-ink3: 27 36 31;
@@ -97,32 +85,12 @@
   --hero-glow: rgba(98, 196, 172, 0.16);
   color-scheme: dark;
 }
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --c-ink: 14 19 16;
-    --c-ink2: 20 27 23;
-    --c-ink3: 27 36 31;
-    --c-bone: 243 241 236;
-    --c-bone2: 236 233 226;
-    --c-mint: 98 196 172;
-    --c-emerald: 63 154 135;
-    --c-soft: 174 182 176;
-    --c-line: 243 241 236;
-    --band-stone: #111915;
-    --band-mint: #0f1b16;
-    --nav-bg: rgb(14 19 16 / 0.9);
-    --hero-glow: rgba(98, 196, 172, 0.16);
-    color-scheme: dark;
-  }
-}
-/* Roles, resolved again wherever the channels change (custom properties
-   inherit as computed values, so a dark stage must recompute them). */
+
+/* Roles, resolved again wherever the channels change */
 :root,
-[data-theme],
+[data-theme="dark"],
 .theme-dark,
-.scanner__readout,
-.surface-bone,
-.surface-bone-2 {
+.scanner__readout {
   --sc-canvas: rgb(var(--c-ink));
   --sc-surface: rgb(var(--c-ink2));
   --sc-ink: rgb(var(--c-bone));
@@ -144,7 +112,7 @@
   --sc-font-mono: var(--font-mono), ui-monospace, monospace;
   --sc-shadow-color: 150 20% 3%;
   /* fixed: the light bands (FAQ, contact) and water/salt colours */
-  --emerald-deep: #7d2533;
+  --emerald-deep: #0f5c49;
   --damp: #3b6ea8;
   --salt: #e8e1cf;
   --paper: #ffffff;
@@ -213,17 +181,34 @@
   border: 0;
 }
 
-/* Light surfaces keep their own ink, so the engine's canvas drift never
-   touches their contrast. */
+/* Light surfaces: clean white and soft mint-stone tint, guaranteed light variables */
 .surface-bone {
-  background: var(--paper);
-  color: var(--head-on-bone);
-  --sc-ink-soft: var(--text-on-bone);
+  background: #ffffff;
+  color: #0b0f0d;
+  --sc-ink: #0b0f0d;
+  --sc-ink-soft: #3b4641;
+  --c-ink: 255 255 255;
+  --c-ink2: 255 255 255;
+  --c-ink3: 247 250 249;
+  --c-bone: 11 15 13;
+  --c-mint: 19 117 93;
+  --c-emerald: 15 92 73;
+  color-scheme: light;
 }
 .surface-bone-2 {
-  background: var(--paper-2);
-  color: var(--head-on-bone);
-  --sc-ink-soft: var(--text-on-bone);
+  background: #f7faf9;
+  color: #0b0f0d;
+  --sc-ink: #0b0f0d;
+  --sc-ink-soft: #3b4641;
+  --c-ink: 247 250 249;
+  --c-ink2: 255 255 255;
+  --c-ink3: 240 244 242;
+  --c-bone: 11 15 13;
+  --c-mint: 19 117 93;
+  --c-emerald: 15 92 73;
+  color-scheme: light;
+  border-top: 1px solid var(--frame-line, rgb(17 24 21 / 0.08));
+  border-bottom: 1px solid var(--frame-line, rgb(17 24 21 / 0.08));
 }
 
 /* ============================================================ HERO ======
@@ -1036,34 +1021,49 @@
 }
 
 /* ========================================================== PROSE ======= */
+.prose-sos {
+  max-width: 52rem;
+}
+.prose-sos section {
+  scroll-margin-top: 6rem;
+}
+.prose-sos h2 {
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-size: clamp(1.75rem, 3vw, 2.35rem);
+  font-weight: 700;
+  line-height: 1.25;
+  color: #0b0f0d;
+  letter-spacing: -0.02em;
+}
 .prose-sos p {
-  margin: 0 0 1.1rem;
-  line-height: 1.7;
-  color: var(--text-on-bone);
+  margin: 1rem 0;
+  line-height: 1.75;
+  color: #2b332f;
+  font-size: 1.0625rem;
+  text-align: start;
+  text-wrap: pretty;
 }
 .prose-sos ul {
-  margin: 0 0 1.25rem;
-  padding-left: 1.1rem;
+  margin: 1rem 0 1.5rem;
+  padding-left: 1.25rem;
   list-style: disc;
-  color: var(--text-on-bone);
+  color: #2b332f;
 }
 .prose-sos li {
-  margin: 0.35rem 0;
-  line-height: 1.6;
+  margin: 0.4rem 0;
+  line-height: 1.65;
+  text-align: start;
 }
 .prose-sos li::marker {
   color: var(--emerald);
 }
 
-/* Body text is fully justified, with German hyphenation (soft hyphens from
-   hy() plus the browser's own) so the word spacing stays even. Headings,
-   labels, buttons and navigation keep a ragged edge. */
+/* Body text aligns naturally, with German hyphenation to prevent awkward breaks */
 p,
 li,
 dd,
 figcaption {
-  text-align: justify;
-  text-justify: inter-word;
+  text-align: start;
   hyphens: auto;
   -webkit-hyphens: auto;
   hyphenate-limit-chars: 6 3 2;
@@ -1072,7 +1072,7 @@ figcaption {
 :is(h1, h2, h3, h4, .sc-label, button, label, summary, nav, .no-justify) :is(p, li, span),
 .sc-label,
 .no-justify {
-  text-align: inherit;
+  text-align: start;
   hyphens: manual;
 }
 
@@ -1299,9 +1299,11 @@ html[data-text="xl"] {
   grid-template-columns: 1fr 1fr 1.35fr;
   gap: 0.4rem;
   padding: 0.5rem 0.6rem calc(0.5rem + env(safe-area-inset-bottom));
-  background: var(--nav-bg);
+  background: rgba(255, 255, 255, 0.96) !important;
   backdrop-filter: blur(14px);
-  border-top: 1px solid var(--line);
+  -webkit-backdrop-filter: blur(14px);
+  border-top: 1px solid rgba(17, 24, 21, 0.09);
+  box-shadow: 0 -4px 20px -6px rgba(16, 40, 30, 0.08);
 }
 .mobile-contact a {
   display: flex;
@@ -1311,21 +1313,25 @@ html[data-text="xl"] {
   gap: 0.15rem;
   min-height: 3.1rem;
   border-radius: 14px;
-  color: var(--bone);
+  color: #0b0f0d !important;
   font-size: 0.74rem;
   font-weight: 600;
+  background: #f7faf9;
+  border: 1px solid rgba(17, 24, 21, 0.06);
 }
 .mobile-contact a svg {
   width: 1.2rem;
   height: 1.2rem;
-  color: var(--mint);
+  color: #13755d !important;
 }
 .mobile-contact a.is-primary {
-  background: var(--mint);
-  color: var(--ink);
+  background: var(--grad) !important;
+  color: #ffffff !important;
+  border: none !important;
+  box-shadow: 0 4px 14px -4px rgba(14, 95, 75, 0.4);
 }
 .mobile-contact a.is-primary svg {
-  color: var(--ink);
+  color: #ffffff !important;
 }
 @media (max-width: 639px) {
   body {
@@ -1597,14 +1603,7 @@ main :is(a, button)[class*="rounded-full"]:not([class*="h-"]):not([class*="w-"])
 [data-theme="dark"] .hero__still {
   display: block !important;
 }
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) .hero__video {
-    display: none;
-  }
-  :root:not([data-theme="light"]) .hero__still {
-    display: block !important;
-  }
-}
+
 @media (prefers-reduced-motion: reduce) {
   .hero__video {
     display: none;
@@ -1754,13 +1753,17 @@ p.no-justify {
   overflow: hidden;
   gap: 0;
   border-radius: 20px;
-  border-color: var(--frame-line, rgb(17 24 21 / 0.09));
+  border: 1px solid var(--frame-line, rgb(17 24 21 / 0.09));
+  background: #ffffff !important;
   box-shadow: var(--frame-shadow);
+  display: flex;
+  flex-direction: column;
 }
 .service-card:hover,
 .service-card:focus-visible {
   transform: translateY(-3px);
-  box-shadow: 0 2px 4px rgb(16 40 30 / 0.05), 0 22px 40px -18px rgb(16 40 30 / 0.28);
+  border-color: rgba(19, 117, 93, 0.4) !important;
+  box-shadow: 0 4px 12px -4px rgba(16, 40, 30, 0.12), 0 20px 40px -16px rgba(16, 40, 30, 0.18);
 }
 .service-card__media {
   position: relative;
@@ -1792,8 +1795,9 @@ p.no-justify {
   top: 0.75rem;
   padding: 0.25rem 0.6rem;
   border-radius: 999px;
-  background: rgb(14 19 16 / 0.82);
-  color: #f3f1ec;
+  background: rgb(255 255 255 / 0.93) !important;
+  color: #0b0f0d !important;
+  border: 1px solid rgb(17 24 21 / 0.1);
   font: 500 0.6875rem/1.3 var(--sc-font-mono, ui-monospace, monospace);
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -1815,6 +1819,8 @@ p.no-justify {
   width: 2.3rem;
   height: 2.3rem;
   border-radius: 12px;
+  background: rgba(19, 117, 93, 0.1);
+  color: #13755d;
 }
 .service-card__icon svg {
   width: 1.15rem;
@@ -1822,6 +1828,16 @@ p.no-justify {
 }
 .service-card h3 {
   font-weight: 650;
+  color: #0b0f0d;
+}
+.service-card p {
+  color: #3b4641;
+  text-align: start;
+}
+.service-card__more {
+  color: #0f5c49;
+  font-weight: 600;
+  text-align: start;
 }
 
 /* ======================================================= FACTS STRIP === */
@@ -1835,7 +1851,7 @@ p.no-justify {
   border: 1px solid var(--frame-line, rgb(17 24 21 / 0.09));
   border-radius: 20px;
   box-shadow: var(--frame-shadow);
-  background: rgb(var(--c-ink2));
+  background: #ffffff !important;
   overflow: hidden;
 }
 .facts__item {
@@ -2102,12 +2118,7 @@ p.no-justify {
   --brick: #e07a62;
   --brick-2: #ea957f;
 }
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) {
-    --brick: #e07a62;
-    --brick-2: #ea957f;
-  }
-}
+
 .logo-sos {
   color: var(--brick);
 }
@@ -2237,6 +2248,7 @@ p.no-justify {
   overflow-x: auto;
   border-radius: 20px;
   border: 1px solid var(--frame-line, rgb(17 24 21 / 0.09));
+  background: #ffffff !important;
   box-shadow: var(--frame-shadow);
 }
 .guide-table table {
@@ -2246,30 +2258,31 @@ p.no-justify {
   font-size: 0.9375rem;
 }
 .guide-table th {
-  padding: 0.85rem 1rem;
+  padding: 0.9rem 1.1rem;
   text-align: left;
-  font: 500 0.75rem/1.3 var(--sc-font-mono, ui-monospace, monospace);
+  font: 600 0.75rem/1.3 var(--sc-font-mono, ui-monospace, monospace);
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--sc-ink-soft);
-  background: rgb(var(--c-mint) / 0.06);
+  color: #4a5550;
+  background: #f7faf9;
 }
 .guide-table td {
-  padding: 0.85rem 1rem;
+  padding: 0.95rem 1.1rem;
   border-top: 1px solid var(--frame-line, rgb(17 24 21 / 0.09));
   vertical-align: top;
   text-align: left;
+  color: #2c3631;
 }
 .guide-table td a {
   font-weight: 650;
-  color: var(--mint);
+  color: #0f5c49;
   white-space: nowrap;
 }
 .guide-table td a:hover {
   color: var(--brick);
 }
 .guide-table tr:hover td {
-  background: rgb(var(--c-mint) / 0.03);
+  background: #f7faf9;
 }
 
 /* ------------------------------------------------ layer ruler on photos */
@@ -2511,32 +2524,36 @@ figure > .layer-ruler {
   border-radius: 20px;
   border: 1px solid var(--frame-line, rgb(17 24 21 / 0.09));
   border-top: 3px solid var(--brick);
-  background: rgb(var(--c-ink2));
-  box-shadow: var(--frame-shadow);
+  background: #ffffff;
+  box-shadow: 0 4px 16px -8px rgba(16, 40, 30, 0.08);
 }
 .faq-ask__t {
   margin: 0;
   font-weight: 700;
   font-size: 1.125rem !important;
+  color: #0b0f0d;
 }
 .faq-ask__d {
   margin: 0.3rem 0 0;
-  color: var(--sc-ink-soft);
+  color: #444e4a;
 }
 .faq-cards {
   display: grid;
-  gap: 0.7rem;
+  gap: 0.85rem;
 }
 .faq-card {
   border-radius: 18px;
-  border: 1px solid var(--frame-line, rgb(17 24 21 / 0.09));
+  border: 1px solid var(--frame-line, rgb(17 24 21 / 0.1));
   border-left: 4px solid transparent;
-  background: rgb(var(--c-ink2));
-  box-shadow: var(--frame-shadow);
-  transition: border-color 160ms;
+  background: #ffffff !important;
+  color: #0b0f0d !important;
+  box-shadow: 0 2px 10px -4px rgba(16, 40, 30, 0.08);
+  transition: border-color 160ms, box-shadow 160ms;
 }
 .faq-card[open] {
-  border-left-color: var(--mint);
+  border-left-color: var(--mint) !important;
+  border-color: rgb(var(--c-mint) / 0.35);
+  box-shadow: 0 8px 24px -8px rgba(16, 40, 30, 0.12);
 }
 .faq-card summary {
   display: grid;
@@ -2544,9 +2561,10 @@ figure > .layer-ruler {
   gap: 0.8rem;
   align-items: center;
   min-height: 3.5rem;
-  padding: 0.9rem 1rem 0.9rem 0.9rem;
+  padding: 0.9rem 1.1rem 0.9rem 0.9rem;
   cursor: pointer;
   list-style: none;
+  user-select: none;
 }
 .faq-card summary::-webkit-details-marker {
   display: none;
@@ -2557,22 +2575,23 @@ figure > .layer-ruler {
   width: 2.4rem;
   height: 2.4rem;
   border-radius: 12px;
-  background: rgb(var(--c-mint) / 0.08);
-  color: var(--mint);
+  background: rgb(var(--c-mint) / 0.1) !important;
+  color: var(--mint) !important;
   font: 700 0.875rem/1 var(--sc-font-mono, ui-monospace, monospace);
 }
 .faq-card[open] .faq-card__n {
-  background: var(--mint);
-  color: #fff;
+  background: var(--mint) !important;
+  color: #ffffff !important;
 }
 .faq-card__q {
   font-weight: 650;
-  font-size: 1rem;
+  font-size: 1.05rem;
   line-height: 1.35;
-  text-align: start;
+  text-align: start !important;
+  color: #0b0f0d !important;
 }
 .faq-card summary:hover .faq-card__q {
-  color: var(--brick);
+  color: var(--brick) !important;
 }
 .faq-card__icon {
   position: relative;
@@ -2580,6 +2599,7 @@ figure > .layer-ruler {
   height: 2rem;
   border-radius: 999px;
   border: 1px solid var(--frame-line, rgb(17 24 21 / 0.14));
+  background: #f7faf9;
 }
 .faq-card__icon::before,
 .faq-card__icon::after {
@@ -2591,7 +2611,7 @@ figure > .layer-ruler {
   height: 2px;
   margin: -1px 0 0 -0.375rem;
   border-radius: 2px;
-  background: var(--bone);
+  background: #0b0f0d;
   transition: transform 200ms var(--sc-ease-out);
 }
 .faq-card__icon::after {
@@ -2601,11 +2621,14 @@ figure > .layer-ruler {
   transform: rotate(0deg);
 }
 .faq-card__a {
-  padding: 0 1.1rem 1.1rem 4.1rem;
+  padding: 0 1.1rem 1.25rem 4.1rem;
 }
 .faq-card__a p {
   margin: 0;
-  color: var(--sc-ink-soft);
+  color: #3b4641 !important;
+  line-height: 1.7;
+  font-size: 0.95rem;
+  text-align: start !important;
 }
 @media (max-width: 559px) {
   .faq-card summary {
@@ -2666,9 +2689,9 @@ figure > .layer-ruler {
   overflow-y: auto;
   padding: 0.75rem 1.25rem 1.25rem;
   border-top: 1px solid var(--frame-line, rgb(17 24 21 / 0.09));
-  background: rgb(var(--c-ink2));
-  color: var(--bone);
-  box-shadow: 0 24px 40px -24px rgb(0 0 0 / 0.35);
+  background: #ffffff !important;
+  color: #0b0f0d !important;
+  box-shadow: 0 24px 40px -24px rgb(0 0 0 / 0.25);
 }
 .mnav__group {
   border-bottom: 1px solid var(--frame-line, rgb(17 24 21 / 0.09));
@@ -2680,6 +2703,7 @@ figure > .layer-ruler {
   min-height: 3.25rem;
   font-weight: 650;
   font-size: 1.0625rem;
+  color: #0b0f0d;
   cursor: pointer;
   list-style: none;
 }
@@ -2699,7 +2723,7 @@ figure > .layer-ruler {
   transform: rotate(-135deg) translate(-2px, -2px);
 }
 .mnav__group[open] summary {
-  color: var(--brick);
+  color: #0f5c49;
 }
 .mnav__group ul {
   list-style: none;
@@ -2717,18 +2741,19 @@ figure > .layer-ruler {
   align-items: center;
   gap: 0.75rem;
   min-height: 2.9rem;
-  padding: 0.35rem 0.5rem;
+  padding: 0.35rem 0.65rem;
   border-radius: 12px;
   font-size: 0.9375rem;
   font-weight: 500;
+  color: #2c3631 !important;
   hyphens: auto;
   -webkit-hyphens: auto;
   word-break: break-word;
 }
 .mnav__item:hover,
 .mnav__item:focus-visible {
-  background: rgb(var(--c-mint) / 0.07);
-  color: var(--brick);
+  background: #f7faf9 !important;
+  color: #0f5c49 !important;
 }
 .mnav__item .services-menu__img {
   width: 2.75rem;
@@ -2738,33 +2763,22 @@ figure > .layer-ruler {
   display: block;
   padding: 0.6rem 0.5rem;
   font-weight: 650;
-  color: var(--brick);
+  color: #0f5c49 !important;
 }
 
-/* ============================================ LABELS JUSTIFIED TOO ====
-   Every running text, labels and small captions included, is justified;
-   only headings, buttons, menus, chips, badges, and elements explicitly
-   marked as .no-justify keep their natural left/start alignment. */
+/* ============================================ UNIFIED CLEAN ALIGNMENT ===
+   Clean, natural left alignment across all components. No awkward stretched
+   whitespace gaps between words on narrow mobile screens. */
 .sc-label,
 .hv__kicker,
 .hv__material,
-.hv__material *,
 .proof-card__k,
 main dt,
 .facts__item dt,
 .hv__facts dt,
 .proof-kpis dt,
 .city-card__time,
-.hero__legend span,
-:is(p, li, dd, figcaption, div):is([class*="font-mono"], [class*="font-semibold"], [class*="font-bold"]):not([class*="text-center"]):not(.hv__reading):not(.no-justify):not([class*="no-justify"]) {
-  text-align: justify !important;
-  text-justify: inter-word;
-  hyphens: auto;
-  -webkit-hyphens: auto;
-}
-
-.no-justify,
-:is(p, dd, figcaption, li, div).no-justify {
+.hero__legend span {
   text-align: start !important;
 }
 

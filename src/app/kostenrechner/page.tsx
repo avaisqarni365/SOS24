@@ -43,7 +43,7 @@ export default function KostenrechnerPage() {
             </p>
           </div>
         </section>
-        <CostCalculator />
+        <CostCalculator hideHeader />
         <ContactForm />
       </main>
       <Footer />

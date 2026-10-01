@@ -125,10 +125,10 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
                   {COMPANY_INFO.phoneDisplay}
                 </a>
               </div>
-              <h2 className="sc-label mt-12">Typische Anzeichen</h2>
+              <h2 className="sc-label mt-12 text-[#0b0f0d]">Typische Anzeichen</h2>
               <ul className="mt-4 flex flex-wrap gap-2">
                 {page.symptoms.map((s) => (
-                  <li key={s} className="no-justify rounded-full border border-line/10 bg-[var(--ink-2)] px-4 py-2 text-sm text-[var(--bone)]/85">
+                  <li key={s} className="rounded-full border border-line/12 bg-white px-4 py-2 text-sm font-medium text-[#0b0f0d] shadow-sm">
                     {s}
                   </li>
                 ))}
@@ -136,7 +136,7 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
             </div>
             <div className="grid gap-5">
               {photo ? (
-                <figure className="relative m-0 overflow-hidden rounded-3xl border border-line/10 bg-[var(--ink-2)]">
+                <figure className="relative m-0 overflow-hidden rounded-3xl border border-line/12 bg-white shadow-sm">
                   <img
                     src={photo.src}
                     srcSet={photo.src2x ? `${photo.src} ${photo.w}w, ${photo.src2x} 960w` : undefined}
@@ -153,7 +153,7 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
                 </figure>
               ) : (
                 card && (
-                  <div className="overflow-hidden rounded-3xl border border-line/10" aria-hidden="true">
+                  <div className="overflow-hidden rounded-3xl border border-line/10 bg-white shadow-sm" aria-hidden="true">
                     <div className="aspect-[16/10]">
                       <ServiceArt kind={card.art} />
                     </div>
@@ -189,17 +189,17 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
           <div className="sc-wrap grid gap-12 lg:grid-cols-[1fr_22rem]">
             <Prose sections={page.sections} />
             <aside className="lg:sticky lg:top-28 lg:self-start">
-              <div className="rounded-3xl bg-white p-7 shadow-sm">
-                <h2 className="font-editorial text-2xl text-[var(--head-on-bone)]">So läuft es ab</h2>
+              <div className="rounded-3xl border border-line/12 bg-white p-7 shadow-sm">
+                <h2 className="font-editorial text-2xl text-[#0b0f0d]">So läuft es ab</h2>
                 <ol className="mt-5 grid gap-5">
                   {page.steps.map((s, i) => (
                     <li key={s.title} className="grid grid-cols-[2rem_1fr] gap-3">
-                      <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[var(--mint)] font-mono text-xs font-bold text-[var(--ink)]" aria-hidden="true">
+                      <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[var(--mint)] font-mono text-xs font-bold text-white shadow-sm" aria-hidden="true">
                         {i + 1}
                       </span>
                       <div>
-                        <h3 className="font-semibold text-[var(--head-on-bone)]">{s.title}</h3>
-                        <p className="mt-1 text-sm text-[var(--text-on-bone)]">{hy(s.text)}</p>
+                        <h3 className="font-semibold text-[#0b0f0d]">{s.title}</h3>
+                        <p className="mt-1 text-sm text-[#3b4641] leading-relaxed">{hy(s.text)}</p>
                       </div>
                     </li>
                   ))}
