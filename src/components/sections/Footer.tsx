@@ -34,25 +34,30 @@ export default function Footer() {
             </address>
           </div>
 
-          <nav className="md:col-span-3" aria-label="Leistungen">
+          <nav className="md:col-span-3" aria-label="Leistungen im Footer">
             <p className="mb-4 font-mono text-xs uppercase tracking-wider text-[var(--bone)]">Leistungen</p>
             <ul className="space-y-1 text-sm">
               {SERVICE_CARDS.map((s) => (
                 <li key={s.slug}>
-                  <a href={`/leistungen/${s.slug}/`} className="inline-block py-1.5 hover:text-[var(--bone)]">
+                  <a href={`/leistungen/${s.slug}/`} className="inline-block py-1.5 hover:text-[var(--brick)]">
                     {s.title}
                   </a>
                 </li>
               ))}
+              <li>
+                <a href="/leistungen/" className="inline-block py-1.5 font-semibold text-[var(--brick)]">
+                  Alle Leistungen →
+                </a>
+              </li>
             </ul>
           </nav>
 
-          <nav className="md:col-span-3" aria-label="Servicegebiet">
+          <nav className="md:col-span-3" aria-label="Servicegebiet im Footer">
             <p className="mb-4 font-mono text-xs uppercase tracking-wider text-[var(--bone)]">Kellersanierung in</p>
             <ul className="space-y-1 text-sm">
               {CITY_PAGES.map((c) => (
                 <li key={c.slug}>
-                  <a href={`/kellersanierung/${c.slug}/`} className="inline-block py-1.5 hover:text-[var(--bone)]">
+                  <a href={`/kellersanierung/${c.slug}/`} className="inline-block py-1.5 hover:text-[var(--brick)]">
                     {c.name}
                   </a>
                 </li>
@@ -60,24 +65,38 @@ export default function Footer() {
             </ul>
           </nav>
 
-          <nav className="md:col-span-2" aria-label="Rechtliches">
-            <p className="mb-4 font-mono text-xs uppercase tracking-wider text-[var(--bone)]">Rechtliches</p>
+          <nav className="md:col-span-2" aria-label="Seiten">
+            <p className="mb-4 font-mono text-xs uppercase tracking-wider text-[var(--bone)]">Seiten</p>
             <ul className="space-y-1 text-sm">
-              <li>
-                <a href="/impressum/" className="inline-block py-1.5 hover:text-[var(--bone)]">
-                  Impressum
-                </a>
-              </li>
-              <li>
-                <a href="/datenschutz/" className="inline-block py-1.5 hover:text-[var(--bone)]">
-                  Datenschutz
-                </a>
-              </li>
+              {[
+                ["/#schicht-fuer-schicht", "3D-Verfahren"],
+                ["/#nachweis", "Ablauf mit Nachweis"],
+                ["/galerie/", "Galerie"],
+                ["/kostenrechner/", "Kostenrechner"],
+                ["/#servicegebiet", "Servicegebiet"],
+                ["/#faq", "Häufige Fragen"],
+                ["/#kontakt", "Kontakt"],
+              ].map(([href, label]) => (
+                <li key={href}>
+                  <a href={href} className="inline-block py-1.5 hover:text-[var(--brick)]">
+                    {label}
+                  </a>
+                </li>
+              ))}
             </ul>
           </nav>
         </div>
         <div className="mt-12 flex flex-col items-start justify-between gap-3 border-t border-line/5 pt-8 font-mono text-[11px] text-[var(--bone)]/55 sm:flex-row">
-          <p className="no-justify">© 2026 sos-abdichtung · Inh. {COMPANY_INFO.owner}</p>
+          <p className="no-justify">
+            © 2026 sos-abdichtung · Inh. {COMPANY_INFO.owner} ·{" "}
+            <a href="/impressum/" className="underline-offset-2 hover:underline">
+              Impressum
+            </a>{" "}
+            ·{" "}
+            <a href="/datenschutz/" className="underline-offset-2 hover:underline">
+              Datenschutz
+            </a>
+          </p>
           <p className="no-justify">SchimmelPeter® ist eine Marke der SchimmelPeter GmbH.</p>
         </div>
       </div>

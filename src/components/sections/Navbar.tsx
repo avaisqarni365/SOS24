@@ -1,15 +1,15 @@
 "use client";
 
-import React, { useState } from "react";
-import { Menu, Phone, X, MessageCircle, ShieldCheck } from "lucide-react";
+import React, { useEffect, useRef, useState } from "react";
+import { Menu, Phone, X, MessageCircle, ShieldCheck, ChevronDown } from "lucide-react";
 import { COMPANY_INFO } from "@/data/content-data";
+import { SERVICE_CARDS } from "@/data/services";
 import Logo from "@/components/brand/Logo";
 import LanguageSelector from "@/components/navigation/LanguageSelector";
 import AppearanceMenu from "@/components/navigation/AppearanceMenu";
 import { useLanguage } from "@/i18n/LanguageContext";
 
 const LINKS = [
-  { href: "/#leistungen", key: "nav.services" },
   { href: "/#schicht-fuer-schicht", key: "nav.process3d" },
   { href: "/#nachweis", key: "nav.proof" },
   { href: "/galerie/", key: "nav.gallery" },
@@ -21,6 +21,62 @@ const AUDIENCE = [
   { href: "/#fuer-hausbesitzer", label: "Für Hausbesitzer" },
   { href: "/#fuer-unternehmen", label: "Für Hausverwaltungen & Unternehmen" },
 ];
+
+/** "Leistungen" in the main bar: all six services with their picture, and the overview page. */
+function ServicesMenu({ label }: { label: string }) {
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLLIElement>(null);
+  const timer = useRef<ReturnType<typeof setTimeout>>();
+  useEffect(() => {
+    if (!open) return;
+    const onDown = (e: MouseEvent) => {
+      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
+    };
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setOpen(false);
+    };
+    document.addEventListener("mousedown", onDown);
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("mousedown", onDown);
+      document.removeEventListener("keydown", onKey);
+    };
+  }, [open]);
+  const enter = () => {
+    clearTimeout(timer.current);
+    setOpen(true);
+  };
+  const leave = () => {
+    timer.current = setTimeout(() => setOpen(false), 160);
+  };
+  return (
+    <li ref={ref} className="relative" onMouseEnter={enter} onMouseLeave={leave}>
+      <button type="button" className="site-nav__trigger" aria-expanded={open} aria-controls="services-menu" onClick={() => setOpen(!open)}>
+        {label} <ChevronDown className="h-4 w-4" aria-hidden="true" />
+      </button>
+      <div id="services-menu" className="services-menu" hidden={!open}>
+        <ul>
+          {SERVICE_CARDS.map((s) => (
+            <li key={s.slug}>
+              <a href={`/leistungen/${s.slug}/`} onClick={() => setOpen(false)}>
+                <span className={`services-menu__img services-menu__img--${s.image.fit}`}>
+                  <img src={s.image.src} alt="" width={96} height={68} loading="lazy" decoding="async" />
+                </span>
+                <span>
+                  <span className="services-menu__t">{s.title}</span>
+                  <span className="services-menu__d">{s.text}</span>
+                </span>
+              </a>
+            </li>
+          ))}
+        </ul>
+        <a className="services-menu__all" href="/leistungen/" onClick={() => setOpen(false)}>
+          Alle Leistungen im Überblick <span aria-hidden="true">→</span>
+        </a>
+      </div>
+    </li>
+  );
+}
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
@@ -66,6 +122,7 @@ export default function Navbar() {
 
           <nav aria-label="Hauptnavigation" className="site-nav hidden shrink-0 min-[1440px]:block">
             <ul className="flex items-center">
+              <ServicesMenu label={t("nav.services")} />
               {LINKS.map((l) => (
                 <li key={l.href}>
                   <a href={l.href} className="block whitespace-nowrap">
@@ -100,7 +157,25 @@ export default function Navbar() {
 
       {open && (
         <div id="mobile-menu" className="max-h-[calc(100svh-4rem)] overflow-y-auto border-t border-line/10 bg-[var(--ink)] px-6 py-5 shadow-lg min-[1440px]:hidden">
-          <ul className="flex flex-col text-base text-[var(--bone)]">
+          <p className="sc-label">{t("nav.services")}</p>
+          <ul className="mt-2 grid gap-1 text-[0.9375rem] text-[var(--bone)] sm:grid-cols-2">
+            {SERVICE_CARDS.map((sv) => (
+              <li key={sv.slug}>
+                <a href={`/leistungen/${sv.slug}/`} onClick={() => setOpen(false)} className="flex items-center gap-3 rounded-xl px-2 py-2 hover:bg-line/[0.05]">
+                  <span className={`services-menu__img services-menu__img--${sv.image.fit}`}>
+                    <img src={sv.image.src} alt="" width={64} height={45} loading="lazy" decoding="async" />
+                  </span>
+                  <span className="font-semibold">{sv.title}</span>
+                </a>
+              </li>
+            ))}
+            <li className="sm:col-span-2">
+              <a href="/leistungen/" onClick={() => setOpen(false)} className="block px-2 py-2 font-semibold text-[var(--brick)]">
+                Alle Leistungen im Überblick →
+              </a>
+            </li>
+          </ul>
+          <ul className="mt-3 flex flex-col border-t border-line/10 pt-2 text-base text-[var(--bone)]">
             {[...LINKS, { href: "/#faq", key: "nav.faq" }].map((l) => (
               <li key={l.href} className="border-b border-line/[0.08] last:border-0">
                 <a href={l.href} onClick={() => setOpen(false)} className="block py-3 hover:text-[var(--mint)]">

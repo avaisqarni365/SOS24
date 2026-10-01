@@ -1,6 +1,7 @@
 import { SERVICE_CARDS, type ServiceCard } from "@/data/services";
 import { FAQS } from "@/data/content-data";
-import { CITY_PAGES } from "@/data/seo-pages";
+import { CITY_PAGES, SERVICE_PAGES } from "@/data/seo-pages";
+import { LayerRuler } from "@/components/seo/SubpageParts";
 import { MAP_AREAS, MAP_ESSEN, MAP_H, MAP_W } from "@/data/region-map";
 import OsmMap from "@/components/interactive/OsmMap";
 import { Home, Layers, ShieldCheck, SprayCan, Gauge, Wrench, type LucideIcon } from "lucide-react";
@@ -44,6 +45,40 @@ export function ScannerSection() {
 /* ------------------------------------------------------------- services -- */
 /** Six services as one calm grid. The photos live in the gallery below, so
     this section carries no images and nothing moves sideways. */
+/** The six services as picture cards; each card opens the service page. */
+export function ServiceCardGrid() {
+  return (
+    <ul className="services-grid mt-10">
+      {SERVICE_CARDS.map((s) => {
+        const Icon = CARD_ICON[s.art];
+        return (
+          <li key={s.slug}>
+            <a className="service-card" href={`/leistungen/${s.slug}/`}>
+              <span className={`service-card__media service-card__media--${s.image.fit}`}>
+                <img src={s.image.src} alt={s.image.alt} width={640} height={450} loading="lazy" decoding="async" />
+                <span className="service-card__badge">{s.image.fit === "contain" ? "3D · Wissen" : "Messung · Wissen"}</span>
+                <LayerRuler layers={SERVICE_PAGES.find((p) => p.slug === s.slug)?.layers ?? []} compact />
+              </span>
+              <span className="service-card__body">
+                <span className="service-card__title">
+                  <span className="service-card__icon" aria-hidden="true">
+                    <Icon strokeWidth={1.6} />
+                  </span>
+                  <h3>{s.title}</h3>
+                </span>
+                <p>{hy(s.text)}</p>
+                <span className="service-card__more">
+                  Details, 3D-Modell und Wissenschaft <span aria-hidden="true">→</span>
+                </span>
+              </span>
+            </a>
+          </li>
+        );
+      })}
+    </ul>
+  );
+}
+
 export function ServicesRail() {
   return (
     <section
@@ -65,33 +100,12 @@ export function ServicesRail() {
             {hy("Welche Leistung Ihr Keller braucht, entscheidet die Messung. Jedes Verfahren hat eine eigene Seite: mit 3D-Modell, der Physik dahinter, Zahlen, Ablauf und Fragen.")}
           </p>
         </div>
-        <ul className="services-grid mt-12">
-          {SERVICE_CARDS.map((s) => {
-            const Icon = CARD_ICON[s.art];
-            return (
-              <li key={s.slug}>
-                <a className="service-card" href={`/leistungen/${s.slug}/`}>
-                  <span className={`service-card__media service-card__media--${s.image.fit}`}>
-                    <img src={s.image.src} alt={s.image.alt} width={640} height={450} loading="lazy" decoding="async" />
-                    <span className="service-card__badge">{s.image.fit === "contain" ? "3D · Wissen" : "Messung · Wissen"}</span>
-                  </span>
-                  <span className="service-card__body">
-                    <span className="service-card__title">
-                      <span className="service-card__icon" aria-hidden="true">
-                        <Icon strokeWidth={1.6} />
-                      </span>
-                      <h3>{s.title}</h3>
-                    </span>
-                    <p>{hy(s.text)}</p>
-                    <span className="service-card__more">
-                      Details, 3D-Modell und Wissenschaft <span aria-hidden="true">→</span>
-                    </span>
-                  </span>
-                </a>
-              </li>
-            );
-          })}
-        </ul>
+        <ServiceCardGrid />
+        <p className="mt-6">
+          <a href="/leistungen/" className="font-semibold text-[var(--brick)] hover:underline">
+            Alle Leistungen im Überblick, mit Wegweiser: welches Verfahren bei welchem Anzeichen →
+          </a>
+        </p>
       </div>
     </section>
   );

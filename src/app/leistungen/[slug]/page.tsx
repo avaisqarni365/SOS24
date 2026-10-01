@@ -13,7 +13,7 @@ import { SERVICE_FACTS, SERVICE_SCENES } from "@/data/service-facts";
 import ScrollEngine, { SC_BOOT } from "@/components/scroll/ScrollEngine";
 import { SCIENCE } from "@/data/science";
 import { PHOTOS, type PhotoKey } from "@/data/photos";
-import { Breadcrumbs, LayerStack, Prose, FaqList, LinkGrid } from "@/components/seo/SubpageParts";
+import { Breadcrumbs, LayerStack, LayerRuler, Prose, FaqList, LinkGrid } from "@/components/seo/SubpageParts";
 import { SERVICE_PAGES, CITY_PAGES } from "@/data/seo-pages";
 import { SERVICE_CARDS } from "@/data/services";
 import { COMPANY_INFO } from "@/data/content-data";
@@ -66,7 +66,7 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
   const photo = PHOTOS[HEADER_PHOTO[page.slug]];
   const crumbs = [
     { name: "Startseite", path: "/" },
-    { name: "Leistungen", path: "/#leistungen" },
+    { name: "Leistungen", path: "/leistungen/" },
     { name: page.navTitle, path },
   ];
 
@@ -136,7 +136,7 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
             </div>
             <div className="grid gap-5">
               {photo ? (
-                <figure className="m-0 overflow-hidden rounded-3xl border border-line/10 bg-[var(--ink-2)]">
+                <figure className="relative m-0 overflow-hidden rounded-3xl border border-line/10 bg-[var(--ink-2)]">
                   <img
                     src={photo.src}
                     srcSet={photo.src2x ? `${photo.src} ${photo.w}w, ${photo.src2x} 960w` : undefined}
@@ -148,6 +148,7 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
                     decoding="async"
                     className="h-auto w-full"
                   />
+                  <LayerRuler layers={page.layers} />
                   <figcaption className="px-4 py-2 text-right text-[0.7rem] text-[var(--sc-ink-soft)]">Foto: SchimmelPeter®</figcaption>
                 </figure>
               ) : (

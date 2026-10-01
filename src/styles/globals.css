@@ -33,12 +33,12 @@
   --c-ink: 255 255 255;
   --c-ink2: 255 255 255;
   --c-ink3: 244 247 246;
-  --c-bone: 17 24 21;
-  --c-bone2: 38 46 42;
+  --c-bone: 11 15 13;
+  --c-bone2: 30 36 33;
   --c-mint: 22 122 98;
   --c-emerald: 17 99 79;
-  --c-soft: 61 70 66;
-  --c-line: 17 24 21;
+  --c-soft: 36 42 39;
+  --c-line: 11 15 13;
   --band-stone: #ffffff;
   --band-mint: #ffffff;
   --nav-bg: rgb(255 255 255 / 0.92);
@@ -1545,14 +1545,14 @@ main :is(a, button)[class*="rounded-full"]:not([class*="h-"]):not([class*="w-"])
   border-bottom: 1px solid var(--frame-line, rgb(17 24 21 / 0.09));
   box-shadow: 0 10px 30px -22px rgb(16 40 30 / 0.45);
 }
-.site-nav ul {
+.site-nav > ul {
   gap: 0.15rem;
   padding: 0.3rem;
   border-radius: 999px;
   border: 1px solid var(--frame-line, rgb(17 24 21 / 0.09));
   background: rgb(var(--c-line) / 0.03);
 }
-.site-nav a {
+.site-nav > ul > li > a {
   padding: 0.5rem 0.95rem;
   border-radius: 999px;
   font-size: 0.9375rem;
@@ -1560,8 +1560,8 @@ main :is(a, button)[class*="rounded-full"]:not([class*="h-"]):not([class*="w-"])
   color: rgb(var(--c-bone) / 0.82);
   transition: background-color 160ms, color 160ms, box-shadow 160ms;
 }
-.site-nav a:hover,
-.site-nav a:focus-visible {
+.site-nav > ul > li > a:hover,
+.site-nav > ul > li > a:focus-visible {
   background: rgb(var(--c-ink2));
   color: var(--mint);
   box-shadow: 0 1px 2px rgb(16 40 30 / 0.06), 0 4px 12px -6px rgb(16 40 30 / 0.2);
@@ -1572,7 +1572,7 @@ main :is(a, button)[class*="rounded-full"]:not([class*="h-"]):not([class*="w-"])
   margin-inline: auto;
   padding-inline: clamp(1rem, 3vw, 2.5rem);
 }
-.site-nav a {
+.site-nav > ul > li > a {
   padding-inline: 0.7rem;
   font-size: 0.9rem;
 }
@@ -2086,4 +2086,248 @@ p.no-justify {
   font-size: 0.75rem !important;
   letter-spacing: 0.1em;
   text-align: start !important;
+}
+
+/* =============================================== BRAND: GREEN + BRICK ===
+   Green carries actions (buttons, active steps), brick red carries the
+   brand accent (logo "sos", accent words, figures, menu hover), text is
+   near-black on snow white. */
+:root {
+  --brick: #bf4a38;
+  --brick-2: #d8664d;
+}
+[data-theme="dark"] {
+  --brick: #e07a62;
+  --brick-2: #ea957f;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --brick: #e07a62;
+    --brick-2: #ea957f;
+  }
+}
+.logo-sos {
+  color: var(--brick);
+}
+.site-header__strip {
+  box-shadow: inset 0 -2px 0 0 transparent;
+  border-bottom: 2px solid;
+  border-image: linear-gradient(90deg, var(--brick), var(--brick-2) 40%, #1c9174 100%) 1;
+}
+.site-nav > ul > li > a:hover,
+.site-nav > ul > li > a:focus-visible,
+.site-nav button:hover,
+.site-nav button:focus-visible,
+.site-nav button[aria-expanded="true"] {
+  color: var(--brick);
+}
+
+/* ------------------------------------------------ Leistungen drop-down */
+.site-nav__trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.5rem 0.7rem;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: rgb(var(--c-bone) / 0.82);
+  transition: background-color 160ms, color 160ms;
+}
+.site-nav__trigger:hover,
+.site-nav__trigger[aria-expanded="true"] {
+  background: rgb(var(--c-ink2));
+}
+.site-nav__trigger[aria-expanded="true"] svg {
+  transform: rotate(180deg);
+}
+.site-nav__trigger svg {
+  transition: transform 160ms;
+}
+.services-menu {
+  position: absolute;
+  top: calc(100% + 0.7rem);
+  left: -0.5rem;
+  z-index: 60;
+  width: min(44rem, 90vw);
+  padding: 0.75rem;
+  border-radius: 20px;
+  border: 1px solid var(--frame-line, rgb(17 24 21 / 0.09));
+  border-top: 3px solid var(--brick);
+  background: rgb(var(--c-ink2));
+  box-shadow: 0 24px 60px -24px rgb(16 40 30 / 0.4);
+}
+.services-menu[hidden] {
+  display: none;
+}
+.services-menu ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.25rem;
+}
+.services-menu li a {
+  display: grid;
+  grid-template-columns: 4.5rem 1fr;
+  gap: 0.75rem;
+  align-items: center;
+  padding: 0.55rem;
+  border-radius: 14px;
+}
+.services-menu li a:hover,
+.services-menu li a:focus-visible {
+  background: rgb(var(--c-mint) / 0.07);
+}
+.services-menu li a:hover .services-menu__t {
+  color: var(--brick);
+}
+.services-menu__img {
+  display: block;
+  width: 4rem;
+  aspect-ratio: 16 / 11;
+  border-radius: 10px;
+  overflow: hidden;
+  background: var(--stage-bg);
+  border: 1px solid var(--frame-line, rgb(17 24 21 / 0.09));
+  flex: none;
+}
+.services-menu__img img {
+  width: 100%;
+  height: 100%;
+}
+.services-menu__img--contain img {
+  object-fit: contain;
+}
+.services-menu__img--cover img {
+  object-fit: cover;
+}
+.services-menu__t {
+  display: block;
+  font-weight: 650;
+  font-size: 0.9375rem;
+  line-height: 1.25;
+  color: var(--bone);
+}
+.services-menu__d {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin-top: 0.15rem;
+  font-size: 0.8125rem;
+  line-height: 1.35;
+  color: var(--sc-ink-soft);
+}
+.services-menu__all {
+  display: block;
+  margin-top: 0.4rem;
+  padding: 0.7rem 0.8rem 0.3rem;
+  border-top: 1px solid var(--frame-line, rgb(17 24 21 / 0.09));
+  font-weight: 650;
+  font-size: 0.9375rem;
+  color: var(--brick);
+}
+
+/* ------------------------------------------- Leistungen: guide table */
+.guide-table {
+  overflow-x: auto;
+  border-radius: 20px;
+  border: 1px solid var(--frame-line, rgb(17 24 21 / 0.09));
+  box-shadow: var(--frame-shadow);
+}
+.guide-table table {
+  width: 100%;
+  min-width: 40rem;
+  border-collapse: collapse;
+  font-size: 0.9375rem;
+}
+.guide-table th {
+  padding: 0.85rem 1rem;
+  text-align: left;
+  font: 500 0.75rem/1.3 var(--sc-font-mono, ui-monospace, monospace);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--sc-ink-soft);
+  background: rgb(var(--c-mint) / 0.06);
+}
+.guide-table td {
+  padding: 0.85rem 1rem;
+  border-top: 1px solid var(--frame-line, rgb(17 24 21 / 0.09));
+  vertical-align: top;
+  text-align: left;
+}
+.guide-table td a {
+  font-weight: 650;
+  color: var(--mint);
+  white-space: nowrap;
+}
+.guide-table td a:hover {
+  color: var(--brick);
+}
+.guide-table tr:hover td {
+  background: rgb(var(--c-mint) / 0.03);
+}
+
+/* ------------------------------------------------ layer ruler on photos */
+.layer-ruler {
+  position: absolute;
+  left: 0.6rem;
+  right: 0.6rem;
+  bottom: 0.6rem;
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  pointer-events: none;
+}
+.layer-ruler li {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.2rem 0.55rem 0.2rem 0.2rem;
+  border-radius: 999px;
+  background: rgb(14 19 16 / 0.84);
+  color: #f3f1ec;
+  font-size: 0.75rem !important;
+  font-weight: 600;
+  line-height: 1.2;
+  text-align: start !important;
+  box-shadow: 0 6px 16px -10px rgb(0 0 0 / 0.6);
+}
+.layer-ruler__n {
+  display: grid;
+  place-items: center;
+  width: 1.2rem;
+  height: 1.2rem;
+  flex: none;
+  border-radius: 999px;
+  color: #0e1310;
+  font: 700 0.6875rem/1 var(--sc-font-mono, ui-monospace, monospace);
+  box-shadow: inset 0 0 0 1px rgb(0 0 0 / 0.25);
+}
+.layer-ruler--compact li {
+  font-size: 0.6875rem !important;
+  padding-right: 0.45rem;
+}
+.layer-ruler__more {
+  padding-left: 0.5rem !important;
+}
+/* on a service page photo the ruler sits on the picture, above the credit */
+figure > .layer-ruler {
+  bottom: 2.4rem;
+}
+.layer-stack__n {
+  display: grid;
+  place-items: center;
+  width: 1.6rem;
+  height: 1.6rem;
+  border-radius: 999px;
+  color: #0e1310;
+  font: 700 0.75rem/1 var(--sc-font-mono, ui-monospace, monospace);
+  box-shadow: inset 0 0 0 1px rgb(0 0 0 / 0.2);
 }

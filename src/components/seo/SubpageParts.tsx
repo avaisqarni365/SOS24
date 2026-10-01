@@ -27,8 +27,34 @@ export function Breadcrumbs({ items }: { items: { name: string; path: string }[]
 }
 
 /** Layer-by-layer stack: bottom of the list is the ground side, as in the homepage cross-section. */
+/** Layer colours, deepest first: soil, masonry, barrier, seal, plaster, board. */
+export const LAYER_PALETTE = ["#7a6146", "#9a6b4b", "#62c4ac", "#8f9a96", "#d9d2c1", "#f3f1ec"];
+
+/**
+ * The layers as a numbered ruler laid over a picture: 1 is the deepest
+ * layer, the numbers match the "Schicht für Schicht" list beside it.
+ * compact shows the first three and a "+n".
+ */
+export function LayerRuler({ layers, compact = false }: { layers: { name: string }[]; compact?: boolean }) {
+  const shown = compact ? layers.slice(0, 3) : layers;
+  const more = layers.length - shown.length;
+  return (
+    <ol className={`layer-ruler${compact ? " layer-ruler--compact" : ""}`} aria-label="Schichten, von innen nach außen nummeriert">
+      {shown.map((l, i) => (
+        <li key={l.name}>
+          <span className="layer-ruler__n" style={{ background: LAYER_PALETTE[i % LAYER_PALETTE.length] }}>
+            {i + 1}
+          </span>
+          {l.name}
+        </li>
+      ))}
+      {more > 0 ? <li className="layer-ruler__more">+{more}</li> : null}
+    </ol>
+  );
+}
+
 export function LayerStack({ layers, title }: { layers: LayerNote[]; title: string }) {
-  const palette = ["#7a6146", "#9a6b4b", "#62c4ac", "#8f9a96", "#d9d2c1", "#f3f1ec"];
+  const palette = LAYER_PALETTE;
   const ordered = [...layers].reverse();
   return (
     <figure className="m-0 rounded-3xl border border-line/10 bg-[var(--ink-2)] p-5 sm:p-6">
@@ -39,10 +65,12 @@ export function LayerStack({ layers, title }: { layers: LayerNote[]; title: stri
           return (
             <li
               key={l.name}
-              className="grid grid-cols-[0.9rem_1fr] gap-3 rounded-2xl border border-line/5 bg-[var(--ink-3)] p-3.5"
+              className="grid grid-cols-[1.6rem_1fr] gap-3 rounded-2xl border border-line/5 bg-[var(--ink-3)] p-3.5"
               style={{ transform: `translateX(${i * 6}px)` }}
             >
-              <span className="mt-1 h-full min-h-[2.2rem] w-3 rounded-full" style={{ background: c }} aria-hidden="true" />
+              <span className="layer-stack__n" style={{ background: c }} aria-hidden="true">
+                {layers.length - i}
+              </span>
               <div>
                 <h3 className="text-[0.98rem] font-semibold text-[var(--bone)]">{l.name}</h3>
                 <p className="mt-1 text-sm leading-relaxed text-[var(--sc-ink-soft)]">{hy(l.text)}</p>
