@@ -62,7 +62,7 @@ const keywordFor = (route: string) => {
 };
 
 // ------------------------------------------------------------ the pages
-const pages = htmlFiles(OUT).filter((f) => !/\/(404|_not-found)\//.test(f + "/"));
+const pages = htmlFiles(OUT).filter((f) => !/[/\\](404|_not-found)[/\\]/.test(f));
 const idsByRoute = new Map<string, Set<string>>();
 const htmlByRoute = new Map<string, string>();
 for (const f of pages) {
