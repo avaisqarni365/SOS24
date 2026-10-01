@@ -23,18 +23,21 @@ type Enquiry = {
   message: string;
 };
 
-function enquiryText(d: Enquiry) {
-  return `Hallo Herr Mahmood, hier ist eine Sanierungsanfrage über sos-abdichtung.de:\n\nName: ${d.name}\nTelefon: ${d.phone}\nE-Mail: ${d.email}\nPLZ: ${d.plz}\nSchadensbild: ${d.damageType}\nNachricht: ${d.message}`;
+function enquiryText(d: Enquiry, place?: string) {
+  const intro = place
+    ? `Hallo Herr Mahmood, hier ist eine Sanierungsanfrage für ${place} über sos-abdichtung.de:`
+    : `Hallo Herr Mahmood, hier ist eine Sanierungsanfrage über sos-abdichtung.de:`;
+  return `${intro}\n\nName: ${d.name}\nTelefon: ${d.phone}\nE-Mail: ${d.email}\nPLZ: ${d.plz}\nSchadensbild: ${d.damageType}\nNachricht: ${d.message}`;
 }
 
-function whatsappLink(d: Enquiry) {
-  return `https://wa.me/${COMPANY_INFO.phoneTel.replace("+", "")}?text=${encodeURIComponent(enquiryText(d))}`;
+function whatsappLink(d: Enquiry, place?: string) {
+  return `https://wa.me/${COMPANY_INFO.phoneTel.replace("+", "")}?text=${encodeURIComponent(enquiryText(d, place))}`;
 }
 
 /** Same enquiry for people without WhatsApp: opens their own mail program. */
-function mailLink(d: Enquiry) {
-  const subject = `Anfrage Feuchtemessung, PLZ ${d.plz}`;
-  return `mailto:${COMPANY_INFO.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(enquiryText(d))}`;
+function mailLink(d: Enquiry, place?: string) {
+  const subject = place ? `Anfrage Feuchtemessung ${place}, PLZ ${d.plz}` : `Anfrage Feuchtemessung, PLZ ${d.plz}`;
+  return `mailto:${COMPANY_INFO.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(enquiryText(d, place))}`;
 }
 
 const field =
@@ -101,8 +104,8 @@ export default function ContactForm({ defaultDamage, place }: { defaultDamage?: 
     const submitter = (e.nativeEvent as SubmitEvent).submitter as HTMLButtonElement | null;
     const via = submitter?.value === "mail" ? "mail" : "whatsapp";
     setChannel(via);
-    if (via === "mail") window.location.href = mailLink(formData);
-    else window.open(whatsappLink(formData), "_blank");
+    if (via === "mail") window.location.href = mailLink(formData, place);
+    else window.open(whatsappLink(formData, place), "_blank");
     setIsSubmitted(true);
   };
 

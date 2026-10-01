@@ -42,6 +42,16 @@ export default function ScrollSectionRail() {
     return () => observer.disconnect();
   }, []);
 
+  const handleRailClick = (e: React.MouseEvent<HTMLAnchorElement>, id: string) => {
+    const el = document.getElementById(id);
+    if (el) {
+      e.preventDefault();
+      el.scrollIntoView({ behavior: "smooth" });
+      window.history.pushState(null, "", `#${id}`);
+      setActiveId(id);
+    }
+  };
+
   // A slim dot rail inside the page margin: it never covers content. The
   // label of each stop shows on hover and keyboard focus.
   return (
@@ -51,7 +61,12 @@ export default function ScrollSectionRail() {
           const isActive = activeId === stop.id;
           return (
             <li key={stop.id}>
-              <a href={`#${stop.id}`} aria-current={isActive ? "true" : undefined} className="section-rail__stop">
+              <a
+                href={`#${stop.id}`}
+                onClick={(e) => handleRailClick(e, stop.id)}
+                aria-current={isActive ? "true" : undefined}
+                className="section-rail__stop"
+              >
                 <span className="section-rail__label">{stop.label}</span>
                 <span className="section-rail__dot" aria-hidden="true" />
               </a>

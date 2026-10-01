@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef, useState } from "react";
+import { usePathname } from "next/navigation";
 import { Menu, Phone, X, MessageCircle, ShieldCheck, ChevronDown } from "lucide-react";
 import { COMPANY_INFO } from "@/data/content-data";
 import { SERVICE_CARDS } from "@/data/services";
@@ -91,6 +92,23 @@ function ServicesMenu({ label }: { label: string }) {
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const { t } = useLanguage();
+  const pathname = usePathname();
+  const isHome = pathname === "/" || pathname === "";
+
+  const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (isHome && href.includes("#")) {
+      const id = href.split("#")[1];
+      const el = document.getElementById(id);
+      if (el) {
+        e.preventDefault();
+        el.scrollIntoView({ behavior: "smooth" });
+        window.history.pushState(null, "", `#${id}`);
+        setOpen(false);
+        return;
+      }
+    }
+    setOpen(false);
+  };
 
   return (
     <header className="site-header fixed inset-x-0 top-0 z-50">
@@ -107,7 +125,7 @@ export default function Navbar() {
           </p>
           <nav aria-label="Zielgruppen" className="flex items-center gap-5">
             {AUDIENCE.map((a) => (
-              <a key={a.href} href={a.href}>
+              <a key={a.href} href={a.href} onClick={(e) => handleNavClick(e, a.href)}>
                 {a.label}
               </a>
             ))}
@@ -130,12 +148,12 @@ export default function Navbar() {
             <Logo sub="SchimmelPeter® Partner · Wuppertal" />
           </a>
 
-          <nav aria-label="Hauptnavigation" className="site-nav hidden shrink-0 min-[1440px]:block">
+          <nav aria-label="Hauptnavigation" className="site-nav hidden shrink-0 min-[1200px]:block">
             <ul className="flex items-center">
               <ServicesMenu label={t("nav.services")} />
               {LINKS.map((l) => (
                 <li key={l.href}>
-                  <a href={l.href} className="block whitespace-nowrap">
+                  <a href={l.href} onClick={(e) => handleNavClick(e, l.href)} className="block whitespace-nowrap">
                     {t(l.key)}
                   </a>
                 </li>
@@ -148,13 +166,13 @@ export default function Navbar() {
             <div className="hidden sm:block">
               <LanguageSelector />
             </div>
-            <a href="/#kontakt" className="btn-shine hidden min-h-[44px] items-center gap-2 whitespace-nowrap rounded-full px-5 text-[0.9375rem] font-semibold sm:inline-flex">
+            <a href="/#kontakt" onClick={(e) => handleNavClick(e, "/#kontakt")} className="btn-shine hidden min-h-[44px] items-center gap-2 whitespace-nowrap rounded-full px-5 text-[0.9375rem] font-semibold sm:inline-flex">
               {t("nav.cta")}
             </a>
             <button
               type="button"
               onClick={() => setOpen(!open)}
-              className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-line/15 bg-[var(--ink)] text-[var(--bone)] hover:border-[var(--mint)] min-[1440px]:hidden"
+              className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-line/15 bg-[var(--ink)] text-[var(--bone)] hover:border-[var(--mint)] min-[1200px]:hidden"
               aria-label={open ? "Menü schließen" : "Menü öffnen"}
               aria-expanded={open}
               aria-controls="mobile-menu"
@@ -166,7 +184,7 @@ export default function Navbar() {
       </div>
 
       {open && (
-        <div id="mobile-menu" className="mnav min-[1440px]:hidden">
+        <div id="mobile-menu" className="mnav min-[1200px]:hidden">
           {/* drill-down: each group opens on tap and lists every page in it */}
           <details className="mnav__group" open>
             <summary>{t("nav.services")}</summary>
