@@ -107,24 +107,37 @@ export function Prose({ sections }: { sections: PageSection[] }) {
   );
 }
 
+/** Questions as numbered cards; the open one is marked. Used on every page. */
+export function FaqCards({ faqs, openFirst = true }: { faqs: Faq[]; openFirst?: boolean }) {
+  return (
+    <div className="faq-cards">
+      {faqs.map((f, i) => (
+        <details key={f.q} className="faq-card" open={openFirst && i === 0}>
+          <summary>
+            <span className="faq-card__n" aria-hidden="true">
+              {String(i + 1).padStart(2, "0")}
+            </span>
+            <span className="faq-card__q">{f.q}</span>
+            <span className="faq-card__icon" aria-hidden="true" />
+          </summary>
+          <div className="faq-card__a">
+            <p>{hy(f.a)}</p>
+          </div>
+        </details>
+      ))}
+    </div>
+  );
+}
+
 export function FaqList({ faqs, title }: { faqs: Faq[]; title: string }) {
   return (
     <section aria-labelledby="faq-sub-title">
-      <h2 id="faq-sub-title" className="font-editorial text-3xl text-[var(--head-on-bone)] sm:text-4xl">
+      <p className="sc-label">Häufige Fragen</p>
+      <h2 id="faq-sub-title" className="sc-display mt-3">
         {title}
       </h2>
-      <div className="mt-8 divide-y divide-black/10 border-y border-black/10">
-        {faqs.map((f) => (
-          <details key={f.q} className="faq-item py-5">
-            <summary className="flex min-h-[44px] items-start justify-between gap-6 text-left text-lg font-semibold text-[var(--head-on-bone)]">
-              <span>{f.q}</span>
-              <span className="faq-plus mt-1 text-2xl leading-none text-[var(--emerald-deep)]" aria-hidden="true">
-                +
-              </span>
-            </summary>
-            <p className="mt-3 text-[var(--text-on-bone)]">{hy(f.a)}</p>
-          </details>
-        ))}
+      <div className="mt-8">
+        <FaqCards faqs={faqs} />
       </div>
     </section>
   );

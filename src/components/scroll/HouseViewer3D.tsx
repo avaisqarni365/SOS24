@@ -212,6 +212,7 @@ export default function HouseViewer3D({ scenes }: { scenes: SceneDef[] }) {
             </div>
           </div>
 
+        </div>
           <div className="hv__layers">
             <p className="hv__kicker">Die Schichten, von außen nach innen</p>
             <ul>
@@ -236,7 +237,6 @@ export default function HouseViewer3D({ scenes }: { scenes: SceneDef[] }) {
               Mehr zur Leistung: {def.service.label} <span aria-hidden="true">→</span>
             </a>
           </div>
-        </div>
       </div>
     </div>
   );

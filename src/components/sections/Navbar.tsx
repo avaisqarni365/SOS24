@@ -60,11 +60,11 @@ function ServicesMenu({ label }: { label: string }) {
             <li key={s.slug}>
               <a href={`/leistungen/${s.slug}/`} onClick={() => setOpen(false)}>
                 <span className={`services-menu__img services-menu__img--${s.image.fit}`}>
-                  <img src={s.image.src} alt="" width={96} height={68} loading="lazy" decoding="async" />
+                  <img src={s.image.src} alt="" width={64} height={44} loading="lazy" decoding="async" />
                 </span>
-                <span>
-                  <span className="services-menu__t">{s.title}</span>
-                  <span className="services-menu__d">{s.text}</span>
+                <span className="services-menu__t">{s.title}</span>
+                <span className="services-menu__arrow" aria-hidden="true">
+                  →
                 </span>
               </a>
             </li>
