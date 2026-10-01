@@ -12,8 +12,8 @@ const LINKS = [
   { href: "/#leistungen", key: "nav.services" },
   { href: "/#schicht-fuer-schicht", key: "nav.process3d" },
   { href: "/#nachweis", key: "nav.proof" },
-  { href: "/#galerie", key: "nav.gallery" },
-  { href: "/#rechner", key: "nav.calculator" },
+  { href: "/galerie/", key: "nav.gallery" },
+  { href: "/kostenrechner/", key: "nav.calculator" },
   { href: "/#servicegebiet", key: "nav.region" },
 ];
 

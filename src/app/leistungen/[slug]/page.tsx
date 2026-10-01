@@ -6,6 +6,10 @@ import ContactForm from "@/components/sections/ContactForm";
 import JsonLd from "@/components/seo/JsonLd";
 import ServiceArt from "@/components/brand/ServiceArt";
 import ScienceSection from "@/components/science/ScienceSection";
+import FactsStrip from "@/components/sections/FactsStrip";
+import LayersAct from "@/components/scroll/LayersAct";
+import { ScannerSection } from "@/components/scroll/HomeSections";
+import { SERVICE_FACTS, SERVICE_SCENES } from "@/data/service-facts";
 import ScrollEngine, { SC_BOOT } from "@/components/scroll/ScrollEngine";
 import { SCIENCE } from "@/data/science";
 import { PHOTOS, type PhotoKey } from "@/data/photos";
@@ -160,7 +164,25 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
           </div>
         </section>
 
+        {SERVICE_FACTS[page.slug] ? <FactsStrip facts={SERVICE_FACTS[page.slug]} title="Zahlen & Fakten" /> : null}
+
         <ScienceSection slug={page.slug} />
+
+        {page.slug === "feuchtemessung" ? <ScannerSection /> : null}
+
+        {SERVICE_SCENES[page.slug] ? (
+          <LayersAct
+            ids={SERVICE_SCENES[page.slug]}
+            id="verfahren-3d"
+            label="Das Verfahren in 3D"
+            title={
+              <>
+                {page.navTitle}, <em>Schritt für Schritt.</em>
+              </>
+            }
+            intro="Jeder Schritt im Bild, mit Material, Zahlen und Messwerten. Mit „In 3D drehen“ lädt das Modell: drehen, zoomen und jede Schicht antippen."
+          />
+        ) : null}
 
         <section className="surface-bone sc-section">
           <div className="sc-wrap grid gap-12 lg:grid-cols-[1fr_22rem]">
