@@ -2710,6 +2710,7 @@ figure > .layer-ruler {
 }
 .mnav__grid {
   grid-template-columns: 1fr 1fr;
+  gap: 0.25rem;
 }
 .mnav__item {
   display: flex;
@@ -2720,6 +2721,9 @@ figure > .layer-ruler {
   border-radius: 12px;
   font-size: 0.9375rem;
   font-weight: 500;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+  word-break: break-word;
 }
 .mnav__item:hover,
 .mnav__item:focus-visible {
@@ -2739,8 +2743,8 @@ figure > .layer-ruler {
 
 /* ============================================ LABELS JUSTIFIED TOO ====
    Every running text, labels and small captions included, is justified;
-   only headings, buttons, menus, chips and centred elements keep their
-   own alignment. */
+   only headings, buttons, menus, chips, badges, and elements explicitly
+   marked as .no-justify keep their natural left/start alignment. */
 .sc-label,
 .hv__kicker,
 .hv__material,
@@ -2752,12 +2756,16 @@ main dt,
 .proof-kpis dt,
 .city-card__time,
 .hero__legend span,
-:is(p, li, dd, figcaption, div):is([class*="font-mono"], [class*="font-semibold"], [class*="font-bold"]):not([class*="text-center"]):not(.hv__reading),
-p.no-justify {
+:is(p, li, dd, figcaption, div):is([class*="font-mono"], [class*="font-semibold"], [class*="font-bold"]):not([class*="text-center"]):not(.hv__reading):not(.no-justify):not([class*="no-justify"]) {
   text-align: justify !important;
   text-justify: inter-word;
   hyphens: auto;
   -webkit-hyphens: auto;
+}
+
+.no-justify,
+:is(p, dd, figcaption, li, div).no-justify {
+  text-align: start !important;
 }
 
 /* ===================================== LIGHT CHIPS ON THE PICTURES =====
@@ -2766,7 +2774,8 @@ p.no-justify {
 .layer-ruler li,
 .service-card__badge,
 .hv__caption,
-.hv__reading {
+.hv__reading,
+.gallery-card__tag {
   background: rgb(255 255 255 / 0.93) !important;
   color: #0b0f0d !important;
   border: 1px solid rgb(17 24 21 / 0.1);

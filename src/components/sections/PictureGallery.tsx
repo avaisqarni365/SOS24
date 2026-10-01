@@ -113,7 +113,7 @@ export default function PictureGallery() {
                       it.category === "team" ? "object-cover object-top bg-white" : "object-cover"
                     }`}
                   />
-                  <span className="absolute left-3 top-3 rounded-full bg-[#0e1310]/80 px-3 py-1 font-mono text-[0.7rem] text-[var(--mint)]">
+                  <span className="gallery-card__tag absolute left-3 top-3 rounded-full px-3 py-1 font-mono text-[0.7rem] font-semibold">
                     {it.tag}
                   </span>
                 </span>
