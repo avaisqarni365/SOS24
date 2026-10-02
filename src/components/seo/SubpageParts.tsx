@@ -57,7 +57,7 @@ export function LayerStack({ layers, title }: { layers: LayerNote[]; title: stri
   const palette = LAYER_PALETTE;
   const ordered = [...layers].reverse();
   return (
-    <figure className="m-0 rounded-3xl border border-line/10 bg-white p-5 shadow-sm sm:p-6">
+    <figure className="m-0 overflow-hidden rounded-3xl border border-line/10 bg-white p-5 shadow-sm sm:p-6">
       <figcaption className="sc-label mb-4 text-[#0b0f0d]">{title}</figcaption>
       <ol className="grid gap-2.5" reversed>
         {ordered.map((l, i) => {
@@ -65,8 +65,8 @@ export function LayerStack({ layers, title }: { layers: LayerNote[]; title: stri
           return (
             <li
               key={l.name}
-              className="grid grid-cols-[1.6rem_1fr] gap-3 rounded-2xl border border-line/8 bg-[#f7faf9] p-3.5"
-              style={{ transform: `translateX(${i * 6}px)` }}
+              className="grid grid-cols-[1.6rem_1fr] gap-3 rounded-2xl border border-line/8 bg-[#f7faf9] p-3.5 transition-all hover:bg-white hover:border-[var(--mint)]/30 hover:shadow-xs sm:translate-x-[calc(var(--offset)*4px)]"
+              style={{ ["--offset" as string]: i }}
             >
               <span className="layer-stack__n" style={{ background: c }} aria-hidden="true">
                 {layers.length - i}
@@ -83,25 +83,260 @@ export function LayerStack({ layers, title }: { layers: LayerNote[]; title: stri
   );
 }
 
-export function Prose({ sections }: { sections: PageSection[] }) {
+/** Framed Symptoms Section: problem identification in clean cards */
+export function SymptomsFrame({
+  symptoms,
+  serviceName,
+  title = "Woran Sie es erkennen: Typische Anzeichen",
+  subtitle = "Feuchtigkeit und Feuchteschäden entwickeln sich schleichend. Achten Sie auf diese typischen Anzeichen:",
+}: {
+  symptoms: string[];
+  serviceName?: string;
+  title?: string;
+  subtitle?: string;
+}) {
   return (
-    <div className="prose-sos grid gap-12 text-left">
-      {sections.map((s) => (
-        <section key={s.heading}>
-          <h2 className="font-editorial text-3xl leading-tight text-[#0b0f0d] sm:text-4xl text-left">{keep(s.heading)}</h2>
-          <div className="mt-5">
+    <section className="sc-section bg-white border-t border-line/10" aria-labelledby="symptoms-title">
+      <div className="sc-wrap">
+        <div className="max-w-3xl mb-10">
+          <p className="sc-label text-[var(--emerald-deep)] font-mono text-xs uppercase tracking-widest">
+            Schadenserkennung
+          </p>
+          <h2 id="symptoms-title" className="sc-display mt-3 text-3xl sm:text-4xl text-[#0b0f0d]">
+            {title}
+          </h2>
+          <p className="sc-lede mt-3 text-[#3b4641]">
+            {subtitle}
+          </p>
+        </div>
+
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {symptoms.map((s) => (
+            <div
+              key={s}
+              className="flex items-start gap-3.5 rounded-2xl border border-line/10 bg-[#f7faf9] p-5 shadow-xs transition-all hover:bg-white hover:border-[var(--mint)]/40 hover:shadow-sm"
+            >
+              <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-xl bg-amber-500/15 text-amber-800 font-bold text-sm mt-0.5" aria-hidden="true">
+                !
+              </span>
+              <div>
+                <p className="text-sm font-semibold text-[#0b0f0d] leading-snug">{hy(s)}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-8 flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-line/10 bg-[#f7faf9] px-6 py-4">
+          <p className="text-sm text-[#3b4641]">
+            <strong className="text-[#0b0f0d]">Wichtig:</strong> Unbehandelte Feuchtigkeit führt zu Schimmelbefall und zerstört das Mauerwerk. Handeln Sie rechtzeitig.
+          </p>
+          <a href="#kontakt" className="inline-flex items-center gap-1.5 text-sm font-semibold text-[var(--emerald-deep)] hover:underline">
+            Kostenlose Feuchtemessung anfragen <span aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/** Prominent full-width Process Steps Frame */
+export function ProcessSteps({
+  steps,
+  title = "In 4 Schritten zum dauerhaft trockenen Ergebnis",
+  subtitle = "Transparenz und Verlässlichkeit vom ersten Vor-Ort-Termin bis zur sauberen Übergabe mit Garantie.",
+}: {
+  steps: { title: string; text: string }[];
+  title?: string;
+  subtitle?: string;
+}) {
+  const perks = [
+    "Kostenlos & unverbindlich vor Ort",
+    "Garantierter Festpreis ohne Nachforderungen",
+    "Saubere Ausführung ohne Bagger & Aufgraben",
+    "10 Jahre Garantie & schriftliches Protokoll",
+  ];
+
+  return (
+    <section className="sc-section bg-[#f7faf9] border-t border-line/10" aria-labelledby="process-steps-heading">
+      <div className="sc-wrap">
+        <div className="max-w-3xl mb-12">
+          <p className="sc-label text-[var(--emerald-deep)] font-mono text-xs uppercase tracking-widest">
+            Ablauf & Verlässlichkeit
+          </p>
+          <h2 id="process-steps-heading" className="sc-display mt-3 text-3xl sm:text-4xl lg:text-5xl text-[#0b0f0d]">
+            {title}
+          </h2>
+          <p className="sc-lede mt-3 text-[#3b4641]">
+            {subtitle}
+          </p>
+        </div>
+
+        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {steps.map((s, i) => (
+            <div
+              key={s.title}
+              className="group relative flex flex-col justify-between rounded-3xl border border-line/12 bg-white p-6 sm:p-7 shadow-sm transition-all duration-300 hover:shadow-md hover:border-[var(--mint)]"
+            >
+              <div>
+                <div className="flex items-center justify-between mb-5">
+                  <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[var(--mint)] font-mono text-base font-bold text-white shadow-sm transition-transform group-hover:scale-105">
+                    0{i + 1}
+                  </span>
+                  <span className="font-mono text-xs font-semibold text-[#8a9691] uppercase tracking-wider">
+                    Phase 0{i + 1}
+                  </span>
+                </div>
+
+                <h3 className="font-editorial text-lg sm:text-xl font-bold text-[#0b0f0d] leading-snug group-hover:text-[var(--emerald-deep)] transition-colors">
+                  {s.title}
+                </h3>
+                <p className="mt-3 text-sm text-[#3b4641] leading-relaxed">
+                  {hy(s.text)}
+                </p>
+              </div>
+
+              <div className="mt-6 pt-4 border-t border-line/8">
+                <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-[var(--emerald-deep)]">
+                  <span className="h-1.5 w-1.5 rounded-full bg-[var(--mint)]" />
+                  {perks[i] || "Fachgerechte Ausführung"}
+                </span>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-10 rounded-3xl border border-line/10 bg-white p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-sm">
+          <div className="flex items-center gap-4">
+            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[var(--mint)]/10 text-[var(--mint)]">
+              <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <div>
+              <h4 className="font-bold text-base text-[#0b0f0d]">Kostenlose Schadensanalyse vor Ort</h4>
+              <p className="text-sm text-[#55605c] mt-0.5">Wir messen die Durchfeuchtung direkt im Mauerwerk und erstellen ein verbindliches Festpreisangebot.</p>
+            </div>
+          </div>
+          <a
+            href="#kontakt"
+            className="shrink-0 inline-flex min-h-[46px] items-center rounded-full bg-[var(--grad)] px-6 text-sm font-semibold text-white shadow-sm hover:opacity-90 transition-opacity"
+          >
+            Termin anfragen <span aria-hidden="true">&nbsp;→</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/** Technical Layers Frame: System cross-section & layered breakdown */
+export function TechnicalLayersFrame({
+  layers,
+  serviceName,
+}: {
+  layers: LayerNote[];
+  serviceName?: string;
+}) {
+  return (
+    <section className="sc-section bg-[#f7faf9] border-t border-line/10" aria-labelledby="layers-title">
+      <div className="sc-wrap">
+        <div className="grid gap-10 lg:grid-cols-[1fr_1.1fr] lg:items-start">
+          <div>
+            <p className="sc-label text-[var(--emerald-deep)] font-mono text-xs uppercase tracking-widest">
+              Technischer Aufbau
+            </p>
+            <h2 id="layers-title" className="sc-display mt-3 text-3xl sm:text-4xl text-[#0b0f0d]">
+              Schicht für Schicht: <em>Das System im Querschnitt</em>
+            </h2>
+            <p className="sc-lede mt-4 text-[#3b4641]">
+              Eine dauerhafte Abdichtung beruht auf einem perfekt aufeinander abgestimmten Schichtenaufbau. Jede Lage erfüllt eine unverzichtbare Funktion im Schutz gegen Nässe, Druckwasser und Salze.
+            </p>
+
+            <div className="mt-8 space-y-4 rounded-3xl border border-line/10 bg-white p-6 sm:p-7 shadow-sm">
+              <h3 className="font-bold text-[#0b0f0d] text-base">Warum das System ganzheitlich wirkt:</h3>
+              <p className="text-sm text-[#3b4641] leading-relaxed">
+                Ein einfacher Anstrich oder isolierte Einzelmaßnahmen halten drückendem Wasser nicht stand. Unser zertifiziertes System kombiniert mechanische und chemische Schutzschichten von innen, sodass die Bausubstanz dauerhaft geschützt und entfeuchtet wird – ganz ohne Aufgraben.
+              </p>
+              <div className="pt-4 border-t border-line/8 flex items-center justify-between text-xs text-[#55605c]">
+                <span>25 Jahre Produktgarantie</span>
+                <span className="font-semibold text-[var(--emerald-deep)]">10 Jahre Handwerksgarantie</span>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <LayerStack layers={layers} title="Funktion der einzelnen Schichten" />
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/** Framed Article Cards for rich SEO knowledge */
+export function Prose({
+  sections,
+  title,
+  subtitle,
+}: {
+  sections: PageSection[];
+  title?: string;
+  subtitle?: string;
+}) {
+  return (
+    <div className="grid gap-8 text-left">
+      {title && (
+        <div className="mb-2">
+          <p className="sc-label text-[var(--emerald-deep)] font-mono text-xs uppercase tracking-widest">Fachwissen</p>
+          <h2 className="sc-display mt-3 text-3xl sm:text-4xl text-[#0b0f0d]">{title}</h2>
+          {subtitle && <p className="sc-lede mt-3 text-[#3b4641] max-w-3xl">{subtitle}</p>}
+        </div>
+      )}
+      {sections.map((s, idx) => (
+        <article
+          key={s.heading}
+          className="rounded-3xl border border-line/12 bg-white p-6 sm:p-9 shadow-sm transition-all hover:border-[var(--mint)]/30 hover:shadow-md"
+        >
+          <div className="flex items-center gap-3 mb-4">
+            <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-[var(--mint)]/10 font-mono text-xs font-bold text-[var(--emerald-deep)]">
+              {String(idx + 1).padStart(2, "0")}
+            </span>
+            <span className="font-mono text-xs uppercase tracking-wider text-[#8a9691]">Fachinformation</span>
+          </div>
+
+          <h3 className="font-editorial text-2xl sm:text-3xl font-bold leading-tight text-[#0b0f0d]">
+            {keep(s.heading)}
+          </h3>
+
+          <div className="mt-5 space-y-4">
             {s.paragraphs.map((p, i) => (
-              <p key={i} className="text-left text-[#2c3631] text-base leading-relaxed">{hy(p)}</p>
+              <p key={i} className="text-[#2c3631] text-base leading-relaxed">
+                {hy(p)}
+              </p>
             ))}
-            {s.bullets && s.bullets.length > 0 && (
-              <ul className="mt-4 list-disc pl-5">
+          </div>
+
+          {s.bullets && s.bullets.length > 0 && (
+            <div className="mt-6 pt-6 border-t border-line/8">
+              <p className="font-mono text-xs font-semibold uppercase tracking-wider text-[var(--emerald-deep)] mb-3">
+                Wichtige Punkte auf einen Blick:
+              </p>
+              <ul className="grid gap-2.5 sm:grid-cols-2">
                 {s.bullets.map((b) => (
-                  <li key={b} className="text-left text-[#2c3631] my-1">{hy(b)}</li>
+                  <li
+                    key={b}
+                    className="flex items-start gap-3 rounded-2xl bg-[#f7faf9] border border-line/8 p-3.5 text-sm font-medium text-[#1c2621]"
+                  >
+                    <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[var(--mint)]/15 text-[var(--mint)] font-bold text-xs mt-0.5" aria-hidden="true">
+                      ✓
+                    </span>
+                    <span className="leading-snug">{hy(b)}</span>
+                  </li>
                 ))}
               </ul>
-            )}
-          </div>
-        </section>
+            </div>
+          )}
+        </article>
       ))}
     </div>
   );

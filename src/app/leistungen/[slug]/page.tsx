@@ -13,7 +13,7 @@ import { SERVICE_FACTS, SERVICE_SCENES } from "@/data/service-facts";
 import ScrollEngine, { SC_BOOT } from "@/components/scroll/ScrollEngine";
 import { SCIENCE } from "@/data/science";
 import { PHOTOS, type PhotoKey } from "@/data/photos";
-import { Breadcrumbs, LayerStack, LayerRuler, Prose, FaqList, LinkGrid } from "@/components/seo/SubpageParts";
+import { Breadcrumbs, LayerRuler, Prose, FaqList, LinkGrid, SymptomsFrame, ProcessSteps, TechnicalLayersFrame } from "@/components/seo/SubpageParts";
 import { SERVICE_PAGES, CITY_PAGES } from "@/data/seo-pages";
 import { SERVICE_CARDS } from "@/data/services";
 import { COMPANY_INFO } from "@/data/content-data";
@@ -109,68 +109,99 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
       <span data-sc-progress aria-hidden="true" />
       <Navbar />
       <main id="main">
+        {/* Frame 1: Hero */}
         <section className="sc-page-top relative overflow-hidden" aria-labelledby="page-title">
-          <div className="sc-wrap grid gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:items-start">
+          <div className="sc-wrap grid gap-10 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
             <div>
               <Breadcrumbs items={crumbs} />
-              <h1 id="page-title" className="sc-display mt-6 text-[2.4rem] leading-[1.04] sm:text-5xl lg:text-[3.8rem]">
+              
+              <div className="mt-5 inline-flex items-center gap-2 rounded-full border border-[var(--mint)]/20 bg-[var(--mint)]/10 px-3.5 py-1 text-xs font-semibold text-[var(--emerald-deep)]">
+                <span className="h-1.5 w-1.5 rounded-full bg-[var(--mint)]" />
+                <span>Ohne Aufgraben · Festpreisgarantie · 10 J. Garantie</span>
+              </div>
+
+              <h1 id="page-title" className="sc-display mt-4 text-[2.2rem] leading-[1.06] sm:text-5xl lg:text-[3.6rem]">
                 {page.h1}
               </h1>
-              <p className="sc-lede mt-6 text-[var(--sc-ink-soft)]">{hy(page.lede)}</p>
+              
+              <p className="sc-lede mt-5 text-[var(--sc-ink-soft)] max-w-2xl">{hy(page.lede)}</p>
+              
               <div className="mt-8 flex flex-wrap gap-3">
-                <a href="#kontakt" className="inline-flex min-h-[48px] items-center rounded-full bg-[var(--bone)] px-6 text-sm font-semibold text-[var(--ink)] hover:bg-white">
+                <a href="#kontakt" className="inline-flex min-h-[48px] items-center rounded-full bg-[var(--grad)] px-6 text-sm font-semibold text-white shadow-sm hover:opacity-95 transition-opacity">
                   Kostenlose Feuchtemessung anfragen <span aria-hidden="true">&nbsp;→</span>
                 </a>
-                <a href={`tel:${COMPANY_INFO.phoneTel}`} className="inline-flex min-h-[48px] items-center rounded-full border border-line/20 px-6 text-sm font-semibold hover:border-[var(--mint)]">
+                <a href={`tel:${COMPANY_INFO.phoneTel}`} className="inline-flex min-h-[48px] items-center rounded-full border border-line/20 bg-white px-6 text-sm font-semibold text-[#0b0f0d] hover:border-[var(--mint)] transition-colors">
                   {COMPANY_INFO.phoneDisplay}
                 </a>
               </div>
-              <h2 className="sc-label mt-12 text-[#0b0f0d]">Typische Anzeichen</h2>
-              <ul className="mt-4 flex flex-wrap gap-2">
-                {page.symptoms.map((s) => (
-                  <li key={s} className="rounded-full border border-line/12 bg-white px-4 py-2 text-sm font-medium text-[#0b0f0d] shadow-sm">
-                    {s}
-                  </li>
-                ))}
-              </ul>
+
+              <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-3 pt-6 border-t border-line/10">
+                <div className="flex items-center gap-2 text-xs font-medium text-[#2c3631]">
+                  <span className="text-[var(--mint)] font-bold">✓</span>
+                  <span>Kostenlos vor Ort</span>
+                </div>
+                <div className="flex items-center gap-2 text-xs font-medium text-[#2c3631]">
+                  <span className="text-[var(--mint)] font-bold">✓</span>
+                  <span>Bis zu 60% günstiger</span>
+                </div>
+                <div className="flex items-center gap-2 text-xs font-medium text-[#2c3631]">
+                  <span className="text-[var(--mint)] font-bold">✓</span>
+                  <span>25 J. SchimmelPeter®</span>
+                </div>
+              </div>
             </div>
-            <div className="grid gap-5">
+
+            <div>
               {photo ? (
-                <figure className="relative m-0 overflow-hidden rounded-3xl border border-line/12 bg-white shadow-sm">
-                  <img
-                    src={photo.src}
-                    srcSet={photo.src2x ? `${photo.src} ${photo.w}w, ${photo.src2x} 960w` : undefined}
-                    sizes="(max-width: 1024px) 92vw, 40vw"
-                    width={photo.w}
-                    height={photo.h}
-                    alt={photo.alt}
-                    fetchPriority="high"
-                    decoding="async"
-                    className="h-auto w-full"
-                  />
-                  <LayerRuler layers={page.layers} />
-                  <figcaption className="px-4 py-2 text-right text-[0.7rem] text-[var(--sc-ink-soft)]">Foto: SchimmelPeter®</figcaption>
-                </figure>
+                <div className="rounded-3xl border border-line/12 bg-white p-3 shadow-md">
+                  <figure className="relative m-0 overflow-hidden rounded-2xl bg-[#f7faf9]">
+                    <img
+                      src={photo.src}
+                      srcSet={photo.src2x ? `${photo.src} ${photo.w}w, ${photo.src2x} 960w` : undefined}
+                      sizes="(max-width: 1024px) 92vw, 40vw"
+                      width={photo.w}
+                      height={photo.h}
+                      alt={photo.alt}
+                      fetchPriority="high"
+                      decoding="async"
+                      className="h-auto w-full object-cover max-h-[380px] sm:max-h-[420px]"
+                    />
+                    <LayerRuler layers={page.layers} />
+                    <figcaption className="absolute bottom-2 right-3 rounded-md bg-black/60 px-2 py-0.5 text-right text-[0.68rem] text-white backdrop-blur-xs">
+                      Foto: SchimmelPeter®
+                    </figcaption>
+                  </figure>
+                  <div className="mt-3 flex items-center justify-between px-2 py-1 text-xs text-[#55605c]">
+                    <span className="font-medium text-[#0b0f0d]">Fachverfahren: {page.navTitle}</span>
+                    <span className="font-mono text-[var(--emerald-deep)] font-semibold">Geprüft & Zertifiziert</span>
+                  </div>
+                </div>
               ) : (
                 card && (
-                  <div className="overflow-hidden rounded-3xl border border-line/10 bg-white shadow-sm" aria-hidden="true">
-                    <div className="aspect-[16/10]">
+                  <div className="overflow-hidden rounded-3xl border border-line/10 bg-white p-3 shadow-md" aria-hidden="true">
+                    <div className="aspect-[16/10] overflow-hidden rounded-2xl">
                       <ServiceArt kind={card.art} />
                     </div>
                   </div>
                 )
               )}
-              <LayerStack layers={page.layers} title="Schicht für Schicht" />
             </div>
           </div>
         </section>
 
+        {/* Frame 2: Schadenserkennung & Symptome */}
+        <SymptomsFrame symptoms={page.symptoms} serviceName={page.navTitle} />
+
+        {/* Frame 3: Ablauf Schritt für Schritt */}
+        <ProcessSteps steps={page.steps} title={`So läuft Ihre ${page.navTitle} ab`} />
+
+        {/* Frame 4: Zahlen & Fakten */}
         {SERVICE_FACTS[page.slug] ? <FactsStrip facts={SERVICE_FACTS[page.slug]} title="Zahlen & Fakten" /> : null}
 
-        <ScienceSection slug={page.slug} />
+        {/* Frame 5: Technischer Schichtenaufbau */}
+        <TechnicalLayersFrame layers={page.layers} serviceName={page.navTitle} />
 
-        {page.slug === "feuchtemessung" ? <ScannerSection /> : null}
-
+        {/* Frame 6: 3D Interaktives Modell */}
         {SERVICE_SCENES[page.slug] ? (
           <LayersAct
             ids={SERVICE_SCENES[page.slug]}
@@ -185,31 +216,24 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
           />
         ) : null}
 
-        <section className="surface-bone sc-section">
-          <div className="sc-wrap grid gap-12 lg:grid-cols-[1fr_22rem]">
-            <Prose sections={page.sections} />
-            <aside className="lg:sticky lg:top-28 lg:self-start">
-              <div className="rounded-3xl border border-line/12 bg-white p-7 shadow-sm">
-                <h2 className="font-editorial text-2xl text-[#0b0f0d]">So läuft es ab</h2>
-                <ol className="mt-5 grid gap-5">
-                  {page.steps.map((s, i) => (
-                    <li key={s.title} className="grid grid-cols-[2rem_1fr] gap-3">
-                      <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[var(--mint)] font-mono text-xs font-bold text-white shadow-sm" aria-hidden="true">
-                        {i + 1}
-                      </span>
-                      <div>
-                        <h3 className="font-semibold text-[#0b0f0d]">{s.title}</h3>
-                        <p className="mt-1 text-sm text-[#3b4641] leading-relaxed">{hy(s.text)}</p>
-                      </div>
-                    </li>
-                  ))}
-                </ol>
-              </div>
-            </aside>
+        {/* Frame 7: Wissenschaft & Bauphysik */}
+        <ScienceSection slug={page.slug} />
+
+        {page.slug === "feuchtemessung" ? <ScannerSection /> : null}
+
+        {/* Frame 8: Detaillierte Fachinformationen (Framed Cards) */}
+        <section className="surface-bone sc-section border-t border-line/10">
+          <div className="sc-wrap">
+            <Prose
+              sections={page.sections}
+              title={`Wissenswertes zur ${page.navTitle}`}
+              subtitle="Fundierte Fachinformationen zu Ursachen, bautechnischen Zusammenhängen und nachhaltigen Sanierungslösungen."
+            />
           </div>
         </section>
 
-        <section className="surface-bone-2 sc-section">
+        {/* Frame 9: Häufige Fragen & Verwandte Links */}
+        <section className="surface-bone-2 sc-section border-t border-line/10">
           <div className="sc-wrap grid gap-12">
             <FaqList faqs={faqs} title={`Fragen zu ${page.navTitle}`} />
             <LinkGrid title="Verwandte Leistungen" links={related} />
@@ -220,6 +244,7 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
           </div>
         </section>
 
+        {/* Frame 10: Kontakt & Termin */}
         <ContactForm defaultDamage={DAMAGE_BY_SLUG[page.slug]} />
       </main>
       <Footer />
