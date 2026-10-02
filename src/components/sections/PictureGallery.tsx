@@ -59,12 +59,12 @@ export default function PictureGallery({ hideHeader = false }: { hideHeader?: bo
         {!hideHeader && (
           <div className="grid gap-6 lg:grid-cols-[1fr_1fr] lg:items-end mb-10">
             <div>
-              <p className="sc-label text-[#0f5c49]">{t("gallery.eyebrow")}</p>
+              <p className="sc-label text-[#0f5c49] font-bold">{t("gallery.eyebrow")}</p>
               <h2 id="galerie-title" className="sc-display mt-3 text-4xl sm:text-5xl lg:text-6xl text-[#0b0f0d]">
                 {t("gallery.h1")} <em className="text-[var(--brick)]">{t("gallery.accent")}</em>
               </h2>
             </div>
-            <p className="sc-body text-[#3b4641]">{t("gallery.sub")}</p>
+            <p className="sc-body text-[#0b0f0d] font-medium">{t("gallery.sub")}</p>
           </div>
         )}
 
@@ -98,10 +98,10 @@ export default function PictureGallery({ hideHeader = false }: { hideHeader?: bo
                   lastTrigger.current = e.currentTarget;
                   setOpen(i);
                 }}
-                className="group flex h-full w-full flex-col overflow-hidden rounded-[22px] border border-line/12 bg-white text-left shadow-sm hover:border-[var(--emerald-deep)] hover:shadow-md transition-all"
+                className="group flex h-full w-full flex-col overflow-hidden rounded-[26px] border border-line/12 bg-white p-3 text-left shadow-sm hover:border-[var(--emerald-deep)] hover:shadow-md transition-all"
                 aria-label={`${it.title}: ${t("gallery.zoomHint")}`}
               >
-                <span className="relative block aspect-[16/11] overflow-hidden bg-[#f7faf9]">
+                <span className="relative block aspect-[16/11] overflow-hidden rounded-[18px] bg-[#f7faf9] border border-black/5">
                   <img
                     src={it.src}
                     srcSet={it.src2x ? `${it.src} ${it.w}w, ${it.src2x} 960w` : undefined}
@@ -111,20 +111,21 @@ export default function PictureGallery({ hideHeader = false }: { hideHeader?: bo
                     alt={it.alt}
                     loading="lazy"
                     decoding="async"
-                    className={`h-full w-full transition-transform duration-500 group-hover:scale-105 ${
+                    className={`h-full w-full transition-transform duration-500 ease-out group-hover:scale-105 ${
                       it.category === "team" ? "object-cover object-top bg-white" : "object-cover"
                     }`}
                   />
-                  <span className="gallery-card__tag absolute left-3 top-3 rounded-full px-3 py-1 font-mono text-[0.7rem] font-semibold">
+                  <span className="absolute left-3 top-3 inline-flex items-center gap-1.5 rounded-full bg-white/94 px-3 py-1 font-sans text-xs font-bold text-[#050807] shadow-sm backdrop-blur-md border border-black/5">
+                    <span className="h-1.5 w-1.5 rounded-full bg-[var(--mint)]" />
                     {it.tag}
                   </span>
                 </span>
-                <span className="flex flex-1 flex-col gap-2 p-5">
-                  <span className="font-editorial text-2xl leading-tight text-[#0b0f0d]">{it.title}</span>
-                  <span className="text-sm leading-relaxed text-[#3b4641]">{it.text}</span>
-                  <span className="mt-auto flex items-center justify-between pt-3 font-mono text-[0.7rem] text-[#55605c]">
+                <span className="flex flex-1 flex-col gap-2 p-4 sm:p-5">
+                  <span className="font-editorial text-2xl leading-tight text-[#050807] font-bold">{it.title}</span>
+                  <span className="text-sm leading-relaxed text-[#0b0f0d] font-medium">{it.text}</span>
+                  <span className="mt-auto flex items-center justify-between pt-3 font-mono text-[0.72rem] text-[#0b0f0d] font-semibold border-t border-line/8">
                     <span>Foto: SchimmelPeter®</span>
-                    <span className="text-[#0f5c49] font-semibold">{t("gallery.zoomHint")} →</span>
+                    <span className="text-[#0f5c49] font-bold">{t("gallery.zoomHint")} →</span>
                   </span>
                 </span>
               </button>

@@ -95,7 +95,7 @@ export default function AppearanceMenu() {
           id="appearance-panel"
           className="absolute right-0 top-[calc(100%+0.6rem)] z-[60] w-[17.5rem] max-sm:fixed max-sm:inset-x-3 max-sm:top-[4.4rem] max-sm:w-auto rounded-2xl border border-line/12 bg-white p-4 text-[#0b0f0d] shadow-xl"
         >
-          <p className="font-mono text-[0.68rem] uppercase tracking-wider text-[#55605c]">Darstellung</p>
+          <p className="font-mono text-[0.68rem] uppercase tracking-wider text-[#0b0f0d] font-bold">Darstellung</p>
           <div className="mt-2 grid grid-cols-3 gap-1.5" role="group" aria-label="Darstellung">
             {THEMES.map(({ id, label, Icon }) => (
               <button
@@ -112,7 +112,7 @@ export default function AppearanceMenu() {
               </button>
             ))}
           </div>
-          <p className="mt-4 flex items-center gap-1.5 font-mono text-[0.68rem] uppercase tracking-wider text-[#55605c]">
+          <p className="mt-4 flex items-center gap-1.5 font-mono text-[0.68rem] uppercase tracking-wider text-[#0b0f0d] font-bold">
             <Type className="h-3.5 w-3.5" aria-hidden="true" /> Schriftgröße
           </p>
           <div className="mt-2 grid grid-cols-3 gap-1.5" role="group" aria-label="Schriftgröße">

@@ -53,22 +53,25 @@ export function ServiceCardGrid() {
         const Icon = CARD_ICON[s.art];
         return (
           <li key={s.slug}>
-            <a className="service-card" href={`/leistungen/${s.slug}/`}>
+            <a className="service-card group" href={`/leistungen/${s.slug}/`}>
               <span className={`service-card__media service-card__media--${s.image.fit}`}>
                 <img src={s.image.src} alt={s.image.alt} width={640} height={450} loading="lazy" decoding="async" />
-                <span className="service-card__badge">{s.image.fit === "contain" ? "3D · Wissen" : "Messung · Wissen"}</span>
-                <LayerRuler layers={SERVICE_PAGES.find((p) => p.slug === s.slug)?.layers ?? []} compact />
+                <span className="service-card__badge flex items-center gap-1.5">
+                  <span className="h-1.5 w-1.5 rounded-full bg-[var(--mint)]" />
+                  {s.image.fit === "contain" ? "3D-Verfahren" : "Fachverfahren"}
+                </span>
               </span>
               <span className="service-card__body">
                 <span className="service-card__title">
                   <span className="service-card__icon" aria-hidden="true">
-                    <Icon strokeWidth={1.6} />
+                    <Icon strokeWidth={2} />
                   </span>
                   <h3>{s.title}</h3>
                 </span>
-                <p>{hy(s.text)}</p>
+                <p>{s.text}</p>
                 <span className="service-card__more">
-                  Details, 3D-Modell und Wissenschaft <span aria-hidden="true">→</span>
+                  <span>Details &amp; 3D-Verfahren</span>
+                  <span aria-hidden="true">&nbsp;→</span>
                 </span>
               </span>
             </a>

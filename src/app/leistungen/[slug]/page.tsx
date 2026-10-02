@@ -13,7 +13,7 @@ import { SERVICE_FACTS, SERVICE_SCENES } from "@/data/service-facts";
 import ScrollEngine, { SC_BOOT } from "@/components/scroll/ScrollEngine";
 import { SCIENCE } from "@/data/science";
 import { PHOTOS, type PhotoKey } from "@/data/photos";
-import { Breadcrumbs, LayerRuler, Prose, FaqList, LinkGrid, SymptomsFrame, ProcessSteps, TechnicalLayersFrame } from "@/components/seo/SubpageParts";
+import { Breadcrumbs, Prose, FaqList, LinkGrid, SymptomsFrame, ProcessSteps, TechnicalLayersFrame } from "@/components/seo/SubpageParts";
 import { SERVICE_PAGES, CITY_PAGES } from "@/data/seo-pages";
 import { SERVICE_CARDS } from "@/data/services";
 import { COMPANY_INFO } from "@/data/content-data";
@@ -124,7 +124,7 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
                 {page.h1}
               </h1>
               
-              <p className="sc-lede mt-5 text-[var(--sc-ink-soft)] max-w-2xl">{hy(page.lede)}</p>
+              <p className="sc-lede mt-5 text-[#0b0f0d] font-medium max-w-2xl">{hy(page.lede)}</p>
               
               <div className="mt-8 flex flex-wrap gap-3">
                 <a href="#kontakt" className="inline-flex min-h-[48px] items-center rounded-full bg-[var(--grad)] px-6 text-sm font-semibold text-white shadow-sm hover:opacity-95 transition-opacity">
@@ -136,15 +136,15 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
               </div>
 
               <div className="mt-8 grid grid-cols-1 sm:grid-cols-3 gap-3 pt-6 border-t border-line/10">
-                <div className="flex items-center gap-2 text-xs font-medium text-[#2c3631]">
+                <div className="flex items-center gap-2 text-xs font-semibold text-[#0b0f0d]">
                   <span className="text-[var(--mint)] font-bold">✓</span>
                   <span>Kostenlos vor Ort</span>
                 </div>
-                <div className="flex items-center gap-2 text-xs font-medium text-[#2c3631]">
+                <div className="flex items-center gap-2 text-xs font-semibold text-[#0b0f0d]">
                   <span className="text-[var(--mint)] font-bold">✓</span>
                   <span>Bis zu 60% günstiger</span>
                 </div>
-                <div className="flex items-center gap-2 text-xs font-medium text-[#2c3631]">
+                <div className="flex items-center gap-2 text-xs font-semibold text-[#0b0f0d]">
                   <span className="text-[var(--mint)] font-bold">✓</span>
                   <span>25 J. SchimmelPeter®</span>
                 </div>
@@ -153,8 +153,8 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
 
             <div>
               {photo ? (
-                <div className="rounded-3xl border border-line/12 bg-white p-3 shadow-md">
-                  <figure className="relative m-0 overflow-hidden rounded-2xl bg-[#f7faf9]">
+                <div className="rounded-3xl border border-line/12 bg-white p-3 shadow-[0_4px_24px_-8px_rgba(16,40,30,0.12)]">
+                  <figure className="group relative m-0 overflow-hidden rounded-2xl bg-[#f7faf9] aspect-[16/11] border border-black/5">
                     <img
                       src={photo.src}
                       srcSet={photo.src2x ? `${photo.src} ${photo.w}w, ${photo.src2x} 960w` : undefined}
@@ -164,22 +164,25 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
                       alt={photo.alt}
                       fetchPriority="high"
                       decoding="async"
-                      className="h-auto w-full object-cover max-h-[380px] sm:max-h-[420px]"
+                      className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
                     />
-                    <LayerRuler layers={page.layers} />
-                    <figcaption className="absolute bottom-2 right-3 rounded-md bg-black/60 px-2 py-0.5 text-right text-[0.68rem] text-white backdrop-blur-xs">
+                    <div className="absolute top-3 left-3 inline-flex items-center gap-1.5 rounded-full bg-white/94 px-3 py-1 text-xs font-bold text-[#050807] shadow-sm backdrop-blur-md border border-black/5">
+                      <span className="h-1.5 w-1.5 rounded-full bg-[var(--mint)]" />
+                      <span>{page.navTitle}</span>
+                    </div>
+                    <figcaption className="absolute bottom-2.5 right-3 rounded-md bg-black/60 px-2.5 py-1 text-right text-[0.7rem] font-medium text-white/90 backdrop-blur-md">
                       Foto: SchimmelPeter®
                     </figcaption>
                   </figure>
-                  <div className="mt-3 flex items-center justify-between px-2 py-1 text-xs text-[#55605c]">
-                    <span className="font-medium text-[#0b0f0d]">Fachverfahren: {page.navTitle}</span>
-                    <span className="font-mono text-[var(--emerald-deep)] font-semibold">Geprüft & Zertifiziert</span>
+                  <div className="mt-3 flex items-center justify-between px-2 py-1 text-xs">
+                    <span className="font-semibold text-[#0b0f0d]">Fachverfahren: {page.navTitle}</span>
+                    <span className="font-mono text-[var(--emerald-deep)] font-bold">Geprüft &amp; Zertifiziert</span>
                   </div>
                 </div>
               ) : (
                 card && (
-                  <div className="overflow-hidden rounded-3xl border border-line/10 bg-white p-3 shadow-md" aria-hidden="true">
-                    <div className="aspect-[16/10] overflow-hidden rounded-2xl">
+                  <div className="overflow-hidden rounded-3xl border border-line/12 bg-white p-3 shadow-md" aria-hidden="true">
+                    <div className="aspect-[16/11] overflow-hidden rounded-2xl">
                       <ServiceArt kind={card.art} />
                     </div>
                   </div>

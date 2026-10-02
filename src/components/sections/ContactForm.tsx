@@ -243,14 +243,14 @@ export default function ContactForm({ defaultDamage, place }: { defaultDamage?: 
                     height={176}
                     alt={`Porträt von ${COMPANY_INFO.owner}`}
                     loading="lazy"
-                    className="h-20 w-[4.5rem] shrink-0 rounded-2xl object-cover object-top"
+                    className="h-20 w-[4.5rem] shrink-0 rounded-2xl object-cover object-top border border-black/10 shadow-xs"
                   />
                   <div>
-                    <p className="font-mono text-[11px] font-semibold uppercase tracking-wider text-[var(--emerald-deep)]">
+                    <p className="font-mono text-[11px] font-bold uppercase tracking-wider text-[var(--emerald-deep)]">
                       Direkter Ansprechpartner
                     </p>
-                    <h3 className="mt-1 font-editorial text-2xl text-[var(--head-on-bone)]">{COMPANY_INFO.owner}</h3>
-                    <p className="mt-0.5 font-mono text-xs text-[var(--text-on-bone)]">Inhaber, SchimmelPeter® Partnerbetrieb</p>
+                    <h3 className="mt-1 font-editorial text-2xl font-bold text-[#050807]">{COMPANY_INFO.owner}</h3>
+                    <p className="mt-0.5 font-mono text-xs font-semibold text-[#0b0f0d]">Inhaber, SchimmelPeter® Partnerbetrieb</p>
                   </div>
                 </div>
                 <img
@@ -266,21 +266,21 @@ export default function ContactForm({ defaultDamage, place }: { defaultDamage?: 
                 <a href={`tel:${COMPANY_INFO.phoneTel}`} className="flex items-center gap-3 rounded-2xl border border-line/10 bg-[#f7faf9] p-3.5 text-[#0b0f0d] hover:bg-white hover:border-[var(--emerald-deep)] transition-all">
                   <Phone className="h-4 w-4 text-[var(--emerald-deep)]" aria-hidden="true" />
                   <span>
-                    <span className="block text-[10px] text-[#55605c]">Telefon</span>
+                    <span className="block text-[10px] font-semibold text-[#0b0f0d]">Telefon</span>
                     <span className="block text-sm font-bold text-[#0b0f0d]">{COMPANY_INFO.phoneDisplay}</span>
                   </span>
                 </a>
                 <a href={COMPANY_INFO.whatsappUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 rounded-2xl border border-line/10 bg-[#f7faf9] p-3.5 text-[#0b0f0d] hover:bg-white hover:border-[var(--emerald-deep)] transition-all">
                   <MessageSquare className="h-4 w-4 text-[var(--emerald-deep)]" aria-hidden="true" />
                   <span>
-                    <span className="block text-[10px] text-[#55605c]">WhatsApp</span>
+                    <span className="block text-[10px] font-semibold text-[#0b0f0d]">WhatsApp</span>
                     <span className="block text-sm font-bold text-[#0b0f0d]">Fotos schicken, Einschätzung bekommen</span>
                   </span>
                 </a>
                 <div className="flex items-center gap-3 rounded-2xl border border-line/10 bg-[#f7faf9] p-3.5 text-[#0b0f0d]">
                   <MapPin className="h-4 w-4 text-[var(--emerald-deep)]" aria-hidden="true" />
                   <span>
-                    <span className="block text-[10px] text-[#55605c]">Sitz</span>
+                    <span className="block text-[10px] font-semibold text-[#0b0f0d]">Sitz</span>
                     <span className="block text-xs font-bold text-[#0b0f0d]">
                       {COMPANY_INFO.street}, {COMPANY_INFO.city}
                     </span>

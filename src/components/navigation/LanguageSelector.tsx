@@ -31,7 +31,7 @@ export default function LanguageSelector() {
         <span className="text-sm leading-none">{currentLocale.flag}</span>
         <span className="font-semibold uppercase tracking-wider">{currentLocale.code}</span>
         <ChevronDown
-          className={`w-3.5 h-3.5 text-[#55605c] transition-transform duration-200 ${
+          className={`w-3.5 h-3.5 text-[#0b0f0d] transition-transform duration-200 ${
             isOpen ? "rotate-180 text-[#13755d]" : ""
           }`}
         />
@@ -39,7 +39,7 @@ export default function LanguageSelector() {
 
       {isOpen && (
         <div className="absolute right-0 mt-2 w-44 rounded-2xl bg-white border border-line/12 shadow-xl py-1.5 z-50 animate-in fade-in zoom-in-95 duration-150">
-          <div className="px-3 py-1 text-[10px] font-mono uppercase tracking-[0.16em] text-[#55605c] border-b border-line/8 mb-1">
+          <div className="px-3 py-1 text-[10px] font-mono uppercase tracking-[0.16em] text-[#0b0f0d] font-bold border-b border-line/8 mb-1">
             Sprache / Language
           </div>
           {SUPPORTED_LOCALES.map((locale) => {
@@ -54,7 +54,7 @@ export default function LanguageSelector() {
                 className={`w-full flex items-center justify-between px-3.5 py-2 text-xs text-left transition-colors font-mono ${
                   isSelected
                     ? "bg-[#13755d]/10 text-[#0f5c49] font-bold"
-                    : "text-[#2c3631] hover:bg-[#f7faf9] hover:text-[#0b0f0d]"
+                    : "text-[#0b0f0d] font-medium hover:bg-[#f7faf9]"
                 }`}
               >
                 <div className="flex items-center gap-2">

@@ -22,13 +22,13 @@ export default function CostCalculator({ hideHeader = false }: { hideHeader?: bo
       <div className="relative sc-wrap sc-section pt-6">
         {!hideHeader && (
           <div className="mb-10">
-            <p className="sc-label text-[#0f5c49]">
+            <p className="sc-label text-[#0f5c49] font-bold">
               {t("calc.eyebrow")}
             </p>
             <h2 className="sc-display mt-3 text-4xl sm:text-5xl lg:text-6xl text-[#0b0f0d]">
               {t("calc.h1")} <em className="text-[var(--brick)]">{t("calc.accent")}</em>
             </h2>
-            <p className="sc-body mt-4 max-w-2xl text-[#3b4641]">
+            <p className="sc-body mt-4 max-w-2xl text-[#0b0f0d] font-medium">
               {t("calc.sub")}
             </p>
           </div>
@@ -37,11 +37,11 @@ export default function CostCalculator({ hideHeader = false }: { hideHeader?: bo
         {/* Clean White Calculator Card */}
         <div className="w-full bg-white rounded-3xl border border-line/12 shadow-sm overflow-hidden">
           <div className="p-5 sm:p-6 bg-[#f7faf9] border-b border-line/10 flex flex-wrap items-center justify-between gap-4">
-            <div className="flex items-center gap-2 text-xs font-mono font-medium text-[#0b0f0d]">
+            <div className="flex items-center gap-2 text-xs font-mono font-bold text-[#0b0f0d]">
               <span className="w-2.5 h-2.5 rounded-full bg-[#13755d]" />
               <span>SchimmelPeter® Verfahren · Verbindliches Angebot nach Messung</span>
             </div>
-            <div className="flex items-center gap-2 text-xs font-mono text-[#0f5c49] font-semibold bg-white px-3.5 py-1.5 rounded-full border border-line/12 shadow-2xs">
+            <div className="flex items-center gap-2 text-xs font-mono text-[#0f5c49] font-bold bg-white px-3.5 py-1.5 rounded-full border border-line/12 shadow-2xs">
               <ShieldCheck className="w-4 h-4 text-[#13755d]" />
               <span>10 J. Garantie + 25 J. Produktgarantie</span>
             </div>
@@ -74,7 +74,7 @@ export default function CostCalculator({ hideHeader = false }: { hideHeader?: bo
                       >
                         <span className="text-xl mb-1.5 block">{item.icon}</span>
                         <div className="text-xs font-bold">{item.label}</div>
-                        <div className={`text-[11px] font-mono mt-0.5 ${isActive ? "text-white/80" : "text-[#55605c]"}`}>
+                        <div className={`text-[11px] font-mono mt-0.5 ${isActive ? "text-white/90 font-medium" : "text-[#0b0f0d] font-medium"}`}>
                           {item.sub}
                         </div>
                       </button>
@@ -101,7 +101,7 @@ export default function CostCalculator({ hideHeader = false }: { hideHeader?: bo
                   onChange={(e) => setMeters(Number(e.target.value))}
                   className="w-full h-2.5 bg-black/10 rounded-lg appearance-none cursor-pointer accent-[#13755d]"
                 />
-                <div className="flex justify-between text-[11px] font-mono text-[#55605c] mt-2">
+                <div className="flex justify-between text-[11px] font-mono text-[#0b0f0d] font-semibold mt-2">
                   <span>3 m</span>
                   <span>15 m</span>
                   <span>35 m</span>
@@ -155,16 +155,16 @@ export default function CostCalculator({ hideHeader = false }: { hideHeader?: bo
                   <div className="text-4xl font-editorial font-bold text-[#0b0f0d]">
                     ab {estimatedInjectionCost.toLocaleString("de-DE")} €*
                   </div>
-                  <p className="text-xs text-[#55605c] mt-1 font-mono">
+                  <p className="text-xs text-[#0b0f0d] font-semibold mt-1 font-mono">
                     inkl. Bohrung, SchimmelPeter-Injektion & Versiegelung
                   </p>
                 </div>
 
                 {/* Excavation comparison */}
                 <div className="mt-6 pt-5 border-t border-line/10 space-y-3 font-mono text-xs">
-                  <div className="flex justify-between items-center text-[#55605c]">
+                  <div className="flex justify-between items-center text-[#0b0f0d] font-medium">
                     <span>Klassische Außenaufgrabung:</span>
-                    <span className="line-through text-red-700/80">
+                    <span className="line-through text-red-700/80 font-bold">
                       ca. {estimatedExcavationCost.toLocaleString("de-DE")} €
                     </span>
                   </div>
@@ -177,7 +177,7 @@ export default function CostCalculator({ hideHeader = false }: { hideHeader?: bo
                   </div>
                 </div>
 
-                <ul className="mt-6 space-y-2.5 text-xs text-[#3b4641]">
+                <ul className="mt-6 space-y-2.5 text-xs text-[#0b0f0d] font-medium">
                   <li className="flex items-center gap-2">
                     <CheckCircle2 className="w-4 h-4 text-[#13755d] shrink-0" />
                     <span>Keine Zerstörung von Garten oder Einfahrt</span>
@@ -201,7 +201,7 @@ export default function CostCalculator({ hideHeader = false }: { hideHeader?: bo
                   <span>{t("calc.cta")}</span>
                   <ArrowRight className="w-4 h-4" />
                 </a>
-                <p className="text-[10px] text-center text-[#55605c] mt-2 font-mono">
+                <p className="text-[10px] text-center text-[#0b0f0d] font-medium mt-2 font-mono">
                   *Richtwert. Exakte Kosten hängen vom Durchfeuchtungsgrad ab. Vor-Ort-Messung unverbindlich.
                 </p>
               </div>
