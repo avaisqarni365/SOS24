@@ -101,9 +101,9 @@ export function ServicesRail() {
           </p>
         </div>
         <ServiceCardGrid />
-        <p className="mt-6">
-          <a href="/leistungen/" className="font-semibold text-[var(--brick)] hover:underline">
-            Alle Leistungen im Überblick, mit Wegweiser: welches Verfahren bei welchem Anzeichen →
+        <p className="mt-8">
+          <a href="/leistungen/" className="inline-flex items-center gap-2 font-semibold text-[var(--emerald-deep)] hover:underline">
+            Alle Leistungen im Überblick, mit Wegweiser: welches Verfahren bei welchem Anzeichen <span aria-hidden="true">→</span>
           </a>
         </p>
       </div>

@@ -84,11 +84,11 @@ export default function AudienceSection() {
               <div className="mt-7 flex flex-wrap items-center gap-3">
                 <a
                   href={cta.href}
-                  className="inline-flex min-h-[48px] items-center gap-2 rounded-full bg-[var(--mint)] px-6 text-sm font-semibold text-[var(--ink)] hover:opacity-90"
+                  className="inline-flex min-h-[48px] items-center gap-2 rounded-full bg-[var(--grad)] px-6 text-sm font-semibold text-white shadow-sm hover:opacity-95 transition-opacity"
                 >
-                  {cta.label} <span aria-hidden="true">→</span>
+                  {cta.label} <span aria-hidden="true">&nbsp;→</span>
                 </a>
-                <a href={more.href} className="text-sm font-semibold text-[var(--mint)] underline-offset-4 hover:underline">
+                <a href={more.href} className="text-sm font-semibold text-[var(--emerald-deep)] underline-offset-4 hover:underline">
                   {more.label}
                 </a>
               </div>
