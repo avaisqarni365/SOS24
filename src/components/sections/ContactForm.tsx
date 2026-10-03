@@ -41,8 +41,8 @@ function mailLink(d: Enquiry, place?: string) {
 }
 
 const field =
-  "w-full min-h-[48px] px-4 py-3 rounded-xl border border-line/15 bg-white text-sm text-[#0b0f0d] shadow-2xs focus:outline-none focus:border-[var(--emerald-deep)] focus:ring-1 focus:ring-[var(--emerald-deep)] placeholder:text-black/40";
-const lbl = "block text-xs font-mono font-bold text-[#0b0f0d] mb-2";
+  "w-full min-h-[48px] px-4 py-3 rounded-xl border border-line/15 bg-white text-sm text-[#050807] shadow-2xs focus:outline-none focus:border-[var(--emerald-deep)] focus:ring-1 focus:ring-[var(--emerald-deep)] placeholder:text-black/40";
+const lbl = "block text-xs font-mono font-bold text-[#050807] mb-2";
 
 export default function ContactForm({ defaultDamage, place }: { defaultDamage?: string; place?: string }) {
   const { t, lang } = useLanguage();
@@ -219,7 +219,7 @@ export default function ContactForm({ defaultDamage, place }: { defaultDamage?: 
                     type="submit"
                     name="via"
                     value="mail"
-                    className="inline-flex min-h-[52px] w-full items-center justify-center gap-2 rounded-full border border-line/20 bg-white px-6 py-4 text-sm font-semibold text-[#0b0f0d] hover:border-[var(--emerald-deep)] hover:bg-[#f7faf9] active:scale-[0.98]"
+                    className="inline-flex min-h-[52px] w-full items-center justify-center gap-2 rounded-full border border-line/20 bg-white px-6 py-4 text-sm font-semibold text-[#050807] hover:border-[var(--emerald-deep)] hover:bg-[#f7faf9] active:scale-[0.98]"
                   >
                     {t("contact.viaMail")}
                     <Mail className="h-4 w-4 text-[var(--emerald-deep)]" aria-hidden="true" />
@@ -250,7 +250,7 @@ export default function ContactForm({ defaultDamage, place }: { defaultDamage?: 
                       Direkter Ansprechpartner
                     </p>
                     <h3 className="mt-1 font-editorial text-2xl font-bold text-[#050807]">{COMPANY_INFO.owner}</h3>
-                    <p className="mt-0.5 font-mono text-xs font-semibold text-[#0b0f0d]">Inhaber, SchimmelPeter® Partnerbetrieb</p>
+                    <p className="mt-0.5 font-mono text-xs font-semibold text-[#050807]">Inhaber, SchimmelPeter® Partnerbetrieb</p>
                   </div>
                 </div>
                 <img
@@ -262,26 +262,26 @@ export default function ContactForm({ defaultDamage, place }: { defaultDamage?: 
                   className="mt-5 h-12 w-auto"
                 />
               </div>
-              <div className="space-y-4 border-t border-line/10 pt-4 font-mono text-xs text-[#0b0f0d]">
-                <a href={`tel:${COMPANY_INFO.phoneTel}`} className="flex items-center gap-3 rounded-2xl border border-line/10 bg-[#f7faf9] p-3.5 text-[#0b0f0d] hover:bg-white hover:border-[var(--emerald-deep)] transition-all">
+              <div className="space-y-4 border-t border-line/10 pt-4 font-mono text-xs text-[#050807]">
+                <a href={`tel:${COMPANY_INFO.phoneTel}`} className="flex items-center gap-3 rounded-2xl border border-line/10 bg-[#f7faf9] p-3.5 text-[#050807] hover:bg-white hover:border-[var(--emerald-deep)] transition-all">
                   <Phone className="h-4 w-4 text-[var(--emerald-deep)]" aria-hidden="true" />
                   <span>
-                    <span className="block text-[10px] font-semibold text-[#0b0f0d]">Telefon</span>
-                    <span className="block text-sm font-bold text-[#0b0f0d]">{COMPANY_INFO.phoneDisplay}</span>
+                    <span className="block text-[10px] font-semibold text-[#050807]">Telefon</span>
+                    <span className="block text-sm font-bold text-[#050807]">{COMPANY_INFO.phoneDisplay}</span>
                   </span>
                 </a>
-                <a href={COMPANY_INFO.whatsappUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 rounded-2xl border border-line/10 bg-[#f7faf9] p-3.5 text-[#0b0f0d] hover:bg-white hover:border-[var(--emerald-deep)] transition-all">
+                <a href={COMPANY_INFO.whatsappUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 rounded-2xl border border-line/10 bg-[#f7faf9] p-3.5 text-[#050807] hover:bg-white hover:border-[var(--emerald-deep)] transition-all">
                   <MessageSquare className="h-4 w-4 text-[var(--emerald-deep)]" aria-hidden="true" />
                   <span>
-                    <span className="block text-[10px] font-semibold text-[#0b0f0d]">WhatsApp</span>
-                    <span className="block text-sm font-bold text-[#0b0f0d]">Fotos schicken, Einschätzung bekommen</span>
+                    <span className="block text-[10px] font-semibold text-[#050807]">WhatsApp</span>
+                    <span className="block text-sm font-bold text-[#050807]">Fotos schicken, Einschätzung bekommen</span>
                   </span>
                 </a>
-                <div className="flex items-center gap-3 rounded-2xl border border-line/10 bg-[#f7faf9] p-3.5 text-[#0b0f0d]">
+                <div className="flex items-center gap-3 rounded-2xl border border-line/10 bg-[#f7faf9] p-3.5 text-[#050807]">
                   <MapPin className="h-4 w-4 text-[var(--emerald-deep)]" aria-hidden="true" />
                   <span>
-                    <span className="block text-[10px] font-semibold text-[#0b0f0d]">Sitz</span>
-                    <span className="block text-xs font-bold text-[#0b0f0d]">
+                    <span className="block text-[10px] font-semibold text-[#050807]">Sitz</span>
+                    <span className="block text-xs font-bold text-[#050807]">
                       {COMPANY_INFO.street}, {COMPANY_INFO.city}
                     </span>
                   </span>
@@ -294,3 +294,4 @@ export default function ContactForm({ defaultDamage, place }: { defaultDamage?: 
     </section>
   );
 }
+

@@ -54,11 +54,11 @@ export default function AudienceSection() {
         <div className="grid gap-6 lg:grid-cols-[1fr_1fr] lg:items-end">
           <div>
             <p className="sc-label">Für wen wir arbeiten</p>
-            <h2 id="fuer-wen-title" className="sc-display mt-3 text-4xl sm:text-5xl lg:text-6xl text-[#0b0f0d]">
+            <h2 id="fuer-wen-title" className="sc-display mt-3 text-4xl sm:text-5xl lg:text-6xl text-[#050807]">
               Ein Keller, zwei Blickwinkel. <em className="text-[var(--mint)]">Eine Lösung.</em>
             </h2>
           </div>
-          <p className="sc-body font-medium text-[#0b0f0d]">
+          <p className="sc-body font-medium text-[#050807]">
             {hy(
               "Ob Ihr eigenes Haus oder ein ganzer Bestand: Am Anfang steht immer die Messung, am Ende ein trockener Keller mit Protokoll. Wählen Sie Ihren Weg."
             )}
@@ -75,7 +75,7 @@ export default function AudienceSection() {
               <h3 className="mt-2 font-editorial text-3xl leading-tight text-[#050807] font-bold">{title}</h3>
               <ul className="mt-5 grid gap-2.5">
                 {points.map((p) => (
-                  <li key={p} className="flex gap-2.5 text-[0.98rem] leading-snug text-[#0b0f0d] font-medium">
+                  <li key={p} className="flex gap-2.5 text-[0.98rem] leading-snug text-[#050807] font-medium">
                     <Check className="mt-0.5 h-5 w-5 flex-none text-[var(--mint)]" aria-hidden="true" />
                     <span>{hy(p)}</span>
                   </li>
@@ -105,7 +105,7 @@ export default function AudienceSection() {
                   <Icon className="h-4 w-4 text-[var(--mint)]" aria-hidden="true" />
                   {title}
                 </p>
-                <p className="mt-1 text-sm font-medium text-[#0b0f0d]">{hy(text)}</p>
+                <p className="mt-1 text-sm font-medium text-[#050807]">{hy(text)}</p>
               </div>
             </li>
           ))}
@@ -114,3 +114,4 @@ export default function AudienceSection() {
     </section>
   );
 }
+

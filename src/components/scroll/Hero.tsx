@@ -30,7 +30,7 @@ export default function Hero() {
             Kellersanierung Wuppertal.{" "}
             <em className="text-[var(--mint)]">Trocken, Schicht für Schicht.</em>
           </h1>
-          <p className="sc-lede mt-6 text-[#0b0f0d] font-medium">
+          <p className="sc-lede mt-6 text-[#050807] font-medium">
             {hy("Wir stoppen aufsteigende Feuchtigkeit dort, wo sie entsteht: von innen, ohne Bagger und ohne aufgerissenen Garten. Mit kostenloser Feuchtemessung vor Ort, 10 Jahren Garantie auf unsere Arbeit und 25 Jahren Produktgarantie von SchimmelPeter.")}
           </p>
           <div className="mt-8 flex flex-wrap items-center gap-3">
@@ -42,22 +42,22 @@ export default function Hero() {
             </a>
             <a
               href={`tel:${COMPANY_INFO.phoneTel}`}
-              className="inline-flex min-h-[48px] items-center gap-2 rounded-full border border-line/20 bg-white px-6 py-3 text-sm font-semibold text-[#0b0f0d] hover:border-[var(--mint)] transition-colors shadow-2xs"
+              className="inline-flex min-h-[48px] items-center gap-2 rounded-full border border-line/20 bg-white px-6 py-3 text-sm font-semibold text-[#050807] hover:border-[var(--mint)] transition-colors shadow-2xs"
             >
               {COMPANY_INFO.phoneDisplay}
             </a>
           </div>
 
           <div className="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-2.5 pt-5 border-t border-line/10">
-            <div className="flex items-center gap-2 text-xs font-semibold text-[#0b0f0d]">
+            <div className="flex items-center gap-2 text-xs font-semibold text-[#050807]">
               <span className="text-[var(--mint)] font-bold">✓</span>
               <span>Kostenlose Messung vor Ort</span>
             </div>
-            <div className="flex items-center gap-2 text-xs font-semibold text-[#0b0f0d]">
+            <div className="flex items-center gap-2 text-xs font-semibold text-[#050807]">
               <span className="text-[var(--mint)] font-bold">✓</span>
               <span>10 Jahre Handwerksgarantie</span>
             </div>
-            <div className="flex items-center gap-2 text-xs font-semibold text-[#0b0f0d]">
+            <div className="flex items-center gap-2 text-xs font-semibold text-[#050807]">
               <span className="text-[var(--mint)] font-bold">✓</span>
               <span>Ohne Bagger & Aufgraben</span>
             </div>
@@ -112,3 +112,4 @@ export default function Hero() {
     </section>
   );
 }
+

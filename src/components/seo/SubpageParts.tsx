@@ -9,13 +9,13 @@ export function Breadcrumbs({ items }: { items: { name: string; path: string }[]
           <li key={it.path} className="flex items-center gap-2">
             {i < items.length - 1 ? (
               <>
-                <a href={it.path} className="hover:text-[#0b0f0d] transition-colors">
+                <a href={it.path} className="hover:text-[#050807] transition-colors">
                   {it.name}
                 </a>
                 <span aria-hidden="true" className="text-black/30">/</span>
               </>
             ) : (
-              <span aria-current="page" className="text-[#0b0f0d] font-semibold">
+              <span aria-current="page" className="text-[#050807] font-semibold">
                 {it.name}
               </span>
             )}
@@ -58,7 +58,7 @@ export function LayerStack({ layers, title }: { layers: LayerNote[]; title: stri
   return (
     <figure className="m-0 overflow-hidden rounded-3xl border border-line/12 bg-white p-5 shadow-sm sm:p-7">
       <div className="flex items-center justify-between mb-5 pb-3 border-b border-line/8">
-        <figcaption className="sc-label text-[#0b0f0d]">{title}</figcaption>
+        <figcaption className="sc-label text-[#050807]">{title}</figcaption>
         <span className="font-mono text-xs text-[#7a8681]">Einflussfaktoren</span>
       </div>
       <ol className="grid gap-3">
@@ -77,8 +77,8 @@ export function LayerStack({ layers, title }: { layers: LayerNote[]; title: stri
                 0{i + 1}
               </span>
               <div>
-                <h3 className="text-base font-bold text-[#0b0f0d]">{l.name}</h3>
-                <p className="mt-1 text-sm leading-relaxed text-[#0b0f0d] font-medium">{l.text}</p>
+                <h3 className="text-base font-bold text-[#050807]">{l.name}</h3>
+                <p className="mt-1 text-sm leading-relaxed text-[#050807] font-medium">{l.text}</p>
               </div>
             </li>
           );
@@ -107,10 +107,10 @@ export function SymptomsFrame({
           <p className="sc-label text-[var(--emerald-deep)] font-mono text-xs uppercase tracking-widest font-bold">
             Schadenserkennung
           </p>
-          <h2 id="symptoms-title" className="sc-display mt-3 text-3xl sm:text-4xl text-[#0b0f0d]">
+          <h2 id="symptoms-title" className="sc-display mt-3 text-3xl sm:text-4xl text-[#050807]">
             {title}
           </h2>
-          <p className="sc-lede mt-3 text-[#0b0f0d] font-medium">
+          <p className="sc-lede mt-3 text-[#050807] font-medium">
             {subtitle}
           </p>
         </div>
@@ -125,15 +125,15 @@ export function SymptomsFrame({
                 !
               </span>
               <div>
-                <p className="text-sm font-semibold text-[#0b0f0d] leading-snug">{s}</p>
+                <p className="text-sm font-semibold text-[#050807] leading-snug">{s}</p>
               </div>
             </div>
           ))}
         </div>
 
-        <div className="mt-8 flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-line/10 bg-[#f7faf9] px-6 py-4">
-          <p className="text-sm text-[#0b0f0d] font-medium">
-            <strong className="text-[#000000] font-bold">Wichtig:</strong> Unbehandelte Feuchtigkeit führt zu Schimmelbefall und zerstört das Mauerwerk. Handeln Sie rechtzeitig.
+        <div className="mt-8 flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-line/10 bg-[#f7faf9] px-6 py-4 latex-box">
+          <p className="text-sm sm:text-base text-[#050807] font-medium">
+            <strong className="text-[var(--emerald-deep)] font-bold">Wichtig:</strong> Unbehandelte Feuchtigkeit führt zu Schimmelbefall und zerstört das Mauerwerk. Handeln Sie rechtzeitig.
           </p>
           <a href="#kontakt" className="inline-flex items-center gap-1.5 text-sm font-semibold text-[var(--emerald-deep)] hover:underline">
             Kostenlose Feuchtemessung anfragen <span aria-hidden="true">→</span>
@@ -168,10 +168,10 @@ export function ProcessSteps({
           <p className="sc-label text-[var(--emerald-deep)] font-mono text-xs uppercase tracking-widest font-bold">
             Ablauf & Verlässlichkeit
           </p>
-          <h2 id="process-steps-heading" className="sc-display mt-3 text-3xl sm:text-4xl lg:text-5xl text-[#0b0f0d]">
+          <h2 id="process-steps-heading" className="sc-display mt-3 text-3xl sm:text-4xl lg:text-5xl text-[#050807]">
             {title}
           </h2>
-          <p className="sc-lede mt-3 text-[#0b0f0d] font-medium">
+          <p className="sc-lede mt-3 text-[#050807] font-medium">
             {subtitle}
           </p>
         </div>
@@ -187,15 +187,15 @@ export function ProcessSteps({
                   <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[var(--mint)] font-mono text-base font-bold text-white shadow-sm transition-transform group-hover:scale-105">
                     0{i + 1}
                   </span>
-                  <span className="font-mono text-xs font-bold text-[#0b0f0d] uppercase tracking-wider">
+                  <span className="font-mono text-xs font-bold text-[#050807] uppercase tracking-wider">
                     Phase 0{i + 1}
                   </span>
                 </div>
 
-                <h3 className="font-editorial text-lg sm:text-xl font-bold text-[#0b0f0d] leading-snug group-hover:text-[var(--emerald-deep)] transition-colors">
+                <h3 className="font-editorial text-lg sm:text-xl font-bold text-[#050807] leading-snug group-hover:text-[var(--emerald-deep)] transition-colors">
                   {s.title}
                 </h3>
-                <p className="mt-3 text-sm text-[#0b0f0d] font-medium leading-relaxed">
+                <p className="mt-3 text-sm text-[#050807] font-medium leading-relaxed">
                   {s.text}
                 </p>
               </div>
@@ -218,8 +218,8 @@ export function ProcessSteps({
               </svg>
             </div>
             <div>
-              <h4 className="font-bold text-base text-[#0b0f0d]">Kostenlose Schadensanalyse vor Ort</h4>
-              <p className="text-sm text-[#0b0f0d] font-medium mt-0.5">Wir messen die Durchfeuchtung direkt im Mauerwerk und erstellen ein verbindliches Festpreisangebot.</p>
+              <h4 className="font-bold text-base text-[#050807]">Kostenlose Schadensanalyse vor Ort</h4>
+              <p className="text-sm text-[#050807] font-medium mt-0.5">Wir messen die Durchfeuchtung direkt im Mauerwerk und erstellen ein verbindliches Festpreisangebot.</p>
             </div>
           </div>
           <a
@@ -261,10 +261,10 @@ export function TechnicalLayersFrame({
               <span className="h-1.5 w-1.5 rounded-full bg-[var(--mint)]" />
               <span>Bauphysik · DIN 18533 · Mehrschicht-System</span>
             </div>
-            <h2 id="layers-title" className="sc-display mt-4 text-3xl sm:text-4xl lg:text-5xl text-[#0b0f0d]">
+            <h2 id="layers-title" className="sc-display mt-4 text-3xl sm:text-4xl lg:text-5xl text-[#050807]">
               Schicht für Schicht: <span className="text-[var(--emerald-deep)]">Das System im Querschnitt</span>
             </h2>
-            <p className="sc-lede mt-4 text-[#0b0f0d] font-medium">
+            <p className="sc-lede mt-4 text-[#050807] font-medium">
               Eine dauerhafte Bauwerksabdichtung basiert auf dem exakt aufeinander abgestimmten Verbund spezialisierter Schutzlagen. Jede Schicht erfüllt eine unverzichtbare Funktion im dauerhaften Schutz gegen drückendes Wasser, aufsteigende Feuchte und Bausalze.
             </p>
           </div>
@@ -274,29 +274,29 @@ export function TechnicalLayersFrame({
             {/* Left: System Function & Warranties */}
             <div className="flex flex-col justify-between gap-6">
               <div className="rounded-2xl sm:rounded-3xl border border-line/10 bg-[#f7faf9] p-6 sm:p-8 flex-1">
-                <h3 className="font-editorial text-xl sm:text-2xl font-bold text-[#0b0f0d] leading-snug">
+                <h3 className="font-editorial text-xl sm:text-2xl font-bold text-[#050807] leading-snug">
                   Warum isolierte Einzelmaßnahmen versagen
                 </h3>
-                <p className="mt-3 text-sm sm:text-base text-[#0b0f0d] font-medium leading-relaxed">
+                <p className="mt-3 text-sm sm:text-base text-[#050807] font-medium leading-relaxed">
                   Ein oberflächlicher Anstrich oder reine Entfeuchtungsgeräte bekämpfen nur kurzfristige Symptome. Unser bauaufsichtlich zugelassenes System stoppt das Wasser direkt in den Kapillaren, wehrt drückendes Erdreich ab und sorgt für eine diffusionsoffene Austrocknung – ohne Aufgraben und ohne Bagger im Garten.
                 </p>
 
                 <div className="mt-6 pt-6 border-t border-line/8 space-y-3.5">
                   <div className="flex items-start gap-3">
                     <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[var(--mint)]/15 text-[var(--emerald-deep)] font-bold text-xs mt-0.5" aria-hidden="true">✓</span>
-                    <p className="text-xs sm:text-sm text-[#0b0f0d] font-medium leading-snug">
+                    <p className="text-xs sm:text-sm text-[#050807] font-medium leading-snug">
                       <strong className="text-[#000000] font-bold">Sperrt Kapillarwasser:</strong> Hydrophobiert die Poren dauerhaft auf molekularer Ebene.
                     </p>
                   </div>
                   <div className="flex items-start gap-3">
                     <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[var(--mint)]/15 text-[var(--emerald-deep)] font-bold text-xs mt-0.5" aria-hidden="true">✓</span>
-                    <p className="text-xs sm:text-sm text-[#0b0f0d] font-medium leading-snug">
+                    <p className="text-xs sm:text-sm text-[#050807] font-medium leading-snug">
                       <strong className="text-[#000000] font-bold">Druckwasserdicht:</strong> Hält auch bei starkem Hangwasser und Regen zuverlässig dicht.
                     </p>
                   </div>
                   <div className="flex items-start gap-3">
                     <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[var(--mint)]/15 text-[var(--emerald-deep)] font-bold text-xs mt-0.5" aria-hidden="true">✓</span>
-                    <p className="text-xs sm:text-sm text-[#0b0f0d] font-medium leading-snug">
+                    <p className="text-xs sm:text-sm text-[#050807] font-medium leading-snug">
                       <strong className="text-[#000000] font-bold">Salzresistent & atmungsaktiv:</strong> Lagert Salze schadlos ein und beugt Schimmel vor.
                     </p>
                   </div>
@@ -317,11 +317,11 @@ export function TechnicalLayersFrame({
                 <div className="grid grid-cols-2 gap-3">
                   <div className="rounded-xl bg-white border border-line/8 p-3.5 shadow-2xs">
                     <span className="block font-bold text-lg sm:text-xl text-[var(--emerald-deep)]">25 Jahre</span>
-                    <span className="text-[#0b0f0d] text-xs font-semibold">SchimmelPeter® Produktgarantie</span>
+                    <span className="text-[#050807] text-xs font-semibold">SchimmelPeter® Produktgarantie</span>
                   </div>
                   <div className="rounded-xl bg-white border border-line/8 p-3.5 shadow-2xs">
                     <span className="block font-bold text-lg sm:text-xl text-[var(--emerald-deep)]">10 Jahre</span>
-                    <span className="text-[#0b0f0d] text-xs font-semibold">SOS Abdichtung Handwerksgarantie</span>
+                    <span className="text-[#050807] text-xs font-semibold">SOS Abdichtung Handwerksgarantie</span>
                   </div>
                 </div>
 
@@ -339,14 +339,14 @@ export function TechnicalLayersFrame({
               <div>
                 <div className="flex flex-wrap items-center justify-between gap-3 mb-6 pb-4 border-b border-line/8">
                   <div>
-                    <h3 className="font-editorial text-lg sm:text-xl font-bold text-[#0b0f0d]">
+                    <h3 className="font-editorial text-lg sm:text-xl font-bold text-[#050807]">
                       Funktion der einzelnen Schichten
                     </h3>
-                    <p className="text-xs text-[#0b0f0d] font-semibold mt-0.5">
+                    <p className="text-xs text-[#050807] font-semibold mt-0.5">
                       Systemaufbau vom Baugrund bis zur Wandoberfläche
                     </p>
                   </div>
-                  <span className="inline-flex items-center gap-1.5 font-mono text-xs text-[#0b0f0d] font-bold bg-white px-3 py-1 rounded-full border border-line/10 shadow-2xs">
+                  <span className="inline-flex items-center gap-1.5 font-mono text-xs text-[#050807] font-bold bg-white px-3 py-1 rounded-full border border-line/10 shadow-2xs">
                     <span className="h-1.5 w-1.5 rounded-full bg-[var(--mint)]" />
                     Erdreich ──► Wohnraum
                   </span>
@@ -368,16 +368,16 @@ export function TechnicalLayersFrame({
                           >
                             0{i + 1}
                           </span>
-                          <h4 className="font-bold text-base sm:text-[1.05rem] text-[#0b0f0d] group-hover:text-[var(--emerald-deep)] transition-colors">
+                          <h4 className="font-bold text-base sm:text-[1.05rem] text-[#050807] group-hover:text-[var(--emerald-deep)] transition-colors">
                             {l.name}
                           </h4>
                         </div>
-                        <span className="hidden sm:inline-flex text-[0.7rem] font-mono uppercase tracking-wider text-[#0b0f0d] font-bold bg-[#f7faf9] px-2.5 py-1 rounded-md border border-line/10 shrink-0">
+                        <span className="hidden sm:inline-flex text-[0.7rem] font-mono uppercase tracking-wider text-[#050807] font-bold bg-[#f7faf9] px-2.5 py-1 rounded-md border border-line/10 shrink-0">
                           {layerRoles[i] || `Schicht 0${i + 1}`}
                         </span>
                       </div>
 
-                      <p className="text-sm text-[#0b0f0d] font-medium leading-relaxed sm:pl-11 mt-1.5 sm:mt-0">
+                      <p className="text-sm text-[#050807] font-medium leading-relaxed sm:pl-11 mt-1.5 sm:mt-0">
                         {l.text}
                       </p>
                     </div>
@@ -386,7 +386,7 @@ export function TechnicalLayersFrame({
               </div>
 
               <div className="mt-6 pt-4 border-t border-line/8">
-                <p className="text-xs text-[#0b0f0d] font-medium leading-relaxed">
+                <p className="text-xs text-[#050807] font-medium leading-relaxed">
                   <strong className="text-[#000000] font-bold">Wichtig:</strong> Die genaue Zusammensetzung und Stärke der Schichten wird bei der kostenlosen Vor-Ort-Messung exakt auf das Mauerwerk Ihres Objekts (Ziegel, Bruchstein, Beton) abgestimmt.
                 </p>
               </div>
@@ -413,8 +413,8 @@ export function Prose({
       {title && (
         <div className="mb-2">
           <p className="sc-label text-[var(--emerald-deep)] font-mono text-xs uppercase tracking-widest font-bold">Fachwissen</p>
-          <h2 className="sc-display mt-3 text-3xl sm:text-4xl text-[#0b0f0d]">{title}</h2>
-          {subtitle && <p className="sc-lede mt-3 text-[#0b0f0d] font-medium max-w-3xl">{subtitle}</p>}
+          <h2 className="sc-display mt-3 text-3xl sm:text-4xl text-[#050807]">{title}</h2>
+          {subtitle && <p className="sc-lede mt-3 text-[#050807] font-medium max-w-3xl">{subtitle}</p>}
         </div>
       )}
       {sections.map((s, idx) => (
@@ -426,16 +426,16 @@ export function Prose({
             <span className="flex h-7 w-7 items-center justify-center rounded-lg bg-[var(--mint)]/10 font-mono text-xs font-bold text-[var(--emerald-deep)]">
               {String(idx + 1).padStart(2, "0")}
             </span>
-            <span className="font-mono text-xs uppercase tracking-wider text-[#0b0f0d] font-bold">Fachinformation</span>
+            <span className="font-mono text-xs uppercase tracking-wider text-[#050807] font-bold">Fachinformation</span>
           </div>
 
-          <h3 className="font-editorial text-2xl sm:text-3xl font-bold leading-tight text-[#0b0f0d]">
+          <h3 className="font-editorial text-2xl sm:text-3xl font-bold leading-tight text-[#050807]">
             {keep(s.heading)}
           </h3>
 
           <div className="mt-5 space-y-4">
             {s.paragraphs.map((p, i) => (
-              <p key={i} className="text-[#0b0f0d] font-medium text-base leading-relaxed">
+              <p key={i} className="text-[#050807] font-normal text-base sm:text-[1.05rem] leading-[1.74] text-justify hyphens-auto">
                 {hy(p)}
               </p>
             ))}
@@ -450,7 +450,7 @@ export function Prose({
                 {s.bullets.map((b) => (
                   <li
                     key={b}
-                    className="flex items-start gap-3 rounded-2xl bg-[#f7faf9] border border-line/8 p-3.5 text-sm font-semibold text-[#0b0f0d]"
+                    className="flex items-start gap-3 rounded-2xl bg-[#f7faf9] border border-line/8 p-3.5 text-sm font-semibold text-[#050807]"
                   >
                     <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[var(--mint)]/15 text-[var(--mint)] font-bold text-xs mt-0.5" aria-hidden="true">
                       ✓
@@ -512,11 +512,11 @@ export function LinkGrid({ title, links }: { title: string; links: { href: strin
           <li key={l.href}>
             <a
               href={l.href}
-              className="flex min-h-[56px] items-center justify-between gap-3 rounded-2xl border border-line/12 bg-white px-5 py-4 font-semibold text-[#0b0f0d] shadow-sm hover:border-[var(--emerald-deep)] hover:shadow-md transition-all"
+              className="flex min-h-[56px] items-center justify-between gap-3 rounded-2xl border border-line/12 bg-white px-5 py-4 font-semibold text-[#050807] shadow-sm hover:border-[var(--emerald-deep)] hover:shadow-md transition-all"
             >
               <span>
                 {l.label}
-                {l.sub ? <span className="block text-xs font-semibold text-[#0b0f0d]">{l.sub}</span> : null}
+                {l.sub ? <span className="block text-xs font-semibold text-[#050807]">{l.sub}</span> : null}
               </span>
               <span aria-hidden="true" className="text-[var(--emerald-deep)] font-bold">
                 →
@@ -528,3 +528,4 @@ export function LinkGrid({ title, links }: { title: string; links: { href: strin
     </section>
   );
 }
+

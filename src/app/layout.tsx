@@ -30,6 +30,16 @@ const mono = localFont({
   preload: false,
 });
 
+const latex = localFont({
+  src: [
+    { path: "../fonts/LM-regular.woff2", weight: "400", style: "normal" },
+    { path: "../fonts/LM-italic.woff2", weight: "400", style: "italic" },
+    { path: "../fonts/LM-bold.woff2", weight: "700", style: "normal" },
+  ],
+  variable: "--font-latex",
+  display: "swap",
+});
+
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
   title: {
@@ -68,7 +78,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html
       lang="de"
       data-theme="light"
-      className={`${plex.variable} ${mono.variable}`}
+      className={`${plex.variable} ${mono.variable} ${latex.variable}`}
       suppressHydrationWarning
     >
       <head>

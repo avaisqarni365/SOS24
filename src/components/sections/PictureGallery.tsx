@@ -60,11 +60,11 @@ export default function PictureGallery({ hideHeader = false }: { hideHeader?: bo
           <div className="grid gap-6 lg:grid-cols-[1fr_1fr] lg:items-end mb-10">
             <div>
               <p className="sc-label text-[#0f5c49] font-bold">{t("gallery.eyebrow")}</p>
-              <h2 id="galerie-title" className="sc-display mt-3 text-4xl sm:text-5xl lg:text-6xl text-[#0b0f0d]">
+              <h2 id="galerie-title" className="sc-display mt-3 text-4xl sm:text-5xl lg:text-6xl text-[#050807]">
                 {t("gallery.h1")} <em className="text-[var(--brick)]">{t("gallery.accent")}</em>
               </h2>
             </div>
-            <p className="sc-body text-[#0b0f0d] font-medium">{t("gallery.sub")}</p>
+            <p className="sc-body text-[#050807] font-medium">{t("gallery.sub")}</p>
           </div>
         )}
 
@@ -81,7 +81,7 @@ export default function PictureGallery({ hideHeader = false }: { hideHeader?: bo
               className={`min-h-[44px] rounded-full border px-4 text-sm font-semibold transition-all ${
                 category === c.id
                   ? "border-transparent bg-[var(--grad)] text-white shadow-sm"
-                  : "border-line/15 bg-white text-[#0b0f0d] hover:border-[var(--emerald-deep)] hover:bg-[#f7faf9]"
+                  : "border-line/15 bg-white text-[#050807] hover:border-[var(--emerald-deep)] hover:bg-[#f7faf9]"
               }`}
             >
               {c.label}
@@ -122,8 +122,8 @@ export default function PictureGallery({ hideHeader = false }: { hideHeader?: bo
                 </span>
                 <span className="flex flex-1 flex-col gap-2 p-4 sm:p-5">
                   <span className="font-editorial text-2xl leading-tight text-[#050807] font-bold">{it.title}</span>
-                  <span className="text-sm leading-relaxed text-[#0b0f0d] font-medium">{it.text}</span>
-                  <span className="mt-auto flex items-center justify-between pt-3 font-mono text-[0.72rem] text-[#0b0f0d] font-semibold border-t border-line/8">
+                  <span className="text-sm leading-relaxed text-[#050807] font-medium">{it.text}</span>
+                  <span className="mt-auto flex items-center justify-between pt-3 font-mono text-[0.72rem] text-[#050807] font-semibold border-t border-line/8">
                     <span>Foto: SchimmelPeter®</span>
                     <span className="text-[#0f5c49] font-bold">{t("gallery.zoomHint")} →</span>
                   </span>
@@ -177,3 +177,4 @@ export default function PictureGallery({ hideHeader = false }: { hideHeader?: bo
     </section>
   );
 }
+
