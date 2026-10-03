@@ -153,8 +153,8 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
 
             <div>
               {photo ? (
-                <div className="rounded-3xl border border-line/12 bg-white p-3 shadow-[0_4px_24px_-8px_rgba(16,40,30,0.12)]">
-                  <figure className="group relative m-0 overflow-hidden rounded-2xl bg-[#f7faf9] aspect-[16/11] border border-black/5">
+                <div className="rounded-[28px] border border-line/10 bg-white p-3.5 shadow-[0_4px_20px_-4px_rgba(16,40,30,0.08),0_16px_40px_-10px_rgba(16,40,30,0.12)] hover:border-[var(--emerald-deep)]/40 hover:shadow-[0_8px_32px_-4px_rgba(16,40,30,0.14),0_24px_52px_-10px_rgba(19,117,93,0.16)] transition-all duration-300">
+                  <figure className="group relative m-0 overflow-hidden rounded-[20px] bg-[#f7faf9] aspect-[16/11] border border-black/5 shadow-inner">
                     <img
                       src={photo.src}
                       srcSet={photo.src2x ? `${photo.src} ${photo.w}w, ${photo.src2x} 960w` : undefined}
@@ -164,9 +164,9 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
                       alt={photo.alt}
                       fetchPriority="high"
                       decoding="async"
-                      className="h-full w-full object-cover transition-transform duration-500 ease-out group-hover:scale-105"
+                      className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
                     />
-                    <div className="absolute top-3 left-3 inline-flex items-center gap-1.5 rounded-full bg-white/94 px-3 py-1 text-xs font-bold text-[#050807] shadow-sm backdrop-blur-md border border-black/5">
+                    <div className="absolute top-3.5 left-3.5 inline-flex items-center gap-1.5 rounded-full bg-white/95 px-3.5 py-1.5 text-xs font-bold text-[#050807] shadow-sm backdrop-blur-md border border-white/70">
                       <span className="h-1.5 w-1.5 rounded-full bg-[var(--mint)]" />
                       <span>{page.navTitle}</span>
                     </div>
@@ -174,7 +174,7 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
                       Foto: SchimmelPeter®
                     </figcaption>
                   </figure>
-                  <div className="mt-3 flex items-center justify-between px-2 py-1 text-xs">
+                  <div className="mt-3.5 flex items-center justify-between px-2 py-1 text-xs">
                     <span className="font-semibold text-[#050807]">Fachverfahren: {page.navTitle}</span>
                     <span className="font-mono text-[var(--emerald-deep)] font-bold">Geprüft &amp; Zertifiziert</span>
                   </div>

@@ -26,7 +26,9 @@ module.exports = {
       fontFamily: {
         latex: ['var(--font-latex)', '"Latin Modern Roman"', '"Computer Modern"', '"TeX Gyre Termes"', 'Georgia', 'serif'],
         editorial: ['var(--font-latex)', '"Latin Modern Roman"', '"Computer Modern"', '"TeX Gyre Termes"', 'Georgia', 'serif'],
-        sans: ['var(--font-sans)', '"IBM Plex Sans Ext"', '-apple-system', 'sans-serif'],
+        sans: ['var(--font-latex)', '"Latin Modern Roman"', '"Computer Modern"', '"TeX Gyre Termes"', 'Georgia', 'serif'],
+        serif: ['var(--font-latex)', '"Latin Modern Roman"', '"Computer Modern"', '"TeX Gyre Termes"', 'Georgia', 'serif'],
+        plex: ['var(--font-sans)', '"IBM Plex Sans Ext"', '-apple-system', 'sans-serif'],
         mono: ['var(--font-mono)', 'ui-monospace', 'SFMono-Regular', 'Menlo', 'monospace'],
       },
       borderRadius: {
