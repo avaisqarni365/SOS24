@@ -1,7 +1,7 @@
 import { SERVICE_CARDS, type ServiceCard } from "@/data/services";
 import { FAQS, COMPANY_INFO } from "@/data/content-data";
-import { CITY_PAGES, SERVICE_PAGES } from "@/data/seo-pages";
-import { LayerRuler, FaqCards } from "@/components/seo/SubpageParts";
+import { CITY_PAGES } from "@/data/seo-pages";
+import { FaqCards } from "@/components/seo/SubpageParts";
 import { MAP_AREAS, MAP_ESSEN, MAP_H, MAP_W } from "@/data/region-map";
 import OsmMap from "@/components/interactive/OsmMap";
 import { Home, Layers, ShieldCheck, SprayCan, Gauge, Wrench, type LucideIcon } from "lucide-react";
