@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
-import { Menu, Phone, X, MessageCircle, ShieldCheck, ChevronDown } from "lucide-react";
+import { Menu, Phone, X, MessageCircle, ShieldCheck } from "lucide-react";
 import { COMPANY_INFO } from "@/data/content-data";
 import { SERVICE_CARDS } from "@/data/services";
 import Logo from "@/components/brand/Logo";
@@ -12,13 +12,6 @@ import { useLanguage } from "@/i18n/LanguageContext";
 
 /* The 3D viewer, the scanner and the measurement proof are one tab now
    (/labor/), not two anchors into a very long landing page. */
-const LINKS = [
-  { href: "/labor/", key: "nav.simulation" },
-  { href: "/galerie/", key: "nav.gallery" },
-  { href: "/kostenrechner/", key: "nav.calculator" },
-  { href: "/#servicegebiet", key: "nav.region" },
-];
-
 /** The six towns of the service area (kept small here: no page texts in the menu bundle). */
 const CITIES = [
   { slug: "wuppertal", name: "Wuppertal" },
@@ -42,62 +35,6 @@ const AUDIENCE = [
   { href: "/#fuer-hausbesitzer", label: "Für Hausbesitzer" },
   { href: "/#fuer-unternehmen", label: "Für Hausverwaltungen & Unternehmen" },
 ];
-
-/** "Leistungen" in the main bar: all six services with their picture, and the overview page. */
-function ServicesMenu({ label }: { label: string }) {
-  const [open, setOpen] = useState(false);
-  const ref = useRef<HTMLLIElement>(null);
-  const timer = useRef<ReturnType<typeof setTimeout>>();
-  useEffect(() => {
-    if (!open) return;
-    const onDown = (e: MouseEvent) => {
-      if (ref.current && !ref.current.contains(e.target as Node)) setOpen(false);
-    };
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setOpen(false);
-    };
-    document.addEventListener("mousedown", onDown);
-    document.addEventListener("keydown", onKey);
-    return () => {
-      document.removeEventListener("mousedown", onDown);
-      document.removeEventListener("keydown", onKey);
-    };
-  }, [open]);
-  const enter = () => {
-    clearTimeout(timer.current);
-    setOpen(true);
-  };
-  const leave = () => {
-    timer.current = setTimeout(() => setOpen(false), 160);
-  };
-  return (
-    <li ref={ref} className="relative" onMouseEnter={enter} onMouseLeave={leave}>
-      <button type="button" className="site-nav__trigger" aria-expanded={open} aria-controls="services-menu" onClick={() => setOpen(!open)}>
-        {label} <ChevronDown className="h-4 w-4" aria-hidden="true" />
-      </button>
-      <div id="services-menu" className="services-menu" hidden={!open}>
-        <ul>
-          {SERVICE_CARDS.map((s) => (
-            <li key={s.slug}>
-              <a href={`/leistungen/${s.slug}/`} onClick={() => setOpen(false)}>
-                <span className={`services-menu__img services-menu__img--${s.image.fit}`}>
-                  <img src={s.image.src} alt="" width={64} height={44} loading="lazy" decoding="async" />
-                </span>
-                <span className="services-menu__t">{s.title}</span>
-                <span className="services-menu__arrow" aria-hidden="true">
-                  →
-                </span>
-              </a>
-            </li>
-          ))}
-        </ul>
-        <a className="services-menu__all" href="/leistungen/" onClick={() => setOpen(false)}>
-          Alle Leistungen im Überblick <span aria-hidden="true">→</span>
-        </a>
-      </div>
-    </li>
-  );
-}
 
 export default function Navbar() {
   const [open, setOpen] = useState(false);
@@ -158,31 +95,19 @@ export default function Navbar() {
             <Logo tone="light" />
           </a>
 
-          <nav aria-label="Hauptnavigation" className="site-nav hidden shrink-0 min-[1200px]:block">
-            <ul className="flex items-center">
-              <ServicesMenu label={t("nav.services")} />
-              {LINKS.map((l) => (
-                <li key={l.href}>
-                  <a href={l.href} onClick={(e) => handleNavClick(e, l.href)} className="block whitespace-nowrap">
-                    {t(l.key)}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </nav>
 
           <div className="flex shrink-0 items-center gap-2 sm:gap-2.5">
             <AppearanceMenu />
             <div className="hidden sm:block">
               <LanguageSelector />
             </div>
-            <a href="/#kontakt" onClick={(e) => handleNavClick(e, "/#kontakt")} className="btn-shine hidden min-h-[44px] items-center gap-2 whitespace-nowrap rounded-full px-5 text-[0.9375rem] font-semibold sm:inline-flex">
+            <a href="/#kontakt" onClick={(e) => handleNavClick(e, "/#kontakt")} className="header-cta hidden min-h-[44px] items-center gap-2 whitespace-nowrap rounded-full px-5 text-[0.9375rem] font-semibold sm:inline-flex">
               {t("nav.cta")}
             </a>
             <button
               type="button"
               onClick={() => setOpen(!open)}
-              className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-line/15 bg-[var(--ink)] text-[var(--bone)] hover:border-accent-deep min-[1200px]:hidden"
+              className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-line/15 bg-[var(--ink)] text-[var(--bone)] hover:border-accent-deep "
               aria-label={open ? "Menü schließen" : "Menü öffnen"}
               aria-expanded={open}
               aria-controls="mobile-menu"
@@ -198,7 +123,7 @@ export default function Navbar() {
            three taps to reach a service and a lot of chrome for a phone. This
            is the whole site as a set-serif index, with the two contact
            channels pinned to the bottom where a thumb reaches them. */
-        <div id="mobile-menu" className="mnav min-[1200px]:hidden" role="dialog" aria-modal="true" aria-label="Menü">
+        <div id="mobile-menu" className="mnav " role="dialog" aria-modal="true" aria-label="Menü">
           <div className="mnav__inner">
             <nav className="mnav__primary" aria-label="Hauptbereiche">
               {PRIMARY.map((l, i) => (

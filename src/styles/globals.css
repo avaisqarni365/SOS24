@@ -4976,3 +4976,48 @@ html[data-theme="dark"] { --logo-drop: #6aa2ec; }
   margin-right: 0.28rem;
 }
 @media (max-width: 359px) { .logo__line { font-size: 1.05rem; } }
+
+/* ===================================================== ONE MENU ===========
+   The hamburger menu is the navigation at every width now: the inline links
+   and the thumbnail dropdown are gone, so desktop and phone get the same
+   picture-free panel. At desktop it lays out as a spread instead of a list.
+   ======================================================================== */
+/* the header CTA stays inside the scheme: white on the navy bar, nothing
+   brighter than the drop */
+.header-cta {
+  background: #ffffff;
+  color: var(--forest);
+  box-shadow: 0 1px 2px rgb(5 14 35 / 0.25);
+  transition: transform 160ms var(--sc-ease-out), box-shadow 160ms;
+}
+.header-cta:hover,
+.header-cta:focus-visible {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px -8px rgb(5 14 35 / 0.6);
+}
+.band-ink .header-cta,
+.site-header .header-cta { color: var(--forest); }
+
+@media (min-width: 900px) {
+  .mnav__inner {
+    max-width: 68rem;
+    margin-inline: auto;
+    display: grid;
+    grid-template-columns: 1.15fr 1fr;
+    column-gap: 5rem;
+    align-content: start;
+    padding-top: 3rem;
+  }
+  .mnav__primary { grid-column: 1; grid-row: 1 / span 4; align-content: start; }
+  .mnav__label { font-size: 2.3rem; }
+  .mnav__primary a { padding: 1.35rem 0; }
+  .mnav__block, .mnav__lang { grid-column: 2; margin-top: 0; }
+  .mnav__block { margin-bottom: 2.25rem; }
+  .mnav__lang { margin-top: 0.5rem; padding-top: 1.25rem; }
+  .mnav__foot {
+    grid-template-columns: repeat(2, minmax(0, 17rem));
+    justify-content: center;
+    gap: 0.8rem;
+  }
+}
+@media (prefers-reduced-motion: reduce) { .header-cta { transition: none; } }
