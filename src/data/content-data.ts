@@ -8,14 +8,6 @@ export interface ServiceItem {
   cta: string;
 }
 
-export interface RegionCity {
-  name: string;
-  plzPrefix: string[];
-  districts: string[];
-  responseHours: string;
-  highlight: string;
-}
-
 export const COMPANY_INFO = {
   name: "sos-abdichtung",
   fullName: "sos-abdichtung, SchimmelPeter® Partnerbetrieb",
@@ -93,75 +85,6 @@ export const SERVICES: ServiceItem[] = [
       "Geeignet für WU-Betonkeller & Weiße Wannen"
     ],
     cta: "Rissverpressung anfragen"
-  }
-];
-
-export const REGIONAL_CITIES: RegionCity[] = [
-  {
-    name: "Wuppertal",
-    plzPrefix: ["42103", "42105", "42107", "42109", "42111", "42113", "42115", "42117", "42119", "42275", "42277", "42279", "42281", "42283", "42285", "42287", "42289", "42327", "42329", "42349", "42369", "42389", "42399"],
-    districts: ["Elberfeld", "Barmen", "Vohwinkel", "Cronenberg", "Ronsdorf", "Uellendahl", "Langerfeld"],
-    responseHours: "24 Std.",
-    highlight: "Spezialist für historische Wuppertaler Altbauten & Hanglagen im Tal der Wupper"
-  },
-  {
-    name: "Solingen",
-    plzPrefix: ["42651", "42653", "42655", "42657", "42659", "42697", "42699"],
-    districts: ["Mitte", "Ohligs", "Wald", "Gräfrath", "Höhscheid", "Aufderhöhe"],
-    responseHours: "24-48 Std.",
-    highlight: "Kellersanierung & Schimmelschutz in der gesamten Klingenstadt"
-  },
-  {
-    name: "Remscheid",
-    plzPrefix: ["42853", "42855", "42857", "42859", "42897", "42899"],
-    districts: ["Alt-Remscheid", "Lennep", "Lüttringhausen", "Süd"],
-    responseHours: "24-48 Std.",
-    highlight: "Feuchte Kellerwände trockenlegen im bergischen Höhenklima"
-  },
-  {
-    name: "Velbert",
-    plzPrefix: ["42549", "42551", "42553", "42555"],
-    districts: ["Velbert-Mitte", "Neviges", "Langenberg"],
-    responseHours: "24-48 Std.",
-    highlight: "Fachmännische Innenabdichtung und Horizontalsperren"
-  },
-  {
-    name: "Haan",
-    plzPrefix: ["42781"],
-    districts: ["Haan-Mitte", "Gruiten"],
-    responseHours: "24-48 Std.",
-    highlight: "Sanierung von Souterrain & Kellerwohnungen im Raum 42"
-  }
-];
-
-export const PROCESS_PIPELINE = [
-  {
-    step: "01",
-    title: "Unverbindliche Schadensanalyse",
-    icon: "🔍",
-    time: "Schritt 1",
-    desc: "Außen- und Innenbesichtigung mit Feuchtemessung. Herr Mahmood ermittelt die genaue Ursache, zum Beispiel kapillar aufsteigende Feuchte, Kondensat, eine undichte Leitung oder mangelhafte Drainage."
-  },
-  {
-    step: "02",
-    title: "Verbindliches Angebot",
-    icon: "📋",
-    time: "Schritt 2",
-    desc: "Auf Basis der Analyse erhalten Sie ein verbindliches Angebot mit der empfohlenen Lösung, ohne versteckte Mehrkosten."
-  },
-  {
-    step: "03",
-    title: "Sanierung nach Plan",
-    icon: "💉",
-    time: "Schritt 3",
-    desc: "Wir erstellen den Sanierungsplan gemeinsam mit Ihnen und sanieren von innen, zum Beispiel mit einer neuen Horizontalsperre per Injektion, ohne Erdarbeiten."
-  },
-  {
-    step: "04",
-    title: "Gemeinsame Abnahme",
-    icon: "☀️",
-    time: "Schritt 4",
-    desc: "Nach der Sanierung nehmen Sie die Arbeiten gemeinsam mit uns ab, die Baustelle wird sauber übergeben. Dazu 10 Jahre Garantie auf unsere Arbeit und 25 Jahre Produktgarantie von SchimmelPeter."
   }
 ];
 
