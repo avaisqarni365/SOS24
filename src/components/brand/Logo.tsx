@@ -98,12 +98,35 @@ export function LogoMark({ size = 36, className = "" }: { size?: number; classNa
   );
 }
 
-/** The lockup, used everywhere. */
+/**
+ * The navigation lock — the "new way" for the header.
+ *
+ * The full emblem (roof over SOS over ABDICHTUNG) is a poster mark: at 60px
+ * its ten shapes and gradients blur into each other. Navigation needs the
+ * opposite: a flat, compact mark and a one-line wordmark, sharp at any size.
+ * The mark keeps the identity's three ideas -- roof, chimney, drop -- in
+ * solid fills: the silhouette in the surface ink, the drop in the water blue.
+ */
+function MarkNav({ size = 34 }: { size?: number }) {
+  return (
+    <svg width={size} height={size} viewBox="0 0 48 48" aria-hidden="true" focusable="false" fill="none">
+      <rect x="32.6" y="10.2" width="5.6" height="12.6" rx="0.8" fill="currentColor" />
+      <path d="M2.6 31.4 24 8.6l21.4 22.8h-7.2L24 17.4 9.8 31.4Z" fill="currentColor" />
+      <path
+        d="M24 19.4c0 0 6.2 7.4 6.2 11.2a6.2 6.2 0 0 1-12.4 0c0-3.8 6.2-11.2 6.2-11.2Z"
+        fill="var(--logo-drop)"
+      />
+    </svg>
+  );
+}
+
 export default function Logo({ tone = "auto", sub }: { tone?: "auto" | "light" | "dark"; sub?: string }) {
   return (
     <span className="logo">
-      <LogoLockup height={62} />
-      {sub ? <span className="logo__sub">{sub}</span> : null}
+      <MarkNav size={36} />
+      <span className="logo__line">
+        <strong>SOS</strong> Abdichtung
+      </span>
     </span>
   );
 }

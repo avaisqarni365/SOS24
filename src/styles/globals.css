@@ -4946,3 +4946,33 @@ html[data-theme="dark"] .sc-label { background: transparent !important; color: v
   text-align: start !important;
 }
 .footer__wordmark span { font-weight: 600; opacity: 0.8; }
+
+/* ---------------------------------------------------- navigation lock -----
+   Flat and sharp at header size: the mark takes the surface ink, the drop
+   takes the water, the wordmark is one line. No gradients below poster size.
+   The full emblem (LogoLockup) stays for large-format uses. */
+:root { --logo-drop: #1e6bd6; }
+.band-ink, .contact-band { --logo-drop: #7cc7e8; }
+html[data-theme="dark"] { --logo-drop: #6aa2ec; }
+.logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: var(--ink-on-surface);
+  filter: none;
+}
+.logo svg { display: block; flex: none; }
+.logo__line {
+  font-size: 1.22rem;
+  font-weight: 500;
+  letter-spacing: 0.005em;
+  line-height: 1;
+  white-space: nowrap;
+  color: inherit;
+}
+.logo__line strong {
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  margin-right: 0.28rem;
+}
+@media (max-width: 359px) { .logo__line { font-size: 1.05rem; } }
