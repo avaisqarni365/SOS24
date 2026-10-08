@@ -27,7 +27,7 @@ if (!existsSync(ROOT)) {
   process.exit(1);
 }
 
-createServer((req, res) => {
+const server = createServer((req, res) => {
   const url = decodeURIComponent((req.url || "/").split("?")[0]);
   let file = path.join(ROOT, url);
   if (!file.startsWith(ROOT)) {
@@ -47,7 +47,19 @@ createServer((req, res) => {
     file = path.join(ROOT, "404.html");
   }
   res.writeHead(status, { "Content-Type": TYPES[path.extname(file)] || "application/octet-stream" });
-  createReadStream(file).pipe(res);
-}).listen(PORT, () => {
+  if (req.method === "HEAD") {
+    res.end();
+    return;
+  }
+  // A client that disconnects mid-download makes the stream emit 'error';
+  // without these handlers that is an uncaught event and the whole server
+  // process dies on the first impatient visitor.
+  const stream = createReadStream(file);
+  stream.on("error", () => res.destroy());
+  res.on("close", () => stream.destroy());
+  stream.pipe(res);
+});
+server.on("clientError", (err, socket) => socket.destroy());
+server.listen(PORT, () => {
   console.log(`\n  sos-abdichtung preview: http://localhost:${PORT}\n  (Ctrl+C to stop)\n`);
 });
