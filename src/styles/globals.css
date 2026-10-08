@@ -5083,3 +5083,314 @@ main :is(.prose-sos, .faq-card__a, .chem__intro, .rx__note, .step__d) {
 /* the menu reads as navigation, not as a poster */
 .mnav__label { font-weight: 600; letter-spacing: -0.02em; }
 .mnav__list a { font-size: 1rem; font-weight: 500; }
+
+/* ===========================================================================
+   SUN & WATER - the light theme, final.
+   Sun white grounds, water-tinted bands, and a deliberate three-step text
+   hierarchy in dark inks:
+     headings  #0B1B2E  near-black water navy, the strongest voice
+     body      #24364F  dark slate, softer than headings so they lead
+     muted     #56677F  captions and secondary lines (6:1 on white)
+   Water carries every accent: #0B63A8 for text and actions (6.6:1 on
+   white), #1784C7 for marks and markers, aqua #1FA9D6 for glow only.
+   Scoped to the light theme; the dark theme keeps its navy plates.
+   ========================================================================= */
+html:not([data-theme="dark"]) {
+  --c-ink: 255 255 255;
+  --c-ink2: 255 255 255;
+  --c-ink3: 241 248 253;
+  --c-bone: 36 54 79;
+  --c-bone2: 11 27 46;
+  --c-soft: 86 103 127;
+  --c-mint: 11 99 168;
+  --c-emerald: 23 132 199;
+  --c-accent-deep: 11 99 168;
+  --c-line: 11 27 46;
+  --ink-on-surface: #24364f;
+  --text-on-bone: #24364f;
+  --head-on-bone: #0b1b2e;
+  --emerald-deep: #0b63a8;
+  --electric: #0b63a8;
+  --royal: #0b63a8;
+  --royal-2: #1784c7;
+  --royal-deep: #0a4f8a;
+  --aqua: #1fa9d6;
+  --aqua-deep: #0a6fa8;
+  --paper-0: #ffffff;
+  --paper-1: #f1f8fd;
+  --paper-2: #e3f1fa;
+  --paper: #ffffff;
+  --band-stone: #ffffff;
+  --band-mint: #f1f8fd;
+  --card: #ffffff;
+  --card-translucent: rgb(255 255 255 / 0.92);
+  --forest: #ffffff;
+  --forest-2: #f1f8fd;
+  --grad: #0b63a8;
+  --btn-ink: #ffffff;
+  /* the CTA gradient's brightest stop still holds white text at 4.9:1 */
+  --grad-cta: linear-gradient(118deg, #0a4f8a 0%, #0b63a8 52%, #0f74bf 100%);
+  --grad-tile:
+    radial-gradient(64% 54% at 100% 0%, rgb(31 169 214 / 0.45) 0%, transparent 62%),
+    linear-gradient(135deg, #0a4f8a 0%, #0f74bf 100%);
+  --grad-em: linear-gradient(95deg, #0a4f8a 0%, #0b63a8 45%, #1590c9 100%);
+  --frame-line: rgb(11 27 46 / 0.09);
+  --line: rgb(11 27 46 / 0.1);
+  --lk-a: #1d548f;
+  --lk-b: #0f3460;
+  --ld-a: #66c2ee;
+  --ld-b: #1580c8;
+  --logo-drop: #1a90d2;
+  --brand: #0f3460;
+  --brand-2: #1580c8;
+  --nav-bg: rgb(255 255 255 / 0.9);
+  --sc-canvas: #ffffff;
+  --sc-surface: #ffffff;
+  --sc-ink: #24364f;
+  --sc-ink-soft: #56677f;
+  --sc-accent: #0b63a8;
+  --map-bg: #f1f8fd;
+  --map-context: #e2edf5;
+  --stage-bg: radial-gradient(70% 60% at 50% 40%, #ffffff, transparent 72%),
+    linear-gradient(180deg, #f4f9fd 0%, #e3eef7 100%);
+  color-scheme: light;
+}
+
+/* ---- the plates become sun-white sections in the light theme ------------- */
+html:not([data-theme="dark"]) .band-ink {
+  background: #ffffff;
+  --c-ink: 255 255 255;
+  --c-ink2: 255 255 255;
+  --c-ink3: 241 248 253;
+  --c-bone: 36 54 79;
+  --c-bone2: 11 27 46;
+  --c-soft: 86 103 127;
+  --c-mint: 11 99 168;
+  --c-emerald: 23 132 199;
+  --c-accent-deep: 11 99 168;
+  --c-line: 11 27 46;
+  --line: rgb(11 27 46 / 0.1);
+  --frame-line: rgb(11 27 46 / 0.1);
+  --ink-on-surface: #24364f;
+  --text-on-bone: #24364f;
+  --head-on-bone: #0b1b2e;
+  --emerald-deep: #0b63a8;
+  --card: #ffffff;
+  --card-translucent: rgb(255 255 255 / 0.92);
+  --grad: #0b63a8;
+  --btn-ink: #ffffff;
+  --sc-ink: #24364f;
+  --sc-ink-soft: #56677f;
+  --sc-canvas: #ffffff;
+  --sc-surface: #ffffff;
+  --sc-accent: #0b63a8;
+  --brand: #0f3460;
+  --brand-2: #1580c8;
+  --lk-a: #1d548f;
+  --lk-b: #0f3460;
+  --ld-a: #66c2ee;
+  --ld-b: #1580c8;
+  --logo-drop: #1a90d2;
+  color: var(--ink-on-surface);
+  color-scheme: light;
+}
+
+/* the hero and the Lab opener: sun white with water light on it */
+html:not([data-theme="dark"]) .hero.band-ink,
+html:not([data-theme="dark"]) .lab-top.band-ink {
+  background:
+    radial-gradient(55% 75% at 96% 4%, rgb(31 169 214 / 0.2) 0%, transparent 62%),
+    radial-gradient(45% 60% at -6% 100%, rgb(11 99 168 / 0.1) 0%, transparent 68%),
+    linear-gradient(180deg, #f5fafe 0%, #ffffff 100%);
+  border-bottom: 1px solid rgb(11 27 46 / 0.06);
+}
+
+/* ---- text hierarchy: headings lead, body follows, muted recedes ---------- */
+html:not([data-theme="dark"]) :is(main, .mnav) :is(h1, h2, h3, h4):not(.sc-label),
+html:not([data-theme="dark"]) .sc-display,
+html:not([data-theme="dark"]) .band-ink .sc-display,
+html:not([data-theme="dark"]) .band-ink :is(h1, h2):not(.sc-label) {
+  color: var(--head-on-bone) !important;
+}
+/* the gradient feature tile keeps its white type */
+html:not([data-theme="dark"]) .services-grid > li:first-child .service-card__h { color: #ffffff !important; }
+
+html:not([data-theme="dark"]) :is(.band-ink, .contact-band) .sc-lede { color: #24364f !important; }
+html:not([data-theme="dark"]) main .sc-lede { color: #2c405c !important; }
+
+html:not([data-theme="dark"]) .band-ink :is(.sc-display, h1, h2) em,
+html:not([data-theme="dark"]) .contact-band :is(.sc-display, h1, h2) em {
+  background-image: var(--grad-em) !important;
+  -webkit-background-clip: text !important;
+  background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  color: #0b63a8 !important;
+}
+
+html:not([data-theme="dark"]) .sc-label,
+html:not([data-theme="dark"]) :is(.band-ink, .contact-band) .sc-label {
+  color: #0a6fa8 !important;
+  background: transparent !important;
+}
+
+/* links inside running text, emphasis, list markers */
+html:not([data-theme="dark"]) main :is(p, li, dd) a:not([class]) {
+  color: #0b63a8;
+  text-decoration: underline;
+  text-decoration-color: rgb(11 99 168 / 0.35);
+  text-underline-offset: 0.18em;
+}
+html:not([data-theme="dark"]) main :is(p, li, dd) a:not([class]):hover { text-decoration-color: currentColor; }
+html:not([data-theme="dark"]) main :is(p, li, dd) strong { color: #0b1b2e; font-weight: 650; }
+html:not([data-theme="dark"]) main ul li::marker { color: #1784c7; }
+
+/* ---- hero controls on white ----------------------------------------------- */
+html:not([data-theme="dark"]) .hero__btn--solid,
+html:not([data-theme="dark"]) .band-ink .hero__btn--solid {
+  background: var(--grad-cta);
+  box-shadow: 0 14px 30px -16px rgb(11 79 138 / 0.65);
+}
+html:not([data-theme="dark"]) .hero__btn--solid:hover { background: var(--grad-cta); filter: brightness(1.06); }
+html:not([data-theme="dark"]) .band-ink .hero__btn--solid,
+html:not([data-theme="dark"]) .band-ink .hero__btn--solid :is(span, strong) { color: #ffffff !important; }
+html:not([data-theme="dark"]) .hero__btn--ghost {
+  color: #0b1b2e;
+  background: rgb(255 255 255 / 0.75);
+  border-color: rgb(11 99 168 / 0.35);
+}
+html:not([data-theme="dark"]) .hero__btn--ghost:hover,
+html:not([data-theme="dark"]) .hero__btn--ghost:focus-visible { border-color: #0b63a8; background: #ffffff; }
+html:not([data-theme="dark"]) .hero__facts { border-top-color: rgb(11 27 46 / 0.1); }
+html:not([data-theme="dark"]) .hero__facts li { color: #3a4c66 !important; }
+html:not([data-theme="dark"]) .hero__facts li::before { color: #1784c7; }
+
+/* ---- Ablauf steps on white ------------------------------------------------- */
+html:not([data-theme="dark"]) .band-ink .step { border-top-color: rgb(11 27 46 / 0.12); }
+html:not([data-theme="dark"]) .band-ink .step__n {
+  color: #0b63a8 !important;
+  background: #ffffff !important;
+  border-color: rgb(11 99 168 / 0.35) !important;
+}
+html:not([data-theme="dark"]) .band-ink .step__d { color: #3a4c66 !important; }
+html:not([data-theme="dark"]) .band-ink .link-quiet { color: #0b63a8; border-bottom-color: rgb(11 99 168 / 0.35); }
+
+/* ---- header: frosted sun white, navy mark, water action ------------------ */
+html:not([data-theme="dark"]) .site-header__bar.band-ink {
+  background: rgb(255 255 255 / 0.88);
+  -webkit-backdrop-filter: blur(14px) saturate(1.4);
+  backdrop-filter: blur(14px) saturate(1.4);
+  border-bottom: 1px solid rgb(11 27 46 / 0.08);
+  box-shadow: 0 8px 24px -20px rgb(11 40 80 / 0.35);
+}
+html:not([data-theme="dark"]) .site-header__bar .logo { color: #0f3460; }
+html:not([data-theme="dark"]) .header-cta,
+html:not([data-theme="dark"]) .site-header .header-cta,
+html:not([data-theme="dark"]) .band-ink .header-cta {
+  background: var(--grad-cta);
+  color: #ffffff;
+  box-shadow: 0 8px 18px -10px rgb(11 79 138 / 0.6);
+}
+
+/* ---- Lab chapter index on white ------------------------------------------- */
+html:not([data-theme="dark"]) .lab-jump { border-top-color: rgb(11 27 46 / 0.1); }
+html:not([data-theme="dark"]) .lab-jump a {
+  color: #0a4f8a;
+  background: #ffffff;
+  border-color: rgb(11 99 168 / 0.3);
+}
+html:not([data-theme="dark"]) .lab-jump a:hover,
+html:not([data-theme="dark"]) .lab-jump a:focus-visible {
+  color: #ffffff;
+  background: #0b63a8;
+  border-color: #0b63a8;
+}
+
+/* ---- contact band: a water panel with dark text and white cards ---------- */
+html:not([data-theme="dark"]) .contact-band {
+  background:
+    radial-gradient(60% 80% at 100% 0%, rgb(31 169 214 / 0.22) 0%, transparent 62%),
+    linear-gradient(135deg, #eaf5fc 0%, #d9edf9 100%);
+  color: #24364f;
+  box-shadow: none;
+  border-top: 1px solid rgb(11 99 168 / 0.1);
+  border-bottom: 1px solid rgb(11 99 168 / 0.1);
+  --ink-on-surface: #24364f;
+  --text-on-bone: #24364f;
+  --head-on-bone: #0b1b2e;
+  --emerald-deep: #0b63a8;
+  --card: #ffffff;
+  --c-line: 11 27 46;
+  --c-soft: 86 103 127;
+  --grad: #0b63a8;
+  --btn-ink: #ffffff;
+  --brand: #0f3460;
+  --brand-2: #1580c8;
+  color-scheme: light;
+}
+html:not([data-theme="dark"]) .contact-band :is(h1, h2, h3, h4) { color: #0b1b2e !important; }
+html:not([data-theme="dark"]) .contact-band__foot { color: #56677f !important; }
+html:not([data-theme="dark"]) .contact-band .channel {
+  background: #ffffff;
+  color: #24364f;
+  border-color: rgb(11 99 168 / 0.14);
+  box-shadow: 0 1px 2px rgb(11 40 80 / 0.06), 0 14px 30px -22px rgb(11 79 138 / 0.45);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+}
+html:not([data-theme="dark"]) .contact-band .channel:hover,
+html:not([data-theme="dark"]) .contact-band .channel:focus-visible {
+  background: #ffffff;
+  border-color: #1784c7;
+  box-shadow: 0 18px 36px -20px rgb(11 79 138 / 0.5);
+}
+html:not([data-theme="dark"]) .contact-band .channel__icon {
+  background: rgb(11 99 168 / 0.08);
+  border-color: rgb(11 99 168 / 0.18);
+  color: #0b63a8;
+}
+html:not([data-theme="dark"]) .contact-band .channel--primary,
+html:not([data-theme="dark"]) .contact-band .channel--primary:hover,
+html:not([data-theme="dark"]) .contact-band .channel--primary:focus-visible {
+  background: var(--grad-cta);
+  border-color: transparent;
+  color: #ffffff;
+}
+html:not([data-theme="dark"]) .contact-band .channel--primary .channel__icon {
+  background: rgb(255 255 255 / 0.16);
+  border-color: rgb(255 255 255 / 0.3);
+  color: #ffffff;
+}
+
+/* ---- FAQ ask panel: water, dark text --------------------------------------- */
+html:not([data-theme="dark"]) .faq-ask {
+  background: linear-gradient(135deg, #eaf5fc 0%, #dcedf8 100%) !important;
+  border: 1px solid rgb(11 99 168 / 0.12) !important;
+  color: #24364f;
+  --ink-on-surface: #24364f;
+  --text-on-bone: #24364f;
+  --head-on-bone: #0b1b2e;
+  --c-soft: 86 103 127;
+  --c-line: 11 27 46;
+}
+html:not([data-theme="dark"]) .faq-ask .faq-ask__t { color: #0b1b2e !important; }
+html:not([data-theme="dark"]) .faq-ask .faq-ask__d { color: #3a4c66 !important; }
+html:not([data-theme="dark"]) .faq-ask .btn-shine { background: var(--grad-cta) !important; color: #ffffff !important; }
+html:not([data-theme="dark"]) .faq-ask a:not(.btn-shine) {
+  color: #0b1b2e;
+  background: #ffffff;
+  border-color: rgb(11 99 168 / 0.35) !important;
+}
+html:not([data-theme="dark"]) .faq-ask a:not(.btn-shine):hover { border-color: #0b63a8 !important; background: #ffffff; }
+
+/* ---- popovers follow the same palette -------------------------------------- */
+html:not([data-theme="dark"]) .surface-pop {
+  --c-bone: 36 54 79;
+  --c-mint: 11 99 168;
+  --c-emerald: 23 132 199;
+  --c-accent-deep: 11 99 168;
+  --c-soft: 86 103 127;
+  --c-line: 11 27 46;
+  --ink-on-surface: #24364f;
+  --emerald-deep: #0b63a8;
+  --grad: #0b63a8;
+}
