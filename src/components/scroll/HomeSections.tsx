@@ -40,7 +40,8 @@ export function ScannerSection() {
 export function ServiceCardGrid() {
   const items = SERVICE_CARDS.map((s) => ({
     slug: s.slug,
-    title: s.title,
+    // soft hyphens: on phones the titles sit in narrow tiles
+    title: hy(s.title),
     text: s.text,
     art: s.art,
     facts: SERVICE_FACTS[s.slug] ?? [],

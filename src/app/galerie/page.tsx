@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Navbar from "@/components/sections/Navbar";
 import Footer from "@/components/sections/Footer";
-import ContactForm from "@/components/sections/ContactForm";
+import HomeSteps from "@/components/sections/HomeSteps";
 import PictureGallery from "@/components/sections/PictureGallery";
 import FilmWall from "@/components/sections/FilmWall";
 import BrandGallery, { type BrandGalleryItem } from "@/components/sections/BrandGallery";
@@ -64,7 +64,7 @@ export default function GaleriePage() {
             { id: "filme", label: "Filme" },
             { id: "bilder", label: "Bilder" },
             { id: "feedback", label: "Feedback" },
-            { id: "kontakt", label: "Kontakt" },
+            { id: "schritte", label: "Kontakt" },
           ]}
           label="Galerie"
         />
@@ -94,7 +94,7 @@ export default function GaleriePage() {
         <PictureGallery hideHeader />
 
         <Feedback />
-        <ContactForm />
+        <HomeSteps />
       </main>
       <Footer />
       <ScrollEngine />

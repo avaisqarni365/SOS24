@@ -1,5 +1,6 @@
 import { PartnerLink, PartnerText, PartnerBadge } from "@/components/brand/PartnerLink";
-import { Phone, MessageCircle, Calculator, Check, AlertTriangle } from "lucide-react";
+import { Phone, MessageCircle, Calculator, AlertTriangle, Gauge, Receipt, ShieldCheck } from "lucide-react";
+import { FactChips } from "@/components/sections/FactsStrip";
 import HeroFilm from "@/components/scroll/HeroFilm";
 import { KitSymbols } from "@/components/brand/KitArt";
 import KitGrid from "@/components/sections/KitGrid";
@@ -62,17 +63,15 @@ export function ServiceHero({
               </span>
             </a>
           </div>
-          <ul className="svc-hero__trust">
-            <li>
-              <Check aria-hidden="true" /> Messung vor Ort kostenlos
-            </li>
-            <li>
-              <Check aria-hidden="true" /> Festpreis nach der Messung
-            </li>
-            <li>
-              <Check aria-hidden="true" /> 10 Jahre Garantie
-            </li>
-          </ul>
+          <FactChips
+            className="svc-hero__chips"
+            label="Unsere Zusagen"
+            facts={[
+              { value: "Kostenlos", label: "Messung vor Ort", Icon: Gauge },
+              { value: "Festpreis", label: "nach der Messung", Icon: Receipt },
+              { value: "10 Jahre", label: "Garantie auf die Arbeit", Icon: ShieldCheck },
+            ]}
+          />
         </div>
         {film ? <HeroFilm film={film} label="Film" /> : null}
       </div>
@@ -98,16 +97,7 @@ export function ServiceOverview({
           {navTitle} <em>auf einen Blick.</em>
         </h2>
         <div className="svc-over__grid">
-          {facts.length > 0 && (
-            <dl className="svc-facts">
-              {facts.map((f) => (
-                <div key={f.label}>
-                  <dt>{f.value}</dt>
-                  <dd><PartnerText text={f.label} /></dd>
-                </div>
-              ))}
-            </dl>
-          )}
+          {facts.length > 0 && <FactChips facts={facts} className="svc-over__chips" label={`${navTitle} in Zahlen`} />}
           <div className="svc-signs">
             <p className="svc-signs__k">
               <AlertTriangle aria-hidden="true" /> Woran Sie es erkennen
@@ -117,7 +107,7 @@ export function ServiceOverview({
                 <li key={s}>{s}</li>
               ))}
             </ul>
-            <a href="#kontakt" className="svc-signs__cta">
+            <a href="/kontakt/" className="svc-signs__cta">
               Kostenlose Feuchtemessung anfragen <span aria-hidden="true">→</span>
             </a>
           </div>

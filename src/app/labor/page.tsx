@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Navbar from "@/components/sections/Navbar";
 import Footer from "@/components/sections/Footer";
-import ContactForm from "@/components/sections/ContactForm";
+import HomeSteps from "@/components/sections/HomeSteps";
 import GrokLeadBot from "@/components/ai/GrokLeadBot";
 import LayersAct from "@/components/scroll/LayersAct";
 import ProofSection from "@/components/science/ProofSection";
@@ -14,10 +14,11 @@ import { SERVICE_FILMS } from "@/data/films";
 import HeroFilm from "@/components/scroll/HeroFilm";
 import LabTabs from "@/components/science/LabTabs";
 import LayerStack3D from "@/components/science/LayerStack3D";
+import { FactChips } from "@/components/sections/FactsStrip";
 import Scenario, { ScenarioDefs } from "@/components/science/Scenarios";
 import { Formula } from "@/components/science/Formula";
 import { hy } from "@/lib/hyphenate";
-import { Home, Layers, ShieldCheck, SprayCan, Gauge, Wrench, Umbrella, Sun, PanelBottom, FlaskConical, Box, ScanLine, ClipboardCheck, type LucideIcon } from "lucide-react";
+import { Home, Layers, ShieldCheck, SprayCan, Gauge, Wrench, Umbrella, Sun, PanelBottom, FlaskConical, Box, ScanLine, ClipboardCheck, Sigma, Ruler, type LucideIcon } from "lucide-react";
 import { SITE_URL, BUSINESS_ID, WEBSITE_ID, abs, businessNode, websiteNode, breadcrumbNode, OG_IMAGE } from "@/lib/site";
 
 const TITLE = "Scientific Lab | Verfahren, Chemie & Nachweis";
@@ -153,14 +154,16 @@ export default function LaborPage() {
                 <p className="sc-lede lab-hero__lede">
                   {hy("Jedes Verfahren als Szenario in sechs Sekunden und als kurzer Film, die Reaktion im Mauerwerk als Gleichung, das Modell in 3D und die Messung, die alles belegt.")}
                 </p>
-                <dl className="lab-stats lab-stats--row">
-                  {STATS.map((s) => (
-                    <div key={s.label}>
-                      <dt>{s.value}</dt>
-                      <dd className="lab-stats__label">{s.label}</dd>
-                    </div>
-                  ))}
-                </dl>
+                <FactChips
+                  className="lab-chips"
+                  label="Das Labor in Zahlen"
+                  facts={[
+                    { value: STATS[0].value, label: STATS[0].label, Icon: FlaskConical },
+                    { value: STATS[1].value, label: STATS[1].label, Icon: Sigma },
+                    { value: STATS[2].value, label: STATS[2].label, Icon: Ruler },
+                    { value: STATS[3].value, label: STATS[3].label, Icon: Gauge },
+                  ]}
+                />
               </div>
               <LayerStack3D />
             </div>
@@ -196,7 +199,7 @@ export default function LaborPage() {
         <KitShowcase id="material" />
         <ProofSection />
 
-        <ContactForm />
+        <HomeSteps />
       </main>
       <Footer />
       <GrokLeadBot />

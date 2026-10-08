@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Navbar from "@/components/sections/Navbar";
 import Footer from "@/components/sections/Footer";
-import ContactForm from "@/components/sections/ContactForm";
+import HomeSteps from "@/components/sections/HomeSteps";
 import JsonLd from "@/components/seo/JsonLd";
 import { Breadcrumbs, LayerStack, Prose, FaqList, LinkGrid } from "@/components/seo/SubpageParts";
 import { CITY_PAGES } from "@/data/seo-pages";
@@ -89,7 +89,7 @@ export default function CityPage({ params }: { params: { city: string } }) {
               </h1>
               <p className="sc-lede mt-6 text-ink font-medium">{hy(page.lede)}</p>
               <div className="mt-8 flex flex-wrap gap-3">
-                <a href="#kontakt" className="btn-shine inline-flex min-h-[48px] items-center rounded-full px-6 text-sm font-semibold shadow-sm hover:opacity-95 transition-opacity">
+                <a href={`/kontakt/?ort=${encodeURIComponent(page.name)}`} className="btn-shine inline-flex min-h-[48px] items-center rounded-full px-6 text-sm font-semibold shadow-sm hover:opacity-95 transition-opacity">
                   Kostenlose Feuchtemessung anfragen <span aria-hidden="true">&nbsp;→</span>
                 </a>
                 <a href={`tel:${COMPANY_INFO.phoneTel}`} className="inline-flex min-h-[48px] items-center rounded-full border border-line/20 bg-surface px-6 text-sm font-semibold text-ink hover:border-accent-deep transition-colors">
@@ -132,7 +132,7 @@ export default function CityPage({ params }: { params: { city: string } }) {
           </div>
         </section>
 
-        <ContactForm place={page.name} />
+        <HomeSteps formHref={`/kontakt/?ort=${encodeURIComponent(page.name)}`} />
       </main>
       <Footer />
     </>

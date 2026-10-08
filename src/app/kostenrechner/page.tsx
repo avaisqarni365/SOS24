@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Navbar from "@/components/sections/Navbar";
 import Footer from "@/components/sections/Footer";
-import ContactForm from "@/components/sections/ContactForm";
+import HomeSteps from "@/components/sections/HomeSteps";
 import QuoteCalculator from "@/components/calculator/QuoteCalculator";
 import JsonLd from "@/components/seo/JsonLd";
 import ScrollEngine, { SC_BOOT } from "@/components/scroll/ScrollEngine";
@@ -44,7 +44,7 @@ export default function KostenrechnerPage() {
           </div>
         </section>
         <QuoteCalculator />
-        <ContactForm />
+        <HomeSteps />
       </main>
       <Footer />
       <ScrollEngine />

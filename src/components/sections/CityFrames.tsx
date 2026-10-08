@@ -8,6 +8,8 @@ import { COMPANY_INFO } from "@/data/content-data";
 export interface CityFrame {
   slug: string;
   name: string;
+  /** the name with soft hyphens, for the narrow tile */
+  label: string;
   plz: string[];
   districts: string[];
   response: string;
@@ -22,6 +24,17 @@ export interface MiniMap {
   essenX: number;
   areas: { slug: string; name: string; d: string; cx: number; cy: number }[];
 }
+
+/** the brand's green, dark red and water blue in turn, on the card and in its map */
+const TONE: Record<string, string> = {
+  wuppertal: "var(--ic-green)",
+  solingen: "var(--ic-red)",
+  remscheid: "var(--ic-water)",
+  velbert: "var(--ic-green)",
+  haan: "var(--ic-red)",
+  wermelskirchen: "var(--ic-water)",
+};
+const tone = (slug: string) => ({ ["--ic" as string]: TONE[slug] ?? "var(--ic-water)" });
 
 const short = (r: string) => r.replace(" Stunden", " h").replace(" bis ", "–");
 
@@ -44,6 +57,7 @@ export default function CityFrames({ cities, map }: { cities: CityFrame[]; map: 
             <a
               href={`/kellersanierung/${c.slug}/`}
               className="cityf__card"
+              style={tone(c.slug)}
               aria-haspopup="dialog"
               onClick={(e) => {
                 if (!isPlainClick(e)) return;
@@ -56,7 +70,7 @@ export default function CityFrames({ cities, map }: { cities: CityFrame[]; map: 
                   <path d={c.icon.d} />
                 </svg>
               </span>
-              <span className="cityf__name">{c.name}</span>
+              <span className="cityf__name">{c.label}</span>
               <span className="cityf__plz">
                 PLZ {c.plz[0]}
                 {c.plz.length > 1 ? `–${c.plz[c.plz.length - 1]}` : ""}
@@ -71,7 +85,7 @@ export default function CityFrames({ cities, map }: { cities: CityFrame[]; map: 
 
       <QuickView open={!!active} onClose={close} labelledBy="city-qv-title" wide>
         {active && (
-          <div className="qv-city">
+          <div className="qv-city" style={tone(active.slug)}>
             <svg className="qv-city__map" data-i18n="" viewBox={map.vb} role="img" aria-label={`Karte: ${active.name} im Servicegebiet, Sitz in Essen`}>
               {map.areas.map((a) => (
                 <path key={a.slug} d={a.d} className={a.slug === active.slug ? "is-on" : undefined} />

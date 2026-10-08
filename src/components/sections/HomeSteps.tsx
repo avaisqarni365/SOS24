@@ -2,10 +2,10 @@ import { Phone, MessageCircle, ArrowRight } from "lucide-react";
 import { COMPANY_INFO } from "@/data/content-data";
 
 /**
- * The last frame of the landing page: four steps from the first call to the
- * dry wall, each with its own small drawing. Step one carries the ways to
- * reach us. The drawings move a little (CSS only), and stand still with
- * reduced motion.
+ * The last frame of every page: four steps from the first call to the dry
+ * wall, each with its own small drawing. Step one carries the ways to reach
+ * us; `formHref` lets a town or service page hand its context to the form.
+ * The drawings move a little (CSS only), and stand still with reduced motion.
  */
 const Bg = () => <ellipse cx="160" cy="262" rx="200" ry="96" fill="#e3f1fa" />;
 
@@ -157,11 +157,11 @@ const STEPS = [
   },
 ];
 
-export default function HomeSteps() {
+export default function HomeSteps({ formHref = "/kontakt/" }: { formHref?: string }) {
   return (
     <section id="schritte" className="sc-section steps4" aria-labelledby="schritte-title">
       <div className="sc-wrap">
-        <p className="sc-label">Ablauf</p>
+        <p className="sc-label">So geht es los</p>
         <h2 id="schritte-title" className="sc-display mt-3">
           So wird Ihr Keller trocken. <em>In vier Schritten.</em>
         </h2>
@@ -194,7 +194,7 @@ export default function HomeSteps() {
                     </span>
                     WhatsApp schreiben
                   </a>
-                  <a href="/kontakt/" className="steps4__btn steps4__btn--solid">
+                  <a href={formHref} className="steps4__btn steps4__btn--solid">
                     Zum Formular
                     <ArrowRight aria-hidden="true" />
                   </a>

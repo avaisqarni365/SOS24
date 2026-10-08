@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Navbar from "@/components/sections/Navbar";
 import Footer from "@/components/sections/Footer";
-import ContactForm from "@/components/sections/ContactForm";
+import HomeSteps from "@/components/sections/HomeSteps";
 import JsonLd from "@/components/seo/JsonLd";
 import ScienceSection from "@/components/science/ScienceSection";
 import LayersAct from "@/components/scroll/LayersAct";
@@ -13,6 +13,9 @@ import { SCIENCE } from "@/data/science";
 import { Prose, FaqList, LinkGrid, TechnicalLayersFrame } from "@/components/seo/SubpageParts";
 import { ServiceHero, ServiceOverview, ServiceSteps, ServiceKit } from "@/components/service/ServiceParts";
 import ChapterNav from "@/components/service/ChapterNav";
+import ChapterFold from "@/components/service/ChapterFold";
+import FoldSync from "@/components/service/FoldSync";
+import { Layers3, BookOpen } from "lucide-react";
 import { SERVICE_FILMS } from "@/data/films";
 import { KIT } from "@/data/kit";
 import { SERVICE_PAGES, CITY_PAGES } from "@/data/seo-pages";
@@ -98,7 +101,7 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
     { id: "technik", label: "Technik" },
     { id: "wissen", label: "Wissen" },
     { id: "fragen", label: "Fragen" },
-    { id: "kontakt", label: "Kontakt" },
+    { id: "schritte", label: "Kontakt" },
   ];
 
   return (
@@ -115,7 +118,13 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
         <ServiceSteps steps={page.steps} navTitle={page.navTitle} slug={page.slug} />
         <ServiceKit slug={page.slug} navTitle={page.navTitle} />
 
-        <div id="technik" className="svc-chapter">
+        <ChapterFold
+          id="technik"
+          kicker="Technik"
+          title={`${page.navTitle}: Aufbau und Verfahren in 3D`}
+          teaser="Der Schichtaufbau der Wand und jeder Arbeitsschritt im 3D-Modell, mit Material, Zahlen und Messwerten."
+          Icon={Layers3}
+        >
           <TechnicalLayersFrame layers={page.layers} serviceName={page.navTitle} />
           {SERVICE_SCENES[page.slug] ? (
             <LayersAct
@@ -130,9 +139,15 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
               intro="Jeder Schritt im Bild, mit Material, Zahlen und Messwerten. Mit „In 3D drehen“ lädt das Modell: drehen, zoomen und jede Schicht antippen."
             />
           ) : null}
-        </div>
+        </ChapterFold>
 
-        <div id="wissen" className="svc-chapter">
+        <ChapterFold
+          id="wissen"
+          kicker="Wissen"
+          title={`Wissen und Physik: ${page.navTitle}`}
+          teaser="Die Physik dahinter zum Ausprobieren, dazu Ursachen, bautechnische Zusammenhänge und dauerhafte Lösungen."
+          Icon={BookOpen}
+        >
           <ScienceSection slug={page.slug} />
           {page.slug === "feuchtemessung" ? <ScannerSection /> : null}
           <section className="sc-section svc-prose" aria-label={`Wissenswertes zur ${page.navTitle}`}>
@@ -144,7 +159,7 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
               />
             </div>
           </section>
-        </div>
+        </ChapterFold>
 
         <section id="fragen" className="sc-section svc-faq" aria-label={`Fragen zu ${page.navTitle}`}>
           <div className="sc-wrap grid gap-12">
@@ -157,9 +172,10 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
           </div>
         </section>
 
-        <ContactForm defaultDamage={DAMAGE_BY_SLUG[page.slug]} />
+        <HomeSteps formHref={DAMAGE_BY_SLUG[page.slug] ? `/kontakt/?schaden=${encodeURIComponent(DAMAGE_BY_SLUG[page.slug])}` : "/kontakt/"} />
       </main>
       <Footer />
+      <FoldSync />
       <ScrollEngine />
     </>
   );

@@ -46,8 +46,12 @@ const field =
   "w-full min-h-[48px] px-4 py-3 rounded-xl border border-line/15 bg-surface text-sm text-ink shadow-2xs focus:outline-none focus:border-[var(--emerald-deep)] focus:ring-1 focus:ring-[var(--emerald-deep)] placeholder:text-ink/40";
 const lbl = "block text-xs font-mono font-bold text-ink mb-2";
 
-export default function ContactForm({ defaultDamage, place }: { defaultDamage?: string; place?: string }) {
+export default function ContactForm({ defaultDamage, place: placeProp }: { defaultDamage?: string; place?: string }) {
   const { t, lang } = useLanguage();
+  // a town or service page links here with ?ort= or ?schaden=; the form
+  // takes that context over
+  const [placeQ, setPlaceQ] = useState<string | undefined>();
+  const place = placeProp ?? placeQ;
   const [formData, setFormData] = useState<Enquiry>({
     name: "",
     phone: "",
@@ -95,6 +99,14 @@ export default function ContactForm({ defaultDamage, place }: { defaultDamage?: 
     }
     // register once
     // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useEffect(() => {
+    const q = new URLSearchParams(window.location.search);
+    const ort = q.get("ort")?.trim();
+    const schaden = q.get("schaden")?.trim();
+    if (ort && ort.length <= 40) setPlaceQ(ort);
+    if (schaden && DAMAGE_OPTIONS.includes(schaden)) setFormData((f) => ({ ...f, damageType: schaden }));
   }, []);
 
   const set = (k: keyof Enquiry) => (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) =>

@@ -47,6 +47,7 @@ export default function ServiceGrid({ items }: { items: ServiceGridItem[] }) {
             <li key={s.slug}>
               <a
                 className="service-card"
+                data-svc={s.slug}
                 href={`/leistungen/${s.slug}/`}
                 aria-haspopup="dialog"
                 onClick={(e) => {

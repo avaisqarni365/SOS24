@@ -1,7 +1,8 @@
-import { ArrowRight, MapPin } from "lucide-react";
+import { ArrowRight, MapPin, FlaskConical, Images, Users, Calculator } from "lucide-react";
 import { CITY_PAGES } from "@/data/seo-pages";
 import { MAP_AREAS, MAP_ESSEN } from "@/data/region-map";
 import CityFrames, { type CityFrame, type MiniMap } from "@/components/sections/CityFrames";
+import { hy } from "@/lib/hyphenate";
 
 /** Office: Niebuhrstraße 46, 45144 Essen. */
 const OFFICE = { lat: 51.4466, lng: 6.98 };
@@ -42,6 +43,7 @@ function cityData(): { cities: CityFrame[]; map: MiniMap } {
     return {
       slug: c.slug,
       name: c.name,
+      label: hy(c.name),
       plz: c.plz,
       districts: c.districts,
       response: c.responseTime,
@@ -72,6 +74,8 @@ function cityData(): { cities: CityFrame[]; map: MiniMap } {
 const CARDS = [
   {
     href: "/labor/",
+    Icon: FlaskConical,
+    tone: "var(--ic-green)",
     img: "/media/film-feuchtemessung.webp",
     w: 432,
     h: 768,
@@ -82,6 +86,8 @@ const CARDS = [
   },
   {
     href: "/galerie/",
+    Icon: Images,
+    tone: "var(--ic-red)",
     img: "/img/brand/brand-van.webp",
     w: 540,
     h: 296,
@@ -92,6 +98,8 @@ const CARDS = [
   },
   {
     href: "/leistungen/#fuer-wen",
+    Icon: Users,
+    tone: "var(--ic-water)",
     img: "/img/brand/brand-walker.webp",
     w: 198,
     h: 302,
@@ -102,6 +110,8 @@ const CARDS = [
   },
   {
     href: "/kostenrechner/",
+    Icon: Calculator,
+    tone: "var(--ic-green)",
     img: "/img/gallery/bohrung-injektion.webp",
     w: 679,
     h: 450,
@@ -124,7 +134,10 @@ export default function MoreLinks() {
         <ul className="more__grid">
           {CARDS.map((c) => (
             <li key={c.href}>
-              <a href={c.href} className="more__card">
+              <a href={c.href} className="more__card" style={{ ["--ic" as string]: c.tone }}>
+                <span className="more__ico" aria-hidden="true">
+                  <c.Icon />
+                </span>
                 <span className="more__img">
                   <img src={c.img} width={c.w} height={c.h} alt="" loading="lazy" decoding="async" style={{ objectPosition: c.pos }} />
                 </span>

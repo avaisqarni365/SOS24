@@ -19,7 +19,7 @@ const PATHS = [
       "Sanierung von innen, Garten und Einfahrt bleiben unberührt",
       "10 Jahre Garantie auf die Arbeit, 25 Jahre Produktgarantie",
     ],
-    cta: { label: "Kostenlose Messung anfragen", href: "#kontakt" },
+    cta: { label: "Kostenlose Messung anfragen", href: "/kontakt/" },
     more: { label: "Feuchtemessung & Gutachten", href: "/leistungen/feuchtemessung/" },
   },
   {
@@ -32,7 +32,7 @@ const PATHS = [
       "Schriftliche Messprotokolle zu jeder Phase, für Eigentümerversammlung oder Versicherung",
       `Festpreis je Objekt, direkter Draht zu ${COMPANY_INFO.owner}`,
     ],
-    cta: { label: "Objektbegehung anfragen", href: "#kontakt" },
+    cta: { label: "Objektbegehung anfragen", href: "/kontakt/" },
     more: { label: "Ablauf mit Nachweis", href: "/labor/" },
   },
 ];

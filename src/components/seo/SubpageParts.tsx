@@ -159,7 +159,7 @@ export function SymptomsFrame({
           <p className="text-sm sm:text-base text-ink font-medium">
             <strong className="text-accent-deep font-bold">Wichtig:</strong> Unbehandelte Feuchtigkeit führt zu Schimmelbefall und zerstört das Mauerwerk. Handeln Sie rechtzeitig.
           </p>
-          <a href="#kontakt" className="inline-flex items-center gap-1.5 text-sm font-semibold text-accent-deep hover:underline">
+          <a href="/kontakt/" className="inline-flex items-center gap-1.5 text-sm font-semibold text-accent-deep hover:underline">
             Kostenlose Feuchtemessung anfragen <span aria-hidden="true">→</span>
           </a>
         </div>
@@ -247,7 +247,7 @@ export function ProcessSteps({
             </div>
           </div>
           <a
-            href="#kontakt"
+            href="/kontakt/"
             className="btn-shine shrink-0 inline-flex min-h-[46px] items-center rounded-full px-6 text-sm font-semibold shadow-sm hover:opacity-90 transition-opacity"
           >
             Termin anfragen <span aria-hidden="true">&nbsp;→</span>
@@ -350,7 +350,7 @@ export function TechnicalLayersFrame({
                 </div>
 
                 <a
-                  href="#kontakt"
+                  href="/kontakt/"
                   className="btn-shine mt-5 inline-flex w-full items-center justify-center gap-2 rounded-xl py-3.5 px-4 text-sm font-semibold shadow-sm hover:opacity-95 transition-opacity"
                 >
                   Kostenlose Vor-Ort-Analyse anfragen <span aria-hidden="true">&nbsp;→</span>
