@@ -1,7 +1,7 @@
 "use client";
 
-import React, { createContext, useContext, useState, useEffect } from "react";
-import { SupportedLocale, SUPPORTED_LOCALES, TRANSLATIONS, LocaleMeta } from "./translations";
+import React, { createContext, useCallback, useContext, useEffect, useState } from "react";
+import { SupportedLocale, SUPPORTED_LOCALES, DE, LocaleMeta } from "./translations";
 
 interface LanguageContextType {
   lang: SupportedLocale;
@@ -12,36 +12,49 @@ interface LanguageContextType {
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
+/** One small chunk per language, fetched only when someone switches to it. */
+const LOADERS: Record<Exclude<SupportedLocale, "de">, () => Promise<{ default: Record<string, string> }>> = {
+  en: () => import("./locales/en"),
+  tr: () => import("./locales/tr"),
+  ru: () => import("./locales/ru"),
+  ar: () => import("./locales/ar"),
+  pl: () => import("./locales/pl"),
+};
+
+const isLocale = (v: string | null): v is SupportedLocale => !!v && SUPPORTED_LOCALES.some((l) => l.code === v);
+
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
   const [lang, setLangState] = useState<SupportedLocale>("de");
+  const [dict, setDict] = useState<Record<string, string>>(DE);
 
-  useEffect(() => {
-    try {
-      const stored = localStorage.getItem("sos_lang") as SupportedLocale;
-      if (stored && TRANSLATIONS[stored]) {
-        setLangState(stored);
-        document.documentElement.lang = stored;
-        document.documentElement.dir = stored === "ar" ? "rtl" : "ltr";
-      }
-    } catch (e) {
-      // Ignore storage errors in restricted iframe
-    }
+  const apply = useCallback(async (next: SupportedLocale) => {
+    const strings = next === "de" ? DE : (await LOADERS[next]()).default;
+    setDict(strings);
+    setLangState(next);
+    document.documentElement.lang = next;
+    document.documentElement.dir = next === "ar" ? "rtl" : "ltr";
   }, []);
 
-  const setLang = (newLang: SupportedLocale) => {
-    setLangState(newLang);
+  useEffect(() => {
+    let stored: string | null = null;
     try {
-      localStorage.setItem("sos_lang", newLang);
-      document.documentElement.lang = newLang;
-      document.documentElement.dir = newLang === "ar" ? "rtl" : "ltr";
-    } catch (e) {
-      // Ignore
+      stored = localStorage.getItem("sos_lang");
+    } catch {
+      // storage blocked (private mode, sandboxed frame)
     }
+    if (isLocale(stored) && stored !== "de") apply(stored).catch(() => {});
+  }, [apply]);
+
+  const setLang = (next: SupportedLocale) => {
+    try {
+      localStorage.setItem("sos_lang", next);
+    } catch {
+      // the choice lasts for this page view
+    }
+    apply(next).catch(() => {});
   };
 
-  const t = (key: string): string => {
-    return TRANSLATIONS[lang]?.[key] || TRANSLATIONS["de"]?.[key] || key;
-  };
+  const t = (key: string): string => dict[key] || DE[key] || key;
 
   const currentLocale = SUPPORTED_LOCALES.find((l) => l.code === lang) || SUPPORTED_LOCALES[0];
 

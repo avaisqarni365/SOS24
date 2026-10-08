@@ -22,11 +22,11 @@ const GALLERY: BrandGalleryItem[] = [
       "Die Elastomerbitumen-Bahn wird vollflächig aufgeschweißt. An den Nähten schmelzen beide Bahnen zu einem Material zusammen: keine Fuge, die altern kann.",
   },
   {
-    shot: "wall",
-    title: "Innenabdichtung",
-    note: "Schicht für Schicht",
+    shot: "bohrung",
+    title: "Horizontalsperre",
+    note: "Bohrloch für Bohrloch",
     detail:
-      "Mineralische Dichtschlämme in zwei Lagen, die Hohlkehle am Boden, darauf Sanierputz, der die Salze aus der Wand aufnimmt. Abgedichtet wird von innen, ohne Aufgraben.",
+      "Für die Horizontalsperre entsteht eine Reihe Bohrlöcher knapp über dem Boden, höchstens 20 cm auseinander. Darüber kommt die Injektionscreme in die Wand und bildet die neue Sperrschicht, ohne Aufgraben.",
   },
   {
     shot: "walker",

@@ -15,12 +15,15 @@ export default function QuickView({
   onClose,
   labelledBy,
   wide = false,
+  owner = true,
   children,
 }: {
   open: boolean;
   onClose: () => void;
   labelledBy: string;
   wide?: boolean;
+  /** the owner's contact strip under the sheet */
+  owner?: boolean;
   children: ReactNode;
 }) {
   const ref = useRef<HTMLDialogElement>(null);
@@ -78,6 +81,15 @@ export default function QuickView({
             <X aria-hidden="true" />
           </button>
           {children}
+          {owner && (
+            <div className="qv__owner">
+              <img src="/img/gallery/shahzad-mahmood-160.webp" width={160} height={176} alt="" loading="lazy" />
+              <p>
+                <strong>Shahzad Mahmood</strong>
+                <span>Inhaber, berät Sie persönlich · SchimmelPeter® Partnerbetrieb</span>
+              </p>
+            </div>
+          )}
         </div>
       )}
     </dialog>,

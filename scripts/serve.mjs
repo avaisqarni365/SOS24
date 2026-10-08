@@ -18,6 +18,9 @@ const TYPES = {
   ".webp": "image/webp",
   ".jpg": "image/jpeg",
   ".png": "image/png",
+  ".jpeg": "image/jpeg",
+  ".mp4": "video/mp4",
+  ".webm": "video/webm",
   ".woff2": "font/woff2",
   ".ico": "image/x-icon",
 };
@@ -46,7 +49,22 @@ const server = createServer((req, res) => {
     status = 404;
     file = path.join(ROOT, "404.html");
   }
-  res.writeHead(status, { "Content-Type": TYPES[path.extname(file)] || "application/octet-stream" });
+  const type = TYPES[path.extname(file)] || "application/octet-stream";
+  const size = statSync(file).size;
+  // video needs byte ranges: Safari will not play an MP4 without them
+  const range = status === 200 && /^bytes=(\d*)-(\d*)$/.exec(req.headers.range || "");
+  let start = 0, end = size - 1;
+  if (range && (range[1] || range[2])) {
+    start = range[1] ? Number(range[1]) : size - Number(range[2]);
+    end = range[1] && range[2] ? Math.min(Number(range[2]), size - 1) : size - 1;
+    if (start > end || start >= size) {
+      res.writeHead(416, { "Content-Range": `bytes */${size}` }).end();
+      return;
+    }
+    res.writeHead(206, { "Content-Type": type, "Accept-Ranges": "bytes", "Content-Range": `bytes ${start}-${end}/${size}`, "Content-Length": end - start + 1 });
+  } else {
+    res.writeHead(status, { "Content-Type": type, "Accept-Ranges": "bytes", "Content-Length": size });
+  }
   if (req.method === "HEAD") {
     res.end();
     return;
@@ -54,7 +72,7 @@ const server = createServer((req, res) => {
   // A client that disconnects mid-download makes the stream emit 'error';
   // without these handlers that is an uncaught event and the whole server
   // process dies on the first impatient visitor.
-  const stream = createReadStream(file);
+  const stream = createReadStream(file, { start, end });
   stream.on("error", () => res.destroy());
   res.on("close", () => stream.destroy());
   stream.pipe(res);

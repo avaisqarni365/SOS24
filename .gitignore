@@ -36,3 +36,6 @@ next-env.d.ts
 
 # Raw asset sources
 /assets-source/schimmelpeter/
+
+# raw client media; edited versions live in public/
+multimedia/

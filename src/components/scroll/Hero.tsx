@@ -1,11 +1,11 @@
 import { COMPANY_INFO } from "@/data/content-data";
+import HeroFilm from "@/components/scroll/HeroFilm";
 
 export const CTA_LABEL = "Kostenlose Feuchtemessung anfragen";
 
 /**
- * Hero: one typographic statement on the ink plate. The 3D cut-away that
- * used to sit beside it belongs in the Scientific Lab, not on a page whose
- * only job is to say what we do and let someone reach us in one tap.
+ * Hero: one typographic statement, and beside it the short image film
+ * (HeroFilm). The 3D cut-away belongs in the Scientific Lab.
  */
 export default function Hero() {
   return (
@@ -57,7 +57,7 @@ export default function Hero() {
             <li>Ohne Aufgraben</li>
           </ul>
         </div>
-
+        <HeroFilm />
         </div>
       </div>
     </section>
