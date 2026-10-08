@@ -43,7 +43,7 @@ export default function Hero() {
         <div className="mt-11 flex flex-wrap items-center justify-center gap-3">
           <a
             href="#kontakt"
-            className="inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition-all active:scale-[0.98] bg-landing-bone text-[#0E1310] hover:bg-white shadow-sm"
+            className="inline-flex items-center gap-2 rounded-full px-6 py-3 text-sm font-semibold transition-all active:scale-[0.98] bg-landing-bone text-ink hover:bg-surface shadow-sm"
           >
             <span>{t("hero.ctaPrimary")}</span>
             <span aria-hidden="true">→</span>

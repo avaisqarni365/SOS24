@@ -85,7 +85,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* theme and text size before first paint (see AppearanceMenu) */}
         <script dangerouslySetInnerHTML={{ __html: APPEARANCE_BOOT }} />
       </head>
-      <body className="min-h-screen font-latex antialiased text-[#050807] bg-white">
+      <body className="min-h-screen font-latex antialiased">
         <LanguageProvider>
           {children}
           <MobileContactBar />

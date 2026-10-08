@@ -126,7 +126,7 @@ export default function InjectionProcess() {
           <div className="mt-12 text-center">
             <a
               href="#kontakt"
-              className="inline-flex items-center gap-2 rounded-full px-7 py-3.5 text-sm font-semibold text-[#0E1310] bg-landing-bone hover:bg-white transition-all shadow-sm active:scale-[0.98]"
+              className="inline-flex items-center gap-2 rounded-full px-7 py-3.5 text-sm font-semibold text-ink bg-landing-bone hover:bg-surface transition-all shadow-sm active:scale-[0.98]"
             >
               <span>{t("pipe.btn")}</span>
               <span aria-hidden="true">→</span>

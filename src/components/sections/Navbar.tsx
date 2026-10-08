@@ -10,9 +10,10 @@ import LanguageSelector from "@/components/navigation/LanguageSelector";
 import AppearanceMenu from "@/components/navigation/AppearanceMenu";
 import { useLanguage } from "@/i18n/LanguageContext";
 
+/* The 3D viewer, the scanner and the measurement proof are one tab now
+   (/labor/), not two anchors into a very long landing page. */
 const LINKS = [
-  { href: "/#schicht-fuer-schicht", key: "nav.process3d" },
-  { href: "/#nachweis", key: "nav.proof" },
+  { href: "/labor/", key: "nav.simulation" },
   { href: "/galerie/", key: "nav.gallery" },
   { href: "/kostenrechner/", key: "nav.calculator" },
   { href: "/#servicegebiet", key: "nav.region" },
@@ -26,6 +27,15 @@ const CITIES = [
   { slug: "velbert", name: "Velbert" },
   { slug: "haan", name: "Haan" },
   { slug: "wermelskirchen", name: "Wermelskirchen" },
+];
+
+/** The flat top level of the menu: the five places the site actually goes. */
+const PRIMARY: { href: string; key?: string; label?: string }[] = [
+  { href: "/leistungen/", label: "Leistungen" },
+  { href: "/labor/", key: "nav.simulation" },
+  { href: "/galerie/", key: "nav.gallery" },
+  { href: "/kostenrechner/", key: "nav.calculator" },
+  { href: "/#kontakt", label: "Kontakt" },
 ];
 
 const AUDIENCE = [
@@ -129,7 +139,7 @@ export default function Navbar() {
                 {a.label}
               </a>
             ))}
-            <span aria-hidden="true" className="h-4 w-px bg-white/30" />
+            <span aria-hidden="true" className="h-4 w-px bg-surface/30" />
             <a href={`tel:${COMPANY_INFO.phoneTel}`} className="flex items-center gap-1.5 font-semibold">
               <Phone className="h-3.5 w-3.5" aria-hidden="true" />
               {COMPANY_INFO.phoneDisplay}
@@ -142,10 +152,10 @@ export default function Navbar() {
         </div>
       </div>
 
-      <div className="site-header__bar">
+      <div className="site-header__bar band-ink">
         <div className="site-wrap flex h-16 items-center justify-between gap-3 sm:h-[4.5rem] lg:gap-4">
           <a href="/" aria-label="sos-abdichtung, zur Startseite" className="shrink-0">
-            <Logo sub="SchimmelPeter® Partner · Wuppertal" />
+            <Logo tone="light" />
           </a>
 
           <nav aria-label="Hauptnavigation" className="site-nav hidden shrink-0 min-[1200px]:block">
@@ -172,7 +182,7 @@ export default function Navbar() {
             <button
               type="button"
               onClick={() => setOpen(!open)}
-              className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-line/15 bg-[var(--ink)] text-[var(--bone)] hover:border-[var(--mint)] min-[1200px]:hidden"
+              className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-line/15 bg-[var(--ink)] text-[var(--bone)] hover:border-accent-deep min-[1200px]:hidden"
               aria-label={open ? "Menü schließen" : "Menü öffnen"}
               aria-expanded={open}
               aria-controls="mobile-menu"
@@ -184,82 +194,86 @@ export default function Navbar() {
       </div>
 
       {open && (
-        <div id="mobile-menu" className="mnav min-[1200px]:hidden">
-          {/* drill-down: each group opens on tap and lists every page in it */}
-          <details className="mnav__group" open>
-            <summary>{t("nav.services")}</summary>
-            <ul>
-              {SERVICE_CARDS.map((sv) => (
-                <li key={sv.slug}>
-                  <a href={`/leistungen/${sv.slug}/`} onClick={() => setOpen(false)} className="mnav__item">
-                    <span className={`services-menu__img services-menu__img--${sv.image.fit}`}>
-                      <img src={sv.image.src} alt="" width={64} height={44} loading="lazy" decoding="async" />
-                    </span>
-                    {sv.title}
-                  </a>
-                </li>
-              ))}
-              <li>
-                <a href="/leistungen/" onClick={() => setOpen(false)} className="mnav__more">
-                  Alle Leistungen im Überblick →
+        /* One screen, flat. The old menu was four accordions of 3D thumbnails:
+           three taps to reach a service and a lot of chrome for a phone. This
+           is the whole site as a set-serif index, with the two contact
+           channels pinned to the bottom where a thumb reaches them. */
+        <div id="mobile-menu" className="mnav min-[1200px]:hidden" role="dialog" aria-modal="true" aria-label="Menü">
+          <div className="mnav__inner">
+            <nav className="mnav__primary" aria-label="Hauptbereiche">
+              {PRIMARY.map((l, i) => (
+                <a key={l.href} href={l.href} onClick={(e) => handleNavClick(e, l.href)}>
+                  <span className="mnav__n">{String(i + 1).padStart(2, "0")}</span>
+                  <span className="mnav__label">{l.key ? t(l.key) : l.label}</span>
+                  <span className="mnav__arrow" aria-hidden="true">→</span>
                 </a>
-              </li>
-            </ul>
-          </details>
-          <details className="mnav__group">
-            <summary>Kellersanierung in Ihrer Stadt</summary>
-            <ul className="mnav__grid">
-              {CITIES.map((c) => (
-                <li key={c.slug}>
-                  <a href={`/kellersanierung/${c.slug}/`} onClick={() => setOpen(false)} className="mnav__item">
-                    {c.name}
-                  </a>
-                </li>
               ))}
-            </ul>
-          </details>
-          <details className="mnav__group">
-            <summary>Mehr entdecken</summary>
-            <ul>
-              {[...LINKS, { href: "/#faq", key: "nav.faq" }, { href: "/#kontakt", key: "rail.contact" }].map((l) => (
-                <li key={l.href}>
-                  <a href={l.href} onClick={() => setOpen(false)} className="mnav__item">
-                    {t(l.key)}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </details>
-          <details className="mnav__group">
-            <summary>Für wen wir arbeiten</summary>
-            <ul>
-              {AUDIENCE.map((a) => (
-                <li key={a.href}>
-                  <a href={a.href} onClick={() => setOpen(false)} className="mnav__item">
-                    {a.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </details>
-          <div className="mt-4 flex items-center justify-between gap-3">
-            <span className="text-sm text-[var(--sc-ink-soft)]">Sprache</span>
-            <LanguageSelector />
+            </nav>
+
+            <section className="mnav__block" aria-labelledby="mnav-services">
+              <p id="mnav-services" className="mnav__kicker">Leistungen</p>
+              <ul className="mnav__list">
+                {SERVICE_CARDS.map((sv) => (
+                  <li key={sv.slug}>
+                    <a href={`/leistungen/${sv.slug}/`} onClick={() => setOpen(false)}>
+                      {sv.title}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </section>
+
+            <section className="mnav__block" aria-labelledby="mnav-cities">
+              <p id="mnav-cities" className="mnav__kicker">Servicegebiet PLZ 42</p>
+              <ul className="mnav__chips">
+                {CITIES.map((c) => (
+                  <li key={c.slug}>
+                    <a href={`/kellersanierung/${c.slug}/`} onClick={() => setOpen(false)}>
+                      {c.name}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </section>
+
+            <section className="mnav__block" aria-labelledby="mnav-audience">
+              <p id="mnav-audience" className="mnav__kicker">Für wen wir arbeiten</p>
+              <ul className="mnav__list">
+                {AUDIENCE.map((a) => (
+                  <li key={a.href}>
+                    <a href={a.href} onClick={(e) => handleNavClick(e, a.href)}>
+                      {a.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </section>
+
+            <div className="mnav__lang">
+              <span className="mnav__kicker">Sprache</span>
+              <LanguageSelector />
+            </div>
           </div>
-          <div className="mt-4 flex flex-col gap-2.5">
-            <a
-              href={`tel:${COMPANY_INFO.phoneTel}`}
-              className="flex items-center justify-center gap-2 rounded-full border border-line/15 py-3 font-semibold"
-            >
-              <Phone className="h-4 w-4 text-[var(--mint)]" aria-hidden="true" />
-              {COMPANY_INFO.phoneDisplay}
+
+          <div className="mnav__foot">
+            <a href={`tel:${COMPANY_INFO.phoneTel}`} className="mnav__call">
+              <Phone className="h-4 w-4" aria-hidden="true" />
+              <span>
+                <small>Jetzt anrufen</small>
+                {COMPANY_INFO.phoneDisplay}
+              </span>
             </a>
             <a
-              href="/#kontakt"
-              onClick={() => setOpen(false)}
-              className="btn-shine rounded-full py-3.5 text-center text-[0.9375rem] font-semibold"
+              href={COMPANY_INFO.whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mnav__wa"
             >
-              {t("contact.submit")}
+              <MessageCircle className="h-4 w-4" aria-hidden="true" />
+              <span>
+                <small>WhatsApp</small>
+                Foto senden
+              </span>
             </a>
           </div>
         </div>

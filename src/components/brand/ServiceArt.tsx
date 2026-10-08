@@ -21,14 +21,14 @@ export default function ServiceArt({ kind }: { kind: ServiceCard["art"] }) {
           <rect x="70" y="60" width="180" height="120" fill="#26322c" />
           {bricks(70, 70, 16, 110, 30)}
           {bricks(234, 70, 16, 110, 30)}
-          <rect x="86" y="172" width="148" height="8" fill="#62c4ac" />
+          <rect x="86" y="172" width="148" height="8" fill="currentColor" />
           <rect x="120" y="100" width="80" height="50" rx="4" fill="#f1cf7a" opacity="0.25" />
         </g>
       )}
       {kind === "sperre" && (
         <g>
           {bricks(80, 20, 160, 170, 40)}
-          <rect x="80" y="140" width="160" height="12" fill="#62c4ac" />
+          <rect x="80" y="140" width="160" height="12" fill="currentColor" />
           {Array.from({ length: 8 }).map((_, i) => (
             <g key={i}>
               <rect x={88 + i * 20} y="143" width="10" height="6" fill="#dfe6e3" />
@@ -62,14 +62,14 @@ export default function ServiceArt({ kind }: { kind: ServiceCard["art"] }) {
           ].map(([x, y, r], i) => (
             <circle key={i} cx={x} cy={y} r={r} fill="#3b4a3c" opacity="0.8" />
           ))}
-          <path d="M160 20 V190" stroke="#62c4ac" strokeWidth="4" strokeDasharray="8 8" />
+          <path d="M160 20 V190" stroke="currentColor" strokeWidth="4" strokeDasharray="8 8" />
         </g>
       )}
       {kind === "messung" && (
         <g>
           {bricks(60, 20, 200, 170, 70)}
-          <rect x="130" y="70" width="70" height="46" rx="8" fill="#0e1310" stroke="#62c4ac" strokeWidth="2" />
-          <text x="165" y="100" textAnchor="middle" fill="#62c4ac" fontSize="18" fontFamily="ui-monospace, monospace">
+          <rect x="130" y="70" width="70" height="46" rx="8" fill="#0e1310" stroke="currentColor" strokeWidth="2" />
+          <text x="165" y="100" textAnchor="middle" fill="currentColor" fontSize="18" fontFamily="ui-monospace, monospace">
             %
           </text>
           <path d="M165 116 V150" stroke="#dfe6e3" strokeWidth="4" />
@@ -79,7 +79,7 @@ export default function ServiceArt({ kind }: { kind: ServiceCard["art"] }) {
         <g>
           <rect x="50" y="20" width="220" height="170" fill="#8a8f8b" />
           <path d="M150 20 L160 60 L145 95 L165 130 L152 190" stroke="#1b241f" strokeWidth="6" fill="none" />
-          <path d="M150 20 L160 60 L145 95 L165 130 L152 190" stroke="#62c4ac" strokeWidth="3" fill="none" />
+          <path d="M150 20 L160 60 L145 95 L165 130 L152 190" stroke="currentColor" strokeWidth="3" fill="none" />
           {[45, 90, 135, 175].map((y, i) => (
             <circle key={i} cx={i % 2 ? 180 : 130} cy={y} r="6" fill="#dfe6e3" />
           ))}

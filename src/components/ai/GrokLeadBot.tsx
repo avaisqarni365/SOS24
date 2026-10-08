@@ -200,7 +200,7 @@ export default function GrokLeadBot() {
               />
               <button
                 type="submit"
-                className="w-9 h-9 rounded-full bg-landing-bone text-landing-ink hover:bg-white flex items-center justify-center transition-colors shrink-0"
+                className="w-9 h-9 rounded-full bg-landing-bone text-landing-ink hover:bg-surface flex items-center justify-center transition-colors shrink-0"
               >
                 <Send className="w-4 h-4" />
               </button>

@@ -72,7 +72,7 @@ export default function RegionalPLZ() {
             />
             <button
               type="submit"
-              className="px-6 py-3.5 rounded-full bg-landing-bone hover:bg-white text-[#0E1310] text-xs font-mono font-semibold transition-all shrink-0 active:scale-[0.98]"
+              className="px-6 py-3.5 rounded-full bg-landing-bone hover:bg-surface text-ink text-xs font-mono font-semibold transition-all shrink-0 active:scale-[0.98]"
             >
               {t("reg.btn")}
             </button>

@@ -4,10 +4,10 @@ import Footer from "@/components/sections/Footer";
 import ContactForm from "@/components/sections/ContactForm";
 import GrokLeadBot from "@/components/ai/GrokLeadBot";
 import Hero from "@/components/scroll/Hero";
-import LayersAct from "@/components/scroll/LayersAct";
 import { ServicesRail, RegionSection, FaqSection } from "@/components/scroll/HomeSections";
 import FactsStrip from "@/components/sections/FactsStrip";
-import ProofSection from "@/components/science/ProofSection";
+import HowWeWork from "@/components/sections/HowWeWork";
+import ContactChannels from "@/components/sections/ContactChannels";
 import ScrollSectionRail from "@/components/navigation/ScrollSectionRail";
 import AudienceSection from "@/components/sections/AudienceSection";
 import ScrollEngine, { SC_BOOT } from "@/components/scroll/ScrollEngine";
@@ -64,12 +64,16 @@ export default function Home() {
       <div className="sc-grain" aria-hidden="true" />
       <Navbar />
       <ScrollSectionRail />
+      {/* The landing page answers four things and then asks for the call:
+          what we do, how it goes, where we come, how to reach us. The 3D
+          viewer, the scanner and the measurement proof moved to /labor/
+          so this page stays short enough to read standing in a wet cellar. */}
       <main id="main">
         <Hero />
         <FactsStrip />
         <ServicesRail />
-        <LayersAct />
-        <ProofSection />
+        <HowWeWork />
+        <ContactChannels />
         <AudienceSection />
         <RegionSection />
         <FaqSection />

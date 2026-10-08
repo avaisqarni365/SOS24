@@ -728,6 +728,198 @@ export const SERVICE_PAGES: ServicePage[] = [
     ],
     related: ["kellerinnenabdichtung", "kellersanierung", "horizontalsperre"],
   },
+
+  // 7. Dachabdichtung
+  {
+    slug: "dachabdichtung",
+    navTitle: "Dachabdichtung",
+    keyword: "Dachabdichtung",
+    title: "Dachabdichtung Wuppertal: Flachdach & Garage dicht",
+    metaDescription:
+      "Dachabdichtung in Wuppertal: Flachdach, Steildach, Dachterrasse und Garagendach dauerhaft dicht. Pr\u00fcfung kostenlos, 10 Jahre Garantie auf die Arbeit.",
+    h1: "Dachabdichtung: Flachdach, Dachterrasse und Garagendach dauerhaft dicht",
+    lede:
+      "Ein undichtes Dach meldet sich selten dort, wo das Wasser eintritt. Wir suchen die Eintrittsstelle systematisch, dichten vollfl\u00e4chig ab und pr\u00fcfen jede Naht, bevor wir abnehmen.",
+    symptoms: [
+      "Feuchte Flecken oder Tropfstellen an der Decke nach Regen",
+      "Blasen, Risse oder offene N\u00e4hte in der alten Dachbahn",
+      "Stehendes Wasser auf dem Flachdach, das nicht abl\u00e4uft",
+      "Moos und Wildwuchs in den Anschl\u00fcssen und Kehlen",
+      "Nasse D\u00e4mmung: das Dach wird schwer und verliert D\u00e4mmwirkung",
+      "Rostspuren an Attika, Einfassungen und Durchdringungen",
+    ],
+    layers: [
+      { name: "Untergrund", text: "Altbahnen pr\u00fcfen, lose Lagen entfernen, Untergrund trocken und tragf\u00e4hig herstellen." },
+      { name: "Dampfsperre & Gef\u00e4lle", text: "Wo n\u00f6tig Dampfsperre und Gef\u00e4lled\u00e4mmung, damit Wasser zum Ablauf l\u00e4uft statt zu stehen." },
+      { name: "Abdichtungslage", text: "Zwei Lagen Elastomerbitumen, vollfl\u00e4chig verschwei\u00dft; Anschl\u00fcsse und Durchdringungen zuerst." },
+      { name: "Schutz & Abnahme", text: "Kiessch\u00fcttung oder Schutzlage, dann Nahtpr\u00fcfung und gemeinsame Abnahme mit Protokoll." },
+    ],
+    sections: [
+      {
+        heading: "Flachdach, Steildach, Dachterrasse, Garagendach",
+        paragraphs: [
+          "Jede Dachform hat ihre eigene Schwachstelle: beim Flachdach die stehende N\u00e4sse, bei der Dachterrasse der T\u00fcranschluss, beim Garagendach die Attika und beim Steildach Kehlen und Durchdringungen. Wir dichten nicht die Fl\u00e4che irgendwo ab, sondern die Stelle, an der das Wasser nachweislich eintritt.",
+          "Daf\u00fcr pr\u00fcfen wir das Dach vor dem Angebot: Sichtpr\u00fcfung der N\u00e4hte und Anschl\u00fcsse, bei Bedarf Feuchtemessung in der D\u00e4mmebene. Sie erhalten ein verbindliches Angebot f\u00fcr genau den Aufbau, den Ihr Dach braucht.",
+        ],
+      },
+      {
+        heading: "Verschwei\u00dft statt geflickt",
+        paragraphs: [
+          "Ein Flicken auf der Leckstelle h\u00e4lt selten l\u00e4nger als einen Winter, weil Wasser unter der alten Bahn wandert. Wir arbeiten vollfl\u00e4chig: zwei Lagen Elastomerbitumen, im Schwei\u00dfverfahren homogen verbunden, mit sauber eingearbeiteten An- und Abschl\u00fcssen.",
+          "Auf die Arbeit geben wir 10 Jahre Garantie. Die Abnahme erfolgt gemeinsam am fertigen Dach, mit Pr\u00fcfung aller N\u00e4hte.",
+        ],
+      },
+    ],
+    steps: [
+      { title: "Dachpr\u00fcfung", text: "Besichtigung von Fl\u00e4che, N\u00e4hten und Anschl\u00fcssen; bei Bedarf Feuchtemessung in der D\u00e4mmung." },
+      { title: "Verbindliches Angebot", text: "Aufbau, Material und Festpreis f\u00fcr Ihr Dach, ohne versteckte Positionen." },
+      { title: "Abdichtung", text: "Anschl\u00fcsse zuerst, dann die Fl\u00e4che: zwei Lagen, vollfl\u00e4chig verschwei\u00dft." },
+      { title: "Nahtpr\u00fcfung & Abnahme", text: "Jede Naht wird gepr\u00fcft; \u00dcbergabe mit Protokoll und 10 Jahren Garantie auf die Arbeit." },
+    ],
+    faqs: [
+      {
+        q: "Woran erkenne ich, dass mein Flachdach undicht ist?",
+        a: "Typisch sind feuchte Flecken an der Decke nach Regen, Blasen oder offene N\u00e4hte in der Dachbahn und stehendes Wasser, das nach zwei Tagen noch nicht abgelaufen ist. Da Wasser unter der Bahn wandert, liegt die Eintrittsstelle oft nicht \u00fcber dem Fleck. Sicherheit gibt die Pr\u00fcfung am Dach.",
+      },
+      {
+        q: "Muss die alte Dachbahn immer komplett herunter?",
+        a: "Nein. Ist die alte Lage trocken und tragf\u00e4hig, kann sie als Untergrund bleiben und wird \u00fcberarbeitet. Ist die D\u00e4mmung durchfeuchtet, muss der nasse Bereich heraus, sonst dichtet man die N\u00e4sse ein. Das kl\u00e4rt die Feuchtemessung vor dem Angebot.",
+      },
+      {
+        q: "Welche Dacharten decken Sie ab?",
+        a: "Flachd\u00e4cher, Dachterrassen, Garagend\u00e4cher und die Abdichtungsdetails am Steildach, etwa Kehlen, Gauben und Durchdringungen. F\u00fcr jede Form gilt derselbe Ablauf: pr\u00fcfen, verbindlich anbieten, vollfl\u00e4chig abdichten, gemeinsam abnehmen.",
+      },
+    ],
+    related: ["balkon-terrasse", "sockelabdichtung", "rissverpressung"],
+  },
+
+  // 8. Balkon & Terrasse
+  {
+    slug: "balkon-terrasse",
+    navTitle: "Balkon & Terrasse",
+    keyword: "Balkon abdichten",
+    title: "Balkon abdichten in Wuppertal: fugenlos & begehbar",
+    metaDescription:
+      "Balkon abdichten ohne Abriss: Fl\u00fcssigkunststoff dichtet fugenlos bis unter die T\u00fcr. F\u00fcr Balkon, Loggia und Terrasse. 10 Jahre Garantie auf die Arbeit.",
+    h1: "Balkon abdichten: fugenlos dicht, auch am T\u00fcranschluss",
+    lede:
+      "Balkone werden fast nie in der Fl\u00e4che undicht, sondern am Detail: T\u00fcranschluss, Gel\u00e4nderfu\u00df, Randabschluss. Fl\u00fcssigkunststoff dichtet genau diese Stellen fugenlos ab und bleibt begehbar.",
+    symptoms: [
+      "Feuchte Flecken an der Decke unter dem Balkon",
+      "Frostsch\u00e4den: abgeplatzte Fliesen und m\u00fcrber Estrich",
+      "Risse im Belag oder in der Aufkantung am Rand",
+      "Wasserr\u00e4nder an der Balkont\u00fcr oder der Schwelle",
+      "Gr\u00fcnbelag in Ecken, in denen Wasser stehen bleibt",
+      "Rost am Gel\u00e4nderfu\u00df oder an der Entw\u00e4sserung",
+    ],
+    layers: [
+      { name: "Untergrund", text: "Belag pr\u00fcfen, lose Teile entfernen, Risse kraftschl\u00fcssig schlie\u00dfen, Fl\u00e4che grundieren." },
+      { name: "Detailabdichtung", text: "T\u00fcranschluss, Gel\u00e4nderf\u00fc\u00dfe und R\u00e4nder zuerst: mit Vlies armiert, 15 cm hochgezogen." },
+      { name: "Fl\u00e4chenabdichtung", text: "Fl\u00fcssigkunststoff in zwei Lagen, fugenlos und UV-best\u00e4ndig, mit Gef\u00e4lle zum Ablauf." },
+      { name: "Nutzschicht", text: "Begehbare Oberfl\u00e4che nach Wunsch: Quarzsand-Einstreu, Beschichtung oder neuer Belag." },
+    ],
+    sections: [
+      {
+        heading: "Warum Fl\u00fcssigkunststoff",
+        paragraphs: [
+          "Bahnen und Fliesen scheitern am Balkon an den Details: jede Naht, jede Fuge und jeder Anschluss ist eine Eintrittsstelle. Fl\u00fcssigkunststoff wird fl\u00fcssig aufgetragen und h\u00e4rtet zu einer einzigen, nahtlosen Haut aus, die bis unter die T\u00fcrschwelle und um jeden Gel\u00e4nderfu\u00df reicht.",
+          "Die Abdichtung bleibt elastisch, \u00fcberbr\u00fcckt k\u00fcnftige Haarrisse und ist nach Stunden regenfest. In den meisten F\u00e4llen ist kein Abriss des Belags n\u00f6tig.",
+        ],
+      },
+      {
+        heading: "Begehbar und gestaltbar",
+        paragraphs: [
+          "Auf die Abdichtung kommt die Nutzschicht: rutschfeste Einstreu, eine farbige Beschichtung oder ein neuer Belag auf Stelzlagern. Die Fl\u00e4che bleibt begehbar und sieht wieder nach Terrasse aus, nicht nach Baustelle.",
+          "Vor dem Angebot pr\u00fcfen wir Gef\u00e4lle, Anschlussh\u00f6hen und den Zustand des Untergrunds. Sie erhalten einen Festpreis und 10 Jahre Garantie auf die Arbeit.",
+        ],
+      },
+    ],
+    steps: [
+      { title: "Pr\u00fcfung vor Ort", text: "Belag, Gef\u00e4lle, T\u00fcranschluss und Entw\u00e4sserung: wir suchen die tats\u00e4chliche Eintrittsstelle." },
+      { title: "Verbindliches Angebot", text: "Aufbau und Festpreis, inklusive Nutzschicht nach Ihrer Wahl." },
+      { title: "Detail- und Fl\u00e4chenabdichtung", text: "Anschl\u00fcsse zuerst, dann die Fl\u00e4che: fugenloser Fl\u00fcssigkunststoff in zwei Lagen." },
+      { title: "Abnahme", text: "Gemeinsame Abnahme der fertigen Fl\u00e4che, mit Protokoll und 10 Jahren Garantie auf die Arbeit." },
+    ],
+    faqs: [
+      {
+        q: "Muss der alte Balkonbelag komplett entfernt werden?",
+        a: "Meist nicht. Ist der Untergrund tragf\u00e4hig, wird direkt auf dem vorhandenen Belag gearbeitet: reinigen, grundieren, abdichten. Nur lose Fliesen und m\u00fcrber Estrich m\u00fcssen heraus. Das kl\u00e4rt die Pr\u00fcfung vor dem Angebot.",
+      },
+      {
+        q: "Wie lange dauert eine Balkonabdichtung?",
+        a: "Ein normaler Balkon ist in ein bis zwei Arbeitstagen abgedichtet, die Fl\u00e4che ist nach wenigen Stunden regenfest und nach etwa einem Tag begehbar. Terrassen und Loggien entsprechend nach Fl\u00e4che.",
+      },
+      {
+        q: "H\u00e4lt Fl\u00fcssigkunststoff auch unter der Balkont\u00fcr?",
+        a: "Ja, das ist seine St\u00e4rke. Die Abdichtung wird mit Vlies armiert und mindestens 15 Zentimeter an T\u00fcr und Wand hochgezogen, bei niedrigen Schwellen mit speziellem Anschlussprofil. Genau an dieser Stelle versagen Bahnenabdichtungen am h\u00e4ufigsten.",
+      },
+    ],
+    related: ["dachabdichtung", "sockelabdichtung", "rissverpressung"],
+  },
+
+  // 9. Sockelabdichtung
+  {
+    slug: "sockelabdichtung",
+    navTitle: "Sockelabdichtung",
+    keyword: "Sockel abdichten",
+    title: "Sockel abdichten: Schutz vor Spritzwasser & Feuchte",
+    metaDescription:
+      "Sockel abdichten in Wuppertal: Spritzwasserzone freilegen, zweilagig beschichten, sauber anschlie\u00dfen. Der Putz h\u00e4lt wieder. 10 Jahre Garantie auf die Arbeit.",
+    h1: "Sockel abdichten: die Spritzwasserzone dauerhaft dicht",
+    lede:
+      "Der Sockel ist die h\u00e4rtest beanspruchte Zone am Haus: Spritzwasser von oben, Erdfeuchte von unten, Frost im Winter. Wenn dort Putz platzt und Farbe bl\u00e4ttert, hilft kein Anstrich, sondern eine Abdichtung.",
+    symptoms: [
+      "Abplatzender Putz und Bl\u00e4schen in der Sockelfarbe",
+      "Dunkler Feuchterand am Haussockel nach Regen",
+      "Salzausbl\u00fchungen in den unteren 30 bis 50 Zentimetern",
+      "Gr\u00fcnbelag und Moos am Sockel auf der Wetterseite",
+      "Frostsch\u00e4den: sandender Putz, der gro\u00dffl\u00e4chig abf\u00e4llt",
+      "Feuchte Innenwand hinter dem besch\u00e4digten Sockel",
+    ],
+    layers: [
+      { name: "Freilegen", text: "Sockel bis unter die Gel\u00e4ndelinie freilegen, Altputz und lose Beschichtung entfernen." },
+      { name: "Dickbeschichtung", text: "Zwei Lagen Bitumen-Dickbeschichtung vom Fundamentansatz bis 30 cm \u00fcber Gel\u00e4nde." },
+      { name: "Schutz & Drainung", text: "Noppenbahn als Schutz, bei Bedarf Kiesstreifen, damit Spritzwasser versickert statt steht." },
+      { name: "Sockelputz", text: "Wasserabweisender Sockelputz und Anstrich: die Zone sieht wieder aus wie neu und bleibt es." },
+    ],
+    sections: [
+      {
+        heading: "Warum der Sockel zuerst leidet",
+        paragraphs: [
+          "Regen prallt auf das Pflaster und spritzt zur\u00fcck an die Fassade: die unteren 30 Zentimeter werden bei jedem Schauer nass. Gleichzeitig zieht Erdfeuchte von unten in den Putz. Normale Fassadenfarbe h\u00e4lt dieser Doppelbelastung nicht stand, deshalb bl\u00e4ttert der Sockel immer wieder, egal wie oft man streicht.",
+          "Die L\u00f6sung ist eine echte Abdichtung der Zone: freilegen, zweilagig beschichten, sch\u00fctzen und mit einem Sockelputz abschlie\u00dfen, der Wasser abweist, aber Wasserdampf durchl\u00e4sst.",
+        ],
+      },
+      {
+        heading: "Sauber angeschlossen",
+        paragraphs: [
+          "Eine Sockelabdichtung ist nur so gut wie ihre Anschl\u00fcsse: oben an die Fassade, unten an die Kellerabdichtung oder das Fundament. Wir arbeiten beide \u00dcberg\u00e4nge sauber ein, damit keine neue Eintrittskante entsteht.",
+          "Die Arbeiten betreffen nur die Sockelzone; Garten und Pflaster bleiben bis auf den schmalen Arbeitsstreifen unber\u00fchrt. Auf die Arbeit geben wir 10 Jahre Garantie.",
+        ],
+      },
+    ],
+    steps: [
+      { title: "Messung & Befund", text: "Feuchtemessung am Sockel und innen dahinter: Spritzwasser, Erdfeuchte oder beides." },
+      { title: "Verbindliches Angebot", text: "Aufbau, Anschlussh\u00f6hen und Festpreis f\u00fcr Ihre Sockelzone." },
+      { title: "Freilegen & Abdichten", text: "Altputz herunter, zwei Lagen Dickbeschichtung, Schutzlage und Anschl\u00fcsse." },
+      { title: "Sockelputz & Abnahme", text: "Wasserabweisender Putz und Anstrich, dann gemeinsame Abnahme mit Protokoll." },
+    ],
+    faqs: [
+      {
+        q: "Reicht es nicht, den Sockel neu zu streichen?",
+        a: "Nein. Farbe ist keine Abdichtung: Spritzwasser und Erdfeuchte dr\u00fccken von beiden Seiten in den Putz, und der n\u00e4chste Winter sprengt die neue Schicht wieder ab. Dauerhaft hilft nur, die Zone abzudichten und mit wasserabweisendem Sockelputz zu schlie\u00dfen.",
+      },
+      {
+        q: "Muss daf\u00fcr der Garten aufgegraben werden?",
+        a: "Nur ein schmaler Streifen direkt am Haus, so tief, dass die Abdichtung unter der Gel\u00e4ndelinie ansetzen kann. Beete, Pflaster und Rasen daneben bleiben unber\u00fchrt. Das unterscheidet die Sockelabdichtung von einer kompletten Au\u00dfenabdichtung.",
+      },
+      {
+        q: "Was kostet eine Sockelabdichtung?",
+        a: "Das h\u00e4ngt von L\u00e4nge, Zustand und Anschlussh\u00f6hen ab. Nach der kostenlosen Messung vor Ort erhalten Sie ein verbindliches Festpreisangebot; versteckte Nachtr\u00e4ge gibt es nicht.",
+      },
+    ],
+    related: ["dachabdichtung", "balkon-terrasse", "kellersanierung"],
+  },
 ];
 
 export const CITY_PAGES: CityPage[] = [

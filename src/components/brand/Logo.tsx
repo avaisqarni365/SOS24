@@ -1,51 +1,109 @@
 import { useId } from "react";
 
 /**
- * sos-abdichtung mark: a house in section. The brick-red roof stands for the
- * whole building, the dark walls for the cellar, and inside it three green
- * layers, the trade itself: sealed layer by layer. Reads at 16 px and on
- * light and dark grounds (the walls take the text colour).
+ * SOS ABDICHTUNG — the brand lockup, drawn to the identity renders.
+ *
+ * Construction, top to bottom: a roof band with its chimney on the right
+ * slope; the water drop hanging under the apex; SOS set large, with the
+ * middle O a ring holding the same drop; "- ABDICHTUNG -" ruled either side.
+ *
+ * Finish: the renders are never flat navy — every surface carries a vertical
+ * light (lighter at the top) and each drop has a gloss spot. The gradients
+ * read their stops from CSS custom properties, so the same artwork is navy
+ * with shine on paper and white-metal with shine on the dark plates, without
+ * a second file.
  */
-export function LogoMark({ size = 32, className = "" }: { size?: number; className?: string }) {
-  const id = useId().replace(/:/g, "");
+export function LogoLockup({ height = 64, className = "" }: { height?: number; className?: string }) {
+  const uid = useId().replace(/:/g, "");
+  const ink = `lk-${uid}`;
+  const drop = `ld-${uid}`;
   return (
-    <svg width={size} height={size} viewBox="0 0 48 48" className={className} aria-hidden="true" focusable="false">
+    <svg
+      height={height}
+      viewBox="0 0 200 126"
+      className={`logo-lockup ${className}`}
+      role="img"
+      aria-label="SOS Abdichtung"
+      fill="none"
+      style={{ width: "auto" }}
+    >
       <defs>
-        <linearGradient id={`roof-${id}`} x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stopColor="#d8664d" />
-          <stop offset="1" stopColor="#ad3c2e" />
+        <linearGradient id={ink} x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" style={{ stopColor: "var(--lk-a)" }} />
+          <stop offset="1" style={{ stopColor: "var(--lk-b)" }} />
+        </linearGradient>
+        <linearGradient id={drop} x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" style={{ stopColor: "var(--ld-a)" }} />
+          <stop offset="1" style={{ stopColor: "var(--ld-b)" }} />
         </linearGradient>
       </defs>
-      <path d="M6.5 21 24 6.5 41.5 21" fill="none" stroke={`url(#roof-${id})`} strokeWidth="5" strokeLinecap="round" strokeLinejoin="round" />
+
+      {/* chimney on the right slope, drawn first so the roof band closes it */}
+      <rect x="138" y="14" width="14" height="30" rx="1" fill={`url(#${ink})`} />
+
+      {/* the roof band, with a thin catch of light along its top edge */}
+      <path d="M14 52 100 2l86 50h-18L100 25 32 52Z" fill={`url(#${ink})`} />
+      <path d="M15.5 51 100 2l84.5 49" stroke="#ffffff" strokeOpacity="0.3" strokeWidth="2.2" strokeLinejoin="round" />
+
+      {/* the drop under the apex, glossed */}
       <path
-        d="M10.5 22.5V40.5a3 3 0 0 0 3 3h21a3 3 0 0 0 3-3V22.5"
-        fill="none"
-        stroke="currentColor"
-        strokeOpacity="0.9"
-        strokeWidth="3.2"
-        strokeLinecap="round"
+        d="M100 23c0 0 10.5 12.6 10.5 18.4a10.5 10.5 0 0 1-21 0C89.5 35.6 100 23 100 23Z"
+        fill={`url(#${drop})`}
       />
-      <rect x="15" y="26.5" width="18" height="3.6" rx="1.8" fill="#2bab8a" />
-      <rect x="15" y="31.6" width="18" height="3.6" rx="1.8" fill="#1a8768" />
-      <rect x="15" y="36.7" width="18" height="3.6" rx="1.8" fill="#0f5c49" />
+      <ellipse cx="95.6" cy="36" rx="2.7" ry="4.4" fill="#ffffff" opacity="0.8" transform="rotate(-16 95.6 36)" />
+
+      {/* SOS — the middle O is drawn as a ring so it can hold the drop */}
+      <text x="40" y="96" textAnchor="middle" className="logo-lockup__s" fill={`url(#${ink})`}>S</text>
+      <circle cx="100" cy="72" r="26" stroke={`url(#${ink})`} strokeWidth="16" />
+      <path
+        d="M100 56c0 0 9 10.8 9 15.8a9 9 0 0 1-18 0c0-5 9-15.8 9-15.8Z"
+        fill={`url(#${drop})`}
+      />
+      <ellipse cx="96.4" cy="67" rx="2.3" ry="3.7" fill="#ffffff" opacity="0.85" transform="rotate(-16 96.4 67)" />
+      <text x="160" y="96" textAnchor="middle" className="logo-lockup__s" fill={`url(#${ink})`}>S</text>
+
+      {/* - ABDICHTUNG - */}
+      <rect x="5" y="111" width="15" height="3.2" rx="1.6" fill={`url(#${ink})`} />
+      <rect x="180" y="111" width="15" height="3.2" rx="1.6" fill={`url(#${ink})`} />
+      <text x="100" y="118" textAnchor="middle" className="logo-lockup__w" fill={`url(#${ink})`}>ABDICHTUNG</text>
     </svg>
   );
 }
 
-export default function Logo({ tone = "auto", sub }: { tone?: "auto" | "light" | "dark"; sub?: string }) {
-  const ink =
-    tone === "dark" ? "text-[var(--head-on-bone)]" : tone === "light" ? "text-[#f3f1ec]" : "text-[var(--bone)]";
+/** The mark alone, same finish, for favicon-sized contexts. */
+export function LogoMark({ size = 36, className = "" }: { size?: number; className?: string }) {
+  const uid = useId().replace(/:/g, "");
+  const ink = `mk-${uid}`;
+  const drop = `md-${uid}`;
   return (
-    <span className="inline-flex items-center gap-2.5">
-      <LogoMark size={42} className="shrink-0" />
-      <span className={`flex flex-col leading-none ${ink}`}>
-        <span className="font-sans text-[1.25rem] font-semibold tracking-[-0.015em]">
-          <span className="logo-sos font-bold tracking-[0.01em]">sos</span>-abdichtung
-        </span>
-        {sub ? (
-          <span className="mt-1 font-mono text-[0.62rem] uppercase tracking-[0.14em] opacity-70 max-[379px]:hidden">{sub}</span>
-        ) : null}
-      </span>
+    <svg width={size} height={size} viewBox="0 0 48 48" className={className} aria-hidden="true" focusable="false" fill="none">
+      <defs>
+        <linearGradient id={ink} x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" style={{ stopColor: "var(--lk-a)" }} />
+          <stop offset="1" style={{ stopColor: "var(--lk-b)" }} />
+        </linearGradient>
+        <linearGradient id={drop} x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" style={{ stopColor: "var(--ld-a)" }} />
+          <stop offset="1" style={{ stopColor: "var(--ld-b)" }} />
+        </linearGradient>
+      </defs>
+      <rect x="32.6" y="10.2" width="5.4" height="12.4" rx="0.8" fill={`url(#${ink})`} />
+      <path d="M2.6 31.4 24 8.6l21.4 22.8h-7.2L24 17.4 9.8 31.4Z" fill={`url(#${ink})`} />
+      <path
+        d="M24 18.8c0 0 5.9 7.1 5.9 10.7a5.9 5.9 0 0 1-11.8 0c0-3.6 5.9-10.7 5.9-10.7Z"
+        fill={`url(#${drop})`}
+      />
+      <ellipse cx="21.6" cy="26.4" rx="1.4" ry="2.3" fill="#ffffff" opacity="0.8" transform="rotate(-16 21.6 26.4)" />
+    </svg>
+  );
+}
+
+/** The lockup, used everywhere. */
+export default function Logo({ tone = "auto", sub }: { tone?: "auto" | "light" | "dark"; sub?: string }) {
+  return (
+    <span className="logo">
+      <LogoLockup height={62} />
+      {sub ? <span className="logo__sub">{sub}</span> : null}
     </span>
   );
 }

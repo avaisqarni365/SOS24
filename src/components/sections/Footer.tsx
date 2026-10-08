@@ -10,7 +10,7 @@ export default function Footer() {
       <div className="sc-wrap">
         <div className="grid grid-cols-1 gap-10 md:grid-cols-12">
           <div className="space-y-4 md:col-span-4">
-            <Logo sub="Wuppertal · PLZ 42" />
+            <Logo />
             <p className="max-w-sm text-sm leading-relaxed">
               Fachbetrieb für Kellersanierung, Horizontalsperren und Schimmelbeseitigung in Wuppertal und dem
               Bergischen Land. Offizieller{" "}
@@ -69,8 +69,7 @@ export default function Footer() {
             <p className="mb-4 font-mono text-xs uppercase tracking-wider text-[var(--bone)]">Seiten</p>
             <ul className="space-y-1 text-sm">
               {[
-                ["/#schicht-fuer-schicht", "3D-Verfahren"],
-                ["/#nachweis", "Ablauf mit Nachweis"],
+                ["/labor/", "Scientific Lab"],
                 ["/galerie/", "Galerie"],
                 ["/kostenrechner/", "Kostenrechner"],
                 ["/#servicegebiet", "Servicegebiet"],

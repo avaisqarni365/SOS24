@@ -22,6 +22,7 @@ export const TRANSLATIONS: Record<SupportedLocale, Record<string, string>> = {
     // Nav
     "nav.services": "Leistungen",
     "nav.process3d": "3D-Verfahren",
+    "nav.simulation": "Scientific Lab",
     "nav.gallery": "Galerie",
     "nav.proof": "Nachweis",
     "rail.proof": "Nachweis",
@@ -154,6 +155,7 @@ export const TRANSLATIONS: Record<SupportedLocale, Record<string, string>> = {
     // Nav
     "nav.services": "Services",
     "nav.process3d": "3D Process",
+    "nav.simulation": "Scientific Lab",
     "nav.gallery": "Gallery",
     "nav.proof": "Proof",
     "rail.proof": "Proof",
@@ -286,6 +288,7 @@ export const TRANSLATIONS: Record<SupportedLocale, Record<string, string>> = {
     // Nav
     "nav.services": "Hizmetler",
     "nav.process3d": "3D Yöntem",
+    "nav.simulation": "Scientific Lab",
     "nav.gallery": "Galeri",
     "nav.proof": "Kanıt",
     "rail.proof": "Kanıt",
@@ -418,6 +421,7 @@ export const TRANSLATIONS: Record<SupportedLocale, Record<string, string>> = {
     // Nav
     "nav.services": "Услуги",
     "nav.process3d": "3D-Метод",
+    "nav.simulation": "Scientific Lab",
     "nav.gallery": "Галерея",
     "nav.proof": "Доказательство",
     "rail.proof": "Замеры",
@@ -550,6 +554,7 @@ export const TRANSLATIONS: Record<SupportedLocale, Record<string, string>> = {
     // Nav
     "nav.services": "الخدمات",
     "nav.process3d": "تقنية 3D",
+    "nav.simulation": "Scientific Lab",
     "nav.gallery": "المعرض",
     "nav.proof": "الإثبات",
     "rail.proof": "الإثبات",
@@ -682,6 +687,7 @@ export const TRANSLATIONS: Record<SupportedLocale, Record<string, string>> = {
     // Nav
     "nav.services": "Usługi",
     "nav.process3d": "Metoda 3D",
+    "nav.simulation": "Scientific Lab",
     "nav.gallery": "Galeria",
     "nav.proof": "Dowód",
     "rail.proof": "Pomiary",

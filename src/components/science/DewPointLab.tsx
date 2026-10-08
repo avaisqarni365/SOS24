@@ -26,7 +26,7 @@ const WALLS: { key: WallKey; label: string; u: number }[] = [
 type Level = "ok" | "warn" | "risk" | "dew";
 const LEVELS: Record<Level, { color: string; title: string; text: string; tips: string[] }> = {
   ok: {
-    color: "#62c4ac",
+    color: "currentColor",
     title: "unkritisch",
     text: "Die Wand bleibt warm genug. Die Feuchte direkt an der Oberfläche liegt unter der Schwelle, ab der Schimmel auf Dauer wachsen kann.",
     tips: [
@@ -156,7 +156,7 @@ export default function DewPointLab() {
                 <label htmlFor={`${uid}-${s.id}`} className="text-sm font-semibold">
                   {s.label}
                 </label>
-                <output htmlFor={`${uid}-${s.id}`} className="font-mono text-sm text-[var(--mint)]">
+                <output htmlFor={`${uid}-${s.id}`} className="font-mono text-sm text-accent-deep">
                   {s.unit === "%" ? s.value : fmt(s.value)} {s.unit}
                 </output>
               </div>
@@ -188,7 +188,7 @@ export default function DewPointLab() {
               id={`${uid}-wall`}
               value={wall}
               onChange={(e) => setWall(e.target.value as WallKey)}
-              className="mt-2 min-h-[44px] w-full rounded-full border border-line/20 bg-[var(--ink-3)] px-4 py-2 text-sm text-[var(--bone)] hover:border-[var(--mint)]"
+              className="mt-2 min-h-[44px] w-full rounded-full border border-line/20 bg-[var(--ink-3)] px-4 py-2 text-sm text-[var(--bone)] hover:border-accent-deep"
             >
               {WALLS.map((w) => (
                 <option key={w.key} value={w.key}>

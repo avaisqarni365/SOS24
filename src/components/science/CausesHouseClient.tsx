@@ -50,7 +50,7 @@ function Section({ active, causes: CAUSES }: { active: number; causes: Cause[] }
       </text>
       {CAUSES.map((c, i) => (
         <g key={c.id}>
-          <circle cx={c.x} cy={c.y} r={active === i ? 26 : 20} fill={active === i ? "#62c4ac" : "#f3f1ec"} stroke="#0e1310" strokeWidth="4" />
+          <circle cx={c.x} cy={c.y} r={active === i ? 26 : 20} fill={active === i ? "currentColor" : "#f3f1ec"} stroke="#0e1310" strokeWidth="4" />
           <text x={c.x} y={c.y + 8} textAnchor="middle" fontSize="22" fontWeight="700" fill="#0e1310" fontFamily="ui-monospace, monospace">
             {c.n}
           </text>
@@ -105,7 +105,7 @@ export default function CausesHouseClient({ causes: CAUSES }: { causes: Cause[] 
           <p className="text-[var(--bone)]">
             <strong>Lösung:</strong> {c.fix}
           </p>
-          <a href={c.href} className="inline-flex min-h-[48px] items-center justify-between rounded-full bg-[var(--bone)] px-5 text-sm font-semibold text-[var(--ink)] hover:bg-white">
+          <a href={c.href} className="inline-flex min-h-[48px] items-center justify-between rounded-full bg-[var(--bone)] px-5 text-sm font-semibold text-[var(--ink)] hover:bg-surface">
             {c.cta} <span aria-hidden="true">→</span>
           </a>
         </div>
@@ -117,7 +117,7 @@ export default function CausesHouseClient({ causes: CAUSES }: { causes: Cause[] 
               type="button"
               onClick={() => setActive(i)}
               aria-pressed={active === i}
-              className={`flex h-full w-full items-start gap-3 rounded-2xl border p-4 text-left ${active === i ? "border-[var(--mint)] bg-[var(--ink-3)]" : "border-line/10 bg-[var(--ink-2)]"}`}
+              className={`flex h-full w-full items-start gap-3 rounded-2xl border p-4 text-left ${active === i ? "border-accent-deep bg-[var(--ink-3)]" : "border-line/10 bg-[var(--ink-2)]"}`}
             >
               <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-[var(--bone)] font-mono text-sm font-bold text-[var(--ink)]">{cause.n}</span>
               <span>

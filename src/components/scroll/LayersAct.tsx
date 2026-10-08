@@ -13,7 +13,7 @@ export default function LayersAct({
   label = "Das Verfahren in 3D",
   title = (
     <>
-      Jeder Ort, <em className="text-[var(--mint)]">Schicht für Schicht.</em>
+      Jeder Ort, <em className="text-accent-deep">Schicht für Schicht.</em>
     </>
   ),
   intro = "Wohnraum, Keller von innen, Keller von außen und Garage: Wählen Sie den Ort und gehen Sie die Sanierung Schritt für Schritt durch. Jeder Schritt zeigt im Bild, welche Schicht entsteht, mit Material, Zahlen und Messwerten. Mit „In 3D drehen“ lädt das Modell, das Sie dann in alle Richtungen drehen können.",
@@ -33,7 +33,7 @@ export default function LayersAct({
     steps: sc.steps.map((st) => ({ ...st, text: hy(st.text), material: hy(st.material) })),
   }));
   return (
-    <section id={id} className="sc-section viewer-sec border-t border-line/10" aria-labelledby={`${id}-title`} data-sc-act="flow">
+    <section id={id} className="sc-section viewer-sec" aria-labelledby={`${id}-title`} data-sc-act="flow">
       <div className="sc-wrap">
         <div className="grid gap-6 lg:grid-cols-[1fr_1fr] lg:items-end">
           <div>

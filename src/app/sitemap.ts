@@ -21,6 +21,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       priority: 0.8,
     })),
     { url: abs("/leistungen/"), lastModified, changeFrequency: "monthly", priority: 0.9 },
+    { url: abs("/labor/"), lastModified, changeFrequency: "monthly", priority: 0.7 },
     { url: abs("/galerie/"), lastModified, changeFrequency: "monthly", priority: 0.6 },
     { url: abs("/kostenrechner/"), lastModified, changeFrequency: "monthly", priority: 0.7 },
     { url: abs("/impressum/"), lastModified, changeFrequency: "yearly", priority: 0.2 },

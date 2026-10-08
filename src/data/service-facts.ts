@@ -43,9 +43,30 @@ export const SERVICE_FACTS: Record<string, { value: string; label: string }[]> =
     { value: "0", label: "Packer bleiben nach dem Verpressen in der Wand" },
     { value: "100 %", label: "des Rissverlaufs vorab dokumentiert" },
   ],
+  dachabdichtung: [
+    { value: "2-lagig", label: "Bitumenbahnen, vollflächig verschweißt" },
+    { value: "4", label: "Dacharten: Flach-, Steildach, Terrasse, Garage" },
+    { value: "10 Jahre", label: "Garantie auf unsere Arbeit" },
+    { value: "0", label: "offene Nähte nach der Abnahmeprüfung" },
+  ],
+  "balkon-terrasse": [
+    { value: "0", label: "Nähte: Flüssigkunststoff dichtet fugenlos" },
+    { value: "15 cm", label: "Aufkantung an Tür und Wandanschluss" },
+    { value: "1,5 %", label: "Mindestgefälle zur Entwässerung" },
+    { value: "10 Jahre", label: "Garantie auf unsere Arbeit" },
+  ],
+  sockelabdichtung: [
+    { value: "30 cm", label: "Spritzwasserzone über Gelände, mindestens" },
+    { value: "2", label: "Lagen Dickbeschichtung am Sockel" },
+    { value: "10 Jahre", label: "Garantie auf unsere Arbeit" },
+    { value: "0", label: "Erdarbeiten über die Sockelzone hinaus" },
+  ],
 };
 
 export const SERVICE_SCENES: Record<string, SceneId[]> = {
+  dachabdichtung: ["garage"],
+  "balkon-terrasse": ["garage"],
+  sockelabdichtung: ["keller-aussen"],
   kellersanierung: ["keller-innen", "keller-aussen"],
   horizontalsperre: ["keller-innen"],
   kellerinnenabdichtung: ["keller-innen", "keller-aussen"],

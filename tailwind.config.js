@@ -22,6 +22,19 @@ module.exports = {
           darkText: '#050807',
         },
         line: 'rgb(var(--c-line) / <alpha-value>)',
+        /* Semantic aliases. Every one resolves through a channel variable, and
+           those are redefined by the theme AND by each surface (.band-ink,
+           .surface-bone, .theme-dark), so a `text-ink` sits correctly on a
+           dark plate inside a light page and flips with the theme everywhere
+           else. Prefer these over any literal colour in markup. */
+        ink: 'rgb(var(--c-bone) / <alpha-value>)',
+        'ink-soft': 'rgb(var(--c-soft) / <alpha-value>)',
+        canvas: 'rgb(var(--c-ink) / <alpha-value>)',
+        surface: 'rgb(var(--c-ink2) / <alpha-value>)',
+        'surface-2': 'rgb(var(--c-ink3) / <alpha-value>)',
+        accent: 'rgb(var(--c-mint) / <alpha-value>)',
+        'accent-deep': 'rgb(var(--c-accent-deep) / <alpha-value>)',
+        bone: 'rgb(var(--c-bone) / <alpha-value>)',
       },
       fontFamily: {
         latex: ['var(--font-latex)', '"Latin Modern Roman"', '"Computer Modern"', '"TeX Gyre Termes"', 'Georgia', 'serif'],

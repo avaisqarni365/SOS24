@@ -32,8 +32,8 @@ function LevelWall() {
         decoding="async"
       />
       <svg viewBox="0 0 480 320" aria-hidden="true" className="cz-overlay">
-        <rect x="150" y="186" width="92" height="62" fill="none" stroke="#62c4ac" strokeWidth="3" rx="4" />
-        <path d="M242 186 L300 120" stroke="#62c4ac" strokeWidth="2" strokeDasharray="5 5" />
+        <rect x="150" y="186" width="92" height="62" fill="none" stroke="currentColor" strokeWidth="3" rx="4" />
+        <path d="M242 186 L300 120" stroke="currentColor" strokeWidth="2" strokeDasharray="5 5" />
         <rect x="298" y="97" width="178" height="27" rx="4" fill="#0e1310" fillOpacity="0.84" />
         <text x="306" y="116" fill="#f3f1ec" fontSize="16" fontFamily="ui-monospace, monospace">
           Sockel, 0 bis 1 m
@@ -83,7 +83,7 @@ function LevelMasonry() {
         {[180, 420, 700, 880].map((x) => (
           <path key={x} d={`M${x} 590 V240`} stroke="#8fb9e8" strokeWidth="4" strokeDasharray="10 14" className="cz-flow" />
         ))}
-        <circle cx="560" cy="400" r="70" fill="none" stroke="#62c4ac" strokeWidth="4" />
+        <circle cx="560" cy="400" r="70" fill="none" stroke="currentColor" strokeWidth="4" />
         <rect x="638" y="300" width="242" height="42" rx="6" fill="#0e1310" fillOpacity="0.84" />
         <text x="650" y="330" fill="#f3f1ec" fontSize="26" fontFamily="ui-monospace, monospace">
           Stein und Fuge
@@ -137,8 +137,8 @@ function LevelPoreWall() {
         <rect x="260" y="40" width="160" height="560" fill="#9a6b4b" />
         <rect x="580" y="40" width="160" height="560" fill="#9a6b4b" />
         {/* hydrophobic polymer film, a few molecules thick */}
-        <rect className="cz-film" x="414" y="40" width="8" height="560" fill="#62c4ac" />
-        <rect className="cz-film" x="578" y="40" width="8" height="560" fill="#62c4ac" />
+        <rect className="cz-film" x="414" y="40" width="8" height="560" fill="currentColor" />
+        <rect className="cz-film" x="578" y="40" width="8" height="560" fill="currentColor" />
         {/* water column: wetting (before) */}
         <g className="cz-before">
           <path d="M420 600 V220 Q500 290 580 220 V600 Z" fill="#5a8fc4" />
@@ -159,16 +159,16 @@ function LevelPoreWall() {
             Wasserdampf entweicht
           </text>
         </g>
-        <text x="760" y="140" fill="#62c4ac" fontSize="20" fontFamily="ui-monospace, monospace">
+        <text x="760" y="140" fill="currentColor" fontSize="20" fontFamily="ui-monospace, monospace">
           Polymerfilm,
         </text>
-        <text x="760" y="166" fill="#62c4ac" fontSize="20" fontFamily="ui-monospace, monospace">
+        <text x="760" y="166" fill="currentColor" fontSize="20" fontFamily="ui-monospace, monospace">
           wenige Moleküle
         </text>
-        <text x="760" y="192" fill="#62c4ac" fontSize="20" fontFamily="ui-monospace, monospace">
+        <text x="760" y="192" fill="currentColor" fontSize="20" fontFamily="ui-monospace, monospace">
           dick
         </text>
-        <path d="M755 160 L592 220" stroke="#62c4ac" strokeWidth="2" />
+        <path d="M755 160 L592 220" stroke="currentColor" strokeWidth="2" />
       </svg>
     </div>
   );

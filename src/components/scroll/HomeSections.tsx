@@ -3,8 +3,7 @@ import { FAQS, COMPANY_INFO } from "@/data/content-data";
 import { CITY_PAGES } from "@/data/seo-pages";
 import { FaqCards } from "@/components/seo/SubpageParts";
 import { MAP_AREAS, MAP_ESSEN, MAP_H, MAP_W } from "@/data/region-map";
-import OsmMap from "@/components/interactive/OsmMap";
-import { Home, Layers, ShieldCheck, SprayCan, Gauge, Wrench, type LucideIcon } from "lucide-react";
+import { Home, Layers, ShieldCheck, SprayCan, Gauge, Wrench, Umbrella, Sun, PanelBottom, type LucideIcon } from "lucide-react";
 
 const CARD_ICON: Record<ServiceCard["art"], LucideIcon> = {
   keller: Home,
@@ -13,6 +12,9 @@ const CARD_ICON: Record<ServiceCard["art"], LucideIcon> = {
   schimmel: SprayCan,
   messung: Gauge,
   riss: Wrench,
+  dach: Umbrella,
+  balkon: Sun,
+  sockel: PanelBottom,
 };
 import FeuchteScanner from "@/components/interactive/FeuchteScanner";
 import { hy } from "@/lib/hyphenate";
@@ -30,7 +32,7 @@ export function ScannerSection() {
       <div className="sc-wrap">
         <div className="mb-10 grid gap-6 lg:grid-cols-[1fr_1fr] lg:items-end" data-sc-in>
           <h2 id="scanner-title" className="sc-display text-4xl sm:text-5xl lg:text-6xl">
-            Erst messen. <em className="text-[var(--mint)]">Dann bohren.</em>
+            Erst messen. <em className="text-accent-deep">Dann bohren.</em>
           </h2>
           <p className="sc-body">
             {hy("Frisch gestrichen sieht jede Wand trocken aus. Führen Sie die Sonde über die Wand und sehen Sie, was eine Feuchtemessung sichtbar macht: aufsteigende Nässe im Sockel, Kondensat in der kalten Ecke, ein Riss, der Wasser führt. Jede Ursache braucht ein anderes Verfahren.")}
@@ -43,36 +45,28 @@ export function ScannerSection() {
 }
 
 /* ------------------------------------------------------------- services -- */
-/** Six services as one calm grid. The photos live in the gallery below, so
-    this section carries no images and nothing moves sideways. */
-/** The six services as picture cards; each card opens the service page. */
+/** The six services as typographic cards. No pictures: the 3D renders were
+    the only images here and they belong in the Scientific Lab, where there is
+    room to explain what they show. A number, a rule, a name and one line. */
 export function ServiceCardGrid() {
   return (
-    <ul className="services-grid mt-10">
-      {SERVICE_CARDS.map((s) => {
+    <ul className="services-grid mt-14">
+      {SERVICE_CARDS.map((s, i) => {
         const Icon = CARD_ICON[s.art];
         return (
           <li key={s.slug}>
-            <a className="service-card group" href={`/leistungen/${s.slug}/`}>
-              <span className={`service-card__media service-card__media--${s.image.fit}`}>
-                <img src={s.image.src} alt={s.image.alt} width={640} height={450} loading="lazy" decoding="async" />
-                <span className="service-card__badge flex items-center gap-1.5">
-                  <span className="h-1.5 w-1.5 rounded-full bg-[var(--mint)]" />
-                  {s.image.fit === "contain" ? "3D-Verfahren" : "Fachverfahren"}
+            <a className="service-card" href={`/leistungen/${s.slug}/`}>
+              <span className="service-card__top">
+                <span className="service-card__icon" aria-hidden="true">
+                  <Icon strokeWidth={1.5} />
                 </span>
+                <span className="service-card__n">{String(i + 1).padStart(2, "0")}</span>
               </span>
-              <span className="service-card__body">
-                <span className="service-card__title">
-                  <span className="service-card__icon" aria-hidden="true">
-                    <Icon strokeWidth={2} />
-                  </span>
-                  <h3>{s.title}</h3>
-                </span>
-                <p>{s.text}</p>
-                <span className="service-card__more">
-                  <span>Details &amp; 3D-Verfahren</span>
-                  <span aria-hidden="true">&nbsp;→</span>
-                </span>
+              <h3 className="service-card__h">{s.title}</h3>
+              <p>{s.text}</p>
+              <span className="service-card__more">
+                <span>Details</span>
+                <span aria-hidden="true">→</span>
               </span>
             </a>
           </li>
@@ -96,7 +90,7 @@ export function ServicesRail() {
           <div>
             <p className="sc-label">Leistungen</p>
             <h2 id="leistungen-title" className="sc-display mt-3 text-4xl sm:text-5xl lg:text-6xl">
-              Sechs Verfahren. <em className="text-[var(--mint)]">Eine Ursache nach der anderen.</em>
+              Neun Verfahren. <em className="text-accent-deep">Eine Ursache nach der anderen.</em>
             </h2>
           </div>
           <p className="sc-body">
@@ -105,7 +99,7 @@ export function ServicesRail() {
         </div>
         <ServiceCardGrid />
         <p className="mt-8">
-          <a href="/leistungen/" className="inline-flex items-center gap-2 font-semibold text-[var(--emerald-deep)] hover:underline">
+          <a href="/leistungen/" className="inline-flex items-center gap-2 font-semibold text-accent-deep hover:underline">
             Alle Leistungen im Überblick, mit Wegweiser: welches Verfahren bei welchem Anzeichen <span aria-hidden="true">→</span>
           </a>
         </p>
@@ -207,7 +201,6 @@ export function RegionSection() {
                 </li>
               ))}
             </ul>
-            <OsmMap />
           </div>
         </div>
       </div>
@@ -218,7 +211,7 @@ export function RegionSection() {
 /* ------------------------------------------------------------------ faq -- */
 export function FaqSection() {
   return (
-    <section id="faq" className="sc-section border-t border-line/10" aria-labelledby="faq-title" data-sc-act="flow">
+    <section id="faq" className="sc-section" aria-labelledby="faq-title" data-sc-act="flow">
       <div className="sc-wrap faq-layout">
         <div className="faq-intro">
           <p className="sc-label">Häufige Fragen</p>
@@ -239,7 +232,7 @@ export function FaqSection() {
                 href={COMPANY_INFO.whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex min-h-[44px] items-center rounded-full border border-line/15 px-5 text-[0.9375rem] font-semibold hover:border-[var(--mint)]"
+                className="inline-flex min-h-[44px] items-center rounded-full border border-line/15 px-5 text-[0.9375rem] font-semibold hover:border-accent-deep"
               >
                 WhatsApp
               </a>

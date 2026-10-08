@@ -54,17 +54,17 @@ export default function PictureGallery({ hideHeader = false }: { hideHeader?: bo
   const cur = open === null ? null : items[open];
 
   return (
-    <section id="galerie" className="sc-section bg-white" aria-labelledby="galerie-title">
+    <section id="galerie" className="sc-section bg-surface" aria-labelledby="galerie-title">
       <div className="sc-wrap">
         {!hideHeader && (
           <div className="grid gap-6 lg:grid-cols-[1fr_1fr] lg:items-end mb-10">
             <div>
-              <p className="sc-label text-[#0f5c49] font-bold">{t("gallery.eyebrow")}</p>
-              <h2 id="galerie-title" className="sc-display mt-3 text-4xl sm:text-5xl lg:text-6xl text-[#050807]">
+              <p className="sc-label text-accent-deep font-bold">{t("gallery.eyebrow")}</p>
+              <h2 id="galerie-title" className="sc-display mt-3 text-4xl sm:text-5xl lg:text-6xl text-ink">
                 {t("gallery.h1")} <em className="text-[var(--brick)]">{t("gallery.accent")}</em>
               </h2>
             </div>
-            <p className="sc-body text-[#050807] font-medium">{t("gallery.sub")}</p>
+            <p className="sc-body text-ink font-medium">{t("gallery.sub")}</p>
           </div>
         )}
 
@@ -80,8 +80,8 @@ export default function PictureGallery({ hideHeader = false }: { hideHeader?: bo
               }}
               className={`min-h-[44px] rounded-full border px-4 text-sm font-semibold transition-all ${
                 category === c.id
-                  ? "border-transparent bg-[var(--grad)] text-white shadow-sm"
-                  : "border-line/15 bg-white text-[#050807] hover:border-[var(--emerald-deep)] hover:bg-[#f7faf9]"
+                  ? "btn-shine border-transparent shadow-sm"
+                  : "border-line/15 bg-surface text-ink hover:border-[var(--emerald-deep)] hover:bg-surface-2"
               }`}
             >
               {c.label}
@@ -98,10 +98,10 @@ export default function PictureGallery({ hideHeader = false }: { hideHeader?: bo
                   lastTrigger.current = e.currentTarget;
                   setOpen(i);
                 }}
-                className="group flex h-full w-full flex-col overflow-hidden rounded-[28px] border border-line/10 bg-white p-3 text-left shadow-[0_4px_16px_-4px_rgba(16,40,30,0.06),0_12px_32px_-8px_rgba(16,40,30,0.08)] hover:border-[var(--emerald-deep)] hover:shadow-[0_8px_28px_-4px_rgba(16,40,30,0.12),0_20px_48px_-8px_rgba(19,117,93,0.16)] hover:-translate-y-1 transition-all duration-300"
+                className="group flex h-full w-full flex-col overflow-hidden rounded-[28px] border border-line/10 bg-surface p-3 text-left shadow-[0_4px_16px_-4px_rgba(16,40,30,0.06),0_12px_32px_-8px_rgba(16,40,30,0.08)] hover:border-[var(--emerald-deep)] hover:shadow-[0_8px_28px_-4px_rgba(16,40,30,0.12),0_20px_48px_-8px_rgba(19,117,93,0.16)] hover:-translate-y-1 transition-all duration-300"
                 aria-label={`${it.title}: ${t("gallery.zoomHint")}`}
               >
-                <span className="relative block aspect-[16/11] overflow-hidden rounded-[20px] bg-[#f7faf9] border border-black/5 shadow-inner">
+                <span className="relative block aspect-[16/11] overflow-hidden rounded-[20px] bg-surface-2 border border-ink/5 shadow-inner">
                   <img
                     src={it.src}
                     srcSet={it.src2x ? `${it.src} ${it.w}w, ${it.src2x} 960w` : undefined}
@@ -112,20 +112,20 @@ export default function PictureGallery({ hideHeader = false }: { hideHeader?: bo
                     loading="lazy"
                     decoding="async"
                     className={`h-full w-full transition-transform duration-500 ease-out group-hover:scale-105 ${
-                      it.category === "team" ? "object-cover object-top bg-white" : "object-cover"
+                      it.category === "team" ? "object-cover object-top bg-surface" : "object-cover"
                     }`}
                   />
-                  <span className="absolute left-3 top-3 inline-flex items-center gap-1.5 rounded-full bg-white/95 px-3 py-1 font-latex text-xs font-bold text-[#050807] shadow-sm backdrop-blur-md border border-white/60">
-                    <span className="h-1.5 w-1.5 rounded-full bg-[var(--mint)]" />
+                  <span className="absolute left-3 top-3 inline-flex items-center gap-1.5 rounded-full bg-surface/95 px-3 py-1 font-latex text-xs font-bold text-ink shadow-sm backdrop-blur-md border border-canvas/60">
+                    <span className="h-1.5 w-1.5 rounded-full bg-accent-deep" />
                     {it.tag}
                   </span>
                 </span>
                 <span className="flex flex-1 flex-col gap-2 p-4 sm:p-5">
-                  <span className="font-editorial text-2xl leading-tight text-[#050807] font-bold">{it.title}</span>
-                  <span className="text-sm sm:text-[0.95rem] leading-[1.68] text-[#050807] font-normal text-justify hyphens-auto">{it.text}</span>
-                  <span className="mt-auto flex items-center justify-between pt-3 font-mono text-[0.72rem] text-[#050807] font-semibold border-t border-line/8">
+                  <span className="font-editorial text-2xl leading-tight text-ink font-bold">{it.title}</span>
+                  <span className="text-sm sm:text-[0.95rem] leading-[1.68] text-ink font-normal text-justify hyphens-auto">{it.text}</span>
+                  <span className="mt-auto flex items-center justify-between pt-3 font-mono text-[0.72rem] text-ink font-semibold border-t border-line/8">
                     <span>Foto: SchimmelPeter®</span>
-                    <span className="text-[#0f5c49] font-bold">{t("gallery.zoomHint")} →</span>
+                    <span className="text-accent-deep font-bold">{t("gallery.zoomHint")} →</span>
                   </span>
                 </span>
               </button>
@@ -139,7 +139,7 @@ export default function PictureGallery({ hideHeader = false }: { hideHeader?: bo
           role="dialog"
           aria-modal="true"
           aria-labelledby="galerie-dialog-title"
-          className="theme-dark fixed inset-0 z-[70] flex items-center justify-center bg-[#0e1310]/95 p-4 backdrop-blur-sm sm:p-8"
+          className="theme-dark fixed inset-0 z-[70] flex items-center justify-center bg-canvas/95 p-4 backdrop-blur-sm sm:p-8"
           onClick={close}
         >
           <div className="relative flex w-full max-w-4xl flex-col items-center gap-4" onClick={(e) => e.stopPropagation()}>

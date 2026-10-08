@@ -63,7 +63,7 @@ export const SCENES: SceneDef[] = [
     layers: [
       { id: "erdreich", name: "Erdreich & Bodenfeuchte", short: "Erdreich", color: "#7a6146", text: "Das Wasser im Boden zieht kapillar ins Mauerwerk. Außen wird nicht gegraben." },
       { id: "mauerwerk", name: "Mauerwerk", short: "Mauerwerk", color: "#9a6b4b", text: "Ziegel, Bruchstein oder Beton. Wir messen vorher, wie tief und wie hoch die Nässe sitzt." },
-      { id: "horizontalsperre", name: "Horizontalsperre", short: "Sperre", color: "#62c4ac", text: "Bohrlöcher im Abstand von bis zu 20 cm, gefüllt mit in Paraffin gelöstem Kunststoff. Die Wand bleibt diffusionsfähig." },
+      { id: "horizontalsperre", name: "Horizontalsperre", short: "Sperre", color: "#8a8a86", text: "Bohrlöcher im Abstand von bis zu 20 cm, gefüllt mit in Paraffin gelöstem Kunststoff. Die Wand bleibt diffusionsfähig." },
       { id: "innenabdichtung", name: "Innenabdichtung & Hohlkehle", short: "Abdichtung", color: "#8f9a96", text: "Mineralische Dichtungsschlämme mit Hohlkehle am Boden-Wand-Anschluss hält seitlich drückende Feuchte zurück." },
       { id: "sanierputz", name: "Sanierputz", short: "Sanierputz", color: "#d9d2c1", text: "Nimmt Restsalze auf und lässt die Wand weiter austrocknen, ohne neue Ausblühungen." },
       { id: "klimaplatte", name: "Calciumsilikat-Platte", short: "Klimaplatte", color: "#f3f1ec", text: "Kapillaraktiv und schimmelhemmend: reguliert die Oberfläche, wo Kondensat droht." },

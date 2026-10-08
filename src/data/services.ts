@@ -3,7 +3,7 @@ export interface ServiceCard {
   slug: string;
   title: string;
   text: string;
-  art: "keller" | "sperre" | "innen" | "schimmel" | "messung" | "riss";
+  art: "keller" | "sperre" | "innen" | "schimmel" | "messung" | "riss" | "dach" | "balkon" | "sockel";
   /** card picture: a still from the 3D model (transparent, "contain") or a photo ("cover") */
   image: { src: string; alt: string; fit: "contain" | "cover" };
 }
@@ -50,5 +50,26 @@ export const SERVICE_CARDS: ServiceCard[] = [
     text: "Wasserführende Risse in Beton und Mauerwerk mit PU-Harz oder Epoxid dicht verpressen.",
     art: "riss",
     image: { src: "/img/3d/garage-3-640.webp", alt: "3D-Modell: Riss in der Betonwand, mit Harz verpresst", fit: "contain" },
+  },
+  {
+    slug: "dachabdichtung",
+    title: "Dachabdichtung",
+    text: "Flachdach, Steildach, Dachterrasse und Garagendach: dauerhafter Schutz vor Wasser, verschweißt statt geflickt.",
+    art: "dach",
+    image: { src: "/img/sp/vertikalsperre-bitumen-kellerwand-320.webp", alt: "Bitumenbahn als Abdichtung, sauber verschweißt", fit: "cover" },
+  },
+  {
+    slug: "balkon-terrasse",
+    title: "Balkon & Terrasse",
+    text: "Begehbare Flächen dicht an jedem Anschluss: Flüssigkunststoff ohne Naht, bis unter Tür und Geländer.",
+    art: "balkon",
+    image: { src: "/img/sp/saniert-heller-raum-320.webp", alt: "Sanierte, helle Fläche nach der Abdichtung", fit: "cover" },
+  },
+  {
+    slug: "sockelabdichtung",
+    title: "Sockelabdichtung",
+    text: "Der Spritzwasserbereich am Haus: Sockel freilegen, abdichten und wieder sauber anschließen.",
+    art: "sockel",
+    image: { src: "/img/sp/aussenabdichtung-drainage-baustelle-320.webp", alt: "Freigelegter Sockel mit frischer Abdichtung", fit: "cover" },
   },
 ];

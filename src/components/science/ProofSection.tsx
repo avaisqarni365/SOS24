@@ -10,14 +10,14 @@ import ProofPhasesClient from "./ProofPhasesClient";
 export default function ProofSection() {
   const phases = PHASES.map((p) => ({ ...p, measure: hy(p.measure), criterion: hy(p.criterion), proof: hy(p.proof) }));
   return (
-    <section id="nachweis" className="sc-section border-t border-line/5" aria-labelledby="nachweis-title">
+    <section id="nachweis" className="sc-section band-mint" aria-labelledby="nachweis-title">
       <span id="ablauf" aria-hidden="true" />
       <div className="sc-wrap">
         <div className="grid gap-6 lg:grid-cols-[1fr_1fr] lg:items-end">
           <div>
             <p className="sc-label">Ablauf mit Nachweis</p>
             <h2 id="nachweis-title" className="sc-display mt-3 text-4xl sm:text-5xl lg:text-6xl">
-              Feuchte Wände trockenlegen, <em className="text-[var(--mint)]">messbar in jeder Phase.</em>
+              Feuchte Wände trockenlegen, <em className="text-accent-deep">messbar in jeder Phase.</em>
             </h2>
           </div>
           <p className="sc-body">

@@ -31,7 +31,7 @@ export default function CtaBanner() {
         <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
           <a
             href="#kontakt"
-            className="inline-flex items-center gap-2 rounded-full px-7 py-3.5 text-sm font-semibold transition-all active:scale-[0.98] bg-landing-bone text-[#0E1310] hover:bg-white shadow-sm"
+            className="inline-flex items-center gap-2 rounded-full px-7 py-3.5 text-sm font-semibold transition-all active:scale-[0.98] bg-landing-bone text-ink hover:bg-surface shadow-sm"
           >
             <span>{t("cta.btn")}</span>
             <span aria-hidden="true">→</span>

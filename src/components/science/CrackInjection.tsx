@@ -234,7 +234,7 @@ export default function CrackInjection() {
                 <text x="1186" y="394" textAnchor="end" className="ci-t ci-t--soft">(danach entfernt)</text>
               </g>
               <g className="ci-stop">
-                <line x1="300" y1="448" x2="300" y2="494" stroke="#62c4ac" strokeWidth="6" strokeLinecap="round" />
+                <line x1="300" y1="448" x2="300" y2="494" stroke="currentColor" strokeWidth="6" strokeLinecap="round" />
                 <text x="150" y="560" textAnchor="middle" className="ci-t ci-t--mint">Wasser bleibt</text>
                 <text x="150" y="586" textAnchor="middle" className="ci-t ci-t--mint">draußen</text>
               </g>

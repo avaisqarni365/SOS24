@@ -11,8 +11,8 @@ export default function ScrollSectionRail() {
   const sectionStops = [
     { id: "top", label: t("rail.start") || "Start" },
     { id: "leistungen", label: t("nav.services") || "Leistungen" },
-    { id: "schicht-fuer-schicht", label: t("rail.layers") || "3D" },
-    { id: "nachweis", label: t("rail.proof") || "Nachweis" },
+    { id: "ablauf", label: t("rail.process") || "Ablauf" },
+    { id: "kontakt-kanaele", label: t("rail.contact") || "Kontakt" },
     { id: "servicegebiet", label: t("rail.region") || "PLZ 42" },
     { id: "faq", label: "FAQ" },
     { id: "kontakt", label: t("rail.contact") || "Kontakt" }

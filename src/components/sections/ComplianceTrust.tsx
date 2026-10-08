@@ -39,18 +39,18 @@ export default function ComplianceTrust() {
   ];
 
   return (
-    <section id="zertifizierung" className="relative bg-landing-bone2 text-[#1A1D1B]">
+    <section id="zertifizierung" className="relative bg-landing-bone2 text-ink">
       <div className="relative max-w-6xl mx-auto px-6 py-24 sm:py-32">
         {/* Section Header */}
         <p className="text-[11px] font-semibold uppercase tracking-[0.18em] mb-5 text-landing-emerald font-mono">
           {t("comp.eyebrow")}
         </p>
-        <h2 className="font-editorial font-normal tracking-[-0.02em] leading-[1.04] text-[2.25rem] sm:text-5xl lg:text-[3.5rem] text-[#1A1D1B]">
+        <h2 className="font-editorial font-normal tracking-[-0.02em] leading-[1.04] text-[2.25rem] sm:text-5xl lg:text-[3.5rem] text-ink">
           {t("comp.h1")}
           <br />
           <span className="italic text-landing-mint">{t("comp.accent")}</span>
         </h2>
-        <p className="mt-6 max-w-2xl text-base sm:text-lg leading-relaxed text-[#444945]">
+        <p className="mt-6 max-w-2xl text-base sm:text-lg leading-relaxed text-ink-soft">
           {t("comp.sub")}
         </p>
 
@@ -61,23 +61,23 @@ export default function ComplianceTrust() {
             return (
               <div
                 key={p.n}
-                className="rounded-2xl p-7 border bg-white/70 border-black/5 hover:bg-white transition-all flex flex-col justify-between shadow-sm"
+                className="rounded-2xl p-7 border bg-surface/70 border-ink/5 hover:bg-surface transition-all flex flex-col justify-between shadow-sm"
               >
                 <div>
                   <div className="flex items-start justify-between mb-6">
                     <div className="w-10 h-10 rounded-xl flex items-center justify-center bg-landing-emerald/10 text-landing-emerald">
                       <Icon className="w-5 h-5" />
                     </div>
-                    <span className="font-mono text-xs text-black/25 font-bold">{p.n}</span>
+                    <span className="font-mono text-xs text-ink/25 font-bold">{p.n}</span>
                   </div>
 
                   <p className="text-[10px] font-semibold uppercase tracking-[0.16em] mb-2 text-landing-emerald/80 font-mono">
                     {p.eyebrow}
                   </p>
-                  <h3 className="font-editorial text-lg mb-3 text-[#1A1D1B] leading-snug">
+                  <h3 className="font-editorial text-lg mb-3 text-ink leading-snug">
                     {p.title}
                   </h3>
-                  <p className="text-xs leading-relaxed text-[#444945]">{p.desc}</p>
+                  <p className="text-xs leading-relaxed text-ink-soft">{p.desc}</p>
                 </div>
               </div>
             );

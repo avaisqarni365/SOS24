@@ -10,7 +10,7 @@ export default function LegalPage({ title, updated, children }: { title: string;
       <header className="border-b border-line/[0.08] bg-[var(--nav-bg)]">
         <div className="mx-auto flex h-16 max-w-4xl items-center justify-between px-5 sm:h-[4.5rem] sm:px-8">
           <a href="/" aria-label="sos-abdichtung, zur Startseite">
-            <Logo sub="SchimmelPeter® Partner · Wuppertal" />
+            <Logo />
           </a>
           <div className="flex items-center gap-3">
             <a href="/" className="text-sm font-semibold text-[var(--bone)]/80 hover:text-[var(--bone)]">

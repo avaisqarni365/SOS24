@@ -202,7 +202,7 @@ export default function NegativeSeal() {
                 <g key={y}>
                   <line x1="430" y1={y} x2="522" y2={y} stroke="#8fb6e0" strokeWidth="3" strokeDasharray="8 7" />
                   <path d={`M534 ${y} L522 ${y - 7} L522 ${y + 7} Z`} fill="#8fb6e0" />
-                  <line x1="540" y1={y - 16} x2="540" y2={y + 16} stroke="#62c4ac" strokeWidth="5" strokeLinecap="round" />
+                  <line x1="540" y1={y - 16} x2="540" y2={y + 16} stroke="currentColor" strokeWidth="5" strokeLinecap="round" />
                 </g>
               ))}
             </g>
@@ -261,7 +261,7 @@ export default function NegativeSeal() {
               <text x="666" y="524" className="ns-t">Boden-Wand-Anschluss</text>
             </g>
             <g className="ns-dry">
-              <path d="M968 552 l10 10 l20 -22" stroke="#62c4ac" strokeWidth="5" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+              <path d="M968 552 l10 10 l20 -22" stroke="currentColor" strokeWidth="5" fill="none" strokeLinecap="round" strokeLinejoin="round" />
               <text x="1010" y="566" className="ns-t ns-t--mint">Raum trocken</text>
             </g>
           </svg>

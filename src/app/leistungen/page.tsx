@@ -79,7 +79,7 @@ export default function LeistungenPage() {
             </h1>
             <p className="sc-lede mt-5 max-w-3xl">
               {hy(
-                "Sechs Verfahren, eine Regel: erst messen, dann sanieren. Jede Leistung hat eine eigene Seite mit 3D-Modell, der Physik dahinter, Zahlen, Ablauf und Fragen. Wir arbeiten in Wuppertal, Solingen, Remscheid, Velbert, Haan und Wermelskirchen."
+                "Neun Verfahren, eine Regel: erst messen, dann sanieren. Jede Leistung hat eine eigene Seite mit 3D-Modell, der Physik dahinter, Zahlen, Ablauf und Fragen. Wir arbeiten in Wuppertal, Solingen, Remscheid, Velbert, Haan und Wermelskirchen."
               )}
             </p>
             <ServiceCardGrid />

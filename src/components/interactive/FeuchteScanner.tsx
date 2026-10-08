@@ -193,7 +193,7 @@ export default function FeuchteScanner() {
         <div className="flex flex-col gap-3">
           <a
             href={zone.href}
-            className="inline-flex min-h-[48px] items-center justify-between rounded-full bg-[var(--bone)] px-5 py-3 text-sm font-semibold text-[var(--ink)] hover:bg-white"
+            className="inline-flex min-h-[48px] items-center justify-between rounded-full bg-[var(--bone)] px-5 py-3 text-sm font-semibold text-[var(--ink)] hover:bg-surface"
           >
             Passende Leistung: {zone.service} <span aria-hidden="true">→</span>
           </a>
@@ -201,7 +201,7 @@ export default function FeuchteScanner() {
             type="button"
             onClick={() => setReveal((r) => !r)}
             aria-pressed={reveal}
-            className="min-h-[48px] rounded-full border border-line/20 px-5 py-3 text-sm font-semibold hover:border-[var(--mint)]"
+            className="min-h-[48px] rounded-full border border-line/20 px-5 py-3 text-sm font-semibold hover:border-accent-deep"
           >
             {reveal ? "Nur die Sonde zeigen" : "Ganze Feuchtekarte aufdecken"}
           </button>

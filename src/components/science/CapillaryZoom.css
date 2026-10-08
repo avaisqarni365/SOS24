@@ -47,8 +47,10 @@
   border-radius: 0;
   padding: 0.45rem 0.8rem;
   border-radius: 10px;
-  background: rgba(14, 19, 16, 0.85);
-  color: var(--mint);
+  background: #121212;
+  /* the global `main p` ink rule carries !important, and this chip is a dark
+     plate in both themes, so it has to state its own ink at the same weight */
+  color: #ffffff !important;
   font: 600 clamp(0.9rem, 0.8rem + 0.5vw, 1.25rem) / 1.2 var(--sc-font-mono);
   text-align: left;
 }

@@ -134,7 +134,7 @@ function WallSvg({ active, title }: { active: number; title: string }) {
         </clipPath>
       </defs>
       <rect width="600" height="420" fill="#1b241f" />
-      <rect width="600" height="420" fill="#62c4ac" opacity="0.5" />
+      <rect width="600" height="420" fill="currentColor" opacity="0.5" />
       <g clipPath="url(#mp-wall)">
         <g {...layer(0)}>
           <path d="M0 420V250Q75 232 150 246T300 240T450 250T600 238V420Z" fill="url(#mp-rise)" filter="url(#mp-soft)" />
@@ -190,7 +190,7 @@ function WallSvg({ active, title }: { active: number; title: string }) {
 
 function DepthSvg({ methods }: { methods: MethodKey[] }) {
   const on = (k: MethodKey) => methods.includes(k);
-  const col = (k: MethodKey) => (on(k) ? "#62c4ac" : "#5b665f");
+  const col = (k: MethodKey) => (on(k) ? "currentColor" : "#5b665f");
   return (
     <svg viewBox="0 0 360 200" className="h-auto w-full" role="img" aria-label="Messtiefe: welche Methode wo im Wandquerschnitt misst">
       <rect x="30" y="0" width="70" height="200" fill="#d8d1c2" opacity="0.85" />
@@ -269,8 +269,8 @@ export default function MoisturePatterns() {
             onClick={() => setActive(i)}
             className={`min-h-[44px] rounded-full border px-4 py-2 text-sm font-semibold motion-safe:transition-colors ${
               active === i
-                ? "border-[var(--mint)] bg-[var(--mint)] text-[var(--ink)]"
-                : "border-line/20 text-[var(--bone)] hover:border-[var(--mint)]"
+                ? "border-accent-deep bg-accent-deep text-[var(--ink)]"
+                : "border-line/20 text-[var(--bone)] hover:border-accent-deep"
             }`}
           >
             {t.label}
@@ -287,7 +287,7 @@ export default function MoisturePatterns() {
         <figure className="rounded-[22px] border border-line/10 bg-[var(--ink-2)] p-4 sm:p-6">
           <WallSvg active={active} title={`Schematische Kellerwand mit Feuchtebild: ${p.label}`} />
           <div className="mt-4" aria-hidden="true">
-            <div className="h-2 rounded-full" style={{ background: "linear-gradient(90deg,#62c4ac,#e8b04c,#3b6ea8)" }} />
+            <div className="h-2 rounded-full" style={{ background: "linear-gradient(90deg,currentColor,#e8b04c,#3b6ea8)" }} />
             <div className="mt-1 flex justify-between font-mono text-[11px] text-[var(--sc-ink-soft)]">
               <span>trocken</span>
               <span>feucht</span>
@@ -307,7 +307,7 @@ export default function MoisturePatterns() {
           <ul className="mt-3 flex flex-col gap-2 text-sm">
             {p.signs.map((s) => (
               <li key={s} className="flex gap-3">
-                <span aria-hidden="true" className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--mint)]" />
+                <span aria-hidden="true" className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-accent-deep" />
                 <span className="text-[var(--bone-2)]">{s}</span>
               </li>
             ))}
@@ -318,7 +318,7 @@ export default function MoisturePatterns() {
           <p className="mt-2 text-sm text-[var(--bone-2)]">{p.next}</p>
           <a
             href={p.href}
-            className="mt-5 inline-flex min-h-[48px] w-full items-center justify-between gap-3 rounded-full bg-[var(--bone)] px-5 py-3 text-sm font-semibold text-[var(--ink)] hover:bg-white"
+            className="mt-5 inline-flex min-h-[48px] w-full items-center justify-between gap-3 rounded-full bg-[var(--bone)] px-5 py-3 text-sm font-semibold text-[var(--ink)] hover:bg-surface"
           >
             {p.cta} <span aria-hidden="true">→</span>
           </a>
@@ -342,11 +342,11 @@ export default function MoisturePatterns() {
               <li
                 key={m.key}
                 className={`flex gap-3 rounded-2xl border p-3 motion-safe:transition-colors ${
-                  on ? "border-[var(--mint)] bg-[var(--ink-3)]" : "border-line/10"
+                  on ? "border-accent-deep bg-[var(--ink-3)]" : "border-line/10"
                 }`}
                 style={{ textAlign: "start" }}
               >
-                <span className={`font-mono text-sm ${on ? "text-[var(--mint)]" : "text-[var(--sc-ink-soft)]"}`}>{i + 1}</span>
+                <span className={`font-mono text-sm ${on ? "text-accent-deep" : "text-[var(--sc-ink-soft)]"}`}>{i + 1}</span>
                 <span>
                   <strong className="block text-sm">{m.name}</strong>
                   <span className="text-sm text-[var(--sc-ink-soft)]">{m.text}</span>
