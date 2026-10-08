@@ -41,6 +41,49 @@ export default function Navbar() {
   const { t } = useLanguage();
   const pathname = usePathname();
   const isHome = pathname === "/" || pathname === "";
+  const burgerRef = useRef<HTMLButtonElement>(null);
+  const menuRef = useRef<HTMLDivElement>(null);
+
+  // A full-screen menu has to behave like a dialog: Escape closes it, focus
+  // moves into it and comes back to the button, Tab stays inside, and the
+  // page behind it does not scroll.
+  useEffect(() => {
+    if (!open) return;
+    const root = document.documentElement;
+    const prevOverflow = root.style.overflow;
+    root.style.overflow = "hidden";
+    const focusables = () =>
+      Array.from(menuRef.current?.querySelectorAll<HTMLElement>("a[href], button:not([disabled])") ?? []);
+    focusables()[0]?.focus();
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setOpen(false);
+        return;
+      }
+      if (e.key !== "Tab") return;
+      const items = [burgerRef.current, ...focusables()].filter(Boolean) as HTMLElement[];
+      const first = items[0];
+      const last = items[items.length - 1];
+      if (e.shiftKey && document.activeElement === first) {
+        e.preventDefault();
+        last.focus();
+      } else if (!e.shiftKey && document.activeElement === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    };
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      root.style.overflow = prevOverflow;
+      burgerRef.current?.focus();
+    };
+  }, [open]);
+
+  // Navigating away closes the menu (covers the browser back button too).
+  useEffect(() => {
+    setOpen(false);
+  }, [pathname]);
 
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     if (isHome && href.includes("#")) {
@@ -105,6 +148,7 @@ export default function Navbar() {
               {t("nav.cta")}
             </a>
             <button
+              ref={burgerRef}
               type="button"
               onClick={() => setOpen(!open)}
               className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-line/15 bg-[var(--ink)] text-[var(--bone)] hover:border-accent-deep "
@@ -123,7 +167,7 @@ export default function Navbar() {
            three taps to reach a service and a lot of chrome for a phone. This
            is the whole site as a set-serif index, with the two contact
            channels pinned to the bottom where a thumb reaches them. */
-        <div id="mobile-menu" className="mnav " role="dialog" aria-modal="true" aria-label="Menü">
+        <div id="mobile-menu" ref={menuRef} className="mnav" role="dialog" aria-modal="true" aria-label="Menü">
           <div className="mnav__inner">
             <nav className="mnav__primary" aria-label="Hauptbereiche">
               {PRIMARY.map((l, i) => (

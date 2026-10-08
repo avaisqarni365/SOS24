@@ -5021,3 +5021,65 @@ html[data-theme="dark"] { --logo-drop: #6aa2ec; }
   }
 }
 @media (prefers-reduced-motion: reduce) { .header-cta { transition: none; } }
+
+/* ===================================================== READABLE TEXT ======
+   Three fixes for desktop reading:
+   1. Display type is set solid. A `.band-ink .sc-display` rule (0,2,0) was
+      beating the 650 weight, so the hero rendered thin at 79px in pale slate.
+   2. Section intros stack under their heading at a proper measure instead of
+      being squeezed into four of twelve columns (352px at 1440).
+   3. No word-breaking on desktop. At a real measure the line has room, and
+      the soft hyphens inserted for phones were chopping words mid-line.
+   ======================================================================== */
+.sc-display,
+.band-ink .sc-display,
+.contact-band .sc-display,
+main :is(h1, h2):not(.sc-label) {
+  font-weight: 650 !important;
+  letter-spacing: -0.028em;
+}
+main h3:not(.sc-label) { font-weight: 650 !important; }
+
+/* on the plates the whole headline is white; the emphasis keeps its water */
+.band-ink .sc-display,
+.band-ink :is(h1, h2):not(.sc-label) { color: #ffffff !important; }
+.band-ink .sc-lede,
+.contact-band .sc-lede { color: #dbe4f2 !important; }
+
+/* body copy: regular weight renders cleaner than a synthesized 450 */
+main :is(p, li, dd) { font-weight: 400 !important; }
+main .sc-lede { font-weight: 400 !important; }
+
+/* 2. section heads stack: label, heading, intro below at a readable width */
+@media (min-width: 1024px) {
+  .sc-section > .sc-wrap > .grid.lg\:grid-cols-\[1fr_1fr\],
+  .sc-section > .sc-wrap > div.grid:first-child {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    row-gap: 1.25rem;
+  }
+  .sc-section > .sc-wrap > div.grid:first-child > :first-child,
+  .sc-section > .sc-wrap > div.grid:first-child > :last-child {
+    grid-column: 1 / -1;
+    padding-top: 0;
+  }
+}
+main .sc-body { max-width: 64ch !important; }
+main .sc-display { max-width: 22ch; }
+
+/* 3. hyphenation only where the column is genuinely narrow */
+@media (min-width: 768px) {
+  main :is(p, li, dd, figcaption, h1, h2, h3, h4, span, a),
+  .mnav :is(a, span, p) {
+    hyphens: none !important;
+    -webkit-hyphens: none !important;
+  }
+}
+/* long-form prose never runs wider than a comfortable line */
+main :is(.prose-sos, .faq-card__a, .chem__intro, .rx__note, .step__d) {
+  max-width: 70ch;
+}
+
+/* the menu reads as navigation, not as a poster */
+.mnav__label { font-weight: 600; letter-spacing: -0.02em; }
+.mnav__list a { font-size: 1rem; font-weight: 500; }
