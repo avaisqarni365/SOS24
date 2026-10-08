@@ -68,7 +68,7 @@ export default function KitGrid({ items }: { items: KitItem[] }) {
                 ))}
               </ul>
               <div className="qv__actions">
-                <a href="/#kontakt" className="qv__btn qv__btn--solid" onClick={close}>
+                <a href="/kontakt/" className="qv__btn qv__btn--solid" onClick={close}>
                   Messung anfragen
                   <ArrowRight aria-hidden="true" />
                 </a>

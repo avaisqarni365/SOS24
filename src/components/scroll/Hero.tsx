@@ -2,6 +2,7 @@ import { PartnerLink, PartnerText, PartnerBadge } from "@/components/brand/Partn
 import { COMPANY_INFO } from "@/data/content-data";
 import HeroFilm from "@/components/scroll/HeroFilm";
 import { REEL } from "@/data/films";
+import FactsStrip from "@/components/sections/FactsStrip";
 
 export const CTA_LABEL = "Kostenlose Feuchtemessung anfragen";
 
@@ -53,11 +54,7 @@ export default function Hero() {
             </a>
           </div>
 
-          <ul className="hero__facts mt-9">
-            <li>Messung vor Ort kostenlos</li>
-            <li>10 Jahre Garantie</li>
-            <li>Ohne Aufgraben</li>
-          </ul>
+          <FactsStrip inHero />
         </div>
         <HeroFilm film={REEL} />
         </div>

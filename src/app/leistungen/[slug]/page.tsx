@@ -112,7 +112,7 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
         <ChapterNav items={chapters} label={`Kapitel: ${page.navTitle}`} />
 
         <ServiceOverview facts={SERVICE_FACTS[page.slug] ?? []} symptoms={page.symptoms} navTitle={page.navTitle} />
-        <ServiceSteps steps={page.steps} navTitle={page.navTitle} />
+        <ServiceSteps steps={page.steps} navTitle={page.navTitle} slug={page.slug} />
         <ServiceKit slug={page.slug} navTitle={page.navTitle} />
 
         <div id="technik" className="svc-chapter">

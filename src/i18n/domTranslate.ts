@@ -13,7 +13,7 @@ import { I18N_VERSION } from "./version";
 
 export type Dict = Record<string, string>;
 
-const SKIP = "script,style,noscript,svg,code,pre,.rx__eq,.qv__eq,.labpanel__rx-eq,[data-no-translate]";
+const SKIP = "script,style,noscript,svg:not([data-i18n]),code,pre,.rx__eq,.qv__eq,.labpanel__rx-eq,[data-no-translate]";
 const ATTRS = ["alt", "aria-label", "title", "placeholder"] as const;
 
 /** Must match the extraction (scripts/i18n): soft hyphens out, spaces folded. */

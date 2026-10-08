@@ -22,7 +22,7 @@ if (!BASE) {
 
 // Paths the site itself serves from /public or as pages.
 const PREFIX =
-  "(?:img/|textures/|scrollcraft/|fonts/|video/|leistungen/|kellersanierung/|galerie/|kostenrechner/|impressum/|datenschutz/|icon\\.svg|logo\\.svg|og-image\\.jpg|llms\\.txt|#)";
+  "(?:img/|textures/|scrollcraft/|fonts/|video/|media/|i18n/|leistungen/|kellersanierung/|galerie/|kostenrechner/|kontakt/|labor/|impressum/|datenschutz/|icon\\.svg|logo\\.svg|og-image\\.jpg|llms\\.txt|#)";
 // An opening quote, an escaped quote inside RSC/JSON payloads, or url(.
 const OPEN = '(\\\\"|["\'`(])';
 const rules = [

@@ -31,12 +31,12 @@ const PRIMARY: { href: string; key?: string; label?: string }[] = [
   { href: "/labor/", key: "nav.simulation" },
   { href: "/galerie/", key: "nav.gallery" },
   { href: "/kostenrechner/", key: "nav.calculator" },
-  { href: "/#kontakt", label: "Kontakt" },
+  { href: "/kontakt/", label: "Kontakt" },
 ];
 
 const AUDIENCE = [
-  { href: "/#fuer-hausbesitzer", label: "Für Hausbesitzer" },
-  { href: "/#fuer-unternehmen", label: "Für Hausverwaltungen & Unternehmen" },
+  { href: "/leistungen/#fuer-hausbesitzer", label: "Für Hausbesitzer" },
+  { href: "/leistungen/#fuer-unternehmen", label: "Für Hausverwaltungen & Unternehmen" },
 ];
 
 export default function Navbar() {
@@ -159,7 +159,7 @@ export default function Navbar() {
             <div className="hidden sm:block">
               <LanguageSelector />
             </div>
-            <a href="/#kontakt" onClick={(e) => handleNavClick(e, "/#kontakt")} className="header-cta hidden min-h-[44px] items-center gap-2 whitespace-nowrap rounded-full px-5 text-[0.9375rem] font-semibold sm:inline-flex">
+            <a href="/kontakt/" onClick={(e) => handleNavClick(e, "/kontakt/")} className="header-cta hidden min-h-[44px] items-center gap-2 whitespace-nowrap rounded-full px-5 text-[0.9375rem] font-semibold sm:inline-flex">
               {t("nav.cta")}
             </a>
             <button

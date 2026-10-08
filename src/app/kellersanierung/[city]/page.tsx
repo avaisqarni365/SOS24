@@ -35,7 +35,7 @@ export default function CityPage({ params }: { params: { city: string } }) {
   const path = `/kellersanierung/${page.slug}/`;
   const crumbs = [
     { name: "Startseite", path: "/" },
-    { name: "Servicegebiet", path: "/#servicegebiet" },
+    { name: "Servicegebiet", path: "/leistungen/#servicegebiet" },
     { name: `Kellersanierung ${page.name}`, path },
   ];
 

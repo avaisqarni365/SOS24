@@ -5,10 +5,12 @@ import ContactForm from "@/components/sections/ContactForm";
 import FactsStrip from "@/components/sections/FactsStrip";
 import JsonLd from "@/components/seo/JsonLd";
 import ScrollEngine, { SC_BOOT } from "@/components/scroll/ScrollEngine";
-import { ServiceCardGrid } from "@/components/scroll/HomeSections";
+import { ServiceCardGrid, RegionSection, FaqSection } from "@/components/scroll/HomeSections";
+import AudienceSection from "@/components/sections/AudienceSection";
+import { FAQS } from "@/data/content-data";
 import { Breadcrumbs } from "@/components/seo/SubpageParts";
 import { SERVICE_CARDS } from "@/data/services";
-import { abs, businessNode, websiteNode, breadcrumbNode, BUSINESS_ID, WEBSITE_ID, OG_IMAGE } from "@/lib/site";
+import { abs, businessNode, websiteNode, breadcrumbNode, faqNode, BUSINESS_ID, WEBSITE_ID, OG_IMAGE } from "@/lib/site";
 import { hy } from "@/lib/hyphenate";
 
 const TITLE = "Leistungen: Kellersanierung & Abdichtung | sos-abdichtung";
@@ -63,6 +65,7 @@ export default function LeistungenPage() {
       },
     },
     { ...breadcrumbNode(crumbs), "@id": `${abs(PATH)}#breadcrumb` },
+    faqNode(FAQS),
   ];
 
   return (
@@ -86,7 +89,7 @@ export default function LeistungenPage() {
           </div>
         </section>
 
-        <section className="sc-section border-t border-line/10" aria-labelledby="guide-title">
+        <section id="wegweiser" className="sc-section border-t border-line/10" aria-labelledby="guide-title">
           <div className="sc-wrap">
             <p className="sc-label">Wegweiser</p>
             <h2 id="guide-title" className="sc-display mt-3">
@@ -123,6 +126,9 @@ export default function LeistungenPage() {
           </div>
         </section>
 
+        <AudienceSection />
+        <RegionSection />
+        <FaqSection />
         <FactsStrip title="Zahlen & Fakten" />
         <ContactForm />
       </main>

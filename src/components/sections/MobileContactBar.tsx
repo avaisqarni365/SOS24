@@ -13,7 +13,7 @@ export default function MobileContactBar() {
         <MessageCircle aria-hidden="true" />
         WhatsApp
       </a>
-      <a href="/#kontakt" className="is-primary">
+      <a href="/kontakt/" className="is-primary">
         <CalendarCheck aria-hidden="true" />
         Messung anfragen
       </a>

@@ -1,5 +1,6 @@
 import { PartnerLink, PartnerText, PartnerBadge } from "@/components/brand/PartnerLink";
-import { Phone, MessageCircle, Mail, MapPin } from "lucide-react";
+import { Phone, MessageCircle, Mail, MapPin, ArrowRight } from "lucide-react";
+import { SHOTS } from "@/components/brand/BrandShot";
 import { COMPANY_INFO } from "@/data/content-data";
 import { SERVICE_CARDS } from "@/data/services";
 import { CITY_PAGES } from "@/data/seo-pages";
@@ -10,15 +11,22 @@ const PAGES: [string, string][] = [
   ["/labor/", "Scientific Lab"],
   ["/galerie/", "Galerie"],
   ["/kostenrechner/", "Angebotsrechner"],
-  ["/#servicegebiet", "Servicegebiet"],
-  ["/#faq", "Häufige Fragen"],
-  ["/#kontakt", "Kontakt"],
+  ["/leistungen/#servicegebiet", "Servicegebiet"],
+  ["/leistungen/#faq", "Häufige Fragen"],
+  ["/kontakt/", "Kontakt"],
 ];
 
-/** The footer: solid type, four columns, the two direct lines on top. */
+/**
+ * The footer: the service van as its background on one side, fading into
+ * the page; over it the brand and the way in (the contact page as one
+ * button, the two direct lines beside it); below, four columns of links.
+ */
 export default function Footer() {
   return (
     <footer className="site-footer">
+      <div className="site-footer__bg" aria-hidden="true">
+        <img src={SHOTS.van.src} width={SHOTS.van.w} height={SHOTS.van.h} alt="" loading="lazy" decoding="async" />
+      </div>
       <div className="sc-wrap">
         <div className="site-footer__top">
           <div className="site-footer__brand">
@@ -31,8 +39,15 @@ export default function Footer() {
             </p>
             <PartnerBadge className="site-footer__badge" />
           </div>
-          <div className="site-footer__lines">
-            <a href={`tel:${COMPANY_INFO.phoneTel}`} className="site-footer__line site-footer__line--call">
+          <div id="footer-kontakt" className="site-footer__act">
+            <a href="/kontakt/" className="site-footer__kontakt">
+              <span>
+                <small>Kostenlose Feuchtemessung</small>
+                Kontakt
+              </span>
+              <ArrowRight aria-hidden="true" />
+            </a>
+            <a href={`tel:${COMPANY_INFO.phoneTel}`} className="site-footer__line">
               <Phone aria-hidden="true" />
               <span>
                 <small>Anrufen</small>
@@ -43,7 +58,7 @@ export default function Footer() {
               <MessageCircle aria-hidden="true" />
               <span>
                 <small>WhatsApp</small>
-                Foto der Wand senden
+                Foto senden
               </span>
             </a>
           </div>

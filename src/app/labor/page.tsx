@@ -13,6 +13,8 @@ import { CHEMISTRY } from "@/data/chemistry";
 import { SERVICE_FILMS } from "@/data/films";
 import HeroFilm from "@/components/scroll/HeroFilm";
 import LabTabs from "@/components/science/LabTabs";
+import LayerStack3D from "@/components/science/LayerStack3D";
+import Scenario, { ScenarioDefs } from "@/components/science/Scenarios";
 import { Formula } from "@/components/science/Formula";
 import { hy } from "@/lib/hyphenate";
 import { Home, Layers, ShieldCheck, SprayCan, Gauge, Wrench, Umbrella, Sun, PanelBottom, FlaskConical, Box, ScanLine, ClipboardCheck, type LucideIcon } from "lucide-react";
@@ -94,6 +96,7 @@ export default function LaborPage() {
       icon: <Icon strokeWidth={1.7} />,
       panel: (
         <>
+          <Scenario slug={c.slug} />
           <div className="labpanel" id={`verfahren-${c.slug}`}>
             {film ? <HeroFilm film={film} label="Film" /> : null}
             <article className="labpanel__chem">
@@ -138,6 +141,7 @@ export default function LaborPage() {
       <JsonLd graph={graph} />
       <Navbar />
       <main id="main" className="lab-page">
+        <ScenarioDefs />
         <section className="lab-hero" aria-labelledby="lab-title">
           <div className="sc-wrap">
             <div className="lab-hero__grid">
@@ -147,17 +151,18 @@ export default function LaborPage() {
                   Der Nachweis, <em>nicht die Behauptung.</em>
                 </h1>
                 <p className="sc-lede lab-hero__lede">
-                  {hy("Jedes Verfahren als kurzer Film, die Reaktion im Mauerwerk als Gleichung, das Modell in 3D und die Messung, die alles belegt. Wählen Sie ein Verfahren und gehen Sie es Schicht für Schicht durch.")}
+                  {hy("Jedes Verfahren als Szenario in sechs Sekunden und als kurzer Film, die Reaktion im Mauerwerk als Gleichung, das Modell in 3D und die Messung, die alles belegt.")}
                 </p>
+                <dl className="lab-stats lab-stats--row">
+                  {STATS.map((s) => (
+                    <div key={s.label}>
+                      <dt>{s.value}</dt>
+                      <dd className="lab-stats__label">{s.label}</dd>
+                    </div>
+                  ))}
+                </dl>
               </div>
-              <dl className="lab-stats">
-                {STATS.map((s) => (
-                  <div key={s.label}>
-                    <dt>{s.value}</dt>
-                    <dd>{s.label}</dd>
-                  </div>
-                ))}
-              </dl>
+              <LayerStack3D />
             </div>
             <nav className="lab-chapters" aria-label="Kapitel">
               {CHAPTERS.map(({ href, label, Icon }, i) => (

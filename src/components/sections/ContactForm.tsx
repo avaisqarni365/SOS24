@@ -5,7 +5,6 @@ import { PartnerLink, PartnerText, PartnerBadge } from "@/components/brand/Partn
 import React, { useEffect, useRef, useState } from "react";
 import { Phone, MapPin, CheckCircle2, MessageSquare, ArrowRight, Mail } from "lucide-react";
 import { COMPANY_INFO } from "@/data/content-data";
-import BrandShot from "@/components/brand/BrandShot";
 import { useLanguage } from "@/i18n/LanguageContext";
 
 const DAMAGE_OPTIONS = [
@@ -237,12 +236,9 @@ export default function ContactForm({ defaultDamage, place }: { defaultDamage?: 
 
           <div className="space-y-6 lg:col-span-5">
             <div className="contact-card">
-              {/* The van is the cover: the first thing a customer sees of us at
-                  the door. The partner badge sits top-right on it, framed. */}
-              <div className="contact-card__cover">
-                <BrandShot shot="van" decorative />
-                <PartnerBadge className="contact-card__badge" />
-              </div>
+              {/* The partner badge sits top-right, framed; the van picture is
+                  in the footer of every page. */}
+              <PartnerBadge className="contact-card__badge" />
               <div className="contact-card__person">
                 <img
                   src="/img/gallery/shahzad-mahmood-160.webp"

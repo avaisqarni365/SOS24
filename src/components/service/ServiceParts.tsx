@@ -7,6 +7,7 @@ import { Breadcrumbs } from "@/components/seo/SubpageParts";
 import { COMPANY_INFO } from "@/data/content-data";
 import { KIT } from "@/data/kit";
 import type { Film } from "@/data/films";
+import Scenario, { ScenarioDefs } from "@/components/science/Scenarios";
 import { hy } from "@/lib/hyphenate";
 
 /** Service hero: the claim on the left, the service's own film on the right. */
@@ -126,8 +127,8 @@ export function ServiceOverview({
   );
 }
 
-/** The steps as a timeline on one water line. */
-export function ServiceSteps({ steps, navTitle }: { steps: { title: string; text: string }[]; navTitle: string }) {
+/** The steps as a timeline on one water line, after the six-second scenario. */
+export function ServiceSteps({ steps, navTitle, slug }: { steps: { title: string; text: string }[]; navTitle: string; slug?: string }) {
   return (
     <section id="ablauf" className="sc-section svc-steps" aria-labelledby="ablauf-title">
       <div className="sc-wrap">
@@ -135,6 +136,12 @@ export function ServiceSteps({ steps, navTitle }: { steps: { title: string; text
         <h2 id="ablauf-title" className="sc-display mt-3">
           So läuft Ihre {navTitle} ab, <em>Schritt für Schritt.</em>
         </h2>
+        {slug ? (
+          <div className="svc-anim">
+            <ScenarioDefs />
+            <Scenario slug={slug} />
+          </div>
+        ) : null}
         <ol className="svc-steps__list">
           {steps.map((s, i) => (
             <li key={s.title} className="svc-step">

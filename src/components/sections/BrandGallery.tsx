@@ -50,7 +50,7 @@ export default function BrandGallery({ items }: { items: BrandGalleryItem[] }) {
               </h2>
               <p className="qv__lead">{active.detail}</p>
               <div className="qv__actions">
-                <a href="/#kontakt" className="qv__btn qv__btn--solid" onClick={close}>
+                <a href="/kontakt/" className="qv__btn qv__btn--solid" onClick={close}>
                   Termin vereinbaren
                   <ArrowRight aria-hidden="true" />
                 </a>

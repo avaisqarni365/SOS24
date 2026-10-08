@@ -1,37 +1,53 @@
-import { PartnerLink, PartnerText, PartnerBadge } from "@/components/brand/PartnerLink";
-import CountUp from "@/components/ui/CountUp";
+import { ShieldCheck, BadgeCheck, Shovel, Clock, Ruler, MapPin, type LucideIcon } from "lucide-react";
+import { PartnerText } from "@/components/brand/PartnerLink";
 
 export interface Fact {
   value: string;
   label: string;
+  Icon?: LucideIcon;
 }
 
-/** The key figures right under the hero: what a homeowner wants to know first. */
+/** The key figures, each one short line: a bold value and what it means. */
 const HOME_FACTS: Fact[] = [
-  { value: "10 Jahre", label: "Garantie auf unsere Arbeit" },
-  { value: "25 Jahre", label: "Produktgarantie von SchimmelPeter" },
-  { value: "0", label: "Erdarbeiten bei der Sanierung von innen" },
-  { value: "24 h", label: "bis zum Termin vor Ort in Wuppertal" },
-  { value: "5", label: "Messhöhen, Protokoll nach jeder Phase" },
-  { value: "6", label: "Städte im Servicegebiet PLZ 42" },
+  { value: "10 Jahre", label: "Garantie auf die Arbeit", Icon: ShieldCheck },
+  { value: "25 Jahre", label: "Produktgarantie SchimmelPeter®", Icon: BadgeCheck },
+  { value: "Ohne", label: "Aufgraben", Icon: Shovel },
+  { value: "24 h", label: "bis zum Termin vor Ort", Icon: Clock },
+  { value: "5", label: "Messhöhen je Messpunkt", Icon: Ruler },
+  { value: "6", label: "Städte im Servicegebiet", Icon: MapPin },
 ];
 
-/** A row of key figures that count up when they come into view. */
-export default function FactsStrip({ facts = HOME_FACTS, title }: { facts?: Fact[]; title?: string }) {
+function Chips({ facts, id, className = "" }: { facts: Fact[]; id?: string; className?: string }) {
   return (
-    <section className="facts" aria-label={title ?? "Zahlen und Fakten"}>
+    <ul id={id} className={`factchips ${className}`} aria-label="Zahlen und Fakten">
+      {facts.map(({ value, label, Icon }) => (
+        <li key={label}>
+          {Icon ? (
+            <span className="factchips__i" aria-hidden="true">
+              <Icon />
+            </span>
+          ) : null}
+          <span className="factchips__t">
+            <strong>{value}</strong> <PartnerText text={label} />
+          </span>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+/**
+ * The key figures as a row of light chips. With `inHero` they sit in the
+ * hero copy, so the first frame carries the claim, both contact buttons and
+ * the figures at once.
+ */
+export default function FactsStrip({ facts = HOME_FACTS, title, inHero = false }: { facts?: Fact[]; title?: string; inHero?: boolean }) {
+  if (inHero) return <Chips facts={facts} id="zahlen" className="factchips--hero" />;
+  return (
+    <section id="zahlen" className="facts facts--chips" aria-label={title ?? "Zahlen und Fakten"}>
       <div className="sc-wrap">
-        {title ? <h2 className="sc-label mb-3">{title}</h2> : null}
-        <dl className="facts__grid" style={{ ["--n" as string]: facts.length }}>
-          {facts.map((f) => (
-            <div key={f.label} className="facts__item">
-              <dt><PartnerText text={f.label} /></dt>
-              <dd>
-                <CountUp value={f.value} onView ms={900} />
-              </dd>
-            </div>
-          ))}
-        </dl>
+        {title ? <h2 className="sc-label mb-4">{title}</h2> : null}
+        <Chips facts={facts} />
       </div>
     </section>
   );

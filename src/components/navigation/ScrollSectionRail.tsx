@@ -11,11 +11,9 @@ export default function ScrollSectionRail() {
   const sectionStops = [
     { id: "top", label: t("rail.start") || "Start" },
     { id: "leistungen", label: t("nav.services") || "Leistungen" },
-    { id: "ablauf", label: t("rail.process") || "Ablauf" },
-    { id: "kontakt-kanaele", label: t("rail.contact") || "Kontakt" },
-    { id: "servicegebiet", label: t("rail.region") || "PLZ 42" },
-    { id: "faq", label: "FAQ" },
-    { id: "kontakt", label: t("rail.contact") || "Kontakt" }
+    { id: "mehr", label: "Mehr erfahren" },
+    { id: "schritte", label: "Ablauf" },
+    { id: "footer-kontakt", label: t("rail.contact") || "Kontakt" }
   ];
 
   useEffect(() => {

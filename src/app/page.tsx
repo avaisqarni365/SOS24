@@ -1,22 +1,16 @@
 import type { Metadata } from "next";
 import Navbar from "@/components/sections/Navbar";
 import Footer from "@/components/sections/Footer";
-import ContactForm from "@/components/sections/ContactForm";
 import GrokLeadBot from "@/components/ai/GrokLeadBot";
 import Hero from "@/components/scroll/Hero";
-import { ServicesRail, RegionSection, FaqSection } from "@/components/scroll/HomeSections";
-import FactsStrip from "@/components/sections/FactsStrip";
-import HowWeWork from "@/components/sections/HowWeWork";
-import BrandInAction from "@/components/sections/BrandInAction";
-import KitShowcase from "@/components/sections/KitShowcase";
-import ContactChannels from "@/components/sections/ContactChannels";
+import { ServicesRail } from "@/components/scroll/HomeSections";
+import MoreLinks from "@/components/sections/MoreLinks";
+import HomeSteps from "@/components/sections/HomeSteps";
 import ScrollSectionRail from "@/components/navigation/ScrollSectionRail";
-import AudienceSection from "@/components/sections/AudienceSection";
 import ScrollEngine, { SC_BOOT } from "@/components/scroll/ScrollEngine";
 import JsonLd from "@/components/seo/JsonLd";
-import { FAQS } from "@/data/content-data";
 import { SERVICE_CARDS } from "@/data/services";
-import { SITE_URL, BUSINESS_ID, WEBSITE_ID, abs, businessNode, websiteNode, breadcrumbNode, faqNode, OG_IMAGE } from "@/lib/site";
+import { SITE_URL, BUSINESS_ID, WEBSITE_ID, abs, businessNode, websiteNode, breadcrumbNode, OG_IMAGE } from "@/lib/site";
 
 const TITLE = "Kellersanierung Wuppertal ohne Aufgraben | sos-abdichtung";
 const DESCRIPTION =
@@ -55,7 +49,6 @@ export default function Home() {
         name: s.title,
       })),
     },
-    faqNode(FAQS),
   ];
 
   return (
@@ -66,22 +59,18 @@ export default function Home() {
       <div className="sc-grain" aria-hidden="true" />
       <Navbar />
       <ScrollSectionRail />
-      {/* The landing page answers four things and then asks for the call:
-          what we do, how it goes, where we come, how to reach us. The 3D
-          viewer, the scanner and the measurement proof moved to /labor/
-          so this page stays short enough to read standing in a wet cellar. */}
-      <main id="main">
+      {/* Four stops and the footer: the first frame (claim, call, WhatsApp,
+          the figures and the film), the services and one row of links to
+          the detail pages, then the four steps from the call to the dry wall.
+          The contact form has its own page (/kontakt/); the steps and the
+          footer lead there. Who we work for, the service area and the
+          FAQ live on /leistungen/, the team in the Galerie, the process and
+          the proof in the Scientific Lab. */}
+      <main id="main" className="home">
         <Hero />
-        <FactsStrip />
         <ServicesRail />
-        <HowWeWork />
-        <BrandInAction />
-        <KitShowcase />
-        <ContactChannels />
-        <AudienceSection />
-        <RegionSection />
-        <FaqSection />
-        <ContactForm />
+        <MoreLinks />
+        <HomeSteps />
       </main>
       <Footer />
       <GrokLeadBot />
