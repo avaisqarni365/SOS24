@@ -3,6 +3,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Phone, MapPin, CheckCircle2, MessageSquare, ArrowRight, Mail } from "lucide-react";
 import { COMPANY_INFO } from "@/data/content-data";
+import BrandShot from "@/components/brand/BrandShot";
 import { useLanguage } from "@/i18n/LanguageContext";
 
 const DAMAGE_OPTIONS = [
@@ -234,34 +235,36 @@ export default function ContactForm({ defaultDamage, place }: { defaultDamage?: 
           </div>
 
           <div className="space-y-6 lg:col-span-5">
-            <div className="space-y-6 rounded-3xl border border-ink/5 bg-surface p-8 shadow-sm">
-              <div>
-                <div className="flex items-center gap-4">
-                  <img
-                    src="/img/gallery/shahzad-mahmood-160.webp"
-                    width={160}
-                    height={176}
-                    alt={`Porträt von ${COMPANY_INFO.owner}`}
-                    loading="lazy"
-                    className="h-[5.5rem] w-[5.5rem] shrink-0 rounded-full object-cover object-top border border-ink/10"
-                  />
-                  <div>
-                    <p className="font-mono text-[11px] font-bold uppercase tracking-wider text-accent-deep">
-                      Direkter Ansprechpartner
-                    </p>
-                    <h3 className="mt-1.5 text-2xl font-semibold tracking-[-0.02em] text-ink">{COMPANY_INFO.owner}</h3>
-                    <p className="mt-1 text-sm text-ink-soft">Inhaber · SchimmelPeter® Partnerbetrieb</p>
-                  </div>
-                </div>
+            <div className="contact-card">
+              {/* The van is the cover: the first thing a customer sees of us at
+                  the door. The partner badge sits top-right on it, framed. */}
+              <div className="contact-card__cover">
+                <BrandShot shot="van" decorative />
                 <img
                   src="/img/gallery/schimmelpeter-fachbetrieb.svg"
                   width={225}
                   height={82}
                   alt="SchimmelPeter® Zertifizierter Fachbetrieb"
                   loading="lazy"
-                  className="mt-5 h-12 w-auto"
+                  className="contact-card__badge"
                 />
               </div>
+              <div className="contact-card__person">
+                <img
+                  src="/img/gallery/shahzad-mahmood-160.webp"
+                  width={160}
+                  height={176}
+                  alt={`Porträt von ${COMPANY_INFO.owner}`}
+                  loading="lazy"
+                  className="contact-card__portrait"
+                />
+                <div>
+                  <p className="contact-card__k">Direkter Ansprechpartner</p>
+                  <h3 className="contact-card__name">{COMPANY_INFO.owner}</h3>
+                  <p className="contact-card__role">Inhaber · SchimmelPeter® Partnerbetrieb</p>
+                </div>
+              </div>
+              <p className="contact-card__claim">Schützt, was wichtig ist!</p>
               <div className="contact-rows space-y-3 border-t border-line/10 pt-5">
                 <a href={`tel:${COMPANY_INFO.phoneTel}`} className="contact-row">
                   <Phone className="contact-row__i" aria-hidden="true" />
