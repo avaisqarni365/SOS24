@@ -8225,7 +8225,7 @@ html[data-theme="dark"] .qv-city__plz > span { background: rgb(255 255 255 / 0.0
   .steps4__n { width: 2rem; height: 2rem; font-size: 0.95rem; box-shadow: 0 0 0 4px rgb(var(--pw-accent-rgb) / 0.12); }
   #schritte .steps4__t { font-size: 1.05rem !important; text-align: start !important; }
   #schritte .steps4__d { grid-area: text; margin-top: 0.35rem !important; font-size: 0.9rem !important; }
-  .steps4__cta { grid-area: cta; grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .steps4__cta { grid-area: cta; grid-template-columns: minmax(0, 1fr); }
   .steps4__cta .steps4__btn:first-child { display: none; }
 }
 @media (prefers-reduced-motion: no-preference) {
@@ -8688,3 +8688,35 @@ html[data-theme="dark"] .svc-fold__d { color: #c9d6e3; }
 html[data-theme="dark"] .svc-fold__k { color: color-mix(in srgb, var(--ic, #a6dcfa) 55%, #ffffff); }
 html[data-theme="dark"] .svc-fold__i { background: color-mix(in srgb, var(--ic) 24%, transparent); color: color-mix(in srgb, var(--ic) 62%, #ffffff); }
 @media (prefers-reduced-motion: reduce) { .svc-fold__sum, .svc-fold__go svg { transition: none; } .svc-fold__sum:hover { transform: none; } }
+/* buttons never let their text run out of the box */
+.steps4__btn { min-width: 0; }
+@media (max-width: 639px) { .steps4__btn { white-space: normal; } }
+
+/* phones: long German compounds never run out of their boxes */
+@media (max-width: 639px) {
+  .hv__layers button, .factchips__t, .steps4__btn, .svc-guarantee span {
+    -webkit-hyphens: auto;
+    hyphens: auto;
+    overflow-wrap: break-word;
+  }
+  .more__k { letter-spacing: 0.03em; overflow-wrap: anywhere; }
+}
+/* the two guarantee boxes stack on narrow phones */
+@media (max-width: 459px) { .svc-guarantee { grid-template-columns: minmax(0, 1fr) !important; } }
+/* phones: in flex boxes a long word sets the minimum width unless it may
+   break; Safari hyphenates German first, the hard break is the fallback */
+@media (max-width: 639px) {
+  .hv__layers button, .hv__facts :is(dt, dd), .factchips__t, .steps4__btn {
+    -webkit-hyphens: auto;
+    hyphens: auto;
+    overflow-wrap: anywhere;
+  }
+  dl.grid-cols-3 > div > dt.font-mono { letter-spacing: 0.02em; overflow-wrap: anywhere; -webkit-hyphens: auto; hyphens: auto; }
+}
+@media (max-width: 639px) {
+  /* the film's side column may shrink below its longest label */
+  .hero-film__side { min-width: 0; }
+  .hero-film__k { overflow-wrap: anywhere; }
+  .hero-film__chapters button { min-width: 0; white-space: normal; }
+  .kit-card__name, .quote__svc { -webkit-hyphens: auto; hyphens: auto; overflow-wrap: anywhere; }
+}

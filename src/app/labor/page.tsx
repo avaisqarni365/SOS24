@@ -170,7 +170,7 @@ export default function LaborPage() {
             <nav className="lab-chapters" aria-label="Kapitel">
               {CHAPTERS.map(({ href, label, Icon }, i) => (
                 <a key={href} href={href} className="lab-chapter">
-                  <span className="lab-chapter__n">{String(i + 1).padStart(2, "0")}</span>
+                  <span className="lab-chapter__n">{String(i + 1).padStart(2, "0")}</span>{" "}
                   <Icon aria-hidden="true" />
                   <span className="lab-chapter__l">{label}</span>
                 </a>

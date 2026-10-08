@@ -338,14 +338,14 @@ export function TechnicalLayersFrame({
                   </span>
                 </div>
 
-                <div className="grid grid-cols-2 gap-3">
+                <div className="svc-guarantee grid grid-cols-2 gap-3">
                   <div className="rounded-xl bg-surface border border-line/8 p-3.5 shadow-2xs">
                     <span className="block font-bold text-lg sm:text-xl text-accent-deep">25 Jahre</span>
                     <span className="text-ink text-xs font-semibold"><PartnerLink>SchimmelPeter®</PartnerLink> Produktgarantie</span>
                   </div>
                   <div className="rounded-xl bg-surface border border-line/8 p-3.5 shadow-2xs">
                     <span className="block font-bold text-lg sm:text-xl text-accent-deep">10 Jahre</span>
-                    <span className="text-ink text-xs font-semibold">SOS Abdichtung Handwerksgarantie</span>
+                    <span className="text-ink text-xs font-semibold">{hy("SOS Abdichtung Handwerksgarantie")}</span>
                   </div>
                 </div>
 

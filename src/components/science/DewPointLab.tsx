@@ -205,8 +205,9 @@ export default function DewPointLab() {
           <dl className="grid grid-cols-3 gap-3">
             {[
               ["Taupunkt", `${fmt(td)} °C`],
-              ["Oberfläche innen", `${fmt(thetaSi)} °C`],
-              ["Feuchte an der Oberfläche", `${Math.round(surfRh)} %`],
+              // soft hyphens: the three readouts share a narrow row on phones
+              ["Ober\u00ADfläche innen", `${fmt(thetaSi)} °C`],
+              ["Feuchte an der Ober\u00ADfläche", `${Math.round(surfRh)} %`],
             ].map(([k, val]) => (
               <div key={k} className="rounded-2xl bg-[var(--ink-3)] p-3">
                 <dt className="font-mono text-[11px] uppercase leading-snug tracking-wide text-[var(--sc-ink-soft)]">{k}</dt>

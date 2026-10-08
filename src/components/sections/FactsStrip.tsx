@@ -1,5 +1,6 @@
 import { ShieldCheck, BadgeCheck, Shovel, Clock, Ruler, MapPin, type LucideIcon } from "lucide-react";
 import { PartnerText } from "@/components/brand/PartnerLink";
+import { hy } from "@/lib/hyphenate";
 
 export interface Fact {
   value: string;
@@ -43,7 +44,7 @@ export function FactChips({ facts, id, className = "", label = "Zahlen und Fakte
             </span>
           ) : null}
           <span className="factchips__t">
-            <strong>{value}</strong> <PartnerText text={text} />
+            <strong>{value}</strong> <PartnerText text={hy(text)} />
           </span>
         </li>
       ))}

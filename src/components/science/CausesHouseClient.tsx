@@ -79,7 +79,7 @@ export default function CausesHouseClient({ causes: CAUSES }: { causes: Cause[] 
               onClick={() => setActive(i)}
               aria-pressed={active === i}
               aria-label={`Ursache ${cause.n}: ${cause.title}`}
-              className="absolute h-12 w-12 -translate-x-1/2 -translate-y-1/2 rounded-full"
+              className="absolute h-7 w-7 -translate-x-1/2 -translate-y-1/2 rounded-full sm:h-12 sm:w-12"
               style={{ left: `${(cause.x / 1000) * 100}%`, top: `${(cause.y / 620) * 100}%` }}
             />
           ))}
