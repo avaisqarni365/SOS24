@@ -9,6 +9,8 @@
  * translates a translation. A MutationObserver covers what appears later:
  * menus, quick views, the calculator, the assistant.
  */
+import { I18N_VERSION } from "./version";
+
 export type Dict = Record<string, string>;
 
 const SKIP = "script,style,noscript,svg,code,pre,.rx__eq,.qv__eq,.labpanel__rx-eq,[data-no-translate]";
@@ -31,7 +33,7 @@ const cache = new Map<string, Dict>();
 export async function loadDict(lang: string): Promise<Dict> {
   const hit = cache.get(lang);
   if (hit) return hit;
-  const res = await fetch(`/i18n/${lang}.json`, { cache: "force-cache" });
+  const res = await fetch(`/i18n/${lang}.json?v=${I18N_VERSION}`);
   if (!res.ok) throw new Error(`i18n ${lang}: ${res.status}`);
   const d = (await res.json()) as Dict;
   cache.set(lang, d);

@@ -13,13 +13,9 @@ interface LanguageContextType {
 
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
-/** One small chunk per language, fetched only when someone switches to it. */
+/** The English interface strings, fetched only when someone switches to English. */
 const LOADERS: Record<Exclude<SupportedLocale, "de">, () => Promise<{ default: Record<string, string> }>> = {
   en: () => import("./locales/en"),
-  tr: () => import("./locales/tr"),
-  ru: () => import("./locales/ru"),
-  ar: () => import("./locales/ar"),
-  pl: () => import("./locales/pl"),
 };
 
 const isLocale = (v: string | null): v is SupportedLocale => !!v && SUPPORTED_LOCALES.some((l) => l.code === v);
@@ -42,7 +38,6 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
       }
       setLangState(next);
       root.lang = next;
-      root.dir = next === "ar" ? "rtl" : "ltr";
       // headings change length with the language: let them refit
       window.dispatchEvent(new Event("sos-i18n"));
     } finally {

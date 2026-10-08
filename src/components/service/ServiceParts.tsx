@@ -30,7 +30,9 @@ export function ServiceHero({
           <Breadcrumbs items={crumbs} />
           <p className="svc-hero__chip">
             <span aria-hidden="true" />
-            {navTitle} · <PartnerLink>SchimmelPeter® Partnerbetrieb</PartnerLink>
+            <span className="svc-hero__chip-t">
+              {navTitle} · <PartnerLink>SchimmelPeter® Partnerbetrieb</PartnerLink>
+            </span>
           </p>
           <h1 id="page-title" className="sc-display svc-hero__title">
             {h1}

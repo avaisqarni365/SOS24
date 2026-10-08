@@ -1,4 +1,4 @@
-export type SupportedLocale = "de" | "en" | "tr" | "ru" | "ar" | "pl";
+export type SupportedLocale = "de" | "en";
 
 export interface LocaleMeta {
   code: SupportedLocale;
@@ -11,13 +11,9 @@ export interface LocaleMeta {
 export const SUPPORTED_LOCALES: LocaleMeta[] = [
   { code: "de", name: "German", nativeName: "Deutsch", flag: "🇩🇪", dir: "ltr" },
   { code: "en", name: "English", nativeName: "English", flag: "🇬🇧", dir: "ltr" },
-  { code: "tr", name: "Turkish", nativeName: "Türkçe", flag: "🇹🇷", dir: "ltr" },
-  { code: "ru", name: "Russian", nativeName: "Русский", flag: "🇷🇺", dir: "ltr" },
-  { code: "ar", name: "Arabic", nativeName: "العربية", flag: "🇸🇦", dir: "rtl" },
-  { code: "pl", name: "Polish", nativeName: "Polski", flag: "🇵🇱", dir: "ltr" },
 ];
 
-/** German is the site's language and ships with the page; the others load on demand (./locales). */
+/** German is the site's language and ships with the page; English loads on demand (./locales). */
 export const DE: Record<string, string> = {
     // Nav
     "nav.services": "Leistungen",
