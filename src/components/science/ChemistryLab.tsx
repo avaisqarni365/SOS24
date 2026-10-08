@@ -1,22 +1,5 @@
 import { CHEMISTRY, type Reaction } from "@/data/chemistry";
-
-/**
- * Formula setter. The data writes `H_2O` and `30×10^3`; this turns the `_`
- * and `^` runs into real <sub>/<sup> so the equations read as chemistry
- * rather than as source code. Everything else passes through untouched.
- */
-function Formula({ source }: { source: string }) {
-  const parts = source.split(/([_^][0-9a-zA-Z]+)/g).filter(Boolean);
-  return (
-    <>
-      {parts.map((p, i) => {
-        if (p.startsWith("_")) return <sub key={i}>{p.slice(1)}</sub>;
-        if (p.startsWith("^")) return <sup key={i}>{p.slice(1)}</sup>;
-        return <span key={i}>{p}</span>;
-      })}
-    </>
-  );
-}
+import { Formula } from "@/components/science/Formula";
 
 function ReactionRow({ r }: { r: Reaction }) {
   return (

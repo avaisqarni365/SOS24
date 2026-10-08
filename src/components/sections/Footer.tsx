@@ -71,7 +71,7 @@ export default function Footer() {
               {[
                 ["/labor/", "Scientific Lab"],
                 ["/galerie/", "Galerie"],
-                ["/kostenrechner/", "Kostenrechner"],
+                ["/kostenrechner/", "Angebotsrechner"],
                 ["/#servicegebiet", "Servicegebiet"],
                 ["/#faq", "Häufige Fragen"],
                 ["/#kontakt", "Kontakt"],

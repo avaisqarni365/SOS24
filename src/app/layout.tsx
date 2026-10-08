@@ -6,6 +6,7 @@ import "@/styles/globals.css";
 import { SITE_URL, OG_IMAGE } from "@/lib/site";
 import MobileContactBar from "@/components/sections/MobileContactBar";
 import { APPEARANCE_BOOT } from "@/components/navigation/AppearanceMenu";
+import { TONE_BOOT } from "@/lib/tone";
 import { LanguageProvider } from "@/i18n/LanguageContext";
 
 // Self-hosted fonts: no request to Google at runtime (DSGVO) and no build-time fetch.
@@ -84,6 +85,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <head>
         {/* theme and text size before first paint (see AppearanceMenu) */}
         <script dangerouslySetInnerHTML={{ __html: APPEARANCE_BOOT }} />
+        <script dangerouslySetInnerHTML={{ __html: TONE_BOOT }} />
       </head>
       <body className="min-h-screen font-latex antialiased">
         <LanguageProvider>

@@ -27,7 +27,7 @@ export const TRANSLATIONS: Record<SupportedLocale, Record<string, string>> = {
     "nav.proof": "Nachweis",
     "rail.proof": "Nachweis",
     "rail.layers": "3D-Wand",
-    "nav.calculator": "Kostenrechner",
+    "nav.calculator": "Angebotsrechner",
     "nav.region": "Servicegebiet",
     "nav.faq": "Häufige Fragen",
     "nav.cta": "Feuchtemessung anfragen",
@@ -81,15 +81,6 @@ export const TRANSLATIONS: Record<SupportedLocale, Record<string, string>> = {
     "comp.sub": "Bei der Bausubstanz gibt es keinen Raum für Experimente. Jede chemische Injektion wird mit lückenlosem Prüfprotokoll und bauaufsichtlich zugelassenen Wirkstoffen ausgeführt.",
 
     // Calculator
-    "calc.eyebrow": "Kosten & Ersparnisrechner",
-    "calc.h1": "Transparente Kosten.",
-    "calc.accent": "Bis zu 60% günstiger als Aufgraben.",
-    "calc.sub": "Vergleichen Sie das schonende chemische Injektionsverfahren von der Innenseite mit einer aufwändigen und teuren Außenaufgrabung für Ihr Gebäude in Wuppertal und Umgebung.",
-    "calc.step1": "1. Schadensbild auswählen",
-    "calc.step2": "2. Betroffene Wandlänge:",
-    "calc.step3": "3. Mauerwerkstyp",
-    "calc.estTitle": "Kalkulierter Richtpreis",
-    "calc.cta": "Verbindliches Festpreisangebot anfragen",
 
     // Regional
     "reg.eyebrow": "Servicegebiet Raum Wuppertal & Bergisches Land",
@@ -160,7 +151,7 @@ export const TRANSLATIONS: Record<SupportedLocale, Record<string, string>> = {
     "nav.proof": "Proof",
     "rail.proof": "Proof",
     "rail.layers": "3D wall",
-    "nav.calculator": "Cost Calculator",
+    "nav.calculator": "Quote planner",
     "nav.region": "Service Area",
     "nav.faq": "FAQ",
     "nav.cta": "Request Diagnosis →",
@@ -214,15 +205,6 @@ export const TRANSLATIONS: Record<SupportedLocale, Record<string, string>> = {
     "comp.sub": "With building integrity, there is no room for trial and error. Every chemical injection is executed with an official CM measurement protocol and German construction-authority approved compounds.",
 
     // Calculator
-    "calc.eyebrow": "Cost & Savings Calculator",
-    "calc.h1": "Transparent Pricing.",
-    "calc.accent": "Up to 60% cheaper than exterior excavation.",
-    "calc.sub": "Compare non-invasive internal chemical injection with expensive, destructive outdoor digging for your property in the Wuppertal area.",
-    "calc.step1": "1. Select Damage Type",
-    "calc.step2": "2. Wall Length (approx. metres):",
-    "calc.step3": "3. Masonry Type",
-    "calc.estTitle": "Estimated Benchmark Cost",
-    "calc.cta": "Request Binding Fixed-Price Offer",
 
     // Regional
     "reg.eyebrow": "Service Area Wuppertal & Bergisches Land",
@@ -293,7 +275,7 @@ export const TRANSLATIONS: Record<SupportedLocale, Record<string, string>> = {
     "nav.proof": "Kanıt",
     "rail.proof": "Kanıt",
     "rail.layers": "3D duvar",
-    "nav.calculator": "Maliyet",
+    "nav.calculator": "Teklif hesaplayıcı",
     "nav.region": "Hizmet Bölgesi",
     "nav.faq": "Sıkça Sorulanlar",
     "nav.cta": "Teşhis Talep Et →",
@@ -347,15 +329,6 @@ export const TRANSLATIONS: Record<SupportedLocale, Record<string, string>> = {
     "comp.sub": "Bina güvenliğinde deneme yanılmaya yer yoktur. Her enjeksiyon, CM nem ölçüm protokolü ve resmi yapı izinli Alman kimyasalları ile yapılır.",
 
     // Calculator
-    "calc.eyebrow": "Maliyet & Tasarruf Hesaplayıcı",
-    "calc.h1": "Şeffaf Fiyatlandırma.",
-    "calc.accent": "Dış kazıya kıyasla %60'a varan tasarruf.",
-    "calc.sub": "Evinizin bahçesini ve girişini kazdırmak yerine içeriden uygulanan modern kimyasal enjeksiyonun ekonomik avantajını hemen hesaplayın.",
-    "calc.step1": "1. Hasar Türünü Seçin",
-    "calc.step2": "2. Duvar Uzunluğu (Metre):",
-    "calc.step3": "3. Duvar Tipi",
-    "calc.estTitle": "Tahmini Yaklaşık Fiyat",
-    "calc.cta": "Sabit Fiyat Teklifi İsteyin",
 
     // Regional
     "reg.eyebrow": "Hizmet Bölgesi: Wuppertal & Çevresi",
@@ -426,7 +399,7 @@ export const TRANSLATIONS: Record<SupportedLocale, Record<string, string>> = {
     "nav.proof": "Доказательство",
     "rail.proof": "Замеры",
     "rail.layers": "3D-стена",
-    "nav.calculator": "Калькулятор",
+    "nav.calculator": "Объём работ",
     "nav.region": "Регион 42",
     "nav.faq": "Вопросы и ответы",
     "nav.cta": "Заказать диагностику →",
@@ -480,15 +453,6 @@ export const TRANSLATIONS: Record<SupportedLocale, Record<string, string>> = {
     "comp.sub": "В вопросах сохранности здания недопустимы эксперименты. Каждая процедура сопровождается протоколом карбидного замера (CM) и немецкими сертифицированными составами.",
 
     // Calculator
-    "calc.eyebrow": "Калькулятор стоимости и экономии",
-    "calc.h1": "Прозрачные цены.",
-    "calc.accent": "До 60% дешевле, чем раскапывать снаружи.",
-    "calc.sub": "Сравните аккуратную инъекцию изнутри здания с дорогостоящими раскопками фундамента вашего дома в регионе Вупперталя.",
-    "calc.step1": "1. Выберите тип проблемы",
-    "calc.step2": "2. Длина стены (погонные метры):",
-    "calc.step3": "3. Материал кладки",
-    "calc.estTitle": "Ориентировочная стоимость",
-    "calc.cta": "Запросить фиксированную смету",
 
     // Regional
     "reg.eyebrow": "Регион обслуживания: Вупперталь и округ",
@@ -559,7 +523,7 @@ export const TRANSLATIONS: Record<SupportedLocale, Record<string, string>> = {
     "nav.proof": "الإثبات",
     "rail.proof": "الإثبات",
     "rail.layers": "الجدار 3D",
-    "nav.calculator": "الحاسبة",
+    "nav.calculator": "حاسبة العرض",
     "nav.region": "منطقة الخدمة",
     "nav.faq": "الأسئلة الشائعة",
     "nav.cta": "طلب فحص مجاني ←",
@@ -613,15 +577,6 @@ export const TRANSLATIONS: Record<SupportedLocale, Record<string, string>> = {
     "comp.sub": "سلامة مبناك لا تحتمل التجارب. كل عملية حقن تنفذ وفق تقرير قياس الرطوبة المعتمد وباستخدام مواد ألمانية مرخصة من هيئات البناء.",
 
     // Calculator
-    "calc.eyebrow": "حاسبة التكاليف والتوفير",
-    "calc.h1": "أسعار واضحة وشفافة.",
-    "calc.accent": "توفير يصل إلى 60% مقارنة بالحفر الخارجي.",
-    "calc.sub": "قارن بين طريقة الحقن الداخلي النظيفة وتكاليف الحفر الخارجي الباهظة لعقارك في منطقة فوبرتال وما حولها.",
-    "calc.step1": "1. حدد نوع الضرر",
-    "calc.step2": "2. طول الجدار المتضرر (بالمتر):",
-    "calc.step3": "3. نوع البناء والجدار",
-    "calc.estTitle": "التكلفة التقديرية المبدئية",
-    "calc.cta": "طلب عرض سعر نهائي وثابت",
 
     // Regional
     "reg.eyebrow": "منطقة الخدمة: فوبرتال ومحيطها",
@@ -692,7 +647,7 @@ export const TRANSLATIONS: Record<SupportedLocale, Record<string, string>> = {
     "nav.proof": "Dowód",
     "rail.proof": "Pomiary",
     "rail.layers": "Ściana 3D",
-    "nav.calculator": "Kalkulator",
+    "nav.calculator": "Kalkulator oferty",
     "nav.region": "Obszar 42",
     "nav.faq": "Częste pytania",
     "nav.cta": "Zamów diagnozę →",
@@ -746,15 +701,6 @@ export const TRANSLATIONS: Record<SupportedLocale, Record<string, string>> = {
     "comp.sub": "W kwestii konstrukcji budynku nie ma miejsca na kompromisy. Każda iniekcja wykonywana jest z protokołem pomiaru wilgotności (metoda CM) i atestowaną chemią budowlaną.",
 
     // Calculator
-    "calc.eyebrow": "Kalkulator kosztów i oszczędności",
-    "calc.h1": "Przejrzyste ceny.",
-    "calc.accent": "Do 60% taniej niż odkopywanie budynku z zewnątrz.",
-    "calc.sub": "Porównaj czystą iniekcję chemiczną od wewnątrz z kosztownym i uciążliwym rozkopywaniem ogrodu i podjazdu.",
-    "calc.step1": "1. Wybierz rodzaj problemu",
-    "calc.step2": "2. Długość zawilgoconej ściany (metry):",
-    "calc.step3": "3. Rodzaj muru",
-    "calc.estTitle": "Szacunkowy koszt orientacyjny",
-    "calc.cta": "Zamów wiążącą ofertę ze stałą ceną",
 
     // Regional
     "reg.eyebrow": "Obszar działania: Wuppertal i okolice",

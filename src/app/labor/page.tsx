@@ -6,6 +6,7 @@ import GrokLeadBot from "@/components/ai/GrokLeadBot";
 import LayersAct from "@/components/scroll/LayersAct";
 import ProofSection from "@/components/science/ProofSection";
 import ChemistryLab from "@/components/science/ChemistryLab";
+import KitShowcase from "@/components/sections/KitShowcase";
 import ScienceSection from "@/components/science/ScienceSection";
 import { ScannerSection } from "@/components/scroll/HomeSections";
 import JsonLd from "@/components/seo/JsonLd";
@@ -56,6 +57,7 @@ export default function LaborPage() {
   const JUMPS = [
     { href: "#modell", label: "Verfahren im 3D-Modell" },
     { href: "#chemie", label: "Chemische Reaktion" },
+    { href: "#material", label: "Geräte & Material" },
     { href: "#feuchte-scanner", label: "Feuchte-Scanner" },
     { href: "#nachweis", label: "Nachweis je Phase" },
     { href: "#physik", label: "Physik je Leistung" },
@@ -88,6 +90,7 @@ export default function LaborPage() {
 
         <LayersAct id="modell" />
         <ChemistryLab />
+        <KitShowcase id="material" />
         <ScannerSection />
         <ProofSection />
 

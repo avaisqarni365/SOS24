@@ -2,6 +2,8 @@
 
 import { useEffect, useRef, useState } from "react";
 import { SunMoon, Sun, Moon, Monitor, Type } from "lucide-react";
+import ToneSlider, { readTone } from "@/components/navigation/ToneSlider";
+import { setTone } from "@/lib/tone";
 
 type Theme = "light" | "dark" | "auto";
 type TextSize = "md" | "lg" | "xl";
@@ -46,6 +48,11 @@ export default function AppearanceMenu() {
 
     const z = d.getAttribute("data-text");
     setSize(z === "lg" || z === "xl" ? z : "md");
+
+    // the colour slider switches dark back to light; follow it
+    const onTheme = (e: Event) => setTheme((e as CustomEvent<Theme>).detail);
+    window.addEventListener("sos-theme", onTheme);
+    return () => window.removeEventListener("sos-theme", onTheme);
   }, []);
 
   useEffect(() => {
@@ -68,6 +75,8 @@ export default function AppearanceMenu() {
     if (t === "auto") d.removeAttribute("data-theme");
     else d.setAttribute("data-theme", t);
     save("sos_theme", t === "light" ? null : t);
+    // the colour tone belongs to the light theme only
+    setTone(t === "dark" ? 50 : readTone());
   };
   const pickSize = (z: TextSize) => {
     setSize(z);
@@ -85,7 +94,7 @@ export default function AppearanceMenu() {
         aria-expanded={open}
         aria-controls="appearance-panel"
         className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-line/15 bg-surface text-ink hover:border-accent-deep shadow-2xs transition-colors"
-        title="Ansicht: Hell/Dunkel und Schriftgröße"
+        title="Ansicht: Farbe, Hell/Dunkel und Schriftgröße"
       >
         <SunMoon className="h-5 w-5" aria-hidden="true" />
         <span className="visually-hidden">Ansicht anpassen</span>
@@ -95,7 +104,8 @@ export default function AppearanceMenu() {
           id="appearance-panel"
           className="absolute right-0 top-[calc(100%+0.6rem)] z-[60] w-[17.5rem] max-sm:fixed max-sm:inset-x-3 max-sm:top-[4.4rem] max-sm:w-auto surface-pop rounded-2xl p-4"
         >
-          <p className="font-mono text-[0.68rem] uppercase tracking-wider text-ink font-bold">Darstellung</p>
+          <ToneSlider className="tone--panel" />
+          <p className="mt-4 font-mono text-[0.68rem] uppercase tracking-wider text-ink font-bold">Darstellung</p>
           <div className="mt-2 grid grid-cols-3 gap-1.5" role="group" aria-label="Darstellung">
             {THEMES.map(({ id, label, Icon }) => (
               <button

@@ -1,12 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
-  <!-- SOS ABDICHTUNG: roof, chimney, and the water it keeps out.
-       The brand blue lifts on dark UA chrome so the tab icon stays legible. -->
-  <style>
-    .b{fill:#1b3a8f;stroke:#1b3a8f}
-    .d{fill:#2f72d6}
-    @media (prefers-color-scheme: dark){.b{fill:#7fb0ff;stroke:#7fb0ff}.d{fill:#4f93f5}}
-  </style>
-  <rect class="b" x="32.4" y="10.6" width="5.8" height="13" rx="1.2"/>
-  <path class="b" d="M2.6 30.2 24 10.6l21.4 19.6" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
-  <path class="d" d="M24 18c0 0 5.6 6.8 5.6 10.3a5.6 5.6 0 0 1-11.2 0C18.4 24.8 24 18 24 18Z"/>
+  <!-- SOS-Abdichtung: the O of the wordmark with its water drop. -->
+  <style>.o{fill:#0B8AD0}@media (prefers-color-scheme: dark){.o{fill:#4DB3F0}}</style>
+  <path class="o" d="M4.2 24Q4.2 14.1 9.4 8.5Q14.6 3 23.9 3Q33.5 3 38.6 8.4Q43.8 13.9 43.8 23.7Q43.8 30.8 41.5 35.4Q39.3 39.9 35 42.5Q30.8 45 24.4 45Q17.9 45 13.7 42.8Q9.5 40.6 6.9 35.9Q4.2 31.1 4.2 24ZM16 24.1Q16 30.2 18.2 32.9Q20.3 35.6 24 35.6Q27.8 35.6 29.9 33Q32 30.3 32 23.5Q32 17.8 29.8 15.1Q27.6 12.5 23.9 12.5Q20.3 12.5 18.2 15.2Q16 17.9 16 24.1ZM24 16.6C25.7 20.6 28.9 23.4 28.9 26.1C28.9 28.8 26.7 30.9 24 30.9C21.3 30.9 19.1 28.8 19.1 26.1C19.1 23.4 22.3 20.6 24 16.6Z"/>
 </svg>

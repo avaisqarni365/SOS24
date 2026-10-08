@@ -1,21 +1,11 @@
-import { SERVICE_CARDS, type ServiceCard } from "@/data/services";
+import { SERVICE_CARDS } from "@/data/services";
 import { FAQS, COMPANY_INFO } from "@/data/content-data";
 import { CITY_PAGES } from "@/data/seo-pages";
 import { FaqCards } from "@/components/seo/SubpageParts";
 import { MAP_AREAS, MAP_ESSEN, MAP_H, MAP_W } from "@/data/region-map";
-import { Home, Layers, ShieldCheck, SprayCan, Gauge, Wrench, Umbrella, Sun, PanelBottom, type LucideIcon } from "lucide-react";
-
-const CARD_ICON: Record<ServiceCard["art"], LucideIcon> = {
-  keller: Home,
-  sperre: Layers,
-  innen: ShieldCheck,
-  schimmel: SprayCan,
-  messung: Gauge,
-  riss: Wrench,
-  dach: Umbrella,
-  balkon: Sun,
-  sockel: PanelBottom,
-};
+import { SERVICE_FACTS } from "@/data/service-facts";
+import { CHEMISTRY } from "@/data/chemistry";
+import ServiceGrid from "@/components/sections/ServiceGrid";
 import FeuchteScanner from "@/components/interactive/FeuchteScanner";
 import { hy } from "@/lib/hyphenate";
 
@@ -45,35 +35,18 @@ export function ScannerSection() {
 }
 
 /* ------------------------------------------------------------- services -- */
-/** The six services as typographic cards. No pictures: the 3D renders were
-    the only images here and they belong in the Scientific Lab, where there is
-    room to explain what they show. A number, a rule, a name and one line. */
+/** The services as typographic cards; a click opens the quick view
+    (components/sections/ServiceGrid.tsx), the card stays a real link. */
 export function ServiceCardGrid() {
-  return (
-    <ul className="services-grid mt-14">
-      {SERVICE_CARDS.map((s, i) => {
-        const Icon = CARD_ICON[s.art];
-        return (
-          <li key={s.slug}>
-            <a className="service-card" href={`/leistungen/${s.slug}/`}>
-              <span className="service-card__top">
-                <span className="service-card__icon" aria-hidden="true">
-                  <Icon strokeWidth={1.5} />
-                </span>
-                <span className="service-card__n">{String(i + 1).padStart(2, "0")}</span>
-              </span>
-              <h3 className="service-card__h">{s.title}</h3>
-              <p>{s.text}</p>
-              <span className="service-card__more">
-                <span>Details</span>
-                <span aria-hidden="true">→</span>
-              </span>
-            </a>
-          </li>
-        );
-      })}
-    </ul>
-  );
+  const items = SERVICE_CARDS.map((s) => ({
+    slug: s.slug,
+    title: s.title,
+    text: s.text,
+    art: s.art,
+    facts: SERVICE_FACTS[s.slug] ?? [],
+    material: CHEMISTRY.find((c) => c.slug === s.slug)?.intro,
+  }));
+  return <ServiceGrid items={items} />;
 }
 
 export function ServicesRail() {

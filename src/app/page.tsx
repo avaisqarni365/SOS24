@@ -8,6 +8,7 @@ import { ServicesRail, RegionSection, FaqSection } from "@/components/scroll/Hom
 import FactsStrip from "@/components/sections/FactsStrip";
 import HowWeWork from "@/components/sections/HowWeWork";
 import BrandInAction from "@/components/sections/BrandInAction";
+import KitShowcase from "@/components/sections/KitShowcase";
 import ContactChannels from "@/components/sections/ContactChannels";
 import ScrollSectionRail from "@/components/navigation/ScrollSectionRail";
 import AudienceSection from "@/components/sections/AudienceSection";
@@ -75,6 +76,7 @@ export default function Home() {
         <ServicesRail />
         <HowWeWork />
         <BrandInAction />
+        <KitShowcase />
         <ContactChannels />
         <AudienceSection />
         <RegionSection />

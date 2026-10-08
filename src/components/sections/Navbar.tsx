@@ -8,6 +8,7 @@ import { SERVICE_CARDS } from "@/data/services";
 import Logo from "@/components/brand/Logo";
 import LanguageSelector from "@/components/navigation/LanguageSelector";
 import AppearanceMenu from "@/components/navigation/AppearanceMenu";
+import ToneSlider from "@/components/navigation/ToneSlider";
 import { useLanguage } from "@/i18n/LanguageContext";
 
 /* The 3D viewer, the scanner and the measurement proof are one tab now
@@ -43,6 +44,8 @@ export default function Navbar() {
   const isHome = pathname === "/" || pathname === "";
   const burgerRef = useRef<HTMLButtonElement>(null);
   const menuRef = useRef<HTMLDivElement>(null);
+  /** a same-page anchor picked in the menu: scrolled to once the menu is gone */
+  const pendingScroll = useRef<string | null>(null);
 
   // A full-screen menu has to behave like a dialog: Escape closes it, focus
   // moves into it and comes back to the button, Tab stays inside, and the
@@ -76,7 +79,12 @@ export default function Navbar() {
     return () => {
       document.removeEventListener("keydown", onKey);
       root.style.overflow = prevOverflow;
-      burgerRef.current?.focus();
+      const target = pendingScroll.current;
+      pendingScroll.current = null;
+      // scrolling while the page is still locked gets cut off, so the jump
+      // waits until the lock is released
+      if (target) document.getElementById(target)?.scrollIntoView({ behavior: "smooth" });
+      else burgerRef.current?.focus({ preventScroll: true });
     };
   }, [open]);
 
@@ -91,9 +99,13 @@ export default function Navbar() {
       const el = document.getElementById(id);
       if (el) {
         e.preventDefault();
-        el.scrollIntoView({ behavior: "smooth" });
         window.history.pushState(null, "", `#${id}`);
-        setOpen(false);
+        if (open) {
+          pendingScroll.current = id;
+          setOpen(false);
+        } else {
+          el.scrollIntoView({ behavior: "smooth" });
+        }
         return;
       }
     }
@@ -135,11 +147,12 @@ export default function Navbar() {
       <div className="site-header__bar band-ink">
         <div className="site-wrap flex h-16 items-center justify-between gap-3 sm:h-[4.5rem] lg:gap-4">
           <a href="/" aria-label="sos-abdichtung, zur Startseite" className="shrink-0">
-            <Logo tone="light" />
+            <Logo />
           </a>
 
 
           <div className="flex shrink-0 items-center gap-2 sm:gap-2.5">
+            <ToneSlider compact className="header-tone" />
             <AppearanceMenu />
             <div className="hidden sm:block">
               <LanguageSelector />
@@ -162,6 +175,7 @@ export default function Navbar() {
         </div>
       </div>
 
+      {open && <div className="mnav-scrim" aria-hidden="true" onClick={() => setOpen(false)} />}
       {open && (
         /* One screen, flat. The old menu was four accordions of 3D thumbnails:
            three taps to reach a service and a lot of chrome for a phone. This
@@ -179,7 +193,7 @@ export default function Navbar() {
               ))}
             </nav>
 
-            <section className="mnav__block" aria-labelledby="mnav-services">
+            <section className="mnav__block mnav__block--services" aria-labelledby="mnav-services">
               <p id="mnav-services" className="mnav__kicker">Leistungen</p>
               <ul className="mnav__list">
                 {SERVICE_CARDS.map((sv) => (
@@ -192,7 +206,7 @@ export default function Navbar() {
               </ul>
             </section>
 
-            <section className="mnav__block" aria-labelledby="mnav-cities">
+            <section className="mnav__block mnav__block--cities" aria-labelledby="mnav-cities">
               <p id="mnav-cities" className="mnav__kicker">Servicegebiet PLZ 42</p>
               <ul className="mnav__chips">
                 {CITIES.map((c) => (
@@ -205,7 +219,7 @@ export default function Navbar() {
               </ul>
             </section>
 
-            <section className="mnav__block" aria-labelledby="mnav-audience">
+            <section className="mnav__block mnav__block--audience" aria-labelledby="mnav-audience">
               <p id="mnav-audience" className="mnav__kicker">Für wen wir arbeiten</p>
               <ul className="mnav__list">
                 {AUDIENCE.map((a) => (
@@ -218,9 +232,12 @@ export default function Navbar() {
               </ul>
             </section>
 
-            <div className="mnav__lang">
-              <span className="mnav__kicker">Sprache</span>
-              <LanguageSelector />
+            <div className="mnav__prefs">
+              <ToneSlider className="mnav__tone" />
+              <div className="mnav__lang">
+                <span className="mnav__kicker">Sprache</span>
+                <LanguageSelector />
+              </div>
             </div>
           </div>
 

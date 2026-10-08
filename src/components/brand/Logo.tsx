@@ -1,132 +1,55 @@
-import { useId } from "react";
-
 /**
- * SOS ABDICHTUNG — the brand lockup, drawn to the identity renders.
- *
- * Construction, top to bottom: a roof band with its chimney on the right
- * slope; the water drop hanging under the apex; SOS set large, with the
- * middle O a ring holding the same drop; "- ABDICHTUNG -" ruled either side.
- *
- * Finish: the renders are never flat navy — every surface carries a vertical
- * light (lighter at the top) and each drop has a gloss spot. The gradients
- * read their stops from CSS custom properties, so the same artwork is navy
- * with shine on paper and white-metal with shine on the dark plates, without
- * a second file.
+ * The SOS-Abdichtung wordmark, as the client's artwork draws it: SOS in the
+ * water blue with a drop in the O, -Abdichtung in navy, and under it a row
+ * of three bricks with injection points feeding a hose that runs out under
+ * the name. Drawn as outlines, so it is sharp at 24px and at 2000px and
+ * needs no web font. Colours come from --logo-blue / --logo-navy so the
+ * dark theme can lift the navy to white.
  */
-export function LogoLockup({ height = 64, className = "" }: { height?: number; className?: string }) {
-  const uid = useId().replace(/:/g, "");
-  const ink = `lk-${uid}`;
-  const drop = `ld-${uid}`;
+export const LOGO_PATHS = {
+  sos: "M74 315L132 311Q133 326 139 334Q148 346 166 346Q179 346 186 340Q193 333 193 325Q193 317 186 310Q179 304 155 298Q115 289 98 273Q81 257 81 233Q81 217 90 203Q99 188 116 180Q134 172 164 172Q202 172 222 187Q241 202 245 234L188 238Q186 224 178 217Q171 211 158 211Q148 211 143 216Q137 220 137 227Q137 232 142 236Q146 240 162 244Q201 253 219 262Q236 271 244 285Q251 299 251 316Q251 336 241 353Q231 370 212 378Q193 387 165 387Q115 387 96 367Q77 346 74 315ZM243 280Q243 229 269 200Q296 172 344 172Q392 172 419 200Q445 228 445 278Q445 314 434 338Q422 361 400 374Q379 387 346 387Q313 387 291 376Q270 365 256 340Q243 316 243 280ZM303 280Q303 311 314 325Q325 339 344 339Q363 339 374 325Q385 312 385 277Q385 248 374 234Q363 221 343 221Q325 221 314 234Q303 248 303 280ZM436 315L493 311Q495 326 501 334Q510 346 527 346Q540 346 547 340Q554 333 554 325Q554 317 548 310Q541 304 517 298Q477 289 460 273Q443 257 443 233Q443 217 452 203Q461 188 478 180Q496 172 526 172Q564 172 583 187Q603 202 607 234L550 238Q547 224 540 217Q533 211 520 211Q510 211 504 216Q499 220 499 227Q499 232 503 236Q508 240 524 244Q563 253 580 262Q597 271 605 285Q613 299 613 316Q613 336 603 353Q592 370 574 378Q555 387 527 387Q477 387 457 367Q438 346 436 315Z",
+  drop: "M344 243C352 263 368 276 368 290C368 303 357 314 344 314C331 314 320 303 320 290C320 276 335 263 344 243Z",
+  word: "M697 326L626 326L626 298L697 298ZM876 383L830 383L817 342L751 342L738 383L692 383L760 197L810 197ZM807 310L787 247Q785 240 784 230L783 230Q782 238 780 246L760 310ZM912 368L912 368L912 383L871 383L871 186L912 186L912 270L912 270Q928 247 956 247Q981 247 995 265Q1009 282 1009 313Q1009 346 993 366Q977 386 950 386Q925 386 912 368ZM911 312L911 325Q911 338 919 346Q926 355 938 355Q952 355 959 344Q967 333 967 313Q967 297 960 288Q953 278 940 278Q927 278 919 288Q911 297 911 312ZM1142 383L1101 383L1101 365L1100 365Q1086 386 1059 386Q1034 386 1019 369Q1004 351 1004 320Q1004 287 1020 267Q1037 247 1064 247Q1090 247 1100 265L1101 265L1101 186L1142 186ZM1101 318L1101 308Q1101 295 1094 287Q1086 278 1074 278Q1061 278 1053 289Q1045 300 1045 318Q1045 336 1053 345Q1060 355 1073 355Q1086 355 1094 345Q1101 335 1101 318ZM1173 229Q1162 229 1156 223Q1149 217 1149 208Q1149 199 1156 193Q1162 187 1173 187Q1183 187 1190 193Q1196 199 1196 208Q1196 217 1190 223Q1183 229 1173 229ZM1193 383L1152 383L1152 250L1193 250ZM1304 378Q1290 386 1264 386Q1234 386 1215 368Q1196 349 1196 320Q1196 286 1216 267Q1236 247 1270 247Q1294 247 1304 253L1304 288Q1291 278 1276 278Q1258 278 1248 289Q1237 299 1237 317Q1237 335 1247 345Q1257 355 1274 355Q1290 355 1304 345ZM1435 383L1394 383L1394 308Q1394 278 1372 278Q1362 278 1355 287Q1348 295 1348 307L1348 383L1307 383L1307 186L1348 186L1348 270L1349 270Q1364 247 1389 247Q1435 247 1435 301ZM1523 381Q1514 386 1496 386Q1453 386 1453 341L1453 280L1431 280L1431 250L1453 250L1453 222L1493 210L1493 250L1523 250L1523 280L1493 280L1493 334Q1493 355 1510 355Q1516 355 1523 351ZM1649 383L1608 383L1608 363L1607 363Q1592 386 1567 386Q1520 386 1520 330L1520 250L1561 250L1561 327Q1561 355 1584 355Q1595 355 1601 347Q1608 339 1608 326L1608 250L1649 250ZM1787 383L1747 383L1747 309Q1747 278 1724 278Q1714 278 1707 287Q1700 295 1700 307L1700 383L1659 383L1659 250L1700 250L1700 271L1701 271Q1715 247 1743 247Q1787 247 1787 302ZM1926 368Q1926 405 1905 425Q1883 445 1843 445Q1816 445 1800 438L1800 403Q1821 415 1841 415Q1862 415 1874 404Q1885 393 1885 374L1885 364L1885 364Q1871 386 1843 386Q1818 386 1803 368Q1788 350 1788 320Q1788 287 1805 267Q1821 247 1848 247Q1872 247 1885 266L1885 266L1885 250L1926 250ZM1886 319L1886 309Q1886 296 1878 287Q1871 278 1859 278Q1845 278 1837 289Q1830 300 1830 319Q1830 336 1837 345Q1844 355 1857 355Q1870 355 1878 345Q1886 335 1886 319Z",
+  bricks: "M121 401H252V442H121ZM121 473H252V511H121ZM265 401H395V442H265ZM265 473H395V511H265ZM408 401H528V442H408ZM408 473H528V511H408Z",
+  line: "M121 457H520C540 457 552 454.5 568 450.5",
+  hose: "M634 437C700 433 760 440 820 452C900 468 980 473 1060 473C1250 473 1420 446 1560 425C1660 411 1730 410 1786 410",
+};
+const P = LOGO_PATHS;
+const DOTS = [185,330,462];
+
+export function LogoWordmark({ className = "", title }: { className?: string; title?: string }) {
   return (
     <svg
-      height={height}
-      viewBox="0 0 200 126"
-      className={`logo-lockup ${className}`}
-      role="img"
-      aria-label="SOS Abdichtung"
-      fill="none"
-      style={{ width: "auto" }}
+      className={`logo__svg ${className}`}
+      viewBox="70 168 1860 347"
+      role={title ? "img" : undefined}
+      aria-label={title}
+      aria-hidden={title ? undefined : true}
+      focusable="false"
     >
-      <defs>
-        <linearGradient id={ink} x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" style={{ stopColor: "var(--lk-a)" }} />
-          <stop offset="1" style={{ stopColor: "var(--lk-b)" }} />
-        </linearGradient>
-        <linearGradient id={drop} x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" style={{ stopColor: "var(--ld-a)" }} />
-          <stop offset="1" style={{ stopColor: "var(--ld-b)" }} />
-        </linearGradient>
-      </defs>
-
-      {/* chimney on the right slope, drawn first so the roof band closes it */}
-      <rect x="138" y="14" width="14" height="30" rx="1" fill={`url(#${ink})`} />
-
-      {/* the roof band, with a thin catch of light along its top edge */}
-      <path d="M14 52 100 2l86 50h-18L100 25 32 52Z" fill={`url(#${ink})`} />
-      <path d="M15.5 51 100 2l84.5 49" stroke="#ffffff" strokeOpacity="0.3" strokeWidth="2.2" strokeLinejoin="round" />
-
-      {/* the drop under the apex, glossed */}
-      <path
-        d="M100 23c0 0 10.5 12.6 10.5 18.4a10.5 10.5 0 0 1-21 0C89.5 35.6 100 23 100 23Z"
-        fill={`url(#${drop})`}
-      />
-      <ellipse cx="95.6" cy="36" rx="2.7" ry="4.4" fill="#ffffff" opacity="0.8" transform="rotate(-16 95.6 36)" />
-
-      {/* SOS — the middle O is drawn as a ring so it can hold the drop */}
-      <text x="40" y="96" textAnchor="middle" className="logo-lockup__s" fill={`url(#${ink})`}>S</text>
-      <circle cx="100" cy="72" r="26" stroke={`url(#${ink})`} strokeWidth="16" />
-      <path
-        d="M100 56c0 0 9 10.8 9 15.8a9 9 0 0 1-18 0c0-5 9-15.8 9-15.8Z"
-        fill={`url(#${drop})`}
-      />
-      <ellipse cx="96.4" cy="67" rx="2.3" ry="3.7" fill="#ffffff" opacity="0.85" transform="rotate(-16 96.4 67)" />
-      <text x="160" y="96" textAnchor="middle" className="logo-lockup__s" fill={`url(#${ink})`}>S</text>
-
-      {/* - ABDICHTUNG - */}
-      <rect x="5" y="111" width="15" height="3.2" rx="1.6" fill={`url(#${ink})`} />
-      <rect x="180" y="111" width="15" height="3.2" rx="1.6" fill={`url(#${ink})`} />
-      <text x="100" y="118" textAnchor="middle" className="logo-lockup__w" fill={`url(#${ink})`}>ABDICHTUNG</text>
+      <path className="logo__brick" d={P.bricks} />
+      <path className="logo__pipe" d={P.line} strokeWidth={10} />
+      {DOTS.map((x) => (
+        <circle key={x} className="logo__blue" cx={x} cy={457.5} r={14} />
+      ))}
+      <g transform="rotate(-6 596 445)">
+        <rect className="logo__navy" x={566} y={443} width={12} height={14} rx={2} />
+        <rect className="logo__blue" x={577} y={428} width={38} height={34} rx={5} />
+        <rect className="logo__navy" x={614} y={430} width={18} height={28} rx={3} />
+      </g>
+      <path className="logo__pipe" d={P.hose} strokeWidth={11.5} strokeLinecap="round" />
+      <path className="logo__blue" d={P.sos + P.drop} />
+      <path className="logo__navy" d={P.word} />
     </svg>
   );
 }
 
-/** The mark alone, same finish, for favicon-sized contexts. */
-export function LogoMark({ size = 36, className = "" }: { size?: number; className?: string }) {
-  const uid = useId().replace(/:/g, "");
-  const ink = `mk-${uid}`;
-  const drop = `md-${uid}`;
+/** Header, footer and legal pages: the wordmark, nothing else. */
+export default function Logo({ className = "" }: { className?: string }) {
   return (
-    <svg width={size} height={size} viewBox="0 0 48 48" className={className} aria-hidden="true" focusable="false" fill="none">
-      <defs>
-        <linearGradient id={ink} x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" style={{ stopColor: "var(--lk-a)" }} />
-          <stop offset="1" style={{ stopColor: "var(--lk-b)" }} />
-        </linearGradient>
-        <linearGradient id={drop} x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" style={{ stopColor: "var(--ld-a)" }} />
-          <stop offset="1" style={{ stopColor: "var(--ld-b)" }} />
-        </linearGradient>
-      </defs>
-      <rect x="32.6" y="10.2" width="5.4" height="12.4" rx="0.8" fill={`url(#${ink})`} />
-      <path d="M2.6 31.4 24 8.6l21.4 22.8h-7.2L24 17.4 9.8 31.4Z" fill={`url(#${ink})`} />
-      <path
-        d="M24 18.8c0 0 5.9 7.1 5.9 10.7a5.9 5.9 0 0 1-11.8 0c0-3.6 5.9-10.7 5.9-10.7Z"
-        fill={`url(#${drop})`}
-      />
-      <ellipse cx="21.6" cy="26.4" rx="1.4" ry="2.3" fill="#ffffff" opacity="0.8" transform="rotate(-16 21.6 26.4)" />
-    </svg>
-  );
-}
-
-/**
- * The navigation lock — the "new way" for the header.
- *
- * The full emblem (roof over SOS over ABDICHTUNG) is a poster mark: at 60px
- * its ten shapes and gradients blur into each other. Navigation needs the
- * opposite: a flat, compact mark and a one-line wordmark, sharp at any size.
- * The mark keeps the identity's three ideas -- roof, chimney, drop -- in
- * solid fills: the silhouette in the surface ink, the drop in the water blue.
- */
-function MarkNav({ size = 34 }: { size?: number }) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 48 48" aria-hidden="true" focusable="false" fill="none">
-      <rect x="32.6" y="10.2" width="5.6" height="12.6" rx="0.8" fill="currentColor" />
-      <path d="M2.6 31.4 24 8.6l21.4 22.8h-7.2L24 17.4 9.8 31.4Z" fill="currentColor" />
-      <path
-        d="M24 19.4c0 0 6.2 7.4 6.2 11.2a6.2 6.2 0 0 1-12.4 0c0-3.8 6.2-11.2 6.2-11.2Z"
-        fill="var(--logo-drop)"
-      />
-    </svg>
-  );
-}
-
-export default function Logo({ tone = "auto", sub }: { tone?: "auto" | "light" | "dark"; sub?: string }) {
-  return (
-    <span className="logo">
-      <MarkNav size={36} />
-      <span className="logo__line">
-        <strong>SOS</strong> Abdichtung
-      </span>
+    <span className={`logo ${className}`}>
+      <LogoWordmark />
+      <span className="visually-hidden">SOS-Abdichtung</span>
     </span>
   );
 }

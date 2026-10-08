@@ -327,7 +327,7 @@ export function TechnicalLayersFrame({
               </div>
 
               {/* Warranties & Action Card */}
-              <div className="rounded-2xl sm:rounded-3xl border border-accent-deep/20 bg-gradient-to-br from-surface-2 via-white to-white p-6 sm:p-7 shadow-xs">
+              <div className="rounded-2xl sm:rounded-3xl border border-accent-deep/20 bg-gradient-to-br from-surface-2 via-surface to-surface p-6 sm:p-7 shadow-xs">
                 <div className="flex items-center justify-between mb-4">
                   <span className="font-mono text-xs uppercase tracking-wider text-accent-deep font-bold">
                     Garantierte Sicherheit

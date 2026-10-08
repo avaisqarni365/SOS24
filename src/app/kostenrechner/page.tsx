@@ -2,16 +2,16 @@ import type { Metadata } from "next";
 import Navbar from "@/components/sections/Navbar";
 import Footer from "@/components/sections/Footer";
 import ContactForm from "@/components/sections/ContactForm";
-import CostCalculator from "@/components/calculator/CostCalculator";
+import QuoteCalculator from "@/components/calculator/QuoteCalculator";
 import JsonLd from "@/components/seo/JsonLd";
 import ScrollEngine, { SC_BOOT } from "@/components/scroll/ScrollEngine";
 import { Breadcrumbs } from "@/components/seo/SubpageParts";
 import { abs, businessNode, websiteNode, breadcrumbNode, OG_IMAGE } from "@/lib/site";
 import { hy } from "@/lib/hyphenate";
 
-const TITLE = "Kostenrechner Kellersanierung | sos-abdichtung";
+const TITLE = "Angebotsrechner Kellersanierung | sos-abdichtung";
 const DESCRIPTION =
-  "Kostenrechner für die Kellersanierung: Schadensbild und Wandlänge wählen, Richtwert für die Injektion von innen sehen und mit dem Aufgraben vergleichen.";
+  "Angebotsrechner für Kellersanierung und Abdichtung: Leistung, Fläche und Zustand wählen, Umfang sehen, Festpreis nach kostenloser Messung anfragen.";
 const PATH = "/kostenrechner/";
 
 export const metadata: Metadata = {
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
 export default function KostenrechnerPage() {
   const crumbs = [
     { name: "Startseite", path: "/" },
-    { name: "Kostenrechner", path: PATH },
+    { name: "Angebotsrechner", path: PATH },
   ];
   return (
     <>
@@ -36,14 +36,14 @@ export default function KostenrechnerPage() {
           <div className="sc-wrap">
             <Breadcrumbs items={crumbs} />
             <h1 id="page-title" className="sc-display mt-6">
-              Kostenrechner <em>Kellersanierung</em>
+              Angebotsrechner <em>Kellersanierung</em>
             </h1>
             <p className="sc-lede mt-5 max-w-3xl text-[var(--sc-ink-soft)]">
-              {hy("Ein erster Richtwert in einer Minute: Schadensbild und Wandlänge wählen. Den verbindlichen Festpreis erhalten Sie nach der kostenlosen Messung vor Ort.")}
+              {hy("Leistung, Fläche und Zustand wählen: Sie sehen sofort, wie groß das Vorhaben ist und was im Angebot steht. Einen Preis nennen wir erst nach der kostenlosen Messung, dann schriftlich und verbindlich.")}
             </p>
           </div>
         </section>
-        <CostCalculator hideHeader />
+        <QuoteCalculator />
         <ContactForm />
       </main>
       <Footer />

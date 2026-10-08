@@ -30,7 +30,7 @@ const lines: string[] = [
   ...SERVICE_PAGES.map((s) => `- [${s.navTitle}](${SITE}/leistungen/${s.slug}/): ${s.lede}`),
   "",
   "## Weitere Seiten",
-  `- [Kostenrechner Kellersanierung](${SITE}/kostenrechner/): Richtwert für die Injektion von innen im Vergleich zur Außenabdichtung`,
+  `- [Angebotsrechner Kellersanierung](${SITE}/kostenrechner/): Umfang des Vorhabens einschätzen und das Festpreis-Angebot nach kostenloser Messung anfragen (keine Preisangaben)`,
   `- [Galerie](${SITE}/galerie/): Schadensbilder und Arbeitsschritte aus dem SchimmelPeter-Netzwerk`,
   `- 3D-Modelle auf jeder Leistungsseite und auf der Startseite: Keller von innen und außen, Garage (Rissverpressung), Wohnraum (Schimmel), Schritt für Schritt mit Material und Zahlen`,
   "",
