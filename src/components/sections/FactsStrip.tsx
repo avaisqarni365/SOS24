@@ -1,3 +1,4 @@
+import { PartnerLink, PartnerText, PartnerBadge } from "@/components/brand/PartnerLink";
 import CountUp from "@/components/ui/CountUp";
 
 export interface Fact {
@@ -24,7 +25,7 @@ export default function FactsStrip({ facts = HOME_FACTS, title }: { facts?: Fact
         <dl className="facts__grid" style={{ ["--n" as string]: facts.length }}>
           {facts.map((f) => (
             <div key={f.label} className="facts__item">
-              <dt>{f.label}</dt>
+              <dt><PartnerText text={f.label} /></dt>
               <dd>
                 <CountUp value={f.value} onView ms={900} />
               </dd>

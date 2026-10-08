@@ -1,5 +1,7 @@
 "use client";
 
+import { PartnerLink, PartnerText, PartnerBadge } from "@/components/brand/PartnerLink";
+
 import { useCallback, useState } from "react";
 import { Home, Layers, ShieldCheck, SprayCan, Gauge, Wrench, Umbrella, Sun, PanelBottom, ArrowRight, Phone, MessageCircle, type LucideIcon } from "lucide-react";
 import QuickView, { isPlainClick } from "@/components/ui/QuickView";
@@ -94,7 +96,7 @@ export default function ServiceGrid({ items }: { items: ServiceGridItem[] }) {
                 {active.facts.slice(0, 4).map((f) => (
                   <div key={f.label}>
                     <dt>{f.value}</dt>
-                    <dd>{f.label}</dd>
+                    <dd><PartnerText text={f.label} /></dd>
                   </div>
                 ))}
               </dl>

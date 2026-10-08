@@ -27,9 +27,22 @@ export function hy(text: string): string {
     .map((tok) =>
       SKIP.test(tok)
         ? tok
-        : tok.replace(/[A-Za-zÄÖÜäöüß]{7,}/g, (w) => EXC[w] ?? hyphenateSync(w, { minWordLength: 7 }))
+        : tok.replace(/[A-Za-zÄÖÜäöüß]{10,}/g, (w) => sparse(EXC[w] ?? hyphenateSync(w, { minWordLength: 10 })))
     )
     .join("");
+}
+
+/** Drops break points that would leave fewer than four letters on a line. */
+function sparse(word: string): string {
+  const parts = word.split(SHY);
+  let out = parts[0];
+  let before = parts[0].length;
+  const total = parts.join("").length;
+  for (const p of parts.slice(1)) {
+    out += before >= 4 && total - before >= 4 ? SHY + p : p;
+    before += p.length;
+  }
+  return out;
 }
 
 /** Keeps codes like "4-4-04" on one line (non-breaking hyphen between digits). */

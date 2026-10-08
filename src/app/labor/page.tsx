@@ -5,17 +5,22 @@ import ContactForm from "@/components/sections/ContactForm";
 import GrokLeadBot from "@/components/ai/GrokLeadBot";
 import LayersAct from "@/components/scroll/LayersAct";
 import ProofSection from "@/components/science/ProofSection";
-import ChemistryLab from "@/components/science/ChemistryLab";
 import KitShowcase from "@/components/sections/KitShowcase";
 import ScienceSection from "@/components/science/ScienceSection";
 import { ScannerSection } from "@/components/scroll/HomeSections";
 import JsonLd from "@/components/seo/JsonLd";
 import { CHEMISTRY } from "@/data/chemistry";
+import { SERVICE_FILMS } from "@/data/films";
+import HeroFilm from "@/components/scroll/HeroFilm";
+import LabTabs from "@/components/science/LabTabs";
+import { Formula } from "@/components/science/Formula";
+import { hy } from "@/lib/hyphenate";
+import { Home, Layers, ShieldCheck, SprayCan, Gauge, Wrench, Umbrella, Sun, PanelBottom, FlaskConical, Box, ScanLine, ClipboardCheck, type LucideIcon } from "lucide-react";
 import { SITE_URL, BUSINESS_ID, WEBSITE_ID, abs, businessNode, websiteNode, breadcrumbNode, OG_IMAGE } from "@/lib/site";
 
 const TITLE = "Scientific Lab | Verfahren, Chemie & Nachweis";
 const DESCRIPTION =
-  "Jedes Verfahren im 3D-Modell, die chemische Reaktion dahinter, der Feuchte-Scanner und der Messnachweis in jeder Phase der Sanierung.";
+  "Neun Verfahren mit Film, chemischer Reaktion und 3D-Modell, dazu der Feuchte-Scanner, Geräte und Material und der Messnachweis in jeder Phase.";
 
 export const metadata: Metadata = {
   title: TITLE,
@@ -54,57 +59,137 @@ export default function LaborPage() {
     },
   ];
 
-  const JUMPS = [
-    { href: "#modell", label: "Verfahren im 3D-Modell" },
-    { href: "#chemie", label: "Chemische Reaktion" },
-    { href: "#material", label: "Geräte & Material" },
-    { href: "#feuchte-scanner", label: "Feuchte-Scanner" },
-    { href: "#nachweis", label: "Nachweis je Phase" },
-    { href: "#physik", label: "Physik je Leistung" },
+  const reactions = CHEMISTRY.reduce((n, c) => n + c.reactions.length, 0);
+  const STATS = [
+    { value: String(CHEMISTRY.length), label: "Verfahren im Labor" },
+    { value: String(reactions), label: "Reaktionen als Gleichung" },
+    { value: "5", label: "Messhöhen je Messpunkt" },
+    { value: "3", label: "Messverfahren: kapazitiv, CM, Darr" },
   ];
+  const CHAPTERS = [
+    { href: "#verfahren", label: "Verfahren & Chemie", Icon: FlaskConical },
+    { href: "#modell", label: "3D-Modell", Icon: Box },
+    { href: "#feuchte-scanner", label: "Feuchte-Scanner", Icon: ScanLine },
+    { href: "#material", label: "Geräte & Material", Icon: Wrench },
+    { href: "#nachweis", label: "Nachweis je Phase", Icon: ClipboardCheck },
+  ];
+  const ICON: Record<string, LucideIcon> = {
+    kellersanierung: Home,
+    horizontalsperre: Layers,
+    kellerinnenabdichtung: ShieldCheck,
+    schimmelbeseitigung: SprayCan,
+    feuchtemessung: Gauge,
+    rissverpressung: Wrench,
+    dachabdichtung: Umbrella,
+    "balkon-terrasse": Sun,
+    sockelabdichtung: PanelBottom,
+  };
+
+  const tabs = CHEMISTRY.map((c) => {
+    const Icon = ICON[c.slug] ?? FlaskConical;
+    const film = SERVICE_FILMS[c.slug];
+    return {
+      id: c.slug,
+      label: c.service,
+      icon: <Icon strokeWidth={1.7} />,
+      panel: (
+        <>
+          <div className="labpanel" id={`verfahren-${c.slug}`}>
+            {film ? <HeroFilm film={film} label="Film" /> : null}
+            <article className="labpanel__chem">
+              <p className="labpanel__k">{c.service} · Chemie</p>
+              <h3 className="labpanel__h">{c.heading}</h3>
+              <p className="labpanel__intro">{hy(c.intro)}</p>
+              <ol className="labpanel__rx">
+                {c.reactions.map((r, i) => (
+                  <li key={r.stage}>
+                    <span className="labpanel__rx-n" aria-hidden="true">
+                      {String(i + 1).padStart(2, "0")}
+                    </span>
+                    <div>
+                      <p className="labpanel__rx-stage">{r.stage}</p>
+                      <p className="labpanel__rx-eq">
+                        <Formula source={r.equation} />
+                      </p>
+                      <p className="labpanel__rx-note">{hy(r.note)}</p>
+                    </div>
+                  </li>
+                ))}
+              </ol>
+              <div className="labpanel__foot">
+                <p className="labpanel__out">
+                  <span>{c.outcome.value}</span>
+                  {c.outcome.label}
+                </p>
+                <a href={`/leistungen/${c.slug}/`} className="labpanel__link">
+                  {c.service} als Leistung <span aria-hidden="true">→</span>
+                </a>
+              </div>
+            </article>
+          </div>
+          <ScienceSection slug={c.slug} />
+        </>
+      ),
+    };
+  });
 
   return (
     <>
       <JsonLd graph={graph} />
       <Navbar />
-      <main id="main">
-        <section className="band-ink lab-top" aria-labelledby="lab-title">
+      <main id="main" className="lab-page">
+        <section className="lab-hero" aria-labelledby="lab-title">
           <div className="sc-wrap">
-            <p className="sc-label">Scientific Lab</p>
-            <h1 id="lab-title" className="sc-display mt-4">
-              Der Nachweis, <em>nicht die Behauptung.</em>
-            </h1>
-            <p className="sc-lede mt-6">
-              Jedes Verfahren im Modell, die Reaktion im Mauerwerk als Gleichung, die
-              Messung, die sie belegt. Nachrechnen erwünscht.
-            </p>
-            <nav className="lab-jump" aria-label="Kapitel">
-              {JUMPS.map((j) => (
-                <a key={j.href} href={j.href}>
-                  {j.label}
+            <div className="lab-hero__grid">
+              <div>
+                <p className="sc-label">Scientific Lab</p>
+                <h1 id="lab-title" className="sc-display lab-hero__title">
+                  Der Nachweis, <em>nicht die Behauptung.</em>
+                </h1>
+                <p className="sc-lede lab-hero__lede">
+                  {hy("Jedes Verfahren als kurzer Film, die Reaktion im Mauerwerk als Gleichung, das Modell in 3D und die Messung, die alles belegt. Wählen Sie ein Verfahren und gehen Sie es Schicht für Schicht durch.")}
+                </p>
+              </div>
+              <dl className="lab-stats">
+                {STATS.map((s) => (
+                  <div key={s.label}>
+                    <dt>{s.value}</dt>
+                    <dd>{s.label}</dd>
+                  </div>
+                ))}
+              </dl>
+            </div>
+            <nav className="lab-chapters" aria-label="Kapitel">
+              {CHAPTERS.map(({ href, label, Icon }, i) => (
+                <a key={href} href={href} className="lab-chapter">
+                  <span className="lab-chapter__n">{String(i + 1).padStart(2, "0")}</span>
+                  <Icon aria-hidden="true" />
+                  <span className="lab-chapter__l">{label}</span>
                 </a>
               ))}
             </nav>
           </div>
         </section>
 
-        <LayersAct id="modell" />
-        <ChemistryLab />
-        <KitShowcase id="material" />
-        <ScannerSection />
-        <ProofSection />
-
-        <section id="physik" className="sc-section" aria-labelledby="physik-title">
+        <section id="verfahren" className="sc-section lab-methods" aria-labelledby="verfahren-title">
           <div className="sc-wrap">
-            <p className="sc-label">Physik je Leistung</p>
-            <h2 id="physik-title" className="sc-display mt-4 max-w-[20ch]">
-              Neun Leistungen, <em>ein Nachweis.</em>
+            <p className="sc-label">Verfahren & Chemie</p>
+            <h2 id="verfahren-title" className="sc-display mt-3">
+              Neun Verfahren, <em>ein Labor.</em>
             </h2>
+            <p className="sc-body mt-5">
+              {hy("Wählen Sie ein Verfahren: Sie sehen den Film dazu, die chemische Reaktion im Mauerwerk mit ihrer Gleichung und, wo es sie gibt, das interaktive Modell der Bauphysik.")}
+            </p>
+          </div>
+          <div className="sc-wrap lab-methods__tabs">
+            <LabTabs tabs={tabs} />
           </div>
         </section>
-        {CHEMISTRY.map((c) => (
-          <ScienceSection key={c.slug} slug={c.slug} />
-        ))}
+
+        <LayersAct id="modell" />
+        <ScannerSection />
+        <KitShowcase id="material" />
+        <ProofSection />
 
         <ContactForm />
       </main>

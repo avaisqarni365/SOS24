@@ -21,7 +21,7 @@ export default function LanguageSelector() {
   }, []);
 
   return (
-    <div ref={containerRef} className="relative inline-block text-left">
+    <div ref={containerRef} className="relative inline-block text-left" data-no-translate>
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface hover:bg-surface-2 border border-line/15 hover:border-accent-deep/40 text-xs font-mono text-ink transition-all shadow-xs"

@@ -1,5 +1,7 @@
 "use client";
 
+import { PartnerLink, PartnerText, PartnerBadge } from "@/components/brand/PartnerLink";
+
 import React, { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import { Menu, Phone, X, MessageCircle, ShieldCheck } from "lucide-react";
@@ -123,7 +125,7 @@ export default function Navbar() {
         <div className="site-wrap flex h-9 items-center justify-between gap-6 text-[0.8125rem]">
           <p className="no-justify flex items-center gap-2 font-medium">
             <ShieldCheck className="h-4 w-4" aria-hidden="true" />
-            SchimmelPeter® Partnerbetrieb · Kostenlose Feuchtemessung vor Ort
+            <PartnerLink>SchimmelPeter® Partnerbetrieb</PartnerLink> · Kostenlose Feuchtemessung vor Ort
           </p>
           <nav aria-label="Zielgruppen" className="flex items-center gap-5">
             {AUDIENCE.map((a) => (

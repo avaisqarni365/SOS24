@@ -1,5 +1,7 @@
+import { PartnerLink, PartnerText, PartnerBadge } from "@/components/brand/PartnerLink";
 import { COMPANY_INFO } from "@/data/content-data";
 import HeroFilm from "@/components/scroll/HeroFilm";
+import { REEL } from "@/data/films";
 
 export const CTA_LABEL = "Kostenlose Feuchtemessung anfragen";
 
@@ -19,7 +21,7 @@ export default function Hero() {
         <div className="hero__grid">
           <div className="hero__copy">
           <p className="sc-label">
-            SchimmelPeter® Partnerbetrieb · Wuppertal &amp; Bergisches Land
+            <PartnerLink>SchimmelPeter® Partnerbetrieb</PartnerLink> · Wuppertal &amp; Bergisches Land
           </p>
           <h1
             id="hero-title"
@@ -57,7 +59,7 @@ export default function Hero() {
             <li>Ohne Aufgraben</li>
           </ul>
         </div>
-        <HeroFilm />
+        <HeroFilm film={REEL} />
         </div>
       </div>
     </section>

@@ -1,5 +1,7 @@
 "use client";
 
+import { PartnerLink } from "@/components/brand/PartnerLink";
+
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { GALLERY, type GalleryCategory } from "@/data/gallery";
@@ -124,7 +126,7 @@ export default function PictureGallery({ hideHeader = false }: { hideHeader?: bo
                   <span className="font-editorial text-2xl leading-tight text-ink font-bold">{it.title}</span>
                   <span className="text-sm sm:text-[0.95rem] leading-[1.68] text-ink font-normal text-justify hyphens-auto">{it.text}</span>
                   <span className="mt-auto flex items-center justify-between pt-3 font-mono text-[0.72rem] text-ink font-semibold border-t border-line/8">
-                    <span>Foto: SchimmelPeter®</span>
+                    <span>Foto: <PartnerLink>SchimmelPeter®</PartnerLink></span>
                     <span className="text-accent-deep font-bold">{t("gallery.zoomHint")} →</span>
                   </span>
                 </span>
@@ -153,7 +155,7 @@ export default function PictureGallery({ hideHeader = false }: { hideHeader?: bo
             />
             <div className="max-w-2xl text-center">
               <p className="font-mono text-xs text-[var(--sc-ink-soft)]">
-                {cur.tag} · {open! + 1} / {items.length} · Foto: SchimmelPeter®
+                {cur.tag} · {open! + 1} / {items.length} · Foto: <PartnerLink>SchimmelPeter®</PartnerLink>
               </p>
               <h3 id="galerie-dialog-title" className="mt-1 font-editorial text-2xl text-[var(--bone)]">
                 {cur.title}

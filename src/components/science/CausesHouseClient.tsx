@@ -1,5 +1,7 @@
 "use client";
 
+import { PartnerLink } from "@/components/brand/PartnerLink";
+
 import { useState } from "react";
 import { PHOTOS } from "@/data/photos";
 import type { Cause } from "@/data/causes";
@@ -85,7 +87,7 @@ export default function CausesHouseClient({ causes: CAUSES }: { causes: Cause[] 
         <div className="flex flex-col gap-5 rounded-[22px] border border-line/10 bg-[var(--ink-2)] p-6 sm:p-7" aria-live="polite">
           <figure className="m-0 overflow-hidden rounded-2xl">
             <img src={p.src} width={p.w} height={p.h} alt={p.alt} loading="lazy" decoding="async" className="h-auto w-full" />
-            <figcaption className="mt-1 text-right text-[0.7rem] text-[var(--sc-ink-soft)]">Foto: SchimmelPeter®</figcaption>
+            <figcaption className="mt-1 text-right text-[0.7rem] text-[var(--sc-ink-soft)]">Foto: <PartnerLink>SchimmelPeter®</PartnerLink></figcaption>
           </figure>
           <div>
             <p className="sc-label">Ursache {c.n} von 4</p>

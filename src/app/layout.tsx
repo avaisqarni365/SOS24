@@ -7,7 +7,9 @@ import { SITE_URL, OG_IMAGE } from "@/lib/site";
 import MobileContactBar from "@/components/sections/MobileContactBar";
 import { APPEARANCE_BOOT } from "@/components/navigation/AppearanceMenu";
 import { TONE_BOOT } from "@/lib/tone";
+import { I18N_BOOT } from "@/i18n/boot";
 import { LanguageProvider } from "@/i18n/LanguageContext";
+import HeadingFit from "@/components/ui/HeadingFit";
 
 // Self-hosted fonts: no request to Google at runtime (DSGVO) and no build-time fetch.
 // Upright type only: IBM Plex Sans for headings and text, IBM Plex Mono for
@@ -86,10 +88,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* theme and text size before first paint (see AppearanceMenu) */}
         <script dangerouslySetInnerHTML={{ __html: APPEARANCE_BOOT }} />
         <script dangerouslySetInnerHTML={{ __html: TONE_BOOT }} />
+        <script dangerouslySetInnerHTML={{ __html: I18N_BOOT }} />
       </head>
-      <body className="min-h-screen font-latex antialiased">
+      <body className="min-h-screen font-latex">
         <LanguageProvider>
           {children}
+          <HeadingFit />
           <MobileContactBar />
         </LanguageProvider>
       </body>

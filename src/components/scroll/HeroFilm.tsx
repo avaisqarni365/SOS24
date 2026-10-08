@@ -2,30 +2,24 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Pause, Play } from "lucide-react";
-
-/** Chapter starts in /media/sos-reel.mp4 (seconds), as the editor cut it. */
-const CHAPTERS = [
-  { label: "Messen", at: 0 },
-  { label: "Beraten", at: 2.3 },
-  { label: "Abdichten", at: 3.75 },
-  { label: "Übergabe", at: 8.45 },
-  { label: "Kontakt", at: 10.55 },
-];
+import type { Film } from "@/data/films";
 
 type Conn = { saveData?: boolean; effectiveType?: string };
 
 /**
- * The image film beside the hero: 13 seconds, no sound, 0.6 MB. Nothing is
- * downloaded until it is on screen. It plays by itself only on wide screens
- * where nobody asked for less data or less motion; phones get the poster
- * and a play button. A pause button is always there.
+ * An image film in a portrait frame with its chapters: the reel beside the
+ * home hero, a service film beside a service hero. Silent, about 0.5 MB.
+ * Nothing loads until the frame is on screen; it plays by itself only on
+ * wide screens where nobody asked for less data or less motion. Phones get
+ * the poster and a play button. A pause button is always there.
  */
-export default function HeroFilm() {
+export default function HeroFilm({ film, label = "Imagefilm" }: { film: Film; label?: string }) {
   const video = useRef<HTMLVideoElement>(null);
   const box = useRef<HTMLElement>(null);
   const userPaused = useRef(false);
   const [playing, setPlaying] = useState(false);
   const [chapter, setChapter] = useState(0);
+  const chapters = film.chapters;
 
   useEffect(() => {
     const v = video.current;
@@ -54,7 +48,7 @@ export default function HeroFilm() {
 
     const onTime = () => {
       let i = 0;
-      CHAPTERS.forEach((c, k) => {
+      chapters.forEach((c, k) => {
         if (v.currentTime >= c.at) i = k;
       });
       setChapter(i);
@@ -70,7 +64,7 @@ export default function HeroFilm() {
       v.removeEventListener("play", onPlay);
       v.removeEventListener("pause", onPause);
     };
-  }, []);
+  }, [chapters]);
 
   const toggle = useCallback(() => {
     const v = video.current;
@@ -93,26 +87,26 @@ export default function HeroFilm() {
   }, []);
 
   return (
-    <figure ref={box} className="hero-film" aria-label="Imagefilm von SOS-Abdichtung">
+    <figure ref={box} className="hero-film" aria-label={`${label}: ${film.title}`}>
       <div className="hero-film__frame">
         <video
           ref={video}
           className="hero-film__video"
-          src="/media/sos-reel.mp4"
-          poster="/media/sos-reel-poster.webp"
+          src={film.src}
+          poster={film.poster}
           width={432}
           height={768}
           muted
           loop
           playsInline
           preload="none"
-          aria-label="Imagefilm ohne Ton: messen, beraten, abdichten, übergeben"
+          aria-label={`${label} ohne Ton: ${chapters.map((c) => c.label).join(", ")}`}
         />
         <button type="button" className="hero-film__toggle" onClick={toggle} aria-label={playing ? "Film anhalten" : "Film abspielen"}>
           {playing ? <Pause aria-hidden="true" /> : <Play aria-hidden="true" />}
         </button>
-        <span className="hero-film__tag">Imagefilm</span>
-        <span className={`hero-film__owner${chapter === CHAPTERS.length - 1 ? " is-hidden" : ""}`}>
+        <span className="hero-film__tag">{label}</span>
+        <span className={`hero-film__owner${chapter === chapters.length - 1 ? " is-hidden" : ""}`}>
           <img src="/img/gallery/shahzad-mahmood-160.webp" width={160} height={176} alt="" loading="lazy" />
           <span>
             <strong>Shahzad Mahmood</strong>
@@ -121,9 +115,11 @@ export default function HeroFilm() {
         </span>
       </div>
       <figcaption className="hero-film__side">
-        <span className="hero-film__k">So arbeiten wir · 13 Sekunden</span>
+        <span className="hero-film__k">
+          {film.title} · {film.seconds} Sekunden
+        </span>
         <ol className="hero-film__chapters">
-          {CHAPTERS.map((c, i) => (
+          {chapters.map((c, i) => (
             <li key={c.label}>
               <button type="button" aria-current={i === chapter ? "step" : undefined} onClick={() => seek(c.at)}>
                 <span aria-hidden="true">{String(i + 1).padStart(2, "0")}</span>

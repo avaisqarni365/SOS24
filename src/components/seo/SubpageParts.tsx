@@ -1,3 +1,4 @@
+import { PartnerLink, PartnerText, PartnerBadge } from "@/components/brand/PartnerLink";
 import type { Faq, LayerNote, PageSection } from "@/data/seo-pages";
 import { hy, keep } from "@/lib/hyphenate";
 
@@ -340,7 +341,7 @@ export function TechnicalLayersFrame({
                 <div className="grid grid-cols-2 gap-3">
                   <div className="rounded-xl bg-surface border border-line/8 p-3.5 shadow-2xs">
                     <span className="block font-bold text-lg sm:text-xl text-accent-deep">25 Jahre</span>
-                    <span className="text-ink text-xs font-semibold">SchimmelPeter® Produktgarantie</span>
+                    <span className="text-ink text-xs font-semibold"><PartnerLink>SchimmelPeter®</PartnerLink> Produktgarantie</span>
                   </div>
                   <div className="rounded-xl bg-surface border border-line/8 p-3.5 shadow-2xs">
                     <span className="block font-bold text-lg sm:text-xl text-accent-deep">10 Jahre</span>
@@ -459,7 +460,7 @@ export function Prose({
           <div className="mt-5 space-y-4">
             {s.paragraphs.map((p, i) => (
               <p key={i} className="text-ink font-normal text-base sm:text-[1.05rem] leading-[1.74] text-justify hyphens-auto">
-                {hy(p)}
+                <PartnerText text={hy(p)} />
               </p>
             ))}
           </div>
@@ -478,7 +479,7 @@ export function Prose({
                     <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-accent-deep/15 text-accent-deep font-bold text-xs mt-0.5" aria-hidden="true">
                       ✓
                     </span>
-                    <span className="leading-snug">{hy(b)}</span>
+                    <span className="leading-snug"><PartnerText text={hy(b)} /></span>
                   </li>
                 ))}
               </ul>
@@ -504,7 +505,7 @@ export function FaqCards({ faqs, openFirst = true }: { faqs: Faq[]; openFirst?: 
             <span className="faq-card__icon" aria-hidden="true" />
           </summary>
           <div className="faq-card__a">
-            <p>{hy(f.a)}</p>
+            <p><PartnerText text={hy(f.a)} /></p>
           </div>
         </details>
       ))}

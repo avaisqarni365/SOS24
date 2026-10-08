@@ -2,6 +2,7 @@
 
 import React, { createContext, useCallback, useContext, useEffect, useState } from "react";
 import { SupportedLocale, SUPPORTED_LOCALES, DE, LocaleMeta } from "./translations";
+import { applyDict, loadDict } from "./domTranslate";
 
 interface LanguageContextType {
   lang: SupportedLocale;
@@ -28,11 +29,25 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
   const [dict, setDict] = useState<Record<string, string>>(DE);
 
   const apply = useCallback(async (next: SupportedLocale) => {
-    const strings = next === "de" ? DE : (await LOADERS[next]()).default;
-    setDict(strings);
-    setLangState(next);
-    document.documentElement.lang = next;
-    document.documentElement.dir = next === "ar" ? "rtl" : "ltr";
+    const root = document.documentElement;
+    try {
+      if (next === "de") {
+        setDict(DE);
+        applyDict(null);
+      } else {
+        // the interface strings and the page dictionary arrive together
+        const [ui, page] = await Promise.all([LOADERS[next](), loadDict(next)]);
+        setDict(ui.default);
+        applyDict(page);
+      }
+      setLangState(next);
+      root.lang = next;
+      root.dir = next === "ar" ? "rtl" : "ltr";
+      // headings change length with the language: let them refit
+      window.dispatchEvent(new Event("sos-i18n"));
+    } finally {
+      root.classList.remove("i18n-wait");
+    }
   }, []);
 
   useEffect(() => {
@@ -43,11 +58,13 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
       // storage blocked (private mode, sandboxed frame)
     }
     if (isLocale(stored) && stored !== "de") apply(stored).catch(() => {});
+    else document.documentElement.classList.remove("i18n-wait");
   }, [apply]);
 
   const setLang = (next: SupportedLocale) => {
     try {
-      localStorage.setItem("sos_lang", next);
+      if (next === "de") localStorage.removeItem("sos_lang");
+      else localStorage.setItem("sos_lang", next);
     } catch {
       // the choice lasts for this page view
     }

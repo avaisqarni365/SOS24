@@ -1,5 +1,7 @@
 "use client";
 
+import { PartnerLink, PartnerText, PartnerBadge } from "@/components/brand/PartnerLink";
+
 import { useEffect, useRef, useState, type ReactNode, type MouseEvent as ReactMouseEvent } from "react";
 import { createPortal } from "react-dom";
 import { X } from "lucide-react";
@@ -86,7 +88,7 @@ export default function QuickView({
               <img src="/img/gallery/shahzad-mahmood-160.webp" width={160} height={176} alt="" loading="lazy" />
               <p>
                 <strong>Shahzad Mahmood</strong>
-                <span>Inhaber, berät Sie persönlich · SchimmelPeter® Partnerbetrieb</span>
+                <span>Inhaber, berät Sie persönlich · <PartnerLink>SchimmelPeter® Partnerbetrieb</PartnerLink></span>
               </p>
             </div>
           )}

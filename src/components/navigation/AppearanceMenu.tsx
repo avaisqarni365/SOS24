@@ -1,9 +1,9 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { SunMoon, Sun, Moon, Monitor, Type } from "lucide-react";
-import ToneSlider, { readTone } from "@/components/navigation/ToneSlider";
-import { setTone } from "@/lib/tone";
+import { SunMoon, Sun, Moon, Monitor, Palette, Contrast, Type } from "lucide-react";
+import ToneSlider, { readTone, chooseTone, onTone } from "@/components/navigation/ToneSlider";
+import { setTone, toneName } from "@/lib/tone";
 
 type Theme = "light" | "dark" | "auto";
 type TextSize = "md" | "lg" | "xl";
@@ -17,12 +17,17 @@ export const APPEARANCE_BOOT = `(function(){var d=document.documentElement;d.set
 const THEMES: { id: Theme; label: string; Icon: typeof Sun }[] = [
   { id: "light", label: "Hell", Icon: Sun },
   { id: "dark", label: "Dunkel", Icon: Moon },
-  { id: "auto", label: "Automatisch", Icon: Monitor },
+  { id: "auto", label: "Auto", Icon: Monitor },
 ];
 const SIZES: { id: TextSize; label: string; scale: string }[] = [
   { id: "md", label: "Normal", scale: "A" },
   { id: "lg", label: "Groß", scale: "A+" },
   { id: "xl", label: "Sehr groß", scale: "A++" },
+];
+const SWATCHES = [
+  { v: 0, label: "Hell", cls: "ap-swatch__dot--sun" },
+  { v: 50, label: "Wasser", cls: "ap-swatch__dot--water" },
+  { v: 100, label: "Grün", cls: "ap-swatch__dot--green" },
 ];
 
 function save(key: string, value: string | null) {
@@ -34,25 +39,30 @@ function save(key: string, value: string | null) {
   }
 }
 
-/** "Ansicht": light, dark or automatic theme and three text sizes. */
+/** "Ansicht": colour, light or dark, and three text sizes. */
 export default function AppearanceMenu() {
   const [open, setOpen] = useState(false);
   const [theme, setTheme] = useState<Theme>("light");
   const [size, setSize] = useState<TextSize>("md");
+  const [tone, setToneState] = useState(50);
   const box = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const d = document.documentElement;
     const t = d.getAttribute("data-theme");
     setTheme(t === "light" || t === "dark" ? t : "auto");
-
     const z = d.getAttribute("data-text");
     setSize(z === "lg" || z === "xl" ? z : "md");
+    setToneState(readTone());
 
     // the colour slider switches dark back to light; follow it
     const onTheme = (e: Event) => setTheme((e as CustomEvent<Theme>).detail);
     window.addEventListener("sos-theme", onTheme);
-    return () => window.removeEventListener("sos-theme", onTheme);
+    const offTone = onTone(setToneState);
+    return () => {
+      window.removeEventListener("sos-theme", onTheme);
+      offTone();
+    };
   }, []);
 
   useEffect(() => {
@@ -100,48 +110,59 @@ export default function AppearanceMenu() {
         <span className="visually-hidden">Ansicht anpassen</span>
       </button>
       {open && (
-        <div
-          id="appearance-panel"
-          className="absolute right-0 top-[calc(100%+0.6rem)] z-[60] w-[17.5rem] max-sm:fixed max-sm:inset-x-3 max-sm:top-[4.4rem] max-sm:w-auto surface-pop rounded-2xl p-4"
-        >
-          <ToneSlider className="tone--panel" />
-          <p className="mt-4 font-mono text-[0.68rem] uppercase tracking-wider text-ink font-bold">Darstellung</p>
-          <div className="mt-2 grid grid-cols-3 gap-1.5" role="group" aria-label="Darstellung">
-            {THEMES.map(({ id, label, Icon }) => (
-              <button
-                key={id}
-                type="button"
-                aria-pressed={theme === id}
-                onClick={() => pickTheme(id)}
-                className={`flex min-h-[3.5rem] flex-col items-center justify-center gap-1 rounded-xl border text-[0.72rem] font-semibold transition-all ${
-                  theme === id ? "btn-shine border-transparent shadow-sm" : "border-line/15 bg-surface-2 text-ink hover:border-accent-deep hover:bg-surface"
-                }`}
-              >
-                <Icon className="h-4 w-4" aria-hidden="true" />
-                {label}
-              </button>
-            ))}
-          </div>
-          <p className="mt-4 flex items-center gap-1.5 font-mono text-[0.68rem] uppercase tracking-wider text-ink font-bold">
-            <Type className="h-3.5 w-3.5" aria-hidden="true" /> Schriftgröße
-          </p>
-          <div className="mt-2 grid grid-cols-3 gap-1.5" role="group" aria-label="Schriftgröße">
-            {SIZES.map((z, i) => (
-              <button
-                key={z.id}
-                type="button"
-                aria-pressed={size === z.id}
-                aria-label={z.label}
-                onClick={() => pickSize(z.id)}
-                className={`min-h-[3rem] rounded-xl border font-semibold transition-all ${
-                  size === z.id ? "btn-shine border-transparent shadow-sm" : "border-line/15 bg-surface-2 text-ink hover:border-accent-deep hover:bg-surface"
-                }`}
-                style={{ fontSize: `${0.85 + i * 0.18}rem` }}
-              >
-                {z.scale}
-              </button>
-            ))}
-          </div>
+        <div id="appearance-panel" className="ap" role="dialog" aria-label="Ansicht anpassen">
+          <p className="ap__title">Ansicht</p>
+
+          <section className="ap__sec" aria-labelledby="ap-colour">
+            <div className="ap__row">
+              <span id="ap-colour" className="ap__k">
+                <Palette aria-hidden="true" /> Farbe
+              </span>
+              <span className="ap__v">{toneName(tone)}</span>
+            </div>
+            <div className="ap-swatches" role="group" aria-labelledby="ap-colour">
+              {SWATCHES.map((s) => (
+                <button
+                  key={s.v}
+                  type="button"
+                  className="ap-swatch"
+                  aria-pressed={Math.abs(tone - s.v) <= 3 && theme !== "dark"}
+                  onClick={() => chooseTone(s.v)}
+                >
+                  <span className={`ap-swatch__dot ${s.cls}`} aria-hidden="true" />
+                  {s.label}
+                </button>
+              ))}
+            </div>
+            <ToneSlider bare className="ap__slider" />
+          </section>
+
+          <section className="ap__sec" aria-labelledby="ap-theme">
+            <span id="ap-theme" className="ap__k">
+              <Contrast aria-hidden="true" /> Darstellung
+            </span>
+            <div className="ap-seg" role="group" aria-labelledby="ap-theme">
+              {THEMES.map(({ id, label, Icon }) => (
+                <button key={id} type="button" aria-pressed={theme === id} onClick={() => pickTheme(id)}>
+                  <Icon aria-hidden="true" />
+                  {label}
+                </button>
+              ))}
+            </div>
+          </section>
+
+          <section className="ap__sec" aria-labelledby="ap-size">
+            <span id="ap-size" className="ap__k">
+              <Type aria-hidden="true" /> Schriftgröße
+            </span>
+            <div className="ap-seg ap-seg--size" role="group" aria-labelledby="ap-size">
+              {SIZES.map((z, i) => (
+                <button key={z.id} type="button" aria-pressed={size === z.id} aria-label={z.label} onClick={() => pickSize(z.id)}>
+                  <span style={{ fontSize: `${0.9 + i * 0.16}rem` }}>{z.scale}</span>
+                </button>
+              ))}
+            </div>
+          </section>
         </div>
       )}
     </div>

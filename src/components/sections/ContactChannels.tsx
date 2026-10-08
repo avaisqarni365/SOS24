@@ -1,3 +1,4 @@
+import { PartnerLink, PartnerText, PartnerBadge } from "@/components/brand/PartnerLink";
 import { Phone, MessageCircle, Mail, CalendarClock } from "lucide-react";
 import { COMPANY_INFO } from "@/data/content-data";
 
@@ -102,7 +103,7 @@ export default function ContactChannels() {
             <span className="contact-band__who-k">Ihr direkter Ansprechpartner</span>
             <span className="contact-band__who-n">Shahzad Mahmood</span>
             <span className="contact-band__who-r">
-              Inhaber · SchimmelPeter® Partnerbetrieb · Wuppertal &amp; Bergisches Land
+              Inhaber · <PartnerLink>SchimmelPeter® Partnerbetrieb</PartnerLink> · Wuppertal &amp; Bergisches Land
             </span>
           </figcaption>
         </figure>

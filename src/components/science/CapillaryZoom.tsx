@@ -1,3 +1,4 @@
+import { PartnerLink } from "@/components/brand/PartnerLink";
 import { PHOTOS } from "@/data/photos";
 import "./CapillaryZoom.css";
 
@@ -232,7 +233,7 @@ export default function CapillaryZoom() {
             </span>
           ))}
         </div>
-        <p className="cz-credit">Foto: SchimmelPeter®. Schematische Darstellung, nicht maßstäblich.</p>
+        <p className="cz-credit">Foto: <PartnerLink>SchimmelPeter®</PartnerLink>. Schematische Darstellung, nicht maßstäblich.</p>
       </div>
     </section>
   );

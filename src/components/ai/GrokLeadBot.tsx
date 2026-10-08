@@ -1,5 +1,7 @@
 "use client";
 
+import { PartnerLink, PartnerText, PartnerBadge } from "@/components/brand/PartnerLink";
+
 import React, { useState, useRef, useEffect } from "react";
 import { MessageSquare, Send, X, Bot, Sparkles } from "lucide-react";
 import { COMPANY_INFO } from "@/data/content-data";
@@ -126,7 +128,7 @@ export default function GrokLeadBot() {
                   <span className="w-1.5 h-1.5 rounded-full bg-landing-mint"></span>
                 </h4>
                 <p className="text-[10px] text-landing-bone/50 font-mono">
-                  SchimmelPeter® Partner Wuppertal
+                  <PartnerLink>SchimmelPeter® Partner Wuppertal</PartnerLink>
                 </p>
               </div>
             </div>

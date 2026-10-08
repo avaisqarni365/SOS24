@@ -1,5 +1,7 @@
 "use client";
 
+import { PartnerLink, PartnerText, PartnerBadge } from "@/components/brand/PartnerLink";
+
 import React, { useEffect, useRef, useState } from "react";
 import { Phone, MapPin, CheckCircle2, MessageSquare, ArrowRight, Mail } from "lucide-react";
 import { COMPANY_INFO } from "@/data/content-data";
@@ -128,8 +130,7 @@ export default function ContactForm({ defaultDamage, place }: { defaultDamage?: 
           id="kontakt-title"
           className="font-editorial text-[2.25rem] font-normal leading-[1.04] tracking-[-0.02em] text-[var(--head-on-bone)] sm:text-5xl lg:text-[3.5rem]"
         >
-          {place && lang === "de" ? `Sprechen wir über Ihr Objekt in ${place}.` : t("contact.h1")}
-          <br />
+          {place && lang === "de" ? `Sprechen wir über Ihr Objekt in ${place}.` : t("contact.h1")}{" "}
           <span className="text-accent-deep">{t("contact.accent")}</span>
         </h2>
         <p className="mt-6 max-w-2xl text-base leading-relaxed text-[var(--text-on-bone)] sm:text-lg">
@@ -240,14 +241,7 @@ export default function ContactForm({ defaultDamage, place }: { defaultDamage?: 
                   the door. The partner badge sits top-right on it, framed. */}
               <div className="contact-card__cover">
                 <BrandShot shot="van" decorative />
-                <img
-                  src="/img/gallery/schimmelpeter-fachbetrieb.svg"
-                  width={225}
-                  height={82}
-                  alt="SchimmelPeter® Zertifizierter Fachbetrieb"
-                  loading="lazy"
-                  className="contact-card__badge"
-                />
+                <PartnerBadge className="contact-card__badge" />
               </div>
               <div className="contact-card__person">
                 <img
@@ -261,7 +255,7 @@ export default function ContactForm({ defaultDamage, place }: { defaultDamage?: 
                 <div>
                   <p className="contact-card__k">Direkter Ansprechpartner</p>
                   <h3 className="contact-card__name">{COMPANY_INFO.owner}</h3>
-                  <p className="contact-card__role">Inhaber · SchimmelPeter® Partnerbetrieb</p>
+                  <p className="contact-card__role">Inhaber · <PartnerLink>SchimmelPeter® Partnerbetrieb</PartnerLink></p>
                 </div>
               </div>
               <p className="contact-card__claim">Schützt, was wichtig ist!</p>
