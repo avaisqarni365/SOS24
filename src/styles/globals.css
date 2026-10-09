@@ -7073,7 +7073,7 @@ html[data-theme="dark"] .qv-film__chapters li { background: rgb(255 255 255 / 0.
 html[data-theme="dark"] .svc-btn--solid small { color: #ffffff !important; }
 html[data-theme="dark"] .lab-chapter__n { color: var(--pw-on-dark); }
 html[data-theme="dark"] .labtabs__tab[aria-selected="true"],
-html[data-theme="dark"] .chapnav .chapnav__a[aria-current] { background: linear-gradient(118deg, #0a4f8a 0%, #0b5d9e 100%); }
+html[data-theme="dark"] .chapnav .chapnav__a[aria-current] { background: var(--action); }
 @media (max-width: 639px) {
   .svc-hero__cta { display: grid; grid-template-columns: 1fr; }
   .svc-btn { width: 100%; }
@@ -8735,3 +8735,5 @@ html:not([data-theme="dark"]) .band-ink:not(.hero, .lab-top) :is(.sc-display, h1
   background: none !important;
   font-style: normal;
 }
+html[data-theme] #kontakt .contact-card__claim { background-image: none !important; color: var(--accent) !important; }
+.hero__brand::after { content: none; }
