@@ -88,7 +88,7 @@ export function ServicesRail() {
 function RegionMap() {
   const byslug = Object.fromEntries(CITY_PAGES.map((c) => [c.slug, c]));
   return (
-    <svg
+    <svg data-i18n=""
       viewBox={`0 0 ${MAP_W} ${MAP_H}`}
       className="region-map"
       role="img"

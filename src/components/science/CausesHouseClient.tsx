@@ -8,7 +8,7 @@ import type { Cause } from "@/data/causes";
 
 function Section({ active, causes: CAUSES }: { active: number; causes: Cause[] }) {
   return (
-    <svg viewBox="0 0 1000 620" className="h-auto w-full" role="img" aria-label="Querschnitt durch einen Keller mit vier Ursachen für Feuchtigkeit">
+    <svg data-i18n="" viewBox="0 0 1000 620" className="h-auto w-full" role="img" aria-label="Querschnitt durch einen Keller mit vier Ursachen für Feuchtigkeit">
       <defs>
         <linearGradient id="ch-damp" x1="0" y1="1" x2="0" y2="0">
           <stop offset="0" stopColor="#3b6ea8" stopOpacity="0.8" />

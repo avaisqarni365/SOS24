@@ -29,7 +29,7 @@ function Chart({ heights, barrier, base, phase }: { heights: number[]; barrier: 
   const top = heights.length - 1;
   return (
     <div className="relative">
-      <svg viewBox={`0 0 ${W} ${H}`} className="h-auto w-full" role="img" aria-labelledby="proof-chart-title">
+      <svg data-i18n="" viewBox={`0 0 ${W} ${H}`} className="h-auto w-full" role="img" aria-labelledby="proof-chart-title">
         <title id="proof-chart-title">
           {`Feuchteprofil der Wand: Durchfeuchtungsgrad in Prozent je Messhöhe, Nullmessung und Phase ${phase.n}`}
         </title>

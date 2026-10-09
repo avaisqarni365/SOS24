@@ -96,7 +96,7 @@ export default function CrackInjection() {
         <div className="crackinj__stage">
           <figure className="ci-figure">
             <p className="sc-label ci-kicker">Ansicht und Schnitt einer Beton-Kellerwand</p>
-            <svg
+            <svg data-i18n=""
               className="ci-svg"
               viewBox="0 0 1200 700"
               preserveAspectRatio="xMidYMid meet"
