@@ -10,7 +10,7 @@ import { SERVICE_CARDS } from "@/data/services";
 import Logo from "@/components/brand/Logo";
 import LanguageSelector from "@/components/navigation/LanguageSelector";
 import AppearanceMenu from "@/components/navigation/AppearanceMenu";
-import ToneSlider from "@/components/navigation/ToneSlider";
+import ColorControl from "@/components/navigation/ColorControl";
 import { useLanguage } from "@/i18n/LanguageContext";
 
 /* The 3D viewer, the scanner and the measurement proof are one tab now
@@ -154,7 +154,7 @@ export default function Navbar() {
 
 
           <div className="flex shrink-0 items-center gap-2 sm:gap-2.5">
-            <ToneSlider compact className="header-tone" />
+            <ColorControl compact className="header-tone" />
             <AppearanceMenu />
             <div className="hidden sm:block">
               <LanguageSelector />
@@ -235,7 +235,10 @@ export default function Navbar() {
             </section>
 
             <div className="mnav__prefs">
-              <ToneSlider className="mnav__tone" />
+              <div className="mnav__tone">
+                <span className="mnav__kicker">Farbe</span>
+                <ColorControl />
+              </div>
               <div className="mnav__lang">
                 <span className="mnav__kicker">Sprache</span>
                 <LanguageSelector />

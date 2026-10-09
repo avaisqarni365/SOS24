@@ -296,6 +296,24 @@ const SCENES: Record<string, { steps: [string, string, string]; art: ReactNode }
   },
 };
 
+/** The steps of a service's scenario: problem, treatment, result. */
+export const scenarioSteps = (slug: string) => SCENES[slug]?.steps;
+
+/**
+ * One frame of a scenario, standing still: "before" is the problem, "after"
+ * the finished result (styles in globals.css, "SCENES STANDING STILL").
+ * Needs <ScenarioDefs/> on the page.
+ */
+export function ScenarioArt({ slug, state }: { slug: string; state: "before" | "after" }) {
+  const s = SCENES[slug];
+  if (!s) return null;
+  return (
+    <svg viewBox="0 0 480 280" className={`scn scn--${state}`} role="img" aria-label={state === "before" ? `Vorher: ${s.steps[0]}` : `Nachher: ${s.steps[2]}`} data-i18n="">
+      {s.art}
+    </svg>
+  );
+}
+
 /** The scenario for a service, or nothing if there is none. */
 export default function Scenario({ slug }: { slug: string }) {
   const s = SCENES[slug];

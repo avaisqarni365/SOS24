@@ -13,22 +13,17 @@ import { SCIENCE } from "@/data/science";
 import { Prose, FaqList, LinkGrid, TechnicalLayersFrame } from "@/components/seo/SubpageParts";
 import { ServiceHero, ServiceOverview, ServiceSteps, ServiceKit } from "@/components/service/ServiceParts";
 import ChapterNav from "@/components/service/ChapterNav";
+import { formHrefFor } from "@/data/guide";
 import ChapterFold from "@/components/service/ChapterFold";
 import FoldSync from "@/components/service/FoldSync";
+import ServiceTools from "@/components/service/ServiceTools";
+import WebComponents from "@/components/wc/WebComponents";
 import { Layers3, BookOpen } from "lucide-react";
 import { SERVICE_FILMS } from "@/data/films";
 import { KIT } from "@/data/kit";
 import { SERVICE_PAGES, CITY_PAGES } from "@/data/seo-pages";
 import { BUSINESS_ID, WEBSITE_ID, abs, businessNode, websiteNode, breadcrumbNode, faqNode, OG_IMAGE } from "@/lib/site";
 
-const DAMAGE_BY_SLUG: Record<string, string> = {
-  kellersanierung: "Nasser Keller / Drückendes Hangwasser",
-  horizontalsperre: "Feuchte Kellerwände / Horizontalsperre",
-  kellerinnenabdichtung: "Nasser Keller / Drückendes Hangwasser",
-  schimmelbeseitigung: "Schimmelbefall & Geruch",
-  feuchtemessung: "Allgemeine Feuchtigkeitsmessung",
-  rissverpressung: "Wasserführender Riss",
-};
 
 /** services with at least one instrument or material in the kit */
 const KIT_SLUGS = new Set(KIT.flatMap((k) => k.services.map((s) => s.slug)));
@@ -96,6 +91,7 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
 
   const chapters = [
     { id: "ueberblick", label: "Überblick" },
+    { id: "check", label: "Check" },
     { id: "ablauf", label: "Ablauf" },
     ...(KIT_SLUGS.has(page.slug) ? [{ id: "material", label: "Material" }] : []),
     { id: "technik", label: "Technik" },
@@ -115,6 +111,7 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
         <ChapterNav items={chapters} label={`Kapitel: ${page.navTitle}`} />
 
         <ServiceOverview facts={SERVICE_FACTS[page.slug] ?? []} symptoms={page.symptoms} navTitle={page.navTitle} />
+        <ServiceTools slug={page.slug} navTitle={page.navTitle} />
         <ServiceSteps steps={page.steps} navTitle={page.navTitle} slug={page.slug} />
         <ServiceKit slug={page.slug} navTitle={page.navTitle} />
 
@@ -172,10 +169,11 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
           </div>
         </section>
 
-        <HomeSteps formHref={DAMAGE_BY_SLUG[page.slug] ? `/kontakt/?schaden=${encodeURIComponent(DAMAGE_BY_SLUG[page.slug])}` : "/kontakt/"} />
+        <HomeSteps formHref={formHrefFor(page.slug)} />
       </main>
       <Footer />
       <FoldSync />
+      <WebComponents />
       <ScrollEngine />
     </>
   );
