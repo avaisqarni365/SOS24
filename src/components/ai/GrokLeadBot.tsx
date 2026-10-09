@@ -198,7 +198,7 @@ export default function GrokLeadBot() {
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 placeholder="Ihre Frage zur Sanierung..."
-                className="flex-1 px-4 py-2.5 rounded-full bg-landing-ink border border-line/10 text-xs text-landing-bone focus:outline-none focus:border-landing-mint placeholder:text-landing-bone/30"
+                className="flex-1 px-4 py-2.5 rounded-full bg-landing-ink border border-[var(--line-strong)] text-xs text-landing-bone focus:outline-none focus:border-[var(--focus)] focus:ring-1 focus:ring-[var(--focus)] placeholder:text-landing-bone/30"
               />
               <button
                 type="submit"

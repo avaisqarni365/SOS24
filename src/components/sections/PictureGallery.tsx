@@ -83,7 +83,7 @@ export default function PictureGallery({ hideHeader = false }: { hideHeader?: bo
               className={`min-h-[44px] rounded-full border px-4 text-sm font-semibold transition-all ${
                 category === c.id
                   ? "btn-shine border-transparent shadow-sm"
-                  : "border-line/15 bg-surface text-ink hover:border-[var(--emerald-deep)] hover:bg-surface-2"
+                  : "border-[var(--line-strong)] bg-surface text-ink hover:border-[var(--emerald-deep)] hover:bg-surface-2"
               }`}
             >
               {c.label}

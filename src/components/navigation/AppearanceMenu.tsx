@@ -88,7 +88,7 @@ export default function AppearanceMenu() {
         onClick={() => setOpen((o) => !o)}
         aria-expanded={open}
         aria-controls="appearance-panel"
-        className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-line/15 bg-surface text-ink hover:border-accent-deep shadow-2xs transition-colors"
+        className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[var(--line-strong)] bg-surface text-ink hover:border-accent-deep shadow-2xs transition-colors"
         title="Ansicht: Farbe, Hell/Dunkel und Schriftgröße"
       >
         <SunMoon className="h-5 w-5" aria-hidden="true" />

@@ -8670,3 +8670,24 @@ html .band-ink:is(.hero, .lab-top) .hero-film__k,
 html .band-ink:is(.hero, .lab-top) .hero-film__chapters button > span { color: var(--on-plate-accent); }
 html .band-ink:is(.hero, .lab-top) .hero-film__chapters button:not([aria-current]) { color: var(--on-plate-soft); }
 html .band-ink:is(.hero, .lab-top) .hero-film__chapters button:not([aria-current]):hover { color: var(--on-plate); }
+
+/* ===========================================================================
+   FOCUS - always visible (design system): a 2px solid ring in the focus
+   colour with a 2px offset on every control. Text fields instead turn
+   their border to the focus colour with a 1px ring. !important because
+   many controls carry a local outline-none.
+   ========================================================================= */
+:focus-visible {
+  outline: 2px solid var(--focus) !important;
+  outline-offset: 2px !important;
+}
+:is(input:not([type="checkbox"], [type="radio"], [type="range"], [type="color"]), select, textarea):focus-visible {
+  outline: none !important;
+  border-color: var(--focus) !important;
+  box-shadow: 0 0 0 1px var(--focus) !important;
+}
+/* a visually hidden radio or checkbox: the ring goes on the label that shows it */
+label:has(> input:is([type="radio"], [type="checkbox"]):focus-visible) {
+  outline: 2px solid var(--focus) !important;
+  outline-offset: 2px !important;
+}
