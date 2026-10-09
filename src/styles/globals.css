@@ -74,6 +74,196 @@ pre,
   font-family: var(--font-mono, ui-monospace), ui-monospace, monospace !important;
 }
 
+/* ===========================================================================
+   THEME VARIABLES - every custom property the page root carries, in one
+   place: the light values on :root, what the dark theme changes below it.
+   Surfaces (.band-ink, .theme-dark, .contact-band ...) re-declare some of
+   them for their own subtree further down; the colour picker (tone.ts)
+   writes the --pw-* values inline on <html>.
+   ========================================================================= */
+:root {
+  --c-bone2: 11 27 46;
+  --nav-bg: rgb(255 255 255 / 0.9);
+  --c-mint: var(--pw-accent-rgb);
+  --c-ink3: var(--pw-paper1-rgb);
+  --band-stone: #ffffff;
+  --c-emerald: var(--pw-mark-rgb);
+  --hero-glow: transparent;
+  --c-bone: 20 37 60;
+  --band-mint: var(--pw-paper1);
+  --c-accent-deep: var(--pw-accent-rgb);
+  --c-line: 11 27 46;
+  --c-soft: 51 67 90;
+  --c-ink2: 255 255 255;
+  --c-ink: 255 255 255;
+  --grain: 0;
+  --btn-ink: #ffffff;
+  --hero-water: transparent;
+  --frame-shadow: 0 1px 2px rgb(0 0 0/ 0.04), 0 12px 32px -14px rgb(0 0 0/ 0.16);
+  --grad: var(--pw-accent);
+  --frame-line: rgb(11 27 46 / 0.09);
+  --stage-bg: radial-gradient(70% 60% at 50% 40%, #ffffff, transparent 72%),
+    linear-gradient(180deg, var(--pw-hero) 0%, var(--pw-paper2) 100%);
+  --grad-text: none;
+  --damp: #3e5d92;
+  --card: #ffffff;
+  --salt: #d6dbe4;
+  --ink-on-surface: #14253c;
+  --text-on-bone: #14253c;
+  --paper-1: var(--pw-paper1);
+  --paper: #ffffff;
+  --emerald-deep: var(--pw-accent);
+  --paper-0: #ffffff;
+  --head-on-bone: #071628;
+  --card-translucent: rgb(255 255 255 / 0.92);
+  --paper-2: var(--pw-paper2);
+  --ink: rgb(var(--c-ink));
+  --sc-ink-soft: #33435a;
+  --sc-ink: #14253c;
+  --ink-3: rgb(var(--c-ink3));
+  --sc-accent: var(--pw-accent);
+  --bone-2: rgb(var(--c-bone2));
+  --mint: rgb(var(--c-mint));
+  --sc-surface: #ffffff;
+  --line: rgb(11 27 46 / 0.1);
+  --ink-2: rgb(var(--c-ink2));
+  --emerald: rgb(var(--c-emerald));
+  --sc-accent-ink: rgb(var(--c-ink));
+  --sc-canvas: #ffffff;
+  --bone: rgb(var(--c-bone));
+  --sc-font-text: var(--font-sans), system-ui, sans-serif;
+  --sc-font-mono: var(--font-mono), ui-monospace, monospace;
+  --font-latex: var(--font-latex, "Latin Modern Roman"), "Latin Modern Roman", "Computer Modern", "TeX Gyre Termes", "STIX Two Text", "Baskerville", Georgia, serif;
+  --sc-shadow-color: 150 20% 3%;
+  --sc-font-display: var(--font-sans), system-ui, sans-serif;
+  --sc-font-prose: var(--font-latex), "Latin Modern Roman", Georgia, serif;
+  --fs-h2: clamp(1.5rem, 1.25rem + 1vw, 2.2rem);
+  --fs-h3: clamp(1.2rem, 1.1rem + 0.4vw, 1.45rem);
+  --fs-h4: 1.12rem;
+  --fs-h1: clamp(2.05rem, 1.55rem + 1.8vw, 3.1rem);
+  --brick: var(--pw-brick);
+  --brick-2: #3e5d92;
+  --brand-2: #1580c8;
+  --brand: #0f3460;
+  --forest-2: var(--pw-paper1);
+  --forest: #ffffff;
+  --map-line: 17 24 39;
+  --map-context: var(--pw-paper2);
+  --map-bg: var(--pw-paper1);
+  --grad-em: linear-gradient(95deg, var(--pw-deep) 0%, var(--pw-accent) 45%, var(--pw-em-hi) 100%);
+  --grad-cta: linear-gradient(118deg, var(--pw-deep) 0%, var(--pw-accent) 52%, var(--pw-cta-hi) 100%);
+  --grad-tile: radial-gradient(64% 54% at 100% 0%, rgb(var(--pw-aqua-rgb) / calc(0.45 * var(--pw-glow, 1))) 0%, transparent 62%),
+    linear-gradient(135deg, var(--pw-deep) 0%, var(--pw-cta-hi) 100%);
+  --aqua-deep: var(--pw-label);
+  --grad-em-plate: linear-gradient(95deg, #a4e4f2 0%, #9db8ff 100%);
+  --electric: var(--pw-accent);
+  --aqua: var(--pw-aqua);
+  --lk-b: #0f3460;
+  --ld-a: #66c2ee;
+  --lk-a: #1d548f;
+  --ld-b: #1580c8;
+  --royal-deep: var(--pw-deep);
+  --royal: var(--pw-accent);
+  --royal-2: var(--pw-mark);
+  --logo-drop: #1a90d2;
+  --pw-wash2: #d9edf9;
+  --pw-accent: #0b63a8;
+  --pw-glow: 1;
+  --pw-deep: #0a4f8a;
+  --pw-wash1: #eaf5fc;
+  --pw-paper1: #f1f8fd;
+  --pw-mark-rgb: 23 132 199;
+  --pw-em-hi: #1590c9;
+  --pw-label: #0a6fa8;
+  --pw-accent-rgb: 11 99 168;
+  --pw-mark: #1784c7;
+  --pw-deep-rgb: 10 79 138;
+  --pw-shot: #dbe9f4;
+  --pw-paper1-rgb: 241 248 253;
+  --pw-hero: #f5fafe;
+  --pw-aqua-rgb: 31 169 214;
+  --pw-paper2: #e3f1fa;
+  --pw-cta-hi: #0f74bf;
+  --pw-aqua: #1fa9d6;
+  --pw-brick: #2b4570;
+  --logo-blue: #0b8ad0;
+  --logo-brick: #b95642;
+  --logo-navy: #173455;
+  --font-display: "Segoe UI Variable Display", "Segoe UI", var(--font-sans), system-ui, Tahoma, Verdana, sans-serif;
+  --font-ui: "Segoe UI Variable Text", "Segoe UI", var(--font-sans), system-ui, Tahoma, Verdana, sans-serif;
+  --ic-red: #b42318;
+  --ic-green: #15803d;
+  --ic-water: #0b6fb3;
+  --pw-on-dark: #a6dcfa;
+  --pw-on-dark-rgb: 166 220 250;
+  --pw-on-dark-2: #7cc4f2;
+}
+html[data-theme="dark"] {
+  --c-bone2: 208 217 232;
+  --nav-bg: rgb(7 11 20 / 0.9);
+  --c-mint: var(--pw-on-dark-rgb);
+  --c-ink3: 35 46 66;
+  --band-stone: #151c28;
+  --c-emerald: var(--pw-on-dark-rgb);
+  --c-bone: 232 237 245;
+  --band-mint: #1c2534;
+  --c-accent-deep: var(--pw-on-dark-rgb);
+  --c-line: 232 237 245;
+  --c-soft: 142 157 182;
+  --c-ink2: 26 34 50;
+  --c-ink: 15 20 30;
+  --grain: 0.03;
+  --frame-shadow: none;
+  --frame-line: rgb(237 241 248 / 0.14);
+  --stage-bg: linear-gradient(180deg, #1c2534 0%, #0f141e 100%);
+  --damp: #96b1d6;
+  --card: #1a2232;
+  --salt: #2a3346;
+  --ink-on-surface: #e8edf5;
+  --text-on-bone: #bcc8dc;
+  --paper-1: #151c28;
+  --paper: #0f141e;
+  --emerald-deep: var(--pw-on-dark);
+  --paper-0: #0f141e;
+  --head-on-bone: #ffffff;
+  --card-translucent: rgb(26 34 50 / 0.94);
+  --paper-2: #1c2534;
+  --sc-ink-soft: rgb(var(--c-soft));
+  --sc-ink: rgb(var(--c-bone));
+  --sc-accent: rgb(var(--c-mint));
+  --sc-surface: rgb(var(--c-ink2));
+  --line: rgb(237 241 248 / 0.14);
+  --sc-canvas: rgb(var(--c-ink));
+  --brick: #96b1d6;
+  --brick-2: #b2c8e5;
+  --brand-2: #9ec8ff;
+  --brand: #ffffff;
+  --forest-2: #1d3658;
+  --forest: #152840;
+  --text-on-bone-x: var(--text-on-bone);
+  --map-line: 226 232 240;
+  --map-context: #222c3e;
+  --map-bg: #121824;
+  --grad-em: linear-gradient(95deg, var(--pw-on-dark) 0%, var(--pw-on-dark-2) 100%);
+  --grad-tile: radial-gradient(64% 54% at 100% 0%, rgb(var(--pw-aqua-rgb) / 0.32) 0%, transparent 62%),
+    linear-gradient(135deg, var(--pw-deep) 0%, var(--pw-cta-hi) 100%);
+  --aqua-deep: var(--pw-on-dark-2);
+  --grad-em-plate: linear-gradient(95deg, var(--pw-on-dark) 0%, var(--pw-on-dark-2) 100%);
+  --electric: var(--pw-on-dark-2);
+  --aqua: var(--pw-on-dark);
+  --lk-b: #b4c7e4;
+  --ld-a: #dff2ff;
+  --lk-a: #f2f6ff;
+  --ld-b: #80b2e8;
+  --royal-deep: var(--pw-on-dark-2);
+  --royal: var(--pw-on-dark-2);
+  --royal-2: var(--pw-on-dark);
+  --logo-drop: #6aa2ec;
+  --logo-blue: #3fb0ee;
+  --logo-navy: #f2f6fb;
+}
+
+
 /* ---------------------------------------------------------------------------
    Theme. Colours are RGB channels so Tailwind can add opacity to them.
    Light is the default: one flat British-white ground (no tinted bands, no
@@ -110,46 +300,12 @@ pre,
                      the point rather than a costume.
    ------------------------------------------------------------------------- */
 :root {
-  --c-ink: 244 245 247;
-  --c-ink2: 255 255 255;
-  --c-ink3: 234 236 240;
-  --c-bone: 43 69 112;
-  --c-bone2: 33 54 88;
   /* the accent is the brand, and it is the only hue on the page */
-  --c-mint: 43 69 112;
-  --c-emerald: 62 93 146;
-  --c-accent-deep: 43 69 112;
-  --c-soft: 99 114 143;
-  --c-line: 43 69 112;
-  --band-stone: #ffffff;
-  --band-mint: #eaecf0;
-  --nav-bg: rgb(255 255 255 / 0.94);
-  --hero-glow: transparent;
-  color-scheme: light;
+    color-scheme: light;
 }
-/* Page-level only (a dark stage inside a light page does not change them):
-   paper grain, the water glow in the hero, the 3D stage. */
-:root {
-  --frame-line: rgb(var(--c-line)/ 0.09);
-  --frame-shadow: 0 1px 2px rgb(0 0 0/ 0.04), 0 12px 32px -14px rgb(0 0 0/ 0.16);
-  /* A button is a block of ink with paper type on it; in dark the two swap. */
-  --grad: #2b4570;
-  --btn-ink: #ffffff;
-  /* Emphasis is italic, not coloured: the display serif already carries it. */
-  --grad-text: none;
-  --grain: 0;
-  --hero-water: transparent;
-  --stage-bg: radial-gradient(70% 60% at 50% 40%, #ffffff, transparent 72%), linear-gradient(180deg, #f3f6f5 0%, #e6ecea 100%);
-}
-[data-theme="dark"] {
-  --frame-line: rgb(243 241 236 / 0.1);
-  --frame-shadow: none;
-  --grain: 0.045;
-  --hero-water: transparent;
-  --stage-bg: linear-gradient(180deg, #141414 0%, #0a0a0a 100%);
-}
+
+
 /* dark: only when the visitor explicitly chose it in the appearance menu */
-[data-theme="dark"],
 .theme-dark,
 .scanner__readout {
   /* The exact inversion of the light sheet: black ground, white type, and the
@@ -188,8 +344,6 @@ pre,
 
 
 /* Roles, resolved again wherever the channels change */
-:root,
-[data-theme="dark"],
 .theme-dark,
 .scanner__readout {
   --sc-canvas: rgb(var(--c-ink));
@@ -207,29 +361,7 @@ pre,
   --emerald: rgb(var(--c-emerald));
   --line: rgb(var(--c-line) / 0.12);
 }
-:root {
-  --font-latex: var(--font-latex, "Latin Modern Roman"), "Latin Modern Roman", "Computer Modern", "TeX Gyre Termes", "STIX Two Text", "Baskerville", Georgia, serif;
-  --sc-font-display: var(--font-sans), system-ui, sans-serif;
-  --sc-font-text: var(--font-sans), system-ui, sans-serif;
-  --sc-font-prose: var(--font-latex), "Latin Modern Roman", Georgia, serif;
-  --sc-font-mono: var(--font-mono), ui-monospace, monospace;
-  --sc-shadow-color: 150 20% 3%;
-  /* fixed: the light bands (FAQ, contact) and water/salt colours */
-  --emerald-deep: #2b4570;
-  --damp: #3e5d92;
-  --salt: #d6dbe4;
-  --paper: #f4f5f7;
-  --text-on-bone: #2b4570;
-  --head-on-bone: #22365a;
-  /* The one ink every surface answers for. Light surfaces keep the editorial
-     near-black; a dark band (.band-ink / .theme-dark) flips it to bone, so a
-     full-bleed dark section needs no per-element colour overrides. */
-  --ink-on-surface: #2b4570;
-  /* The one card/panel surface. Light: paper white on the warm ground.
-     Dark: one step up from the ground, never pure black. */
-  --card: #ffffff;
-  --card-translucent: rgb(255 255 255 / 0.94);
-}
+
 /* A dark stage keeps its own ink even on a light page. */
 .theme-dark {
   color: var(--sc-ink);
@@ -1496,20 +1628,7 @@ em,
   color: var(--ink-on-surface);
 }
 
-/* =================================================== ONE SCALE ========
-   Authentic LaTeX academic & scientific document typography:
-   Latin Modern Roman serif for all prose, ledes, articles, and headings.
-   High-contrast pitch dark black ink (#050807), academic line height (1.72),
-   justified alignment with German hyphenation, and micro-typographic kerning. */
-:root {
-  /* One scale, ~1.4x between the display steps and ~1.2x into the body.
-     h3 was flat 1.2rem and h4 1.05rem, which left h4 within 2% of body copy
-     (1.03rem): four heading levels, but only three visible ones. */
-  --fs-h1: clamp(2.05rem, 1.55rem + 1.8vw, 3.1rem);
-  --fs-h2: clamp(1.5rem, 1.25rem + 1vw, 2.2rem);
-  --fs-h3: clamp(1.2rem, 1.1rem + 0.4vw, 1.45rem);
-  --fs-h4: 1.12rem;
-}
+
 body {
   font-family: "Segoe UI", var(--font-sans), system-ui, Tahoma, Verdana, sans-serif;
   font-size: 1.03rem;
@@ -2275,28 +2394,10 @@ p.no-justify {
   text-align: start !important;
 }
 
-/* =============================================== BRAND: GREEN + BRICK ===
-   Green carries actions (buttons, active steps), brick red carries the
-   brand accent (logo "sos", accent words, figures, menu hover), text is
-   near-black on snow white. */
-:root {
-  --brick: #2b4570;
-  --brick-2: #3e5d92;
-}
-[data-theme="dark"] {
-  --brick: #ffffff;
-  --brick-2: #c8d3e6;
-}
 
-/* ------------------------------------------------------------------ logo --
-   The one place a hue is allowed: the brand blue on the roof and the drops.
-   Everything else on the page is ink on paper, so the mark is the only colour
-   and reads as identity rather than decoration. */
-:root {
-  --brand: #2b4570;
-  --brand-2: #3e5d92;
-}
-html[data-theme="dark"],
+
+
+
 .band-ink,
 .contact-band {
   /* navy disappears on a dark or saturated ground; the same blue lifted */
@@ -2937,26 +3038,7 @@ main dt,
 }
 
 
-/* ===========================================================================
-   EDITORIAL SURFACES
-   The page is built from full-bleed bands that alternate a deep forest ink
-   with warm paper, the way a printed prospectus alternates plates and text
-   pages. A band declares its own ground and ink, so anything dropped inside
-   it -- headings, labels, rules, buttons -- resolves correctly without a
-   single per-element colour.
-   ========================================================================= */
 
-/* Warm paper, not white: white grounds read as "unstyled", bone reads as
-   stock that was chosen. */
-:root {
-  --paper-0: #f4f5f7;
-  --paper-1: #eaecf0;
-  --paper-2: #dfe3ea;
-  /* the inverted plate: black in light, and still black in dark, where the
-     white cards on it do the separating */
-  --forest: #233a5e;
-  --forest-2: #2b4570;
-}
 
 .band-paper { background: var(--paper-0); }
 .band-bone  { background: var(--paper-1); }
@@ -3657,70 +3739,11 @@ html[data-theme="dark"] {
   /* The same six tokens, re-mixed for a dark sheet. Not an inversion: the
      navy cannot carry on black, so the accent moves to the drop blue lifted
      to #7FB0FF, and the neutrals keep their blue bias. */
-  --c-ink: 15 20 30;
-  --c-ink2: 26 34 50;
-  --c-ink3: 35 46 66;
-  --c-bone: 232 237 245;
-  --c-bone2: 208 217 232;
-  --c-mint: 150 177 214;
-  --c-emerald: 178 200 229;
-  --c-accent-deep: 150 177 214;
-  --c-soft: 142 157 182;
-  --c-line: 232 237 245;
-
-  --ink-on-surface: #e8edf5;
-  --text-on-bone: #bcc8dc;
-  --head-on-bone: #ffffff;
-  --emerald-deep: #96b1d6;
-
-  --paper-0: #0f141e;
-  --paper-1: #151c28;
-  --paper-2: #1c2534;
-  --paper: #0f141e;
-  --card: #1a2232;
-  --card-translucent: rgb(26 34 50 / 0.94);
-  --band-stone: #151c28;
-  --band-mint: #1c2534;
-  --forest: #233a5e;
-  --forest-2: #2b4570;
-
-  --grad: #3e5d92;
-  --btn-ink: #ffffff;
-  --grad-text: none;
-  --brick: #96b1d6;
-  --brick-2: #b2c8e5;
-
-  --nav-bg: rgb(7 11 20 / 0.9);
-  --hero-glow: transparent;
-  --hero-water: transparent;
-  --frame-line: rgb(237 241 248 / 0.14);
-  --frame-shadow: none;
-  --grain: 0.03;
-  --stage-bg: linear-gradient(180deg, #1c2534 0%, #0f141e 100%);
-  --damp: #96b1d6;
-  --salt: #2a3346;
-  --line: rgb(237 241 248 / 0.14);
-  color-scheme: dark;
+    color-scheme: dark;
 }
 
 
-/* Resolved roles have to be recomputed wherever the channels changed. */
-html[data-theme="dark"] {
-  --sc-canvas: rgb(var(--c-ink));
-  --sc-surface: rgb(var(--c-ink2));
-  --sc-ink: rgb(var(--c-bone));
-  --sc-ink-soft: rgb(var(--c-soft));
-  --sc-accent: rgb(var(--c-mint));
-  --sc-accent-ink: rgb(var(--c-ink));
-  --bone: rgb(var(--c-bone));
-  --bone-2: rgb(var(--c-bone2));
-  --ink: rgb(var(--c-ink));
-  --ink-2: rgb(var(--c-ink2));
-  --ink-3: rgb(var(--c-ink3));
-  --mint: rgb(var(--c-mint));
-  --emerald: rgb(var(--c-emerald));
-  --text-on-bone-x: var(--text-on-bone);
-}
+
 
 /* The two "always light" panels follow the theme now, and the region map
    drops the colours it was still drawing with. */
@@ -4097,20 +4120,8 @@ main :is(h1, h2, h3) em,
     var(--paper-1);
 }
 
-/* Figure and ground. With the neighbours drawn in the page's blue paper, the
-   whole frame read as one wash and the six towns we actually serve did not
-   separate from the ones we don't. The surround is neutral grey; the service
-   area is the only blue on the map, and Wuppertal is the solid one. */
-:root {
-  --map-bg: #eceef2;
-  --map-context: #dde1e9;
-  --map-line: 17 24 39;
-}
-html[data-theme="dark"] {
-  --map-bg: #121824;
-  --map-context: #222c3e;
-  --map-line: 226 232 240;
-}
+
+
 .region-map__bg { fill: var(--map-bg); }
 .region-map__context path {
   fill: var(--map-context);
@@ -4329,39 +4340,8 @@ main :is(h1, h2):not(.sc-label) { font-weight: 650; }
   letter-spacing: 0.14em;
 }
 
-/* ===========================================================================
-   2030 LAYER — the colour combination.
-   The spine stays the client's pair (#2B4570 on #F4F5F7). Two companions
-   join it, both from the subject: AQUA (#39C6E0) is the water the trade
-   exists to stop, ELECTRIC (#3E6FD8) is the live, interactive state. They
-   appear as gradients, glass and glow — never as flat competing fills — so
-   the page reads as one brand with depth rather than three colours arguing.
-   ========================================================================= */
-:root {
-  --aqua: #39c6e0;
-  --aqua-deep: #0d7d9c;
-  --electric: #3e6fd8;
-  /* The CTA gradient ends at #3e6fd8 on purpose: that stop still gives white
-     label text 4.5:1, so the brightest edge of a wide button stays readable.
-     The aqua never sits under small white type -- it appears as the corner
-     glow on the feature tile and in the display-size gradients only. */
-  --grad-cta: linear-gradient(118deg, #2b4570 0%, #35549e 48%, #3e6fd8 100%);
-  --grad-tile:
-    radial-gradient(64% 54% at 100% 0%, rgb(57 198 224 / 0.38) 0%, transparent 62%),
-    linear-gradient(135deg, #2b4570 0%, #3e6fd8 100%);
-  --grad-em: linear-gradient(95deg, #2b4570 0%, #3e6fd8 55%, #0d7d9c 100%);
-  --grad-em-plate: linear-gradient(95deg, #a4e4f2 0%, #9db8ff 100%);
-}
-html[data-theme="dark"] {
-  --aqua: #54d2e8;
-  --aqua-deep: #6fcbe0;
-  --electric: #7fa3f0;
-  --grad-cta: linear-gradient(118deg, #33508c 0%, #3d5fb0 48%, #4568c4 100%);
-  --grad-tile:
-    radial-gradient(64% 54% at 100% 0%, rgb(84 210 232 / 0.4) 0%, transparent 62%),
-    linear-gradient(135deg, #33508c 0%, #4568c4 100%);
-  --grad-em: linear-gradient(95deg, #9db8ff 0%, #8fd8ea 100%);
-}
+
+
 ::selection { background: var(--electric); color: #ffffff; }
 :focus-visible { outline-color: var(--electric); }
 
@@ -4506,18 +4486,7 @@ html[data-theme="dark"] {
   .service-card:hover, .service-card:focus-visible { transform: none; }
 }
 
-/* ===================================================== WATER & SHINE ======
-   The identity is rendered, never printed flat: every blue surface carries a
-   vertical light and the drops carry a gloss. These stops feed the lockup's
-   SVG gradients; the plates and the dark theme swap them for the white-metal
-   version of the same finish.
-   ======================================================================== */
-:root {
-  --lk-a: #41699f;
-  --lk-b: #22375c;
-  --ld-a: #8cc0f0;
-  --ld-b: #2c599f;
-}
+
 .band-ink,
 .contact-band {
   --lk-a: #ffffff;
@@ -4525,12 +4494,7 @@ html[data-theme="dark"] {
   --ld-a: #e2f4ff;
   --ld-b: #7fb2ea;
 }
-html[data-theme="dark"] {
-  --lk-a: #f2f6ff;
-  --lk-b: #b4c7e4;
-  --ld-a: #dff2ff;
-  --ld-b: #80b2e8;
-}
+
 .logo-lockup { filter: drop-shadow(0 2px 4px rgb(23 40 70 / 0.28)); }
 .band-ink .logo-lockup,
 .contact-band .logo-lockup { filter: drop-shadow(0 3px 8px rgb(0 0 0 / 0.4)); }
@@ -4644,41 +4608,9 @@ html[data-theme="dark"] {
 .region-map__frame,
 .osm-map { border-radius: 16px; }
 
-/* ===========================================================================
-   ROYAL IDENTITY LAYER — the brand sheet, applied.
-   The sheet's system: saturated royal fills, white type on them, solid
-   numbered squares, and skewed ribbon labels. The slate #2B4570 stays the
-   reading ink on paper; the royal carries every fill, plate and badge.
-   ========================================================================= */
-:root {
-  --royal: #0b44d8;
-  --royal-2: #1e55d6;
-  --royal-deep: #0a33ad;
-  --electric: #1e55d6;
-  --forest: #0a33ad;
-  --forest-2: #0b44d8;
-  --grad-cta: linear-gradient(118deg, #0a35b5 0%, #0f47cf 48%, #1e55d6 100%);
-  --grad-tile:
-    radial-gradient(64% 54% at 100% 0%, rgb(57 198 224 / 0.35) 0%, transparent 62%),
-    linear-gradient(135deg, #0a33ad 0%, #1e55d6 100%);
-  --grad-em: linear-gradient(95deg, #2b4570 0%, #0b44d8 55%, #1e55d6 100%);
-}
-html[data-theme="dark"] {
-  --royal: #4d7df0;
-  --royal-2: #6b95f5;
-  --royal-deep: #2f5fd0;
-}
-html[data-theme="dark"] {
-  --forest: #12306f;
-  --forest-2: #1a3f94;
-  /* the dark CTA ends one step darker: white labels hold 4.9:1 at the
-     brightest edge instead of 3.8 */
-  --grad-cta: linear-gradient(118deg, #27479e 0%, #3058be 48%, #3a66d8 100%);
-  --grad-tile:
-    radial-gradient(64% 54% at 100% 0%, rgb(84 210 232 / 0.3) 0%, transparent 62%),
-    linear-gradient(135deg, #27479e 0%, #3a66d8 100%);
-  --grad-em: linear-gradient(95deg, #9db8ff 0%, #8fd8ea 100%);
-}
+
+
+
 
 /* ---- the ribbon: the sheet's label device --------------------------------
    Every section eyebrow becomes a solid royal ribbon, slightly skewed like
@@ -4783,61 +4715,8 @@ html[data-theme="dark"] .sc-label { background: var(--royal); color: #ffffff !im
   --c-line: 255 255 255;
 }
 
-/* ===========================================================================
-   WASSERLINIE — FINAL.
-   The direction, settled: kontai24's way of presenting information — calm
-   paper, dark readable text, tiny mono labels, quiet numbers — carried in
-   this brand's water blue. The royal layer's tokens are re-pointed here and
-   its louder devices (skewed ribbons, filled number squares) are retired.
-   ========================================================================= */
-:root {
-  /* dark text on paper: near-black with the water bias, 13:1 on the ground */
-  --c-bone: 18 28 46;
-  --c-bone2: 36 50 74;
-  --ink-on-surface: #121c2e;
-  --text-on-bone: #121c2e;
-  --head-on-bone: #0d1626;
-  --c-soft: 81 96 122;
 
-  /* the water accent */
-  --c-mint: 20 99 199;
-  --c-emerald: 30 107 214;
-  --c-accent-deep: 20 99 199;
-  --royal: #1463c7;
-  --royal-2: #2f7be0;
-  --royal-deep: #104f9e;
-  --electric: #1e6bd6;
-  --emerald-deep: #1463c7;
 
-  /* plates: deep water, not vivid royal */
-  --forest: #132033;
-  --forest-2: #1b2c47;
-  --grad: #16304f;
-  --grad-cta: linear-gradient(118deg, #15457f 0%, #1859a8 48%, #1e6bd6 100%);
-  --grad-tile:
-    radial-gradient(64% 54% at 100% 0%, rgb(57 198 224 / 0.3) 0%, transparent 62%),
-    linear-gradient(135deg, #16304f 0%, #1e6bd6 100%);
-  --grad-em: linear-gradient(95deg, #16304f 0%, #1463c7 60%, #1e6bd6 100%);
-
-  /* the lockup, matched to the navy render */
-  --lk-a: #3d5f91;
-  --lk-b: #233450;
-  --ld-a: #7fb3e8;
-  --ld-b: #2f5fa8;
-}
-html[data-theme="dark"] {
-  --royal: #5b96e8;
-  --royal-2: #7fb0f0;
-  --royal-deep: #4a82d4;
-  --electric: #6aa2ec;
-  --emerald-deep: #7fb0f0;
-  --forest: #152840;
-  --forest-2: #1d3658;
-  --grad-cta: linear-gradient(118deg, #1c3f6e 0%, #205090 48%, #2a67b8 100%);
-  --grad-tile:
-    radial-gradient(64% 54% at 100% 0%, rgb(84 210 232 / 0.28) 0%, transparent 62%),
-    linear-gradient(135deg, #1c3f6e 0%, #2a67b8 100%);
-}
 
 /* ---- labels, the kontai way: small, mono, water, no chrome ---------------- */
 .sc-label {
@@ -4901,13 +4780,9 @@ html[data-theme="dark"] .sc-label { background: transparent !important; color: v
 }
 .footer__wordmark span { font-weight: 600; opacity: 0.8; }
 
-/* ---------------------------------------------------- navigation lock -----
-   Flat and sharp at header size: the mark takes the surface ink, the drop
-   takes the water, the wordmark is one line. No gradients below poster size.
-   The full emblem (LogoLockup) stays for large-format uses. */
-:root { --logo-drop: #1e6bd6; }
+
 .band-ink, .contact-band { --logo-drop: #7cc7e8; }
-html[data-theme="dark"] { --logo-drop: #6aa2ec; }
+
 .logo {
   display: inline-flex;
   align-items: center;
@@ -5050,64 +4925,8 @@ main :is(.prose-sos, .faq-card__a, .chem__intro, .rx__note) {
    Scoped to the light theme; the dark theme keeps its navy plates.
    ========================================================================= */
 html:not([data-theme="dark"]) {
-  --c-ink: 255 255 255;
-  --c-ink2: 255 255 255;
-  --c-ink3: var(--pw-paper1-rgb);
-  --c-bone: 20 37 60;
-  --c-bone2: 11 27 46;
-  --c-soft: 51 67 90;
-  --c-mint: var(--pw-accent-rgb);
-  --c-emerald: var(--pw-mark-rgb);
-  --c-accent-deep: var(--pw-accent-rgb);
-  --c-line: 11 27 46;
-  --ink-on-surface: #14253c;
-  --text-on-bone: #14253c;
-  --head-on-bone: #0b1b2e;
-  --emerald-deep: var(--pw-accent);
-  --electric: var(--pw-accent);
-  --royal: var(--pw-accent);
-  --royal-2: var(--pw-mark);
-  --royal-deep: var(--pw-deep);
-  --aqua: var(--pw-aqua);
-  --aqua-deep: var(--pw-label);
-  --paper-0: #ffffff;
-  --paper-1: var(--pw-paper1);
-  --paper-2: var(--pw-paper2);
-  --paper: #ffffff;
-  --band-stone: #ffffff;
-  --band-mint: var(--pw-paper1);
-  --card: #ffffff;
-  --card-translucent: rgb(255 255 255 / 0.92);
-  --forest: #ffffff;
-  --forest-2: var(--pw-paper1);
-  --grad: var(--pw-accent);
-  --btn-ink: #ffffff;
   /* the CTA gradient's brightest stop still holds white text at 4.9:1 */
-  --grad-cta: linear-gradient(118deg, var(--pw-deep) 0%, var(--pw-accent) 52%, var(--pw-cta-hi) 100%);
-  --grad-tile:
-    radial-gradient(64% 54% at 100% 0%, rgb(var(--pw-aqua-rgb) / calc(0.45 * var(--pw-glow, 1))) 0%, transparent 62%),
-    linear-gradient(135deg, var(--pw-deep) 0%, var(--pw-cta-hi) 100%);
-  --grad-em: linear-gradient(95deg, var(--pw-deep) 0%, var(--pw-accent) 45%, var(--pw-em-hi) 100%);
-  --frame-line: rgb(11 27 46 / 0.09);
-  --line: rgb(11 27 46 / 0.1);
-  --lk-a: #1d548f;
-  --lk-b: #0f3460;
-  --ld-a: #66c2ee;
-  --ld-b: #1580c8;
-  --logo-drop: #1a90d2;
-  --brand: #0f3460;
-  --brand-2: #1580c8;
-  --nav-bg: rgb(255 255 255 / 0.9);
-  --sc-canvas: #ffffff;
-  --sc-surface: #ffffff;
-  --sc-ink: #14253c;
-  --sc-ink-soft: #33435a;
-  --sc-accent: var(--pw-accent);
-  --map-bg: var(--pw-paper1);
-  --map-context: var(--pw-paper2);
-  --stage-bg: radial-gradient(70% 60% at 50% 40%, #ffffff, transparent 72%),
-    linear-gradient(180deg, var(--pw-hero) 0%, var(--pw-paper2) 100%);
-  color-scheme: light;
+    color-scheme: light;
 }
 
 /* ---- the plates become sun-white sections in the light theme ------------- */
@@ -5623,45 +5442,13 @@ html[data-theme="dark"] #kontakt .contact-card__claim {
   #team .brand-gallery__item:hover { transform: none; }
 }
 
-/* ===========================================================================
-   PALETTE - what the colour slider moves (src/lib/tone.ts). These are the
-   water defaults; the slider overrides them inline on <html> in the light
-   theme, from "Hell" (tints all but gone) through water to "Grün".
-   ========================================================================= */
-:root {
-  --pw-accent: #0b63a8;
-  --pw-accent-rgb: 11 99 168;
-  --pw-deep: #0a4f8a;
-  --pw-deep-rgb: 10 79 138;
-  --pw-mark: #1784c7;
-  --pw-mark-rgb: 23 132 199;
-  --pw-aqua: #1fa9d6;
-  --pw-aqua-rgb: 31 169 214;
-  --pw-label: #0a6fa8;
-  --pw-cta-hi: #0f74bf;
-  --pw-em-hi: #1590c9;
-  --pw-paper1: #f1f8fd;
-  --pw-paper1-rgb: 241 248 253;
-  --pw-paper2: #e3f1fa;
-  --pw-wash1: #eaf5fc;
-  --pw-wash2: #d9edf9;
-  --pw-hero: #f5fafe;
-  --pw-shot: #dbe9f4;
-  --pw-brick: #2b4570;
-  --pw-glow: 1;
-}
-/* the client's navy accent and the feature tile follow the slider too */
-html:not([data-theme="dark"]) { --brick: var(--pw-brick); }
+
+
 html:not([data-theme="dark"]) .services-grid > li:first-child .service-card { --card: var(--pw-brick); }
 html:not([data-theme="dark"]) .services-grid > li:first-child .service-card:hover .service-card__icon { color: var(--pw-brick); }
 
-/* ---- the slider ------------------------------------------------------------ */
 
-/* ===========================================================================
-   WORDMARK - the client's logo as outlines (components/brand/Logo.tsx).
-   ========================================================================= */
-:root { --logo-blue: #0b8ad0; --logo-navy: #173455; --logo-brick: #b95642; }
-html[data-theme="dark"] { --logo-blue: #3fb0ee; --logo-navy: #f2f6fb; }
+
 .logo { display: inline-flex; align-items: center; gap: 0; color: inherit; filter: none; }
 .logo__svg { display: block; height: 2.7rem; width: auto; overflow: visible; }
 .logo__blue { fill: var(--logo-blue); }
@@ -6636,17 +6423,11 @@ html[data-theme="dark"] .ap-seg { background: rgb(255 255 255 / 0.06); border-co
 html[data-theme="dark"] .ap-seg button { color: #c9d6e3; }
 html[data-theme="dark"] .ap-seg button[aria-pressed="true"] { background: rgb(255 255 255 / 0.14); color: #ffffff; }
 
-/* ===========================================================================
-   SHARP TEXT - darker inks, heavier weights, justified running text.
-   No light shades: body #14253C, secondary #33435A (9:1 on white).
-   Windows 11's variable Segoe UI comes first so 500/650 render as such.
-   ========================================================================= */
-:root {
-  --font-ui: "Segoe UI Variable Text", "Segoe UI", var(--font-sans), system-ui, Tahoma, Verdana, sans-serif;
-  --font-display: "Segoe UI Variable Display", "Segoe UI", var(--font-sans), system-ui, Tahoma, Verdana, sans-serif;
-}
-html:not([data-theme="dark"]),
-html:not([data-theme="dark"]) :is(.band-ink, .contact-band, .faq-ask, .surface-pop) {
+
+html:not([data-theme="dark"]) :is(.band-ink,
+.contact-band,
+.faq-ask,
+.surface-pop) {
   --c-bone: 20 37 60;
   --c-soft: 51 67 90;
   --ink-on-surface: #14253c;
@@ -8390,11 +8171,7 @@ html[data-theme="dark"] .site-footer__base .site-footer__addr { color: #e2eaf3; 
 }
 
 
-/* ===========================================================================
-   COLOURFUL ICONS - each service, figure, link card and town its own colour;
-   on phones the swipe rows become compact icon tiles, everything in view.
-   ========================================================================= */
-:root { --ic-green: #15803d; --ic-red: #b42318; --ic-water: #0b6fb3; }
+
 .services-grid > li:nth-child(3n + 1) .service-card { --ic: var(--ic-green); }
 .services-grid > li:nth-child(3n + 2) .service-card { --ic: var(--ic-red); }
 .services-grid > li:nth-child(3n) .service-card { --ic: var(--ic-water); }
@@ -8627,23 +8404,8 @@ html[data-theme="dark"] .svc-fold__i { background: color-mix(in srgb, var(--ic) 
 }
 
 
-/* ===========================================================================
-   SITE COLOUR - Wasser, Grün, Rot or any colour (src/lib/tone.ts). The
-   background stays white (dark in the dark theme); the colour reaches the
-   accents. In the dark theme the accent text takes light tints of it.
-   ========================================================================= */
-:root {
-  --pw-on-dark: #a6dcfa;
-  --pw-on-dark-rgb: 166 220 250;
-  --pw-on-dark-2: #7cc4f2;
-}
-html[data-theme="dark"] {
-  --c-accent-deep: var(--pw-on-dark-rgb);
-  --c-mint: var(--pw-on-dark-rgb);
-  --c-emerald: var(--pw-on-dark-rgb);
-  --grad: var(--pw-accent);
-  --grad-cta: linear-gradient(118deg, var(--pw-deep) 0%, var(--pw-accent) 52%, var(--pw-cta-hi) 100%);
-}
+
+
 
 /* the controls: three swatches, a picker, and the colour wheel slider */
 .hue-wrap { display: grid; gap: 0.7rem; }
@@ -8701,21 +8463,7 @@ html[data-theme="dark"] .hue-wrap--compact { background: rgb(255 255 255 / 0.06)
 html[data-theme="dark"] .hue__i { color: var(--pw-on-dark); }
 html[data-theme="dark"] .ap__hint { color: #c9d6e3; }
 @media (prefers-reduced-motion: reduce) { .hue-swatch, .hue__range::-webkit-slider-thumb { transition: none; } .hue-swatch:hover { transform: none; } }
-/* dark theme: every accent token takes the chosen colour's light tints */
-html[data-theme="dark"] {
-  --emerald-deep: var(--pw-on-dark);
-  --electric: var(--pw-on-dark-2);
-  --royal: var(--pw-on-dark-2);
-  --royal-2: var(--pw-on-dark);
-  --royal-deep: var(--pw-on-dark-2);
-  --aqua: var(--pw-on-dark);
-  --aqua-deep: var(--pw-on-dark-2);
-  --grad-em: linear-gradient(95deg, var(--pw-on-dark) 0%, var(--pw-on-dark-2) 100%);
-  --grad-em-plate: linear-gradient(95deg, var(--pw-on-dark) 0%, var(--pw-on-dark-2) 100%);
-  --grad-tile:
-    radial-gradient(64% 54% at 100% 0%, rgb(var(--pw-aqua-rgb) / 0.32) 0%, transparent 62%),
-    linear-gradient(135deg, var(--pw-deep) 0%, var(--pw-cta-hi) 100%);
-}
+
 
 
 /* ===========================================================================
