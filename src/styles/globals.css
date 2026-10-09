@@ -129,8 +129,7 @@ pre,
   --frame-shadow: 0 1px 2px rgb(0 0 0/ 0.04), 0 12px 32px -14px rgb(0 0 0/ 0.16);
   --grad: var(--action);
   --frame-line: var(--line);
-  --stage-bg: radial-gradient(70% 60% at 50% 40%, #ffffff, transparent 72%),
-    linear-gradient(180deg, var(--pw-hero) 0%, var(--pw-paper2) 100%);
+  --stage-bg: var(--surface-tint);
   --grad-text: none;
   --damp: #3e5d92;
   --card: var(--surface);
@@ -177,9 +176,8 @@ pre,
   --map-context: var(--accent-wash);
   --map-bg: var(--surface-tint);
   --grad-em: linear-gradient(95deg, var(--pw-deep) 0%, var(--pw-accent) 45%, var(--pw-em-hi) 100%);
-  --grad-cta: linear-gradient(118deg, var(--pw-deep) 0%, var(--pw-accent) 52%, var(--pw-cta-hi) 100%);
-  --grad-tile: radial-gradient(64% 54% at 100% 0%, rgb(var(--pw-aqua-rgb) / calc(0.45 * var(--pw-glow, 1))) 0%, transparent 62%),
-    linear-gradient(135deg, var(--pw-deep) 0%, var(--pw-cta-hi) 100%);
+  --grad-cta: var(--action);
+  --grad-tile: var(--action);
   --aqua-deep: var(--pw-label);
   --grad-em-plate: linear-gradient(95deg, #a4e4f2 0%, #9db8ff 100%);
   --electric: var(--accent);
@@ -222,7 +220,7 @@ pre,
   --ic-water: var(--info);
   --pw-on-dark: #a6dcfa;
   --pw-on-dark-rgb: 166 220 250;
-  --pw-on-dark-2: #7cc4f2;
+  --pw-on-dark2: #7cc4f2;
 }
 html[data-theme="dark"] {
   /* Dunkel: water-biased, surfaces separate by tone instead of shadow */
@@ -237,7 +235,7 @@ html[data-theme="dark"] {
   --ink-strong: #ffffff;
   --ink-soft: #a9b4c4;
   --accent: var(--pw-on-dark);
-  --accent-deep: var(--pw-on-dark-2);
+  --accent-deep: var(--pw-on-dark2);
   --action: var(--pw-accent);
   --action-hover: var(--pw-cta-hi);
   --plate: #152840;
@@ -261,7 +259,7 @@ html[data-theme="dark"] {
   --nav-bg: rgb(11 17 26 / 0.9);
   --grain: 0.03;
   --frame-shadow: none;
-  --stage-bg: linear-gradient(180deg, var(--surface-2) 0%, var(--canvas) 100%);
+  --stage-bg: var(--surface-2);
   --damp: #96b1d6;
   --salt: #2a3346;
   --card-translucent: color-mix(in srgb, var(--surface) 94%, transparent);
@@ -270,11 +268,9 @@ html[data-theme="dark"] {
   --brand-2: #9ec8ff;
   --brand: #ffffff;
   --map-line: 226 232 240;
-  --grad-em: linear-gradient(95deg, var(--pw-on-dark) 0%, var(--pw-on-dark-2) 100%);
-  --grad-tile: radial-gradient(64% 54% at 100% 0%, rgb(var(--pw-aqua-rgb) / 0.32) 0%, transparent 62%),
-    linear-gradient(135deg, var(--pw-deep) 0%, var(--pw-cta-hi) 100%);
-  --aqua-deep: var(--pw-on-dark-2);
-  --grad-em-plate: linear-gradient(95deg, var(--pw-on-dark) 0%, var(--pw-on-dark-2) 100%);
+  --grad-em: linear-gradient(95deg, var(--pw-on-dark) 0%, var(--pw-on-dark2) 100%);
+  --aqua-deep: var(--pw-on-dark2);
+  --grad-em-plate: linear-gradient(95deg, var(--pw-on-dark) 0%, var(--pw-on-dark2) 100%);
   --electric: var(--accent-deep);
   --aqua: var(--pw-on-dark);
   --lk-b: #b4c7e4;
@@ -4405,28 +4401,17 @@ main :is(h1, h2):not(.sc-label) { font-weight: 650; }
   box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.18);
 }
 
-/* ---- emphasis becomes the gradient ---------------------------------------
-   The solid fallback colour stays declared, so a browser without text-clip
-   (and the contrast audit) still sees a legible blue. */
-@supports (-webkit-background-clip: text) {
-  main :is(h1, h2) em,
-  .sc-display em {
-    background-image: var(--grad-em) !important;
-    -webkit-background-clip: text !important;
-    background-clip: text !important;
-    color: var(--electric) !important;
-    -webkit-text-fill-color: transparent !important;
-  }
-  .band-ink .sc-display em,
-  .band-ink :is(h1, h2) em,
-  .contact-band .sc-display em,
-  .contact-band :is(h1, h2) em {
-    background-image: var(--grad-em-plate) !important;
-    -webkit-background-clip: text !important;
-    background-clip: text !important;
-    color: #a9d6f5 !important;
-    -webkit-text-fill-color: transparent !important;
-  }
+/* ---- emphasis: the accent, upright (design system: no gradient text) ---- */
+main :is(h1, h2) em,
+.sc-display em {
+  color: var(--accent) !important;
+  font-style: normal;
+}
+.band-ink .sc-display em,
+.band-ink :is(h1, h2) em,
+.contact-band .sc-display em,
+.contact-band :is(h1, h2) em {
+  color: var(--on-plate-accent) !important;
 }
 
 /* ---- the eyebrow labels take the water ---------------------------------- */
@@ -5465,7 +5450,7 @@ html[data-theme="dark"] #kontakt .contact-card__cover::after {
 }
 html[data-theme="dark"] #kontakt .contact-card__portrait { border-color: rgb(var(--c-ink2)); }
 html[data-theme="dark"] #kontakt .contact-card__claim {
-  background-image: linear-gradient(100deg, var(--pw-on-dark-2) 0%, var(--pw-on-dark) 100%) !important;
+  background-image: linear-gradient(100deg, var(--pw-on-dark2) 0%, var(--pw-on-dark) 100%) !important;
   color: var(--pw-on-dark) !important;
 }
 
@@ -5883,7 +5868,7 @@ html[data-theme="dark"] .qv__card { background: rgb(var(--c-ink2)); box-shadow: 
 html[data-theme="dark"] .qv__t { color: #f2f6fb; }
 html[data-theme="dark"] .qv__lead { color: #e2eaf3; }
 html[data-theme="dark"] .qv__p, html[data-theme="dark"] .qv-facts dd { color: #b9c7d6; }
-html[data-theme="dark"] .qv__k { color: var(--pw-on-dark-2); }
+html[data-theme="dark"] .qv__k { color: var(--pw-on-dark2); }
 html[data-theme="dark"] .qv__x,
 html[data-theme="dark"] .qv__btn:not(.qv__btn--solid) { background: rgb(255 255 255 / 0.06); border-color: rgb(255 255 255 / 0.16); color: #f2f6fb; }
 html[data-theme="dark"] .qv__eq,
@@ -5895,8 +5880,8 @@ html[data-theme="dark"] .kit-card { background: rgb(var(--c-ink2)); border-color
 html[data-theme="dark"] .kit-card__art { background: linear-gradient(180deg, #eef5fb, #dceaf5); }
 html[data-theme="dark"] .kit-card__name { color: #f2f6fb; }
 html[data-theme="dark"] .kit-card__short { color: #b9c7d6; }
-html[data-theme="dark"] .kit-card__more { color: var(--pw-on-dark-2); }
-html[data-theme="dark"] :is(#ausruestung, #material) .kit-group__k { color: var(--pw-on-dark-2) !important; }
+html[data-theme="dark"] .kit-card__more { color: var(--pw-on-dark2); }
+html[data-theme="dark"] :is(#ausruestung, #material) .kit-group__k { color: var(--pw-on-dark2) !important; }
 
 /* ===========================================================================
    ANGEBOTSRECHNER - size of the job, not a price (QuoteCalculator).
@@ -6159,9 +6144,9 @@ html[data-theme="dark"] #rechner :is(.quote__big, .quote__how strong) { color: #
 html[data-theme="dark"] #rechner :is(.quote__big span, .quote__level span, .quote__list li, .quote__how li, .quote__note) { color: #c9d6e3 !important; }
 html[data-theme="dark"] #rechner :is(.quote__level, .quote__qty) { color: var(--pw-on-dark) !important; }
 html[data-theme="dark"] #rechner .quote__qty { background: rgb(255 255 255 / 0.06); }
-html[data-theme="dark"] #rechner .quote__k--plain { color: var(--pw-on-dark-2) !important; }
+html[data-theme="dark"] #rechner .quote__k--plain { color: var(--pw-on-dark2) !important; }
 html[data-theme="dark"] #rechner .quote__meter span { background: rgb(255 255 255 / 0.1); }
-html[data-theme="dark"] #rechner .quote__meter span.is-on { background: linear-gradient(180deg, var(--pw-on-dark-2), #1784c7); }
+html[data-theme="dark"] #rechner .quote__meter span.is-on { background: linear-gradient(180deg, var(--pw-on-dark2), #1784c7); }
 /* phones: the kit as a compact two-up grid; the quick view carries the detail */
 @media (max-width: 560px) {
   :is(#ausruestung, #material) .kit-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.65rem; }
@@ -6332,7 +6317,7 @@ html[data-theme="dark"] .hero-film__chapters button { color: #c9d6e3; }
 html[data-theme="dark"] .hero-film__chapters button[aria-current] { background: rgb(255 255 255 / 0.08); color: #ffffff; }
 html[data-theme="dark"] .hero-film__who > span { color: #c9d6e3; }
 html[data-theme="dark"] .hero-film__who strong { color: #ffffff; }
-html[data-theme="dark"] .hero-film__k { color: var(--pw-on-dark-2); }
+html[data-theme="dark"] .hero-film__k { color: var(--pw-on-dark2); }
 
 /* the owner under every quick view */
 .qv__owner {
@@ -6761,7 +6746,7 @@ html[data-theme="dark"] .svc-hero { background: rgb(var(--c-ink)); border-bottom
 html[data-theme="dark"] :is(.svc-btn:not(.svc-btn--solid), .svc-hero__chip, .svc-facts > div, .svc-signs li, .svc-step) { background: rgb(255 255 255 / 0.05); border-color: rgb(255 255 255 / 0.12); color: #f2f6fb !important; }
 html[data-theme="dark"] .svc-hero__chip, html[data-theme="dark"] .svc-btn small, html[data-theme="dark"] .svc-signs__cta { color: var(--pw-on-dark) !important; }
 html[data-theme="dark"] :is(.svc-hero__trust li, .svc-signs__k, .svc-step__t, .svc-facts dd, .svc-signs li) { color: #f2f6fb !important; }
-html[data-theme="dark"] .svc-facts dt { background-image: linear-gradient(100deg, var(--pw-on-dark), var(--pw-on-dark-2)); }
+html[data-theme="dark"] .svc-facts dt { background-image: linear-gradient(100deg, var(--pw-on-dark), var(--pw-on-dark2)); }
 html[data-theme="dark"] .svc-signs { background: rgb(255 255 255 / 0.03); border-color: rgb(255 255 255 / 0.1); }
 html[data-theme="dark"] :is(.svc-steps, .svc-prose, .svc-faq) { background: transparent; }
 html[data-theme="dark"] .chapnav { background: rgb(var(--c-ink) / 0.92); border-bottom-color: rgb(255 255 255 / 0.1); }
@@ -6949,7 +6934,7 @@ html[data-theme="dark"] :is(.lab-stats dd, .lab-chapter__l, .labpanel__h, .labpa
 html[data-theme="dark"] .labtabs__tab { color: #d7e2ee; }
 html[data-theme="dark"] :is(.labpanel__rx > li, .labpanel__rx-eq) { background: rgb(255 255 255 / 0.05); border-color: rgb(255 255 255 / 0.1); color: #f2f6fb !important; }
 html[data-theme="dark"] .labpanel__k, html[data-theme="dark"] .labpanel__out span { color: var(--pw-on-dark) !important; }
-html[data-theme="dark"] .lab-stats dt { background-image: linear-gradient(100deg, var(--pw-on-dark), var(--pw-on-dark-2)); }
+html[data-theme="dark"] .lab-stats dt { background-image: linear-gradient(100deg, var(--pw-on-dark), var(--pw-on-dark2)); }
 
 /* ===========================================================================
    GALERIE - film wall, film quick view, feedback.
@@ -7439,7 +7424,7 @@ html[data-theme="dark"] .anim {
   --cap-bg: rgb(255 255 255 / 0.04);
   --cap-line: rgb(255 255 255 / 0.12);
   --cap-on-bg: rgb(166 220 250 / 0.12);
-  --cap-on-line: var(--pw-on-dark-2);
+  --cap-on-line: var(--pw-on-dark2);
 }
 html[data-theme="dark"] .anim__label { color: #f2f6fb !important; }
 html[data-theme="dark"] .anim__label span { background: rgb(255 255 255 / 0.08); color: var(--pw-on-dark); }
@@ -7796,7 +7781,7 @@ html[data-theme="dark"] .factchips__i { background: rgb(255 255 255 / 0.08); col
 }
 html[data-theme="dark"] .cityf__card { background: rgb(255 255 255 / 0.04); border-color: rgb(255 255 255 / 0.12); color: #f2f6fb !important; }
 html[data-theme="dark"] .cityf__logo { background: rgb(255 255 255 / 0.05); }
-html[data-theme="dark"] .cityf__logo path { fill: rgb(124 196 242 / 0.25); stroke: var(--pw-on-dark-2); }
+html[data-theme="dark"] .cityf__logo path { fill: rgb(124 196 242 / 0.25); stroke: var(--pw-on-dark2); }
 html[data-theme="dark"] .cityf__plz { color: var(--pw-on-dark); }
 html[data-theme="dark"] .cityf__time { background: rgb(52 211 153 / 0.14); color: #6ee7b7; }
 html[data-theme="dark"] #mehr .more__area-k { color: #f2f6fb !important; }
@@ -8228,7 +8213,7 @@ html[data-theme="dark"] .site-footer__base .site-footer__addr { color: #e2eaf3; 
 html[data-theme="dark"] .service-card[data-svc] .service-card__icon { color: color-mix(in srgb, var(--ic) 62%, #ffffff) !important; background: color-mix(in srgb, var(--ic) 24%, transparent) !important; border-color: color-mix(in srgb, var(--ic) 45%, transparent) !important; }
 html[data-theme="dark"] :is(.factchips__i, .more__ico) { background: color-mix(in srgb, var(--ic, var(--pw-accent)) 24%, transparent); color: color-mix(in srgb, var(--ic, var(--pw-accent)) 62%, #ffffff); }
 html[data-theme="dark"] .more__k { color: color-mix(in srgb, var(--ic, var(--pw-on-dark)) 55%, #ffffff); }
-html[data-theme="dark"] .cityf__logo path { fill: color-mix(in srgb, var(--ic, var(--pw-on-dark-2)) 30%, transparent); stroke: color-mix(in srgb, var(--ic, var(--pw-on-dark-2)) 65%, #ffffff); }
+html[data-theme="dark"] .cityf__logo path { fill: color-mix(in srgb, var(--ic, var(--pw-on-dark2)) 30%, transparent); stroke: color-mix(in srgb, var(--ic, var(--pw-on-dark2)) 65%, #ffffff); }
 html[data-theme="dark"] :is(.mobile-contact, .site-footer__act, .steps4__cta) a[href^="tel:"] svg { color: #4ade80 !important; }
 html[data-theme="dark"] :is(.mobile-contact, .site-footer__act, .steps4__cta) a[href*="wa.me"] svg { color: #f87171 !important; }
 html[data-theme="dark"] .steps4__cta a:is([href^="tel:"], [href*="wa.me"]) .steps4__btn-i { background: rgb(255 255 255 / 0.08); }
@@ -8690,4 +8675,63 @@ html .band-ink:is(.hero, .lab-top) .hero-film__chapters button:not([aria-current
 label:has(> input:is([type="radio"], [type="checkbox"]):focus-visible) {
   outline: 2px solid var(--focus) !important;
   outline-offset: 2px !important;
+}
+
+/* ===========================================================================
+   FLAT - the design system has no gradients, glows or glass: the plate is
+   one colour, buttons and the feature tile are the flat action blue,
+   emphasis is the accent. Written last so it outranks the older layers.
+   ========================================================================= */
+/* plates and bands: one colour, no light source */
+.band-ink,
+.contact-band { background-image: none !important; }
+.contact-band { background-color: var(--plate) !important; box-shadow: none; }
+html:not([data-theme="dark"]) .faq-ask { background: var(--surface-tint) !important; }
+.more,
+.steps4,
+.site-footer { background: transparent; }
+.site-footer::before { background: var(--accent); }
+.steps4__item:not(:last-child) .steps4__head::after { background: var(--line-strong); }
+
+/* buttons: the action fill, darker on hover, no shine sweep */
+.btn-shine,
+html:not([data-theme="dark"]) .hero__btn--solid { background: var(--action) !important; color: var(--on-action) !important; filter: none !important; }
+.btn-shine:hover,
+html:not([data-theme="dark"]) .hero__btn--solid:hover { background: var(--action-hover) !important; filter: none !important; }
+.btn-shine::after { content: none !important; }
+.btn-shine :is(span, strong, svg) { color: inherit !important; }
+
+/* the feature tile: flat action with on-action type */
+.services-grid > li:first-child .service-card,
+.services-grid > li:first-child .service-card:hover { background: var(--action) !important; filter: none !important; }
+
+/* figures and the contact claim: accent text, not gradient text */
+.svc-facts dt,
+.lab-stats dt,
+#kontakt .contact-card__claim {
+  background: none !important;
+  -webkit-text-fill-color: currentColor !important;
+  color: var(--accent) !important;
+}
+html:not([data-theme="dark"]) .band-ink:not(.hero, .lab-top) :is(.sc-display, h1, h2) em {
+  background: none !important;
+  -webkit-text-fill-color: currentColor !important;
+}
+/* the service and Lab pages: flat openers and sections, flat panels */
+.svc-hero,
+.lab-hero,
+.svc-tools,
+.svc-steps,
+.lab-methods { background: transparent !important; }
+.svc-fold__sum,
+.anim { background: var(--surface) !important; }
+.svc-signs { background: var(--surface-tint) !important; }
+/* heading emphasis is the accent (an older rule set it to the body ink and
+   hid that behind gradient text) */
+:root main :is(h1, h2, h3) em,
+:root .sc-display em {
+  color: var(--accent) !important;
+  -webkit-text-fill-color: currentColor !important;
+  background: none !important;
+  font-style: normal;
 }
