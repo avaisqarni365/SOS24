@@ -2,8 +2,8 @@
 
 import { useEffect, useRef, useState } from "react";
 import { SunMoon, Sun, Moon, Monitor, Palette, Contrast, Type } from "lucide-react";
-import ToneSlider, { readTone, chooseTone, onTone } from "@/components/navigation/ToneSlider";
-import { setTone, toneName } from "@/lib/tone";
+import ColorControl, { onColor } from "@/components/navigation/ColorControl";
+import { colorName, readColor, COLOR_DEFAULT, type ColorChoice } from "@/lib/tone";
 
 type Theme = "light" | "dark" | "auto";
 type TextSize = "md" | "lg" | "xl";
@@ -24,11 +24,6 @@ const SIZES: { id: TextSize; label: string; scale: string }[] = [
   { id: "lg", label: "Groß", scale: "A+" },
   { id: "xl", label: "Sehr groß", scale: "A++" },
 ];
-const SWATCHES = [
-  { v: 0, label: "Hell", cls: "ap-swatch__dot--sun" },
-  { v: 50, label: "Wasser", cls: "ap-swatch__dot--water" },
-  { v: 100, label: "Grün", cls: "ap-swatch__dot--green" },
-];
 
 function save(key: string, value: string | null) {
   try {
@@ -44,7 +39,7 @@ export default function AppearanceMenu() {
   const [open, setOpen] = useState(false);
   const [theme, setTheme] = useState<Theme>("light");
   const [size, setSize] = useState<TextSize>("md");
-  const [tone, setToneState] = useState(50);
+  const [color, setColorState] = useState<ColorChoice>(COLOR_DEFAULT);
   const box = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -53,16 +48,8 @@ export default function AppearanceMenu() {
     setTheme(t === "light" || t === "dark" ? t : "auto");
     const z = d.getAttribute("data-text");
     setSize(z === "lg" || z === "xl" ? z : "md");
-    setToneState(readTone());
-
-    // the colour slider switches dark back to light; follow it
-    const onTheme = (e: Event) => setTheme((e as CustomEvent<Theme>).detail);
-    window.addEventListener("sos-theme", onTheme);
-    const offTone = onTone(setToneState);
-    return () => {
-      window.removeEventListener("sos-theme", onTheme);
-      offTone();
-    };
+    setColorState(readColor());
+    return onColor(setColorState);
   }, []);
 
   useEffect(() => {
@@ -85,8 +72,6 @@ export default function AppearanceMenu() {
     if (t === "auto") d.removeAttribute("data-theme");
     else d.setAttribute("data-theme", t);
     save("sos_theme", t === "light" ? null : t);
-    // the colour tone belongs to the light theme only
-    setTone(t === "dark" ? 50 : readTone());
   };
   const pickSize = (z: TextSize) => {
     setSize(z);
@@ -103,7 +88,7 @@ export default function AppearanceMenu() {
         onClick={() => setOpen((o) => !o)}
         aria-expanded={open}
         aria-controls="appearance-panel"
-        className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-line/15 bg-surface text-ink hover:border-accent-deep shadow-2xs transition-colors"
+        className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[var(--line-strong)] bg-surface text-ink hover:border-accent-deep shadow-2xs transition-colors"
         title="Ansicht: Farbe, Hell/Dunkel und Schriftgröße"
       >
         <SunMoon className="h-5 w-5" aria-hidden="true" />
@@ -118,23 +103,10 @@ export default function AppearanceMenu() {
               <span id="ap-colour" className="ap__k">
                 <Palette aria-hidden="true" /> Farbe
               </span>
-              <span className="ap__v">{toneName(tone)}</span>
+              <span className="ap__v">{colorName(color)}</span>
             </div>
-            <div className="ap-swatches" role="group" aria-labelledby="ap-colour">
-              {SWATCHES.map((s) => (
-                <button
-                  key={s.v}
-                  type="button"
-                  className="ap-swatch"
-                  aria-pressed={Math.abs(tone - s.v) <= 3 && theme !== "dark"}
-                  onClick={() => chooseTone(s.v)}
-                >
-                  <span className={`ap-swatch__dot ${s.cls}`} aria-hidden="true" />
-                  {s.label}
-                </button>
-              ))}
-            </div>
-            <ToneSlider bare className="ap__slider" />
+            <ColorControl className="ap__color" />
+            <p className="ap__hint">Der Hintergrund bleibt hell, die Farbe zeigt sich in Akzenten, Knöpfen und Symbolen. Im dunklen Modus färbt sie die Schrift-Akzente.</p>
           </section>
 
           <section className="ap__sec" aria-labelledby="ap-theme">

@@ -12,6 +12,7 @@ import { Breadcrumbs } from "@/components/seo/SubpageParts";
 import { SERVICE_CARDS } from "@/data/services";
 import { abs, businessNode, websiteNode, breadcrumbNode, faqNode, BUSINESS_ID, WEBSITE_ID, OG_IMAGE } from "@/lib/site";
 import { hy } from "@/lib/hyphenate";
+import { GUIDE } from "@/data/guide";
 
 const TITLE = "Leistungen: Kellersanierung & Abdichtung | sos-abdichtung";
 const DESCRIPTION =
@@ -25,15 +26,6 @@ export const metadata: Metadata = {
   openGraph: { title: TITLE, description: DESCRIPTION, url: PATH, type: "website", locale: "de_DE", siteName: "sos-abdichtung", images: [OG_IMAGE] },
 };
 
-/** Which method for which sign: the question every homeowner asks first. */
-const GUIDE = [
-  { sign: "Feuchterand und weiße Salze im Sockel, nach oben hin trockener", cause: "Aufsteigende Feuchte aus dem Erdreich", slug: "horizontalsperre" },
-  { sign: "Nasse Flächen über die ganze Wandhöhe, Wasser drückt seitlich", cause: "Seitlich eindringendes Wasser", slug: "kellerinnenabdichtung" },
-  { sign: "Schwarze Flecken in Raumecken, hinter Schränken, an Fensterlaibungen", cause: "Kondensat an kalten Flächen", slug: "schimmelbeseitigung" },
-  { sign: "Wasser sickert durch einen Riss in Beton oder Mauerwerk", cause: "Wasserführender Riss", slug: "rissverpressung" },
-  { sign: "Mehrere Anzeichen zugleich, der Keller soll wieder nutzbar werden", cause: "Mehrere Ursachen", slug: "kellersanierung" },
-  { sign: "Ursache unklar, Gutachten für Kauf, Versicherung oder Vermieter", cause: "Erst messen", slug: "feuchtemessung" },
-];
 
 export default function LeistungenPage() {
   const crumbs = [

@@ -188,7 +188,7 @@ export default function DewPointLab() {
               id={`${uid}-wall`}
               value={wall}
               onChange={(e) => setWall(e.target.value as WallKey)}
-              className="mt-2 min-h-[44px] w-full rounded-full border border-line/20 bg-[var(--ink-3)] px-4 py-2 text-sm text-[var(--bone)] hover:border-accent-deep"
+              className="mt-2 min-h-[44px] w-full rounded-full border border-[var(--line-strong)] bg-[var(--ink-3)] px-4 py-2 text-sm text-[var(--bone)] hover:border-accent-deep"
             >
               {WALLS.map((w) => (
                 <option key={w.key} value={w.key}>

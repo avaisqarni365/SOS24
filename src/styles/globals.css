@@ -61,7 +61,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Segoe UI", var(--font-sans), "IBM Plex Sans Ext", system-ui, Tahoma, Geneva, Verdana, sans-serif;
+  font-family: var(--font-sans), "Segoe UI", "IBM Plex Sans Ext", system-ui, Tahoma, Geneva, Verdana, sans-serif;
 }
 
 /* Monospace exclusively for technical readouts, numbers, and rulers */
@@ -74,13 +74,225 @@ pre,
   font-family: var(--font-mono, ui-monospace), ui-monospace, monospace !important;
 }
 
+/* ===========================================================================
+   THEME VARIABLES - every custom property the page root carries, in one
+   place: the light values on :root, what the dark theme changes below it.
+   Surfaces (.band-ink, .theme-dark, .contact-band ...) re-declare some of
+   them for their own subtree further down; the colour picker (tone.ts)
+   writes the --pw-* values inline on <html>.
+   ========================================================================= */
+:root {
+  /* design tokens (design system "SOS-Abdichtung"); the picker feeds --pw-* */
+  --canvas: #f4f5f7;
+  --surface: #ffffff;
+  --surface-2: #eaecf0;
+  --surface-tint: var(--pw-paper1);
+  --accent-wash: var(--pw-paper2);
+  --line: rgb(43 69 112 / 0.12);
+  --line-strong: #7d8899;
+  --ink: #14253c;
+  --ink-strong: #071628;
+  --ink-soft: #33435a;
+  --accent: var(--pw-accent);
+  --accent-deep: var(--pw-deep);
+  --action: var(--pw-accent);
+  --action-hover: var(--pw-deep);
+  --on-action: #ffffff;
+  --plate: #132033;
+  --plate-2: #1b2c47;
+  --on-plate: #ffffff;
+  --on-plate-soft: #c8d3e6;
+  --on-plate-accent: var(--pw-on-dark);
+  --focus: #1e6bd6;
+  --success: #15803d;
+  --danger: #b42318;
+  --info: #0b6fb3;
+
+  /* legacy names, kept for the existing rules: they point at the tokens */
+  --c-bone2: 7 22 40;
+  --nav-bg: rgb(255 255 255 / 0.9);
+  --c-mint: var(--pw-accent-rgb);
+  --c-ink3: 234 236 240;
+  --band-stone: var(--surface);
+  --c-emerald: var(--pw-mark-rgb);
+  --hero-glow: transparent;
+  --c-bone: 20 37 60;
+  --band-mint: var(--surface-tint);
+  --c-accent-deep: var(--pw-deep-rgb);
+  --c-line: 43 69 112;
+  --c-soft: 51 67 90;
+  --c-ink2: 255 255 255;
+  --c-ink: 244 245 247;
+  --grain: 0;
+  --btn-ink: var(--on-action);
+  --hero-water: transparent;
+  --frame-shadow: 0 1px 2px rgb(0 0 0/ 0.04), 0 12px 32px -14px rgb(0 0 0/ 0.16);
+  --grad: var(--action);
+  --frame-line: var(--line);
+  --stage-bg: var(--surface-tint);
+  --grad-text: none;
+  --damp: #3e5d92;
+  --card: var(--surface);
+  --salt: #d6dbe4;
+  --ink-on-surface: var(--ink);
+  --text-on-bone: var(--ink);
+  --paper-1: var(--surface-tint);
+  --paper: var(--canvas);
+  --emerald-deep: var(--accent);
+  --paper-0: var(--canvas);
+  --head-on-bone: var(--ink-strong);
+  --card-translucent: rgb(255 255 255 / 0.92);
+  --paper-2: var(--accent-wash);
+  --ground: rgb(var(--c-ink));
+  --sc-ink-soft: var(--ink-soft);
+  --sc-ink: var(--ink);
+  --ink-3: rgb(var(--c-ink3));
+  --sc-accent: var(--accent);
+  --bone-2: rgb(var(--c-bone2));
+  --mint: rgb(var(--c-mint));
+  --sc-surface: var(--surface);
+  --ink-2: rgb(var(--c-ink2));
+  --emerald: rgb(var(--c-emerald));
+  --sc-accent-ink: var(--on-action);
+  --sc-canvas: var(--canvas);
+  --bone: rgb(var(--c-bone));
+  --sc-font-text: var(--font-sans), system-ui, sans-serif;
+  --sc-font-mono: var(--font-mono), ui-monospace, monospace;
+  --font-latex: var(--font-latex, "Latin Modern Roman"), "Latin Modern Roman", "Computer Modern", "TeX Gyre Termes", "STIX Two Text", "Baskerville", Georgia, serif;
+  --sc-shadow-color: 150 20% 3%;
+  --sc-font-display: var(--font-sans), system-ui, sans-serif;
+  --sc-font-prose: var(--font-latex), "Latin Modern Roman", Georgia, serif;
+  --fs-h2: clamp(1.5rem, 1.25rem + 1vw, 2.2rem);
+  --fs-h3: clamp(1.2rem, 1.1rem + 0.4vw, 1.45rem);
+  --fs-h4: 1.12rem;
+  --fs-h1: clamp(2.05rem, 1.55rem + 1.8vw, 3.1rem);
+  --brick: var(--pw-brick);
+  --brick-2: #3e5d92;
+  --brand-2: #1580c8;
+  --brand: #0f3460;
+  --forest-2: var(--plate-2);
+  --forest: var(--plate);
+  --map-line: 17 24 39;
+  --map-context: var(--accent-wash);
+  --map-bg: var(--surface-tint);
+  --grad-em: linear-gradient(95deg, var(--pw-deep) 0%, var(--pw-accent) 45%, var(--pw-em-hi) 100%);
+  --grad-cta: var(--action);
+  --grad-tile: var(--action);
+  --aqua-deep: var(--pw-label);
+  --grad-em-plate: linear-gradient(95deg, #a4e4f2 0%, #9db8ff 100%);
+  --electric: var(--accent);
+  --aqua: var(--pw-aqua);
+  --lk-b: #0f3460;
+  --ld-a: #66c2ee;
+  --lk-a: #1d548f;
+  --ld-b: #1580c8;
+  --royal-deep: var(--accent-deep);
+  --royal: var(--accent);
+  --royal-2: var(--pw-mark);
+  --logo-drop: #1a90d2;
+  --pw-wash2: #d9edf9;
+  --pw-accent: #0b63a8;
+  --pw-glow: 1;
+  --pw-deep: #0a4f8a;
+  --pw-wash1: #eaf5fc;
+  --pw-paper1: #f1f8fd;
+  --pw-mark-rgb: 23 132 199;
+  --pw-em-hi: #1590c9;
+  --pw-label: #0a6fa8;
+  --pw-accent-rgb: 11 99 168;
+  --pw-mark: #1784c7;
+  --pw-deep-rgb: 10 79 138;
+  --pw-shot: #dbe9f4;
+  --pw-paper1-rgb: 241 248 253;
+  --pw-hero: #f5fafe;
+  --pw-aqua-rgb: 31 169 214;
+  --pw-paper2: #e3f1fa;
+  --pw-cta-hi: #0f74bf;
+  --pw-aqua: #1fa9d6;
+  --pw-brick: #2b4570;
+  --logo-blue: #0b8ad0;
+  --logo-brick: #b95642;
+  --logo-navy: #173455;
+  --font-display: var(--font-sans), "Segoe UI Variable Display", "Segoe UI", system-ui, Tahoma, Verdana, sans-serif;
+  --font-ui: var(--font-sans), "Segoe UI Variable Text", "Segoe UI", system-ui, Tahoma, Verdana, sans-serif;
+  --ic-red: var(--danger);
+  --ic-green: var(--success);
+  --ic-water: var(--info);
+  --pw-on-dark: #a6dcfa;
+  --pw-on-dark-rgb: 166 220 250;
+  --pw-on-dark2: #7cc4f2;
+}
+html[data-theme="dark"] {
+  /* Dunkel: water-biased, surfaces separate by tone instead of shadow */
+  --canvas: #0b111a;
+  --surface: #121a26;
+  --surface-2: #1a2433;
+  --surface-tint: #0f1f30;
+  --accent-wash: #12304a;
+  --line: rgb(255 255 255 / 0.12);
+  --line-strong: #5f6d82;
+  --ink: #f2f6fb;
+  --ink-strong: #ffffff;
+  --ink-soft: #a9b4c4;
+  --accent: var(--pw-on-dark);
+  --accent-deep: var(--pw-on-dark2);
+  --action: var(--pw-accent);
+  --action-hover: var(--pw-cta-hi);
+  --plate: #152840;
+  --plate-2: #1d3658;
+  --focus: #6aa2ec;
+  --success: #6fd39a;
+  --danger: #f4a49b;
+  --info: #8fcaf2;
+
+  /* legacy names whose dark value is not simply their token */
+  --c-ink: 11 17 26;
+  --c-ink2: 18 26 38;
+  --c-ink3: 26 36 51;
+  --c-bone: 242 246 251;
+  --c-bone2: 255 255 255;
+  --c-soft: 169 180 196;
+  --c-line: 255 255 255;
+  --c-mint: var(--pw-on-dark-rgb);
+  --c-emerald: var(--pw-on-dark-rgb);
+  --c-accent-deep: var(--pw-on-dark-rgb);
+  --nav-bg: rgb(11 17 26 / 0.9);
+  --grain: 0.03;
+  --frame-shadow: none;
+  --stage-bg: var(--surface-2);
+  --damp: #96b1d6;
+  --salt: #2a3346;
+  --card-translucent: color-mix(in srgb, var(--surface) 94%, transparent);
+  --brick: #96b1d6;
+  --brick-2: #b2c8e5;
+  --brand-2: #9ec8ff;
+  --brand: #ffffff;
+  --map-line: 226 232 240;
+  --grad-em: linear-gradient(95deg, var(--pw-on-dark) 0%, var(--pw-on-dark2) 100%);
+  --aqua-deep: var(--pw-on-dark2);
+  --grad-em-plate: linear-gradient(95deg, var(--pw-on-dark) 0%, var(--pw-on-dark2) 100%);
+  --electric: var(--accent-deep);
+  --aqua: var(--pw-on-dark);
+  --lk-b: #b4c7e4;
+  --ld-a: #dff2ff;
+  --lk-a: #f2f6ff;
+  --ld-b: #80b2e8;
+  --royal: var(--accent-deep);
+  --royal-2: var(--pw-on-dark);
+  --logo-drop: #6aa2ec;
+  --logo-blue: #3fb0ee;
+  --logo-navy: #f2f6fb;
+  --sc-accent-ink: rgb(var(--c-ink));
+}
+
+
 /* ---------------------------------------------------------------------------
    Theme. Colours are RGB channels so Tailwind can add opacity to them.
    Light is the default: one flat British-white ground (no tinted bands, no
    glow, no grain), white cards, near-black text, deep emerald accent. Dark is the forest-ink original. A visitor's choice (header
    switch, stored as "sos_theme") sets data-theme on <html>; without a
    choice the device setting decides.
-   Roles keep their historic names: --ink is the ground (and the text that
+   Roles keep their historic names: --ground is the ground (and the text that
    sits on the accent), --bone is the primary text (and the fill of solid
    buttons), --mint is the accent.
    ------------------------------------------------------------------------- */
@@ -110,76 +322,42 @@ pre,
                      the point rather than a costume.
    ------------------------------------------------------------------------- */
 :root {
-  --c-ink: 244 245 247;
-  --c-ink2: 255 255 255;
-  --c-ink3: 234 236 240;
-  --c-bone: 43 69 112;
-  --c-bone2: 33 54 88;
   /* the accent is the brand, and it is the only hue on the page */
-  --c-mint: 43 69 112;
-  --c-emerald: 62 93 146;
-  --c-accent-deep: 43 69 112;
-  --c-soft: 99 114 143;
-  --c-line: 43 69 112;
-  --band-stone: #ffffff;
-  --band-mint: #eaecf0;
-  --nav-bg: rgb(255 255 255 / 0.94);
-  --hero-glow: transparent;
-  color-scheme: light;
+    color-scheme: light;
 }
-/* Page-level only (a dark stage inside a light page does not change them):
-   paper grain, the water glow in the hero, the 3D stage. */
-:root {
-  --frame-line: rgb(var(--c-line)/ 0.09);
-  --frame-shadow: 0 1px 2px rgb(0 0 0/ 0.04), 0 12px 32px -14px rgb(0 0 0/ 0.16);
-  /* A button is a block of ink with paper type on it; in dark the two swap. */
-  --grad: #2b4570;
-  --btn-ink: #ffffff;
-  /* Emphasis is italic, not coloured: the display serif already carries it. */
-  --grad-text: none;
-  --grain: 0;
-  --hero-water: transparent;
-  --stage-bg: radial-gradient(70% 60% at 50% 40%, #ffffff, transparent 72%), linear-gradient(180deg, #f3f6f5 0%, #e6ecea 100%);
-}
-[data-theme="dark"] {
-  --frame-line: rgb(243 241 236 / 0.1);
-  --frame-shadow: none;
-  --grain: 0.045;
-  --hero-water: transparent;
-  --stage-bg: linear-gradient(180deg, #141414 0%, #0a0a0a 100%);
-}
+
+
 /* dark: only when the visitor explicitly chose it in the appearance menu */
-[data-theme="dark"],
 .theme-dark,
 .scanner__readout {
-  /* The exact inversion of the light sheet: black ground, white type, and the
-     same accent-is-the-ink rule, so no hue enters on the way across. */
-  --c-ink: 0 0 0;
-  --c-ink2: 18 18 18;
-  --c-ink3: 26 26 26;
+  /* A dark island in either theme: the blue-tinted dark ground (Dunkel),
+     white type, and the same accent-is-the-ink rule. */
+  --c-ink: 11 17 26;
+  --c-ink2: 18 26 38;
+  --c-ink3: 26 36 51;
   --c-bone: 255 255 255;
-  --c-bone2: 238 238 238;
+  --c-bone2: 242 246 251;
   --c-mint: 255 255 255;
   --c-emerald: 255 255 255;
   --c-accent-deep: 255 255 255;
-  --c-soft: 168 168 164;
+  --c-soft: 169 180 196;
   --c-line: 255 255 255;
   --ink-on-surface: #ffffff;
-  --text-on-bone: #c9c9c5;
+  --text-on-bone: #a9b4c4;
   --head-on-bone: #ffffff;
   --emerald-deep: #ffffff;
-  --paper-0: #000000;
-  --paper-1: #0d0d0d;
-  --paper-2: #161616;
-  --card: #121212;
-  --card-translucent: rgb(18 18 18 / 0.94);
-  --paper: #000000;
+  --paper-0: #0b111a;
+  --paper-1: #0f1f30;
+  --paper-2: #12304a;
+  --card: #121a26;
+  --card-translucent: rgb(18 26 38 / 0.94);
+  --paper: #0b111a;
   --grad: #ffffff;
-  --btn-ink: #0a0a0a;
+  --btn-ink: #0b111a;
   --grad-text: none;
-  --band-stone: #0d0d0d;
-  --band-mint: #141414;
-  --nav-bg: rgb(0 0 0 / 0.9);
+  --band-stone: #121a26;
+  --band-mint: #0f1f30;
+  --nav-bg: rgb(11 17 26 / 0.9);
   --hero-glow: transparent;
   --damp: #9a9a96;
   --salt: #3a3a37;
@@ -188,10 +366,17 @@ pre,
 
 
 /* Roles, resolved again wherever the channels change */
-:root,
-[data-theme="dark"],
 .theme-dark,
 .scanner__readout {
+  --canvas: rgb(var(--c-ink));
+  --surface: rgb(var(--c-ink2));
+  --surface-2: rgb(var(--c-ink3));
+  --ink: rgb(var(--c-bone));
+  --ink-strong: #ffffff;
+  --ink-soft: rgb(var(--c-soft));
+  --line: rgb(255 255 255 / 0.12);
+  --line-strong: #5f6d82;
+  --focus: #6aa2ec;
   --sc-canvas: rgb(var(--c-ink));
   --sc-surface: rgb(var(--c-ink2));
   --sc-ink: rgb(var(--c-bone));
@@ -200,36 +385,14 @@ pre,
   --sc-accent-ink: rgb(var(--c-ink));
   --bone: rgb(var(--c-bone));
   --bone-2: rgb(var(--c-bone2));
-  --ink: rgb(var(--c-ink));
+  --ground: rgb(var(--c-ink));
   --ink-2: rgb(var(--c-ink2));
   --ink-3: rgb(var(--c-ink3));
   --mint: rgb(var(--c-mint));
   --emerald: rgb(var(--c-emerald));
   --line: rgb(var(--c-line) / 0.12);
 }
-:root {
-  --font-latex: var(--font-latex, "Latin Modern Roman"), "Latin Modern Roman", "Computer Modern", "TeX Gyre Termes", "STIX Two Text", "Baskerville", Georgia, serif;
-  --sc-font-display: var(--font-sans), system-ui, sans-serif;
-  --sc-font-text: var(--font-sans), system-ui, sans-serif;
-  --sc-font-prose: var(--font-latex), "Latin Modern Roman", Georgia, serif;
-  --sc-font-mono: var(--font-mono), ui-monospace, monospace;
-  --sc-shadow-color: 150 20% 3%;
-  /* fixed: the light bands (FAQ, contact) and water/salt colours */
-  --emerald-deep: #2b4570;
-  --damp: #3e5d92;
-  --salt: #d6dbe4;
-  --paper: #f4f5f7;
-  --text-on-bone: #2b4570;
-  --head-on-bone: #22365a;
-  /* The one ink every surface answers for. Light surfaces keep the editorial
-     near-black; a dark band (.band-ink / .theme-dark) flips it to bone, so a
-     full-bleed dark section needs no per-element colour overrides. */
-  --ink-on-surface: #2b4570;
-  /* The one card/panel surface. Light: paper white on the warm ground.
-     Dark: one step up from the ground, never pure black. */
-  --card: #ffffff;
-  --card-translucent: rgb(255 255 255 / 0.94);
-}
+
 /* A dark stage keeps its own ink even on a light page. */
 .theme-dark {
   color: var(--sc-ink);
@@ -252,7 +415,7 @@ pre,
   }
   ::selection {
     background: var(--mint);
-    color: var(--ink);
+    color: var(--ground);
   }
 }
 
@@ -270,7 +433,7 @@ pre,
   top: -4rem;
   z-index: 100;
   background: var(--bone);
-  color: var(--ink);
+  color: var(--ground);
   padding: 0.75rem 1rem;
   border-radius: 999px;
   font-weight: 600;
@@ -331,7 +494,7 @@ pre,
   background:
     radial-gradient(60% 70% at 74% 58%, var(--hero-glow), transparent 70%),
     radial-gradient(40% 40% at 70% 92%, var(--hero-water), transparent 70%),
-    linear-gradient(180deg, var(--ink) 0%, var(--band-mint) 70%, var(--ink) 100%);
+    linear-gradient(180deg, var(--ground) 0%, var(--band-mint) 70%, var(--ground) 100%);
 }
 .hero__grid {
   position: relative;
@@ -433,10 +596,10 @@ pre,
 .hv__scenes button[aria-selected="true"] {
   background: var(--mint);
   border-color: var(--mint);
-  color: var(--ink);
+  color: var(--ground);
 }
 .hv__scenes button[aria-selected="true"] svg {
-  color: var(--ink);
+  color: var(--ground);
 }
 @media (max-width: 639px) {
   .hv__scenes {
@@ -522,7 +685,7 @@ pre,
   max-width: calc(100% - 1.6rem);
   padding: 0.35rem 0.75rem 0.35rem 0.35rem;
   border-radius: 999px;
-  background: rgb(14 19 16 / 0.86);
+  background: rgb(11 17 26 / 0.86);
   color: #f3f1ec;
   font-size: 0.85rem;
   font-weight: 600;
@@ -535,7 +698,7 @@ pre,
   padding: 0.2rem 0.5rem;
   border-radius: 999px;
   background: var(--ink-on-surface);
-  color: #0e1310;
+  color: #0b111a;
   font: 700 0.72rem/1.2 var(--sc-font-mono, ui-monospace, monospace);
 }
 .hv__load {
@@ -587,7 +750,7 @@ pre,
   margin: 0;
   padding: 0.45rem 0.9rem;
   border-radius: 999px;
-  background: color-mix(in oklab, #0e1310 80%, transparent);
+  background: color-mix(in oklab, #0b111a 80%, transparent);
   border: 1px solid color-mix(in oklab, var(--bone) 14%, transparent);
   color: var(--bone);
   font-size: 0.8rem;
@@ -613,7 +776,7 @@ pre,
   width: 2.75rem;
   height: 2.75rem;
   border-radius: 999px;
-  background: color-mix(in oklab, #0e1310 82%, transparent);
+  background: color-mix(in oklab, #0b111a 82%, transparent);
   border: 1px solid color-mix(in oklab, var(--bone) 16%, transparent);
   color: var(--bone);
   font-size: 1.2rem;
@@ -633,7 +796,7 @@ pre,
   gap: 0.4rem;
   padding: 0.3rem 0.65rem 0.3rem 0.3rem;
   border-radius: 999px;
-  background: color-mix(in oklab, #0e1310 86%, transparent);
+  background: color-mix(in oklab, #0b111a 86%, transparent);
   border: 1px solid color-mix(in oklab, var(--bone) 16%, transparent);
   color: var(--bone);
   font-size: 0.78rem;
@@ -650,7 +813,7 @@ pre,
   height: 1.3rem;
   border-radius: 999px;
   background: var(--mint);
-  color: var(--ink);
+  color: var(--ground);
   font-family: var(--sc-font-mono, ui-monospace, monospace);
   font-size: 0.7rem;
 }
@@ -689,7 +852,7 @@ pre,
 .hv__steps button[aria-pressed="true"] {
   background: var(--mint);
   border-color: var(--mint);
-  color: var(--ink);
+  color: var(--ground);
 }
 .hv__step,
 .hv__layers {
@@ -755,7 +918,7 @@ pre,
 .hv__nav button.is-primary {
   background: var(--bone);
   border-color: var(--bone);
-  color: var(--ink);
+  color: var(--ground);
 }
 .hv__layers ul {
   list-style: none;
@@ -791,7 +954,7 @@ pre,
   height: 1.4rem;
   border-radius: 999px;
   background: var(--swatch);
-  color: #0e1310;
+  color: #0b111a;
   font-family: var(--sc-font-mono, ui-monospace, monospace);
   font-size: 0.7rem;
   box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.25);
@@ -1091,7 +1254,7 @@ pre,
   scroll-margin-top: 6rem;
 }
 .prose-sos h2 {
-  font-family: "Segoe UI", var(--font-sans), system-ui, Tahoma, Verdana, sans-serif;
+  font-family: var(--font-sans), "Segoe UI", system-ui, Tahoma, Verdana, sans-serif;
   font-size: clamp(1.75rem, 3vw, 2.35rem);
   font-weight: 700;
   line-height: 1.25;
@@ -1100,14 +1263,14 @@ pre,
   text-wrap: balance;
 }
 .prose-sos h3 {
-  font-family: "Segoe UI", var(--font-sans), system-ui, Tahoma, Verdana, sans-serif;
+  font-family: var(--font-sans), "Segoe UI", system-ui, Tahoma, Verdana, sans-serif;
   font-size: 1.35rem;
   font-weight: 700;
   line-height: 1.3;
   color: var(--ink-on-surface);
 }
 .prose-sos p {
-  font-family: "Segoe UI", var(--font-sans), system-ui, Tahoma, Verdana, sans-serif;
+  font-family: var(--font-sans), "Segoe UI", system-ui, Tahoma, Verdana, sans-serif;
   margin: 1.15rem 0;
   line-height: 1.74;
   color: var(--ink-on-surface);
@@ -1125,7 +1288,7 @@ pre,
   color: var(--ink-on-surface);
 }
 .prose-sos li {
-  font-family: "Segoe UI", var(--font-sans), system-ui, Tahoma, Verdana, sans-serif;
+  font-family: var(--font-sans), "Segoe UI", system-ui, Tahoma, Verdana, sans-serif;
   margin: 0.45rem 0;
   line-height: 1.7;
   color: var(--ink-on-surface);
@@ -1236,7 +1399,7 @@ article p,
     display: grid;
     gap: 2px;
     border-radius: 999px;
-    background: color-mix(in oklab, #0e1310 72%, transparent);
+    background: color-mix(in oklab, #0b111a 72%, transparent);
     backdrop-filter: blur(10px);
   }
   .section-rail__stop {
@@ -1271,7 +1434,7 @@ article p,
     white-space: nowrap;
     padding: 4px 10px;
     border-radius: 999px;
-    background: #0e1310;
+    background: #0b111a;
     border: 1px solid color-mix(in oklab, var(--bone) 14%, transparent);
     color: var(--bone);
     font-family: var(--sc-font-mono, ui-monospace, monospace);
@@ -1396,7 +1559,7 @@ html[data-text="xl"] {
   height: 2rem;
   border-radius: 999px;
   background: var(--mint);
-  color: var(--ink);
+  color: var(--ground);
   font-family: var(--sc-font-mono, ui-monospace, monospace);
   font-weight: 700;
 }
@@ -1457,7 +1620,7 @@ em,
   font-style: italic;
 }
 .sc-display {
-  font-family: "Segoe UI", var(--font-sans), system-ui, Tahoma, Verdana, sans-serif !important;
+  font-family: var(--font-sans), "Segoe UI", system-ui, Tahoma, Verdana, sans-serif !important;
   font-weight: 600;
   letter-spacing: -0.03em;
   line-height: 1.05;
@@ -1490,28 +1653,15 @@ em,
 }
 /* Headings that still carry the old editorial class: same upright Latin Modern Roman */
 .font-editorial {
-  font-family: "Segoe UI", var(--font-sans), system-ui, Tahoma, Verdana, sans-serif !important;
+  font-family: var(--font-sans), "Segoe UI", system-ui, Tahoma, Verdana, sans-serif !important;
   font-weight: 700;
   letter-spacing: -0.015em;
   color: var(--ink-on-surface);
 }
 
-/* =================================================== ONE SCALE ========
-   Authentic LaTeX academic & scientific document typography:
-   Latin Modern Roman serif for all prose, ledes, articles, and headings.
-   High-contrast pitch dark black ink (#050807), academic line height (1.72),
-   justified alignment with German hyphenation, and micro-typographic kerning. */
-:root {
-  /* One scale, ~1.4x between the display steps and ~1.2x into the body.
-     h3 was flat 1.2rem and h4 1.05rem, which left h4 within 2% of body copy
-     (1.03rem): four heading levels, but only three visible ones. */
-  --fs-h1: clamp(2.05rem, 1.55rem + 1.8vw, 3.1rem);
-  --fs-h2: clamp(1.5rem, 1.25rem + 1vw, 2.2rem);
-  --fs-h3: clamp(1.2rem, 1.1rem + 0.4vw, 1.45rem);
-  --fs-h4: 1.12rem;
-}
+
 body {
-  font-family: "Segoe UI", var(--font-sans), system-ui, Tahoma, Verdana, sans-serif;
+  font-family: var(--font-sans), "Segoe UI", system-ui, Tahoma, Verdana, sans-serif;
   font-size: 1.03rem;
   line-height: 1.72;
   color: var(--ink-on-surface);
@@ -1521,7 +1671,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 main h1:not(.sc-label) {
-  font-family: "Segoe UI", var(--font-sans), system-ui, Tahoma, Verdana, sans-serif !important;
+  font-family: var(--font-sans), "Segoe UI", system-ui, Tahoma, Verdana, sans-serif !important;
   font-size: var(--fs-h1) !important;
   line-height: 1.14 !important;
   letter-spacing: -0.018em;
@@ -1530,7 +1680,7 @@ main h1:not(.sc-label) {
   text-wrap: balance;
 }
 main h2:not(.sc-label) {
-  font-family: "Segoe UI", var(--font-sans), system-ui, Tahoma, Verdana, sans-serif !important;
+  font-family: var(--font-sans), "Segoe UI", system-ui, Tahoma, Verdana, sans-serif !important;
   font-size: var(--fs-h2) !important;
   line-height: 1.22 !important;
   letter-spacing: -0.015em;
@@ -1539,7 +1689,7 @@ main h2:not(.sc-label) {
   text-wrap: balance;
 }
 main h3:not(.sc-label) {
-  font-family: "Segoe UI", var(--font-sans), system-ui, Tahoma, Verdana, sans-serif !important;
+  font-family: var(--font-sans), "Segoe UI", system-ui, Tahoma, Verdana, sans-serif !important;
   font-size: var(--fs-h3) !important;
   line-height: 1.3 !important;
   letter-spacing: -0.01em;
@@ -1547,7 +1697,7 @@ main h3:not(.sc-label) {
   color: var(--ink-on-surface);
 }
 main h4:not(.sc-label) {
-  font-family: "Segoe UI", var(--font-sans), system-ui, Tahoma, Verdana, sans-serif !important;
+  font-family: var(--font-sans), "Segoe UI", system-ui, Tahoma, Verdana, sans-serif !important;
   font-size: var(--fs-h4) !important;
   line-height: 1.35 !important;
   font-weight: 700;
@@ -1555,7 +1705,7 @@ main h4:not(.sc-label) {
 }
 /* All prose, copy, and paragraphs use Latin Modern Roman */
 main :is(p, li, dd, blockquote) {
-  font-family: "Segoe UI", var(--font-sans), system-ui, Tahoma, Verdana, sans-serif;
+  font-family: var(--font-sans), "Segoe UI", system-ui, Tahoma, Verdana, sans-serif;
   line-height: 1.72;
   color: var(--ink-on-surface);
   font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
@@ -1564,7 +1714,7 @@ main :is(p, li, dd, blockquote) {
    instead of the even grey a justified column is supposed to give. Ragged
    right here; the long-form prose further down stays justified. */
 main .sc-lede {
-  font-family: "Segoe UI", var(--font-sans), system-ui, Tahoma, Verdana, sans-serif !important;
+  font-family: var(--font-sans), "Segoe UI", system-ui, Tahoma, Verdana, sans-serif !important;
   font-size: 1.25rem !important;
   line-height: 1.6 !important;
   color: var(--ink-on-surface) !important;
@@ -1577,7 +1727,7 @@ main .sc-lede {
    justifying it opened the same rivers as the lede. The article prose on the
    service pages keeps its justification. */
 main .sc-body {
-  font-family: "Segoe UI", var(--font-sans), system-ui, Tahoma, Verdana, sans-serif !important;
+  font-family: var(--font-sans), "Segoe UI", system-ui, Tahoma, Verdana, sans-serif !important;
   font-size: 1.03rem !important;
   line-height: 1.72 !important;
   color: var(--ink-on-surface) !important;
@@ -1692,7 +1842,7 @@ main [class*="font-mono"][class*="uppercase"] {
   color: var(--emerald-deep);
 }
 main :is(p, li, dd, blockquote):not(.sc-lede):not(.sc-label):not(.cz-formula):not([class*="kicker"]):not([class*="label"]):not([class*="font-mono"]):not([class*="text-xs"]):not([class*="text-[1"]):not([class*="text-[0.6"]):not([class*="text-[0.7"]):not([class*="text-[0.8"]) {
-  font-family: "Segoe UI", var(--font-sans), system-ui, Tahoma, Verdana, sans-serif !important;
+  font-family: var(--font-sans), "Segoe UI", system-ui, Tahoma, Verdana, sans-serif !important;
   font-size: 1.03rem !important;
   line-height: 1.72 !important;
   color: var(--ink-on-surface) !important;
@@ -1883,7 +2033,7 @@ p.no-justify {
   min-width: 9.5rem;
   padding: 0.6rem 0.75rem 0.55rem;
   border-radius: 14px;
-  background: rgb(14 19 16 / 0.86);
+  background: rgb(11 17 26 / 0.86);
   color: #f3f1ec;
   pointer-events: none;
   box-shadow: 0 10px 24px -14px rgb(0 0 0 / 0.6);
@@ -1984,7 +2134,7 @@ p.no-justify {
   height: 1.25rem;
 }
 .service-card h3 {
-  font-family: "Segoe UI", var(--font-sans), system-ui, Tahoma, Verdana, sans-serif;
+  font-family: var(--font-sans), "Segoe UI", system-ui, Tahoma, Verdana, sans-serif;
   font-weight: 700;
   font-size: 1.35rem;
   color: var(--ink-on-surface);
@@ -1992,7 +2142,7 @@ p.no-justify {
   line-height: 1.2;
 }
 .service-card p {
-  font-family: "Segoe UI", var(--font-sans), system-ui, Tahoma, Verdana, sans-serif;
+  font-family: var(--font-sans), "Segoe UI", system-ui, Tahoma, Verdana, sans-serif;
   color: var(--ink-on-surface) !important;
   font-weight: 400 !important;
   font-size: 0.98rem;
@@ -2275,28 +2425,10 @@ p.no-justify {
   text-align: start !important;
 }
 
-/* =============================================== BRAND: GREEN + BRICK ===
-   Green carries actions (buttons, active steps), brick red carries the
-   brand accent (logo "sos", accent words, figures, menu hover), text is
-   near-black on snow white. */
-:root {
-  --brick: #2b4570;
-  --brick-2: #3e5d92;
-}
-[data-theme="dark"] {
-  --brick: #ffffff;
-  --brick-2: #c8d3e6;
-}
 
-/* ------------------------------------------------------------------ logo --
-   The one place a hue is allowed: the brand blue on the roof and the drops.
-   Everything else on the page is ink on paper, so the mark is the only colour
-   and reads as identity rather than decoration. */
-:root {
-  --brand: #2b4570;
-  --brand-2: #3e5d92;
-}
-html[data-theme="dark"],
+
+
+
 .band-ink,
 .contact-band {
   /* navy disappears on a dark or saturated ground; the same blue lifted */
@@ -2308,13 +2440,13 @@ html[data-theme="dark"],
 /* The letterforms are the page's own face, so the lockup needs no second
    artwork and stays crisp at any size. */
 .logo-lockup__s {
-  font-family: "Segoe UI", var(--font-sans), system-ui, Tahoma, sans-serif;
+  font-family: var(--font-sans), "Segoe UI", system-ui, Tahoma, sans-serif;
   font-size: 72px;
   font-weight: 700;
   letter-spacing: -2px;
 }
 .logo-lockup__w {
-  font-family: "Segoe UI", var(--font-sans), system-ui, Tahoma, sans-serif;
+  font-family: var(--font-sans), "Segoe UI", system-ui, Tahoma, sans-serif;
   font-size: 18px;
   font-weight: 700;
   letter-spacing: 3.2px;
@@ -2513,7 +2645,7 @@ html[data-theme="dark"],
   gap: 0.35rem;
   padding: 0.2rem 0.55rem 0.2rem 0.2rem;
   border-radius: 999px;
-  background: rgb(14 19 16 / 0.84);
+  background: rgb(11 17 26 / 0.84);
   color: #f3f1ec;
   font-size: 0.75rem !important;
   font-weight: 600;
@@ -2528,7 +2660,7 @@ html[data-theme="dark"],
   height: 1.2rem;
   flex: none;
   border-radius: 999px;
-  color: #0e1310;
+  color: #0b111a;
   font: 700 0.6875rem/1 var(--sc-font-mono, ui-monospace, monospace);
   box-shadow: inset 0 0 0 1px rgb(0 0 0 / 0.25);
 }
@@ -2549,7 +2681,7 @@ figure > .layer-ruler {
   width: 1.6rem;
   height: 1.6rem;
   border-radius: 999px;
-  color: #0e1310;
+  color: #0b111a;
   font: 700 0.75rem/1 var(--sc-font-mono, ui-monospace, monospace);
   box-shadow: inset 0 0 0 1px rgb(0 0 0 / 0.2);
 }
@@ -2937,60 +3069,49 @@ main dt,
 }
 
 
-/* ===========================================================================
-   EDITORIAL SURFACES
-   The page is built from full-bleed bands that alternate a deep forest ink
-   with warm paper, the way a printed prospectus alternates plates and text
-   pages. A band declares its own ground and ink, so anything dropped inside
-   it -- headings, labels, rules, buttons -- resolves correctly without a
-   single per-element colour.
-   ========================================================================= */
 
-/* Warm paper, not white: white grounds read as "unstyled", bone reads as
-   stock that was chosen. */
-:root {
-  --paper-0: #f4f5f7;
-  --paper-1: #eaecf0;
-  --paper-2: #dfe3ea;
-  /* the inverted plate: black in light, and still black in dark, where the
-     white cards on it do the separating */
-  --forest: #233a5e;
-  --forest-2: #2b4570;
-}
 
 .band-paper { background: var(--paper-0); }
 .band-bone  { background: var(--paper-1); }
 .band-bone2 { background: var(--paper-2); }
 
-/* The dark plate. Sets the channel variables too, so Tailwind's landing-*
+/* The deep-water plate (design token "plate"): the hero and the Lab opener,
+   in both themes. Sets the channel variables too, so Tailwind's landing-*
    colours and every rgb(var(--c-*)) consumer follow it. */
 .band-ink {
-  background: var(--forest);
-  --ink-on-surface: #ffffff;
-  --text-on-bone: #c8d3e6;
-  --head-on-bone: #ffffff;
-  --c-ink: 35 58 94;
-  --c-ink2: 43 69 112;
-  --c-ink3: 52 82 130;
+  background: var(--plate);
+  --ink-on-surface: var(--on-plate);
+  --text-on-bone: var(--on-plate-soft);
+  --head-on-bone: var(--on-plate);
+  --c-ink: 19 32 51;
+  --c-ink2: 27 44 71;
+  --c-ink3: 35 56 88;
   --c-bone: 255 255 255;
-  --c-bone2: 226 233 244;
-  --c-mint: 168 190 222;
-  --c-emerald: 168 190 222;
-  --c-accent-deep: 168 190 222;
-  --c-soft: 160 178 207;
+  --c-bone2: 255 255 255;
+  --c-mint: var(--pw-on-dark-rgb);
+  --c-emerald: var(--pw-on-dark-rgb);
+  --c-accent-deep: var(--pw-on-dark-rgb);
+  --c-soft: 200 211 230;
   --c-line: 255 255 255;
   --line: rgb(255 255 255 / 0.16);
   --frame-line: rgb(255 255 255 / 0.16);
-  --emerald-deep: #a8bede;
-  --card: #2b4570;
-  --card-translucent: rgb(43 69 112 / 0.94);
-  --grad: #ffffff;
-  --btn-ink: #233a5e;
-  --sc-ink: #ffffff;
-  --sc-ink-soft: #a0b2cf;
-  --sc-canvas: var(--forest);
-  --sc-surface: #2b4570;
-  --sc-accent: #a8bede;
+  --emerald-deep: var(--on-plate-accent);
+  --card: var(--plate-2);
+  --card-translucent: color-mix(in srgb, var(--plate-2) 94%, transparent);
+  --grad: var(--on-plate);
+  --btn-ink: var(--plate);
+  --sc-ink: var(--on-plate);
+  --sc-ink-soft: var(--on-plate-soft);
+  --sc-canvas: var(--plate);
+  --sc-surface: var(--plate-2);
+  --sc-accent: var(--on-plate-accent);
+  /* the semantic tokens, as they read on the plate */
+  --surface: var(--plate-2);
+  --ink: var(--on-plate);
+  --ink-strong: var(--on-plate);
+  --ink-soft: var(--on-plate-soft);
+  --accent: var(--on-plate-accent);
+  --line-strong: var(--on-plate-soft);
   color: var(--ink-on-surface);
   color-scheme: dark;
 }
@@ -3006,7 +3127,7 @@ main dt,
 /* A control with a light ground inside a dark band keeps a dark ink. */
 .band-ink .hero__btn--solid,
 .band-ink .hero__btn--solid :is(span, strong) {
-  color: #0e1310;
+  color: #0b111a;
 }
 .band-ink .sc-body,
 .band-ink .sc-lede { color: var(--text-on-bone) !important; }
@@ -3197,7 +3318,7 @@ main h4:not(.sc-label) { font-weight: 600; letter-spacing: -0.01em; }
   opacity: 0.8;
 }
 .channel__title {
-  font-family: "Segoe UI", var(--font-sans), system-ui, Tahoma, Verdana, sans-serif;
+  font-family: var(--font-sans), "Segoe UI", system-ui, Tahoma, Verdana, sans-serif;
   font-size: 1.3rem;
   font-weight: 450;
   letter-spacing: -0.018em;
@@ -3265,7 +3386,7 @@ main h4:not(.sc-label) { font-weight: 600; letter-spacing: -0.01em; }
 .hero__btn:focus-visible { transform: translateY(-2px); }
 .hero__btn--solid {
   background: #f3f1ec;
-  color: #0e1310;
+  color: #0b111a;
   box-shadow: 0 14px 30px -14px rgb(0 0 0 / 0.6);
 }
 .hero__btn--solid:hover { background: #ffffff; }
@@ -3657,70 +3778,11 @@ html[data-theme="dark"] {
   /* The same six tokens, re-mixed for a dark sheet. Not an inversion: the
      navy cannot carry on black, so the accent moves to the drop blue lifted
      to #7FB0FF, and the neutrals keep their blue bias. */
-  --c-ink: 15 20 30;
-  --c-ink2: 26 34 50;
-  --c-ink3: 35 46 66;
-  --c-bone: 232 237 245;
-  --c-bone2: 208 217 232;
-  --c-mint: 150 177 214;
-  --c-emerald: 178 200 229;
-  --c-accent-deep: 150 177 214;
-  --c-soft: 142 157 182;
-  --c-line: 232 237 245;
-
-  --ink-on-surface: #e8edf5;
-  --text-on-bone: #bcc8dc;
-  --head-on-bone: #ffffff;
-  --emerald-deep: #96b1d6;
-
-  --paper-0: #0f141e;
-  --paper-1: #151c28;
-  --paper-2: #1c2534;
-  --paper: #0f141e;
-  --card: #1a2232;
-  --card-translucent: rgb(26 34 50 / 0.94);
-  --band-stone: #151c28;
-  --band-mint: #1c2534;
-  --forest: #233a5e;
-  --forest-2: #2b4570;
-
-  --grad: #3e5d92;
-  --btn-ink: #ffffff;
-  --grad-text: none;
-  --brick: #96b1d6;
-  --brick-2: #b2c8e5;
-
-  --nav-bg: rgb(7 11 20 / 0.9);
-  --hero-glow: transparent;
-  --hero-water: transparent;
-  --frame-line: rgb(237 241 248 / 0.14);
-  --frame-shadow: none;
-  --grain: 0.03;
-  --stage-bg: linear-gradient(180deg, #1c2534 0%, #0f141e 100%);
-  --damp: #96b1d6;
-  --salt: #2a3346;
-  --line: rgb(237 241 248 / 0.14);
-  color-scheme: dark;
+    color-scheme: dark;
 }
 
 
-/* Resolved roles have to be recomputed wherever the channels changed. */
-html[data-theme="dark"] {
-  --sc-canvas: rgb(var(--c-ink));
-  --sc-surface: rgb(var(--c-ink2));
-  --sc-ink: rgb(var(--c-bone));
-  --sc-ink-soft: rgb(var(--c-soft));
-  --sc-accent: rgb(var(--c-mint));
-  --sc-accent-ink: rgb(var(--c-ink));
-  --bone: rgb(var(--c-bone));
-  --bone-2: rgb(var(--c-bone2));
-  --ink: rgb(var(--c-ink));
-  --ink-2: rgb(var(--c-ink2));
-  --ink-3: rgb(var(--c-ink3));
-  --mint: rgb(var(--c-mint));
-  --emerald: rgb(var(--c-emerald));
-  --text-on-bone-x: var(--text-on-bone);
-}
+
 
 /* The two "always light" panels follow the theme now, and the region map
    drops the colours it was still drawing with. */
@@ -3782,7 +3844,7 @@ html[data-theme="dark"] :is(.surface-bone, .surface-bone-2) { color-scheme: dark
   color: rgb(var(--c-soft));
 }
 .mnav__label {
-  font-family: "Segoe UI", var(--font-sans), system-ui, Tahoma, Verdana, sans-serif;
+  font-family: var(--font-sans), "Segoe UI", system-ui, Tahoma, Verdana, sans-serif;
   font-size: 1.75rem;
   font-weight: 450;
   letter-spacing: -0.022em;
@@ -3896,7 +3958,7 @@ html[data-theme="dark"] :is(.surface-bone, .surface-bone-2) { color-scheme: dark
   opacity: 0.62;
 }
 .contact-band__who-n {
-  font-family: "Segoe UI", var(--font-sans), system-ui, Tahoma, Verdana, sans-serif;
+  font-family: var(--font-sans), "Segoe UI", system-ui, Tahoma, Verdana, sans-serif;
   font-size: 1.35rem;
   font-weight: 450;
   letter-spacing: -0.018em;
@@ -4060,7 +4122,7 @@ main :is(h1, h2, h3) em,
 /* labels: the page's own faces, haloed in the map ground so they stay legible
    wherever a boundary runs under them */
 .region-map__area text {
-  font-family: "Segoe UI", var(--font-sans), system-ui, Tahoma, Verdana, sans-serif;
+  font-family: var(--font-sans), "Segoe UI", system-ui, Tahoma, Verdana, sans-serif;
   font-weight: 600;
   letter-spacing: -0.01em;
   fill: rgb(var(--c-bone));
@@ -4097,20 +4159,8 @@ main :is(h1, h2, h3) em,
     var(--paper-1);
 }
 
-/* Figure and ground. With the neighbours drawn in the page's blue paper, the
-   whole frame read as one wash and the six towns we actually serve did not
-   separate from the ones we don't. The surround is neutral grey; the service
-   area is the only blue on the map, and Wuppertal is the solid one. */
-:root {
-  --map-bg: #eceef2;
-  --map-context: #dde1e9;
-  --map-line: 17 24 39;
-}
-html[data-theme="dark"] {
-  --map-bg: #121824;
-  --map-context: #222c3e;
-  --map-line: 226 232 240;
-}
+
+
 .region-map__bg { fill: var(--map-bg); }
 .region-map__context path {
   fill: var(--map-context);
@@ -4329,39 +4379,8 @@ main :is(h1, h2):not(.sc-label) { font-weight: 650; }
   letter-spacing: 0.14em;
 }
 
-/* ===========================================================================
-   2030 LAYER — the colour combination.
-   The spine stays the client's pair (#2B4570 on #F4F5F7). Two companions
-   join it, both from the subject: AQUA (#39C6E0) is the water the trade
-   exists to stop, ELECTRIC (#3E6FD8) is the live, interactive state. They
-   appear as gradients, glass and glow — never as flat competing fills — so
-   the page reads as one brand with depth rather than three colours arguing.
-   ========================================================================= */
-:root {
-  --aqua: #39c6e0;
-  --aqua-deep: #0d7d9c;
-  --electric: #3e6fd8;
-  /* The CTA gradient ends at #3e6fd8 on purpose: that stop still gives white
-     label text 4.5:1, so the brightest edge of a wide button stays readable.
-     The aqua never sits under small white type -- it appears as the corner
-     glow on the feature tile and in the display-size gradients only. */
-  --grad-cta: linear-gradient(118deg, #2b4570 0%, #35549e 48%, #3e6fd8 100%);
-  --grad-tile:
-    radial-gradient(64% 54% at 100% 0%, rgb(57 198 224 / 0.38) 0%, transparent 62%),
-    linear-gradient(135deg, #2b4570 0%, #3e6fd8 100%);
-  --grad-em: linear-gradient(95deg, #2b4570 0%, #3e6fd8 55%, #0d7d9c 100%);
-  --grad-em-plate: linear-gradient(95deg, #a4e4f2 0%, #9db8ff 100%);
-}
-html[data-theme="dark"] {
-  --aqua: #54d2e8;
-  --aqua-deep: #6fcbe0;
-  --electric: #7fa3f0;
-  --grad-cta: linear-gradient(118deg, #33508c 0%, #3d5fb0 48%, #4568c4 100%);
-  --grad-tile:
-    radial-gradient(64% 54% at 100% 0%, rgb(84 210 232 / 0.4) 0%, transparent 62%),
-    linear-gradient(135deg, #33508c 0%, #4568c4 100%);
-  --grad-em: linear-gradient(95deg, #9db8ff 0%, #8fd8ea 100%);
-}
+
+
 ::selection { background: var(--electric); color: #ffffff; }
 :focus-visible { outline-color: var(--electric); }
 
@@ -4382,28 +4401,17 @@ html[data-theme="dark"] {
   box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.18);
 }
 
-/* ---- emphasis becomes the gradient ---------------------------------------
-   The solid fallback colour stays declared, so a browser without text-clip
-   (and the contrast audit) still sees a legible blue. */
-@supports (-webkit-background-clip: text) {
-  main :is(h1, h2) em,
-  .sc-display em {
-    background-image: var(--grad-em) !important;
-    -webkit-background-clip: text !important;
-    background-clip: text !important;
-    color: var(--electric) !important;
-    -webkit-text-fill-color: transparent !important;
-  }
-  .band-ink .sc-display em,
-  .band-ink :is(h1, h2) em,
-  .contact-band .sc-display em,
-  .contact-band :is(h1, h2) em {
-    background-image: var(--grad-em-plate) !important;
-    -webkit-background-clip: text !important;
-    background-clip: text !important;
-    color: #a9d6f5 !important;
-    -webkit-text-fill-color: transparent !important;
-  }
+/* ---- emphasis: the accent, upright (design system: no gradient text) ---- */
+main :is(h1, h2) em,
+.sc-display em {
+  color: var(--accent) !important;
+  font-style: normal;
+}
+.band-ink .sc-display em,
+.band-ink :is(h1, h2) em,
+.contact-band .sc-display em,
+.contact-band :is(h1, h2) em {
+  color: var(--on-plate-accent) !important;
 }
 
 /* ---- the eyebrow labels take the water ---------------------------------- */
@@ -4506,18 +4514,7 @@ html[data-theme="dark"] {
   .service-card:hover, .service-card:focus-visible { transform: none; }
 }
 
-/* ===================================================== WATER & SHINE ======
-   The identity is rendered, never printed flat: every blue surface carries a
-   vertical light and the drops carry a gloss. These stops feed the lockup's
-   SVG gradients; the plates and the dark theme swap them for the white-metal
-   version of the same finish.
-   ======================================================================== */
-:root {
-  --lk-a: #41699f;
-  --lk-b: #22375c;
-  --ld-a: #8cc0f0;
-  --ld-b: #2c599f;
-}
+
 .band-ink,
 .contact-band {
   --lk-a: #ffffff;
@@ -4525,12 +4522,7 @@ html[data-theme="dark"] {
   --ld-a: #e2f4ff;
   --ld-b: #7fb2ea;
 }
-html[data-theme="dark"] {
-  --lk-a: #f2f6ff;
-  --lk-b: #b4c7e4;
-  --ld-a: #dff2ff;
-  --ld-b: #80b2e8;
-}
+
 .logo-lockup { filter: drop-shadow(0 2px 4px rgb(23 40 70 / 0.28)); }
 .band-ink .logo-lockup,
 .contact-band .logo-lockup { filter: drop-shadow(0 3px 8px rgb(0 0 0 / 0.4)); }
@@ -4644,41 +4636,9 @@ html[data-theme="dark"] {
 .region-map__frame,
 .osm-map { border-radius: 16px; }
 
-/* ===========================================================================
-   ROYAL IDENTITY LAYER — the brand sheet, applied.
-   The sheet's system: saturated royal fills, white type on them, solid
-   numbered squares, and skewed ribbon labels. The slate #2B4570 stays the
-   reading ink on paper; the royal carries every fill, plate and badge.
-   ========================================================================= */
-:root {
-  --royal: #0b44d8;
-  --royal-2: #1e55d6;
-  --royal-deep: #0a33ad;
-  --electric: #1e55d6;
-  --forest: #0a33ad;
-  --forest-2: #0b44d8;
-  --grad-cta: linear-gradient(118deg, #0a35b5 0%, #0f47cf 48%, #1e55d6 100%);
-  --grad-tile:
-    radial-gradient(64% 54% at 100% 0%, rgb(57 198 224 / 0.35) 0%, transparent 62%),
-    linear-gradient(135deg, #0a33ad 0%, #1e55d6 100%);
-  --grad-em: linear-gradient(95deg, #2b4570 0%, #0b44d8 55%, #1e55d6 100%);
-}
-html[data-theme="dark"] {
-  --royal: #4d7df0;
-  --royal-2: #6b95f5;
-  --royal-deep: #2f5fd0;
-}
-html[data-theme="dark"] {
-  --forest: #12306f;
-  --forest-2: #1a3f94;
-  /* the dark CTA ends one step darker: white labels hold 4.9:1 at the
-     brightest edge instead of 3.8 */
-  --grad-cta: linear-gradient(118deg, #27479e 0%, #3058be 48%, #3a66d8 100%);
-  --grad-tile:
-    radial-gradient(64% 54% at 100% 0%, rgb(84 210 232 / 0.3) 0%, transparent 62%),
-    linear-gradient(135deg, #27479e 0%, #3a66d8 100%);
-  --grad-em: linear-gradient(95deg, #9db8ff 0%, #8fd8ea 100%);
-}
+
+
+
 
 /* ---- the ribbon: the sheet's label device --------------------------------
    Every section eyebrow becomes a solid royal ribbon, slightly skewed like
@@ -4783,61 +4743,8 @@ html[data-theme="dark"] .sc-label { background: var(--royal); color: #ffffff !im
   --c-line: 255 255 255;
 }
 
-/* ===========================================================================
-   WASSERLINIE — FINAL.
-   The direction, settled: kontai24's way of presenting information — calm
-   paper, dark readable text, tiny mono labels, quiet numbers — carried in
-   this brand's water blue. The royal layer's tokens are re-pointed here and
-   its louder devices (skewed ribbons, filled number squares) are retired.
-   ========================================================================= */
-:root {
-  /* dark text on paper: near-black with the water bias, 13:1 on the ground */
-  --c-bone: 18 28 46;
-  --c-bone2: 36 50 74;
-  --ink-on-surface: #121c2e;
-  --text-on-bone: #121c2e;
-  --head-on-bone: #0d1626;
-  --c-soft: 81 96 122;
 
-  /* the water accent */
-  --c-mint: 20 99 199;
-  --c-emerald: 30 107 214;
-  --c-accent-deep: 20 99 199;
-  --royal: #1463c7;
-  --royal-2: #2f7be0;
-  --royal-deep: #104f9e;
-  --electric: #1e6bd6;
-  --emerald-deep: #1463c7;
 
-  /* plates: deep water, not vivid royal */
-  --forest: #132033;
-  --forest-2: #1b2c47;
-  --grad: #16304f;
-  --grad-cta: linear-gradient(118deg, #15457f 0%, #1859a8 48%, #1e6bd6 100%);
-  --grad-tile:
-    radial-gradient(64% 54% at 100% 0%, rgb(57 198 224 / 0.3) 0%, transparent 62%),
-    linear-gradient(135deg, #16304f 0%, #1e6bd6 100%);
-  --grad-em: linear-gradient(95deg, #16304f 0%, #1463c7 60%, #1e6bd6 100%);
-
-  /* the lockup, matched to the navy render */
-  --lk-a: #3d5f91;
-  --lk-b: #233450;
-  --ld-a: #7fb3e8;
-  --ld-b: #2f5fa8;
-}
-html[data-theme="dark"] {
-  --royal: #5b96e8;
-  --royal-2: #7fb0f0;
-  --royal-deep: #4a82d4;
-  --electric: #6aa2ec;
-  --emerald-deep: #7fb0f0;
-  --forest: #152840;
-  --forest-2: #1d3658;
-  --grad-cta: linear-gradient(118deg, #1c3f6e 0%, #205090 48%, #2a67b8 100%);
-  --grad-tile:
-    radial-gradient(64% 54% at 100% 0%, rgb(84 210 232 / 0.28) 0%, transparent 62%),
-    linear-gradient(135deg, #1c3f6e 0%, #2a67b8 100%);
-}
 
 /* ---- labels, the kontai way: small, mono, water, no chrome ---------------- */
 .sc-label {
@@ -4901,13 +4808,9 @@ html[data-theme="dark"] .sc-label { background: transparent !important; color: v
 }
 .footer__wordmark span { font-weight: 600; opacity: 0.8; }
 
-/* ---------------------------------------------------- navigation lock -----
-   Flat and sharp at header size: the mark takes the surface ink, the drop
-   takes the water, the wordmark is one line. No gradients below poster size.
-   The full emblem (LogoLockup) stays for large-format uses. */
-:root { --logo-drop: #1e6bd6; }
+
 .band-ink, .contact-band { --logo-drop: #7cc7e8; }
-html[data-theme="dark"] { --logo-drop: #6aa2ec; }
+
 .logo {
   display: inline-flex;
   align-items: center;
@@ -5050,68 +4953,13 @@ main :is(.prose-sos, .faq-card__a, .chem__intro, .rx__note) {
    Scoped to the light theme; the dark theme keeps its navy plates.
    ========================================================================= */
 html:not([data-theme="dark"]) {
-  --c-ink: 255 255 255;
-  --c-ink2: 255 255 255;
-  --c-ink3: var(--pw-paper1-rgb);
-  --c-bone: 20 37 60;
-  --c-bone2: 11 27 46;
-  --c-soft: 51 67 90;
-  --c-mint: var(--pw-accent-rgb);
-  --c-emerald: var(--pw-mark-rgb);
-  --c-accent-deep: var(--pw-accent-rgb);
-  --c-line: 11 27 46;
-  --ink-on-surface: #14253c;
-  --text-on-bone: #14253c;
-  --head-on-bone: #0b1b2e;
-  --emerald-deep: var(--pw-accent);
-  --electric: var(--pw-accent);
-  --royal: var(--pw-accent);
-  --royal-2: var(--pw-mark);
-  --royal-deep: var(--pw-deep);
-  --aqua: var(--pw-aqua);
-  --aqua-deep: var(--pw-label);
-  --paper-0: #ffffff;
-  --paper-1: var(--pw-paper1);
-  --paper-2: var(--pw-paper2);
-  --paper: #ffffff;
-  --band-stone: #ffffff;
-  --band-mint: var(--pw-paper1);
-  --card: #ffffff;
-  --card-translucent: rgb(255 255 255 / 0.92);
-  --forest: #ffffff;
-  --forest-2: var(--pw-paper1);
-  --grad: var(--pw-accent);
-  --btn-ink: #ffffff;
   /* the CTA gradient's brightest stop still holds white text at 4.9:1 */
-  --grad-cta: linear-gradient(118deg, var(--pw-deep) 0%, var(--pw-accent) 52%, var(--pw-cta-hi) 100%);
-  --grad-tile:
-    radial-gradient(64% 54% at 100% 0%, rgb(var(--pw-aqua-rgb) / calc(0.45 * var(--pw-glow, 1))) 0%, transparent 62%),
-    linear-gradient(135deg, var(--pw-deep) 0%, var(--pw-cta-hi) 100%);
-  --grad-em: linear-gradient(95deg, var(--pw-deep) 0%, var(--pw-accent) 45%, var(--pw-em-hi) 100%);
-  --frame-line: rgb(11 27 46 / 0.09);
-  --line: rgb(11 27 46 / 0.1);
-  --lk-a: #1d548f;
-  --lk-b: #0f3460;
-  --ld-a: #66c2ee;
-  --ld-b: #1580c8;
-  --logo-drop: #1a90d2;
-  --brand: #0f3460;
-  --brand-2: #1580c8;
-  --nav-bg: rgb(255 255 255 / 0.9);
-  --sc-canvas: #ffffff;
-  --sc-surface: #ffffff;
-  --sc-ink: #14253c;
-  --sc-ink-soft: #33435a;
-  --sc-accent: var(--pw-accent);
-  --map-bg: var(--pw-paper1);
-  --map-context: var(--pw-paper2);
-  --stage-bg: radial-gradient(70% 60% at 50% 40%, #ffffff, transparent 72%),
-    linear-gradient(180deg, var(--pw-hero) 0%, var(--pw-paper2) 100%);
-  color-scheme: light;
+    color-scheme: light;
 }
 
-/* ---- the plates become sun-white sections in the light theme ------------- */
-html:not([data-theme="dark"]) .band-ink {
+/* ---- the header bar stays a light band in the light theme; the hero and the
+   Lab opener stay plates (design system: plates in both themes) ---------- */
+html:not([data-theme="dark"]) .band-ink:not(.hero, .lab-top) {
   background: #ffffff;
   --c-ink: 255 255 255;
   --c-ink2: 255 255 255;
@@ -5149,15 +4997,6 @@ html:not([data-theme="dark"]) .band-ink {
   color-scheme: light;
 }
 
-/* the hero and the Lab opener: sun white with water light on it */
-html:not([data-theme="dark"]) .hero.band-ink,
-html:not([data-theme="dark"]) .lab-top.band-ink {
-  background:
-    radial-gradient(55% 75% at 96% 4%, rgb(var(--pw-aqua-rgb) / calc(0.2 * var(--pw-glow, 1))) 0%, transparent 62%),
-    radial-gradient(45% 60% at -6% 100%, rgb(var(--pw-accent-rgb) / 0.1) 0%, transparent 68%),
-    linear-gradient(180deg, var(--pw-hero) 0%, #ffffff 100%);
-  border-bottom: 1px solid rgb(11 27 46 / 0.06);
-}
 
 /* ---- text hierarchy: headings lead, body follows, muted recedes ---------- */
 html:not([data-theme="dark"]) :is(main, .mnav) :is(h1, h2, h3, h4):not(.sc-label),
@@ -5169,11 +5008,9 @@ html:not([data-theme="dark"]) .band-ink :is(h1, h2):not(.sc-label) {
 /* the gradient feature tile keeps its white type */
 html:not([data-theme="dark"]) .services-grid > li:first-child .service-card__h { color: #ffffff !important; }
 
-html:not([data-theme="dark"]) :is(.band-ink, .contact-band) .sc-lede { color: #14253c !important; }
-html:not([data-theme="dark"]) main .sc-lede { color: #1b2d47 !important; }
+html:not([data-theme="dark"]) main .sc-lede { color: var(--text-on-bone) !important; }
 
-html:not([data-theme="dark"]) .band-ink :is(.sc-display, h1, h2) em,
-html:not([data-theme="dark"]) .contact-band :is(.sc-display, h1, h2) em {
+html:not([data-theme="dark"]) .band-ink:not(.hero, .lab-top) :is(.sc-display, h1, h2) em {
   background-image: var(--grad-em) !important;
   -webkit-background-clip: text !important;
   background-clip: text !important;
@@ -5181,8 +5018,7 @@ html:not([data-theme="dark"]) .contact-band :is(.sc-display, h1, h2) em {
   color: var(--pw-accent) !important;
 }
 
-html:not([data-theme="dark"]) .sc-label,
-html:not([data-theme="dark"]) :is(.band-ink, .contact-band) .sc-label {
+html:not([data-theme="dark"]) .sc-label {
   color: var(--pw-label) !important;
   background: transparent !important;
 }
@@ -5560,7 +5396,7 @@ html:not([data-theme="dark"]) .surface-pop {
 }
 #kontakt .contact-card__name {
   margin: 0;
-  font-family: "Segoe UI", var(--font-sans), system-ui, sans-serif !important;
+  font-family: var(--font-sans), "Segoe UI", system-ui, sans-serif !important;
   font-size: 1.45rem !important;
   font-weight: 700 !important;
   letter-spacing: -0.02em;
@@ -5614,8 +5450,8 @@ html[data-theme="dark"] #kontakt .contact-card__cover::after {
 }
 html[data-theme="dark"] #kontakt .contact-card__portrait { border-color: rgb(var(--c-ink2)); }
 html[data-theme="dark"] #kontakt .contact-card__claim {
-  background-image: linear-gradient(100deg, #7cc4f2 0%, #a6dcfa 100%) !important;
-  color: #a6dcfa !important;
+  background-image: linear-gradient(100deg, var(--pw-on-dark2) 0%, var(--pw-on-dark) 100%) !important;
+  color: var(--pw-on-dark) !important;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -5623,106 +5459,13 @@ html[data-theme="dark"] #kontakt .contact-card__claim {
   #team .brand-gallery__item:hover { transform: none; }
 }
 
-/* ===========================================================================
-   PALETTE - what the colour slider moves (src/lib/tone.ts). These are the
-   water defaults; the slider overrides them inline on <html> in the light
-   theme, from "Hell" (tints all but gone) through water to "Grün".
-   ========================================================================= */
-:root {
-  --pw-accent: #0b63a8;
-  --pw-accent-rgb: 11 99 168;
-  --pw-deep: #0a4f8a;
-  --pw-deep-rgb: 10 79 138;
-  --pw-mark: #1784c7;
-  --pw-mark-rgb: 23 132 199;
-  --pw-aqua: #1fa9d6;
-  --pw-aqua-rgb: 31 169 214;
-  --pw-label: #0a6fa8;
-  --pw-cta-hi: #0f74bf;
-  --pw-em-hi: #1590c9;
-  --pw-paper1: #f1f8fd;
-  --pw-paper1-rgb: 241 248 253;
-  --pw-paper2: #e3f1fa;
-  --pw-wash1: #eaf5fc;
-  --pw-wash2: #d9edf9;
-  --pw-hero: #f5fafe;
-  --pw-shot: #dbe9f4;
-  --pw-brick: #2b4570;
-  --pw-glow: 1;
-}
-/* the client's navy accent and the feature tile follow the slider too */
-html:not([data-theme="dark"]) { --brick: var(--pw-brick); }
+
+
 html:not([data-theme="dark"]) .services-grid > li:first-child .service-card { --card: var(--pw-brick); }
 html:not([data-theme="dark"]) .services-grid > li:first-child .service-card:hover .service-card__icon { color: var(--pw-brick); }
 
-/* ---- the slider ------------------------------------------------------------ */
-.tone { display: flex; align-items: center; gap: 0.55rem; }
-.tone__k {
-  font-family: var(--sc-font-mono, ui-monospace, monospace);
-  font-size: 0.6875rem;
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: rgb(var(--c-soft));
-}
-.tone__i { flex: none; width: 1.05rem; height: 1.05rem; color: #c99a1e; }
-.tone__i--leaf { color: #159a63; }
-.tone__range {
-  -webkit-appearance: none;
-  appearance: none;
-  flex: 1;
-  min-width: 0;
-  height: 10px;
-  margin: 0;
-  border-radius: 999px;
-  background: linear-gradient(90deg, #eef2f6 0%, #8fd3ec 24%, #1784c7 50%, #2fc48a 76%, #0c6e4a 100%);
-  box-shadow: inset 0 0 0 1px rgb(11 27 46 / 0.12);
-  cursor: pointer;
-}
-.tone__range::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  appearance: none;
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  background: #ffffff;
-  border: 4px solid var(--pw-accent);
-  box-shadow: 0 2px 8px rgb(6 20 40 / 0.35);
-  transition: transform 150ms ease;
-}
-.tone__range::-moz-range-thumb {
-  width: 14px;
-  height: 14px;
-  border-radius: 50%;
-  background: #ffffff;
-  border: 4px solid var(--pw-accent);
-  box-shadow: 0 2px 8px rgb(6 20 40 / 0.35);
-}
-.tone__range:active::-webkit-slider-thumb { transform: scale(1.12); }
-.tone__range:focus-visible { outline: 2px solid var(--pw-accent); outline-offset: 5px; }
-.tone__v {
-  min-width: 3.6rem;
-  font-size: 0.8125rem;
-  font-weight: 700;
-  color: var(--head-on-bone);
-  text-align: right;
-}
-.tone--compact {
-  height: 44px;
-  padding: 0 0.85rem;
-  border-radius: 999px;
-  background: rgb(255 255 255 / 0.9);
-  border: 1px solid rgb(11 27 46 / 0.12);
-}
-.tone--compact .tone__range { width: 6.75rem; flex: none; }
-html[data-theme="dark"] .tone--compact { background: rgb(255 255 255 / 0.06); border-color: rgb(255 255 255 / 0.16); }
-html[data-theme="dark"] .tone__v { color: #eef4fb; }
 
-/* ===========================================================================
-   WORDMARK - the client's logo as outlines (components/brand/Logo.tsx).
-   ========================================================================= */
-:root { --logo-blue: #0b8ad0; --logo-navy: #173455; --logo-brick: #b95642; }
-html[data-theme="dark"] { --logo-blue: #3fb0ee; --logo-navy: #f2f6fb; }
+
 .logo { display: inline-flex; align-items: center; gap: 0; color: inherit; filter: none; }
 .logo__svg { display: block; height: 2.7rem; width: auto; overflow: visible; }
 .logo__blue { fill: var(--logo-blue); }
@@ -5744,7 +5487,6 @@ footer .logo__svg { height: 3.1rem; }
 }
 .mnav__prefs { margin-top: 2.25rem; padding-top: 1.25rem; border-top: 1px solid rgb(var(--c-line) / 0.14); display: grid; gap: 1rem; }
 .mnav__prefs .mnav__lang { margin: 0; padding: 0; border: 0; }
-.mnav__tone .tone__range { max-width: 16rem; }
 
 @media (min-width: 1024px) {
   .mnav-scrim {
@@ -5835,7 +5577,7 @@ html[data-theme="dark"] .mnav__foot { background: rgb(255 255 255 / 0.04); borde
    Scoped under the section ids: the running-text rule outranks classes.
    ========================================================================= */
 .kit-art { display: block; width: 100%; height: auto; }
-.kit-art text { font-family: "Segoe UI", var(--font-sans), system-ui, sans-serif; }
+.kit-art text { font-family: var(--font-sans), "Segoe UI", system-ui, sans-serif; }
 
 :is(#ausruestung, #material) .kit-group { margin-top: 2.5rem; }
 :is(#ausruestung, #material) .kit-group__k {
@@ -5948,7 +5690,7 @@ html[data-theme="dark"] .mnav__foot { background: rgb(255 255 255 / 0.04); borde
   border: 0;
   background: transparent;
   color: #14253c;
-  font-family: "Segoe UI", var(--font-sans), system-ui, Tahoma, Verdana, sans-serif;
+  font-family: var(--font-sans), "Segoe UI", system-ui, Tahoma, Verdana, sans-serif;
   overflow: visible;
 }
 .qv--wide { width: min(52rem, calc(100vw - 2rem)); }
@@ -6126,20 +5868,20 @@ html[data-theme="dark"] .qv__card { background: rgb(var(--c-ink2)); box-shadow: 
 html[data-theme="dark"] .qv__t { color: #f2f6fb; }
 html[data-theme="dark"] .qv__lead { color: #e2eaf3; }
 html[data-theme="dark"] .qv__p, html[data-theme="dark"] .qv-facts dd { color: #b9c7d6; }
-html[data-theme="dark"] .qv__k { color: #7cc4f2; }
+html[data-theme="dark"] .qv__k { color: var(--pw-on-dark2); }
 html[data-theme="dark"] .qv__x,
 html[data-theme="dark"] .qv__btn:not(.qv__btn--solid) { background: rgb(255 255 255 / 0.06); border-color: rgb(255 255 255 / 0.16); color: #f2f6fb; }
 html[data-theme="dark"] .qv__eq,
 html[data-theme="dark"] .qv-facts > div { background: rgb(255 255 255 / 0.05); border-color: rgb(255 255 255 / 0.12); color: #e2eaf3; }
-html[data-theme="dark"] .qv-facts dt { color: #a6dcfa; }
-html[data-theme="dark"] .qv__chips a { color: #a6dcfa; border-color: rgb(166 220 250 / 0.35); }
+html[data-theme="dark"] .qv-facts dt { color: var(--pw-on-dark); }
+html[data-theme="dark"] .qv__chips a { color: var(--pw-on-dark); border-color: rgb(166 220 250 / 0.35); }
 html[data-theme="dark"] .qv-kit__art { background: #e9f2f9; }
 html[data-theme="dark"] .kit-card { background: rgb(var(--c-ink2)); border-color: rgb(255 255 255 / 0.1); }
 html[data-theme="dark"] .kit-card__art { background: linear-gradient(180deg, #eef5fb, #dceaf5); }
 html[data-theme="dark"] .kit-card__name { color: #f2f6fb; }
 html[data-theme="dark"] .kit-card__short { color: #b9c7d6; }
-html[data-theme="dark"] .kit-card__more { color: #7cc4f2; }
-html[data-theme="dark"] :is(#ausruestung, #material) .kit-group__k { color: #7cc4f2 !important; }
+html[data-theme="dark"] .kit-card__more { color: var(--pw-on-dark2); }
+html[data-theme="dark"] :is(#ausruestung, #material) .kit-group__k { color: var(--pw-on-dark2) !important; }
 
 /* ===========================================================================
    ANGEBOTSRECHNER - size of the job, not a price (QuoteCalculator).
@@ -6400,12 +6142,11 @@ html[data-theme="dark"] #rechner .quote__state[aria-pressed="true"] { background
 html[data-theme="dark"] #rechner .quote__out { background: rgb(255 255 255 / 0.03); }
 html[data-theme="dark"] #rechner :is(.quote__big, .quote__how strong) { color: #f2f6fb !important; }
 html[data-theme="dark"] #rechner :is(.quote__big span, .quote__level span, .quote__list li, .quote__how li, .quote__note) { color: #c9d6e3 !important; }
-html[data-theme="dark"] #rechner :is(.quote__level, .quote__qty) { color: #a6dcfa !important; }
+html[data-theme="dark"] #rechner :is(.quote__level, .quote__qty) { color: var(--pw-on-dark) !important; }
 html[data-theme="dark"] #rechner .quote__qty { background: rgb(255 255 255 / 0.06); }
-html[data-theme="dark"] #rechner .quote__k--plain { color: #7cc4f2 !important; }
+html[data-theme="dark"] #rechner .quote__k--plain { color: var(--pw-on-dark2) !important; }
 html[data-theme="dark"] #rechner .quote__meter span { background: rgb(255 255 255 / 0.1); }
-html[data-theme="dark"] #rechner .quote__meter span.is-on { background: linear-gradient(180deg, #7cc4f2, #1784c7); }
-.tone--panel .tone__k { color: rgb(var(--c-bone)); }
+html[data-theme="dark"] #rechner .quote__meter span.is-on { background: linear-gradient(180deg, var(--pw-on-dark2), #1784c7); }
 /* phones: the kit as a compact two-up grid; the quick view carries the detail */
 @media (max-width: 560px) {
   :is(#ausruestung, #material) .kit-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.65rem; }
@@ -6576,7 +6317,7 @@ html[data-theme="dark"] .hero-film__chapters button { color: #c9d6e3; }
 html[data-theme="dark"] .hero-film__chapters button[aria-current] { background: rgb(255 255 255 / 0.08); color: #ffffff; }
 html[data-theme="dark"] .hero-film__who > span { color: #c9d6e3; }
 html[data-theme="dark"] .hero-film__who strong { color: #ffffff; }
-html[data-theme="dark"] .hero-film__k { color: #7cc4f2; }
+html[data-theme="dark"] .hero-film__k { color: var(--pw-on-dark2); }
 
 /* the owner under every quick view */
 .qv__owner {
@@ -6654,37 +6395,6 @@ html.i18n-wait body { opacity: 0; animation: i18n-release 0s linear 2.5s forward
   font-weight: 700;
   color: var(--pw-deep);
 }
-.ap-swatches { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.45rem; }
-.ap-swatch {
-  display: grid;
-  justify-items: center;
-  gap: 0.35rem;
-  padding: 0.6rem 0.25rem 0.5rem;
-  border-radius: 14px;
-  border: 1.5px solid rgb(11 27 46 / 0.1);
-  background: #ffffff;
-  font-size: 0.78rem;
-  font-weight: 700;
-  color: #14253c;
-  cursor: pointer;
-  transition: border-color 160ms, box-shadow 160ms, transform 160ms;
-}
-.ap-swatch:hover { border-color: rgb(var(--pw-accent-rgb) / 0.45); transform: translateY(-1px); }
-.ap-swatch[aria-pressed="true"] {
-  border-color: var(--pw-accent);
-  box-shadow: 0 0 0 3px rgb(var(--pw-accent-rgb) / 0.15);
-  color: #0b1b2e;
-}
-.ap-swatch__dot {
-  width: 2rem;
-  height: 2rem;
-  border-radius: 999px;
-  box-shadow: inset 0 0 0 1px rgb(11 27 46 / 0.12), 0 4px 10px -6px rgb(6 20 40 / 0.5);
-}
-.ap-swatch__dot--sun { background: radial-gradient(circle at 35% 30%, #ffffff 0 40%, #eef3f7 70%, #dfe7ee 100%); }
-.ap-swatch__dot--water { background: radial-gradient(circle at 35% 30%, #8fd3ec 0%, #1784c7 55%, #0a4f8a 100%); }
-.ap-swatch__dot--green { background: radial-gradient(circle at 35% 30%, #7fe0b4 0%, #159a63 55%, #0b5e40 100%); }
-.ap__slider { padding: 0.15rem 0.1rem 0; }
 .ap-seg {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -6721,27 +6431,19 @@ html.i18n-wait body { opacity: 0; animation: i18n-release 0s linear 2.5s forward
 .ap-seg button[aria-pressed="true"] svg { color: var(--pw-accent); }
 .ap-seg--size button span { font-weight: 800; line-height: 1; }
 .ap button:focus-visible { outline: 2px solid var(--pw-accent); outline-offset: 2px; }
-@media (prefers-reduced-motion: reduce) { .ap { animation: none; } .ap-swatch { transition: none; } }
+@media (prefers-reduced-motion: reduce) { .ap { animation: none; } }
 
 html[data-theme="dark"] .ap { background: rgb(var(--c-ink2) / 0.97); border-color: rgb(255 255 255 / 0.12); color: #f2f6fb; }
 html[data-theme="dark"] .ap__k { color: #d7e2ee; }
-html[data-theme="dark"] .ap__v { background: rgb(255 255 255 / 0.06); color: #a6dcfa; border-color: rgb(255 255 255 / 0.14); }
-html[data-theme="dark"] .ap-swatch { background: rgb(255 255 255 / 0.04); border-color: rgb(255 255 255 / 0.14); color: #d7e2ee; }
+html[data-theme="dark"] .ap__v { background: rgb(255 255 255 / 0.06); color: var(--pw-on-dark); border-color: rgb(255 255 255 / 0.14); }
 html[data-theme="dark"] .ap-seg { background: rgb(255 255 255 / 0.06); border-color: rgb(255 255 255 / 0.08); }
 html[data-theme="dark"] .ap-seg button { color: #c9d6e3; }
 html[data-theme="dark"] .ap-seg button[aria-pressed="true"] { background: rgb(255 255 255 / 0.14); color: #ffffff; }
 
-/* ===========================================================================
-   SHARP TEXT - darker inks, heavier weights, justified running text.
-   No light shades: body #14253C, secondary #33435A (9:1 on white).
-   Windows 11's variable Segoe UI comes first so 500/650 render as such.
-   ========================================================================= */
-:root {
-  --font-ui: "Segoe UI Variable Text", "Segoe UI", var(--font-sans), system-ui, Tahoma, Verdana, sans-serif;
-  --font-display: "Segoe UI Variable Display", "Segoe UI", var(--font-sans), system-ui, Tahoma, Verdana, sans-serif;
-}
-html:not([data-theme="dark"]),
-html:not([data-theme="dark"]) :is(.band-ink, .contact-band, .faq-ask, .surface-pop) {
+
+html:not([data-theme="dark"]) :is(.band-ink:not(.hero, .lab-top),
+.faq-ask,
+.surface-pop) {
   --c-bone: 20 37 60;
   --c-soft: 51 67 90;
   --ink-on-surface: #14253c;
@@ -7042,9 +6744,9 @@ html:not([data-theme="dark"]) .city-card__meta { color: #22344d !important; }
 
 html[data-theme="dark"] .svc-hero { background: rgb(var(--c-ink)); border-bottom-color: rgb(255 255 255 / 0.08); }
 html[data-theme="dark"] :is(.svc-btn:not(.svc-btn--solid), .svc-hero__chip, .svc-facts > div, .svc-signs li, .svc-step) { background: rgb(255 255 255 / 0.05); border-color: rgb(255 255 255 / 0.12); color: #f2f6fb !important; }
-html[data-theme="dark"] .svc-hero__chip, html[data-theme="dark"] .svc-btn small, html[data-theme="dark"] .svc-signs__cta { color: #a6dcfa !important; }
+html[data-theme="dark"] .svc-hero__chip, html[data-theme="dark"] .svc-btn small, html[data-theme="dark"] .svc-signs__cta { color: var(--pw-on-dark) !important; }
 html[data-theme="dark"] :is(.svc-hero__trust li, .svc-signs__k, .svc-step__t, .svc-facts dd, .svc-signs li) { color: #f2f6fb !important; }
-html[data-theme="dark"] .svc-facts dt { background-image: linear-gradient(100deg, #a6dcfa, #7cc4f2); }
+html[data-theme="dark"] .svc-facts dt { background-image: linear-gradient(100deg, var(--pw-on-dark), var(--pw-on-dark2)); }
 html[data-theme="dark"] .svc-signs { background: rgb(255 255 255 / 0.03); border-color: rgb(255 255 255 / 0.1); }
 html[data-theme="dark"] :is(.svc-steps, .svc-prose, .svc-faq) { background: transparent; }
 html[data-theme="dark"] .chapnav { background: rgb(var(--c-ink) / 0.92); border-bottom-color: rgb(255 255 255 / 0.1); }
@@ -7231,8 +6933,8 @@ html[data-theme="dark"] :is(.lab-stats > div, .lab-chapter, .labtabs__list, .lab
 html[data-theme="dark"] :is(.lab-stats dd, .lab-chapter__l, .labpanel__h, .labpanel__rx-stage, .labpanel__out) { color: #f2f6fb !important; }
 html[data-theme="dark"] .labtabs__tab { color: #d7e2ee; }
 html[data-theme="dark"] :is(.labpanel__rx > li, .labpanel__rx-eq) { background: rgb(255 255 255 / 0.05); border-color: rgb(255 255 255 / 0.1); color: #f2f6fb !important; }
-html[data-theme="dark"] .labpanel__k, html[data-theme="dark"] .labpanel__out span { color: #a6dcfa !important; }
-html[data-theme="dark"] .lab-stats dt { background-image: linear-gradient(100deg, #a6dcfa, #7cc4f2); }
+html[data-theme="dark"] .labpanel__k, html[data-theme="dark"] .labpanel__out span { color: var(--pw-on-dark) !important; }
+html[data-theme="dark"] .lab-stats dt { background-image: linear-gradient(100deg, var(--pw-on-dark), var(--pw-on-dark2)); }
 
 /* ===========================================================================
    GALERIE - film wall, film quick view, feedback.
@@ -7369,9 +7071,9 @@ html[data-theme="dark"] .qv-film__chapters li { background: rgb(255 255 255 / 0.
 
 /* dark theme: small labels on the new blocks */
 html[data-theme="dark"] .svc-btn--solid small { color: #ffffff !important; }
-html[data-theme="dark"] .lab-chapter__n { color: #a6dcfa; }
+html[data-theme="dark"] .lab-chapter__n { color: var(--pw-on-dark); }
 html[data-theme="dark"] .labtabs__tab[aria-selected="true"],
-html[data-theme="dark"] .chapnav .chapnav__a[aria-current] { background: linear-gradient(118deg, #0a4f8a 0%, #0b5d9e 100%); }
+html[data-theme="dark"] .chapnav .chapnav__a[aria-current] { background: var(--action); }
 @media (max-width: 639px) {
   .svc-hero__cta { display: grid; grid-template-columns: 1fr; }
   .svc-btn { width: 100%; }
@@ -7722,11 +7424,11 @@ html[data-theme="dark"] .anim {
   --cap-bg: rgb(255 255 255 / 0.04);
   --cap-line: rgb(255 255 255 / 0.12);
   --cap-on-bg: rgb(166 220 250 / 0.12);
-  --cap-on-line: #7cc4f2;
+  --cap-on-line: var(--pw-on-dark2);
 }
 html[data-theme="dark"] .anim__label { color: #f2f6fb !important; }
-html[data-theme="dark"] .anim__label span { background: rgb(255 255 255 / 0.08); color: #a6dcfa; }
-html[data-theme="dark"] .anim__k { color: #a6dcfa; }
+html[data-theme="dark"] .anim__label span { background: rgb(255 255 255 / 0.08); color: var(--pw-on-dark); }
+html[data-theme="dark"] .anim__k { color: var(--pw-on-dark); }
 
 /* where the scenarios sit */
 .labtabs__panel > .anim {
@@ -7970,9 +7672,9 @@ html[data-theme="dark"] .more { background: transparent; }
 html[data-theme="dark"] .more__card { background: rgb(255 255 255 / 0.04); border-color: rgb(255 255 255 / 0.12); }
 html[data-theme="dark"] :is(.more__t, .more__quick-k) { color: #f2f6fb; }
 html[data-theme="dark"] .more__d { color: #d7e2ee; }
-html[data-theme="dark"] .more__k { color: #a6dcfa; }
+html[data-theme="dark"] .more__k { color: var(--pw-on-dark); }
 html[data-theme="dark"] .more__chip { background: rgb(255 255 255 / 0.05); border-color: rgb(255 255 255 / 0.16); color: #f2f6fb !important; }
-html[data-theme="dark"] .more__chip--line { color: #a6dcfa !important; }
+html[data-theme="dark"] .more__chip--line { color: var(--pw-on-dark) !important; }
 html[data-theme="dark"] .more__sep { background: rgb(255 255 255 / 0.16); }
 @media (prefers-reduced-motion: reduce) { .more__card, .more__img img, .more__go { transition: none; } .more__card:hover { transform: none; } .more__card:hover .more__img img { transform: none; } }
 
@@ -8025,7 +7727,7 @@ html[data-theme="dark"] .more__sep { background: rgb(255 255 255 / 0.16); }
 }
 html[data-theme="dark"] .factchips > .factchips__label { background: rgb(255 255 255 / 0.06); border-color: rgb(255 255 255 / 0.14); color: #d7e2ee !important; }
 html[data-theme="dark"] .factchips__t strong { color: #ffffff; }
-html[data-theme="dark"] .factchips__i { background: rgb(255 255 255 / 0.08); color: #a6dcfa; }
+html[data-theme="dark"] .factchips__i { background: rgb(255 255 255 / 0.08); color: var(--pw-on-dark); }
 
 /* ===========================================================================
    SERVICE AREA - the six towns framed, each with its own outline.
@@ -8079,8 +7781,8 @@ html[data-theme="dark"] .factchips__i { background: rgb(255 255 255 / 0.08); col
 }
 html[data-theme="dark"] .cityf__card { background: rgb(255 255 255 / 0.04); border-color: rgb(255 255 255 / 0.12); color: #f2f6fb !important; }
 html[data-theme="dark"] .cityf__logo { background: rgb(255 255 255 / 0.05); }
-html[data-theme="dark"] .cityf__logo path { fill: rgb(124 196 242 / 0.25); stroke: #7cc4f2; }
-html[data-theme="dark"] .cityf__plz { color: #a6dcfa; }
+html[data-theme="dark"] .cityf__logo path { fill: rgb(124 196 242 / 0.25); stroke: var(--pw-on-dark2); }
+html[data-theme="dark"] .cityf__plz { color: var(--pw-on-dark); }
 html[data-theme="dark"] .cityf__time { background: rgb(52 211 153 / 0.14); color: #6ee7b7; }
 html[data-theme="dark"] #mehr .more__area-k { color: #f2f6fb !important; }
 html[data-theme="dark"] #mehr .more__area-k span { color: #c9d6e3; }
@@ -8116,11 +7818,11 @@ html[data-theme="dark"] #mehr .more__area-k span { color: #c9d6e3; }
 html[data-theme="dark"] .qv-city__map { background: rgb(255 255 255 / 0.04); }
 html[data-theme="dark"] .qv-city__map > path { fill: rgb(255 255 255 / 0.12); stroke: rgb(var(--c-ink)); }
 html[data-theme="dark"] .qv-city__map > path.is-on { fill: #2b8fd6; }
-html[data-theme="dark"] .qv-city__map > path.qv-city__route { stroke: #a6dcfa; }
+html[data-theme="dark"] .qv-city__map > path.qv-city__route { stroke: var(--pw-on-dark); }
 html[data-theme="dark"] :is(.qv-city__label, .qv-city__hq text) { fill: #f2f6fb; stroke: rgb(var(--c-ink)); }
 html[data-theme="dark"] .qv-city__facts > div { background: rgb(255 255 255 / 0.05); border-color: rgb(255 255 255 / 0.1); }
 html[data-theme="dark"] .qv-city__facts dd { color: #f2f6fb; }
-html[data-theme="dark"] .qv-city__facts dt { color: #a6dcfa; }
+html[data-theme="dark"] .qv-city__facts dt { color: var(--pw-on-dark); }
 html[data-theme="dark"] .qv-city__facts dd > span:not(:only-child) { color: #c9d6e3; }
 html[data-theme="dark"] .qv-city__plz > span { background: rgb(255 255 255 / 0.06); border-color: rgb(255 255 255 / 0.14); color: #f2f6fb !important; }
 
@@ -8248,7 +7950,7 @@ html[data-theme="dark"] .steps4 { background: transparent; }
 html[data-theme="dark"] .steps4__art { border-color: rgb(255 255 255 / 0.12); }
 html[data-theme="dark"] #schritte .steps4__t { color: #f2f6fb !important; }
 html[data-theme="dark"] .steps4__btn:not(.steps4__btn--solid) { background: rgb(255 255 255 / 0.06); border-color: rgb(255 255 255 / 0.14); color: #f2f6fb !important; }
-html[data-theme="dark"] .steps4__btn-i { background: rgb(255 255 255 / 0.08); color: #a6dcfa; }
+html[data-theme="dark"] .steps4__btn-i { background: rgb(255 255 255 / 0.08); color: var(--pw-on-dark); }
 @media (max-width: 639px) {
   .factchips > .factchips__label { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 0.5rem; font-size: 0.8rem !important; line-height: 1.3 !important; }
   .factchips__t strong { font-size: 0.95rem; line-height: 1.2; }
@@ -8439,14 +8141,14 @@ html[data-theme="dark"] .steps4__btn-i { background: rgb(255 255 255 / 0.08); co
 
 html[data-theme="dark"] .site-footer { background: rgb(var(--c-ink)); color: #e2eaf3; border-top-color: rgb(255 255 255 / 0.1); }
 html[data-theme="dark"] .site-footer__bg { opacity: 0.75; }
-html[data-theme="dark"] .site-footer__claim { color: #a6dcfa; }
+html[data-theme="dark"] .site-footer__claim { color: var(--pw-on-dark); }
 html[data-theme="dark"] :is(.site-footer__about, .site-footer__addr, .site-footer__base) { color: #c9d6e3; }
 html[data-theme="dark"] .site-footer__h { color: #ffffff; }
 html[data-theme="dark"] .site-footer__grp li a { color: #d7e2ee; }
 html[data-theme="dark"] .site-footer__links { background: rgb(255 255 255 / 0.04); border-color: rgb(255 255 255 / 0.1); box-shadow: none; }
 html[data-theme="dark"] .site-footer__links > nav + nav { border-top-color: rgb(255 255 255 / 0.1); }
 html[data-theme="dark"] .site-footer__line { background: rgb(255 255 255 / 0.08); border-color: rgb(255 255 255 / 0.16); color: #ffffff !important; }
-html[data-theme="dark"] .site-footer__line small { color: #a6dcfa; }
+html[data-theme="dark"] .site-footer__line small { color: var(--pw-on-dark); }
 html[data-theme="dark"] .site-footer__base { border-top-color: rgb(255 255 255 / 0.12); }
 @media (prefers-reduced-motion: reduce) {
   .site-footer__kontakt, .site-footer__kontakt svg, .site-footer__line, .site-footer__grp > summary svg { transition: none; }
@@ -8485,11 +8187,7 @@ html[data-theme="dark"] .site-footer__base .site-footer__addr { color: #e2eaf3; 
 }
 
 
-/* ===========================================================================
-   COLOURFUL ICONS - each service, figure, link card and town its own colour;
-   on phones the swipe rows become compact icon tiles, everything in view.
-   ========================================================================= */
-:root { --ic-green: #15803d; --ic-red: #b42318; --ic-water: #0b6fb3; }
+
 .services-grid > li:nth-child(3n + 1) .service-card { --ic: var(--ic-green); }
 .services-grid > li:nth-child(3n + 2) .service-card { --ic: var(--ic-red); }
 .services-grid > li:nth-child(3n) .service-card { --ic: var(--ic-water); }
@@ -8514,8 +8212,8 @@ html[data-theme="dark"] .site-footer__base .site-footer__addr { color: #e2eaf3; 
 .steps4__cta a[href*="wa.me"] .steps4__btn-i { background: color-mix(in srgb, var(--ic-red) 12%, #ffffff); }
 html[data-theme="dark"] .service-card[data-svc] .service-card__icon { color: color-mix(in srgb, var(--ic) 62%, #ffffff) !important; background: color-mix(in srgb, var(--ic) 24%, transparent) !important; border-color: color-mix(in srgb, var(--ic) 45%, transparent) !important; }
 html[data-theme="dark"] :is(.factchips__i, .more__ico) { background: color-mix(in srgb, var(--ic, var(--pw-accent)) 24%, transparent); color: color-mix(in srgb, var(--ic, var(--pw-accent)) 62%, #ffffff); }
-html[data-theme="dark"] .more__k { color: color-mix(in srgb, var(--ic, #a6dcfa) 55%, #ffffff); }
-html[data-theme="dark"] .cityf__logo path { fill: color-mix(in srgb, var(--ic, #7cc4f2) 30%, transparent); stroke: color-mix(in srgb, var(--ic, #7cc4f2) 65%, #ffffff); }
+html[data-theme="dark"] .more__k { color: color-mix(in srgb, var(--ic, var(--pw-on-dark)) 55%, #ffffff); }
+html[data-theme="dark"] .cityf__logo path { fill: color-mix(in srgb, var(--ic, var(--pw-on-dark2)) 30%, transparent); stroke: color-mix(in srgb, var(--ic, var(--pw-on-dark2)) 65%, #ffffff); }
 html[data-theme="dark"] :is(.mobile-contact, .site-footer__act, .steps4__cta) a[href^="tel:"] svg { color: #4ade80 !important; }
 html[data-theme="dark"] :is(.mobile-contact, .site-footer__act, .steps4__cta) a[href*="wa.me"] svg { color: #f87171 !important; }
 html[data-theme="dark"] .steps4__cta a:is([href^="tel:"], [href*="wa.me"]) .steps4__btn-i { background: rgb(255 255 255 / 0.08); }
@@ -8685,7 +8383,7 @@ html[data-theme="dark"] .factchips__label--plain .factchips__t strong { color: c
 html[data-theme="dark"] .svc-fold__sum { background: rgb(255 255 255 / 0.04); border-color: rgb(255 255 255 / 0.12); }
 html[data-theme="dark"] .svc-fold__t { color: #f2f6fb; }
 html[data-theme="dark"] .svc-fold__d { color: #c9d6e3; }
-html[data-theme="dark"] .svc-fold__k { color: color-mix(in srgb, var(--ic, #a6dcfa) 55%, #ffffff); }
+html[data-theme="dark"] .svc-fold__k { color: color-mix(in srgb, var(--ic, var(--pw-on-dark)) 55%, #ffffff); }
 html[data-theme="dark"] .svc-fold__i { background: color-mix(in srgb, var(--ic) 24%, transparent); color: color-mix(in srgb, var(--ic) 62%, #ffffff); }
 @media (prefers-reduced-motion: reduce) { .svc-fold__sum, .svc-fold__go svg { transition: none; } .svc-fold__sum:hover { transform: none; } }
 /* buttons never let their text run out of the box */
@@ -8720,3 +8418,322 @@ html[data-theme="dark"] .svc-fold__i { background: color-mix(in srgb, var(--ic) 
   .hero-film__chapters button { min-width: 0; white-space: normal; }
   .kit-card__name, .quote__svc { -webkit-hyphens: auto; hyphens: auto; overflow-wrap: anywhere; }
 }
+
+
+
+
+
+/* the controls: three swatches, a picker, and the colour wheel slider */
+.hue-wrap { display: grid; gap: 0.7rem; }
+.hue-swatches { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0.4rem; }
+.hue-swatch {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  gap: 0.35rem;
+  padding: 0.55rem 0.2rem 0.5rem;
+  border-radius: 14px;
+  border: 1.5px solid rgb(11 27 46 / 0.1);
+  background: #ffffff;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #14253c;
+  cursor: pointer;
+  transition: border-color 160ms ease, box-shadow 160ms ease, transform 160ms ease;
+}
+.hue-swatch:hover { border-color: rgb(var(--pw-accent-rgb) / 0.45); transform: translateY(-1px); }
+.hue-swatch:is([aria-pressed="true"], [data-on]) { border-color: var(--pw-accent); box-shadow: 0 0 0 3px rgb(var(--pw-accent-rgb) / 0.16); color: #0b1b2e; }
+.hue-swatch:focus-within { outline: 2px solid var(--pw-accent); outline-offset: 2px; }
+.hue-swatch__dot { display: grid; place-items: center; width: 2rem; height: 2rem; border-radius: 999px; box-shadow: inset 0 0 0 1px rgb(11 27 46 / 0.12), 0 4px 10px -6px rgb(6 20 40 / 0.5); }
+.hue-swatch__dot--water { background: radial-gradient(circle at 35% 30%, #8fd3ec 0%, #1784c7 55%, #0a4f8a 100%); }
+.hue-swatch__dot--green { background: radial-gradient(circle at 35% 30%, #7fe0b4 0%, #159a63 55%, #0b5e40 100%); }
+.hue-swatch__dot--red { background: radial-gradient(circle at 35% 30%, #f6a39b 0%, #d92d20 55%, #8f1d14 100%); }
+.hue-swatch__dot--custom svg { width: 0.95rem; height: 0.95rem; color: #ffffff; filter: drop-shadow(0 1px 1px rgb(0 0 0 / 0.4)); }
+.hue-swatch--custom input[type="color"] { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; border: 0; padding: 0; }
+.hue { display: flex; align-items: center; gap: 0.5rem; }
+.hue__i { flex: none; width: 1.05rem; height: 1.05rem; color: var(--pw-accent); }
+.hue__range {
+  -webkit-appearance: none;
+  appearance: none;
+  flex: 1;
+  min-width: 0;
+  height: 10px;
+  margin: 0;
+  border-radius: 999px;
+  background: linear-gradient(90deg, hsl(0 72% 42%), hsl(45 72% 42%), hsl(90 72% 42%), hsl(150 72% 42%), hsl(200 72% 42%), hsl(250 72% 42%), hsl(300 72% 42%), hsl(359 72% 42%));
+  box-shadow: inset 0 0 0 1px rgb(11 27 46 / 0.12);
+  cursor: pointer;
+}
+.hue__range::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 22px; height: 22px; border-radius: 50%; background: #ffffff; border: 5px solid var(--pw-accent); box-shadow: 0 2px 8px rgb(6 20 40 / 0.35); transition: transform 150ms ease; }
+.hue__range::-moz-range-thumb { width: 12px; height: 12px; border-radius: 50%; background: #ffffff; border: 5px solid var(--pw-accent); box-shadow: 0 2px 8px rgb(6 20 40 / 0.35); }
+.hue__range:active::-webkit-slider-thumb { transform: scale(1.12); }
+.hue__range:focus-visible { outline: 2px solid var(--pw-accent); outline-offset: 5px; }
+.hue-wrap--compact { display: flex; align-items: center; height: 44px; padding: 0 0.85rem; border-radius: 999px; background: rgb(255 255 255 / 0.9); border: 1px solid rgb(11 27 46 / 0.12); }
+.hue-wrap--compact .hue__range { width: 7rem; flex: none; }
+.mnav__tone { display: grid; gap: 0.55rem; }
+.mnav__tone .hue__range { max-width: 18rem; }
+.ap__hint { margin: 0.1rem 0 0; font-size: 0.78rem; font-weight: 600; line-height: 1.4; color: #33435a; }
+html[data-theme="dark"] .hue-swatch { background: rgb(255 255 255 / 0.05); border-color: rgb(255 255 255 / 0.14); color: #e2eaf3; }
+html[data-theme="dark"] .hue-swatch:is([aria-pressed="true"], [data-on]) { border-color: var(--pw-on-dark); box-shadow: 0 0 0 3px rgb(var(--pw-on-dark-rgb) / 0.2); color: #ffffff; }
+html[data-theme="dark"] .hue-wrap--compact { background: rgb(255 255 255 / 0.06); border-color: rgb(255 255 255 / 0.16); }
+html[data-theme="dark"] .hue__i { color: var(--pw-on-dark); }
+html[data-theme="dark"] .ap__hint { color: #c9d6e3; }
+@media (prefers-reduced-motion: reduce) { .hue-swatch, .hue__range::-webkit-slider-thumb { transition: none; } .hue-swatch:hover { transform: none; } }
+
+
+
+/* ===========================================================================
+   SCENES STANDING STILL - a scenario frame as "before" or "after" (the
+   comparison on the service pages).
+   ========================================================================= */
+.scn { display: block; width: 100%; height: auto; }
+.scn * { animation: none !important; }
+.scn :is(.g1y, .g2y, .g2x, .pop2, .flame) { transform-box: fill-box; }
+.scn :is(.g1y, .g2y) { transform-origin: 50% 100%; }
+.scn .g2y.top { transform-origin: 50% 0%; }
+.scn .g2x { transform-origin: 0% 50%; }
+.scn .pop2 { transform-origin: 50% 50%; }
+.scn :is(.dash2, .dash3) { stroke-dasharray: 1; }
+.scn--after :is(.p1, .g1y, .roll) { opacity: 0; }
+.scn--after .probe { transform: translateY(52px); }
+.scn--after :is(.dash2, .dash3) { stroke-dashoffset: 0; }
+.scn--before :is(.p1, .g1y) { opacity: 1; }
+.scn--before :is(.s2, .s3, .roll) { opacity: 0; }
+.scn--before .g2x { transform: scaleX(0); }
+.scn--before .g2y { transform: scaleY(0); }
+.scn--before .pop2 { transform: scale(0); }
+.scn--before :is(.dash2, .dash3) { stroke-dashoffset: 1; }
+.scn--before .probe { transform: translateY(214px); }
+
+/* ===========================================================================
+   SERVICE TOOLS - Schnell-Check, Vorher/Nachher, Rückruf (Web Components).
+   ========================================================================= */
+.svc-tools { background: linear-gradient(180deg, #ffffff 0%, var(--pw-paper1) 100%); }
+.svc-tools__grid { display: grid; gap: 1.1rem; margin-top: 1.75rem; }
+@media (min-width: 960px) { .svc-tools__grid { grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); align-items: start; } }
+.svc-tools__side { display: grid; gap: 1.1rem; }
+.tool {
+  display: block;
+  padding: 1.15rem 1.2rem 1.25rem;
+  border-radius: 22px;
+  background: #ffffff;
+  border: 1px solid rgb(var(--pw-accent-rgb) / 0.14);
+  box-shadow: 0 2px 4px rgb(11 40 80 / 0.05), 0 22px 40px -32px rgb(var(--pw-deep-rgb) / 0.7);
+}
+.tool__head { display: grid; grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; gap: 0.8rem; }
+.tool__i { display: grid; place-items: center; width: 2.6rem; height: 2.6rem; border-radius: 14px; background: color-mix(in srgb, var(--pw-accent) 12%, #ffffff); color: var(--pw-accent); }
+.tool__i svg { width: 1.3rem; height: 1.3rem; }
+#check .tool__k { margin: 0; font-family: var(--sc-font-mono, ui-monospace, monospace) !important; font-size: 0.68rem; font-weight: 800 !important; letter-spacing: 0.14em; text-transform: uppercase; color: var(--pw-label) !important; text-align: start !important; }
+#check .tool__t { margin: 0.1rem 0 0; font-family: var(--font-display) !important; font-size: 1.12rem; font-weight: 800 !important; line-height: 1.25; color: #071628 !important; text-align: start !important; }
+.tool__count { padding: 0.2rem 0.55rem; border-radius: 999px; background: var(--pw-paper1); font-family: var(--sc-font-mono, ui-monospace, monospace); font-size: 0.72rem; font-weight: 800; color: var(--pw-deep); }
+.tool--check:not([data-ready]) .tool__count, .tool--check:not([data-ready]) .chk__bar { visibility: hidden; }
+.chk__bar { position: relative; height: 6px; margin: 0.9rem 0 0.2rem; overflow: hidden; border-radius: 999px; background: var(--pw-paper2); }
+.chk__bar::after { content: ""; position: absolute; inset: 0 auto 0 0; width: calc(var(--done, 0) * 100%); border-radius: inherit; background: var(--grad-cta); transition: width 350ms cubic-bezier(0.22, 1, 0.36, 1); }
+.chk__q { min-width: 0; margin: 0.9rem 0 0; padding: 0; border: 0; }
+:is(.chk__q, .chk__result)[hidden] { display: none !important; }
+.chk__legend { margin-bottom: 0.6rem; padding: 0; font-size: 1rem; font-weight: 800; color: #071628; }
+.chk__answers { display: grid; gap: 0.45rem; }
+.chk__a {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  min-height: 50px;
+  padding: 0.6rem 0.9rem;
+  border-radius: 14px;
+  border: 1.5px solid rgb(var(--pw-accent-rgb) / 0.18);
+  background: #ffffff;
+  font-size: 0.95rem;
+  font-weight: 650;
+  line-height: 1.35;
+  color: #14253c;
+  cursor: pointer;
+  transition: border-color 160ms ease, background-color 160ms ease;
+}
+.chk__a::before { content: ""; flex: none; width: 1.15rem; height: 1.15rem; border-radius: 50%; border: 2px solid rgb(var(--pw-accent-rgb) / 0.45); background: #ffffff; box-shadow: inset 0 0 0 3px #ffffff; }
+.chk__a input { position: absolute; inset: 0; margin: 0; opacity: 0; cursor: pointer; }
+.chk__a:hover { border-color: var(--pw-accent); background: var(--pw-paper1); }
+.chk__a:has(input:checked) { border-color: var(--pw-accent); background: var(--pw-paper1); }
+.chk__a:has(input:checked)::before { border-color: var(--pw-accent); background: var(--pw-accent); }
+.chk__a:has(input:focus-visible) { outline: 2px solid var(--pw-accent); outline-offset: 2px; }
+.chk__result { margin-top: 1rem; padding: 1rem 1.05rem; border-radius: 16px; background: var(--pw-paper1); border: 1px solid rgb(var(--pw-accent-rgb) / 0.18); }
+#check .chk__res-t { margin: 0.2rem 0 0; font-family: var(--font-display) !important; font-size: 1.35rem; font-weight: 800 !important; line-height: 1.2; color: var(--pw-deep) !important; text-align: start !important; outline: none; }
+#check .chk__res-d { margin: 0.4rem 0 0; font-size: 0.95rem !important; line-height: 1.55 !important; text-align: start !important; }
+.chk__res-cta { display: flex; flex-wrap: wrap; gap: 0.45rem; margin-top: 0.9rem; }
+.tool__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 44px;
+  padding: 0 1rem;
+  border-radius: 999px;
+  border: 1px solid rgb(var(--pw-accent-rgb) / 0.25);
+  background: #ffffff;
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 800;
+  color: var(--pw-deep) !important;
+  text-decoration: none !important;
+  cursor: pointer;
+  transition: border-color 160ms ease, transform 160ms ease;
+}
+.tool__btn svg { width: 1rem; height: 1rem; }
+.tool__btn:hover { border-color: var(--pw-accent); transform: translateY(-1px); }
+.tool__btn--solid { border-color: transparent; background: var(--grad-cta); color: #ffffff !important; }
+.tool__btn--ghost { background: transparent; }
+/* comparison */
+.cmp__stage { position: relative; margin-top: 0.9rem; overflow: hidden; aspect-ratio: 480 / 280; border-radius: 16px; box-shadow: inset 0 0 0 1px rgb(11 27 46 / 0.08); cursor: ew-resize; touch-action: pan-y; user-select: none; -webkit-user-select: none; }
+.cmp__stage .scn { position: absolute; inset: 0; width: 100%; height: 100%; }
+.cmp__before { position: absolute; inset: 0; clip-path: inset(0 calc(100% - var(--pos, 50%)) 0 0); }
+.cmp__handle { position: absolute; top: 0; bottom: 0; left: var(--pos, 50%); width: 3px; margin-left: -1.5px; background: #ffffff; box-shadow: 0 0 0 1px rgb(11 27 46 / 0.15), 0 0 14px rgb(6 20 40 / 0.3); pointer-events: none; }
+.cmp__handle::after { content: "‹ ›"; position: absolute; top: 50%; left: 50%; display: grid; place-items: center; width: 2.5rem; height: 2.5rem; margin: -1.25rem 0 0 -1.25rem; border-radius: 50%; background: #ffffff; box-shadow: 0 4px 12px rgb(6 20 40 / 0.35); font-size: 1.05rem; font-weight: 800; letter-spacing: 0.1em; color: var(--pw-deep); }
+.cmp__tag { position: absolute; top: 0.6rem; padding: 0.2rem 0.6rem; border-radius: 999px; background: rgb(255 255 255 / 0.94); font-size: 0.72rem; font-weight: 800; color: #071628; pointer-events: none; }
+.cmp__tag--before { left: 0.6rem; }
+.cmp__tag--after { right: 0.6rem; }
+.cmp__range { display: block; width: 100%; margin: 0.75rem 0 0; accent-color: var(--pw-accent); }
+.cmp__caps { display: grid; gap: 0.25rem; margin-top: 0.55rem; }
+#check .cmp__caps p { margin: 0; font-size: 0.9rem !important; line-height: 1.45 !important; text-align: start !important; }
+#check .cmp__caps strong { color: var(--pw-deep); }
+/* callback planner */
+.cb__group { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.4rem; min-width: 0; margin: 0.9rem 0 0; padding: 0; border: 0; }
+.cb__legend { margin-bottom: 0.45rem; padding: 0; font-family: var(--sc-font-mono, ui-monospace, monospace); font-size: 0.68rem; font-weight: 800; letter-spacing: 0.14em; text-transform: uppercase; color: var(--pw-label); }
+.cb__opt { position: relative; display: grid; place-items: center; min-height: 58px; padding: 0.45rem 0.3rem; border-radius: 14px; border: 1.5px solid rgb(var(--pw-accent-rgb) / 0.18); background: #ffffff; font-size: 0.88rem; font-weight: 800; line-height: 1.2; text-align: center; color: #071628; cursor: pointer; transition: border-color 160ms ease, background-color 160ms ease; }
+.cb__opt small { display: block; margin-top: 0.15rem; font-size: 0.72rem; font-weight: 600; color: #33435a; }
+.cb__opt small:empty { display: none; }
+.cb__opt input { position: absolute; inset: 0; margin: 0; opacity: 0; cursor: pointer; }
+.cb__opt:hover { border-color: var(--pw-accent); }
+.cb__opt:has(input:checked) { border-color: var(--pw-accent); background: var(--pw-paper1); box-shadow: 0 0 0 3px rgb(var(--pw-accent-rgb) / 0.14); }
+.cb__opt:has(input:focus-visible) { outline: 2px solid var(--pw-accent); outline-offset: 2px; }
+.cb__send { width: 100%; justify-content: center; min-height: 50px; margin-top: 1rem; }
+.cb__send[aria-disabled="true"] { opacity: 0.45; pointer-events: none; }
+#check .cb__note { margin: 0.5rem 0 0; font-size: 0.8rem !important; line-height: 1.4 !important; color: #33435a !important; text-align: center !important; }
+html[data-theme="dark"] .svc-tools { background: transparent; }
+html[data-theme="dark"] .tool { background: rgb(255 255 255 / 0.04); border-color: rgb(255 255 255 / 0.12); box-shadow: none; }
+html[data-theme="dark"] #check .tool__t, html[data-theme="dark"] .chk__legend, html[data-theme="dark"] .cb__opt { color: #f2f6fb !important; }
+html[data-theme="dark"] #check .tool__k, html[data-theme="dark"] .cb__legend { color: var(--pw-on-dark) !important; }
+html[data-theme="dark"] .tool__i { background: rgb(var(--pw-on-dark-rgb) / 0.14); color: var(--pw-on-dark); }
+html[data-theme="dark"] :is(.chk__a, .cb__opt) { background: rgb(255 255 255 / 0.05); border-color: rgb(255 255 255 / 0.14); color: #e2eaf3; }
+html[data-theme="dark"] :is(.chk__a:has(input:checked), .cb__opt:has(input:checked), .chk__result) { background: rgb(var(--pw-on-dark-rgb) / 0.12); border-color: var(--pw-on-dark); }
+html[data-theme="dark"] #check .chk__res-t, html[data-theme="dark"] #check .cmp__caps strong { color: var(--pw-on-dark) !important; }
+html[data-theme="dark"] :is(.tool__count, .chk__bar) { background: rgb(255 255 255 / 0.08); color: var(--pw-on-dark); }
+html[data-theme="dark"] .tool__btn:not(.tool__btn--solid) { background: rgb(255 255 255 / 0.06); border-color: rgb(255 255 255 / 0.16); color: #f2f6fb !important; }
+html[data-theme="dark"] .cb__opt small, html[data-theme="dark"] #check .cb__note { color: #c9d6e3 !important; }
+@media (prefers-reduced-motion: reduce) { .chk__bar::after, .chk__a, .cb__opt, .tool__btn { transition: none; } .tool__btn:hover { transform: none; } }
+.cb__opt > span > span { display: block; }
+.cb__opt:has(input:disabled) { opacity: 0.4; cursor: not-allowed; }
+.cb__opt:has(input:disabled) input { cursor: not-allowed; }
+
+/* ===========================================================================
+   ON THE PLATE - what sits on the deep-water plate (the hero, the Lab
+   opener) in both themes: headings and body in on-plate, the eyebrow and
+   the emphasised words in on-plate-accent, outlined controls in
+   on-plate-soft. Written after the light-theme rules so it outranks them.
+   ========================================================================= */
+html .band-ink:is(.hero, .lab-top) .sc-label {
+  color: var(--on-plate-accent) !important;
+  background: transparent !important;
+}
+html .band-ink:is(.hero, .lab-top) :is(.sc-display, h1, h2, h3) em {
+  color: var(--on-plate-accent) !important;
+  -webkit-text-fill-color: var(--on-plate-accent) !important;
+  background: none !important;
+}
+html .band-ink:is(.hero, .lab-top) .hero__btn--ghost {
+  color: var(--on-plate);
+  background: transparent;
+  border-color: var(--on-plate-soft);
+}
+html .band-ink:is(.hero, .lab-top) .hero__btn--ghost:hover {
+  background: var(--plate-2);
+  border-color: var(--on-plate);
+}
+html .band-ink:is(.hero, .lab-top) .hero__btn--ghost :is(span, strong) { color: inherit !important; }
+html .band-ink:is(.hero, .lab-top) .hero__facts { border-top-color: var(--plate-2); }
+html .band-ink:is(.hero, .lab-top) .hero__facts li { color: var(--on-plate-soft) !important; }
+/* the image film's chapter list beside the hero */
+html .band-ink:is(.hero, .lab-top) .hero-film__k,
+html .band-ink:is(.hero, .lab-top) .hero-film__chapters button > span { color: var(--on-plate-accent); }
+html .band-ink:is(.hero, .lab-top) .hero-film__chapters button:not([aria-current]) { color: var(--on-plate-soft); }
+html .band-ink:is(.hero, .lab-top) .hero-film__chapters button:not([aria-current]):hover { color: var(--on-plate); }
+
+/* ===========================================================================
+   FOCUS - always visible (design system): a 2px solid ring in the focus
+   colour with a 2px offset on every control. Text fields instead turn
+   their border to the focus colour with a 1px ring. !important because
+   many controls carry a local outline-none.
+   ========================================================================= */
+:focus-visible {
+  outline: 2px solid var(--focus) !important;
+  outline-offset: 2px !important;
+}
+:is(input:not([type="checkbox"], [type="radio"], [type="range"], [type="color"]), select, textarea):focus-visible {
+  outline: none !important;
+  border-color: var(--focus) !important;
+  box-shadow: 0 0 0 1px var(--focus) !important;
+}
+/* a visually hidden radio or checkbox: the ring goes on the label that shows it */
+label:has(> input:is([type="radio"], [type="checkbox"]):focus-visible) {
+  outline: 2px solid var(--focus) !important;
+  outline-offset: 2px !important;
+}
+
+/* ===========================================================================
+   FLAT - the design system has no gradients, glows or glass: the plate is
+   one colour, buttons and the feature tile are the flat action blue,
+   emphasis is the accent. Written last so it outranks the older layers.
+   ========================================================================= */
+/* plates and bands: one colour, no light source */
+.band-ink,
+.contact-band { background-image: none !important; }
+.contact-band { background-color: var(--plate) !important; box-shadow: none; }
+html:not([data-theme="dark"]) .faq-ask { background: var(--surface-tint) !important; }
+.more,
+.steps4,
+.site-footer { background: transparent; }
+.site-footer::before { background: var(--accent); }
+.steps4__item:not(:last-child) .steps4__head::after { background: var(--line-strong); }
+
+/* buttons: the action fill, darker on hover, no shine sweep */
+.btn-shine,
+html:not([data-theme="dark"]) .hero__btn--solid { background: var(--action) !important; color: var(--on-action) !important; filter: none !important; }
+.btn-shine:hover,
+html:not([data-theme="dark"]) .hero__btn--solid:hover { background: var(--action-hover) !important; filter: none !important; }
+.btn-shine::after { content: none !important; }
+.btn-shine :is(span, strong, svg) { color: inherit !important; }
+
+/* the feature tile: flat action with on-action type */
+.services-grid > li:first-child .service-card,
+.services-grid > li:first-child .service-card:hover { background: var(--action) !important; filter: none !important; }
+
+/* figures and the contact claim: accent text, not gradient text */
+.svc-facts dt,
+.lab-stats dt,
+#kontakt .contact-card__claim {
+  background: none !important;
+  -webkit-text-fill-color: currentColor !important;
+  color: var(--accent) !important;
+}
+html:not([data-theme="dark"]) .band-ink:not(.hero, .lab-top) :is(.sc-display, h1, h2) em {
+  background: none !important;
+  -webkit-text-fill-color: currentColor !important;
+}
+/* the service and Lab pages: flat openers and sections, flat panels */
+.svc-hero,
+.lab-hero,
+.svc-tools,
+.svc-steps,
+.lab-methods { background: transparent !important; }
+.svc-fold__sum,
+.anim { background: var(--surface) !important; }
+.svc-signs { background: var(--surface-tint) !important; }
+/* heading emphasis is the accent (an older rule set it to the body ink and
+   hid that behind gradient text) */
+:root main :is(h1, h2, h3) em,
+:root .sc-display em {
+  color: var(--accent) !important;
+  -webkit-text-fill-color: currentColor !important;
+  background: none !important;
+  font-style: normal;
+}
+html[data-theme] #kontakt .contact-card__claim { background-image: none !important; color: var(--accent) !important; }
+.hero__brand::after { content: none; }

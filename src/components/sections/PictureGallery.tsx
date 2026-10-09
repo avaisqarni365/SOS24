@@ -83,7 +83,7 @@ export default function PictureGallery({ hideHeader = false }: { hideHeader?: bo
               className={`min-h-[44px] rounded-full border px-4 text-sm font-semibold transition-all ${
                 category === c.id
                   ? "btn-shine border-transparent shadow-sm"
-                  : "border-line/15 bg-surface text-ink hover:border-[var(--emerald-deep)] hover:bg-surface-2"
+                  : "border-[var(--line-strong)] bg-surface text-ink hover:border-[var(--emerald-deep)] hover:bg-surface-2"
               }`}
             >
               {c.label}
@@ -166,7 +166,7 @@ export default function PictureGallery({ hideHeader = false }: { hideHeader?: bo
               <button type="button" onClick={() => step(-1)} className="min-h-[44px] rounded-full border border-line/20 px-5 text-sm" aria-label="Vorheriges Bild">
                 ←
               </button>
-              <button ref={closeRef} type="button" onClick={close} className="min-h-[44px] rounded-full bg-[var(--bone)] px-5 text-sm font-semibold text-[var(--ink)]">
+              <button ref={closeRef} type="button" onClick={close} className="min-h-[44px] rounded-full bg-[var(--bone)] px-5 text-sm font-semibold text-[var(--ground)]">
                 {t("gallery.modalClose")}
               </button>
               <button type="button" onClick={() => step(1)} className="min-h-[44px] rounded-full border border-line/20 px-5 text-sm" aria-label="Nächstes Bild">

@@ -73,7 +73,7 @@
   height: 2rem;
   border-radius: 999px;
   background: var(--mint);
-  color: var(--ink);
+  color: var(--ground);
   font: 700 0.85rem/1 var(--sc-font-mono);
 }
 .cz__scale {

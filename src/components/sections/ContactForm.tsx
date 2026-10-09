@@ -43,7 +43,7 @@ function mailLink(d: Enquiry, place?: string) {
 }
 
 const field =
-  "w-full min-h-[48px] px-4 py-3 rounded-xl border border-line/15 bg-surface text-sm text-ink shadow-2xs focus:outline-none focus:border-[var(--emerald-deep)] focus:ring-1 focus:ring-[var(--emerald-deep)] placeholder:text-ink/40";
+  "w-full min-h-[48px] px-4 py-3 rounded-xl border border-[var(--line-strong)] bg-surface text-sm text-ink shadow-2xs focus:outline-none focus:border-[var(--focus)] focus:ring-1 focus:ring-[var(--focus)] placeholder:text-[var(--ink-soft)]";
 const lbl = "block text-xs font-mono font-bold text-ink mb-2";
 
 export default function ContactForm({ defaultDamage, place: placeProp }: { defaultDamage?: string; place?: string }) {

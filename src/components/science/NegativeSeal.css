@@ -37,7 +37,7 @@
   height: auto;
   border-radius: 14px;
   border: 1px solid color-mix(in oklab, var(--bone) 10%, transparent);
-  background: var(--ink);
+  background: var(--ground);
 }
 .ns-caption {
   margin: 0;
@@ -74,7 +74,7 @@
   opacity: 0.75;
 }
 .negseal .ns-bubble circle {
-  fill: var(--ink);
+  fill: var(--ground);
   stroke: var(--mint);
   stroke-width: 2.5;
 }
@@ -126,7 +126,7 @@
   place-items: center;
   font: 600 0.75rem/1 var(--sc-font-mono);
   background: var(--sw, var(--mint));
-  color: var(--ink);
+  color: var(--ground);
   box-shadow: 0 0 0 1px color-mix(in oklab, var(--bone) 18%, transparent);
 }
 .ns-legend strong {

@@ -206,7 +206,7 @@ export function FaqSection() {
                 href={COMPANY_INFO.whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex min-h-[44px] items-center rounded-full border border-line/15 px-5 text-[0.9375rem] font-semibold hover:border-accent-deep"
+                className="inline-flex min-h-[44px] items-center rounded-full border border-[var(--line-strong)] px-5 text-[0.9375rem] font-semibold hover:border-accent-deep"
               >
                 WhatsApp
               </a>
