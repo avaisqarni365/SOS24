@@ -230,7 +230,7 @@ export default function DewPointLab() {
         </div>
 
         <figure className="mt-6">
-          <svg viewBox={`0 0 ${W} ${H}`} className="h-auto w-full" role="img" aria-labelledby={`${uid}-svgt`}>
+          <svg data-i18n="" viewBox={`0 0 ${W} ${H}`} className="h-auto w-full" role="img" aria-labelledby={`${uid}-svgt`}>
             <title id={`${uid}-svgt`}>
               {`Temperaturverlauf durch die Wand: innen ${fmt(ti)} °C, Oberfläche innen ${fmt(thetaSi)} °C, außen ${fmt(te)} °C, Taupunkt ${fmt(td)} °C.`}
             </title>

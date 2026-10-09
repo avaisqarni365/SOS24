@@ -32,7 +32,7 @@ function LevelWall() {
         loading="lazy"
         decoding="async"
       />
-      <svg viewBox="0 0 480 320" aria-hidden="true" className="cz-overlay">
+      <svg data-i18n="" viewBox="0 0 480 320" aria-hidden="true" className="cz-overlay">
         <rect x="150" y="186" width="92" height="62" fill="none" stroke="currentColor" strokeWidth="3" rx="4" />
         <path d="M242 186 L300 120" stroke="currentColor" strokeWidth="2" strokeDasharray="5 5" />
         <rect x="298" y="97" width="178" height="27" rx="4" fill="#0e1310" fillOpacity="0.84" />
@@ -47,7 +47,7 @@ function LevelWall() {
 function LevelMasonry() {
   return (
     <div className="cz-art">
-      <svg viewBox="0 0 1000 620" role="img" aria-label="Mauerwerk im Schnitt mit aufsteigender Feuchte aus dem Erdreich">
+      <svg data-i18n="" viewBox="0 0 1000 620" role="img" aria-label="Mauerwerk im Schnitt mit aufsteigender Feuchte aus dem Erdreich">
         <defs>
           <linearGradient id="cz-damp" x1="0" y1="1" x2="0" y2="0">
             <stop offset="0" stopColor="#3b6ea8" stopOpacity="0.85" />
@@ -97,7 +97,7 @@ function LevelMasonry() {
 function LevelPores() {
   return (
     <div className="cz-art">
-      <svg viewBox="0 0 1000 620" role="img" aria-label="Drei Kapillaren unterschiedlicher Weite: je feiner, desto höher steigt Wasser">
+      <svg data-i18n="" viewBox="0 0 1000 620" role="img" aria-label="Drei Kapillaren unterschiedlicher Weite: je feiner, desto höher steigt Wasser">
         <rect width="1000" height="620" fill="#141b17" />
         <rect y="540" width="1000" height="80" fill="#3b6ea8" opacity="0.7" />
         {TUBES.map((t) => {
@@ -132,7 +132,7 @@ function LevelPores() {
 function LevelPoreWall() {
   return (
     <div className="cz-art">
-      <svg viewBox="0 0 1000 620" role="img" aria-label="Eine Pore im Detail: vor der Injektion steigt Wasser mit hohlem Meniskus, danach wird es mit gewölbtem Meniskus nach unten gedrückt, Wasserdampf entweicht">
+      <svg data-i18n="" viewBox="0 0 1000 620" role="img" aria-label="Eine Pore im Detail: vor der Injektion steigt Wasser mit hohlem Meniskus, danach wird es mit gewölbtem Meniskus nach unten gedrückt, Wasserdampf entweicht">
         <rect width="1000" height="620" fill="#141b17" />
         {/* pore walls (mineral) */}
         <rect x="260" y="40" width="160" height="560" fill="#9a6b4b" />
