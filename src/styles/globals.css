@@ -225,70 +225,63 @@ pre,
   --pw-on-dark-2: #7cc4f2;
 }
 html[data-theme="dark"] {
-  --canvas: #0f141e;
-  --surface: #1a2232;
-  --surface-2: #232e42;
-  --surface-tint: #151c28;
-  --accent-wash: #1c2534;
-  --line: rgb(237 241 248 / 0.14);
+  /* Dunkel: water-biased, surfaces separate by tone instead of shadow */
+  --canvas: #0b111a;
+  --surface: #121a26;
+  --surface-2: #1a2433;
+  --surface-tint: #0f1f30;
+  --accent-wash: #12304a;
+  --line: rgb(255 255 255 / 0.12);
   --line-strong: #5f6d82;
-  --ink: #e8edf5;
+  --ink: #f2f6fb;
   --ink-strong: #ffffff;
-  --ink-soft: #8e9db6;
+  --ink-soft: #a9b4c4;
   --accent: var(--pw-on-dark);
-  --accent-deep: var(--pw-on-dark);
+  --accent-deep: var(--pw-on-dark-2);
   --action: var(--pw-accent);
   --action-hover: var(--pw-cta-hi);
   --plate: #152840;
   --plate-2: #1d3658;
   --focus: #6aa2ec;
+  --success: #6fd39a;
+  --danger: #f4a49b;
+  --info: #8fcaf2;
 
-  --c-bone2: 208 217 232;
-  --nav-bg: rgb(7 11 20 / 0.9);
+  /* legacy names whose dark value is not simply their token */
+  --c-ink: 11 17 26;
+  --c-ink2: 18 26 38;
+  --c-ink3: 26 36 51;
+  --c-bone: 242 246 251;
+  --c-bone2: 255 255 255;
+  --c-soft: 169 180 196;
+  --c-line: 255 255 255;
   --c-mint: var(--pw-on-dark-rgb);
-  --c-ink3: 35 46 66;
-  --band-stone: #151c28;
   --c-emerald: var(--pw-on-dark-rgb);
-  --c-bone: 232 237 245;
-  --band-mint: #1c2534;
   --c-accent-deep: var(--pw-on-dark-rgb);
-  --c-line: 232 237 245;
-  --c-soft: 142 157 182;
-  --c-ink2: 26 34 50;
-  --c-ink: 15 20 30;
+  --nav-bg: rgb(11 17 26 / 0.9);
   --grain: 0.03;
   --frame-shadow: none;
-  --stage-bg: linear-gradient(180deg, #1c2534 0%, #0f141e 100%);
+  --stage-bg: linear-gradient(180deg, var(--surface-2) 0%, var(--canvas) 100%);
   --damp: #96b1d6;
   --salt: #2a3346;
-  --text-on-bone: #bcc8dc;
-  --card-translucent: rgb(26 34 50 / 0.94);
-  --sc-ink-soft: rgb(var(--c-soft));
-  --sc-ink: rgb(var(--c-bone));
-  --sc-accent: rgb(var(--c-mint));
-  --sc-surface: rgb(var(--c-ink2));
-  --sc-canvas: rgb(var(--c-ink));
+  --card-translucent: color-mix(in srgb, var(--surface) 94%, transparent);
   --brick: #96b1d6;
   --brick-2: #b2c8e5;
   --brand-2: #9ec8ff;
   --brand: #ffffff;
-  --text-on-bone-x: var(--text-on-bone);
   --map-line: 226 232 240;
-  --map-context: #222c3e;
-  --map-bg: #121824;
   --grad-em: linear-gradient(95deg, var(--pw-on-dark) 0%, var(--pw-on-dark-2) 100%);
   --grad-tile: radial-gradient(64% 54% at 100% 0%, rgb(var(--pw-aqua-rgb) / 0.32) 0%, transparent 62%),
     linear-gradient(135deg, var(--pw-deep) 0%, var(--pw-cta-hi) 100%);
   --aqua-deep: var(--pw-on-dark-2);
   --grad-em-plate: linear-gradient(95deg, var(--pw-on-dark) 0%, var(--pw-on-dark-2) 100%);
-  --electric: var(--pw-on-dark-2);
+  --electric: var(--accent-deep);
   --aqua: var(--pw-on-dark);
   --lk-b: #b4c7e4;
   --ld-a: #dff2ff;
   --lk-a: #f2f6ff;
   --ld-b: #80b2e8;
-  --royal-deep: var(--pw-on-dark-2);
-  --royal: var(--pw-on-dark-2);
+  --royal: var(--accent-deep);
   --royal-2: var(--pw-on-dark);
   --logo-drop: #6aa2ec;
   --logo-blue: #3fb0ee;
@@ -341,34 +334,34 @@ html[data-theme="dark"] {
 /* dark: only when the visitor explicitly chose it in the appearance menu */
 .theme-dark,
 .scanner__readout {
-  /* The exact inversion of the light sheet: black ground, white type, and the
-     same accent-is-the-ink rule, so no hue enters on the way across. */
-  --c-ink: 0 0 0;
-  --c-ink2: 18 18 18;
-  --c-ink3: 26 26 26;
+  /* A dark island in either theme: the blue-tinted dark ground (Dunkel),
+     white type, and the same accent-is-the-ink rule. */
+  --c-ink: 11 17 26;
+  --c-ink2: 18 26 38;
+  --c-ink3: 26 36 51;
   --c-bone: 255 255 255;
-  --c-bone2: 238 238 238;
+  --c-bone2: 242 246 251;
   --c-mint: 255 255 255;
   --c-emerald: 255 255 255;
   --c-accent-deep: 255 255 255;
-  --c-soft: 168 168 164;
+  --c-soft: 169 180 196;
   --c-line: 255 255 255;
   --ink-on-surface: #ffffff;
-  --text-on-bone: #c9c9c5;
+  --text-on-bone: #a9b4c4;
   --head-on-bone: #ffffff;
   --emerald-deep: #ffffff;
-  --paper-0: #000000;
-  --paper-1: #0d0d0d;
-  --paper-2: #161616;
-  --card: #121212;
-  --card-translucent: rgb(18 18 18 / 0.94);
-  --paper: #000000;
+  --paper-0: #0b111a;
+  --paper-1: #0f1f30;
+  --paper-2: #12304a;
+  --card: #121a26;
+  --card-translucent: rgb(18 26 38 / 0.94);
+  --paper: #0b111a;
   --grad: #ffffff;
-  --btn-ink: #0a0a0a;
+  --btn-ink: #0b111a;
   --grad-text: none;
-  --band-stone: #0d0d0d;
-  --band-mint: #141414;
-  --nav-bg: rgb(0 0 0 / 0.9);
+  --band-stone: #121a26;
+  --band-mint: #0f1f30;
+  --nav-bg: rgb(11 17 26 / 0.9);
   --hero-glow: transparent;
   --damp: #9a9a96;
   --salt: #3a3a37;
@@ -379,6 +372,15 @@ html[data-theme="dark"] {
 /* Roles, resolved again wherever the channels change */
 .theme-dark,
 .scanner__readout {
+  --canvas: rgb(var(--c-ink));
+  --surface: rgb(var(--c-ink2));
+  --surface-2: rgb(var(--c-ink3));
+  --ink: rgb(var(--c-bone));
+  --ink-strong: #ffffff;
+  --ink-soft: rgb(var(--c-soft));
+  --line: rgb(255 255 255 / 0.12);
+  --line-strong: #5f6d82;
+  --focus: #6aa2ec;
   --sc-canvas: rgb(var(--c-ink));
   --sc-surface: rgb(var(--c-ink2));
   --sc-ink: rgb(var(--c-bone));
@@ -687,7 +689,7 @@ html[data-theme="dark"] {
   max-width: calc(100% - 1.6rem);
   padding: 0.35rem 0.75rem 0.35rem 0.35rem;
   border-radius: 999px;
-  background: rgb(14 19 16 / 0.86);
+  background: rgb(11 17 26 / 0.86);
   color: #f3f1ec;
   font-size: 0.85rem;
   font-weight: 600;
@@ -700,7 +702,7 @@ html[data-theme="dark"] {
   padding: 0.2rem 0.5rem;
   border-radius: 999px;
   background: var(--ink-on-surface);
-  color: #0e1310;
+  color: #0b111a;
   font: 700 0.72rem/1.2 var(--sc-font-mono, ui-monospace, monospace);
 }
 .hv__load {
@@ -752,7 +754,7 @@ html[data-theme="dark"] {
   margin: 0;
   padding: 0.45rem 0.9rem;
   border-radius: 999px;
-  background: color-mix(in oklab, #0e1310 80%, transparent);
+  background: color-mix(in oklab, #0b111a 80%, transparent);
   border: 1px solid color-mix(in oklab, var(--bone) 14%, transparent);
   color: var(--bone);
   font-size: 0.8rem;
@@ -778,7 +780,7 @@ html[data-theme="dark"] {
   width: 2.75rem;
   height: 2.75rem;
   border-radius: 999px;
-  background: color-mix(in oklab, #0e1310 82%, transparent);
+  background: color-mix(in oklab, #0b111a 82%, transparent);
   border: 1px solid color-mix(in oklab, var(--bone) 16%, transparent);
   color: var(--bone);
   font-size: 1.2rem;
@@ -798,7 +800,7 @@ html[data-theme="dark"] {
   gap: 0.4rem;
   padding: 0.3rem 0.65rem 0.3rem 0.3rem;
   border-radius: 999px;
-  background: color-mix(in oklab, #0e1310 86%, transparent);
+  background: color-mix(in oklab, #0b111a 86%, transparent);
   border: 1px solid color-mix(in oklab, var(--bone) 16%, transparent);
   color: var(--bone);
   font-size: 0.78rem;
@@ -956,7 +958,7 @@ html[data-theme="dark"] {
   height: 1.4rem;
   border-radius: 999px;
   background: var(--swatch);
-  color: #0e1310;
+  color: #0b111a;
   font-family: var(--sc-font-mono, ui-monospace, monospace);
   font-size: 0.7rem;
   box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.25);
@@ -1401,7 +1403,7 @@ article p,
     display: grid;
     gap: 2px;
     border-radius: 999px;
-    background: color-mix(in oklab, #0e1310 72%, transparent);
+    background: color-mix(in oklab, #0b111a 72%, transparent);
     backdrop-filter: blur(10px);
   }
   .section-rail__stop {
@@ -1436,7 +1438,7 @@ article p,
     white-space: nowrap;
     padding: 4px 10px;
     border-radius: 999px;
-    background: #0e1310;
+    background: #0b111a;
     border: 1px solid color-mix(in oklab, var(--bone) 14%, transparent);
     color: var(--bone);
     font-family: var(--sc-font-mono, ui-monospace, monospace);
@@ -2035,7 +2037,7 @@ p.no-justify {
   min-width: 9.5rem;
   padding: 0.6rem 0.75rem 0.55rem;
   border-radius: 14px;
-  background: rgb(14 19 16 / 0.86);
+  background: rgb(11 17 26 / 0.86);
   color: #f3f1ec;
   pointer-events: none;
   box-shadow: 0 10px 24px -14px rgb(0 0 0 / 0.6);
@@ -2647,7 +2649,7 @@ p.no-justify {
   gap: 0.35rem;
   padding: 0.2rem 0.55rem 0.2rem 0.2rem;
   border-radius: 999px;
-  background: rgb(14 19 16 / 0.84);
+  background: rgb(11 17 26 / 0.84);
   color: #f3f1ec;
   font-size: 0.75rem !important;
   font-weight: 600;
@@ -2662,7 +2664,7 @@ p.no-justify {
   height: 1.2rem;
   flex: none;
   border-radius: 999px;
-  color: #0e1310;
+  color: #0b111a;
   font: 700 0.6875rem/1 var(--sc-font-mono, ui-monospace, monospace);
   box-shadow: inset 0 0 0 1px rgb(0 0 0 / 0.25);
 }
@@ -2683,7 +2685,7 @@ figure > .layer-ruler {
   width: 1.6rem;
   height: 1.6rem;
   border-radius: 999px;
-  color: #0e1310;
+  color: #0b111a;
   font: 700 0.75rem/1 var(--sc-font-mono, ui-monospace, monospace);
   box-shadow: inset 0 0 0 1px rgb(0 0 0 / 0.2);
 }
@@ -3107,6 +3109,13 @@ main dt,
   --sc-canvas: var(--plate);
   --sc-surface: var(--plate-2);
   --sc-accent: var(--on-plate-accent);
+  /* the semantic tokens, as they read on the plate */
+  --surface: var(--plate-2);
+  --ink: var(--on-plate);
+  --ink-strong: var(--on-plate);
+  --ink-soft: var(--on-plate-soft);
+  --accent: var(--on-plate-accent);
+  --line-strong: var(--on-plate-soft);
   color: var(--ink-on-surface);
   color-scheme: dark;
 }
@@ -3122,7 +3131,7 @@ main dt,
 /* A control with a light ground inside a dark band keeps a dark ink. */
 .band-ink .hero__btn--solid,
 .band-ink .hero__btn--solid :is(span, strong) {
-  color: #0e1310;
+  color: #0b111a;
 }
 .band-ink .sc-body,
 .band-ink .sc-lede { color: var(--text-on-bone) !important; }
@@ -3381,7 +3390,7 @@ main h4:not(.sc-label) { font-weight: 600; letter-spacing: -0.01em; }
 .hero__btn:focus-visible { transform: translateY(-2px); }
 .hero__btn--solid {
   background: #f3f1ec;
-  color: #0e1310;
+  color: #0b111a;
   box-shadow: 0 14px 30px -14px rgb(0 0 0 / 0.6);
 }
 .hero__btn--solid:hover { background: #ffffff; }
