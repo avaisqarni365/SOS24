@@ -166,7 +166,7 @@ export default function PictureGallery({ hideHeader = false }: { hideHeader?: bo
               <button type="button" onClick={() => step(-1)} className="min-h-[44px] rounded-full border border-line/20 px-5 text-sm" aria-label="Vorheriges Bild">
                 ←
               </button>
-              <button ref={closeRef} type="button" onClick={close} className="min-h-[44px] rounded-full bg-[var(--bone)] px-5 text-sm font-semibold text-[var(--ink)]">
+              <button ref={closeRef} type="button" onClick={close} className="min-h-[44px] rounded-full bg-[var(--bone)] px-5 text-sm font-semibold text-[var(--ground)]">
                 {t("gallery.modalClose")}
               </button>
               <button type="button" onClick={() => step(1)} className="min-h-[44px] rounded-full border border-line/20 px-5 text-sm" aria-label="Nächstes Bild">

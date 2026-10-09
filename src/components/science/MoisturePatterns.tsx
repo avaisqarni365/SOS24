@@ -269,7 +269,7 @@ export default function MoisturePatterns() {
             onClick={() => setActive(i)}
             className={`min-h-[44px] rounded-full border px-4 py-2 text-sm font-semibold motion-safe:transition-colors ${
               active === i
-                ? "border-accent-deep bg-accent-deep text-[var(--ink)]"
+                ? "border-accent-deep bg-accent-deep text-[var(--ground)]"
                 : "border-line/20 text-[var(--bone)] hover:border-accent-deep"
             }`}
           >
@@ -318,7 +318,7 @@ export default function MoisturePatterns() {
           <p className="mt-2 text-sm text-[var(--bone-2)]">{p.next}</p>
           <a
             href={p.href}
-            className="mt-5 inline-flex min-h-[48px] w-full items-center justify-between gap-3 rounded-full bg-[var(--bone)] px-5 py-3 text-sm font-semibold text-[var(--ink)] hover:bg-surface"
+            className="mt-5 inline-flex min-h-[48px] w-full items-center justify-between gap-3 rounded-full bg-[var(--bone)] px-5 py-3 text-sm font-semibold text-[var(--ground)] hover:bg-surface"
           >
             {p.cta} <span aria-hidden="true">→</span>
           </a>

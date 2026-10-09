@@ -166,7 +166,7 @@ export default function Navbar() {
               ref={burgerRef}
               type="button"
               onClick={() => setOpen(!open)}
-              className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-line/15 bg-[var(--ink)] text-[var(--bone)] hover:border-accent-deep "
+              className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-line/15 bg-surface text-[var(--bone)] hover:border-accent-deep "
               aria-label={open ? "Menü schließen" : "Menü öffnen"}
               aria-expanded={open}
               aria-controls="mobile-menu"

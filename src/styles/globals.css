@@ -82,54 +82,80 @@ pre,
    writes the --pw-* values inline on <html>.
    ========================================================================= */
 :root {
-  --c-bone2: 11 27 46;
+  /* design tokens (design system "SOS-Abdichtung"); the picker feeds --pw-* */
+  --canvas: #f4f5f7;
+  --surface: #ffffff;
+  --surface-2: #eaecf0;
+  --surface-tint: var(--pw-paper1);
+  --accent-wash: var(--pw-paper2);
+  --line: rgb(43 69 112 / 0.12);
+  --line-strong: #7d8899;
+  --ink: #14253c;
+  --ink-strong: #071628;
+  --ink-soft: #33435a;
+  --accent: var(--pw-accent);
+  --accent-deep: var(--pw-deep);
+  --action: var(--pw-accent);
+  --action-hover: var(--pw-deep);
+  --on-action: #ffffff;
+  --plate: #132033;
+  --plate-2: #1b2c47;
+  --on-plate: #ffffff;
+  --on-plate-soft: #c8d3e6;
+  --on-plate-accent: var(--pw-on-dark);
+  --focus: #1e6bd6;
+  --success: #15803d;
+  --danger: #b42318;
+  --info: #0b6fb3;
+
+  /* legacy names, kept for the existing rules: they point at the tokens */
+  --c-bone2: 7 22 40;
   --nav-bg: rgb(255 255 255 / 0.9);
   --c-mint: var(--pw-accent-rgb);
-  --c-ink3: var(--pw-paper1-rgb);
-  --band-stone: #ffffff;
+  --c-ink3: 234 236 240;
+  --band-stone: var(--surface);
   --c-emerald: var(--pw-mark-rgb);
   --hero-glow: transparent;
   --c-bone: 20 37 60;
-  --band-mint: var(--pw-paper1);
-  --c-accent-deep: var(--pw-accent-rgb);
-  --c-line: 11 27 46;
+  --band-mint: var(--surface-tint);
+  --c-accent-deep: var(--pw-deep-rgb);
+  --c-line: 43 69 112;
   --c-soft: 51 67 90;
   --c-ink2: 255 255 255;
-  --c-ink: 255 255 255;
+  --c-ink: 244 245 247;
   --grain: 0;
-  --btn-ink: #ffffff;
+  --btn-ink: var(--on-action);
   --hero-water: transparent;
   --frame-shadow: 0 1px 2px rgb(0 0 0/ 0.04), 0 12px 32px -14px rgb(0 0 0/ 0.16);
-  --grad: var(--pw-accent);
-  --frame-line: rgb(11 27 46 / 0.09);
+  --grad: var(--action);
+  --frame-line: var(--line);
   --stage-bg: radial-gradient(70% 60% at 50% 40%, #ffffff, transparent 72%),
     linear-gradient(180deg, var(--pw-hero) 0%, var(--pw-paper2) 100%);
   --grad-text: none;
   --damp: #3e5d92;
-  --card: #ffffff;
+  --card: var(--surface);
   --salt: #d6dbe4;
-  --ink-on-surface: #14253c;
-  --text-on-bone: #14253c;
-  --paper-1: var(--pw-paper1);
-  --paper: #ffffff;
-  --emerald-deep: var(--pw-accent);
-  --paper-0: #ffffff;
-  --head-on-bone: #071628;
+  --ink-on-surface: var(--ink);
+  --text-on-bone: var(--ink);
+  --paper-1: var(--surface-tint);
+  --paper: var(--canvas);
+  --emerald-deep: var(--accent);
+  --paper-0: var(--canvas);
+  --head-on-bone: var(--ink-strong);
   --card-translucent: rgb(255 255 255 / 0.92);
-  --paper-2: var(--pw-paper2);
-  --ink: rgb(var(--c-ink));
-  --sc-ink-soft: #33435a;
-  --sc-ink: #14253c;
+  --paper-2: var(--accent-wash);
+  --ground: rgb(var(--c-ink));
+  --sc-ink-soft: var(--ink-soft);
+  --sc-ink: var(--ink);
   --ink-3: rgb(var(--c-ink3));
-  --sc-accent: var(--pw-accent);
+  --sc-accent: var(--accent);
   --bone-2: rgb(var(--c-bone2));
   --mint: rgb(var(--c-mint));
-  --sc-surface: #ffffff;
-  --line: rgb(11 27 46 / 0.1);
+  --sc-surface: var(--surface);
   --ink-2: rgb(var(--c-ink2));
   --emerald: rgb(var(--c-emerald));
-  --sc-accent-ink: rgb(var(--c-ink));
-  --sc-canvas: #ffffff;
+  --sc-accent-ink: var(--on-action);
+  --sc-canvas: var(--canvas);
   --bone: rgb(var(--c-bone));
   --sc-font-text: var(--font-sans), system-ui, sans-serif;
   --sc-font-mono: var(--font-mono), ui-monospace, monospace;
@@ -145,25 +171,25 @@ pre,
   --brick-2: #3e5d92;
   --brand-2: #1580c8;
   --brand: #0f3460;
-  --forest-2: var(--pw-paper1);
-  --forest: #ffffff;
+  --forest-2: var(--plate-2);
+  --forest: var(--plate);
   --map-line: 17 24 39;
-  --map-context: var(--pw-paper2);
-  --map-bg: var(--pw-paper1);
+  --map-context: var(--accent-wash);
+  --map-bg: var(--surface-tint);
   --grad-em: linear-gradient(95deg, var(--pw-deep) 0%, var(--pw-accent) 45%, var(--pw-em-hi) 100%);
   --grad-cta: linear-gradient(118deg, var(--pw-deep) 0%, var(--pw-accent) 52%, var(--pw-cta-hi) 100%);
   --grad-tile: radial-gradient(64% 54% at 100% 0%, rgb(var(--pw-aqua-rgb) / calc(0.45 * var(--pw-glow, 1))) 0%, transparent 62%),
     linear-gradient(135deg, var(--pw-deep) 0%, var(--pw-cta-hi) 100%);
   --aqua-deep: var(--pw-label);
   --grad-em-plate: linear-gradient(95deg, #a4e4f2 0%, #9db8ff 100%);
-  --electric: var(--pw-accent);
+  --electric: var(--accent);
   --aqua: var(--pw-aqua);
   --lk-b: #0f3460;
   --ld-a: #66c2ee;
   --lk-a: #1d548f;
   --ld-b: #1580c8;
-  --royal-deep: var(--pw-deep);
-  --royal: var(--pw-accent);
+  --royal-deep: var(--accent-deep);
+  --royal: var(--accent);
   --royal-2: var(--pw-mark);
   --logo-drop: #1a90d2;
   --pw-wash2: #d9edf9;
@@ -191,14 +217,32 @@ pre,
   --logo-navy: #173455;
   --font-display: "Segoe UI Variable Display", "Segoe UI", var(--font-sans), system-ui, Tahoma, Verdana, sans-serif;
   --font-ui: "Segoe UI Variable Text", "Segoe UI", var(--font-sans), system-ui, Tahoma, Verdana, sans-serif;
-  --ic-red: #b42318;
-  --ic-green: #15803d;
-  --ic-water: #0b6fb3;
+  --ic-red: var(--danger);
+  --ic-green: var(--success);
+  --ic-water: var(--info);
   --pw-on-dark: #a6dcfa;
   --pw-on-dark-rgb: 166 220 250;
   --pw-on-dark-2: #7cc4f2;
 }
 html[data-theme="dark"] {
+  --canvas: #0f141e;
+  --surface: #1a2232;
+  --surface-2: #232e42;
+  --surface-tint: #151c28;
+  --accent-wash: #1c2534;
+  --line: rgb(237 241 248 / 0.14);
+  --line-strong: #5f6d82;
+  --ink: #e8edf5;
+  --ink-strong: #ffffff;
+  --ink-soft: #8e9db6;
+  --accent: var(--pw-on-dark);
+  --accent-deep: var(--pw-on-dark);
+  --action: var(--pw-accent);
+  --action-hover: var(--pw-cta-hi);
+  --plate: #152840;
+  --plate-2: #1d3658;
+  --focus: #6aa2ec;
+
   --c-bone2: 208 217 232;
   --nav-bg: rgb(7 11 20 / 0.9);
   --c-mint: var(--pw-on-dark-rgb);
@@ -214,32 +258,20 @@ html[data-theme="dark"] {
   --c-ink: 15 20 30;
   --grain: 0.03;
   --frame-shadow: none;
-  --frame-line: rgb(237 241 248 / 0.14);
   --stage-bg: linear-gradient(180deg, #1c2534 0%, #0f141e 100%);
   --damp: #96b1d6;
-  --card: #1a2232;
   --salt: #2a3346;
-  --ink-on-surface: #e8edf5;
   --text-on-bone: #bcc8dc;
-  --paper-1: #151c28;
-  --paper: #0f141e;
-  --emerald-deep: var(--pw-on-dark);
-  --paper-0: #0f141e;
-  --head-on-bone: #ffffff;
   --card-translucent: rgb(26 34 50 / 0.94);
-  --paper-2: #1c2534;
   --sc-ink-soft: rgb(var(--c-soft));
   --sc-ink: rgb(var(--c-bone));
   --sc-accent: rgb(var(--c-mint));
   --sc-surface: rgb(var(--c-ink2));
-  --line: rgb(237 241 248 / 0.14);
   --sc-canvas: rgb(var(--c-ink));
   --brick: #96b1d6;
   --brick-2: #b2c8e5;
   --brand-2: #9ec8ff;
   --brand: #ffffff;
-  --forest-2: #1d3658;
-  --forest: #152840;
   --text-on-bone-x: var(--text-on-bone);
   --map-line: 226 232 240;
   --map-context: #222c3e;
@@ -261,6 +293,7 @@ html[data-theme="dark"] {
   --logo-drop: #6aa2ec;
   --logo-blue: #3fb0ee;
   --logo-navy: #f2f6fb;
+  --sc-accent-ink: rgb(var(--c-ink));
 }
 
 
@@ -270,7 +303,7 @@ html[data-theme="dark"] {
    glow, no grain), white cards, near-black text, deep emerald accent. Dark is the forest-ink original. A visitor's choice (header
    switch, stored as "sos_theme") sets data-theme on <html>; without a
    choice the device setting decides.
-   Roles keep their historic names: --ink is the ground (and the text that
+   Roles keep their historic names: --ground is the ground (and the text that
    sits on the accent), --bone is the primary text (and the fill of solid
    buttons), --mint is the accent.
    ------------------------------------------------------------------------- */
@@ -354,7 +387,7 @@ html[data-theme="dark"] {
   --sc-accent-ink: rgb(var(--c-ink));
   --bone: rgb(var(--c-bone));
   --bone-2: rgb(var(--c-bone2));
-  --ink: rgb(var(--c-ink));
+  --ground: rgb(var(--c-ink));
   --ink-2: rgb(var(--c-ink2));
   --ink-3: rgb(var(--c-ink3));
   --mint: rgb(var(--c-mint));
@@ -384,7 +417,7 @@ html[data-theme="dark"] {
   }
   ::selection {
     background: var(--mint);
-    color: var(--ink);
+    color: var(--ground);
   }
 }
 
@@ -402,7 +435,7 @@ html[data-theme="dark"] {
   top: -4rem;
   z-index: 100;
   background: var(--bone);
-  color: var(--ink);
+  color: var(--ground);
   padding: 0.75rem 1rem;
   border-radius: 999px;
   font-weight: 600;
@@ -463,7 +496,7 @@ html[data-theme="dark"] {
   background:
     radial-gradient(60% 70% at 74% 58%, var(--hero-glow), transparent 70%),
     radial-gradient(40% 40% at 70% 92%, var(--hero-water), transparent 70%),
-    linear-gradient(180deg, var(--ink) 0%, var(--band-mint) 70%, var(--ink) 100%);
+    linear-gradient(180deg, var(--ground) 0%, var(--band-mint) 70%, var(--ground) 100%);
 }
 .hero__grid {
   position: relative;
@@ -565,10 +598,10 @@ html[data-theme="dark"] {
 .hv__scenes button[aria-selected="true"] {
   background: var(--mint);
   border-color: var(--mint);
-  color: var(--ink);
+  color: var(--ground);
 }
 .hv__scenes button[aria-selected="true"] svg {
-  color: var(--ink);
+  color: var(--ground);
 }
 @media (max-width: 639px) {
   .hv__scenes {
@@ -782,7 +815,7 @@ html[data-theme="dark"] {
   height: 1.3rem;
   border-radius: 999px;
   background: var(--mint);
-  color: var(--ink);
+  color: var(--ground);
   font-family: var(--sc-font-mono, ui-monospace, monospace);
   font-size: 0.7rem;
 }
@@ -821,7 +854,7 @@ html[data-theme="dark"] {
 .hv__steps button[aria-pressed="true"] {
   background: var(--mint);
   border-color: var(--mint);
-  color: var(--ink);
+  color: var(--ground);
 }
 .hv__step,
 .hv__layers {
@@ -887,7 +920,7 @@ html[data-theme="dark"] {
 .hv__nav button.is-primary {
   background: var(--bone);
   border-color: var(--bone);
-  color: var(--ink);
+  color: var(--ground);
 }
 .hv__layers ul {
   list-style: none;
@@ -1528,7 +1561,7 @@ html[data-text="xl"] {
   height: 2rem;
   border-radius: 999px;
   background: var(--mint);
-  color: var(--ink);
+  color: var(--ground);
   font-family: var(--sc-font-mono, ui-monospace, monospace);
   font-weight: 700;
 }
@@ -3044,35 +3077,36 @@ main dt,
 .band-bone  { background: var(--paper-1); }
 .band-bone2 { background: var(--paper-2); }
 
-/* The dark plate. Sets the channel variables too, so Tailwind's landing-*
+/* The deep-water plate (design token "plate"): the hero and the Lab opener,
+   in both themes. Sets the channel variables too, so Tailwind's landing-*
    colours and every rgb(var(--c-*)) consumer follow it. */
 .band-ink {
-  background: var(--forest);
-  --ink-on-surface: #ffffff;
-  --text-on-bone: #c8d3e6;
-  --head-on-bone: #ffffff;
-  --c-ink: 35 58 94;
-  --c-ink2: 43 69 112;
-  --c-ink3: 52 82 130;
+  background: var(--plate);
+  --ink-on-surface: var(--on-plate);
+  --text-on-bone: var(--on-plate-soft);
+  --head-on-bone: var(--on-plate);
+  --c-ink: 19 32 51;
+  --c-ink2: 27 44 71;
+  --c-ink3: 35 56 88;
   --c-bone: 255 255 255;
-  --c-bone2: 226 233 244;
-  --c-mint: 168 190 222;
-  --c-emerald: 168 190 222;
-  --c-accent-deep: 168 190 222;
-  --c-soft: 160 178 207;
+  --c-bone2: 255 255 255;
+  --c-mint: var(--pw-on-dark-rgb);
+  --c-emerald: var(--pw-on-dark-rgb);
+  --c-accent-deep: var(--pw-on-dark-rgb);
+  --c-soft: 200 211 230;
   --c-line: 255 255 255;
   --line: rgb(255 255 255 / 0.16);
   --frame-line: rgb(255 255 255 / 0.16);
-  --emerald-deep: #a8bede;
-  --card: #2b4570;
-  --card-translucent: rgb(43 69 112 / 0.94);
-  --grad: #ffffff;
-  --btn-ink: #233a5e;
-  --sc-ink: #ffffff;
-  --sc-ink-soft: #a0b2cf;
-  --sc-canvas: var(--forest);
-  --sc-surface: #2b4570;
-  --sc-accent: #a8bede;
+  --emerald-deep: var(--on-plate-accent);
+  --card: var(--plate-2);
+  --card-translucent: color-mix(in srgb, var(--plate-2) 94%, transparent);
+  --grad: var(--on-plate);
+  --btn-ink: var(--plate);
+  --sc-ink: var(--on-plate);
+  --sc-ink-soft: var(--on-plate-soft);
+  --sc-canvas: var(--plate);
+  --sc-surface: var(--plate-2);
+  --sc-accent: var(--on-plate-accent);
   color: var(--ink-on-surface);
   color-scheme: dark;
 }
@@ -4929,8 +4963,9 @@ html:not([data-theme="dark"]) {
     color-scheme: light;
 }
 
-/* ---- the plates become sun-white sections in the light theme ------------- */
-html:not([data-theme="dark"]) .band-ink {
+/* ---- the header bar stays a light band in the light theme; the hero and the
+   Lab opener stay plates (design system: plates in both themes) ---------- */
+html:not([data-theme="dark"]) .band-ink:not(.hero, .lab-top) {
   background: #ffffff;
   --c-ink: 255 255 255;
   --c-ink2: 255 255 255;
@@ -4968,15 +5003,6 @@ html:not([data-theme="dark"]) .band-ink {
   color-scheme: light;
 }
 
-/* the hero and the Lab opener: sun white with water light on it */
-html:not([data-theme="dark"]) .hero.band-ink,
-html:not([data-theme="dark"]) .lab-top.band-ink {
-  background:
-    radial-gradient(55% 75% at 96% 4%, rgb(var(--pw-aqua-rgb) / calc(0.2 * var(--pw-glow, 1))) 0%, transparent 62%),
-    radial-gradient(45% 60% at -6% 100%, rgb(var(--pw-accent-rgb) / 0.1) 0%, transparent 68%),
-    linear-gradient(180deg, var(--pw-hero) 0%, #ffffff 100%);
-  border-bottom: 1px solid rgb(11 27 46 / 0.06);
-}
 
 /* ---- text hierarchy: headings lead, body follows, muted recedes ---------- */
 html:not([data-theme="dark"]) :is(main, .mnav) :is(h1, h2, h3, h4):not(.sc-label),
@@ -4988,11 +5014,9 @@ html:not([data-theme="dark"]) .band-ink :is(h1, h2):not(.sc-label) {
 /* the gradient feature tile keeps its white type */
 html:not([data-theme="dark"]) .services-grid > li:first-child .service-card__h { color: #ffffff !important; }
 
-html:not([data-theme="dark"]) :is(.band-ink, .contact-band) .sc-lede { color: #14253c !important; }
-html:not([data-theme="dark"]) main .sc-lede { color: #1b2d47 !important; }
+html:not([data-theme="dark"]) main .sc-lede { color: var(--text-on-bone) !important; }
 
-html:not([data-theme="dark"]) .band-ink :is(.sc-display, h1, h2) em,
-html:not([data-theme="dark"]) .contact-band :is(.sc-display, h1, h2) em {
+html:not([data-theme="dark"]) .band-ink:not(.hero, .lab-top) :is(.sc-display, h1, h2) em {
   background-image: var(--grad-em) !important;
   -webkit-background-clip: text !important;
   background-clip: text !important;
@@ -5000,8 +5024,7 @@ html:not([data-theme="dark"]) .contact-band :is(.sc-display, h1, h2) em {
   color: var(--pw-accent) !important;
 }
 
-html:not([data-theme="dark"]) .sc-label,
-html:not([data-theme="dark"]) :is(.band-ink, .contact-band) .sc-label {
+html:not([data-theme="dark"]) .sc-label {
   color: var(--pw-label) !important;
   background: transparent !important;
 }
@@ -6424,8 +6447,7 @@ html[data-theme="dark"] .ap-seg button { color: #c9d6e3; }
 html[data-theme="dark"] .ap-seg button[aria-pressed="true"] { background: rgb(255 255 255 / 0.14); color: #ffffff; }
 
 
-html:not([data-theme="dark"]) :is(.band-ink,
-.contact-band,
+html:not([data-theme="dark"]) :is(.band-ink:not(.hero, .lab-top),
 .faq-ask,
 .surface-pop) {
   --c-bone: 20 37 60;
@@ -8606,3 +8628,36 @@ html[data-theme="dark"] .cb__opt small, html[data-theme="dark"] #check .cb__note
 .cb__opt > span > span { display: block; }
 .cb__opt:has(input:disabled) { opacity: 0.4; cursor: not-allowed; }
 .cb__opt:has(input:disabled) input { cursor: not-allowed; }
+
+/* ===========================================================================
+   ON THE PLATE - what sits on the deep-water plate (the hero, the Lab
+   opener) in both themes: headings and body in on-plate, the eyebrow and
+   the emphasised words in on-plate-accent, outlined controls in
+   on-plate-soft. Written after the light-theme rules so it outranks them.
+   ========================================================================= */
+html .band-ink:is(.hero, .lab-top) .sc-label {
+  color: var(--on-plate-accent) !important;
+  background: transparent !important;
+}
+html .band-ink:is(.hero, .lab-top) :is(.sc-display, h1, h2, h3) em {
+  color: var(--on-plate-accent) !important;
+  -webkit-text-fill-color: var(--on-plate-accent) !important;
+  background: none !important;
+}
+html .band-ink:is(.hero, .lab-top) .hero__btn--ghost {
+  color: var(--on-plate);
+  background: transparent;
+  border-color: var(--on-plate-soft);
+}
+html .band-ink:is(.hero, .lab-top) .hero__btn--ghost:hover {
+  background: var(--plate-2);
+  border-color: var(--on-plate);
+}
+html .band-ink:is(.hero, .lab-top) .hero__btn--ghost :is(span, strong) { color: inherit !important; }
+html .band-ink:is(.hero, .lab-top) .hero__facts { border-top-color: var(--plate-2); }
+html .band-ink:is(.hero, .lab-top) .hero__facts li { color: var(--on-plate-soft) !important; }
+/* the image film's chapter list beside the hero */
+html .band-ink:is(.hero, .lab-top) .hero-film__k,
+html .band-ink:is(.hero, .lab-top) .hero-film__chapters button > span { color: var(--on-plate-accent); }
+html .band-ink:is(.hero, .lab-top) .hero-film__chapters button:not([aria-current]) { color: var(--on-plate-soft); }
+html .band-ink:is(.hero, .lab-top) .hero-film__chapters button:not([aria-current]):hover { color: var(--on-plate); }
