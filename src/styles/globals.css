@@ -8901,8 +8901,8 @@ main p.sc-lede { text-align: justify !important; hyphens: auto; -webkit-hyphens:
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(90deg, rgb(7 12 20 / 0.9) 0%, rgb(7 12 20 / 0.72) 38%, rgb(7 12 20 / 0.25) 68%, rgb(7 12 20 / 0.1) 100%),
-    linear-gradient(0deg, rgb(7 12 20 / 0.6) 0%, transparent 32%);
+    linear-gradient(90deg, rgb(7 12 20 / 0.82) 0%, rgb(7 12 20 / 0.58) 36%, rgb(7 12 20 / 0.12) 62%, transparent 100%),
+    linear-gradient(0deg, rgb(7 12 20 / 0.45) 0%, transparent 28%);
 }
 .hero.band-ink .hero__back { display: none; }
 .hero.band-ink .hero__copy { max-width: 44rem; }
@@ -8912,7 +8912,7 @@ main p.sc-lede { text-align: justify !important; hyphens: auto; -webkit-hyphens:
 .hero.band-ink .hero__btn-wa { color: #6fd39a; }
 @media (max-aspect-ratio: 4/5) {
   .hero-cine__v { object-position: 50% 30%; }
-  .hero-cine__shade { background: linear-gradient(180deg, rgb(7 12 20 / 0.3) 0%, rgb(7 12 20 / 0.62) 38%, rgb(7 12 20 / 0.86) 100%); }
+  .hero-cine__shade { background: linear-gradient(180deg, rgb(7 12 20 / 0.12) 0%, rgb(7 12 20 / 0.45) 34%, rgb(7 12 20 / 0.72) 70%, rgb(7 12 20 / 0.84) 100%); }
   .hero.band-ink { min-height: min(78svh, 48rem); }
 }
 @media (prefers-reduced-motion: reduce) { .hero-cine__v { animation: none; } }
@@ -8922,3 +8922,98 @@ main p.sc-lede { text-align: justify !important; hyphens: auto; -webkit-hyphens:
 @media (max-width: 639px) {
   .hero-film__k { white-space: normal !important; overflow: visible; contain: none; }
 }
+
+/* the film's pause / play button, bottom right of the hero */
+.hero-cine__btn {
+  position: absolute;
+  right: max(1rem, env(safe-area-inset-right));
+  bottom: 1rem;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid rgb(255 255 255 / 0.45);
+  background: rgb(7 12 20 / 0.45);
+  color: #ffffff;
+  cursor: pointer;
+}
+.hero-cine__btn svg { width: 1.1rem; height: 1.1rem; }
+.hero-cine__btn:hover { background: rgb(7 12 20 / 0.7); }
+@media (max-width: 639px) {
+  /* phones: below the facts, in the flow, not under the fixed contact bar */
+  .hero.band-ink { flex-direction: column; align-items: stretch; }
+  .hero-cine__btn { position: relative; right: auto; bottom: auto; order: 2; align-self: flex-end; margin: 0 1.25rem 1.25rem 0; }
+}
+
+/* ===========================================================================
+   APPLE-GRADE TYPE, SPACE AND MOTION - one calm scale, generous air.
+   - Type: the Apple system font (SF Pro) on Apple devices, IBM Plex Sans
+     everywhere else. Headlines large, tight and semibold; body 17px on
+     1.5; ledes 21px in the secondary ink at a reading measure.
+   - Space: sections breathe (up to 160px), copy never runs wider than
+     its measure.
+   - Motion: one easing curve; content fades up once as it scrolls into
+     view (components/ui/Reveal.tsx); nothing moves with "reduce motion".
+   ========================================================================= */
+:root {
+  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", var(--font-plex), "Segoe UI", system-ui, sans-serif;
+  --ease-apple: cubic-bezier(0.25, 0.1, 0.25, 1);
+  --ease-out-apple: cubic-bezier(0.22, 1, 0.36, 1);
+  --fs-h1: clamp(2.5rem, 1.45rem + 3.9vw, 4.5rem);
+  --fs-h2: clamp(2rem, 1.35rem + 2.5vw, 3.5rem);
+  --fs-h3: clamp(1.3rem, 1.15rem + 0.6vw, 1.65rem);
+  --fs-h4: 1.1875rem;
+}
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { font-family: var(--font-sans) !important; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility; }
+
+/* headlines: large, tight, semibold */
+main h1:not(.sc-label) { line-height: 1.06 !important; letter-spacing: -0.028em !important; font-weight: 600 !important; }
+main h2:not(.sc-label) { line-height: 1.08 !important; letter-spacing: -0.024em !important; font-weight: 600 !important; }
+main h3:not(.sc-label) { line-height: 1.2 !important; letter-spacing: -0.014em !important; font-weight: 600 !important; }
+main h4:not(.sc-label) { line-height: 1.3 !important; letter-spacing: -0.01em !important; font-weight: 600 !important; }
+.hero.band-ink .hero__title { font-size: clamp(2.6rem, 1.5rem + 4.2vw, 4.75rem) !important; line-height: 1.04 !important; letter-spacing: -0.032em !important; }
+.svc-hero__title { font-size: clamp(2.3rem, 1.4rem + 3.2vw, 4rem) !important; line-height: 1.05 !important; letter-spacing: -0.03em !important; }
+
+/* the lede: one size up, secondary ink, a reading measure */
+main .sc-lede {
+  font-size: clamp(1.1875rem, 1.1rem + 0.35vw, 1.3125rem) !important;
+  line-height: 1.42 !important;
+  letter-spacing: -0.012em;
+  font-weight: 400 !important;
+  color: var(--ink-soft) !important;
+  max-width: 40em;
+}
+.hero.band-ink .sc-lede { color: rgb(255 255 255 / 0.86) !important; }
+
+/* body copy: 17px on 1.5 */
+main :is(p, li, dd):not(.sc-lede):not(.sc-label):not([class*="font-mono"]):not([class*="text-xs"]):not([class*="kicker"]) { line-height: 1.5; }
+main .sc-body { font-size: 1.0625rem !important; line-height: 1.5 !important; color: var(--ink-soft) !important; max-width: 42em; }
+
+/* space: sections breathe; a heading block sits clear of what follows */
+.sc-section { padding-block: clamp(5rem, 2.75rem + 6.5vw, 10rem); }
+.sc-section > .sc-wrap > :is(h2, .sc-display) + :is(.sc-lede, .sc-body, p) { margin-top: 1rem; }
+
+/* motion: one curve for every control and card */
+:is(a, button, .service-card, .more__card, .city-card, .faq-card, .kit-card, .steps4__btn) {
+  transition-timing-function: var(--ease-apple);
+}
+:is(.service-card, .more__card, .kit-card, .city-card) { transition: transform 420ms var(--ease-out-apple), box-shadow 420ms var(--ease-out-apple); }
+@media (hover: hover) {
+  :is(.service-card, .more__card, .kit-card, .city-card):hover { transform: translateY(-4px); }
+}
+
+/* scroll reveal (Reveal.tsx adds .rv to what starts below the fold) */
+.rv { opacity: 0; transform: translateY(24px); transition: opacity 900ms var(--ease-out-apple), transform 900ms var(--ease-out-apple); transition-delay: var(--rv-delay, 0ms); }
+.rv.rv-in,
+.rv:focus-within { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) { .rv { opacity: 1; transform: none; transition: none; } }
+/* phones: a long German compound in a heading breaks rather than widening the page */
+@media (max-width: 639px) {
+  main :is(h1, h2, h3) { overflow-wrap: anywhere; }
+}
+/* keyboard focus reveals its block at once */
+.rv:focus-within { transition: none; }

@@ -11,6 +11,7 @@ import { I18N_BOOT } from "@/i18n/boot";
 import { LanguageProvider } from "@/i18n/LanguageContext";
 import HeadingFit from "@/components/ui/HeadingFit";
 import LabelFit from "@/components/ui/LabelFit";
+import Reveal from "@/components/ui/Reveal";
 
 // Self-hosted fonts: no request to Google at runtime (DSGVO) and no build-time fetch.
 // Upright type only: IBM Plex Sans for headings and text, IBM Plex Mono for
@@ -18,7 +19,8 @@ import LabelFit from "@/components/ui/LabelFit";
 // unicode-range (globals.css) and load only when a page needs them.
 const plex = localFont({
   src: "../fonts/ibm-plex-sans-latin-wght-normal.woff2",
-  variable: "--font-sans",
+  // --font-sans (globals.css) puts the Apple system font first, then this
+  variable: "--font-plex",
   weight: "100 700",
   display: "swap",
 });
@@ -96,6 +98,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           {children}
           <HeadingFit />
           <LabelFit />
+          <Reveal />
           <MobileContactBar />
         </LanguageProvider>
       </body>
