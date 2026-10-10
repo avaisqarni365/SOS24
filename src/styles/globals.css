@@ -190,26 +190,26 @@ pre,
   --royal: var(--accent);
   --royal-2: var(--pw-mark);
   --logo-drop: #1a90d2;
-  --pw-wash2: #d9edf9;
-  --pw-accent: #0b63a8;
+  --pw-wash2: #f6dfdc;
+  --pw-accent: #b42318;
   --pw-glow: 1;
-  --pw-deep: #0a4f8a;
-  --pw-wash1: #eaf5fc;
-  --pw-paper1: #f1f8fd;
-  --pw-mark-rgb: 23 132 199;
-  --pw-em-hi: #1590c9;
-  --pw-label: #0a6fa8;
-  --pw-accent-rgb: 11 99 168;
-  --pw-mark: #1784c7;
-  --pw-deep-rgb: 10 79 138;
-  --pw-shot: #dbe9f4;
-  --pw-paper1-rgb: 241 248 253;
-  --pw-hero: #f5fafe;
-  --pw-aqua-rgb: 31 169 214;
-  --pw-paper2: #e3f1fa;
-  --pw-cta-hi: #0f74bf;
-  --pw-aqua: #1fa9d6;
-  --pw-brick: #2b4570;
+  --pw-deep: #8f1d14;
+  --pw-wash1: #fcf0ef;
+  --pw-paper1: #fdf5f4;
+  --pw-mark-rgb: 217 45 32;
+  --pw-em-hi: #e0483a;
+  --pw-label: #a8231a;
+  --pw-accent-rgb: 180 35 24;
+  --pw-mark: #d92d20;
+  --pw-deep-rgb: 143 29 20;
+  --pw-shot: #f0dedc;
+  --pw-paper1-rgb: 253 245 244;
+  --pw-hero: #fefaf9;
+  --pw-aqua-rgb: 242 135 125;
+  --pw-paper2: #f9e6e4;
+  --pw-cta-hi: #c8291c;
+  --pw-aqua: #f2877d;
+  --pw-brick: #5e1e18;
   --logo-blue: #0b8ad0;
   --logo-brick: #b95642;
   --logo-navy: #173455;
@@ -218,17 +218,17 @@ pre,
   --ic-red: var(--danger);
   --ic-green: var(--success);
   --ic-water: var(--info);
-  --pw-on-dark: #a6dcfa;
-  --pw-on-dark-rgb: 166 220 250;
-  --pw-on-dark2: #7cc4f2;
+  --pw-on-dark: #f4b4ad;
+  --pw-on-dark-rgb: 244 180 173;
+  --pw-on-dark2: #ec8a81;
 }
 html[data-theme="dark"] {
   /* Dunkel: water-biased, surfaces separate by tone instead of shadow */
   --canvas: #0b111a;
   --surface: #121a26;
   --surface-2: #1a2433;
-  --surface-tint: #0f1f30;
-  --accent-wash: #12304a;
+  --surface-tint: color-mix(in srgb, var(--pw-accent) 12%, #0b111a);
+  --accent-wash: color-mix(in srgb, var(--pw-accent) 34%, #0b111a);
   --line: rgb(255 255 255 / 0.12);
   --line-strong: #5f6d82;
   --ink: #f2f6fb;
@@ -4957,9 +4957,15 @@ html:not([data-theme="dark"]) {
     color-scheme: light;
 }
 
-/* ---- the header bar stays a light band in the light theme; the hero and the
-   Lab opener stay plates (design system: plates in both themes) ---------- */
-html:not([data-theme="dark"]) .band-ink:not(.hero, .lab-top) {
+/* ---- the light theme: the header bar and the hero are light bands, white
+   with dark type; the dark theme keeps the deep-water plate -------------- */
+html:not([data-theme="dark"]) .band-ink {
+  --surface: #ffffff;
+  --ink: #14253c;
+  --ink-strong: #071628;
+  --ink-soft: #33435a;
+  --accent: var(--pw-accent);
+  --line-strong: #7d8899;
   background: #ffffff;
   --c-ink: 255 255 255;
   --c-ink2: 255 255 255;
@@ -6441,7 +6447,7 @@ html[data-theme="dark"] .ap-seg button { color: #c9d6e3; }
 html[data-theme="dark"] .ap-seg button[aria-pressed="true"] { background: rgb(255 255 255 / 0.14); color: #ffffff; }
 
 
-html:not([data-theme="dark"]) :is(.band-ink:not(.hero, .lab-top),
+html:not([data-theme="dark"]) :is(.band-ink,
 .faq-ask,
 .surface-pop) {
   --c-bone: 20 37 60;
@@ -7894,7 +7900,9 @@ html[data-theme="dark"] .qv-city__plz > span { background: rgb(255 255 255 / 0.0
 }
 #schritte .steps4__t { margin: 0 !important; font-size: 1.15rem !important; line-height: 1.25 !important; text-align: center !important; color: #071628 !important; }
 #schritte .steps4__d { margin: 0.55rem 0 0 !important; font-size: 0.96rem !important; line-height: 1.55 !important; text-align: start !important; hyphens: manual !important; }
-.steps4__cta { display: grid; gap: 0.45rem; margin-top: 0.9rem; }
+/* the three ways in: one row, centred under the four steps */
+.steps4__cta { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.75rem; margin-top: 2.25rem; }
+.steps4__cta .steps4__btn { flex: 0 1 15.5rem; }
 .steps4__btn {
   display: flex;
   align-items: center;
@@ -7921,13 +7929,14 @@ html[data-theme="dark"] .qv-city__plz > span { background: rgb(255 255 255 / 0.0
 }
 @media (max-width: 639px) {
   .steps4__list { grid-template-columns: minmax(0, 1fr); gap: 1rem; margin-top: 1.4rem !important; }
-  #schritte .steps4__item { display: grid; grid-template-columns: 6.5rem minmax(0, 1fr); grid-template-areas: "art head" "art text" "cta cta"; column-gap: 0.9rem; align-items: start; }
+  #schritte .steps4__item { display: grid; grid-template-columns: 6.5rem minmax(0, 1fr); grid-template-areas: "art head" "art text"; column-gap: 0.9rem; align-items: start; }
   .steps4__art { grid-area: art; aspect-ratio: 1; border-radius: 16px; }
   .steps4__head { grid-area: head; display: flex; align-items: center; gap: 0.55rem; margin: 0.15rem 0 0; }
   .steps4__n { width: 2rem; height: 2rem; font-size: 0.95rem; box-shadow: 0 0 0 4px rgb(var(--pw-accent-rgb) / 0.12); }
   #schritte .steps4__t { font-size: 1.05rem !important; text-align: start !important; }
   #schritte .steps4__d { grid-area: text; margin-top: 0.35rem !important; font-size: 0.9rem !important; }
-  .steps4__cta { grid-area: cta; grid-template-columns: minmax(0, 1fr); }
+  .steps4__cta { flex-direction: column; align-items: stretch; gap: 0.5rem; margin-top: 1.4rem; }
+  .steps4__cta .steps4__btn { flex: none; }
   .steps4__cta .steps4__btn:first-child { display: none; }
 }
 @media (prefers-reduced-motion: no-preference) {
@@ -8625,36 +8634,36 @@ html[data-theme="dark"] .cb__opt small, html[data-theme="dark"] #check .cb__note
 
 /* ===========================================================================
    ON THE PLATE - what sits on the deep-water plate (the hero, the Lab
-   opener) in both themes: headings and body in on-plate, the eyebrow and
+   opener) in the dark theme: headings and body in on-plate, the eyebrow and
    the emphasised words in on-plate-accent, outlined controls in
    on-plate-soft. Written after the light-theme rules so it outranks them.
    ========================================================================= */
-html .band-ink:is(.hero, .lab-top) .sc-label {
+html[data-theme="dark"] .band-ink:is(.hero, .lab-top) .sc-label {
   color: var(--on-plate-accent) !important;
   background: transparent !important;
 }
-html .band-ink:is(.hero, .lab-top) :is(.sc-display, h1, h2, h3) em {
+html[data-theme="dark"] .band-ink:is(.hero, .lab-top) :is(.sc-display, h1, h2, h3) em {
   color: var(--on-plate-accent) !important;
   -webkit-text-fill-color: var(--on-plate-accent) !important;
   background: none !important;
 }
-html .band-ink:is(.hero, .lab-top) .hero__btn--ghost {
+html[data-theme="dark"] .band-ink:is(.hero, .lab-top) .hero__btn--ghost {
   color: var(--on-plate);
   background: transparent;
   border-color: var(--on-plate-soft);
 }
-html .band-ink:is(.hero, .lab-top) .hero__btn--ghost:hover {
+html[data-theme="dark"] .band-ink:is(.hero, .lab-top) .hero__btn--ghost:hover {
   background: var(--plate-2);
   border-color: var(--on-plate);
 }
-html .band-ink:is(.hero, .lab-top) .hero__btn--ghost :is(span, strong) { color: inherit !important; }
-html .band-ink:is(.hero, .lab-top) .hero__facts { border-top-color: var(--plate-2); }
-html .band-ink:is(.hero, .lab-top) .hero__facts li { color: var(--on-plate-soft) !important; }
+html[data-theme="dark"] .band-ink:is(.hero, .lab-top) .hero__btn--ghost :is(span, strong) { color: inherit !important; }
+html[data-theme="dark"] .band-ink:is(.hero, .lab-top) .hero__facts { border-top-color: var(--plate-2); }
+html[data-theme="dark"] .band-ink:is(.hero, .lab-top) .hero__facts li { color: var(--on-plate-soft) !important; }
 /* the image film's chapter list beside the hero */
-html .band-ink:is(.hero, .lab-top) .hero-film__k,
-html .band-ink:is(.hero, .lab-top) .hero-film__chapters button > span { color: var(--on-plate-accent); }
-html .band-ink:is(.hero, .lab-top) .hero-film__chapters button:not([aria-current]) { color: var(--on-plate-soft); }
-html .band-ink:is(.hero, .lab-top) .hero-film__chapters button:not([aria-current]):hover { color: var(--on-plate); }
+html[data-theme="dark"] .band-ink:is(.hero, .lab-top) .hero-film__k,
+html[data-theme="dark"] .band-ink:is(.hero, .lab-top) .hero-film__chapters button > span { color: var(--on-plate-accent); }
+html[data-theme="dark"] .band-ink:is(.hero, .lab-top) .hero-film__chapters button:not([aria-current]) { color: var(--on-plate-soft); }
+html[data-theme="dark"] .band-ink:is(.hero, .lab-top) .hero-film__chapters button:not([aria-current]):hover { color: var(--on-plate); }
 
 /* ===========================================================================
    FOCUS - always visible (design system): a 2px solid ring in the focus
@@ -8737,3 +8746,91 @@ html:not([data-theme="dark"]) .band-ink:not(.hero, .lab-top) :is(.sc-display, h1
 }
 html[data-theme] #kontakt .contact-card__claim { background-image: none !important; color: var(--accent) !important; }
 .hero__brand::after { content: none; }
+
+/* the light theme's hero is white with dark type: emphasis in the accent */
+html:not([data-theme="dark"]) .band-ink :is(.sc-display, h1, h2, h3) em {
+  color: var(--accent) !important;
+  -webkit-text-fill-color: currentColor !important;
+}
+
+/* ===========================================================================
+   PLAIN TEXT, NO LABEL SHAPES - figures are a bullet list on the section's
+   own background; running text and ledes are justified; the small labels
+   above headings stay on one line (LabelFit shrinks them on narrow screens).
+   ========================================================================= */
+.factchips {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, max-content)) !important;
+  gap: 0.4rem 2.25rem !important;
+}
+.factchips > :is(.factchips__label, .factchips__label--plain) {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: flex-start !important;
+  gap: 0.65rem !important;
+  min-height: 0 !important;
+  padding: 0 !important;
+  background: none !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  font-size: 1rem !important;
+  line-height: 1.5 !important;
+  text-align: start !important;
+  color: var(--ink) !important;
+}
+.factchips > :is(.factchips__label, .factchips__label--plain)::before {
+  content: "" !important;
+  flex: none;
+  width: 0.45rem;
+  height: 0.45rem;
+  margin-top: 0.55em;
+  border-radius: 50%;
+  background: var(--accent) !important;
+}
+.factchips__i { display: none !important; }
+.factchips__t strong,
+.factchips__label--plain .factchips__t strong { display: inline !important; font-size: inherit !important; color: var(--ink-strong) !important; }
+@media (max-width: 639px) {
+  .factchips,
+  .factchips.svc-over__chips,
+  .factchips.lab-chips { grid-template-columns: minmax(0, 1fr) !important; gap: 0.3rem !important; }
+}
+
+/* ledes read as running text: justified and hyphenated */
+main p.sc-lede { text-align: justify !important; hyphens: auto; -webkit-hyphens: auto; }
+
+/* the small labels above headings: always one line */
+.sc-label,
+.hero-film__k { white-space: nowrap !important; }
+
+/* the hero's WhatsApp button shows the WhatsApp icon */
+.hero__btn--wa { display: inline-grid !important; grid-template-columns: auto minmax(0, 1fr); column-gap: 0.7rem; align-items: center; }
+.hero__btn--wa .hero__btn-wa { grid-row: 1 / span 2; width: 1.55rem; height: 1.55rem; color: var(--success); }
+.hero__btn--wa :is(.hero__btn-k, .hero__btn-v) { grid-column: 2; }
+
+/* the footer: only the number, and WhatsApp as an icon */
+.site-footer__act--plain { display: flex !important; align-items: center; gap: 0.75rem; flex-wrap: nowrap !important; }
+.site-footer__num {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 44px;
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--ink-strong) !important;
+  text-decoration: none !important;
+}
+.site-footer__num svg { width: 1.15rem; height: 1.15rem; color: var(--success) !important; }
+.site-footer__wa { display: grid; place-items: center; width: 44px; height: 44px; color: var(--success) !important; }
+.site-footer__wa svg { width: 1.6rem; height: 1.6rem; }
+.site-footer__num:hover { color: var(--accent) !important; }
+.site-footer__wa:hover { color: var(--accent) !important; }
+/* a link inside a label (the SchimmelPeter® partner link) takes the label's size */
+:is(.sc-label, .hero-film__k) * { font-size: inherit !important; letter-spacing: inherit !important; }
+/* phones: the two hero buttons stack, so each label has room beside its icon */
+@media (max-width: 639px) {
+  .hero__cta { display: grid !important; grid-template-columns: minmax(0, 1fr) !important; gap: 0.6rem !important; }
+  .hero__cta .hero__btn { width: 100% !important; min-width: 0 !important; }
+}

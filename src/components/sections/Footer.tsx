@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import { PartnerLink, PartnerBadge } from "@/components/brand/PartnerLink";
-import { Phone, MessageCircle, Mail, MapPin, ArrowRight, ChevronDown } from "lucide-react";
+import { Phone, MessageCircle, Mail, MapPin, ChevronDown } from "lucide-react";
 import { SHOTS } from "@/components/brand/BrandShot";
 import { COMPANY_INFO } from "@/data/content-data";
 import { SERVICE_CARDS } from "@/data/services";
@@ -53,27 +53,14 @@ export default function Footer() {
           <p className="site-footer__about">
             Kellersanierung, Horizontalsperren und Schimmelbeseitigung in Wuppertal und dem Bergischen Land.
           </p>
-          <div id="footer-kontakt" className="site-footer__act">
-            <a href="/kontakt/" className="site-footer__kontakt">
-              <span>
-                <small>Kostenlose Feuchtemessung</small>
-                Kontakt
-              </span>
-              <ArrowRight aria-hidden="true" />
-            </a>
-            <a href={`tel:${COMPANY_INFO.phoneTel}`} className="site-footer__line">
+          {/* only the number, and WhatsApp as an icon */}
+          <div id="footer-kontakt" className="site-footer__act site-footer__act--plain">
+            <a href={`tel:${COMPANY_INFO.phoneTel}`} className="site-footer__num">
               <Phone aria-hidden="true" />
-              <span>
-                <small>Anrufen</small>
-                {COMPANY_INFO.phoneDisplay}
-              </span>
+              {COMPANY_INFO.phoneDisplay}
             </a>
-            <a href={COMPANY_INFO.whatsappUrl} target="_blank" rel="noopener noreferrer" className="site-footer__line">
+            <a href={COMPANY_INFO.whatsappUrl} target="_blank" rel="noopener noreferrer" className="site-footer__wa" aria-label="WhatsApp: Foto senden" title="WhatsApp">
               <MessageCircle aria-hidden="true" />
-              <span>
-                <small>WhatsApp</small>
-                Foto senden
-              </span>
             </a>
           </div>
         </div>

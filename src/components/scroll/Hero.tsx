@@ -1,4 +1,5 @@
 import { PartnerLink, PartnerText, PartnerBadge } from "@/components/brand/PartnerLink";
+import { MessageCircle } from "lucide-react";
 import { COMPANY_INFO } from "@/data/content-data";
 import HeroFilm from "@/components/scroll/HeroFilm";
 import { REEL } from "@/data/films";
@@ -47,8 +48,9 @@ export default function Hero() {
               href={COMPANY_INFO.whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="hero__btn hero__btn--ghost"
+              className="hero__btn hero__btn--ghost hero__btn--wa"
             >
+              <MessageCircle className="hero__btn-wa" aria-hidden="true" />
               <span className="hero__btn-k">WhatsApp</span>
               <span className="hero__btn-v">Foto der Wand senden</span>
             </a>

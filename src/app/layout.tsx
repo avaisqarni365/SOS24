@@ -10,6 +10,7 @@ import { COLOR_BOOT } from "@/lib/tone";
 import { I18N_BOOT } from "@/i18n/boot";
 import { LanguageProvider } from "@/i18n/LanguageContext";
 import HeadingFit from "@/components/ui/HeadingFit";
+import LabelFit from "@/components/ui/LabelFit";
 
 // Self-hosted fonts: no request to Google at runtime (DSGVO) and no build-time fetch.
 // Upright type only: IBM Plex Sans for headings and text, IBM Plex Mono for
@@ -94,6 +95,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <LanguageProvider>
           {children}
           <HeadingFit />
+          <LabelFit />
           <MobileContactBar />
         </LanguageProvider>
       </body>
