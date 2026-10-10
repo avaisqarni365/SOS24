@@ -8917,7 +8917,8 @@ main p.sc-lede { text-align: justify !important; hyphens: auto; -webkit-hyphens:
 }
 @media (prefers-reduced-motion: reduce) { .hero-cine__v { animation: none; } }
 
-/* very narrow phones: the film's small label may take two lines rather than be cut */
-@media (max-width: 379px) {
+/* phones: the film's caption (not a label above a heading) may take two lines
+   rather than be cut */
+@media (max-width: 639px) {
   .hero-film__k { white-space: normal !important; overflow: visible; contain: none; }
 }
