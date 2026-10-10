@@ -9011,3 +9011,9 @@ main .sc-body { font-size: 1.0625rem !important; line-height: 1.5 !important; co
 .rv.rv-in,
 .rv:focus-within { opacity: 1; transform: none; }
 @media (prefers-reduced-motion: reduce) { .rv { opacity: 1; transform: none; transition: none; } }
+/* phones: a long German compound in a heading breaks rather than widening the page */
+@media (max-width: 639px) {
+  main :is(h1, h2, h3) { overflow-wrap: anywhere; }
+}
+/* keyboard focus reveals its block at once */
+.rv:focus-within { transition: none; }
