@@ -4959,7 +4959,7 @@ html:not([data-theme="dark"]) {
 
 /* ---- the light theme: the header bar and the hero are light bands, white
    with dark type; the dark theme keeps the deep-water plate -------------- */
-html:not([data-theme="dark"]) .band-ink {
+html:not([data-theme="dark"]) .band-ink:not(.hero) {
   --surface: #ffffff;
   --ink: #14253c;
   --ink-strong: #071628;
@@ -6447,7 +6447,7 @@ html[data-theme="dark"] .ap-seg button { color: #c9d6e3; }
 html[data-theme="dark"] .ap-seg button[aria-pressed="true"] { background: rgb(255 255 255 / 0.14); color: #ffffff; }
 
 
-html:not([data-theme="dark"]) :is(.band-ink,
+html:not([data-theme="dark"]) :is(.band-ink:not(.hero),
 .faq-ask,
 .surface-pop) {
   --c-bone: 20 37 60;
@@ -8154,7 +8154,7 @@ html[data-theme="dark"] .site-footer__claim { color: var(--pw-on-dark); }
 html[data-theme="dark"] :is(.site-footer__about, .site-footer__addr, .site-footer__base) { color: #c9d6e3; }
 html[data-theme="dark"] .site-footer__h { color: #ffffff; }
 html[data-theme="dark"] .site-footer__grp li a { color: #d7e2ee; }
-html[data-theme="dark"] .site-footer__links { background: rgb(255 255 255 / 0.04); border-color: rgb(255 255 255 / 0.1); box-shadow: none; }
+html[data-theme="dark"] .site-footer__links { background: var(--surface); border-color: rgb(255 255 255 / 0.1); box-shadow: none; }
 html[data-theme="dark"] .site-footer__links > nav + nav { border-top-color: rgb(255 255 255 / 0.1); }
 html[data-theme="dark"] .site-footer__line { background: rgb(255 255 255 / 0.08); border-color: rgb(255 255 255 / 0.16); color: #ffffff !important; }
 html[data-theme="dark"] .site-footer__line small { color: var(--pw-on-dark); }
@@ -8638,32 +8638,32 @@ html[data-theme="dark"] .cb__opt small, html[data-theme="dark"] #check .cb__note
    the emphasised words in on-plate-accent, outlined controls in
    on-plate-soft. Written after the light-theme rules so it outranks them.
    ========================================================================= */
-html[data-theme="dark"] .band-ink:is(.hero, .lab-top) .sc-label {
+html .band-ink:is(.hero, .lab-top) .sc-label {
   color: var(--on-plate-accent) !important;
   background: transparent !important;
 }
-html[data-theme="dark"] .band-ink:is(.hero, .lab-top) :is(.sc-display, h1, h2, h3) em {
+html .band-ink:is(.hero, .lab-top) :is(.sc-display, h1, h2, h3) em {
   color: var(--on-plate-accent) !important;
   -webkit-text-fill-color: var(--on-plate-accent) !important;
   background: none !important;
 }
-html[data-theme="dark"] .band-ink:is(.hero, .lab-top) .hero__btn--ghost {
+html .band-ink:is(.hero, .lab-top) .hero__btn--ghost {
   color: var(--on-plate);
   background: transparent;
   border-color: var(--on-plate-soft);
 }
-html[data-theme="dark"] .band-ink:is(.hero, .lab-top) .hero__btn--ghost:hover {
+html .band-ink:is(.hero, .lab-top) .hero__btn--ghost:hover {
   background: var(--plate-2);
   border-color: var(--on-plate);
 }
-html[data-theme="dark"] .band-ink:is(.hero, .lab-top) .hero__btn--ghost :is(span, strong) { color: inherit !important; }
-html[data-theme="dark"] .band-ink:is(.hero, .lab-top) .hero__facts { border-top-color: var(--plate-2); }
-html[data-theme="dark"] .band-ink:is(.hero, .lab-top) .hero__facts li { color: var(--on-plate-soft) !important; }
+html .band-ink:is(.hero, .lab-top) .hero__btn--ghost :is(span, strong) { color: inherit !important; }
+html .band-ink:is(.hero, .lab-top) .hero__facts { border-top-color: var(--plate-2); }
+html .band-ink:is(.hero, .lab-top) .hero__facts li { color: var(--on-plate-soft) !important; }
 /* the image film's chapter list beside the hero */
-html[data-theme="dark"] .band-ink:is(.hero, .lab-top) .hero-film__k,
-html[data-theme="dark"] .band-ink:is(.hero, .lab-top) .hero-film__chapters button > span { color: var(--on-plate-accent); }
-html[data-theme="dark"] .band-ink:is(.hero, .lab-top) .hero-film__chapters button:not([aria-current]) { color: var(--on-plate-soft); }
-html[data-theme="dark"] .band-ink:is(.hero, .lab-top) .hero-film__chapters button:not([aria-current]):hover { color: var(--on-plate); }
+html .band-ink:is(.hero, .lab-top) .hero-film__k,
+html .band-ink:is(.hero, .lab-top) .hero-film__chapters button > span { color: var(--on-plate-accent); }
+html .band-ink:is(.hero, .lab-top) .hero-film__chapters button:not([aria-current]) { color: var(--on-plate-soft); }
+html .band-ink:is(.hero, .lab-top) .hero-film__chapters button:not([aria-current]):hover { color: var(--on-plate); }
 
 /* ===========================================================================
    FOCUS - always visible (design system): a 2px solid ring in the focus
@@ -8748,7 +8748,7 @@ html[data-theme] #kontakt .contact-card__claim { background-image: none !importa
 .hero__brand::after { content: none; }
 
 /* the light theme's hero is white with dark type: emphasis in the accent */
-html:not([data-theme="dark"]) .band-ink :is(.sc-display, h1, h2, h3) em {
+html:not([data-theme="dark"]) .band-ink:not(.hero) :is(.sc-display, h1, h2, h3) em {
   color: var(--accent) !important;
   -webkit-text-fill-color: currentColor !important;
 }
@@ -8879,3 +8879,45 @@ main p.sc-lede { text-align: justify !important; hyphens: auto; -webkit-hyphens:
 .hero-film__who > * { min-width: 0; overflow-wrap: anywhere; }
 .proof-card,
 .proof-chart { min-width: 0; max-width: 100%; }
+
+/* ===========================================================================
+   CINEMATIC HERO - the image film runs full width behind the heading
+   (HeroCine), in both themes: a dark shade over it, white type on top.
+   ========================================================================= */
+.hero.band-ink {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  min-height: min(92svh, 54rem);
+  display: flex;
+  align-items: center;
+  background: #0b111a !important;
+  border-bottom: 0 !important;
+}
+.hero.band-ink > .hero__stage { width: 100%; }
+.hero-cine { position: absolute; inset: 0; z-index: -1; background: #0b111a; }
+.hero-cine__v { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 70% 50%; }
+.hero-cine__shade {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgb(7 12 20 / 0.9) 0%, rgb(7 12 20 / 0.72) 38%, rgb(7 12 20 / 0.25) 68%, rgb(7 12 20 / 0.1) 100%),
+    linear-gradient(0deg, rgb(7 12 20 / 0.6) 0%, transparent 32%);
+}
+.hero.band-ink .hero__back { display: none; }
+.hero.band-ink .hero__copy { max-width: 44rem; }
+/* white type and light accents over the film, whatever the theme */
+.hero.band-ink :is(h1, .sc-display) { color: #ffffff !important; text-shadow: 0 2px 24px rgb(0 0 0 / 0.35); }
+.hero.band-ink .sc-lede { color: #e6ecf5 !important; }
+.hero.band-ink .hero__btn-wa { color: #6fd39a; }
+@media (max-aspect-ratio: 4/5) {
+  .hero-cine__v { object-position: 50% 30%; }
+  .hero-cine__shade { background: linear-gradient(180deg, rgb(7 12 20 / 0.3) 0%, rgb(7 12 20 / 0.62) 38%, rgb(7 12 20 / 0.86) 100%); }
+  .hero.band-ink { min-height: min(78svh, 48rem); }
+}
+@media (prefers-reduced-motion: reduce) { .hero-cine__v { animation: none; } }
+
+/* very narrow phones: the film's small label may take two lines rather than be cut */
+@media (max-width: 379px) {
+  .hero-film__k { white-space: normal !important; overflow: visible; contain: none; }
+}
