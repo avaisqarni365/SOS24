@@ -1,6 +1,6 @@
 /**
- * The site colour. Three hand-tuned presets (Wasser, Grün, Rot) or any
- * colour the visitor picks. The background stays white (dark in the dark
+ * The site colour. Three hand-tuned presets (Rot, the default and the
+ * logo's brick red; Wasser; Grün) or any colour the visitor picks. The background stays white (dark in the dark
  * theme); the colour reaches the accents only: headings' highlights,
  * buttons, icons, links, the faint section tints. In the dark theme the
  * accent text uses light tints of the same colour.
@@ -78,13 +78,13 @@ const CHANNELS = ["accent", "deep", "mark", "aqua", "paper1", "onDark"];
 export type ColorChoice = string;
 export const COLOR_KEY = "sos_color";
 const LEGACY_KEY = "sos_tone";
-export const COLOR_DEFAULT = "water";
+export const COLOR_DEFAULT = "red";
 
 /** where each preset sits on the colour wheel (the slider) */
 export const PRESET_HUE: Record<string, number> = { water: 206, green: 157, red: 4 };
 
 export function colorName(c: ColorChoice) {
-  return c === "water" ? "Wasser" : c === "green" ? "Grün" : c === "red" ? "Rot" : "Eigene Farbe";
+  return c === "water" ? "Wasser" : c === "green" ? "Grün" : c === "red" ? "Auto (Rot)" : "Eigene Farbe";
 }
 
 /** a clear, mid colour for a hue (the slider's custom colours) */
@@ -101,7 +101,7 @@ export function hexFromHue(h: number) {
 export function hueOf(c: ColorChoice) {
   if (PRESET_HUE[c] !== undefined) return PRESET_HUE[c];
   const m = /^#([0-9a-f]{6})$/i.exec(c);
-  if (!m) return PRESET_HUE.water;
+  if (!m) return PRESET_HUE.red;
   const [r, g, b] = [0, 2, 4].map((i) => parseInt(m[1].slice(i, i + 2), 16) / 255);
   const mx = Math.max(r, g, b), mn = Math.min(r, g, b), d = mx - mn;
   if (!d) return 0;
@@ -119,13 +119,14 @@ const PALETTES = { WATER, GREEN, RED, CHANNELS };
  * sheet) that still meets its contrast target.
  */
 function paint(this: void, P: typeof PALETTES, c: string, d: HTMLElement) {
-  var keys = Object.keys(P.WATER);
+  var keys = Object.keys(P.RED);
   var name = function (k: string) {
     return "--pw-" + k.replace(/[A-Z]/g, function (m) {
       return "-" + m.toLowerCase();
     });
   };
-  if (c === "water" || !c) {
+  // the default (red) is what the stylesheet already carries
+  if (c === "red" || !c) {
     for (var i = 0; i < keys.length; i++) {
       d.style.removeProperty(name(keys[i]));
       d.style.removeProperty(name(keys[i]) + "-rgb");
@@ -135,7 +136,7 @@ function paint(this: void, P: typeof PALETTES, c: string, d: HTMLElement) {
   var hexRgb = function (h: string) {
     return [parseInt(h.slice(1, 3), 16), parseInt(h.slice(3, 5), 16), parseInt(h.slice(5, 7), 16)];
   };
-  var pal: Record<string, string> | null = c === "green" ? P.GREEN : c === "red" ? P.RED : null;
+  var pal: Record<string, string> | null = c === "green" ? P.GREEN : c === "water" ? P.WATER : null;
   if (!pal) {
     if (!/^#[0-9a-fA-F]{6}$/.test(c)) return;
     var rgb = hexRgb(c).map(function (v) {
@@ -240,4 +241,4 @@ export function storeColor(c: ColorChoice) {
 }
 
 /** inline boot snippet: paints the stored colour before the first paint */
-export const COLOR_BOOT = `(function(){try{var c=localStorage.getItem(${JSON.stringify(COLOR_KEY)});if(!c){var t=parseFloat(localStorage.getItem(${JSON.stringify(LEGACY_KEY)}));if(t>75)c='green'}if(!c||c==='water')return;(${paint.toString()})(${JSON.stringify(PALETTES)},c,document.documentElement)}catch(e){}})();`;
+export const COLOR_BOOT = `(function(){try{var c=localStorage.getItem(${JSON.stringify(COLOR_KEY)});if(!c){var t=parseFloat(localStorage.getItem(${JSON.stringify(LEGACY_KEY)}));if(t>75)c='green'}if(!c||c==='red')return;(${paint.toString()})(${JSON.stringify(PALETTES)},c,document.documentElement)}catch(e){}})();`;

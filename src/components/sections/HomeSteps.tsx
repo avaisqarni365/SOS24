@@ -180,29 +180,28 @@ export default function HomeSteps({ formHref = "/kontakt/" }: { formHref?: strin
                 <h3 className="steps4__t">{s.title}</h3>
               </div>
               <p className="steps4__d">{s.text}</p>
-              {i === 0 ? (
-                <div className="steps4__cta">
-                  <a href={`tel:${COMPANY_INFO.phoneTel}`} className="steps4__btn">
-                    <span className="steps4__btn-i">
-                      <Phone aria-hidden="true" />
-                    </span>
-                    {COMPANY_INFO.phoneDisplay}
-                  </a>
-                  <a href={COMPANY_INFO.whatsappUrl} target="_blank" rel="noopener noreferrer" className="steps4__btn">
-                    <span className="steps4__btn-i">
-                      <MessageCircle aria-hidden="true" />
-                    </span>
-                    WhatsApp schreiben
-                  </a>
-                  <a href={formHref} className="steps4__btn steps4__btn--solid">
-                    Zum Formular
-                    <ArrowRight aria-hidden="true" />
-                  </a>
-                </div>
-              ) : null}
             </li>
           ))}
         </ol>
+        {/* the first step's three ways in, in one row under all four steps */}
+        <div className="steps4__cta">
+          <a href={`tel:${COMPANY_INFO.phoneTel}`} className="steps4__btn">
+            <span className="steps4__btn-i">
+              <Phone aria-hidden="true" />
+            </span>
+            {COMPANY_INFO.phoneDisplay}
+          </a>
+          <a href={COMPANY_INFO.whatsappUrl} target="_blank" rel="noopener noreferrer" className="steps4__btn">
+            <span className="steps4__btn-i">
+              <MessageCircle aria-hidden="true" />
+            </span>
+            WhatsApp schreiben
+          </a>
+          <a href={formHref} className="steps4__btn steps4__btn--solid">
+            Zum Formular
+            <ArrowRight aria-hidden="true" />
+          </a>
+        </div>
       </div>
     </section>
   );
