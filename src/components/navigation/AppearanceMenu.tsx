@@ -10,9 +10,10 @@ type TextSize = "md" | "lg" | "xl";
 
 /** Script for <head>: applies the stored choice before first paint, so the
     page never flashes in the wrong theme or text size. */
-// White is the default on every device; dark only when the visitor picks it
-// ("auto" follows the device, and only when chosen).
-export const APPEARANCE_BOOT = `(function(){var d=document.documentElement;d.setAttribute('data-theme','light');try{var t=localStorage.getItem('sos_theme'),z=localStorage.getItem('sos_text');if(t==='dark')d.setAttribute('data-theme','dark');else if(t==='auto')d.removeAttribute('data-theme');if(z==='lg'||z==='xl')d.setAttribute('data-text',z)}catch(e){}})();`;
+// White is the default on every device; dark only when the visitor picks it.
+// "Auto" follows the device's light/dark setting, also when it changes later
+// (the boot script listens for that while "auto" is stored).
+export const APPEARANCE_BOOT = `(function(){var d=document.documentElement;d.setAttribute('data-theme','light');try{var t=localStorage.getItem('sos_theme'),z=localStorage.getItem('sos_text'),m=window.matchMedia&&matchMedia('(prefers-color-scheme: dark)');var a=function(){d.setAttribute('data-theme',m&&m.matches?'dark':'light')};if(t==='dark')d.setAttribute('data-theme','dark');else if(t==='auto')a();if(m){var f=function(){try{if(localStorage.getItem('sos_theme')==='auto')a()}catch(e){}};m.addEventListener?m.addEventListener('change',f):m.addListener(f)}if(z==='lg'||z==='xl')d.setAttribute('data-text',z)}catch(e){}})();`;
 
 const THEMES: { id: Theme; label: string; Icon: typeof Sun }[] = [
   { id: "light", label: "Hell", Icon: Sun },
@@ -44,8 +45,13 @@ export default function AppearanceMenu() {
 
   useEffect(() => {
     const d = document.documentElement;
-    const t = d.getAttribute("data-theme");
-    setTheme(t === "light" || t === "dark" ? t : "auto");
+    let stored: string | null = null;
+    try {
+      stored = localStorage.getItem("sos_theme");
+    } catch {
+      /* private mode */
+    }
+    setTheme(stored === "dark" || stored === "auto" ? stored : "light");
     const z = d.getAttribute("data-text");
     setSize(z === "lg" || z === "xl" ? z : "md");
     setColorState(readColor());
@@ -69,9 +75,9 @@ export default function AppearanceMenu() {
   const pickTheme = (t: Theme) => {
     setTheme(t);
     const d = document.documentElement;
-    if (t === "auto") d.removeAttribute("data-theme");
-    else d.setAttribute("data-theme", t);
     save("sos_theme", t === "light" ? null : t);
+    const deviceDark = window.matchMedia?.("(prefers-color-scheme: dark)").matches;
+    d.setAttribute("data-theme", t === "auto" ? (deviceDark ? "dark" : "light") : t);
   };
   const pickSize = (z: TextSize) => {
     setSize(z);
