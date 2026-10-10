@@ -8901,8 +8901,8 @@ main p.sc-lede { text-align: justify !important; hyphens: auto; -webkit-hyphens:
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(90deg, rgb(7 12 20 / 0.9) 0%, rgb(7 12 20 / 0.72) 38%, rgb(7 12 20 / 0.25) 68%, rgb(7 12 20 / 0.1) 100%),
-    linear-gradient(0deg, rgb(7 12 20 / 0.6) 0%, transparent 32%);
+    linear-gradient(90deg, rgb(7 12 20 / 0.82) 0%, rgb(7 12 20 / 0.58) 36%, rgb(7 12 20 / 0.12) 62%, transparent 100%),
+    linear-gradient(0deg, rgb(7 12 20 / 0.45) 0%, transparent 28%);
 }
 .hero.band-ink .hero__back { display: none; }
 .hero.band-ink .hero__copy { max-width: 44rem; }
@@ -8912,7 +8912,7 @@ main p.sc-lede { text-align: justify !important; hyphens: auto; -webkit-hyphens:
 .hero.band-ink .hero__btn-wa { color: #6fd39a; }
 @media (max-aspect-ratio: 4/5) {
   .hero-cine__v { object-position: 50% 30%; }
-  .hero-cine__shade { background: linear-gradient(180deg, rgb(7 12 20 / 0.3) 0%, rgb(7 12 20 / 0.62) 38%, rgb(7 12 20 / 0.86) 100%); }
+  .hero-cine__shade { background: linear-gradient(180deg, rgb(7 12 20 / 0.12) 0%, rgb(7 12 20 / 0.45) 34%, rgb(7 12 20 / 0.72) 70%, rgb(7 12 20 / 0.84) 100%); }
   .hero.band-ink { min-height: min(78svh, 48rem); }
 }
 @media (prefers-reduced-motion: reduce) { .hero-cine__v { animation: none; } }
@@ -8921,4 +8921,28 @@ main p.sc-lede { text-align: justify !important; hyphens: auto; -webkit-hyphens:
    rather than be cut */
 @media (max-width: 639px) {
   .hero-film__k { white-space: normal !important; overflow: visible; contain: none; }
+}
+
+/* the film's pause / play button, bottom right of the hero */
+.hero-cine__btn {
+  position: absolute;
+  right: max(1rem, env(safe-area-inset-right));
+  bottom: 1rem;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid rgb(255 255 255 / 0.45);
+  background: rgb(7 12 20 / 0.45);
+  color: #ffffff;
+  cursor: pointer;
+}
+.hero-cine__btn svg { width: 1.1rem; height: 1.1rem; }
+.hero-cine__btn:hover { background: rgb(7 12 20 / 0.7); }
+@media (max-width: 639px) {
+  /* phones: below the facts, in the flow, not under the fixed contact bar */
+  .hero.band-ink { flex-direction: column; align-items: stretch; }
+  .hero-cine__btn { position: relative; right: auto; bottom: auto; order: 2; align-self: flex-end; margin: 0 1.25rem 1.25rem 0; }
 }

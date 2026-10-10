@@ -220,11 +220,9 @@ export function applyColor(c: ColorChoice) {
 
 export function readColor(): ColorChoice {
   try {
-    const c = localStorage.getItem(COLOR_KEY);
-    if (c) return c;
-    // the old slider: its right end was green
-    const t = parseFloat(localStorage.getItem(LEGACY_KEY) ?? "");
-    return t > 75 ? "green" : COLOR_DEFAULT;
+    // only an explicit choice counts; the old slider's value (sos_tone) is
+    // ignored, so every device without one shows the default colour
+    return localStorage.getItem(COLOR_KEY) || COLOR_DEFAULT;
   } catch {
     return COLOR_DEFAULT;
   }
@@ -241,4 +239,4 @@ export function storeColor(c: ColorChoice) {
 }
 
 /** inline boot snippet: paints the stored colour before the first paint */
-export const COLOR_BOOT = `(function(){try{var c=localStorage.getItem(${JSON.stringify(COLOR_KEY)});if(!c){var t=parseFloat(localStorage.getItem(${JSON.stringify(LEGACY_KEY)}));if(t>75)c='green'}if(!c||c==='red')return;(${paint.toString()})(${JSON.stringify(PALETTES)},c,document.documentElement)}catch(e){}})();`;
+export const COLOR_BOOT = `(function(){try{localStorage.removeItem(${JSON.stringify(LEGACY_KEY)});var c=localStorage.getItem(${JSON.stringify(COLOR_KEY)});if(!c||c==='red')return;(${paint.toString()})(${JSON.stringify(PALETTES)},c,document.documentElement)}catch(e){}})();`;
