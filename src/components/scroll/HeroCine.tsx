@@ -10,11 +10,12 @@ const PORTRAIT = "(max-aspect-ratio: 4/5)";
 
 /**
  * The cinematic first frame: the image film runs silently behind the hero
- * heading. Landscape screens get the wide cut, portrait screens the tall
- * one; turning a tablet swaps them. iPhones refuse to start a video on
- * their own in Low Power Mode, so a refused start is retried on the first
- * touch or scroll. A small button pauses and plays it (and with "reduce
- * motion" the film waits for that button).
+ * heading. The video is written into the page the way iPhones start one by
+ * themselves (autoplay, muted, playsinline, both cuts as <source> with a
+ * media query), so it runs before any script. The script only steps in
+ * where a browser holds it back: it retries on the first real tap (iOS
+ * Low Power Mode allows playback only from a tap), swaps the cut when a
+ * tablet turns, and drives the pause / play button.
  */
 export default function HeroCine() {
   const ref = useRef<HTMLVideoElement>(null);
@@ -24,28 +25,22 @@ export default function HeroCine() {
   useEffect(() => {
     const v = ref.current;
     if (!v) return;
-    // iOS starts a video by itself only when it is muted and inline
     v.muted = true;
     v.defaultMuted = true;
     v.playsInline = true;
-    v.setAttribute("muted", "");
-    v.setAttribute("playsinline", "");
-    v.setAttribute("webkit-playsinline", "");
-
-    const reduce = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
-    if (reduce) wanted.current = false;
     const mq = window.matchMedia(PORTRAIT);
 
     const start = () => {
-      if (!wanted.current) return;
+      if (!wanted.current || !v.paused) return;
       v.play().catch(() => {
-        /* refused (Low Power Mode): the first touch or scroll tries again */
+        /* held back (Low Power Mode): the next tap tries again */
       });
     };
-    const load = () => {
+    // a browser that ignores <source media> or a tablet that turns: set the right cut
+    const fit = () => {
       const cut = mq.matches ? TALL : WIDE;
       v.poster = cut.poster;
-      if (!v.src.endsWith(cut.src)) {
+      if (v.currentSrc && !v.currentSrc.endsWith(cut.src)) {
         v.src = cut.src;
         v.load();
       }
@@ -53,28 +48,35 @@ export default function HeroCine() {
     };
     const onPlay = () => setPlaying(true);
     const onPause = () => setPlaying(false);
-    const retry = () => start();
+    const onTap = () => start();
 
     v.addEventListener("playing", onPlay);
     v.addEventListener("pause", onPause);
-    v.addEventListener("canplay", retry);
-    window.addEventListener("touchstart", retry, { passive: true });
-    window.addEventListener("scroll", retry, { passive: true });
-    document.addEventListener("visibilitychange", retry);
-    mq.addEventListener?.("change", load);
-    load();
+    v.addEventListener("loadeddata", start);
+    v.addEventListener("canplay", start);
+    // touchend and click count as a tap for iOS playback; touchstart and scroll do not
+    window.addEventListener("touchend", onTap, { passive: true });
+    window.addEventListener("click", onTap);
+    window.addEventListener("scroll", onTap, { passive: true });
+    document.addEventListener("visibilitychange", onTap);
+    mq.addEventListener?.("change", fit);
+    if (!v.paused) setPlaying(true);
+    fit();
     return () => {
       v.removeEventListener("playing", onPlay);
       v.removeEventListener("pause", onPause);
-      v.removeEventListener("canplay", retry);
-      window.removeEventListener("touchstart", retry);
-      window.removeEventListener("scroll", retry);
-      document.removeEventListener("visibilitychange", retry);
-      mq.removeEventListener?.("change", load);
+      v.removeEventListener("loadeddata", start);
+      v.removeEventListener("canplay", start);
+      window.removeEventListener("touchend", onTap);
+      window.removeEventListener("click", onTap);
+      window.removeEventListener("scroll", onTap);
+      document.removeEventListener("visibilitychange", onTap);
+      mq.removeEventListener?.("change", fit);
     };
   }, []);
 
-  const toggle = () => {
+  const toggle = (e: React.MouseEvent) => {
+    e.stopPropagation();
     const v = ref.current;
     if (!v) return;
     if (v.paused) {
@@ -89,7 +91,21 @@ export default function HeroCine() {
   return (
     <>
       <div className="hero-cine" aria-hidden="true">
-        <video ref={ref} className="hero-cine__v" muted loop playsInline preload="auto" poster={WIDE.poster} />
+        <video
+          ref={ref}
+          className="hero-cine__v"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          poster={WIDE.poster}
+          disablePictureInPicture
+          disableRemotePlayback
+        >
+          <source src={TALL.src} type="video/mp4" media={PORTRAIT} />
+          <source src={WIDE.src} type="video/mp4" />
+        </video>
         <div className="hero-cine__shade" />
       </div>
       <button type="button" className="hero-cine__btn" onClick={toggle} aria-label={playing ? "Film anhalten" : "Film abspielen"}>
