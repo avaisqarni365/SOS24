@@ -8834,3 +8834,48 @@ main p.sc-lede { text-align: justify !important; hyphens: auto; -webkit-hyphens:
   .hero__cta { display: grid !important; grid-template-columns: minmax(0, 1fr) !important; gap: 0.6rem !important; }
   .hero__cta .hero__btn { width: 100% !important; min-width: 0 !important; }
 }
+
+/* ---- devices: nothing may widen the page past the screen ------------------ */
+/* the fact list shares the width; a long fact wraps inside its column */
+.factchips { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+.factchips__t { min-width: 0; overflow-wrap: anywhere; }
+@media (max-width: 639px) {
+  .factchips,
+  .factchips.svc-over__chips,
+  .factchips.lab-chips { grid-template-columns: minmax(0, 1fr) !important; }
+}
+/* a one-line label never grows its column: LabelFit shrinks the text instead */
+.sc-label,
+.hero-film__k { display: block; max-width: 100%; min-width: 0; overflow: hidden; }
+.hero-film__side { min-width: 0; }
+.svc-hero__label { margin: 0.9rem 0 0 !important; }
+
+/* narrow screens: running text and ledes read left-aligned (justifying a
+   phone-width column opens wide gaps between words); wider screens justify */
+@media (max-width: 767px) {
+  main :is(p, li, dd, blockquote),
+  main p.sc-lede { text-align: start !important; }
+}
+/* grid and flex columns may shrink below their widest one-line label */
+:is(.svc-hero__grid, .hero__grid, .hero-film, .svc-hero__copy) > * { min-width: 0; }
+/* facts wrap inside their column (an older rule kept each on one line) */
+.factchips > li,
+.factchips__t { white-space: normal !important; }
+/* the film's side column: its inner grid takes the column's width, not its widest item */
+.hero-film__side { grid-template-columns: minmax(0, 1fr); }
+/* phones: a long German word in a heading may hyphenate or break instead of
+   pushing the page wider than the screen */
+@media (max-width: 639px) {
+  main :is(h1, h2, h3) { overflow-wrap: break-word; -webkit-hyphens: auto; hyphens: auto; }
+}
+/* a one-line label takes the width it is given and never sizes its container
+   (otherwise a long label widens grid cards past the screen) */
+.sc-label,
+.hero-film__k { contain: inline-size; }
+/* the film's chapter list and the Lab's proof card stay inside a 320px screen */
+.hero-film__chapters { grid-template-columns: minmax(0, 1fr); }
+.hero-film__chapters button { min-width: 0; overflow-wrap: anywhere; }
+.hero-film__who { min-width: 0; }
+.hero-film__who > * { min-width: 0; overflow-wrap: anywhere; }
+.proof-card,
+.proof-chart { min-width: 0; max-width: 100%; }

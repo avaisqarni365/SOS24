@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import { PartnerLink, PartnerBadge } from "@/components/brand/PartnerLink";
-import { Phone, MessageCircle, Mail, MapPin, ChevronDown } from "lucide-react";
+import { Phone, Mail, MapPin, ChevronDown } from "lucide-react";
 import { SHOTS } from "@/components/brand/BrandShot";
 import { COMPANY_INFO } from "@/data/content-data";
 import { SERVICE_CARDS } from "@/data/services";
@@ -49,20 +49,6 @@ export default function Footer() {
             <Logo />
             <PartnerBadge className="site-footer__badge" />
           </div>
-          <p className="site-footer__claim">Schützt, was wichtig ist!</p>
-          <p className="site-footer__about">
-            Kellersanierung, Horizontalsperren und Schimmelbeseitigung in Wuppertal und dem Bergischen Land.
-          </p>
-          {/* only the number, and WhatsApp as an icon */}
-          <div id="footer-kontakt" className="site-footer__act site-footer__act--plain">
-            <a href={`tel:${COMPANY_INFO.phoneTel}`} className="site-footer__num">
-              <Phone aria-hidden="true" />
-              {COMPANY_INFO.phoneDisplay}
-            </a>
-            <a href={COMPANY_INFO.whatsappUrl} target="_blank" rel="noopener noreferrer" className="site-footer__wa" aria-label="WhatsApp: Foto senden" title="WhatsApp">
-              <MessageCircle aria-hidden="true" />
-            </a>
-          </div>
         </div>
 
         <div className="site-footer__links">
@@ -90,7 +76,7 @@ export default function Footer() {
         </div>
 
         <div className="site-footer__base">
-          <address className="site-footer__addr">
+          <address id="footer-kontakt" className="site-footer__addr">
             <span>
               <MapPin aria-hidden="true" />
               {COMPANY_INFO.owner} · {COMPANY_INFO.street}, {COMPANY_INFO.city}
