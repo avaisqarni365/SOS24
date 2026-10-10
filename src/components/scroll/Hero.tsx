@@ -1,15 +1,14 @@
 import { PartnerLink, PartnerText, PartnerBadge } from "@/components/brand/PartnerLink";
 import { MessageCircle } from "lucide-react";
 import { COMPANY_INFO } from "@/data/content-data";
-import HeroFilm from "@/components/scroll/HeroFilm";
-import { REEL } from "@/data/films";
+import HeroCine from "@/components/scroll/HeroCine";
 import FactsStrip from "@/components/sections/FactsStrip";
 
 export const CTA_LABEL = "Kostenlose Feuchtemessung anfragen";
 
 /**
- * Hero: one typographic statement, and beside it the short image film
- * (HeroFilm). The 3D cut-away belongs in the Scientific Lab.
+ * Hero: one typographic statement over the image film, full width and
+ * silent (HeroCine). The 3D cut-away belongs in the Scientific Lab.
  */
 export default function Hero() {
   return (
@@ -18,6 +17,7 @@ export default function Hero() {
       className="hero band-ink"
       aria-labelledby="hero-title"
     >
+      <HeroCine />
       <div className="hero__stage">
         <div className="hero__back" data-hero-plane="back" aria-hidden="true" />
         <div className="hero__grid">
@@ -58,7 +58,6 @@ export default function Hero() {
 
           <FactsStrip inHero />
         </div>
-        <HeroFilm film={REEL} />
         </div>
       </div>
     </section>
