@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Navbar from "@/components/sections/Navbar";
 import Footer from "@/components/sections/Footer";
-import GrokLeadBot from "@/components/ai/GrokLeadBot";
 import Hero from "@/components/scroll/Hero";
 import { ServicesRail } from "@/components/scroll/HomeSections";
 import MoreLinks from "@/components/sections/MoreLinks";
@@ -73,7 +72,6 @@ export default function Home() {
         <HomeSteps />
       </main>
       <Footer />
-      <GrokLeadBot />
       <ScrollEngine />
     </>
   );

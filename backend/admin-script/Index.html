@@ -1,0 +1,721 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<style>
+:root{--bg:#f4f6f8;--surface:#ebeff3;--ink:#0f2537;--ink2:#4b5563;--line:rgba(15,37,55,.35);--soft:rgba(15,37,55,.14);--red:#059669;--fill:#047857;--fill2:#065f46;--on:#f8fafc;--tint:#ecfdf5;--tint-ink:#065f46}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font:500 15px/1.5 Inter,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+a{color:inherit}
+button,input,select,textarea{font:inherit;color:inherit}
+:focus-visible{outline:2px solid var(--red);outline-offset:2px}
+h1,h2,h3{margin:0;font-weight:700;letter-spacing:-.02em;line-height:1.1}
+.top{position:sticky;top:0;z-index:5;background:var(--ink);color:var(--on);display:flex;align-items:center;gap:6px 18px;flex-wrap:wrap;padding:10px 20px}
+.brand{font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-size:14px;margin-right:auto;display:flex;align-items:center;gap:10px}
+.brand i{width:22px;height:22px;background:#10b981;display:inline-block;border-radius:4px}
+.brand b{color:#34d399}
+.top nav{display:flex;gap:2px}
+.top nav a{text-decoration:none;padding:8px 12px;font-weight:600}
+.top nav a[aria-current=page]{box-shadow:inset 0 -3px 0 #34d399}
+.top .me{font-size:12.5px;color:#b8c1ce;display:flex;gap:12px;align-items:center}
+.top .me a{color:#f3f2f2}
+main{max-width:1280px;margin:0 auto;padding:24px clamp(20px,4vw,48px) 80px}
+.kicker{font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--fill2)}
+.h{display:flex;align-items:end;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:6px 0 18px}
+.h h1{font-size:28px}
+.btn{display:inline-flex;align-items:center;justify-content:space-between;gap:16px;border:1px solid var(--line);background:transparent;padding:10px 14px;min-height:42px;font-weight:700;cursor:pointer;text-decoration:none}
+.btn:hover{background:rgba(15,37,55,.07)}
+.btn.primary{background:var(--fill);border-color:var(--fill);color:var(--on)}
+.btn.primary:hover{background:var(--fill2)}
+.btn.small{min-height:34px;padding:6px 10px;font-size:13px}
+.btn:disabled{opacity:.45;cursor:default}
+.grid4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:2px solid var(--ink)}
+.kpi{padding:16px 16px 18px 0;border-bottom:1px solid var(--line)}
+.kpi + .kpi{padding-left:16px;border-left:1px solid var(--line)}
+.kpi b{display:block;font-size:34px;line-height:1;margin-bottom:6px;font-variant-numeric:tabular-nums}
+.kpi span{font-size:13px;color:var(--ink2)}
+.cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:32px;margin-top:32px}
+.block h2{font-size:18px;margin-bottom:8px}
+.list{border-top:2px solid var(--ink)}
+.row{display:grid;grid-template-columns:96px minmax(0,1fr) auto;gap:4px 14px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line);text-decoration:none}
+.row:hover{background:rgba(15,37,55,.04)}
+.row .id{font-weight:700;font-variant-numeric:tabular-nums}
+.row small{display:block;color:var(--ink2);font-size:13px}
+.empty{color:var(--ink2);padding:12px 0}
+.badge{display:inline-block;font-size:11.5px;font-weight:700;padding:3px 8px;white-space:nowrap;border:1px solid var(--line)}
+/* status order: Neu, In Arbeit, Angebot raus, Gebucht, Erledigt, Verloren */
+.s0{background:#0284c7;border-color:#0284c7;color:var(--on)}
+.s1{background:var(--tint);color:var(--tint-ink);border-color:var(--tint)}
+.s2{background:var(--ink);color:var(--on);border-color:var(--ink)}
+.s3{background:#047857;color:#fff;border-color:#047857}
+.s4,.s5{color:var(--ink2)}
+.filters{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:14px}
+.chip{border:1px solid var(--line);background:transparent;padding:7px 12px;font-weight:600;font-size:13.5px;cursor:pointer}
+a.chip{display:inline-flex;align-items:center;text-decoration:none;color:inherit}
+.chip[aria-pressed=true]{background:var(--ink);color:var(--on);border-color:var(--ink)}
+.chip span{opacity:.7;margin-left:4px;font-variant-numeric:tabular-nums}
+.input{border:1px solid var(--line);background:var(--surface);padding:9px 12px;min-height:42px;border-radius:0;width:100%}
+.input:focus-visible{border-color:var(--red);outline-offset:0}
+.filters .input{width:auto;flex:1 1 220px}
+table{width:100%;border-collapse:collapse}
+.tbl{border-top:2px solid var(--ink)}
+.tbl th{font-size:11.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink2);text-align:left;padding:10px 10px 10px 0;border-bottom:2px solid var(--ink)}
+.tbl td{padding:11px 10px 11px 0;border-bottom:1px solid var(--line);vertical-align:top}
+.tbl tbody tr{cursor:pointer}
+.tbl tbody tr:hover{background:rgba(15,37,55,.04)}
+.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.muted{color:var(--ink2);font-size:13px}
+.detail{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:32px;align-items:start}
+.card{border-top:2px solid var(--ink);padding-top:14px;margin-bottom:28px}
+.card h2{font-size:18px;margin-bottom:10px}
+.facts{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));border-top:1px solid var(--line)}
+.facts div{padding:9px 12px 9px 0;border-bottom:1px solid var(--line);min-width:0}
+.facts div:nth-child(even){padding-left:12px;border-left:1px solid var(--line)}
+.facts dt{font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink2)}
+.facts dd{margin:2px 0 0;font-weight:600;overflow-wrap:anywhere}
+.side .field{margin-bottom:12px}
+.field label{display:block;font-size:12px;color:var(--ink2);margin-bottom:4px}
+.actions{display:flex;gap:8px;flex-wrap:wrap}
+.qt td{padding:6px 6px 6px 0;border-bottom:1px solid var(--line)}
+.qt th{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink2);text-align:left;padding:6px 6px 6px 0;border-bottom:2px solid var(--ink)}
+.qt .input{min-height:36px;padding:6px 8px;font-size:14px}
+.qt .n{width:64px;text-align:right}
+.qt .u{width:54px}
+@media (min-width:641px){.qt{width:100%;border-collapse:collapse}.qt td:nth-child(1){width:24%}.qt td:nth-child(1) .input,.qt td:nth-child(2) .input{width:100%}}
+.qt .x{border:0;background:transparent;cursor:pointer;font-size:18px;line-height:1;padding:6px;color:var(--ink2)}
+.total{display:flex;justify-content:space-between;align-items:baseline;padding:12px 0;border-bottom:2px solid var(--ink);font-weight:700}
+.total b{font-size:28px;font-variant-numeric:tabular-nums}
+textarea.input{min-height:120px;resize:vertical;line-height:1.5}
+.toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:var(--ink);color:var(--on);padding:12px 18px;font-weight:600;z-index:20;max-width:90vw}
+.toast.err{background:#dc2626}
+.loading{padding:40px 0;color:var(--ink2)}
+.cal-m{font-size:20px;margin:24px 0 8px}
+.nw{white-space:nowrap}
+.detail.busy .side{opacity:.55;pointer-events:none}
+.ktag{display:inline-block;font-size:11px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;padding:2px 6px;margin-right:8px;vertical-align:1px;border:1px solid currentColor}
+.k-auftrag{color:var(--ink)}.k-flexibel{color:#8a5a00}.k-termin{color:#047857}
+.cal-key{font-size:13px;line-height:2}.cal-key .ktag{margin-left:10px}.cal-key .ktag:first-child{margin-left:0}
+@media (max-width:640px){.cal-key{display:grid;grid-template-columns:auto 1fr;gap:6px 0;align-items:center;line-height:1.4}.cal-key .ktag{margin-left:0;justify-self:start}}
+@media (max-width:900px){
+  .detail,.cols{grid-template-columns:minmax(0,1fr)}
+  .grid4{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .kpi:nth-child(3){padding-left:0;border-left:0}
+  .tbl thead{display:none}
+  .tbl tr{display:grid;grid-template-columns:auto 1fr auto;gap:2px 10px;padding:10px 0;border-bottom:1px solid var(--line)}
+  .tbl td{border:0;padding:0}
+  .tbl td.hide-m{display:none}
+  .top .me span{display:none}
+  .tbl.items tr{grid-template-columns:minmax(0,1fr) 36px 48px}
+  .tbl.items td:nth-child(2){display:none}
+  .tbl.items td.num{text-align:right}
+}
+@media (max-width:640px){
+  .top{padding:10px 14px;position:relative}
+  .top nav{order:3;width:100%;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:2px;border-top:1px solid rgba(243,242,242,.15);padding-top:6px}
+  .top nav a{min-height:44px;display:flex;align-items:center;justify-content:center;padding:6px 4px;font-size:14px}
+  .top .me{gap:4px}
+  .top .me a{min-height:44px;display:inline-flex;align-items:center;padding:0 8px}
+  .btn.small,.chip{min-height:44px}
+  .row{grid-template-columns:56px minmax(0,1fr) auto;gap:4px 12px}
+  .row.cal{grid-template-columns:80px minmax(0,1fr) auto}
+  #lead-docs .row{grid-template-columns:auto minmax(0,1fr) auto}
+  main a.muted:first-child{display:inline-flex;align-items:center;min-height:44px}
+  main{padding:16px 14px 80px}
+}
+@media (max-width:640px){
+  .qt thead{display:none}
+  .qt,.qt tbody{display:block;width:100%}
+  .qt tr{display:grid;grid-template-columns:repeat(3,minmax(0,1fr)) auto 44px;gap:6px 8px;align-items:end;padding:12px 0;border-bottom:1px solid var(--soft)}
+  .qt td{padding:0;border:0;min-width:0}
+  .qt td:nth-child(1),.qt td:nth-child(2){grid-column:1/-1}
+  .qt td::before{display:block;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink2);margin-bottom:3px}
+  .qt td:nth-child(1)::before{content:"Position"}.qt td:nth-child(2)::before{content:"Basis"}.qt td:nth-child(3)::before{content:"Menge"}
+  .qt td:nth-child(4)::before{content:"Einheit"}.qt td:nth-child(5)::before{content:"Satz €"}.qt td:nth-child(6)::before{content:"Betrag"}
+  .qt .input,.qt .n,.qt .u{width:100%;min-height:44px}
+  .qt td.amt{text-align:right;font-weight:700;white-space:nowrap;padding-bottom:12px}
+  .qt td:last-child{display:flex;align-items:end}
+  .qt .x{width:44px;height:44px}
+}
+body.locked .top nav,body.locked .top .me{display:none}
+.login{max-width:380px;margin:8vh auto 0;display:grid;gap:14px;background:#fff;padding:28px 24px;border-top:4px solid var(--red)}
+.login h1{margin:0;font-size:28px}
+.login label{display:grid;gap:6px;font-weight:700;font-size:14px}
+.login .input{min-height:46px;font-size:16px}
+.login .btn{min-height:48px;width:100%}
+.login-brand{display:flex;align-items:center;gap:8px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;font-size:13px}
+.login-brand i{width:18px;height:18px;background:var(--red);display:inline-block;border-radius:3px}
+.login-brand b{color:var(--fill)}
+.login-err{min-height:1.4em;margin:0;color:#dc2626;font-weight:700;font-size:14px}
+.login .muted{margin:0;font-size:13px}
+@media (max-width:360px){.qt tr{grid-template-columns:repeat(3,minmax(0,1fr))}.qt td:nth-child(6){grid-column:1/3;align-self:center}.qt td:nth-child(7){grid-column:3;justify-self:end}}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="brand"><i aria-hidden="true"></i>SOS <b>Abdichtung</b> · Admin</div>
+  <nav aria-label="Admin">
+    <a href="#/" data-nav="home">Übersicht</a>
+    <a href="#/anfragen" data-nav="list">Anfragen</a>
+    <a href="#/planer" data-nav="planner">Aufmaß</a>
+    <a href="#/kalender" data-nav="cal">Kalender</a>
+    <a href="#/termine" data-nav="appts">Termine</a>
+    <a href="#/belege" data-nav="docs">Belege</a>
+    <a href="#/statistik" data-nav="stats">Statistik</a>
+    <a href="#/hilfe" data-nav="help">Hilfe</a>
+  </nav>
+  <div class="me"><span id="me-name"></span><a href="#" id="sheet-link" target="_blank" rel="noopener">Tabelle</a><a href="<?= siteUrl ?>" target="_blank" rel="noopener">Website</a><a href="#" id="logout">Abmelden</a></div>
+</header>
+<main id="app"><p class="loading">Daten werden geladen …</p></main>
+<div id="toast" class="toast" role="status" hidden></div>
+
+<script>
+(function () {
+  'use strict';
+  var S = {leads: [], statuses: [], me: '', portal: false, filter: {status: 'open', q: '', service: ''}, cur: null};
+  var app = document.getElementById('app');
+  var OPEN = ['Neu', 'In Arbeit', 'Angebot raus'];
+  var START = <?!= JSON.stringify(start || '') ?>;
+  if (START && !location.hash.replace(/^#\/?/, '')) location.hash = '#/' + START;
+
+  function syncUrl(h) {
+    if (!(window.google && google.script && google.script.history)) return;
+    var p = h.indexOf('a/') === 0 ? {a: decodeURIComponent(h.slice(2))} : h.indexOf('beleg/') === 0 ? {b: decodeURIComponent(h.slice(6))} : h === 'termine' ? {t: '1'} : {};
+    try { google.script.history.replace(null, p, ''); } catch (err) {}
+  }
+
+  /* ---------- helpers ---------- */
+  function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return {'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'}[c]; }); }
+  var TOKEN = '';
+  try { TOKEN = sessionStorage.getItem('sos-admin') || ''; } catch (e) {}
+  function run(fn) {
+    var args = Array.prototype.slice.call(arguments, 1);
+    return new Promise(function (ok, bad) {
+      google.script.run.withSuccessHandler(ok).withFailureHandler(function (e) {
+        if (/LOGIN/.test(e && e.message || e)) { showLogin(); return; }
+        bad(e);
+      }).api(TOKEN, fn, args);
+    });
+  }
+  function setToken(t) { TOKEN = t || ''; try { if (t) sessionStorage.setItem('sos-admin', t); else sessionStorage.removeItem('sos-admin'); } catch (e) {} }
+  var loginShown = false;
+  function showLogin(msg) {
+    setToken('');
+    if (document.getElementById('login') && !msg) return;
+    loginShown = true;
+    document.body.classList.add('locked');
+    app.innerHTML = '<form class="login" id="login" autocomplete="on"><div class="login-brand"><i aria-hidden="true"></i>SOS <b>Abdichtung</b> · Admin</div>' +
+      '<h1>Anmelden</h1><label>Benutzername<input class="input" name="user" autocomplete="username" autocapitalize="none" spellcheck="false" required></label>' +
+      '<label>Passwort<input class="input" name="pass" type="password" autocomplete="current-password" required></label>' +
+      '<p class="login-err" role="alert">' + esc(msg || '') + '</p><button class="btn primary" type="submit">Anmelden <span aria-hidden="true">→</span></button>' +
+      '<p class="muted">Zugang erhalten Sie von Inhaber Shahzad Mahmood (Tabellenblatt „Benutzer“).</p></form>';
+    var f = document.getElementById('login');
+    f.user.focus();
+    f.addEventListener('submit', function (ev) {
+      ev.preventDefault();
+      var b = f.querySelector('button'); b.disabled = true;
+      google.script.run.withSuccessHandler(function (r) {
+        b.disabled = false;
+        if (!r || !r.ok) {
+          f.querySelector('.login-err').textContent = r && r.error === 'locked' ? 'Zu viele Versuche – bitte in 15 Minuten erneut versuchen.' : 'Benutzername oder Passwort stimmt nicht.';
+          f.pass.value = ''; f.pass.focus(); return;
+        }
+        setToken(r.token); loginShown = false; document.body.classList.remove('locked');
+        document.getElementById('me-name').textContent = r.name;
+        app.innerHTML = '<p class="loading">Daten werden geladen …</p>';
+        reload().then(routeTo).catch(function (e) { app.innerHTML = '<p class="loading">Fehler beim Laden: ' + esc(e && e.message || e) + '</p>'; });
+      }).withFailureHandler(function (e) { b.disabled = false; f.querySelector('.login-err').textContent = 'Anmeldung nicht möglich: ' + (e && e.message || e); }).login(f.user.value, f.pass.value);
+    });
+  }
+  document.getElementById('logout').addEventListener('click', function (ev) {
+    ev.preventDefault();
+    google.script.run.withSuccessHandler(function () {}).logout(TOKEN);
+    document.getElementById('me-name').textContent = '';
+    showLogin('Sie sind abgemeldet.');
+  });
+  var toastT;
+  function toast(msg, err) { var t = document.getElementById('toast'); t.textContent = msg; t.className = 'toast' + (err ? ' err' : ''); t.hidden = false; clearTimeout(toastT); toastT = setTimeout(function () { t.hidden = true; }, 3500); }
+  function fail(e) {
+    var m = (e && e.message) || String(e), p = app.querySelector(':scope > p.loading');
+    toast(m, true);
+    if (p) p.outerHTML = '<div class="card"><p><b>' + esc(m) + '</b></p><p><a href="javascript:history.back()">← Zurück</a> · <a href="#/">Zur Übersicht</a></p></div>';
+  }
+  function eur(n) { return n == null || n === '' || isNaN(n) ? '–' : Number(n).toLocaleString('de-DE', {minimumFractionDigits: 0, maximumFractionDigits: 2}) + ' €'; }
+  function day(iso) { if (!iso) return '–'; var d = new Date(iso); return isNaN(d) ? esc(iso) : d.toLocaleDateString('de-DE', {day: '2-digit', month: '2-digit', year: '2-digit'}); }
+  function dt(iso) { if (!iso) return '–'; var d = new Date(iso); return isNaN(d) ? esc(iso) : d.toLocaleString('de-DE', {day: '2-digit', month: '2-digit', hour: '2-digit', minute: '2-digit'}); }
+  function de(n) { return String(n == null ? '' : n).replace('.', ','); }
+  function isDate(s) { return /^\d{4}-\d{2}-\d{2}$/.test(s); }
+  function badge(s) { return '<span class="badge s' + S.statuses.indexOf(s) + '">' + esc(s) + '</span>'; }
+  function svc(l) { return String(l.service || 'Kellerabdichtung').replace(/ \((Planer|Kurzformular|Rechner)\)$/, ''); }
+  function place(a) { var m = /(\d{5})\s+([^,\d][^,]*)/.exec(a || ''); return m ? m[1] + ' ' + m[2].trim() : String(a || '').split(',').slice(-1)[0].trim(); }
+  function route(l) { return [place(l.from), l.to].filter(Boolean).join(' · ') || 'Wuppertal / NRW'; }
+  function waNum(p) { var d = String(p).replace(/[^\d+]/g, ''); if (d[0] === '+') return d.slice(1); if (d.slice(0, 2) === '00') return d.slice(2); if (d[0] === '0') return '49' + d.slice(1); return d; }
+  function setNav(k) { document.querySelectorAll('[data-nav]').forEach(function (a) { if (a.getAttribute('data-nav') === k) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current'); }); }
+
+  /* ---------- routing ---------- */
+  function routeTo() {
+    var h = location.hash.replace(/^#\/?/, '');
+    if (!TOKEN) return showLogin();
+    syncUrl(h);
+    if (window.SUDocs && window.SUDocs.route(h)) return;
+    if (window.SUAppts && window.SUAppts.route(h)) return;
+    if (window.SUPlaner && window.SUPlaner.route(h)) return;
+    if (window.SUHilfe && window.SUHilfe.route(h)) return;
+    if (h.indexOf('a/') === 0) return detail(decodeURIComponent(h.slice(2)));
+    if (h === 'anfragen') return list();
+    if (h === 'kalender') return calendar();
+    return home();
+  }
+  window.addEventListener('hashchange', routeTo);
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href]');
+    if (!a || e.defaultPrevented || e.button || e.metaKey || e.ctrlKey || e.shiftKey) return;
+    var h = a.getAttribute('href');
+    if (h.charAt(0) === '#') { if (h.length > 1 && h !== '#' + location.hash.slice(1)) location.hash = h; e.preventDefault(); }
+    else if (/^(tel|mailto):/.test(h) && !a.target) a.target = '_top';
+  });
+
+  function reload() { return run('api_bootstrap').then(function (d) { S.leads = d.leads; S.statuses = d.statuses; S.me = d.me; document.getElementById('me-name').textContent = d.me; S.portal = d.portal; S.routes = d.routes; document.getElementById('sheet-link').href = d.sheetUrl; }); }
+
+  /* ---------- overview ---------- */
+  function home() {
+    setNav('home');
+    var c = function (s) { return S.leads.filter(function (l) { return l.status === s; }).length; };
+    var today = new Date().toISOString().slice(0, 10);
+    var upcoming = S.leads.filter(function (l) { return isDate(l.date) && l.date >= today && l.status !== 'Verloren'; }).sort(function (a, b) { return a.date < b.date ? -1 : 1; }).slice(0, 8);
+    var fresh = S.leads.filter(function (l) { return l.status === 'Neu'; }).slice(0, 8);
+    var stale = S.leads.filter(function (l) { return l.status === 'Angebot raus' && l.quoteSent && (Date.now() - new Date(l.quoteSent)) > 3 * 864e5; });
+    app.innerHTML = '<span class="kicker">Übersicht · SOS Abdichtung NRW</span><div class="h"><h1>Guten Tag, ' + esc(S.me || 'Shahzad') + '.</h1><a class="btn primary" href="#/anfragen">Alle Anfragen →</a></div>' +
+      '<div class="grid4">' + ['Neu', 'In Arbeit', 'Angebot raus', 'Gebucht'].map(function (s) { return '<a class="kpi" style="text-decoration:none" href="#/anfragen" data-st="' + esc(s) + '"><b>' + c(s) + '</b><span>' + esc(s) + '</span></a>'; }).join('') + '</div>' +
+      '<div class="cols"><section class="block"><h2>Neue Schadensanfragen</h2><div class="list">' + (fresh.length ? fresh.map(function (l) { return rowHtml(l); }).join('') : '<p class="empty">Keine neuen Anfragen.</p>') + '</div></section>' +
+      '<section class="block"><h2>Nächste Vor-Ort-Termine &amp; Sanierungen</h2><div class="list">' + (upcoming.length ? upcoming.map(function (l) { return rowHtml(l, true); }).join('') : '<p class="empty">Keine festen Termine.</p>') + '</div>' +
+      (stale.length ? '<h2 style="margin-top:24px">Angebot ohne Rückmeldung (&gt; 3 Tage)</h2><div class="list">' + stale.map(function (l) { return rowHtml(l); }).join('') + '</div>' : '') + '</section></div>' +
+      routesHtml();
+    app.querySelectorAll('[data-st]').forEach(function (a) { a.addEventListener('click', function () { S.filter.status = a.getAttribute('data-st'); }); });
+  }
+
+  function routesHtml() {
+    var r = S.routes; if (!r) return '';
+    var leads30 = S.leads.filter(function (l) { return (Date.now() - new Date(l.received)) <= 30 * 864e5; }).length;
+    return '<section class="block" style="margin-top:32px"><h2>Besucher im Schadens- &amp; Sanierungsrechner</h2>' +
+      '<div class="grid4"><div class="kpi"><b>' + r.today + '</b><span>heute</span></div><div class="kpi"><b>' + r.week + '</b><span>letzte 7 Tage</span></div>' +
+      '<div class="kpi"><b>' + r.month + '</b><span>letzte 30 Tage</span></div><div class="kpi"><b>' + (r.month ? Math.round(leads30 / r.month * 100) + ' %' : '–') + '</b><span>daraus Anfragen (30 Tage)</span></div></div>' +
+      '<div class="cols" style="margin-top:16px"><div><h2>Häufigste Einsatzorte / Schäden (30 Tage)</h2><div class="list">' + (r.towns.length ? r.towns.map(function (t) { return '<div class="row" style="grid-template-columns:minmax(0,1fr) auto"><span>' + esc(t[0]) + '</span><b>' + t[1] + '</b></div>'; }).join('') : '<p class="empty">Noch keine Berechnungen.</p>') + '</div></div>' +
+      '<div><h2>Zuletzt im Rechner geprüft</h2><div class="list">' + (r.last.length ? r.last.map(function (x) { return '<div class="row" style="grid-template-columns:96px minmax(0,1fr) auto"><span class="muted">' + dt(x.at) + '</span><span>' + esc(x.from) + ' · ' + esc(x.to) + '<small>' + esc(x.page) + '</small></span><b>' + x.km + ' m²/lfm</b></div>'; }).join('') : '<p class="empty">Noch keine Berechnungen.</p>') + '</div></div></div>' +
+      '<p class="muted">Gespeichert werden nur PLZ/Ort und Schadensart, keine personenbezogenen Daten. Einträge werden nach 6 Monaten automatisch gelöscht.</p></section>';
+  }
+  function rowHtml(l, withDate) {
+    return '<a class="row" href="#/a/' + encodeURIComponent(l.id) + '"><span class="id">' + esc(l.id) + '</span><span>' + esc(l.name || '–') +
+      '<small>' + esc(svc(l)) + ' · ' + esc(route(l)) + ' · <span class="nw">' + (withDate ? day(l.date) : dt(l.received)) + '</span></small></span>' + badge(l.status) + '</a>';
+  }
+
+  /* ---------- list ---------- */
+  function list() {
+    setNav('list');
+    var counts = {open: 0, all: S.leads.length};
+    S.leads.forEach(function (l) { counts[l.status] = (counts[l.status] || 0) + 1; if (OPEN.indexOf(l.status) >= 0) counts.open++; });
+    var chips = [['open', 'Offen']].concat(S.statuses.map(function (s) { return [s, s]; })).concat([['all', 'Alle']]);
+    var services = ['Kellerabdichtung', 'Feuchte Wände', 'Horizontalsperre', 'Schimmelbeseitigung', 'Rissinjektion', 'Balkon / Terrasse'];
+    app.innerHTML = '<span class="kicker">Anfragen</span><div class="h"><h1>Alle Schadensanfragen</h1><button class="btn small" id="refresh">Aktualisieren</button></div>' +
+      '<div class="filters" role="group" aria-label="Status">' + chips.map(function (c) { return '<button class="chip" data-f="' + esc(c[0]) + '" aria-pressed="' + (S.filter.status === c[0]) + '">' + esc(c[1]) + '<span>' + (counts[c[0]] || 0) + '</span></button>'; }).join('') + '</div>' +
+      '<div class="filters"><input class="input" id="q" type="search" placeholder="Suchen: Name, ID, Telefon, Objektadresse, PLZ" value="' + esc(S.filter.q) + '" aria-label="Suchen">' +
+      '<select class="input" id="svc" aria-label="Schadensart" style="flex:0 1 220px"><option value="">Alle Schadensarten</option>' + services.map(function (s) { return '<option' + (S.filter.service === s ? ' selected' : '') + '>' + s + '</option>'; }).join('') + '</select></div>' +
+      '<div id="tbl"></div>';
+    app.querySelectorAll('[data-f]').forEach(function (b) { b.addEventListener('click', function () { S.filter.status = b.getAttribute('data-f'); list(); }); });
+    document.getElementById('q').addEventListener('input', function (e) { S.filter.q = e.target.value; table(); });
+    document.getElementById('svc').addEventListener('change', function (e) { S.filter.service = e.target.value; table(); });
+    document.getElementById('refresh').addEventListener('click', function () { reload().then(list).catch(fail); });
+    table();
+  }
+  function table() {
+    var f = S.filter, q = f.q.trim().toLowerCase();
+    var rows = S.leads.filter(function (l) {
+      if (f.status === 'open' && OPEN.indexOf(l.status) < 0) return false;
+      if (f.status !== 'open' && f.status !== 'all' && l.status !== f.status) return false;
+      if (f.service && svc(l).toLowerCase().indexOf(f.service.toLowerCase()) < 0) return false;
+      return !q || [l.id, l.name, l.phone, l.email, l.from, l.to, l.owner].join(' ').toLowerCase().indexOf(q) >= 0;
+    });
+    document.getElementById('tbl').innerHTML = rows.length ? '<table class="tbl"><thead><tr><th>Nr.</th><th>Kunde</th><th class="hide-m">Schadensart</th><th class="hide-m">Objekt / Bereich</th><th>Wunschtermin</th><th class="num hide-m">Fläche</th><th class="num hide-m">Angebot</th><th>Status</th></tr></thead><tbody>' +
+      rows.map(function (l) {
+        return '<tr data-id="' + esc(l.id) + '"><td><b>' + esc(l.id) + '</b><div class="muted">' + dt(l.received) + '</div></td><td>' + esc(l.name || '–') + '<div class="muted">' + esc(l.owner ? 'Zuständig: ' + l.owner : (l.phone || l.email)) + '</div></td>' +
+          '<td class="hide-m">' + esc(svc(l)) + '</td><td class="hide-m">' + esc(route(l)) + '</td><td>' + (isDate(l.date) ? day(l.date) : '<span class="muted">' + esc(l.date || 'flexibel') + '</span>') + '</td>' +
+          '<td class="num hide-m">' + (l.volMin != null ? esc(de(l.volMin)) + '–' + esc(de(l.volMax)) + ' m²/lfm' : '–') + '</td><td class="num hide-m">' + eur(l.total) + '</td><td>' + badge(l.status) + '</td></tr>';
+      }).join('') + '</tbody></table>' : '<p class="empty">Keine Anfragen für diesen Filter.</p>';
+    document.querySelectorAll('#tbl tr[data-id]').forEach(function (tr) { tr.addEventListener('click', function () { location.hash = '#/a/' + encodeURIComponent(tr.getAttribute('data-id')); }); });
+  }
+
+  /* ---------- detail ---------- */
+  function detail(id) {
+    setNav('list');
+    var known = (S.leads || []).filter(function (x) { return x.id === id; })[0];
+    if (known) { S.cur = {lead: known, items: [], quote: {lines: [], version: 0}, minPrice: 0, loading: true}; drawDetail(); }
+    else app.innerHTML = '<p class="loading">Anfrage ' + esc(id) + ' wird geladen …</p>';
+    run('api_lead', id).then(function (d) { if (decodeURIComponent(location.hash.replace(/^#\/?/, '')) !== 'a/' + id) return; S.cur = d; drawDetail(); }).catch(fail);
+  }
+  function drawDetail() {
+    var d = S.cur, l = d.lead;
+    var fact = function (k, v) { return v || v === 0 ? '<div><dt>' + esc(k) + '</dt><dd>' + esc(v) + '</dd></div>' : ''; };
+    var facts = fact('Schadensart', l.service) + fact('Wunschtermin', isDate(l.date) ? day(l.date) : l.date) + fact('Objektadresse / Ort', l.from) + fact('Bauteil / Bereich', l.to) +
+      fact('Anfahrt', l.kmMaps != null ? l.kmMaps + ' km (' + l.minutes + ' min)' : (l.kmFamily ? l.kmFamily + ' km (Angabe)' : '')) + fact('Gebäudetyp', l.household) +
+      fact('Mauerwerk / Baujahr', l.accOld) + fact('Zugänglichkeit', l.accNew) + fact('Schutzfolie / Staubschutz', l.hvz) + fact('Betroffene Räume', l.rooms) +
+      fact('Fläche / Umfang', l.volMin != null ? de(l.volMin) + '–' + de(l.volMax) + ' m²/lfm' : '') + fact('Materialbedarf', l.weight ? l.weight + ' kg' : '') +
+      fact('Systemempfehlung', l.vehicle) + fact('Facharbeiter / Stunden', l.crew ? l.crew + ' Techniker · ' + de(l.hours) + ' Std.' : '') + fact('Einschätzung', l.confidence) +
+      fact('Kostenträger / Eigentum', l.payer && l.payer !== 'Selbstzahler' ? l.payer : '') + fact('Dringlichkeit / Status', l.pre) +
+      fact('Quelle', l.source) + fact('Sprache', l.lang) + fact('Eingang', dt(l.received));
+    var items = d.items.length ? '<div class="card"><h2>Sanierungspositionen &amp; Schadensmerkmale (' + d.items.reduce(function (a, i) { return a + i.n; }, 0) + ')</h2><table class="tbl items" style="border-top:0"><thead><tr><th>Position / Maßnahme</th><th>Kategorie</th><th class="num">Menge</th><th class="num">Faktor</th></tr></thead><tbody>' +
+      d.items.map(function (i) { return '<tr style="cursor:default"><td>' + esc(i.name) + (i.size ? ' <span class="muted">' + esc(i.size) + '</span>' : '') + '</td><td class="muted">' + esc(i.source) + '</td><td class="num">' + i.n + '</td><td class="num">' + Number(i.vol).toLocaleString('de-DE') + '</td></tr>'; }).join('') + '</tbody></table></div>' : '';
+    var contact = (l.phone ? '<a class="btn small" href="tel:' + esc(l.phone.replace(/\s/g, '')) + '">📞 Anrufen</a><a class="btn small" target="_blank" rel="noopener" href="https://wa.me/' + waNum(l.phone) + '">💬 WhatsApp</a>' : '') +
+      (l.email ? '<a class="btn small" href="mailto:' + esc(l.email) + '">✉️ E-Mail</a>' : '') +
+      (l.photosDrive ? '<a class="btn small" target="_blank" rel="noopener" href="' + esc(l.photosDrive) + '">📷 Schadensfotos (Drive)</a>' : '') +
+      '<a class="btn small" href="#/planer?id=' + encodeURIComponent(l.id) + '" title="Im Aufmaß-Planer bearbeiten oder verfeinern">📐 Im Aufmaß-Planer öffnen</a>';
+    app.innerHTML = '<a href="#/anfragen" class="muted">← Alle Anfragen</a>' +
+      '<div class="h"><div><span class="kicker">' + esc(l.id) + ' · ' + esc(svc(l)) + '</span><h1>' + esc(l.name || '–') + '</h1>' +
+      '<div class="muted">' + esc([l.phone, l.email].filter(Boolean).join(' · ')) + (l.channel ? ' · bevorzugt: ' + esc(({whatsapp: 'WhatsApp', email: 'E-Mail', phone: 'Telefon', call: 'Telefon'})[String(l.channel).toLowerCase()] || l.channel) : '') + '</div></div><div class="actions">' + contact + '</div></div>' +
+      '<div class="detail"><div>' +
+        '<div class="card"><h2>Schadensdiagnose &amp; Objektdaten</h2><dl class="facts" style="margin:0">' + facts + '</dl>' + (l.message ? '<p style="margin:12px 0 0;white-space:pre-wrap"><b>Schadensbeschreibung / Kundennotiz:</b> ' + esc(l.message) + '</p>' : '') + '</div>' +
+        items + quoteHtml() +
+      '</div><aside class="side">' +
+        '<div class="card"><h2>Bearbeitung</h2><div class="field"><label for="st">Status</label><select class="input" id="st">' + S.statuses.map(function (s) { return '<option' + (s === l.status ? ' selected' : '') + '>' + esc(s) + '</option>'; }).join('') + '</select></div>' +
+        '<div class="field"><label for="ow">Zuständiger Sachverständiger / Bauleiter</label><input class="input" id="ow" value="' + esc(l.owner) + '" placeholder="z. B. Shahzad Mahmood"></div>' +
+        '<div class="field"><label for="nt">Interne Messwerte &amp; Notizen</label><textarea class="input" id="nt" placeholder="z. B. CM-Messung 4,2 %, Nitratbelastung mittel, Bohrlochraster 12 cm">' + esc(l.notes) + '</textarea></div>' +
+        '<button class="btn primary" id="save-meta">Speichern</button></div>' +
+        contractHtml() +
+        handoverHtml() +
+        filesHtml() +
+        sendHtml() +
+        '<div class="card" id="lead-docs"></div>' +
+      '</aside></div>';
+    if (d.loading) { app.querySelector('.detail').classList.add('busy'); return; }
+    bindDetail();
+    if (window.SUDocs) window.SUDocs.leadCard(l, document.getElementById('lead-docs'));
+  }
+
+  /* files & drive storage: customer damage photos, signature certificates */
+  function filesHtml() {
+    var l = S.cur.lead, c = l.contract || {};
+    return '<div class="card" id="files-card">' +
+      '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">' +
+        '<h2 style="margin:0">Dateien &amp; Cloud (Google Drive)</h2>' +
+        '<span class="badge" style="background:#e0f2fe;color:#0369a1">Drive Cloud</span>' +
+      '</div>' +
+      '<p class="muted" style="margin:0 0 10px;font-size:12.5px">Alle hochgeladenen Schadensfotos, Unterschriften und GoBD-Belege sind dauerhaft in Ihrem Google Drive (`SOS Abdichtung - Schadensfotos / ' + esc(l.id) + '`) gesichert.</p>' +
+      '<div style="display:flex;flex-direction:column;gap:8px">' +
+        (l.photosDrive
+          ? '<div style="background:#f0fdf4;border:1px solid #bbf7d0;border-radius:6px;padding:10px;display:flex;align-items:center;justify-content:space-between">' +
+              '<div><b style="font-size:13px;color:#166534">📷 Schadensfotos vorhanden</b><div class="muted" style="font-size:12px">Originalfotos im Drive-Ordner ' + esc(l.id) + '</div></div>' +
+              '<a class="btn small" target="_blank" rel="noopener" href="' + esc(l.photosDrive) + '" style="background:#166534;color:#fff;font-weight:600">Drive-Ordner öffnen ↗</a>' +
+            '</div>'
+          : '<div style="background:#f8fafc;border:1px dashed var(--soft,#cbd5e1);border-radius:6px;padding:10px;display:flex;align-items:center;justify-content:space-between">' +
+              '<div><b style="font-size:12.5px;color:var(--muted)">📷 Keine Schadensfotos hochgeladen</b><div class="muted" style="font-size:11.5px">Kunde hat noch keine Fotos im Formular/Chat beigefügt</div></div>' +
+            '</div>') +
+        (c.sigDriveUrl
+          ? '<div style="background:#eff6ff;border:1px solid #bfdbfe;border-radius:6px;padding:10px;display:flex;align-items:center;justify-content:space-between">' +
+              '<div><b style="font-size:13px;color:#1e40af">✍️ Signatur-Zertifikat</b><div class="muted" style="font-size:12px">Unterschrift in „SOS Abdichtung - Verträge“ gespeichert</div></div>' +
+              '<a class="btn small" target="_blank" rel="noopener" href="' + esc(c.sigDriveUrl) + '" style="background:#1e40af;color:#fff;font-weight:600">Signatur öffnen ↗</a>' +
+            '</div>'
+          : '') +
+      '</div>' +
+    '</div>';
+  }
+
+  /* quote editor */
+  function quoteHtml() {
+    var q = S.cur.quote;
+    if (S.cur.loading) return '<div class="card" id="quote"><h2>Kalkulation &amp; Angebot</h2><p class="loading">Positionen werden geladen …</p></div>';
+    return '<div class="card" id="quote"><h2>Kalkulation ' + (q.saved ? '<span class="muted">Version ' + q.version + '</span>' : '<span class="muted">WTA-Richtwert aus den Angaben' + (q.range ? ' (Spanne ±' + q.range + ' %)' : '') + '</span>') + '</h2>' +
+      '<div style="overflow-x:auto"><table class="qt"><thead><tr><th>Position</th><th>Basis / Gewerk</th><th class="num">Menge</th><th>Einheit</th><th class="num">Satz €</th><th class="num">Betrag</th><th></th></tr></thead><tbody id="qlines">' +
+      q.lines.map(lineHtml).join('') + '</tbody></table></div>' +
+      '<div class="actions" style="margin:10px 0"><button class="btn small" id="addline">+ Position</button></div>' +
+      '<div class="total"><span>Gesamt <span class="muted">(mindestens ' + eur(S.cur.minPrice) + ')</span></span><b id="qtotal"></b></div>' +
+      '<div class="actions" style="margin-top:12px"><button class="btn primary" id="saveq">Kalkulation speichern</button></div></div>';
+  }
+  function lineHtml(l) {
+    return '<tr><td><input class="input" value="' + esc(l[0]) + '" aria-label="Position"></td><td><input class="input" value="' + esc(l[1]) + '" aria-label="Basis"></td>' +
+      '<td><input class="input n" type="number" step="any" value="' + esc(l[2]) + '" aria-label="Menge"></td><td><input class="input u" value="' + esc(l[3]) + '" aria-label="Einheit"></td>' +
+      '<td><input class="input n" type="number" step="any" value="' + esc(l[4]) + '" aria-label="Satz"></td><td class="num amt"></td><td><button class="x" title="Entfernen" aria-label="Position entfernen">×</button></td></tr>';
+  }
+  function readLines() {
+    return Array.prototype.map.call(document.querySelectorAll('#qlines tr'), function (tr) { var i = tr.querySelectorAll('input'); return [i[0].value, i[1].value, Number(i[2].value) || 0, i[3].value, Number(i[4].value) || 0]; });
+  }
+  function totals() {
+    var sum = 0;
+    document.querySelectorAll('#qlines tr').forEach(function (tr) { var i = tr.querySelectorAll('input'), a = (Number(i[2].value) || 0) * (Number(i[4].value) || 0); sum += a; tr.querySelector('.amt').textContent = eur(Math.round(a * 100) / 100); });
+    var t = Math.max(S.cur.minPrice || 0, Math.round(sum * 100) / 100);
+    document.getElementById('qtotal').textContent = eur(t);
+    return t;
+  }
+
+  /* contract, e-signature and e-pdf options */
+  function contractHtml() {
+    var l = S.cur.lead, c = l.contract || {};
+    if (c.signed) {
+      return '<div class="card" id="contract-card" style="border-left:4px solid #047857">' +
+        '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">' +
+          '<h2 style="margin:0">Vertrag &amp; Signatur</h2><span class="badge" style="background:#d1fae5;color:#065f46">✓ Signiert</span>' +
+        '</div>' +
+        '<p class="muted" style="margin:0 0 8px;font-size:13px">Kunde hat den Sanierungsauftrag digital unterzeichnet:</p>' +
+        '<dl class="facts" style="margin:0 0 12px">' +
+          (c.signer ? '<div><dt>Unterzeichner</dt><dd>' + esc(c.signer) + '</dd></div>' : '') +
+          (c.signedAt ? '<div><dt>Zeitpunkt</dt><dd>' + dt(c.signedAt) + '</dd></div>' : '') +
+        '</dl>' +
+        '<div class="actions" style="flex-direction:column;gap:6px">' +
+          (c.sigDriveUrl ? '<a class="btn small" target="_blank" rel="noopener" href="' + esc(c.sigDriveUrl) + '" style="width:100%;text-align:center">✍️ Signatur ansehen (Drive)</a>' : '') +
+          '<a class="btn small primary" href="#/neu/invoice/' + encodeURIComponent(l.id) + '" style="width:100%;text-align:center">Rechnung erstellen →</a>' +
+          '<a class="btn small" href="#/neu/offer/' + encodeURIComponent(l.id) + '" style="width:100%;text-align:center">📄 GoBD-Angebot / PDF ansehen</a>' +
+        '</div>' +
+      '</div>';
+    }
+    return '<div class="card" id="contract-card">' +
+      '<h2>Vertrags- &amp; Angebots-Optionen</h2>' +
+      '<p class="muted" style="margin:0 0 10px;font-size:13px">Wählen Sie, wie das Sanierungsangebot an den Kunden übermittelt wird:</p>' +
+      '<div style="background:#f8fafc;border:1px solid var(--line);border-radius:6px;padding:10px;margin-bottom:10px">' +
+        '<b style="font-size:13px;display:block;margin-bottom:4px;color:var(--ink)">1. Digitaler E-Signatur-Auftrag</b>' +
+        '<p class="muted" style="margin:0 0 8px;font-size:12px">Kunde prüft &amp; signiert digital per Finger/Maus (§ 312j / § 650a BGB Bauvertrag).</p>' +
+        '<div class="actions" style="gap:6px">' +
+          '<button class="btn small" id="copy-portal-link" style="flex:1">🔗 Link kopieren</button>' +
+          (l.phone ? '<button class="btn small" id="wa-portal-link" style="background:#25d366;color:#fff" title="Signatur-Link per WhatsApp senden">📲 WhatsApp</button>' : '') +
+        '</div>' +
+      '</div>' +
+      '<div style="background:#f8fafc;border:1px solid var(--line);border-radius:6px;padding:10px">' +
+        '<b style="font-size:13px;display:block;margin-bottom:4px;color:var(--ink)">2. Formales GoBD-Angebot / Rechnung (PDF)</b>' +
+        '<p class="muted" style="margin:0 0 8px;font-size:12px">Offizielles PDF-Dokument (ANG-2026-XXXX / RE-2026-XXXX) inkl. § 35a EStG Handwerkerleistung.</p>' +
+        '<div class="actions">' +
+          '<a class="btn small primary" href="#/neu/offer/' + encodeURIComponent(l.id) + '" style="width:100%;text-align:center">📄 PDF-Angebot erstellen &amp; senden →</a>' +
+        '</div>' +
+      '</div>' +
+    '</div>';
+  }
+
+  var HANDOVER_DEFAULTS = [
+    {k: 'moisture', t: 'Kapazitive Feuchtigkeitsmessung & CM-Messung protokolliert'},
+    {k: 'salts', t: 'Wandkernprobe / Salzanalyse (Nitrate, Sulfate, Chloride) geprüft'},
+    {k: 'foil', t: 'Baustelleneinrichtung, Schutzfolie & Staubschutzwand installiert'},
+    {k: 'plaster_off', t: 'Altputz bis 80 cm über Schadensgrenze abgeschlagen & Fugen ausgekratzt'},
+    {k: 'drilling', t: 'Bohrlochraster (10–12 cm Abstand, Winkel/Tiefe nach WTA) gebohrt & ausgeblasen'},
+    {k: 'injection', t: 'WTA-Silan-Injektionscreme / Harz lückenlos eingebracht & Bohrlöcher verschlossen'},
+    {k: 'sealing', t: 'Druckwasserdichte Hohlkehle & 2K-Dichtschlämme (MDS) 2-lagig aufgetragen'},
+    {k: 'sanierputz', t: 'WTA-Sanierputzsystem / Calciumsilikat-Klimaplatte fachgerecht aufgebracht'},
+    {k: 'protocol', t: 'Trocknungs- & Abnahmeprotokoll (10 Jahre Garantie) vom Kunden unterzeichnet'},
+    {k: 'payment', t: 'Abschlags- oder Schlussrechnung (§ 35a EStG) übergeben / Zahlung geklärt'}
+  ];
+
+  /* Handover / On-Site Checklist for Technician & Owner (Shahzad Mahmood) */
+  function handoverHtml() {
+    var l = S.cur.lead, h = l.handover || {};
+    var checkedCount = 0;
+    HANDOVER_DEFAULTS.forEach(function (it) { if (h[it.k]) checkedCount++; });
+    var pct = Math.round((checkedCount / HANDOVER_DEFAULTS.length) * 100);
+
+    var rows = HANDOVER_DEFAULTS.map(function (it) {
+      var isChecked = !!h[it.k];
+      return '<label style="display:flex;align-items:flex-start;gap:8px;font-size:12.5px;line-height:1.35;cursor:pointer;margin-bottom:6px">' +
+        '<input type="checkbox" class="ho-chk" data-k="' + it.k + '"' + (isChecked ? ' checked' : '') + ' style="margin-top:2px;accent-color:var(--fill,#047857)">' +
+        '<span>' + esc(it.t) + '</span>' +
+      '</label>';
+    }).join('');
+
+    return '<div class="card" id="handover-card">' +
+      '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:6px">' +
+        '<h2 style="margin:0">Vor-Ort- &amp; Technik-Checkliste</h2>' +
+        '<span class="badge" id="ho-badge">' + checkedCount + '/' + HANDOVER_DEFAULTS.length + ' (' + pct + '%)</span>' +
+      '</div>' +
+      '<p class="muted" style="margin:0 0 10px;font-size:12.5px">Techniker-Checkliste für Feuchtigkeitsmessung, Bohrlochraster &amp; Übergabe an Inhaber Shahzad Mahmood.</p>' +
+      '<div style="max-height:220px;overflow-y:auto;border:1px solid var(--soft,#e5e7eb);padding:8px 10px;border-radius:4px;background:#fafafa;margin-bottom:10px">' +
+        rows +
+      '</div>' +
+      '<div class="field" style="margin-bottom:10px">' +
+        '<label for="ho-note" style="font-size:12px;font-weight:600">Messwerte / Baustellenhinweise</label>' +
+        '<textarea class="input" id="ho-note" placeholder="z. B. Wandstärke 36 cm Bruchstein, Feuchtewert 118 Digits, Starkstrom im Keller vorhanden" style="min-height:50px;font-size:12px">' + esc(h.note || '') + '</textarea>' +
+      '</div>' +
+      '<div class="actions" style="gap:6px">' +
+        '<button class="btn small primary" id="save-handover" style="flex:1">Speichern</button>' +
+        '<button class="btn small" id="wa-handover" style="background:#25d366;color:#fff" title="Checkliste per WhatsApp an Inhaber senden">📲 An Inhaber (WhatsApp)</button>' +
+      '</div>' +
+    '</div>';
+  }
+
+  /* message to the customer */
+  function sendHtml() {
+    var l = S.cur.lead;
+    return '<div class="card" id="send"><h2>Angebot senden</h2><p class="muted" style="margin:0 0 8px">Text vor dem Senden anpassen. WhatsApp oder E-Mail öffnet sich mit diesem Text; die Anfrage wird als „Angebot raus“ markiert.</p>' +
+      '<textarea class="input" id="msg" style="min-height:260px"></textarea>' +
+      '<div class="actions" style="margin-top:10px"><button class="btn primary" id="send-wa"' + (l.phone ? '' : ' disabled') + '>Per WhatsApp senden</button><button class="btn" id="send-mail"' + (l.email ? '' : ' disabled') + '>Per E-Mail senden</button></div>' +
+      (l.quoteSent ? '<p class="muted" style="margin:8px 0 0">Zuletzt gesendet: ' + dt(l.quoteSent) + '</p>' : '') + '</div>';
+  }
+  function message(total, link) {
+    var l = S.cur.lead, en = l.lang === 'EN', lines = readLines().filter(function (x) { return x[2] * x[4] > 0; });
+    var date = isDate(l.date) ? new Date(l.date).toLocaleDateString(en ? 'en-GB' : 'de-DE') : '';
+    var first = (l.name || '').split(' ')[0];
+    if (en) return ['Hello ' + (l.name || '') + ',', '', 'thank you for your inquiry at SOS Abdichtung (' + l.id + ').', '',
+      'Our waterproofing & remediation quote for ' + svc(l) + (date ? ' (target date ' + date + ')' : '') + ':'].concat(lines.map(function (x) { return '– ' + x[0] + (x[1] ? ' (' + x[1] + ')' : '') + ': ' + eur(Math.round(x[2] * x[4] * 100) / 100); }))
+      .concat(['', 'Total price: ' + eur(total), '', 'Valid for 14 days. Includes 10-year warranty on WTA waterproofing systems.'])
+      .concat(link ? ['', 'Review & digitally sign online: ' + link + '#sign'] : []).concat(['', 'Questions? Call or WhatsApp +49 172 2064177.', '', 'Kind regards', 'Shahzad Mahmood', 'SOS Abdichtung (SchimmelPeter® Partnerbetrieb) · Niebuhrstraße 46 · 45144 Essen']).join('\n');
+    return ['Guten Tag ' + (l.name || first) + ',', '', 'vielen Dank für Ihre Anfrage bei SOS Abdichtung (' + l.id + ').', '',
+      'Unser Sanierungsangebot für „' + svc(l) + '“' + (date ? ' (Wunschtermin ' + date + ')' : '') + ':'].concat(lines.map(function (x) { return '– ' + x[0] + (x[1] ? ' (' + x[1] + ')' : '') + ': ' + eur(Math.round(x[2] * x[4] * 100) / 100); }))
+      .concat(['', 'Gesamtbetrag: ' + eur(total) + ' (inkl. 10 Jahre Systemgarantie & § 35a EStG Handwerkerbonus)', '', 'Das Angebot ist 14 Tage gültig. Wenn alles passt, antworten Sie einfach kurz mit „Ja“ oder unterzeichnen Sie direkt digital online.'])
+      .concat(link ? ['', 'Angebot prüfen & direkt digital unterzeichnen: ' + link + '#sign'] : []).concat(['', 'Bei Rückfragen erreichen Sie uns jederzeit unter 0172 2064177 (Telefon & WhatsApp).', '', 'Mit freundlichen Grüßen', 'Shahzad Mahmood', 'SOS Abdichtung · SchimmelPeter® Partnerbetrieb Wuppertal & NRW']).join('\n');
+  }
+
+  function bindDetail() {
+    var d = S.cur, l = d.lead, link = '';
+    var refreshMsg = function () { document.getElementById('msg').value = message(totals(), link); };
+    var qlines = document.getElementById('qlines');
+    qlines.addEventListener('input', refreshMsg);
+    qlines.addEventListener('click', function (e) { if (e.target.classList.contains('x')) { e.target.closest('tr').remove(); refreshMsg(); } });
+    document.getElementById('addline').addEventListener('click', function () { qlines.insertAdjacentHTML('beforeend', lineHtml(['', '', 1, 'lfm', 0])); qlines.lastElementChild.querySelector('input').focus(); refreshMsg(); });
+    refreshMsg();
+    if (S.portal) run('api_customerLink', l.id).then(function (u) { link = u; refreshMsg(); }).catch(function () {});
+
+    document.getElementById('save-meta').addEventListener('click', function (e) {
+      var b = e.target; b.disabled = true;
+      run('api_update', l.id, {status: document.getElementById('st').value, owner: document.getElementById('ow').value, notes: document.getElementById('nt').value})
+        .then(function (nl) { b.disabled = false; S.cur.lead = nl; patchLead(nl); toast('Gespeichert.'); })
+        .catch(function (err) { b.disabled = false; fail(err); });
+    });
+    document.getElementById('saveq').addEventListener('click', function (e) {
+      var b = e.target; b.disabled = true;
+      run('api_saveQuote', l.id, readLines())
+        .then(function (r) { b.disabled = false; S.cur.quote = {version: r.version, lines: readLines(), saved: true}; toast('Angebot Version ' + r.version + ' gespeichert: ' + eur(r.total)); patchLead({id: l.id, total: r.total}); document.querySelector('#quote h2').innerHTML = 'Kalkulation <span class="muted">Version ' + r.version + '</span>'; })
+        .catch(function (err) { b.disabled = false; fail(err); });
+    });
+    var send = function (channel) {
+      var w = channel === 'wa' ? window.open('', '_blank') : null;
+      run('api_sendQuote', l.id, document.getElementById('msg').value, channel === 'wa' ? 'wa' : 'mail')
+        .then(function (r) {
+          if (channel === 'wa') { if (w) w.location = r.wa; else location.href = r.wa; } else location.href = r.mail;
+          toast('Als „Angebot raus“ markiert.'); patchLead({id: l.id, status: 'Angebot raus', quoteSent: r.sent});
+          var st = document.getElementById('st'); if (st) st.value = 'Angebot raus';
+        })
+        .catch(function (err) { if (w) w.close(); fail(err); });
+    };
+    document.getElementById('send-wa').addEventListener('click', function () { send('wa'); });
+    document.getElementById('send-mail').addEventListener('click', function () { send('mail'); });
+    var copyBtn = document.getElementById('copy-portal-link');
+    if (copyBtn) {
+      copyBtn.addEventListener('click', function () {
+        if (!link) { toast('Portal-Link wird noch geladen …', true); return; }
+        var signLink = link + '#sign';
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          navigator.clipboard.writeText(signLink).then(function () { toast('Signatur-Link kopiert!'); }).catch(function () { prompt('Signatur-Link kopieren:', signLink); });
+        } else {
+          prompt('Signatur-Link kopieren:', signLink);
+        }
+      });
+    }
+
+    var waPortalBtn = document.getElementById('wa-portal-link');
+    if (waPortalBtn) {
+      waPortalBtn.addEventListener('click', function () {
+        if (!link) { toast('Portal-Link wird noch geladen …', true); return; }
+        var signLink = link + '#sign';
+        var msg = 'Guten Tag ' + (l.name || '') + ',\n\nhier ist Ihr persönlicher Link zum Sanierungsangebot und zur digitalen Auftragsbestätigung bei SOS Abdichtung (' + l.id + '):\n\n' + signLink + '\n\nSie können das Angebot bequem auf dem Smartphone prüfen und direkt mit dem Finger gegenzeichnen. Bei Rückfragen erreichen Sie uns unter 0172 2064177!';
+        window.open('https://wa.me/' + waNum(l.phone) + '?text=' + encodeURIComponent(msg), '_blank', 'noopener');
+      });
+    }
+
+    var saveHoBtn = document.getElementById('save-handover');
+    if (saveHoBtn) {
+      saveHoBtn.addEventListener('click', function () {
+        saveHoBtn.disabled = true;
+        var hState = {note: (document.getElementById('ho-note') ? document.getElementById('ho-note').value.trim() : '')};
+        document.querySelectorAll('.ho-chk').forEach(function (chk) {
+          hState[chk.getAttribute('data-k')] = chk.checked;
+        });
+        run('api_update', l.id, {handover: hState})
+          .then(function (nl) {
+            saveHoBtn.disabled = false;
+            S.cur.lead = nl;
+            patchLead(nl);
+            toast('Vor-Ort-Checkliste gespeichert.');
+            var done = 0;
+            HANDOVER_DEFAULTS.forEach(function (it) { if (hState[it.k]) done++; });
+            var b = document.getElementById('ho-badge');
+            if (b) b.textContent = done + '/' + HANDOVER_DEFAULTS.length + ' (' + Math.round(done / HANDOVER_DEFAULTS.length * 100) + '%)';
+          })
+          .catch(function (err) { saveHoBtn.disabled = false; fail(err); });
+      });
+    }
+
+    var waHoBtn = document.getElementById('wa-handover');
+    if (waHoBtn) {
+      waHoBtn.addEventListener('click', function () {
+        var hState = {note: (document.getElementById('ho-note') ? document.getElementById('ho-note').value.trim() : '')};
+        var done = 0, lines = [];
+        document.querySelectorAll('.ho-chk').forEach(function (chk) {
+          var text = chk.parentNode.textContent.trim();
+          if (chk.checked) {
+            done++;
+            lines.push('✓ ' + text);
+          } else {
+            lines.push('☐ ' + text);
+          }
+        });
+        var dateStr = isDate(l.date) ? day(l.date) : (l.date || 'flexibel');
+        var waMsg = [
+          'SOS Abdichtung · Baustellen-Übergabe ' + l.id,
+          'Kunde: ' + (l.name || '–') + ' (' + (l.phone || l.email || '–') + ')',
+          'Termin: ' + dateStr,
+          'Objekt: ' + route(l),
+          'System: ' + (l.vehicle || 'WTA-Abdichtung') + ' | Team: ' + (l.crew || '2') + ' Techniker',
+          'Angebot: ' + eur(l.total),
+          '',
+          'Checkliste (' + done + '/' + HANDOVER_DEFAULTS.length + ' erledigt):',
+          lines.join('\n'),
+          hState.note ? '\nMesswerte / Hinweis: ' + hState.note : '',
+          l.photosDrive ? '\nSchadensfotos (Drive): ' + l.photosDrive : ''
+        ].filter(Boolean).join('\n');
+        window.open('https://wa.me/491722064177?text=' + encodeURIComponent(waMsg), '_blank', 'noopener');
+      });
+    }
+  }
+  function patchLead(p) { S.leads.forEach(function (x) { if (x.id === p.id) for (var k in p) x[k] = p[k]; }); }
+
+  /* ---------- calendar ---------- */
+  function calendar() {
+    setNav('cal');
+    drawCalendar(window.SU.appts || [], !window.SU.appts);
+    run('api_appts').then(function (r) { window.SU.appts = r.appts || []; if (location.hash.replace(/^#\/?/, '') === 'kalender') drawCalendar(window.SU.appts); }, function () {});
+  }
+  function drawCalendar(appts, pending) {
+    var today = new Date().toISOString().slice(0, 10), from = today.slice(0, 8) + '01', items = [];
+    S.leads.forEach(function (l) {
+      if (l.status === 'Verloren' || l.status === 'Erledigt') return;
+      var d = isDate(l.date) ? l.date : '', m = !d && /(\d{2})\.(\d{2})\.(\d{4})/.exec(l.date || '');
+      if (m) d = m[3] + '-' + m[2] + '-' + m[1];
+      if (d) items.push({date: d, time: '', href: '#/a/' + encodeURIComponent(l.id), name: l.name, kind: m ? 'flexibel' : 'Auftrag',
+        info: [l.id, svc(l), route(l), m ? l.date : '', l.owner].filter(Boolean).join(' · '), badge: badge(l.status)});
+    });
+    appts.forEach(function (a) {
+      if (a.status === 'Abgesagt' || !isDate(a.date)) return;
+      items.push({date: a.date, time: a.time, href: a.lead ? '#/a/' + encodeURIComponent(a.lead) : '#/termine', name: a.name, kind: 'Termin',
+        info: [a.time + ' Uhr', ({visit: 'Vor-Ort-Feuchtigkeitsmessung', video: 'Video-Erstdiagnose (Google Meet)', call: 'Telefonische Fachberatung'})[a.type] || a.type, a.nr, a.address].filter(Boolean).join(' · '), badge: '<span class="badge">' + esc(a.status) + '</span>'});
+    });
+    var groups = {};
+    items.filter(function (x) { return x.date >= from; }).sort(function (a, b) { return (a.date + a.time) < (b.date + b.time) ? -1 : 1; })
+      .forEach(function (x) { var k = x.date.slice(0, 7); (groups[k] = groups[k] || []).push(x); });
+    var months = Object.keys(groups).sort();
+    app.innerHTML = '<span class="kicker">Kalender</span><div class="h"><h1>Sanierungsaufträge &amp; Vor-Ort-Besichtigungen</h1><a class="btn small" href="#/termine">Termine verwalten</a></div>' +
+      '<p class="muted cal-key"><span class="ktag k-auftrag">Auftrag</span> fester Ausführungstag <span class="ktag k-flexibel">flexibel</span> Wunschzeitraum <span class="ktag k-termin">Termin</span> Vor-Ort-Feuchtigkeitsmessung oder Video-Diagnose</p>' +
+      (pending ? '<p class="muted">Termine aus Google Kalender werden geladen …</p>' : '') +
+      (months.length ? months.map(function (m) {
+        var name = new Date(m + '-01T12:00:00').toLocaleDateString('de-DE', {month: 'long', year: 'numeric'});
+        return '<h2 class="cal-m">' + esc(name) + '</h2><div class="list">' + groups[m].map(function (x) {
+          var d = new Date(x.date + 'T12:00:00');
+          return '<a class="row cal" href="' + x.href + '"><span class="id">' + d.toLocaleDateString('de-DE', {weekday: 'short', day: '2-digit', month: '2-digit'}) + '</span><span><span class="ktag k-' + x.kind.toLowerCase() + '">' + esc(x.kind) + '</span>' + esc(x.name || '–') +
+            '<small>' + esc(x.info) + '</small></span>' + x.badge + '</a>';
+        }).join('') + '</div>';
+      }).join('') : '<p class="empty">Keine kommenden Aufträge oder Besichtigungen.</p>');
+  }
+
+  /* shared with BelegeUi.html, TermineUi.html, PlanerUi.html, HilfeUi.html */
+  window.SU = {run: run, esc: esc, eur: eur, dt: dt, day: day, toast: toast, fail: fail, app: app, setNav: setNav, waNum: waNum};
+
+  if (TOKEN) reload().then(routeTo).catch(function (e) { app.innerHTML = '<p class="loading">Fehler beim Laden: ' + esc(e && e.message || e) + '</p>'; });
+  else showLogin();
+})();
+</script>
+<?!= include_('BelegeUi') ?>
+<?!= include_('TermineUi') ?>
+<?!= include_('PlanerUi') ?>
+<?!= include_('HilfeUi') ?>
+</body>
+</html>

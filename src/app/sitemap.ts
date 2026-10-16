@@ -27,5 +27,6 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: abs("/kontakt/"), lastModified, changeFrequency: "yearly", priority: 0.8 },
     { url: abs("/impressum/"), lastModified, changeFrequency: "yearly", priority: 0.2 },
     { url: abs("/datenschutz/"), lastModified, changeFrequency: "yearly", priority: 0.2 },
+    { url: abs("/admin/"), lastModified, changeFrequency: "monthly", priority: 0.3 },
   ];
 }

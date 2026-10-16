@@ -120,7 +120,7 @@ export default function Footer() {
           <div className="site-footer__legal">
             <p>
               © 2026 sos-abdichtung · Inh. {COMPANY_INFO.owner} · <a href="/impressum/">Impressum</a> ·{" "}
-              <a href="/datenschutz/">Datenschutz</a>
+              <a href="/datenschutz/">Datenschutz</a> · <a href="/admin/">Mitarbeiter-Login</a>
             </p>
             <p>
               <PartnerLink>SchimmelPeter®</PartnerLink> ist eine Marke der SchimmelPeter GmbH.

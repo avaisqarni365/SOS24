@@ -1,0 +1,120 @@
+<style>
+.help-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px;margin-top:20px}
+@media (max-width:860px){.help-grid{grid-template-columns:minmax(0,1fr)}}
+.help-card{background:#fff;border-top:3px solid var(--ink);padding:20px 22px;box-shadow:0 2px 10px rgba(0,0,0,.04)}
+.help-card.accent{border-top-color:var(--fill)}
+.help-card h2{font-size:19px;margin:0 0 10px;display:flex;align-items:center;gap:8px}
+.help-card p{margin:0 0 10px;color:var(--ink2);font-size:14px;line-height:1.55}
+.help-steps{margin:10px 0 0;padding-left:20px;font-size:14px;line-height:1.6}
+.help-steps li{margin-bottom:6px}
+.help-steps b{color:var(--ink)}
+.help-kbd{display:inline-block;background:var(--surface);border:1px solid var(--line);padding:1px 6px;font-size:12px;font-weight:700}
+</style>
+<script>
+(function () {
+  'use strict';
+  var U = window.SU;
+
+  function drawHelp() {
+    U.setNav('help');
+    U.app.innerHTML = '<span class="kicker">Handbuch · SOS Abdichtung NRW</span>' +
+      '<div class="h"><h1>So funktioniert Ihr Admin-Portal</h1>' +
+      '<div class="actions"><a class="btn small" href="#/planer">📐 Zum Aufmaß-Planer</a><a class="btn small primary" href="#/belege">🧾 Zu den GoBD-Belegen</a></div></div>' +
+      '<p class="muted" style="max-width:780px;font-size:14.5px">Kurzanleitung für Inhaber Shahzad Mahmood und Ihr Team: Alle Schritte vom ersten Kundenkontakt über Schadensfotos, Vor-Ort-Feuchtigkeitsmessung und digitaler E-Signatur bis zur GoBD-Rechnung (§ 35a EStG) und 1-Klick-Website-Aktualisierung.</p>' +
+
+      '<div class="help-grid">' +
+        '<section class="help-card accent">' +
+          '<h2>1. Neue Schadensanfrage bearbeiten</h2>' +
+          '<p>Wenn ein Kunde auf <b>sos-abdichtung.de</b> das Formular, den Sanierungsrechner oder den KI-Berater nutzt, erscheint die Anfrage sofort unter <span class="help-kbd">Anfragen</span> (Status: <b>Neu</b>) und Sie erhalten eine E-Mail.</p>' +
+          '<ol class="help-steps">' +
+            '<li>Klicken Sie auf die Anfrage (z. B. <b>A-1001</b>), um alle Schadensdaten, Fläche/Länge und hochgeladene <b>Schadensfotos (Google Drive)</b> zu sehen.</li>' +
+            '<li>Prüfen Sie in der Tabelle <b>Kalkulation</b> die vorgeschlagenen WTA-Positionen. Sie können Zeilen jederzeit ändern, löschen oder mit <b>+ Position</b> ergänzen.</li>' +
+            '<li>Klicken Sie auf <b>Kalkulation speichern</b> und danach rechts auf <b>Per WhatsApp senden</b> oder <b>Per E-Mail senden</b>.</li>' +
+            '<li>Der Status springt automatisch auf <b>Angebot raus</b>.</li>' +
+          '</ol>' +
+        '</section>' +
+
+        '<section class="help-card accent">' +
+          '<h2>2. Vor-Ort-Aufmaß am Telefon oder im Keller</h2>' +
+          '<p>Ruft ein Eigentümer oder eine Hausverwaltung an oder stehen Sie bei der Feuchtigkeitsmessung im Keller? Öffnen Sie oben im Menü <span class="help-kbd">Aufmaß</span>.</p>' +
+          '<ol class="help-steps">' +
+            '<li>Tragen Sie Name, Telefon und Objektadresse ein.</li>' +
+            '<li>Wählen Sie die benötigten Maßnahmen per Klick auf <b>+</b> / <b>−</b> (z. B. WTA-Silan-Injektion, 2K-Dichtschlämme MDS, Hohlkehle, Sanierputz, Klimaplatte).</li>' +
+            '<li>Rechts sehen Sie sofort live <b>Materialbedarf</b>, <b>Techniker-Stunden</b> und den <b>Richtpreis</b>.</li>' +
+            '<li>Mit einem Klick auf <b>Direkt GoBD-Angebot (PDF) erstellen</b> wird die Anfrage gespeichert und sofort das druckfertige PDF vorbereitet.</li>' +
+          '</ol>' +
+        '</section>' +
+
+        '<section class="help-card">' +
+          '<h2>3. GoBD-Angebote, Rechnungen &amp; § 35a EStG</h2>' +
+          '<p>Unter <span class="help-kbd">Belege</span> verwalten Sie alle offiziellen Dokumente mit fortlaufender Nummer (<b>ANG-2026-0001</b>, <b>RE-2026-0001</b>, <b>AB-…</b>, <b>ST-…</b>).</p>' +
+          '<ol class="help-steps">' +
+            '<li><b>PDF ansehen &amp; drucken:</b> Klicken Sie in jedem Beleg oben rechts auf <b>👁️ PDF ansehen / drucken</b>. Es öffnet sich eine Sofort-Vorschau direkt im Admin.</li>' +
+            '<li><b>§ 35a Handwerkerbonus:</b> Bei jeder Position mit aktivierter Checkbox <b>Lohn</b> wird der steuerlich absetzbare Arbeits- &amp; Fahrtkostenanteil automatisch auf dem PDF ausgewiesen (20 % Steuerbonus für Privatkunden).</li>' +
+            '<li><b>Kleinunternehmer / Regelbesteuerung:</b> Im Feld <b>USt. %</b> können Sie zwischen <b>19 %</b>, <b>7 %</b> und <b>0 % (§ 19 UStG)</b> wählen.</li>' +
+            '<li><b>GoBD-Schutz:</b> Sobald eine Rechnung versendet oder bezahlt ist, ist sie unveränderbar gesperrt. Bei Fehlern klicken Sie rechts unter <i>Folgebelege</i> auf <b>Stornorechnung erstellen</b>.</li>' +
+          '</ol>' +
+        '</section>' +
+
+        '<section class="help-card">' +
+          '<h2>4. Vor-Ort-Feuchtigkeitsmessung &amp; Google Kalender</h2>' +
+          '<p>Kunden können auf der Website oder im KI-Chatbot eine <b>Vor-Ort-Feuchtigkeitsmessung</b>, eine <b>Video-Erstdiagnose (Google Meet)</b> oder einen <b>Rückruf</b> buchen.</p>' +
+          '<ol class="help-steps">' +
+            '<li>Alle gebuchten Termine landen automatisch in Ihrem <b>Google Kalender</b> (inkl. Google-Meet-Link bei Video-Termine) und im Menü <span class="help-kbd">Termine</span>.</li>' +
+            '<li>Unter <span class="help-kbd">Kalender</span> sehen Sie alle festen Sanierungsaufträge, flexiblen Wunschtermine und Besichtigungen nach Monat sortiert.</li>' +
+            '<li>In jeder Anfrage finden Sie zudem die <b>Vor-Ort- &amp; Technik-Checkliste</b> (CM-Messung, Salzanalyse, Bohrlochraster, Hohlkehle) mit 1-Klick-WhatsApp-Übergabe.</li>' +
+          '</ol>' +
+        '</section>' +
+
+        '<section class="help-card">' +
+          '<h2>5. Google Drive Ordnerstruktur</h2>' +
+          '<p>Alle Dateien werden vollautomatisch in Ihrem Google Drive abgelegt:</p>' +
+          '<ol class="help-steps">' +
+            '<li><b>SOS Abdichtung - Schadensfotos / &lt;Anfrage-ID&gt;</b>: Alle vom Kunden per Kamera oder Upload gesendeten Schadensbilder in Originalauflösung.</li>' +
+            '<li><b>SOS Abdichtung - Verträge</b>: Digital per Finger oder Maus unterzeichnete Auftragsbestätigungen (PNG-Signaturzertifikate).</li>' +
+            '<li><b>SOS Abdichtung - Belege / &lt;Jahr&gt;</b>: Alle festgeschriebenen Angebote und Rechnungen als revisionssichere PDF-Dateien.</li>' +
+          '</ol>' +
+        '</section>' +
+
+        '<section class="help-card accent">' +
+          '<h2>6. Website per 1-Klick aktualisieren (ohne Programmierer)</h2>' +
+          '<p>Wenn Sie im Tabellenblatt <b>Katalog</b>, <b>Regeln</b> oder <b>Preise</b> Werte ändern, können Sie diese direkt auf <b>sos-abdichtung.de</b> veröffentlichen, ohne Code anzufassen:</p>' +
+          '<ol class="help-steps">' +
+            '<li>Passen Sie die gewünschten Richtpreise oder Positionen in der Google-Tabelle an.</li>' +
+            '<li>Klicken Sie hier unten auf den Button <b>🚀 Preise &amp; Katalog jetzt auf Website veröffentlichen</b>.</li>' +
+            '<li>GitHub Pages baut die Website im Hintergrund automatisch neu (dauert ca. 2 Minuten).</li>' +
+          '</ol>' +
+          '<div style="margin-top:14px;padding-top:12px;border-top:1px solid var(--line);display:flex;align-items:center;gap:12px;flex-wrap:wrap">' +
+            '<button class="btn primary" type="button" id="btn-publish-catalog">🚀 Preise &amp; Katalog jetzt auf Website veröffentlichen</button>' +
+            '<span id="publish-status" class="muted" style="font-size:13px"></span>' +
+          '</div>' +
+        '</section>' +
+      '</div>';
+
+    var pubBtn = document.getElementById('btn-publish-catalog');
+    if (pubBtn) {
+      pubBtn.addEventListener('click', function () {
+        var st = document.getElementById('publish-status');
+        pubBtn.disabled = true;
+        st.textContent = 'Veröffentlichung zu GitHub (avaisqarni365/SOS24) läuft …';
+        U.run('api_publishWebsite').then(function (r) {
+          pubBtn.disabled = false;
+          st.textContent = '✓ ' + (r && r.message ? r.message : 'Veröffentlicht!');
+          U.toast(r && r.message ? r.message : 'Website-Katalog veröffentlicht!');
+        }).catch(function (e) {
+          pubBtn.disabled = false;
+          st.textContent = 'Fehler: ' + (e && e.message || e);
+          U.fail(e);
+        });
+      });
+    }
+  }
+
+  function route(h) {
+    if (h === 'hilfe') { drawHelp(); return true; }
+    return false;
+  }
+
+  window.SUHilfe = {route: route};
+})();
+</script>

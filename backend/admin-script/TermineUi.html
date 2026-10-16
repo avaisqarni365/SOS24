@@ -1,0 +1,159 @@
+<style>
+.bar-row{display:grid;grid-template-columns:160px minmax(0,1fr) 72px;gap:12px;align-items:center;padding:8px 0;border-bottom:1px solid var(--line)}
+.bar-track{height:12px;background:var(--surface)}
+.bar-fill{height:100%;background:var(--ink)}
+.bar-fill.acc{background:var(--fill)}
+.appt-actions{display:flex;gap:6px;flex-wrap:wrap}
+@media (max-width:640px){.bar-row{grid-template-columns:110px minmax(0,1fr) 56px;font-size:13.5px}}
+</style>
+<script>
+(function () {
+  'use strict';
+  var U = window.SU;
+  var A = {appts: null, types: {}, statuses: [], filter: 'open'};
+
+  function ensureAppts() {
+    if (A.appts) return Promise.resolve(A);
+    return U.run('api_appts').then(function (r) { A.appts = r.appts; A.types = r.types; A.statuses = r.statuses; U.appts = r.appts; return A; });
+  }
+  function refreshAppts() { A.appts = null; return ensureAppts(); }
+
+  /* ---------- appointments ---------- */
+  function apptsPage() {
+    U.setNav('appts');
+    U.app.innerHTML = '<p class="loading">Termine werden geladen …</p>';
+    ensureAppts().then(drawAppts).catch(U.fail);
+  }
+  function drawAppts() {
+    var today = new Date().toISOString().slice(0, 10);
+    var upcoming = A.appts.filter(function (a) { return a.date >= today && a.status !== 'Abgesagt'; }).length;
+    var visits = A.appts.filter(function (a) { return a.type === 'visit' && a.date >= today && a.status !== 'Abgesagt'; }).length;
+    var videos = A.appts.filter(function (a) { return a.type === 'video' && a.date >= today && a.status !== 'Abgesagt'; }).length;
+    var calls = A.appts.filter(function (a) { return a.type === 'call' && a.date >= today && a.status !== 'Abgesagt'; }).length;
+    var chips = [['open', 'Kommend'], ['Vor-Ort', 'Vor-Ort-Messung'], ['Video', 'Video (Meet)'], ['Telefon', 'Rückruf'], ['all', 'Alle']];
+
+    var rows = A.appts.filter(function (a) {
+      if (A.filter === 'open') return a.date >= today && a.status !== 'Abgesagt' && a.status !== 'Erledigt';
+      if (A.filter === 'Vor-Ort') return a.type === 'visit';
+      if (A.filter === 'Video') return a.type === 'video';
+      if (A.filter === 'Telefon') return a.type === 'call';
+      return true;
+    }).sort(function (a, b) { return (a.date + a.time) < (b.date + b.time) ? -1 : 1; });
+
+    U.app.innerHTML = '<span class="kicker">Termine · Google Kalender &amp; Meet</span><div class="h"><h1>Vor-Ort-Feuchtigkeitsmessung &amp; Beratung</h1>' +
+      '<button class="btn small" id="ap-ref">Aktualisieren</button></div>' +
+      '<div class="grid4"><div class="kpi"><b>' + upcoming + '</b><span>kommende Termine</span></div>' +
+      '<div class="kpi"><b>' + visits + '</b><span>Vor-Ort-Messung</span></div>' +
+      '<div class="kpi"><b>' + videos + '</b><span>Video-Diagnose (Meet)</span></div>' +
+      '<div class="kpi"><b>' + calls + '</b><span>Telefonberatung</span></div></div>' +
+      '<div class="filters" style="margin-top:24px">' + chips.map(function (c) { return '<button class="chip" data-af="' + c[0] + '" aria-pressed="' + (A.filter === c[0]) + '">' + c[1] + '</button>'; }).join('') + '</div>' +
+      (rows.length ? '<table class="tbl"><thead><tr><th>Datum &amp; Uhrzeit</th><th>Art</th><th>Kunde</th><th class="hide-m">Objektadresse / Notiz</th><th>Status</th><th>Aktion</th></tr></thead><tbody>' +
+        rows.map(function (a) {
+          var tlabel = A.types[a.type] || a.type;
+          var wa = a.phone ? 'https://wa.me/' + U.waNum(a.phone) + '?text=' + encodeURIComponent(
+            'Guten Tag ' + a.name + ', kurze Erinnerung an unseren Termin (' + tlabel + ') bei SOS Abdichtung am ' +
+            new Date(a.date + 'T12:00:00').toLocaleDateString('de-DE') + ' um ' + a.time + ' Uhr' +
+            (a.meetLink ? '.\nVideo-Link: ' + a.meetLink : '.') + '\nViele Grüße, Shahzad Mahmood · SOS Abdichtung') : '';
+          return '<tr><td><b>' + U.day(a.date) + ' · ' + U.esc(a.time) + ' Uhr</b><div class="muted">' + U.esc(a.nr) +
+            (a.lead ? ' · <a href="#/a/' + encodeURIComponent(a.lead) + '">' + U.esc(a.lead) + '</a>' : '') + '</div></td>' +
+            '<td>' + U.esc(tlabel) + (a.meetLink ? '<div><a href="' + U.esc(a.meetLink) + '" target="_blank" rel="noopener"><b>→ Google Meet öffnen</b></a></div>' : '') + '</td>' +
+            '<td>' + U.esc(a.name) + '<div class="muted">' + U.esc([a.phone, a.email].filter(Boolean).join(' · ')) + '</div></td>' +
+            '<td class="hide-m">' + U.esc(a.address || '') + (a.note ? '<div class="muted">' + U.esc(a.note) + '</div>' : '') + '</td>' +
+            '<td><select class="input" data-ast="' + U.esc(a.nr) + '" style="min-height:34px;padding:4px 8px;width:auto">' +
+              A.statuses.map(function (s) { return '<option' + (s === a.status ? ' selected' : '') + '>' + U.esc(s) + '</option>'; }).join('') + '</select></td>' +
+            '<td><div class="appt-actions">' +
+              (a.phone ? '<a class="btn small" href="tel:' + U.esc(a.phone.replace(/\s/g, '')) + '">Anrufen</a>' : '') +
+              (wa ? '<a class="btn small" target="_blank" rel="noopener" href="' + wa + '">WhatsApp</a>' : '') +
+            '</div></td></tr>';
+        }).join('') + '</tbody></table>' : '<p class="empty">Keine Termine für diesen Filter.</p>');
+
+    U.app.querySelectorAll('[data-af]').forEach(function (b) { b.addEventListener('click', function () { A.filter = b.getAttribute('data-af'); drawAppts(); }); });
+    document.getElementById('ap-ref').addEventListener('click', function () { refreshAppts().then(drawAppts).catch(U.fail); });
+    U.app.querySelectorAll('[data-ast]').forEach(function (sel) {
+      sel.addEventListener('change', function () {
+        var nr = sel.getAttribute('data-ast'), st = sel.value;
+        U.run('api_updateAppt', nr, {status: st}).then(function () {
+          A.appts.forEach(function (x) { if (x.nr === nr) x.status = st; });
+          U.toast('Termin ' + nr + ': ' + st);
+        }).catch(U.fail);
+      });
+    });
+  }
+
+  /* ---------- statistics & analytics ---------- */
+  function statsPage() {
+    U.setNav('stats');
+    U.app.innerHTML = '<p class="loading">Statistik wird berechnet …</p>';
+    U.run('api_stats').then(drawStats).catch(U.fail);
+  }
+  function barList(pairs, unit, accent) {
+    if (!pairs || !pairs.length) return '<p class="empty">Noch keine Daten.</p>';
+    var max = Math.max.apply(null, pairs.map(function (p) { return p[1]; })) || 1;
+    return pairs.map(function (p) {
+      var w = Math.max(2, Math.round(p[1] / max * 100));
+      return '<div class="bar-row"><span style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + U.esc(p[0]) + '</span>' +
+        '<div class="bar-track"><div class="bar-fill' + (accent ? ' acc' : '') + '" style="width:' + w + '%"></div></div>' +
+        '<b class="num">' + p[1] + (unit ? ' ' + unit : '') + '</b></div>';
+    }).join('');
+  }
+  function drawStats(s) {
+    var v = s.visits || {}, f = s.funnel || {}, rv = s.revenue || {};
+    var conv = v.d30 ? Math.round(f.leads30 / v.d30 * 1000) / 10 + ' %' : '–';
+    var winRate = f.total ? Math.round((f.booked || 0) / f.total * 100) + ' %' : '–';
+
+    U.app.innerHTML = '<span class="kicker">Statistik</span><div class="h"><h1>Besucher, Schadensanfragen &amp; Umsatz</h1>' +
+      '<button class="btn small" id="st-ref">Aktualisieren</button></div>' +
+
+      '<h2 style="font-size:18px;margin:18px 0 8px">Website-Besucher</h2>' +
+      '<div class="grid4"><div class="kpi"><b>' + (v.today || 0) + '</b><span>heute</span></div>' +
+      '<div class="kpi"><b>' + (v.d7 || 0) + '</b><span>letzte 7 Tage</span></div>' +
+      '<div class="kpi"><b>' + (v.d30 || 0) + '</b><span>letzte 30 Tage</span></div>' +
+      '<div class="kpi"><b>' + conv + '</b><span>Besucher → Anfrage (30 Tage)</span></div></div>' +
+
+      '<h2 style="font-size:18px;margin:28px 0 8px">Anfragen &amp; Umsatz</h2>' +
+      '<div class="grid4"><div class="kpi"><b>' + (f.total || 0) + '</b><span>Anfragen gesamt (' + (f.leads30 || 0) + ' in 30 Tagen)</span></div>' +
+      '<div class="kpi"><b>' + winRate + '</b><span>Abschlussquote (' + (f.booked || 0) + ' gebucht/erledigt)</span></div>' +
+      '<div class="kpi"><b>' + U.eur(rv.paidYear || 0) + '</b><span>bezahlter Umsatz (laufendes Jahr)</span></div>' +
+      '<div class="kpi"><b>' + U.eur(rv.openInv || 0) + '</b><span>offene Rechnungen (' + (rv.overdueCount || 0) + ' überfällig)</span></div></div>' +
+
+      '<div class="cols">' +
+        '<section class="block"><h2>Trichter (vom Besuch zum Auftrag)</h2>' +
+          barList([
+            ['Website-Besuche (30 Tage)', v.d30 || 0],
+            ['Schadensrechner genutzt (30 Tage)', f.routes30 || 0],
+            ['Anfragen gesendet (gesamt)', f.total || 0],
+            ['Angebot gesendet', f.quoted || 0],
+            ['Vor-Ort-Termine gebucht', f.appts || 0],
+            ['Auftrag gebucht / erledigt', f.booked || 0]
+          ], '', true) +
+        '</section>' +
+        '<section class="block"><h2>Anfragen nach Schadensart</h2>' + barList(s.byService, '') +
+          '<h2 style="margin-top:24px">Anfragen nach Quelle</h2>' + barList(s.bySource, '') +
+        '</section>' +
+      '</div>' +
+
+      '<div class="cols">' +
+        '<section class="block"><h2>Meistbesuchte Seiten (30 Tage)</h2>' + barList(v.pages, '') + '</section>' +
+        '<section class="block"><h2>Herkunft &amp; Gerät (30 Tage)</h2>' + barList(v.sources, '') +
+          '<h2 style="margin-top:24px">Geräte</h2>' + barList(v.devices, '') +
+        '</section>' +
+      '</div>' +
+
+      '<div class="cols">' +
+        '<section class="block"><h2>Monatlicher Umsatz (bezahlte Rechnungen)</h2>' + barList(rv.byMonth, '€', true) + '</section>' +
+        '<section class="block"><h2>Häufigste Orte im Schadensrechner (30 Tage)</h2>' + barList(s.topTowns, '') + '</section>' +
+      '</div>' +
+      '<p class="muted" style="margin-top:24px">Datenschutz: Es werden keine Cookies, keine IP-Adressen und keine personenbezogenen Daten für die Besucherzählung gespeichert. Einträge im Blatt „Besuche“ werden nach 6 Monaten automatisch gelöscht.</p>';
+
+    document.getElementById('st-ref').addEventListener('click', function () { statsPage(); });
+  }
+
+  function route(h) {
+    if (h === 'termine') { apptsPage(); return true; }
+    if (h === 'statistik') { statsPage(); return true; }
+    return false;
+  }
+
+  window.SUAppts = {route: route};
+})();
+</script>

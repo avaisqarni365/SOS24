@@ -1,0 +1,177 @@
+{
+  "version": "2026.10",
+  "rooms": ["horizontal", "keller", "schimmel", "crack"],
+  "items": [
+    {
+      "id": "horiz-24",
+      "de": "Horizontalsperre Injektionsverfahren",
+      "en": "Horizontal barrier injection",
+      "syn": ["horizontalsperre", "feuchte wand", "injektion", "paraffin", "silan"],
+      "room": "horizontal",
+      "dis": 15,
+      "asm": 10,
+      "crew": 1,
+      "fragile": true,
+      "vars": [
+        { "l": "24 cm Wandstärke", "v": 0.55, "kg": [1.4, 1.8] }
+      ]
+    },
+    {
+      "id": "horiz-36",
+      "de": "Horizontalsperre Injektionsverfahren",
+      "en": "Horizontal barrier injection",
+      "syn": ["horizontalsperre", "feuchte wand", "injektion"],
+      "room": "horizontal",
+      "dis": 20,
+      "asm": 15,
+      "crew": 1,
+      "fragile": true,
+      "vars": [
+        { "l": "36,5 cm Wandstärke", "v": 0.7, "kg": [2.0, 2.6] }
+      ]
+    },
+    {
+      "id": "horiz-48",
+      "de": "Horizontalsperre Injektionsverfahren",
+      "en": "Horizontal barrier injection",
+      "syn": ["horizontalsperre", "bruchstein", "altbau"],
+      "room": "horizontal",
+      "dis": 25,
+      "asm": 20,
+      "crew": 2,
+      "fragile": true,
+      "vars": [
+        { "l": "48+ cm / Bruchstein", "v": 0.95, "kg": [2.8, 3.6] }
+      ]
+    },
+    {
+      "id": "mds-seal",
+      "de": "Mineralische Dichtungsschlämme (MDS)",
+      "en": "Mineral waterproofing slurry",
+      "syn": ["kellerinnenabdichtung", "mds", "dichtschlämme", "nasser keller"],
+      "room": "keller",
+      "dis": 15,
+      "asm": 15,
+      "crew": 2,
+      "fragile": true,
+      "vars": [
+        { "l": "2-lagig", "v": 0.45, "kg": [5.0, 6.5] }
+      ]
+    },
+    {
+      "id": "wta-plaster",
+      "de": "WTA-Sanierputzsystem (Porenputz)",
+      "en": "WTA restoration plaster",
+      "syn": ["sanierputz", "putz", "salzausblühung", "wta"],
+      "room": "keller",
+      "dis": 20,
+      "asm": 15,
+      "crew": 2,
+      "fragile": true,
+      "vars": [
+        { "l": "20 mm Schicht", "v": 0.5, "kg": [18.0, 24.0] }
+      ]
+    },
+    {
+      "id": "fillet-joint",
+      "de": "Druckwasserdichte Hohlkehle ausbilden",
+      "en": "Waterproof wall-floor fillet",
+      "syn": ["hohlkehle", "wand-boden", "anschluss"],
+      "room": "keller",
+      "dis": 10,
+      "asm": 10,
+      "crew": 1,
+      "fragile": true,
+      "vars": [
+        { "l": "Wand-Boden", "v": 0.35, "kg": [3.5, 4.5] }
+      ]
+    },
+    {
+      "id": "old-plaster",
+      "de": "Altputz abschlagen & Fugen auskratzen",
+      "en": "Remove damaged plaster",
+      "syn": ["altputz", "abschlagen", "vorbereitung"],
+      "room": "keller",
+      "dis": 10,
+      "asm": 10,
+      "crew": 2,
+      "vars": [
+        { "l": "inkl. Entsorgung", "v": 0.4, "kg": [15.0, 25.0] }
+      ]
+    },
+    {
+      "id": "mold-clean",
+      "de": "Schimmelbeseitigung & Tiefendesinfektion",
+      "en": "Spore-safe mold removal",
+      "syn": ["schimmel", "sporen", "desinfektion", "geruch"],
+      "room": "schimmel",
+      "dis": 15,
+      "asm": 10,
+      "crew": 1,
+      "fragile": true,
+      "vars": [
+        { "l": "Sporenfrei", "v": 0.45, "kg": [0.5, 1.0] }
+      ]
+    },
+    {
+      "id": "casi-board",
+      "de": "Calciumsilikat-Klimaplatte montieren",
+      "en": "Calcium silicate board installation",
+      "syn": ["klimaplatte", "calciumsilikat", "wärmebrücke", "taupunkt"],
+      "room": "schimmel",
+      "dis": 15,
+      "asm": 15,
+      "crew": 1,
+      "fragile": true,
+      "vars": [
+        { "l": "25–30 mm", "v": 0.65, "kg": [6.0, 8.0] }
+      ]
+    },
+    {
+      "id": "crack-pu",
+      "de": "Rissverpressung mit PU-Injektionsharz",
+      "en": "High-pressure PU crack injection",
+      "syn": ["riss", "rissverpressung", "packer", "beton", "wasserführend"],
+      "room": "crack",
+      "dis": 20,
+      "asm": 15,
+      "crew": 1,
+      "fragile": true,
+      "vars": [
+        { "l": "Hochdruck inkl. Packer", "v": 0.75, "kg": [1.2, 1.8] }
+      ]
+    },
+    {
+      "id": "cm-measure",
+      "de": "Feuchtemessung & Salzanalyse inkl. Messprotokoll",
+      "en": "Moisture & salt analysis protocol",
+      "syn": ["feuchtemessung", "protokoll", "nullmessung", "cm-messung"],
+      "room": "all",
+      "dis": 15,
+      "asm": 15,
+      "crew": 1,
+      "fragile": true,
+      "vars": [
+        { "l": "Protokolliert", "v": 1.5, "kg": [0.1, 0.2] }
+      ]
+    }
+  ],
+  "presets": {
+    "single": { "horiz-36": [12, 0], "cm-measure": [1, 0] },
+    "couple": { "horiz-36": [18, 0], "wta-plaster": [25, 0], "old-plaster": [25, 0], "cm-measure": [1, 0] },
+    "family": { "horiz-36": [28, 0], "mds-seal": [45, 0], "wta-plaster": [45, 0], "fillet-joint": [28, 0], "old-plaster": [45, 0], "cm-measure": [1, 0] }
+  },
+  "guess": {},
+  "rules": {
+    "buffer": 0.1,
+    "range": { "high": 0.08, "medium": 0.15, "low": 0.25 },
+    "weight": { "pick": 1, "custom": 1, "list": 0.8, "photo": 0.8, "preset": 0.5, "guess": 0.4 },
+    "vehicles": [
+      { "id": "sprinter", "cap": 50 },
+      { "id": "lkw75", "cap": 150 },
+      { "id": "lkw12", "cap": 300 }
+    ],
+    "defaultKm": 15,
+    "customDensity": 10
+  }
+}

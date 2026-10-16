@@ -29,6 +29,17 @@ export const COMPANY_INFO = {
   ]
 };
 
+export const COMPANY = {
+  ...COMPANY_INFO,
+  phoneHref: COMPANY_INFO.phoneTel,
+  whatsappNumber: "491722064177",
+  serviceAreaSummary: COMPANY_INFO.operatingRegion,
+  streetAddress: COMPANY_INFO.street,
+  postalCode: "45144",
+  addressLocality: "Essen",
+  openingHoursDisplay: "Mo–Fr 08:00–18:00 Uhr · Sa 09:00–14:00 Uhr",
+};
+
 export const SERVICES: ServiceItem[] = [
   {
     id: "feuchte-waende",

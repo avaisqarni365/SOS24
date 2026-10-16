@@ -1,0 +1,448 @@
+<style>
+.doc-kicker{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.doc-badge{display:inline-block;font-size:11.5px;font-weight:700;padding:3px 8px;border:1px solid var(--line);white-space:nowrap}
+.db-entwurf{color:var(--ink2)}
+.db-offen,.db-versendet{background:var(--tint);color:var(--tint-ink);border-color:var(--tint)}
+.db-angenommen,.db-bezahlt{background:#047857;color:#fff;border-color:#047857}
+.db-überfällig,.db-abgelehnt{background:#dc2626;color:#fff;border-color:#dc2626}
+.db-storniert,.db-abgelaufen{color:var(--ink2);text-decoration:line-through}
+.dlines th,.dlines td{padding:6px 6px 6px 0;border-bottom:1px solid var(--line);vertical-align:top}
+.dlines th{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink2);text-align:left;border-bottom:2px solid var(--ink)}
+.dlines .input{min-height:36px;padding:6px 8px;font-size:14px}
+.dlines .n{width:76px;text-align:right}
+.dlines .u{width:78px}
+.dlines .x{border:0;background:transparent;cursor:pointer;font-size:18px;line-height:1;padding:6px;color:var(--ink2)}
+.sumbox{max-width:440px;margin-left:auto;margin-top:12px;border-top:2px solid var(--ink)}
+.sumbox div{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--line);font-variant-numeric:tabular-nums}
+.sumbox .grand{font-weight:700;font-size:20px;border-bottom:2px solid var(--ink)}
+.tpls{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0}
+.fgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.fgrid .wide{grid-column:1 / -1}
+.warn{border-left:4px solid var(--fill);background:var(--tint);color:var(--tint-ink);padding:10px 14px;margin-bottom:16px;font-size:13.5px}
+.chk{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;color:var(--ink2);cursor:pointer;user-select:none}
+.chk input{width:16px;height:16px;accent-color:var(--ink)}
+@media (max-width:640px){
+  .fgrid{grid-template-columns:minmax(0,1fr)}
+  .dlines thead{display:none}
+  .dlines,.dlines tbody{display:block;width:100%}
+  .dlines tr{display:grid;grid-template-columns:repeat(3,minmax(0,1fr)) auto 44px;gap:6px 8px;align-items:end;padding:12px 0;border-bottom:1px solid var(--soft)}
+  .dlines td{padding:0;border:0;min-width:0}
+  .dlines td:nth-child(1),.dlines td:nth-child(2){grid-column:1/-1}
+  .dlines td::before{display:block;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--ink2);margin-bottom:3px}
+  .dlines td:nth-child(1)::before{content:"Bezeichnung"}.dlines td:nth-child(2)::before{content:"Zuschlag"}.dlines td:nth-child(3)::before{content:"Menge"}
+  .dlines td:nth-child(4)::before{content:"Einheit"}.dlines td:nth-child(5)::before{content:"Einzelpreis €"}.dlines td:nth-child(6)::before{content:"Betrag"}
+  .dlines .input,.dlines .n,.dlines .u{width:100%;min-height:44px}
+  .dlines td.amt{text-align:right;font-weight:700;white-space:nowrap;padding-bottom:12px}
+  .dlines .x{width:44px;height:44px}
+}
+@media (max-width:360px){.dlines tr{grid-template-columns:repeat(3,minmax(0,1fr))}.dlines td:nth-child(6){grid-column:1/3;align-self:center}.dlines td:nth-child(7){grid-column:3;justify-self:end}}
+.pdf-modal{position:fixed;inset:0;z-index:50;background:rgba(15,23,42,.72);display:flex;align-items:center;justify-content:center;padding:18px;backdrop-filter:blur(3px)}
+.pdf-modal[hidden]{display:none}
+.pdf-box{background:#fff;width:min(960px,96vw);height:min(90vh,920px);display:flex;flex-direction:column;border-top:4px solid var(--fill);box-shadow:0 24px 60px rgba(0,0,0,.35)}
+.pdf-head{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 18px;background:var(--ink);color:var(--on);flex-wrap:wrap}
+.pdf-head b{font-size:15px;letter-spacing:.02em}
+.pdf-head .actions{gap:6px}
+.pdf-head .btn.small{color:var(--on);border-color:rgba(243,242,242,.35)}
+.pdf-head .btn.small.primary{background:var(--fill);border-color:var(--fill)}
+.pdf-frame{flex:1;width:100%;border:0;background:#fff}
+</style>
+<div id="pdf-modal" class="pdf-modal" role="dialog" aria-modal="true" aria-label="PDF-Vorschau" hidden>
+  <div class="pdf-box">
+    <div class="pdf-head">
+      <b id="pdf-title">Beleg-Vorschau</b>
+      <div class="actions">
+        <button class="btn small primary" id="pdf-print" type="button">🖨️ Drucken / Als PDF speichern</button>
+        <a class="btn small" id="pdf-drive" href="#" target="_blank" rel="noopener" hidden>Im Drive öffnen ↗</a>
+        <button class="btn small" id="pdf-close" type="button">Schließen ×</button>
+      </div>
+    </div>
+    <iframe id="pdf-frame" class="pdf-frame" title="Beleg-Vorschau"></iframe>
+  </div>
+</div>
+<script>
+(function () {
+  'use strict';
+  var U = window.SU;
+  var D = {docs: null, types: {}, statuses: {}, defaults: {}, cur: null, filter: {type: 'all', status: 'open', q: ''}};
+  var OPEN_DOC = ['Entwurf', 'Versendet', 'Offen', 'Überfällig'];
+  var TEMPLATES = [
+    ['Nachträgliche Horizontalsperre (WTA-Injektion)', 'Bohrlochinjektion mit Silan-Creme inkl. Verschließen', 10, 'lfm', 135, true],
+    ['Kellerinnenabdichtung (2K-Dichtschlämme MDS)', '2-lagiger Auftrag auf vorbereitetem Untergrund', 18, 'm²', 120, true],
+    ['WTA-Sanierputzsystem (Porenputz)', 'Salzspeichernder Sanierputz inkl. Spritzbewurf', 18, 'm²', 85, true],
+    ['Druckwasserdichte Hohlkehle', 'Wand-Sohlen-Anschluss ausrunden & abdichten', 10, 'lfm', 65, true],
+    ['Sporensichere Schimmelbeseitigung', '70 % Ethanol/H2O2-Desinfektion & Feinreinigung', 12, 'm²', 55, true],
+    ['Calciumsilikat-Klimaplatte (Innendämmung)', 'Kapillaraktive Kalziumsilikatplatte inkl. Spezialkleber', 12, 'm²', 125, true],
+    ['Hochdruck-Rissverpressung (PU / Epoxidharz)', 'Setzen von Hochdruckpackern & Injektion', 5, 'lfm', 185, true],
+    ['Feuchte- & Salzanalyse (CM-Messung)', 'Kapazitive Messung, Tiefenprofil & Sanierungskonzept', 1, 'Pausch.', 149, true],
+    ['Facharbeiter / Montagelohn (§ 35a EStG)', 'Arbeitszeit Bautenschutz-Techniker vor Ort', 8, 'Std.', 68, true],
+    ['Anfahrt & Baustelleneinrichtung', 'Schutzfolie, Staubschutz & Maschineneinsatz', 1, 'Pausch.', 95, true]
+  ];
+  var UNITS = ['lfm', 'm²', 'Pausch.', 'Std.', 'Stk.', 'Gebinde', 'Tag'];
+
+  function openPreview(nr) {
+    var modal = document.getElementById('pdf-modal');
+    var frame = document.getElementById('pdf-frame');
+    var title = document.getElementById('pdf-title');
+    var driveBtn = document.getElementById('pdf-drive');
+    title.textContent = nr + ' – Vorschau wird geladen …';
+    driveBtn.hidden = true;
+    frame.srcdoc = '<p style="font:15px system-ui,sans-serif;padding:24px;color:#55606f">Beleg wird vorbereitet …</p>';
+    modal.hidden = false;
+    U.run('api_docHtml', nr).then(function (r) {
+      title.textContent = r.nr + ' · ' + (r.typeLabel || 'Beleg') + ' (' + (r.customer || '') + ')';
+      frame.srcdoc = r.html;
+      if (r.pdfUrl) { driveBtn.href = r.pdfUrl; driveBtn.hidden = false; }
+    }).catch(function (e) { modal.hidden = true; U.fail(e); });
+  }
+  document.getElementById('pdf-close').addEventListener('click', function () { document.getElementById('pdf-modal').hidden = true; });
+  document.getElementById('pdf-modal').addEventListener('click', function (e) { if (e.target.id === 'pdf-modal') e.currentTarget.hidden = true; });
+  document.getElementById('pdf-print').addEventListener('click', function () {
+    var f = document.getElementById('pdf-frame');
+    if (f && f.contentWindow) { f.contentWindow.focus(); f.contentWindow.print(); }
+  });
+
+  function ensureDocs() {
+    if (D.docs) return Promise.resolve(D);
+    return U.run('api_docs').then(function (r) { D.docs = r.docs; D.types = r.types; D.statuses = r.statuses; D.defaults = r.defaults; return D; });
+  }
+  function refreshDocs() { D.docs = null; return ensureDocs(); }
+  function dbadge(s) { return '<span class="doc-badge db-' + String(s || '').toLowerCase() + '">' + U.esc(s) + '</span>'; }
+  function locked(d) { return d.type !== 'offer' && d.status !== 'Entwurf'; }
+
+  function list() {
+    U.setNav('docs');
+    U.app.innerHTML = '<p class="loading">Belege werden geladen …</p>';
+    ensureDocs().then(drawList).catch(U.fail);
+  }
+  function drawList() {
+    var today = new Date().toISOString().slice(0, 10);
+    var openInv = 0, overdue = 0, paidYear = 0, openOffers = 0, yr = today.slice(0, 4);
+    D.docs.forEach(function (d) {
+      if ((d.type === 'invoice' || d.type === 'deposit') && (d.status === 'Offen' || d.status === 'Überfällig')) {
+        openInv += Number(d.gross) || 0;
+        if (d.status === 'Überfällig' || (d.dueDate && d.dueDate < today)) overdue++;
+      }
+      if (d.status === 'Bezahlt' && String(d.paidAt || d.date).slice(0, 4) === yr) paidYear += Number(d.gross) || 0;
+      if (d.type === 'offer' && (d.status === 'Versendet' || d.status === 'Entwurf')) openOffers++;
+    });
+    var tchips = [['all', 'Alle'], ['offer', 'Angebote'], ['invoice', 'Rechnungen'], ['deposit', 'Abschlag'], ['credit', 'Storno']];
+    var schips = [['open', 'Offen / Entwurf'], ['Bezahlt', 'Bezahlt'], ['Angenommen', 'Angenommen'], ['Überfällig', 'Überfällig'], ['all', 'Alle Status']];
+    U.app.innerHTML = '<span class="kicker">Belege · GoBD (ANG-2026 / RE-2026)</span><div class="h"><h1>Angebote und Rechnungen</h1>' +
+      '<div class="actions"><a class="btn" href="#/neu/offer">+ Angebot</a><a class="btn primary" href="#/neu/invoice">+ Rechnung</a><button class="btn small" id="d-ref">Aktualisieren</button></div></div>' +
+      '<div class="grid4"><div class="kpi"><b>' + U.eur(openInv) + '</b><span>offene Rechnungen</span></div>' +
+      '<div class="kpi"><b>' + overdue + '</b><span>überfällig</span></div>' +
+      '<div class="kpi"><b>' + openOffers + '</b><span>offene Angebote</span></div>' +
+      '<div class="kpi"><b>' + U.eur(paidYear) + '</b><span>bezahlt ' + yr + '</span></div></div>' +
+      '<div class="filters" style="margin-top:24px">' + tchips.map(function (c) { return '<button class="chip" data-tf="' + c[0] + '" aria-pressed="' + (D.filter.type === c[0]) + '">' + c[1] + '</button>'; }).join('') + '</div>' +
+      '<div class="filters">' + schips.map(function (c) { return '<button class="chip" data-sf="' + c[0] + '" aria-pressed="' + (D.filter.status === c[0]) + '">' + c[1] + '</button>'; }).join('') +
+      '<input class="input" id="dq" type="search" placeholder="Suchen: Belegnr., Anfrage, Kunde, Ort" value="' + U.esc(D.filter.q) + '" aria-label="Suchen"></div>' +
+      '<div id="dtbl"></div>';
+    U.app.querySelectorAll('[data-tf]').forEach(function (b) { b.addEventListener('click', function () { D.filter.type = b.getAttribute('data-tf'); drawList(); }); });
+    U.app.querySelectorAll('[data-sf]').forEach(function (b) { b.addEventListener('click', function () { D.filter.status = b.getAttribute('data-sf'); drawList(); }); });
+    document.getElementById('dq').addEventListener('input', function (e) { D.filter.q = e.target.value; drawTable(); });
+    document.getElementById('d-ref').addEventListener('click', function () { refreshDocs().then(drawList).catch(U.fail); });
+    drawTable();
+  }
+  function drawTable() {
+    var f = D.filter, q = f.q.trim().toLowerCase();
+    var rows = D.docs.filter(function (d) {
+      if (f.type !== 'all' && d.type !== f.type) return false;
+      if (f.status === 'open' && OPEN_DOC.indexOf(d.status) < 0) return false;
+      if (f.status !== 'open' && f.status !== 'all' && d.status !== f.status) return false;
+      return !q || [d.nr, d.leadId, d.name, d.email, d.address, d.from, d.to].join(' ').toLowerCase().indexOf(q) >= 0;
+    });
+    document.getElementById('dtbl').innerHTML = rows.length ? '<table class="tbl"><thead><tr><th>Nr.</th><th>Art</th><th>Kunde</th><th class="hide-m">Anfrage</th><th>Datum</th><th class="hide-m">Fällig / Gültig</th><th class="num">Brutto</th><th>Status</th></tr></thead><tbody>' +
+      rows.map(function (d) {
+        var due = d.type === 'offer' ? d.validUntil : d.dueDate;
+        return '<tr data-nr="' + U.esc(d.nr) + '"><td><b>' + U.esc(d.nr) + '</b></td><td>' + U.esc(d.typeLabel) + (d.ref ? '<div class="muted">zu ' + U.esc(d.ref) + '</div>' : '') + '</td>' +
+          '<td>' + U.esc(d.name || '–') + '<div class="muted">' + U.esc(d.email || d.phone || '') + '</div></td>' +
+          '<td class="hide-m">' + (d.leadId ? '<a href="#/a/' + encodeURIComponent(d.leadId) + '" onclick="event.stopPropagation()">' + U.esc(d.leadId) + '</a>' : '–') + '</td>' +
+          '<td>' + U.day(d.date) + '</td><td class="hide-m">' + (due ? U.day(due) : '–') + '</td>' +
+          '<td class="num"><b>' + U.eur(d.gross) + '</b><div class="muted">Netto ' + U.eur(d.net) + '</div></td><td>' + dbadge(d.status) + '</td></tr>';
+      }).join('') + '</tbody></table>' : '<p class="empty">Keine Belege für diesen Filter.</p>';
+    document.querySelectorAll('#dtbl tr[data-nr]').forEach(function (tr) { tr.addEventListener('click', function () { location.hash = '#/beleg/' + encodeURIComponent(tr.getAttribute('data-nr')); }); });
+  }
+
+  function openNew(type, leadId, fromNr) {
+    U.setNav('docs');
+    U.app.innerHTML = '<p class="loading">Beleg wird vorbereitet …</p>';
+    U.run('api_newDoc', type, leadId || '', fromNr || '').then(function (r) { D.cur = r; D.types = r.types; D.statuses = r.statuses; drawEditor(); }).catch(U.fail);
+  }
+  function openDoc(nr) {
+    U.setNav('docs');
+    var known = (D.docs || []).filter(function (x) { return x.nr === nr; })[0];
+    if (known) { D.cur = {doc: known, types: D.types, statuses: D.statuses, hasMail: !!known.email, loading: true}; drawEditor(); }
+    else U.app.innerHTML = '<p class="loading">Beleg ' + U.esc(nr) + ' wird geladen …</p>';
+    U.run('api_doc', nr).then(function (r) { if (decodeURIComponent(location.hash.replace(/^#\/?/, '')) !== 'beleg/' + nr) return; D.cur = r; D.types = r.types; D.statuses = r.statuses; drawEditor(); }).catch(U.fail);
+  }
+
+  function drawEditor() {
+    var r = D.cur, d = r.doc, isLock = locked(d), isOffer = d.type === 'offer';
+    var stList = (D.statuses && D.statuses[d.type]) || [d.status];
+    var dis = isLock ? ' disabled' : '';
+    var title = d.nr ? d.typeLabel + ' ' + d.nr : 'Neues ' + (d.typeLabel || 'Dokument');
+    var lockNote = isLock ? '<div class="warn">Dieser Beleg ist bereits festgeschrieben (GoBD). Inhalt und Beträge sind unveränderbar. Für Korrekturen bitte „Stornorechnung erstellen“ nutzen.</div>' : '';
+
+    U.app.innerHTML = '<a href="#/belege" class="muted">← Alle Belege</a>' +
+      (d.leadId ? ' · <a href="#/a/' + encodeURIComponent(d.leadId) + '" class="muted">Anfrage ' + U.esc(d.leadId) + '</a>' : '') +
+      (d.ref ? ' · <a href="#/beleg/' + encodeURIComponent(d.ref) + '" class="muted">Bezug ' + U.esc(d.ref) + '</a>' : '') +
+      '<div class="h"><div><div class="doc-kicker"><span class="kicker">' + U.esc(d.typeLabel) + '</span>' + dbadge(d.status) + '</div><h1>' + U.esc(title) + '</h1></div>' +
+      '<div class="actions">' + topActions(d) + '</div></div>' + lockNote +
+      '<div class="detail"><div>' +
+        '<div class="card"><h2>Empfänger &amp; Objekt</h2><div class="fgrid">' +
+          field('Kunde / Firma', 'd-name', d.name, dis) +
+          field('Anfrage-Nr.', 'd-lead', d.leadId, dis) +
+          field('Rechnungsadresse (Straße, PLZ Ort)', 'd-addr', d.address, dis, 'wide', 'textarea') +
+          field('E-Mail', 'd-mail', d.email, dis, '', 'email') +
+          field('Telefon', 'd-phone', d.phone, dis) +
+          field('Leistungsart / Gewerk', 'd-svc', d.service, dis) +
+          field('Wunsch- / Leistungsdatum', 'd-sdate', d.serviceDate, dis, '', 'date') +
+          field('Objektadresse (Einsatzort)', 'd-from', d.from, dis) +
+          field('Betroffenes Bauteil (Keller / Wand)', 'd-to', d.to, dis) +
+        '</div></div>' +
+
+        '<div class="card"><h2>Positionen</h2>' +
+          (isLock ? '' : '<div class="tpls"><span class="muted" style="align-self:center">Baustein einfügen:</span>' +
+            TEMPLATES.map(function (t, i) { return '<button class="btn small" type="button" data-tpl="' + i + '">+ ' + U.esc(t[0]) + '</button>'; }).join('') + '</div>') +
+          '<div style="overflow-x:auto"><table class="dlines"><thead><tr><th style="width:44%">Bezeichnung</th><th>§ 35a</th><th class="num">Menge</th><th>Einheit</th><th class="num">Einzel €</th><th class="num">Betrag</th><th></th></tr></thead>' +
+          '<tbody id="dlines">' + (d.items || []).map(function (it) { return itemRow(it, isLock); }).join('') + '</tbody></table></div>' +
+          (isLock ? '' : '<div class="actions" style="margin-top:10px"><button class="btn small" type="button" id="d-addline">+ Freie Position</button></div>') +
+          '<div class="sumbox">' +
+            '<div><span>Zwischensumme</span><span id="s-sub"></span></div>' +
+            '<div style="align-items:center"><span>Rabatt %</span><input class="input" id="d-disc" type="number" step="any" min="0" max="100" value="' + U.esc(d.discountPct || 0) + '" style="width:90px;min-height:32px;padding:4px 8px;text-align:right"' + dis + '></div>' +
+            '<div><span>Nettobetrag</span><span id="s-net"></span></div>' +
+            '<div style="align-items:center"><span>USt. % <small class="muted">(0 = § 19 UStG)</small></span><select class="input" id="d-vat" style="width:110px;min-height:32px;padding:4px 8px"' + dis + '>' +
+              [19, 7, 0].map(function (v) { return '<option value="' + v + '"' + (Number(d.vatRate) === v ? ' selected' : '') + '>' + v + ' %</option>'; }).join('') + '</select></div>' +
+            '<div><span>Umsatzsteuer</span><span id="s-vat"></span></div>' +
+            '<div class="grand"><span>Gesamtbetrag</span><span id="s-gross"></span></div>' +
+            '<div><span class="muted">darin Arbeits-/Handwerkerkosten (§ 35a EStG, inkl. USt.)</span><span class="muted" id="s-labor"></span></div>' +
+          '</div>' +
+        '</div>' +
+
+        '<div class="card"><h2>Texte auf dem PDF</h2><div class="fgrid">' +
+          field('Einleitungstext', 'd-intro', d.intro, dis, 'wide', 'textarea') +
+          field('Schlusstext / Zahlungsbedingungen / 10-Jahre-Garantiehinweis', 'd-note', d.note, dis, 'wide', 'textarea') +
+        '</div></div>' +
+      '</div>' +
+
+      '<aside class="side">' +
+        '<div class="card"><h2>Belegdaten &amp; Status</h2>' +
+          '<div class="field"><label for="d-st">Status</label><select class="input" id="d-st">' + stList.map(function (s) { return '<option' + (s === d.status ? ' selected' : '') + '>' + U.esc(s) + '</option>'; }).join('') + '</select></div>' +
+          '<div class="fgrid">' +
+            field('Belegdatum', 'd-date', d.date, dis, '', 'date') +
+            (isOffer ? field('Gültig bis', 'd-valid', d.validUntil, dis, '', 'date') : field('Fällig am', 'd-due', d.dueDate, dis, '', 'date')) +
+            (isOffer ? '' : field('Bezahlt am', 'd-paid', d.paidAt, '', '', 'date')) +
+            (isOffer ? '' : field('Zahlungsart', 'd-pmeth', d.payMethod, '', '', 'select', ['', 'Überweisung', 'Bar', 'EC-Karte', 'PayPal'])) +
+          '</div>' +
+          '<div class="actions" style="margin-top:14px">' +
+            '<button class="btn primary" id="d-save">' + (d.nr ? 'Speichern' : (isOffer ? 'Angebot anlegen' : 'Rechnung anlegen')) + '</button>' +
+            (d.nr && !isOffer && d.status !== 'Bezahlt' && d.status !== 'Storniert' ? '<button class="btn small" id="d-markpaid">✓ Als bezahlt markieren</button>' : '') +
+          '</div>' +
+        '</div>' +
+
+        '<div class="card"><h2>PDF &amp; Versand</h2>' +
+          (d.pdfUrl ? '<p style="margin:0 0 10px"><button class="btn small primary" type="button" id="d-preview">👁️ PDF hier ansehen &amp; drucken</button> <a class="btn small" target="_blank" rel="noopener" href="' + U.esc(d.pdfUrl) + '">Drive ↗</a></p>'
+                    : '<p class="muted" style="margin:0 0 10px">' + (d.nr ? 'PDF wird beim Ansehen oder Senden im Ordner „SOS Abdichtung - Belege“ erzeugt.' : 'Erst speichern, dann kann das PDF erzeugt und gesendet werden.') + '</p>') +
+          '<div class="actions">' +
+            '<button class="btn small" id="d-pdf"' + (d.nr ? '' : ' disabled') + '>👁️ Vorschau &amp; PDF erzeugen</button>' +
+            '<button class="btn small primary" id="d-send"' + (d.nr && d.email ? '' : ' disabled') + '>Per E-Mail mit PDF senden</button>' +
+            '<button class="btn small" id="d-wa"' + (d.nr && d.phone ? '' : ' disabled') + '>WhatsApp-Nachricht</button>' +
+          '</div>' +
+          (d.sentAt ? '<p class="muted" style="margin:8px 0 0">Zuletzt gesendet: ' + U.dt(d.sentAt) + '</p>' : '') +
+        '</div>' +
+
+        (d.nr ? '<div class="card"><h2>Folgebelege</h2><div class="actions">' + followActions(d) + '</div></div>' : '') +
+      '</aside></div>';
+
+    if (r.loading) { U.app.querySelector('.detail').classList.add('busy'); return; }
+    bindEditor();
+  }
+
+  function topActions(d) {
+    if (!d.nr) return '';
+    return '<button class="btn small primary" type="button" id="d-top-preview">👁️ PDF ansehen / drucken</button>' +
+      (d.pdfUrl ? '<a class="btn small" target="_blank" rel="noopener" href="' + U.esc(d.pdfUrl) + '">Drive ↗</a>' : '');
+  }
+  function followActions(d) {
+    var a = [];
+    if (d.type === 'offer') {
+      a.push('<a class="btn small primary" href="#/aus/' + encodeURIComponent(d.nr) + '/invoice">→ Rechnung aus Angebot</a>');
+      a.push('<a class="btn small" href="#/aus/' + encodeURIComponent(d.nr) + '/deposit">→ Abschlagsrechnung (30 %)</a>');
+    }
+    if ((d.type === 'invoice' || d.type === 'deposit') && d.status !== 'Storniert') {
+      a.push('<a class="btn small" href="#/aus/' + encodeURIComponent(d.nr) + '/credit">Stornorechnung erstellen</a>');
+    }
+    a.push('<a class="btn small" href="#/aus/' + encodeURIComponent(d.nr) + '/' + d.type + '">Als Vorlage kopieren</a>');
+    return a.join('');
+  }
+  function field(label, id, val, dis, cls, kind, opts) {
+    var c = 'field' + (cls ? ' ' + cls : '');
+    if (kind === 'textarea') return '<div class="' + c + '"><label for="' + id + '">' + label + '</label><textarea class="input" id="' + id + '" style="min-height:74px"' + dis + '>' + U.esc(val || '') + '</textarea></div>';
+    if (kind === 'select') return '<div class="' + c + '"><label for="' + id + '">' + label + '</label><select class="input" id="' + id + '"' + dis + '>' + opts.map(function (o) { return '<option' + (o === val ? ' selected' : '') + '>' + U.esc(o) + '</option>'; }).join('') + '</select></div>';
+    return '<div class="' + c + '"><label for="' + id + '">' + label + '</label><input class="input" id="' + id + '" type="' + (kind || 'text') + '" value="' + U.esc(val || '') + '"' + dis + '></div>';
+  }
+  function itemRow(it, isLock) {
+    var dis = isLock ? ' disabled' : '';
+    var u = it[2] || 'lfm';
+    var uOpts = UNITS.indexOf(u) >= 0 ? UNITS : [u].concat(UNITS);
+    return '<tr>' +
+      '<td><input class="input" value="' + U.esc(it[0]) + '" placeholder="Position" aria-label="Bezeichnung"' + dis + '>' +
+        '<input class="input" value="' + U.esc(it[1]) + '" placeholder="Zusatz / WTA-Systembeschreibung (optional)" aria-label="Zusatz" style="margin-top:4px;font-size:12.5px;min-height:30px"' + dis + '></td>' +
+      '<td style="padding-top:12px"><label class="chk" title="Arbeits-/Handwerkerleistung nach § 35a EStG"><input type="checkbox"' + (it[5] ? ' checked' : '') + dis + '><span>Lohn</span></label></td>' +
+      '<td><input class="input n" type="number" step="any" value="' + U.esc(it[3]) + '" aria-label="Menge"' + dis + '></td>' +
+      '<td><select class="input u" aria-label="Einheit"' + dis + '>' + uOpts.map(function (x) { return '<option' + (x === u ? ' selected' : '') + '>' + U.esc(x) + '</option>'; }).join('') + '</select></td>' +
+      '<td><input class="input n" type="number" step="any" value="' + U.esc(it[4]) + '" aria-label="Einzelpreis"' + dis + '></td>' +
+      '<td class="num amt" style="padding-top:12px;font-weight:600"></td>' +
+      '<td>' + (isLock ? '' : '<button class="x" type="button" title="Entfernen" aria-label="Position entfernen">×</button>') + '</td></tr>';
+  }
+
+  function readEditor() {
+    var d = D.cur.doc, isOffer = d.type === 'offer';
+    var items = Array.prototype.map.call(document.querySelectorAll('#dlines tr'), function (tr) {
+      var inp = tr.querySelectorAll('input'), sel = tr.querySelector('select');
+      return [inp[0].value, inp[1].value, sel.value, Number(inp[3].value) || 0, Number(inp[4].value) || 0, inp[2].checked];
+    });
+    return {
+      nr: d.nr, type: d.type, ref: d.ref, status: val('d-st'),
+      leadId: val('d-lead'), name: val('d-name'), address: val('d-addr'), email: val('d-mail'), phone: val('d-phone'),
+      service: val('d-svc'), serviceDate: val('d-sdate'), from: val('d-from'), to: val('d-to'),
+      date: val('d-date'), validUntil: isOffer ? val('d-valid') : '', dueDate: isOffer ? '' : val('d-due'),
+      paidAt: isOffer ? '' : val('d-paid'), payMethod: isOffer ? '' : val('d-pmeth'),
+      discountPct: Number(val('d-disc')) || 0, vatRate: Number(val('d-vat')),
+      intro: val('d-intro'), note: val('d-note'), items: items
+    };
+  }
+  function val(id) { var el = document.getElementById(id); return el ? el.value : ''; }
+
+  function calcSums() {
+    var sub = 0, labor = 0;
+    document.querySelectorAll('#dlines tr').forEach(function (tr) {
+      var inp = tr.querySelectorAll('input');
+      var a = Math.round((Number(inp[3].value) || 0) * (Number(inp[4].value) || 0) * 100) / 100;
+      sub += a; if (inp[2].checked) labor += a;
+      tr.querySelector('.amt').textContent = U.eur(a);
+    });
+    var discPct = Math.max(0, Math.min(100, Number(val('d-disc')) || 0));
+    var disc = Math.round(sub * discPct) / 100;
+    var net = Math.round((sub - disc) * 100) / 100;
+    var rate = Number(val('d-vat')) || 0;
+    var vat = Math.round(net * rate) / 100;
+    var gross = Math.round((net + vat) * 100) / 100;
+    var laborGross = Math.round(labor * (1 - discPct / 100) * (1 + rate / 100) * 100) / 100;
+    document.getElementById('s-sub').textContent = U.eur(sub) + (disc ? ' (−' + U.eur(disc) + ')' : '');
+    document.getElementById('s-net').textContent = U.eur(net);
+    document.getElementById('s-vat').textContent = U.eur(vat);
+    document.getElementById('s-gross').textContent = U.eur(gross);
+    document.getElementById('s-labor').textContent = U.eur(laborGross);
+  }
+
+  function bindEditor() {
+    var dlines = document.getElementById('dlines');
+    dlines.addEventListener('input', calcSums);
+    dlines.addEventListener('change', calcSums);
+    dlines.addEventListener('click', function (e) { if (e.target.classList.contains('x')) { e.target.closest('tr').remove(); calcSums(); } });
+    document.getElementById('d-disc').addEventListener('input', calcSums);
+    document.getElementById('d-vat').addEventListener('change', calcSums);
+    var addBtn = document.getElementById('d-addline');
+    if (addBtn) addBtn.addEventListener('click', function () {
+      dlines.insertAdjacentHTML('beforeend', itemRow(['', '', 'lfm', 1, 0, true], false));
+      dlines.lastElementChild.querySelector('input').focus(); calcSums();
+    });
+    U.app.querySelectorAll('[data-tpl]').forEach(function (b) {
+      b.addEventListener('click', function () {
+        var t = TEMPLATES[Number(b.getAttribute('data-tpl'))];
+        dlines.insertAdjacentHTML('beforeend', itemRow([t[0], t[1], t[3], t[2], t[4], t[5]], false));
+        calcSums();
+      });
+    });
+    calcSums();
+
+    var save = function (override) {
+      var btn = document.getElementById('d-save'); btn.disabled = true;
+      var payload = readEditor();
+      if (override) for (var k in override) payload[k] = override[k];
+      return U.run('api_saveDoc', payload).then(function (saved) {
+        btn.disabled = false; D.docs = null; D.cur.doc = saved;
+        U.toast('Beleg ' + saved.nr + ' gespeichert.');
+        if (location.hash !== '#/beleg/' + encodeURIComponent(saved.nr)) location.hash = '#/beleg/' + encodeURIComponent(saved.nr);
+        else drawEditor();
+        return saved;
+      }).catch(function (e) { btn.disabled = false; U.fail(e); });
+    };
+    document.getElementById('d-save').addEventListener('click', function () { save(); });
+
+    var mp = document.getElementById('d-markpaid');
+    if (mp) mp.addEventListener('click', function () {
+      save({status: 'Bezahlt', paidAt: val('d-paid') || new Date().toISOString().slice(0, 10), payMethod: val('d-pmeth') || 'Überweisung'});
+    });
+
+    var prevBtn = document.getElementById('d-preview');
+    if (prevBtn) prevBtn.addEventListener('click', function () { openPreview(D.cur.doc.nr); });
+    var topPrev = document.getElementById('d-top-preview');
+    if (topPrev) topPrev.addEventListener('click', function () { openPreview(D.cur.doc.nr); });
+
+    document.getElementById('d-pdf').addEventListener('click', function (e) {
+      var b = e.target; b.disabled = true;
+      save().then(function (saved) {
+        if (!saved) { b.disabled = false; return; }
+        openPreview(saved.nr);
+        return U.run('api_docPdf', saved.nr).then(function (r) {
+          b.disabled = false; D.cur.doc.pdfUrl = r.pdfUrl;
+          var driveBtn = document.getElementById('pdf-drive');
+          if (driveBtn && r.pdfUrl) { driveBtn.href = r.pdfUrl; driveBtn.hidden = false; }
+          drawEditor();
+        });
+      }).catch(function (err) { b.disabled = false; U.fail(err); });
+    });
+
+    document.getElementById('d-send').addEventListener('click', function (e) {
+      var b = e.target;
+      var to = val('d-mail').trim();
+      if (!to) { U.toast('Bitte zuerst eine E-Mail-Adresse eintragen.', true); return; }
+      if (!confirm(D.cur.doc.typeLabel + ' ' + D.cur.doc.nr + ' als PDF an ' + to + ' senden?\n(Bei Rechnungen wird der Beleg damit GoBD-festgeschrieben.)')) return;
+      b.disabled = true;
+      save().then(function (saved) {
+        if (!saved) return;
+        return U.run('api_sendDoc', saved.nr, to, '').then(function (r) {
+          b.disabled = false; D.docs = null; D.cur.doc = r.doc; drawEditor();
+          U.toast('PDF per E-Mail an ' + to + ' gesendet.');
+        });
+      }).catch(function (err) { b.disabled = false; U.fail(err); });
+    });
+
+    document.getElementById('d-wa').addEventListener('click', function () {
+      var d = D.cur.doc;
+      var msg = 'Guten Tag ' + (d.name || '') + ',\n\nhier ist Ihr ' + d.typeLabel + ' ' + d.nr + ' von SOS Abdichtung über ' + U.eur(d.gross) +
+        (d.pdfUrl ? ':\n' + d.pdfUrl : '.') + '\n\nBei Rückfragen erreichen Sie uns unter 0172 2064177.\nViele Grüße\nShahzad Mahmood · SOS Abdichtung';
+      window.open('https://wa.me/' + U.waNum(val('d-phone') || d.phone) + '?text=' + encodeURIComponent(msg), '_blank', 'noopener');
+    });
+  }
+
+  function leadCard(lead, el) {
+    if (!el) return;
+    el.innerHTML = '<h2>Belege (GoBD)</h2>' +
+      '<div class="actions" style="margin-bottom:10px">' +
+        '<a class="btn small" href="#/neu/offer/' + encodeURIComponent(lead.id) + '">+ Angebot (PDF)</a>' +
+        '<a class="btn small primary" href="#/neu/invoice/' + encodeURIComponent(lead.id) + '">+ Rechnung (PDF)</a>' +
+      '</div><div id="lead-doc-list" class="muted">Belege werden geladen …</div>';
+    ensureDocs().then(function () {
+      var box = document.getElementById('lead-doc-list');
+      if (!box) return;
+      var mine = D.docs.filter(function (d) { return d.leadId === lead.id; });
+      box.innerHTML = mine.length ? '<div class="list">' + mine.map(function (d) {
+        return '<a class="row" href="#/beleg/' + encodeURIComponent(d.nr) + '"><span class="id">' + U.esc(d.nr) + '</span><span>' + U.esc(d.typeLabel) + ' · ' + U.eur(d.gross) + '<small>' + U.day(d.date) + '</small></span>' + dbadge(d.status) + '</a>';
+      }).join('') + '</div>' : 'Noch keine offiziellen PDF-Belege zu dieser Anfrage.';
+    }).catch(function () {});
+  }
+
+  function route(h) {
+    if (h === 'belege') { list(); return true; }
+    if (h.indexOf('beleg/') === 0) { openDoc(decodeURIComponent(h.slice(6))); return true; }
+    if (h.indexOf('neu/') === 0) { var p = h.slice(4).split('/'); openNew(p[0] || 'offer', decodeURIComponent(p[1] || ''), ''); return true; }
+    if (h.indexOf('aus/') === 0) { var q = h.slice(4).split('/'); openNew(q[1] || 'invoice', '', decodeURIComponent(q[0] || '')); return true; }
+    return false;
+  }
+
+  window.SUDocs = {route: route, leadCard: leadCard};
+})();
+</script>

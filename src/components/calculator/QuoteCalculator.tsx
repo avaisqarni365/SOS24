@@ -1,340 +1,446 @@
-"use client";
+'use client';
 
-import { useMemo, useState, type CSSProperties } from "react";
-import { Home, Layers, ShieldCheck, SprayCan, Gauge, Wrench, Umbrella, Sun, PanelBottom, MessageCircle, Mail, Phone, CheckCircle2, type LucideIcon } from "lucide-react";
-import { COMPANY_INFO } from "@/data/content-data";
+import React, { useState, useMemo, useEffect } from 'react';
+import {
+  Calculator,
+  CheckCircle2,
+  ArrowRight,
+  MessageSquare,
+  Phone,
+  ShieldCheck,
+  Info,
+  Send,
+  Loader2,
+} from 'lucide-react';
+import { COMPANY } from '@/data/content-data';
+import { logDiagnosticCalculation, submitLeadToWorkspace } from '@/lib/backend';
 
-/**
- * The quote planner. No euro figure anywhere: a price guessed from three
- * inputs is wrong for most cellars, and the client fixes it after the free
- * measurement. What the visitor gets instead is what really scales with the
- * size of the job: how big the job is, roughly how long we are on site, and
- * what the fixed-price quote will contain. The inputs travel with the
- * request, so the first call starts from them.
- */
-type Svc = {
-  slug: string;
-  title: string;
-  Icon: LucideIcon;
-  /** what is measured, and in which unit */
-  what: string;
-  unit: string;
-  min: number;
-  max: number;
-  step: number;
-  /** a typical job of this kind: the middle of the scale */
-  typical: number;
-  /** units per working day on site */
-  perDay: number;
-  includes: string[];
+type DamageCategory = 'horizontalsperre' | 'kellerinnenabdichtung' | 'schimmel' | 'rissinjektion';
+type SeverityLevel = 'leicht' | 'mittel' | 'stark';
+type WallMaterial = 'ziegel' | 'beton' | 'bruchstein' | 'unklar';
+
+const CATEGORY_CONFIG: Record<
+  DamageCategory,
+  {
+    label: string;
+    unit: string;
+    minQty: number;
+    maxQty: number;
+    defaultQty: number;
+    baseMinPerUnit: number;
+    baseMaxPerUnit: number;
+    recommendedMethod: string;
+    durationDays: string;
+  }
+> = {
+  horizontalsperre: {
+    label: 'Aufsteigende Feuchte (Horizontalsperre)',
+    unit: 'laufende Meter Wandlänge (lfm)',
+    minQty: 3,
+    maxQty: 60,
+    defaultQty: 12,
+    baseMinPerUnit: 115,
+    baseMaxPerUnit: 175,
+    recommendedMethod: 'Niederdruck-/gravimetrische Bohrlochinjektion (Silan-Siloxan / Paraffin-System nach WTA)',
+    durationDays: '1 bis 2 Arbeitstage',
+  },
+  kellerinnenabdichtung: {
+    label: 'Feuchte Kellerwand (Innenabdichtung & Sanierputz)',
+    unit: 'Quadratmeter Wandfläche (m²)',
+    minQty: 5,
+    maxQty: 120,
+    defaultQty: 20,
+    baseMinPerUnit: 95,
+    baseMaxPerUnit: 155,
+    recommendedMethod: 'Negativabdichtung (Dichtungsschlämme MDS) + mehrlagiges WTA-Sanierputzsystem inkl. Hohlkehle',
+    durationDays: '2 bis 4 Arbeitstage',
+  },
+  schimmel: {
+    label: 'Schimmelbefall & Wärmebrücken (Klimaplatte)',
+    unit: 'Quadratmeter Wandfläche (m²)',
+    minQty: 3,
+    maxQty: 80,
+    defaultQty: 12,
+    baseMinPerUnit: 75,
+    baseMaxPerUnit: 135,
+    recommendedMethod: 'Sporensichere Tiefendesinfektion + kapillaraktive Calciumsilikat-Klimaplatte zur Taupunktanhebung',
+    durationDays: '1 bis 2 Arbeitstage',
+  },
+  rissinjektion: {
+    label: 'Wasserführende Wand-/Bodenrisse (Harzinjektion)',
+    unit: 'laufende Meter Risslänge (lfm)',
+    minQty: 1,
+    maxQty: 30,
+    defaultQty: 5,
+    baseMinPerUnit: 130,
+    baseMaxPerUnit: 210,
+    recommendedMethod: 'Hochdruck-Verpressung über Bohrpacker mit elastischem 2K-Polyurethan- oder Epoxidharz',
+    durationDays: '1 Arbeitstag',
+  },
 };
 
-const SERVICES: Svc[] = [
-  {
-    slug: "horizontalsperre",
-    title: "Feuchte Wand",
-    Icon: Layers,
-    what: "Wandlänge",
-    unit: "m",
-    min: 2,
-    max: 80,
-    step: 1,
-    typical: 15,
-    perDay: 12,
-    includes: ["Bohrlochreihe, höchstens 20 cm Abstand", "Injektion mit Silan-Siloxan-Creme", "Bohrlöcher verschlossen", "Messprotokoll vorher und nachher"],
+const SEVERITY_MULTIPLIER: Record<SeverityLevel, { label: string; factor: number; hint: string }> = {
+  leicht: {
+    label: 'Leicht (erste Feuchteflecken / muffiger Geruch)',
+    factor: 0.9,
+    hint: 'Geringer Vorbereitungsaufwand am Altputz',
   },
-  {
-    slug: "kellerinnenabdichtung",
-    title: "Keller abdichten",
-    Icon: ShieldCheck,
-    what: "Wandfläche",
-    unit: "m²",
-    min: 5,
-    max: 250,
-    step: 5,
-    typical: 40,
-    perDay: 14,
-    includes: ["Untergrund vorbereiten, Hohlkehle", "Dichtschlämme in zwei Lagen", "Sanierputz nach WTA", "Abnahme mit Messprotokoll"],
+  mittel: {
+    label: 'Deutlich (Salzausblühungen / abblätternder Putz)',
+    factor: 1.0,
+    hint: 'Inkl. Altputzabschlag im Schadensbereich & Salzbehandlung',
   },
-  {
-    slug: "kellersanierung",
-    title: "Kellersanierung",
-    Icon: Home,
-    what: "Kellerfläche",
-    unit: "m²",
-    min: 10,
-    max: 300,
-    step: 5,
-    typical: 60,
-    perDay: 9,
-    includes: ["Ursache gemessen und benannt", "Abdichtung von innen", "Sanierputz und Oberflächen", "10 Jahre Garantie auf die Arbeit"],
+  stark: {
+    label: 'Stark (drückende Nässe / dicker Altbau-Bruchstein)',
+    factor: 1.22,
+    hint: 'Erhöhter Injektionsmittelbedarf & mehrlagiger Systemaufbau',
   },
-  {
-    slug: "schimmelbeseitigung",
-    title: "Schimmel",
-    Icon: SprayCan,
-    what: "befallene Fläche",
-    unit: "m²",
-    min: 1,
-    max: 100,
-    step: 1,
-    typical: 8,
-    perDay: 14,
-    includes: ["Ursache: Kondensat oder Feuchte", "sporensichere Entfernung", "Calciumsilikat-Platte, wo nötig", "Lüftungs- und Heizempfehlung"],
-  },
-  {
-    slug: "rissverpressung",
-    title: "Riss",
-    Icon: Wrench,
-    what: "Risslänge",
-    unit: "m",
-    min: 1,
-    max: 50,
-    step: 1,
-    typical: 5,
-    perDay: 10,
-    includes: ["Packer gesetzt", "PU-Harz oder Epoxid verpresst", "Oberfläche verschlossen", "Dichtheit geprüft"],
-  },
-  {
-    slug: "dachabdichtung",
-    title: "Dach",
-    Icon: Umbrella,
-    what: "Dachfläche",
-    unit: "m²",
-    min: 10,
-    max: 500,
-    step: 10,
-    typical: 80,
-    perDay: 55,
-    includes: ["Altbelag geprüft oder entfernt", "Elastomerbitumen, verschweißt", "Anschlüsse und Abläufe", "Dichtheitskontrolle"],
-  },
-  {
-    slug: "balkon-terrasse",
-    title: "Balkon",
-    Icon: Sun,
-    what: "Fläche",
-    unit: "m²",
-    min: 2,
-    max: 150,
-    step: 1,
-    typical: 15,
-    perDay: 15,
-    includes: ["Untergrund vorbereitet", "Flüssigkunststoff mit Vlies", "Anschlüsse ohne Naht", "Nutzschicht nach Wunsch"],
-  },
-  {
-    slug: "sockelabdichtung",
-    title: "Sockel",
-    Icon: PanelBottom,
-    what: "Sockellänge",
-    unit: "m",
-    min: 5,
-    max: 150,
-    step: 5,
-    typical: 30,
-    perDay: 18,
-    includes: ["Sockel freigelegt und gereinigt", "Bitumen-Dickbeschichtung in zwei Lagen", "Spritzwasserschutz", "Übergang zum Putz"],
-  },
-  {
-    slug: "feuchtemessung",
-    title: "Nur Messung",
-    Icon: Gauge,
-    what: "Räume",
-    unit: "Räume",
-    min: 1,
-    max: 20,
-    step: 1,
-    typical: 3,
-    perDay: 8,
-    includes: ["Messung in fünf Höhen je Punkt", "CM-Messung, wo nötig", "Ursache benannt", "Protokoll für Sie"],
-  },
-];
+};
 
-const STATES = [
-  { id: "leicht", label: "Leicht", hint: "Flecken, muffiger Geruch", factor: 0.85 },
-  { id: "deutlich", label: "Deutlich", hint: "Putz bröckelt, Salzränder", factor: 1 },
-  { id: "stark", label: "Stark", hint: "Wasser steht oder läuft", factor: 1.3 },
-] as const;
-
-const LEVELS = ["Klein", "Überschaubar", "Mittel", "Groß", "Sehr groß"];
-
-function levelOf(ratio: number) {
-  if (ratio < 0.5) return 0;
-  if (ratio < 0.9) return 1;
-  if (ratio < 1.5) return 2;
-  if (ratio < 2.6) return 3;
-  return 4;
-}
-
-function daysText(days: number, slug: string) {
-  if (slug === "feuchtemessung") return days <= 1 ? "ein Termin, etwa zwei Stunden" : "ein bis zwei Termine";
-  if (days <= 1) return "etwa ein Arbeitstag";
-  if (days <= 2.5) return "etwa 2 bis 3 Arbeitstage";
-  if (days <= 5) return "etwa eine Arbeitswoche";
-  if (days <= 10) return "etwa 1 bis 2 Wochen";
-  return "mehrere Wochen, in Abschnitten";
-}
-
-const fmt = (n: number) => n.toLocaleString("de-DE");
+const MATERIAL_MULTIPLIER: Record<WallMaterial, { label: string; factor: number }> = {
+  ziegel: { label: 'Ziegelmauerwerk / Kalksandstein', factor: 1.0 },
+  beton: { label: 'Beton / Hohlblockstein', factor: 0.95 },
+  bruchstein: { label: 'Bruchstein / Naturstein (Altbau Wuppertal)', factor: 1.18 },
+  unklar: { label: 'Noch unklar (wird vor Ort gemessen)', factor: 1.05 },
+};
 
 export default function QuoteCalculator() {
-  const [slug, setSlug] = useState(SERVICES[0].slug);
-  const svc = SERVICES.find((s) => s.slug === slug) ?? SERVICES[0];
-  const [qty, setQty] = useState(svc.typical);
-  const [state, setState] = useState<(typeof STATES)[number]["id"]>("deutlich");
+  const [category, setCategory] = useState<DamageCategory>('horizontalsperre');
+  const [quantity, setQuantity] = useState<number>(12);
+  const [severity, setSeverity] = useState<SeverityLevel>('mittel');
+  const [material, setMaterial] = useState<WallMaterial>('ziegel');
+  const [plz, setPlz] = useState<string>('42103 Wuppertal');
+  const [quickPhone, setQuickPhone] = useState<string>('');
+  const [quickName, setQuickName] = useState<string>('');
+  const [sendingCloud, setSendingCloud] = useState(false);
+  const [cloudLeadId, setCloudLeadId] = useState<string>('');
 
-  const pick = (s: Svc) => {
-    setSlug(s.slug);
-    setQty(s.typical);
+  const config = CATEGORY_CONFIG[category];
+
+  const handleCategoryChange = (newCat: DamageCategory) => {
+    setCategory(newCat);
+    setQuantity(CATEGORY_CONFIG[newCat].defaultQty);
+    setCloudLeadId('');
   };
 
-  const result = useMemo(() => {
-    const f = STATES.find((x) => x.id === state)?.factor ?? 1;
-    const ratio = (qty / svc.typical) * f;
-    const level = levelOf(ratio);
-    const days = (qty / svc.perDay) * f;
-    return { level, days: daysText(days, svc.slug) };
-  }, [qty, state, svc]);
+  const estimate = useMemo(() => {
+    const sevFactor = SEVERITY_MULTIPLIER[severity].factor;
+    const matFactor = MATERIAL_MULTIPLIER[material].factor;
+    const rawMin = Math.round((quantity * config.baseMinPerUnit * sevFactor * matFactor) / 50) * 50;
+    const rawMax = Math.round((quantity * config.baseMaxPerUnit * sevFactor * matFactor) / 50) * 50;
+    const minTotal = Math.max(450, rawMin);
+    const maxTotal = Math.max(minTotal + 150, rawMax);
+    const taxCredit20 = Math.round(minTotal * 0.6 * 0.2);
+    return { minTotal, maxTotal, taxCredit20 };
+  }, [category, quantity, severity, material, config]);
 
-  const stateLabel = STATES.find((x) => x.id === state)?.label ?? "";
-  const summary = `${svc.title}: ${fmt(qty)} ${svc.unit} ${svc.what}, Schaden ${stateLabel.toLowerCase()}`;
-  const message = `Hallo Herr Mahmood, ich bitte um ein Festpreis-Angebot nach kostenloser Messung. Mein Vorhaben: ${summary}. Umfang laut Angebotsrechner: ${LEVELS[result.level]}.`;
-  const wa = `https://wa.me/${COMPANY_INFO.phoneTel.replace(/\D/g, "")}?text=${encodeURIComponent(message)}`;
-  const mail = `mailto:${COMPANY_INFO.email}?subject=${encodeURIComponent(`Angebot: ${svc.title}`)}&body=${encodeURIComponent(message)}`;
-  const fill = ((qty - svc.min) / (svc.max - svc.min)) * 100;
+  // Log anonymous diagnostic check to Google Sheets (`Strecken`) when parameters settle
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      logDiagnosticCalculation({
+        plz,
+        damageType: config.label,
+        area: quantity,
+        severity,
+      });
+    }, 2200);
+    return () => clearTimeout(timer);
+  }, [category, quantity, severity, plz, config.label]);
+
+  const whatsappSummary = encodeURIComponent(
+    `Hallo Herr Mahmood (${COMPANY.name}),\n\n` +
+      `ich habe den Online-Sanierungsrechner genutzt:\n` +
+      `• Maßnahme: ${config.label}\n` +
+      `• Umfang: ca. ${quantity} ${config.unit}\n` +
+      `• Mauerwerk: ${MATERIAL_MULTIPLIER[material].label}\n` +
+      `• Ausprägung: ${SEVERITY_MULTIPLIER[severity].label}\n` +
+      `• Objektort: ${plz}\n` +
+      `• Orientierungsrahmen: ${estimate.minTotal.toLocaleString('de-DE')} € – ${estimate.maxTotal.toLocaleString('de-DE')} €\n\n` +
+      `Ich bitte um eine kostenlose Vor-Ort-Feuchtemessung und ein verbindliches Festpreisangebot.`
+  );
+
+  const handleDirectCloudRequest = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!quickName.trim() || !quickPhone.trim()) return;
+    setSendingCloud(true);
+    try {
+      const res = await submitLeadToWorkspace({
+        name: quickName.trim(),
+        phone: quickPhone.trim(),
+        plzOrt: plz,
+        damageType: config.label,
+        severity,
+        areaOrLength: quantity,
+        message: `Kalkulator: ${quantity} ${config.unit}, Mauerwerk: ${MATERIAL_MULTIPLIER[material].label}, Richtwert: ${estimate.minTotal}–${estimate.maxTotal} €`,
+        source: 'Sanierungsrechner',
+      });
+      setCloudLeadId(res.id || 'A-1001');
+    } finally {
+      setSendingCloud(false);
+    }
+  };
 
   return (
-    <section id="rechner" className="quote sc-section pt-6" aria-label="Angebotsrechner">
-      <div className="sc-wrap">
-        <div className="quote__card">
-          <div className="quote__inputs">
-            <fieldset className="quote__step">
-              <legend className="quote__k">
-                <span>1</span> Was soll gemacht werden?
-              </legend>
-              <div className="quote__svcs">
-                {SERVICES.map((s) => (
-                  <button
-                    key={s.slug}
-                    type="button"
-                    className="quote__svc"
-                    aria-pressed={s.slug === slug}
-                    onClick={() => pick(s)}
-                  >
-                    <s.Icon aria-hidden="true" strokeWidth={1.7} />
-                    {s.title}
-                  </button>
-                ))}
-              </div>
-            </fieldset>
+    <section id="rechner" className="py-16 lg:py-24 bg-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-3xl mb-10">
+          <span className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-brand-700 bg-brand-100 px-3 py-1 rounded-full mb-3">
+            <Calculator className="w-3.5 h-3.5" />
+            Interaktiver Sanierungs- &amp; Kostenrechner 2026
+          </span>
+          <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-brand-950 tracking-tight mb-3">
+            Was kostet Ihre Kellerabdichtung oder Horizontalsperre?
+          </h2>
+          <p className="text-slate-600 text-base leading-relaxed">
+            Berechnen Sie in 30 Sekunden einen realistischen Orientierungsrahmen für Ihr Objekt in Wuppertal und Umgebung – inklusive empfohlenem WTA-Sanierungsverfahren und steuerlicher Förderung (§ 35a EStG Handwerkerbonus).
+          </p>
+        </div>
 
-            <div className="quote__step">
-              <div className="quote__row">
-                <label htmlFor="quote-qty" className="quote__k">
-                  <span>2</span> {svc.what}
+        <div className="grid lg:grid-cols-12 gap-8 items-start">
+          {/* Left: Controls */}
+          <div className="lg:col-span-7 bg-surface-50 rounded-2xl p-6 sm:p-8 border border-slate-200/90 space-y-7">
+            {/* Step 1: Category */}
+            <div>
+              <label className="block text-sm font-bold text-brand-950 mb-3">
+                1. Welches Schadensbild liegt vor?
+              </label>
+              <div className="grid sm:grid-cols-2 gap-3">
+                {(Object.keys(CATEGORY_CONFIG) as DamageCategory[]).map((key) => {
+                  const active = category === key;
+                  return (
+                    <button
+                      key={key}
+                      type="button"
+                      onClick={() => handleCategoryChange(key)}
+                      className={`text-left p-4 rounded-xl border transition-all ${
+                        active
+                          ? 'bg-brand-950 text-white border-brand-950 shadow-sm'
+                          : 'bg-white text-slate-800 border-slate-200 hover:border-brand-500'
+                      }`}
+                    >
+                      <div className="text-sm font-bold leading-snug">{CATEGORY_CONFIG[key].label}</div>
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+
+            {/* Step 2: Quantity Slider */}
+            <div>
+              <div className="flex justify-between items-baseline mb-2">
+                <label htmlFor="calc-qty" className="text-sm font-bold text-brand-950">
+                  2. Geschätzter Umfang ({config.unit})
                 </label>
-                <output htmlFor="quote-qty" className="quote__qty">
-                  {fmt(qty)} {svc.unit}
-                </output>
+                <span className="text-xl font-extrabold text-brand-700 bg-brand-100 px-3 py-1 rounded-lg">
+                  {quantity} {category === 'horizontalsperre' || category === 'rissinjektion' ? 'lfm' : 'm²'}
+                </span>
               </div>
               <input
-                id="quote-qty"
+                id="calc-qty"
                 type="range"
-                min={svc.min}
-                max={svc.max}
-                step={svc.step}
-                value={qty}
-                onChange={(e) => setQty(Number(e.target.value))}
-                className="quote__range"
-                style={{ "--fill": `${fill}%` } as CSSProperties}
-                aria-valuetext={`${fmt(qty)} ${svc.unit}`}
+                min={config.minQty}
+                max={config.maxQty}
+                step={1}
+                value={quantity}
+                onChange={(e) => setQuantity(Number(e.target.value))}
+                className="w-full h-2.5 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-brand-700"
               />
-              <div className="quote__scale" aria-hidden="true">
-                <span>
-                  {fmt(svc.min)} {svc.unit}
-                </span>
-                <span>
-                  {fmt(svc.max)} {svc.unit}
-                </span>
+              <div className="flex justify-between text-xs text-slate-500 mt-1">
+                <span>Min: {config.minQty}</span>
+                <span>Mittelwert: {config.defaultQty}</span>
+                <span>Max: {config.maxQty}</span>
               </div>
             </div>
 
-            <fieldset className="quote__step">
-              <legend className="quote__k">
-                <span>3</span> Wie stark ist der Schaden?
-              </legend>
-              <div className="quote__states">
-                {STATES.map((s) => (
-                  <button key={s.id} type="button" className="quote__state" aria-pressed={s.id === state} onClick={() => setState(s.id)}>
-                    <strong>{s.label}</strong>
-                    <span>{s.hint}</span>
-                  </button>
-                ))}
+            {/* Step 3: Severity */}
+            <div>
+              <label className="block text-sm font-bold text-brand-950 mb-3">
+                3. Grad der Durchfeuchtung / Schädigung
+              </label>
+              <div className="grid sm:grid-cols-3 gap-2.5">
+                {(Object.keys(SEVERITY_MULTIPLIER) as SeverityLevel[]).map((lvl) => {
+                  const active = severity === lvl;
+                  return (
+                    <button
+                      key={lvl}
+                      type="button"
+                      onClick={() => setSeverity(lvl)}
+                      className={`text-left p-3.5 rounded-xl border text-xs transition-all ${
+                        active
+                          ? 'bg-brand-100/80 border-brand-600 text-brand-950 font-bold'
+                          : 'bg-white border-slate-200 text-slate-700 hover:border-slate-300'
+                      }`}
+                    >
+                      <div className="font-bold mb-1">{SEVERITY_MULTIPLIER[lvl].label}</div>
+                      <div className="text-[11px] text-slate-500">{SEVERITY_MULTIPLIER[lvl].hint}</div>
+                    </button>
+                  );
+                })}
               </div>
-            </fieldset>
+            </div>
+
+            {/* Step 4: Wall Material & PLZ */}
+            <div className="grid sm:grid-cols-2 gap-4">
+              <div>
+                <label htmlFor="calc-material" className="block text-sm font-bold text-brand-950 mb-2">
+                  4. Mauerwerk / Bausubstanz
+                </label>
+                <select
+                  id="calc-material"
+                  value={material}
+                  onChange={(e) => setMaterial(e.target.value as WallMaterial)}
+                  className="w-full px-4 py-3 rounded-xl border border-slate-300 bg-white text-slate-900 text-sm font-medium focus:border-brand-600 outline-none"
+                >
+                  {(Object.keys(MATERIAL_MULTIPLIER) as WallMaterial[]).map((mat) => (
+                    <option key={mat} value={mat}>
+                      {MATERIAL_MULTIPLIER[mat].label}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div>
+                <label htmlFor="calc-plz" className="block text-sm font-bold text-brand-950 mb-2">
+                  5. PLZ / Ort des Gebäudes
+                </label>
+                <input
+                  id="calc-plz"
+                  type="text"
+                  value={plz}
+                  onChange={(e) => setPlz(e.target.value)}
+                  placeholder="z. B. 42103 Wuppertal"
+                  className="w-full px-4 py-3 rounded-xl border border-slate-300 bg-white text-slate-900 text-sm font-medium focus:border-brand-600 outline-none"
+                />
+              </div>
+            </div>
           </div>
 
-          <div className="quote__out" aria-live="polite">
-            <p className="quote__k quote__k--plain">Ihr Vorhaben</p>
-            <p className="quote__big">
-              {fmt(qty)} {svc.unit}
-              <span>
-                {svc.what} · {svc.title}
+          {/* Right: Result Card */}
+          <div className="lg:col-span-5 bg-brand-950 text-white rounded-2xl p-6 sm:p-8 shadow-elevated space-y-6">
+            <div>
+              <span className="text-xs font-bold uppercase tracking-wider text-brand-300">
+                Unverbindlicher Orientierungsrahmen (inkl. MwSt.)
               </span>
-            </p>
-
-            <p className="quote__k quote__k--plain">Umfang des Auftrags</p>
-            <div className="quote__meter" role="img" aria-label={`Umfang: ${LEVELS[result.level]}, Stufe ${result.level + 1} von 5`}>
-              {LEVELS.map((l, i) => (
-                <span key={l} className={i <= result.level ? "is-on" : ""} style={{ height: `${36 + i * 16}%` }} />
-              ))}
+              <div className="text-3xl sm:text-4xl font-extrabold text-white mt-2 tracking-tight">
+                {estimate.minTotal.toLocaleString('de-DE')} € – {estimate.maxTotal.toLocaleString('de-DE')} €
+              </div>
+              <p className="text-xs text-slate-300 mt-1">
+                Abzgl. bis zu <strong>ca. {estimate.taxCredit20.toLocaleString('de-DE')} € Steuerbonus</strong> nach § 35a EStG (20 % auf Arbeits- &amp; Fahrtkosten).
+              </p>
             </div>
-            <p className="quote__level">
-              {LEVELS[result.level]}
-              <span>Arbeit vor Ort: {result.days}</span>
-            </p>
 
-            <p className="quote__k quote__k--plain">Das steht im Festpreis-Angebot</p>
-            <ul className="quote__list">
-              {svc.includes.map((x) => (
-                <li key={x}>
-                  <CheckCircle2 aria-hidden="true" />
-                  {x}
-                </li>
-              ))}
-            </ul>
-
-            <ol className="quote__how">
-              <li>
-                <strong>Kostenlose Messung</strong> vor Ort
-              </li>
-              <li>
-                <strong>Festpreis</strong> schriftlich
-              </li>
-              <li>
-                <strong>Ausführung</strong> mit Garantie
-              </li>
-            </ol>
-
-            <div className="quote__cta">
-              <a href={wa} target="_blank" rel="noopener noreferrer" className="quote__btn quote__btn--solid">
-                <MessageCircle aria-hidden="true" />
-                Angebot per WhatsApp anfragen
-              </a>
-              <div className="quote__cta-row">
-                <a href={mail} className="quote__btn">
-                  <Mail aria-hidden="true" />
-                  Per E-Mail
-                </a>
-                <a href={`tel:${COMPANY_INFO.phoneTel}`} className="quote__btn">
-                  <Phone aria-hidden="true" />
-                  Anrufen
-                </a>
+            <div className="bg-brand-900/70 rounded-xl p-4 border border-brand-800 space-y-3 text-sm">
+              <div>
+                <div className="text-xs uppercase tracking-wider text-brand-300 font-semibold">
+                  Empfohlenes Sanierungsverfahren
+                </div>
+                <div className="font-semibold text-white mt-0.5">{config.recommendedMethod}</div>
+              </div>
+              <div className="flex justify-between pt-2 border-t border-brand-800/80 text-xs">
+                <span className="text-slate-300">Geschätzte Ausführungsdauer:</span>
+                <span className="font-bold text-brand-300">{config.durationDays}</span>
+              </div>
+              <div className="flex justify-between text-xs">
+                <span className="text-slate-300">Vor-Ort-Feuchtemessung:</span>
+                <span className="font-bold text-brand-300">0,00 € (Kostenlos)</span>
               </div>
             </div>
-            <p className="quote__note">
-              Je größer die Fläche, desto größer der Auftrag. Einen Preis nennen wir erst nach der kostenlosen Messung,
-              dann schriftlich und verbindlich. Ihre Angaben gehen nur mit, wenn Sie die Anfrage selbst absenden.
-            </p>
+
+            <ul className="space-y-2 text-xs text-slate-200">
+              <li className="flex items-center gap-2">
+                <CheckCircle2 className="w-4 h-4 text-brand-400 shrink-0" />
+                Inklusive kapazitiver Tiefenfeuchtemessung &amp; Salzanalyse vorab
+              </li>
+              <li className="flex items-center gap-2">
+                <CheckCircle2 className="w-4 h-4 text-brand-400 shrink-0" />
+                Ohne Aufbaggern des Gartens – saubere Ausführung von innen
+              </li>
+              <li className="flex items-center gap-2">
+                <ShieldCheck className="w-4 h-4 text-accent-400 shrink-0" />
+                10 Jahre sos-abdichtung Ausführungsgarantie + 25 Jahre Produktgarantie
+              </li>
+            </ul>
+
+            {/* Direct 1-Click Cloud Inquiry Box */}
+            {cloudLeadId ? (
+              <div className="bg-brand-900/90 border border-brand-500 rounded-xl p-4 text-xs space-y-1.5">
+                <div className="font-bold text-brand-300 text-sm">
+                  ✓ Kalkulation gespeichert (Nr. {cloudLeadId})
+                </div>
+                <p className="text-slate-200">
+                  Herr Shahzad Mahmood hat Ihre Berechnung erhalten und meldet sich kurzfristig telefonisch bei Ihnen.
+                </p>
+              </div>
+            ) : (
+              <form onSubmit={handleDirectCloudRequest} className="bg-brand-900/60 border border-brand-800 rounded-xl p-3.5 space-y-2.5">
+                <div className="text-xs font-bold text-brand-300">
+                  ⚡ Berechnung direkt für kostenlose Messung vormerken:
+                </div>
+                <div className="grid grid-cols-2 gap-2">
+                  <input
+                    type="text"
+                    required
+                    value={quickName}
+                    onChange={(e) => setQuickName(e.target.value)}
+                    placeholder="Ihr Name *"
+                    aria-label="Ihr Name"
+                    className="px-3 py-2 rounded-lg bg-brand-950/90 border border-brand-700 text-white placeholder-slate-400 text-xs outline-none focus:border-brand-400"
+                  />
+                  <input
+                    type="tel"
+                    required
+                    value={quickPhone}
+                    onChange={(e) => setQuickPhone(e.target.value)}
+                    placeholder="Telefon / Mobil *"
+                    aria-label="Telefonnummer"
+                    className="px-3 py-2 rounded-lg bg-brand-950/90 border border-brand-700 text-white placeholder-slate-400 text-xs outline-none focus:border-brand-400"
+                  />
+                </div>
+                <button
+                  type="submit"
+                  disabled={sendingCloud}
+                  className="w-full inline-flex items-center justify-center gap-2 bg-brand-600 hover:bg-brand-500 text-white font-bold px-4 py-2.5 rounded-lg text-xs transition-colors"
+                >
+                  {sendingCloud ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <Send className="w-3.5 h-3.5" />}
+                  Richtpreis &amp; kostenlose Messung anfordern
+                </button>
+              </form>
+            )}
+
+            <div className="space-y-3 pt-1">
+              <a
+                href={`https://wa.me/${COMPANY.whatsappNumber}?text=${whatsappSummary}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full inline-flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#1ebe5d] text-white font-bold px-5 py-3.5 rounded-xl transition-colors text-sm shadow-sm"
+              >
+                <MessageSquare className="w-4 h-4" />
+                Ergebnis per WhatsApp senden &amp; Messung buchen
+              </a>
+
+              <a
+                href="/kontakt/#kontakt"
+                className="w-full inline-flex items-center justify-center gap-2 bg-white hover:bg-slate-100 text-brand-950 font-bold px-5 py-3.5 rounded-xl transition-colors text-sm"
+              >
+                Festpreis-Besichtigung im Formular anfragen
+                <ArrowRight className="w-4 h-4" />
+              </a>
+
+              <a
+                href={`tel:${COMPANY.phoneHref}`}
+                className="w-full inline-flex items-center justify-center gap-2 text-brand-200 hover:text-white font-semibold py-2 text-xs transition-colors"
+              >
+                <Phone className="w-3.5 h-3.5" />
+                Direkt anrufen: {COMPANY.phoneDisplay}
+              </a>
+            </div>
+
+            <div className="flex items-start gap-2 text-[11px] text-slate-400 pt-2 border-t border-brand-900">
+              <Info className="w-4 h-4 shrink-0 mt-0.5 text-brand-400" />
+              <span>
+                Hinweis: Jeder Feuchteschaden ist individuell. Das verbindliche Festpreisangebot erhalten Sie nach unserer kostenlosen elektronischen Feuchtemessung vor Ort.
+              </span>
+            </div>
           </div>
         </div>
       </div>

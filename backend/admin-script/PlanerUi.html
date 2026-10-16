@@ -1,0 +1,404 @@
+<style>
+.pl-wrap{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,1fr);gap:28px;align-items:start}
+@media (max-width:960px){.pl-wrap{grid-template-columns:minmax(0,1fr)}}
+.pl-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.pl-grid .wide{grid-column:1 / -1}
+@media (max-width:640px){.pl-grid{grid-template-columns:minmax(0,1fr)}}
+.pl-tabs{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0 14px}
+.pl-items{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:8px;max-height:380px;overflow-y:auto;padding:4px 2px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.pl-it{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 10px;background:#fff;border:1px solid var(--line)}
+.pl-it.on{border-color:var(--fill);background:var(--tint)}
+.pl-it-name{font-size:13.5px;font-weight:600;line-height:1.25;min-width:0}
+.pl-it-name small{display:block;font-weight:500;font-size:11.5px;color:var(--ink2)}
+.pl-qty{display:inline-flex;align-items:center;gap:4px;flex-shrink:0}
+.pl-qty button{width:30px;height:30px;border:1px solid var(--line);background:var(--bg);font-weight:700;cursor:pointer;line-height:1}
+.pl-qty button:hover{background:var(--ink);color:var(--on)}
+.pl-qty b{min-width:22px;text-align:center;font-variant-numeric:tabular-nums;font-size:14px}
+.pl-svcs{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+@media (max-width:640px){.pl-svcs{grid-template-columns:minmax(0,1fr)}}
+.pl-svc{display:flex;align-items:flex-start;gap:8px;padding:9px 10px;background:#fff;border:1px solid var(--line);cursor:pointer;font-size:13.5px}
+.pl-svc input{width:17px;height:17px;margin-top:2px;accent-color:var(--ink)}
+.pl-svc small{display:block;color:var(--ink2);font-size:11.5px}
+.pl-summary{position:sticky;top:64px}
+.pl-kpis{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:2px solid var(--ink);border-bottom:1px solid var(--line);margin-bottom:14px}
+.pl-kpis div{padding:10px 8px 12px 0}
+.pl-kpis div + div{padding-left:10px;border-left:1px solid var(--line)}
+.pl-kpis b{display:block;font-size:22px;line-height:1.1;font-variant-numeric:tabular-nums}
+.pl-kpis span{font-size:11.5px;color:var(--ink2)}
+.pl-lines{width:100%;border-collapse:collapse;font-size:13.5px}
+.pl-lines th{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--ink2);text-align:left;padding:6px 6px 6px 0;border-bottom:2px solid var(--ink)}
+.pl-lines td{padding:6px 6px 6px 0;border-bottom:1px solid var(--line)}
+.pl-total{display:flex;justify-content:space-between;align-items:baseline;padding:12px 0;border-top:2px solid var(--ink);border-bottom:2px solid var(--ink);margin-top:8px}
+.pl-total b{font-size:28px;font-variant-numeric:tabular-nums;color:var(--fill)}
+</style>
+<script>
+(function () {
+  'use strict';
+  var U = window.SU;
+
+  var CATALOG = [
+    // Horizontalsperre & Wand (lfm / m²)
+    {id: 'hs_injektion_24', cat: 'Horizontalsperre', name: 'WTA-Silan-Injektion (Wand bis 24 cm)', vol: 1.0, kg: 3, ass: true},
+    {id: 'hs_injektion_36', cat: 'Horizontalsperre', name: 'WTA-Silan-Injektion (Wand 36–48 cm)', vol: 1.4, kg: 5, ass: true},
+    {id: 'hs_injektion_bruch', cat: 'Horizontalsperre', name: 'Niederdruck-Injektion Bruchsteinmauerwerk', vol: 1.8, kg: 8, ass: true},
+    {id: 'hs_edelstahl', cat: 'Horizontalsperre', name: 'Mechanische Horizontalsperre (Chromstahl)', vol: 1.6, kg: 6, ass: true},
+    // Kellerabdichtung (m² / lfm)
+    {id: 'keller_mds', cat: 'Kellerwand', name: 'Kellerinnenabdichtung 2K-MDS (pro m²)', vol: 1.0, kg: 6, ass: true},
+    {id: 'keller_hohlkehle', cat: 'Kellerwand', name: 'Druckwasserdichte Hohlkehle (pro lfm)', vol: 0.6, kg: 4, ass: true},
+    {id: 'keller_altputz', cat: 'Kellerwand', name: 'Altputz abschlagen & Fugen auskratzen (m²)', vol: 0.5, kg: 25, ass: true},
+    {id: 'keller_sanierputz', cat: 'Kellerwand', name: 'WTA-Sanierputzsystem 2-lagig (pro m²)', vol: 0.9, kg: 18, ass: true},
+    {id: 'keller_schleier', cat: 'Kellerwand', name: 'Gelschleierinjektion / Flächeninjektion (m²)', vol: 2.2, kg: 12, ass: true},
+    // Schimmel & Innendämmung
+    {id: 'schimmel_desinfekt', cat: 'Schimmel & Klima', name: 'Sporensichere Schimmelbeseitigung H2O2 (m²)', vol: 0.5, kg: 1, ass: false},
+    {id: 'schimmel_klimaplatte', cat: 'Schimmel & Klima', name: 'Calciumsilikat-Klimaplatte 25–50 mm (m²)', vol: 1.2, kg: 8, ass: true},
+    {id: 'schimmel_silikatfarbe', cat: 'Schimmel & Klima', name: 'Hochalkalischer Silikatanstrich (m²)', vol: 0.3, kg: 1, ass: false},
+    {id: 'schimmel_taupunkt', cat: 'Schimmel & Klima', name: 'Taupunkt-Lüftungssteuerung montieren', vol: 3.5, kg: 4, ass: true},
+    // Rissverpressung & Bautenschutz
+    {id: 'riss_pu', cat: 'Riss & Spezial', name: 'Hochdruck-Rissverpressung PU-Harz (pro lfm)', vol: 1.5, kg: 2, ass: true},
+    {id: 'riss_epoxid', cat: 'Riss & Spezial', name: 'Kraftschlüssige Epoxidharz-Injektion (lfm)', vol: 1.6, kg: 2, ass: true},
+    {id: 'spez_pumpensumpf', cat: 'Riss & Spezial', name: 'Pumpensumpf / Rückstausicherung abdichten', vol: 3.0, kg: 15, ass: true},
+    {id: 'spez_bautrockner', cat: 'Riss & Spezial', name: 'Kondensationstrockner Aufstellung (Stück)', vol: 1.0, kg: 28, ass: false},
+    {id: 'spez_salzanalyse', cat: 'Riss & Spezial', name: 'CM-Feuchtemessung & Laborsalzanalyse', vol: 1.2, kg: 1, ass: false}
+  ];
+  var CATS = ['Alle', 'Horizontalsperre', 'Kellerwand', 'Schimmel & Klima', 'Riss & Spezial'];
+
+  function defaultState() {
+    return {
+      leadId: '',
+      name: '', phone: '', email: '', payer: 'Eigentümer (Privat)', date: '', notes: '',
+      serviceType: 'Kellerabdichtung',
+      fromAddress: '', toAddress: 'Kellerwand / Sockelbereich', km: 0,
+      fromFloor: 0, toFloor: 0, fromElev: true, toElev: true,
+      fromWalk: 10, toWalk: 10,
+      hvzFrom: true, hvzTo: false,
+      boxes: 0, packService: false, disCount: 0, asmCount: 0, kitchenM: 0, disposalM3: 0,
+      cat: 'Alle', search: '',
+      counts: {}, customItems: []
+    };
+  }
+  var P = defaultState();
+
+  function calc() {
+    var itemVol = 0, itemKg = 0, itemCount = 0;
+    CATALOG.forEach(function (it) {
+      var n = Number(P.counts[it.id]) || 0;
+      if (n > 0) { itemVol += n * it.vol; itemKg += n * it.kg; itemCount += n; }
+    });
+    P.customItems.forEach(function (c) {
+      var n = Number(c.qty) || 0, v = Number(c.vol) || 1.0;
+      if (n > 0 && c.name) { itemVol += n * v; itemKg += n * v * 8; itemCount += n; }
+    });
+
+    var vol = Math.round((itemVol + (Number(P.boxes) || 0)) * 10) / 10;
+    var effectiveArea = Math.max(vol, 6);
+    var crew = effectiveArea <= 12 ? 1 : (effectiveArea <= 35 ? 2 : 3);
+    var hours = Math.max(3, Math.round((2 + effectiveArea * 0.45 + (Number(P.disCount) || 0) * 0.5 + (Number(P.asmCount) || 0) * 0.5) * 2) / 2);
+    var vehicle = P.serviceType === 'Horizontalsperre' ? 'WTA-Silan-Injektionsanlage' :
+                  P.serviceType === 'Schimmelbeseitigung' ? 'Sporensanierung & Klimaplatte' :
+                  P.serviceType === 'Rissinjektion' ? '2K-Hochdruck-Injektionspumpe' : '2K-Dichtschlämme (MDS) & WTA-Sanierputz';
+
+    var lines = [];
+    var push = function (pos, basis, qty, unit, rate) {
+      qty = Math.round(qty * 100) / 100;
+      rate = Math.round(rate * 100) / 100;
+      if (qty > 0 && rate > 0) lines.push([pos, basis, qty, unit, rate]);
+    };
+
+    push('Feuchte- & Salzanalyse / Baustelleneinrichtung', 'CM-Messung, Schutzfolie & Gerätevorhaltung', 1, 'Pausch.', P.hvzFrom ? 149 : 95);
+
+    CATALOG.forEach(function (it) {
+      var n = Number(P.counts[it.id]) || 0;
+      if (n > 0) {
+        var unit = it.id.indexOf('hs_') === 0 || it.id.indexOf('riss_') === 0 || it.id === 'keller_hohlkehle' ? 'lfm' : 'm²';
+        var rate = it.id.indexOf('hs_') === 0 ? Math.round(135 * it.vol) :
+                   it.id.indexOf('riss_') === 0 ? 185 :
+                   it.id === 'keller_mds' ? 120 :
+                   it.id === 'keller_sanierputz' ? 85 :
+                   it.id === 'keller_altputz' ? 42 :
+                   it.id === 'schimmel_klimaplatte' ? 125 :
+                   it.id === 'schimmel_desinfekt' ? 55 : Math.round(95 * it.vol);
+        push(it.name, it.cat, n, unit, rate);
+      }
+    });
+
+    P.customItems.forEach(function (c) {
+      if ((Number(c.qty) || 0) > 0 && c.name) {
+        push(c.name, 'Sonderposition', Number(c.qty), 'm²/lfm', Math.round((Number(c.vol) || 1) * 95));
+      }
+    });
+
+    if (lines.length <= 1 && effectiveArea > 0) {
+      var defaultRate = P.serviceType === 'Schimmelbeseitigung' ? 65 : 125;
+      push(P.serviceType + ' (WTA-Fachausführung)', 'Aufmaß ca. ' + effectiveArea + ' m²/lfm', effectiveArea, 'm²/lfm', defaultRate);
+    }
+
+    if (Number(P.disposalM3) > 0) push('Bauschutt- & Altputzentsorgung', P.disposalM3 + ' m³ inkl. Deponiegebühr', Number(P.disposalM3), 'm³', 65);
+    if (Number(P.km) > 25) push('Anfahrtspauschale NRW (> 25 km)', P.km + ' km ab Wuppertal/Essen', Number(P.km) - 25, 'km', 1.4);
+
+    var sum = lines.reduce(function (a, l) { return a + l[2] * l[4]; }, 0);
+    var minPrice = 290;
+    var total = Math.max(minPrice, Math.round(sum / 10) * 10);
+
+    return {
+      vol: vol, volMin: Math.round(effectiveArea * 0.9 * 10) / 10, volMax: Math.round(effectiveArea * 1.1 * 10) / 10,
+      kg: Math.round(itemKg), itemCount: itemCount,
+      crew: crew, hours: hours, vehicle: vehicle,
+      lines: lines, total: total, minPrice: minPrice
+    };
+  }
+
+  function openPlaner(queryId) {
+    U.setNav('planner');
+    if (queryId && P.leadId !== queryId) {
+      U.app.innerHTML = '<p class="loading">Anfrage ' + U.esc(queryId) + ' wird in den Aufmaß-Planer geladen …</p>';
+      U.run('api_lead', queryId).then(function (d) {
+        loadFromLead(d);
+        draw();
+      }).catch(U.fail);
+      return;
+    }
+    draw();
+  }
+
+  function loadFromLead(d) {
+    var l = d.lead || {};
+    P = defaultState();
+    P.leadId = l.id || '';
+    P.name = l.name || '';
+    P.phone = l.phone || '';
+    P.email = l.email || '';
+    P.payer = l.payer || 'Eigentümer (Privat)';
+    P.date = /^\d{4}-\d{2}-\d{2}$/.test(l.date || '') ? l.date : '';
+    P.notes = l.message || l.notes || '';
+    P.serviceType = String(l.service || 'Kellerabdichtung').replace(/ \(.*\)$/, '') || 'Kellerabdichtung';
+    P.fromAddress = l.from || '';
+    P.toAddress = l.to || 'Kellerwand / Sockelbereich';
+    P.km = Number(l.kmMaps || l.kmFamily) || 0;
+    (d.items || []).forEach(function (it) {
+      var found = CATALOG.filter(function (c) { return c.name.toLowerCase() === String(it.name || '').toLowerCase(); })[0];
+      if (found) P.counts[found.id] = (P.counts[found.id] || 0) + (Number(it.n) || 1);
+      else if (it.name) P.customItems.push({name: it.name, qty: Number(it.n) || 1, vol: Number(it.vol) || 1.0});
+    });
+  }
+
+  function draw() {
+    var c = calc();
+    var filtered = CATALOG.filter(function (it) {
+      if (P.cat !== 'Alle' && it.cat !== P.cat) return false;
+      if (P.search && it.name.toLowerCase().indexOf(P.search.toLowerCase()) < 0) return false;
+      return true;
+    });
+
+    U.app.innerHTML = '<span class="kicker">Aufmaß- &amp; Sanierungsplaner · Vor-Ort-Kalkulation</span>' +
+      '<div class="h"><h1>' + (P.leadId ? 'Anfrage ' + U.esc(P.leadId) + ' im Aufmaß-Planer' : 'Neues Aufmaß / Vor-Ort-Angebot kalkulieren') + '</h1>' +
+      '<div class="actions">' +
+        (P.leadId ? '<a class="btn small" href="#/a/' + encodeURIComponent(P.leadId) + '">← Zur Anfrage ' + U.esc(P.leadId) + '</a>' : '') +
+        '<button class="btn small" type="button" id="pl-reset">Neu / Zurücksetzen</button>' +
+      '</div></div>' +
+
+      '<div class="pl-wrap"><div>' +
+        '<div class="card"><h2>1. Kunde &amp; Objektadresse</h2><div class="pl-grid">' +
+          inp('Kundenname / Hausverwaltung *', 'pl-name', P.name, 'z. B. Familie Schneider / WEG Elberfeld') +
+          inp('Telefon / WhatsApp', 'pl-phone', P.phone, 'z. B. 0172 2064177') +
+          inp('E-Mail', 'pl-email', P.email, 'kunde@beispiel.de', 'email') +
+          sel('Hauptgewerk', 'pl-svc', P.serviceType, ['Kellerabdichtung', 'Horizontalsperre', 'Feuchte Wände', 'Schimmelbeseitigung', 'Rissinjektion', 'Balkon / Terrasse']) +
+          inp('Wunschtermin Ausführung', 'pl-date', P.date, '', 'date') +
+          sel('Auftraggeber / Abrechnung', 'pl-payer', P.payer, ['Eigentümer (Privat)', 'Hausverwaltung / WEG', 'Gewerbe / Bauträger', 'Versicherungsschaden']) +
+          inp('Objektadresse (Straße, PLZ Ort)', 'pl-from', P.fromAddress, 'z. B. Friedrich-Ebert-Str. 40, 42103 Wuppertal') +
+          inp('Betroffenes Bauteil / Raum', 'pl-to', P.toAddress, 'z. B. Keller Außenwand Nord + Waschküche') +
+          inp('Anfahrt (km ab Wuppertal/Essen)', 'pl-km', P.km, '12', 'number') +
+          inp('Freie Fläche / Länge (m² oder lfm)', 'pl-boxes', P.boxes, '0', 'number') +
+        '</div></div>' +
+
+        '<div class="card"><h2>2. Sanierungsbausteine &amp; Aufmaß (' + c.itemCount + ' Einheiten · ' + c.vol + ' Faktor)</h2>' +
+          '<div class="pl-tabs">' + CATS.map(function (cat) {
+            return '<button class="chip" type="button" data-cat="' + U.esc(cat) + '" aria-pressed="' + (P.cat === cat) + '">' + U.esc(cat) + '</button>';
+          }).join('') +
+          '<input class="input" id="pl-q" type="search" placeholder="Maßnahme suchen (z. B. Horizontalsperre, Sanierputz, Klimaplatte) …" value="' + U.esc(P.search) + '" style="flex:1 1 180px;min-height:36px;padding:6px 10px"></div>' +
+          '<div class="pl-items" id="pl-catalog">' + filtered.map(itemCardHtml).join('') + '</div>' +
+          '<div style="margin-top:12px;display:flex;gap:8px;flex-wrap:wrap;align-items:end">' +
+            '<div style="flex:2 1 180px"><label class="muted" style="display:block;font-size:11.5px">Eigene Aufmaß-Position</label><input class="input" id="pl-cname" placeholder="z. B. Sockelabdichtung Gartenmauer" style="min-height:36px"></div>' +
+            '<div style="width:90px"><label class="muted" style="display:block;font-size:11.5px">Menge (m²/lfm)</label><input class="input" id="pl-cqty" type="number" value="5" min="1" style="min-height:36px"></div>' +
+            '<div style="width:90px"><label class="muted" style="display:block;font-size:11.5px">Faktor</label><input class="input" id="pl-cvol" type="number" step="0.1" value="1.0" style="min-height:36px"></div>' +
+            '<button class="btn small" type="button" id="pl-cadd" style="min-height:36px">+ Hinzufügen</button>' +
+          '</div>' +
+          (P.customItems.length ? '<div style="margin-top:10px">' + P.customItems.map(function (ci, idx) {
+            return '<span class="chip" style="margin:2px">' + U.esc(ci.qty + '× ' + ci.name + ' (' + ci.vol + ')') + ' <button type="button" data-cdel="' + idx + '" style="border:0;background:transparent;cursor:pointer;font-weight:700">×</button></span>';
+          }).join('') + '</div>' : '') +
+        '</div>' +
+
+        '<div class="card"><h2>3. Baustellenzulagen &amp; Entsorgung</h2>' +
+          '<div class="pl-svcs">' +
+            chk('pl-hvz-from', P.hvzFrom, 'CM-Feuchtemessung &amp; Staubschutzfolie', 'Inkl. kapazitiver Tiefenmessung &amp; Schutzvlies (149 €)') +
+            numRow('pl-disposal', P.disposalM3, 'Altputz- &amp; Bauschuttentsorgung (m³)', '65 € je m³ inkl. Deponie') +
+          '</div>' +
+          '<div class="field" style="margin-top:12px"><label for="pl-notes">Messwerte &amp; Vor-Ort-Befund</label>' +
+            '<textarea class="input" id="pl-notes" placeholder="z. B. Kellerwand West 125 Digits, Ausblühungen bis 90 cm Höhe, Außenwand nicht zugänglich">' + U.esc(P.notes) + '</textarea></div>' +
+        '</div>' +
+      '</div>' +
+
+      '<aside class="side pl-summary"><div class="card">' +
+        '<h2>Live-Kalkulation</h2>' +
+        '<div class="pl-kpis">' +
+          '<div><b id="pk-vol">' + c.volMin + '–' + c.volMax + '</b><span>Umfang (m²/lfm)</span></div>' +
+          '<div><b id="pk-veh">' + U.esc(c.vehicle) + '</b><span id="pk-kg">ca. ' + c.kg + ' kg Material</span></div>' +
+          '<div><b id="pk-crew">' + c.crew + ' Techniker · ' + c.hours + ' h</b><span>Richtzeit vor Ort</span></div>' +
+        '</div>' +
+        '<table class="pl-lines"><thead><tr><th>Position</th><th class="num">Menge</th><th class="num">Betrag</th></tr></thead>' +
+          '<tbody id="pk-lines">' + linesHtml(c.lines) + '</tbody></table>' +
+        '<div class="pl-total"><span>Richtpreis (inkl. § 35a)</span><b id="pk-total">' + U.eur(c.total) + '</b></div>' +
+        '<p class="muted" style="margin:8px 0 12px;font-size:12.5px">Speichert die Kalkulation als Anfrage in Google Sheets und öffnet auf Wunsch direkt den GoBD-Belegeditor (ANG-2026 / RE-2026).</p>' +
+        '<div class="actions" style="flex-direction:column;align-items:stretch">' +
+          '<button class="btn primary" type="button" id="pl-save-lead">' + (P.leadId ? '✓ Anfrage ' + U.esc(P.leadId) + ' aktualisieren' : '💾 Als Anfrage speichern &amp; öffnen') + '</button>' +
+          '<button class="btn" type="button" id="pl-make-offer">📄 Direkt GoBD-Angebot (PDF) erstellen →</button>' +
+          '<button class="btn" type="button" id="pl-make-inv">🧾 Direkt GoBD-Rechnung (PDF) erstellen →</button>' +
+        '</div>' +
+      '</div></aside></div>';
+
+    bind();
+  }
+
+  function inp(label, id, val, ph, type) {
+    return '<div class="field"><label for="' + id + '">' + label + '</label><input class="input" id="' + id + '" type="' + (type || 'text') + '" value="' + U.esc(val) + '" placeholder="' + U.esc(ph || '') + '"></div>';
+  }
+  function sel(label, id, val, opts) {
+    return '<div class="field"><label for="' + id + '">' + label + '</label><select class="input" id="' + id + '">' +
+      opts.map(function (o) { var v = Array.isArray(o) ? o[0] : o, l = Array.isArray(o) ? o[1] : o; return '<option value="' + U.esc(v) + '"' + (String(v) === String(val) ? ' selected' : '') + '>' + U.esc(l) + '</option>'; }).join('') +
+      '</select></div>';
+  }
+  function chk(id, checked, title, sub) {
+    return '<label class="pl-svc"><input type="checkbox" id="' + id + '"' + (checked ? ' checked' : '') + '><span><b>' + title + '</b><small>' + sub + '</small></span></label>';
+  }
+  function numRow(id, val, title, sub) {
+    return '<div class="pl-svc" style="justify-content:space-between;align-items:center"><span><b>' + title + '</b><small>' + sub + '</small></span>' +
+      '<input class="input" id="' + id + '" type="number" min="0" step="any" value="' + U.esc(val) + '" style="width:74px;min-height:36px;padding:4px 8px;text-align:right"></div>';
+  }
+  function itemCardHtml(it) {
+    var n = Number(P.counts[it.id]) || 0;
+    return '<div class="pl-it' + (n > 0 ? ' on' : '') + '" data-item="' + it.id + '">' +
+      '<div class="pl-it-name">' + U.esc(it.name) + '<small>' + U.esc(it.cat) + ' · Faktor ' + String(it.vol).replace('.', ',') + '</small></div>' +
+      '<div class="pl-qty"><button type="button" data-d="-1" aria-label="Weniger">−</button><b>' + n + '</b><button type="button" data-d="1" aria-label="Mehr">+</button></div></div>';
+  }
+  function linesHtml(lines) {
+    return lines.map(function (l) {
+      return '<tr><td><b>' + U.esc(l[0]) + '</b><div class="muted">' + U.esc(l[1]) + '</div></td>' +
+        '<td class="num">' + U.esc(String(l[2]).replace('.', ',') + ' ' + l[3]) + '</td>' +
+        '<td class="num"><b>' + U.eur(Math.round(l[2] * l[4] * 100) / 100) + '</b></td></tr>';
+    }).join('');
+  }
+
+  function syncInputs() {
+    var g = function (id) { var el = document.getElementById(id); return el ? el.value : ''; };
+    var gc = function (id) { var el = document.getElementById(id); return !!(el && el.checked); };
+    P.name = g('pl-name'); P.phone = g('pl-phone'); P.email = g('pl-email');
+    P.serviceType = g('pl-svc'); P.date = g('pl-date'); P.payer = g('pl-payer');
+    P.fromAddress = g('pl-from'); P.toAddress = g('pl-to'); P.km = Number(g('pl-km')) || 0;
+    P.boxes = Number(g('pl-boxes')) || 0;
+    P.hvzFrom = gc('pl-hvz-from');
+    P.disposalM3 = Number(g('pl-disposal')) || 0;
+    P.notes = g('pl-notes');
+  }
+
+  function refreshSummary() {
+    syncInputs();
+    var c = calc();
+    document.getElementById('pk-vol').textContent = c.volMin + '–' + c.volMax;
+    document.getElementById('pk-veh').textContent = c.vehicle;
+    document.getElementById('pk-kg').textContent = 'ca. ' + c.kg + ' kg Material';
+    document.getElementById('pk-crew').textContent = c.crew + ' Techniker · ' + c.hours + ' h';
+    document.getElementById('pk-lines').innerHTML = linesHtml(c.lines);
+    document.getElementById('pk-total').textContent = U.eur(c.total);
+  }
+
+  function bind() {
+    U.app.querySelectorAll('input, select, textarea').forEach(function (el) {
+      if (el.id === 'pl-q' || el.id === 'pl-cname' || el.id === 'pl-cqty' || el.id === 'pl-cvol') return;
+      el.addEventListener('input', refreshSummary);
+      el.addEventListener('change', refreshSummary);
+    });
+    U.app.querySelectorAll('[data-cat]').forEach(function (b) {
+      b.addEventListener('click', function () { syncInputs(); P.cat = b.getAttribute('data-cat'); draw(); });
+    });
+    document.getElementById('pl-q').addEventListener('input', function (e) {
+      syncInputs(); P.search = e.target.value;
+      var filtered = CATALOG.filter(function (it) {
+        if (P.cat !== 'Alle' && it.cat !== P.cat) return false;
+        if (P.search && it.name.toLowerCase().indexOf(P.search.toLowerCase()) < 0) return false;
+        return true;
+      });
+      document.getElementById('pl-catalog').innerHTML = filtered.map(itemCardHtml).join('');
+      bindCatalogClicks();
+    });
+    bindCatalogClicks();
+
+    document.getElementById('pl-cadd').addEventListener('click', function () {
+      syncInputs();
+      var name = document.getElementById('pl-cname').value.trim();
+      var qty = Number(document.getElementById('pl-cqty').value) || 1;
+      var vol = Number(document.getElementById('pl-cvol').value) || 1.0;
+      if (!name) { U.toast('Bitte Bezeichnung für die Position eingeben.', true); return; }
+      P.customItems.push({name: name, qty: qty, vol: vol});
+      draw();
+    });
+    U.app.querySelectorAll('[data-cdel]').forEach(function (b) {
+      b.addEventListener('click', function () { syncInputs(); P.customItems.splice(Number(b.getAttribute('data-cdel')), 1); draw(); });
+    });
+    document.getElementById('pl-reset').addEventListener('click', function () { P = defaultState(); location.hash = '#/planer'; draw(); });
+
+    var savePlan = function (nextHashFn) {
+      syncInputs();
+      if (!P.name.trim()) { U.toast('Bitte mindestens den Kundennamen eintragen.', true); document.getElementById('pl-name').focus(); return; }
+      var c = calc();
+      var items = [];
+      CATALOG.forEach(function (it) {
+        var n = Number(P.counts[it.id]) || 0;
+        if (n > 0) items.push({name: it.name, cat: it.cat, qty: n, vol: it.vol});
+      });
+      P.customItems.forEach(function (ci) { items.push({name: ci.name, cat: 'Sonderposition', qty: ci.qty, vol: ci.vol}); });
+
+      var payload = {
+        leadId: P.leadId, name: P.name.trim(), phone: P.phone.trim(), email: P.email.trim(),
+        payer: P.payer, service: P.serviceType, date: P.date, notes: P.notes,
+        from: P.fromAddress.trim(), to: P.toAddress.trim(), km: P.km,
+        accOld: 'Vor-Ort-Aufmaß', accNew: 'Zugänglich',
+        hvz: P.hvzFrom ? 'CM-Messung & Schutzfolie' : 'Standard',
+        volMin: c.volMin, volMax: c.volMax, kg: c.kg, vehicle: c.vehicle, crew: c.crew, hours: c.hours,
+        items: items, lines: c.lines, total: c.total
+      };
+      U.run('api_savePlanerLead', payload).then(function (r) {
+        P.leadId = r.id;
+        U.toast('Anfrage ' + r.id + ' gespeichert (' + U.eur(r.total) + ').');
+        location.hash = nextHashFn(r.id);
+      }).catch(U.fail);
+    };
+
+    document.getElementById('pl-save-lead').addEventListener('click', function () { savePlan(function (id) { return '#/a/' + encodeURIComponent(id); }); });
+    document.getElementById('pl-make-offer').addEventListener('click', function () { savePlan(function (id) { return '#/neu/offer/' + encodeURIComponent(id); }); });
+    document.getElementById('pl-make-inv').addEventListener('click', function () { savePlan(function (id) { return '#/neu/invoice/' + encodeURIComponent(id); }); });
+  }
+
+  function bindCatalogClicks() {
+    document.querySelectorAll('#pl-catalog [data-item]').forEach(function (card) {
+      var id = card.getAttribute('data-item');
+      card.querySelectorAll('button[data-d]').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var d = Number(btn.getAttribute('data-d'));
+          var next = Math.max(0, (Number(P.counts[id]) || 0) + d);
+          if (next === 0) delete P.counts[id]; else P.counts[id] = next;
+          card.classList.toggle('on', next > 0);
+          card.querySelector('.pl-qty b').textContent = next;
+          refreshSummary();
+        });
+      });
+    });
+  }
+
+  function route(h) {
+    if (h === 'planer') { openPlaner(''); return true; }
+    if (h.indexOf('planer?id=') === 0) { openPlaner(decodeURIComponent(h.slice(10))); return true; }
+    return false;
+  }
+
+  window.SUPlaner = {route: route};
+})();
+</script>
