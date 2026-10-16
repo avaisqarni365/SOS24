@@ -3,6 +3,7 @@ import Navbar from "@/components/sections/Navbar";
 import Footer from "@/components/sections/Footer";
 import AdminPortalClient from "@/components/admin/AdminPortalClient";
 import JsonLd from "@/components/seo/JsonLd";
+import { Breadcrumbs } from "@/components/seo/SubpageParts";
 import { SITE_URL, BUSINESS_ID, WEBSITE_ID, abs, breadcrumbNode, OG_IMAGE } from "@/lib/site";
 
 const TITLE = "Admin & Backoffice | sos-abdichtung Wuppertal";
@@ -25,6 +26,11 @@ export const metadata: Metadata = {
 };
 
 export default function AdminPage() {
+  const crumbs = [
+    { name: "Startseite", path: "/" },
+    { name: "Admin & Backoffice", path: "/admin/" },
+  ];
+
   const graph = [
     {
       "@type": "WebPage",
@@ -38,10 +44,7 @@ export default function AdminPage() {
       breadcrumb: { "@id": `${SITE_URL}/admin/#breadcrumb` },
     },
     {
-      ...breadcrumbNode([
-        { name: "Startseite", path: "/" },
-        { name: "Admin & Backoffice", path: "/admin/" },
-      ]),
+      ...breadcrumbNode(crumbs),
       "@id": `${SITE_URL}/admin/#breadcrumb`,
     },
   ];
@@ -50,19 +53,19 @@ export default function AdminPage() {
     <>
       <JsonLd graph={graph} />
       <Navbar />
-      <main id="main" className="min-h-screen bg-surface-100 py-12 lg:py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="mb-8">
-            <span className="inline-block text-xs font-bold uppercase tracking-wider text-brand-700 bg-brand-100 px-3 py-1 rounded-full mb-2">
-              SOS Abdichtung · Cloud Management
-            </span>
-            <h1 className="text-2xl sm:text-3xl font-extrabold text-brand-950 tracking-tight">
-              Admin-Portal &amp; GoBD-Backoffice
+      <main id="main" className="min-h-screen bg-canvas text-ink pb-24 lg:pb-16 overflow-x-clip">
+        <section className="sc-page-top" aria-labelledby="page-title">
+          <div className="sc-wrap">
+            <Breadcrumbs items={crumbs} />
+            <h1 id="page-title" className="sc-display mt-4">
+              Admin-Portal &amp; <em>GoBD-Backoffice.</em>
             </h1>
-            <p className="text-sm text-slate-600 mt-1">
-              Schadensanfragen, Google Drive Schadensfotos, digitale Auftragsunterschriften, Vor-Ort-Checkliste und GoBD-Rechnungen verwalten.
+            <p className="text-sm sm:text-base text-ink-soft mt-2 max-w-3xl font-plex">
+              Schadensanfragen, Google Drive Schadensfotos, digitale Auftragsunterschriften, Vor-Ort-Checkliste und GoBD-Rechnungen auf Smartphone, Tablet und Desktop verwalten.
             </p>
           </div>
+        </section>
+        <div className="sc-wrap mt-6 sm:mt-8">
           <AdminPortalClient />
         </div>
       </main>
