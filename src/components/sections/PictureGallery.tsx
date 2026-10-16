@@ -4,6 +4,7 @@ import { PartnerLink } from "@/components/brand/PartnerLink";
 
 import React, { useCallback, useEffect, useRef, useState } from "react";
 import { useLanguage } from "@/i18n/LanguageContext";
+import { DE } from "@/i18n/translations";
 import { GALLERY, type GalleryCategory } from "@/data/gallery";
 
 /**
@@ -83,7 +84,7 @@ export default function PictureGallery({ hideHeader = false }: { hideHeader?: bo
               className={`min-h-[44px] rounded-full border px-4 text-sm font-semibold transition-all ${
                 category === c.id
                   ? "btn-shine border-transparent shadow-sm"
-                  : "border-line/15 bg-surface text-ink hover:border-[var(--emerald-deep)] hover:bg-surface-2"
+                  : "border-[var(--line-strong)] bg-surface text-ink hover:border-[var(--emerald-deep)] hover:bg-surface-2"
               }`}
             >
               {c.label}
@@ -101,7 +102,8 @@ export default function PictureGallery({ hideHeader = false }: { hideHeader?: bo
                   setOpen(i);
                 }}
                 className="group flex h-full w-full flex-col overflow-hidden rounded-[28px] border border-line/10 bg-surface p-3 text-left shadow-[0_4px_16px_-4px_rgba(16,40,30,0.06),0_12px_32px_-8px_rgba(16,40,30,0.08)] hover:border-[var(--emerald-deep)] hover:shadow-[0_8px_28px_-4px_rgba(16,40,30,0.12),0_20px_48px_-8px_rgba(19,117,93,0.16)] hover:-translate-y-1 transition-all duration-300"
-                aria-label={`${it.title}: ${t("gallery.zoomHint")}`}
+                // German source: the page translation has the whole label
+                aria-label={`${it.title}: ${DE["gallery.zoomHint"]}`}
               >
                 <span className="relative block aspect-[16/11] overflow-hidden rounded-[20px] bg-surface-2 border border-ink/5 shadow-inner">
                   <img
@@ -166,7 +168,7 @@ export default function PictureGallery({ hideHeader = false }: { hideHeader?: bo
               <button type="button" onClick={() => step(-1)} className="min-h-[44px] rounded-full border border-line/20 px-5 text-sm" aria-label="Vorheriges Bild">
                 ←
               </button>
-              <button ref={closeRef} type="button" onClick={close} className="min-h-[44px] rounded-full bg-[var(--bone)] px-5 text-sm font-semibold text-[var(--ink)]">
+              <button ref={closeRef} type="button" onClick={close} className="min-h-[44px] rounded-full bg-[var(--bone)] px-5 text-sm font-semibold text-[var(--ground)]">
                 {t("gallery.modalClose")}
               </button>
               <button type="button" onClick={() => step(1)} className="min-h-[44px] rounded-full border border-line/20 px-5 text-sm" aria-label="Nächstes Bild">

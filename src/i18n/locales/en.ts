@@ -113,7 +113,7 @@ const STRINGS: Record<string, string> = {
     "gallery.filterTeam": "Diagnostics & Team",
     "gallery.modalClose": "Close",
     "gallery.tagVerified": "SchimmelPeter® method",
-    "gallery.zoomHint": "Expand →",
+    "gallery.zoomHint": "Expand",
 
     // Rail
     "rail.start": "Start",

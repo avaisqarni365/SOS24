@@ -193,7 +193,7 @@ export default function FeuchteScanner() {
         <div className="flex flex-col gap-3">
           <a
             href={zone.href}
-            className="inline-flex min-h-[48px] items-center justify-between rounded-full bg-[var(--bone)] px-5 py-3 text-sm font-semibold text-[var(--ink)] hover:bg-surface"
+            className="inline-flex min-h-[48px] items-center justify-between rounded-full bg-[var(--bone)] px-5 py-3 text-sm font-semibold text-[var(--ground)] hover:bg-surface"
           >
             Passende Leistung: {zone.service} <span aria-hidden="true">→</span>
           </a>

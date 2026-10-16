@@ -10,6 +10,8 @@ import { COLOR_BOOT } from "@/lib/tone";
 import { I18N_BOOT } from "@/i18n/boot";
 import { LanguageProvider } from "@/i18n/LanguageContext";
 import HeadingFit from "@/components/ui/HeadingFit";
+import LabelFit from "@/components/ui/LabelFit";
+import Reveal from "@/components/ui/Reveal";
 import GrokLeadBot from "@/components/ai/GrokLeadBot";
 
 // Self-hosted fonts: no request to Google at runtime (DSGVO) and no build-time fetch.
@@ -18,7 +20,8 @@ import GrokLeadBot from "@/components/ai/GrokLeadBot";
 // unicode-range (globals.css) and load only when a page needs them.
 const plex = localFont({
   src: "../fonts/ibm-plex-sans-latin-wght-normal.woff2",
-  variable: "--font-sans",
+  // --font-sans (globals.css) puts the Apple system font first, then this
+  variable: "--font-plex",
   weight: "100 700",
   display: "swap",
 });
@@ -95,6 +98,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <LanguageProvider>
           {children}
           <HeadingFit />
+          <LabelFit />
+          <Reveal />
           <GrokLeadBot />
           <MobileContactBar />
         </LanguageProvider>

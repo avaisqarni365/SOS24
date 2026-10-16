@@ -61,7 +61,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: var(--font-sans), "IBM Plex Sans Ext", "Segoe UI", system-ui, Tahoma, Geneva, Verdana, sans-serif;
+  font-family: var(--font-sans), "Segoe UI", "IBM Plex Sans Ext", system-ui, Tahoma, Geneva, Verdana, sans-serif;
 }
 
 /* Monospace exclusively for technical readouts, numbers, and rulers */
@@ -74,13 +74,225 @@ pre,
   font-family: var(--font-mono, ui-monospace), ui-monospace, monospace !important;
 }
 
+/* ===========================================================================
+   THEME VARIABLES - every custom property the page root carries, in one
+   place: the light values on :root, what the dark theme changes below it.
+   Surfaces (.band-ink, .theme-dark, .contact-band ...) re-declare some of
+   them for their own subtree further down; the colour picker (tone.ts)
+   writes the --pw-* values inline on <html>.
+   ========================================================================= */
+:root {
+  /* design tokens (design system "SOS-Abdichtung"); the picker feeds --pw-* */
+  --canvas: #f4f5f7;
+  --surface: #ffffff;
+  --surface-2: #eaecf0;
+  --surface-tint: var(--pw-paper1);
+  --accent-wash: var(--pw-paper2);
+  --line: rgb(43 69 112 / 0.12);
+  --line-strong: #7d8899;
+  --ink: #14253c;
+  --ink-strong: #071628;
+  --ink-soft: #33435a;
+  --accent: var(--pw-accent);
+  --accent-deep: var(--pw-deep);
+  --action: var(--pw-accent);
+  --action-hover: var(--pw-deep);
+  --on-action: #ffffff;
+  --plate: #132033;
+  --plate-2: #1b2c47;
+  --on-plate: #ffffff;
+  --on-plate-soft: #c8d3e6;
+  --on-plate-accent: var(--pw-on-dark);
+  --focus: #1e6bd6;
+  --success: #15803d;
+  --danger: #b42318;
+  --info: #0b6fb3;
+
+  /* legacy names, kept for the existing rules: they point at the tokens */
+  --c-bone2: 7 22 40;
+  --nav-bg: rgb(255 255 255 / 0.9);
+  --c-mint: var(--pw-accent-rgb);
+  --c-ink3: 234 236 240;
+  --band-stone: var(--surface);
+  --c-emerald: var(--pw-mark-rgb);
+  --hero-glow: transparent;
+  --c-bone: 20 37 60;
+  --band-mint: var(--surface-tint);
+  --c-accent-deep: var(--pw-deep-rgb);
+  --c-line: 43 69 112;
+  --c-soft: 51 67 90;
+  --c-ink2: 255 255 255;
+  --c-ink: 244 245 247;
+  --grain: 0;
+  --btn-ink: var(--on-action);
+  --hero-water: transparent;
+  --frame-shadow: 0 1px 2px rgb(0 0 0/ 0.04), 0 12px 32px -14px rgb(0 0 0/ 0.16);
+  --grad: var(--action);
+  --frame-line: var(--line);
+  --stage-bg: var(--surface-tint);
+  --grad-text: none;
+  --damp: #3e5d92;
+  --card: var(--surface);
+  --salt: #d6dbe4;
+  --ink-on-surface: var(--ink);
+  --text-on-bone: var(--ink);
+  --paper-1: var(--surface-tint);
+  --paper: var(--canvas);
+  --emerald-deep: var(--accent);
+  --paper-0: var(--canvas);
+  --head-on-bone: var(--ink-strong);
+  --card-translucent: rgb(255 255 255 / 0.92);
+  --paper-2: var(--accent-wash);
+  --ground: rgb(var(--c-ink));
+  --sc-ink-soft: var(--ink-soft);
+  --sc-ink: var(--ink);
+  --ink-3: rgb(var(--c-ink3));
+  --sc-accent: var(--accent);
+  --bone-2: rgb(var(--c-bone2));
+  --mint: rgb(var(--c-mint));
+  --sc-surface: var(--surface);
+  --ink-2: rgb(var(--c-ink2));
+  --emerald: rgb(var(--c-emerald));
+  --sc-accent-ink: var(--on-action);
+  --sc-canvas: var(--canvas);
+  --bone: rgb(var(--c-bone));
+  --sc-font-text: var(--font-sans), system-ui, sans-serif;
+  --sc-font-mono: var(--font-mono), ui-monospace, monospace;
+  --font-latex: var(--font-latex, "Latin Modern Roman"), "Latin Modern Roman", "Computer Modern", "TeX Gyre Termes", "STIX Two Text", "Baskerville", Georgia, serif;
+  --sc-shadow-color: 150 20% 3%;
+  --sc-font-display: var(--font-sans), system-ui, sans-serif;
+  --sc-font-prose: var(--font-latex), "Latin Modern Roman", Georgia, serif;
+  --fs-h2: clamp(1.5rem, 1.25rem + 1vw, 2.2rem);
+  --fs-h3: clamp(1.2rem, 1.1rem + 0.4vw, 1.45rem);
+  --fs-h4: 1.12rem;
+  --fs-h1: clamp(2.05rem, 1.55rem + 1.8vw, 3.1rem);
+  --brick: var(--pw-brick);
+  --brick-2: #3e5d92;
+  --brand-2: #1580c8;
+  --brand: #0f3460;
+  --forest-2: var(--plate-2);
+  --forest: var(--plate);
+  --map-line: 17 24 39;
+  --map-context: var(--accent-wash);
+  --map-bg: var(--surface-tint);
+  --grad-em: linear-gradient(95deg, var(--pw-deep) 0%, var(--pw-accent) 45%, var(--pw-em-hi) 100%);
+  --grad-cta: var(--action);
+  --grad-tile: var(--action);
+  --aqua-deep: var(--pw-label);
+  --grad-em-plate: linear-gradient(95deg, #a4e4f2 0%, #9db8ff 100%);
+  --electric: var(--accent);
+  --aqua: var(--pw-aqua);
+  --lk-b: #0f3460;
+  --ld-a: #66c2ee;
+  --lk-a: #1d548f;
+  --ld-b: #1580c8;
+  --royal-deep: var(--accent-deep);
+  --royal: var(--accent);
+  --royal-2: var(--pw-mark);
+  --logo-drop: #1a90d2;
+  --pw-wash2: #f6dfdc;
+  --pw-accent: #b42318;
+  --pw-glow: 1;
+  --pw-deep: #8f1d14;
+  --pw-wash1: #fcf0ef;
+  --pw-paper1: #fdf5f4;
+  --pw-mark-rgb: 217 45 32;
+  --pw-em-hi: #e0483a;
+  --pw-label: #a8231a;
+  --pw-accent-rgb: 180 35 24;
+  --pw-mark: #d92d20;
+  --pw-deep-rgb: 143 29 20;
+  --pw-shot: #f0dedc;
+  --pw-paper1-rgb: 253 245 244;
+  --pw-hero: #fefaf9;
+  --pw-aqua-rgb: 242 135 125;
+  --pw-paper2: #f9e6e4;
+  --pw-cta-hi: #c8291c;
+  --pw-aqua: #f2877d;
+  --pw-brick: #5e1e18;
+  --logo-blue: #0b8ad0;
+  --logo-brick: #b95642;
+  --logo-navy: #173455;
+  --font-display: var(--font-sans), "Segoe UI Variable Display", "Segoe UI", system-ui, Tahoma, Verdana, sans-serif;
+  --font-ui: var(--font-sans), "Segoe UI Variable Text", "Segoe UI", system-ui, Tahoma, Verdana, sans-serif;
+  --ic-red: var(--danger);
+  --ic-green: var(--success);
+  --ic-water: var(--info);
+  --pw-on-dark: #f4b4ad;
+  --pw-on-dark-rgb: 244 180 173;
+  --pw-on-dark2: #ec8a81;
+}
+html[data-theme="dark"] {
+  /* Dunkel: water-biased, surfaces separate by tone instead of shadow */
+  --canvas: #0b111a;
+  --surface: #121a26;
+  --surface-2: #1a2433;
+  --surface-tint: color-mix(in srgb, var(--pw-accent) 12%, #0b111a);
+  --accent-wash: color-mix(in srgb, var(--pw-accent) 34%, #0b111a);
+  --line: rgb(255 255 255 / 0.12);
+  --line-strong: #5f6d82;
+  --ink: #f2f6fb;
+  --ink-strong: #ffffff;
+  --ink-soft: #a9b4c4;
+  --accent: var(--pw-on-dark);
+  --accent-deep: var(--pw-on-dark2);
+  --action: var(--pw-accent);
+  --action-hover: var(--pw-cta-hi);
+  --plate: #152840;
+  --plate-2: #1d3658;
+  --focus: #6aa2ec;
+  --success: #6fd39a;
+  --danger: #f4a49b;
+  --info: #8fcaf2;
+
+  /* legacy names whose dark value is not simply their token */
+  --c-ink: 11 17 26;
+  --c-ink2: 18 26 38;
+  --c-ink3: 26 36 51;
+  --c-bone: 242 246 251;
+  --c-bone2: 255 255 255;
+  --c-soft: 169 180 196;
+  --c-line: 255 255 255;
+  --c-mint: var(--pw-on-dark-rgb);
+  --c-emerald: var(--pw-on-dark-rgb);
+  --c-accent-deep: var(--pw-on-dark-rgb);
+  --nav-bg: rgb(11 17 26 / 0.9);
+  --grain: 0.03;
+  --frame-shadow: none;
+  --stage-bg: var(--surface-2);
+  --damp: #96b1d6;
+  --salt: #2a3346;
+  --card-translucent: color-mix(in srgb, var(--surface) 94%, transparent);
+  --brick: #96b1d6;
+  --brick-2: #b2c8e5;
+  --brand-2: #9ec8ff;
+  --brand: #ffffff;
+  --map-line: 226 232 240;
+  --grad-em: linear-gradient(95deg, var(--pw-on-dark) 0%, var(--pw-on-dark2) 100%);
+  --aqua-deep: var(--pw-on-dark2);
+  --grad-em-plate: linear-gradient(95deg, var(--pw-on-dark) 0%, var(--pw-on-dark2) 100%);
+  --electric: var(--accent-deep);
+  --aqua: var(--pw-on-dark);
+  --lk-b: #b4c7e4;
+  --ld-a: #dff2ff;
+  --lk-a: #f2f6ff;
+  --ld-b: #80b2e8;
+  --royal: var(--accent-deep);
+  --royal-2: var(--pw-on-dark);
+  --logo-drop: #6aa2ec;
+  --logo-blue: #3fb0ee;
+  --logo-navy: #f2f6fb;
+  --sc-accent-ink: rgb(var(--c-ink));
+}
+
+
 /* ---------------------------------------------------------------------------
    Theme. Colours are RGB channels so Tailwind can add opacity to them.
    Light is the default: one flat British-white ground (no tinted bands, no
    glow, no grain), white cards, near-black text, deep emerald accent. Dark is the forest-ink original. A visitor's choice (header
    switch, stored as "sos_theme") sets data-theme on <html>; without a
    choice the device setting decides.
-   Roles keep their historic names: --ink is the ground (and the text that
+   Roles keep their historic names: --ground is the ground (and the text that
    sits on the accent), --bone is the primary text (and the fill of solid
    buttons), --mint is the accent.
    ------------------------------------------------------------------------- */
@@ -110,76 +322,42 @@ pre,
                      the point rather than a costume.
    ------------------------------------------------------------------------- */
 :root {
-  --c-ink: 244 245 247;
-  --c-ink2: 255 255 255;
-  --c-ink3: 234 236 240;
-  --c-bone: 43 69 112;
-  --c-bone2: 33 54 88;
   /* the accent is the brand, and it is the only hue on the page */
-  --c-mint: 43 69 112;
-  --c-emerald: 62 93 146;
-  --c-accent-deep: 43 69 112;
-  --c-soft: 99 114 143;
-  --c-line: 43 69 112;
-  --band-stone: #ffffff;
-  --band-mint: #eaecf0;
-  --nav-bg: rgb(255 255 255 / 0.94);
-  --hero-glow: transparent;
-  color-scheme: light;
+    color-scheme: light;
 }
-/* Page-level only (a dark stage inside a light page does not change them):
-   paper grain, the water glow in the hero, the 3D stage. */
-:root {
-  --frame-line: rgb(var(--c-line)/ 0.09);
-  --frame-shadow: 0 1px 2px rgb(0 0 0/ 0.04), 0 12px 32px -14px rgb(0 0 0/ 0.16);
-  /* A button is a block of ink with paper type on it; in dark the two swap. */
-  --grad: #2b4570;
-  --btn-ink: #ffffff;
-  /* Emphasis is italic, not coloured: the display serif already carries it. */
-  --grad-text: none;
-  --grain: 0;
-  --hero-water: transparent;
-  --stage-bg: radial-gradient(70% 60% at 50% 40%, #ffffff, transparent 72%), linear-gradient(180deg, #f3f6f5 0%, #e6ecea 100%);
-}
-[data-theme="dark"] {
-  --frame-line: rgb(243 241 236 / 0.1);
-  --frame-shadow: none;
-  --grain: 0.045;
-  --hero-water: transparent;
-  --stage-bg: linear-gradient(180deg, #141414 0%, #0a0a0a 100%);
-}
+
+
 /* dark: only when the visitor explicitly chose it in the appearance menu */
-[data-theme="dark"],
 .theme-dark,
 .scanner__readout {
-  /* The exact inversion of the light sheet: black ground, white type, and the
-     same accent-is-the-ink rule, so no hue enters on the way across. */
-  --c-ink: 0 0 0;
-  --c-ink2: 18 18 18;
-  --c-ink3: 26 26 26;
+  /* A dark island in either theme: the blue-tinted dark ground (Dunkel),
+     white type, and the same accent-is-the-ink rule. */
+  --c-ink: 11 17 26;
+  --c-ink2: 18 26 38;
+  --c-ink3: 26 36 51;
   --c-bone: 255 255 255;
-  --c-bone2: 238 238 238;
+  --c-bone2: 242 246 251;
   --c-mint: 255 255 255;
   --c-emerald: 255 255 255;
   --c-accent-deep: 255 255 255;
-  --c-soft: 168 168 164;
+  --c-soft: 169 180 196;
   --c-line: 255 255 255;
   --ink-on-surface: #ffffff;
-  --text-on-bone: #c9c9c5;
+  --text-on-bone: #a9b4c4;
   --head-on-bone: #ffffff;
   --emerald-deep: #ffffff;
-  --paper-0: #000000;
-  --paper-1: #0d0d0d;
-  --paper-2: #161616;
-  --card: #121212;
-  --card-translucent: rgb(18 18 18 / 0.94);
-  --paper: #000000;
+  --paper-0: #0b111a;
+  --paper-1: #0f1f30;
+  --paper-2: #12304a;
+  --card: #121a26;
+  --card-translucent: rgb(18 26 38 / 0.94);
+  --paper: #0b111a;
   --grad: #ffffff;
-  --btn-ink: #0a0a0a;
+  --btn-ink: #0b111a;
   --grad-text: none;
-  --band-stone: #0d0d0d;
-  --band-mint: #141414;
-  --nav-bg: rgb(0 0 0 / 0.9);
+  --band-stone: #121a26;
+  --band-mint: #0f1f30;
+  --nav-bg: rgb(11 17 26 / 0.9);
   --hero-glow: transparent;
   --damp: #9a9a96;
   --salt: #3a3a37;
@@ -188,10 +366,17 @@ pre,
 
 
 /* Roles, resolved again wherever the channels change */
-:root,
-[data-theme="dark"],
 .theme-dark,
 .scanner__readout {
+  --canvas: rgb(var(--c-ink));
+  --surface: rgb(var(--c-ink2));
+  --surface-2: rgb(var(--c-ink3));
+  --ink: rgb(var(--c-bone));
+  --ink-strong: #ffffff;
+  --ink-soft: rgb(var(--c-soft));
+  --line: rgb(255 255 255 / 0.12);
+  --line-strong: #5f6d82;
+  --focus: #6aa2ec;
   --sc-canvas: rgb(var(--c-ink));
   --sc-surface: rgb(var(--c-ink2));
   --sc-ink: rgb(var(--c-bone));
@@ -200,36 +385,14 @@ pre,
   --sc-accent-ink: rgb(var(--c-ink));
   --bone: rgb(var(--c-bone));
   --bone-2: rgb(var(--c-bone2));
-  --ink: rgb(var(--c-ink));
+  --ground: rgb(var(--c-ink));
   --ink-2: rgb(var(--c-ink2));
   --ink-3: rgb(var(--c-ink3));
   --mint: rgb(var(--c-mint));
   --emerald: rgb(var(--c-emerald));
   --line: rgb(var(--c-line) / 0.12);
 }
-:root {
-  --font-latex: var(--font-latex, "Latin Modern Roman"), "Latin Modern Roman", "Computer Modern", "TeX Gyre Termes", "STIX Two Text", "Baskerville", Georgia, serif;
-  --sc-font-display: var(--font-sans), system-ui, sans-serif;
-  --sc-font-text: var(--font-sans), system-ui, sans-serif;
-  --sc-font-prose: var(--font-latex), "Latin Modern Roman", Georgia, serif;
-  --sc-font-mono: var(--font-mono), ui-monospace, monospace;
-  --sc-shadow-color: 150 20% 3%;
-  /* fixed: the light bands (FAQ, contact) and water/salt colours */
-  --emerald-deep: #2b4570;
-  --damp: #3e5d92;
-  --salt: #d6dbe4;
-  --paper: #f4f5f7;
-  --text-on-bone: #2b4570;
-  --head-on-bone: #22365a;
-  /* The one ink every surface answers for. Light surfaces keep the editorial
-     near-black; a dark band (.band-ink / .theme-dark) flips it to bone, so a
-     full-bleed dark section needs no per-element colour overrides. */
-  --ink-on-surface: #2b4570;
-  /* The one card/panel surface. Light: paper white on the warm ground.
-     Dark: one step up from the ground, never pure black. */
-  --card: #ffffff;
-  --card-translucent: rgb(255 255 255 / 0.94);
-}
+
 /* A dark stage keeps its own ink even on a light page. */
 .theme-dark {
   color: var(--sc-ink);
@@ -252,7 +415,7 @@ pre,
   }
   ::selection {
     background: var(--mint);
-    color: var(--ink);
+    color: var(--ground);
   }
 }
 
@@ -270,7 +433,7 @@ pre,
   top: -4rem;
   z-index: 100;
   background: var(--bone);
-  color: var(--ink);
+  color: var(--ground);
   padding: 0.75rem 1rem;
   border-radius: 999px;
   font-weight: 600;
@@ -331,7 +494,7 @@ pre,
   background:
     radial-gradient(60% 70% at 74% 58%, var(--hero-glow), transparent 70%),
     radial-gradient(40% 40% at 70% 92%, var(--hero-water), transparent 70%),
-    linear-gradient(180deg, var(--ink) 0%, var(--band-mint) 70%, var(--ink) 100%);
+    linear-gradient(180deg, var(--ground) 0%, var(--band-mint) 70%, var(--ground) 100%);
 }
 .hero__grid {
   position: relative;
@@ -433,10 +596,10 @@ pre,
 .hv__scenes button[aria-selected="true"] {
   background: var(--mint);
   border-color: var(--mint);
-  color: var(--ink);
+  color: var(--ground);
 }
 .hv__scenes button[aria-selected="true"] svg {
-  color: var(--ink);
+  color: var(--ground);
 }
 @media (max-width: 639px) {
   .hv__scenes {
@@ -522,7 +685,7 @@ pre,
   max-width: calc(100% - 1.6rem);
   padding: 0.35rem 0.75rem 0.35rem 0.35rem;
   border-radius: 999px;
-  background: rgb(14 19 16 / 0.86);
+  background: rgb(11 17 26 / 0.86);
   color: #f3f1ec;
   font-size: 0.85rem;
   font-weight: 600;
@@ -535,7 +698,7 @@ pre,
   padding: 0.2rem 0.5rem;
   border-radius: 999px;
   background: var(--ink-on-surface);
-  color: #0e1310;
+  color: #0b111a;
   font: 700 0.72rem/1.2 var(--sc-font-mono, ui-monospace, monospace);
 }
 .hv__load {
@@ -587,7 +750,7 @@ pre,
   margin: 0;
   padding: 0.45rem 0.9rem;
   border-radius: 999px;
-  background: color-mix(in oklab, #0e1310 80%, transparent);
+  background: color-mix(in oklab, #0b111a 80%, transparent);
   border: 1px solid color-mix(in oklab, var(--bone) 14%, transparent);
   color: var(--bone);
   font-size: 0.8rem;
@@ -613,7 +776,7 @@ pre,
   width: 2.75rem;
   height: 2.75rem;
   border-radius: 999px;
-  background: color-mix(in oklab, #0e1310 82%, transparent);
+  background: color-mix(in oklab, #0b111a 82%, transparent);
   border: 1px solid color-mix(in oklab, var(--bone) 16%, transparent);
   color: var(--bone);
   font-size: 1.2rem;
@@ -633,7 +796,7 @@ pre,
   gap: 0.4rem;
   padding: 0.3rem 0.65rem 0.3rem 0.3rem;
   border-radius: 999px;
-  background: color-mix(in oklab, #0e1310 86%, transparent);
+  background: color-mix(in oklab, #0b111a 86%, transparent);
   border: 1px solid color-mix(in oklab, var(--bone) 16%, transparent);
   color: var(--bone);
   font-size: 0.78rem;
@@ -650,7 +813,7 @@ pre,
   height: 1.3rem;
   border-radius: 999px;
   background: var(--mint);
-  color: var(--ink);
+  color: var(--ground);
   font-family: var(--sc-font-mono, ui-monospace, monospace);
   font-size: 0.7rem;
 }
@@ -689,7 +852,7 @@ pre,
 .hv__steps button[aria-pressed="true"] {
   background: var(--mint);
   border-color: var(--mint);
-  color: var(--ink);
+  color: var(--ground);
 }
 .hv__step,
 .hv__layers {
@@ -755,7 +918,7 @@ pre,
 .hv__nav button.is-primary {
   background: var(--bone);
   border-color: var(--bone);
-  color: var(--ink);
+  color: var(--ground);
 }
 .hv__layers ul {
   list-style: none;
@@ -791,7 +954,7 @@ pre,
   height: 1.4rem;
   border-radius: 999px;
   background: var(--swatch);
-  color: #0e1310;
+  color: #0b111a;
   font-family: var(--sc-font-mono, ui-monospace, monospace);
   font-size: 0.7rem;
   box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.25);
@@ -1236,7 +1399,7 @@ article p,
     display: grid;
     gap: 2px;
     border-radius: 999px;
-    background: color-mix(in oklab, #0e1310 72%, transparent);
+    background: color-mix(in oklab, #0b111a 72%, transparent);
     backdrop-filter: blur(10px);
   }
   .section-rail__stop {
@@ -1271,7 +1434,7 @@ article p,
     white-space: nowrap;
     padding: 4px 10px;
     border-radius: 999px;
-    background: #0e1310;
+    background: #0b111a;
     border: 1px solid color-mix(in oklab, var(--bone) 14%, transparent);
     color: var(--bone);
     font-family: var(--sc-font-mono, ui-monospace, monospace);
@@ -1396,7 +1559,7 @@ html[data-text="xl"] {
   height: 2rem;
   border-radius: 999px;
   background: var(--mint);
-  color: var(--ink);
+  color: var(--ground);
   font-family: var(--sc-font-mono, ui-monospace, monospace);
   font-weight: 700;
 }
@@ -1496,20 +1659,7 @@ em,
   color: var(--ink-on-surface);
 }
 
-/* =================================================== ONE SCALE ========
-   Authentic LaTeX academic & scientific document typography:
-   Latin Modern Roman serif for all prose, ledes, articles, and headings.
-   High-contrast pitch dark black ink (#050807), academic line height (1.72),
-   justified alignment with German hyphenation, and micro-typographic kerning. */
-:root {
-  /* One scale, ~1.4x between the display steps and ~1.2x into the body.
-     h3 was flat 1.2rem and h4 1.05rem, which left h4 within 2% of body copy
-     (1.03rem): four heading levels, but only three visible ones. */
-  --fs-h1: clamp(2.05rem, 1.55rem + 1.8vw, 3.1rem);
-  --fs-h2: clamp(1.5rem, 1.25rem + 1vw, 2.2rem);
-  --fs-h3: clamp(1.2rem, 1.1rem + 0.4vw, 1.45rem);
-  --fs-h4: 1.12rem;
-}
+
 body {
   font-family: var(--font-sans), "Segoe UI", system-ui, Tahoma, Verdana, sans-serif;
   font-size: 1.03rem;
@@ -1883,7 +2033,7 @@ p.no-justify {
   min-width: 9.5rem;
   padding: 0.6rem 0.75rem 0.55rem;
   border-radius: 14px;
-  background: rgb(14 19 16 / 0.86);
+  background: rgb(11 17 26 / 0.86);
   color: #f3f1ec;
   pointer-events: none;
   box-shadow: 0 10px 24px -14px rgb(0 0 0 / 0.6);
@@ -2275,28 +2425,10 @@ p.no-justify {
   text-align: start !important;
 }
 
-/* =============================================== BRAND: GREEN + BRICK ===
-   Green carries actions (buttons, active steps), brick red carries the
-   brand accent (logo "sos", accent words, figures, menu hover), text is
-   near-black on snow white. */
-:root {
-  --brick: #2b4570;
-  --brick-2: #3e5d92;
-}
-[data-theme="dark"] {
-  --brick: #ffffff;
-  --brick-2: #c8d3e6;
-}
 
-/* ------------------------------------------------------------------ logo --
-   The one place a hue is allowed: the brand blue on the roof and the drops.
-   Everything else on the page is ink on paper, so the mark is the only colour
-   and reads as identity rather than decoration. */
-:root {
-  --brand: #2b4570;
-  --brand-2: #3e5d92;
-}
-html[data-theme="dark"],
+
+
+
 .band-ink,
 .contact-band {
   /* navy disappears on a dark or saturated ground; the same blue lifted */
@@ -2513,7 +2645,7 @@ html[data-theme="dark"],
   gap: 0.35rem;
   padding: 0.2rem 0.55rem 0.2rem 0.2rem;
   border-radius: 999px;
-  background: rgb(14 19 16 / 0.84);
+  background: rgb(11 17 26 / 0.84);
   color: #f3f1ec;
   font-size: 0.75rem !important;
   font-weight: 600;
@@ -2528,7 +2660,7 @@ html[data-theme="dark"],
   height: 1.2rem;
   flex: none;
   border-radius: 999px;
-  color: #0e1310;
+  color: #0b111a;
   font: 700 0.6875rem/1 var(--sc-font-mono, ui-monospace, monospace);
   box-shadow: inset 0 0 0 1px rgb(0 0 0 / 0.25);
 }
@@ -2549,7 +2681,7 @@ figure > .layer-ruler {
   width: 1.6rem;
   height: 1.6rem;
   border-radius: 999px;
-  color: #0e1310;
+  color: #0b111a;
   font: 700 0.75rem/1 var(--sc-font-mono, ui-monospace, monospace);
   box-shadow: inset 0 0 0 1px rgb(0 0 0 / 0.2);
 }
@@ -2937,60 +3069,49 @@ main dt,
 }
 
 
-/* ===========================================================================
-   EDITORIAL SURFACES
-   The page is built from full-bleed bands that alternate a deep forest ink
-   with warm paper, the way a printed prospectus alternates plates and text
-   pages. A band declares its own ground and ink, so anything dropped inside
-   it -- headings, labels, rules, buttons -- resolves correctly without a
-   single per-element colour.
-   ========================================================================= */
 
-/* Warm paper, not white: white grounds read as "unstyled", bone reads as
-   stock that was chosen. */
-:root {
-  --paper-0: #f4f5f7;
-  --paper-1: #eaecf0;
-  --paper-2: #dfe3ea;
-  /* the inverted plate: black in light, and still black in dark, where the
-     white cards on it do the separating */
-  --forest: #233a5e;
-  --forest-2: #2b4570;
-}
 
 .band-paper { background: var(--paper-0); }
 .band-bone  { background: var(--paper-1); }
 .band-bone2 { background: var(--paper-2); }
 
-/* The dark plate. Sets the channel variables too, so Tailwind's landing-*
+/* The deep-water plate (design token "plate"): the hero and the Lab opener,
+   in both themes. Sets the channel variables too, so Tailwind's landing-*
    colours and every rgb(var(--c-*)) consumer follow it. */
 .band-ink {
-  background: var(--forest);
-  --ink-on-surface: #ffffff;
-  --text-on-bone: #c8d3e6;
-  --head-on-bone: #ffffff;
-  --c-ink: 35 58 94;
-  --c-ink2: 43 69 112;
-  --c-ink3: 52 82 130;
+  background: var(--plate);
+  --ink-on-surface: var(--on-plate);
+  --text-on-bone: var(--on-plate-soft);
+  --head-on-bone: var(--on-plate);
+  --c-ink: 19 32 51;
+  --c-ink2: 27 44 71;
+  --c-ink3: 35 56 88;
   --c-bone: 255 255 255;
-  --c-bone2: 226 233 244;
-  --c-mint: 168 190 222;
-  --c-emerald: 168 190 222;
-  --c-accent-deep: 168 190 222;
-  --c-soft: 160 178 207;
+  --c-bone2: 255 255 255;
+  --c-mint: var(--pw-on-dark-rgb);
+  --c-emerald: var(--pw-on-dark-rgb);
+  --c-accent-deep: var(--pw-on-dark-rgb);
+  --c-soft: 200 211 230;
   --c-line: 255 255 255;
   --line: rgb(255 255 255 / 0.16);
   --frame-line: rgb(255 255 255 / 0.16);
-  --emerald-deep: #a8bede;
-  --card: #2b4570;
-  --card-translucent: rgb(43 69 112 / 0.94);
-  --grad: #ffffff;
-  --btn-ink: #233a5e;
-  --sc-ink: #ffffff;
-  --sc-ink-soft: #a0b2cf;
-  --sc-canvas: var(--forest);
-  --sc-surface: #2b4570;
-  --sc-accent: #a8bede;
+  --emerald-deep: var(--on-plate-accent);
+  --card: var(--plate-2);
+  --card-translucent: color-mix(in srgb, var(--plate-2) 94%, transparent);
+  --grad: var(--on-plate);
+  --btn-ink: var(--plate);
+  --sc-ink: var(--on-plate);
+  --sc-ink-soft: var(--on-plate-soft);
+  --sc-canvas: var(--plate);
+  --sc-surface: var(--plate-2);
+  --sc-accent: var(--on-plate-accent);
+  /* the semantic tokens, as they read on the plate */
+  --surface: var(--plate-2);
+  --ink: var(--on-plate);
+  --ink-strong: var(--on-plate);
+  --ink-soft: var(--on-plate-soft);
+  --accent: var(--on-plate-accent);
+  --line-strong: var(--on-plate-soft);
   color: var(--ink-on-surface);
   color-scheme: dark;
 }
@@ -3006,7 +3127,7 @@ main dt,
 /* A control with a light ground inside a dark band keeps a dark ink. */
 .band-ink .hero__btn--solid,
 .band-ink .hero__btn--solid :is(span, strong) {
-  color: #0e1310;
+  color: #0b111a;
 }
 .band-ink .sc-body,
 .band-ink .sc-lede { color: var(--text-on-bone) !important; }
@@ -3265,7 +3386,7 @@ main h4:not(.sc-label) { font-weight: 600; letter-spacing: -0.01em; }
 .hero__btn:focus-visible { transform: translateY(-2px); }
 .hero__btn--solid {
   background: #f3f1ec;
-  color: #0e1310;
+  color: #0b111a;
   box-shadow: 0 14px 30px -14px rgb(0 0 0 / 0.6);
 }
 .hero__btn--solid:hover { background: #ffffff; }
@@ -3657,70 +3778,11 @@ html[data-theme="dark"] {
   /* The same six tokens, re-mixed for a dark sheet. Not an inversion: the
      navy cannot carry on black, so the accent moves to the drop blue lifted
      to #7FB0FF, and the neutrals keep their blue bias. */
-  --c-ink: 15 20 30;
-  --c-ink2: 26 34 50;
-  --c-ink3: 35 46 66;
-  --c-bone: 232 237 245;
-  --c-bone2: 208 217 232;
-  --c-mint: 150 177 214;
-  --c-emerald: 178 200 229;
-  --c-accent-deep: 150 177 214;
-  --c-soft: 142 157 182;
-  --c-line: 232 237 245;
-
-  --ink-on-surface: #e8edf5;
-  --text-on-bone: #bcc8dc;
-  --head-on-bone: #ffffff;
-  --emerald-deep: #96b1d6;
-
-  --paper-0: #0f141e;
-  --paper-1: #151c28;
-  --paper-2: #1c2534;
-  --paper: #0f141e;
-  --card: #1a2232;
-  --card-translucent: rgb(26 34 50 / 0.94);
-  --band-stone: #151c28;
-  --band-mint: #1c2534;
-  --forest: #233a5e;
-  --forest-2: #2b4570;
-
-  --grad: #3e5d92;
-  --btn-ink: #ffffff;
-  --grad-text: none;
-  --brick: #96b1d6;
-  --brick-2: #b2c8e5;
-
-  --nav-bg: rgb(7 11 20 / 0.9);
-  --hero-glow: transparent;
-  --hero-water: transparent;
-  --frame-line: rgb(237 241 248 / 0.14);
-  --frame-shadow: none;
-  --grain: 0.03;
-  --stage-bg: linear-gradient(180deg, #1c2534 0%, #0f141e 100%);
-  --damp: #96b1d6;
-  --salt: #2a3346;
-  --line: rgb(237 241 248 / 0.14);
-  color-scheme: dark;
+    color-scheme: dark;
 }
 
 
-/* Resolved roles have to be recomputed wherever the channels changed. */
-html[data-theme="dark"] {
-  --sc-canvas: rgb(var(--c-ink));
-  --sc-surface: rgb(var(--c-ink2));
-  --sc-ink: rgb(var(--c-bone));
-  --sc-ink-soft: rgb(var(--c-soft));
-  --sc-accent: rgb(var(--c-mint));
-  --sc-accent-ink: rgb(var(--c-ink));
-  --bone: rgb(var(--c-bone));
-  --bone-2: rgb(var(--c-bone2));
-  --ink: rgb(var(--c-ink));
-  --ink-2: rgb(var(--c-ink2));
-  --ink-3: rgb(var(--c-ink3));
-  --mint: rgb(var(--c-mint));
-  --emerald: rgb(var(--c-emerald));
-  --text-on-bone-x: var(--text-on-bone);
-}
+
 
 /* The two "always light" panels follow the theme now, and the region map
    drops the colours it was still drawing with. */
@@ -4097,20 +4159,8 @@ main :is(h1, h2, h3) em,
     var(--paper-1);
 }
 
-/* Figure and ground. With the neighbours drawn in the page's blue paper, the
-   whole frame read as one wash and the six towns we actually serve did not
-   separate from the ones we don't. The surround is neutral grey; the service
-   area is the only blue on the map, and Wuppertal is the solid one. */
-:root {
-  --map-bg: #eceef2;
-  --map-context: #dde1e9;
-  --map-line: 17 24 39;
-}
-html[data-theme="dark"] {
-  --map-bg: #121824;
-  --map-context: #222c3e;
-  --map-line: 226 232 240;
-}
+
+
 .region-map__bg { fill: var(--map-bg); }
 .region-map__context path {
   fill: var(--map-context);
@@ -4329,39 +4379,8 @@ main :is(h1, h2):not(.sc-label) { font-weight: 650; }
   letter-spacing: 0.14em;
 }
 
-/* ===========================================================================
-   2030 LAYER — the colour combination.
-   The spine stays the client's pair (#2B4570 on #F4F5F7). Two companions
-   join it, both from the subject: AQUA (#39C6E0) is the water the trade
-   exists to stop, ELECTRIC (#3E6FD8) is the live, interactive state. They
-   appear as gradients, glass and glow — never as flat competing fills — so
-   the page reads as one brand with depth rather than three colours arguing.
-   ========================================================================= */
-:root {
-  --aqua: #39c6e0;
-  --aqua-deep: #0d7d9c;
-  --electric: #3e6fd8;
-  /* The CTA gradient ends at #3e6fd8 on purpose: that stop still gives white
-     label text 4.5:1, so the brightest edge of a wide button stays readable.
-     The aqua never sits under small white type -- it appears as the corner
-     glow on the feature tile and in the display-size gradients only. */
-  --grad-cta: linear-gradient(118deg, #2b4570 0%, #35549e 48%, #3e6fd8 100%);
-  --grad-tile:
-    radial-gradient(64% 54% at 100% 0%, rgb(57 198 224 / 0.38) 0%, transparent 62%),
-    linear-gradient(135deg, #2b4570 0%, #3e6fd8 100%);
-  --grad-em: linear-gradient(95deg, #2b4570 0%, #3e6fd8 55%, #0d7d9c 100%);
-  --grad-em-plate: linear-gradient(95deg, #a4e4f2 0%, #9db8ff 100%);
-}
-html[data-theme="dark"] {
-  --aqua: #54d2e8;
-  --aqua-deep: #6fcbe0;
-  --electric: #7fa3f0;
-  --grad-cta: linear-gradient(118deg, #33508c 0%, #3d5fb0 48%, #4568c4 100%);
-  --grad-tile:
-    radial-gradient(64% 54% at 100% 0%, rgb(84 210 232 / 0.4) 0%, transparent 62%),
-    linear-gradient(135deg, #33508c 0%, #4568c4 100%);
-  --grad-em: linear-gradient(95deg, #9db8ff 0%, #8fd8ea 100%);
-}
+
+
 ::selection { background: var(--electric); color: #ffffff; }
 :focus-visible { outline-color: var(--electric); }
 
@@ -4382,28 +4401,17 @@ html[data-theme="dark"] {
   box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.18);
 }
 
-/* ---- emphasis becomes the gradient ---------------------------------------
-   The solid fallback colour stays declared, so a browser without text-clip
-   (and the contrast audit) still sees a legible blue. */
-@supports (-webkit-background-clip: text) {
-  main :is(h1, h2) em,
-  .sc-display em {
-    background-image: var(--grad-em) !important;
-    -webkit-background-clip: text !important;
-    background-clip: text !important;
-    color: var(--electric) !important;
-    -webkit-text-fill-color: transparent !important;
-  }
-  .band-ink .sc-display em,
-  .band-ink :is(h1, h2) em,
-  .contact-band .sc-display em,
-  .contact-band :is(h1, h2) em {
-    background-image: var(--grad-em-plate) !important;
-    -webkit-background-clip: text !important;
-    background-clip: text !important;
-    color: #a9d6f5 !important;
-    -webkit-text-fill-color: transparent !important;
-  }
+/* ---- emphasis: the accent, upright (design system: no gradient text) ---- */
+main :is(h1, h2) em,
+.sc-display em {
+  color: var(--accent) !important;
+  font-style: normal;
+}
+.band-ink .sc-display em,
+.band-ink :is(h1, h2) em,
+.contact-band .sc-display em,
+.contact-band :is(h1, h2) em {
+  color: var(--on-plate-accent) !important;
 }
 
 /* ---- the eyebrow labels take the water ---------------------------------- */
@@ -4506,18 +4514,7 @@ html[data-theme="dark"] {
   .service-card:hover, .service-card:focus-visible { transform: none; }
 }
 
-/* ===================================================== WATER & SHINE ======
-   The identity is rendered, never printed flat: every blue surface carries a
-   vertical light and the drops carry a gloss. These stops feed the lockup's
-   SVG gradients; the plates and the dark theme swap them for the white-metal
-   version of the same finish.
-   ======================================================================== */
-:root {
-  --lk-a: #41699f;
-  --lk-b: #22375c;
-  --ld-a: #8cc0f0;
-  --ld-b: #2c599f;
-}
+
 .band-ink,
 .contact-band {
   --lk-a: #ffffff;
@@ -4525,12 +4522,7 @@ html[data-theme="dark"] {
   --ld-a: #e2f4ff;
   --ld-b: #7fb2ea;
 }
-html[data-theme="dark"] {
-  --lk-a: #f2f6ff;
-  --lk-b: #b4c7e4;
-  --ld-a: #dff2ff;
-  --ld-b: #80b2e8;
-}
+
 .logo-lockup { filter: drop-shadow(0 2px 4px rgb(23 40 70 / 0.28)); }
 .band-ink .logo-lockup,
 .contact-band .logo-lockup { filter: drop-shadow(0 3px 8px rgb(0 0 0 / 0.4)); }
@@ -4644,41 +4636,9 @@ html[data-theme="dark"] {
 .region-map__frame,
 .osm-map { border-radius: 16px; }
 
-/* ===========================================================================
-   ROYAL IDENTITY LAYER — the brand sheet, applied.
-   The sheet's system: saturated royal fills, white type on them, solid
-   numbered squares, and skewed ribbon labels. The slate #2B4570 stays the
-   reading ink on paper; the royal carries every fill, plate and badge.
-   ========================================================================= */
-:root {
-  --royal: #0b44d8;
-  --royal-2: #1e55d6;
-  --royal-deep: #0a33ad;
-  --electric: #1e55d6;
-  --forest: #0a33ad;
-  --forest-2: #0b44d8;
-  --grad-cta: linear-gradient(118deg, #0a35b5 0%, #0f47cf 48%, #1e55d6 100%);
-  --grad-tile:
-    radial-gradient(64% 54% at 100% 0%, rgb(57 198 224 / 0.35) 0%, transparent 62%),
-    linear-gradient(135deg, #0a33ad 0%, #1e55d6 100%);
-  --grad-em: linear-gradient(95deg, #2b4570 0%, #0b44d8 55%, #1e55d6 100%);
-}
-html[data-theme="dark"] {
-  --royal: #4d7df0;
-  --royal-2: #6b95f5;
-  --royal-deep: #2f5fd0;
-}
-html[data-theme="dark"] {
-  --forest: #12306f;
-  --forest-2: #1a3f94;
-  /* the dark CTA ends one step darker: white labels hold 4.9:1 at the
-     brightest edge instead of 3.8 */
-  --grad-cta: linear-gradient(118deg, #27479e 0%, #3058be 48%, #3a66d8 100%);
-  --grad-tile:
-    radial-gradient(64% 54% at 100% 0%, rgb(84 210 232 / 0.3) 0%, transparent 62%),
-    linear-gradient(135deg, #27479e 0%, #3a66d8 100%);
-  --grad-em: linear-gradient(95deg, #9db8ff 0%, #8fd8ea 100%);
-}
+
+
+
 
 /* ---- the ribbon: the sheet's label device --------------------------------
    Every section eyebrow becomes a solid royal ribbon, slightly skewed like
@@ -4783,61 +4743,8 @@ html[data-theme="dark"] .sc-label { background: var(--royal); color: #ffffff !im
   --c-line: 255 255 255;
 }
 
-/* ===========================================================================
-   WASSERLINIE — FINAL.
-   The direction, settled: kontai24's way of presenting information — calm
-   paper, dark readable text, tiny mono labels, quiet numbers — carried in
-   this brand's water blue. The royal layer's tokens are re-pointed here and
-   its louder devices (skewed ribbons, filled number squares) are retired.
-   ========================================================================= */
-:root {
-  /* dark text on paper: near-black with the water bias, 13:1 on the ground */
-  --c-bone: 18 28 46;
-  --c-bone2: 36 50 74;
-  --ink-on-surface: #121c2e;
-  --text-on-bone: #121c2e;
-  --head-on-bone: #0d1626;
-  --c-soft: 81 96 122;
 
-  /* the water accent */
-  --c-mint: 20 99 199;
-  --c-emerald: 30 107 214;
-  --c-accent-deep: 20 99 199;
-  --royal: #1463c7;
-  --royal-2: #2f7be0;
-  --royal-deep: #104f9e;
-  --electric: #1e6bd6;
-  --emerald-deep: #1463c7;
 
-  /* plates: deep water, not vivid royal */
-  --forest: #132033;
-  --forest-2: #1b2c47;
-  --grad: #16304f;
-  --grad-cta: linear-gradient(118deg, #15457f 0%, #1859a8 48%, #1e6bd6 100%);
-  --grad-tile:
-    radial-gradient(64% 54% at 100% 0%, rgb(57 198 224 / 0.3) 0%, transparent 62%),
-    linear-gradient(135deg, #16304f 0%, #1e6bd6 100%);
-  --grad-em: linear-gradient(95deg, #16304f 0%, #1463c7 60%, #1e6bd6 100%);
-
-  /* the lockup, matched to the navy render */
-  --lk-a: #3d5f91;
-  --lk-b: #233450;
-  --ld-a: #7fb3e8;
-  --ld-b: #2f5fa8;
-}
-html[data-theme="dark"] {
-  --royal: #5b96e8;
-  --royal-2: #7fb0f0;
-  --royal-deep: #4a82d4;
-  --electric: #6aa2ec;
-  --emerald-deep: #7fb0f0;
-  --forest: #152840;
-  --forest-2: #1d3658;
-  --grad-cta: linear-gradient(118deg, #1c3f6e 0%, #205090 48%, #2a67b8 100%);
-  --grad-tile:
-    radial-gradient(64% 54% at 100% 0%, rgb(84 210 232 / 0.28) 0%, transparent 62%),
-    linear-gradient(135deg, #1c3f6e 0%, #2a67b8 100%);
-}
 
 /* ---- labels, the kontai way: small, mono, water, no chrome ---------------- */
 .sc-label {
@@ -4901,13 +4808,9 @@ html[data-theme="dark"] .sc-label { background: transparent !important; color: v
 }
 .footer__wordmark span { font-weight: 600; opacity: 0.8; }
 
-/* ---------------------------------------------------- navigation lock -----
-   Flat and sharp at header size: the mark takes the surface ink, the drop
-   takes the water, the wordmark is one line. No gradients below poster size.
-   The full emblem (LogoLockup) stays for large-format uses. */
-:root { --logo-drop: #1e6bd6; }
+
 .band-ink, .contact-band { --logo-drop: #7cc7e8; }
-html[data-theme="dark"] { --logo-drop: #6aa2ec; }
+
 .logo {
   display: inline-flex;
   align-items: center;
@@ -5050,68 +4953,19 @@ main :is(.prose-sos, .faq-card__a, .chem__intro, .rx__note) {
    Scoped to the light theme; the dark theme keeps its navy plates.
    ========================================================================= */
 html:not([data-theme="dark"]) {
-  --c-ink: 255 255 255;
-  --c-ink2: 255 255 255;
-  --c-ink3: var(--pw-paper1-rgb);
-  --c-bone: 20 37 60;
-  --c-bone2: 11 27 46;
-  --c-soft: 51 67 90;
-  --c-mint: var(--pw-accent-rgb);
-  --c-emerald: var(--pw-mark-rgb);
-  --c-accent-deep: var(--pw-accent-rgb);
-  --c-line: 11 27 46;
-  --ink-on-surface: #14253c;
-  --text-on-bone: #14253c;
-  --head-on-bone: #0b1b2e;
-  --emerald-deep: var(--pw-accent);
-  --electric: var(--pw-accent);
-  --royal: var(--pw-accent);
-  --royal-2: var(--pw-mark);
-  --royal-deep: var(--pw-deep);
-  --aqua: var(--pw-aqua);
-  --aqua-deep: var(--pw-label);
-  --paper-0: #ffffff;
-  --paper-1: var(--pw-paper1);
-  --paper-2: var(--pw-paper2);
-  --paper: #ffffff;
-  --band-stone: #ffffff;
-  --band-mint: var(--pw-paper1);
-  --card: #ffffff;
-  --card-translucent: rgb(255 255 255 / 0.92);
-  --forest: #ffffff;
-  --forest-2: var(--pw-paper1);
-  --grad: var(--pw-accent);
-  --btn-ink: #ffffff;
   /* the CTA gradient's brightest stop still holds white text at 4.9:1 */
-  --grad-cta: linear-gradient(118deg, var(--pw-deep) 0%, var(--pw-accent) 52%, var(--pw-cta-hi) 100%);
-  --grad-tile:
-    radial-gradient(64% 54% at 100% 0%, rgb(var(--pw-aqua-rgb) / calc(0.45 * var(--pw-glow, 1))) 0%, transparent 62%),
-    linear-gradient(135deg, var(--pw-deep) 0%, var(--pw-cta-hi) 100%);
-  --grad-em: linear-gradient(95deg, var(--pw-deep) 0%, var(--pw-accent) 45%, var(--pw-em-hi) 100%);
-  --frame-line: rgb(11 27 46 / 0.09);
-  --line: rgb(11 27 46 / 0.1);
-  --lk-a: #1d548f;
-  --lk-b: #0f3460;
-  --ld-a: #66c2ee;
-  --ld-b: #1580c8;
-  --logo-drop: #1a90d2;
-  --brand: #0f3460;
-  --brand-2: #1580c8;
-  --nav-bg: rgb(255 255 255 / 0.9);
-  --sc-canvas: #ffffff;
-  --sc-surface: #ffffff;
-  --sc-ink: #14253c;
-  --sc-ink-soft: #33435a;
-  --sc-accent: var(--pw-accent);
-  --map-bg: var(--pw-paper1);
-  --map-context: var(--pw-paper2);
-  --stage-bg: radial-gradient(70% 60% at 50% 40%, #ffffff, transparent 72%),
-    linear-gradient(180deg, var(--pw-hero) 0%, var(--pw-paper2) 100%);
-  color-scheme: light;
+    color-scheme: light;
 }
 
-/* ---- the plates become sun-white sections in the light theme ------------- */
-html:not([data-theme="dark"]) .band-ink {
+/* ---- the light theme: the header bar and the hero are light bands, white
+   with dark type; the dark theme keeps the deep-water plate -------------- */
+html:not([data-theme="dark"]) .band-ink:not(.hero) {
+  --surface: #ffffff;
+  --ink: #14253c;
+  --ink-strong: #071628;
+  --ink-soft: #33435a;
+  --accent: var(--pw-accent);
+  --line-strong: #7d8899;
   background: #ffffff;
   --c-ink: 255 255 255;
   --c-ink2: 255 255 255;
@@ -5149,15 +5003,6 @@ html:not([data-theme="dark"]) .band-ink {
   color-scheme: light;
 }
 
-/* the hero and the Lab opener: sun white with water light on it */
-html:not([data-theme="dark"]) .hero.band-ink,
-html:not([data-theme="dark"]) .lab-top.band-ink {
-  background:
-    radial-gradient(55% 75% at 96% 4%, rgb(var(--pw-aqua-rgb) / calc(0.2 * var(--pw-glow, 1))) 0%, transparent 62%),
-    radial-gradient(45% 60% at -6% 100%, rgb(var(--pw-accent-rgb) / 0.1) 0%, transparent 68%),
-    linear-gradient(180deg, var(--pw-hero) 0%, #ffffff 100%);
-  border-bottom: 1px solid rgb(11 27 46 / 0.06);
-}
 
 /* ---- text hierarchy: headings lead, body follows, muted recedes ---------- */
 html:not([data-theme="dark"]) :is(main, .mnav) :is(h1, h2, h3, h4):not(.sc-label),
@@ -5169,11 +5014,9 @@ html:not([data-theme="dark"]) .band-ink :is(h1, h2):not(.sc-label) {
 /* the gradient feature tile keeps its white type */
 html:not([data-theme="dark"]) .services-grid > li:first-child .service-card__h { color: #ffffff !important; }
 
-html:not([data-theme="dark"]) :is(.band-ink, .contact-band) .sc-lede { color: #14253c !important; }
-html:not([data-theme="dark"]) main .sc-lede { color: #1b2d47 !important; }
+html:not([data-theme="dark"]) main .sc-lede { color: var(--text-on-bone) !important; }
 
-html:not([data-theme="dark"]) .band-ink :is(.sc-display, h1, h2) em,
-html:not([data-theme="dark"]) .contact-band :is(.sc-display, h1, h2) em {
+html:not([data-theme="dark"]) .band-ink:not(.hero, .lab-top) :is(.sc-display, h1, h2) em {
   background-image: var(--grad-em) !important;
   -webkit-background-clip: text !important;
   background-clip: text !important;
@@ -5181,8 +5024,7 @@ html:not([data-theme="dark"]) .contact-band :is(.sc-display, h1, h2) em {
   color: var(--pw-accent) !important;
 }
 
-html:not([data-theme="dark"]) .sc-label,
-html:not([data-theme="dark"]) :is(.band-ink, .contact-band) .sc-label {
+html:not([data-theme="dark"]) .sc-label {
   color: var(--pw-label) !important;
   background: transparent !important;
 }
@@ -5614,7 +5456,7 @@ html[data-theme="dark"] #kontakt .contact-card__cover::after {
 }
 html[data-theme="dark"] #kontakt .contact-card__portrait { border-color: rgb(var(--c-ink2)); }
 html[data-theme="dark"] #kontakt .contact-card__claim {
-  background-image: linear-gradient(100deg, var(--pw-on-dark-2) 0%, var(--pw-on-dark) 100%) !important;
+  background-image: linear-gradient(100deg, var(--pw-on-dark2) 0%, var(--pw-on-dark) 100%) !important;
   color: var(--pw-on-dark) !important;
 }
 
@@ -5623,45 +5465,13 @@ html[data-theme="dark"] #kontakt .contact-card__claim {
   #team .brand-gallery__item:hover { transform: none; }
 }
 
-/* ===========================================================================
-   PALETTE - what the colour slider moves (src/lib/tone.ts). These are the
-   water defaults; the slider overrides them inline on <html> in the light
-   theme, from "Hell" (tints all but gone) through water to "Grün".
-   ========================================================================= */
-:root {
-  --pw-accent: #0b63a8;
-  --pw-accent-rgb: 11 99 168;
-  --pw-deep: #0a4f8a;
-  --pw-deep-rgb: 10 79 138;
-  --pw-mark: #1784c7;
-  --pw-mark-rgb: 23 132 199;
-  --pw-aqua: #1fa9d6;
-  --pw-aqua-rgb: 31 169 214;
-  --pw-label: #0a6fa8;
-  --pw-cta-hi: #0f74bf;
-  --pw-em-hi: #1590c9;
-  --pw-paper1: #f1f8fd;
-  --pw-paper1-rgb: 241 248 253;
-  --pw-paper2: #e3f1fa;
-  --pw-wash1: #eaf5fc;
-  --pw-wash2: #d9edf9;
-  --pw-hero: #f5fafe;
-  --pw-shot: #dbe9f4;
-  --pw-brick: #2b4570;
-  --pw-glow: 1;
-}
-/* the client's navy accent and the feature tile follow the slider too */
-html:not([data-theme="dark"]) { --brick: var(--pw-brick); }
+
+
 html:not([data-theme="dark"]) .services-grid > li:first-child .service-card { --card: var(--pw-brick); }
 html:not([data-theme="dark"]) .services-grid > li:first-child .service-card:hover .service-card__icon { color: var(--pw-brick); }
 
-/* ---- the slider ------------------------------------------------------------ */
 
-/* ===========================================================================
-   WORDMARK - the client's logo as outlines (components/brand/Logo.tsx).
-   ========================================================================= */
-:root { --logo-blue: #0b8ad0; --logo-navy: #173455; --logo-brick: #b95642; }
-html[data-theme="dark"] { --logo-blue: #3fb0ee; --logo-navy: #f2f6fb; }
+
 .logo { display: inline-flex; align-items: center; gap: 0; color: inherit; filter: none; }
 .logo__svg { display: block; height: 2.7rem; width: auto; overflow: visible; }
 .logo__blue { fill: var(--logo-blue); }
@@ -6064,7 +5874,7 @@ html[data-theme="dark"] .qv__card { background: rgb(var(--c-ink2)); box-shadow: 
 html[data-theme="dark"] .qv__t { color: #f2f6fb; }
 html[data-theme="dark"] .qv__lead { color: #e2eaf3; }
 html[data-theme="dark"] .qv__p, html[data-theme="dark"] .qv-facts dd { color: #b9c7d6; }
-html[data-theme="dark"] .qv__k { color: var(--pw-on-dark-2); }
+html[data-theme="dark"] .qv__k { color: var(--pw-on-dark2); }
 html[data-theme="dark"] .qv__x,
 html[data-theme="dark"] .qv__btn:not(.qv__btn--solid) { background: rgb(255 255 255 / 0.06); border-color: rgb(255 255 255 / 0.16); color: #f2f6fb; }
 html[data-theme="dark"] .qv__eq,
@@ -6076,8 +5886,8 @@ html[data-theme="dark"] .kit-card { background: rgb(var(--c-ink2)); border-color
 html[data-theme="dark"] .kit-card__art { background: linear-gradient(180deg, #eef5fb, #dceaf5); }
 html[data-theme="dark"] .kit-card__name { color: #f2f6fb; }
 html[data-theme="dark"] .kit-card__short { color: #b9c7d6; }
-html[data-theme="dark"] .kit-card__more { color: var(--pw-on-dark-2); }
-html[data-theme="dark"] :is(#ausruestung, #material) .kit-group__k { color: var(--pw-on-dark-2) !important; }
+html[data-theme="dark"] .kit-card__more { color: var(--pw-on-dark2); }
+html[data-theme="dark"] :is(#ausruestung, #material) .kit-group__k { color: var(--pw-on-dark2) !important; }
 
 /* ===========================================================================
    ANGEBOTSRECHNER - size of the job, not a price (QuoteCalculator).
@@ -6340,9 +6150,9 @@ html[data-theme="dark"] #rechner :is(.quote__big, .quote__how strong) { color: #
 html[data-theme="dark"] #rechner :is(.quote__big span, .quote__level span, .quote__list li, .quote__how li, .quote__note) { color: #c9d6e3 !important; }
 html[data-theme="dark"] #rechner :is(.quote__level, .quote__qty) { color: var(--pw-on-dark) !important; }
 html[data-theme="dark"] #rechner .quote__qty { background: rgb(255 255 255 / 0.06); }
-html[data-theme="dark"] #rechner .quote__k--plain { color: var(--pw-on-dark-2) !important; }
+html[data-theme="dark"] #rechner .quote__k--plain { color: var(--pw-on-dark2) !important; }
 html[data-theme="dark"] #rechner .quote__meter span { background: rgb(255 255 255 / 0.1); }
-html[data-theme="dark"] #rechner .quote__meter span.is-on { background: linear-gradient(180deg, var(--pw-on-dark-2), #1784c7); }
+html[data-theme="dark"] #rechner .quote__meter span.is-on { background: linear-gradient(180deg, var(--pw-on-dark2), #1784c7); }
 /* phones: the kit as a compact two-up grid; the quick view carries the detail */
 @media (max-width: 560px) {
   :is(#ausruestung, #material) .kit-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.65rem; }
@@ -6513,7 +6323,7 @@ html[data-theme="dark"] .hero-film__chapters button { color: #c9d6e3; }
 html[data-theme="dark"] .hero-film__chapters button[aria-current] { background: rgb(255 255 255 / 0.08); color: #ffffff; }
 html[data-theme="dark"] .hero-film__who > span { color: #c9d6e3; }
 html[data-theme="dark"] .hero-film__who strong { color: #ffffff; }
-html[data-theme="dark"] .hero-film__k { color: var(--pw-on-dark-2); }
+html[data-theme="dark"] .hero-film__k { color: var(--pw-on-dark2); }
 
 /* the owner under every quick view */
 .qv__owner {
@@ -6636,17 +6446,10 @@ html[data-theme="dark"] .ap-seg { background: rgb(255 255 255 / 0.06); border-co
 html[data-theme="dark"] .ap-seg button { color: #c9d6e3; }
 html[data-theme="dark"] .ap-seg button[aria-pressed="true"] { background: rgb(255 255 255 / 0.14); color: #ffffff; }
 
-/* ===========================================================================
-   SHARP TEXT - darker inks, heavier weights, justified running text.
-   No light shades: body #14253C, secondary #33435A (9:1 on white).
-   IBM Plex Sans (self-hosted, 100 to 700) leads; Segoe UI is the fallback.
-   ========================================================================= */
-:root {
-  --font-ui: var(--font-sans), "Segoe UI Variable Text", "Segoe UI", system-ui, Tahoma, Verdana, sans-serif;
-  --font-display: var(--font-sans), "Segoe UI Variable Display", "Segoe UI", system-ui, Tahoma, Verdana, sans-serif;
-}
-html:not([data-theme="dark"]),
-html:not([data-theme="dark"]) :is(.band-ink, .contact-band, .faq-ask, .surface-pop) {
+
+html:not([data-theme="dark"]) :is(.band-ink:not(.hero),
+.faq-ask,
+.surface-pop) {
   --c-bone: 20 37 60;
   --c-soft: 51 67 90;
   --ink-on-surface: #14253c;
@@ -6949,7 +6752,7 @@ html[data-theme="dark"] .svc-hero { background: rgb(var(--c-ink)); border-bottom
 html[data-theme="dark"] :is(.svc-btn:not(.svc-btn--solid), .svc-hero__chip, .svc-facts > div, .svc-signs li, .svc-step) { background: rgb(255 255 255 / 0.05); border-color: rgb(255 255 255 / 0.12); color: #f2f6fb !important; }
 html[data-theme="dark"] .svc-hero__chip, html[data-theme="dark"] .svc-btn small, html[data-theme="dark"] .svc-signs__cta { color: var(--pw-on-dark) !important; }
 html[data-theme="dark"] :is(.svc-hero__trust li, .svc-signs__k, .svc-step__t, .svc-facts dd, .svc-signs li) { color: #f2f6fb !important; }
-html[data-theme="dark"] .svc-facts dt { background-image: linear-gradient(100deg, var(--pw-on-dark), var(--pw-on-dark-2)); }
+html[data-theme="dark"] .svc-facts dt { background-image: linear-gradient(100deg, var(--pw-on-dark), var(--pw-on-dark2)); }
 html[data-theme="dark"] .svc-signs { background: rgb(255 255 255 / 0.03); border-color: rgb(255 255 255 / 0.1); }
 html[data-theme="dark"] :is(.svc-steps, .svc-prose, .svc-faq) { background: transparent; }
 html[data-theme="dark"] .chapnav { background: rgb(var(--c-ink) / 0.92); border-bottom-color: rgb(255 255 255 / 0.1); }
@@ -7137,7 +6940,7 @@ html[data-theme="dark"] :is(.lab-stats dd, .lab-chapter__l, .labpanel__h, .labpa
 html[data-theme="dark"] .labtabs__tab { color: #d7e2ee; }
 html[data-theme="dark"] :is(.labpanel__rx > li, .labpanel__rx-eq) { background: rgb(255 255 255 / 0.05); border-color: rgb(255 255 255 / 0.1); color: #f2f6fb !important; }
 html[data-theme="dark"] .labpanel__k, html[data-theme="dark"] .labpanel__out span { color: var(--pw-on-dark) !important; }
-html[data-theme="dark"] .lab-stats dt { background-image: linear-gradient(100deg, var(--pw-on-dark), var(--pw-on-dark-2)); }
+html[data-theme="dark"] .lab-stats dt { background-image: linear-gradient(100deg, var(--pw-on-dark), var(--pw-on-dark2)); }
 
 /* ===========================================================================
    GALERIE - film wall, film quick view, feedback.
@@ -7276,7 +7079,7 @@ html[data-theme="dark"] .qv-film__chapters li { background: rgb(255 255 255 / 0.
 html[data-theme="dark"] .svc-btn--solid small { color: #ffffff !important; }
 html[data-theme="dark"] .lab-chapter__n { color: var(--pw-on-dark); }
 html[data-theme="dark"] .labtabs__tab[aria-selected="true"],
-html[data-theme="dark"] .chapnav .chapnav__a[aria-current] { background: linear-gradient(118deg, #0a4f8a 0%, #0b5d9e 100%); }
+html[data-theme="dark"] .chapnav .chapnav__a[aria-current] { background: var(--action); }
 @media (max-width: 639px) {
   .svc-hero__cta { display: grid; grid-template-columns: 1fr; }
   .svc-btn { width: 100%; }
@@ -7627,7 +7430,7 @@ html[data-theme="dark"] .anim {
   --cap-bg: rgb(255 255 255 / 0.04);
   --cap-line: rgb(255 255 255 / 0.12);
   --cap-on-bg: rgb(166 220 250 / 0.12);
-  --cap-on-line: var(--pw-on-dark-2);
+  --cap-on-line: var(--pw-on-dark2);
 }
 html[data-theme="dark"] .anim__label { color: #f2f6fb !important; }
 html[data-theme="dark"] .anim__label span { background: rgb(255 255 255 / 0.08); color: var(--pw-on-dark); }
@@ -7984,7 +7787,7 @@ html[data-theme="dark"] .factchips__i { background: rgb(255 255 255 / 0.08); col
 }
 html[data-theme="dark"] .cityf__card { background: rgb(255 255 255 / 0.04); border-color: rgb(255 255 255 / 0.12); color: #f2f6fb !important; }
 html[data-theme="dark"] .cityf__logo { background: rgb(255 255 255 / 0.05); }
-html[data-theme="dark"] .cityf__logo path { fill: rgb(124 196 242 / 0.25); stroke: var(--pw-on-dark-2); }
+html[data-theme="dark"] .cityf__logo path { fill: rgb(124 196 242 / 0.25); stroke: var(--pw-on-dark2); }
 html[data-theme="dark"] .cityf__plz { color: var(--pw-on-dark); }
 html[data-theme="dark"] .cityf__time { background: rgb(52 211 153 / 0.14); color: #6ee7b7; }
 html[data-theme="dark"] #mehr .more__area-k { color: #f2f6fb !important; }
@@ -8097,7 +7900,9 @@ html[data-theme="dark"] .qv-city__plz > span { background: rgb(255 255 255 / 0.0
 }
 #schritte .steps4__t { margin: 0 !important; font-size: 1.15rem !important; line-height: 1.25 !important; text-align: center !important; color: #071628 !important; }
 #schritte .steps4__d { margin: 0.55rem 0 0 !important; font-size: 0.96rem !important; line-height: 1.55 !important; text-align: start !important; hyphens: manual !important; }
-.steps4__cta { display: grid; gap: 0.45rem; margin-top: 0.9rem; }
+/* the three ways in: one row, centred under the four steps */
+.steps4__cta { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.75rem; margin-top: 2.25rem; }
+.steps4__cta .steps4__btn { flex: 0 1 15.5rem; }
 .steps4__btn {
   display: flex;
   align-items: center;
@@ -8124,13 +7929,14 @@ html[data-theme="dark"] .qv-city__plz > span { background: rgb(255 255 255 / 0.0
 }
 @media (max-width: 639px) {
   .steps4__list { grid-template-columns: minmax(0, 1fr); gap: 1rem; margin-top: 1.4rem !important; }
-  #schritte .steps4__item { display: grid; grid-template-columns: 6.5rem minmax(0, 1fr); grid-template-areas: "art head" "art text" "cta cta"; column-gap: 0.9rem; align-items: start; }
+  #schritte .steps4__item { display: grid; grid-template-columns: 6.5rem minmax(0, 1fr); grid-template-areas: "art head" "art text"; column-gap: 0.9rem; align-items: start; }
   .steps4__art { grid-area: art; aspect-ratio: 1; border-radius: 16px; }
   .steps4__head { grid-area: head; display: flex; align-items: center; gap: 0.55rem; margin: 0.15rem 0 0; }
   .steps4__n { width: 2rem; height: 2rem; font-size: 0.95rem; box-shadow: 0 0 0 4px rgb(var(--pw-accent-rgb) / 0.12); }
   #schritte .steps4__t { font-size: 1.05rem !important; text-align: start !important; }
   #schritte .steps4__d { grid-area: text; margin-top: 0.35rem !important; font-size: 0.9rem !important; }
-  .steps4__cta { grid-area: cta; grid-template-columns: minmax(0, 1fr); }
+  .steps4__cta { flex-direction: column; align-items: stretch; gap: 0.5rem; margin-top: 1.4rem; }
+  .steps4__cta .steps4__btn { flex: none; }
   .steps4__cta .steps4__btn:first-child { display: none; }
 }
 @media (prefers-reduced-motion: no-preference) {
@@ -8348,7 +8154,7 @@ html[data-theme="dark"] .site-footer__claim { color: var(--pw-on-dark); }
 html[data-theme="dark"] :is(.site-footer__about, .site-footer__addr, .site-footer__base) { color: #c9d6e3; }
 html[data-theme="dark"] .site-footer__h { color: #ffffff; }
 html[data-theme="dark"] .site-footer__grp li a { color: #d7e2ee; }
-html[data-theme="dark"] .site-footer__links { background: rgb(255 255 255 / 0.04); border-color: rgb(255 255 255 / 0.1); box-shadow: none; }
+html[data-theme="dark"] .site-footer__links { background: var(--surface); border-color: rgb(255 255 255 / 0.1); box-shadow: none; }
 html[data-theme="dark"] .site-footer__links > nav + nav { border-top-color: rgb(255 255 255 / 0.1); }
 html[data-theme="dark"] .site-footer__line { background: rgb(255 255 255 / 0.08); border-color: rgb(255 255 255 / 0.16); color: #ffffff !important; }
 html[data-theme="dark"] .site-footer__line small { color: var(--pw-on-dark); }
@@ -8390,11 +8196,7 @@ html[data-theme="dark"] .site-footer__base .site-footer__addr { color: #e2eaf3; 
 }
 
 
-/* ===========================================================================
-   COLOURFUL ICONS - each service, figure, link card and town its own colour;
-   on phones the swipe rows become compact icon tiles, everything in view.
-   ========================================================================= */
-:root { --ic-green: #15803d; --ic-red: #b42318; --ic-water: #0b6fb3; }
+
 .services-grid > li:nth-child(3n + 1) .service-card { --ic: var(--ic-green); }
 .services-grid > li:nth-child(3n + 2) .service-card { --ic: var(--ic-red); }
 .services-grid > li:nth-child(3n) .service-card { --ic: var(--ic-water); }
@@ -8420,7 +8222,7 @@ html[data-theme="dark"] .site-footer__base .site-footer__addr { color: #e2eaf3; 
 html[data-theme="dark"] .service-card[data-svc] .service-card__icon { color: color-mix(in srgb, var(--ic) 62%, #ffffff) !important; background: color-mix(in srgb, var(--ic) 24%, transparent) !important; border-color: color-mix(in srgb, var(--ic) 45%, transparent) !important; }
 html[data-theme="dark"] :is(.factchips__i, .more__ico) { background: color-mix(in srgb, var(--ic, var(--pw-accent)) 24%, transparent); color: color-mix(in srgb, var(--ic, var(--pw-accent)) 62%, #ffffff); }
 html[data-theme="dark"] .more__k { color: color-mix(in srgb, var(--ic, var(--pw-on-dark)) 55%, #ffffff); }
-html[data-theme="dark"] .cityf__logo path { fill: color-mix(in srgb, var(--ic, var(--pw-on-dark-2)) 30%, transparent); stroke: color-mix(in srgb, var(--ic, var(--pw-on-dark-2)) 65%, #ffffff); }
+html[data-theme="dark"] .cityf__logo path { fill: color-mix(in srgb, var(--ic, var(--pw-on-dark2)) 30%, transparent); stroke: color-mix(in srgb, var(--ic, var(--pw-on-dark2)) 65%, #ffffff); }
 html[data-theme="dark"] :is(.mobile-contact, .site-footer__act, .steps4__cta) a[href^="tel:"] svg { color: #4ade80 !important; }
 html[data-theme="dark"] :is(.mobile-contact, .site-footer__act, .steps4__cta) a[href*="wa.me"] svg { color: #f87171 !important; }
 html[data-theme="dark"] .steps4__cta a:is([href^="tel:"], [href*="wa.me"]) .steps4__btn-i { background: rgb(255 255 255 / 0.08); }
@@ -8627,23 +8429,8 @@ html[data-theme="dark"] .svc-fold__i { background: color-mix(in srgb, var(--ic) 
 }
 
 
-/* ===========================================================================
-   SITE COLOUR - Wasser, Grün, Rot or any colour (src/lib/tone.ts). The
-   background stays white (dark in the dark theme); the colour reaches the
-   accents. In the dark theme the accent text takes light tints of it.
-   ========================================================================= */
-:root {
-  --pw-on-dark: #a6dcfa;
-  --pw-on-dark-rgb: 166 220 250;
-  --pw-on-dark-2: #7cc4f2;
-}
-html[data-theme="dark"] {
-  --c-accent-deep: var(--pw-on-dark-rgb);
-  --c-mint: var(--pw-on-dark-rgb);
-  --c-emerald: var(--pw-on-dark-rgb);
-  --grad: var(--pw-accent);
-  --grad-cta: linear-gradient(118deg, var(--pw-deep) 0%, var(--pw-accent) 52%, var(--pw-cta-hi) 100%);
-}
+
+
 
 /* the controls: three swatches, a picker, and the colour wheel slider */
 .hue-wrap { display: grid; gap: 0.7rem; }
@@ -8701,21 +8488,7 @@ html[data-theme="dark"] .hue-wrap--compact { background: rgb(255 255 255 / 0.06)
 html[data-theme="dark"] .hue__i { color: var(--pw-on-dark); }
 html[data-theme="dark"] .ap__hint { color: #c9d6e3; }
 @media (prefers-reduced-motion: reduce) { .hue-swatch, .hue__range::-webkit-slider-thumb { transition: none; } .hue-swatch:hover { transform: none; } }
-/* dark theme: every accent token takes the chosen colour's light tints */
-html[data-theme="dark"] {
-  --emerald-deep: var(--pw-on-dark);
-  --electric: var(--pw-on-dark-2);
-  --royal: var(--pw-on-dark-2);
-  --royal-2: var(--pw-on-dark);
-  --royal-deep: var(--pw-on-dark-2);
-  --aqua: var(--pw-on-dark);
-  --aqua-deep: var(--pw-on-dark-2);
-  --grad-em: linear-gradient(95deg, var(--pw-on-dark) 0%, var(--pw-on-dark-2) 100%);
-  --grad-em-plate: linear-gradient(95deg, var(--pw-on-dark) 0%, var(--pw-on-dark-2) 100%);
-  --grad-tile:
-    radial-gradient(64% 54% at 100% 0%, rgb(var(--pw-aqua-rgb) / 0.32) 0%, transparent 62%),
-    linear-gradient(135deg, var(--pw-deep) 0%, var(--pw-cta-hi) 100%);
-}
+
 
 
 /* ===========================================================================
@@ -8858,3 +8631,389 @@ html[data-theme="dark"] .cb__opt small, html[data-theme="dark"] #check .cb__note
 .cb__opt > span > span { display: block; }
 .cb__opt:has(input:disabled) { opacity: 0.4; cursor: not-allowed; }
 .cb__opt:has(input:disabled) input { cursor: not-allowed; }
+
+/* ===========================================================================
+   ON THE PLATE - what sits on the deep-water plate (the hero, the Lab
+   opener) in the dark theme: headings and body in on-plate, the eyebrow and
+   the emphasised words in on-plate-accent, outlined controls in
+   on-plate-soft. Written after the light-theme rules so it outranks them.
+   ========================================================================= */
+html .band-ink:is(.hero, .lab-top) .sc-label {
+  color: var(--on-plate-accent) !important;
+  background: transparent !important;
+}
+html .band-ink:is(.hero, .lab-top) :is(.sc-display, h1, h2, h3) em {
+  color: var(--on-plate-accent) !important;
+  -webkit-text-fill-color: var(--on-plate-accent) !important;
+  background: none !important;
+}
+html .band-ink:is(.hero, .lab-top) .hero__btn--ghost {
+  color: var(--on-plate);
+  background: transparent;
+  border-color: var(--on-plate-soft);
+}
+html .band-ink:is(.hero, .lab-top) .hero__btn--ghost:hover {
+  background: var(--plate-2);
+  border-color: var(--on-plate);
+}
+html .band-ink:is(.hero, .lab-top) .hero__btn--ghost :is(span, strong) { color: inherit !important; }
+html .band-ink:is(.hero, .lab-top) .hero__facts { border-top-color: var(--plate-2); }
+html .band-ink:is(.hero, .lab-top) .hero__facts li { color: var(--on-plate-soft) !important; }
+/* the image film's chapter list beside the hero */
+html .band-ink:is(.hero, .lab-top) .hero-film__k,
+html .band-ink:is(.hero, .lab-top) .hero-film__chapters button > span { color: var(--on-plate-accent); }
+html .band-ink:is(.hero, .lab-top) .hero-film__chapters button:not([aria-current]) { color: var(--on-plate-soft); }
+html .band-ink:is(.hero, .lab-top) .hero-film__chapters button:not([aria-current]):hover { color: var(--on-plate); }
+
+/* ===========================================================================
+   FOCUS - always visible (design system): a 2px solid ring in the focus
+   colour with a 2px offset on every control. Text fields instead turn
+   their border to the focus colour with a 1px ring. !important because
+   many controls carry a local outline-none.
+   ========================================================================= */
+:focus-visible {
+  outline: 2px solid var(--focus) !important;
+  outline-offset: 2px !important;
+}
+:is(input:not([type="checkbox"], [type="radio"], [type="range"], [type="color"]), select, textarea):focus-visible {
+  outline: none !important;
+  border-color: var(--focus) !important;
+  box-shadow: 0 0 0 1px var(--focus) !important;
+}
+/* a visually hidden radio or checkbox: the ring goes on the label that shows it */
+label:has(> input:is([type="radio"], [type="checkbox"]):focus-visible) {
+  outline: 2px solid var(--focus) !important;
+  outline-offset: 2px !important;
+}
+
+/* ===========================================================================
+   FLAT - the design system has no gradients, glows or glass: the plate is
+   one colour, buttons and the feature tile are the flat action blue,
+   emphasis is the accent. Written last so it outranks the older layers.
+   ========================================================================= */
+/* plates and bands: one colour, no light source */
+.band-ink,
+.contact-band { background-image: none !important; }
+.contact-band { background-color: var(--plate) !important; box-shadow: none; }
+html:not([data-theme="dark"]) .faq-ask { background: var(--surface-tint) !important; }
+.more,
+.steps4,
+.site-footer { background: transparent; }
+.site-footer::before { background: var(--accent); }
+.steps4__item:not(:last-child) .steps4__head::after { background: var(--line-strong); }
+
+/* buttons: the action fill, darker on hover, no shine sweep */
+.btn-shine,
+html:not([data-theme="dark"]) .hero__btn--solid { background: var(--action) !important; color: var(--on-action) !important; filter: none !important; }
+.btn-shine:hover,
+html:not([data-theme="dark"]) .hero__btn--solid:hover { background: var(--action-hover) !important; filter: none !important; }
+.btn-shine::after { content: none !important; }
+.btn-shine :is(span, strong, svg) { color: inherit !important; }
+
+/* the feature tile: flat action with on-action type */
+.services-grid > li:first-child .service-card,
+.services-grid > li:first-child .service-card:hover { background: var(--action) !important; filter: none !important; }
+
+/* figures and the contact claim: accent text, not gradient text */
+.svc-facts dt,
+.lab-stats dt,
+#kontakt .contact-card__claim {
+  background: none !important;
+  -webkit-text-fill-color: currentColor !important;
+  color: var(--accent) !important;
+}
+html:not([data-theme="dark"]) .band-ink:not(.hero, .lab-top) :is(.sc-display, h1, h2) em {
+  background: none !important;
+  -webkit-text-fill-color: currentColor !important;
+}
+/* the service and Lab pages: flat openers and sections, flat panels */
+.svc-hero,
+.lab-hero,
+.svc-tools,
+.svc-steps,
+.lab-methods { background: transparent !important; }
+.svc-fold__sum,
+.anim { background: var(--surface) !important; }
+.svc-signs { background: var(--surface-tint) !important; }
+/* heading emphasis is the accent (an older rule set it to the body ink and
+   hid that behind gradient text) */
+:root main :is(h1, h2, h3) em,
+:root .sc-display em {
+  color: var(--accent) !important;
+  -webkit-text-fill-color: currentColor !important;
+  background: none !important;
+  font-style: normal;
+}
+html[data-theme] #kontakt .contact-card__claim { background-image: none !important; color: var(--accent) !important; }
+.hero__brand::after { content: none; }
+
+/* the light theme's hero is white with dark type: emphasis in the accent */
+html:not([data-theme="dark"]) .band-ink:not(.hero) :is(.sc-display, h1, h2, h3) em {
+  color: var(--accent) !important;
+  -webkit-text-fill-color: currentColor !important;
+}
+
+/* ===========================================================================
+   PLAIN TEXT, NO LABEL SHAPES - figures are a bullet list on the section's
+   own background; running text and ledes are justified; the small labels
+   above headings stay on one line (LabelFit shrinks them on narrow screens).
+   ========================================================================= */
+.factchips {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, max-content)) !important;
+  gap: 0.4rem 2.25rem !important;
+}
+.factchips > :is(.factchips__label, .factchips__label--plain) {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: flex-start !important;
+  gap: 0.65rem !important;
+  min-height: 0 !important;
+  padding: 0 !important;
+  background: none !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  font-size: 1rem !important;
+  line-height: 1.5 !important;
+  text-align: start !important;
+  color: var(--ink) !important;
+}
+.factchips > :is(.factchips__label, .factchips__label--plain)::before {
+  content: "" !important;
+  flex: none;
+  width: 0.45rem;
+  height: 0.45rem;
+  margin-top: 0.55em;
+  border-radius: 50%;
+  background: var(--accent) !important;
+}
+.factchips__i { display: none !important; }
+.factchips__t strong,
+.factchips__label--plain .factchips__t strong { display: inline !important; font-size: inherit !important; color: var(--ink-strong) !important; }
+@media (max-width: 639px) {
+  .factchips,
+  .factchips.svc-over__chips,
+  .factchips.lab-chips { grid-template-columns: minmax(0, 1fr) !important; gap: 0.3rem !important; }
+}
+
+/* ledes read as running text: justified and hyphenated */
+main p.sc-lede { text-align: justify !important; hyphens: auto; -webkit-hyphens: auto; }
+
+/* the small labels above headings: always one line */
+.sc-label,
+.hero-film__k { white-space: nowrap !important; }
+
+/* the hero's WhatsApp button shows the WhatsApp icon */
+.hero__btn--wa { display: inline-grid !important; grid-template-columns: auto minmax(0, 1fr); column-gap: 0.7rem; align-items: center; }
+.hero__btn--wa .hero__btn-wa { grid-row: 1 / span 2; width: 1.55rem; height: 1.55rem; color: var(--success); }
+.hero__btn--wa :is(.hero__btn-k, .hero__btn-v) { grid-column: 2; }
+
+/* the footer: only the number, and WhatsApp as an icon */
+.site-footer__act--plain { display: flex !important; align-items: center; gap: 0.75rem; flex-wrap: nowrap !important; }
+.site-footer__num {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-height: 44px;
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--ink-strong) !important;
+  text-decoration: none !important;
+}
+.site-footer__num svg { width: 1.15rem; height: 1.15rem; color: var(--success) !important; }
+.site-footer__wa { display: grid; place-items: center; width: 44px; height: 44px; color: var(--success) !important; }
+.site-footer__wa svg { width: 1.6rem; height: 1.6rem; }
+.site-footer__num:hover { color: var(--accent) !important; }
+.site-footer__wa:hover { color: var(--accent) !important; }
+/* a link inside a label (the SchimmelPeter® partner link) takes the label's size */
+:is(.sc-label, .hero-film__k) * { font-size: inherit !important; letter-spacing: inherit !important; }
+/* phones: the two hero buttons stack, so each label has room beside its icon */
+@media (max-width: 639px) {
+  .hero__cta { display: grid !important; grid-template-columns: minmax(0, 1fr) !important; gap: 0.6rem !important; }
+  .hero__cta .hero__btn { width: 100% !important; min-width: 0 !important; }
+}
+
+/* ---- devices: nothing may widen the page past the screen ------------------ */
+/* the fact list shares the width; a long fact wraps inside its column */
+.factchips { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+.factchips__t { min-width: 0; overflow-wrap: anywhere; }
+@media (max-width: 639px) {
+  .factchips,
+  .factchips.svc-over__chips,
+  .factchips.lab-chips { grid-template-columns: minmax(0, 1fr) !important; }
+}
+/* a one-line label never grows its column: LabelFit shrinks the text instead */
+.sc-label,
+.hero-film__k { display: block; max-width: 100%; min-width: 0; overflow: hidden; }
+.hero-film__side { min-width: 0; }
+.svc-hero__label { margin: 0.9rem 0 0 !important; }
+
+/* narrow screens: running text and ledes read left-aligned (justifying a
+   phone-width column opens wide gaps between words); wider screens justify */
+@media (max-width: 767px) {
+  main :is(p, li, dd, blockquote),
+  main p.sc-lede { text-align: start !important; }
+}
+/* grid and flex columns may shrink below their widest one-line label */
+:is(.svc-hero__grid, .hero__grid, .hero-film, .svc-hero__copy) > * { min-width: 0; }
+/* facts wrap inside their column (an older rule kept each on one line) */
+.factchips > li,
+.factchips__t { white-space: normal !important; }
+/* the film's side column: its inner grid takes the column's width, not its widest item */
+.hero-film__side { grid-template-columns: minmax(0, 1fr); }
+/* phones: a long German word in a heading may hyphenate or break instead of
+   pushing the page wider than the screen */
+@media (max-width: 639px) {
+  main :is(h1, h2, h3) { overflow-wrap: break-word; -webkit-hyphens: auto; hyphens: auto; }
+}
+/* a one-line label takes the width it is given and never sizes its container
+   (otherwise a long label widens grid cards past the screen) */
+.sc-label,
+.hero-film__k { contain: inline-size; }
+/* the film's chapter list and the Lab's proof card stay inside a 320px screen */
+.hero-film__chapters { grid-template-columns: minmax(0, 1fr); }
+.hero-film__chapters button { min-width: 0; overflow-wrap: anywhere; }
+.hero-film__who { min-width: 0; }
+.hero-film__who > * { min-width: 0; overflow-wrap: anywhere; }
+.proof-card,
+.proof-chart { min-width: 0; max-width: 100%; }
+
+/* ===========================================================================
+   CINEMATIC HERO - the image film runs full width behind the heading
+   (HeroCine), in both themes: a dark shade over it, white type on top.
+   ========================================================================= */
+.hero.band-ink {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  min-height: min(92svh, 54rem);
+  display: flex;
+  align-items: center;
+  background: #0b111a !important;
+  border-bottom: 0 !important;
+}
+.hero.band-ink > .hero__stage { width: 100%; }
+.hero-cine { position: absolute; inset: 0; z-index: -1; background: #0b111a; }
+.hero-cine__v { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 70% 50%; }
+.hero-cine__shade {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgb(7 12 20 / 0.82) 0%, rgb(7 12 20 / 0.58) 36%, rgb(7 12 20 / 0.12) 62%, transparent 100%),
+    linear-gradient(0deg, rgb(7 12 20 / 0.45) 0%, transparent 28%);
+}
+.hero.band-ink .hero__back { display: none; }
+.hero.band-ink .hero__copy { max-width: 44rem; }
+/* white type and light accents over the film, whatever the theme */
+.hero.band-ink :is(h1, .sc-display) { color: #ffffff !important; text-shadow: 0 2px 24px rgb(0 0 0 / 0.35); }
+.hero.band-ink .sc-lede { color: #e6ecf5 !important; }
+.hero.band-ink .hero__btn-wa { color: #6fd39a; }
+@media (max-aspect-ratio: 4/5) {
+  .hero-cine__v { object-position: 50% 30%; }
+  .hero-cine__shade { background: linear-gradient(180deg, rgb(7 12 20 / 0.12) 0%, rgb(7 12 20 / 0.45) 34%, rgb(7 12 20 / 0.72) 70%, rgb(7 12 20 / 0.84) 100%); }
+  .hero.band-ink { min-height: min(78svh, 48rem); }
+}
+@media (prefers-reduced-motion: reduce) { .hero-cine__v { animation: none; } }
+
+/* phones: the film's caption (not a label above a heading) may take two lines
+   rather than be cut */
+@media (max-width: 639px) {
+  .hero-film__k { white-space: normal !important; overflow: visible; contain: none; }
+}
+
+/* the film's pause / play button, bottom right of the hero */
+.hero-cine__btn {
+  position: absolute;
+  right: max(1rem, env(safe-area-inset-right));
+  bottom: 1rem;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid rgb(255 255 255 / 0.45);
+  background: rgb(7 12 20 / 0.45);
+  color: #ffffff;
+  cursor: pointer;
+}
+.hero-cine__btn svg { width: 1.1rem; height: 1.1rem; }
+.hero-cine__btn:hover { background: rgb(7 12 20 / 0.7); }
+@media (max-width: 639px) {
+  /* phones: below the facts, in the flow, not under the fixed contact bar */
+  .hero.band-ink { flex-direction: column; align-items: stretch; }
+  .hero-cine__btn { position: relative; right: auto; bottom: auto; order: 2; align-self: flex-end; margin: 0 1.25rem 1.25rem 0; }
+}
+
+/* ===========================================================================
+   APPLE-GRADE TYPE, SPACE AND MOTION - one calm scale, generous air.
+   - Type: the Apple system font (SF Pro) on Apple devices, IBM Plex Sans
+     everywhere else. Headlines large, tight and semibold; body 17px on
+     1.5; ledes 21px in the secondary ink at a reading measure.
+   - Space: sections breathe (up to 160px), copy never runs wider than
+     its measure.
+   - Motion: one easing curve; content fades up once as it scrolls into
+     view (components/ui/Reveal.tsx); nothing moves with "reduce motion".
+   ========================================================================= */
+:root {
+  --font-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", var(--font-plex), "Segoe UI", system-ui, sans-serif;
+  --ease-apple: cubic-bezier(0.25, 0.1, 0.25, 1);
+  --ease-out-apple: cubic-bezier(0.22, 1, 0.36, 1);
+  --fs-h1: clamp(2.5rem, 1.45rem + 3.9vw, 4.5rem);
+  --fs-h2: clamp(2rem, 1.35rem + 2.5vw, 3.5rem);
+  --fs-h3: clamp(1.3rem, 1.15rem + 0.6vw, 1.65rem);
+  --fs-h4: 1.1875rem;
+}
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+body { font-family: var(--font-sans) !important; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; text-rendering: optimizeLegibility; }
+
+/* headlines: large, tight, semibold */
+main h1:not(.sc-label) { line-height: 1.06 !important; letter-spacing: -0.028em !important; font-weight: 600 !important; }
+main h2:not(.sc-label) { line-height: 1.08 !important; letter-spacing: -0.024em !important; font-weight: 600 !important; }
+main h3:not(.sc-label) { line-height: 1.2 !important; letter-spacing: -0.014em !important; font-weight: 600 !important; }
+main h4:not(.sc-label) { line-height: 1.3 !important; letter-spacing: -0.01em !important; font-weight: 600 !important; }
+.hero.band-ink .hero__title { font-size: clamp(2.6rem, 1.5rem + 4.2vw, 4.75rem) !important; line-height: 1.04 !important; letter-spacing: -0.032em !important; }
+.svc-hero__title { font-size: clamp(2.3rem, 1.4rem + 3.2vw, 4rem) !important; line-height: 1.05 !important; letter-spacing: -0.03em !important; }
+
+/* the lede: one size up, secondary ink, a reading measure */
+main .sc-lede {
+  font-size: clamp(1.1875rem, 1.1rem + 0.35vw, 1.3125rem) !important;
+  line-height: 1.42 !important;
+  letter-spacing: -0.012em;
+  font-weight: 400 !important;
+  color: var(--ink-soft) !important;
+  max-width: 40em;
+}
+.hero.band-ink .sc-lede { color: rgb(255 255 255 / 0.86) !important; }
+
+/* body copy: 17px on 1.5 */
+main :is(p, li, dd):not(.sc-lede):not(.sc-label):not([class*="font-mono"]):not([class*="text-xs"]):not([class*="kicker"]) { line-height: 1.5; }
+main .sc-body { font-size: 1.0625rem !important; line-height: 1.5 !important; color: var(--ink-soft) !important; max-width: 42em; }
+
+/* space: sections breathe; a heading block sits clear of what follows */
+.sc-section { padding-block: clamp(5rem, 2.75rem + 6.5vw, 10rem); }
+.sc-section > .sc-wrap > :is(h2, .sc-display) + :is(.sc-lede, .sc-body, p) { margin-top: 1rem; }
+
+/* motion: one curve for every control and card */
+:is(a, button, .service-card, .more__card, .city-card, .faq-card, .kit-card, .steps4__btn) {
+  transition-timing-function: var(--ease-apple);
+}
+:is(.service-card, .more__card, .kit-card, .city-card) { transition: transform 420ms var(--ease-out-apple), box-shadow 420ms var(--ease-out-apple); }
+@media (hover: hover) {
+  :is(.service-card, .more__card, .kit-card, .city-card):hover { transform: translateY(-4px); }
+}
+
+/* scroll reveal (Reveal.tsx adds .rv to what starts below the fold) */
+.rv { opacity: 0; transform: translateY(24px); transition: opacity 900ms var(--ease-out-apple), transform 900ms var(--ease-out-apple); transition-delay: var(--rv-delay, 0ms); }
+.rv.rv-in,
+.rv:focus-within { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) { .rv { opacity: 1; transform: none; transition: none; } }
+/* phones: a long German compound in a heading breaks rather than widening the page */
+@media (max-width: 639px) {
+  main :is(h1, h2, h3) { overflow-wrap: anywhere; }
+}
+/* keyboard focus reveals its block at once */
+.rv:focus-within { transition: none; }

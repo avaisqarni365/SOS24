@@ -112,7 +112,7 @@ function WallSvg({ active, title }: { active: number; title: string }) {
     className: "motion-safe:transition-opacity motion-safe:duration-500",
   });
   return (
-    <svg viewBox="0 0 600 460" className="h-auto w-full rounded-2xl" role="img" aria-label={title}>
+    <svg data-i18n="" viewBox="0 0 600 460" className="h-auto w-full rounded-2xl" role="img" aria-label={title}>
       <defs>
         <radialGradient id="mp-spot">
           <stop offset="0" stopColor="#24528c" stopOpacity="0.95" />
@@ -192,7 +192,7 @@ function DepthSvg({ methods }: { methods: MethodKey[] }) {
   const on = (k: MethodKey) => methods.includes(k);
   const col = (k: MethodKey) => (on(k) ? "currentColor" : "#5b665f");
   return (
-    <svg viewBox="0 0 360 200" className="h-auto w-full" role="img" aria-label="Messtiefe: welche Methode wo im Wandquerschnitt misst">
+    <svg data-i18n="" viewBox="0 0 360 200" className="h-auto w-full" role="img" aria-label="Messtiefe: welche Methode wo im Wandquerschnitt misst">
       <rect x="30" y="0" width="70" height="200" fill="#d8d1c2" opacity="0.85" />
       <rect x="100" y="0" width="120" height="200" fill="#8a5a46" opacity="0.85" />
       <rect x="220" y="0" width="140" height="200" fill="#6d4536" opacity="0.85" />
@@ -269,7 +269,7 @@ export default function MoisturePatterns() {
             onClick={() => setActive(i)}
             className={`min-h-[44px] rounded-full border px-4 py-2 text-sm font-semibold motion-safe:transition-colors ${
               active === i
-                ? "border-accent-deep bg-accent-deep text-[var(--ink)]"
+                ? "border-accent-deep bg-accent-deep text-[var(--ground)]"
                 : "border-line/20 text-[var(--bone)] hover:border-accent-deep"
             }`}
           >
@@ -318,7 +318,7 @@ export default function MoisturePatterns() {
           <p className="mt-2 text-sm text-[var(--bone-2)]">{p.next}</p>
           <a
             href={p.href}
-            className="mt-5 inline-flex min-h-[48px] w-full items-center justify-between gap-3 rounded-full bg-[var(--bone)] px-5 py-3 text-sm font-semibold text-[var(--ink)] hover:bg-surface"
+            className="mt-5 inline-flex min-h-[48px] w-full items-center justify-between gap-3 rounded-full bg-[var(--bone)] px-5 py-3 text-sm font-semibold text-[var(--ground)] hover:bg-surface"
           >
             {p.cta} <span aria-hidden="true">→</span>
           </a>

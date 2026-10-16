@@ -8,7 +8,7 @@ import type { Cause } from "@/data/causes";
 
 function Section({ active, causes: CAUSES }: { active: number; causes: Cause[] }) {
   return (
-    <svg viewBox="0 0 1000 620" className="h-auto w-full" role="img" aria-label="Querschnitt durch einen Keller mit vier Ursachen für Feuchtigkeit">
+    <svg data-i18n="" viewBox="0 0 1000 620" className="h-auto w-full" role="img" aria-label="Querschnitt durch einen Keller mit vier Ursachen für Feuchtigkeit">
       <defs>
         <linearGradient id="ch-damp" x1="0" y1="1" x2="0" y2="0">
           <stop offset="0" stopColor="#3b6ea8" stopOpacity="0.8" />
@@ -107,7 +107,7 @@ export default function CausesHouseClient({ causes: CAUSES }: { causes: Cause[] 
           <p className="text-[var(--bone)]">
             <strong>Lösung:</strong> {c.fix}
           </p>
-          <a href={c.href} className="inline-flex min-h-[48px] items-center justify-between rounded-full bg-[var(--bone)] px-5 text-sm font-semibold text-[var(--ink)] hover:bg-surface">
+          <a href={c.href} className="inline-flex min-h-[48px] items-center justify-between rounded-full bg-[var(--bone)] px-5 text-sm font-semibold text-[var(--ground)] hover:bg-surface">
             {c.cta} <span aria-hidden="true">→</span>
           </a>
         </div>
@@ -121,7 +121,7 @@ export default function CausesHouseClient({ causes: CAUSES }: { causes: Cause[] 
               aria-pressed={active === i}
               className={`flex h-full w-full items-start gap-3 rounded-2xl border p-4 text-left ${active === i ? "border-accent-deep bg-[var(--ink-3)]" : "border-line/10 bg-[var(--ink-2)]"}`}
             >
-              <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-[var(--bone)] font-mono text-sm font-bold text-[var(--ink)]">{cause.n}</span>
+              <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-[var(--bone)] font-mono text-sm font-bold text-[var(--ground)]">{cause.n}</span>
               <span>
                 <span className="block font-semibold">{cause.title}</span>
                 <span className="mt-1 block text-sm text-[var(--sc-ink-soft)]">{cause.fix}</span>

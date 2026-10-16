@@ -1,6 +1,7 @@
 "use client";
 
 import { useId, useState } from "react";
+import { useLanguage } from "@/i18n/LanguageContext";
 
 /* Magnus over water, DIN 4108-2 style surface check (Rsi = 0,25 m²K/W). */
 const A = 17.62;
@@ -105,6 +106,7 @@ function layersFor(u: number): Layer[] {
 
 export default function DewPointLab() {
   const uid = useId();
+  const { lang } = useLanguage();
   const [ti, setTi] = useState(20);
   const [rh, setRh] = useState(60);
   const [te, setTe] = useState(0);
@@ -188,7 +190,7 @@ export default function DewPointLab() {
               id={`${uid}-wall`}
               value={wall}
               onChange={(e) => setWall(e.target.value as WallKey)}
-              className="mt-2 min-h-[44px] w-full rounded-full border border-line/20 bg-[var(--ink-3)] px-4 py-2 text-sm text-[var(--bone)] hover:border-accent-deep"
+              className="mt-2 min-h-[44px] w-full rounded-full border border-[var(--line-strong)] bg-[var(--ink-3)] px-4 py-2 text-sm text-[var(--bone)] hover:border-accent-deep"
             >
               {WALLS.map((w) => (
                 <option key={w.key} value={w.key}>
@@ -230,9 +232,12 @@ export default function DewPointLab() {
         </div>
 
         <figure className="mt-6">
-          <svg viewBox={`0 0 ${W} ${H}`} className="h-auto w-full" role="img" aria-labelledby={`${uid}-svgt`}>
+          <svg data-i18n="" viewBox={`0 0 ${W} ${H}`} className="h-auto w-full" role="img" aria-labelledby={`${uid}-svgt`}>
             <title id={`${uid}-svgt`}>
-              {`Temperaturverlauf durch die Wand: innen ${fmt(ti)} °C, Oberfläche innen ${fmt(thetaSi)} °C, außen ${fmt(te)} °C, Taupunkt ${fmt(td)} °C.`}
+              {/* live numbers: the page translation cannot match this sentence, so it is built per language */}
+              {lang === "en"
+                ? `Temperature through the wall: inside ${fmt(ti).replace(",", ".")} °C, inner surface ${fmt(thetaSi).replace(",", ".")} °C, outside ${fmt(te).replace(",", ".")} °C, dew point ${fmt(td).replace(",", ".")} °C.`
+                : `Temperaturverlauf durch die Wand: innen ${fmt(ti)} °C, Oberfläche innen ${fmt(thetaSi)} °C, außen ${fmt(te)} °C, Taupunkt ${fmt(td)} °C.`}
             </title>
             <defs>
               <pattern id="dpl-brick" width="40" height="24" patternUnits="userSpaceOnUse">

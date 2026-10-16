@@ -21,10 +21,11 @@ export function onColor(fn: (c: ColorChoice) => void) {
   return () => window.removeEventListener(EVENT, on);
 }
 
+/** "Auto" is the site's default colour: the logo's brick red */
 const SWATCHES = [
+  { id: "red", label: "Auto" },
   { id: "water", label: "Wasser" },
   { id: "green", label: "Grün" },
-  { id: "red", label: "Rot" },
 ] as const;
 
 /** the slider snaps to a preset within a few degrees of it */
@@ -37,7 +38,7 @@ function fromSlider(h: number): ColorChoice {
 }
 
 /**
- * The colour of the site: Wasser, Grün, Rot, or any colour (the wheel
+ * The colour of the site: Auto (the default red), Wasser, Grün, or any colour (the wheel
  * slider or the colour picker). `compact` is the slider alone, for the
  * header bar.
  */

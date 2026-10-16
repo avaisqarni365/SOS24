@@ -37,7 +37,7 @@
   height: auto;
   border-radius: 14px;
   border: 1px solid color-mix(in oklab, var(--bone) 10%, transparent);
-  background: var(--ink);
+  background: var(--ground);
 }
 .ci-caption {
   margin: 0;

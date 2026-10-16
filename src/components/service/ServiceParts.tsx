@@ -30,11 +30,9 @@ export function ServiceHero({
       <div className="svc-hero__grid sc-wrap">
         <div className="svc-hero__copy">
           <Breadcrumbs items={crumbs} />
-          <p className="svc-hero__chip">
-            <span aria-hidden="true" />
-            <span className="svc-hero__chip-t">
-              {navTitle} · <PartnerLink>SchimmelPeter® Partnerbetrieb</PartnerLink>
-            </span>
+          {/* a plain label, like every other eyebrow: no pill shape */}
+          <p className="sc-label svc-hero__label">
+            {navTitle} · <PartnerLink>SchimmelPeter® Partnerbetrieb</PartnerLink>
           </p>
           <h1 id="page-title" className="sc-display svc-hero__title">
             {h1}

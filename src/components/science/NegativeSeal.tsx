@@ -61,7 +61,7 @@ export default function NegativeSeal() {
       <div className="negseal__stage">
         <figure className="ns-figure">
           <p className="sc-label ns-kicker">Schnitt: Erdreich, Kellerwand, Raum</p>
-          <svg
+          <svg data-i18n=""
             className="ns-svg"
             viewBox="0 0 1200 700"
             preserveAspectRatio="xMidYMid meet"
