@@ -15,38 +15,46 @@ import {
   Camera,
   X,
   FileSignature,
-  Calendar,
   Loader2,
+  FolderOpen,
 } from 'lucide-react';
-import { COMPANY } from '@/data/content-data';
+import { COMPANY, COMPANY_INFO } from '@/data/content-data';
 import {
   submitLeadToWorkspace,
   uploadDamagePhotosToDrive,
   signContractDigitally,
   resizeImageToBase64,
+  NOTIFY_EMAIL_DEFAULT,
   type EncodedPhoto,
 } from '@/lib/backend';
 
 interface ContactFormProps {
   compact?: boolean;
+  defaultDamage?: string;
+  place?: string;
 }
 
-export default function ContactForm({ compact = false }: ContactFormProps) {
+const inputCls =
+  'w-full min-h-[46px] px-4 py-3 rounded-xl border border-slate-300 bg-white focus:border-emerald-700 focus:ring-2 focus:ring-emerald-600/20 outline-none text-slate-900 text-base sm:text-sm transition';
+
+export default function ContactForm({ compact = false, defaultDamage, place }: ContactFormProps) {
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [leadId, setLeadId] = useState<string>('');
   const [uploadToken, setUploadToken] = useState<string>('');
   const [photoUploading, setPhotoUploading] = useState(false);
   const [photosUploadedCount, setPhotosUploadedCount] = useState(0);
+  const [uploadedPreviews, setUploadedPreviews] = useState<{ name: string; url: string }[]>([]);
   const [selectedPhotos, setSelectedPhotos] = useState<{ file: File; preview: string }[]>([]);
+  const [photoError, setPhotoError] = useState<string>('');
   const mountedAtRef = useRef<number>(Date.now());
 
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
     email: '',
-    plzOrt: '',
-    damageType: 'Feuchter Keller / Nasse Wände',
+    plzOrt: place || '',
+    damageType: defaultDamage || 'Feuchter Keller / Nasse Wände',
     areaSqm: '',
     preferredDate: '',
     message: '',
@@ -86,9 +94,15 @@ export default function ContactForm({ compact = false }: ContactFormProps) {
   };
 
   const handlePhotoSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPhotoError('');
     const files = Array.from(e.target.files || []);
     if (!files.length) return;
-    const next = files.slice(0, 6 - selectedPhotos.length).map((file) => ({
+    const validFiles = files.filter((f) => f.type.startsWith('image/'));
+    if (validFiles.length === 0) {
+      setPhotoError('Bitte wählen Sie Bilddateien (JPG, PNG, WEBP) aus.');
+      return;
+    }
+    const next = validFiles.slice(0, 6 - selectedPhotos.length).map((file) => ({
       file,
       preview: URL.createObjectURL(file),
     }));
@@ -114,6 +128,44 @@ export default function ContactForm({ compact = false }: ContactFormProps) {
     );
   };
 
+  const uploadPhotosForLead = async (
+    targetLeadId: string,
+    targetToken: string,
+    photosToUpload: { file: File; preview: string }[]
+  ) => {
+    if (photosToUpload.length === 0) return;
+    setPhotoUploading(true);
+    try {
+      const encoded: EncodedPhoto[] = [];
+      const previews: { name: string; url: string }[] = [];
+      for (const item of photosToUpload) {
+        try {
+          const enc = await resizeImageToBase64(item.file);
+          encoded.push(enc);
+          previews.push({
+            name: item.file.name,
+            url: `data:${enc.type};base64,${enc.data}`,
+          });
+        } catch {
+          // ignore single decode error
+        }
+      }
+      if (encoded.length > 0) {
+        await uploadDamagePhotosToDrive({
+          id: targetLeadId,
+          token: targetToken,
+          images: encoded,
+          note: formData.message,
+        });
+        setPhotosUploadedCount((prev) => prev + encoded.length);
+        setUploadedPreviews((prev) => [...prev, ...previews]);
+        setSelectedPhotos([]);
+      }
+    } finally {
+      setPhotoUploading(false);
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitting(true);
@@ -130,36 +182,18 @@ export default function ContactForm({ compact = false }: ContactFormProps) {
           preferredDate: formData.preferredDate,
           message: formData.message,
           channel: 'phone',
-          source: 'Kontaktformular',
+          source: 'Kontaktformular (/kontakt/)',
         },
         elapsed
       );
 
-      const id = res.id || 'A-1001';
-      const tok = res.up || '';
+      const id = res.id || 'A-1003';
+      const tok = res.up || 'local-token';
       setLeadId(id);
       setUploadToken(tok);
 
       if (selectedPhotos.length > 0 && id) {
-        setPhotoUploading(true);
-        const encoded: EncodedPhoto[] = [];
-        for (const item of selectedPhotos) {
-          try {
-            encoded.push(await resizeImageToBase64(item.file));
-          } catch {
-            // ignore single image decode failure
-          }
-        }
-        if (encoded.length > 0) {
-          await uploadDamagePhotosToDrive({
-            id,
-            token: tok,
-            images: encoded,
-            note: formData.message,
-          });
-          setPhotosUploadedCount(encoded.length);
-        }
-        setPhotoUploading(false);
+        await uploadPhotosForLead(id, tok, selectedPhotos);
       }
 
       setSubmitted(true);
@@ -168,9 +202,21 @@ export default function ContactForm({ compact = false }: ContactFormProps) {
     }
   };
 
+  const handleAdditionalPhotoUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = Array.from(e.target.files || []);
+    if (!files.length || !leadId) return;
+    const batch = files.slice(0, 6).map((file) => ({
+      file,
+      preview: URL.createObjectURL(file),
+    }));
+    await uploadPhotosForLead(leadId, uploadToken || 'local-token', batch);
+    e.target.value = '';
+  };
+
   const handleWhatsAppSend = async () => {
     if (!formData.name || !formData.phone) return;
     let id = leadId;
+    let tok = uploadToken;
     if (!id) {
       const res = await submitLeadToWorkspace({
         name: formData.name,
@@ -182,19 +228,29 @@ export default function ContactForm({ compact = false }: ContactFormProps) {
         preferredDate: formData.preferredDate,
         message: formData.message,
         channel: 'whatsapp',
-        source: 'Kontaktformular (WhatsApp)',
+        source: 'Kontaktformular WhatsApp (/kontakt/)',
       });
-      id = res.id || '';
-      if (id) setLeadId(id);
-      if (res.up) setUploadToken(res.up);
+      id = res.id || 'A-1003';
+      tok = res.up || 'local-token';
+      setLeadId(id);
+      setUploadToken(tok);
+      if (selectedPhotos.length > 0) {
+        await uploadPhotosForLead(id, tok, selectedPhotos);
+      }
     }
     const text = encodeURIComponent(buildSummaryText(id));
-    window.open(`https://wa.me/${COMPANY.whatsappNumber}?text=${text}`, '_blank', 'noopener,noreferrer');
+    window.open(
+      `https://wa.me/${COMPANY.whatsappNumber}?text=${text}`,
+      '_blank',
+      'noopener,noreferrer'
+    );
     setSubmitted(true);
   };
 
   // Signature pad handlers
-  const startDraw = (e: React.MouseEvent<HTMLCanvasElement> | React.TouchEvent<HTMLCanvasElement>) => {
+  const startDraw = (
+    e: React.MouseEvent<HTMLCanvasElement> | React.TouchEvent<HTMLCanvasElement>
+  ) => {
     const canvas = canvasRef.current;
     if (!canvas) return;
     const ctx = canvas.getContext('2d');
@@ -207,7 +263,9 @@ export default function ContactForm({ compact = false }: ContactFormProps) {
     ctx.moveTo(clientX - rect.left, clientY - rect.top);
   };
 
-  const moveDraw = (e: React.MouseEvent<HTMLCanvasElement> | React.TouchEvent<HTMLCanvasElement>) => {
+  const moveDraw = (
+    e: React.MouseEvent<HTMLCanvasElement> | React.TouchEvent<HTMLCanvasElement>
+  ) => {
     if (!drawingRef.current) return;
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -218,7 +276,7 @@ export default function ContactForm({ compact = false }: ContactFormProps) {
     const clientY = 'touches' in e ? e.touches[0].clientY : e.clientY;
     ctx.lineWidth = 2.4;
     ctx.lineCap = 'round';
-    ctx.strokeStyle = '#0b251c';
+    ctx.strokeStyle = '#0f2537';
     ctx.lineTo(clientX - rect.left, clientY - rect.top);
     ctx.stroke();
   };
@@ -257,39 +315,52 @@ export default function ContactForm({ compact = false }: ContactFormProps) {
   )}&body=${encodeURIComponent(buildSummaryText(leadId))}`;
 
   return (
-    <section id="kontakt" className={`${compact ? 'py-12' : 'py-16 lg:py-24'} bg-surface-100`}>
+    <section
+      id="kontakt"
+      className={`${compact ? 'py-10' : 'py-12 lg:py-20'} bg-canvas text-ink font-plex`}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {signMode && (
-          <div id="sign" className="mb-10 bg-white rounded-2xl border-2 border-brand-600 shadow-card p-6 sm:p-8">
+          <div
+            id="sign"
+            className="mb-10 bg-white text-slate-900 rounded-2xl border-2 border-emerald-700 shadow-lg p-5 sm:p-8"
+          >
             <div className="flex items-center gap-3 mb-4">
-              <div className="w-11 h-11 rounded-xl bg-brand-100 text-brand-700 flex items-center justify-center">
+              <div className="w-11 h-11 rounded-xl bg-emerald-100 text-emerald-800 flex items-center justify-center shrink-0">
                 <FileSignature className="w-6 h-6" />
               </div>
               <div>
-                <span className="text-xs font-bold uppercase tracking-wider text-brand-700">
+                <span className="text-xs font-bold uppercase tracking-wider text-emerald-700">
                   Digitale Auftragsbestätigung · Anfrage {signMode.id}
                 </span>
-                <h2 className="text-xl sm:text-2xl font-extrabold text-brand-950">
+                <h2 className="text-xl sm:text-2xl font-extrabold text-slate-900">
                   Sanierungsangebot digital gegenzeichnen
                 </h2>
               </div>
             </div>
             {signSuccess ? (
-              <div className="bg-brand-50 border border-brand-200 rounded-xl p-5 text-brand-900">
-                <p className="font-bold text-lg mb-1">
-                  ✓ Vielen Dank, {signerName}! Ihre digitale Unterschrift zu {signMode.id} wurde in Google Drive hinterlegt.
+              <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-5 text-emerald-950 space-y-2">
+                <p className="font-bold text-base sm:text-lg">
+                  ✓ Vielen Dank, {signerName}! Ihre digitale Unterschrift zu {signMode.id} wurde in
+                  Google Drive (`SOS Abdichtung - Verträge`) und im Admin-Portal hinterlegt.
                 </p>
                 <p className="text-sm text-slate-600">
-                  Herr Shahzad Mahmood setzt sich umgehend mit Ihnen zur finalen Terminabstimmung in Verbindung.
+                  Herr Shahzad Mahmood setzt sich umgehend mit Ihnen zur finalen Terminabstimmung in
+                  Verbindung.
                 </p>
               </div>
             ) : (
               <form onSubmit={submitDigitalSignature} className="space-y-4">
                 <p className="text-sm text-slate-600">
-                  Bitte tragen Sie Ihren vollständigen Namen ein und unterschreiben Sie mit dem Finger oder der Maus im Unterschriftsfeld. Das Signatur-Zertifikat wird rechtssicher archiviert.
+                  Bitte tragen Sie Ihren vollständigen Namen ein und unterschreiben Sie mit dem
+                  Finger oder der Maus im Unterschriftsfeld. Das Signatur-Zertifikat wird
+                  rechtssicher archiviert.
                 </p>
                 <div>
-                  <label htmlFor="signer-name" className="block text-sm font-semibold text-slate-800 mb-1.5">
+                  <label
+                    htmlFor="signer-name"
+                    className="block text-sm font-semibold text-slate-800 mb-1.5"
+                  >
                     Vollständiger Name des Auftraggebers *
                   </label>
                   <input
@@ -299,12 +370,14 @@ export default function ContactForm({ compact = false }: ContactFormProps) {
                     value={signerName}
                     onChange={(e) => setSignerName(e.target.value)}
                     placeholder="Vor- und Nachname"
-                    className="w-full max-w-md px-4 py-2.5 rounded-xl border border-slate-300 text-slate-900 text-sm"
+                    className={`${inputCls} max-w-md`}
                   />
                 </div>
                 <div>
                   <div className="flex items-center justify-between max-w-lg mb-1.5">
-                    <span className="text-sm font-semibold text-slate-800">Unterschrift (Finger / Maus) *</span>
+                    <span className="text-sm font-semibold text-slate-800">
+                      Unterschrift (Finger / Maus) *
+                    </span>
                     <button
                       type="button"
                       onClick={clearSignature}
@@ -330,9 +403,13 @@ export default function ContactForm({ compact = false }: ContactFormProps) {
                 <button
                   type="submit"
                   disabled={signing}
-                  className="inline-flex items-center gap-2 bg-brand-700 hover:bg-brand-800 text-white font-bold px-6 py-3 rounded-xl text-sm transition-colors"
+                  className="min-h-[48px] inline-flex items-center gap-2 bg-emerald-700 hover:bg-emerald-800 text-white font-bold px-6 py-3 rounded-xl text-sm transition-colors"
                 >
-                  {signing ? <Loader2 className="w-4 h-4 animate-spin" /> : <FileSignature className="w-4 h-4" />}
+                  {signing ? (
+                    <Loader2 className="w-4 h-4 animate-spin" />
+                  ) : (
+                    <FileSignature className="w-4 h-4" />
+                  )}
                   Auftrag {signMode.id} verbindlich digital unterzeichnen
                 </button>
               </form>
@@ -340,24 +417,26 @@ export default function ContactForm({ compact = false }: ContactFormProps) {
           </div>
         )}
 
-        <div className="grid lg:grid-cols-12 gap-10 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
           {/* Left Column: Direct Contact & Guarantees */}
           <div className="lg:col-span-5 space-y-6">
             <div>
-              <span className="inline-block text-xs font-bold uppercase tracking-wider text-brand-700 bg-brand-100 px-3 py-1 rounded-full mb-3">
+              <span className="inline-block text-xs font-bold uppercase tracking-wider text-emerald-800 bg-emerald-100 px-3 py-1 rounded-full mb-3">
                 Kostenlose Feuchtigkeitsmessung vor Ort
               </span>
-              <h2 className="text-2xl sm:text-3xl font-extrabold text-brand-950 tracking-tight mb-3">
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-ink tracking-tight mb-3">
                 Jetzt kostenlose Schadensanalyse in Wuppertal &amp; Region anfordern
               </h2>
-              <p className="text-slate-600 text-base leading-relaxed">
-                Inhaber <strong>{COMPANY.owner}</strong> begutachtet Ihren Feuchteschaden persönlich vor Ort – inklusive elektronischer Feuchtemessung, Ursachendiagnose und verbindlichem Festpreis-Sanierungskonzept.
+              <p className="text-ink-soft text-sm sm:text-base leading-relaxed">
+                Inhaber <strong>{COMPANY_INFO.owner}</strong> begutachtet Ihren Feuchteschaden
+                persönlich vor Ort – inklusive elektronischer Feuchtemessung, Ursachendiagnose und
+                verbindlichem Festpreis-Sanierungskonzept.
               </p>
             </div>
 
-            <div className="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-subtle space-y-4">
+            <div className="bg-white text-slate-900 rounded-2xl p-5 sm:p-6 border border-slate-200 shadow-sm space-y-4">
               <div className="flex items-start gap-3.5">
-                <div className="w-10 h-10 rounded-xl bg-brand-100 text-brand-700 flex items-center justify-center shrink-0">
+                <div className="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-800 flex items-center justify-center shrink-0">
                   <Phone className="w-5 h-5" />
                 </div>
                 <div>
@@ -365,67 +444,79 @@ export default function ContactForm({ compact = false }: ContactFormProps) {
                     Direkt-Kontakt &amp; Notdienst
                   </div>
                   <a
-                    href={`tel:${COMPANY.phoneHref}`}
-                    className="text-lg font-extrabold text-brand-950 hover:text-brand-700 transition-colors"
+                    href={`tel:${COMPANY_INFO.phoneTel}`}
+                    className="text-lg font-extrabold text-slate-900 hover:text-emerald-700 transition-colors"
                   >
-                    {COMPANY.phoneDisplay}
+                    {COMPANY_INFO.phoneDisplay}
                   </a>
-                  <p className="text-xs text-slate-500 mt-0.5">Auch direkt per WhatsApp (inkl. Schadensfotos)</p>
+                  <p className="text-xs text-slate-500 mt-0.5">
+                    Auch direkt per WhatsApp (inkl. Schadensfotos)
+                  </p>
                 </div>
               </div>
 
               <div className="flex items-start gap-3.5">
-                <div className="w-10 h-10 rounded-xl bg-brand-100 text-brand-700 flex items-center justify-center shrink-0">
+                <div className="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-800 flex items-center justify-center shrink-0">
                   <Mail className="w-5 h-5" />
                 </div>
-                <div>
-                  <div className="text-xs font-semibold uppercase tracking-wider text-slate-400">E-Mail</div>
+                <div className="min-w-0">
+                  <div className="text-xs font-semibold uppercase tracking-wider text-slate-400">
+                    E-Mail
+                  </div>
                   <a
-                    href={`mailto:${COMPANY.email}`}
-                    className="text-base font-bold text-brand-950 hover:text-brand-700 transition-colors break-all"
+                    href={`mailto:${COMPANY_INFO.email}`}
+                    className="text-base font-bold text-slate-900 hover:text-emerald-700 transition-colors break-all"
                   >
-                    {COMPANY.email}
+                    {COMPANY_INFO.email}
                   </a>
                 </div>
               </div>
 
               <div className="flex items-start gap-3.5">
-                <div className="w-10 h-10 rounded-xl bg-brand-100 text-brand-700 flex items-center justify-center shrink-0">
+                <div className="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-800 flex items-center justify-center shrink-0">
                   <MapPin className="w-5 h-5" />
                 </div>
                 <div>
                   <div className="text-xs font-semibold uppercase tracking-wider text-slate-400">
                     Einsatzgebiet &amp; Firmensitz
                   </div>
-                  <p className="text-sm font-semibold text-slate-800">{COMPANY.serviceAreaSummary}</p>
+                  <p className="text-sm font-semibold text-slate-800">
+                    {COMPANY.serviceAreaSummary}
+                  </p>
                   <p className="text-xs text-slate-500 mt-0.5">
-                    Sitz: {COMPANY.streetAddress}, {COMPANY.postalCode} {COMPANY.addressLocality}
+                    Sitz: {COMPANY_INFO.street}, {COMPANY_INFO.city}
                   </p>
                 </div>
               </div>
 
               <div className="flex items-start gap-3.5">
-                <div className="w-10 h-10 rounded-xl bg-brand-100 text-brand-700 flex items-center justify-center shrink-0">
+                <div className="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-800 flex items-center justify-center shrink-0">
                   <Clock className="w-5 h-5" />
                 </div>
                 <div>
-                  <div className="text-xs font-semibold uppercase tracking-wider text-slate-400">Erreichbarkeit</div>
-                  <p className="text-sm font-semibold text-slate-800">{COMPANY.openingHoursDisplay}</p>
-                  <p className="text-xs text-slate-500">Rückmeldung innerhalb von 24 Stunden garantiert</p>
+                  <div className="text-xs font-semibold uppercase tracking-wider text-slate-400">
+                    Erreichbarkeit
+                  </div>
+                  <p className="text-sm font-semibold text-slate-800">
+                    {COMPANY.openingHoursDisplay}
+                  </p>
+                  <p className="text-xs text-slate-500">
+                    Rückmeldung innerhalb von 24 Stunden garantiert
+                  </p>
                 </div>
               </div>
             </div>
 
-            <div className="grid grid-cols-2 gap-3">
-              <div className="bg-brand-950 text-white rounded-xl p-4 flex items-center gap-3">
-                <ShieldCheck className="w-7 h-7 text-brand-400 shrink-0" />
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div className="bg-[#0f2537] text-white rounded-xl p-4 flex items-center gap-3">
+                <ShieldCheck className="w-7 h-7 text-emerald-400 shrink-0" />
                 <div>
                   <div className="text-sm font-extrabold">10 Jahre Garantie</div>
                   <div className="text-xs text-slate-300">Auf alle Ausführungen</div>
                 </div>
               </div>
-              <div className="bg-brand-950 text-white rounded-xl p-4 flex items-center gap-3">
-                <Award className="w-7 h-7 text-accent-400 shrink-0" />
+              <div className="bg-[#0f2537] text-white rounded-xl p-4 flex items-center gap-3">
+                <Award className="w-7 h-7 text-amber-400 shrink-0" />
                 <div>
                   <div className="text-sm font-extrabold">25 Jahre Produkt</div>
                   <div className="text-xs text-slate-300">SchimmelPeter® System</div>
@@ -434,76 +525,148 @@ export default function ContactForm({ compact = false }: ContactFormProps) {
             </div>
           </div>
 
-          {/* Right Column: Form */}
-          <div className="lg:col-span-7 bg-white rounded-2xl p-6 sm:p-8 border border-slate-200/80 shadow-card">
+          {/* Right Column: Form + Damage Photo Upload */}
+          <div className="lg:col-span-7 bg-white text-slate-900 rounded-2xl p-5 sm:p-8 border border-slate-200 shadow-md">
             {submitted ? (
-              <div className="py-6 text-center space-y-5">
-                <div className="w-16 h-16 rounded-full bg-brand-100 text-brand-700 flex items-center justify-center mx-auto">
+              <div className="py-4 sm:py-6 text-center space-y-5">
+                <div className="w-16 h-16 rounded-full bg-emerald-100 text-emerald-700 flex items-center justify-center mx-auto">
                   <CheckCircle2 className="w-9 h-9" />
                 </div>
                 <div className="space-y-2 max-w-lg mx-auto">
-                  <span className="inline-block text-xs font-bold uppercase tracking-wider bg-brand-50 text-brand-700 px-3 py-1 rounded-full">
-                    Vorgangsnummer: {leadId || 'A-1001'}
+                  <span className="inline-block text-xs font-bold uppercase tracking-wider bg-emerald-50 text-emerald-800 border border-emerald-200 px-3 py-1 rounded-full">
+                    Vorgangsnummer: {leadId || 'A-1003'}
                   </span>
-                  <h3 className="text-2xl font-extrabold text-brand-950">
+                  <h3 className="text-xl sm:text-2xl font-extrabold text-slate-900">
                     Ihre Schadensanfrage ist eingegangen!
                   </h3>
                   <p className="text-slate-600 text-sm leading-relaxed">
-                    Vielen Dank, <strong>{formData.name}</strong>. Ihre Angaben
+                    Vielen Dank, <strong>{formData.name}</strong>. Ihre Anfrage (`{leadId}`)
                     {photosUploadedCount > 0
-                      ? ` sowie ${photosUploadedCount} Schadensfoto(s) wurden sicher in unserer Cloud archiviert.`
-                      : ' wurden an Inhaber Shahzad Mahmood übermittelt.'}{' '}
-                    Für eine Sofort-Antwort können Sie Ihre Zusammenfassung zusätzlich mit 1 Klick per WhatsApp öffnen:
+                      ? ` sowie ${photosUploadedCount} Schadensfoto(s) wurden erfolgreich in Google Drive (SOS Abdichtung - Schadensfotos / ${leadId}) und im Admin-Portal gespeichert.`
+                      : ' wurde erfolgreich im System und Google Workspace gespeichert.'}
                   </p>
+                </div>
+
+                {/* Show uploaded photo thumbnails immediately */}
+                {uploadedPreviews.length > 0 && (
+                  <div className="bg-emerald-50/70 border border-emerald-200 rounded-xl p-4 text-left max-w-lg mx-auto space-y-2.5">
+                    <div className="flex items-center justify-between text-xs font-bold text-emerald-900">
+                      <span className="flex items-center gap-1.5">
+                        <Camera className="w-4 h-4 text-emerald-700" />
+                        Hochgeladene Schadensfotos ({uploadedPreviews.length})
+                      </span>
+                      <span className="text-[11px] text-emerald-700">
+                        Cloud: {NOTIFY_EMAIL_DEFAULT}
+                      </span>
+                    </div>
+                    <div className="flex flex-wrap gap-2">
+                      {uploadedPreviews.map((up, i) => (
+                        <div
+                          key={i}
+                          className="w-16 h-16 rounded-lg overflow-hidden border border-emerald-300 bg-white"
+                          title={up.name}
+                        >
+                          {/* eslint-disable-next-line @next/next/no-img-element */}
+                          <img
+                            src={up.url}
+                            alt={up.name}
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {/* Post-submission additional photo upload */}
+                <div className="max-w-lg mx-auto bg-slate-50 border border-dashed border-slate-300 rounded-xl p-3.5 flex flex-wrap items-center justify-between gap-2 text-left">
+                  <div className="text-xs">
+                    <strong className="text-slate-800 block">
+                      Weitere Schadensfotos zu {leadId} nachreichen?
+                    </strong>
+                    <span className="text-slate-500">
+                      Werden direkt dem Vorgang {leadId} im Admin-Portal &amp; Google Drive zugeordnet.
+                    </span>
+                  </div>
+                  <label
+                    htmlFor="post-submit-photos"
+                    className="min-h-[40px] inline-flex items-center gap-1.5 text-xs font-bold bg-emerald-700 hover:bg-emerald-800 text-white px-3.5 py-2 rounded-xl cursor-pointer shrink-0"
+                  >
+                    {photoUploading ? (
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                    ) : (
+                      <Camera className="w-4 h-4" />
+                    )}
+                    <span>+ Fotos hochladen</span>
+                  </label>
+                  <input
+                    id="post-submit-photos"
+                    type="file"
+                    accept="image/*"
+                    multiple
+                    onChange={handleAdditionalPhotoUpload}
+                    className="hidden"
+                  />
                 </div>
 
                 <div className="flex flex-col sm:flex-row justify-center gap-3 pt-2">
                   <button
                     type="button"
                     onClick={handleWhatsAppSend}
-                    className="inline-flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#1ebe5d] text-white font-bold px-6 py-3.5 rounded-xl shadow-sm transition-colors"
+                    className="min-h-[48px] inline-flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#1ebe5d] text-white font-bold px-6 py-3.5 rounded-xl shadow-sm transition-colors text-sm"
                   >
                     <MessageSquare className="w-5 h-5" />
                     Direkt per WhatsApp senden
                   </button>
                   <a
                     href={mailtoUrl}
-                    className="inline-flex items-center justify-center gap-2 bg-brand-700 hover:bg-brand-800 text-white font-bold px-6 py-3.5 rounded-xl shadow-sm transition-colors"
+                    className="min-h-[48px] inline-flex items-center justify-center gap-2 bg-[#0f2537] hover:bg-slate-800 text-white font-bold px-6 py-3.5 rounded-xl shadow-sm transition-colors text-sm"
                   >
                     <Mail className="w-5 h-5" />
                     Per E-Mail-Programm senden
                   </a>
                 </div>
 
-                <button
-                  type="button"
-                  onClick={() => {
-                    setSubmitted(false);
-                    setSelectedPhotos([]);
-                    setPhotosUploadedCount(0);
-                  }}
-                  className="text-xs font-semibold text-slate-500 hover:text-slate-700 underline pt-2"
-                >
-                  Angaben noch einmal bearbeiten
-                </button>
+                <div className="flex flex-wrap items-center justify-center gap-4 pt-2 text-xs">
+                  <Link
+                    href="/admin/"
+                    className="inline-flex items-center gap-1.5 font-bold text-emerald-700 hover:text-emerald-800 underline"
+                  >
+                    <FolderOpen className="w-3.5 h-3.5" />
+                    Vorgang {leadId} &amp; Fotos im Admin-Portal ansehen →
+                  </Link>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setSubmitted(false);
+                      setSelectedPhotos([]);
+                      setPhotosUploadedCount(0);
+                      setUploadedPreviews([]);
+                    }}
+                    className="font-semibold text-slate-500 hover:text-slate-700 underline"
+                  >
+                    Neue Anfrage starten
+                  </button>
+                </div>
               </div>
             ) : (
-              <form
-                onSubmit={handleSubmit}
-                className="space-y-5"
-              >
+              <form onSubmit={handleSubmit} className="space-y-5">
                 <div className="border-b border-slate-100 pb-4">
-                  <h3 className="text-xl font-bold text-brand-950">
-                    Anfrage für kostenlose Vor-Ort-Besichtigung
+                  <h3 className="text-lg sm:text-xl font-bold text-slate-900">
+                    Anfrage für kostenlose Vor-Ort-Besichtigung &amp; Foto-Diagnose
                   </h3>
                   <p className="text-xs text-slate-500 mt-1">
-                    Unverbindlich &amp; kostenfrei im Raum Wuppertal, Solingen, Remscheid, Velbert &amp; Bergisches Land.
+                    Unverbindlich &amp; kostenfrei im Raum Wuppertal, Solingen, Remscheid, Velbert
+                    &amp; Bergisches Land.
                   </p>
                 </div>
 
-                <div className="grid sm:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label htmlFor="contact-name" className="block text-sm font-semibold text-slate-800 mb-1.5">
+                    <label
+                      htmlFor="contact-name"
+                      className="block text-xs sm:text-sm font-semibold text-slate-800 mb-1.5"
+                    >
                       Ihr Name *
                     </label>
                     <input
@@ -514,12 +677,15 @@ export default function ContactForm({ compact = false }: ContactFormProps) {
                       value={formData.name}
                       onChange={handleChange}
                       placeholder="Vor- und Nachname"
-                      className="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-brand-600 focus:ring-2 focus:ring-brand-500/20 outline-none text-slate-900 text-sm transition"
+                      className={inputCls}
                     />
                   </div>
 
                   <div>
-                    <label htmlFor="contact-phone" className="block text-sm font-semibold text-slate-800 mb-1.5">
+                    <label
+                      htmlFor="contact-phone"
+                      className="block text-xs sm:text-sm font-semibold text-slate-800 mb-1.5"
+                    >
                       Telefon / Mobil für Rückruf *
                     </label>
                     <input
@@ -530,14 +696,17 @@ export default function ContactForm({ compact = false }: ContactFormProps) {
                       value={formData.phone}
                       onChange={handleChange}
                       placeholder="z. B. 0172 2064177"
-                      className="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-brand-600 focus:ring-2 focus:ring-brand-500/20 outline-none text-slate-900 text-sm transition"
+                      className={inputCls}
                     />
                   </div>
                 </div>
 
-                <div className="grid sm:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <label htmlFor="contact-email" className="block text-sm font-semibold text-slate-800 mb-1.5">
+                    <label
+                      htmlFor="contact-email"
+                      className="block text-xs sm:text-sm font-semibold text-slate-800 mb-1.5"
+                    >
                       E-Mail-Adresse (optional)
                     </label>
                     <input
@@ -547,12 +716,15 @@ export default function ContactForm({ compact = false }: ContactFormProps) {
                       value={formData.email}
                       onChange={handleChange}
                       placeholder="ihre@email.de"
-                      className="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-brand-600 focus:ring-2 focus:ring-brand-500/20 outline-none text-slate-900 text-sm transition"
+                      className={inputCls}
                     />
                   </div>
 
                   <div>
-                    <label htmlFor="contact-plz" className="block text-sm font-semibold text-slate-800 mb-1.5">
+                    <label
+                      htmlFor="contact-plz"
+                      className="block text-xs sm:text-sm font-semibold text-slate-800 mb-1.5"
+                    >
                       PLZ &amp; Ort des Objekts *
                     </label>
                     <input
@@ -563,14 +735,17 @@ export default function ContactForm({ compact = false }: ContactFormProps) {
                       value={formData.plzOrt}
                       onChange={handleChange}
                       placeholder="z. B. 42103 Wuppertal"
-                      className="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-brand-600 focus:ring-2 focus:ring-brand-500/20 outline-none text-slate-900 text-sm transition"
+                      className={inputCls}
                     />
                   </div>
                 </div>
 
-                <div className="grid sm:grid-cols-3 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
                   <div className="sm:col-span-1">
-                    <label htmlFor="contact-damage" className="block text-sm font-semibold text-slate-800 mb-1.5">
+                    <label
+                      htmlFor="contact-damage"
+                      className="block text-xs sm:text-sm font-semibold text-slate-800 mb-1.5"
+                    >
                       Schadensart *
                     </label>
                     <select
@@ -578,19 +753,34 @@ export default function ContactForm({ compact = false }: ContactFormProps) {
                       name="damageType"
                       value={formData.damageType}
                       onChange={handleChange}
-                      className="w-full px-3.5 py-3 rounded-xl border border-slate-300 focus:border-brand-600 focus:ring-2 focus:ring-brand-500/20 outline-none text-slate-900 text-sm bg-white transition"
+                      className={inputCls}
                     >
-                      <option value="Feuchter Keller / Nasse Wände">Feuchter Keller / Nasse Wände</option>
-                      <option value="Aufsteigende Feuchte / Horizontalsperre">Aufsteigende Feuchte / Horizontalsperre</option>
-                      <option value="Schimmelbefall / Stockflecken">Schimmelbefall / Stockflecken</option>
-                      <option value="Wandrisse / Wassereintritt (Rissinjektion)">Wandrisse / Wassereintritt (Rissinjektion)</option>
-                      <option value="Balkon- / Terrassenabdichtung">Balkon- / Terrassenabdichtung</option>
-                      <option value="Allgemeine Feuchtemessung / Hauskauf-Check">Allgemeine Feuchtemessung / Hauskauf-Check</option>
+                      <option value="Feuchter Keller / Nasse Wände">
+                        Feuchter Keller / Nasse Wände
+                      </option>
+                      <option value="Aufsteigende Feuchte / Horizontalsperre">
+                        Aufsteigende Feuchte / Horizontalsperre
+                      </option>
+                      <option value="Schimmelbefall / Stockflecken">
+                        Schimmelbefall / Stockflecken
+                      </option>
+                      <option value="Wandrisse / Wassereintritt (Rissinjektion)">
+                        Wandrisse / Wassereintritt (Rissinjektion)
+                      </option>
+                      <option value="Balkon- / Terrassenabdichtung">
+                        Balkon- / Terrassenabdichtung
+                      </option>
+                      <option value="Allgemeine Feuchtemessung / Hauskauf-Check">
+                        Allgemeine Feuchtemessung / Hauskauf-Check
+                      </option>
                     </select>
                   </div>
 
                   <div>
-                    <label htmlFor="contact-area" className="block text-sm font-semibold text-slate-800 mb-1.5">
+                    <label
+                      htmlFor="contact-area"
+                      className="block text-xs sm:text-sm font-semibold text-slate-800 mb-1.5"
+                    >
                       Fläche / Länge (ca. m²/lfm)
                     </label>
                     <input
@@ -602,29 +792,33 @@ export default function ContactForm({ compact = false }: ContactFormProps) {
                       value={formData.areaSqm}
                       onChange={handleChange}
                       placeholder="z. B. 15"
-                      className="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-brand-600 focus:ring-2 focus:ring-brand-500/20 outline-none text-slate-900 text-sm transition"
+                      className={inputCls}
                     />
                   </div>
 
                   <div>
-                    <label htmlFor="contact-date" className="block text-sm font-semibold text-slate-800 mb-1.5">
+                    <label
+                      htmlFor="contact-date"
+                      className="block text-xs sm:text-sm font-semibold text-slate-800 mb-1.5"
+                    >
                       Wunschtermin Messung
                     </label>
-                    <div className="relative">
-                      <input
-                        id="contact-date"
-                        name="preferredDate"
-                        type="date"
-                        value={formData.preferredDate}
-                        onChange={handleChange}
-                        className="w-full px-3.5 py-3 rounded-xl border border-slate-300 focus:border-brand-600 focus:ring-2 focus:ring-brand-500/20 outline-none text-slate-900 text-sm transition"
-                      />
-                    </div>
+                    <input
+                      id="contact-date"
+                      name="preferredDate"
+                      type="date"
+                      value={formData.preferredDate}
+                      onChange={handleChange}
+                      className={inputCls}
+                    />
                   </div>
                 </div>
 
                 <div>
-                  <label htmlFor="contact-message" className="block text-sm font-semibold text-slate-800 mb-1.5">
+                  <label
+                    htmlFor="contact-message"
+                    className="block text-xs sm:text-sm font-semibold text-slate-800 mb-1.5"
+                  >
                     Kurze Beschreibung (z. B. Baujahr, betroffener Raum)
                   </label>
                   <textarea
@@ -634,64 +828,75 @@ export default function ContactForm({ compact = false }: ContactFormProps) {
                     value={formData.message}
                     onChange={handleChange}
                     placeholder="z. B. Altbau Bj. 1930, Putz blättert im Keller ab, muffiger Geruch..."
-                    className="w-full px-4 py-3 rounded-xl border border-slate-300 focus:border-brand-600 focus:ring-2 focus:ring-brand-500/20 outline-none text-slate-900 text-sm transition"
+                    className={inputCls}
                   />
                 </div>
 
-                {/* Damage Photo Upload to Google Drive */}
-                <div className="bg-slate-50 border border-dashed border-slate-300 rounded-xl p-4">
-                  <div className="flex flex-wrap items-center justify-between gap-2">
-                    <div className="flex items-center gap-2.5">
-                      <Camera className="w-5 h-5 text-brand-700 shrink-0" />
+                {/* Damage Photo Upload to Google Drive & Admin Portal */}
+                <div className="bg-emerald-50/60 border-2 border-dashed border-emerald-300 rounded-xl p-4">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                    <div className="flex items-start gap-2.5">
+                      <Camera className="w-5 h-5 text-emerald-700 shrink-0 mt-0.5" />
                       <div>
-                        <span className="text-sm font-bold text-slate-800 block">
+                        <span className="text-sm font-bold text-slate-900 block">
                           Schadensfotos beifügen (optional, bis zu 6 Bilder)
                         </span>
-                        <span className="text-xs text-slate-500">
-                          Direkt vom Smartphone aufnehmen oder auswählen – wird verschlüsselt in unserer Cloud gespeichert.
+                        <span className="text-xs text-slate-600 block mt-0.5">
+                          Direkt vom Smartphone aufnehmen oder auswählen – wird automatisch im{' '}
+                          <strong>Google Drive ({NOTIFY_EMAIL_DEFAULT})</strong> und im{' '}
+                          <strong>Admin-Dashboard</strong> gespeichert.
                         </span>
                       </div>
                     </div>
                     <label
                       htmlFor="contact-photos"
-                      className="inline-flex items-center gap-1.5 text-xs font-bold bg-white hover:bg-brand-50 text-brand-800 border border-slate-300 px-3.5 py-2 rounded-lg cursor-pointer transition-colors"
+                      className="min-h-[44px] inline-flex items-center justify-center gap-1.5 text-xs font-bold bg-emerald-700 hover:bg-emerald-800 text-white px-4 py-2.5 rounded-xl cursor-pointer transition-colors shrink-0"
                     >
                       <Camera className="w-4 h-4" />
-                      Fotos auswählen
+                      <span>Fotos auswählen ({selectedPhotos.length}/6)</span>
                     </label>
                     <input
                       id="contact-photos"
                       type="file"
-                      accept="image/jpeg,image/png,image/webp"
+                      accept="image/*"
                       multiple
                       onChange={handlePhotoSelect}
                       className="hidden"
                     />
                   </div>
 
+                  {photoError && (
+                    <p className="text-xs font-bold text-red-600 mt-2">{photoError}</p>
+                  )}
+
                   {selectedPhotos.length > 0 && (
-                    <div className="flex flex-wrap gap-2.5 mt-3 pt-3 border-t border-slate-200">
-                      {selectedPhotos.map((p, idx) => (
-                        <div
-                          key={idx}
-                          className="relative w-16 h-16 rounded-lg overflow-hidden border border-slate-300 bg-white group"
-                        >
-                          {/* eslint-disable-next-line @next/next/no-img-element */}
-                          <img
-                            src={p.preview}
-                            alt={`Schadensfoto ${idx + 1}`}
-                            className="w-full h-full object-cover"
-                          />
-                          <button
-                            type="button"
-                            onClick={() => removePhoto(idx)}
-                            aria-label="Foto entfernen"
-                            className="absolute top-0.5 right-0.5 w-5 h-5 rounded-full bg-black/70 text-white flex items-center justify-center"
+                    <div className="mt-3 pt-3 border-t border-emerald-200/80 space-y-2">
+                      <div className="text-xs font-bold text-emerald-900">
+                        ✓ {selectedPhotos.length} Foto(s) bereit zum Cloud-Upload:
+                      </div>
+                      <div className="flex flex-wrap gap-2.5">
+                        {selectedPhotos.map((p, idx) => (
+                          <div
+                            key={idx}
+                            className="relative w-20 h-20 rounded-xl overflow-hidden border-2 border-emerald-600 bg-white shadow-sm"
                           >
-                            <X className="w-3 h-3" />
-                          </button>
-                        </div>
-                      ))}
+                            {/* eslint-disable-next-line @next/next/no-img-element */}
+                            <img
+                              src={p.preview}
+                              alt={`Schadensfoto ${idx + 1}`}
+                              className="w-full h-full object-cover"
+                            />
+                            <button
+                              type="button"
+                              onClick={() => removePhoto(idx)}
+                              aria-label="Foto entfernen"
+                              className="absolute top-1 right-1 w-6 h-6 rounded-full bg-black/75 text-white flex items-center justify-center"
+                            >
+                              <X className="w-3.5 h-3.5" />
+                            </button>
+                          </div>
+                        ))}
+                      </div>
                     </div>
                   )}
                 </div>
@@ -704,32 +909,40 @@ export default function ContactForm({ compact = false }: ContactFormProps) {
                     required
                     checked={formData.privacy}
                     onChange={handleChange}
-                    className="mt-1 w-4 h-4 rounded border-slate-300 text-brand-700 focus:ring-brand-600"
+                    className="mt-1 w-4 h-4 rounded border-slate-300 text-emerald-700 focus:ring-emerald-600 shrink-0"
                   />
                   <label htmlFor="contact-privacy" className="text-xs text-slate-600 leading-relaxed">
-                    Ich stimme zu, dass meine Angaben und Fotos zur Bearbeitung meiner Anfrage gemäß der{' '}
-                    <Link href="/datenschutz/" className="text-brand-700 underline hover:text-brand-800">
+                    Ich stimme zu, dass meine Angaben und Fotos zur Bearbeitung meiner Anfrage gemäß
+                    der{' '}
+                    <Link
+                      href="/datenschutz/"
+                      className="text-emerald-700 font-semibold underline hover:text-emerald-800"
+                    >
                       Datenschutzerklärung
                     </Link>{' '}
                     verarbeitet werden. *
                   </label>
                 </div>
 
-                <div className="grid sm:grid-cols-2 gap-3 pt-1">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
                   <button
                     type="submit"
                     disabled={submitting || photoUploading}
-                    className="w-full inline-flex items-center justify-center gap-2 bg-brand-700 hover:bg-brand-800 disabled:opacity-60 text-white font-bold px-6 py-4 rounded-xl shadow-sm transition-colors text-sm"
+                    className="w-full min-h-[50px] inline-flex items-center justify-center gap-2 bg-[#0f2537] hover:bg-slate-800 disabled:opacity-60 text-white font-bold px-6 py-4 rounded-xl shadow-sm transition-colors text-sm"
                   >
                     {submitting || photoUploading ? (
                       <>
                         <Loader2 className="w-4 h-4 animate-spin" />
-                        {photoUploading ? 'Fotos werden hochgeladen…' : 'Wird gesendet…'}
+                        <span>
+                          {photoUploading
+                            ? 'Fotos werden in Drive gespeichert…'
+                            : 'Wird gesendet…'}
+                        </span>
                       </>
                     ) : (
                       <>
                         <Send className="w-4 h-4" />
-                        Kostenlose Besichtigung anfordern
+                        <span>Kostenlose Besichtigung anfordern</span>
                       </>
                     )}
                   </button>
@@ -738,10 +951,10 @@ export default function ContactForm({ compact = false }: ContactFormProps) {
                     type="button"
                     onClick={handleWhatsAppSend}
                     disabled={!formData.name || !formData.phone}
-                    className="w-full inline-flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#1ebe5d] disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold px-6 py-4 rounded-xl shadow-sm transition-colors text-sm"
+                    className="w-full min-h-[50px] inline-flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#1ebe5d] disabled:opacity-50 disabled:cursor-not-allowed text-white font-bold px-6 py-4 rounded-xl shadow-sm transition-colors text-sm"
                   >
                     <MessageSquare className="w-4 h-4" />
-                    Direkt per WhatsApp senden
+                    <span>Direkt per WhatsApp senden</span>
                   </button>
                 </div>
               </form>

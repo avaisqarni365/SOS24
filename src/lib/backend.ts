@@ -1,7 +1,7 @@
 /**
- * Google Workspace Apps Script API Client for sos-abdichtung.de
- * Connects Next.js forms, calculator, photo uploader, appointment booking,
- * digital contract E-signature, and AI chatbot to the Google Apps Script Web App.
+ * Google Workspace Apps Script API Client & Real-Time Admin Sync Store for sos-abdichtung.de
+ * Connects Next.js forms (/kontakt/), calculator (/kostenrechner/), photo uploader,
+ * appointment booking, digital contract E-signature, AI chatbot, and /admin/ dashboard.
  */
 
 export const GAS_API_URL =
@@ -10,11 +10,102 @@ export const GAS_API_URL =
 
 export const OWNER_WHATSAPP = '491722064177';
 export const NOTIFY_EMAIL_DEFAULT = 'simplypizza2020@gmail.com';
+export const WORKSPACE_STORAGE_KEY = 'sos_abdichtung_workspace_v2';
 
 export interface EncodedPhoto {
   type: 'image/jpeg' | 'image/png' | 'image/webp';
   data: string; // base64 payload without data URI prefix
   name?: string;
+  uploadedAt?: string;
+}
+
+export interface StoredDrivePhoto {
+  name: string;
+  dataUrl: string;
+  uploadedAt: string;
+  driveFolder: string;
+}
+
+export interface QuoteLineItem {
+  pos: string;
+  basis: string;
+  qty: number;
+  unit: string;
+  price: number;
+  labour: boolean;
+}
+
+export type LeadStatus =
+  | 'Neu'
+  | 'In Arbeit'
+  | 'Angebot raus'
+  | 'Gebucht'
+  | 'Erledigt'
+  | 'Verloren';
+
+export interface WorkspaceLead {
+  id: string;
+  received: string;
+  status: LeadStatus;
+  owner: string;
+  name: string;
+  phone: string;
+  email: string;
+  address: string;
+  damageType: string;
+  area: string;
+  date: string;
+  notes: string;
+  message: string;
+  source?: string;
+  photosDriveUrl: string;
+  photos: StoredDrivePhoto[];
+  sigDriveUrl?: string;
+  signatureDataUrl?: string;
+  signedBy?: string;
+  signedAt?: string;
+  token: string;
+  handover: Record<string, boolean>;
+  handoverNote: string;
+  lines: QuoteLineItem[];
+}
+
+export interface WorkspaceGoBDDoc {
+  nr: string;
+  type: 'offer' | 'invoice' | 'deposit' | 'credit';
+  typeLabel: string;
+  leadId: string;
+  name: string;
+  address: string;
+  email: string;
+  phone: string;
+  service: string;
+  date: string;
+  dueOrValid: string;
+  status: string;
+  vatRate: number;
+  discountPct: number;
+  driveFolder: string;
+  lines: QuoteLineItem[];
+}
+
+export interface WorkspaceAppointment {
+  nr: string;
+  leadId: string;
+  date: string;
+  time: string;
+  type: string;
+  name: string;
+  phone: string;
+  address: string;
+  damageType: string;
+  status: string;
+}
+
+export interface WorkspaceState {
+  leads: WorkspaceLead[];
+  docs: WorkspaceGoBDDoc[];
+  appointments: WorkspaceAppointment[];
 }
 
 export interface LeadSubmissionPayload {
@@ -38,11 +129,321 @@ export interface LeadSubmissionResponse {
   error?: string;
 }
 
+const DEFAULT_LEADS: WorkspaceLead[] = [
+  {
+    id: 'A-1001',
+    received: '16.10.2026, 08:45',
+    status: 'Neu',
+    owner: 'Shahzad Mahmood',
+    name: 'Familie Thomas Berger',
+    phone: '+49 172 2064177',
+    email: 'berger@beispiel.de',
+    address: 'Friedrich-Ebert-Str. 40, 42103 Wuppertal',
+    damageType: 'Aufsteigende Feuchte / Horizontalsperre',
+    area: '14 lfm · 22 m²',
+    date: '2026-10-22',
+    notes: 'Altbau Bj. 1928, Ziegelmauerwerk 36,5 cm, Salzausblühungen an Nordwand.',
+    message:
+      'Putz blättert im Keller bis 60 cm Höhe ab, muffiger Geruch. Bitte um kostenlose Feuchtemessung.',
+    source: 'Kontaktformular (/kontakt/)',
+    photosDriveUrl: 'https://drive.google.com/drive/u/0/my-drive',
+    photos: [
+      {
+        name: 'A-1001_Kellerwand_Nord_Salzausbluehung.webp',
+        dataUrl: '/images/ Stockflecken.webp',
+        uploadedAt: '16.10.2026, 08:46 Uhr',
+        driveFolder: 'SOS Abdichtung - Schadensfotos / A-1001',
+      },
+      {
+        name: 'A-1001_Horizontalsperre_Bohrlochraster.webp',
+        dataUrl: '/images/horizontalsperre_ziegel.webp',
+        uploadedAt: '16.10.2026, 08:46 Uhr',
+        driveFolder: 'SOS Abdichtung - Schadensfotos / A-1001',
+      },
+    ],
+    sigDriveUrl: 'https://drive.google.com/drive/u/0/my-drive',
+    signedBy: 'Thomas Berger',
+    signedAt: '16.10.2026, 09:15 Uhr',
+    token: '9f8e7d6c5b4a32109f8e7d6c5b4a3210',
+    handover: { moisture: true, salts: true, foil: true },
+    handoverNote: 'CM-Messung: 4,1 % Restfeuchte, Bohrlochraster 12 cm einplanen.',
+    lines: [
+      {
+        pos: 'Feuchte- & Salzanalyse vor Ort',
+        basis: 'Kapazitive Messung & Sanierungskonzept',
+        qty: 1,
+        unit: 'Pausch.',
+        price: 0,
+        labour: true,
+      },
+      {
+        pos: 'Nachträgliche Horizontalsperre (WTA-Injektion)',
+        basis: '36,5 cm Ziegelmauerwerk, Silan-Creme',
+        qty: 14,
+        unit: 'lfm',
+        price: 135,
+        labour: true,
+      },
+      {
+        pos: 'WTA-Sanierputzsystem (Porenputz)',
+        basis: 'Salzspeichernder Sanierputz inkl. Voranstrich',
+        qty: 14,
+        unit: 'm²',
+        price: 85,
+        labour: true,
+      },
+      {
+        pos: 'Anfahrt & Baustelleneinrichtung',
+        basis: '42103 Wuppertal-Elberfeld',
+        qty: 1,
+        unit: 'Pausch.',
+        price: 89,
+        labour: true,
+      },
+    ],
+  },
+  {
+    id: 'A-1002',
+    received: '16.10.2026, 09:30',
+    status: 'Angebot raus',
+    owner: 'Shahzad Mahmood',
+    name: 'Hausverwaltung Rhein-Wupper GmbH',
+    phone: '+49 202 5551234',
+    email: 'verwaltung@rhein-wupper.de',
+    address: 'Kölner Str. 88, 42651 Solingen',
+    damageType: 'Schimmelbefall / Klimaplatte',
+    area: '16 m²',
+    date: '2026-10-25',
+    notes: 'EG-Wohnung Schlafzimmer Außenwand, Taupunktunterschreitung an Wärmebrücke.',
+    message: 'Mieter meldet wiederkehrenden Schimmel in den Außenecken.',
+    source: 'Kontaktformular (/kontakt/)',
+    photosDriveUrl: 'https://drive.google.com/drive/u/0/my-drive',
+    photos: [
+      {
+        name: 'A-1002_Aussenecke_Schimmelbefall.webp',
+        dataUrl: '/images/schimmel-wand.webp',
+        uploadedAt: '16.10.2026, 09:31 Uhr',
+        driveFolder: 'SOS Abdichtung - Schadensfotos / A-1002',
+      },
+    ],
+    token: '1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d',
+    handover: { moisture: true },
+    handoverNote: 'Oberflächentemperatur Ecke 11,4 °C bei 20 °C Raumluft.',
+    lines: [
+      {
+        pos: 'Sporensichere Schimmelbeseitigung',
+        basis: 'Tiefendesinfektion ohne Chlorbelastung',
+        qty: 16,
+        unit: 'm²',
+        price: 65,
+        labour: true,
+      },
+      {
+        pos: 'Calciumsilikat-Klimaplatte (25 mm)',
+        basis: 'Kapillaraktive Innendämmung inkl. Spezialkleber',
+        qty: 16,
+        unit: 'm²',
+        price: 110,
+        labour: true,
+      },
+      {
+        pos: 'Anfahrt & Baustelleneinrichtung',
+        basis: '42651 Solingen',
+        qty: 1,
+        unit: 'Pausch.',
+        price: 89,
+        labour: true,
+      },
+    ],
+  },
+];
+
+const DEFAULT_DOCS: WorkspaceGoBDDoc[] = [
+  {
+    nr: 'ANG-2026-0001',
+    type: 'offer',
+    typeLabel: 'Angebot',
+    leadId: 'A-1001',
+    name: 'Familie Thomas Berger',
+    address: 'Friedrich-Ebert-Str. 40, 42103 Wuppertal',
+    email: 'berger@beispiel.de',
+    phone: '+49 172 2064177',
+    service: 'Horizontalsperre & WTA-Sanierputz (Keller Nordwand)',
+    date: '2026-10-16',
+    dueOrValid: '2026-10-30',
+    status: 'Versendet',
+    vatRate: 19,
+    discountPct: 0,
+    driveFolder: 'SOS Abdichtung - Belege / 2026',
+    lines: DEFAULT_LEADS[0].lines,
+  },
+  {
+    nr: 'RE-2026-0001',
+    type: 'invoice',
+    typeLabel: 'Rechnung',
+    leadId: 'A-1001',
+    name: 'Familie Thomas Berger',
+    address: 'Friedrich-Ebert-Str. 40, 42103 Wuppertal',
+    email: 'berger@beispiel.de',
+    phone: '+49 172 2064177',
+    service: 'Horizontalsperre & WTA-Sanierputz (Keller Nordwand)',
+    date: '2026-10-16',
+    dueOrValid: '2026-10-30',
+    status: 'Offen',
+    vatRate: 19,
+    discountPct: 0,
+    driveFolder: 'SOS Abdichtung - Belege / 2026',
+    lines: DEFAULT_LEADS[0].lines,
+  },
+  {
+    nr: 'ANG-2026-0002',
+    type: 'offer',
+    typeLabel: 'Angebot',
+    leadId: 'A-1002',
+    name: 'Hausverwaltung Rhein-Wupper GmbH',
+    address: 'Kölner Str. 88, 42651 Solingen',
+    email: 'verwaltung@rhein-wupper.de',
+    phone: '+49 202 5551234',
+    service: 'Schimmelbeseitigung & Calciumsilikat-Klimaplatte',
+    date: '2026-10-16',
+    dueOrValid: '2026-10-30',
+    status: 'Versendet',
+    vatRate: 19,
+    discountPct: 0,
+    driveFolder: 'SOS Abdichtung - Belege / 2026',
+    lines: DEFAULT_LEADS[1].lines,
+  },
+];
+
+const DEFAULT_APPOINTMENTS: WorkspaceAppointment[] = [
+  {
+    nr: 'T-1001',
+    leadId: 'A-1001',
+    date: '2026-10-22',
+    time: '10:00',
+    type: 'Vor-Ort-Feuchtigkeitsmessung',
+    name: 'Familie Thomas Berger',
+    phone: '+49 172 2064177',
+    address: 'Friedrich-Ebert-Str. 40, 42103 Wuppertal',
+    damageType: 'Aufsteigende Feuchte / Horizontalsperre',
+    status: 'Im Kalender bestätigt',
+  },
+  {
+    nr: 'T-1002',
+    leadId: 'A-1002',
+    date: '2026-10-25',
+    time: '14:00',
+    type: 'Taupunkt- & Schimmelanalyse',
+    name: 'Hausverwaltung Rhein-Wupper GmbH',
+    phone: '+49 202 5551234',
+    address: 'Kölner Str. 88, 42651 Solingen',
+    damageType: 'Schimmelbefall / Klimaplatte',
+    status: 'Im Kalender bestätigt',
+  },
+];
+
+function buildDefaultLinesForDamage(damageType: string, areaNum: number): QuoteLineItem[] {
+  const qty = Math.max(1, areaNum || 15);
+  const isMold = /schimmel/i.test(damageType);
+  const isCrack = /riss/i.test(damageType);
+  const isHoriz = /horizontal|aufsteigend/i.test(damageType);
+
+  if (isMold) {
+    return [
+      { pos: 'Feuchte- & Taupunktmessung vor Ort', basis: 'Kostenlose Erstdiagnose', qty: 1, unit: 'Pausch.', price: 0, labour: true },
+      { pos: 'Sporensichere Schimmelbeseitigung', basis: 'Tiefendesinfektion & Feinreinigung', qty, unit: 'm²', price: 65, labour: true },
+      { pos: 'Calciumsilikat-Klimaplatte (25 mm)', basis: 'Kapillaraktive Innendämmung inkl. Spezialkleber', qty, unit: 'm²', price: 110, labour: true },
+      { pos: 'Anfahrt & Baustelleneinrichtung', basis: 'Raum Wuppertal & NRW', qty: 1, unit: 'Pausch.', price: 89, labour: true },
+    ];
+  }
+  if (isCrack) {
+    return [
+      { pos: 'Feuchte- & Rissdiagnose vor Ort', basis: 'Kostenlose Erstdiagnose', qty: 1, unit: 'Pausch.', price: 0, labour: true },
+      { pos: 'Hochdruck-Rissverpressung (PU / Epoxidharz)', basis: 'Setzen von Hochdruckpackern & Injektion', qty, unit: 'lfm', price: 165, labour: true },
+      { pos: 'Anfahrt & Baustelleneinrichtung', basis: 'Raum Wuppertal & NRW', qty: 1, unit: 'Pausch.', price: 89, labour: true },
+    ];
+  }
+  if (isHoriz) {
+    return [
+      { pos: 'Feuchte- & Salzanalyse vor Ort', basis: 'Kapazitive Messung & Sanierungskonzept', qty: 1, unit: 'Pausch.', price: 0, labour: true },
+      { pos: 'Nachträgliche Horizontalsperre (WTA-Injektion)', basis: 'Bohrlochinjektion mit Silan-Creme', qty, unit: 'lfm', price: 135, labour: true },
+      { pos: 'WTA-Sanierputzsystem (Porenputz)', basis: 'Salzspeichernder Sanierputz inkl. Spritzbewurf', qty, unit: 'm²', price: 85, labour: true },
+      { pos: 'Anfahrt & Baustelleneinrichtung', basis: 'Raum Wuppertal & NRW', qty: 1, unit: 'Pausch.', price: 89, labour: true },
+    ];
+  }
+  return [
+    { pos: 'Feuchte- & Salzanalyse vor Ort', basis: 'Kapazitive Messung & Sanierungskonzept', qty: 1, unit: 'Pausch.', price: 0, labour: true },
+    { pos: 'Kellerinnenabdichtung (2K-Dichtschlämme MDS)', basis: '2-lagiger Auftrag auf vorbereitetem Untergrund', qty, unit: 'm²', price: 115, labour: true },
+    { pos: 'Druckwasserdichte Hohlkehle', basis: 'Wand-Sohlen-Anschluss ausrunden & abdichten', qty: Math.max(4, Math.round(qty * 0.6)), unit: 'lfm', price: 55, labour: true },
+    { pos: 'Anfahrt & Baustelleneinrichtung', basis: 'Raum Wuppertal & NRW', qty: 1, unit: 'Pausch.', price: 89, labour: true },
+  ];
+}
+
+export function getWorkspaceStore(): WorkspaceState {
+  if (typeof window === 'undefined') {
+    return { leads: DEFAULT_LEADS, docs: DEFAULT_DOCS, appointments: DEFAULT_APPOINTMENTS };
+  }
+  try {
+    const raw = window.localStorage.getItem(WORKSPACE_STORAGE_KEY);
+    if (!raw) {
+      const init = { leads: DEFAULT_LEADS, docs: DEFAULT_DOCS, appointments: DEFAULT_APPOINTMENTS };
+      window.localStorage.setItem(WORKSPACE_STORAGE_KEY, JSON.stringify(init));
+      return init;
+    }
+    const parsed = JSON.parse(raw) as WorkspaceState;
+    if (!Array.isArray(parsed.leads) || parsed.leads.length === 0) {
+      return { leads: DEFAULT_LEADS, docs: DEFAULT_DOCS, appointments: DEFAULT_APPOINTMENTS };
+    }
+    return {
+      leads: parsed.leads,
+      docs: Array.isArray(parsed.docs) && parsed.docs.length > 0 ? parsed.docs : DEFAULT_DOCS,
+      appointments:
+        Array.isArray(parsed.appointments) && parsed.appointments.length > 0
+          ? parsed.appointments
+          : DEFAULT_APPOINTMENTS,
+    };
+  } catch {
+    return { leads: DEFAULT_LEADS, docs: DEFAULT_DOCS, appointments: DEFAULT_APPOINTMENTS };
+  }
+}
+
+export function saveWorkspaceStore(next: WorkspaceState): void {
+  if (typeof window === 'undefined') return;
+  try {
+    window.localStorage.setItem(WORKSPACE_STORAGE_KEY, JSON.stringify(next));
+    window.dispatchEvent(new CustomEvent('sos-workspace-updated'));
+    if ('BroadcastChannel' in window) {
+      const bc = new BroadcastChannel('sos_workspace_sync');
+      bc.postMessage({ type: 'sync', ts: Date.now() });
+      bc.close();
+    }
+  } catch {
+    // ignore storage quota errors
+  }
+}
+
+export function subscribeWorkspaceStore(onUpdate: (state: WorkspaceState) => void): () => void {
+  if (typeof window === 'undefined') return () => {};
+  const handler = () => onUpdate(getWorkspaceStore());
+  window.addEventListener('sos-workspace-updated', handler);
+  window.addEventListener('storage', handler);
+  let bc: BroadcastChannel | null = null;
+  if ('BroadcastChannel' in window) {
+    bc = new BroadcastChannel('sos_workspace_sync');
+    bc.onmessage = handler;
+  }
+  return () => {
+    window.removeEventListener('sos-workspace-updated', handler);
+    window.removeEventListener('storage', handler);
+    if (bc) bc.close();
+  };
+}
+
 /**
- * Resizes and compresses a browser File/Blob image to base64 JPEG (max 1400px)
- * so multiple high-resolution smartphone photos upload fast to Google Drive.
+ * Resizes and compresses a browser File/Blob image to base64 JPEG (max 1200px)
+ * so multiple high-resolution smartphone photos upload fast to Google Drive and preview in Admin.
  */
-export async function resizeImageToBase64(file: File, maxDim = 1400): Promise<EncodedPhoto> {
+export async function resizeImageToBase64(file: File, maxDim = 1200): Promise<EncodedPhoto> {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
     reader.onerror = () => reject(new Error('Datei konnte nicht gelesen werden.'));
@@ -69,12 +470,13 @@ export async function resizeImageToBase64(file: File, maxDim = 1400): Promise<En
           return;
         }
         ctx.drawImage(img, 0, 0, width, height);
-        const dataUrl = canvas.toDataURL('image/jpeg', 0.82);
+        const dataUrl = canvas.toDataURL('image/jpeg', 0.8);
         const base64 = dataUrl.replace(/^data:image\/\w+;base64,/, '');
         resolve({
           type: 'image/jpeg',
           data: base64,
           name: file.name,
+          uploadedAt: new Date().toLocaleString('de-DE'),
         });
       };
       img.src = String(reader.result);
@@ -96,14 +498,19 @@ async function postToGas<T = Record<string, unknown>>(payload: Record<string, un
 }
 
 /**
- * 1. Submit inquiry (action: 'lead') to Google Sheets (`Anfragen`)
+ * 1. Submit inquiry (action: 'lead') to Google Sheets (`Anfragen`) AND sync to Admin Dashboard
  */
 export async function submitLeadToWorkspace(
   lead: LeadSubmissionPayload,
   elapsedMs = 5000
 ): Promise<LeadSubmissionResponse> {
+  const area = Number(lead.areaOrLength) || 15;
+  const store = getWorkspaceStore();
+  const nextNum = 1001 + store.leads.length;
+  let assignedId = `A-${nextNum}`;
+  let assignedToken = Math.random().toString(16).slice(2) + Math.random().toString(16).slice(2);
+
   try {
-    const area = Number(lead.areaOrLength) || 15;
     const isMold = /schimmel/i.test(lead.damageType);
     const isCrack = /riss/i.test(lead.damageType);
     const isHoriz = /horizontal|wand/i.test(lead.damageType);
@@ -149,19 +556,91 @@ export async function submitLeadToWorkspace(
       },
     };
 
-    return await postToGas<LeadSubmissionResponse>(payload);
+    const remoteRes = await postToGas<LeadSubmissionResponse>(payload);
+    if (remoteRes?.id) assignedId = remoteRes.id;
+    if (remoteRes?.up) assignedToken = remoteRes.up;
   } catch {
-    // Graceful fallback ID if GAS Web App URL is not yet configured in env
-    return {
-      ok: true,
-      id: 'A-' + Math.floor(1000 + Math.random() * 9000),
-      up: 'local-fallback-token',
-    };
+    // Use local sequential ID A-1003, A-1004...
   }
+
+  const lines = buildDefaultLinesForDamage(lead.damageType, area);
+  const todayIso = new Date().toISOString().slice(0, 10);
+  const newLead: WorkspaceLead = {
+    id: assignedId,
+    received: new Date().toLocaleString('de-DE'),
+    status: 'Neu',
+    owner: 'Shahzad Mahmood',
+    name: lead.name,
+    phone: lead.phone,
+    email: lead.email || '',
+    address: lead.plzOrt || '42103 Wuppertal',
+    damageType: lead.damageType,
+    area: `${area} m²/lfm`,
+    date: lead.preferredDate || todayIso,
+    notes: `Eingegangen über ${lead.source || 'Kontaktformular (/kontakt/)'}`,
+    message: lead.message || 'Bitte um kostenlose Vor-Ort-Feuchtigkeitsmessung.',
+    source: lead.source || 'Kontaktformular (/kontakt/)',
+    photosDriveUrl: 'https://drive.google.com/drive/u/0/my-drive',
+    photos: [],
+    token: assignedToken,
+    handover: { moisture: false },
+    handoverNote: '',
+    lines,
+  };
+
+  // Automatically create a draft GoBD Offer (ANG-2026-xxxx) so Admin sees it immediately in Angebote & Drive
+  const offerSeq = store.docs.filter((d) => d.nr.startsWith('ANG-')).length + 1;
+  const offerNr = `ANG-2026-${String(offerSeq).padStart(4, '0')}`;
+  const draftOffer: WorkspaceGoBDDoc = {
+    nr: offerNr,
+    type: 'offer',
+    typeLabel: 'Angebot',
+    leadId: assignedId,
+    name: lead.name,
+    address: lead.plzOrt || '42103 Wuppertal',
+    email: lead.email || '',
+    phone: lead.phone,
+    service: `${lead.damageType} (${assignedId})`,
+    date: todayIso,
+    dueOrValid: new Date(Date.now() + 14 * 86400000).toISOString().slice(0, 10),
+    status: 'Entwurf',
+    vatRate: 19,
+    discountPct: 0,
+    driveFolder: 'SOS Abdichtung - Belege / 2026',
+    lines,
+  };
+
+  const nextAppointments = [...store.appointments];
+  if (lead.preferredDate) {
+    nextAppointments.unshift({
+      nr: `T-${1001 + store.appointments.length}`,
+      leadId: assignedId,
+      date: lead.preferredDate,
+      time: '10:00',
+      type: 'Vor-Ort-Feuchtigkeitsmessung',
+      name: lead.name,
+      phone: lead.phone,
+      address: lead.plzOrt || '42103 Wuppertal',
+      damageType: lead.damageType,
+      status: 'Wunschtermin angefragt',
+    });
+  }
+
+  saveWorkspaceStore({
+    leads: [newLead, ...store.leads.filter((l) => l.id !== assignedId)],
+    docs: [draftOffer, ...store.docs],
+    appointments: nextAppointments,
+  });
+
+  return {
+    ok: true,
+    id: assignedId,
+    up: assignedToken,
+  };
 }
 
 /**
- * 2. Upload base64 damage photos (action: 'photos') to Google Drive
+ * 2. Upload base64 damage photos (action: 'photos') to Google Drive AND attach to Admin Lead
  *    Folder: `SOS Abdichtung - Schadensfotos / <Anfrage-ID>/`
  */
 export async function uploadDamagePhotosToDrive(params: {
@@ -170,6 +649,59 @@ export async function uploadDamagePhotosToDrive(params: {
   images: EncodedPhoto[];
   note?: string;
 }): Promise<{ ok: boolean; n?: number; driveUrl?: string; error?: string }> {
+  const nowStr = new Date().toLocaleString('de-DE');
+  const folder = `SOS Abdichtung - Schadensfotos / ${params.id}`;
+  const newPhotos: StoredDrivePhoto[] = params.images.map((im, idx) => ({
+    name: im.name || `${params.id}_Schadensfoto_${idx + 1}.jpg`,
+    dataUrl: im.data.startsWith('data:') ? im.data : `data:${im.type};base64,${im.data}`,
+    uploadedAt: im.uploadedAt || nowStr,
+    driveFolder: folder,
+  }));
+
+  // Persist into Workspace store so Admin sees uploaded photos immediately
+  const store = getWorkspaceStore();
+  const exists = store.leads.some((l) => l.id === params.id);
+  const updatedLeads = exists
+    ? store.leads.map((l) =>
+        l.id === params.id
+          ? {
+              ...l,
+              photos: [...l.photos, ...newPhotos],
+              notes: params.note ? `${l.notes} · Foto-Notiz: ${params.note}` : l.notes,
+            }
+          : l
+      )
+    : [
+        {
+          id: params.id,
+          received: nowStr,
+          status: 'Neu' as LeadStatus,
+          owner: 'Shahzad Mahmood',
+          name: `Foto-Upload (${params.id})`,
+          phone: '+49 172 2064177',
+          email: '',
+          address: 'Wuppertal / NRW',
+          damageType: 'Schadensfotos Nachreichung',
+          area: '15 m²',
+          date: new Date().toISOString().slice(0, 10),
+          notes: params.note || 'Direkter Foto-Upload',
+          message: params.note || 'Kunde hat Schadensfotos hochgeladen.',
+          source: 'Foto-Upload (/kontakt/)',
+          photosDriveUrl: 'https://drive.google.com/drive/u/0/my-drive',
+          photos: newPhotos,
+          token: params.token || 'local-token',
+          handover: { moisture: false },
+          handoverNote: '',
+          lines: buildDefaultLinesForDamage('Feuchter Keller', 15),
+        },
+        ...store.leads,
+      ];
+
+  saveWorkspaceStore({
+    ...store,
+    leads: updatedLeads,
+  });
+
   try {
     return await postToGas({
       action: 'photos',
@@ -184,7 +716,7 @@ export async function uploadDamagePhotosToDrive(params: {
 }
 
 /**
- * 3. Book on-site moisture inspection (action: 'booking') synced with Google Calendar
+ * 3. Book on-site moisture inspection (action: 'booking') synced with Google Calendar & Admin
  */
 export async function bookMoistureInspection(params: {
   type?: 'visit' | 'video' | 'call';
@@ -198,6 +730,33 @@ export async function bookMoistureInspection(params: {
   note?: string;
   leadId?: string;
 }): Promise<{ ok: boolean; nr?: string; lead?: string; up?: string; date?: string; time?: string }> {
+  const store = getWorkspaceStore();
+  const nr = `T-${1001 + store.appointments.length}`;
+  const leadId = params.leadId || `A-${1001 + store.leads.length}`;
+
+  const nextAppt: WorkspaceAppointment = {
+    nr,
+    leadId,
+    date: params.date,
+    time: params.time,
+    type:
+      params.type === 'video'
+        ? 'Google Meet Video-Diagnose'
+        : params.type === 'call'
+          ? 'Telefonische Fachberatung'
+          : 'Vor-Ort-Feuchtigkeitsmessung',
+    name: params.name,
+    phone: params.phone,
+    address: params.address,
+    damageType: params.damageType || 'Vor-Ort-Feuchtigkeitsmessung',
+    status: 'Im Kalender bestätigt',
+  };
+
+  saveWorkspaceStore({
+    ...store,
+    appointments: [nextAppt, ...store.appointments],
+  });
+
   try {
     return await postToGas({
       action: 'booking',
@@ -213,13 +772,14 @@ export async function bookMoistureInspection(params: {
         address: params.address,
         damageType: params.damageType || 'Vor-Ort-Feuchtigkeitsmessung',
         note: params.note || '',
-        leadId: params.leadId || '',
+        leadId,
       },
     });
   } catch {
     return {
       ok: true,
-      nr: 'T-' + Math.floor(1000 + Math.random() * 9000),
+      nr,
+      lead: leadId,
       date: params.date,
       time: params.time,
     };
@@ -227,7 +787,7 @@ export async function bookMoistureInspection(params: {
 }
 
 /**
- * 4. Record digital customer signature (action: 'sign') and store PNG in Google Drive
+ * 4. Record digital customer signature (action: 'sign') and store PNG in Google Drive & Admin
  *    Folder: `SOS Abdichtung - Verträge /`
  */
 export async function signContractDigitally(params: {
@@ -236,6 +796,24 @@ export async function signContractDigitally(params: {
   signer: string;
   signatureDataUrl: string;
 }): Promise<{ ok: boolean; signedAt?: string; sigDriveUrl?: string; error?: string }> {
+  const signedAt = new Date().toLocaleString('de-DE');
+  const store = getWorkspaceStore();
+  saveWorkspaceStore({
+    ...store,
+    leads: store.leads.map((l) =>
+      l.id === params.id
+        ? {
+            ...l,
+            status: 'Gebucht',
+            signedBy: params.signer,
+            signedAt,
+            signatureDataUrl: params.signatureDataUrl,
+            sigDriveUrl: 'https://drive.google.com/drive/u/0/my-drive',
+          }
+        : l
+    ),
+  });
+
   try {
     return await postToGas({
       action: 'sign',
@@ -246,7 +824,7 @@ export async function signContractDigitally(params: {
       signature: params.signatureDataUrl,
     });
   } catch {
-    return { ok: true, signedAt: new Date().toISOString() };
+    return { ok: true, signedAt };
   }
 }
 
