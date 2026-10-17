@@ -9017,3 +9017,47 @@ main .sc-body { font-size: 1.0625rem !important; line-height: 1.5 !important; co
 }
 /* keyboard focus reveals its block at once */
 .rv:focus-within { transition: none; }
+
+/* ===========================================================================
+   GoBD INVOICE & ESTIMATE PRINT OPTIMIZATION (DIN 5008 / A4)
+   ========================================================================= */
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 12mm 15mm 15mm 15mm;
+  }
+  body {
+    background: #ffffff !important;
+    color: #0f172a !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+  /* Hide non-printable app UI elements */
+  nav, header, footer, aside, .no-print, [role="navigation"], .fixed.inset-0.bg-black\/75 > div > div:first-child {
+    display: none !important;
+  }
+  /* Ensure printable invoice container takes full page without modal constraints */
+  .fixed.inset-0 {
+    position: static !important;
+    background: transparent !important;
+    padding: 0 !important;
+    display: block !important;
+  }
+  .fixed.inset-0 > div {
+    max-width: 100% !important;
+    max-height: none !important;
+    box-shadow: none !important;
+    border: none !important;
+    border-radius: 0 !important;
+    overflow: visible !important;
+  }
+  #printable-invoice {
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    max-width: 100% !important;
+    width: 100% !important;
+    border-radius: 0 !important;
+  }
+}
+

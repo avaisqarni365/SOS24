@@ -324,6 +324,7 @@ export default function AdminPortalClient() {
   const [selectedLeadId, setSelectedLeadId] = useState<string>("A-1001");
   const [selectedDocNr, setSelectedDocNr] = useState<string>("ANG-2026-0001");
   const [docFilter, setDocFilter] = useState<"all" | "offer" | "invoice">("all");
+  const [docViewMode, setDocViewMode] = useState<"editor" | "preview">("editor");
   const [previewDoc, setPreviewDoc] = useState<WorkspaceGoBDDoc | null>(null);
   const [zoomPhoto, setZoomPhoto] = useState<{ photo: StoredDrivePhoto; leadId: string } | null>(
     null
@@ -1203,6 +1204,337 @@ export default function AdminPortalClient() {
   const docTotals = calcDocTotals(curDoc);
   const curLeadDocs = docs.filter((d) => d.leadId === curLead?.id);
 
+  const renderDIN5008Invoice = (doc: WorkspaceGoBDDoc, isModal: boolean = false) => {
+    const tTotals = calcDocTotals(doc);
+    const isInvoice = doc.type === "invoice";
+    const issueDateFormatted = doc.date;
+    const dueDateFormatted = doc.dueOrValid;
+
+    return (
+      <div
+        id="printable-invoice"
+        className={`bg-white text-slate-900 font-sans leading-normal ${
+          isModal
+            ? "p-4 sm:p-8 space-y-6"
+            : "border border-slate-200 rounded-2xl shadow-xl p-6 sm:p-10 space-y-6 max-w-4xl mx-auto"
+        }`}
+      >
+        {/* 1. Header with Official SOS-Abdichtung Logo & SchimmelPeter Partner Badge */}
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b-2 border-[#0f2537] pb-5">
+          <div className="space-y-1.5">
+            <div className="flex items-center gap-3">
+              <img
+                src="/logo.svg"
+                alt="SOS-Abdichtung Logo"
+                className="h-9 sm:h-11 w-auto object-contain"
+              />
+              <div className="h-8 w-px bg-slate-300 hidden sm:block" />
+              <img
+                src="/img/gallery/schimmelpeter-fachbetrieb.svg"
+                alt="SchimmelPeter® Partnerbetrieb"
+                className="h-8 sm:h-10 w-auto object-contain"
+              />
+            </div>
+            <div className="text-[10px] font-extrabold uppercase tracking-wider text-slate-500">
+              {t(
+                "Zertifizierter Fachbetrieb für Kellersanierung · WTA-konform",
+                "Certified Basement Waterproofing Specialist · WTA Standard"
+              )}
+            </div>
+          </div>
+
+          <div className="sm:text-right text-[11px] text-slate-600 space-y-0.5">
+            <div className="font-extrabold text-[#0f2537] text-xs sm:text-sm">
+              {COMPANY_INFO.fullName}
+            </div>
+            <div>
+              {t("Inhaber:", "Owner:")} <span className="font-bold text-slate-900">{COMPANY_INFO.owner}</span>
+            </div>
+            <div>{COMPANY_INFO.street} · {COMPANY_INFO.city}</div>
+            <div>
+              Tel.: <span className="font-bold text-slate-900">{COMPANY_INFO.phoneDisplay}</span>
+            </div>
+            <div>E-Mail: {COMPANY_INFO.email} · Web: sos-abdichtung.de</div>
+          </div>
+        </div>
+
+        {/* 2. DIN 5008 Anschriftenzone (Address Zone) & Document Info Box */}
+        <div className="grid grid-cols-1 sm:grid-cols-12 gap-6 pt-2">
+          {/* Left 7 cols: Address */}
+          <div className="sm:col-span-7 space-y-2.5">
+            {/* DIN 5008 Return Line (Absenderzeile für Fensterbriefumschlag) */}
+            <div className="text-[10px] text-slate-400 border-b border-slate-200 pb-1 font-mono">
+              sos-abdichtung · {COMPANY_INFO.owner} · {COMPANY_INFO.street} · {COMPANY_INFO.city}
+            </div>
+
+            <div className="bg-slate-50 p-4 rounded-xl border border-slate-200 space-y-1">
+              <div className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
+                {t("Empfänger / Auftraggeber", "Recipient / Customer")}
+              </div>
+              <div className="text-base font-black text-slate-900">
+                {doc.name || t("Kunde", "Customer")}
+              </div>
+              <div className="text-xs text-slate-700 whitespace-pre-line leading-relaxed font-medium">
+                {doc.address || "Objektadresse Wuppertal"}
+              </div>
+              {doc.phone && <div className="text-xs text-slate-500 pt-0.5">Tel.: {doc.phone}</div>}
+              {doc.email && <div className="text-xs text-slate-500">E-Mail: {doc.email}</div>}
+            </div>
+          </div>
+
+          {/* Right 5 cols: Official German Document Meta Infobox */}
+          <div className="sm:col-span-5 bg-slate-50 border border-slate-200 rounded-xl p-4 space-y-2 text-xs">
+            <div className="flex items-center justify-between border-b border-slate-200 pb-2">
+              <span className="text-[11px] font-bold text-slate-500 uppercase tracking-wide">
+                {doc.typeLabel}
+              </span>
+              <span className="text-sm font-black font-mono text-emerald-800">
+                {doc.nr}
+              </span>
+            </div>
+
+            <div className="flex justify-between py-0.5">
+              <span className="text-slate-500">{t("Ausstellungsdatum:", "Date:")}</span>
+              <strong className="text-slate-900">{issueDateFormatted}</strong>
+            </div>
+
+            <div className="flex justify-between py-0.5">
+              <span className="text-slate-500">
+                {isInvoice ? t("Fälligkeitsdatum:", "Due Date:") : t("Gültig bis:", "Valid Until:")}
+              </span>
+              <strong className="text-slate-900">{dueDateFormatted}</strong>
+            </div>
+
+            <div className="flex justify-between py-0.5">
+              <span className="text-slate-500">{t("Leistungszeitpunkt:", "Performance Date:")}</span>
+              <span className="font-semibold text-slate-800">{t("Gemäß Abnahme", "As executed")}</span>
+            </div>
+
+            <div className="flex justify-between py-0.5 border-t border-slate-200 pt-1.5">
+              <span className="text-slate-500">{t("Projekt- / Lead-ID:", "Lead / Project:")}</span>
+              <span className="font-mono font-bold text-slate-700">{doc.leadId}</span>
+            </div>
+
+            {doc.refOfferNr && (
+              <div className="flex justify-between py-0.5 text-emerald-700 font-semibold">
+                <span>{t("Basierend auf Angebot:", "Based on Quote:")}</span>
+                <span className="font-mono">{doc.refOfferNr}</span>
+              </div>
+            )}
+
+            <div className="flex justify-between py-0.5 text-slate-500 text-[11px] border-t border-slate-200 pt-1.5">
+              <span>USt-Status:</span>
+              <span>{doc.vatRate === 19 ? "19 % Regelbesteuerung (§ 14 UStG)" : `${doc.vatRate} % gem. UStG`}</span>
+            </div>
+          </div>
+        </div>
+
+        {/* 3. Document Subject & Introduction */}
+        <div className="border-b-2 border-slate-900 pb-3 pt-2">
+          <h3 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">
+            {doc.typeLabel.toUpperCase()} {doc.nr}
+          </h3>
+          <div className="text-sm font-bold text-emerald-800 mt-1">
+            {t("Bauvorhaben / Gewerk:", "Project / Trade:")} {doc.service || "Kellersanierung & Bauwerksabdichtung nach WTA-Richtlinien"}
+          </div>
+          <p className="text-xs text-slate-600 mt-2 leading-relaxed">
+            {isInvoice
+              ? t(
+                  "Sehr geehrte Damen und Herren, für die nachfolgend aufgeführten Sanierungs- und Abdichtungsarbeiten an Ihrem Objekt erlauben wir uns, vereinbarungsgemäß folgende Leistungen nach VOB/BGB und WTA-Merkblatt in Rechnung zu stellen:",
+                  "Dear Sir or Madam, for the masonry waterproofing work completed at your property, we bill the following line items according to German VOB/BGB and WTA specifications:"
+                )
+              : t(
+                  "Sehr geehrte Damen und Herren, vielen Dank für Ihre Anfrage und das Vertrauen in unseren zertifizierten Fachbetrieb. Gerne unterbreiten wir Ihnen für die Sanierung Ihres Objektes folgendes verbindliches Festpreisangebot:",
+                  "Dear Sir or Madam, thank you for your inquiry and trust in our certified company. We submit the following binding fixed-price quote for your property restoration:"
+                )}
+          </p>
+        </div>
+
+        {/* 4. Table of Items (Positionstabelle) */}
+        <div className="overflow-x-auto">
+          <table className="w-full border-collapse text-xs sm:text-sm">
+            <thead>
+              <tr className="border-b-2 border-slate-900 text-left text-[11px] uppercase tracking-wider text-slate-600 bg-slate-50">
+                <th className="py-2.5 px-2 w-10 text-center font-bold">Pos.</th>
+                <th className="py-2.5 px-3 font-bold">{t("Bezeichnung & technische Ausführungsgrundlage", "Item & Specification")}</th>
+                <th className="py-2.5 px-2 text-right font-bold w-20">{t("Menge", "Qty")}</th>
+                <th className="py-2.5 px-2 text-right font-bold w-24">{t("Einzelpreis", "Unit Price")}</th>
+                <th className="py-2.5 px-2 text-right font-bold w-28">{t("Gesamtpreis", "Total")}</th>
+              </tr>
+            </thead>
+            <tbody className="divide-y divide-slate-200">
+              {doc.lines.map((l, i) => (
+                <tr key={i} className="hover:bg-slate-50/60 transition-colors">
+                  <td className="py-3 px-2 text-center font-mono font-bold text-slate-500 align-top">
+                    {i + 1}
+                  </td>
+                  <td className="py-3 px-3 align-top space-y-1">
+                    <div className="font-extrabold text-slate-900 text-xs sm:text-sm">
+                      {l.pos}
+                    </div>
+                    {l.basis && (
+                      <div className="text-[11px] text-slate-600 leading-snug">
+                        {l.basis}
+                      </div>
+                    )}
+                    {l.labour && (
+                      <div className="pt-0.5">
+                        <span className="inline-flex items-center gap-1 text-[10px] font-bold text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
+                          <Check className="w-3 h-3 text-emerald-700" />
+                          <span>§ 35a Handwerkerlohn-Anteil</span>
+                        </span>
+                      </div>
+                    )}
+                  </td>
+                  <td className="py-3 px-2 text-right whitespace-nowrap font-semibold text-slate-800 align-top">
+                    {l.qty} {l.unit}
+                  </td>
+                  <td className="py-3 px-2 text-right whitespace-nowrap text-slate-700 align-top">
+                    {eur(l.price)}
+                  </td>
+                  <td className="py-3 px-2 text-right whitespace-nowrap font-black text-slate-900 align-top">
+                    {eur(l.qty * l.price)}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+
+        {/* 5. Accounting Summary & Totals */}
+        <div className="border-t-2 border-slate-900 pt-4 flex flex-col sm:flex-row justify-between items-start gap-6">
+          {/* Left: Notes & Tax Bonus Indicator */}
+          <div className="w-full sm:max-w-md space-y-3">
+            {/* § 35a Tax Certificate Box */}
+            <div className="bg-emerald-50/90 border border-emerald-300 rounded-xl p-3.5 space-y-1.5 text-xs text-emerald-950 shadow-sm">
+              <div className="font-extrabold flex items-center gap-1.5 text-emerald-900">
+                <ShieldCheck className="w-4 h-4 text-emerald-700 shrink-0" />
+                <span>{t("Bescheinigung für das Finanzamt (§ 35a Abs. 3 EStG):", "Certificate for German Tax Office (§ 35a EStG):")}</span>
+              </div>
+              <p className="text-[11px] text-slate-700 leading-relaxed">
+                {t(
+                  `Im ausgewiesenen Gesamtbetrag sind reine Lohn- und Arbeitskosten in Höhe von ${eur(tTotals.labourGross)} (inkl. 19 % MwSt.) enthalten.`,
+                  `The invoice total includes craft labor costs of ${eur(tTotals.labourGross)} (incl. 19% VAT).`
+                )}
+              </p>
+              <div className="text-[11px] font-bold text-emerald-800 bg-emerald-100/70 p-2 rounded-lg border border-emerald-200">
+                💰 {t("Ihre tarifliche Steuerermäßigung (20 %):", "Direct Tax Credit (20 %):")}{" "}
+                <span className="text-sm font-black text-emerald-900">−{eur(tTotals.taxBonus20)}</span>
+              </div>
+              <div className="text-[10px] text-slate-500">
+                * {t("Voraussetzung ist die unbare Begleichung per Banküberweisung.", "Requires cashless bank transfer.")}
+              </div>
+            </div>
+          </div>
+
+          {/* Right: Numbers */}
+          <div className="w-full sm:w-72 space-y-2 text-xs sm:text-sm">
+            {doc.discountPct && doc.discountPct > 0 ? (
+              <>
+                <div className="flex justify-between py-1 border-b border-slate-100 text-slate-600">
+                  <span>{t("Zwischensumme Netto:", "Subtotal Net:")}</span>
+                  <span className="font-semibold">{eur(tTotals.rawNet)}</span>
+                </div>
+                <div className="flex justify-between py-1 border-b border-slate-100 text-emerald-800">
+                  <span>{t(`Rabatt / Nachlass (${doc.discountPct} %):`, `Discount (${doc.discountPct} %):`)}</span>
+                  <span className="font-bold">−{eur(tTotals.discountAmount)}</span>
+                </div>
+              </>
+            ) : null}
+
+            <div className="flex justify-between py-1 border-b border-slate-200 text-slate-700">
+              <span>{t("Nettobetrag:", "Net Total:")}</span>
+              <span className="font-bold text-slate-900">{eur(tTotals.net)}</span>
+            </div>
+
+            <div className="flex justify-between py-1 border-b border-slate-200 text-slate-700">
+              <span>{t(`zzgl. ${doc.vatRate} % Umsatzsteuer:`, `plus ${doc.vatRate} % VAT:`)}</span>
+              <span className="font-bold text-slate-900">{eur(tTotals.vat)}</span>
+            </div>
+
+            <div className="flex justify-between py-2 border-b-4 border-double border-slate-900 text-base sm:text-lg font-black text-slate-950">
+              <span>{t("Gesamtbetrag (Brutto):", "Gross Total:")}</span>
+              <span className="text-emerald-800">{eur(tTotals.gross)}</span>
+            </div>
+
+            {doc.skontoPct && doc.skontoPct > 0 ? (
+              <div className="bg-emerald-50 p-2.5 rounded-lg border border-emerald-200 text-[11px] text-emerald-900 space-y-1">
+                <div className="flex justify-between font-bold">
+                  <span>{doc.skontoPct} % {t("Skonto bei Überweisung bis", "Discount if paid by")} {new Date(new Date(doc.date).getTime() + 7 * 86400000).toLocaleDateString("de-DE")}:</span>
+                  <span className="text-emerald-700 font-extrabold">−{eur(tTotals.skontoAmount)}</span>
+                </div>
+                <div className="flex justify-between font-black text-xs pt-1 border-t border-emerald-200">
+                  <span>{t("Skontierter Zahlbetrag:", "Discounted Amount:")}</span>
+                  <span>{eur(tTotals.gross - tTotals.skontoAmount)}</span>
+                </div>
+              </div>
+            ) : null}
+          </div>
+        </div>
+
+        {/* 6. Payment Instructions & Guarantee */}
+        <div className="bg-slate-50 border border-slate-200 rounded-xl p-4 space-y-2 text-xs">
+          <div className="font-bold text-slate-900">
+            {t("Zahlungsbedingungen & Bankverbindung:", "Payment Terms & Bank Details:")}
+          </div>
+          <p className="text-slate-600 leading-relaxed">
+            {t(
+              `Bitte überweisen Sie den Gesamtbetrag von ${eur(tTotals.gross)} unter Angabe der Belegnummer ${doc.nr} bis zum ${dueDateFormatted} auf unser folgendes Geschäftskonto:`,
+              `Please transfer the total of ${eur(tTotals.gross)} quoting document number ${doc.nr} by ${dueDateFormatted} to our account:`
+            )}
+          </p>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-2.5 pt-1 text-slate-800 font-mono text-[11px] bg-white p-3 rounded-lg border border-slate-200">
+            <div>
+              <span className="text-slate-400 block text-[10px] font-sans">{t("Kontoinhaber:", "Account Holder:")}</span>
+              <strong className="text-slate-900">{COMPANY_INFO.owner}</strong>
+            </div>
+            <div>
+              <span className="text-slate-400 block text-[10px] font-sans">IBAN:</span>
+              <strong className="text-slate-900">DE02 3601 0043 0123 4567 89</strong>
+            </div>
+            <div>
+              <span className="text-slate-400 block text-[10px] font-sans">BIC / Bank:</span>
+              <strong className="text-slate-900">PBNKDEFF · Postbank Essen</strong>
+            </div>
+          </div>
+
+          <div className="pt-2 text-[11px] text-slate-600 border-t border-slate-200 flex items-center gap-2">
+            <ShieldCheck className="w-4 h-4 text-emerald-700 shrink-0" />
+            <span>
+              <strong>{t("Garantie & Qualität:", "Warranty & Quality:")}</strong>{" "}
+              {t(
+                "10 Jahre Gewährleistung auf ausgeführte Handwerksleistungen von sos-abdichtung sowie 25 Jahre Produktgarantie durch SchimmelPeter GmbH.",
+                "10-year workmanship warranty from sos-abdichtung plus 25-year manufacturer warranty from SchimmelPeter GmbH."
+              )}
+            </span>
+          </div>
+        </div>
+
+        {/* 7. DIN 5008 3-Column Footer */}
+        <div className="border-t border-slate-200 pt-4 grid grid-cols-1 sm:grid-cols-3 gap-3 text-[10px] text-slate-500 leading-normal">
+          <div>
+            <strong className="text-slate-700 block font-bold">{COMPANY_INFO.name}</strong>
+            <div>Inh. {COMPANY_INFO.owner}</div>
+            <div>{COMPANY_INFO.street}</div>
+            <div>{COMPANY_INFO.city}</div>
+          </div>
+          <div>
+            <strong className="text-slate-700 block font-bold">{t("Kontakt & Support", "Contact & Support")}</strong>
+            <div>Tel.: {COMPANY_INFO.phoneDisplay}</div>
+            <div>E-Mail: {COMPANY_INFO.email}</div>
+            <div>Web: www.sos-abdichtung.de</div>
+          </div>
+          <div>
+            <strong className="text-slate-700 block font-bold">{t("Steuer- & Rechtsangaben", "Tax & Legal Info")}</strong>
+            <div>USt-IdNr.: gemäß § 14 UStG</div>
+            <div>Gerichtsstand: Essen / Wuppertal</div>
+            <div>SchimmelPeter® Partnerbetrieb</div>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
   return (
     <div className="space-y-6 font-plex text-slate-900">
       {toast && (
@@ -2003,22 +2335,32 @@ export default function AdminPortalClient() {
       {/* TAB 4: AUFMASS-PLANER / ESTIMATOR */}
       {tab === "planer" && (
         <div className="space-y-6">
-          {/* Interactive Workflow Pipeline Header */}
+          {/* Interactive Workflow Pipeline Header with Official Logo */}
           <div className="bg-[#0f2537] text-white rounded-2xl p-4 sm:p-5 shadow-sm border border-slate-700/50">
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-              <div>
-                <span className="text-[11px] font-extrabold uppercase tracking-widest text-emerald-400">
-                  {t("GoBD-Auftragspipeline · Schritt 1 von 3", "GoBD Pipeline · Step 1 of 3")}
-                </span>
-                <h3 className="text-base sm:text-lg font-extrabold text-white">
-                  {t("Vor-Ort-Aufmaß & Schnellkalkulation", "On-Site Diagnostic Measurement & Quick Estimate")}
-                </h3>
-                <p className="text-xs text-slate-300 mt-0.5">
-                  {t(
-                    "Erfassen Sie Vor-Ort-Messdaten und überführen Sie diese mit 1 Klick in ein GoBD-Angebot oder direkt in eine Rechnung.",
-                    "Capture on-site diagnostic measurements and convert them in 1 click into a GoBD quote or invoice."
-                  )}
-                </p>
+            <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3.5">
+                <div className="bg-white p-2.5 rounded-xl shrink-0 shadow-md flex items-center justify-center">
+                  <img src="/logo.svg" alt="SOS-Abdichtung" className="h-7 sm:h-8 w-auto object-contain" />
+                </div>
+                <div>
+                  <div className="flex items-center gap-2">
+                    <span className="text-[10px] font-extrabold uppercase tracking-widest text-emerald-400">
+                      {t("GoBD-Auftragspipeline · Schritt 1 von 3", "GoBD Pipeline · Step 1 of 3")}
+                    </span>
+                    <span className="text-[10px] bg-white/10 text-slate-300 px-2 py-0.5 rounded font-bold">
+                      WTA & TÜV
+                    </span>
+                  </div>
+                  <h3 className="text-base sm:text-lg font-extrabold text-white">
+                    {t("Vor-Ort-Aufmaß & Schnellkalkulation", "On-Site Diagnostic Measurement & Quick Estimate")}
+                  </h3>
+                  <p className="text-xs text-slate-300 mt-0.5">
+                    {t(
+                      "Erfassen Sie Vor-Ort-Messdaten und überführen Sie diese mit 1 Klick in ein GoBD-Angebot oder direkt in eine Rechnung.",
+                      "Capture on-site diagnostic measurements and convert them in 1 click into a GoBD quote or invoice."
+                    )}
+                  </p>
+                </div>
               </div>
 
               {/* Pipeline Step Indicators */}
@@ -2443,6 +2785,36 @@ export default function AdminPortalClient() {
                       <div className="space-y-2.5 pt-2">
                         <button
                           type="button"
+                          onClick={() => {
+                            const draftDoc: WorkspaceGoBDDoc = {
+                              nr: "ANG-2026-ENTWURF",
+                              type: "offer",
+                              typeLabel: t("Kostenvoranschlag / Angebot", "Estimate / Quote"),
+                              leadId: "VOR-ORT",
+                              date: new Date().toISOString().slice(0, 10),
+                              dueOrValid: new Date(Date.now() + 14 * 86400000).toISOString().slice(0, 10),
+                              status: t("Entwurf", "Draft"),
+                              name: plName || t("Kunde (Vor-Ort-Aufmaß)", "Customer (On-Site Estimate)"),
+                              address: plAddr || "Wuppertal & Bergisches Land",
+                              email: "",
+                              phone: plPhone || "+49 172 2064177",
+                              service: plService || "Kellersanierung & Horizontalsperre nach WTA",
+                              vatRate: 19,
+                              lines: plLines,
+                              skontoPct: 2,
+                              discountPct: 0,
+                              driveFolder: "SOS Abdichtung - Vor-Ort-Aufmaß",
+                            };
+                            setPreviewDoc(draftDoc);
+                          }}
+                          className="w-full min-h-[46px] bg-sky-600 hover:bg-sky-500 text-white font-extrabold py-2.5 px-4 rounded-xl text-xs sm:text-sm shadow-md transition-all flex items-center justify-center gap-2"
+                        >
+                          <Eye className="w-4 h-4 shrink-0" />
+                          <span>{t("👁️ Live-Belegvorschau vor Ort (DIN 5008)", "👁️ Live Estimate Preview on Site (DIN 5008)")}</span>
+                        </button>
+
+                        <button
+                          type="button"
                           onClick={createOfferFromPlaner}
                           className="w-full min-h-[50px] bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold py-3.5 px-4 rounded-xl text-xs sm:text-sm shadow-md transition-all flex items-center justify-center gap-2"
                         >
@@ -2471,6 +2843,58 @@ export default function AdminPortalClient() {
       {/* TAB 5: GoBD INVOICING & QUOTE ENGINE */}
       {tab === "belege" && curDoc && (
         <div className="space-y-6">
+          {/* Top Header Card: Branding & View Mode Toggle (Editor vs DIN 5008 Live Preview) */}
+          <div className="bg-white rounded-2xl p-4 border border-slate-200 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div className="flex items-center gap-3">
+              <div className="h-10 w-28 relative flex items-center justify-center p-1.5 bg-slate-50 border border-slate-200 rounded-xl">
+                <img
+                  src="/logo.svg"
+                  alt="SOS Abdichtung"
+                  className="h-7 w-auto max-w-full object-contain"
+                />
+              </div>
+              <div>
+                <h3 className="text-sm sm:text-base font-extrabold text-slate-900 flex items-center gap-2">
+                  <span>{t("GoBD Belegverwaltung & Abrechnung", "GoBD Document Management & Billing")}</span>
+                  <span className="text-[10px] bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded-full border border-emerald-300">
+                    DIN 5008
+                  </span>
+                </h3>
+                <div className="text-[11px] text-slate-500">
+                  {t("Angebote, Rechnungen & § 35a Handwerkerbonus", "Quotes, Invoices & § 35a Tax Bonus")}
+                </div>
+              </div>
+            </div>
+
+            {/* View Mode Switcher: Editor vs Live DIN 5008 Vorschau */}
+            <div className="flex items-center bg-slate-100 p-1 rounded-xl border border-slate-200 shrink-0">
+              <button
+                type="button"
+                onClick={() => setDocViewMode("editor")}
+                className={`min-h-[38px] px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 ${
+                  docViewMode === "editor"
+                    ? "bg-white text-slate-900 shadow-sm"
+                    : "text-slate-600 hover:text-slate-900"
+                }`}
+              >
+                <SlidersHorizontal className="w-3.5 h-3.5 text-emerald-700" />
+                <span>{t("📝 Beleg-Editor", "📝 Document Editor")}</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => setDocViewMode("preview")}
+                className={`min-h-[38px] px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 ${
+                  docViewMode === "preview"
+                    ? "bg-emerald-700 text-white shadow-sm"
+                    : "text-slate-600 hover:text-slate-900"
+                }`}
+              >
+                <Eye className="w-3.5 h-3.5" />
+                <span>{t("📄 Live-Belegvorschau (DIN 5008)", "📄 Live Preview (DIN 5008)")}</span>
+              </button>
+            </div>
+          </div>
+
           {/* Document Type Filter & Quick Creation Bar */}
           <div className="bg-white rounded-2xl p-4 border border-slate-200 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-3">
             <div className="flex flex-wrap items-center gap-2">
@@ -2682,7 +3106,53 @@ export default function AdminPortalClient() {
             </div>
           )}
 
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+          {docViewMode === "preview" ? (
+            /* LIVE DIN 5008 PREVIEW VIEW */
+            <div className="space-y-4">
+              <div className="bg-slate-900 text-white p-3.5 sm:p-4 rounded-2xl shadow-sm flex flex-wrap items-center justify-between gap-3 border border-slate-800">
+                <div className="flex items-center gap-2.5 text-xs sm:text-sm font-bold">
+                  <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" />
+                  <span>
+                    {t("Live-Belegvorschau (DIN 5008):", "Live Document Preview (DIN 5008):")}
+                  </span>
+                  <span className="text-emerald-300 font-extrabold">
+                    {curDoc.nr} · {curDoc.typeLabel}
+                  </span>
+                </div>
+                <div className="flex flex-wrap items-center gap-2">
+                  <button
+                    type="button"
+                    onClick={() => setDocViewMode("editor")}
+                    className="min-h-[38px] px-3.5 py-1.5 bg-white/10 hover:bg-white/20 text-white text-xs font-bold rounded-xl flex items-center gap-1.5 transition-colors"
+                  >
+                    <SlidersHorizontal className="w-3.5 h-3.5" />
+                    <span>{t("← Zurück zum Editor", "← Back to Editor")}</span>
+                  </button>
+                  {curDoc.type === "offer" && (
+                    <button
+                      type="button"
+                      onClick={() => convertOfferToInvoice(curDoc)}
+                      className="min-h-[38px] px-3.5 py-1.5 bg-teal-600 hover:bg-teal-500 text-white text-xs font-bold rounded-xl flex items-center gap-1.5 shadow-sm transition-colors"
+                    >
+                      <Sparkles className="w-3.5 h-3.5" />
+                      <span>{t("⚡ In Rechnung umwandeln", "⚡ Convert to Invoice")}</span>
+                    </button>
+                  )}
+                  <button
+                    type="button"
+                    onClick={() => window.print()}
+                    className="min-h-[38px] px-4 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold rounded-xl flex items-center gap-1.5 shadow-sm transition-colors"
+                  >
+                    <Printer className="w-4 h-4" />
+                    <span>{t("🖨️ Drucken / Als PDF speichern", "🖨️ Print / Save as PDF")}</span>
+                  </button>
+                </div>
+              </div>
+
+              {renderDIN5008Invoice(curDoc, false)}
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
             {/* Left 8 Cols: Editable Header & Line Items Table */}
             <div className="lg:col-span-8 bg-white rounded-2xl p-4 sm:p-6 border border-slate-200 space-y-5 shadow-sm">
               <div className="border-b border-slate-100 pb-3 flex items-center justify-between gap-2">
@@ -3204,11 +3674,20 @@ export default function AdminPortalClient() {
 
                 {/* 1-Click Convert or Print Buttons */}
                 <div className="space-y-2 pt-2">
+                  <button
+                    type="button"
+                    onClick={() => setDocViewMode("preview")}
+                    className="w-full min-h-[46px] bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold py-3 px-4 rounded-xl flex items-center justify-center gap-2 shadow-sm transition-colors text-xs sm:text-sm"
+                  >
+                    <Eye className="w-4 h-4 shrink-0" />
+                    <span>{t("📄 Live DIN 5008 Belegvorschau öffnen", "📄 Open Live DIN 5008 Preview")}</span>
+                  </button>
+
                   {curDoc.type === "offer" && (
                     <button
                       type="button"
                       onClick={() => convertOfferToInvoice(curDoc)}
-                      className="w-full min-h-[46px] bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold py-3 px-4 rounded-xl flex items-center justify-center gap-2 shadow-sm transition-colors text-xs sm:text-sm"
+                      className="w-full min-h-[46px] bg-teal-700 hover:bg-teal-600 text-white font-extrabold py-3 px-4 rounded-xl flex items-center justify-center gap-2 shadow-sm transition-colors text-xs sm:text-sm"
                     >
                       <Sparkles className="w-4 h-4" />
                       <span>{t("⚡ In Rechnung umwandeln", "⚡ Convert to Invoice")}</span>
@@ -3227,6 +3706,7 @@ export default function AdminPortalClient() {
               </div>
             </div>
           </div>
+          )}
         </div>
       )}
 
@@ -4381,128 +4861,40 @@ export default function AdminPortalClient() {
             if (e.target === e.currentTarget) setPreviewDoc(null);
           }}
         >
-          <div className="bg-white w-full max-w-3xl max-h-[92dvh] rounded-2xl overflow-hidden flex flex-col shadow-2xl">
-            <div className="bg-[#0f2537] text-white px-4 sm:px-5 py-3 flex flex-wrap items-center justify-between gap-2">
-              <strong className="text-xs sm:text-sm truncate">
-                {previewDoc.nr} · {previewDoc.typeLabel} ({previewDoc.name})
-              </strong>
+          <div className="bg-white w-full max-w-4xl max-h-[94dvh] rounded-2xl overflow-hidden flex flex-col shadow-2xl">
+            <div className="bg-[#0f2537] text-white px-4 sm:px-6 py-3 flex flex-wrap items-center justify-between gap-2 border-b border-slate-700">
+              <div className="flex items-center gap-2.5 truncate">
+                <img
+                  src="/logo.svg"
+                  alt="SOS Abdichtung"
+                  className="h-6 w-auto brightness-0 invert"
+                />
+                <span className="text-slate-400">|</span>
+                <strong className="text-xs sm:text-sm truncate">
+                  {previewDoc.nr} · {previewDoc.typeLabel} ({previewDoc.name})
+                </strong>
+              </div>
               <div className="flex items-center gap-2">
                 <button
                   type="button"
                   onClick={() => window.print()}
-                  className="min-h-[40px] bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold px-3.5 py-2 rounded-xl"
+                  className="min-h-[40px] bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold px-4 py-2 rounded-xl flex items-center gap-1.5 shadow-sm"
                 >
-                  {t("🖨️ Drucken / PDF", "🖨️ Print / PDF")}
+                  <Printer className="w-4 h-4" />
+                  <span>{t("🖨️ Drucken / Als PDF speichern", "🖨️ Print / Save as PDF")}</span>
                 </button>
                 <button
                   type="button"
                   onClick={() => setPreviewDoc(null)}
-                  className="min-h-[40px] bg-white/10 hover:bg-white/20 text-white text-xs font-bold px-3 py-2 rounded-xl"
+                  className="min-h-[40px] bg-white/10 hover:bg-white/20 text-white text-xs font-bold px-3.5 py-2 rounded-xl"
                 >
                   {t("Schließen ×", "Close ×")}
                 </button>
               </div>
             </div>
 
-            <div className="p-4 sm:p-8 overflow-y-auto space-y-5 text-xs text-slate-800">
-              <div className="flex flex-col sm:flex-row justify-between sm:items-start gap-3 border-b-2 border-[#0f2537] pb-4">
-                <div>
-                  <div className="text-base sm:text-lg font-extrabold text-[#0f2537]">
-                    {COMPANY.fullName}
-                  </div>
-                  <div className="text-slate-600">
-                    {t("Inhaber:", "Owner:")} {COMPANY_INFO.owner} · {COMPANY_INFO.street}, {COMPANY_INFO.city}
-                  </div>
-                  <div className="text-slate-600 break-words">
-                    Tel.: {COMPANY_INFO.phoneDisplay} · E-Mail: {COMPANY_INFO.email}
-                  </div>
-                </div>
-                <div className="sm:text-right">
-                  <div className="text-sm sm:text-base font-extrabold text-emerald-700">
-                    {previewDoc.typeLabel.toUpperCase()}
-                  </div>
-                  <div className="font-bold">Nr.: {previewDoc.nr}</div>
-                  <div>{t("Datum:", "Date:")} {previewDoc.date}</div>
-                  <div>{t("Bezug:", "Reference:")} {t("Anfrage", "Lead")} {previewDoc.leadId}</div>
-                </div>
-              </div>
-
-              <div>
-                <div className="text-[10px] uppercase tracking-wider text-slate-400">
-                  {t("Empfänger", "Recipient / Customer")}
-                </div>
-                <div className="font-bold text-sm text-slate-900">{previewDoc.name}</div>
-                <div>{previewDoc.address}</div>
-              </div>
-
-              <div className="font-bold text-sm text-[#0f2537]">{previewDoc.service}</div>
-
-              <table className="w-full border-collapse">
-                <thead>
-                  <tr className="border-b-2 border-slate-900 text-left text-[11px] uppercase text-slate-500">
-                    <th className="py-2 pr-2">{t("Pos. / Beschreibung", "Item / Description")}</th>
-                    <th className="py-2 px-1 sm:px-2 text-right">{t("Menge", "Qty")}</th>
-                    <th className="py-2 px-2 text-right hidden sm:table-cell">{t("Einzelpreis", "Unit Price")}</th>
-                    <th className="py-2 pl-2 text-right">{t("Gesamt", "Total")}</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-slate-200">
-                  {previewDoc.lines.map((l, i) => (
-                    <tr key={i}>
-                      <td className="py-2.5 pr-2">
-                        <div className="font-bold text-slate-900">{l.pos}</div>
-                        <div className="text-slate-500">{l.basis}</div>
-                      </td>
-                      <td className="py-2.5 px-1 sm:px-2 text-right whitespace-nowrap">
-                        <div>
-                          {l.qty} {l.unit}
-                        </div>
-                        <div className="text-[10px] text-slate-500 sm:hidden">
-                          {eur(l.price)}
-                        </div>
-                      </td>
-                      <td className="py-2.5 px-2 text-right whitespace-nowrap hidden sm:table-cell">
-                        {eur(l.price)}
-                      </td>
-                      <td className="py-2.5 pl-2 text-right font-bold whitespace-nowrap">
-                        {eur(l.qty * l.price)}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-
-              {(() => {
-                const tTotals = calcDocTotals(previewDoc);
-                return (
-                  <div className="sm:ml-auto sm:max-w-xs space-y-1.5 border-t-2 border-slate-900 pt-3">
-                    <div className="flex justify-between">
-                      <span>{t("Nettobetrag:", "Net Total:")}</span>
-                      <strong>{eur(tTotals.net)}</strong>
-                    </div>
-                    <div className="flex justify-between">
-                      <span>{t(`Umsatzsteuer (${previewDoc.vatRate} %):`, `VAT (${previewDoc.vatRate} %):`)}</span>
-                      <strong>{eur(tTotals.vat)}</strong>
-                    </div>
-                    <div className="flex justify-between text-sm font-extrabold border-t border-slate-300 pt-1.5">
-                      <span>{t("Gesamtbetrag:", "Gross Total:")}</span>
-                      <span>{eur(tTotals.gross)}</span>
-                    </div>
-                    <div className="text-[11px] text-slate-600 pt-1">
-                      {t("Darin enthaltener Arbeits-/Lohnanteil nach § 35a EStG:", "Included labor portion eligible for § 35a EStG tax deduction:")}{" "}
-                      <strong>{eur(tTotals.labourGross)}</strong> ({t("20 % Steuerermäßigung =", "20 % tax credit =")}{" "}
-                      {eur(tTotals.taxBonus20)}).
-                    </div>
-                  </div>
-                );
-              })()}
-
-              <div className="pt-4 border-t border-slate-200 text-[11px] text-slate-500">
-                {t(
-                  "Garantiehinweis: 10 Jahre Ausführungsgarantie von sos-abdichtung + 25 Jahre Produktgarantie der SchimmelPeter GmbH.",
-                  "Warranty statement: 10-year workmanship warranty from sos-abdichtung + 25-year manufacturer warranty from SchimmelPeter GmbH."
-                )}
-              </div>
+            <div className="p-3 sm:p-6 overflow-y-auto bg-slate-100/70">
+              {renderDIN5008Invoice(previewDoc, true)}
             </div>
           </div>
         </div>
