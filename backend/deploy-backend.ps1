@@ -12,20 +12,37 @@ Write-Host "  SOS Abdichtung - Backend & Admin Cloud Deployment       " -Foregro
 Write-Host "==========================================================" -ForegroundColor Cyan
 
 # 1. Check Clasp Installation
-if (-not (Get-Command "clasp" -ErrorAction SilentlyContinue)) {
+$claspCmd = (Get-Command "clasp.cmd" -ErrorAction SilentlyContinue)
+if (-not $claspCmd) {
     Write-Host "[!] Google clasp CLI not found. Installing @google/clasp globally..." -ForegroundColor Yellow
     npm install -g @google/clasp
+    $claspCmd = (Get-Command "clasp.cmd" -ErrorAction SilentlyContinue)
 }
 
 # 2. Check Authentication
-$clasprcPath = Join-Path $env:USERPROFILE ".clasprc.json"
-if (-not (Test-Path $clasprcPath)) {
+$currentUser = ""
+try {
+    $authUserOutput = & clasp.cmd show-authorized-user 2>&1 | Out-String
+    if ($authUserOutput -match "logged in as ([^\s]+)") {
+        $currentUser = $matches[1]
+    }
+} catch {
+    $currentUser = ""
+}
+
+Write-Host "Aktuell angemeldet als: $currentUser" -ForegroundColor Cyan
+if ($currentUser -and $currentUser -ne "simplypizza2020@gmail.com") {
+    Write-Host "[!] Aktuell ist noch das alte Konto '$currentUser' eingeloggt." -ForegroundColor Yellow
+    Write-Host "[!] Bitte mit dem neuen Google Workspace Konto 'simplypizza2020@gmail.com' anmelden." -ForegroundColor Yellow
+    & clasp.cmd logout
+    & clasp.cmd login
+} elseif (-not $currentUser) {
     Write-Host ""
     Write-Host "[1/4] Google Account Authentication Required" -ForegroundColor Yellow
-    Write-Host "A browser window will open. Log in with your Google Workspace account." -ForegroundColor Gray
-    clasp login
+    Write-Host "Ein Browserfenster öffnet sich. Bitte mit 'simplypizza2020@gmail.com' anmelden." -ForegroundColor Gray
+    & clasp.cmd login
 } else {
-    Write-Host "[1/4] Authenticated with Google clasp (~/.clasprc.json found)." -ForegroundColor Green
+    Write-Host "[1/4] Authentifiziert mit Google Workspace ($currentUser)." -ForegroundColor Green
 }
 
 # 3. Sync Shared Modules
@@ -47,13 +64,13 @@ Push-Location $appsDir
 try {
     if (-not (Test-Path ".clasp.json")) {
         Write-Host "Creating new Google Sheet + bound Apps Script project 'SOS Abdichtung — Anfragen & Kalkulation'..." -ForegroundColor Yellow
-        clasp create --type sheets --title "SOS Abdichtung — Anfragen & Kalkulation"
+        & clasp.cmd create --type sheets --title "SOS Abdichtung — Anfragen & Kalkulation"
     }
     Write-Host "Pushing Website API files to Google Apps Script..." -ForegroundColor Gray
-    clasp push --force
+    & clasp.cmd push --force
 
     Write-Host "Creating Web App deployment for Website API..." -ForegroundColor Gray
-    $deployOut = clasp deploy --description "SOS Abdichtung Website API (Leads, Photos, Calendar, E-Sign, AI Chat)" 2>&1 | Out-String
+    $deployOut = & clasp.cmd deploy --description "SOS Abdichtung Website API (Leads, Photos, Calendar, E-Sign, AI Chat)" 2>&1 | Out-String
     Write-Host $deployOut -ForegroundColor Green
 } finally {
     Pop-Location
@@ -79,13 +96,13 @@ try {
 
     if (-not (Test-Path ".clasp.json")) {
         Write-Host "Creating standalone Apps Script project 'SOS Abdichtung — Admin Portal'..." -ForegroundColor Yellow
-        clasp create --type webapp --title "SOS Abdichtung — Admin Portal"
+        & clasp.cmd create --type webapp --title "SOS Abdichtung — Admin Portal"
     }
     Write-Host "Pushing Admin Portal files to Google Apps Script..." -ForegroundColor Gray
-    clasp push --force
+    & clasp.cmd push --force
 
     Write-Host "Creating Web App deployment for Admin Portal..." -ForegroundColor Gray
-    $adminDeployOut = clasp deploy --description "SOS Abdichtung Admin Portal (Leads, Drive, GoBD Belege, Kalender)" 2>&1 | Out-String
+    $adminDeployOut = & clasp.cmd deploy --description "SOS Abdichtung Admin Portal (Leads, Drive, GoBD Belege, Kalender)" 2>&1 | Out-String
     Write-Host $adminDeployOut -ForegroundColor Green
 } finally {
     Pop-Location
