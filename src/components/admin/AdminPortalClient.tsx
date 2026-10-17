@@ -40,7 +40,11 @@ import {
   Layers,
   Sparkles,
   BadgePercent,
+  Percent,
   CreditCard,
+  Ruler,
+  Maximize2,
+  SlidersHorizontal,
 } from "lucide-react";
 import { COMPANY, COMPANY_INFO } from "@/data/content-data";
 import {
@@ -333,6 +337,14 @@ export default function AdminPortalClient() {
   const [plPhone, setPlPhone] = useState("");
   const [plAddr, setPlAddr] = useState("42103 Wuppertal");
   const [plService, setPlService] = useState("Horizontalsperre");
+    // Room geometry & advanced on-site diagnostic planning state
+  const [calcLen, setCalcLen] = useState<number>(14);
+  const [calcHeight, setCalcHeight] = useState<number>(2.4);
+  const [calcThick, setCalcThick] = useState<number>(36.5);
+  const [calcMasonry, setCalcMasonry] = useState<string>("Ziegelmauerwerk");
+  const [calcMoisture, setCalcMoisture] = useState<string>("80 % (Stark durchfeuchtet)");
+  const [calcExpanded, setCalcExpanded] = useState<boolean>(false);
+
   const [plLines, setPlLines] = useState<QuoteLineItem[]>([
     {
       pos: isEn ? WTA_TEMPLATES[0].pos_en : WTA_TEMPLATES[0].pos_de,
@@ -417,6 +429,8 @@ export default function AdminPortalClient() {
         net: 0,
         vat: 0,
         gross: 0,
+        rawNet: 0,
+        discountAmount: 0,
         labourNet: 0,
         materialNet: 0,
         labourGross: 0,
@@ -427,11 +441,17 @@ export default function AdminPortalClient() {
       };
     }
     const lines = doc.lines || [];
-    const net = lines.reduce((sum, item) => sum + (Number(item.qty) || 0) * (Number(item.price) || 0), 0);
-    const labourNet = lines
+    const rawNet = lines.reduce((sum, item) => sum + (Number(item.qty) || 0) * (Number(item.price) || 0), 0);
+    const discountRate = (Number(doc.discountPct) || 0) / 100;
+    const discountAmount = rawNet * discountRate;
+    const net = Math.max(0, rawNet - discountAmount);
+
+    const labourNetRaw = lines
       .filter((i) => i.labour)
       .reduce((sum, item) => sum + (Number(item.qty) || 0) * (Number(item.price) || 0), 0);
+    const labourNet = Math.max(0, labourNetRaw * (1 - discountRate));
     const materialNet = Math.max(0, net - labourNet);
+
     const vatRate = doc.vatRate ?? 19;
     const vat = net * (vatRate / 100);
     const gross = net + vat;
@@ -442,10 +462,13 @@ export default function AdminPortalClient() {
     const materialPct = 100 - labourPct;
     const skontoRate = doc.skontoPct ?? 2;
     const skontoAmount = (gross * skontoRate) / 100;
+
     return {
       net,
       vat,
       gross,
+      rawNet,
+      discountAmount,
       labourNet,
       materialNet,
       labourGross,
@@ -454,6 +477,60 @@ export default function AdminPortalClient() {
       materialPct,
       skontoAmount,
     };
+  };
+
+  const applyRoomGeometry = () => {
+    const lfmVal = Math.round(calcLen * 10) / 10;
+    const m2Val = Math.round(calcLen * calcHeight * 10) / 10;
+
+    setPlLines((prev) =>
+      prev.map((line) => {
+        const u = (line.unit || "").toLowerCase();
+        if (u.includes("lfm") || u.includes("lin")) {
+          return { ...line, qty: lfmVal };
+        }
+        if (u.includes("m²") || u.includes("m2") || u.includes("qm")) {
+          return { ...line, qty: m2Val };
+        }
+        return line;
+      })
+    );
+
+    showToast(
+      t(
+        `Raummaße übernommen: ${lfmVal} lfm · ${m2Val} m² auf alle Positionen angewendet!`,
+        `Room dimensions applied: ${lfmVal} lin. m · ${m2Val} m² updated on all items!`
+      )
+    );
+  };
+
+  const applyPriceAdjustmentToPlaner = (multiplier: number, label: string) => {
+    setPlLines((prev) =>
+      prev.map((l) => ({
+        ...l,
+        price: Math.max(1, Math.round(l.price * multiplier)),
+      }))
+    );
+    showToast(t(`Preisanpassung (${label}) auf Aufmaß angewendet.`, `Price adjustment (${label}) applied to estimate.`));
+  };
+
+  const applyPriceAdjustmentToDoc = (multiplier: number, label: string) => {
+    updateCurDoc((doc) => ({
+      ...doc,
+      lines: (doc.lines || []).map((l) => ({
+        ...l,
+        price: Math.max(1, Math.round(l.price * multiplier)),
+      })),
+    }));
+    showToast(t(`Preise um ${label} angepasst.`, `Prices adjusted by ${label}.`));
+  };
+
+  const setDocDiscount = (pct: number) => {
+    updateCurDoc((doc) => ({
+      ...doc,
+      discountPct: pct,
+    }));
+    showToast(t(`Rabatt auf ${pct} % gesetzt.`, `Discount set to ${pct} %.`));
   };
 
   const getDocDateStatus = (doc: WorkspaceGoBDDoc) => {
@@ -1125,7 +1202,7 @@ export default function AdminPortalClient() {
         </div>
 
         <nav
-          className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-2"
+          className="flex sm:grid sm:grid-cols-4 lg:grid-cols-8 gap-1.5 sm:gap-2 overflow-x-auto pb-1 sm:pb-0 scrollbar-none"
           aria-label="Admin Navigation"
         >
           {(
@@ -1144,10 +1221,10 @@ export default function AdminPortalClient() {
               key={k}
               type="button"
               onClick={() => setTab(k)}
-              className={`min-h-[44px] inline-flex items-center justify-center gap-1.5 px-2.5 py-2.5 rounded-xl text-xs font-bold transition-colors ${
+              className={`min-h-[44px] shrink-0 inline-flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-xl text-xs font-bold transition-all ${
                 tab === k
                   ? "bg-emerald-600 text-white shadow-sm"
-                  : "bg-white/5 text-slate-200 hover:bg-white/15"
+                  : "bg-white/5 text-slate-200 hover:bg-white/15 hover:text-white"
               }`}
             >
               <Icon className="w-4 h-4 shrink-0" />
@@ -1985,6 +2062,172 @@ export default function AdminPortalClient() {
                 </div>
               </div>
 
+              {/* SMART ROOM GEOMETRY & MASONRY CALCULATOR */}
+              <div className="bg-slate-50 border border-slate-200 rounded-xl p-3.5 space-y-3">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-2">
+                    <Ruler className="w-4 h-4 text-emerald-700 shrink-0" />
+                    <div>
+                      <h5 className="text-xs font-extrabold text-slate-900">
+                        {t("Vor-Ort Raum- & Geometrierechner (WTA)", "On-Site Room & Geometry Calculator (WTA)")}
+                      </h5>
+                      <p className="text-[10px] text-slate-500">
+                        {t("Berechnet lfm, Wandfläche (m²) und Bohrlochraster automatisch.", "Calculates lin. m, wall surface (m²) and borehole grid automatically.")}
+                      </p>
+                    </div>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => setCalcExpanded(!calcExpanded)}
+                    className="text-xs font-bold text-emerald-700 hover:text-emerald-800 bg-white border border-slate-200 px-2.5 py-1 rounded-lg"
+                  >
+                    {calcExpanded ? t("Weniger ▲", "Collapse ▲") : t("Rechner öffnen ▼", "Open Calculator ▼")}
+                  </button>
+                </div>
+
+                {calcExpanded && (
+                  <div className="pt-2 border-t border-slate-200 space-y-3">
+                    <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
+                      <div>
+                        <label className="text-[11px] font-bold text-slate-700 block mb-1">
+                          {t("Wandlänge (lfm)", "Wall Length (m)")}
+                        </label>
+                        <input
+                          type="number"
+                          step={0.5}
+                          min={1}
+                          value={calcLen}
+                          onChange={(e) => setCalcLen(Number(e.target.value) || 1)}
+                          className={inputCls}
+                        />
+                      </div>
+                      <div>
+                        <label className="text-[11px] font-bold text-slate-700 block mb-1">
+                          {t("Wandhöhe (m)", "Wall Height (m)")}
+                        </label>
+                        <input
+                          type="number"
+                          step={0.1}
+                          min={0.5}
+                          value={calcHeight}
+                          onChange={(e) => setCalcHeight(Number(e.target.value) || 1)}
+                          className={inputCls}
+                        />
+                      </div>
+                      <div>
+                        <label className="text-[11px] font-bold text-slate-700 block mb-1">
+                          {t("Mauerstärke (cm)", "Thickness (cm)")}
+                        </label>
+                        <input
+                          type="number"
+                          step={1}
+                          min={10}
+                          value={calcThick}
+                          onChange={(e) => setCalcThick(Number(e.target.value) || 36.5)}
+                          className={inputCls}
+                        />
+                      </div>
+                      <div>
+                        <label className="text-[11px] font-bold text-slate-700 block mb-1">
+                          {t("Mauerwerk", "Masonry Type")}
+                        </label>
+                        <select
+                          value={calcMasonry}
+                          onChange={(e) => setCalcMasonry(e.target.value)}
+                          className={inputCls}
+                        >
+                          <option value="Ziegelmauerwerk">Ziegelmauerwerk</option>
+                          <option value="Bruchstein / Sandstein">Bruchstein / Sandstein</option>
+                          <option value="Beton / Schalstein">Beton / Schalstein</option>
+                          <option value="Kalksandstein">Kalksandstein</option>
+                        </select>
+                      </div>
+                      <div className="col-span-2">
+                        <label className="text-[11px] font-bold text-slate-700 block mb-1">
+                          {t("Durchfeuchtungsgrad", "Moisture Degree")}
+                        </label>
+                        <select
+                          value={calcMoisture}
+                          onChange={(e) => setCalcMoisture(e.target.value)}
+                          className={inputCls}
+                        >
+                          <option value="bis 60 % (Mäßig)">bis 60 % (Mäßig durchfeuchtet)</option>
+                          <option value="bis 80 % (Stark)">bis 80 % (Starke Kapillarfeuchte)</option>
+                          <option value="bis 100 % (Druckwasser)">bis 100 % (Druckwassereinbruch / Nass)</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    {/* Quick Live Diagnostics Output */}
+                    <div className="bg-white border border-emerald-200 rounded-xl p-3 grid grid-cols-2 sm:grid-cols-4 gap-2 text-center text-xs">
+                      <div>
+                        <span className="text-[10px] text-slate-400 block">{t("Länge (Sperre)", "Length")}</span>
+                        <strong className="text-emerald-800 text-sm">{calcLen} lfm</strong>
+                      </div>
+                      <div>
+                        <span className="text-[10px] text-slate-400 block">{t("Wandfläche (Putz)", "Surface")}</span>
+                        <strong className="text-emerald-800 text-sm">{Math.round(calcLen * calcHeight * 10) / 10} m²</strong>
+                      </div>
+                      <div>
+                        <span className="text-[10px] text-slate-400 block">{t("Bohrlöcher (~10 cm)", "Boreholes")}</span>
+                        <strong className="text-slate-800 text-sm">~{Math.round(calcLen * 10)} Stk.</strong>
+                      </div>
+                      <div>
+                        <span className="text-[10px] text-slate-400 block">{t("Silan-Creme Bedarf", "Silane Volume")}</span>
+                        <strong className="text-slate-800 text-sm">~{Math.round(calcLen * (calcThick / 20) * 10) / 10} L</strong>
+                      </div>
+                    </div>
+
+                    <button
+                      type="button"
+                      onClick={applyRoomGeometry}
+                      className="w-full min-h-[42px] bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold text-xs px-4 py-2.5 rounded-xl shadow-sm transition-colors flex items-center justify-center gap-2"
+                    >
+                      <Check className="w-4 h-4" />
+                      <span>{t("⚡ Maße auf Positionen anwenden (lfm & m² synchronisieren)", "⚡ Apply Dimensions to Line Items (Sync lfm & m²)")}</span>
+                    </button>
+                  </div>
+                )}
+              </div>
+
+              {/* Price Tuning Toolbar */}
+              <div className="bg-slate-50 border border-slate-200 rounded-xl p-3 flex flex-wrap items-center justify-between gap-2 text-xs">
+                <span className="font-bold text-slate-700 flex items-center gap-1.5">
+                  <Percent className="w-3.5 h-3.5 text-emerald-700" />
+                  <span>{t("Preise im Aufmaß anpassen:", "Adjust Prices in Estimate:")}</span>
+                </span>
+                <div className="flex flex-wrap items-center gap-1.5">
+                  <button
+                    type="button"
+                    onClick={() => applyPriceAdjustmentToPlaner(0.95, "-5 % Skonto")}
+                    className="min-h-[36px] px-2.5 py-1 bg-white hover:bg-slate-100 text-slate-700 font-bold border border-slate-200 rounded-lg"
+                  >
+                    -5 %
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => applyPriceAdjustmentToPlaner(0.90, "-10 % Rabatt")}
+                    className="min-h-[36px] px-2.5 py-1 bg-white hover:bg-slate-100 text-slate-700 font-bold border border-slate-200 rounded-lg"
+                  >
+                    -10 %
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => applyPriceAdjustmentToPlaner(1.15, "+15 % Altbau-Zuschlag")}
+                    className="min-h-[36px] px-2.5 py-1 bg-white hover:bg-slate-100 text-slate-700 font-bold border border-slate-200 rounded-lg"
+                  >
+                    +15 % {t("Altbau", "Old building")}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => applyPriceAdjustmentToPlaner(1.25, "+25 % Express-Notdienst")}
+                    className="min-h-[36px] px-2.5 py-1 bg-white hover:bg-slate-100 text-slate-700 font-bold border border-slate-200 rounded-lg"
+                  >
+                    +25 % {t("Express", "Express")}
+                  </button>
+                </div>
+              </div>
+
               <div>
                 <div className="flex items-center justify-between gap-2 mb-2">
                   <div className="text-xs font-bold text-slate-700">
@@ -2542,6 +2785,86 @@ export default function AdminPortalClient() {
                 </button>
               </div>
 
+              {/* GLOBAL PRICE & DISCOUNT TOOLBAR */}
+              <div className="bg-slate-50 border border-slate-200 rounded-xl p-3.5 space-y-3">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                  <div className="flex items-center gap-2">
+                    <Percent className="w-4 h-4 text-emerald-700" />
+                    <div>
+                      <h5 className="text-xs font-extrabold text-slate-900">
+                        {t("Preise & Gesamtrabatt einstellen", "Set Document Prices & Discount")}
+                      </h5>
+                      <p className="text-[10px] text-slate-500">
+                        {t("Nachlass wird vor Umsatzsteuer abgezogen (GoBD-konform).", "Discount applied before VAT according to GoBD.")}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-1.5">
+                    <span className="text-xs font-bold text-slate-700">{t("Rabatt:", "Discount:")}</span>
+                    <input
+                      type="number"
+                      min={0}
+                      max={50}
+                      step={1}
+                      value={curDoc.discountPct || 0}
+                      onChange={(e) => setDocDiscount(Math.min(50, Math.max(0, Number(e.target.value) || 0)))}
+                      className="w-16 min-h-[36px] px-2 py-1 rounded-lg border border-slate-300 bg-white text-right text-xs font-bold text-slate-900"
+                    />
+                    <span className="text-xs font-bold text-slate-600">%</span>
+                  </div>
+                </div>
+
+                <div className="flex flex-wrap items-center gap-1.5 pt-1 border-t border-slate-200/60">
+                  <span className="text-[10px] font-bold text-slate-500 mr-1">{t("Schnellrabatt:", "Quick Discount:")}</span>
+                  <button
+                    type="button"
+                    onClick={() => setDocDiscount(0)}
+                    className="min-h-[32px] px-2.5 py-1 rounded-lg text-xs font-semibold bg-white border border-slate-200 hover:bg-slate-100 text-slate-700"
+                  >
+                    0 %
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setDocDiscount(2)}
+                    className="min-h-[32px] px-2.5 py-1 rounded-lg text-xs font-semibold bg-white border border-slate-200 hover:bg-slate-100 text-slate-700"
+                  >
+                    2 % {t("Skonto", "Cash Disc.")}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setDocDiscount(5)}
+                    className="min-h-[32px] px-2.5 py-1 rounded-lg text-xs font-semibold bg-white border border-slate-200 hover:bg-slate-100 text-slate-700"
+                  >
+                    5 % {t("Neukunde", "New Client")}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setDocDiscount(10)}
+                    className="min-h-[32px] px-2.5 py-1 rounded-lg text-xs font-semibold bg-white border border-slate-200 hover:bg-slate-100 text-slate-700"
+                  >
+                    10 % {t("Großprojekt", "Volume")}
+                  </button>
+
+                  <span className="text-[10px] font-bold text-slate-500 mx-1">|</span>
+                  <span className="text-[10px] font-bold text-slate-500">{t("Zuschläge:", "Surcharges:")}</span>
+                  <button
+                    type="button"
+                    onClick={() => applyPriceAdjustmentToDoc(1.15, "+15 % Altbau")}
+                    className="min-h-[32px] px-2.5 py-1 rounded-lg text-xs font-semibold bg-white border border-slate-200 hover:bg-slate-100 text-slate-700"
+                  >
+                    +15 % {t("Altbau", "Old Building")}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => applyPriceAdjustmentToDoc(1.25, "+25 % Express")}
+                    className="min-h-[32px] px-2.5 py-1 rounded-lg text-xs font-semibold bg-white border border-slate-200 hover:bg-slate-100 text-slate-700"
+                  >
+                    +25 % {t("Express", "Express")}
+                  </button>
+                </div>
+              </div>
+
               {/* INTERACTIVE LINE ITEM EDITOR (ACCA & BILLDU STYLE) */}
               <div className="space-y-3 pt-3 border-t border-slate-100">
                 <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
@@ -2587,84 +2910,94 @@ export default function AdminPortalClient() {
                       key={idx}
                       className="bg-slate-50 border border-slate-200 rounded-xl p-3 sm:p-4 space-y-2.5 transition-all hover:border-slate-300"
                     >
-                      <div className="grid grid-cols-1 sm:grid-cols-12 gap-2 items-start">
+                      <div className="grid grid-cols-1 sm:grid-cols-12 gap-2.5 items-start">
                         {/* Title & Spec */}
                         <div className="sm:col-span-6 space-y-1.5">
+                          <label className="text-[10px] font-bold text-slate-500 sm:hidden block">{t("Leistung / Beschreibung:", "Service / Title:")}</label>
                           <input
                             type="text"
                             value={l.pos}
                             onChange={(e) => updateLine(idx, { pos: e.target.value })}
                             placeholder={t("Leistungsbezeichnung", "Service Title")}
-                            className="w-full text-xs font-bold text-slate-900 px-2.5 py-1.5 rounded-lg border border-slate-300 bg-white min-h-[38px]"
+                            className="w-full text-sm sm:text-xs font-bold text-slate-900 px-2.5 py-1.5 rounded-lg border border-slate-300 bg-white min-h-[42px] sm:min-h-[38px]"
                           />
                           <input
                             type="text"
                             value={l.basis}
                             onChange={(e) => updateLine(idx, { basis: e.target.value })}
                             placeholder={t("Technische Ausführungsgrundlage", "Technical specification / notes")}
-                            className="w-full text-[11px] text-slate-600 px-2.5 py-1 rounded-lg border border-slate-200 bg-white"
+                            className="w-full text-xs sm:text-[11px] text-slate-600 px-2.5 py-1 rounded-lg border border-slate-200 bg-white min-h-[36px]"
                           />
                         </div>
 
                         {/* Quantity & Unit */}
-                        <div className="sm:col-span-2 flex items-center gap-1">
-                          <input
-                            type="number"
-                            min={0.1}
-                            step={1}
-                            value={l.qty}
-                            onChange={(e) => updateLine(idx, { qty: Number(e.target.value) || 1 })}
-                            className="w-16 min-h-[38px] px-2 py-1 rounded-lg border border-slate-300 bg-white text-right text-xs font-bold text-slate-900"
-                          />
-                          <select
-                            value={l.unit}
-                            onChange={(e) => updateLine(idx, { unit: e.target.value })}
-                            className="min-h-[38px] text-[11px] font-semibold px-1.5 py-1 rounded-lg border border-slate-200 bg-white text-slate-700"
-                          >
-                            <option value="lfm">lfm</option>
-                            <option value="m²">m²</option>
-                            <option value="Stk.">Stk.</option>
-                            <option value="Std.">Std.</option>
-                            <option value="Pausch.">Pausch.</option>
-                            <option value="Tage">Tage</option>
-                            <option value="kg">kg</option>
-                          </select>
+                        <div className="sm:col-span-2">
+                          <label className="text-[10px] font-bold text-slate-500 sm:hidden block">{t("Menge & Einheit:", "Qty & Unit:")}</label>
+                          <div className="flex items-center gap-1">
+                            <input
+                              type="number"
+                              min={0.1}
+                              step={1}
+                              value={l.qty}
+                              onChange={(e) => updateLine(idx, { qty: Number(e.target.value) || 1 })}
+                              className="w-full min-h-[42px] sm:min-h-[38px] px-2 py-1 rounded-lg border border-slate-300 bg-white text-right text-sm sm:text-xs font-bold text-slate-900"
+                            />
+                            <select
+                              value={l.unit}
+                              onChange={(e) => updateLine(idx, { unit: e.target.value })}
+                              className="min-h-[42px] sm:min-h-[38px] text-xs font-semibold px-2 py-1 rounded-lg border border-slate-200 bg-white text-slate-700"
+                            >
+                              <option value="lfm">lfm</option>
+                              <option value="m²">m²</option>
+                              <option value="Stk.">Stk.</option>
+                              <option value="Std.">Std.</option>
+                              <option value="Pausch.">Pausch.</option>
+                              <option value="Tage">Tage</option>
+                              <option value="kg">kg</option>
+                            </select>
+                          </div>
                         </div>
 
                         {/* Unit Price */}
-                        <div className="sm:col-span-2 flex items-center gap-1">
-                          <input
-                            type="number"
-                            min={0}
-                            step={0.5}
-                            value={l.price}
-                            onChange={(e) => updateLine(idx, { price: Number(e.target.value) || 0 })}
-                            className="w-full min-h-[38px] px-2 py-1 rounded-lg border border-slate-300 bg-white text-right text-xs font-bold text-slate-900"
-                          />
-                          <span className="text-xs text-slate-400 font-bold">€</span>
+                        <div className="sm:col-span-2">
+                          <label className="text-[10px] font-bold text-slate-500 sm:hidden block">{t("Einzelpreis (€):", "Unit Price (€):")}</label>
+                          <div className="flex items-center gap-1">
+                            <input
+                              type="number"
+                              min={0}
+                              step={0.5}
+                              value={l.price}
+                              onChange={(e) => updateLine(idx, { price: Number(e.target.value) || 0 })}
+                              className="w-full min-h-[42px] sm:min-h-[38px] px-2 py-1 rounded-lg border border-slate-300 bg-white text-right text-sm sm:text-xs font-bold text-slate-900"
+                            />
+                            <span className="text-xs text-slate-400 font-bold">€</span>
+                          </div>
                         </div>
 
                         {/* Line Total & Actions */}
                         <div className="sm:col-span-2 flex items-center justify-between sm:justify-end gap-2 pt-1 sm:pt-0">
-                          <span className="text-xs font-extrabold text-slate-900 sm:text-right">
-                            {eur(l.qty * l.price)}
-                          </span>
+                          <div>
+                            <span className="text-[10px] font-bold text-slate-500 sm:hidden block">{t("Gesamt:", "Total:")}</span>
+                            <span className="text-sm sm:text-xs font-extrabold text-slate-900 sm:text-right block">
+                              {eur(l.qty * l.price)}
+                            </span>
+                          </div>
                           <div className="flex items-center gap-1">
                             <button
                               type="button"
                               onClick={() => duplicateLine(idx)}
                               title={t("Position duplizieren", "Duplicate line")}
-                              className="min-h-[36px] min-w-[36px] inline-flex items-center justify-center text-slate-400 hover:text-slate-700 rounded-lg hover:bg-slate-200/50"
+                              className="min-h-[42px] min-w-[42px] sm:min-h-[36px] sm:min-w-[36px] inline-flex items-center justify-center text-slate-400 hover:text-slate-700 rounded-lg hover:bg-slate-200/50"
                             >
-                              <Copy className="w-3.5 h-3.5" />
+                              <Copy className="w-4 h-4 sm:w-3.5 sm:h-3.5" />
                             </button>
                             <button
                               type="button"
                               onClick={() => removeLine(idx)}
                               title={t("Position löschen", "Delete line")}
-                              className="min-h-[36px] min-w-[36px] inline-flex items-center justify-center text-slate-400 hover:text-rose-600 rounded-lg hover:bg-rose-50"
+                              className="min-h-[42px] min-w-[42px] sm:min-h-[36px] sm:min-w-[36px] inline-flex items-center justify-center text-slate-400 hover:text-rose-600 rounded-lg hover:bg-rose-50"
                             >
-                              <Trash2 className="w-3.5 h-3.5" />
+                              <Trash2 className="w-4 h-4 sm:w-3.5 sm:h-3.5" />
                             </button>
                           </div>
                         </div>
@@ -2788,6 +3121,18 @@ export default function AdminPortalClient() {
                 <h4 className="text-sm font-extrabold text-slate-900 border-b border-slate-100 pb-2">
                   {t("GoBD-Gesamtsummen", "GoBD Accounting Totals")}
                 </h4>
+                {curDoc.discountPct && curDoc.discountPct > 0 ? (
+                  <>
+                    <div className="flex justify-between py-1 border-b border-slate-100">
+                      <span className="text-slate-600">{t("Zwischensumme (Netto vor Rabatt):", "Subtotal (Net before discount):")}</span>
+                      <span className="font-semibold">{eur(docTotals.rawNet)}</span>
+                    </div>
+                    <div className="flex justify-between py-1 border-b border-slate-100 text-emerald-800">
+                      <span>{t(`Nachlass / Rabatt (${curDoc.discountPct} %):`, `Discount (${curDoc.discountPct} %):`)}</span>
+                      <span className="font-bold">−{eur(docTotals.discountAmount)}</span>
+                    </div>
+                  </>
+                ) : null}
                 <div className="flex justify-between py-1 border-b border-slate-100">
                   <span className="text-slate-600">{t("Nettobetrag:", "Net Total:")}</span>
                   <span className="font-bold">{eur(docTotals.net)}</span>
