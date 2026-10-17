@@ -155,15 +155,24 @@ const DEFAULT_LEADS: WorkspaceLead[] = [
     photos: [
       {
         name: 'A-1001_Kellerwand_Nord_Salzausbluehung.webp',
-        dataUrl: '/images/ Stockflecken.webp',
+        dataUrl: '/img/gallery/schimmel-ausbluehungen-480.webp',
         uploadedAt: '16.10.2026, 08:46 Uhr',
         driveFolder: 'SOS Abdichtung - Schadensfotos / A-1001',
+        fileType: 'image',
       },
       {
-        name: 'A-1001_Horizontalsperre_Bohrlochraster.webp',
-        dataUrl: '/images/horizontalsperre_ziegel.webp',
+        name: 'A-1001_Horizontalsperre_Bohrlochinjektion.webp',
+        dataUrl: '/img/gallery/bohrung-injektion.webp',
         uploadedAt: '16.10.2026, 08:46 Uhr',
         driveFolder: 'SOS Abdichtung - Schadensfotos / A-1001',
+        fileType: 'image',
+      },
+      {
+        name: 'A-1001_Feuchte_Kellerwand_Sockel.webp',
+        dataUrl: '/img/gallery/feuchterand-sockel-480.webp',
+        uploadedAt: '16.10.2026, 08:50 Uhr',
+        driveFolder: 'SOS Abdichtung - Schadensfotos / A-1001',
+        fileType: 'image',
       },
     ],
     sigDriveUrl: 'https://drive.google.com/drive/u/0/my-drive',
@@ -226,9 +235,24 @@ const DEFAULT_LEADS: WorkspaceLead[] = [
     photos: [
       {
         name: 'A-1002_Aussenecke_Schimmelbefall.webp',
-        dataUrl: '/images/schimmel-wand.webp',
+        dataUrl: '/img/sp/schimmel-raumecke-320.webp',
         uploadedAt: '16.10.2026, 09:31 Uhr',
         driveFolder: 'SOS Abdichtung - Schadensfotos / A-1002',
+        fileType: 'image',
+      },
+      {
+        name: 'A-1002_Wasserrand_Tapete.webp',
+        dataUrl: '/img/sp/schimmel-wasserrand-wand-320.webp',
+        uploadedAt: '16.10.2026, 09:32 Uhr',
+        driveFolder: 'SOS Abdichtung - Schadensfotos / A-1002',
+        fileType: 'image',
+      },
+      {
+        name: 'A-1002_Sanierputz_Vorbereitung.webp',
+        dataUrl: '/img/sp/sanierputz-spachteln-320.webp',
+        uploadedAt: '16.10.2026, 09:35 Uhr',
+        driveFolder: 'SOS Abdichtung - Schadensfotos / A-1002',
+        fileType: 'image',
       },
     ],
     token: '1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d',
@@ -384,6 +408,38 @@ function buildDefaultLinesForDamage(damageType: string, areaNum: number): QuoteL
   ];
 }
 
+function sanitizeStoredPhoto(ph: StoredDrivePhoto, leadId: string): StoredDrivePhoto {
+  let url = ph.dataUrl || '';
+  if (
+    url.includes('/images/') ||
+    url.includes('Stockflecken') ||
+    url.includes('horizontalsperre_ziegel') ||
+    url.includes('schimmel-wand') ||
+    !url
+  ) {
+    const nameLower = (ph.name || '').toLowerCase();
+    if (nameLower.includes('injektion') || nameLower.includes('bohrloch')) {
+      url = '/img/gallery/bohrung-injektion.webp';
+    } else if (nameLower.includes('aussenecke') || nameLower.includes('schimmel')) {
+      url = '/img/sp/schimmel-raumecke-320.webp';
+    } else if (nameLower.includes('wasserrand') || nameLower.includes('tapete')) {
+      url = '/img/sp/schimmel-wasserrand-wand-320.webp';
+    } else if (nameLower.includes('sanierputz') || nameLower.includes('spachteln')) {
+      url = '/img/sp/sanierputz-spachteln-320.webp';
+    } else if (nameLower.includes('sockel') || nameLower.includes('aussen')) {
+      url = '/img/gallery/feuchterand-sockel-480.webp';
+    } else {
+      url = '/img/gallery/schimmel-ausbluehungen-480.webp';
+    }
+  }
+  return {
+    ...ph,
+    dataUrl: url,
+    driveFolder: ph.driveFolder || `SOS Abdichtung - Schadensfotos / ${leadId}`,
+    fileType: ph.fileType || (ph.name && ph.name.toLowerCase().endsWith('.pdf') ? 'pdf' : 'image'),
+  };
+}
+
 export function getWorkspaceStore(): WorkspaceState {
   if (typeof window === 'undefined') {
     return { leads: DEFAULT_LEADS, docs: DEFAULT_DOCS, appointments: DEFAULT_APPOINTMENTS };
@@ -399,8 +455,12 @@ export function getWorkspaceStore(): WorkspaceState {
     if (!Array.isArray(parsed.leads) || parsed.leads.length === 0) {
       return { leads: DEFAULT_LEADS, docs: DEFAULT_DOCS, appointments: DEFAULT_APPOINTMENTS };
     }
+    const sanitizedLeads = parsed.leads.map((l) => ({
+      ...l,
+      photos: (l.photos || []).map((ph) => sanitizeStoredPhoto(ph, l.id)),
+    }));
     return {
-      leads: parsed.leads,
+      leads: sanitizedLeads,
       docs: Array.isArray(parsed.docs) && parsed.docs.length > 0 ? parsed.docs : DEFAULT_DOCS,
       appointments:
         Array.isArray(parsed.appointments) && parsed.appointments.length > 0

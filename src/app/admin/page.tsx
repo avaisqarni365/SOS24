@@ -53,7 +53,7 @@ export default function AdminPage() {
     <>
       <JsonLd graph={graph} />
       <Navbar />
-      <main id="main" className="min-h-screen bg-canvas text-ink pt-3 sm:pt-4 pb-20 overflow-x-clip">
+      <main id="main" className="min-h-screen bg-canvas text-ink pt-20 sm:pt-24 lg:pt-32 pb-20 overflow-x-clip">
         <h1 className="sr-only">Admin-Portal &amp; GoBD-Backoffice</h1>
         <div className="sc-wrap">
           <AdminPortalClient />

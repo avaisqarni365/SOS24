@@ -45,6 +45,14 @@ import {
   Ruler,
   Maximize2,
   SlidersHorizontal,
+  ZoomIn,
+  ZoomOut,
+  RotateCw,
+  ChevronLeft,
+  ChevronRight,
+  Grid,
+  List,
+  ImageIcon,
 } from "lucide-react";
 import { COMPANY, COMPANY_INFO } from "@/data/content-data";
 import {
@@ -326,9 +334,19 @@ export default function AdminPortalClient() {
   const [docFilter, setDocFilter] = useState<"all" | "offer" | "invoice">("all");
   const [docViewMode, setDocViewMode] = useState<"editor" | "preview">("editor");
   const [previewDoc, setPreviewDoc] = useState<WorkspaceGoBDDoc | null>(null);
-  const [zoomPhoto, setZoomPhoto] = useState<{ photo: StoredDrivePhoto; leadId: string } | null>(
-    null
-  );
+  const [zoomPhoto, setZoomPhoto] = useState<{
+    photo: StoredDrivePhoto;
+    leadId: string;
+    leadName?: string;
+    index: number;
+    total: number;
+    list: Array<{ photo: StoredDrivePhoto; leadId: string; leadName?: string }>;
+  } | null>(null);
+  const [zoomScale, setZoomScale] = useState<number>(1);
+  const [rotationDeg, setRotationDeg] = useState<number>(0);
+  const [driveLeadFilter, setDriveLeadFilter] = useState<string>("all");
+  const [drivePhotoSearch, setDrivePhotoSearch] = useState<string>("");
+  const [driveViewMode, setDriveViewMode] = useState<"grid" | "table">("grid");
   const [toast, setToast] = useState<string>("");
   const [publishStatus, setPublishStatus] = useState<string>("");
   const [adminUploading, setAdminUploading] = useState(false);
@@ -428,6 +446,96 @@ export default function AdminPortalClient() {
       }
     }
   };
+
+  const openPhotoViewer = (
+    targetPhoto: StoredDrivePhoto,
+    leadId: string,
+    contextPhotos?: Array<{ photo: StoredDrivePhoto; leadId: string; leadName?: string }>
+  ) => {
+    const allList: Array<{ photo: StoredDrivePhoto; leadId: string; leadName?: string }> =
+      contextPhotos && contextPhotos.length > 0
+        ? contextPhotos
+        : leads.flatMap((l) =>
+            (l.photos || []).map((p) => ({
+              photo: p,
+              leadId: l.id,
+              leadName: l.name,
+            }))
+          );
+
+    const idx = allList.findIndex(
+      (item) => item.photo.name === targetPhoto.name && item.leadId === leadId
+    );
+
+    const currentLead = leads.find((l) => l.id === leadId);
+
+    setZoomScale(1);
+    setRotationDeg(0);
+    setZoomPhoto({
+      photo: targetPhoto,
+      leadId,
+      leadName: currentLead?.name,
+      index: idx >= 0 ? idx : 0,
+      total: allList.length,
+      list: allList,
+    });
+  };
+
+  const nextPhoto = () => {
+    if (!zoomPhoto || zoomPhoto.list.length <= 1) return;
+    const nextIdx = (zoomPhoto.index + 1) % zoomPhoto.list.length;
+    const target = zoomPhoto.list[nextIdx];
+    setZoomScale(1);
+    setRotationDeg(0);
+    setZoomPhoto({
+      photo: target.photo,
+      leadId: target.leadId,
+      leadName: target.leadName,
+      index: nextIdx,
+      total: zoomPhoto.list.length,
+      list: zoomPhoto.list,
+    });
+  };
+
+  const prevPhoto = () => {
+    if (!zoomPhoto || zoomPhoto.list.length <= 1) return;
+    const prevIdx = (zoomPhoto.index - 1 + zoomPhoto.list.length) % zoomPhoto.list.length;
+    const target = zoomPhoto.list[prevIdx];
+    setZoomScale(1);
+    setRotationDeg(0);
+    setZoomPhoto({
+      photo: target.photo,
+      leadId: target.leadId,
+      leadName: target.leadName,
+      index: prevIdx,
+      total: zoomPhoto.list.length,
+      list: zoomPhoto.list,
+    });
+  };
+
+  useEffect(() => {
+    if (!zoomPhoto) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setZoomPhoto(null);
+      } else if (e.key === "ArrowRight") {
+        nextPhoto();
+      } else if (e.key === "ArrowLeft") {
+        prevPhoto();
+      } else if (e.key === "+" || e.key === "=") {
+        setZoomScale((s) => Math.min(3, Math.round((s + 0.25) * 100) / 100));
+      } else if (e.key === "-") {
+        setZoomScale((s) => Math.max(0.75, Math.round((s - 0.25) * 100) / 100));
+      } else if (e.key === "0") {
+        setZoomScale(1);
+        setRotationDeg(0);
+      } else if (e.key.toLowerCase() === "r") {
+        setRotationDeg((r) => (r + 90) % 360);
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [zoomPhoto]);
 
   const persistAll = (
     nextLeads: WorkspaceLead[],
@@ -2000,13 +2108,24 @@ export default function AdminPortalClient() {
                           ) : (
                             <button
                               type="button"
-                              onClick={() => setZoomPhoto({ photo: ph, leadId: curLead.id })}
+                              onClick={() => {
+                                const leadPhotoList = (curLead.photos || []).map((p) => ({
+                                  photo: p,
+                                  leadId: curLead.id,
+                                  leadName: curLead.name,
+                                }));
+                                openPhotoViewer(ph, curLead.id, leadPhotoList);
+                              }}
                               className="relative h-24 w-full overflow-hidden bg-slate-100 text-left"
                             >
                               {/* eslint-disable-next-line @next/next/no-img-element */}
                               <img
                                 src={ph.dataUrl}
                                 alt={ph.name}
+                                onError={(e) => {
+                                  (e.currentTarget as HTMLImageElement).src =
+                                    "/img/gallery/schimmel-ausbluehungen-480.webp";
+                                }}
                                 className="w-full h-full object-cover group-hover:scale-105 transition-transform"
                               />
                               <span className="absolute inset-0 bg-black/0 group-hover:bg-black/30 flex items-center justify-center transition-colors">
@@ -2202,82 +2321,405 @@ export default function AdminPortalClient() {
             </div>
 
             {/* Section 1: Customer Damage Photos & Uploaded PDFs */}
-            <div className="space-y-3">
-              <h4 className="text-sm font-extrabold text-slate-900 flex items-center gap-2">
-                <Camera className="w-4 h-4 text-emerald-700" />
-                {t("1. Kunden-Dateien & Schadensfotos (Ordner:", "1. Customer Files & Damage Photos (Folder:")} <code>SOS Abdichtung - Schadensfotos</code>)
-              </h4>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-                {leads.flatMap((l) =>
-                  (l.photos || []).map((ph, idx) => {
-                    const isPdf = ph.fileType === "pdf" || ph.name.toLowerCase().endsWith(".pdf");
-                    return (
-                      <div
-                        key={`${l.id}-${idx}`}
-                        className="bg-slate-50 rounded-2xl border border-slate-200 overflow-hidden flex flex-col justify-between shadow-sm"
-                      >
-                        {isPdf ? (
-                          <a
-                            href={ph.dataUrl}
-                            download={ph.name}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="relative h-40 w-full bg-red-50 flex flex-col items-center justify-center p-3 text-center hover:bg-red-100 transition-colors"
-                          >
-                            <FileText className="w-12 h-12 text-red-600 mb-2" />
-                            <span className="text-xs font-bold text-red-950 truncate max-w-full">
-                              {ph.name}
-                            </span>
-                            <span className="text-[10px] text-red-700 mt-1">PDF Dokument (Download)</span>
-                          </a>
-                        ) : (
-                          <button
-                            type="button"
-                            onClick={() => setZoomPhoto({ photo: ph, leadId: l.id })}
-                            className="relative h-40 w-full bg-slate-200 overflow-hidden group text-left"
-                          >
-                            {/* eslint-disable-next-line @next/next/no-img-element */}
-                            <img
-                              src={ph.dataUrl}
-                              alt={ph.name}
-                              className="w-full h-full object-cover group-hover:scale-105 transition-transform"
-                            />
-                            <span className="absolute top-2 left-2 bg-[#0f2537]/90 text-white text-[10px] font-bold px-2.5 py-1 rounded-full">
-                              {l.id} · {l.name}
-                            </span>
-                          </button>
-                        )}
-                        <div className="p-3 space-y-1 text-xs">
-                          <div className="font-bold text-slate-900 truncate" title={ph.name}>
-                            {ph.name}
-                          </div>
-                          <div className="text-[11px] text-slate-500">{ph.uploadedAt}</div>
-                          <div className="flex items-center justify-between pt-2">
+            <div className="space-y-4">
+              <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 bg-slate-50 p-3.5 rounded-2xl border border-slate-200">
+                <div className="space-y-1">
+                  <h4 className="text-sm font-extrabold text-slate-900 flex items-center gap-2">
+                    <Camera className="w-4 h-4 text-emerald-700" />
+                    <span>
+                      {t(
+                        "1. Kunden-Dateien & Schadensfotos (Ordner: SOS Abdichtung - Schadensfotos)",
+                        "1. Customer Files & Damage Photos (Folder: SOS Abdichtung - Schadensfotos)"
+                      )}
+                    </span>
+                  </h4>
+                  <p className="text-[11px] text-slate-500">
+                    {t(
+                      "Klicken Sie auf ein beliebiges Schadensfoto für die hochauflösende Detail-Analyse, Zoom (bis 300%) und Bildrotation.",
+                      "Click any damage photo for high-res inspection, deep zoom (up to 300%), and 90° rotation."
+                    )}
+                  </p>
+                </div>
+
+                <div className="flex flex-wrap items-center gap-2">
+                  {/* View Mode Toggle: Grid vs Table */}
+                  <div className="flex items-center bg-white p-1 rounded-xl border border-slate-200 shadow-sm">
+                    <button
+                      type="button"
+                      onClick={() => setDriveViewMode("grid")}
+                      className={`min-h-[32px] px-2.5 py-1 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 ${
+                        driveViewMode === "grid"
+                          ? "bg-[#0f2537] text-white"
+                          : "text-slate-600 hover:text-slate-900"
+                      }`}
+                    >
+                      <Grid className="w-3.5 h-3.5" />
+                      <span>{t("Galerie", "Grid")}</span>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setDriveViewMode("table")}
+                      className={`min-h-[32px] px-2.5 py-1 rounded-lg text-xs font-bold transition-all flex items-center gap-1.5 ${
+                        driveViewMode === "table"
+                          ? "bg-[#0f2537] text-white"
+                          : "text-slate-600 hover:text-slate-900"
+                      }`}
+                    >
+                      <List className="w-3.5 h-3.5" />
+                      <span>{t("Tabelle", "Table")}</span>
+                    </button>
+                  </div>
+
+                  <a
+                    href="https://drive.google.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="min-h-[36px] bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-bold px-3 py-1.5 rounded-xl inline-flex items-center gap-1.5 transition-colors shadow-sm"
+                  >
+                    <span>Google Drive ↗</span>
+                  </a>
+                </div>
+              </div>
+
+              {/* Filter & Search Bar */}
+              {(() => {
+                const allPhotosFlattened = leads.flatMap((l) =>
+                  (l.photos || []).map((ph) => ({
+                    photo: ph,
+                    leadId: l.id,
+                    leadName: l.name,
+                    damageType: l.damageType,
+                  }))
+                );
+
+                const filteredPhotos = allPhotosFlattened.filter((item) => {
+                  if (driveLeadFilter !== "all" && item.leadId !== driveLeadFilter) return false;
+                  if (!drivePhotoSearch.trim()) return true;
+                  const q = drivePhotoSearch.toLowerCase();
+                  return (
+                    item.photo.name.toLowerCase().includes(q) ||
+                    item.leadName.toLowerCase().includes(q) ||
+                    item.leadId.toLowerCase().includes(q) ||
+                    item.damageType.toLowerCase().includes(q)
+                  );
+                });
+
+                return (
+                  <div className="space-y-3">
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                      {/* Customer / Dossier Filter Pills */}
+                      <div className="flex items-center gap-1.5 overflow-x-auto pb-1 max-w-full">
+                        <span className="text-xs font-bold text-slate-500 shrink-0 mr-1">
+                          {t("Kunde:", "Customer:")}
+                        </span>
+                        <button
+                          type="button"
+                          onClick={() => setDriveLeadFilter("all")}
+                          className={`min-h-[34px] px-3 py-1 rounded-xl text-xs font-bold shrink-0 transition-colors ${
+                            driveLeadFilter === "all"
+                              ? "bg-[#0f2537] text-white shadow-sm"
+                              : "bg-slate-100 text-slate-700 hover:bg-slate-200"
+                          }`}
+                        >
+                          {t("Alle Fotos", "All Photos")} ({allPhotosFlattened.length})
+                        </button>
+                        {leads.map((l) => {
+                          const pCount = l.photos?.length || 0;
+                          return (
                             <button
+                              key={l.id}
                               type="button"
-                              onClick={() => {
-                                setSelectedLeadId(l.id);
-                                setTab("leads");
-                              }}
-                              className="text-xs font-bold text-emerald-700 hover:underline"
+                              onClick={() => setDriveLeadFilter(l.id)}
+                              className={`min-h-[34px] px-3 py-1 rounded-xl text-xs font-bold shrink-0 transition-colors ${
+                                driveLeadFilter === l.id
+                                  ? "bg-[#0f2537] text-white shadow-sm"
+                                  : "bg-slate-100 text-slate-700 hover:bg-slate-200"
+                              }`}
                             >
-                              {t(`Zur Anfrage ${l.id} →`, `Open Lead ${l.id} →`)}
+                              <span>{l.id} ({pCount})</span>
                             </button>
-                            <a
-                              href={ph.dataUrl}
-                              download={ph.name}
-                              className="inline-flex items-center gap-1 text-xs font-bold text-slate-700 hover:text-slate-900"
+                          );
+                        })}
+                      </div>
+
+                      {/* Search box */}
+                      <div className="relative min-w-[220px]">
+                        <Search className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
+                        <input
+                          type="text"
+                          value={drivePhotoSearch}
+                          onChange={(e) => setDrivePhotoSearch(e.target.value)}
+                          placeholder={t("Dateiname oder Schaden suchen…", "Search filename or damage…")}
+                          className="w-full text-xs pl-9 pr-3 py-2 rounded-xl border border-slate-200 bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                        />
+                      </div>
+                    </div>
+
+                    {filteredPhotos.length === 0 ? (
+                      <div className="bg-slate-50 border border-slate-200 rounded-2xl p-8 text-center text-slate-500 space-y-2">
+                        <ImageIcon className="w-10 h-10 text-slate-300 mx-auto" />
+                        <div className="text-sm font-bold text-slate-700">
+                          {t("Keine Schadensfotos gefunden", "No damage photos found")}
+                        </div>
+                        <p className="text-xs">
+                          {t(
+                            "Passen Sie die Filter an oder laden Sie unter Anfragen neue Schadensfotos hoch.",
+                            "Adjust filters or upload new damage photos under Inquiries."
+                          )}
+                        </p>
+                      </div>
+                    ) : driveViewMode === "grid" ? (
+                      /* GRID GALLERY VIEW */
+                      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                        {filteredPhotos.map((item, idx) => {
+                          const { photo: ph, leadId, leadName, damageType } = item;
+                          const isPdf = ph.fileType === "pdf" || ph.name.toLowerCase().endsWith(".pdf");
+                          return (
+                            <div
+                              key={`${leadId}-${idx}`}
+                              className="bg-white rounded-2xl border border-slate-200 overflow-hidden flex flex-col justify-between shadow-sm hover:shadow-md hover:border-emerald-300 transition-all group"
                             >
-                              <Download className="w-3.5 h-3.5" />
-                              <span>Download</span>
-                            </a>
-                          </div>
+                              {isPdf ? (
+                                <a
+                                  href={ph.dataUrl}
+                                  download={ph.name}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="relative aspect-[4/3] w-full bg-red-50 flex flex-col items-center justify-center p-3 text-center hover:bg-red-100 transition-colors"
+                                >
+                                  <FileText className="w-12 h-12 text-red-600 mb-2" />
+                                  <span className="text-xs font-bold text-red-950 truncate max-w-full">
+                                    {ph.name}
+                                  </span>
+                                  <span className="text-[10px] text-red-700 mt-1 font-semibold">PDF Dokument (Download)</span>
+                                </a>
+                              ) : (
+                                <button
+                                  type="button"
+                                  onClick={() =>
+                                    openPhotoViewer(
+                                      ph,
+                                      leadId,
+                                      filteredPhotos.map((f) => ({
+                                        photo: f.photo,
+                                        leadId: f.leadId,
+                                        leadName: f.leadName,
+                                      }))
+                                    )
+                                  }
+                                  className="relative aspect-[4/3] w-full bg-slate-900 overflow-hidden group text-left cursor-zoom-in"
+                                >
+                                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                                  <img
+                                    src={ph.dataUrl}
+                                    alt={ph.name}
+                                    onError={(e) => {
+                                      (e.currentTarget as HTMLImageElement).src =
+                                        "/img/gallery/schimmel-ausbluehungen-480.webp";
+                                    }}
+                                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                                  />
+                                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/30 pointer-events-none" />
+                                  <span className="absolute top-2.5 left-2.5 bg-[#0f2537]/90 text-white text-[10px] font-bold px-2.5 py-1 rounded-full shadow-sm">
+                                    {leadId} · {leadName}
+                                  </span>
+                                  <span className="absolute top-2.5 right-2.5 bg-emerald-600/90 text-white text-[10px] font-extrabold px-2 py-0.5 rounded-full shadow-sm">
+                                    {damageType || "Schadensfoto"}
+                                  </span>
+                                  <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 bg-black/30 transition-opacity">
+                                    <span className="bg-white/90 text-slate-900 font-extrabold text-xs px-3 py-1.5 rounded-xl shadow-lg flex items-center gap-1.5">
+                                      <Eye className="w-3.5 h-3.5 text-emerald-700" />
+                                      <span>{t("Vergrößern & Zoom", "Inspect & Zoom")}</span>
+                                    </span>
+                                  </div>
+                                </button>
+                              )}
+
+                              <div className="p-3.5 space-y-2 text-xs flex-1 flex flex-col justify-between">
+                                <div className="space-y-1">
+                                  <div className="font-bold text-slate-900 truncate" title={ph.name}>
+                                    {ph.name}
+                                  </div>
+                                  <div className="text-[11px] text-slate-500 truncate">
+                                    📁 <code>{ph.driveFolder}</code>
+                                  </div>
+                                  <div className="text-[10px] text-slate-400">
+                                    {t("Aufnahme / Upload:", "Uploaded:")} {ph.uploadedAt}
+                                  </div>
+                                </div>
+
+                                <div className="flex items-center justify-between pt-2 border-t border-slate-100">
+                                  <button
+                                    type="button"
+                                    onClick={() => {
+                                      setSelectedLeadId(leadId);
+                                      setTab("leads");
+                                    }}
+                                    className="text-xs font-bold text-emerald-700 hover:underline"
+                                  >
+                                    {t(`Anfrage ${leadId} →`, `Lead ${leadId} →`)}
+                                  </button>
+                                  <div className="flex items-center gap-2">
+                                    {!isPdf && (
+                                      <button
+                                        type="button"
+                                        onClick={() =>
+                                          openPhotoViewer(
+                                            ph,
+                                            leadId,
+                                            filteredPhotos.map((f) => ({
+                                              photo: f.photo,
+                                              leadId: f.leadId,
+                                              leadName: f.leadName,
+                                            }))
+                                          )
+                                        }
+                                        className="text-slate-600 hover:text-emerald-700 font-bold text-xs inline-flex items-center gap-1"
+                                        title={t("Detail-Zoom öffnen", "Open Detail Zoom")}
+                                      >
+                                        <Eye className="w-3.5 h-3.5" />
+                                      </button>
+                                    )}
+                                    <a
+                                      href={ph.dataUrl}
+                                      download={ph.name}
+                                      className="inline-flex items-center gap-1 text-xs font-bold text-slate-700 hover:text-slate-900"
+                                      title={t("Herunterladen", "Download")}
+                                    >
+                                      <Download className="w-3.5 h-3.5" />
+                                      <span>Download</span>
+                                    </a>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    ) : (
+                      /* TABLE / DETAIL LIST VIEW */
+                      <div className="bg-white rounded-2xl border border-slate-200 overflow-hidden shadow-sm">
+                        <div className="overflow-x-auto">
+                          <table className="w-full text-left text-xs">
+                            <thead className="bg-slate-50 text-slate-500 border-b border-slate-200">
+                              <tr>
+                                <th className="p-3 w-16">{t("Vorschau", "Preview")}</th>
+                                <th className="p-3">{t("Dateiname & Schaden", "File Name & Damage")}</th>
+                                <th className="p-3">{t("Kunde / Lead", "Customer / Lead")}</th>
+                                <th className="p-3">{t("Google Drive Ordner", "Google Drive Folder")}</th>
+                                <th className="p-3">{t("Datum", "Date")}</th>
+                                <th className="p-3 text-right">{t("Aktionen", "Actions")}</th>
+                              </tr>
+                            </thead>
+                            <tbody className="divide-y divide-slate-100">
+                              {filteredPhotos.map((item, idx) => {
+                                const { photo: ph, leadId, leadName, damageType } = item;
+                                const isPdf = ph.fileType === "pdf" || ph.name.toLowerCase().endsWith(".pdf");
+                                return (
+                                  <tr key={`${leadId}-${idx}`} className="hover:bg-slate-50/80 transition-colors">
+                                    <td className="p-2.5">
+                                      {isPdf ? (
+                                        <div className="w-12 h-12 bg-red-50 rounded-lg flex items-center justify-center text-red-600">
+                                          <FileText className="w-6 h-6" />
+                                        </div>
+                                      ) : (
+                                        <button
+                                          type="button"
+                                          onClick={() =>
+                                            openPhotoViewer(
+                                              ph,
+                                              leadId,
+                                              filteredPhotos.map((f) => ({
+                                                photo: f.photo,
+                                                leadId: f.leadId,
+                                                leadName: f.leadName,
+                                              }))
+                                            )
+                                          }
+                                          className="w-12 h-12 rounded-lg overflow-hidden bg-slate-100 border border-slate-200 relative shrink-0 block"
+                                        >
+                                          {/* eslint-disable-next-line @next/next/no-img-element */}
+                                          <img
+                                            src={ph.dataUrl}
+                                            alt={ph.name}
+                                            onError={(e) => {
+                                              (e.currentTarget as HTMLImageElement).src =
+                                                "/img/gallery/schimmel-ausbluehungen-480.webp";
+                                            }}
+                                            className="w-full h-full object-cover"
+                                          />
+                                        </button>
+                                      )}
+                                    </td>
+                                    <td className="p-3">
+                                      <div className="font-bold text-slate-900">{ph.name}</div>
+                                      <div className="text-[11px] text-emerald-700 font-semibold">{damageType}</div>
+                                    </td>
+                                    <td className="p-3">
+                                      <div className="font-semibold text-slate-800">{leadName}</div>
+                                      <span className="text-[10px] bg-slate-100 text-slate-600 px-1.5 py-0.5 rounded font-mono">
+                                        {leadId}
+                                      </span>
+                                    </td>
+                                    <td className="p-3 text-[11px] font-mono text-slate-600">
+                                      {ph.driveFolder}
+                                    </td>
+                                    <td className="p-3 text-slate-500 whitespace-nowrap">
+                                      {ph.uploadedAt}
+                                    </td>
+                                    <td className="p-3 text-right whitespace-nowrap">
+                                      <div className="flex items-center justify-end gap-2">
+                                        {!isPdf && (
+                                          <button
+                                            type="button"
+                                            onClick={() =>
+                                              openPhotoViewer(
+                                                ph,
+                                                leadId,
+                                                filteredPhotos.map((f) => ({
+                                                  photo: f.photo,
+                                                  leadId: f.leadId,
+                                                  leadName: f.leadName,
+                                                }))
+                                              )
+                                            }
+                                            className="p-1.5 text-slate-500 hover:text-emerald-700 rounded-lg hover:bg-slate-100"
+                                            title={t("Vergrößern", "Inspect")}
+                                          >
+                                            <Eye className="w-4 h-4" />
+                                          </button>
+                                        )}
+                                        <a
+                                          href={ph.dataUrl}
+                                          download={ph.name}
+                                          className="p-1.5 text-slate-500 hover:text-slate-900 rounded-lg hover:bg-slate-100"
+                                          title={t("Download", "Download")}
+                                        >
+                                          <Download className="w-4 h-4" />
+                                        </a>
+                                        <button
+                                          type="button"
+                                          onClick={() => {
+                                            setSelectedLeadId(leadId);
+                                            setTab("leads");
+                                          }}
+                                          className="text-xs font-bold text-emerald-700 hover:underline px-2 py-1"
+                                        >
+                                          {t("Lead", "Lead")} →
+                                        </button>
+                                      </div>
+                                    </td>
+                                  </tr>
+                                );
+                              })}
+                            </tbody>
+                          </table>
                         </div>
                       </div>
-                    );
-                  })
-                )}
-              </div>
+                    )}
+                  </div>
+                );
+              })()}
             </div>
 
             {/* Section 2: GoBD Offers & Invoices */}
@@ -4804,51 +5246,201 @@ export default function AdminPortalClient() {
         </div>
       )}
 
-      {/* Full-Screen Photo Lightbox Modal */}
+      {/* Full-Screen Photo Lightbox Modal & Damage Inspector */}
       {zoomPhoto && (
         <div
-          className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-3 sm:p-6"
+          className="fixed inset-0 z-50 bg-black/95 backdrop-blur-md flex flex-col p-2 sm:p-4 select-none"
           onClick={(e) => {
             if (e.target === e.currentTarget) setZoomPhoto(null);
           }}
         >
-          <div className="bg-white w-full max-w-2xl rounded-2xl overflow-hidden shadow-2xl flex flex-col max-h-[90dvh]">
-            <div className="bg-[#0f2537] text-white px-4 py-3 flex items-center justify-between gap-2">
-              <div className="min-w-0">
-                <strong className="text-xs sm:text-sm block truncate">
-                  {zoomPhoto.leadId} · {zoomPhoto.photo.name}
-                </strong>
-                <span className="text-[11px] text-emerald-300 block truncate">
-                  Drive: {zoomPhoto.photo.driveFolder}
-                </span>
+          {/* Top Bar */}
+          <div className="bg-[#0f2537] text-white px-3 sm:px-5 py-3 rounded-2xl flex flex-wrap items-center justify-between gap-3 shadow-xl shrink-0 border border-slate-800">
+            <div className="flex items-center gap-3 min-w-0">
+              <div className="p-2 bg-emerald-950 border border-emerald-500/40 rounded-xl shrink-0">
+                <Camera className="w-5 h-5 text-emerald-400" />
               </div>
-              <div className="flex items-center gap-2 shrink-0">
-                <a
-                  href={zoomPhoto.photo.dataUrl}
-                  download={zoomPhoto.photo.name}
-                  className="min-h-[38px] inline-flex items-center gap-1 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold px-3 py-1.5 rounded-xl"
-                >
-                  <Download className="w-3.5 h-3.5" />
-                  <span>Download</span>
-                </a>
-                <button
-                  type="button"
-                  onClick={() => setZoomPhoto(null)}
-                  className="min-h-[38px] bg-white/10 hover:bg-white/20 text-white text-xs font-bold px-3 py-1.5 rounded-xl inline-flex items-center gap-1"
-                >
-                  <X className="w-4 h-4" />
-                  <span>{t("Schließen", "Close")}</span>
-                </button>
+              <div className="min-w-0">
+                <div className="flex items-center gap-2 flex-wrap">
+                  <span className="font-extrabold text-xs sm:text-sm text-white truncate">
+                    {zoomPhoto.leadId} {zoomPhoto.leadName ? `· ${zoomPhoto.leadName}` : ""}
+                  </span>
+                  <span className="text-[10px] bg-emerald-600/70 text-emerald-100 px-2 py-0.5 rounded-full font-bold">
+                    {zoomPhoto.index + 1} / {zoomPhoto.total}
+                  </span>
+                </div>
+                <div className="text-[11px] text-slate-300 truncate">
+                  📁 <code>{zoomPhoto.photo.driveFolder}</code> · {zoomPhoto.photo.name}
+                </div>
               </div>
             </div>
-            <div className="p-4 bg-slate-900 flex-1 overflow-auto flex items-center justify-center">
-              {/* eslint-disable-next-line @next/next/no-img-element */}
+
+            {/* Viewer Controls */}
+            <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
+              {/* Zoom Out */}
+              <button
+                type="button"
+                onClick={() => setZoomScale((s) => Math.max(0.75, Math.round((s - 0.25) * 100) / 100))}
+                title={t("Verkleinern (-)", "Zoom Out (-)")}
+                className="min-h-[38px] min-w-[38px] bg-white/10 hover:bg-white/20 text-white rounded-xl inline-flex items-center justify-center transition-colors"
+              >
+                <ZoomOut className="w-4 h-4" />
+              </button>
+
+              {/* Zoom Reset / Scale */}
+              <button
+                type="button"
+                onClick={() => {
+                  setZoomScale(1);
+                  setRotationDeg(0);
+                }}
+                title={t("Zoom zurücksetzen (0)", "Reset Zoom (0)")}
+                className="min-h-[38px] px-2.5 bg-white/10 hover:bg-white/20 text-white text-xs font-bold rounded-xl transition-colors"
+              >
+                {Math.round(zoomScale * 100)} %
+              </button>
+
+              {/* Zoom In */}
+              <button
+                type="button"
+                onClick={() => setZoomScale((s) => Math.min(3, Math.round((s + 0.25) * 100) / 100))}
+                title={t("Vergrößern (+)", "Zoom In (+)")}
+                className="min-h-[38px] min-w-[38px] bg-white/10 hover:bg-white/20 text-white rounded-xl inline-flex items-center justify-center transition-colors"
+              >
+                <ZoomIn className="w-4 h-4" />
+              </button>
+
+              {/* Rotate */}
+              <button
+                type="button"
+                onClick={() => setRotationDeg((r) => (r + 90) % 360)}
+                title={t("90° Drehen (R)", "Rotate 90° (R)")}
+                className="min-h-[38px] min-w-[38px] bg-white/10 hover:bg-white/20 text-white rounded-xl inline-flex items-center justify-center transition-colors"
+              >
+                <RotateCw className="w-4 h-4" />
+              </button>
+
+              {/* Download */}
+              <a
+                href={zoomPhoto.photo.dataUrl}
+                download={zoomPhoto.photo.name}
+                title={t("Herunterladen", "Download")}
+                className="min-h-[38px] px-3 bg-emerald-600 hover:bg-emerald-500 text-white text-xs font-bold rounded-xl inline-flex items-center gap-1.5 transition-colors shadow-sm"
+              >
+                <Download className="w-4 h-4" />
+                <span className="hidden sm:inline">Download</span>
+              </a>
+
+              {/* Close */}
+              <button
+                type="button"
+                onClick={() => setZoomPhoto(null)}
+                title={t("Schließen (Esc)", "Close (Esc)")}
+                className="min-h-[38px] min-w-[38px] bg-white/10 hover:bg-rose-600 text-white rounded-xl inline-flex items-center justify-center transition-colors ml-1"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+          </div>
+
+          {/* Center Stage with Prev / Next Buttons */}
+          <div className="relative flex-1 my-2 overflow-hidden rounded-2xl bg-black/60 flex items-center justify-center border border-white/5">
+            {/* Prev Button */}
+            {zoomPhoto.total > 1 && (
+              <button
+                type="button"
+                onClick={prevPhoto}
+                title={t("Vorheriges Foto (←)", "Previous Photo (←)")}
+                className="absolute left-3 sm:left-6 z-20 min-h-[48px] min-w-[48px] rounded-full bg-black/70 hover:bg-emerald-600 text-white flex items-center justify-center transition-all shadow-xl backdrop-blur-sm border border-white/20"
+              >
+                <ChevronLeft className="w-6 h-6" />
+              </button>
+            )}
+
+            {/* Photo Container */}
+            <div className="w-full h-full flex items-center justify-center p-2 sm:p-6 overflow-hidden">
               <img
                 src={zoomPhoto.photo.dataUrl}
                 alt={zoomPhoto.photo.name}
-                className="max-h-[72dvh] w-auto object-contain rounded-lg"
+                onError={(e) => {
+                  (e.currentTarget as HTMLImageElement).src =
+                    "/img/gallery/schimmel-ausbluehungen-480.webp";
+                }}
+                style={{
+                  transform: `scale(${zoomScale}) rotate(${rotationDeg}deg)`,
+                  transition: "transform 0.15s ease-out",
+                }}
+                className="max-h-full max-w-full object-contain rounded-lg shadow-2xl"
               />
             </div>
+
+            {/* Next Button */}
+            {zoomPhoto.total > 1 && (
+              <button
+                type="button"
+                onClick={nextPhoto}
+                title={t("Nächstes Foto (→)", "Next Photo (→)")}
+                className="absolute right-3 sm:right-6 z-20 min-h-[48px] min-w-[48px] rounded-full bg-black/70 hover:bg-emerald-600 text-white flex items-center justify-center transition-all shadow-xl backdrop-blur-sm border border-white/20"
+              >
+                <ChevronRight className="w-6 h-6" />
+              </button>
+            )}
+          </div>
+
+          {/* Bottom Thumbnail Strip & File Details */}
+          <div className="bg-[#0f2537]/90 backdrop-blur-md rounded-2xl p-2.5 sm:p-3 flex flex-col sm:flex-row items-center justify-between gap-3 text-white shrink-0 border border-slate-800">
+            <div className="text-xs space-y-0.5 text-center sm:text-left min-w-0">
+              <div className="font-bold truncate text-emerald-300">
+                {zoomPhoto.photo.name}
+              </div>
+              <div className="text-[11px] text-slate-300 flex flex-wrap items-center justify-center sm:justify-start gap-2">
+                <span>{t("Hochgeladen:", "Uploaded:")} {zoomPhoto.photo.uploadedAt}</span>
+                <span>·</span>
+                <span>{zoomPhoto.photo.driveFolder}</span>
+              </div>
+            </div>
+
+            {/* Thumbnails */}
+            {zoomPhoto.total > 1 && (
+              <div className="flex items-center gap-1.5 overflow-x-auto max-w-full py-1">
+                {zoomPhoto.list.map((item, i) => {
+                  const isActive = i === zoomPhoto.index;
+                  return (
+                    <button
+                      key={i}
+                      type="button"
+                      onClick={() => {
+                        setZoomScale(1);
+                        setRotationDeg(0);
+                        setZoomPhoto({
+                          photo: item.photo,
+                          leadId: item.leadId,
+                          leadName: item.leadName,
+                          index: i,
+                          total: zoomPhoto.total,
+                          list: zoomPhoto.list,
+                        });
+                      }}
+                      className={`relative h-12 w-12 sm:h-14 sm:w-14 rounded-lg overflow-hidden shrink-0 border-2 transition-all ${
+                        isActive
+                          ? "border-emerald-400 scale-105 shadow-md"
+                          : "border-transparent opacity-60 hover:opacity-100"
+                      }`}
+                    >
+                      <img
+                        src={item.photo.dataUrl}
+                        alt={item.photo.name}
+                        onError={(e) => {
+                          (e.currentTarget as HTMLImageElement).src =
+                            "/img/gallery/schimmel-ausbluehungen-480.webp";
+                        }}
+                        className="w-full h-full object-cover"
+                      />
+                    </button>
+                  );
+                })}
+              </div>
+            )}
           </div>
         </div>
       )}
