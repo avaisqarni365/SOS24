@@ -3327,30 +3327,53 @@ export default function AdminPortalClient() {
                 </div>
                 <div className="pt-2 border-t border-white/10 space-y-1.5 text-xs">
                   <a
-                    href="https://search.google.com/search-console"
+                    href="https://search.google.com/test/rich-results?url=https%3A%2F%2Fsos-abdichtung.de%2F"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-1.5 font-bold text-emerald-300 hover:text-emerald-200"
+                    title="Live Googlebot-Prüfung ohne Login"
                   >
-                    <span>{t("GSC Dashboard öffnen ↗", "Open GSC Dashboard ↗")}</span>
+                    <span>{t("🚀 Live Googlebot-Test (Sofort) ↗", "🚀 Live Googlebot Test (Instant) ↗")}</span>
                   </a>
-                  <div className="flex items-center justify-between text-[11px] text-slate-400">
-                    <a
-                      href="https://search.google.com/search-console/welcome"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="hover:underline text-slate-300"
-                    >
-                      + Property hinzufügen
-                    </a>
-                    <a
-                      href="https://search.google.com/search-console/sitemaps"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="hover:underline text-slate-300"
-                    >
-                      Sitemap einreichen
-                    </a>
+                  <div className="flex flex-col gap-1 text-[11px] text-slate-400 pt-0.5">
+                    <div className="flex items-center justify-between">
+                      <a
+                        href="https://search.google.com/search-console/welcome"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="hover:underline text-sky-300 font-semibold"
+                      >
+                        {t("+ Property anlegen ↗", "+ Add Property ↗")}
+                      </a>
+                      <a
+                        href="https://search.google.com/search-console/sitemaps"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="hover:underline text-slate-300"
+                      >
+                        Sitemap einreichen
+                      </a>
+                    </div>
+                    <div className="flex items-center justify-between text-[10px]">
+                      <a
+                        href="https://search.google.com/search-console/inspect?resource_id=https%3A%2F%2Fsos-abdichtung.de%2F&id=https%3A%2F%2Fsos-abdichtung.de%2F"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="hover:underline text-slate-300"
+                        title="URL-Präfix Inspektion (erfordert bestätigte Property)"
+                      >
+                        GSC-Inspect (Präfix)
+                      </a>
+                      <a
+                        href="https://search.google.com/search-console/inspect?resource_id=sc-domain%3Asos-abdichtung.de&id=https%3A%2F%2Fsos-abdichtung.de%2F"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="hover:underline text-slate-300"
+                        title="Domain-Property Inspektion"
+                      >
+                        (Domain)
+                      </a>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -3815,6 +3838,78 @@ export default function AdminPortalClient() {
               </a>
             </div>
 
+            {/* GSC Verification & URL Inspect Troubleshooting Helper */}
+            <div className="bg-sky-50 border border-sky-200 rounded-xl p-4 sm:p-5 space-y-3">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
+                <div className="flex items-center gap-2.5">
+                  <div className="w-8 h-8 rounded-lg bg-sky-700 text-white flex items-center justify-center font-black text-xs shrink-0 shadow-sm">
+                    GSC
+                  </div>
+                  <div>
+                    <h5 className="font-extrabold text-slate-900 text-sm">
+                      {t("Warum zeigt Google „Keine Berechtigung“ bei der URL-Prüfung?", "Why does Google Search Console URL Inspect show 'No Permission'?")}
+                    </h5>
+                    <p className="text-[11px] text-slate-600">
+                      {t(
+                        "Google Search Console schützt Website-Daten: Sie können URLs erst analysieren, nachdem die Property „https://sos-abdichtung.de/“ in Ihrem Google-Konto einmalig bestätigt wurde.",
+                        "GSC requires property verification before allowing URL inspection. Once verified in your Google account, deep links will work."
+                      )}
+                    </p>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-2 shrink-0">
+                  <a
+                    href="https://search.google.com/test/rich-results?url=https%3A%2F%2Fsos-abdichtung.de%2F"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="min-h-[36px] px-3.5 py-1.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-bold text-xs inline-flex items-center gap-1.5 shadow-sm"
+                  >
+                    <span>{t("🚀 Live-Test ohne Login ↗", "🚀 Live Test (No Login) ↗")}</span>
+                  </a>
+                  <a
+                    href="https://search.google.com/search-console/welcome"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="min-h-[36px] px-3.5 py-1.5 rounded-lg bg-[#0f2537] hover:bg-slate-800 text-white font-bold text-xs inline-flex items-center gap-1.5"
+                  >
+                    <span>{t("Property bestätigen ↗", "Verify Property ↗")}</span>
+                  </a>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-2.5 pt-1 text-xs">
+                <div className="bg-white p-3 rounded-lg border border-sky-100 space-y-1">
+                  <strong className="text-slate-900 block font-bold text-[11px]">1. Property anlegen:</strong>
+                  <p className="text-[11px] text-slate-600">
+                    Öffnen Sie <a href="https://search.google.com/search-console/welcome" target="_blank" rel="noopener noreferrer" className="text-sky-700 underline font-semibold">GSC Welcome</a> und tragen Sie unter <strong>URL-Präfix</strong> exakt <code className="bg-slate-100 px-1 py-0.5 rounded text-[10px]">https://sos-abdichtung.de/</code> ein.
+                  </p>
+                  <button
+                    type="button"
+                    onClick={() => copyToClipboard("https://sos-abdichtung.de/", t("GSC URL-Präfix", "GSC URL Prefix"), "gsc_prefix")}
+                    className="mt-1 text-[10px] font-bold text-sky-700 hover:text-sky-900 inline-flex items-center gap-1"
+                  >
+                    <Copy className="w-3 h-3" />
+                    <span>{t("URL kopieren", "Copy URL")}</span>
+                  </button>
+                </div>
+
+                <div className="bg-white p-3 rounded-lg border border-sky-100 space-y-1">
+                  <strong className="text-slate-900 block font-bold text-[11px]">2. 1-Klick Bestätigung:</strong>
+                  <p className="text-[11px] text-slate-600">
+                    Wählen Sie <strong>Google Analytics</strong> als Bestätigungsmethode (funktioniert sofort mit 1 Klick, wenn Sie dasselbe Google-Konto nutzen) oder HTML-Tag.
+                  </p>
+                </div>
+
+                <div className="bg-white p-3 rounded-lg border border-sky-100 space-y-1">
+                  <strong className="text-slate-900 block font-bold text-[11px]">3. Sofortige URL-Prüfung:</strong>
+                  <p className="text-[11px] text-slate-600">
+                    Nach der Bestätigung funktioniert der Link <a href="https://search.google.com/search-console/inspect?resource_id=https%3A%2F%2Fsos-abdichtung.de%2F&id=https%3A%2F%2Fsos-abdichtung.de%2F" target="_blank" rel="noopener noreferrer" className="text-sky-700 underline font-semibold">GSC URL-Inspect ↗</a> dauerhaft in Ihrem Browser.
+                  </p>
+                </div>
+              </div>
+            </div>
+
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               {/* Phase 1 */}
               <div className="bg-slate-50 rounded-xl p-4 border border-slate-200 space-y-2">
@@ -4125,14 +4220,26 @@ export default function AdminPortalClient() {
                       <td className="py-2.5 px-3 font-semibold text-slate-700">{pg.kw}</td>
                       <td className="py-2.5 px-3 text-slate-500">{pg.target}</td>
                       <td className="py-2.5 pl-3 text-right">
-                        <a
-                          href={`https://search.google.com/search-console/inspect?id=${encodeURIComponent(`https://sos-abdichtung.de${pg.url}`)}`}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-[11px] font-bold text-sky-700 hover:underline"
-                        >
-                          Google Prüfen ↗
-                        </a>
+                        <div className="flex items-center justify-end gap-1.5 flex-wrap">
+                          <a
+                            href={`https://search.google.com/test/rich-results?url=${encodeURIComponent(`https://sos-abdichtung.de${pg.url}`)}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1 text-[11px] font-bold text-emerald-700 hover:text-emerald-800 bg-emerald-50 hover:bg-emerald-100 px-2 py-1 rounded border border-emerald-200"
+                            title="Live Googlebot-Test ohne GSC-Login ausführen"
+                          >
+                            <span>Live Googlebot ↗</span>
+                          </a>
+                          <a
+                            href={`https://search.google.com/search-console/inspect?resource_id=${encodeURIComponent("https://sos-abdichtung.de/")}&id=${encodeURIComponent(`https://sos-abdichtung.de${pg.url}`)}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-[11px] font-bold text-sky-700 hover:underline px-1 py-1"
+                            title="Google Search Console URL-Prüfung (erfordert verifizierte Property)"
+                          >
+                            GSC ↗
+                          </a>
+                        </div>
                       </td>
                     </tr>
                   ))}
