@@ -30,6 +30,17 @@ import {
   MapPin,
   Search,
   CheckCircle2,
+  ArrowRight,
+  Copy,
+  Check,
+  Clock,
+  TriangleAlert,
+  RefreshCw,
+  FileCheck,
+  Layers,
+  Sparkles,
+  BadgePercent,
+  CreditCard,
 } from "lucide-react";
 import { COMPANY, COMPANY_INFO } from "@/data/content-data";
 import {
@@ -213,6 +224,39 @@ const WTA_TEMPLATES = [
     price: 89,
     labour: true,
   },
+  {
+    pos_de: "Bautrocknung & Kondenstrockner (Miete)",
+    pos_en: "Dehumidification & Condensation Dryer (Rental)",
+    basis_de: "Hocheffizienter Kondenstrockner inkl. Stromverbrauchszähler",
+    basis_en: "High-efficiency condensation dryer incl. energy metering",
+    qty: 7,
+    unit_de: "Tage",
+    unit_en: "Days",
+    price: 35,
+    labour: false,
+  },
+  {
+    pos_de: "Elektronische CM-Feuchtemessung & Protokoll",
+    pos_en: "CM Moisture Diagnostic & Certified Protocol",
+    basis_de: "Kalziumkarbid-Messung nach WTA-Merkblatt inkl. Schadensbericht",
+    basis_en: "Calcium carbide quantitative moisture test & WTA report",
+    qty: 1,
+    unit_de: "Pausch.",
+    unit_en: "Flat rate",
+    price: 120,
+    labour: true,
+  },
+  {
+    pos_de: "Wand-Boden-Fugenabdichtung (KMB / Quellband)",
+    pos_en: "Wall-Floor Joint Waterproofing Seal",
+    basis_de: "Haftbrücke, Quellbandeinlage & 2K-KMB-Abdichtungskehle",
+    basis_en: "Adhesion coat, swelling tape & elastomeric fillet coat",
+    qty: 14,
+    unit_de: "lfm",
+    unit_en: "lin. m",
+    price: 78,
+    labour: true,
+  },
 ];
 
 const LOCAL_SEO_PAGES = [
@@ -275,6 +319,7 @@ export default function AdminPortalClient() {
 
   const [selectedLeadId, setSelectedLeadId] = useState<string>("A-1001");
   const [selectedDocNr, setSelectedDocNr] = useState<string>("ANG-2026-0001");
+  const [docFilter, setDocFilter] = useState<"all" | "offer" | "invoice">("all");
   const [previewDoc, setPreviewDoc] = useState<WorkspaceGoBDDoc | null>(null);
   const [zoomPhoto, setZoomPhoto] = useState<{ photo: StoredDrivePhoto; leadId: string } | null>(
     null
@@ -366,14 +411,421 @@ export default function AdminPortalClient() {
   const calcLeadTotal = (lead: WorkspaceLead) =>
     (lead.lines || []).reduce((sum, item) => sum + item.qty * item.price, 0);
 
-  const calcDocTotals = (doc?: WorkspaceGoBDDoc) => {
-    if (!doc) return { net: 0, vat: 0, gross: 0, labourGross: 0, taxBonus20: 0 };
-    const net = (doc.lines || []).reduce((sum, item) => sum + item.qty * item.price, 0);
-    const vat = net * ((doc.vatRate ?? 19) / 100);
+  const calcDocTotals = (doc?: WorkspaceGoBDDoc | null) => {
+    if (!doc) {
+      return {
+        net: 0,
+        vat: 0,
+        gross: 0,
+        labourNet: 0,
+        materialNet: 0,
+        labourGross: 0,
+        taxBonus20: 0,
+        labourPct: 0,
+        materialPct: 0,
+        skontoAmount: 0,
+      };
+    }
+    const lines = doc.lines || [];
+    const net = lines.reduce((sum, item) => sum + (Number(item.qty) || 0) * (Number(item.price) || 0), 0);
+    const labourNet = lines
+      .filter((i) => i.labour)
+      .reduce((sum, item) => sum + (Number(item.qty) || 0) * (Number(item.price) || 0), 0);
+    const materialNet = Math.max(0, net - labourNet);
+    const vatRate = doc.vatRate ?? 19;
+    const vat = net * (vatRate / 100);
     const gross = net + vat;
-    const labourGross = gross;
+    const labourGross = labourNet * (1 + vatRate / 100);
+    // Under German § 35a Abs. 3 EStG: 20% craft labor tax credit, capped at 1,200 EUR/year
     const taxBonus20 = Math.min(1200, labourGross * 0.2);
-    return { net, vat, gross, labourGross, taxBonus20 };
+    const labourPct = net > 0 ? Math.round((labourNet / net) * 100) : 0;
+    const materialPct = 100 - labourPct;
+    const skontoRate = doc.skontoPct ?? 2;
+    const skontoAmount = (gross * skontoRate) / 100;
+    return {
+      net,
+      vat,
+      gross,
+      labourNet,
+      materialNet,
+      labourGross,
+      taxBonus20,
+      labourPct,
+      materialPct,
+      skontoAmount,
+    };
+  };
+
+  const getDocDateStatus = (doc: WorkspaceGoBDDoc) => {
+    const s = (doc.status || "").toLowerCase();
+    if (s.includes("bezahlt") || s.includes("paid")) {
+      return {
+        label: t("Bezahlt", "Paid"),
+        color: "bg-emerald-100 text-emerald-800 border-emerald-300",
+        days: 0,
+        isOverdue: false,
+        isPaid: true,
+      };
+    }
+    if (s.includes("storn") || s.includes("void")) {
+      return {
+        label: t("Storniert", "Voided"),
+        color: "bg-slate-100 text-slate-700 border-slate-300",
+        days: 0,
+        isOverdue: false,
+        isPaid: false,
+      };
+    }
+    if (!doc.dueOrValid) {
+      return {
+        label: doc.status || t("Offen", "Open"),
+        color: "bg-slate-100 text-slate-700 border-slate-300",
+        days: 0,
+        isOverdue: false,
+        isPaid: false,
+      };
+    }
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const due = new Date(doc.dueOrValid);
+    due.setHours(0, 0, 0, 0);
+    const diffTime = due.getTime() - today.getTime();
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+    if (diffDays < 0) {
+      return {
+        label: t(`Überfällig um ${Math.abs(diffDays)} Tage`, `Overdue by ${Math.abs(diffDays)} days`),
+        color: "bg-rose-100 text-rose-800 border-rose-300 font-bold",
+        days: diffDays,
+        isOverdue: true,
+        isPaid: false,
+      };
+    }
+    if (diffDays === 0) {
+      return {
+        label: t("Heute fällig", "Due today"),
+        color: "bg-amber-100 text-amber-900 border-amber-300 font-bold",
+        days: 0,
+        isOverdue: false,
+        isPaid: false,
+      };
+    }
+    return {
+      label: t(`Noch ${diffDays} Tage bis Fälligkeit`, `${diffDays} days remaining`),
+      color: "bg-sky-100 text-sky-800 border-sky-300 font-bold",
+      days: diffDays,
+      isOverdue: false,
+      isPaid: false,
+    };
+  };
+
+  const updateCurDoc = (updater: (prev: WorkspaceGoBDDoc) => WorkspaceGoBDDoc) => {
+    if (!curDoc) return;
+    const nextDocs = docs.map((d) => (d.nr === curDoc.nr ? updater(d) : d));
+    persistAll(leads, nextDocs);
+  };
+
+  const updateLine = (idx: number, patch: Partial<QuoteLineItem>) => {
+    updateCurDoc((doc) => {
+      const newLines = (doc.lines || []).map((l, i) => (i === idx ? { ...l, ...patch } : l));
+      return { ...doc, lines: newLines };
+    });
+  };
+
+  const removeLine = (idx: number) => {
+    updateCurDoc((doc) => {
+      const newLines = (doc.lines || []).filter((_, i) => i !== idx);
+      return { ...doc, lines: newLines };
+    });
+  };
+
+  const duplicateLine = (idx: number) => {
+    updateCurDoc((doc) => {
+      const line = (doc.lines || [])[idx];
+      if (!line) return doc;
+      const newLines = [...(doc.lines || [])];
+      newLines.splice(idx + 1, 0, { ...line, pos: `${line.pos} (Kopie)` });
+      return { ...doc, lines: newLines };
+    });
+  };
+
+  const addBlankLine = () => {
+    updateCurDoc((doc) => ({
+      ...doc,
+      lines: [
+        ...(doc.lines || []),
+        {
+          pos: isEn ? "Custom Waterproofing Service" : "Individuelle Sanierungsleistung",
+          basis: isEn ? "Specification / notes" : "Technische Ausführung nach WTA",
+          qty: 1,
+          unit: isEn ? "Flat rate" : "Pausch.",
+          price: 100,
+          labour: true,
+        },
+      ],
+    }));
+  };
+
+  const addTemplateLine = (tpl: typeof WTA_TEMPLATES[0]) => {
+    updateCurDoc((doc) => ({
+      ...doc,
+      lines: [
+        ...(doc.lines || []),
+        {
+          pos: isEn ? tpl.pos_en : tpl.pos_de,
+          basis: isEn ? tpl.basis_en : tpl.basis_de,
+          qty: tpl.qty,
+          unit: isEn ? tpl.unit_en : tpl.unit_de,
+          price: tpl.price,
+          labour: tpl.labour,
+        },
+      ],
+    }));
+    showToast(t(`Position "${isEn ? tpl.pos_en : tpl.pos_de}" hinzugefügt.`, `Added "${isEn ? tpl.pos_en : tpl.pos_de}".`));
+  };
+
+  const setDocStatus = (status: string) => {
+    updateCurDoc((doc) => ({ ...doc, status }));
+    showToast(t(`Status auf "${status}" aktualisiert.`, `Status updated to "${status}".`));
+  };
+
+  const setPaymentPreset = (days: number, skonto: number = 0) => {
+    const baseDate = curDoc?.date ? new Date(curDoc.date) : new Date();
+    const due = new Date(baseDate.getTime() + days * 86400000).toISOString().slice(0, 10);
+    updateCurDoc((doc) => ({
+      ...doc,
+      dueOrValid: due,
+      paymentTermsDays: days,
+      skontoPct: skonto,
+    }));
+    showToast(
+      t(
+        `Zahlungsziel auf ${days} Tage (${due}) gesetzt.`,
+        `Payment terms set to ${days} days (${due}).`
+      )
+    );
+  };
+
+  const convertOfferToInvoice = (offerDoc: WorkspaceGoBDDoc) => {
+    const seq = docs.filter((d) => d.type === "invoice" || d.nr.startsWith("RE-")).length + 1;
+    const nr = `RE-2026-${String(seq).padStart(4, "0")}`;
+    const today = new Date().toISOString().slice(0, 10);
+    const due = new Date(Date.now() + 14 * 86400000).toISOString().slice(0, 10);
+
+    const newInvoice: WorkspaceGoBDDoc = {
+      nr,
+      type: "invoice",
+      typeLabel: t("Rechnung", "Invoice"),
+      leadId: offerDoc.leadId,
+      name: offerDoc.name,
+      address: offerDoc.address,
+      email: offerDoc.email,
+      phone: offerDoc.phone,
+      service: `${offerDoc.service} (Ref: ${offerDoc.nr})`,
+      date: today,
+      dueOrValid: due,
+      status: t("Offen", "Open"),
+      vatRate: offerDoc.vatRate ?? 19,
+      discountPct: offerDoc.discountPct ?? 0,
+      driveFolder: "SOS Abdichtung - Belege / 2026",
+      lines: JSON.parse(JSON.stringify(offerDoc.lines || [])),
+      refOfferNr: offerDoc.nr,
+      paymentTermsDays: 14,
+      skontoPct: 2,
+      skontoDays: 7,
+    };
+
+    const nextDocs = [
+      newInvoice,
+      ...docs.map((d) =>
+        d.nr === offerDoc.nr
+          ? {
+              ...d,
+              status: t("Angenommen & Abgerechnet", "Accepted & Invoiced"),
+            }
+          : d
+      ),
+    ];
+
+    const nextLeads = leads.map((l) =>
+      l.id === offerDoc.leadId ? { ...l, status: "Gebucht" as LeadStatus } : l
+    );
+
+    persistAll(nextLeads, nextDocs);
+    setSelectedDocNr(nr);
+    setTab("belege");
+    showToast(
+      t(
+        `Erfolg: Angebot ${offerDoc.nr} mit 1 Klick in Rechnung ${nr} überführt!`,
+        `Success: Quote ${offerDoc.nr} converted into Invoice ${nr} in 1 click!`
+      )
+    );
+  };
+
+  const createNewEmptyDoc = (type: "offer" | "invoice") => {
+    const seq =
+      docs.filter((d) => (type === "offer" ? d.nr.startsWith("ANG-") : d.nr.startsWith("RE-"))).length +
+      1;
+    const prefix = type === "offer" ? "ANG-2026-" : "RE-2026-";
+    const nr = `${prefix}${String(seq).padStart(4, "0")}`;
+    const newDoc: WorkspaceGoBDDoc = {
+      nr,
+      type,
+      typeLabel: type === "offer" ? t("Angebot", "Quote") : t("Rechnung", "Invoice"),
+      leadId: `M-${1000 + seq}`,
+      name: isEn ? "New Customer" : "Neuer Kunde",
+      address: "Musterstraße 1, 42103 Wuppertal",
+      email: "",
+      phone: "+49 202 5550190",
+      service: isEn ? "Basement Waterproofing (WTA)" : "Kellerabdichtung nach WTA-Merkblatt",
+      date: new Date().toISOString().slice(0, 10),
+      dueOrValid: new Date(Date.now() + 14 * 86400000).toISOString().slice(0, 10),
+      status: type === "offer" ? t("Entwurf", "Draft") : t("Offen", "Open"),
+      vatRate: 19,
+      discountPct: 0,
+      driveFolder: "SOS Abdichtung - Belege / 2026",
+      lines: [
+        {
+          pos: isEn ? WTA_TEMPLATES[0].pos_en : WTA_TEMPLATES[0].pos_de,
+          basis: isEn ? WTA_TEMPLATES[0].basis_en : WTA_TEMPLATES[0].basis_de,
+          qty: 12,
+          unit: isEn ? WTA_TEMPLATES[0].unit_en : WTA_TEMPLATES[0].unit_de,
+          price: 135,
+          labour: true,
+        },
+      ],
+      paymentTermsDays: 14,
+      skontoPct: 2,
+      skontoDays: 7,
+    };
+    const nextDocs = [newDoc, ...docs];
+    persistAll(leads, nextDocs);
+    setSelectedDocNr(nr);
+    showToast(t(`Neuer Beleg ${nr} erfolgreich angelegt.`, `New document ${nr} successfully created.`));
+  };
+
+  const createOfferFromPlaner = () => {
+    const newId = `A-${1001 + leads.length}`;
+    const nl: WorkspaceLead = {
+      id: newId,
+      received: new Date().toLocaleString(isEn ? "en-US" : "de-DE"),
+      status: "Angebot raus",
+      owner: COMPANY_INFO.owner,
+      name: plName || (isEn ? "On-Site Customer" : "Vor-Ort-Kunde"),
+      phone: plPhone || COMPANY_INFO.phoneDisplay,
+      email: "",
+      address: plAddr,
+      damageType: plService,
+      area: `${plLines[0]?.qty || 10} ${plLines[0]?.unit || "lfm"}`,
+      date: new Date().toISOString().slice(0, 10),
+      notes: isEn ? "Created in On-Site Estimator" : "Erstellt im Aufmaß-Planer",
+      message: isEn ? "On-site moisture diagnostic & measurement" : "Vor-Ort-Feuchtigkeitsmessung & Aufmaß",
+      source: "Aufmaß-Planer (/admin/)",
+      photosDriveUrl: "https://drive.google.com/drive/u/0/my-drive",
+      photos: [],
+      token: "localtoken",
+      handover: { moisture: true },
+      handoverNote: "",
+      lines: plLines,
+    };
+    const nextLeads = [nl, ...leads];
+
+    const seq = docs.filter((d) => d.type === "offer" || d.nr.startsWith("ANG-")).length + 1;
+    const nr = `ANG-2026-${String(seq).padStart(4, "0")}`;
+    const newDoc: WorkspaceGoBDDoc = {
+      nr,
+      type: "offer",
+      typeLabel: t("Angebot", "Quote"),
+      leadId: nl.id,
+      name: nl.name,
+      address: nl.address,
+      email: nl.email,
+      phone: nl.phone,
+      service: `${nl.damageType} (${nl.id})`,
+      date: new Date().toISOString().slice(0, 10),
+      dueOrValid: new Date(Date.now() + 14 * 86400000).toISOString().slice(0, 10),
+      status: t("Versendet", "Sent"),
+      vatRate: 19,
+      discountPct: 0,
+      driveFolder: "SOS Abdichtung - Belege / 2026",
+      lines: JSON.parse(JSON.stringify(plLines)),
+      paymentTermsDays: 14,
+      skontoPct: 2,
+      skontoDays: 7,
+    };
+
+    const nextDocs = [newDoc, ...docs];
+    persistAll(nextLeads, nextDocs);
+    setSelectedDocNr(nr);
+    setTab("belege");
+    showToast(
+      t(
+        `GoBD-Angebot ${nr} aus Aufmaß erstellt! Sie können es nun direkt prüfen oder in 1 Klick in eine Rechnung überführen.`,
+        `GoBD Quote ${nr} created from estimate! You can now edit lines or convert to Invoice in 1 click.`
+      )
+    );
+  };
+
+  const createInvoiceDirectlyFromPlaner = () => {
+    const newId = `A-${1001 + leads.length}`;
+    const nl: WorkspaceLead = {
+      id: newId,
+      received: new Date().toLocaleString(isEn ? "en-US" : "de-DE"),
+      status: "Gebucht",
+      owner: COMPANY_INFO.owner,
+      name: plName || (isEn ? "On-Site Customer" : "Vor-Ort-Kunde"),
+      phone: plPhone || COMPANY_INFO.phoneDisplay,
+      email: "",
+      address: plAddr,
+      damageType: plService,
+      area: `${plLines[0]?.qty || 10} ${plLines[0]?.unit || "lfm"}`,
+      date: new Date().toISOString().slice(0, 10),
+      notes: isEn ? "Created in On-Site Estimator" : "Erstellt im Aufmaß-Planer",
+      message: isEn ? "Direct on-site order billing" : "Direktabrechnung Vor-Ort-Auftrag",
+      source: "Aufmaß-Planer (/admin/)",
+      photosDriveUrl: "https://drive.google.com/drive/u/0/my-drive",
+      photos: [],
+      token: "localtoken",
+      handover: { moisture: true },
+      handoverNote: "",
+      lines: plLines,
+    };
+    const nextLeads = [nl, ...leads];
+
+    const seq = docs.filter((d) => d.type === "invoice" || d.nr.startsWith("RE-")).length + 1;
+    const nr = `RE-2026-${String(seq).padStart(4, "0")}`;
+    const newDoc: WorkspaceGoBDDoc = {
+      nr,
+      type: "invoice",
+      typeLabel: t("Rechnung", "Invoice"),
+      leadId: nl.id,
+      name: nl.name,
+      address: nl.address,
+      email: nl.email,
+      phone: nl.phone,
+      service: `${nl.damageType} (${nl.id})`,
+      date: new Date().toISOString().slice(0, 10),
+      dueOrValid: new Date(Date.now() + 14 * 86400000).toISOString().slice(0, 10),
+      status: t("Offen", "Open"),
+      vatRate: 19,
+      discountPct: 0,
+      driveFolder: "SOS Abdichtung - Belege / 2026",
+      lines: JSON.parse(JSON.stringify(plLines)),
+      paymentTermsDays: 14,
+      skontoPct: 2,
+      skontoDays: 7,
+    };
+
+    const nextDocs = [newDoc, ...docs];
+    persistAll(nextLeads, nextDocs);
+    setSelectedDocNr(nr);
+    setTab("belege");
+    showToast(
+      t(
+        `GoBD-Rechnung ${nr} direkt aus Aufmaß erstellt!`,
+        `GoBD Invoice ${nr} created directly from estimate!`
+      )
+    );
   };
 
   const createDocFromLead = (lead: WorkspaceLead, type: "offer" | "invoice") => {
@@ -406,6 +858,9 @@ export default function AdminPortalClient() {
           labour: true,
         },
       ],
+      paymentTermsDays: 14,
+      skontoPct: 2,
+      skontoDays: 7,
     };
 
     const nextDocs = [newDoc, ...docs];
@@ -1429,354 +1884,962 @@ export default function AdminPortalClient() {
 
       {/* TAB 4: AUFMASS-PLANER / ESTIMATOR */}
       {tab === "planer" && (
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-          <div className="lg:col-span-7 bg-white rounded-2xl p-4 sm:p-6 border border-slate-200 space-y-4">
-            <h3 className="text-base sm:text-lg font-extrabold text-slate-900">
-              {t("Vor-Ort-Aufmaß & Schnellkalkulation", "On-Site Diagnostic Measurement & Quick Estimate")}
-            </h3>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+        <div className="space-y-6">
+          {/* Interactive Workflow Pipeline Header */}
+          <div className="bg-[#0f2537] text-white rounded-2xl p-4 sm:p-5 shadow-sm border border-slate-700/50">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
               <div>
-                <label className="text-xs font-bold text-slate-700 block mb-1">
-                  {t("Kundenname / WEG *", "Customer Name / HOA *")}
-                </label>
-                <input
-                  type="text"
-                  value={plName}
-                  onChange={(e) => setPlName(e.target.value)}
-                  placeholder={t("z. B. Familie Schneider", "e.g. Schneider Family")}
-                  className={inputCls}
-                />
+                <span className="text-[11px] font-extrabold uppercase tracking-widest text-emerald-400">
+                  {t("GoBD-Auftragspipeline · Schritt 1 von 3", "GoBD Pipeline · Step 1 of 3")}
+                </span>
+                <h3 className="text-base sm:text-lg font-extrabold text-white">
+                  {t("Vor-Ort-Aufmaß & Schnellkalkulation", "On-Site Diagnostic Measurement & Quick Estimate")}
+                </h3>
+                <p className="text-xs text-slate-300 mt-0.5">
+                  {t(
+                    "Erfassen Sie Vor-Ort-Messdaten und überführen Sie diese mit 1 Klick in ein GoBD-Angebot oder direkt in eine Rechnung.",
+                    "Capture on-site diagnostic measurements and convert them in 1 click into a GoBD quote or invoice."
+                  )}
+                </p>
               </div>
-              <div>
-                <label className="text-xs font-bold text-slate-700 block mb-1">
-                  {t("Telefon / WhatsApp *", "Phone / WhatsApp *")}
-                </label>
-                <input
-                  type="tel"
-                  value={plPhone}
-                  onChange={(e) => setPlPhone(e.target.value)}
-                  placeholder="z. B. 0172 2064177"
-                  className={inputCls}
-                />
-              </div>
-              <div>
-                <label className="text-xs font-bold text-slate-700 block mb-1">
-                  {t("Objektadresse", "Property Address")}
-                </label>
-                <input
-                  type="text"
-                  value={plAddr}
-                  onChange={(e) => setPlAddr(e.target.value)}
-                  className={inputCls}
-                />
-              </div>
-              <div>
-                <label className="text-xs font-bold text-slate-700 block mb-1">
-                  {t("Hauptgewerk", "Primary Service")}
-                </label>
-                <select
-                  value={plService}
-                  onChange={(e) => setPlService(e.target.value)}
-                  className={inputCls}
-                >
-                  <option value="Horizontalsperre">{t("Horizontalsperre (WTA-Injektion)", "Horizontal Damp Barrier (WTA)")}</option>
-                  <option value="Kellerinnenabdichtung (MDS)">{t("Kellerinnenabdichtung (MDS)", "Interior Basement Waterproofing (Slurry)")}</option>
-                  <option value="Schimmelbeseitigung & Klimaplatte">{t("Schimmelbeseitigung & Klimaplatte", "Mold Remediation & Climate Boards")}</option>
-                  <option value="Hochdruck-Rissverpressung">{t("Hochdruck-Rissverpressung", "High-Pressure Masonry Crack Injection")}</option>
-                </select>
+
+              {/* Pipeline Step Indicators */}
+              <div className="flex items-center gap-1.5 sm:gap-2 text-[11px] font-bold overflow-x-auto py-1">
+                <div className="flex items-center gap-1.5 bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 px-3 py-1.5 rounded-xl whitespace-nowrap">
+                  <span className="w-5 h-5 rounded-full bg-emerald-500 text-slate-900 flex items-center justify-center text-[10px] font-extrabold">1</span>
+                  <span>{t("Aufmaß (Aktiv)", "Estimate (Active)")}</span>
+                </div>
+                <ArrowRight className="w-3.5 h-3.5 text-slate-500 shrink-0" />
+                <div className="flex items-center gap-1.5 bg-white/5 text-slate-300 border border-white/10 px-3 py-1.5 rounded-xl whitespace-nowrap">
+                  <span className="w-5 h-5 rounded-full bg-slate-700 text-slate-300 flex items-center justify-center text-[10px] font-bold">2</span>
+                  <span>{t("Angebot (ANG)", "Quote (ANG)")}</span>
+                </div>
+                <ArrowRight className="w-3.5 h-3.5 text-slate-500 shrink-0" />
+                <div className="flex items-center gap-1.5 bg-white/5 text-slate-300 border border-white/10 px-3 py-1.5 rounded-xl whitespace-nowrap">
+                  <span className="w-5 h-5 rounded-full bg-slate-700 text-slate-300 flex items-center justify-center text-[10px] font-bold">3</span>
+                  <span>{t("Rechnung (RE)", "Invoice (RE)")}</span>
+                </div>
               </div>
             </div>
+          </div>
 
-            <div>
-              <div className="text-xs font-bold text-slate-700 mb-2">
-                {t("WTA-Bausteine hinzufügen:", "Add WTA Standard Modules:")}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+            <div className="lg:col-span-7 bg-white rounded-2xl p-4 sm:p-6 border border-slate-200 space-y-5">
+              <div className="border-b border-slate-100 pb-3">
+                <h4 className="text-sm font-extrabold text-slate-900">
+                  {t("Kunden- & Objektdaten", "Customer & Site Details")}
+                </h4>
               </div>
-              <div className="flex flex-wrap gap-1.5">
-                {WTA_TEMPLATES.map((tpl, i) => (
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label className="text-xs font-bold text-slate-700 block mb-1">
+                    {t("Kundenname / WEG *", "Customer Name / HOA *")}
+                  </label>
+                  <input
+                    type="text"
+                    value={plName}
+                    onChange={(e) => setPlName(e.target.value)}
+                    placeholder={t("z. B. Familie Schneider", "e.g. Schneider Family")}
+                    className={inputCls}
+                  />
+                </div>
+                <div>
+                  <label className="text-xs font-bold text-slate-700 block mb-1">
+                    {t("Telefon / WhatsApp *", "Phone / WhatsApp *")}
+                  </label>
+                  <input
+                    type="tel"
+                    value={plPhone}
+                    onChange={(e) => setPlPhone(e.target.value)}
+                    placeholder="z. B. 0172 2064177"
+                    className={inputCls}
+                  />
+                </div>
+                <div>
+                  <label className="text-xs font-bold text-slate-700 block mb-1">
+                    {t("Objektadresse", "Property Address")}
+                  </label>
+                  <input
+                    type="text"
+                    value={plAddr}
+                    onChange={(e) => setPlAddr(e.target.value)}
+                    className={inputCls}
+                  />
+                </div>
+                <div>
+                  <label className="text-xs font-bold text-slate-700 block mb-1">
+                    {t("Hauptgewerk", "Primary Service")}
+                  </label>
+                  <select
+                    value={plService}
+                    onChange={(e) => setPlService(e.target.value)}
+                    className={inputCls}
+                  >
+                    <option value="Horizontalsperre">{t("Horizontalsperre (WTA-Injektion)", "Horizontal Damp Barrier (WTA)")}</option>
+                    <option value="Kellerinnenabdichtung (MDS)">{t("Kellerinnenabdichtung (MDS)", "Interior Basement Waterproofing (Slurry)")}</option>
+                    <option value="Schimmelbeseitigung & Klimaplatte">{t("Schimmelbeseitigung & Klimaplatte", "Mold Remediation & Climate Boards")}</option>
+                    <option value="Hochdruck-Rissverpressung">{t("Hochdruck-Rissverpressung", "High-Pressure Masonry Crack Injection")}</option>
+                    <option value="Bautrocknung & Wasserschaden">{t("Bautrocknung & Wasserschaden", "Building Dehumidification & Water Damage")}</option>
+                  </select>
+                </div>
+              </div>
+
+              <div>
+                <div className="flex items-center justify-between gap-2 mb-2">
+                  <div className="text-xs font-bold text-slate-700">
+                    {t("WTA-Bausteine mit 1 Klick hinzufügen:", "Add WTA Standard Modules in 1 Click:")}
+                  </div>
+                  <span className="text-[11px] text-slate-400">
+                    {WTA_TEMPLATES.length} {t("Vorlagen", "Templates")}
+                  </span>
+                </div>
+                <div className="flex flex-wrap gap-1.5">
+                  {WTA_TEMPLATES.map((tpl, i) => (
+                    <button
+                      key={i}
+                      type="button"
+                      onClick={() =>
+                        setPlLines((prev) => [
+                          ...prev,
+                          {
+                            pos: isEn ? tpl.pos_en : tpl.pos_de,
+                            basis: isEn ? tpl.basis_en : tpl.basis_de,
+                            qty: tpl.qty,
+                            unit: isEn ? tpl.unit_en : tpl.unit_de,
+                            price: tpl.price,
+                            labour: tpl.labour,
+                          },
+                        ])
+                      }
+                      className="min-h-[38px] text-xs font-semibold bg-slate-50 hover:bg-emerald-50 text-slate-800 border border-slate-200 hover:border-emerald-300 px-3 py-1.5 rounded-xl inline-flex items-center gap-1.5 text-left transition-colors"
+                    >
+                      <Plus className="w-3.5 h-3.5 shrink-0 text-emerald-700" />
+                      <span>{isEn ? tpl.pos_en : tpl.pos_de}</span>
+                      <span className="text-[10px] text-slate-400">({eur(tpl.price)})</span>
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              <div className="space-y-2.5 pt-2">
+                <div className="flex items-center justify-between border-b border-slate-100 pb-2">
+                  <div className="text-xs font-bold text-slate-700">
+                    {t("Aufmaß-Positionen:", "Estimate Line Items:")} ({plLines.length})
+                  </div>
                   <button
-                    key={i}
                     type="button"
                     onClick={() =>
                       setPlLines((prev) => [
                         ...prev,
                         {
-                          pos: isEn ? tpl.pos_en : tpl.pos_de,
-                          basis: isEn ? tpl.basis_en : tpl.basis_de,
-                          qty: tpl.qty,
-                          unit: isEn ? tpl.unit_en : tpl.unit_de,
-                          price: tpl.price,
-                          labour: tpl.labour,
+                          pos: isEn ? "Custom Waterproofing Service" : "Individuelle Sanierungsleistung",
+                          basis: isEn ? "Specification / notes" : "Technische Ausführung nach WTA",
+                          qty: 1,
+                          unit: isEn ? "Flat rate" : "Pausch.",
+                          price: 100,
+                          labour: true,
                         },
                       ])
                     }
-                    className="min-h-[40px] text-xs font-semibold bg-slate-100 hover:bg-emerald-50 text-slate-800 border border-slate-200 px-3 py-2 rounded-xl inline-flex items-center gap-1.5 text-left"
+                    className="text-xs font-bold text-emerald-700 hover:text-emerald-800 inline-flex items-center gap-1"
                   >
-                    <Plus className="w-3.5 h-3.5 shrink-0 text-emerald-700" />
-                    <span>{isEn ? tpl.pos_en : tpl.pos_de}</span>
+                    <Plus className="w-3.5 h-3.5" />
+                    <span>{t("Eigene Position", "Custom Item")}</span>
                   </button>
+                </div>
+
+                {plLines.map((l, idx) => (
+                  <div
+                    key={idx}
+                    className="flex flex-col sm:grid sm:grid-cols-12 gap-2 sm:items-center bg-slate-50 hover:bg-slate-100/80 p-3 rounded-xl border border-slate-200/80 transition-colors"
+                  >
+                    <div className="sm:col-span-5">
+                      <div className="text-xs font-bold text-slate-900">{l.pos}</div>
+                      <div className="text-[11px] text-slate-500 truncate">{l.basis}</div>
+                    </div>
+                    <div className="flex items-center justify-between gap-2 sm:contents">
+                      <div className="flex items-center gap-1.5 sm:col-span-3">
+                        <input
+                          type="number"
+                          min={0.1}
+                          step={1}
+                          aria-label={`Menge für ${l.pos}`}
+                          value={l.qty}
+                          onChange={(e) => {
+                            const qty = Number(e.target.value) || 1;
+                            setPlLines((prev) =>
+                              prev.map((x, j) => (j === idx ? { ...x, qty } : x))
+                            );
+                          }}
+                          className="w-20 sm:w-full min-h-[40px] px-2.5 py-1.5 rounded-lg border border-slate-300 bg-white text-right text-xs font-bold text-slate-900"
+                        />
+                        <span className="text-xs text-slate-500 shrink-0">{l.unit}</span>
+                      </div>
+                      <div className="sm:col-span-3 text-right text-xs font-extrabold text-slate-900">
+                        {eur(l.qty * l.price)}
+                      </div>
+                      <div className="sm:col-span-1 text-right">
+                        <button
+                          type="button"
+                          onClick={() => setPlLines((prev) => prev.filter((_, j) => j !== idx))}
+                          aria-label="Position löschen"
+                          className="min-h-[36px] min-w-[36px] inline-flex items-center justify-center text-slate-400 hover:text-red-600 rounded-lg"
+                        >
+                          <Trash2 className="w-4 h-4" />
+                        </button>
+                      </div>
+                    </div>
+                  </div>
                 ))}
               </div>
             </div>
 
-            <div className="space-y-2.5 pt-2">
-              {plLines.map((l, idx) => (
-                <div
-                  key={idx}
-                  className="flex flex-col sm:grid sm:grid-cols-12 gap-2 sm:items-center bg-slate-50 p-3 rounded-xl border border-slate-200/80"
-                >
-                  <div className="sm:col-span-5 text-xs font-bold text-slate-900">{l.pos}</div>
-                  <div className="flex items-center justify-between gap-2 sm:contents">
-                    <div className="flex items-center gap-1.5 sm:col-span-3">
-                      <input
-                        type="number"
-                        min={1}
-                        aria-label={`Menge für ${l.pos}`}
-                        value={l.qty}
-                        onChange={(e) => {
-                          const qty = Number(e.target.value) || 1;
-                          setPlLines((prev) =>
-                            prev.map((x, j) => (j === idx ? { ...x, qty } : x))
-                          );
-                        }}
-                        className="w-20 sm:w-full min-h-[42px] px-2.5 py-1.5 rounded-lg border border-slate-300 bg-white text-right text-base sm:text-sm font-bold text-slate-900"
-                      />
-                      <span className="text-xs text-slate-500 shrink-0">{l.unit}</span>
-                    </div>
-                    <div className="sm:col-span-3 text-right text-xs font-extrabold text-slate-900">
-                      {eur(l.qty * l.price)}
-                    </div>
-                    <div className="sm:col-span-1 text-right">
-                      <button
-                        type="button"
-                        onClick={() => setPlLines((prev) => prev.filter((_, j) => j !== idx))}
-                        aria-label="Position löschen"
-                        className="min-h-[38px] min-w-[38px] inline-flex items-center justify-center text-slate-400 hover:text-red-600 rounded-lg"
-                      >
-                        <Trash2 className="w-4 h-4" />
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
+            {/* Right Summary & 1-Click Pipeline Card */}
+            <div className="lg:col-span-5 bg-[#0f2537] text-white rounded-2xl p-5 sm:p-6 space-y-5 shadow-lg">
+              <div>
+                <span className="text-xs font-extrabold uppercase tracking-wider text-emerald-400 block mb-1">
+                  {t("Kalkulations-Summe", "Live Estimate Total")}
+                </span>
+                {(() => {
+                  const netSum = plLines.reduce((s, l) => s + (Number(l.qty) || 0) * (Number(l.price) || 0), 0);
+                  const vatSum = netSum * 0.19;
+                  const grossSum = netSum + vatSum;
+                  const labourNetSum = plLines.filter(l => l.labour).reduce((s, l) => s + (Number(l.qty) || 0) * (Number(l.price) || 0), 0);
+                  const labourGrossSum = labourNetSum * 1.19;
+                  const taxBonus = Math.min(1200, labourGrossSum * 0.2);
+                  const labourPct = netSum > 0 ? Math.round((labourNetSum / netSum) * 100) : 0;
 
-          <div className="lg:col-span-5 bg-[#0f2537] text-white rounded-2xl p-5 sm:p-6 space-y-4">
-            <span className="text-xs font-bold uppercase tracking-wider text-emerald-300">
-              {t("Live Aufmaß-Summe", "Live Estimate Total")}
-            </span>
-            <div className="text-2xl sm:text-3xl font-extrabold">
-              {eur(plLines.reduce((s, l) => s + l.qty * l.price, 0))}
+                  return (
+                    <div className="space-y-4">
+                      <div className="text-3xl sm:text-4xl font-extrabold tracking-tight">
+                        {eur(grossSum)}
+                      </div>
+                      <div className="text-xs text-slate-300 space-y-1 border-t border-white/10 pt-3">
+                        <div className="flex justify-between">
+                          <span>{t("Nettobetrag:", "Net Subtotal:")}</span>
+                          <span className="font-semibold">{eur(netSum)}</span>
+                        </div>
+                        <div className="flex justify-between">
+                          <span>{t("Umsatzsteuer (19 %):", "VAT (19 %):")}</span>
+                          <span className="font-semibold">{eur(vatSum)}</span>
+                        </div>
+                      </div>
+
+                      {/* Visual Labour vs Material Ratio */}
+                      <div className="bg-white/5 border border-white/10 rounded-xl p-3 space-y-2">
+                        <div className="flex justify-between text-xs">
+                          <span className="text-emerald-400 font-bold">
+                            {t("Lohnanteil § 35a:", "Labor Ratio § 35a:")} {labourPct}%
+                          </span>
+                          <span className="text-sky-300 font-semibold">
+                            {t("Material:", "Material:")} {100 - labourPct}%
+                          </span>
+                        </div>
+                        <div className="w-full h-2.5 bg-slate-800 rounded-full overflow-hidden flex">
+                          <div style={{ width: `${labourPct}%` }} className="bg-emerald-500 h-full transition-all" />
+                          <div style={{ width: `${100 - labourPct}%` }} className="bg-sky-400 h-full transition-all" />
+                        </div>
+                        <div className="flex justify-between text-[11px] text-slate-300 pt-0.5">
+                          <span>{t("Steuerbonus für Kunden:", "Customer Tax Bonus:")}</span>
+                          <strong className="text-emerald-300 font-extrabold">−{eur(taxBonus)}</strong>
+                        </div>
+                      </div>
+
+                      <div className="p-3 bg-emerald-950/50 border border-emerald-500/30 rounded-xl text-xs text-emerald-200">
+                        <p className="leading-relaxed">
+                          {t(
+                            "✓ 10 Jahre Systemgarantie auf alle ausgeführten WTA-Leistungen.",
+                            "✓ 10-year system warranty on all executed WTA waterproofing work."
+                          )}
+                        </p>
+                      </div>
+
+                      {/* 1-Click Action Buttons */}
+                      <div className="space-y-2.5 pt-2">
+                        <button
+                          type="button"
+                          onClick={createOfferFromPlaner}
+                          className="w-full min-h-[50px] bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold py-3.5 px-4 rounded-xl text-xs sm:text-sm shadow-md transition-all flex items-center justify-center gap-2"
+                        >
+                          <FileText className="w-4 h-4 shrink-0" />
+                          <span>{t("⚡ Als GoBD-Angebot (ANG-2026) übernehmen →", "⚡ Convert to GoBD Quote (ANG-2026) →")}</span>
+                        </button>
+
+                        <button
+                          type="button"
+                          onClick={createInvoiceDirectlyFromPlaner}
+                          className="w-full min-h-[46px] bg-white/10 hover:bg-white/20 text-white font-bold py-2.5 px-4 rounded-xl text-xs transition-colors flex items-center justify-center gap-2 border border-white/15"
+                        >
+                          <CreditCard className="w-4 h-4 shrink-0 text-sky-400" />
+                          <span>{t("⚡ Direkt als Rechnung (RE-2026) abrechnen →", "⚡ Bill directly as Invoice (RE-2026) →")}</span>
+                        </button>
+                      </div>
+                    </div>
+                  );
+                })()}
+              </div>
             </div>
-            <p className="text-xs text-slate-300 leading-relaxed">
-              {t(
-                "Inkl. ausgewiesenem Handwerker-Lohnanteil nach § 35a EStG und 10 Jahren Systemgarantie.",
-                "Includes § 35a EStG tax-deductible craftsman labor bonus and 10-year system warranty."
-              )}
-            </p>
-            <button
-              type="button"
-              onClick={() => {
-                const newId = `A-${1001 + leads.length}`;
-                const nl: WorkspaceLead = {
-                  id: newId,
-                  received: new Date().toLocaleString(isEn ? "en-US" : "de-DE"),
-                  status: "Neu",
-                  owner: COMPANY_INFO.owner,
-                  name: plName || (isEn ? "On-Site Customer" : "Vor-Ort-Kunde"),
-                  phone: plPhone || COMPANY_INFO.phoneDisplay,
-                  email: "",
-                  address: plAddr,
-                  damageType: plService,
-                  area: `${plLines[0]?.qty || 10} ${plLines[0]?.unit || "lfm"}`,
-                  date: new Date().toISOString().slice(0, 10),
-                  notes: isEn ? "Created in On-Site Estimator" : "Erstellt im Aufmaß-Planer",
-                  message: isEn ? "On-site moisture diagnostic & measurement" : "Vor-Ort-Feuchtigkeitsmessung & Aufmaß",
-                  source: "Aufmaß-Planer (/admin/)",
-                  photosDriveUrl: "https://drive.google.com/drive/u/0/my-drive",
-                  photos: [],
-                  token: "localtoken",
-                  handover: { moisture: true },
-                  handoverNote: "",
-                  lines: plLines,
-                };
-                const nextLeads = [nl, ...leads];
-                persistAll(nextLeads, docs);
-                createDocFromLead(nl, "offer");
-              }}
-              className="w-full min-h-[48px] bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 px-4 rounded-xl text-xs sm:text-sm"
-            >
-              {t("📄 Als Anfrage speichern & GoBD-Angebot (PDF) öffnen →", "📄 Save as Lead & Open GoBD Quote (PDF) →")}
-            </button>
           </div>
         </div>
       )}
 
       {/* TAB 5: GoBD INVOICING & QUOTE ENGINE */}
       {tab === "belege" && curDoc && (
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
-          <div className="lg:col-span-8 bg-white rounded-2xl p-4 sm:p-6 border border-slate-200 space-y-5">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-4">
-              <div className="flex flex-wrap gap-2">
-                {docs.map((d) => (
+        <div className="space-y-6">
+          {/* Document Type Filter & Quick Creation Bar */}
+          <div className="bg-white rounded-2xl p-4 border border-slate-200 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-3">
+            <div className="flex flex-wrap items-center gap-2">
+              <span className="text-xs font-bold text-slate-500 mr-1">{t("Filter:", "Filter:")}</span>
+              <button
+                type="button"
+                onClick={() => setDocFilter("all")}
+                className={`min-h-[38px] px-3.5 py-1.5 rounded-xl text-xs font-bold transition-colors ${
+                  docFilter === "all"
+                    ? "bg-[#0f2537] text-white"
+                    : "bg-slate-100 text-slate-700 hover:bg-slate-200"
+                }`}
+              >
+                {t("Alle Belege", "All Documents")} ({docs.length})
+              </button>
+              <button
+                type="button"
+                onClick={() => setDocFilter("offer")}
+                className={`min-h-[38px] px-3.5 py-1.5 rounded-xl text-xs font-bold transition-colors ${
+                  docFilter === "offer"
+                    ? "bg-[#0f2537] text-white"
+                    : "bg-slate-100 text-slate-700 hover:bg-slate-200"
+                }`}
+              >
+                {t("Angebote", "Quotes")} ({docs.filter((d) => d.type === "offer").length})
+              </button>
+              <button
+                type="button"
+                onClick={() => setDocFilter("invoice")}
+                className={`min-h-[38px] px-3.5 py-1.5 rounded-xl text-xs font-bold transition-colors ${
+                  docFilter === "invoice"
+                    ? "bg-[#0f2537] text-white"
+                    : "bg-slate-100 text-slate-700 hover:bg-slate-200"
+                }`}
+              >
+                {t("Rechnungen", "Invoices")} ({docs.filter((d) => d.type === "invoice").length})
+              </button>
+            </div>
+
+            <div className="flex flex-wrap items-center gap-2">
+              <button
+                type="button"
+                onClick={() => createNewEmptyDoc("offer")}
+                className="min-h-[40px] px-3 py-2 bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-bold rounded-xl inline-flex items-center gap-1.5 transition-colors"
+              >
+                <Plus className="w-3.5 h-3.5 text-emerald-700" />
+                <span>{t("+ Neues Angebot", "+ New Quote")}</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => createNewEmptyDoc("invoice")}
+                className="min-h-[40px] px-3 py-2 bg-slate-100 hover:bg-slate-200 text-slate-800 text-xs font-bold rounded-xl inline-flex items-center gap-1.5 transition-colors"
+              >
+                <Plus className="w-3.5 h-3.5 text-sky-700" />
+                <span>{t("+ Neue Rechnung", "+ New Invoice")}</span>
+              </button>
+              <button
+                type="button"
+                onClick={() => setPreviewDoc(curDoc)}
+                className="min-h-[40px] px-4 py-2 bg-emerald-700 hover:bg-emerald-800 text-white text-xs font-bold rounded-xl inline-flex items-center gap-1.5 shadow-sm transition-colors"
+              >
+                <Printer className="w-4 h-4" />
+                <span>{t("👁️ PDF-Druck", "👁️ Print PDF")}</span>
+              </button>
+            </div>
+          </div>
+
+          {/* Document Selector Pills */}
+          <div className="flex items-center gap-2 overflow-x-auto pb-1">
+            {docs
+              .filter((d) => (docFilter === "all" ? true : d.type === docFilter))
+              .map((d) => {
+                const dateSt = getDocDateStatus(d);
+                const isSelected = d.nr === curDoc.nr;
+                return (
                   <button
                     key={d.nr}
                     type="button"
                     onClick={() => setSelectedDocNr(d.nr)}
-                    className={`min-h-[42px] px-3.5 py-2 rounded-xl text-xs font-bold border ${
-                      d.nr === curDoc.nr
-                        ? "bg-[#0f2537] text-white border-[#0f2537]"
-                        : "bg-slate-50 text-slate-700 border-slate-200"
+                    className={`min-h-[44px] px-4 py-2 rounded-xl text-xs font-bold border shrink-0 transition-all text-left flex items-center gap-2.5 ${
+                      isSelected
+                        ? "bg-[#0f2537] text-white border-[#0f2537] shadow"
+                        : "bg-white text-slate-700 border-slate-200 hover:bg-slate-50"
                     }`}
                   >
-                    {d.nr} ({d.typeLabel})
+                    <div>
+                      <div className="flex items-center gap-1.5">
+                        <span>{d.nr}</span>
+                        <span className={`text-[10px] px-1.5 py-0.5 rounded font-extrabold uppercase ${
+                          d.type === "offer" ? "bg-amber-100 text-amber-800" : "bg-sky-100 text-sky-800"
+                        }`}>
+                          {d.typeLabel}
+                        </span>
+                      </div>
+                      <div className={`text-[10px] truncate max-w-[140px] ${isSelected ? "text-slate-300" : "text-slate-400"}`}>
+                        {d.name}
+                      </div>
+                    </div>
+                    <span className={`text-[10px] px-2 py-0.5 rounded-full border ${dateSt.color}`}>
+                      {d.status}
+                    </span>
                   </button>
-                ))}
-              </div>
-              <button
-                type="button"
-                onClick={() => setPreviewDoc(curDoc)}
-                className="min-h-[44px] inline-flex items-center justify-center gap-1.5 bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs px-4 py-2.5 rounded-xl shrink-0"
-              >
-                <Printer className="w-4 h-4" />
-                <span>{t("👁️ PDF-Vorschau & Drucken", "👁️ PDF Preview & Print")}</span>
-              </button>
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-              <div>
-                <label className="text-xs font-bold text-slate-700 block mb-1">
-                  {t("Empfänger / Kunde", "Recipient / Customer")}
-                </label>
-                <input
-                  type="text"
-                  value={curDoc.name}
-                  onChange={(e) => {
-                    const nextDocs = docs.map((d) =>
-                      d.nr === curDoc.nr ? { ...d, name: e.target.value } : d
-                    );
-                    persistAll(leads, nextDocs);
-                  }}
-                  className={inputCls}
-                />
-              </div>
-              <div>
-                <label className="text-xs font-bold text-slate-700 block mb-1">
-                  {t("Anschrift", "Address")}
-                </label>
-                <input
-                  type="text"
-                  value={curDoc.address}
-                  onChange={(e) => {
-                    const nextDocs = docs.map((d) =>
-                      d.nr === curDoc.nr ? { ...d, address: e.target.value } : d
-                    );
-                    persistAll(leads, nextDocs);
-                  }}
-                  className={inputCls}
-                />
-              </div>
-              <div>
-                <label className="text-xs font-bold text-slate-700 block mb-1">
-                  {t("Betreff / Bauvorhaben", "Subject / Project")}
-                </label>
-                <input
-                  type="text"
-                  value={curDoc.service}
-                  onChange={(e) => {
-                    const nextDocs = docs.map((d) =>
-                      d.nr === curDoc.nr ? { ...d, service: e.target.value } : d
-                    );
-                    persistAll(leads, nextDocs);
-                  }}
-                  className={inputCls}
-                />
-              </div>
-              <div>
-                <label className="text-xs font-bold text-slate-700 block mb-1">
-                  {t("Umsatzsteuer (§ 14 / § 19 UStG)", "VAT (§ 14 / § 19 UStG)")}
-                </label>
-                <select
-                  value={curDoc.vatRate}
-                  onChange={(e) => {
-                    const nextDocs = docs.map((d) =>
-                      d.nr === curDoc.nr ? { ...d, vatRate: Number(e.target.value) } : d
-                    );
-                    persistAll(leads, nextDocs);
-                  }}
-                  className={inputCls}
-                >
-                  <option value={19}>{t("19 % Regelbesteuerung", "19 % Standard VAT")}</option>
-                  <option value={7}>{t("7 % Ermäßigt", "7 % Reduced VAT")}</option>
-                  <option value={0}>{t("0 % Kleinunternehmer (§ 19 UStG)", "0 % Small Business (§ 19 UStG)")}</option>
-                </select>
-              </div>
-            </div>
-
-            <div className="space-y-2.5">
-              <div className="text-xs font-bold text-slate-700">
-                {t("Positionen (inkl. § 35a EStG Lohnanteil):", "Line Items (incl. § 35a EStG Craft Labor Bonus):")}
-              </div>
-              {curDoc.lines.map((l, idx) => (
-                <div
-                  key={idx}
-                  className="flex flex-col sm:grid sm:grid-cols-12 gap-1.5 sm:gap-2 sm:items-center text-xs bg-slate-50 p-3 rounded-xl border border-slate-200/70"
-                >
-                  <div className="sm:col-span-6">
-                    <div className="font-bold text-slate-900">{l.pos}</div>
-                    <div className="text-slate-500">{l.basis}</div>
-                  </div>
-                  <div className="flex items-center justify-between sm:contents pt-1 sm:pt-0">
-                    <div className="sm:col-span-2 sm:text-right font-semibold">
-                      {l.qty} {l.unit}
-                    </div>
-                    <div className="sm:col-span-2 sm:text-right text-slate-500">{eur(l.price)}</div>
-                    <div className="sm:col-span-2 sm:text-right font-extrabold text-slate-900">
-                      {eur(l.qty * l.price)}
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
+                );
+              })}
           </div>
 
-          <div className="lg:col-span-4 bg-white rounded-2xl p-4 sm:p-6 border border-slate-200 space-y-3 text-xs">
-            <h3 className="text-base font-extrabold text-slate-900">
-              {t("GoBD-Summen & § 35a EStG", "GoBD Totals & § 35a Tax Bonus")}
-            </h3>
-            <div className="flex justify-between py-1.5 border-b border-slate-100">
-              <span className="text-slate-600">{t("Nettobetrag:", "Net Total:")}</span>
-              <span className="font-bold">{eur(docTotals.net)}</span>
-            </div>
-            <div className="flex justify-between py-1.5 border-b border-slate-100">
-              <span className="text-slate-600">{t(`Umsatzsteuer (${curDoc.vatRate} %):`, `VAT (${curDoc.vatRate} %):`)}</span>
-              <span className="font-bold">{eur(docTotals.vat)}</span>
-            </div>
-            <div className="flex justify-between py-2 border-b-2 border-slate-900 text-base font-extrabold text-slate-900">
-              <span>{t("Gesamtbetrag (Brutto):", "Gross Total:")}</span>
-              <span>{eur(docTotals.gross)}</span>
-            </div>
-            <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-3.5 space-y-1.5">
-              <div className="font-bold text-slate-900">
-                {t("§ 35a EStG Handwerkerleistung (Lohn- & Fahrtanteil):", "§ 35a EStG Craft Labor Bonus (Tax-Deductible):")}
+          {/* 1-CLICK PIPELINE & WORKFLOW BANNER */}
+          {curDoc.type === "offer" ? (
+            <div className="bg-gradient-to-r from-emerald-700 via-teal-800 to-[#0f2537] text-white p-4 sm:p-5 rounded-2xl shadow-md border border-emerald-600/40 flex flex-col md:flex-row md:items-center justify-between gap-4">
+              <div className="space-y-1">
+                <div className="flex items-center gap-2 text-xs font-extrabold uppercase tracking-wider text-emerald-300">
+                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                  <span>{t("Workflow: 1-Klick-Übernahme in GoBD-Rechnung", "Workflow: 1-Click Conversion to Invoice")}</span>
+                </div>
+                <div className="text-sm font-bold">
+                  {t(
+                    `Angebot ${curDoc.nr} (${curDoc.name}) liegt vor. Wurde der Auftrag erteilt?`,
+                    `Quote ${curDoc.nr} (${curDoc.name}) is ready. Was the project accepted?`
+                  )}
+                </div>
+                <p className="text-xs text-slate-200">
+                  {t(
+                    "Ein Klick genügt: Alle WTA-Positionen, Beträge und Kundendaten werden lückenlos in eine fortlaufende GoBD-Rechnung überführt.",
+                    "One click converts all line items, amounts, and customer details into a GoBD-compliant invoice."
+                  )}
+                </p>
               </div>
-              <div className="flex justify-between text-slate-700">
-                <span>{t("Ausgewiesener Arbeitsanteil:", "Eligible Labor Share:")}</span>
-                <strong>{eur(docTotals.labourGross)}</strong>
+
+              <button
+                type="button"
+                onClick={() => convertOfferToInvoice(curDoc)}
+                className="min-h-[46px] bg-white hover:bg-emerald-50 text-emerald-950 font-extrabold text-xs sm:text-sm px-5 py-3 rounded-xl shadow-lg transition-all flex items-center justify-center gap-2 whitespace-nowrap shrink-0"
+              >
+                <Sparkles className="w-4 h-4 text-emerald-600" />
+                <span>{t("⚡ Angebot in Rechnung (RE-2026) umwandeln →", "⚡ Convert Quote to Invoice (RE-2026) →")}</span>
+              </button>
+            </div>
+          ) : (
+            <div className="bg-slate-900 text-white p-4 sm:p-5 rounded-2xl shadow-md border border-slate-800 flex flex-col md:flex-row md:items-center justify-between gap-4">
+              <div className="space-y-1">
+                <div className="flex items-center gap-2 text-xs font-extrabold uppercase tracking-wider text-sky-400">
+                  <FileCheck className="w-4 h-4 text-sky-400" />
+                  <span>{t("GoBD-Schlussrechnung nach § 14 UStG", "Official GoBD Invoice § 14 UStG")}</span>
+                </div>
+                <div className="text-sm font-bold flex items-center gap-2">
+                  <span>{curDoc.nr} · {curDoc.name}</span>
+                  {curDoc.refOfferNr && (
+                    <button
+                      type="button"
+                      onClick={() => setSelectedDocNr(curDoc.refOfferNr!)}
+                      className="text-xs text-emerald-400 hover:underline bg-emerald-950/60 border border-emerald-600/40 px-2 py-0.5 rounded-lg"
+                    >
+                      {t("🔗 Aus Angebot", "🔗 From Quote")} {curDoc.refOfferNr}
+                    </button>
+                  )}
+                </div>
+                <p className="text-xs text-slate-300">
+                  {t("Schnellstatus-Aktualisierung:", "Quick status update:")}
+                </p>
               </div>
-              <div className="flex justify-between text-emerald-800">
-                <span>{t("20 % Steuerersparnis für Kunden:", "20 % Tax Savings for Client:")}</span>
-                <strong>−{eur(docTotals.taxBonus20)}</strong>
+
+              {/* Status Switcher Buttons */}
+              <div className="flex flex-wrap items-center gap-1.5 shrink-0">
+                <button
+                  type="button"
+                  onClick={() => setDocStatus(t("Offen", "Open"))}
+                  className={`min-h-[36px] px-3 py-1.5 rounded-xl text-xs font-bold border transition-colors ${
+                    curDoc.status === t("Offen", "Open")
+                      ? "bg-amber-500 text-white border-amber-500"
+                      : "bg-slate-800 text-slate-300 border-slate-700 hover:bg-slate-700"
+                  }`}
+                >
+                  {t("Offen", "Open")}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setDocStatus(t("Bezahlt", "Paid"))}
+                  className={`min-h-[36px] px-3 py-1.5 rounded-xl text-xs font-bold border transition-colors ${
+                    curDoc.status === t("Bezahlt", "Paid")
+                      ? "bg-emerald-600 text-white border-emerald-600"
+                      : "bg-slate-800 text-slate-300 border-slate-700 hover:bg-slate-700"
+                  }`}
+                >
+                  {t("Bezahlt ✓", "Paid ✓")}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setDocStatus(t("Überfällig", "Overdue"))}
+                  className={`min-h-[36px] px-3 py-1.5 rounded-xl text-xs font-bold border transition-colors ${
+                    curDoc.status === t("Überfällig", "Overdue")
+                      ? "bg-rose-600 text-white border-rose-600"
+                      : "bg-slate-800 text-slate-300 border-slate-700 hover:bg-slate-700"
+                  }`}
+                >
+                  {t("Mahnung / Überfällig", "Overdue")}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setDocStatus(t("Storniert", "Voided"))}
+                  className={`min-h-[36px] px-3 py-1.5 rounded-xl text-xs font-bold border transition-colors ${
+                    curDoc.status === t("Storniert", "Voided")
+                      ? "bg-slate-600 text-white border-slate-600"
+                      : "bg-slate-800 text-slate-300 border-slate-700 hover:bg-slate-700"
+                  }`}
+                >
+                  {t("Storniert", "Voided")}
+                </button>
               </div>
             </div>
-            <button
-              type="button"
-              onClick={() => setPreviewDoc(curDoc)}
-              className="w-full min-h-[48px] bg-[#0f2537] hover:bg-slate-800 text-white font-bold py-3 px-4 rounded-xl flex items-center justify-center gap-2"
-            >
-              <Printer className="w-4 h-4 shrink-0" />
-              <span>{t("Offizielles PDF öffnen & drucken", "Open Official PDF & Print")}</span>
-            </button>
+          )}
+
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+            {/* Left 8 Cols: Editable Header & Line Items Table */}
+            <div className="lg:col-span-8 bg-white rounded-2xl p-4 sm:p-6 border border-slate-200 space-y-5 shadow-sm">
+              <div className="border-b border-slate-100 pb-3 flex items-center justify-between gap-2">
+                <h4 className="text-sm font-extrabold text-slate-900">
+                  {t("Beleg- & Kundendaten bearbeiten", "Edit Document & Client Details")}
+                </h4>
+                <span className="text-xs font-bold text-slate-400">
+                  {curDoc.nr} ({curDoc.typeLabel})
+                </span>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label className="text-xs font-bold text-slate-700 block mb-1">
+                    {t("Empfänger / Kunde", "Recipient / Customer")}
+                  </label>
+                  <input
+                    type="text"
+                    value={curDoc.name}
+                    onChange={(e) => updateCurDoc((d) => ({ ...d, name: e.target.value }))}
+                    className={inputCls}
+                  />
+                </div>
+                <div>
+                  <label className="text-xs font-bold text-slate-700 block mb-1">
+                    {t("Anschrift", "Address")}
+                  </label>
+                  <input
+                    type="text"
+                    value={curDoc.address}
+                    onChange={(e) => updateCurDoc((d) => ({ ...d, address: e.target.value }))}
+                    className={inputCls}
+                  />
+                </div>
+                <div>
+                  <label className="text-xs font-bold text-slate-700 block mb-1">
+                    {t("E-Mail / Telefon", "Email / Phone")}
+                  </label>
+                  <div className="grid grid-cols-2 gap-2">
+                    <input
+                      type="email"
+                      value={curDoc.email}
+                      placeholder="kunde@beispiel.de"
+                      onChange={(e) => updateCurDoc((d) => ({ ...d, email: e.target.value }))}
+                      className={inputCls}
+                    />
+                    <input
+                      type="tel"
+                      value={curDoc.phone}
+                      placeholder="+49 172 2064177"
+                      onChange={(e) => updateCurDoc((d) => ({ ...d, phone: e.target.value }))}
+                      className={inputCls}
+                    />
+                  </div>
+                </div>
+                <div>
+                  <label className="text-xs font-bold text-slate-700 block mb-1">
+                    {t("Betreff / Bauvorhaben", "Subject / Project")}
+                  </label>
+                  <input
+                    type="text"
+                    value={curDoc.service}
+                    onChange={(e) => updateCurDoc((d) => ({ ...d, service: e.target.value }))}
+                    className={inputCls}
+                  />
+                </div>
+              </div>
+
+              {/* Date & Payment Terms Row */}
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 pt-1">
+                <div>
+                  <label className="text-xs font-bold text-slate-700 block mb-1">
+                    {t("Belegdatum", "Issue Date")}
+                  </label>
+                  <input
+                    type="date"
+                    value={curDoc.date}
+                    onChange={(e) => updateCurDoc((d) => ({ ...d, date: e.target.value }))}
+                    className={inputCls}
+                  />
+                </div>
+                <div>
+                  <label className="text-xs font-bold text-slate-700 block mb-1">
+                    {t("Fälligkeitsdatum", "Due Date")}
+                  </label>
+                  <input
+                    type="date"
+                    value={curDoc.dueOrValid}
+                    onChange={(e) => updateCurDoc((d) => ({ ...d, dueOrValid: e.target.value }))}
+                    className={inputCls}
+                  />
+                </div>
+                <div>
+                  <label className="text-xs font-bold text-slate-700 block mb-1">
+                    {t("Umsatzsteuer (§ 14 UStG)", "VAT (§ 14 UStG)")}
+                  </label>
+                  <select
+                    value={curDoc.vatRate}
+                    onChange={(e) => updateCurDoc((d) => ({ ...d, vatRate: Number(e.target.value) }))}
+                    className={inputCls}
+                  >
+                    <option value={19}>{t("19 % Regelbesteuerung", "19 % Standard VAT")}</option>
+                    <option value={7}>{t("7 % Ermäßigt", "7 % Reduced VAT")}</option>
+                    <option value={0}>{t("0 % Kleinunternehmer (§ 19 UStG)", "0 % Small Business (§ 19 UStG)")}</option>
+                  </select>
+                </div>
+              </div>
+
+              {/* Payment Presets Chips */}
+              <div className="flex flex-wrap items-center gap-1.5 pt-1">
+                <span className="text-[11px] font-bold text-slate-500 mr-1">
+                  {t("Zahlungsziel:", "Terms:")}
+                </span>
+                <button
+                  type="button"
+                  onClick={() => setPaymentPreset(14, 0)}
+                  className="text-xs px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold"
+                >
+                  14 {t("Tage netto", "Days net")}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setPaymentPreset(7, 2)}
+                  className="text-xs px-2.5 py-1 rounded-lg bg-emerald-50 hover:bg-emerald-100 text-emerald-800 font-bold border border-emerald-200"
+                >
+                  7 {t("Tage (2 % Skonto)", "Days (2% Skonto)")}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setPaymentPreset(30, 0)}
+                  className="text-xs px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold"
+                >
+                  30 {t("Tage", "Days")}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setPaymentPreset(0, 0)}
+                  className="text-xs px-2.5 py-1 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold"
+                >
+                  {t("Sofort fällig", "Due immediately")}
+                </button>
+              </div>
+
+              {/* INTERACTIVE LINE ITEM EDITOR (ACCA & BILLDU STYLE) */}
+              <div className="space-y-3 pt-3 border-t border-slate-100">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                  <div>
+                    <h4 className="text-xs font-bold text-slate-800 uppercase tracking-wider">
+                      {t("Positionen & WTA-Leistungsverzeichnis", "Line Items & WTA Specifications")}
+                    </h4>
+                    <p className="text-[11px] text-slate-500">
+                      {t("Alle Werte sind direkt editierbar und berechnen die Summen in Echtzeit.", "All values are directly editable and calculate totals in real time.")}
+                    </p>
+                  </div>
+
+                  {/* Template Insert Dropdown */}
+                  <div className="flex items-center gap-2">
+                    <select
+                      aria-label={t("WTA-Vorlage einfügen", "Insert WTA template")}
+                      defaultValue=""
+                      onChange={(e) => {
+                        const idx = Number(e.target.value);
+                        if (!isNaN(idx) && WTA_TEMPLATES[idx]) {
+                          addTemplateLine(WTA_TEMPLATES[idx]);
+                          e.target.value = "";
+                        }
+                      }}
+                      className="text-xs font-bold text-emerald-800 bg-emerald-50 border border-emerald-300 rounded-xl px-3 py-2 min-h-[38px]"
+                    >
+                      <option value="" disabled>
+                        ⚡ {t("+ WTA-Vorlage einfügen...", "+ Insert WTA Template...")}
+                      </option>
+                      {WTA_TEMPLATES.map((tpl, i) => (
+                        <option key={i} value={i}>
+                          {isEn ? tpl.pos_en : tpl.pos_de} ({eur(tpl.price)})
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+
+                {/* Table of Lines */}
+                <div className="space-y-3">
+                  {curDoc.lines.map((l, idx) => (
+                    <div
+                      key={idx}
+                      className="bg-slate-50 border border-slate-200 rounded-xl p-3 sm:p-4 space-y-2.5 transition-all hover:border-slate-300"
+                    >
+                      <div className="grid grid-cols-1 sm:grid-cols-12 gap-2 items-start">
+                        {/* Title & Spec */}
+                        <div className="sm:col-span-6 space-y-1.5">
+                          <input
+                            type="text"
+                            value={l.pos}
+                            onChange={(e) => updateLine(idx, { pos: e.target.value })}
+                            placeholder={t("Leistungsbezeichnung", "Service Title")}
+                            className="w-full text-xs font-bold text-slate-900 px-2.5 py-1.5 rounded-lg border border-slate-300 bg-white min-h-[38px]"
+                          />
+                          <input
+                            type="text"
+                            value={l.basis}
+                            onChange={(e) => updateLine(idx, { basis: e.target.value })}
+                            placeholder={t("Technische Ausführungsgrundlage", "Technical specification / notes")}
+                            className="w-full text-[11px] text-slate-600 px-2.5 py-1 rounded-lg border border-slate-200 bg-white"
+                          />
+                        </div>
+
+                        {/* Quantity & Unit */}
+                        <div className="sm:col-span-2 flex items-center gap-1">
+                          <input
+                            type="number"
+                            min={0.1}
+                            step={1}
+                            value={l.qty}
+                            onChange={(e) => updateLine(idx, { qty: Number(e.target.value) || 1 })}
+                            className="w-16 min-h-[38px] px-2 py-1 rounded-lg border border-slate-300 bg-white text-right text-xs font-bold text-slate-900"
+                          />
+                          <select
+                            value={l.unit}
+                            onChange={(e) => updateLine(idx, { unit: e.target.value })}
+                            className="min-h-[38px] text-[11px] font-semibold px-1.5 py-1 rounded-lg border border-slate-200 bg-white text-slate-700"
+                          >
+                            <option value="lfm">lfm</option>
+                            <option value="m²">m²</option>
+                            <option value="Stk.">Stk.</option>
+                            <option value="Std.">Std.</option>
+                            <option value="Pausch.">Pausch.</option>
+                            <option value="Tage">Tage</option>
+                            <option value="kg">kg</option>
+                          </select>
+                        </div>
+
+                        {/* Unit Price */}
+                        <div className="sm:col-span-2 flex items-center gap-1">
+                          <input
+                            type="number"
+                            min={0}
+                            step={0.5}
+                            value={l.price}
+                            onChange={(e) => updateLine(idx, { price: Number(e.target.value) || 0 })}
+                            className="w-full min-h-[38px] px-2 py-1 rounded-lg border border-slate-300 bg-white text-right text-xs font-bold text-slate-900"
+                          />
+                          <span className="text-xs text-slate-400 font-bold">€</span>
+                        </div>
+
+                        {/* Line Total & Actions */}
+                        <div className="sm:col-span-2 flex items-center justify-between sm:justify-end gap-2 pt-1 sm:pt-0">
+                          <span className="text-xs font-extrabold text-slate-900 sm:text-right">
+                            {eur(l.qty * l.price)}
+                          </span>
+                          <div className="flex items-center gap-1">
+                            <button
+                              type="button"
+                              onClick={() => duplicateLine(idx)}
+                              title={t("Position duplizieren", "Duplicate line")}
+                              className="min-h-[36px] min-w-[36px] inline-flex items-center justify-center text-slate-400 hover:text-slate-700 rounded-lg hover:bg-slate-200/50"
+                            >
+                              <Copy className="w-3.5 h-3.5" />
+                            </button>
+                            <button
+                              type="button"
+                              onClick={() => removeLine(idx)}
+                              title={t("Position löschen", "Delete line")}
+                              className="min-h-[36px] min-w-[36px] inline-flex items-center justify-center text-slate-400 hover:text-rose-600 rounded-lg hover:bg-rose-50"
+                            >
+                              <Trash2 className="w-3.5 h-3.5" />
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* § 35a Craft Labor Flag */}
+                      <div className="flex items-center gap-2 pt-1 border-t border-slate-200/50 text-[11px] text-slate-600">
+                        <label className="flex items-center gap-1.5 cursor-pointer">
+                          <input
+                            type="checkbox"
+                            checked={l.labour}
+                            onChange={(e) => updateLine(idx, { labour: e.target.checked })}
+                            className="rounded text-emerald-600 focus:ring-emerald-500 w-3.5 h-3.5"
+                          />
+                          <span className="font-semibold text-slate-700">
+                            {t("Handwerkerleistung nach § 35a EStG (steuerlich absetzbar für Kunden)", "§ 35a EStG Craft Labor (Tax-deductible for client)")}
+                          </span>
+                        </label>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                <button
+                  type="button"
+                  onClick={addBlankLine}
+                  className="w-full min-h-[42px] border-2 border-dashed border-slate-200 hover:border-emerald-500 text-slate-600 hover:text-emerald-700 rounded-xl text-xs font-bold inline-flex items-center justify-center gap-2 transition-colors"
+                >
+                  <Plus className="w-4 h-4" />
+                  <span>{t("+ Freie Position hinzufügen", "+ Add Custom Line Item")}</span>
+                </button>
+              </div>
+            </div>
+
+            {/* Right 4 Cols: ACCA & BILLDU STYLE CHARTS & FINANCIAL SUMMARY */}
+            <div className="lg:col-span-4 space-y-4">
+              {/* Cost Category Distribution Chart (ACCA Style) */}
+              <div className="bg-white rounded-2xl p-4 sm:p-5 border border-slate-200 shadow-sm space-y-3">
+                <div className="flex items-center justify-between">
+                  <h4 className="text-xs font-extrabold text-slate-900 uppercase tracking-wider flex items-center gap-1.5">
+                    <BarChart3 className="w-4 h-4 text-emerald-700" />
+                    <span>{t("Kostenstruktur & Verteilung", "Cost Breakdown & Ratio")}</span>
+                  </h4>
+                  <span className="text-[11px] font-bold text-slate-400">
+                    § 35a EStG
+                  </span>
+                </div>
+
+                {/* Progress Bar Chart */}
+                <div className="space-y-1.5">
+                  <div className="w-full h-3 bg-slate-100 rounded-full overflow-hidden flex shadow-inner">
+                    <div
+                      style={{ width: `${docTotals.labourPct}%` }}
+                      className="bg-emerald-600 h-full transition-all"
+                      title={`Lohn: ${docTotals.labourPct}%`}
+                    />
+                    <div
+                      style={{ width: `${docTotals.materialPct}%` }}
+                      className="bg-sky-500 h-full transition-all"
+                      title={`Material: ${docTotals.materialPct}%`}
+                    />
+                  </div>
+                  <div className="flex justify-between text-[11px] font-semibold text-slate-600 pt-0.5">
+                    <span className="flex items-center gap-1">
+                      <span className="w-2 h-2 rounded-full bg-emerald-600" />
+                      {t("Lohn:", "Labor:")} {docTotals.labourPct}% ({eur(docTotals.labourNet)})
+                    </span>
+                    <span className="flex items-center gap-1">
+                      <span className="w-2 h-2 rounded-full bg-sky-500" />
+                      {t("Material:", "Material:")} {docTotals.materialPct}% ({eur(docTotals.materialNet)})
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Date & Payment Terms Timeline (Billdu Style) */}
+              <div className="bg-white rounded-2xl p-4 sm:p-5 border border-slate-200 shadow-sm space-y-3">
+                <div className="flex items-center justify-between">
+                  <h4 className="text-xs font-extrabold text-slate-900 uppercase tracking-wider flex items-center gap-1.5">
+                    <Clock className="w-4 h-4 text-sky-700" />
+                    <span>{t("Zahlungsziel & Fälligkeit", "Payment Terms & Timeline")}</span>
+                  </h4>
+                  {(() => {
+                    const st = getDocDateStatus(curDoc);
+                    return (
+                      <span className={`text-[10px] px-2 py-0.5 rounded-full border ${st.color}`}>
+                        {st.label}
+                      </span>
+                    );
+                  })()}
+                </div>
+
+                <div className="grid grid-cols-2 gap-2 text-xs bg-slate-50 p-2.5 rounded-xl border border-slate-100">
+                  <div>
+                    <span className="text-slate-400 block text-[10px]">{t("Ausgestellt am:", "Issued on:")}</span>
+                    <strong className="text-slate-800">{curDoc.date}</strong>
+                  </div>
+                  <div>
+                    <span className="text-slate-400 block text-[10px]">{t("Fällig bis:", "Due by:")}</span>
+                    <strong className="text-slate-800">{curDoc.dueOrValid}</strong>
+                  </div>
+                </div>
+
+                {/* Skonto Bonus Card */}
+                {curDoc.skontoPct && curDoc.skontoPct > 0 ? (
+                  <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-3 text-xs space-y-1 text-emerald-900">
+                    <div className="font-bold flex items-center justify-between">
+                      <span>{curDoc.skontoPct} % {t("Skonto-Ersparnis:", "Early Payment Discount:")}</span>
+                      <strong className="text-emerald-700">−{eur(docTotals.skontoAmount)}</strong>
+                    </div>
+                    <div className="text-[11px] text-emerald-700">
+                      {t("Zahlbetrag bei Überweisung binnen 7 Tagen:", "Payable within 7 days:")}{" "}
+                      <strong>{eur(docTotals.gross - docTotals.skontoAmount)}</strong>
+                    </div>
+                  </div>
+                ) : null}
+              </div>
+
+              {/* GoBD Totals & Tax Deduction Box */}
+              <div className="bg-white rounded-2xl p-4 sm:p-5 border border-slate-200 shadow-sm space-y-3 text-xs">
+                <h4 className="text-sm font-extrabold text-slate-900 border-b border-slate-100 pb-2">
+                  {t("GoBD-Gesamtsummen", "GoBD Accounting Totals")}
+                </h4>
+                <div className="flex justify-between py-1 border-b border-slate-100">
+                  <span className="text-slate-600">{t("Nettobetrag:", "Net Total:")}</span>
+                  <span className="font-bold">{eur(docTotals.net)}</span>
+                </div>
+                <div className="flex justify-between py-1 border-b border-slate-100">
+                  <span className="text-slate-600">{t(`Umsatzsteuer (${curDoc.vatRate} %):`, `VAT (${curDoc.vatRate} %):`)}</span>
+                  <span className="font-bold">{eur(docTotals.vat)}</span>
+                </div>
+                <div className="flex justify-between py-2 border-b-2 border-slate-900 text-base font-extrabold text-slate-900">
+                  <span>{t("Gesamtbetrag (Brutto):", "Gross Total:")}</span>
+                  <span>{eur(docTotals.gross)}</span>
+                </div>
+
+                {/* § 35a Handwerker-Bonus */}
+                <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-3 space-y-1.5">
+                  <div className="font-bold text-slate-900">
+                    {t("§ 35a EStG Handwerkerleistung (Lohnanteil):", "§ 35a EStG Craft Labor Bonus (Tax-Deductible):")}
+                  </div>
+                  <div className="flex justify-between text-slate-700">
+                    <span>{t("Ausgewiesener Arbeitsanteil:", "Eligible Labor Share:")}</span>
+                    <strong>{eur(docTotals.labourGross)}</strong>
+                  </div>
+                  <div className="flex justify-between text-emerald-800">
+                    <span>{t("20 % direkte Steuerersparnis:", "20 % Direct Tax Savings:")}</span>
+                    <strong className="text-emerald-700 font-extrabold">−{eur(docTotals.taxBonus20)}</strong>
+                  </div>
+                </div>
+
+                {/* 1-Click Convert or Print Buttons */}
+                <div className="space-y-2 pt-2">
+                  {curDoc.type === "offer" && (
+                    <button
+                      type="button"
+                      onClick={() => convertOfferToInvoice(curDoc)}
+                      className="w-full min-h-[46px] bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold py-3 px-4 rounded-xl flex items-center justify-center gap-2 shadow-sm transition-colors text-xs sm:text-sm"
+                    >
+                      <Sparkles className="w-4 h-4" />
+                      <span>{t("⚡ In Rechnung umwandeln", "⚡ Convert to Invoice")}</span>
+                    </button>
+                  )}
+
+                  <button
+                    type="button"
+                    onClick={() => setPreviewDoc(curDoc)}
+                    className="w-full min-h-[46px] bg-[#0f2537] hover:bg-slate-800 text-white font-bold py-3 px-4 rounded-xl flex items-center justify-center gap-2 transition-colors text-xs"
+                  >
+                    <Printer className="w-4 h-4 shrink-0" />
+                    <span>{t("Offizielles PDF drucken / ansehen", "Print / Preview Official PDF")}</span>
+                  </button>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       )}

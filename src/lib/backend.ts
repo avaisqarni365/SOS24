@@ -88,6 +88,10 @@ export interface WorkspaceGoBDDoc {
   discountPct: number;
   driveFolder: string;
   lines: QuoteLineItem[];
+  refOfferNr?: string;
+  paymentTermsDays?: number;
+  skontoPct?: number;
+  skontoDays?: number;
 }
 
 export interface WorkspaceAppointment {
