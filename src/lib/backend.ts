@@ -13,7 +13,7 @@ export const NOTIFY_EMAIL_DEFAULT = 'simplypizza2020@gmail.com';
 export const WORKSPACE_STORAGE_KEY = 'sos_abdichtung_workspace_v2';
 
 export interface EncodedPhoto {
-  type: 'image/jpeg' | 'image/png' | 'image/webp';
+  type: 'image/jpeg' | 'image/png' | 'image/webp' | 'application/pdf' | string;
   data: string; // base64 payload without data URI prefix
   name?: string;
   uploadedAt?: string;
@@ -24,6 +24,7 @@ export interface StoredDrivePhoto {
   dataUrl: string;
   uploadedAt: string;
   driveFolder: string;
+  fileType?: 'image' | 'pdf' | 'document';
 }
 
 export interface QuoteLineItem {
@@ -485,6 +486,31 @@ export async function resizeImageToBase64(file: File, maxDim = 1200): Promise<En
   });
 }
 
+/**
+ * Encodes either an image (compressed via canvas) or a PDF / document into base64
+ */
+export async function processFileForUpload(file: File, maxDim = 1200): Promise<EncodedPhoto> {
+  const isPdf = file.type === 'application/pdf' || file.name.toLowerCase().endsWith('.pdf');
+  if (isPdf) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.onerror = () => reject(new Error('Dokument konnte nicht gelesen werden.'));
+      reader.onload = () => {
+        const fullDataUrl = String(reader.result);
+        const base64 = fullDataUrl.replace(/^data:[^;]+;base64,/, '');
+        resolve({
+          type: 'application/pdf',
+          data: base64,
+          name: file.name,
+          uploadedAt: new Date().toLocaleString('de-DE'),
+        });
+      };
+      reader.readAsDataURL(file);
+    });
+  }
+  return resizeImageToBase64(file, maxDim);
+}
+
 async function postToGas<T = Record<string, unknown>>(payload: Record<string, unknown>): Promise<T> {
   const res = await fetch(GAS_API_URL, {
     method: 'POST',
@@ -651,12 +677,16 @@ export async function uploadDamagePhotosToDrive(params: {
 }): Promise<{ ok: boolean; n?: number; driveUrl?: string; error?: string }> {
   const nowStr = new Date().toLocaleString('de-DE');
   const folder = `SOS Abdichtung - Schadensfotos / ${params.id}`;
-  const newPhotos: StoredDrivePhoto[] = params.images.map((im, idx) => ({
-    name: im.name || `${params.id}_Schadensfoto_${idx + 1}.jpg`,
-    dataUrl: im.data.startsWith('data:') ? im.data : `data:${im.type};base64,${im.data}`,
-    uploadedAt: im.uploadedAt || nowStr,
-    driveFolder: folder,
-  }));
+  const newPhotos: StoredDrivePhoto[] = params.images.map((im, idx) => {
+    const isPdf = im.type === 'application/pdf' || (im.name && im.name.toLowerCase().endsWith('.pdf'));
+    return {
+      name: im.name || `${params.id}_Datei_${idx + 1}.${isPdf ? 'pdf' : 'jpg'}`,
+      dataUrl: im.data.startsWith('data:') ? im.data : `data:${im.type};base64,${im.data}`,
+      uploadedAt: im.uploadedAt || nowStr,
+      driveFolder: folder,
+      fileType: isPdf ? 'pdf' : 'image',
+    };
+  });
 
   // Persist into Workspace store so Admin sees uploaded photos immediately
   const store = getWorkspaceStore();

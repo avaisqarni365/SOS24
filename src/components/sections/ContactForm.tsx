@@ -15,6 +15,7 @@ import {
   Camera,
   X,
   FileSignature,
+  FileText,
   Loader2,
   FolderOpen,
 } from 'lucide-react';
@@ -24,6 +25,7 @@ import {
   uploadDamagePhotosToDrive,
   signContractDigitally,
   resizeImageToBase64,
+  processFileForUpload,
   NOTIFY_EMAIL_DEFAULT,
   type EncodedPhoto,
 } from '@/lib/backend';
@@ -44,8 +46,12 @@ export default function ContactForm({ compact = false, defaultDamage, place }: C
   const [uploadToken, setUploadToken] = useState<string>('');
   const [photoUploading, setPhotoUploading] = useState(false);
   const [photosUploadedCount, setPhotosUploadedCount] = useState(0);
-  const [uploadedPreviews, setUploadedPreviews] = useState<{ name: string; url: string }[]>([]);
-  const [selectedPhotos, setSelectedPhotos] = useState<{ file: File; preview: string }[]>([]);
+  const [uploadedPreviews, setUploadedPreviews] = useState<
+    { name: string; url: string; isPdf?: boolean }[]
+  >([]);
+  const [selectedPhotos, setSelectedPhotos] = useState<
+    { file: File; preview: string; isPdf?: boolean }[]
+  >([]);
   const [photoError, setPhotoError] = useState<string>('');
   const mountedAtRef = useRef<number>(Date.now());
 
@@ -97,14 +103,18 @@ export default function ContactForm({ compact = false, defaultDamage, place }: C
     setPhotoError('');
     const files = Array.from(e.target.files || []);
     if (!files.length) return;
-    const validFiles = files.filter((f) => f.type.startsWith('image/'));
+    const isImg = (f: File) => f.type.startsWith('image/');
+    const isDoc = (f: File) =>
+      f.type === 'application/pdf' || f.name.toLowerCase().endsWith('.pdf');
+    const validFiles = files.filter((f) => isImg(f) || isDoc(f));
     if (validFiles.length === 0) {
-      setPhotoError('Bitte wählen Sie Bilddateien (JPG, PNG, WEBP) aus.');
+      setPhotoError('Bitte wählen Sie Bilddateien (JPG, PNG, WEBP) oder PDF-Dokumente aus.');
       return;
     }
     const next = validFiles.slice(0, 6 - selectedPhotos.length).map((file) => ({
       file,
-      preview: URL.createObjectURL(file),
+      isPdf: isDoc(file),
+      preview: isImg(file) ? URL.createObjectURL(file) : '',
     }));
     setSelectedPhotos((prev) => [...prev, ...next].slice(0, 6));
     e.target.value = '';
@@ -131,20 +141,21 @@ export default function ContactForm({ compact = false, defaultDamage, place }: C
   const uploadPhotosForLead = async (
     targetLeadId: string,
     targetToken: string,
-    photosToUpload: { file: File; preview: string }[]
+    photosToUpload: { file: File; preview: string; isPdf?: boolean }[]
   ) => {
     if (photosToUpload.length === 0) return;
     setPhotoUploading(true);
     try {
       const encoded: EncodedPhoto[] = [];
-      const previews: { name: string; url: string }[] = [];
+      const previews: { name: string; url: string; isPdf?: boolean }[] = [];
       for (const item of photosToUpload) {
         try {
-          const enc = await resizeImageToBase64(item.file);
+          const enc = await processFileForUpload(item.file);
           encoded.push(enc);
           previews.push({
             name: item.file.name,
-            url: `data:${enc.type};base64,${enc.data}`,
+            url: item.isPdf ? '' : `data:${enc.type};base64,${enc.data}`,
+            isPdf: item.isPdf,
           });
         } catch {
           // ignore single decode error
@@ -563,15 +574,24 @@ export default function ContactForm({ compact = false, defaultDamage, place }: C
                       {uploadedPreviews.map((up, i) => (
                         <div
                           key={i}
-                          className="w-16 h-16 rounded-lg overflow-hidden border border-emerald-300 bg-white"
+                          className="w-16 h-16 rounded-lg overflow-hidden border border-emerald-300 bg-white flex flex-col items-center justify-center p-1"
                           title={up.name}
                         >
-                          {/* eslint-disable-next-line @next/next/no-img-element */}
-                          <img
-                            src={up.url}
-                            alt={up.name}
-                            className="w-full h-full object-cover"
-                          />
+                          {up.isPdf ? (
+                            <div className="flex flex-col items-center justify-center text-center">
+                              <FileText className="w-6 h-6 text-red-600" />
+                              <span className="text-[8px] font-bold text-slate-800 truncate max-w-[56px]">
+                                {up.name}
+                              </span>
+                            </div>
+                          ) : (
+                            /* eslint-disable-next-line @next/next/no-img-element */
+                            <img
+                              src={up.url}
+                              alt={up.name}
+                              className="w-full h-full object-cover"
+                            />
+                          )}
                         </div>
                       ))}
                     </div>
@@ -839,10 +859,10 @@ export default function ContactForm({ compact = false, defaultDamage, place }: C
                       <Camera className="w-5 h-5 text-emerald-700 shrink-0 mt-0.5" />
                       <div>
                         <span className="text-sm font-bold text-slate-900 block">
-                          Schadensfotos beifügen (optional, bis zu 6 Bilder)
+                          Schadensfotos &amp; Dokumente beifügen (optional, bis zu 6 Dateien)
                         </span>
                         <span className="text-xs text-slate-600 block mt-0.5">
-                          Direkt vom Smartphone aufnehmen oder auswählen – wird automatisch im{' '}
+                          Direkt vom Smartphone aufnehmen oder auswählen (Fotos, PDF-Pläne, Gutachten) – wird automatisch im{' '}
                           <strong>Google Drive ({NOTIFY_EMAIL_DEFAULT})</strong> und im{' '}
                           <strong>Admin-Dashboard</strong> gespeichert.
                         </span>
@@ -853,12 +873,12 @@ export default function ContactForm({ compact = false, defaultDamage, place }: C
                       className="min-h-[44px] inline-flex items-center justify-center gap-1.5 text-xs font-bold bg-emerald-700 hover:bg-emerald-800 text-white px-4 py-2.5 rounded-xl cursor-pointer transition-colors shrink-0"
                     >
                       <Camera className="w-4 h-4" />
-                      <span>Fotos auswählen ({selectedPhotos.length}/6)</span>
+                      <span>Fotos / PDFs ({selectedPhotos.length}/6)</span>
                     </label>
                     <input
                       id="contact-photos"
                       type="file"
-                      accept="image/*"
+                      accept="image/*,application/pdf,.pdf"
                       multiple
                       onChange={handlePhotoSelect}
                       className="hidden"
@@ -872,24 +892,33 @@ export default function ContactForm({ compact = false, defaultDamage, place }: C
                   {selectedPhotos.length > 0 && (
                     <div className="mt-3 pt-3 border-t border-emerald-200/80 space-y-2">
                       <div className="text-xs font-bold text-emerald-900">
-                        ✓ {selectedPhotos.length} Foto(s) bereit zum Cloud-Upload:
+                        ✓ {selectedPhotos.length} Datei(en) bereit zum Cloud-Upload:
                       </div>
                       <div className="flex flex-wrap gap-2.5">
                         {selectedPhotos.map((p, idx) => (
                           <div
                             key={idx}
-                            className="relative w-20 h-20 rounded-xl overflow-hidden border-2 border-emerald-600 bg-white shadow-sm"
+                            className="relative w-20 h-20 rounded-xl overflow-hidden border-2 border-emerald-600 bg-white shadow-sm flex flex-col items-center justify-center p-1 text-center"
                           >
-                            {/* eslint-disable-next-line @next/next/no-img-element */}
-                            <img
-                              src={p.preview}
-                              alt={`Schadensfoto ${idx + 1}`}
-                              className="w-full h-full object-cover"
-                            />
+                            {p.isPdf ? (
+                              <div className="flex flex-col items-center justify-center p-1">
+                                <FileText className="w-7 h-7 text-red-600" />
+                                <span className="text-[9px] font-bold text-slate-800 truncate max-w-[70px]">
+                                  {p.file.name}
+                                </span>
+                              </div>
+                            ) : (
+                              /* eslint-disable-next-line @next/next/no-img-element */
+                              <img
+                                src={p.preview}
+                                alt={`Schadensfoto ${idx + 1}`}
+                                className="w-full h-full object-cover"
+                              />
+                            )}
                             <button
                               type="button"
                               onClick={() => removePhoto(idx)}
-                              aria-label="Foto entfernen"
+                              aria-label="Datei entfernen"
                               className="absolute top-1 right-1 w-6 h-6 rounded-full bg-black/75 text-white flex items-center justify-center"
                             >
                               <X className="w-3.5 h-3.5" />
