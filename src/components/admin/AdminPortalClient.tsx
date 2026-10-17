@@ -1188,7 +1188,7 @@ export default function AdminPortalClient() {
   const LanguageSwitcher = ({ inNav = false }: { inNav?: boolean }) => (
     <div
       className={`inline-flex items-center rounded-xl p-0.5 border ${
-        inNav ? "bg-white/10 border-white/20" : "bg-slate-100 border-slate-300"
+        inNav ? "bg-slate-100 border-slate-200" : "bg-slate-100 border-slate-300"
       }`}
     >
       <button
@@ -1196,11 +1196,9 @@ export default function AdminPortalClient() {
         onClick={() => changeLang("en")}
         className={`px-2.5 py-1 text-xs font-bold rounded-lg transition-colors flex items-center gap-1 ${
           lang === "en"
-            ? inNav
-              ? "bg-emerald-600 text-white shadow-sm"
-              : "bg-[#0f2537] text-white shadow-sm"
+            ? "bg-emerald-700 text-white shadow-sm"
             : inNav
-            ? "text-slate-300 hover:text-white"
+            ? "text-slate-600 hover:text-slate-900"
             : "text-slate-600 hover:text-slate-900"
         }`}
       >
@@ -1212,11 +1210,9 @@ export default function AdminPortalClient() {
         onClick={() => changeLang("de")}
         className={`px-2.5 py-1 text-xs font-bold rounded-lg transition-colors flex items-center gap-1 ${
           lang === "de"
-            ? inNav
-              ? "bg-emerald-600 text-white shadow-sm"
-              : "bg-[#0f2537] text-white shadow-sm"
+            ? "bg-emerald-700 text-white shadow-sm"
             : inNav
-            ? "text-slate-300 hover:text-white"
+            ? "text-slate-600 hover:text-slate-900"
             : "text-slate-600 hover:text-slate-900"
         }`}
       >
@@ -1652,12 +1648,12 @@ export default function AdminPortalClient() {
       )}
 
       {/* Top Admin Navigation Bar */}
-      <div className="bg-[#0f2537] text-white rounded-2xl p-4 sm:p-5 space-y-3.5 shadow-md">
-        <div className="flex flex-wrap items-center justify-between gap-3 border-b border-white/10 pb-3">
+      <div className="bg-white text-slate-900 border border-slate-200 rounded-2xl p-4 sm:p-5 space-y-3.5 shadow-sm">
+        <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-100 pb-3">
           <div className="flex items-center gap-2.5 min-w-0">
-            <span className="w-3 h-3 rounded-full bg-emerald-400 shrink-0" />
-            <span className="font-extrabold tracking-wider uppercase text-xs sm:text-sm truncate">
-              SOS <span className="text-emerald-400">Abdichtung</span> · {t("Admin & Google Cloud", "Admin & Google Cloud Portal")}
+            <span className="w-3 h-3 rounded-full bg-emerald-500 shrink-0" />
+            <span className="font-extrabold tracking-wider uppercase text-xs sm:text-sm text-slate-900 truncate">
+              SOS <span className="text-emerald-700">Abdichtung</span> · {t("Admin & Google Cloud", "Admin & Google Cloud Portal")}
             </span>
           </div>
 
@@ -1667,14 +1663,14 @@ export default function AdminPortalClient() {
               href="https://drive.google.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-emerald-300 hover:text-white underline font-semibold py-1 px-1"
+              className="text-emerald-700 hover:text-emerald-800 underline font-semibold py-1 px-1"
             >
               Google Drive ↗
             </a>
             <button
               type="button"
               onClick={() => setUnlocked(false)}
-              className="min-h-[38px] inline-flex items-center gap-1.5 text-slate-200 hover:text-white bg-white/10 px-3 py-1.5 rounded-xl font-bold"
+              className="min-h-[38px] inline-flex items-center gap-1.5 text-slate-600 hover:text-slate-900 bg-slate-100 hover:bg-slate-200 px-3 py-1.5 rounded-xl font-bold border border-slate-200"
             >
               <LogOut className="w-3.5 h-3.5" />
               <span>{t("Abmelden", "Log Out")}</span>
@@ -1704,8 +1700,8 @@ export default function AdminPortalClient() {
               onClick={() => setTab(k)}
               className={`min-h-[44px] shrink-0 inline-flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-xl text-xs font-bold transition-all ${
                 tab === k
-                  ? "bg-emerald-600 text-white shadow-sm"
-                  : "bg-white/5 text-slate-200 hover:bg-white/15 hover:text-white"
+                  ? "bg-emerald-700 text-white shadow-sm font-extrabold"
+                  : "bg-slate-50 text-slate-700 hover:bg-slate-100 hover:text-slate-900 border border-slate-200/80"
               }`}
             >
               <Icon className="w-4 h-4 shrink-0" />
@@ -2778,25 +2774,25 @@ export default function AdminPortalClient() {
       {tab === "planer" && (
         <div className="space-y-6">
           {/* Interactive Workflow Pipeline Header with Official Logo */}
-          <div className="bg-[#0f2537] text-white rounded-2xl p-4 sm:p-5 shadow-sm border border-slate-700/50">
+          <div className="bg-white text-slate-900 rounded-2xl p-4 sm:p-5 shadow-sm border border-slate-200">
             <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4">
               <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3.5">
-                <div className="bg-white p-2.5 rounded-xl shrink-0 shadow-md flex items-center justify-center">
+                <div className="bg-slate-50 border border-slate-200 p-2.5 rounded-xl shrink-0 shadow-xs flex items-center justify-center">
                   <img src="/logo.svg" alt="SOS-Abdichtung" className="h-7 sm:h-8 w-auto object-contain" />
                 </div>
                 <div>
                   <div className="flex items-center gap-2">
-                    <span className="text-[10px] font-extrabold uppercase tracking-widest text-emerald-400">
+                    <span className="text-[10px] font-extrabold uppercase tracking-widest text-emerald-700">
                       {t("GoBD-Auftragspipeline · Schritt 1 von 3", "GoBD Pipeline · Step 1 of 3")}
                     </span>
-                    <span className="text-[10px] bg-white/10 text-slate-300 px-2 py-0.5 rounded font-bold">
+                    <span className="text-[10px] bg-emerald-50 text-emerald-800 border border-emerald-200 px-2 py-0.5 rounded font-bold">
                       WTA & TÜV
                     </span>
                   </div>
-                  <h3 className="text-base sm:text-lg font-extrabold text-white">
+                  <h3 className="text-base sm:text-lg font-extrabold text-slate-900">
                     {t("Vor-Ort-Aufmaß & Schnellkalkulation", "On-Site Diagnostic Measurement & Quick Estimate")}
                   </h3>
-                  <p className="text-xs text-slate-300 mt-0.5">
+                  <p className="text-xs text-slate-600 mt-0.5">
                     {t(
                       "Erfassen Sie Vor-Ort-Messdaten und überführen Sie diese mit 1 Klick in ein GoBD-Angebot oder direkt in eine Rechnung.",
                       "Capture on-site diagnostic measurements and convert them in 1 click into a GoBD quote or invoice."
@@ -2807,18 +2803,18 @@ export default function AdminPortalClient() {
 
               {/* Pipeline Step Indicators */}
               <div className="flex items-center gap-1.5 sm:gap-2 text-[11px] font-bold overflow-x-auto py-1">
-                <div className="flex items-center gap-1.5 bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 px-3 py-1.5 rounded-xl whitespace-nowrap">
-                  <span className="w-5 h-5 rounded-full bg-emerald-500 text-slate-900 flex items-center justify-center text-[10px] font-extrabold">1</span>
+                <div className="flex items-center gap-1.5 bg-emerald-50 text-emerald-800 border border-emerald-200 px-3 py-1.5 rounded-xl whitespace-nowrap">
+                  <span className="w-5 h-5 rounded-full bg-emerald-700 text-white flex items-center justify-center text-[10px] font-extrabold">1</span>
                   <span>{t("Aufmaß (Aktiv)", "Estimate (Active)")}</span>
                 </div>
-                <ArrowRight className="w-3.5 h-3.5 text-slate-500 shrink-0" />
-                <div className="flex items-center gap-1.5 bg-white/5 text-slate-300 border border-white/10 px-3 py-1.5 rounded-xl whitespace-nowrap">
-                  <span className="w-5 h-5 rounded-full bg-slate-700 text-slate-300 flex items-center justify-center text-[10px] font-bold">2</span>
+                <ArrowRight className="w-3.5 h-3.5 text-slate-400 shrink-0" />
+                <div className="flex items-center gap-1.5 bg-slate-50 text-slate-600 border border-slate-200 px-3 py-1.5 rounded-xl whitespace-nowrap">
+                  <span className="w-5 h-5 rounded-full bg-slate-200 text-slate-700 flex items-center justify-center text-[10px] font-bold">2</span>
                   <span>{t("Angebot (ANG)", "Quote (ANG)")}</span>
                 </div>
-                <ArrowRight className="w-3.5 h-3.5 text-slate-500 shrink-0" />
-                <div className="flex items-center gap-1.5 bg-white/5 text-slate-300 border border-white/10 px-3 py-1.5 rounded-xl whitespace-nowrap">
-                  <span className="w-5 h-5 rounded-full bg-slate-700 text-slate-300 flex items-center justify-center text-[10px] font-bold">3</span>
+                <ArrowRight className="w-3.5 h-3.5 text-slate-400 shrink-0" />
+                <div className="flex items-center gap-1.5 bg-slate-50 text-slate-600 border border-slate-200 px-3 py-1.5 rounded-xl whitespace-nowrap">
+                  <span className="w-5 h-5 rounded-full bg-slate-200 text-slate-700 flex items-center justify-center text-[10px] font-bold">3</span>
                   <span>{t("Rechnung (RE)", "Invoice (RE)")}</span>
                 </div>
               </div>
@@ -3164,9 +3160,9 @@ export default function AdminPortalClient() {
             </div>
 
             {/* Right Summary & 1-Click Pipeline Card */}
-            <div className="lg:col-span-5 bg-[#0f2537] text-white rounded-2xl p-5 sm:p-6 space-y-5 shadow-lg">
+            <div className="lg:col-span-5 bg-white text-slate-900 border border-slate-200 rounded-2xl p-5 sm:p-6 space-y-5 shadow-sm">
               <div>
-                <span className="text-xs font-extrabold uppercase tracking-wider text-emerald-400 block mb-1">
+                <span className="text-xs font-extrabold uppercase tracking-wider text-emerald-700 block mb-1">
                   {t("Kalkulations-Summe", "Live Estimate Total")}
                 </span>
                 {(() => {
@@ -3180,41 +3176,41 @@ export default function AdminPortalClient() {
 
                   return (
                     <div className="space-y-4">
-                      <div className="text-3xl sm:text-4xl font-extrabold tracking-tight">
+                      <div className="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900">
                         {eur(grossSum)}
                       </div>
-                      <div className="text-xs text-slate-300 space-y-1 border-t border-white/10 pt-3">
+                      <div className="text-xs text-slate-600 space-y-1 border-t border-slate-100 pt-3">
                         <div className="flex justify-between">
                           <span>{t("Nettobetrag:", "Net Subtotal:")}</span>
-                          <span className="font-semibold">{eur(netSum)}</span>
+                          <span className="font-semibold text-slate-900">{eur(netSum)}</span>
                         </div>
                         <div className="flex justify-between">
                           <span>{t("Umsatzsteuer (19 %):", "VAT (19 %):")}</span>
-                          <span className="font-semibold">{eur(vatSum)}</span>
+                          <span className="font-semibold text-slate-900">{eur(vatSum)}</span>
                         </div>
                       </div>
 
                       {/* Visual Labour vs Material Ratio */}
-                      <div className="bg-white/5 border border-white/10 rounded-xl p-3 space-y-2">
+                      <div className="bg-slate-50 border border-slate-200 rounded-xl p-3 space-y-2">
                         <div className="flex justify-between text-xs">
-                          <span className="text-emerald-400 font-bold">
+                          <span className="text-emerald-700 font-bold">
                             {t("Lohnanteil § 35a:", "Labor Ratio § 35a:")} {labourPct}%
                           </span>
-                          <span className="text-sky-300 font-semibold">
+                          <span className="text-sky-700 font-semibold">
                             {t("Material:", "Material:")} {100 - labourPct}%
                           </span>
                         </div>
-                        <div className="w-full h-2.5 bg-slate-800 rounded-full overflow-hidden flex">
-                          <div style={{ width: `${labourPct}%` }} className="bg-emerald-500 h-full transition-all" />
-                          <div style={{ width: `${100 - labourPct}%` }} className="bg-sky-400 h-full transition-all" />
+                        <div className="w-full h-2.5 bg-slate-200 rounded-full overflow-hidden flex">
+                          <div style={{ width: `${labourPct}%` }} className="bg-emerald-600 h-full transition-all" />
+                          <div style={{ width: `${100 - labourPct}%` }} className="bg-sky-500 h-full transition-all" />
                         </div>
-                        <div className="flex justify-between text-[11px] text-slate-300 pt-0.5">
+                        <div className="flex justify-between text-[11px] text-slate-600 pt-0.5">
                           <span>{t("Steuerbonus für Kunden:", "Customer Tax Bonus:")}</span>
-                          <strong className="text-emerald-300 font-extrabold">−{eur(taxBonus)}</strong>
+                          <strong className="text-emerald-700 font-extrabold">−{eur(taxBonus)}</strong>
                         </div>
                       </div>
 
-                      <div className="p-3 bg-emerald-950/50 border border-emerald-500/30 rounded-xl text-xs text-emerald-200">
+                      <div className="p-3 bg-emerald-50 border border-emerald-200 rounded-xl text-xs text-emerald-800">
                         <p className="leading-relaxed">
                           {t(
                             "✓ 10 Jahre Systemgarantie auf alle ausgeführten WTA-Leistungen.",
@@ -3475,25 +3471,25 @@ export default function AdminPortalClient() {
               </button>
             </div>
           ) : (
-            <div className="bg-slate-900 text-white p-4 sm:p-5 rounded-2xl shadow-md border border-slate-800 flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div className="bg-white text-slate-900 p-4 sm:p-5 rounded-2xl shadow-sm border border-slate-200 flex flex-col md:flex-row md:items-center justify-between gap-4">
               <div className="space-y-1">
-                <div className="flex items-center gap-2 text-xs font-extrabold uppercase tracking-wider text-sky-400">
-                  <FileCheck className="w-4 h-4 text-sky-400" />
+                <div className="flex items-center gap-2 text-xs font-extrabold uppercase tracking-wider text-sky-700">
+                  <FileCheck className="w-4 h-4 text-sky-700" />
                   <span>{t("GoBD-Schlussrechnung nach § 14 UStG", "Official GoBD Invoice § 14 UStG")}</span>
                 </div>
-                <div className="text-sm font-bold flex items-center gap-2">
+                <div className="text-sm font-bold flex items-center gap-2 text-slate-900">
                   <span>{curDoc.nr} · {curDoc.name}</span>
                   {curDoc.refOfferNr && (
                     <button
                       type="button"
                       onClick={() => setSelectedDocNr(curDoc.refOfferNr!)}
-                      className="text-xs text-emerald-400 hover:underline bg-emerald-950/60 border border-emerald-600/40 px-2 py-0.5 rounded-lg"
+                      className="text-xs text-emerald-700 hover:underline bg-emerald-50 border border-emerald-200 px-2 py-0.5 rounded-lg"
                     >
                       {t("🔗 Aus Angebot", "🔗 From Quote")} {curDoc.refOfferNr}
                     </button>
                   )}
                 </div>
-                <p className="text-xs text-slate-300">
+                <p className="text-xs text-slate-500">
                   {t("Schnellstatus-Aktualisierung:", "Quick status update:")}
                 </p>
               </div>
@@ -3505,8 +3501,8 @@ export default function AdminPortalClient() {
                   onClick={() => setDocStatus(t("Offen", "Open"))}
                   className={`min-h-[36px] px-3 py-1.5 rounded-xl text-xs font-bold border transition-colors ${
                     curDoc.status === t("Offen", "Open")
-                      ? "bg-amber-500 text-white border-amber-500"
-                      : "bg-slate-800 text-slate-300 border-slate-700 hover:bg-slate-700"
+                      ? "bg-amber-500 text-white border-amber-500 shadow-sm"
+                      : "bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100"
                   }`}
                 >
                   {t("Offen", "Open")}
@@ -3516,8 +3512,8 @@ export default function AdminPortalClient() {
                   onClick={() => setDocStatus(t("Bezahlt", "Paid"))}
                   className={`min-h-[36px] px-3 py-1.5 rounded-xl text-xs font-bold border transition-colors ${
                     curDoc.status === t("Bezahlt", "Paid")
-                      ? "bg-emerald-600 text-white border-emerald-600"
-                      : "bg-slate-800 text-slate-300 border-slate-700 hover:bg-slate-700"
+                      ? "bg-emerald-600 text-white border-emerald-600 shadow-sm"
+                      : "bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100"
                   }`}
                 >
                   {t("Bezahlt ✓", "Paid ✓")}
@@ -3527,8 +3523,8 @@ export default function AdminPortalClient() {
                   onClick={() => setDocStatus(t("Überfällig", "Overdue"))}
                   className={`min-h-[36px] px-3 py-1.5 rounded-xl text-xs font-bold border transition-colors ${
                     curDoc.status === t("Überfällig", "Overdue")
-                      ? "bg-rose-600 text-white border-rose-600"
-                      : "bg-slate-800 text-slate-300 border-slate-700 hover:bg-slate-700"
+                      ? "bg-rose-600 text-white border-rose-600 shadow-sm"
+                      : "bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100"
                   }`}
                 >
                   {t("Mahnung / Überfällig", "Overdue")}
@@ -3538,8 +3534,8 @@ export default function AdminPortalClient() {
                   onClick={() => setDocStatus(t("Storniert", "Voided"))}
                   className={`min-h-[36px] px-3 py-1.5 rounded-xl text-xs font-bold border transition-colors ${
                     curDoc.status === t("Storniert", "Voided")
-                      ? "bg-slate-600 text-white border-slate-600"
-                      : "bg-slate-800 text-slate-300 border-slate-700 hover:bg-slate-700"
+                      ? "bg-slate-600 text-white border-slate-600 shadow-sm"
+                      : "bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100"
                   }`}
                 >
                   {t("Storniert", "Voided")}
@@ -3551,13 +3547,13 @@ export default function AdminPortalClient() {
           {docViewMode === "preview" ? (
             /* LIVE DIN 5008 PREVIEW VIEW */
             <div className="space-y-4">
-              <div className="bg-slate-900 text-white p-3.5 sm:p-4 rounded-2xl shadow-sm flex flex-wrap items-center justify-between gap-3 border border-slate-800">
+              <div className="bg-white text-slate-900 p-3.5 sm:p-4 rounded-2xl shadow-sm flex flex-wrap items-center justify-between gap-3 border border-slate-200">
                 <div className="flex items-center gap-2.5 text-xs sm:text-sm font-bold">
-                  <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse" />
+                  <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
                   <span>
                     {t("Live-Belegvorschau (DIN 5008):", "Live Document Preview (DIN 5008):")}
                   </span>
-                  <span className="text-emerald-300 font-extrabold">
+                  <span className="text-emerald-700 font-extrabold">
                     {curDoc.nr} · {curDoc.typeLabel}
                   </span>
                 </div>
@@ -3565,7 +3561,7 @@ export default function AdminPortalClient() {
                   <button
                     type="button"
                     onClick={() => setDocViewMode("editor")}
-                    className="min-h-[38px] px-3.5 py-1.5 bg-white/10 hover:bg-white/20 text-white text-xs font-bold rounded-xl flex items-center gap-1.5 transition-colors"
+                    className="min-h-[38px] px-3.5 py-1.5 bg-slate-100 hover:bg-slate-200 text-slate-800 border border-slate-200 text-xs font-bold rounded-xl flex items-center gap-1.5 transition-colors"
                   >
                     <SlidersHorizontal className="w-3.5 h-3.5" />
                     <span>{t("← Zurück zum Editor", "← Back to Editor")}</span>
@@ -4205,17 +4201,17 @@ export default function AdminPortalClient() {
       {tab === "seo" && (
         <div className="space-y-6">
           {/* Header Card */}
-          <div className="bg-gradient-to-r from-[#0c1d2c] via-[#0f2537] to-slate-900 text-white rounded-2xl p-5 sm:p-6 shadow-md border border-slate-700/60 space-y-4">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-white/10 pb-4">
+          <div className="bg-white text-slate-900 rounded-2xl p-5 sm:p-6 shadow-sm border border-slate-200 space-y-4">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-4">
               <div>
-                <span className="text-xs font-extrabold uppercase tracking-wider text-emerald-400 flex items-center gap-1.5">
-                  <Sparkles className="w-4 h-4 text-emerald-400" />
+                <span className="text-xs font-extrabold uppercase tracking-wider text-emerald-700 flex items-center gap-1.5">
+                  <Sparkles className="w-4 h-4 text-emerald-600" />
                   <span>{t("Google Workspace, SEO & AI Search Engine Hub", "Google Workspace, SEO & AI Search Engine Hub")}</span>
                 </span>
-                <h3 className="text-lg sm:text-2xl font-extrabold text-white mt-1">
+                <h3 className="text-lg sm:text-2xl font-extrabold text-slate-900 mt-1">
                   {t("Google Suche, Gemini AI & GEO-Strategie für sos-abdichtung.de", "Google Search, Gemini AI & GEO Strategy for sos-abdichtung.de")}
                 </h3>
-                <p className="text-xs sm:text-sm text-slate-300 mt-1 max-w-3xl leading-relaxed">
+                <p className="text-xs sm:text-sm text-slate-600 mt-1 max-w-3xl leading-relaxed">
                   {t(
                     "Behalten Sie Ihr tägliches Google-Wachstum im Blick und optimieren Sie Ihre Auffindbarkeit in Google Search, Google Maps, Google Gemini und KI-Suchmaschinen (GEO).",
                     "Monitor day-by-day organic Google growth and optimize visibility across Google Search, Google Maps, Google Gemini, and AI Search Engines (GEO)."
@@ -4223,8 +4219,8 @@ export default function AdminPortalClient() {
                 </p>
               </div>
               <div className="flex flex-wrap items-center gap-2 shrink-0">
-                <span className="text-xs font-bold px-3 py-1.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 flex items-center gap-1.5">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+                <span className="text-xs font-bold px-3 py-1.5 rounded-full bg-emerald-50 text-emerald-800 border border-emerald-200 flex items-center gap-1.5">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-600" />
                   <span>GEO Score: 98/100 (AI-Ready)</span>
                 </span>
               </div>
@@ -4233,37 +4229,37 @@ export default function AdminPortalClient() {
             {/* Google Tools Direct Access Bar */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 pt-1">
               {/* Tool 1: Google Search Console */}
-              <div className="bg-white/5 hover:bg-white/10 border border-white/10 p-4 rounded-xl flex flex-col justify-between space-y-3 transition-colors">
+              <div className="bg-slate-50/80 hover:bg-slate-100/90 border border-slate-200 p-4 rounded-xl flex flex-col justify-between space-y-3 transition-colors shadow-xs">
                 <div>
                   <div className="flex items-center justify-between">
-                    <span className="text-[11px] font-bold uppercase tracking-wider text-sky-400">SEO & Indexierung</span>
-                    <Search className="w-4 h-4 text-sky-400" />
+                    <span className="text-[11px] font-bold uppercase tracking-wider text-sky-700">SEO & Indexierung</span>
+                    <Search className="w-4 h-4 text-sky-600" />
                   </div>
-                  <h4 className="font-extrabold text-white text-sm mt-1">Google Search Console</h4>
-                  <p className="text-[11px] text-slate-300 mt-1">
+                  <h4 className="font-extrabold text-slate-900 text-sm mt-1">Google Search Console</h4>
+                  <p className="text-[11px] text-slate-600 mt-1">
                     {t(
                       "Sitemap-Indexierung, tägliche Klicks, Suchbegriffe und Positionen in NRW.",
                       "Sitemap indexing, daily organic clicks, keywords, and rank tracking."
                     )}
                   </p>
                 </div>
-                <div className="pt-2 border-t border-white/10 space-y-1.5 text-xs">
+                <div className="pt-2 border-t border-slate-200 space-y-1.5 text-xs">
                   <a
                     href="https://search.google.com/test/rich-results?url=https%3A%2F%2Fsos-abdichtung.de%2F"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 font-bold text-emerald-300 hover:text-emerald-200"
+                    className="inline-flex items-center gap-1.5 font-bold text-emerald-700 hover:text-emerald-800"
                     title="Live Googlebot-Prüfung ohne Login"
                   >
                     <span>{t("🚀 Live Googlebot-Test (Sofort) ↗", "🚀 Live Googlebot Test (Instant) ↗")}</span>
                   </a>
-                  <div className="flex flex-col gap-1 text-[11px] text-slate-400 pt-0.5">
+                  <div className="flex flex-col gap-1 text-[11px] text-slate-500 pt-0.5">
                     <div className="flex items-center justify-between">
                       <a
                         href="https://search.google.com/search-console/welcome"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="hover:underline text-sky-300 font-semibold"
+                        className="hover:underline text-sky-700 font-semibold"
                       >
                         {t("+ Property anlegen ↗", "+ Add Property ↗")}
                       </a>
@@ -4271,7 +4267,7 @@ export default function AdminPortalClient() {
                         href="https://search.google.com/search-console/sitemaps"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="hover:underline text-slate-300"
+                        className="hover:underline text-slate-600 hover:text-slate-900"
                       >
                         Sitemap einreichen
                       </a>
@@ -4281,7 +4277,7 @@ export default function AdminPortalClient() {
                         href="https://search.google.com/search-console/inspect?resource_id=https%3A%2F%2Fsos-abdichtung.de%2F&id=https%3A%2F%2Fsos-abdichtung.de%2F"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="hover:underline text-slate-300"
+                        className="hover:underline text-slate-600 hover:text-slate-900"
                         title="URL-Präfix Inspektion (erfordert bestätigte Property)"
                       >
                         GSC-Inspect (Präfix)
@@ -4290,7 +4286,7 @@ export default function AdminPortalClient() {
                         href="https://search.google.com/search-console/inspect?resource_id=sc-domain%3Asos-abdichtung.de&id=https%3A%2F%2Fsos-abdichtung.de%2F"
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="hover:underline text-slate-300"
+                        className="hover:underline text-slate-600 hover:text-slate-900"
                         title="Domain-Property Inspektion"
                       >
                         (Domain)
@@ -4301,56 +4297,56 @@ export default function AdminPortalClient() {
               </div>
 
               {/* Tool 2: Google Business Profile (Maps) */}
-              <div className="bg-white/5 hover:bg-white/10 border border-white/10 p-4 rounded-xl flex flex-col justify-between space-y-3 transition-colors">
+              <div className="bg-slate-50/80 hover:bg-slate-100/90 border border-slate-200 p-4 rounded-xl flex flex-col justify-between space-y-3 transition-colors shadow-xs">
                 <div>
                   <div className="flex items-center justify-between">
-                    <span className="text-[11px] font-bold uppercase tracking-wider text-emerald-400">Local SEO / Maps</span>
-                    <MapPin className="w-4 h-4 text-emerald-400" />
+                    <span className="text-[11px] font-bold uppercase tracking-wider text-emerald-700">Local SEO / Maps</span>
+                    <MapPin className="w-4 h-4 text-emerald-600" />
                   </div>
-                  <h4 className="font-extrabold text-white text-sm mt-1">Google Business Profile</h4>
-                  <p className="text-[11px] text-slate-300 mt-1">
+                  <h4 className="font-extrabold text-slate-900 text-sm mt-1">Google Business Profile</h4>
+                  <p className="text-[11px] text-slate-600 mt-1">
                     {t(
                       "Google Maps 3-Pack für Wuppertal, Anrufe direkt aus Maps & Kundenbewertungen.",
                       "Google Maps 3-Pack for Wuppertal, direct calls & customer reviews."
                     )}
                   </p>
                 </div>
-                <div className="pt-2 border-t border-white/10 space-y-1.5 text-xs">
+                <div className="pt-2 border-t border-slate-200 space-y-1.5 text-xs">
                   <a
                     href="https://business.google.com/de/business-profile/?ppsrc=GPDA2"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 font-bold text-emerald-300 hover:text-emerald-200"
+                    className="inline-flex items-center gap-1.5 font-bold text-emerald-700 hover:text-emerald-800"
                   >
                     <span>{t("Unternehmensprofil öffnen ↗", "Manage Profile ↗")}</span>
                   </a>
-                  <div className="text-[11px] text-emerald-400 font-semibold">
+                  <div className="text-[11px] text-emerald-700 font-semibold">
                     {t("Direktlink mit Setup-Kit ↓", "Direct Link & Setup Kit ↓")}
                   </div>
                 </div>
               </div>
 
               {/* Tool 3: Google Analytics 4 */}
-              <div className="bg-white/5 hover:bg-white/10 border border-white/10 p-4 rounded-xl flex flex-col justify-between space-y-3 transition-colors">
+              <div className="bg-slate-50/80 hover:bg-slate-100/90 border border-slate-200 p-4 rounded-xl flex flex-col justify-between space-y-3 transition-colors shadow-xs">
                 <div>
                   <div className="flex items-center justify-between">
-                    <span className="text-[11px] font-bold uppercase tracking-wider text-amber-400">Analytics & Traffic</span>
-                    <BarChart3 className="w-4 h-4 text-amber-400" />
+                    <span className="text-[11px] font-bold uppercase tracking-wider text-amber-700">Analytics & Traffic</span>
+                    <BarChart3 className="w-4 h-4 text-amber-600" />
                   </div>
-                  <h4 className="font-extrabold text-white text-sm mt-1">Google Analytics 4 (GA4)</h4>
-                  <p className="text-[11px] text-slate-300 mt-1">
+                  <h4 className="font-extrabold text-slate-900 text-sm mt-1">Google Analytics 4 (GA4)</h4>
+                  <p className="text-[11px] text-slate-600 mt-1">
                     {t(
                       "Echtzeit-Besucher aus Wuppertal, Klick auf Telefonnummer & WhatsApp-Absprünge.",
                       "Real-time visitors, phone call clicks, and WhatsApp interactions."
                     )}
                   </p>
                 </div>
-                <div className="pt-2 border-t border-white/10 space-y-1 text-xs">
+                <div className="pt-2 border-t border-slate-200 space-y-1 text-xs">
                   <a
                     href="https://analytics.google.com/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 font-bold text-amber-300 hover:text-amber-200"
+                    className="inline-flex items-center gap-1.5 font-bold text-amber-700 hover:text-amber-800"
                   >
                     <span>{t("GA4 Dashboard öffnen ↗", "Open GA4 ↗")}</span>
                   </a>
@@ -4358,26 +4354,26 @@ export default function AdminPortalClient() {
               </div>
 
               {/* Tool 4: Google Local Services Ads */}
-              <div className="bg-white/5 hover:bg-white/10 border border-white/10 p-4 rounded-xl flex flex-col justify-between space-y-3 transition-colors">
+              <div className="bg-slate-50/80 hover:bg-slate-100/90 border border-slate-200 p-4 rounded-xl flex flex-col justify-between space-y-3 transition-colors shadow-xs">
                 <div>
                   <div className="flex items-center justify-between">
-                    <span className="text-[11px] font-bold uppercase tracking-wider text-purple-400">Marketing & Leads</span>
-                    <Star className="w-4 h-4 text-purple-400" />
+                    <span className="text-[11px] font-bold uppercase tracking-wider text-purple-700">Marketing & Leads</span>
+                    <Star className="w-4 h-4 text-purple-600" />
                   </div>
-                  <h4 className="font-extrabold text-white text-sm mt-1">Google Local Services Ads</h4>
-                  <p className="text-[11px] text-slate-300 mt-1">
+                  <h4 className="font-extrabold text-slate-900 text-sm mt-1">Google Local Services Ads</h4>
+                  <p className="text-[11px] text-slate-600 mt-1">
                     {t(
                       "Pay-per-Lead Handwerker-Anrufe mit offiziellem „Google Geprüft“-Gütesiegel in NRW.",
                       "Pay-per-Lead calls with 'Google Guaranteed' verification badge."
                     )}
                   </p>
                 </div>
-                <div className="pt-2 border-t border-white/10 space-y-1 text-xs">
+                <div className="pt-2 border-t border-slate-200 space-y-1 text-xs">
                   <a
                     href="https://adwords.google.com/localservices"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1.5 font-bold text-purple-300 hover:text-purple-200"
+                    className="inline-flex items-center gap-1.5 font-bold text-purple-700 hover:text-purple-800"
                   >
                     <span>{t("Local Services Ads ↗", "Open LSA ↗")}</span>
                   </a>
@@ -4387,17 +4383,17 @@ export default function AdminPortalClient() {
           </div>
 
           {/* GOOGLE BUSINESS PROFILE (GBP) 1-CLICK SETUP & OPTIMIZATION KIT */}
-          <div className="bg-gradient-to-br from-[#0f2537] via-slate-900 to-[#0a1824] border border-emerald-500/30 rounded-2xl p-5 sm:p-7 text-white space-y-6 shadow-xl">
-            <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-5 border-b border-white/10">
+          <div className="bg-white border border-emerald-200 rounded-2xl p-5 sm:p-7 text-slate-900 space-y-6 shadow-sm">
+            <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-5 border-b border-slate-100">
               <div className="space-y-1.5">
-                <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 text-[11px] font-extrabold tracking-wide uppercase">
-                  <MapPin className="w-3.5 h-3.5 shrink-0 text-emerald-400" />
+                <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-[11px] font-extrabold tracking-wide uppercase">
+                  <MapPin className="w-3.5 h-3.5 shrink-0 text-emerald-600" />
                   <span>{t("Offizielles Google Unternehmensprofil", "Official Google Business Profile")}</span>
                 </div>
-                <h3 className="text-xl sm:text-2xl font-black tracking-tight text-white flex items-center gap-2">
+                <h3 className="text-xl sm:text-2xl font-black tracking-tight text-slate-900 flex items-center gap-2">
                   <span>{t("Google Business Profile Setup & 1-Klick-Stammdaten", "Google Business Profile Setup & 1-Click Master Data")}</span>
                 </h3>
-                <p className="text-xs sm:text-sm text-slate-300 max-w-2xl leading-relaxed">
+                <p className="text-xs sm:text-sm text-slate-600 max-w-2xl leading-relaxed">
                   {t(
                     "Nutzen Sie den offiziellen deutschen Einrichtungslink für sos-abdichtung und kopieren Sie mit einem Klick die für Wuppertal und Bergisches Land suchmaschinenoptimierten Profildaten.",
                     "Use the official German Google Business Profile creation link and copy pre-optimized master data, categories, and descriptions with 1 click."
@@ -4410,7 +4406,7 @@ export default function AdminPortalClient() {
                   href="https://business.google.com/de/business-profile/?ppsrc=GPDA2"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="min-h-[46px] px-5 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-xs sm:text-sm inline-flex items-center justify-center gap-2 shadow-lg hover:shadow-emerald-500/25 transition-all"
+                  className="min-h-[46px] px-5 py-2.5 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white font-black text-xs sm:text-sm inline-flex items-center justify-center gap-2 shadow-sm transition-all"
                 >
                   <ExternalLink className="w-4 h-4 shrink-0" />
                   <span>{t("Google Profil anlegen / öffnen ↗", "Create / Open Profile on Google ↗")}</span>
@@ -4420,28 +4416,28 @@ export default function AdminPortalClient() {
 
             {/* Quick 1-Click Master Data Grid */}
             <div className="space-y-2">
-              <h4 className="text-xs font-bold uppercase tracking-wider text-emerald-400 flex items-center gap-1.5">
-                <Sparkles className="w-3.5 h-3.5" />
+              <h4 className="text-xs font-bold uppercase tracking-wider text-emerald-800 flex items-center gap-1.5">
+                <Sparkles className="w-3.5 h-3.5 text-emerald-600" />
                 <span>{t("1-Klick-Kopierbare Profildaten (Exakt auf Google-Richtlinien abgestimmt)", "1-Click Copy Profile Data (Optimized for Google Guidelines)")}</span>
               </h4>
 
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
                 {/* 1. Name */}
-                <div className="bg-white/5 border border-white/10 rounded-xl p-3.5 flex flex-col justify-between space-y-2.5">
+                <div className="bg-slate-50 border border-slate-200 rounded-xl p-3.5 flex flex-col justify-between space-y-2.5 shadow-xs">
                   <div className="space-y-1">
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">{t("1. Unternehmensname", "1. Business Name")}</span>
-                    <div className="text-xs font-extrabold text-white leading-snug">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-slate-500">{t("1. Unternehmensname", "1. Business Name")}</span>
+                    <div className="text-xs font-extrabold text-slate-900 leading-snug">
                       sos-abdichtung – Kellersanierung & Schimmelbeseitigung Wuppertal
                     </div>
-                    <p className="text-[10px] text-slate-400">{t("Kombiniert Marke mit den zwei stärksten Suchbegriffen & Ort.", "Combines brand name with top local search keywords.")}</p>
+                    <p className="text-[10px] text-slate-500">{t("Kombiniert Marke mit den zwei stärksten Suchbegriffen & Ort.", "Combines brand name with top local search keywords.")}</p>
                   </div>
                   <button
                     type="button"
                     onClick={() => copyToClipboard("sos-abdichtung – Kellersanierung & Schimmelbeseitigung Wuppertal", t("Unternehmensname", "Business Name"), "name")}
                     className={`w-full min-h-[34px] px-3 py-1.5 rounded-lg text-xs font-bold inline-flex items-center justify-center gap-1.5 transition-all ${
                       copiedField === "name"
-                        ? "bg-emerald-500 text-slate-950 font-black"
-                        : "bg-white/10 hover:bg-white/20 text-emerald-300 border border-white/10"
+                        ? "bg-emerald-700 text-white font-black"
+                        : "bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 shadow-xs"
                     }`}
                   >
                     {copiedField === "name" ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
@@ -4450,13 +4446,13 @@ export default function AdminPortalClient() {
                 </div>
 
                 {/* 2. Primary & Secondary Categories */}
-                <div className="bg-white/5 border border-white/10 rounded-xl p-3.5 flex flex-col justify-between space-y-2.5">
+                <div className="bg-slate-50 border border-slate-200 rounded-xl p-3.5 flex flex-col justify-between space-y-2.5 shadow-xs">
                   <div className="space-y-1">
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">{t("2. Kategorien (Branche)", "2. Categories")}</span>
-                    <div className="text-xs font-extrabold text-emerald-300">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-slate-500">{t("2. Kategorien (Branche)", "2. Categories")}</span>
+                    <div className="text-xs font-extrabold text-emerald-800">
                       {t("Primär: Abdichtungsunternehmen", "Primary: Abdichtungsunternehmen (Waterproofing)")}
                     </div>
-                    <div className="text-[11px] text-slate-300">
+                    <div className="text-[11px] text-slate-600">
                       {t("Sekundär: Bautrocknung, Schimmelbeseitigung, Bautenschutz, Bauunternehmen", "Secondary: Bautrocknung, Schimmelbeseitigung, Bautenschutz, Bauunternehmen")}
                     </div>
                   </div>
@@ -4465,8 +4461,8 @@ export default function AdminPortalClient() {
                     onClick={() => copyToClipboard("Abdichtungsunternehmen", t("Hauptkategorie", "Primary Category"), "cat")}
                     className={`w-full min-h-[34px] px-3 py-1.5 rounded-lg text-xs font-bold inline-flex items-center justify-center gap-1.5 transition-all ${
                       copiedField === "cat"
-                        ? "bg-emerald-500 text-slate-950 font-black"
-                        : "bg-white/10 hover:bg-white/20 text-emerald-300 border border-white/10"
+                        ? "bg-emerald-700 text-white font-black"
+                        : "bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 shadow-xs"
                     }`}
                   >
                     {copiedField === "cat" ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
@@ -4475,13 +4471,13 @@ export default function AdminPortalClient() {
                 </div>
 
                 {/* 3. Address & Service Area */}
-                <div className="bg-white/5 border border-white/10 rounded-xl p-3.5 flex flex-col justify-between space-y-2.5">
+                <div className="bg-slate-50 border border-slate-200 rounded-xl p-3.5 flex flex-col justify-between space-y-2.5 shadow-xs">
                   <div className="space-y-1">
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">{t("3. Standort & Einzugsgebiet", "3. Address & Service Area")}</span>
-                    <div className="text-xs font-bold text-white">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-slate-500">{t("3. Standort & Einzugsgebiet", "3. Address & Service Area")}</span>
+                    <div className="text-xs font-bold text-slate-900">
                       {COMPANY_INFO.street}, {COMPANY_INFO.city}
                     </div>
-                    <p className="text-[10px] text-slate-400">
+                    <p className="text-[10px] text-slate-500">
                       {t("Einzugsgebiet: Wuppertal, Solingen, Remscheid, Velbert, Haan, Wermelskirchen, Essen", "Service area: Wuppertal, Solingen, Remscheid, Velbert, Haan, Wermelskirchen, Essen")}
                     </p>
                   </div>
@@ -4490,8 +4486,8 @@ export default function AdminPortalClient() {
                     onClick={() => copyToClipboard("Wuppertal, Solingen, Remscheid, Velbert, Haan, Wermelskirchen, Essen", t("Einzugsgebiete", "Service Areas"), "area")}
                     className={`w-full min-h-[34px] px-3 py-1.5 rounded-lg text-xs font-bold inline-flex items-center justify-center gap-1.5 transition-all ${
                       copiedField === "area"
-                        ? "bg-emerald-500 text-slate-950 font-black"
-                        : "bg-white/10 hover:bg-white/20 text-emerald-300 border border-white/10"
+                        ? "bg-emerald-700 text-white font-black"
+                        : "bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 shadow-xs"
                     }`}
                   >
                     {copiedField === "area" ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
@@ -4500,19 +4496,19 @@ export default function AdminPortalClient() {
                 </div>
 
                 {/* 4. Phone & Website */}
-                <div className="bg-white/5 border border-white/10 rounded-xl p-3.5 flex flex-col justify-between space-y-2.5">
+                <div className="bg-slate-50 border border-slate-200 rounded-xl p-3.5 flex flex-col justify-between space-y-2.5 shadow-xs">
                   <div className="space-y-1">
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">{t("4. Telefon & Website", "4. Phone & Website")}</span>
-                    <div className="text-xs font-bold text-white">{COMPANY_INFO.phoneDisplay}</div>
-                    <div className="text-[11px] text-slate-300">https://sos-abdichtung.de/</div>
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-slate-500">{t("4. Telefon & Website", "4. Phone & Website")}</span>
+                    <div className="text-xs font-bold text-slate-900">{COMPANY_INFO.phoneDisplay}</div>
+                    <div className="text-[11px] text-slate-600">https://sos-abdichtung.de/</div>
                   </div>
                   <button
                     type="button"
                     onClick={() => copyToClipboard("https://sos-abdichtung.de/", t("Website-URL", "Website URL"), "web")}
                     className={`w-full min-h-[34px] px-3 py-1.5 rounded-lg text-xs font-bold inline-flex items-center justify-center gap-1.5 transition-all ${
                       copiedField === "web"
-                        ? "bg-emerald-500 text-slate-950 font-black"
-                        : "bg-white/10 hover:bg-white/20 text-emerald-300 border border-white/10"
+                        ? "bg-emerald-700 text-white font-black"
+                        : "bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 shadow-xs"
                     }`}
                   >
                     {copiedField === "web" ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
@@ -4521,19 +4517,19 @@ export default function AdminPortalClient() {
                 </div>
 
                 {/* 5. Appointment Link */}
-                <div className="bg-white/5 border border-white/10 rounded-xl p-3.5 flex flex-col justify-between space-y-2.5">
+                <div className="bg-slate-50 border border-slate-200 rounded-xl p-3.5 flex flex-col justify-between space-y-2.5 shadow-xs">
                   <div className="space-y-1">
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">{t("5. Termin- / Buchungslink", "5. Appointment Booking URL")}</span>
-                    <div className="text-xs font-bold text-emerald-300">https://sos-abdichtung.de/kontakt/</div>
-                    <p className="text-[10px] text-slate-400">{t("Direkt im Google Profil als 'Termine buchen' hinterlegen.", "Add in Google profile as 'Book appointment' link.")}</p>
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-slate-500">{t("5. Termin- / Buchungslink", "5. Appointment Booking URL")}</span>
+                    <div className="text-xs font-bold text-emerald-800">https://sos-abdichtung.de/kontakt/</div>
+                    <p className="text-[10px] text-slate-500">{t("Direkt im Google Profil als 'Termine buchen' hinterlegen.", "Add in Google profile as 'Book appointment' link.")}</p>
                   </div>
                   <button
                     type="button"
                     onClick={() => copyToClipboard("https://sos-abdichtung.de/kontakt/", t("Terminlink", "Appointment Link"), "applink")}
                     className={`w-full min-h-[34px] px-3 py-1.5 rounded-lg text-xs font-bold inline-flex items-center justify-center gap-1.5 transition-all ${
                       copiedField === "applink"
-                        ? "bg-emerald-500 text-slate-950 font-black"
-                        : "bg-white/10 hover:bg-white/20 text-emerald-300 border border-white/10"
+                        ? "bg-emerald-700 text-white font-black"
+                        : "bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 shadow-xs"
                     }`}
                   >
                     {copiedField === "applink" ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
@@ -4542,19 +4538,19 @@ export default function AdminPortalClient() {
                 </div>
 
                 {/* 6. Business Hours */}
-                <div className="bg-white/5 border border-white/10 rounded-xl p-3.5 flex flex-col justify-between space-y-2.5">
+                <div className="bg-slate-50 border border-slate-200 rounded-xl p-3.5 flex flex-col justify-between space-y-2.5 shadow-xs">
                   <div className="space-y-1">
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">{t("6. Öffnungszeiten", "6. Business Hours")}</span>
-                    <div className="text-xs font-bold text-white">Mo–Fr: 07:00 – 19:00 Uhr</div>
-                    <div className="text-[11px] text-slate-300">Sa: 08:00 – 16:00 Uhr | So: Notdienst</div>
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-slate-500">{t("6. Öffnungszeiten", "6. Business Hours")}</span>
+                    <div className="text-xs font-bold text-slate-900">Mo–Fr: 07:00 – 19:00 Uhr</div>
+                    <div className="text-[11px] text-slate-600">Sa: 08:00 – 16:00 Uhr | So: Notdienst</div>
                   </div>
                   <button
                     type="button"
                     onClick={() => copyToClipboard("Mo-Fr: 07:00-19:00, Sa: 08:00-16:00", t("Öffnungszeiten", "Business Hours"), "hours")}
                     className={`w-full min-h-[34px] px-3 py-1.5 rounded-lg text-xs font-bold inline-flex items-center justify-center gap-1.5 transition-all ${
                       copiedField === "hours"
-                        ? "bg-emerald-500 text-slate-950 font-black"
-                        : "bg-white/10 hover:bg-white/20 text-emerald-300 border border-white/10"
+                        ? "bg-emerald-700 text-white font-black"
+                        : "bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 shadow-xs"
                     }`}
                   >
                     {copiedField === "hours" ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
@@ -4565,14 +4561,14 @@ export default function AdminPortalClient() {
             </div>
 
             {/* Optimized 750-Character Description */}
-            <div className="bg-white/5 border border-white/10 rounded-xl p-4 sm:p-5 space-y-3">
-              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-white/10 pb-2.5">
+            <div className="bg-slate-50 border border-slate-200 rounded-xl p-4 sm:p-5 space-y-3">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-200 pb-2.5">
                 <div>
-                  <h4 className="text-xs sm:text-sm font-extrabold text-white flex items-center gap-2">
-                    <Sparkles className="w-4 h-4 text-emerald-400 shrink-0" />
+                  <h4 className="text-xs sm:text-sm font-extrabold text-slate-900 flex items-center gap-2">
+                    <Sparkles className="w-4 h-4 text-emerald-600 shrink-0" />
                     <span>{t("Google-optimierte Unternehmensbeschreibung (750 Zeichen)", "Google-Optimized Business Description (750 chars)")}</span>
                   </h4>
-                  <p className="text-[11px] text-slate-300 mt-0.5">
+                  <p className="text-[11px] text-slate-600 mt-0.5">
                     {t(
                       "Enthält alle wichtigen Schlüsselbegriffe für Top-Rankings in Google Maps (WTA, SchimmelPeter®, Horizontalsperre, 10 Jahre Garantie).",
                       "Contains core ranking keywords for Google Maps (WTA, SchimmelPeter®, horizontal barrier, 10-year warranty)."
@@ -4580,7 +4576,7 @@ export default function AdminPortalClient() {
                   </p>
                 </div>
                 <div className="flex items-center gap-2 shrink-0">
-                  <span className="text-[11px] font-bold px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">
+                  <span className="text-[11px] font-bold px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 border border-emerald-200">
                     642 / 750 {t("Zeichen", "chars")}
                   </span>
                   <button
@@ -4593,8 +4589,8 @@ export default function AdminPortalClient() {
                     }}
                     className={`min-h-[36px] px-3.5 py-1.5 rounded-lg text-xs font-bold inline-flex items-center gap-1.5 transition-all ${
                       copiedField === "desc"
-                        ? "bg-emerald-500 text-slate-950 font-black"
-                        : "bg-emerald-600 hover:bg-emerald-500 text-slate-950 font-bold"
+                        ? "bg-emerald-700 text-white font-black"
+                        : "bg-emerald-600 hover:bg-emerald-700 text-white font-bold"
                     }`}
                   >
                     {copiedField === "desc" ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
@@ -4603,24 +4599,23 @@ export default function AdminPortalClient() {
                 </div>
               </div>
 
-              <div className="bg-black/30 rounded-lg p-3.5 text-xs text-slate-200 leading-relaxed font-sans border border-white/5">
+              <div className="bg-white rounded-lg p-3.5 text-xs text-slate-700 leading-relaxed font-sans border border-slate-200">
                 {isEn ? (
                   <>
-                    Certified specialist for basement waterproofing, horizontal damp-proof barriers, internal cellar sealing, and professional mold remediation in Wuppertal and the Bergisches Land region. As an official <strong className="text-emerald-300 font-bold">SchimmelPeter® partner</strong> and <strong className="text-emerald-300 font-bold">WTA-certified company</strong>, we deliver lasting masonry drying with a <strong className="text-emerald-300 font-bold">10-year warranty</strong>. We solve rising damp, pressing groundwater, damp basement walls, efflorescence, and mold in residential and commercial properties. Book your free on-site moisture diagnostic and fixed-price quote today.
+                    Certified specialist for basement waterproofing, horizontal damp-proof barriers, internal cellar sealing, and professional mold remediation in Wuppertal and the Bergisches Land region. As an official <strong className="text-emerald-800 font-bold">SchimmelPeter® partner</strong> and <strong className="text-emerald-800 font-bold">WTA-certified company</strong>, we deliver lasting masonry drying with a <strong className="text-emerald-800 font-bold">10-year warranty</strong>. We solve rising damp, pressing groundwater, damp basement walls, efflorescence, and mold in residential and commercial properties. Book your free on-site moisture diagnostic and fixed-price quote today.
                   </>
                 ) : (
                   <>
-                    Zertifizierter Fachbetrieb für Kellersanierung, Horizontalsperre, Kellerinnenabdichtung und professionelle Schimmelbeseitigung in Wuppertal und dem gesamten Bergischen Land. Als <strong className="text-emerald-300 font-bold">SchimmelPeter® Partnerbetrieb</strong> und <strong className="text-emerald-300 font-bold">WTA-zertifizierter Experte</strong> bieten wir nachhaltige Mauerwerkstrockenlegung mit <strong className="text-emerald-300 font-bold">10 Jahren Garantie</strong>. Wir beheben aufsteigende Feuchtigkeit, drückendes Grundwasser, feuchte Kellerwände, Salzausblühungen und Schimmelbefall in Alt- und Neubauten. Nutzen Sie unsere kostenlose Vor-Ort-Feuchtigkeitsmessung und Schadensanalyse mit Festpreisgarantie. Termine flexibel nach Vereinbarung – Ihr Partner für ein trockenes und gesundes Zuhause.
+                    Zertifizierter Fachbetrieb für Kellersanierung, Horizontalsperre, Kellerinnenabdichtung und professionelle Schimmelbeseitigung in Wuppertal und dem gesamten Bergischen Land. Als <strong className="text-emerald-800 font-bold">SchimmelPeter® Partnerbetrieb</strong> und <strong className="text-emerald-800 font-bold">WTA-zertifizierter Experte</strong> bieten wir nachhaltige Mauerwerkstrockenlegung mit <strong className="text-emerald-800 font-bold">10 Jahren Garantie</strong>. Wir beheben aufsteigende Feuchtigkeit, drückendes Grundwasser, feuchte Kellerwände, Salzausblühungen und Schimmelbefall in Alt- und Neubauten. Nutzen Sie unsere kostenlose Vor-Ort-Feuchtigkeitsmessung und Schadensanalyse mit Festpreisgarantie. Termine flexibel nach Vereinbarung – Ihr Partner für ein trockenes und gesundes Zuhause.
                   </>
                 )}
               </div>
             </div>
-
             {/* 6 Pre-Formulated Services for GBP Services Tab */}
             <div className="space-y-2.5">
               <div className="flex items-center justify-between">
-                <h4 className="text-xs font-bold uppercase tracking-wider text-slate-300 flex items-center gap-1.5">
-                  <FileCheck className="w-3.5 h-3.5 text-emerald-400" />
+                <h4 className="text-xs font-bold uppercase tracking-wider text-slate-700 flex items-center gap-1.5">
+                  <FileCheck className="w-3.5 h-3.5 text-emerald-600" />
                   <span>{t("6 Dienstleistungen für den Google-Leistungskatalog (Direkt einfügen)", "6 Services for Google Business Catalog (Ready to Paste)")}</span>
                 </h4>
               </div>
@@ -4670,12 +4665,12 @@ export default function AdminPortalClient() {
                     key: "srv_mess",
                   },
                 ].map((srv) => (
-                  <div key={srv.key} className="bg-white/5 border border-white/10 rounded-xl p-3 flex flex-col justify-between space-y-2">
+                  <div key={srv.key} className="bg-slate-50 border border-slate-200 rounded-xl p-3 flex flex-col justify-between space-y-2 shadow-xs">
                     <div className="space-y-1">
-                      <div className="text-xs font-bold text-white flex items-center justify-between">
+                      <div className="text-xs font-bold text-slate-900 flex items-center justify-between">
                         <span>{isEn ? srv.title_en : srv.title_de}</span>
                       </div>
-                      <p className="text-[11px] text-slate-300 leading-snug">
+                      <p className="text-[11px] text-slate-600 leading-snug">
                         {isEn ? srv.desc_en : srv.desc_de}
                       </p>
                     </div>
@@ -4687,8 +4682,8 @@ export default function AdminPortalClient() {
                       }}
                       className={`w-full min-h-[30px] px-2.5 py-1 rounded-lg text-[11px] font-bold inline-flex items-center justify-center gap-1.5 transition-all ${
                         copiedField === srv.key
-                          ? "bg-emerald-500 text-slate-950 font-black"
-                          : "bg-white/10 hover:bg-white/20 text-slate-200 border border-white/10"
+                          ? "bg-emerald-700 text-white font-black"
+                          : "bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 shadow-xs"
                       }`}
                     >
                       {copiedField === srv.key ? <Check className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
@@ -4700,36 +4695,36 @@ export default function AdminPortalClient() {
             </div>
 
             {/* 5-Step Google Verification & Success Guide */}
-            <div className="bg-slate-950/60 border border-white/10 rounded-xl p-4 sm:p-5 space-y-3">
-              <h4 className="text-xs sm:text-sm font-extrabold text-white flex items-center gap-2">
-                <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+            <div className="bg-emerald-50/70 border border-emerald-200 rounded-xl p-4 sm:p-5 space-y-3">
+              <h4 className="text-xs sm:text-sm font-extrabold text-slate-900 flex items-center gap-2">
+                <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
                 <span>{t("5-Schritte-Erfolgsplan für Platz 1 im Google Maps 3-Pack", "5-Step Success Plan for Rank #1 in Google Maps 3-Pack")}</span>
               </h4>
               <div className="grid grid-cols-1 sm:grid-cols-5 gap-3 text-xs">
-                <div className="p-2.5 rounded-lg bg-white/5 border border-white/5 space-y-1">
-                  <span className="w-5 h-5 rounded-full bg-emerald-500/20 text-emerald-300 font-extrabold text-[11px] flex items-center justify-center">1</span>
-                  <div className="font-bold text-white text-[11px]">{t("Link aufrufen", "Open Link")}</div>
-                  <p className="text-[10px] text-slate-300">{t("Auf 'Google Profil anlegen' klicken & mit Google-Konto anmelden.", "Click setup button and sign in with Google account.")}</p>
+                <div className="p-2.5 rounded-lg bg-white border border-emerald-100 space-y-1 shadow-xs">
+                  <span className="w-5 h-5 rounded-full bg-emerald-100 text-emerald-800 font-extrabold text-[11px] flex items-center justify-center">1</span>
+                  <div className="font-bold text-slate-900 text-[11px]">{t("Link aufrufen", "Open Link")}</div>
+                  <p className="text-[10px] text-slate-600">{t("Auf 'Google Profil anlegen' klicken & mit Google-Konto anmelden.", "Click setup button and sign in with Google account.")}</p>
                 </div>
-                <div className="p-2.5 rounded-lg bg-white/5 border border-white/5 space-y-1">
-                  <span className="w-5 h-5 rounded-full bg-emerald-500/20 text-emerald-300 font-extrabold text-[11px] flex items-center justify-center">2</span>
-                  <div className="font-bold text-white text-[11px]">{t("Daten einfügen", "Paste Data")}</div>
-                  <p className="text-[10px] text-slate-300">{t("Name, Kategorien, Adresse, Zeiten & Beschreibung mit 1 Klick einfügen.", "Paste business name, categories, hours, and description.")}</p>
+                <div className="p-2.5 rounded-lg bg-white border border-emerald-100 space-y-1 shadow-xs">
+                  <span className="w-5 h-5 rounded-full bg-emerald-100 text-emerald-800 font-extrabold text-[11px] flex items-center justify-center">2</span>
+                  <div className="font-bold text-slate-900 text-[11px]">{t("Daten einfügen", "Paste Data")}</div>
+                  <p className="text-[10px] text-slate-600">{t("Name, Kategorien, Adresse, Zeiten & Beschreibung mit 1 Klick einfügen.", "Paste business name, categories, hours, and description.")}</p>
                 </div>
-                <div className="p-2.5 rounded-lg bg-white/5 border border-white/5 space-y-1">
-                  <span className="w-5 h-5 rounded-full bg-emerald-500/20 text-emerald-300 font-extrabold text-[11px] flex items-center justify-center">3</span>
-                  <div className="font-bold text-white text-[11px]">{t("Verifizierung", "Verification")}</div>
-                  <p className="text-[10px] text-slate-300">{t("Verifizierung abschließen (Google SMS, Video oder Postkarte).", "Complete verification via Google SMS, video, or postcard.")}</p>
+                <div className="p-2.5 rounded-lg bg-white border border-emerald-100 space-y-1 shadow-xs">
+                  <span className="w-5 h-5 rounded-full bg-emerald-100 text-emerald-800 font-extrabold text-[11px] flex items-center justify-center">3</span>
+                  <div className="font-bold text-slate-900 text-[11px]">{t("Verifizierung", "Verification")}</div>
+                  <p className="text-[10px] text-slate-600">{t("Verifizierung abschließen (Google SMS, Video oder Postkarte).", "Complete verification via Google SMS, video, or postcard.")}</p>
                 </div>
-                <div className="p-2.5 rounded-lg bg-white/5 border border-white/5 space-y-1">
-                  <span className="w-5 h-5 rounded-full bg-emerald-500/20 text-emerald-300 font-extrabold text-[11px] flex items-center justify-center">4</span>
-                  <div className="font-bold text-white text-[11px]">{t("Fotos hochladen", "Upload Photos")}</div>
-                  <p className="text-[10px] text-slate-300">{t("Firmenfahrzeug, Team, Vorher/Nachher-Sanierungsbilder hochladen.", "Upload branded vehicle, team, and before/after repair photos.")}</p>
+                <div className="p-2.5 rounded-lg bg-white border border-emerald-100 space-y-1 shadow-xs">
+                  <span className="w-5 h-5 rounded-full bg-emerald-100 text-emerald-800 font-extrabold text-[11px] flex items-center justify-center">4</span>
+                  <div className="font-bold text-slate-900 text-[11px]">{t("Fotos hochladen", "Upload Photos")}</div>
+                  <p className="text-[10px] text-slate-600">{t("Firmenfahrzeug, Team, Vorher/Nachher-Sanierungsbilder hochladen.", "Upload branded vehicle, team, and before/after repair photos.")}</p>
                 </div>
-                <div className="p-2.5 rounded-lg bg-white/5 border border-white/5 space-y-1">
-                  <span className="w-5 h-5 rounded-full bg-emerald-500/20 text-emerald-300 font-extrabold text-[11px] flex items-center justify-center">5</span>
-                  <div className="font-bold text-white text-[11px]">{t("Bewertungen", "Get Reviews")}</div>
-                  <p className="text-[10px] text-slate-300">{t("WhatsApp-Bewertungsbooster unten nutzen für die ersten 5-Sterne.", "Use WhatsApp review booster below to collect first 5-star reviews.")}</p>
+                <div className="p-2.5 rounded-lg bg-white border border-emerald-100 space-y-1 shadow-xs">
+                  <span className="w-5 h-5 rounded-full bg-emerald-100 text-emerald-800 font-extrabold text-[11px] flex items-center justify-center">5</span>
+                  <div className="font-bold text-slate-900 text-[11px]">{t("Bewertungen", "Get Reviews")}</div>
+                  <p className="text-[10px] text-slate-600">{t("WhatsApp-Bewertungsbooster unten nutzen für die ersten 5-Sterne.", "Use WhatsApp review booster below to collect first 5-star reviews.")}</p>
                 </div>
               </div>
             </div>
@@ -4754,7 +4749,7 @@ export default function AdminPortalClient() {
                 href="https://search.google.com/search-console/performance/search-result"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="min-h-[38px] text-xs font-bold bg-[#0f2537] hover:bg-slate-800 text-white px-3.5 py-2 rounded-xl inline-flex items-center gap-1.5 shrink-0"
+                className="min-h-[38px] text-xs font-bold bg-slate-900 hover:bg-slate-800 text-white px-3.5 py-2 rounded-xl inline-flex items-center gap-1.5 shrink-0"
               >
                 <span>{t("Live GSC-Leistung prüfen ↗", "Check Live GSC Performance ↗")}</span>
               </a>
@@ -4793,7 +4788,7 @@ export default function AdminPortalClient() {
                     href="https://search.google.com/search-console/welcome"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="min-h-[36px] px-3.5 py-1.5 rounded-lg bg-[#0f2537] hover:bg-slate-800 text-white font-bold text-xs inline-flex items-center gap-1.5"
+                    className="min-h-[36px] px-3.5 py-1.5 rounded-lg bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs inline-flex items-center gap-1.5"
                   >
                     <span>{t("Property bestätigen ↗", "Verify Property ↗")}</span>
                   </a>
@@ -5019,23 +5014,23 @@ export default function AdminPortalClient() {
 
           {/* 5-Star Review Generator & WhatsApp Booster */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-            <div className="lg:col-span-6 bg-gradient-to-br from-emerald-800 to-[#0f2537] text-white rounded-2xl p-5 sm:p-6 space-y-4 shadow-md">
-              <div className="flex items-center gap-2 text-emerald-300 font-bold text-xs uppercase">
-                <Star className="w-4 h-4 shrink-0 fill-amber-400 text-amber-400" />
+            <div className="lg:col-span-6 bg-gradient-to-br from-emerald-50/80 via-teal-50/40 to-white text-slate-900 rounded-2xl p-5 sm:p-6 space-y-4 shadow-sm border border-emerald-200">
+              <div className="flex items-center gap-2 text-emerald-800 font-bold text-xs uppercase">
+                <Star className="w-4 h-4 shrink-0 fill-amber-400 text-amber-500" />
                 <span>{t("Google 5-Sterne Bewertungs-Booster", "Google 5-Star Review Booster")}</span>
               </div>
-              <h3 className="text-xl sm:text-2xl font-extrabold">
+              <h3 className="text-xl sm:text-2xl font-extrabold text-slate-900">
                 {t("Mehr Google-Bewertungen für Wuppertal", "Accelerate 5-Star Google Reviews")}
               </h3>
-              <p className="text-xs sm:text-sm text-slate-200 leading-relaxed">
+              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
                 {t(
                   "Nach einer erfolgreichen Feuchtigkeitsmessung oder Trockenlegung können Sie dem Kunden mit 1 Klick einen freundlichen WhatsApp-Link senden, der direkt zur 5-Sterne-Bewertungsmaske auf Google Maps führt.",
                   "Send customers a pre-crafted WhatsApp review request after a successful moisture inspection or cellar drying with 1 click."
                 )}
               </p>
-              <div className="bg-white/10 rounded-xl p-3.5 text-xs space-y-2 border border-white/10">
-                <div className="font-semibold text-emerald-200">{t("Vorgeschlagener WhatsApp-Text:", "WhatsApp Message Preview:")}</div>
-                <p className="italic text-slate-100">
+              <div className="bg-white rounded-xl p-3.5 text-xs space-y-2 border border-emerald-200 text-slate-800 shadow-xs">
+                <div className="font-semibold text-emerald-800">{t("Vorgeschlagener WhatsApp-Text:", "WhatsApp Message Preview:")}</div>
+                <p className="italic text-slate-700">
                   „Hallo {curLead?.name || "Kunde"}, vielen Dank für Ihr Vertrauen in sos-abdichtung! Waren Sie mit unserer Vor-Ort-Beratung zufrieden? Wir würden uns riesig über eine kurze 5-Sterne-Bewertung auf Google freuen: https://business.google.com/de/business-profile/?ppsrc=GPDA2 Vielen Dank, Shahzad Mahmood“
                 </p>
               </div>
@@ -5047,7 +5042,7 @@ export default function AdminPortalClient() {
                   );
                   window.open(`https://wa.me/${(curLead?.phone || "").replace(/[^0-9]/g, "")}?text=${revText}`, "_blank");
                 }}
-                className="w-full min-h-[46px] bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold text-xs sm:text-sm py-3 px-4 rounded-xl flex items-center justify-center gap-2 transition-colors shadow-sm"
+                className="w-full min-h-[46px] bg-emerald-700 hover:bg-emerald-800 text-white font-extrabold text-xs sm:text-sm py-3 px-4 rounded-xl flex items-center justify-center gap-2 transition-colors shadow-sm"
               >
                 <MessageSquare className="w-4 h-4 shrink-0" />
                 <span>{t("Bewertungslink per WhatsApp an aktuellen Kunden senden", "Send Review Request via WhatsApp to Current Customer")}</span>
