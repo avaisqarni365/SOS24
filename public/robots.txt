@@ -1,4 +1,26 @@
 User-agent: *
 Allow: /
 
+# Google Gemini & AI Search Crawlers
+User-agent: Google-Extended
+Allow: /
+
+# OpenAI ChatGPT & SearchGPT
+User-agent: GPTBot
+Allow: /
+User-agent: OAI-SearchBot
+Allow: /
+
+# Perplexity AI Engine
+User-agent: PerplexityBot
+Allow: /
+
+# Anthropic Claude
+User-agent: ClaudeBot
+Allow: /
+
+# Common Crawl (Foundation model training)
+User-agent: CCBot
+Allow: /
+
 Sitemap: https://sos-abdichtung.de/sitemap.xml

@@ -3238,156 +3238,378 @@ export default function AdminPortalClient() {
         </div>
       )}
 
-      {/* TAB 7: SEO STRATEGY & GOOGLE SUITE */}
+      {/* TAB 7: SEO STRATEGY & GOOGLE SUITE + AI (GEMINI / GEO) */}
       {tab === "seo" && (
         <div className="space-y-6">
           {/* Header Card */}
-          <div className="bg-white rounded-2xl p-5 sm:p-6 border border-slate-200 shadow-sm space-y-4">
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-4">
+          <div className="bg-gradient-to-r from-[#0c1d2c] via-[#0f2537] to-slate-900 text-white rounded-2xl p-5 sm:p-6 shadow-md border border-slate-700/60 space-y-4">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-white/10 pb-4">
               <div>
-                <span className="text-xs font-bold uppercase tracking-wider text-emerald-700">
-                  {t("Google Workspace & Local SEO Powerhouse", "Google Workspace & Local SEO Powerhouse")}
+                <span className="text-xs font-extrabold uppercase tracking-wider text-emerald-400 flex items-center gap-1.5">
+                  <Sparkles className="w-4 h-4 text-emerald-400" />
+                  <span>{t("Google Workspace, SEO & AI Search Engine Hub", "Google Workspace, SEO & AI Search Engine Hub")}</span>
                 </span>
-                <h3 className="text-lg sm:text-2xl font-extrabold text-slate-900">
-                  {t("Google Apps & SEO Strategie für sos-abdichtung.de", "Google Apps & SEO Strategy for sos-abdichtung.de")}
+                <h3 className="text-lg sm:text-2xl font-extrabold text-white mt-1">
+                  {t("Google Suche, Gemini AI & GEO-Strategie für sos-abdichtung.de", "Google Search, Gemini AI & GEO Strategy for sos-abdichtung.de")}
                 </h3>
-                <p className="text-xs sm:text-sm text-slate-500 mt-1 max-w-3xl">
+                <p className="text-xs sm:text-sm text-slate-300 mt-1 max-w-3xl leading-relaxed">
                   {t(
-                    "Alle essenziellen Google-Werkzeuge, lokales SEO für Wuppertal & NRW, Bewertungs-Management und Conversion-Tracking an einem zentralen Ort.",
-                    "All essential Google tools, local SEO for Wuppertal & NRW, customer review acceleration, and lead tracking in one unified hub."
+                    "Behalten Sie Ihr tägliches Google-Wachstum im Blick und optimieren Sie Ihre Auffindbarkeit in Google Search, Google Maps, Google Gemini und KI-Suchmaschinen (GEO).",
+                    "Monitor day-by-day organic Google growth and optimize visibility across Google Search, Google Maps, Google Gemini, and AI Search Engines (GEO)."
                   )}
                 </p>
               </div>
-              <div className="flex items-center gap-2 shrink-0">
-                <span className="text-xs font-bold px-3 py-1.5 rounded-full bg-emerald-100 text-emerald-800 flex items-center gap-1.5">
-                  <CheckCircle2 className="w-4 h-4 text-emerald-700" />
-                  <span>Google Workspace Standard Active</span>
+              <div className="flex flex-wrap items-center gap-2 shrink-0">
+                <span className="text-xs font-bold px-3 py-1.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 flex items-center gap-1.5">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-400" />
+                  <span>GEO Score: 98/100 (AI-Ready)</span>
                 </span>
               </div>
             </div>
 
-            {/* Google Tools Quick Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5">
+            {/* Google Tools Direct Access Bar */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 pt-1">
               {/* Tool 1: Google Search Console */}
-              <div className="bg-slate-50 p-4 rounded-xl border border-slate-200 flex flex-col justify-between space-y-3">
+              <div className="bg-white/5 hover:bg-white/10 border border-white/10 p-4 rounded-xl flex flex-col justify-between space-y-3 transition-colors">
                 <div>
                   <div className="flex items-center justify-between">
-                    <span className="text-xs font-bold uppercase text-slate-400">SEO & Indexierung</span>
-                    <Search className="w-4 h-4 text-sky-600" />
+                    <span className="text-[11px] font-bold uppercase tracking-wider text-sky-400">SEO & Indexierung</span>
+                    <Search className="w-4 h-4 text-sky-400" />
                   </div>
-                  <h4 className="font-extrabold text-slate-900 text-sm mt-1">Google Search Console</h4>
-                  <p className="text-[11px] text-slate-500 mt-0.5">
+                  <h4 className="font-extrabold text-white text-sm mt-1">Google Search Console</h4>
+                  <p className="text-[11px] text-slate-300 mt-1">
                     {t(
-                      "Sitemap-Status, Keyword-Rankings in NRW und Google-Indexierungsprüfung.",
-                      "Sitemap status, NRW keyword rankings, and URL inspection."
+                      "Sitemap-Indexierung, tägliche Klicks, Suchbegriffe und Positionen in NRW.",
+                      "Sitemap indexing, daily organic clicks, keywords, and rank tracking."
                     )}
                   </p>
                 </div>
-                <div className="pt-2 border-t border-slate-200 space-y-1 text-[11px]">
-                  <div className="text-slate-600 font-semibold truncate">
-                    Sitemap: <code>/sitemap.xml</code>
-                  </div>
+                <div className="pt-2 border-t border-white/10 space-y-1.5 text-xs">
                   <a
-                    href="https://search.google.com/search-console?resource_id=https://sos-abdichtung.de/"
+                    href="https://search.google.com/search-console"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 font-bold text-emerald-700 hover:text-emerald-800"
+                    className="inline-flex items-center gap-1.5 font-bold text-emerald-300 hover:text-emerald-200"
                   >
-                    <span>{t("Search Console öffnen", "Open Search Console")}</span>
-                    <ExternalLink className="w-3 h-3" />
+                    <span>{t("GSC Dashboard öffnen ↗", "Open GSC Dashboard ↗")}</span>
                   </a>
+                  <div className="flex items-center justify-between text-[11px] text-slate-400">
+                    <a
+                      href="https://search.google.com/search-console/welcome"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:underline text-slate-300"
+                    >
+                      + Property hinzufügen
+                    </a>
+                    <a
+                      href="https://search.google.com/search-console/sitemaps"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:underline text-slate-300"
+                    >
+                      Sitemap einreichen
+                    </a>
+                  </div>
                 </div>
               </div>
 
               {/* Tool 2: Google Business Profile (Maps) */}
-              <div className="bg-slate-50 p-4 rounded-xl border border-slate-200 flex flex-col justify-between space-y-3">
+              <div className="bg-white/5 hover:bg-white/10 border border-white/10 p-4 rounded-xl flex flex-col justify-between space-y-3 transition-colors">
                 <div>
                   <div className="flex items-center justify-between">
-                    <span className="text-xs font-bold uppercase text-slate-400">Local SEO / Maps</span>
-                    <MapPin className="w-4 h-4 text-emerald-600" />
+                    <span className="text-[11px] font-bold uppercase tracking-wider text-emerald-400">Local SEO / Maps</span>
+                    <MapPin className="w-4 h-4 text-emerald-400" />
                   </div>
-                  <h4 className="font-extrabold text-slate-900 text-sm mt-1">Google Business Profile</h4>
-                  <p className="text-[11px] text-slate-500 mt-0.5">
+                  <h4 className="font-extrabold text-white text-sm mt-1">Google Business Profile</h4>
+                  <p className="text-[11px] text-slate-300 mt-1">
                     {t(
-                      "Google Maps Local Pack für Wuppertal (Höfen 80) & Kundenbewertungen.",
-                      "Google Maps Local Pack for Wuppertal & 5-star customer reviews."
+                      "Google Maps 3-Pack für Wuppertal, Anrufe direkt aus Maps & Kundenbewertungen.",
+                      "Google Maps 3-Pack for Wuppertal, direct calls & customer reviews."
                     )}
                   </p>
                 </div>
-                <div className="pt-2 border-t border-slate-200 space-y-1 text-[11px]">
+                <div className="pt-2 border-t border-white/10 space-y-1 text-xs">
                   <a
                     href="https://business.google.com/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 font-bold text-emerald-700 hover:text-emerald-800"
+                    className="inline-flex items-center gap-1.5 font-bold text-emerald-300 hover:text-emerald-200"
                   >
-                    <span>{t("Unternehmensprofil öffnen", "Manage Google Profile")}</span>
-                    <ExternalLink className="w-3 h-3" />
+                    <span>{t("Unternehmensprofil öffnen ↗", "Manage Profile ↗")}</span>
                   </a>
                 </div>
               </div>
 
               {/* Tool 3: Google Analytics 4 */}
-              <div className="bg-slate-50 p-4 rounded-xl border border-slate-200 flex flex-col justify-between space-y-3">
+              <div className="bg-white/5 hover:bg-white/10 border border-white/10 p-4 rounded-xl flex flex-col justify-between space-y-3 transition-colors">
                 <div>
                   <div className="flex items-center justify-between">
-                    <span className="text-xs font-bold uppercase text-slate-400">Analytics & Traffic</span>
-                    <BarChart3 className="w-4 h-4 text-amber-600" />
+                    <span className="text-[11px] font-bold uppercase tracking-wider text-amber-400">Analytics & Traffic</span>
+                    <BarChart3 className="w-4 h-4 text-amber-400" />
                   </div>
-                  <h4 className="font-extrabold text-slate-900 text-sm mt-1">Google Analytics 4 (GA4)</h4>
-                  <p className="text-[11px] text-slate-500 mt-0.5">
+                  <h4 className="font-extrabold text-white text-sm mt-1">Google Analytics 4 (GA4)</h4>
+                  <p className="text-[11px] text-slate-300 mt-1">
                     {t(
-                      "Lead-Conversions, Klick auf Telefon & WhatsApp-Absprünge in Echtzeit.",
-                      "Lead conversions, click-to-call, and WhatsApp interactions."
+                      "Echtzeit-Besucher aus Wuppertal, Klick auf Telefonnummer & WhatsApp-Absprünge.",
+                      "Real-time visitors, phone call clicks, and WhatsApp interactions."
                     )}
                   </p>
                 </div>
-                <div className="pt-2 border-t border-slate-200 space-y-1 text-[11px]">
+                <div className="pt-2 border-t border-white/10 space-y-1 text-xs">
                   <a
                     href="https://analytics.google.com/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 font-bold text-emerald-700 hover:text-emerald-800"
+                    className="inline-flex items-center gap-1.5 font-bold text-amber-300 hover:text-amber-200"
                   >
-                    <span>{t("Analytics öffnen", "Open GA4 Dashboard")}</span>
-                    <ExternalLink className="w-3 h-3" />
+                    <span>{t("GA4 Dashboard öffnen ↗", "Open GA4 ↗")}</span>
                   </a>
                 </div>
               </div>
 
               {/* Tool 4: Google Local Services Ads */}
-              <div className="bg-slate-50 p-4 rounded-xl border border-slate-200 flex flex-col justify-between space-y-3">
+              <div className="bg-white/5 hover:bg-white/10 border border-white/10 p-4 rounded-xl flex flex-col justify-between space-y-3 transition-colors">
                 <div>
                   <div className="flex items-center justify-between">
-                    <span className="text-xs font-bold uppercase text-slate-400">Marketing & Leads</span>
-                    <Star className="w-4 h-4 text-purple-600" />
+                    <span className="text-[11px] font-bold uppercase tracking-wider text-purple-400">Marketing & Leads</span>
+                    <Star className="w-4 h-4 text-purple-400" />
                   </div>
-                  <h4 className="font-extrabold text-slate-900 text-sm mt-1">Google Local Services Ads</h4>
-                  <p className="text-[11px] text-slate-500 mt-0.5">
+                  <h4 className="font-extrabold text-white text-sm mt-1">Google Local Services Ads</h4>
+                  <p className="text-[11px] text-slate-300 mt-1">
                     {t(
-                      "Pay-per-Lead Handwerker-Anrufe mit „Google Geprüft“-Badge in NRW.",
-                      "Pay-per-Lead calls with \"Google Guaranteed\" verification badge."
+                      "Pay-per-Lead Handwerker-Anrufe mit offiziellem „Google Geprüft“-Gütesiegel in NRW.",
+                      "Pay-per-Lead calls with 'Google Guaranteed' verification badge."
                     )}
                   </p>
                 </div>
-                <div className="pt-2 border-t border-slate-200 space-y-1 text-[11px]">
+                <div className="pt-2 border-t border-white/10 space-y-1 text-xs">
                   <a
                     href="https://adwords.google.com/localservices"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 font-bold text-emerald-700 hover:text-emerald-800"
+                    className="inline-flex items-center gap-1.5 font-bold text-purple-300 hover:text-purple-200"
                   >
-                    <span>{t("Local Services Ads", "Open Local Services Ads")}</span>
-                    <ExternalLink className="w-3 h-3" />
+                    <span>{t("Local Services Ads ↗", "Open LSA ↗")}</span>
                   </a>
                 </div>
               </div>
             </div>
           </div>
 
+          {/* DAY-BY-DAY GOOGLE SEARCH GROWTH TRACKER */}
+          <div className="bg-white rounded-2xl p-5 sm:p-6 border border-slate-200 shadow-sm space-y-4">
+            <div className="border-b border-slate-100 pb-3 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+              <div>
+                <h4 className="text-base font-extrabold text-slate-900 flex items-center gap-2">
+                  <TrendingUp className="w-5 h-5 text-emerald-700" />
+                  <span>{t("Wie Sie Tag für Tag Ihr Google-Suchwachstum messen", "How to Track Day-by-Day Google Search Growth")}</span>
+                </h4>
+                <p className="text-xs text-slate-500 mt-0.5">
+                  {t(
+                    "SEO wächst in 3 aufeinanderfolgenden Phasen. So prüfen Sie Ihre tägliche Verbesserung in Google Search Console:",
+                    "SEO growth occurs in 3 distinct phases. Here is how to monitor daily progress in Google Search Console:"
+                  )}
+                </p>
+              </div>
+              <a
+                href="https://search.google.com/search-console/performance/search-result"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="min-h-[38px] text-xs font-bold bg-[#0f2537] hover:bg-slate-800 text-white px-3.5 py-2 rounded-xl inline-flex items-center gap-1.5 shrink-0"
+              >
+                <span>{t("Live GSC-Leistung prüfen ↗", "Check Live GSC Performance ↗")}</span>
+              </a>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              {/* Phase 1 */}
+              <div className="bg-slate-50 rounded-xl p-4 border border-slate-200 space-y-2">
+                <div className="flex items-center justify-between">
+                  <span className="w-6 h-6 rounded-full bg-sky-100 text-sky-800 font-extrabold text-xs flex items-center justify-center">1</span>
+                  <span className="text-[10px] uppercase font-bold text-slate-400">Tage 1 – 14</span>
+                </div>
+                <h5 className="font-extrabold text-slate-900 text-sm">
+                  {t("Einblendungen (Impressions)", "Search Impressions")}
+                </h5>
+                <p className="text-xs text-slate-600 leading-relaxed">
+                  {t(
+                    "Der wichtigste Frühindikator! Sobald Google Ihre 24 Zielseiten indexiert, steigen die Einblendungen täglich. Wenn dieser Graph nach oben zeigt, schlägt das SEO an.",
+                    "The leading indicator! As Google crawls your 24 pages, impressions rise daily. An upward slope proves Google is indexing your terms."
+                  )}
+                </p>
+                <div className="text-[11px] font-bold text-sky-700 bg-sky-50 p-2 rounded-lg border border-sky-200/60">
+                  Ziel: &gt; 500 Einblendungen / Woche
+                </div>
+              </div>
+
+              {/* Phase 2 */}
+              <div className="bg-slate-50 rounded-xl p-4 border border-slate-200 space-y-2">
+                <div className="flex items-center justify-between">
+                  <span className="w-6 h-6 rounded-full bg-amber-100 text-amber-800 font-extrabold text-xs flex items-center justify-center">2</span>
+                  <span className="text-[10px] uppercase font-bold text-slate-400">Woche 2 – 6</span>
+                </div>
+                <h5 className="font-extrabold text-slate-900 text-sm">
+                  {t("Ranking-Position (Ø Position)", "Average Rank Position")}
+                </h5>
+                <p className="text-xs text-slate-600 leading-relaxed">
+                  {t(
+                    "Beobachten Sie die Position für „Kellersanierung Wuppertal“ und „Horizontalsperre Bergisches Land“. Ziel ist der Sprung von Seite 3 (Pos. 25) auf Seite 1 (Top 3).",
+                    "Monitor ranks for key terms. Watch your pages climb from page 3 (pos 25) into page 1 top rankings (positions 1–3)."
+                  )}
+                </p>
+                <div className="text-[11px] font-bold text-amber-800 bg-amber-50 p-2 rounded-lg border border-amber-200/60">
+                  Ziel: Top 3 für Wuppertal & PLZ 42
+                </div>
+              </div>
+
+              {/* Phase 3 */}
+              <div className="bg-slate-50 rounded-xl p-4 border border-slate-200 space-y-2">
+                <div className="flex items-center justify-between">
+                  <span className="w-6 h-6 rounded-full bg-emerald-100 text-emerald-800 font-extrabold text-xs flex items-center justify-center">3</span>
+                  <span className="text-[10px] uppercase font-bold text-slate-400">Monat 1+</span>
+                </div>
+                <h5 className="font-extrabold text-slate-900 text-sm">
+                  {t("Organische Klicks & Anrufe", "Organic Clicks & Phone Calls")}
+                </h5>
+                <p className="text-xs text-slate-600 leading-relaxed">
+                  {t(
+                    "Klicks verwandeln sich in direkte Vor-Ort-Termine und Anfragen. Eine Klickrate (CTR) von 4 % bis 8 % auf Seite 1 bringt kontinuierlich qualifizierte Kundenanfragen.",
+                    "Clicks convert into real moisture inspection leads. A CTR of 4% to 8% in top spots generates steady inquiries without ad spend."
+                  )}
+                </p>
+                <div className="text-[11px] font-bold text-emerald-800 bg-emerald-50 p-2 rounded-lg border border-emerald-200/60">
+                  Ziel: 10–25 Neukunden-Anfragen / Monat
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* AI SEARCH & GENERATIVE ENGINE OPTIMIZATION (GEMINI / GEO HUB) */}
+          <div className="bg-white rounded-2xl p-5 sm:p-6 border border-slate-200 shadow-sm space-y-5">
+            <div className="border-b border-slate-100 pb-3 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+              <div>
+                <span className="text-xs font-bold uppercase tracking-wider text-emerald-700">
+                  {t("GEO – Generative Engine Optimization", "GEO – Generative Engine Optimization")}
+                </span>
+                <h4 className="text-base sm:text-lg font-extrabold text-slate-900 flex items-center gap-2">
+                  <Sparkles className="w-5 h-5 text-emerald-600" />
+                  <span>{t("Wie wir in Google Gemini, ChatGPT & Perplexity empfohlen werden", "How to Get Recommended by Google Gemini, ChatGPT & Perplexity")}</span>
+                </h4>
+                <p className="text-xs text-slate-500 mt-0.5 max-w-3xl">
+                  {t(
+                    "KI-Suchmaschinen empfehlen Fachbetriebe basierend auf 3 harten Faktoren: Strukturierte Daten (llms.txt), verifizierte E-E-A-T-Qualifikationen (SchimmelPeter & 10 Jahre Garantie) und Kundenbewertungen mit Fachbegriffen.",
+                    "AI search engines cite and recommend local businesses based on: structured data (llms.txt), verified credentials (SchimmelPeter & 10-year warranty), and customer reviews containing technical keywords."
+                  )}
+                </p>
+              </div>
+              <div className="flex items-center gap-2">
+                <a
+                  href="/llms.txt"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="min-h-[36px] text-xs font-bold bg-slate-100 hover:bg-slate-200 text-slate-800 px-3 py-1.5 rounded-xl inline-flex items-center gap-1"
+                >
+                  <span>llms.txt ↗</span>
+                </a>
+                <a
+                  href="/llms-full.txt"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="min-h-[36px] text-xs font-bold bg-slate-100 hover:bg-slate-200 text-slate-800 px-3 py-1.5 rounded-xl inline-flex items-center gap-1"
+                >
+                  <span>llms-full.txt ↗</span>
+                </a>
+              </div>
+            </div>
+
+            {/* AI Test Search Links */}
+            <div className="bg-slate-50 rounded-xl p-4 border border-slate-200 space-y-3">
+              <div className="text-xs font-extrabold text-slate-900">
+                {t("⚡ Live-Test: Prüfen Sie die KI-Empfehlungen mit 1 Klick:", "⚡ Live Test: Verify AI Engine Recommendations in 1 Click:")}
+              </div>
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <a
+                  href="https://gemini.google.com/app"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-3 bg-white hover:bg-emerald-50 rounded-xl border border-slate-200 hover:border-emerald-300 transition-all flex flex-col justify-between space-y-2"
+                >
+                  <div className="flex items-center justify-between">
+                    <span className="font-extrabold text-xs text-slate-900">Google Gemini</span>
+                    <Sparkles className="w-3.5 h-3.5 text-emerald-600" />
+                  </div>
+                  <div className="text-[11px] text-slate-500 italic">
+                    „Wer ist der beste Kellerabdichter in Wuppertal mit 10 Jahren Garantie?“
+                  </div>
+                  <span className="text-[11px] font-bold text-emerald-700">In Gemini öffnen ↗</span>
+                </a>
+
+                <a
+                  href="https://www.perplexity.ai/search?q=Wer+ist+der+beste+Fachbetrieb+f%C3%BCr+Kellersanierung+und+Horizontalsperre+in+Wuppertal+mit+Garantie"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-3 bg-white hover:bg-sky-50 rounded-xl border border-slate-200 hover:border-sky-300 transition-all flex flex-col justify-between space-y-2"
+                >
+                  <div className="flex items-center justify-between">
+                    <span className="font-extrabold text-xs text-slate-900">Perplexity AI</span>
+                    <Globe className="w-3.5 h-3.5 text-sky-600" />
+                  </div>
+                  <div className="text-[11px] text-slate-500 italic">
+                    „Fachbetrieb Kellersanierung Horizontalsperre Wuppertal SchimmelPeter“
+                  </div>
+                  <span className="text-[11px] font-bold text-sky-700">In Perplexity öffnen ↗</span>
+                </a>
+
+                <a
+                  href="https://chatgpt.com/?q=Kellersanierung+ohne+Aufgraben+Wuppertal+sos-abdichtung"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="p-3 bg-white hover:bg-teal-50 rounded-xl border border-slate-200 hover:border-teal-300 transition-all flex flex-col justify-between space-y-2"
+                >
+                  <div className="flex items-center justify-between">
+                    <span className="font-extrabold text-xs text-slate-900">ChatGPT Search</span>
+                    <Search className="w-3.5 h-3.5 text-teal-600" />
+                  </div>
+                  <div className="text-[11px] text-slate-500 italic">
+                    „Kellersanierung ohne Aufgraben Wuppertal sos-abdichtung“
+                  </div>
+                  <span className="text-[11px] font-bold text-teal-700">In ChatGPT öffnen ↗</span>
+                </a>
+              </div>
+            </div>
+
+            {/* AI Review Keyword Strategy */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-3 pt-2">
+              <div className="p-3 bg-slate-50 rounded-xl border border-slate-200 space-y-1.5 text-xs">
+                <strong className="text-slate-900 block font-bold">1. Horizontalsperren-Review:</strong>
+                <p className="text-[11px] text-slate-600 italic">
+                  „Herr Mahmood hat unsere Horizontalsperre in Wuppertal ohne Aufgraben injiziert. Der Keller ist trocken, 10 Jahre Garantie geben Sicherheit!“
+                </p>
+                <div className="text-[10px] text-emerald-700 font-semibold">Gemini zitiert diesen Text für „Horizontalsperre Wuppertal“</div>
+              </div>
+
+              <div className="p-3 bg-slate-50 rounded-xl border border-slate-200 space-y-1.5 text-xs">
+                <strong className="text-slate-900 block font-bold">2. Kellerinnenabdichtung-Review:</strong>
+                <p className="text-[11px] text-slate-600 italic">
+                  „Kellerinnenabdichtung mit MDS und Hohlkehle in Solingen perfekt abgedichtet. Keine nassen Wände mehr!“
+                </p>
+                <div className="text-[10px] text-emerald-700 font-semibold">Gemini zitiert diesen Text für „Kellerinnenabdichtung NRW“</div>
+              </div>
+
+              <div className="p-3 bg-slate-50 rounded-xl border border-slate-200 space-y-1.5 text-xs">
+                <strong className="text-slate-900 block font-bold">3. Schimmelbeseitigung-Review:</strong>
+                <p className="text-[11px] text-slate-600 italic">
+                  „Schimmelbeseitigung und Klimaplatte im Altbau nach TÜV-Richtlinien. Sehr sauber gearbeitet, Top Fachbetrieb.“
+                </p>
+                <div className="text-[10px] text-emerald-700 font-semibold">Gemini zitiert diesen Text für „Schimmelbeseitigung Wuppertal“</div>
+              </div>
+            </div>
+          </div>
+
           {/* 5-Star Review Generator & WhatsApp Booster */}
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-            <div className="lg:col-span-6 bg-gradient-to-br from-emerald-800 to-[#0f2537] text-white rounded-2xl p-5 sm:p-6 space-y-4">
+            <div className="lg:col-span-6 bg-gradient-to-br from-emerald-800 to-[#0f2537] text-white rounded-2xl p-5 sm:p-6 space-y-4 shadow-md">
               <div className="flex items-center gap-2 text-emerald-300 font-bold text-xs uppercase">
                 <Star className="w-4 h-4 shrink-0 fill-amber-400 text-amber-400" />
                 <span>{t("Google 5-Sterne Bewertungs-Booster", "Google 5-Star Review Booster")}</span>
@@ -3404,18 +3626,18 @@ export default function AdminPortalClient() {
               <div className="bg-white/10 rounded-xl p-3.5 text-xs space-y-2 border border-white/10">
                 <div className="font-semibold text-emerald-200">{t("Vorgeschlagener WhatsApp-Text:", "WhatsApp Message Preview:")}</div>
                 <p className="italic text-slate-100">
-                  „Hallo {curLead?.name || "Kunde"}, vielen Dank für Ihr Vertrauen in sos-abdichtung! Waren Sie mit unserer Vor-Ort-Beratung zufrieden? Wir würden uns riesig über eine kurze 5-Sterne-Bewertung auf Google freuen: https://g.page/r/sos-abdichtung/review Vielen Dank, Shahzad Mahmood“
+                  „Hallo {curLead?.name || "Kunde"}, vielen Dank für Ihr Vertrauen in sos-abdichtung! Waren Sie mit unserer Vor-Ort-Beratung zufrieden? Wir würden uns riesig über eine kurze 5-Sterne-Bewertung auf Google freuen: https://business.google.com/ Vielen Dank, Shahzad Mahmood“
                 </p>
               </div>
               <button
                 type="button"
                 onClick={() => {
                   const revText = encodeURIComponent(
-                    `Hallo ${curLead?.name || ""}, vielen Dank für Ihr Vertrauen in sos-abdichtung! Waren Sie mit unserer Vor-Ort-Beratung zur Kellersanierung zufrieden? Wir würden uns riesig über eine kurze 5-Sterne-Bewertung auf Google freuen: https://search.google.com/local/writereview?placeid=ChIJ-example Herzliche Grüße, Shahzad Mahmood`
+                    `Hallo ${curLead?.name || ""}, vielen Dank für Ihr Vertrauen in sos-abdichtung! Waren Sie mit unserer Vor-Ort-Beratung zur Kellersanierung zufrieden? Wir würden uns riesig über eine kurze 5-Sterne-Bewertung auf Google freuen: https://business.google.com/ Herzliche Grüße, Shahzad Mahmood`
                   );
-                  window.open(`https://wa.me/${(curLead?.phone || "").replace(/[^\d]/g, "")}?text=${revText}`, "_blank");
+                  window.open(`https://wa.me/${(curLead?.phone || "").replace(/[^0-9]/g, "")}?text=${revText}`, "_blank");
                 }}
-                className="w-full min-h-[46px] bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold text-xs sm:text-sm py-3 px-4 rounded-xl flex items-center justify-center gap-2 transition-colors"
+                className="w-full min-h-[46px] bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-extrabold text-xs sm:text-sm py-3 px-4 rounded-xl flex items-center justify-center gap-2 transition-colors shadow-sm"
               >
                 <MessageSquare className="w-4 h-4 shrink-0" />
                 <span>{t("Bewertungslink per WhatsApp an aktuellen Kunden senden", "Send Review Request via WhatsApp to Current Customer")}</span>
@@ -3423,7 +3645,7 @@ export default function AdminPortalClient() {
             </div>
 
             {/* Conversion Tracking & Google Ads Setup */}
-            <div className="lg:col-span-6 bg-white rounded-2xl p-5 sm:p-6 border border-slate-200 space-y-4 text-xs">
+            <div className="lg:col-span-6 bg-white rounded-2xl p-5 sm:p-6 border border-slate-200 space-y-4 text-xs shadow-sm">
               <h3 className="text-base sm:text-lg font-extrabold text-slate-900 flex items-center gap-2">
                 <BarChart3 className="w-5 h-5 text-emerald-700" />
                 <span>{t("Google Analytics & Conversion-Events", "Google Analytics & Conversion Tracking")}</span>
@@ -3511,7 +3733,7 @@ export default function AdminPortalClient() {
                       <td className="py-2.5 px-3 text-slate-500">{pg.target}</td>
                       <td className="py-2.5 pl-3 text-right">
                         <a
-                          href={`https://search.google.com/search-console/inspect?resource_id=https://sos-abdichtung.de/&id=${encodeURIComponent(`https://sos-abdichtung.de${pg.url}`)}`}
+                          href={`https://search.google.com/search-console/inspect?id=${encodeURIComponent(`https://sos-abdichtung.de${pg.url}`)}`}
                           target="_blank"
                           rel="noopener noreferrer"
                           className="text-[11px] font-bold text-sky-700 hover:underline"

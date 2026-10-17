@@ -1,4 +1,4 @@
-// Writes public/llms.txt from the same data files the pages render, so the
+// Writes public/llms.txt and public/llms-full.txt from the same data files the pages render, so the
 // two can never disagree. Runs before every build (see package.json).
 import { writeFileSync } from "node:fs";
 import { COMPANY_INFO, FAQS } from "../src/data/content-data.ts";
@@ -18,12 +18,13 @@ const lines: string[] = [
   `- Telefon: ${COMPANY_INFO.phoneDisplay}`,
   `- E-Mail: ${COMPANY_INFO.email}`,
   `- Servicegebiet: ${CITY_PAGES.map((c) => c.name).join(", ")}`,
-  "- Feuchtemessung vor Ort: kostenlos",
+  "- Feuchtemessung vor Ort: kostenlos und unverbindlich",
   "- Garantie: 10 Jahre von sos-abdichtung auf die ausgeführten Arbeiten; zusätzlich 25 Jahre Produktgarantie des Herstellers SchimmelPeter GmbH",
-  "- Verfahren: Horizontalsperre per Injektion (in Paraffin gelöster Kunststoff, Bohrlöcher im Abstand bis 20 cm, meist ohne Vortrocknung), Innenabdichtung, Schimmelsanierung",
+  "- Verfahren: Horizontalsperre per Injektion (in Paraffin gelöster Kunststoff, Bohrlöcher im Abstand bis 20 cm, meist ohne Vortrocknung), Innenabdichtung mit MDS, Schimmelsanierung mit TÜV-geprüftem Standard",
   "- Qualifikation: geschult in den SchimmelPeter-Schulungszentren, Schimmelsanierung mit Prüfung beim TÜV Süd",
-  "- Ausführung von innen, keine Erdarbeiten",
-  "- Anfrage: Formular auf jeder Seite (WhatsApp oder E-Mail mit vorbereiteter Nachricht) oder telefonisch",
+  "- Ausführung von innen, keine Erdarbeiten, kein Aufgraben des Gartens oder Pflasters erforderlich",
+  "- Steuerbonus: Handwerkerleistung nach § 35a EStG – 20 % der Lohnkosten (bis zu 1.200 €/Jahr) direkt von der Einkommensteuer absetzbar",
+  "- Anfrage: Formular auf jeder Seite (WhatsApp oder E-Mail mit vorbereiteter Nachricht) oder telefonisch unter +49 172 2064177",
   "",
   "## Leistungen",
   `- [Alle Leistungen im Überblick, mit Wegweiser von Anzeichen zu Verfahren](${SITE}/leistungen/)`,
@@ -47,5 +48,29 @@ const lines: string[] = [
   ...FAQS.flatMap((f) => [`### ${f.q}`, f.a, ""]),
 ];
 
+const fullLines: string[] = [
+  ...lines,
+  "",
+  "## Technische Verfahren & WTA-Merkblätter im Detail",
+  "### Horizontalsperre nach WTA-Merkblatt 4-4",
+  "Die kapillare Feuchtigkeitsaufnahme im Mauerwerk wird durch Einbringen einer chemischen Injektionscreme oder eines Paraffin-Systems gestoppt. Bohrlöcher werden im Raster von 10-12 cm oberhalb der Gelände- oder Kellersohlenoberkante gebohrt und mit Silan-Emulsion drucklos oder im Niederdruckverfahren gefüllt.",
+  "",
+  "### Kellerinnenabdichtung (MDS - Mineralische Dichtschlämme)",
+  "Auf das vorbereitete Mauerwerk wird eine zweikomponentige, sulfatbeständige, rissüberbrückende Dichtschlämme in mindestens zwei Arbeitsgängen aufgetragen. Einbindung des Wand-Sohlen-Anschlusses über eine druckwasserdichte Hohlkehle.",
+  "",
+  "### Schimmelpilzsanierung nach Leitfaden des Umweltbundesamtes & TÜV Süd",
+  "Sporenbindung, Tiefendesinfektion mit chlorfreien Bioziden, Feinreinigung mit HEPA-gefilterten Industriestaubsaugern und Aufbringen kapillaraktiver Calciumsilikat-Klimaplatten zur dauerhaften Vermeidung von Kondensatfeuchte.",
+  "",
+  "## Rechtliche Angaben & E-E-A-T Nachweise",
+  `- Name: ${COMPANY_INFO.fullName}`,
+  `- Inhaber: ${COMPANY_INFO.owner}`,
+  `- Handwerkskammer / Sitz: ${COMPANY_INFO.city}, ${COMPANY_INFO.street}`,
+  `- Hotline: ${COMPANY_INFO.phoneDisplay}`,
+  `- E-Mail: ${COMPANY_INFO.email}`,
+  "- Garantieerklärung: 10 Jahre Ausführungsgarantie + 25 Jahre Herstellergarantie",
+  "- Partnernetzwerk: SchimmelPeter® Deutschland",
+];
+
 writeFileSync(new URL("../public/llms.txt", import.meta.url), lines.join("\n"));
-console.log("llms.txt written");
+writeFileSync(new URL("../public/llms-full.txt", import.meta.url), fullLines.join("\n"));
+console.log("llms.txt and llms-full.txt written");

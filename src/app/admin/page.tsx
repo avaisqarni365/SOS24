@@ -53,19 +53,9 @@ export default function AdminPage() {
     <>
       <JsonLd graph={graph} />
       <Navbar />
-      <main id="main" className="min-h-screen bg-canvas text-ink pb-24 lg:pb-16 overflow-x-clip">
-        <section className="sc-page-top" aria-labelledby="page-title">
-          <div className="sc-wrap">
-            <Breadcrumbs items={crumbs} />
-            <h1 id="page-title" className="sc-display mt-4">
-              Admin-Portal &amp; <em>GoBD-Backoffice.</em>
-            </h1>
-            <p className="text-sm sm:text-base text-ink-soft mt-2 max-w-3xl font-plex">
-              Schadensanfragen, Google Drive Schadensfotos, digitale Auftragsunterschriften, Vor-Ort-Checkliste und GoBD-Rechnungen auf Smartphone, Tablet und Desktop verwalten.
-            </p>
-          </div>
-        </section>
-        <div className="sc-wrap mt-6 sm:mt-8">
+      <main id="main" className="min-h-screen bg-canvas text-ink pt-3 sm:pt-4 pb-20 overflow-x-clip">
+        <h1 className="sr-only">Admin-Portal &amp; GoBD-Backoffice</h1>
+        <div className="sc-wrap">
           <AdminPortalClient />
         </div>
       </main>
