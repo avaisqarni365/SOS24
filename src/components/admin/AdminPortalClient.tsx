@@ -382,9 +382,50 @@ export default function AdminPortalClient() {
     return unsub;
   }, []);
 
+  const [copiedField, setCopiedField] = useState<string>("");
+
   const showToast = (msg: string) => {
     setToast(msg);
     setTimeout(() => setToast(""), 3500);
+  };
+
+  const copyToClipboard = (text: string, label: string, fieldKey?: string) => {
+    if (typeof window !== "undefined") {
+      const finish = () => {
+        if (fieldKey) {
+          setCopiedField(fieldKey);
+          setTimeout(() => setCopiedField(""), 2200);
+        }
+        showToast(t(`„${label}“ in die Zwischenablage kopiert!`, `"${label}" copied to clipboard!`));
+      };
+      if (navigator?.clipboard?.writeText) {
+        navigator.clipboard.writeText(text).then(finish, () => {
+          try {
+            const ta = document.createElement("textarea");
+            ta.value = text;
+            document.body.appendChild(ta);
+            ta.select();
+            document.execCommand("copy");
+            document.body.removeChild(ta);
+            finish();
+          } catch {
+            // ignore
+          }
+        });
+      } else {
+        try {
+          const ta = document.createElement("textarea");
+          ta.value = text;
+          document.body.appendChild(ta);
+          ta.select();
+          document.execCommand("copy");
+          document.body.removeChild(ta);
+          finish();
+        } catch {
+          // ignore
+        }
+      }
+    }
   };
 
   const persistAll = (
@@ -3329,15 +3370,18 @@ export default function AdminPortalClient() {
                     )}
                   </p>
                 </div>
-                <div className="pt-2 border-t border-white/10 space-y-1 text-xs">
+                <div className="pt-2 border-t border-white/10 space-y-1.5 text-xs">
                   <a
-                    href="https://business.google.com/"
+                    href="https://business.google.com/de/business-profile/?ppsrc=GPDA2"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-1.5 font-bold text-emerald-300 hover:text-emerald-200"
                   >
                     <span>{t("Unternehmensprofil öffnen ↗", "Manage Profile ↗")}</span>
                   </a>
+                  <div className="text-[11px] text-emerald-400 font-semibold">
+                    {t("Direktlink mit Setup-Kit ↓", "Direct Link & Setup Kit ↓")}
+                  </div>
                 </div>
               </div>
 
@@ -3392,6 +3436,355 @@ export default function AdminPortalClient() {
                   >
                     <span>{t("Local Services Ads ↗", "Open LSA ↗")}</span>
                   </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* GOOGLE BUSINESS PROFILE (GBP) 1-CLICK SETUP & OPTIMIZATION KIT */}
+          <div className="bg-gradient-to-br from-[#0f2537] via-slate-900 to-[#0a1824] border border-emerald-500/30 rounded-2xl p-5 sm:p-7 text-white space-y-6 shadow-xl">
+            <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-5 border-b border-white/10">
+              <div className="space-y-1.5">
+                <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 text-[11px] font-extrabold tracking-wide uppercase">
+                  <MapPin className="w-3.5 h-3.5 shrink-0 text-emerald-400" />
+                  <span>{t("Offizielles Google Unternehmensprofil", "Official Google Business Profile")}</span>
+                </div>
+                <h3 className="text-xl sm:text-2xl font-black tracking-tight text-white flex items-center gap-2">
+                  <span>{t("Google Business Profile Setup & 1-Klick-Stammdaten", "Google Business Profile Setup & 1-Click Master Data")}</span>
+                </h3>
+                <p className="text-xs sm:text-sm text-slate-300 max-w-2xl leading-relaxed">
+                  {t(
+                    "Nutzen Sie den offiziellen deutschen Einrichtungslink für sos-abdichtung und kopieren Sie mit einem Klick die für Wuppertal und Bergisches Land suchmaschinenoptimierten Profildaten.",
+                    "Use the official German Google Business Profile creation link and copy pre-optimized master data, categories, and descriptions with 1 click."
+                  )}
+                </p>
+              </div>
+
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 shrink-0">
+                <a
+                  href="https://business.google.com/de/business-profile/?ppsrc=GPDA2"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="min-h-[46px] px-5 py-2.5 rounded-xl bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-black text-xs sm:text-sm inline-flex items-center justify-center gap-2 shadow-lg hover:shadow-emerald-500/25 transition-all"
+                >
+                  <ExternalLink className="w-4 h-4 shrink-0" />
+                  <span>{t("Google Profil anlegen / öffnen ↗", "Create / Open Profile on Google ↗")}</span>
+                </a>
+              </div>
+            </div>
+
+            {/* Quick 1-Click Master Data Grid */}
+            <div className="space-y-2">
+              <h4 className="text-xs font-bold uppercase tracking-wider text-emerald-400 flex items-center gap-1.5">
+                <Sparkles className="w-3.5 h-3.5" />
+                <span>{t("1-Klick-Kopierbare Profildaten (Exakt auf Google-Richtlinien abgestimmt)", "1-Click Copy Profile Data (Optimized for Google Guidelines)")}</span>
+              </h4>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+                {/* 1. Name */}
+                <div className="bg-white/5 border border-white/10 rounded-xl p-3.5 flex flex-col justify-between space-y-2.5">
+                  <div className="space-y-1">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">{t("1. Unternehmensname", "1. Business Name")}</span>
+                    <div className="text-xs font-extrabold text-white leading-snug">
+                      sos-abdichtung – Kellersanierung & Schimmelbeseitigung Wuppertal
+                    </div>
+                    <p className="text-[10px] text-slate-400">{t("Kombiniert Marke mit den zwei stärksten Suchbegriffen & Ort.", "Combines brand name with top local search keywords.")}</p>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => copyToClipboard("sos-abdichtung – Kellersanierung & Schimmelbeseitigung Wuppertal", t("Unternehmensname", "Business Name"), "name")}
+                    className={`w-full min-h-[34px] px-3 py-1.5 rounded-lg text-xs font-bold inline-flex items-center justify-center gap-1.5 transition-all ${
+                      copiedField === "name"
+                        ? "bg-emerald-500 text-slate-950 font-black"
+                        : "bg-white/10 hover:bg-white/20 text-emerald-300 border border-white/10"
+                    }`}
+                  >
+                    {copiedField === "name" ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
+                    <span>{copiedField === "name" ? t("Kopiert!", "Copied!") : t("Name kopieren", "Copy Name")}</span>
+                  </button>
+                </div>
+
+                {/* 2. Primary & Secondary Categories */}
+                <div className="bg-white/5 border border-white/10 rounded-xl p-3.5 flex flex-col justify-between space-y-2.5">
+                  <div className="space-y-1">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">{t("2. Kategorien (Branche)", "2. Categories")}</span>
+                    <div className="text-xs font-extrabold text-emerald-300">
+                      {t("Primär: Abdichtungsunternehmen", "Primary: Abdichtungsunternehmen (Waterproofing)")}
+                    </div>
+                    <div className="text-[11px] text-slate-300">
+                      {t("Sekundär: Bautrocknung, Schimmelbeseitigung, Bautenschutz, Bauunternehmen", "Secondary: Bautrocknung, Schimmelbeseitigung, Bautenschutz, Bauunternehmen")}
+                    </div>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => copyToClipboard("Abdichtungsunternehmen", t("Hauptkategorie", "Primary Category"), "cat")}
+                    className={`w-full min-h-[34px] px-3 py-1.5 rounded-lg text-xs font-bold inline-flex items-center justify-center gap-1.5 transition-all ${
+                      copiedField === "cat"
+                        ? "bg-emerald-500 text-slate-950 font-black"
+                        : "bg-white/10 hover:bg-white/20 text-emerald-300 border border-white/10"
+                    }`}
+                  >
+                    {copiedField === "cat" ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
+                    <span>{copiedField === "cat" ? t("Kopiert!", "Copied!") : t("Hauptkategorie kopieren", "Copy Category")}</span>
+                  </button>
+                </div>
+
+                {/* 3. Address & Service Area */}
+                <div className="bg-white/5 border border-white/10 rounded-xl p-3.5 flex flex-col justify-between space-y-2.5">
+                  <div className="space-y-1">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">{t("3. Standort & Einzugsgebiet", "3. Address & Service Area")}</span>
+                    <div className="text-xs font-bold text-white">
+                      {COMPANY_INFO.street}, {COMPANY_INFO.city}
+                    </div>
+                    <p className="text-[10px] text-slate-400">
+                      {t("Einzugsgebiet: Wuppertal, Solingen, Remscheid, Velbert, Haan, Wermelskirchen, Essen", "Service area: Wuppertal, Solingen, Remscheid, Velbert, Haan, Wermelskirchen, Essen")}
+                    </p>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => copyToClipboard("Wuppertal, Solingen, Remscheid, Velbert, Haan, Wermelskirchen, Essen", t("Einzugsgebiete", "Service Areas"), "area")}
+                    className={`w-full min-h-[34px] px-3 py-1.5 rounded-lg text-xs font-bold inline-flex items-center justify-center gap-1.5 transition-all ${
+                      copiedField === "area"
+                        ? "bg-emerald-500 text-slate-950 font-black"
+                        : "bg-white/10 hover:bg-white/20 text-emerald-300 border border-white/10"
+                    }`}
+                  >
+                    {copiedField === "area" ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
+                    <span>{copiedField === "area" ? t("Kopiert!", "Copied!") : t("Einzugsgebiete kopieren", "Copy Service Areas")}</span>
+                  </button>
+                </div>
+
+                {/* 4. Phone & Website */}
+                <div className="bg-white/5 border border-white/10 rounded-xl p-3.5 flex flex-col justify-between space-y-2.5">
+                  <div className="space-y-1">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">{t("4. Telefon & Website", "4. Phone & Website")}</span>
+                    <div className="text-xs font-bold text-white">{COMPANY_INFO.phoneDisplay}</div>
+                    <div className="text-[11px] text-slate-300">https://sos-abdichtung.de/</div>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => copyToClipboard("https://sos-abdichtung.de/", t("Website-URL", "Website URL"), "web")}
+                    className={`w-full min-h-[34px] px-3 py-1.5 rounded-lg text-xs font-bold inline-flex items-center justify-center gap-1.5 transition-all ${
+                      copiedField === "web"
+                        ? "bg-emerald-500 text-slate-950 font-black"
+                        : "bg-white/10 hover:bg-white/20 text-emerald-300 border border-white/10"
+                    }`}
+                  >
+                    {copiedField === "web" ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
+                    <span>{copiedField === "web" ? t("Kopiert!", "Copied!") : t("Website-URL kopieren", "Copy Website")}</span>
+                  </button>
+                </div>
+
+                {/* 5. Appointment Link */}
+                <div className="bg-white/5 border border-white/10 rounded-xl p-3.5 flex flex-col justify-between space-y-2.5">
+                  <div className="space-y-1">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">{t("5. Termin- / Buchungslink", "5. Appointment Booking URL")}</span>
+                    <div className="text-xs font-bold text-emerald-300">https://sos-abdichtung.de/kontakt/</div>
+                    <p className="text-[10px] text-slate-400">{t("Direkt im Google Profil als 'Termine buchen' hinterlegen.", "Add in Google profile as 'Book appointment' link.")}</p>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => copyToClipboard("https://sos-abdichtung.de/kontakt/", t("Terminlink", "Appointment Link"), "applink")}
+                    className={`w-full min-h-[34px] px-3 py-1.5 rounded-lg text-xs font-bold inline-flex items-center justify-center gap-1.5 transition-all ${
+                      copiedField === "applink"
+                        ? "bg-emerald-500 text-slate-950 font-black"
+                        : "bg-white/10 hover:bg-white/20 text-emerald-300 border border-white/10"
+                    }`}
+                  >
+                    {copiedField === "applink" ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
+                    <span>{copiedField === "applink" ? t("Kopiert!", "Copied!") : t("Terminlink kopieren", "Copy Appointment Link")}</span>
+                  </button>
+                </div>
+
+                {/* 6. Business Hours */}
+                <div className="bg-white/5 border border-white/10 rounded-xl p-3.5 flex flex-col justify-between space-y-2.5">
+                  <div className="space-y-1">
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">{t("6. Öffnungszeiten", "6. Business Hours")}</span>
+                    <div className="text-xs font-bold text-white">Mo–Fr: 07:00 – 19:00 Uhr</div>
+                    <div className="text-[11px] text-slate-300">Sa: 08:00 – 16:00 Uhr | So: Notdienst</div>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => copyToClipboard("Mo-Fr: 07:00-19:00, Sa: 08:00-16:00", t("Öffnungszeiten", "Business Hours"), "hours")}
+                    className={`w-full min-h-[34px] px-3 py-1.5 rounded-lg text-xs font-bold inline-flex items-center justify-center gap-1.5 transition-all ${
+                      copiedField === "hours"
+                        ? "bg-emerald-500 text-slate-950 font-black"
+                        : "bg-white/10 hover:bg-white/20 text-emerald-300 border border-white/10"
+                    }`}
+                  >
+                    {copiedField === "hours" ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
+                    <span>{copiedField === "hours" ? t("Kopiert!", "Copied!") : t("Zeiten kopieren", "Copy Hours")}</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            {/* Optimized 750-Character Description */}
+            <div className="bg-white/5 border border-white/10 rounded-xl p-4 sm:p-5 space-y-3">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-white/10 pb-2.5">
+                <div>
+                  <h4 className="text-xs sm:text-sm font-extrabold text-white flex items-center gap-2">
+                    <Sparkles className="w-4 h-4 text-emerald-400 shrink-0" />
+                    <span>{t("Google-optimierte Unternehmensbeschreibung (750 Zeichen)", "Google-Optimized Business Description (750 chars)")}</span>
+                  </h4>
+                  <p className="text-[11px] text-slate-300 mt-0.5">
+                    {t(
+                      "Enthält alle wichtigen Schlüsselbegriffe für Top-Rankings in Google Maps (WTA, SchimmelPeter®, Horizontalsperre, 10 Jahre Garantie).",
+                      "Contains core ranking keywords for Google Maps (WTA, SchimmelPeter®, horizontal barrier, 10-year warranty)."
+                    )}
+                  </p>
+                </div>
+                <div className="flex items-center gap-2 shrink-0">
+                  <span className="text-[11px] font-bold px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">
+                    642 / 750 {t("Zeichen", "chars")}
+                  </span>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      const desc = isEn
+                        ? "Certified specialist for basement waterproofing, horizontal damp-proof barriers, internal cellar sealing, and professional mold remediation in Wuppertal and the Bergisches Land region. As an official SchimmelPeter® partner and WTA-certified company, we deliver lasting masonry drying with a 10-year warranty. We solve rising damp, pressing groundwater, damp basement walls, efflorescence, and mold in residential and commercial properties. Book your free on-site moisture diagnostic and fixed-price quote today."
+                        : "Zertifizierter Fachbetrieb für Kellersanierung, Horizontalsperre, Kellerinnenabdichtung und professionelle Schimmelbeseitigung in Wuppertal und dem gesamten Bergischen Land. Als SchimmelPeter® Partnerbetrieb und WTA-zertifizierter Experte bieten wir nachhaltige Mauerwerkstrockenlegung mit 10 Jahren Garantie. Wir beheben aufsteigende Feuchtigkeit, drückendes Grundwasser, feuchte Kellerwände, Salzausblühungen und Schimmelbefall in Alt- und Neubauten. Nutzen Sie unsere kostenlose Vor-Ort-Feuchtigkeitsmessung und Schadensanalyse mit Festpreisgarantie. Termine flexibel nach Vereinbarung – Ihr Partner für ein trockenes und gesundes Zuhause.";
+                      copyToClipboard(desc, t("Unternehmensbeschreibung", "Business Description"), "desc");
+                    }}
+                    className={`min-h-[36px] px-3.5 py-1.5 rounded-lg text-xs font-bold inline-flex items-center gap-1.5 transition-all ${
+                      copiedField === "desc"
+                        ? "bg-emerald-500 text-slate-950 font-black"
+                        : "bg-emerald-600 hover:bg-emerald-500 text-slate-950 font-bold"
+                    }`}
+                  >
+                    {copiedField === "desc" ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
+                    <span>{copiedField === "desc" ? t("Kopiert!", "Copied!") : t("Beschreibung kopieren", "Copy Description")}</span>
+                  </button>
+                </div>
+              </div>
+
+              <div className="bg-black/30 rounded-lg p-3.5 text-xs text-slate-200 leading-relaxed font-sans border border-white/5">
+                {isEn ? (
+                  <>
+                    Certified specialist for basement waterproofing, horizontal damp-proof barriers, internal cellar sealing, and professional mold remediation in Wuppertal and the Bergisches Land region. As an official <strong className="text-emerald-300 font-bold">SchimmelPeter® partner</strong> and <strong className="text-emerald-300 font-bold">WTA-certified company</strong>, we deliver lasting masonry drying with a <strong className="text-emerald-300 font-bold">10-year warranty</strong>. We solve rising damp, pressing groundwater, damp basement walls, efflorescence, and mold in residential and commercial properties. Book your free on-site moisture diagnostic and fixed-price quote today.
+                  </>
+                ) : (
+                  <>
+                    Zertifizierter Fachbetrieb für Kellersanierung, Horizontalsperre, Kellerinnenabdichtung und professionelle Schimmelbeseitigung in Wuppertal und dem gesamten Bergischen Land. Als <strong className="text-emerald-300 font-bold">SchimmelPeter® Partnerbetrieb</strong> und <strong className="text-emerald-300 font-bold">WTA-zertifizierter Experte</strong> bieten wir nachhaltige Mauerwerkstrockenlegung mit <strong className="text-emerald-300 font-bold">10 Jahren Garantie</strong>. Wir beheben aufsteigende Feuchtigkeit, drückendes Grundwasser, feuchte Kellerwände, Salzausblühungen und Schimmelbefall in Alt- und Neubauten. Nutzen Sie unsere kostenlose Vor-Ort-Feuchtigkeitsmessung und Schadensanalyse mit Festpreisgarantie. Termine flexibel nach Vereinbarung – Ihr Partner für ein trockenes und gesundes Zuhause.
+                  </>
+                )}
+              </div>
+            </div>
+
+            {/* 6 Pre-Formulated Services for GBP Services Tab */}
+            <div className="space-y-2.5">
+              <div className="flex items-center justify-between">
+                <h4 className="text-xs font-bold uppercase tracking-wider text-slate-300 flex items-center gap-1.5">
+                  <FileCheck className="w-3.5 h-3.5 text-emerald-400" />
+                  <span>{t("6 Dienstleistungen für den Google-Leistungskatalog (Direkt einfügen)", "6 Services for Google Business Catalog (Ready to Paste)")}</span>
+                </h4>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+                {[
+                  {
+                    title_de: "Horizontalsperre (WTA)",
+                    title_en: "Horizontal Damp Barrier (WTA)",
+                    desc_de: "Drucklose & Niederdruck-Injektion mit Silan-Mikroemulsion gegen aufsteigende Feuchtigkeit. 10 Jahre Garantie.",
+                    desc_en: "Low-pressure silane microemulsion injection against rising damp. 10-year warranty.",
+                    key: "srv_hz",
+                  },
+                  {
+                    title_de: "Kellerinnenabdichtung (MDS)",
+                    title_en: "Internal Cellar Waterproofing (MDS)",
+                    desc_de: "Mehrlagige mineralische Dichtungsschlämme mit Hohlkehle bei drückendem Grundwasser ohne Erdaushub.",
+                    desc_en: "Multi-layer mineral waterproofing slurries with coving against pressing groundwater without excavation.",
+                    key: "srv_mds",
+                  },
+                  {
+                    title_de: "Schimmelbeseitigung (TÜV)",
+                    title_en: "Mold Remediation (TÜV Certified)",
+                    desc_de: "Fachgerechte Schimmelsanierung, Sporenentfernung und diffusionsoffene Calciumsilikat-Klimaplatten.",
+                    desc_en: "Professional mold remediation, spore neutralization, and calcium silicate insulating boards.",
+                    key: "srv_schimmel",
+                  },
+                  {
+                    title_de: "Rissinjektion & Druckwasserschutz",
+                    title_en: "Crack Injection & Pressure Sealing",
+                    desc_de: "Dauerelastische Verpressung von Beton- und Mauerwerksrissen mit Polyurethanharzen und Acrylatgelen.",
+                    desc_en: "Flexible resin crack injection for active water leaks in concrete walls and foundations.",
+                    key: "srv_riss",
+                  },
+                  {
+                    title_de: "Kelleraußenabdichtung (DIN 18533)",
+                    title_en: "External Waterproofing (DIN 18533)",
+                    desc_de: "Erdberührte Abdichtung mit Bitumendickbeschichtung (PMBC), Perimeterdämmung und Dränage nach DIN 18533.",
+                    desc_en: "Earth-contact bitumen coating (PMBC), perimeter insulation, and drainage systems according to DIN 18533.",
+                    key: "srv_aussen",
+                  },
+                  {
+                    title_de: "Kostenlose Vor-Ort-Feuchtemessung",
+                    title_en: "Free On-Site Moisture Diagnostic",
+                    desc_de: "Zerstörungsfreie Mikrowellen- & CM-Feuchtigkeitsanalyse vor Ort in Wuppertal mit verbindlichem Festpreisangebot.",
+                    desc_en: "Non-destructive microwave & CM moisture analysis in Wuppertal with guaranteed fixed-price quote.",
+                    key: "srv_mess",
+                  },
+                ].map((srv) => (
+                  <div key={srv.key} className="bg-white/5 border border-white/10 rounded-xl p-3 flex flex-col justify-between space-y-2">
+                    <div className="space-y-1">
+                      <div className="text-xs font-bold text-white flex items-center justify-between">
+                        <span>{isEn ? srv.title_en : srv.title_de}</span>
+                      </div>
+                      <p className="text-[11px] text-slate-300 leading-snug">
+                        {isEn ? srv.desc_en : srv.desc_de}
+                      </p>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        const copyText = `${isEn ? srv.title_en : srv.title_de}\n${isEn ? srv.desc_en : srv.desc_de}`;
+                        copyToClipboard(copyText, isEn ? srv.title_en : srv.title_de, srv.key);
+                      }}
+                      className={`w-full min-h-[30px] px-2.5 py-1 rounded-lg text-[11px] font-bold inline-flex items-center justify-center gap-1.5 transition-all ${
+                        copiedField === srv.key
+                          ? "bg-emerald-500 text-slate-950 font-black"
+                          : "bg-white/10 hover:bg-white/20 text-slate-200 border border-white/10"
+                      }`}
+                    >
+                      {copiedField === srv.key ? <Check className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
+                      <span>{copiedField === srv.key ? t("Kopiert!", "Copied!") : t("Leistung kopieren", "Copy Service")}</span>
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* 5-Step Google Verification & Success Guide */}
+            <div className="bg-slate-950/60 border border-white/10 rounded-xl p-4 sm:p-5 space-y-3">
+              <h4 className="text-xs sm:text-sm font-extrabold text-white flex items-center gap-2">
+                <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+                <span>{t("5-Schritte-Erfolgsplan für Platz 1 im Google Maps 3-Pack", "5-Step Success Plan for Rank #1 in Google Maps 3-Pack")}</span>
+              </h4>
+              <div className="grid grid-cols-1 sm:grid-cols-5 gap-3 text-xs">
+                <div className="p-2.5 rounded-lg bg-white/5 border border-white/5 space-y-1">
+                  <span className="w-5 h-5 rounded-full bg-emerald-500/20 text-emerald-300 font-extrabold text-[11px] flex items-center justify-center">1</span>
+                  <div className="font-bold text-white text-[11px]">{t("Link aufrufen", "Open Link")}</div>
+                  <p className="text-[10px] text-slate-300">{t("Auf 'Google Profil anlegen' klicken & mit Google-Konto anmelden.", "Click setup button and sign in with Google account.")}</p>
+                </div>
+                <div className="p-2.5 rounded-lg bg-white/5 border border-white/5 space-y-1">
+                  <span className="w-5 h-5 rounded-full bg-emerald-500/20 text-emerald-300 font-extrabold text-[11px] flex items-center justify-center">2</span>
+                  <div className="font-bold text-white text-[11px]">{t("Daten einfügen", "Paste Data")}</div>
+                  <p className="text-[10px] text-slate-300">{t("Name, Kategorien, Adresse, Zeiten & Beschreibung mit 1 Klick einfügen.", "Paste business name, categories, hours, and description.")}</p>
+                </div>
+                <div className="p-2.5 rounded-lg bg-white/5 border border-white/5 space-y-1">
+                  <span className="w-5 h-5 rounded-full bg-emerald-500/20 text-emerald-300 font-extrabold text-[11px] flex items-center justify-center">3</span>
+                  <div className="font-bold text-white text-[11px]">{t("Verifizierung", "Verification")}</div>
+                  <p className="text-[10px] text-slate-300">{t("Verifizierung abschließen (Google SMS, Video oder Postkarte).", "Complete verification via Google SMS, video, or postcard.")}</p>
+                </div>
+                <div className="p-2.5 rounded-lg bg-white/5 border border-white/5 space-y-1">
+                  <span className="w-5 h-5 rounded-full bg-emerald-500/20 text-emerald-300 font-extrabold text-[11px] flex items-center justify-center">4</span>
+                  <div className="font-bold text-white text-[11px]">{t("Fotos hochladen", "Upload Photos")}</div>
+                  <p className="text-[10px] text-slate-300">{t("Firmenfahrzeug, Team, Vorher/Nachher-Sanierungsbilder hochladen.", "Upload branded vehicle, team, and before/after repair photos.")}</p>
+                </div>
+                <div className="p-2.5 rounded-lg bg-white/5 border border-white/5 space-y-1">
+                  <span className="w-5 h-5 rounded-full bg-emerald-500/20 text-emerald-300 font-extrabold text-[11px] flex items-center justify-center">5</span>
+                  <div className="font-bold text-white text-[11px]">{t("Bewertungen", "Get Reviews")}</div>
+                  <p className="text-[10px] text-slate-300">{t("WhatsApp-Bewertungsbooster unten nutzen für die ersten 5-Sterne.", "Use WhatsApp review booster below to collect first 5-star reviews.")}</p>
                 </div>
               </div>
             </div>
@@ -3626,14 +4019,14 @@ export default function AdminPortalClient() {
               <div className="bg-white/10 rounded-xl p-3.5 text-xs space-y-2 border border-white/10">
                 <div className="font-semibold text-emerald-200">{t("Vorgeschlagener WhatsApp-Text:", "WhatsApp Message Preview:")}</div>
                 <p className="italic text-slate-100">
-                  „Hallo {curLead?.name || "Kunde"}, vielen Dank für Ihr Vertrauen in sos-abdichtung! Waren Sie mit unserer Vor-Ort-Beratung zufrieden? Wir würden uns riesig über eine kurze 5-Sterne-Bewertung auf Google freuen: https://business.google.com/ Vielen Dank, Shahzad Mahmood“
+                  „Hallo {curLead?.name || "Kunde"}, vielen Dank für Ihr Vertrauen in sos-abdichtung! Waren Sie mit unserer Vor-Ort-Beratung zufrieden? Wir würden uns riesig über eine kurze 5-Sterne-Bewertung auf Google freuen: https://business.google.com/de/business-profile/?ppsrc=GPDA2 Vielen Dank, Shahzad Mahmood“
                 </p>
               </div>
               <button
                 type="button"
                 onClick={() => {
                   const revText = encodeURIComponent(
-                    `Hallo ${curLead?.name || ""}, vielen Dank für Ihr Vertrauen in sos-abdichtung! Waren Sie mit unserer Vor-Ort-Beratung zur Kellersanierung zufrieden? Wir würden uns riesig über eine kurze 5-Sterne-Bewertung auf Google freuen: https://business.google.com/ Herzliche Grüße, Shahzad Mahmood`
+                    `Hallo ${curLead?.name || ""}, vielen Dank für Ihr Vertrauen in sos-abdichtung! Waren Sie mit unserer Vor-Ort-Beratung zur Kellersanierung zufrieden? Wir würden uns riesig über eine kurze 5-Sterne-Bewertung auf Google freuen: https://business.google.com/de/business-profile/?ppsrc=GPDA2 Herzliche Grüße, Shahzad Mahmood`
                   );
                   window.open(`https://wa.me/${(curLead?.phone || "").replace(/[^0-9]/g, "")}?text=${revText}`, "_blank");
                 }}
