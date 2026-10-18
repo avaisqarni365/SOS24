@@ -58,6 +58,7 @@ import {
   Power,
   DollarSign,
   Sliders,
+  Building2,
 } from "lucide-react";
 import { COMPANY, COMPANY_INFO } from "@/data/content-data";
 import {
@@ -412,6 +413,62 @@ const LOCAL_SEO_PAGES = [
   { url: "/leistungen/rissverpressung/", title: "Rissverpressung Beton & Mauerwerk", kw: "Rissinjektion Keller", target: "NRW-weit" },
 ];
 
+export interface BusinessLocation {
+  id: string;
+  name_de: string;
+  name_en: string;
+  type: "headquarters" | "branch";
+  city: string;
+  plz: string;
+  street: string;
+  phone: string;
+  url: string;
+  serviceAreas: string;
+  googleMapsQuery: string;
+}
+
+const DEFAULT_LOCATIONS: BusinessLocation[] = [
+  {
+    id: "loc_wuppertal",
+    name_de: "Standort 1: Wuppertal (Hauptsitz)",
+    name_en: "Location 1: Wuppertal (Headquarters)",
+    type: "headquarters",
+    city: "Wuppertal",
+    plz: "42103",
+    street: "Niebuhrstraße 46 (Zentrale Bergisches Land)",
+    phone: "+49 (0)172 2064177",
+    url: "https://sos-abdichtung.de/kellersanierung/wuppertal/",
+    serviceAreas: "Wuppertal (Elberfeld, Barmen, Vohwinkel, Cronenberg, Ronsdorf), Essen, Haan, Velbert",
+    googleMapsQuery: "sos-abdichtung+Wuppertal",
+  },
+  {
+    id: "loc_solingen",
+    name_de: "Standort 2: Solingen (Niederlassung)",
+    name_en: "Location 2: Solingen (Branch Office)",
+    type: "branch",
+    city: "Solingen",
+    plz: "42651",
+    street: "Kölner Straße / Ohligs (Service-Stützpunkt)",
+    phone: "+49 (0)172 2064177",
+    url: "https://sos-abdichtung.de/kellersanierung/solingen/",
+    serviceAreas: "Solingen (Ohligs, Wald, Gräfrath, Höhscheid, Burg), Hilden, Langenfeld, Leichlingen",
+    googleMapsQuery: "sos-abdichtung+Solingen",
+  },
+  {
+    id: "loc_remscheid",
+    name_de: "Standort 3: Remscheid & Bergisches Land",
+    name_en: "Location 3: Remscheid & Bergisches Land",
+    type: "branch",
+    city: "Remscheid",
+    plz: "42853",
+    street: "Alleestraße / Lennep (Service-Stützpunkt)",
+    phone: "+49 (0)172 2064177",
+    url: "https://sos-abdichtung.de/kellersanierung/remscheid/",
+    serviceAreas: "Remscheid, Wermelskirchen, Radevormwald, Hückeswagen, Wipperfürth",
+    googleMapsQuery: "sos-abdichtung+Remscheid",
+  },
+];
+
 function eur(n: number) {
   return n.toLocaleString("de-DE", { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + " €";
 }
@@ -526,6 +583,27 @@ export default function AdminPortalClient() {
   const [newServicePrice, setNewServicePrice] = useState<number>(95);
   const [newServiceUnit, setNewServiceUnit] = useState<string>("m²");
   const [newServiceBasis, setNewServiceBasis] = useState<string>("");
+
+  // Multi-Location State (2-3 Business Locations in NRW)
+  const [businessLocations, setBusinessLocations] = useState<BusinessLocation[]>(() => {
+    if (typeof window !== "undefined") {
+      const saved = localStorage.getItem("sos_business_locations");
+      if (saved) {
+        try {
+          const parsed = JSON.parse(saved);
+          if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+        } catch {}
+      }
+    }
+    return DEFAULT_LOCATIONS;
+  });
+  const [selectedLocationId, setSelectedLocationId] = useState<string>("loc_wuppertal");
+  const [showLocationEditorModal, setShowLocationEditorModal] = useState<boolean>(false);
+  const [newLocCity, setNewLocCity] = useState<string>("");
+  const [newLocPlz, setNewLocPlz] = useState<string>("");
+  const [newLocStreet, setNewLocStreet] = useState<string>("");
+  const [newLocPhone, setNewLocPhone] = useState<string>("+49 (0)172 2064177");
+  const [newLocUrl, setNewLocUrl] = useState<string>("");
 
   // Aufmaß-Planer state
   const [plName, setPlName] = useState("");
@@ -706,6 +784,79 @@ export default function AdminPortalClient() {
       ],
     }));
     showToast(t(`Marketing-Ausgabe (${eur(amount)}) als Belegposition übernommen!`, `Added marketing cost (${eur(amount)}) to current document!`));
+  };
+
+  const activeLocation = businessLocations.find((l) => l.id === selectedLocationId) || businessLocations[0] || DEFAULT_LOCATIONS[0];
+
+  const updateLocationField = (id: string, field: keyof BusinessLocation, val: string) => {
+    setBusinessLocations((prev) => {
+      const next = prev.map((loc) => (loc.id === id ? { ...loc, [field]: val } : loc));
+      if (typeof window !== "undefined") {
+        localStorage.setItem("sos_business_locations", JSON.stringify(next));
+      }
+      return next;
+    });
+    showToast(t("Standortdaten aktualisiert!", "Location data updated!"));
+  };
+
+  const addNewLocation = () => {
+    if (!newLocCity.trim()) {
+      showToast(t("Bitte geben Sie eine Stadt ein.", "Please enter a city name."));
+      return;
+    }
+    const cleanCity = newLocCity.trim();
+    const newLoc: BusinessLocation = {
+      id: `loc_${Date.now()}`,
+      name_de: `Standort ${businessLocations.length + 1}: ${cleanCity} (Niederlassung)`,
+      name_en: `Location ${businessLocations.length + 1}: ${cleanCity} (Branch Office)`,
+      type: "branch",
+      city: cleanCity,
+      plz: newLocPlz.trim() || "42xxx",
+      street: newLocStreet.trim() || `${cleanCity} Zentrum`,
+      phone: newLocPhone.trim() || "+49 (0)172 2064177",
+      url: newLocUrl.trim() || `https://sos-abdichtung.de/kellersanierung/${cleanCity.toLowerCase().replace(/[^a-z0-9]/g, "")}/`,
+      serviceAreas: `${cleanCity} & umliegende Region`,
+      googleMapsQuery: `sos-abdichtung+${encodeURIComponent(cleanCity)}`,
+    };
+    setBusinessLocations((prev) => {
+      const next = [...prev, newLoc];
+      if (typeof window !== "undefined") {
+        localStorage.setItem("sos_business_locations", JSON.stringify(next));
+      }
+      return next;
+    });
+    setSelectedLocationId(newLoc.id);
+    setNewLocCity("");
+    setNewLocPlz("");
+    setNewLocStreet("");
+    setNewLocUrl("");
+    setShowLocationEditorModal(false);
+    showToast(t(`Neuer Standort "${cleanCity}" erfolgreich angelegt!`, `New location "${cleanCity}" added successfully!`));
+  };
+
+  const removeLocation = (id: string) => {
+    if (businessLocations.length <= 1) {
+      showToast(t("Mindestens ein Hauptstandort muss erhalten bleiben.", "At least one location must remain."));
+      return;
+    }
+    setBusinessLocations((prev) => {
+      const next = prev.filter((l) => l.id !== id);
+      if (typeof window !== "undefined") {
+        localStorage.setItem("sos_business_locations", JSON.stringify(next));
+      }
+      return next;
+    });
+    setSelectedLocationId((prev) => (prev === id ? businessLocations[0]?.id || "loc_wuppertal" : prev));
+    showToast(t("Standort entfernt.", "Location removed."));
+  };
+
+  const resetLocationsToDefault = () => {
+    setBusinessLocations(DEFAULT_LOCATIONS);
+    setSelectedLocationId("loc_wuppertal");
+    if (typeof window !== "undefined") {
+      localStorage.removeItem("sos_business_locations");
+    }
+    showToast(t("Standorte auf Standardwerte zurückgesetzt.", "Locations reset to standard defaults."));
   };
 
   const openPhotoViewer = (
@@ -5302,12 +5453,108 @@ export default function AdminPortalClient() {
               </div>
             </div>
 
+            {/* Multi-Location Switcher Bar (2–3 Locations in NRW) */}
+            <div className="bg-slate-50 border border-slate-200 rounded-2xl p-4 sm:p-5 space-y-3.5 shadow-xs">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-200 pb-3">
+                <div className="space-y-0.5">
+                  <div className="text-[11px] font-black uppercase tracking-wider text-emerald-800 flex items-center gap-1.5">
+                    <MapPin className="w-3.5 h-3.5 text-emerald-600" />
+                    <span>{t("Standort-Auswahl (Multi-Location Management)", "Location Selector (Multi-Location Management)")}</span>
+                  </div>
+                  <div className="text-xs font-bold text-slate-700">
+                    {t(
+                      "Wählen Sie einen Ihrer 2–3 Betriebsstandorte aus, um die passenden Google-Profildaten, Adressen und Ziel-URLs zu kopieren:",
+                      "Select one of your business branch locations to copy tailored Google profile data, addresses, and landing URLs:"
+                    )}
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-2 shrink-0">
+                  <button
+                    type="button"
+                    onClick={() => setShowLocationEditorModal(true)}
+                    className="min-h-[36px] px-3 py-1.5 rounded-xl bg-white hover:bg-slate-100 text-slate-800 border border-slate-300 font-bold text-xs inline-flex items-center gap-1.5 shadow-xs transition-colors"
+                  >
+                    <Sliders className="w-3.5 h-3.5 text-emerald-700" />
+                    <span>{t("Standorte verwalten / hinzufügen", "Manage / Add Locations")}</span>
+                  </button>
+                  <a
+                    href="https://business.google.com/locations"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="min-h-[36px] px-3 py-1.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-extrabold text-xs inline-flex items-center gap-1.5 shadow-xs transition-colors"
+                  >
+                    <ExternalLink className="w-3.5 h-3.5" />
+                    <span>{t("Google Standortgruppe ↗", "Google Location Group ↗")}</span>
+                  </a>
+                </div>
+              </div>
+
+              {/* Location Tabs */}
+              <div className="flex flex-wrap gap-2">
+                {businessLocations.map((loc) => {
+                  const isCurrent = loc.id === selectedLocationId;
+                  return (
+                    <button
+                      key={loc.id}
+                      type="button"
+                      onClick={() => {
+                        setSelectedLocationId(loc.id);
+                        showToast(t(`Standort gewechselt zu: ${loc.city}`, `Switched location to: ${loc.city}`));
+                      }}
+                      className={`min-h-[44px] px-4 py-2 rounded-xl text-xs font-black inline-flex items-center gap-2 border transition-all ${
+                        isCurrent
+                          ? "bg-emerald-700 text-white border-emerald-700 shadow-sm ring-2 ring-emerald-400/50"
+                          : "bg-white hover:bg-slate-100 text-slate-700 border-slate-300 shadow-xs"
+                      }`}
+                    >
+                      <MapPin className={`w-3.5 h-3.5 shrink-0 ${isCurrent ? "text-white" : "text-emerald-700"}`} />
+                      <span>{isEn ? loc.name_en : loc.name_de}</span>
+                      <span
+                        className={`text-[10px] px-2 py-0.5 rounded-full font-bold uppercase tracking-wider ${
+                          isCurrent
+                            ? "bg-white/20 text-white"
+                            : "bg-slate-100 text-slate-600"
+                        }`}
+                      >
+                        {loc.type === "headquarters" ? t("Hauptsitz", "HQ") : t("Niederlassung", "Branch")}
+                      </span>
+                    </button>
+                  );
+                })}
+              </div>
+
+              {/* Active Location Info Bar */}
+              <div className="bg-emerald-50/80 rounded-xl p-3 border border-emerald-200 text-xs flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                <div className="flex items-center gap-2">
+                  <span className="w-2 h-2 rounded-full bg-emerald-600 animate-pulse" />
+                  <span className="font-extrabold text-slate-900">
+                    {t("Aktiver Profil-Filter:", "Active Profile Filter:")} <span className="text-emerald-800">{activeLocation.city}</span>
+                  </span>
+                  <span className="text-slate-500">({activeLocation.street}, {activeLocation.plz} {activeLocation.city})</span>
+                </div>
+                <div className="text-[11px] text-emerald-800 font-mono font-bold truncate">
+                  Ziel-URL: {activeLocation.url}
+                </div>
+              </div>
+            </div>
+
             {/* Quick 1-Click Master Data Grid */}
             <div className="space-y-2">
-              <h4 className="text-xs font-bold uppercase tracking-wider text-emerald-800 flex items-center gap-1.5">
-                <Sparkles className="w-3.5 h-3.5 text-emerald-600" />
-                <span>{t("1-Klick-Kopierbare Profildaten (Exakt auf Google-Richtlinien abgestimmt)", "1-Click Copy Profile Data (Optimized for Google Guidelines)")}</span>
-              </h4>
+              <div className="flex items-center justify-between">
+                <h4 className="text-xs font-bold uppercase tracking-wider text-emerald-800 flex items-center gap-1.5">
+                  <Sparkles className="w-3.5 h-3.5 text-emerald-600" />
+                  <span>
+                    {t(
+                      `1-Klick-Profildaten für Standort ${activeLocation.city} (Direkt in Google einfügen)`,
+                      `1-Click Profile Data for ${activeLocation.city} (Ready to Paste in Google)`
+                    )}
+                  </span>
+                </h4>
+                <span className="text-[11px] text-slate-500 font-semibold">
+                  {t("Gezielt optimiert für das Google Maps 3-Pack in", "Optimized for Google Maps 3-Pack in")} {activeLocation.city}
+                </span>
+              </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
                 {/* 1. Name */}
@@ -5315,13 +5562,13 @@ export default function AdminPortalClient() {
                   <div className="space-y-1">
                     <span className="text-[10px] font-bold uppercase tracking-wider text-slate-500">{t("1. Unternehmensname", "1. Business Name")}</span>
                     <div className="text-xs font-extrabold text-slate-900 leading-snug">
-                      sos-abdichtung – Kellersanierung & Schimmelbeseitigung Wuppertal
+                      sos-abdichtung – Kellersanierung & Schimmelbeseitigung {activeLocation.city}
                     </div>
                     <p className="text-[10px] text-slate-500">{t("Kombiniert Marke mit den zwei stärksten Suchbegriffen & Ort.", "Combines brand name with top local search keywords.")}</p>
                   </div>
                   <button
                     type="button"
-                    onClick={() => copyToClipboard("sos-abdichtung – Kellersanierung & Schimmelbeseitigung Wuppertal", t("Unternehmensname", "Business Name"), "name")}
+                    onClick={() => copyToClipboard(`sos-abdichtung – Kellersanierung & Schimmelbeseitigung ${activeLocation.city}`, t("Unternehmensname", "Business Name"), "name")}
                     className={`w-full min-h-[34px] px-3 py-1.5 rounded-lg text-xs font-bold inline-flex items-center justify-center gap-1.5 transition-all ${
                       copiedField === "name"
                         ? "bg-emerald-700 text-white font-black"
@@ -5361,38 +5608,46 @@ export default function AdminPortalClient() {
                 {/* 3. Address & Service Area */}
                 <div className="bg-slate-50 border border-slate-200 rounded-xl p-3.5 flex flex-col justify-between space-y-2.5 shadow-xs">
                   <div className="space-y-1">
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-slate-500">{t("3. Standort & Einzugsgebiet", "3. Address & Service Area")}</span>
+                    <div className="flex items-center justify-between">
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-slate-500">{t("3. Standort & Einzugsgebiet", "3. Address & Service Area")}</span>
+                      <span className={`text-[9px] px-1.5 py-0.5 rounded font-extrabold uppercase ${activeLocation.type === "headquarters" ? "bg-emerald-100 text-emerald-800" : "bg-blue-100 text-blue-800"}`}>
+                        {activeLocation.type === "headquarters" ? t("Hauptsitz", "HQ") : t("Filiale", "Branch")}
+                      </span>
+                    </div>
                     <div className="text-xs font-bold text-slate-900">
-                      {COMPANY_INFO.street}, {COMPANY_INFO.city}
+                      {activeLocation.street}, {activeLocation.plz} {activeLocation.city}
                     </div>
                     <p className="text-[10px] text-slate-500">
-                      {t("Einzugsgebiet: Wuppertal, Solingen, Remscheid, Velbert, Haan, Wermelskirchen, Essen", "Service area: Wuppertal, Solingen, Remscheid, Velbert, Haan, Wermelskirchen, Essen")}
+                      <span className="font-semibold text-slate-700">{t("Einzugsgebiet:", "Service area:")}</span> {activeLocation.serviceAreas}
                     </p>
                   </div>
                   <button
                     type="button"
-                    onClick={() => copyToClipboard("Wuppertal, Solingen, Remscheid, Velbert, Haan, Wermelskirchen, Essen", t("Einzugsgebiete", "Service Areas"), "area")}
+                    onClick={() => copyToClipboard(`${activeLocation.street}, ${activeLocation.plz} ${activeLocation.city}`, t("Adresse", "Address"), "addr")}
                     className={`w-full min-h-[34px] px-3 py-1.5 rounded-lg text-xs font-bold inline-flex items-center justify-center gap-1.5 transition-all ${
-                      copiedField === "area"
+                      copiedField === "addr"
                         ? "bg-emerald-700 text-white font-black"
                         : "bg-white hover:bg-slate-100 text-slate-700 border border-slate-300 shadow-xs"
                     }`}
                   >
-                    {copiedField === "area" ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
-                    <span>{copiedField === "area" ? t("Kopiert!", "Copied!") : t("Einzugsgebiete kopieren", "Copy Service Areas")}</span>
+                    {copiedField === "addr" ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
+                    <span>{copiedField === "addr" ? t("Kopiert!", "Copied!") : t("Adresse kopieren", "Copy Address")}</span>
                   </button>
                 </div>
 
-                {/* 4. Phone & Website */}
+                {/* 4. Phone & Dedicated City Landing Page */}
                 <div className="bg-slate-50 border border-slate-200 rounded-xl p-3.5 flex flex-col justify-between space-y-2.5 shadow-xs">
                   <div className="space-y-1">
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-slate-500">{t("4. Telefon & Website", "4. Phone & Website")}</span>
-                    <div className="text-xs font-bold text-slate-900">{COMPANY_INFO.phoneDisplay}</div>
-                    <div className="text-[11px] text-slate-600">https://sos-abdichtung.de/</div>
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-slate-500">{t("4. Telefon & Zielseite (SEO)", "4. Phone & City Landing URL")}</span>
+                    <div className="text-xs font-bold text-slate-900">{activeLocation.phone}</div>
+                    <div className="text-[11px] font-semibold text-emerald-800 break-all">{activeLocation.url}</div>
+                    <p className="text-[10px] text-slate-500 leading-snug">
+                      {t("Wichtig: Immer die städtespezifische Landingpage verlinken für 10x höheres Google Maps Ranking!", "Important: Always link the city-specific landing page for 10x higher Google Maps ranking!")}
+                    </p>
                   </div>
                   <button
                     type="button"
-                    onClick={() => copyToClipboard("https://sos-abdichtung.de/", t("Website-URL", "Website URL"), "web")}
+                    onClick={() => copyToClipboard(activeLocation.url, t("Standort-URL", "Location URL"), "web")}
                     className={`w-full min-h-[34px] px-3 py-1.5 rounded-lg text-xs font-bold inline-flex items-center justify-center gap-1.5 transition-all ${
                       copiedField === "web"
                         ? "bg-emerald-700 text-white font-black"
@@ -5400,7 +5655,7 @@ export default function AdminPortalClient() {
                     }`}
                   >
                     {copiedField === "web" ? <Check className="w-3.5 h-3.5" /> : <Copy className="w-3.5 h-3.5" />}
-                    <span>{copiedField === "web" ? t("Kopiert!", "Copied!") : t("Website-URL kopieren", "Copy Website")}</span>
+                    <span>{copiedField === "web" ? t("Kopiert!", "Copied!") : t("Standort-URL kopieren", "Copy City URL")}</span>
                   </button>
                 </div>
 
@@ -5618,7 +5873,140 @@ export default function AdminPortalClient() {
             </div>
           </div>
 
-          {/* DAY-BY-DAY GOOGLE SEARCH GROWTH TRACKER */}
+          {/* MULTI-LOCATION SEO STRATEGY GUIDE (2-3 BUSINESS ADDRESSES) */}
+          <div className="bg-gradient-to-br from-slate-900 to-slate-800 rounded-2xl p-5 sm:p-6 text-white shadow-md space-y-5">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-700/80 pb-4">
+              <div className="space-y-1">
+                <div className="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 text-[11px] font-bold border border-emerald-400/30">
+                  <Building2 className="w-3.5 h-3.5 text-emerald-400" />
+                  <span>{t("Multi-Standort-Strategie (2-3 Adressen)", "Multi-Location SEO Strategy (2-3 Addresses)")}</span>
+                </div>
+                <h4 className="text-base sm:text-lg font-black tracking-tight text-white">
+                  {t(
+                    "Die 5 Goldenen Regeln für Google-Erfolg mit 2-3 Firmenstandorten",
+                    "The 5 Golden Rules for Dominating Google with 2-3 Business Locations"
+                  )}
+                </h4>
+                <p className="text-xs text-slate-300 max-w-2xl leading-relaxed">
+                  {t(
+                    "Wenn Ihr Handwerksbetrieb 2 oder 3 Standorte betreibt, bündeln Sie Ihre Reichweite statt sich selbst zu kanibalisieren. So strukturieren Sie Google Business, SEO & Google Ads professionell:",
+                    "When managing 2 or 3 business addresses, maximize multi-city authority without cannibalizing rankings. Here is how to structure Google Business, SEO & Ads:"
+                  )}
+                </p>
+              </div>
+
+              <button
+                type="button"
+                onClick={() => setShowLocationEditorModal(true)}
+                className="min-h-[40px] px-4 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-extrabold text-xs inline-flex items-center gap-2 shrink-0 shadow-sm transition-all"
+              >
+                <Sliders className="w-4 h-4" />
+                <span>{t("Standorte verwalten / bearbeiten", "Manage / Edit Locations")}</span>
+              </button>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-5 gap-3.5">
+              {/* Rule 1 */}
+              <div className="bg-slate-800/80 border border-slate-700 rounded-xl p-3.5 space-y-2 flex flex-col justify-between hover:border-emerald-500/40 transition-colors">
+                <div className="space-y-1.5">
+                  <div className="flex items-center justify-between">
+                    <span className="w-6 h-6 rounded-lg bg-emerald-500/20 text-emerald-400 font-black text-xs flex items-center justify-center border border-emerald-500/30">1</span>
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Google GBP</span>
+                  </div>
+                  <div className="text-xs font-black text-white">{t("Eine Standortgruppe", "Single Location Group")}</div>
+                  <p className="text-[11px] text-slate-300 leading-snug">
+                    {t(
+                      "Keine separaten Google-Konten anlegen! Alle 2-3 Adressen in einer zentralen Standortgruppe bei business.google.com verwalten.",
+                      "Never create separate Google accounts! Manage all 2-3 addresses under a single central Location Group in Google Business Profile."
+                    )}
+                  </p>
+                </div>
+                <div className="pt-2 border-t border-slate-700/60 text-[10px] font-medium text-emerald-400">
+                  ✓ {t("Zentral gesteuert", "Centrally controlled")}
+                </div>
+              </div>
+
+              {/* Rule 2 */}
+              <div className="bg-slate-800/80 border border-slate-700 rounded-xl p-3.5 space-y-2 flex flex-col justify-between hover:border-emerald-500/40 transition-colors">
+                <div className="space-y-1.5">
+                  <div className="flex items-center justify-between">
+                    <span className="w-6 h-6 rounded-lg bg-emerald-500/20 text-emerald-400 font-black text-xs flex items-center justify-center border border-emerald-500/30">2</span>
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Landingpages</span>
+                  </div>
+                  <div className="text-xs font-black text-white">{t("Eigene Stadt-URLs", "Dedicated City URLs")}</div>
+                  <p className="text-[11px] text-slate-300 leading-snug">
+                    {t(
+                      "Niemals alle Filialen auf die Startseite verlinken! Filiale Solingen verlinkt auf /kellersanierung/solingen/, Remscheid auf /remscheid/.",
+                      "Never link all branches to the homepage! Branch Solingen links to /kellersanierung/solingen/, Remscheid to /remscheid/."
+                    )}
+                  </p>
+                </div>
+                <div className="pt-2 border-t border-slate-700/60 text-[10px] font-medium text-emerald-400">
+                  ✓ {t("10x höheres Maps-Ranking", "10x higher Maps ranking")}
+                </div>
+              </div>
+
+              {/* Rule 3 */}
+              <div className="bg-slate-800/80 border border-slate-700 rounded-xl p-3.5 space-y-2 flex flex-col justify-between hover:border-emerald-500/40 transition-colors">
+                <div className="space-y-1.5">
+                  <div className="flex items-center justify-between">
+                    <span className="w-6 h-6 rounded-lg bg-emerald-500/20 text-emerald-400 font-black text-xs flex items-center justify-center border border-emerald-500/30">3</span>
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">NAP-Konsistenz</span>
+                  </div>
+                  <div className="text-xs font-black text-white">{t("Name, Adresse & Tel.", "Consistent NAP Data")}</div>
+                  <p className="text-[11px] text-slate-300 leading-snug">
+                    {t(
+                      "Jeder Standort hat eigene Postanschrift und vorzugsweise lokale Vorwahl. Keine Postfächer, da Google physische Beschilderung prüft.",
+                      "Each branch has exact street address and preferably local area code. No PO boxes allowed as Google verifies physical signage."
+                    )}
+                  </p>
+                </div>
+                <div className="pt-2 border-t border-slate-700/60 text-[10px] font-medium text-emerald-400">
+                  ✓ {t("100% verifizierbar", "100% verifiable")}
+                </div>
+              </div>
+
+              {/* Rule 4 */}
+              <div className="bg-slate-800/80 border border-slate-700 rounded-xl p-3.5 space-y-2 flex flex-col justify-between hover:border-emerald-500/40 transition-colors">
+                <div className="space-y-1.5">
+                  <div className="flex items-center justify-between">
+                    <span className="w-6 h-6 rounded-lg bg-emerald-500/20 text-emerald-400 font-black text-xs flex items-center justify-center border border-emerald-500/30">4</span>
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Google Ads</span>
+                  </div>
+                  <div className="text-xs font-black text-white">{t("Standort-Assets", "Location Assets")}</div>
+                  <p className="text-[11px] text-slate-300 leading-snug">
+                    {t(
+                      "Google Ads mit der GBP-Standortgruppe verknüpfen. Google zeigt Suchenden automatisch die nächstgelegene Niederlassung an.",
+                      "Link Google Ads directly to the GBP Location Group. Google Ads will dynamically display the closest branch and distance to the searcher."
+                    )}
+                  </p>
+                </div>
+                <div className="pt-2 border-t border-slate-700/60 text-[10px] font-medium text-emerald-400">
+                  ✓ {t("Bis zu 30% geringere CPC", "Up to 30% lower CPC")}
+                </div>
+              </div>
+
+              {/* Rule 5 */}
+              <div className="bg-slate-800/80 border border-slate-700 rounded-xl p-3.5 space-y-2 flex flex-col justify-between hover:border-emerald-500/40 transition-colors">
+                <div className="space-y-1.5">
+                  <div className="flex items-center justify-between">
+                    <span className="w-6 h-6 rounded-lg bg-emerald-500/20 text-emerald-400 font-black text-xs flex items-center justify-center border border-emerald-500/30">5</span>
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">Google LSA</span>
+                  </div>
+                  <div className="text-xs font-black text-white">{t("Käuferschutz / LSA", "Google Guaranteed")}</div>
+                  <p className="text-[11px] text-slate-300 leading-snug">
+                    {t(
+                      "In Google Lokale Dienstleistungen alle PLZ-Zonen beider Standorte eintragen. Anrufe werden direkt zur Zentrale oder Filiale geroutet.",
+                      "In Local Services Ads (LSA), add postal codes from all branch territories. Calls are routed directly to HQ or branch."
+                    )}
+                  </p>
+                </div>
+                <div className="pt-2 border-t border-slate-700/60 text-[10px] font-medium text-emerald-400">
+                  ✓ {t("Pay-per-Call Anrufe", "Pay-per-Call leads")}
+                </div>
+              </div>
+            </div>
+          </div>
           <div className="bg-white rounded-2xl p-5 sm:p-6 border border-slate-200 shadow-sm space-y-4">
             <div className="border-b border-slate-100 pb-3 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
               <div>
@@ -6547,6 +6935,247 @@ export default function AdminPortalClient() {
               <button
                 type="button"
                 onClick={() => setShowPriceListModal(false)}
+                className="min-h-[44px] px-6 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-black text-xs shadow-sm"
+              >
+                {t("Fertig & Schließen", "Done & Close")}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* MULTI-LOCATION & BRANCH MANAGER MODAL */}
+      {showLocationEditorModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-5 bg-slate-900/60 backdrop-blur-xs overflow-y-auto">
+          <div className="bg-white rounded-2xl shadow-2xl border border-slate-200 max-w-3xl w-full my-auto overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+            {/* Modal Header */}
+            <div className="p-4 sm:p-5 border-b border-slate-100 flex items-center justify-between bg-slate-50/80">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-800 flex items-center justify-center shrink-0">
+                  <Building2 className="w-5 h-5" />
+                </div>
+                <div>
+                  <h3 className="text-base font-black text-slate-900">
+                    {t("Firmenstandorte & Filialen verwalten", "Manage Business Locations & Branches")}
+                  </h3>
+                  <p className="text-xs text-slate-500">
+                    {t(
+                      "Definieren Sie Hauptsitz & Niederlassungen für Google Business Profile, Local SEO & Google Ads",
+                      "Configure HQ & branch offices for Google Business Profile, Local SEO & Google Ads"
+                    )}
+                  </p>
+                </div>
+              </div>
+              <button
+                type="button"
+                onClick={() => setShowLocationEditorModal(false)}
+                className="w-8 h-8 rounded-lg flex items-center justify-center text-slate-400 hover:text-slate-600 hover:bg-slate-200/60"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            {/* Modal Body */}
+            <div className="p-4 sm:p-6 space-y-6 max-h-[75vh] overflow-y-auto">
+              {/* Existing Locations List */}
+              <div className="space-y-3">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-bold text-slate-700 uppercase tracking-wider">
+                    {t("Aktive Standorte", "Active Locations")} ({businessLocations.length})
+                  </span>
+                  <a
+                    href="https://business.google.com/locations"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-xs font-bold text-emerald-700 hover:text-emerald-800 hover:underline inline-flex items-center gap-1"
+                  >
+                    <span>{t("Google Standortgruppe öffnen ↗", "Open Google Location Group ↗")}</span>
+                  </a>
+                </div>
+
+                <div className="space-y-3">
+                  {businessLocations.map((loc, idx) => (
+                    <div
+                      key={loc.id}
+                      className="bg-slate-50 border border-slate-200 rounded-xl p-3.5 space-y-3"
+                    >
+                      <div className="flex items-center justify-between gap-2">
+                        <div className="flex items-center gap-2">
+                          <span className="w-6 h-6 rounded-lg bg-slate-200 text-slate-700 font-black text-xs flex items-center justify-center">
+                            {idx + 1}
+                          </span>
+                          <span className="text-xs font-black text-slate-900">
+                            {isEn ? loc.name_en : loc.name_de}
+                          </span>
+                          <span
+                            className={`text-[9px] px-2 py-0.5 rounded font-extrabold uppercase ${
+                              loc.type === "headquarters"
+                                ? "bg-emerald-100 text-emerald-800"
+                                : "bg-blue-100 text-blue-800"
+                            }`}
+                          >
+                            {loc.type === "headquarters" ? t("Hauptsitz", "HQ") : t("Niederlassung", "Branch")}
+                          </span>
+                        </div>
+
+                        {businessLocations.length > 1 && loc.type !== "headquarters" && (
+                          <button
+                            type="button"
+                            onClick={() => removeLocation(loc.id)}
+                            className="text-slate-400 hover:text-rose-600 p-1 rounded hover:bg-rose-50 transition-colors"
+                            title={t("Standort entfernen", "Remove location")}
+                          >
+                            <Trash2 className="w-4 h-4" />
+                          </button>
+                        )}
+                      </div>
+
+                      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-2 text-xs">
+                        <div>
+                          <label className="text-[10px] font-bold text-slate-500 uppercase">{t("Stadt", "City")}</label>
+                          <input
+                            type="text"
+                            value={loc.city}
+                            onChange={(e) => updateLocationField(loc.id, "city", e.target.value)}
+                            className="w-full mt-0.5 text-xs font-semibold px-2.5 py-1.5 border border-slate-300 rounded-lg bg-white"
+                          />
+                        </div>
+                        <div>
+                          <label className="text-[10px] font-bold text-slate-500 uppercase">{t("PLZ & Straße", "ZIP & Street")}</label>
+                          <div className="flex gap-1 mt-0.5">
+                            <input
+                              type="text"
+                              value={loc.plz}
+                              onChange={(e) => updateLocationField(loc.id, "plz", e.target.value)}
+                              placeholder="PLZ"
+                              className="w-16 text-xs font-semibold px-2 py-1.5 border border-slate-300 rounded-lg bg-white"
+                            />
+                            <input
+                              type="text"
+                              value={loc.street}
+                              onChange={(e) => updateLocationField(loc.id, "street", e.target.value)}
+                              placeholder="Straße"
+                              className="w-full text-xs font-semibold px-2 py-1.5 border border-slate-300 rounded-lg bg-white"
+                            />
+                          </div>
+                        </div>
+                        <div>
+                          <label className="text-[10px] font-bold text-slate-500 uppercase">{t("Telefonnummer", "Phone")}</label>
+                          <input
+                            type="text"
+                            value={loc.phone}
+                            onChange={(e) => updateLocationField(loc.id, "phone", e.target.value)}
+                            className="w-full mt-0.5 text-xs font-semibold px-2.5 py-1.5 border border-slate-300 rounded-lg bg-white"
+                          />
+                        </div>
+                        <div>
+                          <label className="text-[10px] font-bold text-slate-500 uppercase">{t("Zielseiten-URL (SEO)", "City URL")}</label>
+                          <input
+                            type="text"
+                            value={loc.url}
+                            onChange={(e) => updateLocationField(loc.id, "url", e.target.value)}
+                            className="w-full mt-0.5 text-xs font-semibold px-2.5 py-1.5 border border-slate-300 rounded-lg bg-white text-emerald-800"
+                          />
+                        </div>
+                      </div>
+
+                      <div>
+                        <label className="text-[10px] font-bold text-slate-500 uppercase">{t("Einzugsgebiet / Nachbarstädte", "Service Area")}</label>
+                        <input
+                          type="text"
+                          value={loc.serviceAreas}
+                          onChange={(e) => updateLocationField(loc.id, "serviceAreas", e.target.value)}
+                          className="w-full mt-0.5 text-xs font-medium px-2.5 py-1.5 border border-slate-300 rounded-lg bg-white text-slate-700"
+                        />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Add New Location Form */}
+              <div className="p-4 bg-emerald-50/50 border border-emerald-200/80 rounded-xl space-y-3">
+                <h4 className="text-xs font-extrabold text-slate-900 flex items-center gap-2">
+                  <Plus className="w-4 h-4 text-emerald-700" />
+                  <span>{t("Weitere Niederlassung / Standort hinzufügen", "Add Another Branch / Location")}</span>
+                </h4>
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2.5">
+                  <div>
+                    <label className="text-[10px] font-bold text-slate-600 uppercase">{t("Stadt", "City")}</label>
+                    <input
+                      type="text"
+                      value={newLocCity}
+                      onChange={(e) => setNewLocCity(e.target.value)}
+                      placeholder="z.B. Düsseldorf"
+                      className="w-full mt-0.5 text-xs font-semibold px-2.5 py-2 border border-slate-300 rounded-lg bg-white min-h-[38px]"
+                    />
+                  </div>
+                  <div>
+                    <label className="text-[10px] font-bold text-slate-600 uppercase">{t("PLZ", "Postal Code")}</label>
+                    <input
+                      type="text"
+                      value={newLocPlz}
+                      onChange={(e) => setNewLocPlz(e.target.value)}
+                      placeholder="z.B. 40210"
+                      className="w-full mt-0.5 text-xs font-semibold px-2.5 py-2 border border-slate-300 rounded-lg bg-white min-h-[38px]"
+                    />
+                  </div>
+                  <div>
+                    <label className="text-[10px] font-bold text-slate-600 uppercase">{t("Straße & Nr.", "Street & No.")}</label>
+                    <input
+                      type="text"
+                      value={newLocStreet}
+                      onChange={(e) => setNewLocStreet(e.target.value)}
+                      placeholder="z.B. Königsallee 1"
+                      className="w-full mt-0.5 text-xs font-semibold px-2.5 py-2 border border-slate-300 rounded-lg bg-white min-h-[38px]"
+                    />
+                  </div>
+                  <div>
+                    <label className="text-[10px] font-bold text-slate-600 uppercase">{t("Telefon", "Phone")}</label>
+                    <input
+                      type="text"
+                      value={newLocPhone}
+                      onChange={(e) => setNewLocPhone(e.target.value)}
+                      placeholder="z.B. +49 211 1234567"
+                      className="w-full mt-0.5 text-xs font-semibold px-2.5 py-2 border border-slate-300 rounded-lg bg-white min-h-[38px]"
+                    />
+                  </div>
+                  <div className="sm:col-span-2">
+                    <label className="text-[10px] font-bold text-slate-600 uppercase">{t("Landingpage-URL", "Landing Page URL")}</label>
+                    <input
+                      type="text"
+                      value={newLocUrl}
+                      onChange={(e) => setNewLocUrl(e.target.value)}
+                      placeholder="https://sos-abdichtung.de/kellersanierung/duesseldorf/"
+                      className="w-full mt-0.5 text-xs font-semibold px-2.5 py-2 border border-slate-300 rounded-lg bg-white min-h-[38px]"
+                    />
+                  </div>
+                </div>
+
+                <button
+                  type="button"
+                  onClick={addNewLocation}
+                  className="w-full min-h-[40px] bg-emerald-700 hover:bg-emerald-800 text-white font-extrabold text-xs py-2 px-4 rounded-xl flex items-center justify-center gap-2 shadow-xs transition-colors"
+                >
+                  <Plus className="w-4 h-4" />
+                  <span>{t("Standort speichern & aktivieren", "Save Location & Enable")}</span>
+                </button>
+              </div>
+            </div>
+
+            {/* Modal Footer */}
+            <div className="p-4 sm:p-5 border-t border-slate-100 bg-slate-50 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+              <button
+                type="button"
+                onClick={resetLocationsToDefault}
+                className="text-xs font-bold text-slate-500 hover:text-slate-800 underline"
+              >
+                {t("Standard-Standorte wiederherstellen", "Reset to Default Locations")}
+              </button>
+
+              <button
+                type="button"
+                onClick={() => setShowLocationEditorModal(false)}
                 className="min-h-[44px] px-6 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-black text-xs shadow-sm"
               >
                 {t("Fertig & Schließen", "Done & Close")}
