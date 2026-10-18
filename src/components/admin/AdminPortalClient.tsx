@@ -5871,6 +5871,130 @@ export default function AdminPortalClient() {
                 </div>
               </div>
             </div>
+
+            {/* GOOGLE PROFILE LOGO & COVER PHOTO ASSET PACK */}
+            <div className="bg-white border border-slate-200 rounded-xl p-4 sm:p-5 shadow-xs space-y-4">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-3">
+                <div className="space-y-0.5">
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
+                    {t("Google Profil Asset-Paket", "Google Profile Asset Pack")}
+                  </span>
+                  <h4 className="text-sm font-extrabold text-slate-900 flex items-center gap-2 mt-1">
+                    <Camera className="w-4 h-4 text-emerald-700" />
+                    <span>{t("Ihr offizielles Logo & Titelbild für Google Business Profile", "Your Official Logo & Cover Photo for Google Business Profile")}</span>
+                  </h4>
+                  <p className="text-xs text-slate-500">
+                    {t(
+                      "Perfekt formatiert für Googles Kreis-Zuschnitt & 16:9-Titelbanner. Direkt herunterladen & in Google hochladen:",
+                      "Pre-formatted for Google's circular crop & 16:9 cover banner. Download directly & upload to Google:"
+                    )}
+                  </p>
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {/* 1. Square Logo Card */}
+                <div className="bg-slate-50 border border-slate-200 rounded-xl p-4 flex flex-col justify-between space-y-3">
+                  <div className="space-y-2">
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs font-bold text-slate-800">{t("1. Google Logo (Quadratisch 800×800)", "1. Google Logo (Square 800×800)")}</span>
+                      <span className="text-[10px] font-bold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded">PNG • 1:1</span>
+                    </div>
+                    <div className="h-44 bg-white border border-slate-200 rounded-lg flex items-center justify-center p-4 overflow-hidden relative shadow-inner">
+                      {/* Circular crop preview overlay */}
+                      <div className="absolute inset-4 rounded-full border-2 border-dashed border-emerald-500/40 pointer-events-none" title="Google Kreis-Zuschnitt Vorschau" />
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src="/google-profile/01-google-business-logo-800x800.png"
+                        alt="SOS Abdichtung Google Profil Logo"
+                        className="max-h-32 object-contain"
+                      />
+                    </div>
+                    <p className="text-[11px] text-slate-500 leading-snug">
+                      {t("Mit optimierter Schutzzone (Circle-Safe), damit die Schrift bei Google Maps niemals abgeschnitten wird.", "With circle-safe padding so text never gets cropped out in Google Maps.")}
+                    </p>
+                  </div>
+
+                  <a
+                    href="/google-profile/01-google-business-logo-800x800.png"
+                    download="sos-abdichtung-google-logo.png"
+                    className="w-full min-h-[38px] bg-slate-900 hover:bg-slate-800 text-white font-extrabold text-xs px-3 py-2 rounded-xl inline-flex items-center justify-center gap-2 shadow-xs transition-colors"
+                  >
+                    <Download className="w-3.5 h-3.5" />
+                    <span>{t("Logo herunterladen (PNG)", "Download Logo (PNG)")}</span>
+                  </a>
+                </div>
+
+                {/* 2. Cover Photo Card */}
+                <div className="bg-slate-50 border border-slate-200 rounded-xl p-4 flex flex-col justify-between space-y-3">
+                  <div className="space-y-2">
+                    <div className="flex items-center justify-between">
+                      <span className="text-xs font-bold text-slate-800">{t("2. Google Titelbild (16:9 Banner 1200×675)", "2. Google Cover Banner (16:9 1200×675)")}</span>
+                      <span className="text-[10px] font-bold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded">PNG • 16:9</span>
+                    </div>
+                    <div className="h-44 bg-slate-900 border border-slate-800 rounded-lg flex items-center justify-center p-2 overflow-hidden relative shadow-inner">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src="/google-profile/02-google-business-cover-1200x675.png"
+                        alt="SOS Abdichtung Google Profil Titelbild"
+                        className="w-full h-full object-cover rounded"
+                      />
+                    </div>
+                    <p className="text-[11px] text-slate-500 leading-snug">
+                      {t("Professionelles Titelbild mit TÜV-Qualitätsversprechen, Leistungsübersicht & 24/7 Notdienst-Hotline.", "Professional cover banner with TÜV certification, services overview & emergency hotline.")}
+                    </p>
+                  </div>
+
+                  <a
+                    href="/google-profile/02-google-business-cover-1200x675.png"
+                    download="sos-abdichtung-google-cover.png"
+                    className="w-full min-h-[38px] bg-emerald-700 hover:bg-emerald-800 text-white font-extrabold text-xs px-3 py-2 rounded-xl inline-flex items-center justify-center gap-2 shadow-xs transition-colors"
+                  >
+                    <Download className="w-3.5 h-3.5" />
+                    <span>{t("Titelbild herunterladen (PNG)", "Download Cover Photo (PNG)")}</span>
+                  </a>
+                </div>
+              </div>
+
+              {/* Work & Fleet Gallery Strip */}
+              <div className="pt-2 border-t border-slate-100 space-y-2">
+                <span className="text-[11px] font-bold text-slate-700">{t("3. Zusätzliche Baustellen- & Fahrzeugfotos für Google:", "3. Additional Job Site & Vehicle Photos for Google:")}</span>
+                <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                  <a
+                    href="/img/brand/brand-van.webp"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-2 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-lg text-center text-[10px] font-bold text-slate-700 block transition-colors"
+                  >
+                    🚐 {t("Firmenfahrzeug / Van ↗", "Company Van ↗")}
+                  </a>
+                  <a
+                    href="/img/gallery/saniert-kellerraum-960.webp"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-2 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-lg text-center text-[10px] font-bold text-slate-700 block transition-colors"
+                  >
+                    ✨ {t("Saniertes Kellerzimmer ↗", "Finished Cellar ↗")}
+                  </a>
+                  <a
+                    href="/media/film-feuchtemessung.webp"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-2 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-lg text-center text-[10px] font-bold text-slate-700 block transition-colors"
+                  >
+                    🔬 {t("Feuchtemessung Gerät ↗", "Diagnostic Device ↗")}
+                  </a>
+                  <a
+                    href="/img/gallery/feuchterand-sockel-960.webp"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="p-2 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-lg text-center text-[10px] font-bold text-slate-700 block transition-colors"
+                  >
+                    🧱 {t("Sockel & Mauerwerk ↗", "Masonry Repair ↗")}
+                  </a>
+                </div>
+              </div>
+            </div>
           </div>
 
           {/* MULTI-LOCATION SEO STRATEGY GUIDE (2-3 BUSINESS ADDRESSES) */}
