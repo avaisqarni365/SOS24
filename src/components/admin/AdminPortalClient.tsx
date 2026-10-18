@@ -53,6 +53,11 @@ import {
   Grid,
   List,
   ImageIcon,
+  Play,
+  Pause,
+  Power,
+  DollarSign,
+  Sliders,
 } from "lucide-react";
 import { COMPANY, COMPANY_INFO } from "@/data/content-data";
 import {
@@ -350,6 +355,36 @@ export default function AdminPortalClient() {
   const [toast, setToast] = useState<string>("");
   const [publishStatus, setPublishStatus] = useState<string>("");
   const [adminUploading, setAdminUploading] = useState(false);
+
+  // Paid Marketing Campaign & Weekly Schedule Manager state
+  const [campaignActive, setCampaignActive] = useState<boolean>(() => {
+    if (typeof window !== "undefined") {
+      const saved = localStorage.getItem("sos_marketing_active");
+      return saved !== null ? saved === "true" : true;
+    }
+    return true;
+  });
+  const [weeklyBudget, setWeeklyBudget] = useState<number>(() => {
+    if (typeof window !== "undefined") {
+      const saved = localStorage.getItem("sos_marketing_budget");
+      return saved ? Number(saved) : 150;
+    }
+    return 150;
+  });
+  const [schedulePlan, setSchedulePlan] = useState<"weekdays" | "fullweek" | "emergency">(() => {
+    if (typeof window !== "undefined") {
+      const saved = localStorage.getItem("sos_marketing_schedule") as any;
+      if (saved && ["weekdays", "fullweek", "emergency"].includes(saved)) return saved;
+    }
+    return "weekdays";
+  });
+  const [autoPauseCapacity, setAutoPauseCapacity] = useState<boolean>(() => {
+    if (typeof window !== "undefined") {
+      const saved = localStorage.getItem("sos_marketing_autopause");
+      return saved !== null ? saved === "true" : true;
+    }
+    return true;
+  });
 
   // Aufmaß-Planer state
   const [plName, setPlName] = useState("");
@@ -4377,6 +4412,362 @@ export default function AdminPortalClient() {
                   >
                     <span>{t("Local Services Ads ↗", "Open LSA ↗")}</span>
                   </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* PAID MARKETING CAMPAIGNS & WEEKLY PLAN MANAGER (GOOGLE LSA, SEARCH ADS & META) */}
+          <div className="bg-white border-2 border-emerald-500/30 rounded-2xl p-5 sm:p-7 text-slate-900 space-y-6 shadow-sm">
+            {/* Header + Master Status Badge */}
+            <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-5 border-b border-slate-100">
+              <div className="space-y-1.5">
+                <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-[11px] font-extrabold tracking-wide uppercase">
+                  <Power className="w-3.5 h-3.5 shrink-0 text-emerald-600" />
+                  <span>{t("Bezahlte Marketing-Kampagnen (Google & Meta)", "Paid Marketing Campaigns (Google & Meta)")}</span>
+                </div>
+                <h3 className="text-xl sm:text-2xl font-black tracking-tight text-slate-900 flex items-center gap-2">
+                  <span>{t("Kampagnen-Steuerung: Start/Stopp & Wochenpläne", "Campaign Controls: Start/Stop & Weekly Plans")}</span>
+                </h3>
+                <p className="text-xs sm:text-sm text-slate-600 max-w-3xl leading-relaxed">
+                  {t(
+                    "Steuern Sie Ihre bezahlten Werbekampagnen (Google Local Services Ads, Suchanzeigen & Meta) flexibel per Knopfdruck. Pausieren Sie Kampagnen bei hoher Auslastung und wählen Sie feste Wochenpläne und Budget-Deckel.",
+                    "Control your paid advertising campaigns (Google Local Services Ads, Search Ads & Meta) on demand. Pause ads instantly during high capacity, choose weekly schedules, and cap weekly spending."
+                  )}
+                </p>
+              </div>
+
+              {/* Live Status Indicator & Master Start/Stop Toggle */}
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 shrink-0">
+                <div
+                  className={`px-3.5 py-2 rounded-xl border flex items-center gap-2.5 text-xs font-black shadow-xs ${
+                    campaignActive
+                      ? "bg-emerald-50 border-emerald-300 text-emerald-900"
+                      : "bg-amber-50 border-amber-300 text-amber-900"
+                  }`}
+                >
+                  <span
+                    className={`w-2.5 h-2.5 rounded-full ${
+                      campaignActive
+                        ? "bg-emerald-500 animate-pulse ring-4 ring-emerald-100"
+                        : "bg-amber-500 ring-4 ring-amber-100"
+                    }`}
+                  />
+                  <span>
+                    {campaignActive
+                      ? t("KAMPAGNE AKTIV (Live geschaltet)", "CAMPAIGN ACTIVE (Broadcasting)")
+                      : t("PAUSIERT (0 € Kosten / Gestoppt)", "PAUSED (0 € Cost / Inactive)")}
+                  </span>
+                </div>
+
+                <button
+                  type="button"
+                  onClick={() => {
+                    const next = !campaignActive;
+                    setCampaignActive(next);
+                    if (typeof window !== "undefined") {
+                      localStorage.setItem("sos_marketing_active", String(next));
+                    }
+                    showToast(
+                      next
+                        ? t("✓ Werbekampagnen gestartet! Anzeigen werden in NRW ausgespielt.", "✓ Paid campaigns resumed! Ads are now broadcasting in NRW.")
+                        : t("⏸ Werbekampagnen pausiert! Anzeigen gestoppt, keine Klickkosten (0 €).", "⏸ Paid campaigns paused! Ad spend stopped (0 € cost).")
+                    );
+                  }}
+                  className={`min-h-[46px] px-5 py-2.5 rounded-xl font-black text-xs sm:text-sm inline-flex items-center justify-center gap-2 shadow-sm transition-all ${
+                    campaignActive
+                      ? "bg-rose-600 hover:bg-rose-700 text-white"
+                      : "bg-emerald-600 hover:bg-emerald-700 text-white"
+                  }`}
+                >
+                  {campaignActive ? (
+                    <>
+                      <Pause className="w-4 h-4 shrink-0 fill-current" />
+                      <span>{t("Kampagne pausieren (Werbung stoppen)", "Pause Campaign (Stop Ads)")}</span>
+                    </>
+                  ) : (
+                    <>
+                      <Play className="w-4 h-4 shrink-0 fill-current" />
+                      <span>{t("Kampagne starten (Werbung aktivieren)", "Start Campaign (Resume Ads)")}</span>
+                    </>
+                  )}
+                </button>
+              </div>
+            </div>
+
+            {/* 3 Interactive Setting Blocks */}
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-5">
+              {/* BLOCK 1: Weekly Schedule (Wochenplan) */}
+              <div className="bg-slate-50 border border-slate-200 rounded-xl p-4 sm:p-5 flex flex-col justify-between space-y-4">
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between">
+                    <span className="text-[11px] font-extrabold uppercase tracking-wider text-emerald-800 flex items-center gap-1.5">
+                      <Clock className="w-3.5 h-3.5 text-emerald-600" />
+                      <span>{t("1. Wochenplan (Sendezeiten)", "1. Weekly Schedule (Dayparting)")}</span>
+                    </span>
+                    <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-900">
+                      {schedulePlan === "weekdays"
+                        ? "Mo–Fr (07–19)"
+                        : schedulePlan === "fullweek"
+                        ? "7 Tage (24/7)"
+                        : "Notdienst"}
+                    </span>
+                  </div>
+                  <h4 className="font-extrabold text-slate-900 text-sm">
+                    {t("Wann soll bezahlte Werbung geschaltet werden?", "When should your paid ads run?")}
+                  </h4>
+                  <p className="text-[11px] text-slate-600 leading-relaxed">
+                    {t(
+                      "Verhindern Sie vergeudete Werbekosten, wenn das Büro nicht besetzt ist. Wählen Sie Ihren gewünschten Wochenrhythmus:",
+                      "Prevent wasted ad spend when phone lines are unstaffed. Select your operating schedule:"
+                    )}
+                  </p>
+                </div>
+
+                <div className="space-y-2">
+                  {/* Option 1: Weekdays */}
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setSchedulePlan("weekdays");
+                      if (typeof window !== "undefined") localStorage.setItem("sos_marketing_schedule", "weekdays");
+                      showToast(t("Wochenplan gesetzt: Mo–Fr 07:00–19:00 Uhr (Wochenende pausiert)", "Weekly plan set: Mon–Fri 07:00–19:00 (Weekends paused)"));
+                    }}
+                    className={`w-full text-left p-3 rounded-lg border text-xs transition-all ${
+                      schedulePlan === "weekdays"
+                        ? "bg-white border-emerald-500 shadow-xs ring-1 ring-emerald-400"
+                        : "bg-white/60 hover:bg-white border-slate-200 text-slate-700"
+                    }`}
+                  >
+                    <div className="flex items-center justify-between font-bold text-slate-900">
+                      <span>{t("Mo–Fr Bürozeiten (07:00 – 19:00)", "Mon–Fri Business Hours (07:00–19:00)")}</span>
+                      {schedulePlan === "weekdays" && <Check className="w-4 h-4 text-emerald-600" />}
+                    </div>
+                    <p className="text-[10px] text-slate-500 mt-0.5">
+                      {t("Empfohlen für Handwerker. Pausiert nachts & samstags/sonntags automatisch.", "Recommended. Automatically pauses on weekends & nights.")}
+                    </p>
+                  </button>
+
+                  {/* Option 2: Full Week */}
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setSchedulePlan("fullweek");
+                      if (typeof window !== "undefined") localStorage.setItem("sos_marketing_schedule", "fullweek");
+                      showToast(t("Wochenplan gesetzt: 7 Tage rund um die Uhr (24/7 Notdienst-Modus)", "Weekly plan set: 7 Days around the clock (24/7)"));
+                    }}
+                    className={`w-full text-left p-3 rounded-lg border text-xs transition-all ${
+                      schedulePlan === "fullweek"
+                        ? "bg-white border-emerald-500 shadow-xs ring-1 ring-emerald-400"
+                        : "bg-white/60 hover:bg-white border-slate-200 text-slate-700"
+                    }`}
+                  >
+                    <div className="flex items-center justify-between font-bold text-slate-900">
+                      <span>{t("7 Tage Durchgehend (24/7 Vollgas)", "7-Day Full Coverage (24/7 Active)")}</span>
+                      {schedulePlan === "fullweek" && <Check className="w-4 h-4 text-emerald-600" />}
+                    </div>
+                    <p className="text-[10px] text-slate-500 mt-0.5">
+                      {t("Maximales Anfragevolumen. Ideal für akute Notfälle & Rohrbruchschäden.", "Maximum lead volume. Ideal for emergency cellar water damage.")}
+                    </p>
+                  </button>
+
+                  {/* Option 3: Emergency Weekends */}
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setSchedulePlan("emergency");
+                      if (typeof window !== "undefined") localStorage.setItem("sos_marketing_schedule", "emergency");
+                      showToast(t("Wochenplan gesetzt: Notdienst & Wochenende Boost", "Weekly plan set: Emergency & Weekend Boost"));
+                    }}
+                    className={`w-full text-left p-3 rounded-lg border text-xs transition-all ${
+                      schedulePlan === "emergency"
+                        ? "bg-white border-emerald-500 shadow-xs ring-1 ring-emerald-400"
+                        : "bg-white/60 hover:bg-white border-slate-200 text-slate-700"
+                    }`}
+                  >
+                    <div className="flex items-center justify-between font-bold text-slate-900">
+                      <span>{t("Wochenend-Boost & Notdienst", "Weekend Boost & Emergency Focus")}</span>
+                      {schedulePlan === "emergency" && <Check className="w-4 h-4 text-emerald-600" />}
+                    </div>
+                    <p className="text-[10px] text-slate-500 mt-0.5">
+                      {t("Fr 14:00 bis So 22:00 Uhr aktiv, wenn andere Firmen geschlossen sind.", "Fri 14:00 to Sun 22:00 active when competitors are closed.")}
+                    </p>
+                  </button>
+                </div>
+              </div>
+
+              {/* BLOCK 2: Weekly Budget & Lead Estimator */}
+              <div className="bg-slate-50 border border-slate-200 rounded-xl p-4 sm:p-5 flex flex-col justify-between space-y-4">
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between">
+                    <span className="text-[11px] font-extrabold uppercase tracking-wider text-emerald-800 flex items-center gap-1.5">
+                      <DollarSign className="w-3.5 h-3.5 text-emerald-600" />
+                      <span>{t("2. Wöchentliches Budget-Limit", "2. Weekly Budget Cap")}</span>
+                    </span>
+                    <span className="text-xs font-black px-2.5 py-0.5 rounded-full bg-emerald-600 text-white">
+                      {weeklyBudget} € / {t("Woche", "week")}
+                    </span>
+                  </div>
+                  <h4 className="font-extrabold text-slate-900 text-sm">
+                    {t("Feste Kostenkontrolle ohne Überraschungen", "Strict Cost Control — No Surprises")}
+                  </h4>
+                  <p className="text-[11px] text-slate-600 leading-relaxed">
+                    {t(
+                      "Google stoppt die Anzeigenausspielung automatisch, sobald Ihr gewähltes Wochenlimit erreicht ist. Keine Nachzahlungen.",
+                      "Google automatically halts ad delivery as soon as your weekly limit is reached. Never overspend."
+                    )}
+                  </p>
+                </div>
+
+                {/* Quick Preset Buttons */}
+                <div className="space-y-2.5">
+                  <div className="grid grid-cols-4 gap-1.5 text-xs font-bold">
+                    {[75, 150, 300, 500].map((b) => (
+                      <button
+                        key={b}
+                        type="button"
+                        onClick={() => {
+                          setWeeklyBudget(b);
+                          if (typeof window !== "undefined") localStorage.setItem("sos_marketing_budget", String(b));
+                          showToast(t(`Wochenbudget auf ${b} € gesetzt.`, `Weekly budget set to ${b} €.`));
+                        }}
+                        className={`py-1.5 px-2 rounded-lg border text-center transition-all ${
+                          weeklyBudget === b
+                            ? "bg-emerald-600 text-white border-emerald-600 shadow-xs"
+                            : "bg-white hover:bg-slate-100 text-slate-800 border-slate-300"
+                        }`}
+                      >
+                        {b} €
+                      </button>
+                    ))}
+                  </div>
+
+                  {/* Range Slider */}
+                  <div className="space-y-1 pt-1">
+                    <div className="flex justify-between text-[10px] text-slate-500 font-bold">
+                      <span>50 € / Wo.</span>
+                      <span className="text-emerald-700 font-extrabold">{weeklyBudget} € / Woche ({Math.round(weeklyBudget / 7)} € / Tag)</span>
+                      <span>800 € / Wo.</span>
+                    </div>
+                    <input
+                      type="range"
+                      min="50"
+                      max="800"
+                      step="25"
+                      value={weeklyBudget}
+                      onChange={(e) => {
+                        const val = Number(e.target.value);
+                        setWeeklyBudget(val);
+                        if (typeof window !== "undefined") localStorage.setItem("sos_marketing_budget", String(val));
+                      }}
+                      className="w-full accent-emerald-600 cursor-pointer"
+                    />
+                  </div>
+
+                  {/* Estimated Leads Yield Card */}
+                  <div className="bg-white rounded-lg p-2.5 border border-emerald-200 text-slate-800 space-y-1 shadow-xs">
+                    <div className="text-[10px] font-bold uppercase tracking-wider text-emerald-800">
+                      {t("Erwartete Ausbeute (NRW Kellersanierung):", "Expected Performance Yield (NRW):")}
+                    </div>
+                    <div className="flex items-center justify-between text-xs">
+                      <span className="text-slate-600">{t("Geschätzte qualifizierte Anrufe / Anfragen:", "Est. Qualified Phone Calls / Leads:")}</span>
+                      <strong className="text-emerald-700 font-black">
+                        ~{Math.max(2, Math.round(weeklyBudget / 22))} – {Math.max(4, Math.round(weeklyBudget / 14))} {t("Anfragen", "leads")}
+                      </strong>
+                    </div>
+                    <div className="flex items-center justify-between text-[11px] text-slate-500">
+                      <span>{t("Garantierter Maximalpreis:", "Guaranteed Cost Ceiling:")}</span>
+                      <span className="font-semibold text-slate-900">{weeklyBudget},00 € max.</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* BLOCK 3: Capacity Auto-Protection & Live Platforms */}
+              <div className="bg-slate-50 border border-slate-200 rounded-xl p-4 sm:p-5 flex flex-col justify-between space-y-4">
+                <div className="space-y-2">
+                  <div className="flex items-center justify-between">
+                    <span className="text-[11px] font-extrabold uppercase tracking-wider text-emerald-800 flex items-center gap-1.5">
+                      <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
+                      <span>{t("3. Kapazitätsschutz & Auto-Pause", "3. Capacity Protection & Auto-Pause")}</span>
+                    </span>
+                    <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-slate-200 text-slate-800">
+                      {appointments.length} {t("Termine aktiv", "active bookings")}
+                    </span>
+                  </div>
+                  <h4 className="font-extrabold text-slate-900 text-sm">
+                    {t("Automatische Schutzschaltung vor Überlastung", "Prevent Overbooking & Wasted Leads")}
+                  </h4>
+                  <p className="text-[11px] text-slate-600 leading-relaxed">
+                    {t(
+                      "Wenn Ihr Kalender voll ist, zahlen Sie nicht weiter für Anrufe, die Sie nicht zeitnah bedienen können:",
+                      "When your inspection schedule is packed, automatically stop paying for leads you cannot service:"
+                    )}
+                  </p>
+                </div>
+
+                <div className="space-y-2.5">
+                  <label className="flex items-start gap-2.5 p-3 rounded-lg border bg-white cursor-pointer hover:bg-slate-50 transition-colors">
+                    <input
+                      type="checkbox"
+                      checked={autoPauseCapacity}
+                      onChange={(e) => {
+                        const checked = e.target.checked;
+                        setAutoPauseCapacity(checked);
+                        if (typeof window !== "undefined") localStorage.setItem("sos_marketing_autopause", String(checked));
+                        showToast(
+                          checked
+                            ? t("Kapazitätsschutz aktiviert: Pausiert ab 5 gebuchten Wochenterminen.", "Capacity protection enabled: Pauses at 5+ booked appointments.")
+                            : t("Kapazitätsschutz deaktiviert.", "Capacity protection disabled.")
+                        );
+                      }}
+                      className="mt-0.5 w-4 h-4 rounded text-emerald-600 focus:ring-emerald-500 accent-emerald-600"
+                    />
+                    <div className="text-xs">
+                      <div className="font-bold text-slate-900">
+                        {t("Auto-Pause ab 5 Vor-Ort-Terminen / Woche", "Auto-Pause at 5+ inspection bookings / week")}
+                      </div>
+                      <p className="text-[10px] text-slate-500 mt-0.5">
+                        {t(
+                          "Pausiert bezahlte Google Ads automatisch, wenn Handwerker-Kapazitäten ausgelastet sind.",
+                          "Temporarily pauses paid ad spend until current customer quotes are processed."
+                        )}
+                      </p>
+                    </div>
+                  </label>
+
+                  {/* Direct Console Access Links */}
+                  <div className="pt-2 border-t border-slate-200 space-y-1.5 text-xs">
+                    <div className="text-[10px] font-bold uppercase tracking-wider text-slate-500">
+                      {t("Direkte Plattform-Zugänge:", "Direct Platform Portals:")}
+                    </div>
+                    <div className="flex flex-col gap-1.5">
+                      <a
+                        href="https://adwords.google.com/localservices"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="p-2 rounded-lg bg-white hover:bg-slate-100 border border-slate-200 text-slate-900 font-bold inline-flex items-center justify-between text-xs"
+                      >
+                        <span className="flex items-center gap-1.5">
+                          <Star className="w-3.5 h-3.5 text-amber-500 fill-amber-400" />
+                          <span>Google Local Services Ads Konsole</span>
+                        </span>
+                        <ExternalLink className="w-3.5 h-3.5 text-slate-400" />
+                      </a>
+                      <a
+                        href="https://ads.google.com/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="p-2 rounded-lg bg-white hover:bg-slate-100 border border-slate-200 text-slate-900 font-bold inline-flex items-center justify-between text-xs"
+                      >
+                        <span className="flex items-center gap-1.5">
+                          <BarChart3 className="w-3.5 h-3.5 text-sky-600" />
+                          <span>Google Ads Suchkampagnen</span>
+                        </span>
+                        <ExternalLink className="w-3.5 h-3.5 text-slate-400" />
+                      </a>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
