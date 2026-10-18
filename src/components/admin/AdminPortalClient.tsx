@@ -276,6 +276,127 @@ const WTA_TEMPLATES = [
   },
 ];
 
+const MARKETING_PACKAGES = [
+  {
+    id: "starter",
+    title_de: "Starter Local Presence",
+    title_en: "Starter Local Presence",
+    focus_de: "Wuppertal Basis & Google Maps",
+    focus_en: "Wuppertal Core & Google Maps",
+    badge_de: "Basis",
+    badge_en: "Starter",
+    weeklyPrice: 75,
+    dailyPrice: 10.71,
+    hourlyPrice60: 1.25,
+    hourlyPrice24: 0.45,
+    monthlyPrice: 325,
+    estLeadsWeek: "2 – 4",
+    estLeadsMonth: "9 – 16",
+    features_de: [
+      "Google Local Services Ads mit offiziellem Google-Geprüft Siegel",
+      "Top 3 Kern-Keywords: Kellersanierung, Feuchter Keller, Schimmel Wuppertal",
+      "Google Maps 3-Pack Optimierung für lokale Smartphone-Suchen",
+      "Garantierter Ausgaben-Deckel: exakt 75 €/Woche, kein Cent mehr",
+    ],
+    features_en: [
+      "Google Local Services Ads with official 'Google Guaranteed' badge",
+      "Top 3 core search keywords: Cellar Waterproofing, Damp Cellar, Mold Wuppertal",
+      "Google Maps 3-Pack optimization for local smartphone searches",
+      "Strict spend cap: exactly 75 €/week, zero surprise overages",
+    ],
+  },
+  {
+    id: "pro",
+    title_de: "Pro Growth & Lead Booster",
+    title_en: "Pro Growth & Lead Booster",
+    focus_de: "Wuppertal + Solingen + Remscheid (35 km)",
+    focus_en: "Wuppertal + Solingen + Remscheid (35 km)",
+    badge_de: "Empfohlen (Sweet Spot)",
+    badge_en: "Recommended (Sweet Spot)",
+    weeklyPrice: 150,
+    dailyPrice: 21.43,
+    hourlyPrice60: 2.50,
+    hourlyPrice24: 0.89,
+    monthlyPrice: 650,
+    estLeadsWeek: "6 – 10",
+    estLeadsMonth: "26 – 43",
+    features_de: [
+      "Google Local Services Ads + Google Search Suchkampagnen kombiniert",
+      "35 km Radius: Wuppertal, Solingen, Remscheid, Velbert, Haan, Wermelskirchen",
+      "Negativ-Keyword-Filter (schließt Heimwerker, Billig-Suchende & Konkurrenten aus)",
+      "Live Conversion-Tracking (Anrufe, Schadensfotos & WhatsApp-Klicks)",
+      "Automatischer 5-Sterne Google-Bewertungsbooster per WhatsApp",
+      "Garantierter Ausgaben-Deckel: exakt 150 €/Woche",
+    ],
+    features_en: [
+      "Google Local Services Ads + Google Search Ads combined",
+      "35 km radius: Wuppertal, Solingen, Remscheid, Velbert, Haan, Wermelskirchen",
+      "Negative keyword filtering (excludes DIY searches, competitors, and job seekers)",
+      "Live conversion tracking (phone calls, damage photos & WhatsApp clicks)",
+      "Automated 5-Star Google review WhatsApp booster",
+      "Strict spend cap: exactly 150 €/week",
+    ],
+  },
+  {
+    id: "scale",
+    title_de: "Business Scale & NRW Expansion",
+    title_en: "Business Scale & NRW Expansion",
+    focus_de: "Düsseldorf, Bergisches Land & Ruhrgebiet",
+    focus_en: "Düsseldorf, Bergisches Land & Ruhr Area",
+    badge_de: "Wachstum",
+    badge_en: "Growth Scale",
+    weeklyPrice: 300,
+    dailyPrice: 42.86,
+    hourlyPrice60: 5.00,
+    hourlyPrice24: 1.79,
+    monthlyPrice: 1300,
+    estLeadsWeek: "12 – 18",
+    estLeadsMonth: "52 – 78",
+    features_de: [
+      "Vollständige Schaltung über alle 24 regionalen Landing Pages in NRW",
+      "Google Suchanzeigen + Meta Retargeting (Facebook & Instagram Hausbesitzer)",
+      "Bevorzugte Lead-Zustellung direkt per SMS & WhatsApp auf Ihr Smartphone",
+      "A/B-Testing von Anzeigentexten & Anruf-Erweiterungen",
+      "Garantierter Ausgaben-Deckel: exakt 300 €/Woche",
+    ],
+    features_en: [
+      "Full coverage across all 24 regional NRW landing pages",
+      "Google Search Ads + Meta Retargeting (Facebook & Instagram homeowners)",
+      "Priority lead delivery via instant WhatsApp/SMS notification",
+      "A/B split testing of ad copy & call extensions",
+      "Strict spend cap: exactly 300 €/week",
+    ],
+  },
+  {
+    id: "dominance",
+    title_de: "Market Leader Dominance",
+    title_en: "Market Leader Dominance",
+    focus_de: "Ganz NRW & 24/7 Notdienst-Einsätze",
+    focus_en: "Entire NRW & 24/7 Emergency Dispatch",
+    badge_de: "Marktführer",
+    badge_en: "Market Leader",
+    weeklyPrice: 500,
+    dailyPrice: 71.43,
+    hourlyPrice60: 8.33,
+    hourlyPrice24: 2.98,
+    monthlyPrice: 2165,
+    estLeadsWeek: "20 – 30+",
+    estLeadsMonth: "85 – 130+",
+    features_de: [
+      "Aggressive Top-Gebote für Platz 1 in ganz NRW",
+      "24/7 Notdienst-Routing für akuten Wassereinbruch & Starkregen-Schäden",
+      "Multi-Kanal-Dominanz (Google Search, Maps, YouTube & Meta)",
+      "Garantierter Ausgaben-Deckel: exakt 500 €/Woche",
+    ],
+    features_en: [
+      "Aggressive top-of-page #1 bidding across entire NRW",
+      "24/7 emergency water damage & burst pipe lead routing",
+      "Omnichannel dominance (Google Search, Maps, YouTube & Meta)",
+      "Strict spend cap: exactly 500 €/week",
+    ],
+  },
+];
+
 const LOCAL_SEO_PAGES = [
   { url: "/", title: "Kellersanierung Wuppertal", kw: "Kellersanierung Wuppertal", target: "Wuppertal (PLZ 42xxx)" },
   { url: "/kellersanierung/wuppertal/", title: "Feuchter Keller Wuppertal", kw: "Feuchter Keller Wuppertal", target: "Wuppertal Zentrum & Elberfeld" },
@@ -386,6 +507,26 @@ export default function AdminPortalClient() {
     return true;
   });
 
+  // Service Catalog (Preisliste) State — Live editable for any service
+  const [serviceCatalog, setServiceCatalog] = useState<typeof WTA_TEMPLATES>(() => {
+    if (typeof window !== "undefined") {
+      const saved = localStorage.getItem("sos_service_catalog");
+      if (saved) {
+        try {
+          const parsed = JSON.parse(saved);
+          if (Array.isArray(parsed) && parsed.length > 0) return parsed;
+        } catch {}
+      }
+    }
+    return WTA_TEMPLATES;
+  });
+  const [showPriceListModal, setShowPriceListModal] = useState<boolean>(false);
+  const [marketingFreqView, setMarketingFreqView] = useState<"hourly" | "daily" | "weekly" | "monthly">("weekly");
+  const [newServiceName, setNewServiceName] = useState<string>("");
+  const [newServicePrice, setNewServicePrice] = useState<number>(95);
+  const [newServiceUnit, setNewServiceUnit] = useState<string>("m²");
+  const [newServiceBasis, setNewServiceBasis] = useState<string>("");
+
   // Aufmaß-Planer state
   const [plName, setPlName] = useState("");
   const [plPhone, setPlPhone] = useState("");
@@ -480,6 +621,91 @@ export default function AdminPortalClient() {
         }
       }
     }
+  };
+
+  const updateServicePrice = (index: number, newPrice: number) => {
+    const validPrice = Math.max(0, isNaN(newPrice) ? 0 : newPrice);
+    setServiceCatalog((prev) => {
+      const next = [...prev];
+      if (next[index]) {
+        next[index] = { ...next[index], price: validPrice };
+      }
+      if (typeof window !== "undefined") {
+        localStorage.setItem("sos_service_catalog", JSON.stringify(next));
+      }
+      return next;
+    });
+    showToast(t("Preisliste aktualisiert! Gilt ab sofort für alle Angebote & Rechnungen.", "Price list updated! Active immediately for all quotes and invoices."));
+  };
+
+  const addCustomServiceToCatalog = () => {
+    if (!newServiceName.trim()) {
+      showToast(t("Bitte geben Sie einen Leistungsnamen ein.", "Please enter a service name."));
+      return;
+    }
+    const newItem = {
+      pos_de: newServiceName.trim(),
+      pos_en: newServiceName.trim(),
+      basis_de: newServiceBasis.trim() || "Fachgerechte Ausführung nach anerkannten Regeln der Technik",
+      basis_en: newServiceBasis.trim() || "Professional execution according to trade standards",
+      qty: 1,
+      unit_de: newServiceUnit,
+      unit_en: newServiceUnit,
+      price: Math.max(0, newServicePrice),
+      labour: true,
+    };
+    setServiceCatalog((prev) => {
+      const next = [...prev, newItem];
+      if (typeof window !== "undefined") {
+        localStorage.setItem("sos_service_catalog", JSON.stringify(next));
+      }
+      return next;
+    });
+    setNewServiceName("");
+    setNewServiceBasis("");
+    setNewServicePrice(95);
+    showToast(t(`Neue Leistung "${newItem.pos_de}" zur Preisliste hinzugefügt!`, `Added new service "${newItem.pos_de}" to price list!`));
+  };
+
+  const removeServiceFromCatalog = (index: number) => {
+    setServiceCatalog((prev) => {
+      const next = prev.filter((_, i) => i !== index);
+      if (typeof window !== "undefined") {
+        localStorage.setItem("sos_service_catalog", JSON.stringify(next));
+      }
+      return next;
+    });
+    showToast(t("Position aus Preisliste entfernt.", "Service removed from price list."));
+  };
+
+  const resetServiceCatalog = () => {
+    setServiceCatalog(WTA_TEMPLATES);
+    if (typeof window !== "undefined") {
+      localStorage.removeItem("sos_service_catalog");
+    }
+    showToast(t("Preisliste auf WTA-Standardpreise zurückgesetzt.", "Price list reset to standard WTA rates."));
+  };
+
+  const addMarketingExpenseToDoc = (planTitle: string, amount: number, periodLabel: string) => {
+    if (!curDoc) {
+      showToast(t("Kein aktiver Beleg ausgewählt. Bitte öffnen Sie zuerst Tab 5 (Belege).", "No active document selected. Please open Tab 5 (Belege) first."));
+      return;
+    }
+    updateCurDoc((doc) => ({
+      ...doc,
+      lines: [
+        ...(doc.lines || []),
+        {
+          pos: `Marketing & SEO: ${planTitle} (${periodLabel})`,
+          basis: "Werbeausgaben Google Local Services Ads, Search Ads & Conversion Tracking",
+          qty: 1,
+          unit: "Pausch.",
+          price: amount,
+          labour: false,
+        },
+      ],
+    }));
+    showToast(t(`Marketing-Ausgabe (${eur(amount)}) als Belegposition übernommen!`, `Added marketing cost (${eur(amount)}) to current document!`));
   };
 
   const openPhotoViewer = (
@@ -3089,12 +3315,22 @@ export default function AdminPortalClient() {
                   <div className="text-xs font-bold text-slate-700">
                     {t("WTA-Bausteine mit 1 Klick hinzufügen:", "Add WTA Standard Modules in 1 Click:")}
                   </div>
-                  <span className="text-[11px] text-slate-400">
-                    {WTA_TEMPLATES.length} {t("Vorlagen", "Templates")}
-                  </span>
+                  <div className="flex items-center gap-2">
+                    <button
+                      type="button"
+                      onClick={() => setShowPriceListModal(true)}
+                      className="text-[11px] font-extrabold text-emerald-800 hover:text-emerald-900 bg-emerald-50 hover:bg-emerald-100 border border-emerald-300 px-2.5 py-1 rounded-lg inline-flex items-center gap-1 shadow-xs"
+                    >
+                      <Sliders className="w-3 h-3 text-emerald-700" />
+                      <span>{t("Preisliste anpassen", "Edit Price List")}</span>
+                    </button>
+                    <span className="text-[11px] text-slate-400">
+                      {serviceCatalog.length} {t("Vorlagen", "Templates")}
+                    </span>
+                  </div>
                 </div>
                 <div className="flex flex-wrap gap-1.5">
-                  {WTA_TEMPLATES.map((tpl, i) => (
+                  {serviceCatalog.map((tpl, i) => (
                     <button
                       key={i}
                       type="button"
@@ -3115,7 +3351,7 @@ export default function AdminPortalClient() {
                     >
                       <Plus className="w-3.5 h-3.5 shrink-0 text-emerald-700" />
                       <span>{isEn ? tpl.pos_en : tpl.pos_de}</span>
-                      <span className="text-[10px] text-slate-400">({eur(tpl.price)})</span>
+                      <span className="text-[10px] text-slate-500 font-bold">({eur(tpl.price)})</span>
                     </button>
                   ))}
                 </div>
@@ -3861,24 +4097,32 @@ export default function AdminPortalClient() {
                     </p>
                   </div>
 
-                  {/* Template Insert Dropdown */}
+                  {/* Template Insert Dropdown & Price Tuning Button */}
                   <div className="flex items-center gap-2">
+                    <button
+                      type="button"
+                      onClick={() => setShowPriceListModal(true)}
+                      className="text-xs font-bold text-slate-800 bg-white hover:bg-slate-100 border border-slate-300 rounded-xl px-3 py-2 min-h-[38px] inline-flex items-center gap-1.5 shadow-xs transition-colors"
+                    >
+                      <Sliders className="w-3.5 h-3.5 text-emerald-700" />
+                      <span>{t("Preisliste anpassen", "Edit Price List")}</span>
+                    </button>
                     <select
                       aria-label={t("WTA-Vorlage einfügen", "Insert WTA template")}
                       defaultValue=""
                       onChange={(e) => {
                         const idx = Number(e.target.value);
-                        if (!isNaN(idx) && WTA_TEMPLATES[idx]) {
-                          addTemplateLine(WTA_TEMPLATES[idx]);
+                        if (!isNaN(idx) && serviceCatalog[idx]) {
+                          addTemplateLine(serviceCatalog[idx]);
                           e.target.value = "";
                         }
                       }}
                       className="text-xs font-bold text-emerald-800 bg-emerald-50 border border-emerald-300 rounded-xl px-3 py-2 min-h-[38px]"
                     >
                       <option value="" disabled>
-                        ⚡ {t("+ WTA-Vorlage einfügen...", "+ Insert WTA Template...")}
+                        ⚡ {t("+ Vorlage einfügen...", "+ Insert Template...")} ({serviceCatalog.length})
                       </option>
-                      {WTA_TEMPLATES.map((tpl, i) => (
+                      {serviceCatalog.map((tpl, i) => (
                         <option key={i} value={i}>
                           {isEn ? tpl.pos_en : tpl.pos_de} ({eur(tpl.price)})
                         </option>
@@ -4769,6 +5013,259 @@ export default function AdminPortalClient() {
                     </div>
                   </div>
                 </div>
+              </div>
+            </div>
+          </div>
+
+          {/* LIVE SEO & MARKETING RATES ENGINE (HOURLY, DAILY, WEEKLY, MONTHLY) */}
+          <div className="bg-white border-2 border-emerald-500/30 rounded-2xl p-5 sm:p-7 text-slate-900 space-y-6 shadow-sm">
+            <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-5 border-b border-slate-100">
+              <div className="space-y-1.5">
+                <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-[11px] font-extrabold tracking-wide uppercase">
+                  <DollarSign className="w-3.5 h-3.5 shrink-0 text-emerald-600" />
+                  <span>{t("Echte Live-Preise für Marketing & SEO", "Real Live Rates for Marketing & SEO")}</span>
+                </div>
+                <h3 className="text-xl sm:text-2xl font-black tracking-tight text-slate-900 flex items-center gap-2">
+                  <span>{t("Google SEO & Kampagnen-Preisliste (Stündlich, Täglich, Wöchentlich & Monatlich)", "Google SEO & Paid Marketing Rate Card (Hourly, Daily, Weekly & Monthly)")}</span>
+                </h3>
+                <p className="text-xs sm:text-sm text-slate-600 max-w-3xl leading-relaxed">
+                  {t(
+                    "Volle Preistransparenz: Sehen Sie exakt, was bezahlte Google-Werbung und lokale Suchmaschinenoptimierung pro Stunde, Tag, Woche und Monat kosten — und wie viele qualifizierte Hausbesitzer-Anfragen Sie dafür in NRW erhalten.",
+                    "Full pricing transparency: Review exact real costs broken down hour-by-hour, day-by-day, weekly, and monthly, alongside projected customer lead volume across NRW."
+                  )}
+                </p>
+              </div>
+
+              {/* View Switcher: Hourly / Daily / Weekly / Monthly */}
+              <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 shrink-0">
+                <div className="bg-slate-100 p-1 rounded-xl flex items-center gap-1 border border-slate-200">
+                  <button
+                    type="button"
+                    onClick={() => setMarketingFreqView("hourly")}
+                    className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
+                      marketingFreqView === "hourly"
+                        ? "bg-white text-emerald-800 shadow-xs font-black"
+                        : "text-slate-600 hover:text-slate-900"
+                    }`}
+                  >
+                    ⚡ {t("Stündlich", "Hourly")}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setMarketingFreqView("daily")}
+                    className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
+                      marketingFreqView === "daily"
+                        ? "bg-white text-emerald-800 shadow-xs font-black"
+                        : "text-slate-600 hover:text-slate-900"
+                    }`}
+                  >
+                    📅 {t("Täglich", "Daily")}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setMarketingFreqView("weekly")}
+                    className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
+                      marketingFreqView === "weekly"
+                        ? "bg-white text-emerald-800 shadow-xs font-black"
+                        : "text-slate-600 hover:text-slate-900"
+                    }`}
+                  >
+                    📊 {t("Wöchentlich", "Weekly")}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setMarketingFreqView("monthly")}
+                    className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
+                      marketingFreqView === "monthly"
+                        ? "bg-white text-emerald-800 shadow-xs font-black"
+                        : "text-slate-600 hover:text-slate-900"
+                    }`}
+                  >
+                    🗓 {t("Monatlich", "Monthly")}
+                  </button>
+                </div>
+
+                <button
+                  type="button"
+                  onClick={() => setShowPriceListModal(true)}
+                  className="min-h-[40px] px-3.5 py-1.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-extrabold text-xs inline-flex items-center justify-center gap-1.5 shadow-xs"
+                >
+                  <Sliders className="w-3.5 h-3.5 text-emerald-400" />
+                  <span>{t("Service-Preisliste bearbeiten", "Edit Service Price List")}</span>
+                </button>
+              </div>
+            </div>
+
+            {/* 4 Pricing Cards Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+              {MARKETING_PACKAGES.map((pkg) => {
+                const isSelected = weeklyBudget === pkg.weeklyPrice;
+                // Determine display price based on frequency view
+                const displayPrice =
+                  marketingFreqView === "hourly"
+                    ? `${pkg.hourlyPrice60.toFixed(2).replace(".", ",")} €`
+                    : marketingFreqView === "daily"
+                    ? `${pkg.dailyPrice.toFixed(2).replace(".", ",")} €`
+                    : marketingFreqView === "weekly"
+                    ? `${pkg.weeklyPrice},00 €`
+                    : `${pkg.monthlyPrice},00 €`;
+
+                const displayFreqLabel =
+                  marketingFreqView === "hourly"
+                    ? t("/ aktive Arbeitsstunde (Mo–Fr 07–19)", "/ active work hour (Mo–Fr)")
+                    : marketingFreqView === "daily"
+                    ? t("/ Tag (7 Tage/Woche)", "/ day (7 days/week)")
+                    : marketingFreqView === "weekly"
+                    ? t("/ Woche (Budget-Deckel)", "/ week (hard budget cap)")
+                    : t("/ Monat (~4,3 Wochen)", "/ month (~4.3 weeks)");
+
+                return (
+                  <div
+                    key={pkg.id}
+                    className={`rounded-2xl p-4 sm:p-5 flex flex-col justify-between space-y-4 border transition-all ${
+                      isSelected
+                        ? "bg-emerald-50/70 border-emerald-500 shadow-md ring-2 ring-emerald-400/50"
+                        : "bg-slate-50/80 hover:bg-white border-slate-200 shadow-xs"
+                    }`}
+                  >
+                    <div className="space-y-3">
+                      <div className="flex items-center justify-between gap-1">
+                        <span
+                          className={`text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full ${
+                            pkg.id === "pro"
+                              ? "bg-emerald-600 text-white"
+                              : "bg-slate-200 text-slate-800"
+                          }`}
+                        >
+                          {isEn ? pkg.badge_en : pkg.badge_de}
+                        </span>
+                        {isSelected && (
+                          <span className="text-[10px] font-black text-emerald-800 bg-emerald-100 border border-emerald-300 px-2 py-0.5 rounded-full flex items-center gap-1">
+                            <Check className="w-3 h-3 text-emerald-600" />
+                            {t("Aktiver Tarif", "Active Plan")}
+                          </span>
+                        )}
+                      </div>
+
+                      <div>
+                        <h4 className="font-black text-slate-900 text-base">
+                          {isEn ? pkg.title_en : pkg.title_de}
+                        </h4>
+                        <div className="text-[11px] text-slate-500 font-semibold mt-0.5">
+                          {isEn ? pkg.focus_en : pkg.focus_de}
+                        </div>
+                      </div>
+
+                      {/* Dynamic Price Display */}
+                      <div className="pt-2 border-t border-slate-200/80">
+                        <div className="flex items-baseline gap-1.5">
+                          <span className="text-2xl sm:text-3xl font-black text-slate-900">
+                            {displayPrice}
+                          </span>
+                        </div>
+                        <div className="text-[11px] font-semibold text-emerald-800 mt-0.5">
+                          {displayFreqLabel}
+                        </div>
+                        {marketingFreqView === "hourly" && (
+                          <div className="text-[10px] text-slate-400 mt-0.5">
+                            ({pkg.hourlyPrice24.toFixed(2).replace(".", ",")} €/Std. bei 24/7 Notdienst-Plan)
+                          </div>
+                        )}
+                      </div>
+
+                      {/* Lead Volume Yield Box */}
+                      <div className="bg-white rounded-xl p-2.5 border border-slate-200 space-y-1 text-xs">
+                        <div className="text-[10px] font-bold uppercase tracking-wider text-slate-500">
+                          {t("Erwartete Kundenanfragen:", "Projected Qualified Leads:")}
+                        </div>
+                        <div className="font-extrabold text-slate-900">
+                          ~{marketingFreqView === "monthly" ? pkg.estLeadsMonth : pkg.estLeadsWeek}{" "}
+                          <span className="text-[11px] font-normal text-slate-600">
+                            {marketingFreqView === "monthly" ? t("Anfragen / Monat", "leads / month") : t("Anfragen / Woche", "leads / week")}
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* Features */}
+                      <div className="space-y-1.5 text-xs pt-1">
+                        {(isEn ? pkg.features_en : pkg.features_de).map((f, fi) => (
+                          <div key={fi} className="flex items-start gap-1.5 text-[11px] text-slate-700 leading-snug">
+                            <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0 mt-0.5" />
+                            <span>{f}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* Actions: Activate Plan or Transfer to Invoice */}
+                    <div className="pt-3 border-t border-slate-200/80 space-y-2">
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setWeeklyBudget(pkg.weeklyPrice);
+                          setCampaignActive(true);
+                          if (typeof window !== "undefined") {
+                            localStorage.setItem("sos_marketing_budget", String(pkg.weeklyPrice));
+                            localStorage.setItem("sos_marketing_active", "true");
+                          }
+                          showToast(
+                            t(
+                              `✓ ${pkg.title_de} aktiviert! Wochenbudget auf ${pkg.weeklyPrice} € gesetzt.`,
+                              `✓ ${pkg.title_en} activated! Weekly budget set to ${pkg.weeklyPrice} €.`
+                            )
+                          );
+                        }}
+                        className={`w-full min-h-[40px] px-3 py-2 rounded-xl text-xs font-black flex items-center justify-center gap-1.5 transition-all shadow-xs ${
+                          isSelected
+                            ? "bg-emerald-700 text-white hover:bg-emerald-800"
+                            : "bg-slate-900 text-white hover:bg-slate-800"
+                        }`}
+                      >
+                        <Play className="w-3.5 h-3.5 fill-current" />
+                        <span>{isSelected ? t("Aktiver Tarif läuft ✓", "Active Plan Running ✓") : t("Diesen Tarif starten", "Activate This Plan")}</span>
+                      </button>
+
+                      <button
+                        type="button"
+                        onClick={() => addMarketingExpenseToDoc(pkg.title_de, pkg.weeklyPrice, t("Wöchentlich", "Weekly"))}
+                        className="w-full text-[11px] font-bold text-slate-600 hover:text-slate-900 py-1 hover:underline text-center block"
+                      >
+                        {t("Als Ausgabe in Belege (Tab 5) buchen →", "Log as expense in Invoices (Tab 5) →")}
+                      </button>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* Economics & ROI Breakdown Banner */}
+            <div className="bg-slate-50 border border-slate-200 rounded-2xl p-4 sm:p-5 flex flex-col md:flex-row md:items-center justify-between gap-4 text-xs">
+              <div className="space-y-1">
+                <div className="font-extrabold text-slate-900 flex items-center gap-1.5 text-sm">
+                  <BadgePercent className="w-4 h-4 text-emerald-700" />
+                  <span>{t("Echte Wirtschaftlichkeit: Warum sich jeder bezahlte Euro zehnfach rentiert", "Real Marketing Economics & Return on Investment (ROI)")}</span>
+                </div>
+                <p className="text-slate-600 leading-relaxed max-w-2xl text-[11px]">
+                  {t(
+                    "Im Sanitär- & Kellersanierungs-Handwerk in NRW liegt der durchschnittliche Lead-Preis bei 18 – 28 € pro qualifiziertem Telefonat. Ein typischer Sanierungsauftrag erzielt 4.500 € bis 12.000 € Umsatz. Ein einziger gewonnener Kunde refinanziert Ihr gesamtes Google-Marketing für bis zu 8 Monate.",
+                    "In NRW cellar waterproofing, average cost per qualified lead is 18 – 28 €. A single won project generates 4,500 € to 12,000 € in revenue, completely financing up to 8 months of marketing spend."
+                  )}
+                </p>
+              </div>
+
+              <div className="flex items-center gap-3 shrink-0">
+                <div className="text-right">
+                  <div className="text-[10px] font-bold text-slate-500 uppercase">{t("Ø Akquisekosten-Quote", "Customer Acquisition Cost")}</div>
+                  <strong className="text-base font-black text-emerald-700">&lt; 3,5 % des Auftragswerts</strong>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setShowPriceListModal(true)}
+                  className="min-h-[42px] px-4 py-2 bg-emerald-700 hover:bg-emerald-800 text-white font-extrabold text-xs rounded-xl shadow-xs inline-flex items-center gap-1.5"
+                >
+                  <Sliders className="w-3.5 h-3.5" />
+                  <span>{t("Handwerker-Preisliste bearbeiten", "Manage Service Rates")}</span>
+                </button>
               </div>
             </div>
           </div>
@@ -5873,6 +6370,187 @@ export default function AdminPortalClient() {
 
             <div className="p-3 sm:p-6 overflow-y-auto bg-slate-100/70">
               {renderDIN5008Invoice(previewDoc, true)}
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* GLOBAL SERVICE PRICE LIST MANAGER MODAL */}
+      {showPriceListModal && (
+        <div className="fixed inset-0 z-50 bg-slate-950/60 backdrop-blur-xs flex items-center justify-center p-3 sm:p-5 overflow-y-auto">
+          <div className="bg-white border border-slate-200 rounded-3xl shadow-2xl max-w-3xl w-full max-h-[90vh] flex flex-col overflow-hidden text-slate-900 animate-in fade-in duration-200">
+            {/* Modal Header */}
+            <div className="p-5 sm:p-6 border-b border-slate-100 flex items-center justify-between gap-3 bg-gradient-to-r from-emerald-50/60 to-white">
+              <div className="space-y-1">
+                <div className="inline-flex items-center gap-1.5 text-emerald-800 text-[11px] font-black uppercase tracking-wider">
+                  <Sliders className="w-4 h-4 text-emerald-600" />
+                  <span>{t("Service-Preisliste & Tarife verwalten", "Manage Service Price List & Rates")}</span>
+                </div>
+                <h3 className="text-lg sm:text-xl font-black text-slate-900">
+                  {t("Einheitspreise für alle Handwerker-Leistungen anpassen", "Adjust Unit Prices for All Trade Services")}
+                </h3>
+                <p className="text-xs text-slate-600 leading-relaxed">
+                  {t(
+                    "Ändern Sie hier die Preise für beliebige Leistungen. Alle neuen Angebote im Aufmaß-Planer und Rechnungen in den Belegen übernehmen automatisch die neuen Preise.",
+                    "Update unit prices for any service. New estimates in the planner and invoices will immediately reflect updated rates."
+                  )}
+                </p>
+              </div>
+              <button
+                type="button"
+                onClick={() => setShowPriceListModal(false)}
+                className="w-9 h-9 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-600 hover:text-slate-900 flex items-center justify-center shrink-0 transition-colors"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            {/* Modal Body: Scrollable Service List */}
+            <div className="p-5 sm:p-6 overflow-y-auto space-y-4 flex-1">
+              <div className="flex items-center justify-between text-xs font-bold text-slate-500 pb-1 border-b border-slate-100">
+                <span>{t("Leistung & technische Spezifikation", "Service & Specification")}</span>
+                <span className="text-right">{t("Einheitspreis (€)", "Unit Rate (€)")}</span>
+              </div>
+
+              <div className="space-y-3">
+                {serviceCatalog.map((item, idx) => (
+                  <div
+                    key={idx}
+                    className="p-3.5 bg-slate-50 hover:bg-slate-100/80 rounded-xl border border-slate-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3 transition-colors"
+                  >
+                    <div className="space-y-0.5 flex-1 pr-2">
+                      <div className="font-extrabold text-xs text-slate-900">
+                        {isEn ? item.pos_en : item.pos_de}
+                      </div>
+                      <div className="text-[11px] text-slate-500 line-clamp-1">
+                        {isEn ? item.basis_en : item.basis_de}
+                      </div>
+                      <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-slate-200/80 text-slate-700">
+                        {t("Einheit:", "Unit:")} {isEn ? item.unit_en : item.unit_de}
+                      </span>
+                    </div>
+
+                    {/* Inline Price Adjuster */}
+                    <div className="flex items-center gap-2 shrink-0">
+                      <button
+                        type="button"
+                        onClick={() => updateServicePrice(idx, Math.max(0, item.price - 5))}
+                        className="w-8 h-8 rounded-lg bg-white hover:bg-slate-200 border border-slate-300 font-black text-xs text-slate-700 flex items-center justify-center shadow-xs"
+                        title="-5 €"
+                      >
+                        -5
+                      </button>
+
+                      <div className="relative">
+                        <input
+                          type="number"
+                          step={1}
+                          min={0}
+                          value={item.price}
+                          onChange={(e) => updateServicePrice(idx, Number(e.target.value) || 0)}
+                          className="w-24 min-h-[36px] text-center font-black text-xs text-slate-900 bg-white border border-slate-300 rounded-lg px-2 shadow-xs focus:ring-2 focus:ring-emerald-600"
+                        />
+                        <span className="absolute right-2 top-2 text-[10px] font-bold text-slate-400">€</span>
+                      </div>
+
+                      <button
+                        type="button"
+                        onClick={() => updateServicePrice(idx, item.price + 5)}
+                        className="w-8 h-8 rounded-lg bg-white hover:bg-slate-200 border border-slate-300 font-black text-xs text-slate-700 flex items-center justify-center shadow-xs"
+                        title="+5 €"
+                      >
+                        +5
+                      </button>
+
+                      <button
+                        type="button"
+                        onClick={() => removeServiceFromCatalog(idx)}
+                        className="w-8 h-8 rounded-lg bg-white hover:bg-rose-50 text-slate-400 hover:text-rose-600 border border-slate-200 flex items-center justify-center transition-colors ml-1"
+                        title={t("Löschen", "Delete")}
+                      >
+                        <Trash2 className="w-3.5 h-3.5" />
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Add New Custom Service Form */}
+              <div className="pt-4 border-t border-slate-200 space-y-3">
+                <div className="text-xs font-black text-slate-900 flex items-center gap-1.5 uppercase tracking-wider">
+                  <Plus className="w-3.5 h-3.5 text-emerald-600" />
+                  <span>{t("Neue Leistung zur Preisliste hinzufügen", "Add Custom Service to Price List")}</span>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-12 gap-2.5">
+                  <input
+                    type="text"
+                    value={newServiceName}
+                    onChange={(e) => setNewServiceName(e.target.value)}
+                    placeholder={t("Leistungsbezeichnung (z.B. Kernbohrung)", "Service Title (e.g. Core Drilling)")}
+                    className="sm:col-span-5 text-xs px-3 py-2 border border-slate-300 rounded-xl bg-white min-h-[40px]"
+                  />
+                  <input
+                    type="text"
+                    value={newServiceBasis}
+                    onChange={(e) => setNewServiceBasis(e.target.value)}
+                    placeholder={t("Technische Spezifikation / Material", "Specification / Material")}
+                    className="sm:col-span-3 text-xs px-3 py-2 border border-slate-300 rounded-xl bg-white min-h-[40px]"
+                  />
+                  <select
+                    value={newServiceUnit}
+                    onChange={(e) => setNewServiceUnit(e.target.value)}
+                    className="sm:col-span-2 text-xs px-2.5 py-2 border border-slate-300 rounded-xl bg-white min-h-[40px] font-bold"
+                  >
+                    <option value="m²">m²</option>
+                    <option value="lfm">lfm</option>
+                    <option value="Pausch.">Pausch.</option>
+                    <option value="Std.">Std.</option>
+                    <option value="Tage">Tage</option>
+                    <option value="Stk.">Stk.</option>
+                  </select>
+                  <div className="sm:col-span-2 relative">
+                    <input
+                      type="number"
+                      step={1}
+                      min={0}
+                      value={newServicePrice}
+                      onChange={(e) => setNewServicePrice(Number(e.target.value) || 0)}
+                      placeholder="Preis"
+                      className="w-full text-xs font-bold text-center px-2 py-2 border border-slate-300 rounded-xl bg-white min-h-[40px]"
+                    />
+                    <span className="absolute right-2 top-2.5 text-[10px] font-bold text-slate-400">€</span>
+                  </div>
+                </div>
+
+                <button
+                  type="button"
+                  onClick={addCustomServiceToCatalog}
+                  className="w-full min-h-[42px] bg-emerald-700 hover:bg-emerald-800 text-white font-extrabold text-xs py-2 px-4 rounded-xl flex items-center justify-center gap-2 shadow-xs transition-colors"
+                >
+                  <Plus className="w-4 h-4" />
+                  <span>{t("Leistung speichern & sofort in Vorlagen aktivieren", "Save Service & Enable in Templates")}</span>
+                </button>
+              </div>
+            </div>
+
+            {/* Modal Footer */}
+            <div className="p-4 sm:p-5 border-t border-slate-100 bg-slate-50 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+              <button
+                type="button"
+                onClick={resetServiceCatalog}
+                className="text-xs font-bold text-slate-500 hover:text-slate-800 underline"
+              >
+                {t("WTA-Standardwerte wiederherstellen", "Reset to Standard WTA Defaults")}
+              </button>
+
+              <button
+                type="button"
+                onClick={() => setShowPriceListModal(false)}
+                className="min-h-[44px] px-6 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-black text-xs shadow-sm"
+              >
+                {t("Fertig & Schließen", "Done & Close")}
+              </button>
             </div>
           </div>
         </div>
