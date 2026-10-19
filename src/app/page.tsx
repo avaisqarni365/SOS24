@@ -5,6 +5,7 @@ import Hero from "@/components/scroll/Hero";
 import { ServicesRail } from "@/components/scroll/HomeSections";
 import MoreLinks from "@/components/sections/MoreLinks";
 import HomeSteps from "@/components/sections/HomeSteps";
+import OnlineAppointmentBooking from "@/components/sections/OnlineAppointmentBooking";
 import ScrollSectionRail from "@/components/navigation/ScrollSectionRail";
 import ScrollEngine, { SC_BOOT } from "@/components/scroll/ScrollEngine";
 import JsonLd from "@/components/seo/JsonLd";
@@ -70,6 +71,7 @@ export default function Home() {
         <ServicesRail />
         <MoreLinks />
         <HomeSteps />
+        <OnlineAppointmentBooking />
       </main>
       <Footer />
       <ScrollEngine />

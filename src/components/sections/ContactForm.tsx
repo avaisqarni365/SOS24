@@ -18,8 +18,15 @@ import {
   FileText,
   Loader2,
   FolderOpen,
+  Calendar,
+  Download,
 } from 'lucide-react';
 import { COMPANY, COMPANY_INFO } from '@/data/content-data';
+import {
+  buildGoogleCalendarUrl,
+  downloadIcsFile,
+  INSPECTION_SLOTS,
+} from '@/lib/calendar';
 import {
   submitLeadToWorkspace,
   uploadDamagePhotosToDrive,
@@ -63,6 +70,7 @@ export default function ContactForm({ compact = false, defaultDamage, place }: C
     damageType: defaultDamage || 'Feuchter Keller / Nasse Wände',
     areaSqm: '',
     preferredDate: '',
+    preferredTimeSlot: 'morning',
     message: '',
     privacy: false,
   });
@@ -125,6 +133,7 @@ export default function ContactForm({ compact = false, defaultDamage, place }: C
   };
 
   const buildSummaryText = (assignedId?: string) => {
+    const slot = INSPECTION_SLOTS.find((s) => s.id === formData.preferredTimeSlot);
     return (
       `Anfrage kostenlose Schadensanalyse (${COMPANY.name})${assignedId ? ` [${assignedId}]` : ''}\n\n` +
       `Name: ${formData.name}\n` +
@@ -133,7 +142,7 @@ export default function ContactForm({ compact = false, defaultDamage, place }: C
       `PLZ / Ort: ${formData.plzOrt}\n` +
       `Schadensart: ${formData.damageType}\n` +
       (formData.areaSqm ? `Fläche / Wandlänge: ca. ${formData.areaSqm} m²/lfm\n` : '') +
-      (formData.preferredDate ? `Wunschtermin: ${formData.preferredDate}\n` : '') +
+      (formData.preferredDate ? `Wunschtermin: ${formData.preferredDate} (${slot?.label || 'Vormittags'} ${slot?.timeRange || '08:00 – 11:00 Uhr'})\n` : '') +
       `Beschreibung: ${formData.message || 'Bitte um Rückruf zur Terminvereinbarung.'}`
     );
   };
@@ -182,6 +191,10 @@ export default function ContactForm({ compact = false, defaultDamage, place }: C
     setSubmitting(true);
     try {
       const elapsed = Date.now() - mountedAtRef.current;
+      const slot = INSPECTION_SLOTS.find((s) => s.id === formData.preferredTimeSlot);
+      const formattedPreferredDate = formData.preferredDate
+        ? `${formData.preferredDate} (${slot?.timeRange || '10:00 Uhr'})`
+        : '';
       const res = await submitLeadToWorkspace(
         {
           name: formData.name,
@@ -190,7 +203,7 @@ export default function ContactForm({ compact = false, defaultDamage, place }: C
           plzOrt: formData.plzOrt,
           damageType: formData.damageType,
           areaOrLength: Number(formData.areaSqm) || 15,
-          preferredDate: formData.preferredDate,
+          preferredDate: formattedPreferredDate,
           message: formData.message,
           channel: 'phone',
           source: 'Kontaktformular (/kontakt/)',
@@ -629,6 +642,69 @@ export default function ContactForm({ compact = false, defaultDamage, place }: C
                   />
                 </div>
 
+                {/* Google Calendar 1-Click Sync Card if preferredDate was selected */}
+                {formData.preferredDate && (
+                  <div className="bg-emerald-50/80 border border-emerald-300 rounded-2xl p-4 sm:p-5 text-left max-w-lg mx-auto space-y-3 shadow-xs">
+                    <div className="flex items-center justify-between text-xs font-bold text-slate-700">
+                      <span className="flex items-center gap-1.5 text-emerald-800">
+                        <Calendar className="w-4 h-4 text-emerald-600" />
+                        <span>Ihr Wunschtermin zur Feuchtemessung</span>
+                      </span>
+                      <span className="text-emerald-800 bg-white border border-emerald-300 px-2 py-0.5 rounded-full text-[10px] font-black">
+                        Vorgang {leadId}
+                      </span>
+                    </div>
+
+                    <div className="text-sm font-black text-slate-900">
+                      {new Date(formData.preferredDate).toLocaleDateString('de-DE', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
+                    </div>
+                    <div className="text-xs font-extrabold text-emerald-800">
+                      {(() => {
+                        const slot = INSPECTION_SLOTS.find((s) => s.id === formData.preferredTimeSlot) || INSPECTION_SLOTS[0];
+                        return `${slot.icon} ${slot.label}: ${slot.timeRange}`;
+                      })()}
+                    </div>
+
+                    <div className="pt-2 border-t border-emerald-200 grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs">
+                      <a
+                        href={buildGoogleCalendarUrl({
+                          title: `SOS Abdichtung · Vor-Ort-Feuchtigkeitsmessung (${formData.name})`,
+                          description: `Kostenlose Schadensanalyse & Feuchtemessung durch Shahzad Mahmood (${COMPANY_INFO.phoneDisplay}).\nVorgangs-ID: ${leadId}\nSchaden: ${formData.damageType}\nAdresse: ${formData.plzOrt}`,
+                          location: formData.plzOrt || 'NRW',
+                          startDate: formData.preferredDate,
+                          startTime: (INSPECTION_SLOTS.find((s) => s.id === formData.preferredTimeSlot) || INSPECTION_SLOTS[0]).startTime,
+                          durationMinutes: (INSPECTION_SLOTS.find((s) => s.id === formData.preferredTimeSlot) || INSPECTION_SLOTS[0]).durationMinutes,
+                        })}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="p-2.5 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white font-bold flex items-center justify-center gap-1.5 transition-colors shadow-xs"
+                      >
+                        <Calendar className="w-3.5 h-3.5" />
+                        <span>In Google Kalender ↗</span>
+                      </a>
+
+                      <button
+                        type="button"
+                        onClick={() => {
+                          const slot = INSPECTION_SLOTS.find((s) => s.id === formData.preferredTimeSlot) || INSPECTION_SLOTS[0];
+                          downloadIcsFile({
+                            title: `SOS Abdichtung · Vor-Ort-Feuchtigkeitsmessung (${formData.name})`,
+                            description: `Kostenlose Schadensanalyse & Feuchtemessung durch Shahzad Mahmood (${COMPANY_INFO.phoneDisplay}).\nVorgangs-ID: ${leadId}\nSchaden: ${formData.damageType}\nAdresse: ${formData.plzOrt}`,
+                            location: formData.plzOrt || 'NRW',
+                            startDate: formData.preferredDate,
+                            startTime: slot.startTime,
+                            durationMinutes: slot.durationMinutes,
+                          });
+                        }}
+                        className="p-2.5 rounded-xl bg-white hover:bg-slate-100 text-slate-800 border border-slate-200 font-bold flex items-center justify-center gap-1.5 transition-colors"
+                      >
+                        <Download className="w-3.5 h-3.5 text-slate-600" />
+                        <span>Apple / Outlook (.ics)</span>
+                      </button>
+                    </div>
+                  </div>
+                )}
+
                 <div className="flex flex-col sm:flex-row justify-center gap-3 pt-2">
                   <button
                     type="button"
@@ -821,18 +897,51 @@ export default function ContactForm({ compact = false, defaultDamage, place }: C
                       htmlFor="contact-date"
                       className="block text-xs sm:text-sm font-semibold text-slate-800 mb-1.5"
                     >
-                      Wunschtermin Messung
+                      Wunschtermin Messung (optional)
                     </label>
                     <input
                       id="contact-date"
                       name="preferredDate"
                       type="date"
+                      min={new Date(Date.now() + 86400000).toISOString().slice(0, 10)}
                       value={formData.preferredDate}
                       onChange={handleChange}
                       className={inputCls}
                     />
                   </div>
                 </div>
+
+                {formData.preferredDate && (
+                  <div className="bg-emerald-50/70 border border-emerald-200 rounded-xl p-3.5 space-y-2 animate-in fade-in">
+                    <div className="text-xs font-bold text-emerald-950 flex items-center justify-between">
+                      <span className="flex items-center gap-1.5">
+                        <Clock className="w-3.5 h-3.5 text-emerald-700" />
+                        <span>Bevorzugtes Zeitfenster am {new Date(formData.preferredDate).toLocaleDateString('de-DE')}:</span>
+                      </span>
+                      <span className="text-[10px] text-emerald-700 font-semibold">Kostenlos vor Ort</span>
+                    </div>
+                    <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+                      {INSPECTION_SLOTS.map((slot) => {
+                        const isSelected = formData.preferredTimeSlot === slot.id;
+                        return (
+                          <button
+                            key={slot.id}
+                            type="button"
+                            onClick={() => setFormData((p) => ({ ...p, preferredTimeSlot: slot.id }))}
+                            className={`p-2 rounded-lg border text-left text-xs transition-all ${
+                              isSelected
+                                ? 'bg-white border-emerald-600 ring-2 ring-emerald-500/30 font-bold shadow-xs'
+                                : 'bg-white/70 hover:bg-white border-slate-200 text-slate-700'
+                            }`}
+                          >
+                            <div className="text-[11px] font-black text-slate-900">{slot.icon} {slot.label}</div>
+                            <div className="text-[10px] text-slate-500">{slot.timeRange}</div>
+                          </button>
+                        );
+                      })}
+                    </div>
+                  </div>
+                )}
 
                 <div>
                   <label

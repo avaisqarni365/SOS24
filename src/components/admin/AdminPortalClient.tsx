@@ -61,6 +61,7 @@ import {
   Building2,
 } from "lucide-react";
 import { COMPANY, COMPANY_INFO } from "@/data/content-data";
+import { buildGoogleCalendarUrl, downloadIcsFile, INSPECTION_SLOTS } from "@/lib/calendar";
 import {
   getWorkspaceStore,
   saveWorkspaceStore,
@@ -633,6 +634,14 @@ export default function AdminPortalClient() {
   const [newLocStreet, setNewLocStreet] = useState<string>("");
   const [newLocPhone, setNewLocPhone] = useState<string>("+49 (0)172 2064177");
   const [newLocUrl, setNewLocUrl] = useState<string>("");
+
+  // Google Calendar & Appointment Manager State
+  const [showNewAptModal, setShowNewAptModal] = useState<boolean>(false);
+  const [newAptLeadId, setNewAptLeadId] = useState<string>("A-1001");
+  const [newAptDate, setNewAptDate] = useState<string>(() => new Date(Date.now() + 86400000).toISOString().slice(0, 10));
+  const [newAptTime, setNewAptTime] = useState<string>("10:00");
+  const [newAptType, setNewAptType] = useState<string>("Vor-Ort-Feuchtigkeitsmessung");
+  const [aptFilter, setAptFilter] = useState<"all" | "today" | "upcoming" | "done">("all");
 
   // Aufmaß-Planer state
   const [plName, setPlName] = useState("");
@@ -1370,6 +1379,35 @@ export default function AdminPortalClient() {
     persistAll(leads, nextDocs);
     setSelectedDocNr(nr);
     showToast(t(`Neuer Beleg ${nr} erfolgreich angelegt.`, `New document ${nr} successfully created.`));
+  };
+
+  const createNewAppointment = () => {
+    const lead = leads.find((l) => l.id === newAptLeadId);
+    const nr = `T-${1001 + appointments.length}`;
+    const newApt: WorkspaceAppointment = {
+      nr,
+      leadId: newAptLeadId,
+      date: newAptDate,
+      time: newAptTime,
+      type: newAptType,
+      name: lead ? lead.name : "Kunde",
+      phone: lead ? lead.phone : COMPANY_INFO.phoneDisplay,
+      address: lead ? (lead.area || lead.address || "NRW") : "NRW",
+      damageType: lead ? lead.damageType : "Kellersanierung",
+      status: "Bestätigt",
+    };
+    const nextApts = [newApt, ...appointments];
+    setAppointments(nextApts);
+    saveWorkspaceStore({ leads, docs, appointments: nextApts });
+    setShowNewAptModal(false);
+    showToast(t(`✓ Vor-Ort-Termin ${nr} für ${newApt.name} angelegt!`, `✓ Appointment ${nr} for ${newApt.name} scheduled!`));
+  };
+
+  const updateAptStatus = (nr: string, nextStatus: string) => {
+    const nextApts = appointments.map((a) => (a.nr === nr ? { ...a, status: nextStatus } : a));
+    setAppointments(nextApts);
+    saveWorkspaceStore({ leads, docs, appointments: nextApts });
+    showToast(t(`Status von ${nr} auf „${nextStatus}“ aktualisiert.`, `Status of ${nr} updated to '${nextStatus}'.`));
   };
 
   const createOfferFromPlaner = () => {
@@ -2462,6 +2500,20 @@ export default function AdminPortalClient() {
                   {t("🧾 GoBD-Rechnung (RE-2026) erzeugen →", "🧾 Create GoBD Invoice (RE-2026) →")}
                 </button>
               </div>
+
+              <button
+                type="button"
+                onClick={() => {
+                  setNewAptLeadId(curLead.id);
+                  setNewAptDate(curLead.date || new Date(Date.now() + 86400000).toISOString().slice(0, 10));
+                  setTab("termine");
+                  setShowNewAptModal(true);
+                }}
+                className="w-full min-h-[44px] bg-slate-100 hover:bg-slate-200 text-slate-800 font-extrabold text-xs px-4 py-2.5 rounded-xl border border-slate-300 flex items-center justify-center gap-2 transition-colors mt-1"
+              >
+                <Calendar className="w-4 h-4 text-emerald-600" />
+                <span>{t("📅 Vor-Ort-Termin für diesen Kunden planen", "📅 Schedule On-Site Appointment for this Lead")}</span>
+              </button>
             </div>
           </div>
 
@@ -4607,52 +4659,445 @@ export default function AdminPortalClient() {
         </div>
       )}
 
-      {/* TAB 6: APPOINTMENTS & CALENDAR */}
+      {/* TAB 6: APPOINTMENTS & GOOGLE CALENDAR DISPATCHER */}
       {tab === "termine" && (
-        <div className="bg-white rounded-2xl p-4 sm:p-6 border border-slate-200 space-y-4">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-            <div>
-              <h3 className="text-base sm:text-lg font-extrabold text-slate-900">
-                {t("Geplante Vor-Ort-Feuchtigkeitsmessungen & Google Kalender", "Scheduled On-Site Moisture Diagnostics & Google Calendar")}
-              </h3>
-              <p className="text-xs text-slate-500 break-words mt-0.5">
-                {t("Synchronisiert mit dem Google Kalender von", "Synchronized with Google Calendar of")}{" "}
-                <strong className="break-all">{NOTIFY_EMAIL_DEFAULT}</strong>.
-              </p>
+        <div className="space-y-6">
+          {/* Header Card */}
+          <div className="bg-white rounded-2xl p-5 sm:p-6 border border-slate-200 shadow-sm space-y-4">
+            <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 border-b border-slate-100 pb-4">
+              <div className="space-y-1">
+                <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-[11px] font-extrabold uppercase">
+                  <Calendar className="w-3.5 h-3.5 text-emerald-600" />
+                  <span>{t("Google Kalender & Vor-Ort-Terminplaner", "Google Calendar & On-Site Appointment Planner")}</span>
+                </div>
+                <h3 className="text-xl sm:text-2xl font-black text-slate-900">
+                  {t("Vor-Ort-Feuchtigkeitsmessungen & Handwerker-Einsätze", "On-Site Moisture Diagnostics & Field Inspections")}
+                </h3>
+                <p className="text-xs sm:text-sm text-slate-600 max-w-2xl leading-relaxed">
+                  {t(
+                    `Synchronisiert mit Google Workspace (${NOTIFY_EMAIL_DEFAULT}). Fügen Sie Termine mit 1 Klick zu Ihrem Google Kalender hinzu, versenden Sie WhatsApp-Terminbestätigungen an Kunden und laden Sie Kalenderdateien (.ics) für Ihr Smartphone.`,
+                    `Synchronized with Google Workspace (${NOTIFY_EMAIL_DEFAULT}). Sync appointments with Google Calendar in 1-click, send WhatsApp confirmations to homeowners, and export .ics files.`
+                  )}
+                </p>
+              </div>
+
+              <div className="flex flex-wrap items-center gap-2.5 shrink-0">
+                <button
+                  type="button"
+                  onClick={() => setShowNewAptModal(true)}
+                  className="min-h-[44px] px-4 py-2 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white font-black text-xs inline-flex items-center gap-2 shadow-xs transition-colors"
+                >
+                  <Plus className="w-4 h-4" />
+                  <span>{t("+ Neuen Vor-Ort-Termin anlegen", "+ Schedule New Inspection")}</span>
+                </button>
+
+                <a
+                  href="https://calendar.google.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="min-h-[44px] px-4 py-2 rounded-xl bg-[#0f2537] hover:bg-slate-800 text-white font-extrabold text-xs inline-flex items-center gap-2 shadow-xs transition-colors"
+                >
+                  <span>{t("Google Kalender öffnen ↗", "Open Google Calendar ↗")}</span>
+                  <ExternalLink className="w-3.5 h-3.5 text-slate-400" />
+                </a>
+              </div>
             </div>
-            <a
-              href="https://calendar.google.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="min-h-[44px] inline-flex items-center justify-center gap-1.5 text-xs font-bold bg-[#0f2537] text-white px-4 py-2.5 rounded-xl shrink-0"
-            >
-              <span>{t("Google Kalender öffnen", "Open Google Calendar")}</span>
-              <ExternalLink className="w-3.5 h-3.5" />
-            </a>
+
+            {/* 4 Summary KPI Cards */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 pt-1">
+              <div className="bg-slate-50 border border-slate-200 rounded-xl p-3.5 space-y-1">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-slate-500">
+                  {t("Gesamte Termine", "Total Appointments")}
+                </span>
+                <div className="text-2xl font-black text-slate-900">{appointments.length}</div>
+                <div className="text-[11px] text-slate-500">{t("Im System & Cloud erfasst", "Logged in system & cloud")}</div>
+              </div>
+
+              <div className="bg-slate-50 border border-slate-200 rounded-xl p-3.5 space-y-1">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-emerald-800">
+                  {t("Bestätigt & Geplant", "Confirmed & Scheduled")}
+                </span>
+                <div className="text-2xl font-black text-emerald-700">
+                  {appointments.filter((a) => a.status === "Bestätigt" || a.status === "Wunschtermin angefragt").length}
+                </div>
+                <div className="text-[11px] text-emerald-800 font-semibold">{t("Anstehende Vor-Ort-Messungen", "Upcoming inspection visits")}</div>
+              </div>
+
+              <div className="bg-slate-50 border border-slate-200 rounded-xl p-3.5 space-y-1">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-sky-800">
+                  {t("Erledigt / Abgeschlossen", "Completed Visits")}
+                </span>
+                <div className="text-2xl font-black text-sky-700">
+                  {appointments.filter((a) => a.status === "Erledigt").length}
+                </div>
+                <div className="text-[11px] text-slate-500">{t("Aufmaß genommen / Angebot raus", "Diagnostics finished")}</div>
+              </div>
+
+              <div className="bg-slate-50 border border-slate-200 rounded-xl p-3.5 space-y-1">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-slate-500">
+                  {t("Google Kalender Cloud", "Google Calendar Cloud")}
+                </span>
+                <div className="text-xs font-mono font-bold text-slate-900 truncate" title={NOTIFY_EMAIL_DEFAULT}>
+                  {NOTIFY_EMAIL_DEFAULT}
+                </div>
+                <div className="text-[11px] text-emerald-700 font-bold flex items-center gap-1">
+                  <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                  <span>✓ {t("Live synchronisiert", "Live Synchronized")}</span>
+                </div>
+              </div>
+            </div>
           </div>
-          <div className="divide-y divide-slate-200 text-xs">
-            {appointments.map((apt) => (
-              <div
-                key={apt.nr}
-                className="py-3.5 flex flex-col sm:flex-row sm:items-center justify-between gap-2"
+
+          {/* Filter Bar */}
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <div className="bg-slate-100 p-1 rounded-xl flex items-center gap-1 border border-slate-200">
+              <button
+                type="button"
+                onClick={() => setAptFilter("all")}
+                className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
+                  aptFilter === "all" ? "bg-white text-emerald-800 shadow-xs font-black" : "text-slate-600 hover:text-slate-900"
+                }`}
               >
-                <div>
-                  <span className="font-extrabold text-emerald-700">
-                    {apt.nr} · {apt.date} · {apt.time} {t("Uhr", "hrs")}
-                  </span>
-                  <div className="font-bold text-slate-900 mt-0.5">
-                    {apt.type} – {apt.name} ({apt.leadId})
+                {t("Alle Termine", "All")} ({appointments.length})
+              </button>
+              <button
+                type="button"
+                onClick={() => setAptFilter("upcoming")}
+                className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
+                  aptFilter === "upcoming" ? "bg-white text-emerald-800 shadow-xs font-black" : "text-slate-600 hover:text-slate-900"
+                }`}
+              >
+                {t("Offen / Geplant", "Scheduled")} ({appointments.filter((a) => a.status !== "Erledigt").length})
+              </button>
+              <button
+                type="button"
+                onClick={() => setAptFilter("done")}
+                className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
+                  aptFilter === "done" ? "bg-white text-emerald-800 shadow-xs font-black" : "text-slate-600 hover:text-slate-900"
+                }`}
+              >
+                {t("Erledigt", "Completed")} ({appointments.filter((a) => a.status === "Erledigt").length})
+              </button>
+            </div>
+
+            <span className="text-xs text-slate-500">
+              {t("Klicken Sie auf „In Google Kalender eintragen“, um den Termin direkt zu speichern.", "Click 'Add to Google Calendar' to save any visit to your schedule.")}
+            </span>
+          </div>
+
+          {/* Appointments List */}
+          <div className="space-y-3.5">
+            {appointments
+              .filter((apt) => {
+                if (aptFilter === "upcoming") return apt.status !== "Erledigt";
+                if (aptFilter === "done") return apt.status === "Erledigt";
+                return true;
+              })
+              .map((apt) => {
+                const calTitle = `SOS Abdichtung · Vor-Ort-Feuchtigkeitsmessung (${apt.name})`;
+                const calDesc = `Vor-Ort-Feuchtigkeitsmessung & Schadensdiagnose (${COMPANY_INFO.phoneDisplay})\nKunde: ${apt.name} (${apt.phone})\nSchaden: ${apt.damageType}\nAdresse: ${apt.address}\nVorgangs-ID: ${apt.leadId}\nTermin-Nr: ${apt.nr}`;
+                const googleCalLink = buildGoogleCalendarUrl({
+                  title: calTitle,
+                  description: calDesc,
+                  location: apt.address,
+                  startDate: apt.date,
+                  startTime: apt.time,
+                  durationMinutes: 90,
+                });
+
+                return (
+                  <div
+                    key={apt.nr}
+                    className="bg-white rounded-2xl p-4 sm:p-5 border border-slate-200 shadow-xs hover:border-slate-300 transition-all space-y-4"
+                  >
+                    {/* Top Row: Date, ID, Status Dropdown */}
+                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-3">
+                      <div className="flex flex-wrap items-center gap-2.5">
+                        <span className="px-3 py-1 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-900 font-black text-xs flex items-center gap-1.5">
+                          <Clock className="w-3.5 h-3.5 text-emerald-700" />
+                          <span>{apt.date} · {apt.time} {t("Uhr", "hrs")}</span>
+                        </span>
+                        <span className="font-mono text-xs font-bold text-slate-500 bg-slate-100 px-2.5 py-0.5 rounded-lg">
+                          {apt.nr}
+                        </span>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            setSelectedLeadId(apt.leadId);
+                            setTab("leads");
+                          }}
+                          className="text-xs font-extrabold text-sky-700 hover:text-sky-900 hover:underline"
+                        >
+                          {t("Vorgang", "Lead")} {apt.leadId} →
+                        </button>
+                      </div>
+
+                      <div className="flex items-center gap-2">
+                        <span className="text-[11px] font-bold text-slate-500">{t("Status:", "Status:")}</span>
+                        <select
+                          value={apt.status}
+                          onChange={(e) => updateAptStatus(apt.nr, e.target.value)}
+                          className={`text-xs font-extrabold px-3 py-1 rounded-xl border outline-none ${
+                            apt.status === "Bestätigt"
+                              ? "bg-emerald-100 text-emerald-900 border-emerald-300"
+                              : apt.status === "Erledigt"
+                              ? "bg-sky-100 text-sky-900 border-sky-300"
+                              : apt.status === "Verschoben"
+                              ? "bg-amber-100 text-amber-900 border-amber-300"
+                              : "bg-slate-100 text-slate-800 border-slate-300"
+                          }`}
+                        >
+                          <option value="Bestätigt">✓ Bestätigt</option>
+                          <option value="Wunschtermin angefragt">⏳ Wunschtermin angefragt</option>
+                          <option value="Erledigt">✓ Erledigt (Aufmaß genommen)</option>
+                          <option value="Verschoben">📅 Verschoben</option>
+                          <option value="Storniert">❌ Storniert</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    {/* Middle Row: Customer Info */}
+                    <div className="grid grid-cols-1 sm:grid-cols-12 gap-3 text-xs">
+                      <div className="sm:col-span-5 space-y-1">
+                        <div className="font-extrabold text-slate-900 text-sm">{apt.name}</div>
+                        <div className="text-slate-500 flex items-center gap-1.5">
+                          <Phone className="w-3.5 h-3.5 text-slate-400" />
+                          <a href={`tel:${apt.phone}`} className="font-semibold text-slate-700 hover:underline">
+                            {apt.phone}
+                          </a>
+                        </div>
+                      </div>
+
+                      <div className="sm:col-span-4 space-y-1">
+                        <div className="text-[11px] text-slate-500">{t("Einsatzort / Adresse:", "Site Address:")}</div>
+                        <div className="font-semibold text-slate-800 flex items-start gap-1">
+                          <MapPin className="w-3.5 h-3.5 text-slate-400 shrink-0 mt-0.5" />
+                          <a
+                            href={`https://maps.google.com/?q=${encodeURIComponent(apt.address)}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="hover:underline text-emerald-700"
+                            title="In Google Maps öffnen"
+                          >
+                            {apt.address} ↗
+                          </a>
+                        </div>
+                      </div>
+
+                      <div className="sm:col-span-3 space-y-1">
+                        <div className="text-[11px] text-slate-500">{t("Schadensart:", "Damage Type:")}</div>
+                        <div className="font-bold text-slate-900">{apt.damageType}</div>
+                      </div>
+                    </div>
+
+                    {/* Actions Row */}
+                    <div className="pt-2 border-t border-slate-100 flex flex-wrap items-center justify-between gap-2 text-xs">
+                      <div className="flex flex-wrap items-center gap-2">
+                        {/* 1. Google Calendar Link */}
+                        <a
+                          href={googleCalLink}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="min-h-[36px] px-3 py-1.5 rounded-lg bg-emerald-50 hover:bg-emerald-100 text-emerald-900 border border-emerald-300 font-bold inline-flex items-center gap-1.5 transition-colors"
+                          title="Öffnet Google Calendar mit vorausgefülltem Event"
+                        >
+                          <Calendar className="w-3.5 h-3.5 text-emerald-700" />
+                          <span>{t("In Google Kalender ↗", "Add to Google Calendar ↗")}</span>
+                        </a>
+
+                        {/* 2. Download .ics File */}
+                        <button
+                          type="button"
+                          onClick={() => {
+                            downloadIcsFile({
+                              title: calTitle,
+                              description: calDesc,
+                              location: apt.address,
+                              startDate: apt.date,
+                              startTime: apt.time,
+                              durationMinutes: 90,
+                            });
+                            showToast(t(`Kalenderdatei für ${apt.name} heruntergeladen.`, `Calendar file for ${apt.name} downloaded.`));
+                          }}
+                          className="min-h-[36px] px-3 py-1.5 rounded-lg bg-slate-50 hover:bg-slate-100 text-slate-700 border border-slate-200 font-semibold inline-flex items-center gap-1.5 transition-colors"
+                          title="Für iPhone, Apple Kalender oder Outlook"
+                        >
+                          <Download className="w-3.5 h-3.5 text-slate-500" />
+                          <span>.ics {t("Datei", "File")}</span>
+                        </button>
+
+                        {/* 3. WhatsApp Confirmation to Customer */}
+                        <a
+                          href={`https://wa.me/${apt.phone.replace(/[^0-9]/g, "")}?text=${encodeURIComponent(
+                            `Guten Tag ${apt.name}, wir bestätigen Ihren Vor-Ort-Termin zur kostenlosen Feuchtigkeitsmessung am ${apt.date} um ${apt.time} Uhr (${apt.address}). Bei Rückfragen erreichen Sie uns direkt. Viele Grüße, Shahzad Mahmood – SOS Abdichtung`
+                          )}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="min-h-[36px] px-3 py-1.5 rounded-lg bg-emerald-50 hover:bg-emerald-100 text-[#1ebe5d] border border-emerald-200 font-bold inline-flex items-center gap-1.5 transition-colors"
+                        >
+                          <MessageSquare className="w-3.5 h-3.5 text-[#1ebe5d]" />
+                          <span>{t("WhatsApp-Bestätigung senden", "Send WhatsApp Confirmation")}</span>
+                        </a>
+                      </div>
+
+                      <div className="flex items-center gap-2">
+                        <a
+                          href={`tel:${apt.phone}`}
+                          className="min-h-[36px] px-3 py-1.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold inline-flex items-center gap-1.5 transition-colors"
+                        >
+                          <Phone className="w-3.5 h-3.5 text-slate-600" />
+                          <span>{t("Anrufen", "Call")}</span>
+                        </a>
+                      </div>
+                    </div>
                   </div>
-                  <div className="text-slate-500">
-                    {apt.address} · Tel.: {apt.phone}
+                );
+              })}
+          </div>
+
+          {/* Google Kalender Smartphone-Synchronisation Handbuch */}
+          <div className="bg-slate-50 border border-slate-200 rounded-2xl p-4 sm:p-5 text-slate-900 space-y-3">
+            <div className="flex items-center gap-2 text-xs font-black uppercase tracking-wider text-slate-700">
+              <Calendar className="w-4 h-4 text-emerald-700" />
+              <span>{t("So nutzen Sie den Google Kalender optimal auf Ihrem Smartphone", "How to Optimize Google Calendar on Your Smartphone")}</span>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-3 text-xs">
+              <div className="bg-white p-3 rounded-xl border border-slate-200 space-y-1">
+                <div className="font-extrabold text-slate-900">1. Google Kalender App öffnen</div>
+                <p className="text-slate-600 text-[11px] leading-relaxed">
+                  Melden Sie sich in der Google Kalender App auf Ihrem Android-Handy oder iPhone mit <strong>{NOTIFY_EMAIL_DEFAULT}</strong> an.
+                </p>
+              </div>
+
+              <div className="bg-white p-3 rounded-xl border border-slate-200 space-y-1">
+                <div className="font-extrabold text-slate-900">2. Automatische Benachrichtigung</div>
+                <p className="text-slate-600 text-[11px] leading-relaxed">
+                  Jeder Termin, den Sie über „In Google Kalender ↗“ speichern, erinnert Sie 2 Stunden vorher automatisch an die Kundenadresse und Fahrzeit.
+                </p>
+              </div>
+
+              <div className="bg-white p-3 rounded-xl border border-slate-200 space-y-1">
+                <div className="font-extrabold text-slate-900">3. Google Terminplaner (Online-Buchung)</div>
+                <p className="text-slate-600 text-[11px] leading-relaxed">
+                  Kunden buchen freie Zeitfenster (08–11, 11–14, 14–17 Uhr) direkt auf der Startseite von sos-abdichtung.de. Sie behalten die volle Kontrolle.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* Modal: Neuen Vor-Ort-Termin anlegen */}
+          {showNewAptModal && (
+            <div
+              className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-3 sm:p-5"
+              onClick={(e) => {
+                if (e.target === e.currentTarget) setShowNewAptModal(false);
+              }}
+            >
+              <div className="bg-white rounded-3xl p-5 sm:p-7 max-w-lg w-full shadow-2xl border border-slate-200 space-y-5 animate-in fade-in">
+                <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+                  <div className="space-y-0.5">
+                    <span className="text-[11px] font-black uppercase tracking-wider text-emerald-800">
+                      Vor-Ort-Feuchtigkeitsmessung
+                    </span>
+                    <h4 className="text-lg font-black text-slate-900">
+                      {t("Neuen Termin eintragen", "Schedule New Appointment")}
+                    </h4>
+                  </div>
+                  <button
+                    type="button"
+                    onClick={() => setShowNewAptModal(false)}
+                    className="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-500 flex items-center justify-center"
+                  >
+                    <X className="w-4 h-4" />
+                  </button>
+                </div>
+
+                <div className="space-y-3.5 text-xs">
+                  <div>
+                    <label className="block text-xs font-bold text-slate-800 mb-1">
+                      {t("Kunde / Vorgang zuweisen *", "Select Customer / Lead *")}
+                    </label>
+                    <select
+                      value={newAptLeadId}
+                      onChange={(e) => setNewAptLeadId(e.target.value)}
+                      className="w-full px-3 py-2 rounded-xl border border-slate-300 font-bold text-slate-900 min-h-[42px] bg-white outline-none focus:ring-2 focus:ring-emerald-500"
+                    >
+                      {leads.map((l) => (
+                        <option key={l.id} value={l.id}>
+                          {l.id} – {l.name} ({l.area || l.address || "NRW"})
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+
+                  <div className="grid grid-cols-2 gap-3">
+                    <div>
+                      <label className="block text-xs font-bold text-slate-800 mb-1">
+                        {t("Datum *", "Date *")}
+                      </label>
+                      <input
+                        type="date"
+                        value={newAptDate}
+                        onChange={(e) => setNewAptDate(e.target.value)}
+                        className="w-full px-3 py-2 rounded-xl border border-slate-300 font-bold text-slate-900 min-h-[42px] bg-white outline-none focus:ring-2 focus:ring-emerald-500"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-xs font-bold text-slate-800 mb-1">
+                        {t("Uhrzeit *", "Time *")}
+                      </label>
+                      <select
+                        value={newAptTime}
+                        onChange={(e) => setNewAptTime(e.target.value)}
+                        className="w-full px-3 py-2 rounded-xl border border-slate-300 font-bold text-slate-900 min-h-[42px] bg-white outline-none focus:ring-2 focus:ring-emerald-500"
+                      >
+                        <option value="08:00">08:00 Uhr (Vormittags)</option>
+                        <option value="10:00">10:00 Uhr (Vormittags)</option>
+                        <option value="11:30">11:30 Uhr (Mittags)</option>
+                        <option value="14:00">14:00 Uhr (Nachmittags)</option>
+                        <option value="16:00">16:00 Uhr (Nachmittags)</option>
+                        <option value="17:30">17:30 Uhr (Feierabend)</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-bold text-slate-800 mb-1">
+                      {t("Art des Termins", "Appointment Type")}
+                    </label>
+                    <select
+                      value={newAptType}
+                      onChange={(e) => setNewAptType(e.target.value)}
+                      className="w-full px-3 py-2 rounded-xl border border-slate-300 font-bold text-slate-900 min-h-[42px] bg-white outline-none focus:ring-2 focus:ring-emerald-500"
+                    >
+                      <option value="Vor-Ort-Feuchtigkeitsmessung">Kostenlose Vor-Ort-Feuchtigkeitsmessung</option>
+                      <option value="Ursachendiagnose & Sanierungskonzept">Ursachendiagnose &amp; Sanierungskonzept</option>
+                      <option value="WTA-Aufmaßnahme">WTA-Aufmaßnahme</option>
+                      <option value="Baustellenabnahme">Baustellenabnahme</option>
+                    </select>
                   </div>
                 </div>
-                <span className="self-start sm:self-center shrink-0 font-bold bg-emerald-100 text-emerald-800 px-3 py-1 rounded-full">
-                  {apt.status}
-                </span>
+
+                <div className="flex items-center justify-end gap-2 pt-2 border-t border-slate-100">
+                  <button
+                    type="button"
+                    onClick={() => setShowNewAptModal(false)}
+                    className="min-h-[42px] px-4 py-2 rounded-xl text-xs font-bold text-slate-600 hover:bg-slate-100"
+                  >
+                    {t("Abbrechen", "Cancel")}
+                  </button>
+                  <button
+                    type="button"
+                    onClick={createNewAppointment}
+                    className="min-h-[42px] px-5 py-2 rounded-xl text-xs font-black bg-emerald-700 hover:bg-emerald-800 text-white shadow-xs"
+                  >
+                    {t("Termin anlegen & speichern", "Schedule Appointment")}
+                  </button>
+                </div>
               </div>
-            ))}
-          </div>
+            </div>
+          )}
         </div>
       )}
 
