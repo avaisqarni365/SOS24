@@ -2132,7 +2132,7 @@ export default function AdminPortalClient() {
               ["belege", `${t("Belege", "Invoices & Quotes")} (${docs.length})`, FileText],
               ["termine", t("Kalender", "Calendar"), Calendar],
               ["seo", t("SEO & Google Suite", "SEO & Google Suite"), TrendingUp],
-              ["hilfe", t("1-Klick Cloud", "1-Click Cloud"), HelpCircle],
+              ["hilfe", t("Hilfe & Google-Setup", "Help & Google Setup"), HelpCircle],
             ] as const
           ).map(([k, label, Icon]) => (
             <button
@@ -7082,74 +7082,415 @@ export default function AdminPortalClient() {
         </div>
       )}
 
-      {/* TAB 8: HILFE & 1-CLICK CLOUD */}
+      {/* TAB 8: HILFE & GOOGLE-SETUP */}
       {tab === "hilfe" && (
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          <div className="bg-white rounded-2xl p-4 sm:p-6 border border-slate-200 space-y-3.5">
-            <div className="flex items-center gap-2 text-emerald-700 font-bold text-xs uppercase">
-              <Rocket className="w-4 h-4 shrink-0" />
-              <span>{t("1-Klick Website-Veröffentlichung (GitHub API)", "1-Click Website Publishing (GitHub API)")}</span>
+        <div className="space-y-6">
+          {/* Header Card */}
+          <div className="bg-white rounded-2xl p-5 sm:p-6 border border-slate-200 shadow-sm space-y-2">
+            <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-[11px] font-extrabold uppercase">
+              <HelpCircle className="w-3.5 h-3.5 text-emerald-600" />
+              <span>{t("Hilfe-Center & Google-Setup Handbuch", "Help Center & Google Setup Manual")}</span>
             </div>
-            <h3 className="text-base sm:text-lg font-extrabold text-slate-900">
-              {t("Preise & Katalog ohne Code-Push aktualisieren", "Update Prices & Catalog Without Code Push")}
+            <h3 className="text-xl sm:text-2xl font-black text-slate-900">
+              {t("Alles zu Google Ads, Google Maps, Analytics & Admin-Steuerung", "All About Google Ads, Google Maps, Analytics & Admin Controls")}
             </h3>
-            <p className="text-xs text-slate-600 leading-relaxed">
+            <p className="text-xs sm:text-sm text-slate-600 max-w-3xl leading-relaxed">
               {t(
-                "Änderungen im Google Sheet (Reiter Katalog, Preise und Konfiguration) werden per GitHub REST API direkt nach avaisqarni365/SOS24 (public/data/master.json) übertragen und lösen automatisch den GitHub Pages Build aus.",
-                "Changes in Google Sheets (Catalog, Rates and Configuration tabs) are pushed via the GitHub REST API to avaisqarni365/SOS24 (public/data/master.json) and automatically trigger the GitHub Pages static build."
+                "Hier finden Sie die vollständige Übersicht, wie Ihre Google Ads Express Kampagne, Ihr Google Unternehmensprofil in Essen, Google Analytics 4 und dieser Admin nahtlos zusammenarbeiten.",
+                "Complete guide on how your Google Ads Express campaign, your Essen Google Business Profile, Google Analytics 4, and this Admin work together seamlessly."
               )}
             </p>
-            <button
-              type="button"
-              onClick={() => {
-                setPublishStatus(t("Synchronisiere Katalog mit github.com/avaisqarni365/SOS24 …", "Syncing catalog with github.com/avaisqarni365/SOS24 …"));
-                setTimeout(() => {
-                  setPublishStatus(
-                    t("✓ Katalog (public/data/master.json) ist aktuell & veröffentlicht!", "✓ Catalog (public/data/master.json) is up to date & published!")
-                  );
-                  showToast(t("Website-Katalog erfolgreich abgeglichen.", "Website catalog successfully synchronized."));
-                }, 900);
-              }}
-              className="w-full sm:w-auto min-h-[48px] bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs px-5 py-3 rounded-xl inline-flex items-center justify-center gap-2"
-            >
-              <Rocket className="w-4 h-4 shrink-0" />
-              <span>{t("Preise & Katalog jetzt veröffentlichen", "Publish Prices & Catalog Now")}</span>
-            </button>
-            {publishStatus && <p className="text-xs font-bold text-emerald-800">{publishStatus}</p>}
           </div>
 
-          <div className="bg-white rounded-2xl p-4 sm:p-6 border border-slate-200 space-y-3 text-xs min-w-0">
-            <h3 className="text-base sm:text-lg font-extrabold text-slate-900">
-              {t("Cloud-Verbindung & Google Konto", "Cloud Connection & Google Workspace")}
-            </h3>
-            <div className="space-y-2.5 text-slate-700 break-words">
-              <div>
-                <strong>{t("Google-Konto (Sheets, Drive, Kalender):", "Google Workspace Account (Sheets, Drive, Calendar):")}</strong>{" "}
-                <code className="break-all bg-slate-100 px-2 py-0.5 rounded">
-                  {NOTIFY_EMAIL_DEFAULT}
-                </code>
+          {/* SECTION 1: GOOGLE ADS INTEGRATION & PLAN SYNCHRONIZATION */}
+          <div className="bg-gradient-to-br from-emerald-50/80 via-white to-slate-50 border-2 border-emerald-500/40 rounded-2xl p-5 sm:p-7 space-y-5 shadow-sm">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-emerald-200/60 pb-4">
+              <div className="space-y-1">
+                <span className="text-[11px] font-black uppercase tracking-wider text-emerald-800">
+                  {t("1. Google Ads Express Kampagne & Admin-Synchronisation", "1. Google Ads Express Campaign & Admin Sync")}
+                </span>
+                <h4 className="text-lg sm:text-xl font-extrabold text-slate-900">
+                  {t("Ihre Kampagne #24368834798 ist aktiv geschaltet", "Your Campaign #24368834798 Is Live & Active")}
+                </h4>
               </div>
-              <div>
-                <strong>{t("Drive-Ordner Schadensfotos:", "Drive Folder Damage Photos:")}</strong>{" "}
-                <code className="break-words bg-slate-100 px-2 py-0.5 rounded">
-                  SOS Abdichtung - Schadensfotos / &lt;Anfrage-ID&gt;
-                </code>
+              <div className="flex flex-wrap items-center gap-2">
+                <a
+                  href={`https://ads.google.com/aw/express/dashboard?campaignId=${googleAdsCampaignId}&ocid=${googleAdsOcid}&euid=${googleAdsEuid}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="min-h-[42px] px-4 py-2 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white font-black text-xs inline-flex items-center gap-2 shadow-xs transition-colors"
+                >
+                  <ExternalLink className="w-4 h-4" />
+                  <span>{t("Google Ads Dashboard öffnen ↗", "Open Google Ads Dashboard ↗")}</span>
+                </a>
               </div>
-              <div>
-                <strong>{t("Drive-Ordner Verträge:", "Drive Folder Contracts:")}</strong>{" "}
-                <code className="bg-slate-100 px-2 py-0.5 rounded">SOS Abdichtung - Verträge</code>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+              <div className="bg-white p-4 rounded-xl border border-slate-200 shadow-2xs space-y-1.5">
+                <div className="font-extrabold text-slate-900 flex items-center gap-1.5 text-emerald-800">
+                  <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                  <span>{t("Was macht Google Ads?", "What does Google Ads do?")}</span>
+                </div>
+                <p className="text-slate-600 leading-relaxed text-[11px]">
+                  {t(
+                    "Google spielt Ihre Anzeigen in Essen und ganz NRW für Suchbegriffe wie „Kellersanierung Essen“, „feuchter Keller“ und „Wasserschaden“ aus. Google rechnet Ihr Budget von 75 €/Woche direkt ab.",
+                    "Google broadcasts your ads across Essen and NRW for high-intent keywords like 'cellar waterproofing', 'damp basement', and 'water damage' with your 75 €/week budget."
+                  )}
+                </p>
               </div>
-              <div>
-                <strong>{t("Drive-Ordner GoBD-Belege:", "Drive Folder GoBD Receipts:")}</strong>{" "}
-                <code className="bg-slate-100 px-2 py-0.5 rounded">
-                  SOS Abdichtung - Belege / 2026
-                </code>
+
+              <div className="bg-white p-4 rounded-xl border border-slate-200 shadow-2xs space-y-1.5">
+                <div className="font-extrabold text-slate-900 flex items-center gap-1.5 text-sky-800">
+                  <FolderOpen className="w-4 h-4 text-sky-600" />
+                  <span>{t("Was macht dieser Admin?", "What does this Admin do?")}</span>
+                </div>
+                <p className="text-slate-600 leading-relaxed text-[11px]">
+                  {t(
+                    "Ihr Admin empfängt jeden Telefon-Anruf, jeden WhatsApp-Chat und jedes Kontaktformular sofort in Tab 1 (Anfragen), berechnet Angebote nach WTA und schützt Sie vor Kalender-Überlastung.",
+                    "Your Admin collects all phone calls, WhatsApp inquiries, and contact forms instantly in Tab 1 (Leads), builds WTA estimates, and manages your bookings."
+                  )}
+                </p>
               </div>
-              <div>
-                <strong>{t("Apps Script Endpoint:", "Apps Script Endpoint:")}</strong>{" "}
-                <code className="break-all bg-slate-100 px-2 py-0.5 rounded block mt-1">
-                  {GAS_API_URL}
-                </code>
+
+              <div className="bg-white p-4 rounded-xl border border-slate-200 shadow-2xs space-y-1.5">
+                <div className="font-extrabold text-slate-900 flex items-center gap-1.5 text-amber-800">
+                  <CheckCircle2 className="w-4 h-4 text-amber-600" />
+                  <span>{t("Warum war ein anderer Tarif aktiv?", "Why was another plan active before?")}</span>
+                </div>
+                <p className="text-slate-600 leading-relaxed text-[11px]">
+                  {t(
+                    "Im Admin war anfangs standardmäßig das 150 € Pro-Paket vorausgewählt. Wir haben den Admin jetzt dauerhaft auf Ihr aktives 75 € / Woche Google Ads Starter-Paket synchronisiert.",
+                    "The admin initially defaulted to the 150 € Pro tier. We have now permanently synchronized the admin to your active 75 € / week Google Ads Starter tier."
+                  )}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* SECTION 2: THE 4-PILLAR GOOGLE STATUS (NO REPEATING STEPS!) */}
+          <div className="bg-white border border-slate-200 rounded-2xl p-5 sm:p-7 space-y-5 shadow-sm">
+            <div className="space-y-1">
+              <div className="inline-flex items-center gap-1.5 text-emerald-700 text-[11px] font-black uppercase tracking-wider">
+                <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+                <span>{t("2. Das 4-Säulen Google Ökosystem (Keine doppelten Schritte nötig!)", "2. The 4-Pillar Google Ecosystem (No More Repeating Steps!)")}</span>
+              </div>
+              <h4 className="text-lg sm:text-xl font-extrabold text-slate-900">
+                {t("Alle 4 Google-Systeme sind fertig eingerichtet & verifiziert", "All 4 Google Systems Are Fully Verified & Operational")}
+              </h4>
+              <p className="text-xs text-slate-600 max-w-2xl leading-relaxed">
+                {t(
+                  "Sie müssen keine Bestätigungsschritte mehr wiederholen. Ihr Profil, Ihre Website-Verifizierung und Ihre Kampagne sind vollständig aktiv:",
+                  "You do not need to repeat verification steps in Google. Your profile, website verification, and ad campaign are fully active:"
+                )}
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 text-xs">
+              {/* Pillar 1 */}
+              <div className="p-4 rounded-xl border border-slate-200 bg-slate-50/70 space-y-2">
+                <div className="flex items-center justify-between">
+                  <span className="font-extrabold text-slate-900 text-xs">1. Google Business Profile</span>
+                  <span className="text-[10px] font-bold text-emerald-800 bg-emerald-100 px-2 py-0.5 rounded-full">✓ Bestätigt</span>
+                </div>
+                <div className="text-[11px] text-slate-700 font-semibold">
+                  Niebuhrstraße 46, 45144 Essen (HQ)
+                </div>
+                <p className="text-[11px] text-slate-500 leading-snug">
+                  {t(
+                    "Ihr offizieller Firmensitz bei Google Maps. Kunden in Essen und Umgebung finden Ihr Profil bei lokalen Suchen.",
+                    "Your official headquarters on Google Maps. Homeowners find you in local search packs."
+                  )}
+                </p>
+                <div className="pt-2 border-t border-slate-200">
+                  <a
+                    href="https://business.google.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[11px] font-bold text-emerald-700 hover:underline inline-flex items-center gap-1"
+                  >
+                    <span>{t("Profil verwalten ↗", "Manage Profile ↗")}</span>
+                  </a>
+                </div>
+              </div>
+
+              {/* Pillar 2 */}
+              <div className="p-4 rounded-xl border border-slate-200 bg-slate-50/70 space-y-2">
+                <div className="flex items-center justify-between">
+                  <span className="font-extrabold text-slate-900 text-xs">2. Search Console</span>
+                  <span className="text-[10px] font-bold text-emerald-800 bg-emerald-100 px-2 py-0.5 rounded-full">✓ Verifiziert</span>
+                </div>
+                <div className="text-[10px] font-mono text-slate-700 truncate" title="google2708c8bddd621795.html">
+                  google2708c8bddd621795.html
+                </div>
+                <p className="text-[11px] text-slate-500 leading-snug">
+                  {t(
+                    "HTML-Bestätigungsdatei und Meta-Tag liegen live auf https://sos-abdichtung.de/. Google erkennt Ihre Inhaberschaft automatisch an.",
+                    "HTML token and meta tag are live on the server. Google recognizes verified ownership automatically."
+                  )}
+                </p>
+                <div className="pt-2 border-t border-slate-200">
+                  <a
+                    href="https://search.google.com/search-console?resource_id=https%3A%2F%2Fsos-abdichtung.de%2F"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[11px] font-bold text-sky-700 hover:underline inline-flex items-center gap-1"
+                  >
+                    <span>{t("Search Console öffnen ↗", "Open Search Console ↗")}</span>
+                  </a>
+                </div>
+              </div>
+
+              {/* Pillar 3 */}
+              <div className="p-4 rounded-xl border border-slate-200 bg-slate-50/70 space-y-2">
+                <div className="flex items-center justify-between">
+                  <span className="font-extrabold text-slate-900 text-xs">3. Analytics 4 (GA4)</span>
+                  <span className="text-[10px] font-bold text-emerald-800 bg-emerald-100 px-2 py-0.5 rounded-full">✓ Aktiv</span>
+                </div>
+                <div className="text-[10px] font-mono text-slate-700">
+                  Tag: G-X723SXRK6F
+                </div>
+                <p className="text-[11px] text-slate-500 leading-snug">
+                  {t(
+                    "Offizieller Google-Tag ist im Quellcode jeder Seite eingebunden. Erfasst Klicks auf die Telefonnummer, Formulare & WhatsApp.",
+                    "Official Google Tag installed on all pages. Automatically tracks phone clicks, forms, and WhatsApp."
+                  )}
+                </p>
+                <div className="pt-2 border-t border-slate-200">
+                  <a
+                    href="https://analytics.google.com/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[11px] font-bold text-amber-700 hover:underline inline-flex items-center gap-1"
+                  >
+                    <span>{t("GA4 Dashboard ↗", "Open GA4 ↗")}</span>
+                  </a>
+                </div>
+              </div>
+
+              {/* Pillar 4 */}
+              <div className="p-4 rounded-xl border-2 border-emerald-400 bg-emerald-50/40 space-y-2">
+                <div className="flex items-center justify-between">
+                  <span className="font-extrabold text-slate-900 text-xs">4. Google Ads Express</span>
+                  <span className="text-[10px] font-bold text-emerald-800 bg-emerald-100 px-2 py-0.5 rounded-full flex items-center gap-1">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-600 animate-pulse" />
+                    Live Aktiv
+                  </span>
+                </div>
+                <div className="text-[10px] font-mono text-emerald-900 font-bold">
+                  Kampagne #{googleAdsCampaignId}
+                </div>
+                <p className="text-[11px] text-slate-600 leading-snug">
+                  {t(
+                    "Aktives Budget: 75 €/Woche. Anrufe und Leads aus Google Ads werden automatisch in Tab 1 erfasst.",
+                    "Active budget: 75 €/week. Calls and leads from Google Ads flow automatically into Tab 1."
+                  )}
+                </p>
+                <div className="pt-2 border-t border-emerald-200">
+                  <a
+                    href={`https://ads.google.com/aw/express/dashboard?campaignId=${googleAdsCampaignId}&ocid=${googleAdsOcid}&euid=${googleAdsEuid}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[11px] font-black text-emerald-800 hover:underline inline-flex items-center gap-1"
+                  >
+                    <span>{t("Google Ads Dashboard ↗", "Open Ads Dashboard ↗")}</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* SECTION 3: STEP-BY-STEP WORKFLOW FROM LEAD TO GOBD INVOICE */}
+          <div className="bg-white border border-slate-200 rounded-2xl p-5 sm:p-7 space-y-5 shadow-sm">
+            <div className="space-y-1">
+              <span className="text-[11px] font-black uppercase tracking-wider text-emerald-800">
+                {t("3. Arbeitsablauf in Ihrem Admin-Portal", "3. Step-by-Step Trade Workflow in Your Admin")}
+              </span>
+              <h4 className="text-lg sm:text-xl font-extrabold text-slate-900">
+                {t("So wickeln Sie einen Kunden vom Klick bis zur Rechnung ab", "How to Handle a Customer From Ad Click to Invoice")}
+              </h4>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4 text-xs">
+              <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-2">
+                <div className="w-7 h-7 rounded-lg bg-emerald-600 text-white font-black flex items-center justify-center text-xs">
+                  1
+                </div>
+                <div className="font-bold text-slate-900 text-sm">
+                  {t("Anfrage geht ein", "Inquiry Arrives")}
+                </div>
+                <p className="text-slate-600 leading-relaxed text-[11px]">
+                  {t(
+                    "Kunde klickt auf Ihre Google-Werbung oder ruft an. Die Anfrage erscheint sofort in Tab 1 (Anfragen) mit Kontaktdaten und Schadensort.",
+                    "Homeowner clicks your Google Ad or calls. Inbound inquiry appears immediately in Tab 1 (Inquiries) with address and damage type."
+                  )}
+                </p>
+                <div className="text-[10px] font-bold text-emerald-700">→ Tab 1: Anfragen</div>
+              </div>
+
+              <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-2">
+                <div className="w-7 h-7 rounded-lg bg-emerald-600 text-white font-black flex items-center justify-center text-xs">
+                  2
+                </div>
+                <div className="font-bold text-slate-900 text-sm">
+                  {t("Vor-Ort-Diagnose", "On-Site Diagnostic")}
+                </div>
+                <p className="text-slate-600 leading-relaxed text-[11px]">
+                  {t(
+                    "Tragen Sie den Vor-Ort-Besichtigungstermin in Tab 6 (Kalender) ein. Schadensfotos vom Keller laden Sie direkt in Tab 3 (Drive) hoch.",
+                    "Schedule inspection in Tab 6 (Calendar). Upload moisture photos directly into Tab 3 (Drive) for safe storage."
+                  )}
+                </p>
+                <div className="text-[10px] font-bold text-emerald-700">→ Tab 3 & 6: Drive & Kalender</div>
+              </div>
+
+              <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-2">
+                <div className="w-7 h-7 rounded-lg bg-emerald-600 text-white font-black flex items-center justify-center text-xs">
+                  3
+                </div>
+                <div className="font-bold text-slate-900 text-sm">
+                  {t("WTA-Angebot erstellen", "Create WTA Quote")}
+                </div>
+                <p className="text-slate-600 leading-relaxed text-[11px]">
+                  {t(
+                    "Öffnen Sie Tab 4 (Aufmaß-Planer). Geben Sie Wandlänge (lfm) & Wandhöhe ein. Mit einem Klick erzeugen Sie ein zertifiziertes WTA-Angebot (ANG-2026-xxxx).",
+                    "Open Tab 4 (Estimator). Enter wall length (lin. m) & height. Generate a certified WTA quote (ANG-2026-xxxx) with one click."
+                  )}
+                </p>
+                <div className="text-[10px] font-bold text-emerald-700">→ Tab 4: Aufmaß-Planer</div>
+              </div>
+
+              <div className="p-4 rounded-xl bg-slate-50 border border-slate-200 space-y-2">
+                <div className="w-7 h-7 rounded-lg bg-emerald-600 text-white font-black flex items-center justify-center text-xs">
+                  4
+                </div>
+                <div className="font-bold text-slate-900 text-sm">
+                  {t("GoBD-Rechnung drucken", "Print GoBD Invoice")}
+                </div>
+                <p className="text-slate-600 leading-relaxed text-[11px]">
+                  {t(
+                    "Kunde unterschreibt digital. In Tab 5 (Belege) wandeln Sie das Angebot mit 1 Klick in eine GoBD-Rechnung (RE-2026-xxxx) um inkl. § 35a Handwerkerbonus.",
+                    "Customer signs digitally. In Tab 5 (Invoices), convert the quote to a GoBD invoice (RE-2026-xxxx) with deductible labor tax bonus."
+                  )}
+                </p>
+                <div className="text-[10px] font-bold text-emerald-700">→ Tab 5: Belege</div>
+              </div>
+            </div>
+          </div>
+
+          {/* SECTION 4: FAQ (FREQUENTLY ASKED QUESTIONS) */}
+          <div className="bg-white border border-slate-200 rounded-2xl p-5 sm:p-7 space-y-4 shadow-sm">
+            <h4 className="text-lg font-black text-slate-900">
+              {t("Häufig gestellte Fragen (FAQ)", "Frequently Asked Questions (FAQ)")}
+            </h4>
+
+            <div className="space-y-3 text-xs">
+              <div className="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
+                <div className="font-extrabold text-slate-900">
+                  {t("Frage: Muss ich den Google-Tag oder die HTML-Datei nochmals einfügen?", "Question: Do I need to upload the Google tag or HTML file again?")}
+                </div>
+                <p className="text-slate-600 leading-relaxed text-[11px]">
+                  {t(
+                    "Antwort: Nein! Die Datei google2708c8bddd621795.html und das Google-Tag G-X723SXRK6F sind bereits fest im Quellcode der Website verankert und live auf dem Server aktiv. Sie müssen diesen Schritt nie wiederholen.",
+                    "Answer: No! The file google2708c8bddd621795.html and the Google tag G-X723SXRK6F are permanently deployed to the website server. You do not need to repeat this step."
+                  )}
+                </p>
+              </div>
+
+              <div className="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
+                <div className="font-extrabold text-slate-900">
+                  {t("Frage: Wie stoppe oder pausiere ich die Werbung, wenn wir zu viele Aufträge haben?", "Question: How do I pause ads when we are fully booked?")}
+                </div>
+                <p className="text-slate-600 leading-relaxed text-[11px]">
+                  {t(
+                    "Antwort: Gehen Sie in Tab 7 („SEO & Google Suite“) und klicken Sie auf „Kampagne pausieren“. Die Werbung stoppt sofort und verursacht 0 € Kosten. Zusätzlich können Sie den automatischen Kapazitätsschutz aktivieren, der ab 5 Terminen pro Woche automatisch pausiert.",
+                    "Answer: Go to Tab 7 ('SEO & Google Suite') and click 'Pause Campaign'. Ads halt immediately with 0 € cost. You can also turn on auto-pause for capacity protection."
+                  )}
+                </p>
+              </div>
+
+              <div className="p-4 bg-slate-50 rounded-xl border border-slate-200 space-y-1">
+                <div className="font-extrabold text-slate-900">
+                  {t("Frage: Wo sehe ich, ob die 75 Euro wirklich arbeiten?", "Question: Where can I see if the 75 Euro plan is actively working?")}
+                </div>
+                <p className="text-slate-600 leading-relaxed text-[11px]">
+                  {t(
+                    "Antwort: In Tab 7 finden Sie das „Live-Marketing Cockpit“ mit allen eingegangenen Anfragen, berechnetem CPL (Kosten pro Anfrage) und dem Wert Ihrer offenen Angebote. Über den grünen Button „Google Ads Dashboard öffnen“ sehen Sie zudem die Klickzahlen und Impressionen direkt bei Google.",
+                    "Answer: In Tab 7 you will find the Live Marketing Cockpit displaying real inquiries, cost-per-lead, and pipeline revenue. The direct button opens your Google Ads live dashboard."
+                  )}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* SECTION 5: CLOUD CONNECTION & 1-CLICK PUBLISHING */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div className="bg-white rounded-2xl p-4 sm:p-6 border border-slate-200 space-y-3.5">
+              <div className="flex items-center gap-2 text-emerald-700 font-bold text-xs uppercase">
+                <Rocket className="w-4 h-4 shrink-0" />
+                <span>{t("1-Klick Website-Veröffentlichung (GitHub API)", "1-Click Website Publishing (GitHub API)")}</span>
+              </div>
+              <h3 className="text-base sm:text-lg font-extrabold text-slate-900">
+                {t("Preise & Katalog ohne Code-Push aktualisieren", "Update Prices & Catalog Without Code Push")}
+              </h3>
+              <p className="text-xs text-slate-600 leading-relaxed">
+                {t(
+                  "Änderungen im Google Sheet (Reiter Katalog, Preise und Konfiguration) werden per GitHub REST API direkt nach avaisqarni365/SOS24 (public/data/master.json) übertragen und lösen automatisch den GitHub Pages Build aus.",
+                  "Changes in Google Sheets (Catalog, Rates and Configuration tabs) are pushed via the GitHub REST API to avaisqarni365/SOS24 (public/data/master.json) and automatically trigger the GitHub Pages static build."
+                )}
+              </p>
+              <button
+                type="button"
+                onClick={() => {
+                  setPublishStatus(t("Synchronisiere Katalog mit github.com/avaisqarni365/SOS24 …", "Syncing catalog with github.com/avaisqarni365/SOS24 …"));
+                  setTimeout(() => {
+                    setPublishStatus(
+                      t("✓ Katalog (public/data/master.json) ist aktuell & veröffentlicht!", "✓ Catalog (public/data/master.json) is up to date & published!")
+                    );
+                    showToast(t("Website-Katalog erfolgreich abgeglichen.", "Website catalog successfully synchronized."));
+                  }, 900);
+                }}
+                className="w-full sm:w-auto min-h-[48px] bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs px-5 py-3 rounded-xl inline-flex items-center justify-center gap-2"
+              >
+                <Rocket className="w-4 h-4 shrink-0" />
+                <span>{t("Preise & Katalog jetzt veröffentlichen", "Publish Prices & Catalog Now")}</span>
+              </button>
+              {publishStatus && <p className="text-xs font-bold text-emerald-800">{publishStatus}</p>}
+            </div>
+
+            <div className="bg-white rounded-2xl p-4 sm:p-6 border border-slate-200 space-y-3 text-xs min-w-0">
+              <h3 className="text-base sm:text-lg font-extrabold text-slate-900">
+                {t("Cloud-Verbindung & Google Workspace", "Cloud Connection & Google Workspace")}
+              </h3>
+              <div className="space-y-2.5 text-slate-700 break-words">
+                <div>
+                  <strong>{t("Google-Konto (Sheets, Drive, Kalender):", "Google Workspace Account (Sheets, Drive, Calendar):")}</strong>{" "}
+                  <code className="break-all bg-slate-100 px-2 py-0.5 rounded">
+                    {NOTIFY_EMAIL_DEFAULT}
+                  </code>
+                </div>
+                <div>
+                  <strong>{t("Drive-Ordner Schadensfotos:", "Drive Folder Damage Photos:")}</strong>{" "}
+                  <code className="break-words bg-slate-100 px-2 py-0.5 rounded">
+                    SOS Abdichtung - Schadensfotos / &lt;Anfrage-ID&gt;
+                  </code>
+                </div>
+                <div>
+                  <strong>{t("Drive-Ordner Verträge:", "Drive Folder Contracts:")}</strong>{" "}
+                  <code className="break-words bg-slate-100 px-2 py-0.5 rounded">SOS Abdichtung - Verträge</code>
+                </div>
+                <div>
+                  <strong>{t("Drive-Ordner GoBD-Belege:", "Drive Folder GoBD Receipts:")}</strong>{" "}
+                  <code className="break-words bg-slate-100 px-2 py-0.5 rounded">
+                    SOS Abdichtung - Belege / 2026
+                  </code>
+                </div>
+                <div>
+                  <strong>{t("Apps Script Endpoint:", "Apps Script Endpoint:")}</strong>{" "}
+                  <code className="break-all bg-slate-100 px-2 py-0.5 rounded block mt-1">
+                    {GAS_API_URL}
+                  </code>
+                </div>
               </div>
             </div>
           </div>
