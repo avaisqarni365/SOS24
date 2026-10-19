@@ -92,6 +92,18 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       suppressHydrationWarning
     >
       <head>
+        {/* Google tag (gtag.js) */}
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-X723SXRK6F" />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-X723SXRK6F');
+            `,
+          }}
+        />
         {/* theme and text size before first paint (see AppearanceMenu) */}
         <script dangerouslySetInnerHTML={{ __html: APPEARANCE_BOOT }} />
         <script dangerouslySetInnerHTML={{ __html: COLOR_BOOT }} />

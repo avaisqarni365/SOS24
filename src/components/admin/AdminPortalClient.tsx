@@ -4764,14 +4764,20 @@ export default function AdminPortalClient() {
                     <BarChart3 className="w-4 h-4 text-amber-600" />
                   </div>
                   <h4 className="font-extrabold text-slate-900 text-sm mt-1">Google Analytics 4 (GA4)</h4>
+                  <div className="mt-1 flex items-center gap-1.5">
+                    <span className="text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-emerald-100 text-emerald-800 border border-emerald-300">
+                      G-X723SXRK6F
+                    </span>
+                    <span className="text-[10px] font-bold text-emerald-700">✓ Aktiv</span>
+                  </div>
                   <p className="text-[11px] text-slate-600 mt-1">
                     {t(
-                      "Echtzeit-Besucher aus Wuppertal, Klick auf Telefonnummer & WhatsApp-Absprünge.",
-                      "Real-time visitors, phone call clicks, and WhatsApp interactions."
+                      "Echtzeit-Besucher aus Essen, Wuppertal & NRW, Klicks auf Telefonnummer & WhatsApp-Absprünge.",
+                      "Real-time visitors from Essen, Wuppertal & NRW, phone call clicks, and WhatsApp interactions."
                     )}
                   </p>
                 </div>
-                <div className="pt-2 border-t border-slate-200 space-y-1 text-xs">
+                <div className="pt-2 border-t border-slate-200 flex items-center justify-between text-xs">
                   <a
                     href="https://analytics.google.com/"
                     target="_blank"
@@ -4780,6 +4786,13 @@ export default function AdminPortalClient() {
                   >
                     <span>{t("GA4 Dashboard öffnen ↗", "Open GA4 ↗")}</span>
                   </a>
+                  <button
+                    type="button"
+                    onClick={() => copyToClipboard("G-X723SXRK6F", "GA4 Tracking-ID", "ga4_id")}
+                    className="text-[10px] font-bold text-slate-500 hover:text-slate-800"
+                  >
+                    {copiedField === "ga4_id" ? t("Kopiert!", "Copied!") : t("ID kopieren", "Copy ID")}
+                  </button>
                 </div>
               </div>
 
