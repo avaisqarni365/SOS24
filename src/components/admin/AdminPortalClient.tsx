@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import Link from "next/link";
 import {
   ShieldCheck,
   FolderOpen,
@@ -42,6 +43,7 @@ import {
   BadgePercent,
   Percent,
   CreditCard,
+  Receipt,
   Ruler,
   Maximize2,
   SlidersHorizontal,
@@ -7954,6 +7956,154 @@ export default function AdminPortalClient() {
                   >
                     <span>⚙️ Apps Script Admin SPA ↗</span>
                   </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* SECTION 6: MASTER ARCHITECTURE & GOOGLE WORKSPACE CLOUD GUIDE */}
+          <div className="bg-white border-2 border-slate-200 rounded-2xl p-5 sm:p-7 space-y-6 shadow-sm">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-4">
+              <div className="space-y-1">
+                <div className="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-full bg-slate-900 text-white text-[11px] font-black uppercase tracking-wider">
+                  <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
+                  <span>{t("Master-Architektur: Google Apps Script, Sheets & GoBD Cloud", "Master Architecture: Google Apps Script, Sheets & GoBD Cloud")}</span>
+                </div>
+                <h4 className="text-lg sm:text-xl font-extrabold text-slate-900">
+                  {t("Autonomes Google Workspace Ökosystem (Zero-Code im laufenden Betrieb)", "Autonomous Google Workspace Ecosystem (Zero Code After Deployment)")}
+                </h4>
+                <p className="text-xs text-slate-600 max-w-3xl leading-relaxed">
+                  {t(
+                    "Das gesamte System arbeitet vollautomatisch: Anfragen, Schadensfotos, Angebote, Kalendertermine und GoBD-Rechnungen werden direkt in Ihrem Google Workspace gespeichert.",
+                    "The entire system operates automatically: Inquiries, damage photos, quotes, calendar appointments, and GoBD invoices are stored directly in your Google Workspace."
+                  )}
+                </p>
+              </div>
+
+              <div className="flex flex-wrap items-center gap-2 shrink-0">
+                <a
+                  href="https://drive.google.com/open?id=1Qhyu32zpLQ-eFbvh6UPAvcoBdn6kTf1nOxx2GtFI5Gw"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-3.5 py-2 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs inline-flex items-center gap-1.5 transition shadow-xs"
+                >
+                  <ExternalLink className="w-3.5 h-3.5" />
+                  <span>Google Sheet Master ↗</span>
+                </a>
+                <a
+                  href={ADMIN_WEBAPP_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-3.5 py-2 rounded-xl bg-[#0f2537] hover:bg-slate-800 text-white font-bold text-xs inline-flex items-center gap-1.5 transition shadow-xs"
+                >
+                  <ExternalLink className="w-3.5 h-3.5" />
+                  <span>Apps Script Admin SPA ↗</span>
+                </a>
+              </div>
+            </div>
+
+            {/* 3 Core Architecture Pillars */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+              {/* Pillar 1: Google Sheets Database */}
+              <div className="bg-slate-50 border border-slate-200 rounded-xl p-4 space-y-2.5">
+                <div className="flex items-center justify-between">
+                  <span className="font-extrabold text-slate-900 text-sm flex items-center gap-1.5">
+                    <FileText className="w-4 h-4 text-emerald-700" />
+                    <span>1. Google Sheets Datenbank</span>
+                  </span>
+                  <span className="text-[10px] font-bold text-emerald-800 bg-emerald-100 px-2 py-0.5 rounded-full">
+                    8 Tabellen
+                  </span>
+                </div>
+                <p className="text-slate-600 text-[11px] leading-relaxed">
+                  Zentrale relationale Datenbank für Kunden, Preise, Verträge und Audit-Logs:
+                </p>
+                <ul className="space-y-1 text-[11px] text-slate-700 font-medium">
+                  <li>• <strong>Anfragen:</strong> Leads, Adressen, Token &amp; Status</li>
+                  <li>• <strong>Positionen:</strong> WTA-Material- &amp; Leistungspositionen</li>
+                  <li>• <strong>Angebote:</strong> Festpreis-Kalkulationen &amp; Versionen</li>
+                  <li>• <strong>Belege:</strong> 17 GoBD-Spalten (§ 14 UStG &amp; § 35a EStG)</li>
+                  <li>• <strong>Protokoll:</strong> Revisionssicheres Audit-Log jeder Änderung</li>
+                  <li>• <strong>Benutzer:</strong> Gesalzene Passwörter &amp; Brute-Force-Schutz</li>
+                  <li>• <strong>Konfiguration:</strong> Steuernr, USt-ID, IBAN, Stundensätze</li>
+                  <li>• <strong>Termine &amp; Strecken:</strong> Kalenderbuchungen &amp; PLZ-Logs</li>
+                </ul>
+              </div>
+
+              {/* Pillar 2: Google Drive Storage */}
+              <div className="bg-slate-50 border border-slate-200 rounded-xl p-4 space-y-2.5">
+                <div className="flex items-center justify-between">
+                  <span className="font-extrabold text-slate-900 text-sm flex items-center gap-1.5">
+                    <Camera className="w-4 h-4 text-sky-700" />
+                    <span>2. Google Drive Ordner</span>
+                  </span>
+                  <span className="text-[10px] font-bold text-sky-800 bg-sky-100 px-2 py-0.5 rounded-full">
+                    Cloud Storage
+                  </span>
+                </div>
+                <p className="text-slate-600 text-[11px] leading-relaxed">
+                  Automatische Ordner-Erstellung und Archivierung aller Medien in Originalauflösung:
+                </p>
+                <div className="space-y-2 text-[11px]">
+                  <div className="p-2 bg-white rounded-lg border border-slate-200">
+                    <strong className="text-slate-900 block">SOS Abdichtung - Kundenfotos:</strong>
+                    <span className="text-slate-500 font-mono text-[10px]">&lt;Anfrage-ID&gt;/</span> für Schadensfotos direkt vom Smartphone.
+                  </div>
+                  <div className="p-2 bg-white rounded-lg border border-slate-200">
+                    <strong className="text-slate-900 block">SOS Abdichtung - Belege:</strong>
+                    <span className="text-slate-500 font-mono text-[10px]">&lt;2026&gt;/</span> für unveränderbare GoBD-Angebots- &amp; Rechnungs-PDFs.
+                  </div>
+                  <div className="p-2 bg-white rounded-lg border border-slate-200">
+                    <strong className="text-slate-900 block">SOS Abdichtung - Verträge:</strong>
+                    <span className="text-slate-500">Für digitale Kunden-Signaturen (PNG-Zertifikate).</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Pillar 3: GoBD Invoicing & § 35a */}
+              <div className="bg-slate-50 border border-slate-200 rounded-xl p-4 space-y-2.5">
+                <div className="flex items-center justify-between">
+                  <span className="font-extrabold text-slate-900 text-sm flex items-center gap-1.5">
+                    <Receipt className="w-4 h-4 text-amber-700" />
+                    <span>3. GoBD &amp; § 35a EStG</span>
+                  </span>
+                  <span className="text-[10px] font-bold text-amber-800 bg-amber-100 px-2 py-0.5 rounded-full">
+                    Finanzamt-Konform
+                  </span>
+                </div>
+                <p className="text-slate-600 text-[11px] leading-relaxed">
+                  Lückenlose Rechnungslegung und automatischer Steuervorteil für Ihre Kunden:
+                </p>
+                <ul className="space-y-1.5 text-[11px] text-slate-700">
+                  <li>• <strong>Fortlaufende Nummern:</strong> <code>ANG-2026-xxxx</code> (Angebot), <code>RE-2026-xxxx</code> (Rechnung), <code>STORNO-RE-xxxx</code> (Korrektur).</li>
+                  <li>• <strong>§ 35a Handwerkerlohn:</strong> 20 % Steuerersparnis für Kunden bei unbarer Zahlung wird automatisch berechnet und separat ausgewiesen.</li>
+                  <li>• <strong>Zahlungsverfolgung:</strong> Teilbezahlt, Bezahlt und automatische Skonto-/Fälligkeitsberechnung.</li>
+                  <li>• <strong>GoBD-Festschreibung:</strong> Rechnungen können nach Versand nicht gelöscht, sondern nur ordnungsgemäß storniert werden.</li>
+                </ul>
+              </div>
+            </div>
+
+            {/* Customer Self-Service & Testing Verification Bar */}
+            <div className="bg-emerald-50/70 border border-emerald-200 rounded-xl p-4 sm:p-5 flex flex-col md:flex-row md:items-center justify-between gap-4 text-xs">
+              <div className="space-y-1">
+                <div className="font-extrabold text-slate-900 flex items-center gap-2">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-700" />
+                  <span>Kunden-Selfservice-Portal (/mein-auftrag/) &amp; Test-Suiten</span>
+                </div>
+                <p className="text-slate-600 text-[11px] leading-relaxed max-w-2xl">
+                  Kunden erhalten bei jeder Anfrage einen sicheren Token-Link (z. B. <code>/mein-auftrag/?id=A-1001&amp;k=...</code>) mit Live-Status, 1-Klick Google Kalender Sync, Foto-Upload und digitaler Unterschrift per Finger/Maus.
+                </p>
+              </div>
+              <div className="flex flex-wrap items-center gap-2 shrink-0">
+                <Link
+                  href="/mein-auftrag/"
+                  target="_blank"
+                  className="px-3.5 py-2 rounded-xl bg-white border border-emerald-300 hover:bg-emerald-100 text-emerald-900 font-bold text-xs inline-flex items-center gap-1.5 transition"
+                >
+                  <span>Kunden-Portal öffnen ↗</span>
+                </Link>
+                <div className="text-[10px] font-mono text-emerald-800 bg-emerald-100/80 px-2.5 py-1.5 rounded-lg border border-emerald-300">
+                  ✓ node backend/test/run.js (7/7)
                 </div>
               </div>
             </div>
