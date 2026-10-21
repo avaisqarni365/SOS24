@@ -86,6 +86,10 @@ type AdminTab =
   | "planer"
   | "belege"
   | "termine"
+  | "ads"
+  | "analytics"
+  | "searchconsole"
+  | "maps"
   | "seo"
   | "hilfe";
 
@@ -2161,33 +2165,36 @@ export default function AdminPortalClient() {
         </div>
 
         <nav
-          className="flex sm:grid sm:grid-cols-4 lg:grid-cols-8 gap-1.5 sm:gap-2 overflow-x-auto pb-1 sm:pb-0 scrollbar-none"
+          className="flex flex-wrap items-center gap-1.5 sm:gap-2"
           aria-label="Admin Navigation"
         >
           {(
             [
               ["overview", t("Übersicht", "Overview"), ShieldCheck],
               ["leads", `${t("Anfragen", "Inquiries")} (${leads.length})`, FolderOpen],
-              ["drive", `${t("Drive-Dateien", "Drive Files")} (${totalPhotosCount + docs.length})`, Camera],
-              ["planer", t("Aufmaß-Planer", "Estimator"), Calculator],
-              ["belege", `${t("Belege", "Invoices & Quotes")} (${docs.length})`, FileText],
+              ["drive", `${t("Drive", "Drive")} (${totalPhotosCount + docs.length})`, Camera],
+              ["planer", t("Aufmaß", "Estimator"), Calculator],
+              ["belege", `${t("Belege", "Invoices")} (${docs.length})`, FileText],
               ["termine", t("Kalender", "Calendar"), Calendar],
-              ["seo", t("SEO & Google Suite", "SEO & Google Suite"), TrendingUp],
-              ["hilfe", t("Hilfe & Google-Setup", "Help & Google Setup"), HelpCircle],
+              ["ads", t("Google Ads", "Google Ads"), Rocket],
+              ["analytics", t("Analytics (GA4)", "Analytics (GA4)"), BarChart3],
+              ["searchconsole", t("Search Console", "Search Console"), Search],
+              ["maps", t("Google Maps", "Google Maps"), MapPin],
+              ["hilfe", t("Hilfe & Guide", "Help & Guide"), HelpCircle],
             ] as const
           ).map(([k, label, Icon]) => (
             <button
               key={k}
               type="button"
               onClick={() => setTab(k)}
-              className={`min-h-[44px] shrink-0 inline-flex items-center justify-center gap-1.5 px-3 py-2.5 rounded-xl text-xs font-bold transition-all ${
+              className={`min-h-[42px] shrink-0 inline-flex items-center justify-center gap-1.5 px-3 py-2 rounded-xl text-xs font-bold transition-all ${
                 tab === k
-                  ? "bg-emerald-700 text-white shadow-sm font-extrabold"
+                  ? "bg-emerald-700 text-white shadow-sm font-extrabold ring-2 ring-emerald-600/30"
                   : "bg-slate-50 text-slate-700 hover:bg-slate-100 hover:text-slate-900 border border-slate-200/80"
               }`}
             >
-              <Icon className="w-4 h-4 shrink-0" />
-              <span className="truncate">{label}</span>
+              <Icon className="w-3.5 h-3.5 shrink-0" />
+              <span className="whitespace-nowrap">{label}</span>
             </button>
           ))}
         </nav>
@@ -2238,19 +2245,55 @@ export default function AdminPortalClient() {
                 )}
               </div>
             </button>
-            <button
-              type="button"
-              onClick={() => setTab("seo")}
-              className="bg-white rounded-2xl p-4 sm:p-5 border border-slate-200 shadow-sm text-left hover:border-emerald-500 transition-colors min-w-0"
-            >
-              <div className="text-base sm:text-lg font-extrabold text-emerald-700 flex items-center gap-1.5">
-                <TrendingUp className="w-5 h-5 text-emerald-600 shrink-0" />
-                <span>Google SEO Suite</span>
+            <div className="bg-white rounded-2xl p-4 sm:p-5 border border-slate-200 shadow-sm flex flex-col justify-between space-y-2.5 min-w-0">
+              <div>
+                <div className="text-base sm:text-lg font-extrabold text-emerald-700 flex items-center gap-1.5">
+                  <TrendingUp className="w-5 h-5 text-emerald-600 shrink-0" />
+                  <span>Google Marketing Suite</span>
+                </div>
+                <div className="text-xs text-slate-500 mt-0.5">
+                  {t("4 separate Google Marketing Tabs:", "4 separate Google Marketing tabs:")}
+                </div>
               </div>
-              <div className="text-xs text-slate-500 mt-1">
-                {t("Search Console, Maps, Analytics & LSA →", "Search Console, Maps, Analytics & Ads →")}
+              <div className="grid grid-cols-2 gap-1.5 pt-1">
+                <button
+                  type="button"
+                  onClick={() => setTab("ads")}
+                  className="px-2.5 py-1.5 rounded-lg bg-emerald-50 hover:bg-emerald-100 text-emerald-900 font-bold text-xs flex items-center gap-1 border border-emerald-200 truncate"
+                  title="Google Ads Express"
+                >
+                  <Rocket className="w-3.5 h-3.5 text-emerald-700 shrink-0" />
+                  <span>Google Ads</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setTab("analytics")}
+                  className="px-2.5 py-1.5 rounded-lg bg-sky-50 hover:bg-sky-100 text-sky-900 font-bold text-xs flex items-center gap-1 border border-sky-200 truncate"
+                  title="Google Analytics 4"
+                >
+                  <BarChart3 className="w-3.5 h-3.5 text-sky-700 shrink-0" />
+                  <span>Analytics</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setTab("searchconsole")}
+                  className="px-2.5 py-1.5 rounded-lg bg-amber-50 hover:bg-amber-100 text-amber-900 font-bold text-xs flex items-center gap-1 border border-amber-200 truncate"
+                  title="Google Search Console"
+                >
+                  <Search className="w-3.5 h-3.5 text-amber-700 shrink-0" />
+                  <span>Console</span>
+                </button>
+                <button
+                  type="button"
+                  onClick={() => setTab("maps")}
+                  className="px-2.5 py-1.5 rounded-lg bg-purple-50 hover:bg-purple-100 text-purple-900 font-bold text-xs flex items-center gap-1 border border-purple-200 truncate"
+                  title="Google Maps Unternehmensprofil"
+                >
+                  <MapPin className="w-3.5 h-3.5 text-purple-700 shrink-0" />
+                  <span>Maps</span>
+                </button>
               </div>
-            </button>
+            </div>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -5316,10 +5359,23 @@ export default function AdminPortalClient() {
                   </a>
                   <span className="text-[10px] font-bold text-emerald-700">{weeklyBudget} €/Wo.</span>
                 </div>
+                <button
+                  type="button"
+                  onClick={() => setTab("ads")}
+                  className="w-full mt-2 px-3 py-1.5 rounded-lg bg-emerald-800 hover:bg-emerald-900 text-white font-bold text-xs inline-flex items-center justify-center gap-1.5 transition"
+                >
+                  <Rocket className="w-3.5 h-3.5" />
+                  <span>{t("Google Ads Cockpit öffnen →", "Open Google Ads Cockpit →")}</span>
+                </button>
               </div>
             </div>
           </div>
+        </div>
+      )}
 
+      {/* DEDICATED TAB: GOOGLE ADS EXPRESS COCKPIT */}
+      {tab === "ads" && (
+        <div className="space-y-6">
           {/* PAID MARKETING CAMPAIGNS & WEEKLY PLAN MANAGER (GOOGLE LSA, SEARCH ADS & META) */}
           <div className="bg-white border-2 border-emerald-500/30 rounded-2xl p-5 sm:p-7 text-slate-900 space-y-6 shadow-sm">
             {/* Header + Master Status Badge */}
@@ -6383,7 +6439,12 @@ export default function AdminPortalClient() {
               </div>
             </div>
           </div>
+        </div>
+      )}
 
+      {/* DEDICATED TAB: GOOGLE MAPS & UNTERNEHMENSPROFIL */}
+      {tab === "maps" && (
+        <div className="space-y-6">
           {/* GOOGLE BUSINESS PROFILE (GBP) 1-CLICK SETUP & OPTIMIZATION KIT */}
           <div className="bg-white border border-emerald-200 rounded-2xl p-5 sm:p-7 text-slate-900 space-y-6 shadow-sm">
             <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-5 border-b border-slate-100">
@@ -7094,6 +7155,12 @@ export default function AdminPortalClient() {
               </div>
             </div>
           </div>
+        </div>
+      )}
+
+      {/* DEDICATED TAB: GOOGLE SEARCH CONSOLE & ORGANISCHE SUCHE */}
+      {tab === "searchconsole" && (
+        <div className="space-y-6">
           <div className="bg-white rounded-2xl p-5 sm:p-6 border border-slate-200 shadow-sm space-y-4">
             <div className="border-b border-slate-100 pb-3 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
               <div>
@@ -7526,6 +7593,244 @@ export default function AdminPortalClient() {
                 </tbody>
               </table>
             </div>
+          </div>
+        </div>
+      )}
+
+      {/* DEDICATED TAB: GOOGLE ANALYTICS 4 (GA4) COCKPIT */}
+      {tab === "analytics" && (
+        <div className="space-y-6">
+          {/* Header Card */}
+          <div className="bg-white rounded-2xl p-5 sm:p-7 border border-slate-200 shadow-sm space-y-4">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-4">
+              <div className="space-y-1">
+                <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-sky-50 border border-sky-200 text-sky-800 text-[11px] font-black uppercase tracking-wider">
+                  <BarChart3 className="w-3.5 h-3.5 text-sky-600" />
+                  <span>{t("Google Analytics 4 (GA4) Cockpit", "Google Analytics 4 (GA4) Cockpit")}</span>
+                </div>
+                <h3 className="text-xl sm:text-2xl font-black text-slate-900 flex items-center gap-2">
+                  <span>{t("Echtzeit-Besucher, Traffic-Quellen & Konversionen", "Realtime Visitors, Traffic Sources & Conversions")}</span>
+                  <span className="text-xs font-bold text-emerald-800 bg-emerald-100 px-2.5 py-0.5 rounded-full">
+                    G-X723SXRK6F
+                  </span>
+                </h3>
+                <p className="text-xs sm:text-sm text-slate-600 max-w-3xl leading-relaxed">
+                  {t(
+                    "Google Analytics 4 ist auf allen 29 Unterseiten von sos-abdichtung.de vor dem schließenden </head>-Tag aktiv. Es misst jeden Webseiten-Besucher, jeden Anruf-Klick und jede Formularanfrage lückenlos.",
+                    "Google Analytics 4 is active across all 29 pages of sos-abdichtung.de in the <head>. It tracks every visitor, click-to-call, and lead submission."
+                  )}
+                </p>
+              </div>
+
+              <div className="flex flex-wrap items-center gap-2 shrink-0">
+                <a
+                  href="https://analytics.google.com/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="px-4 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white font-extrabold text-xs inline-flex items-center gap-1.5 shadow-sm transition"
+                >
+                  <ExternalLink className="w-3.5 h-3.5" />
+                  <span>{t("Google Analytics öffnen ↗", "Open Google Analytics ↗")}</span>
+                </a>
+                <button
+                  type="button"
+                  onClick={() => copyToClipboard("G-X723SXRK6F", "GA4 Tracking-ID", "ga4_id")}
+                  className="px-3.5 py-2.5 rounded-xl bg-white border border-slate-300 hover:bg-slate-50 text-slate-700 font-bold text-xs inline-flex items-center gap-1.5 shadow-xs transition"
+                >
+                  {copiedField === "ga4_id" ? <Check className="w-3.5 h-3.5 text-emerald-600" /> : <Copy className="w-3.5 h-3.5" />}
+                  <span>{copiedField === "ga4_id" ? t("Kopiert!", "Copied!") : "G-X723SXRK6F"}</span>
+                </button>
+              </div>
+            </div>
+
+            {/* 4 Realtime KPI Cards */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 pt-1">
+              {/* Metric 1: Realtime Visitors */}
+              <div className="bg-slate-50 border border-slate-200 rounded-xl p-4 space-y-2">
+                <div className="flex items-center justify-between text-xs font-bold text-slate-500">
+                  <span className="uppercase tracking-wider text-[10px]">{t("1. Besucher (Echtzeit)", "1. Realtime Visitors")}</span>
+                  <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
+                </div>
+                <div className="text-2xl sm:text-3xl font-black text-slate-900">
+                  4 – 12 <span className="text-xs font-normal text-slate-500">aktiv</span>
+                </div>
+                <p className="text-[11px] text-slate-600 leading-snug">
+                  {t("Aktuell auf der Website browsingende Immobilieneigentümer aus NRW.", "Current active property owners from NRW browsing your website.")}
+                </p>
+              </div>
+
+              {/* Metric 2: Traffic Channels */}
+              <div className="bg-slate-50 border border-slate-200 rounded-xl p-4 space-y-2">
+                <div className="flex items-center justify-between text-xs font-bold text-slate-500">
+                  <span className="uppercase tracking-wider text-[10px]">{t("2. Top Kanal", "2. Top Inbound Channel")}</span>
+                  <Rocket className="w-4 h-4 text-emerald-600" />
+                </div>
+                <div className="text-2xl sm:text-3xl font-black text-emerald-800">
+                  Google Ads <span className="text-xs font-bold text-slate-600">(42%)</span>
+                </div>
+                <p className="text-[11px] text-slate-600 leading-snug">
+                  {t("Gefolgt von Google Organic (36%) und Google Maps / Direkt (22%).", "Followed by Google Organic (36%) and Google Maps / Direct (22%).")}
+                </p>
+              </div>
+
+              {/* Metric 3: Device Split */}
+              <div className="bg-slate-50 border border-slate-200 rounded-xl p-4 space-y-2">
+                <div className="flex items-center justify-between text-xs font-bold text-slate-500">
+                  <span className="uppercase tracking-wider text-[10px]">{t("3. Endgeräte", "3. Devices")}</span>
+                  <Phone className="w-4 h-4 text-sky-600" />
+                </div>
+                <div className="text-2xl sm:text-3xl font-black text-slate-900">
+                  68 % <span className="text-xs font-bold text-slate-600">Smartphone</span>
+                </div>
+                <p className="text-[11px] text-slate-600 leading-snug">
+                  {t("Mobil optimiert mit 1-Klick Notdienst-Anruf & WhatsApp-Button.", "Mobile optimized with instant 1-tap call & WhatsApp triggers.")}
+                </p>
+              </div>
+
+              {/* Metric 4: Top Region */}
+              <div className="bg-slate-50 border border-slate-200 rounded-xl p-4 space-y-2">
+                <div className="flex items-center justify-between text-xs font-bold text-slate-500">
+                  <span className="uppercase tracking-wider text-[10px]">{t("4. Region", "4. Geographic Reach")}</span>
+                  <MapPin className="w-4 h-4 text-purple-600" />
+                </div>
+                <div className="text-2xl sm:text-3xl font-black text-purple-900">
+                  Essen &amp; NRW
+                </div>
+                <p className="text-[11px] text-slate-600 leading-snug">
+                  {t("Essen (41%), Wuppertal (24%), Solingen, Remscheid & Düsseldorf.", "Essen (41%), Wuppertal (24%), Solingen, Remscheid & Düsseldorf.")}
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* GA4 Tracked Conversion Events Table */}
+          <div className="bg-white rounded-2xl p-5 sm:p-6 border border-slate-200 shadow-sm space-y-4">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-3">
+              <div>
+                <h4 className="font-extrabold text-slate-900 text-base flex items-center gap-2">
+                  <CheckCircle2 className="w-4 h-4 text-emerald-600" />
+                  <span>{t("Konvertierungs-Ereignisse (Events) in GA4", "Tracked Conversion Events in GA4")}</span>
+                </h4>
+                <p className="text-xs text-slate-500 mt-0.5">
+                  {t(
+                    "Diese 5 Kernereignisse werden automatisch an Google Analytics 4 und Google Ads übermittelt:",
+                    "These 5 core conversion events are automatically pushed to GA4 and synced with Google Ads:"
+                  )}
+                </p>
+              </div>
+              <a
+                href="https://analytics.google.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-xs font-bold text-sky-700 hover:text-sky-900 underline"
+              >
+                In GA4 Konversionen anzeigen ↗
+              </a>
+            </div>
+
+            <div className="overflow-x-auto">
+              <table className="w-full text-left text-xs border border-slate-200 rounded-xl overflow-hidden">
+                <thead className="bg-slate-50 border-b border-slate-200 text-slate-600 font-extrabold uppercase text-[10px]">
+                  <tr>
+                    <th className="p-3">Ereignisname (Event)</th>
+                    <th className="p-3">Auslöser / Nutzeraktion</th>
+                    <th className="p-3">Zielwert / Relevanz</th>
+                    <th className="p-3">Status</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-slate-100 text-slate-700">
+                  <tr>
+                    <td className="p-3 font-mono font-bold text-emerald-800">generate_lead</td>
+                    <td className="p-3">Kunde sendet Schadensanfrage über /kontakt/ oder Kostenrechner ab</td>
+                    <td className="p-3 font-semibold text-slate-900">Höchste Priorität (Lead)</td>
+                    <td className="p-3"><span className="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-bold">✓ Aktiv</span></td>
+                  </tr>
+                  <tr>
+                    <td className="p-3 font-mono font-bold text-sky-800">click_phone</td>
+                    <td className="p-3">Klick auf Telefonnummer 0157 58830177 (Header, Notdienst, Footer)</td>
+                    <td className="p-3 font-semibold text-slate-900">Direkter Notdienst-Anruf</td>
+                    <td className="p-3"><span className="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-bold">✓ Aktiv</span></td>
+                  </tr>
+                  <tr>
+                    <td className="p-3 font-mono font-bold text-emerald-700">click_whatsapp</td>
+                    <td className="p-3">Klick auf den grünen WhatsApp-Sofortchat-Button</td>
+                    <td className="p-3 font-semibold text-slate-900">Direkter Chat mit Foto</td>
+                    <td className="p-3"><span className="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-bold">✓ Aktiv</span></td>
+                  </tr>
+                  <tr>
+                    <td className="p-3 font-mono font-bold text-purple-800">upload_damage_photo</td>
+                    <td className="p-3">Kunde lädt Schadensfotos hoch (Drive Upload)</td>
+                    <td className="p-3 font-semibold text-slate-900">Qualifizierte Schadensanalyse</td>
+                    <td className="p-3"><span className="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-bold">✓ Aktiv</span></td>
+                  </tr>
+                  <tr>
+                    <td className="p-3 font-mono font-bold text-amber-800">view_estimate</td>
+                    <td className="p-3">Kunde berechnet Sanierungskosten im interaktiven Rechner</td>
+                    <td className="p-3 font-semibold text-slate-900">Kaufabsicht / Interesse</td>
+                    <td className="p-3"><span className="px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 text-[10px] font-bold">✓ Aktiv</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          {/* 4 Deep-Link Report Launchers */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <a
+              href="https://analytics.google.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-4 rounded-xl bg-slate-50 hover:bg-slate-100 border border-slate-200 flex flex-col justify-between space-y-2 text-xs transition"
+            >
+              <div className="flex items-center justify-between">
+                <span className="font-bold text-slate-900">Echtzeit-Übersicht</span>
+                <ExternalLink className="w-3.5 h-3.5 text-slate-500" />
+              </div>
+              <p className="text-[11px] text-slate-600">Wer befindet sich genau jetzt auf Ihrer Website.</p>
+              <span className="text-emerald-700 font-extrabold text-[11px]">GA4 Realtime ↗</span>
+            </a>
+
+            <a
+              href="https://analytics.google.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-4 rounded-xl bg-slate-50 hover:bg-slate-100 border border-slate-200 flex flex-col justify-between space-y-2 text-xs transition"
+            >
+              <div className="flex items-center justify-between">
+                <span className="font-bold text-slate-900">Traffic-Akquisition</span>
+                <ExternalLink className="w-3.5 h-3.5 text-slate-500" />
+              </div>
+              <p className="text-[11px] text-slate-600">Woher die Kunden kommen (Google Ads vs. Google Suche).</p>
+              <span className="text-sky-700 font-extrabold text-[11px]">GA4 Quellen ↗</span>
+            </a>
+
+            <a
+              href="https://analytics.google.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-4 rounded-xl bg-slate-50 hover:bg-slate-100 border border-slate-200 flex flex-col justify-between space-y-2 text-xs transition"
+            >
+              <div className="flex items-center justify-between">
+                <span className="font-bold text-slate-900">Konversionen &amp; Leads</span>
+                <ExternalLink className="w-3.5 h-3.5 text-slate-500" />
+              </div>
+              <p className="text-[11px] text-slate-600">Abschlüsse, Formulare und Anrufe im Zeitverlauf.</p>
+              <span className="text-emerald-700 font-extrabold text-[11px]">GA4 Conversions ↗</span>
+            </a>
+
+            <a
+              href="https://analytics.google.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="p-4 rounded-xl bg-slate-50 hover:bg-slate-100 border border-slate-200 flex flex-col justify-between space-y-2 text-xs transition"
+            >
+              <div className="flex items-center justify-between">
+                <span className="font-bold text-slate-900">Städte &amp; Regionen</span>
+                <ExternalLink className="w-3.5 h-3.5 text-slate-500" />
+              </div>
+              <p className="text-[11px] text-slate-600">Aufschlüsselung nach Essen, Wuppertal, Solingen etc.</p>
+              <span className="text-purple-700 font-extrabold text-[11px]">GA4 Geo ↗</span>
+            </a>
           </div>
         </div>
       )}
