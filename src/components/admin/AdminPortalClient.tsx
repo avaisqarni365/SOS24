@@ -74,6 +74,7 @@ import {
   LeadStatus,
   NOTIFY_EMAIL_DEFAULT,
   GAS_API_URL,
+  ADMIN_WEBAPP_URL,
 } from "@/lib/backend";
 
 type AdminTab =
@@ -7935,6 +7936,24 @@ export default function AdminPortalClient() {
                   <code className="break-all bg-slate-100 px-2 py-0.5 rounded block mt-1">
                     {GAS_API_URL}
                   </code>
+                </div>
+                <div className="pt-2 flex flex-wrap gap-2">
+                  <a
+                    href="https://drive.google.com/open?id=1Qhyu32zpLQ-eFbvh6UPAvcoBdn6kTf1nOxx2GtFI5Gw"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs transition"
+                  >
+                    <span>📊 Google Sheet öffnen ↗</span>
+                  </a>
+                  <a
+                    href={ADMIN_WEBAPP_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#0f2537] hover:bg-slate-800 text-white font-bold text-xs transition"
+                  >
+                    <span>⚙️ Apps Script Admin SPA ↗</span>
+                  </a>
                 </div>
               </div>
             </div>

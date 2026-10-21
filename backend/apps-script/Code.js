@@ -535,6 +535,7 @@ function setup() {
   ensureTab_(TAB.routes, ROUTE_COLS, [130, 160, 160, 70, 90, 160, 70, 140]);
   ensureTab_(TAB.appts, APPT_COLS, [70, 130, 90, 180, 90, 60, 70, 150, 120, 170, 220]);
   ensureTab_(TAB.visits, VISIT_COLS, [90, 220, 140, 90, 70, 70, 70]);
+  ensureTab_(TAB.docs || 'Belege', DOC_COLS);
   usersSheet_();
 
   var leads = sheet_(TAB.leads);

@@ -21,25 +21,25 @@ if (-not $claspCmd) {
 
 # 2. Check Authentication
 $currentUser = ""
-try {
-    $authUserOutput = & clasp.cmd show-authorized-user 2>&1 | Out-String
-    if ($authUserOutput -match "logged in as ([^\s]+)") {
-        $currentUser = $matches[1]
+if (Test-Path "$HOME\.clasprc.json") {
+    try {
+        $rc = Get-Content "$HOME\.clasprc.json" -Raw | ConvertFrom-Json
+        if ($rc.tokens.default.id_token) {
+            $parts = $rc.tokens.default.id_token.Split(".")
+            $b64 = $parts[1].Replace("-", "+").Replace("_", "/")
+            while ($b64.Length % 4 -ne 0) { $b64 += "=" }
+            $jwt = [System.Text.Encoding]::UTF8.GetString([System.Convert]::FromBase64String($b64)) | ConvertFrom-Json
+            $currentUser = $jwt.email
+        }
+    } catch {
+        $currentUser = ""
     }
-} catch {
-    $currentUser = ""
 }
 
-Write-Host "Aktuell angemeldet als: $currentUser" -ForegroundColor Cyan
-if ($currentUser -and $currentUser -ne "simplypizza2020@gmail.com") {
-    Write-Host "[!] Aktuell ist noch das alte Konto '$currentUser' eingeloggt." -ForegroundColor Yellow
-    Write-Host "[!] Bitte mit dem neuen Google Workspace Konto 'simplypizza2020@gmail.com' anmelden." -ForegroundColor Yellow
-    & clasp.cmd logout
-    & clasp.cmd login
-} elseif (-not $currentUser) {
+if (-not $currentUser) {
     Write-Host ""
     Write-Host "[1/4] Google Account Authentication Required" -ForegroundColor Yellow
-    Write-Host "Ein Browserfenster öffnet sich. Bitte mit 'simplypizza2020@gmail.com' anmelden." -ForegroundColor Gray
+    Write-Host "Ein Browserfenster öffnet sich. Bitte mit dem Google Workspace Konto anmelden." -ForegroundColor Gray
     & clasp.cmd login
 } else {
     Write-Host "[1/4] Authentifiziert mit Google Workspace ($currentUser)." -ForegroundColor Green
@@ -63,8 +63,8 @@ Write-Host "[3/4] Deploying Website API (backend/apps-script)..." -ForegroundCol
 Push-Location $appsDir
 try {
     if (-not (Test-Path ".clasp.json")) {
-        Write-Host "Creating new Google Sheet + bound Apps Script project 'SOS Abdichtung — Anfragen & Kalkulation'..." -ForegroundColor Yellow
-        & clasp.cmd create --type sheets --title "SOS Abdichtung — Anfragen & Kalkulation"
+        Write-Host "Creating new Google Sheet + bound Apps Script project 'SOS Abdichtung - Anfragen und Kalkulation'..." -ForegroundColor Yellow
+        & clasp.cmd create --type sheets --title "SOS Abdichtung - Anfragen und Kalkulation"
     }
     Write-Host "Pushing Website API files to Google Apps Script..." -ForegroundColor Gray
     & clasp.cmd push --force
@@ -95,8 +95,8 @@ try {
     }
 
     if (-not (Test-Path ".clasp.json")) {
-        Write-Host "Creating standalone Apps Script project 'SOS Abdichtung — Admin Portal'..." -ForegroundColor Yellow
-        & clasp.cmd create --type webapp --title "SOS Abdichtung — Admin Portal"
+        Write-Host "Creating standalone Apps Script project 'SOS Abdichtung - Admin Portal'..." -ForegroundColor Yellow
+        & clasp.cmd create --type webapp --title "SOS Abdichtung - Admin Portal"
     }
     Write-Host "Pushing Admin Portal files to Google Apps Script..." -ForegroundColor Gray
     & clasp.cmd push --force
@@ -110,5 +110,5 @@ try {
 
 Write-Host ""
 Write-Host "==========================================================" -ForegroundColor Green
-Write-Host "  ALL DONE! Backend & Admin deployed to Google Cloud.     " -ForegroundColor Green
+Write-Host "  ALL DONE! Backend and Admin deployed to Google Cloud.   " -ForegroundColor Green
 Write-Host "==========================================================" -ForegroundColor Green

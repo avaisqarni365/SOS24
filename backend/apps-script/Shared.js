@@ -19,8 +19,11 @@ var TAB = {
   routes: 'Strecken',
   appts: 'Termine',
   visits: 'Besuche',
-  users: 'Benutzer'
+  users: 'Benutzer',
+  docs: 'Belege'
 };
+
+var DOC_COLS = ['Nr', 'Art', 'Status', 'Anfrage', 'Datum', 'Kunde', 'Netto €', 'USt €', 'Brutto €', 'Fällig', 'Bezahlt am', 'Bezahlt €', 'PDF', 'Erstellt von', 'Geändert', 'Bezug', 'Daten (JSON)'];
 
 var USER_COLS = ['Benutzername', 'Name', 'Aktiv', 'Neues Passwort', 'Passwort (verschlüsselt)', 'Salt', 'Letzte Anmeldung'];
 var PW_MIN = 8;

@@ -268,7 +268,7 @@ function api_sendQuote_(id, text, channel) {
 
 function api_customerLink_(id) {
   guard_();
-  var base = (typeof PORTAL_URL !== 'undefined' && PORTAL_URL) ? PORTAL_URL : (DEFAULT_SITE + '/kontakt/');
+  var base = (typeof PORTAL_URL !== 'undefined' && PORTAL_URL) ? PORTAL_URL : (DEFAULT_SITE + '/mein-auftrag/');
   var hit = findLead_(id); if (!hit) throw new Error('Anfrage ' + id + ' nicht gefunden.');
   var col = leadCol_('Kundentoken'), token = String(hit.values[col - 1] || '');
   if (!token) { token = Utilities.getUuid().replace(/-/g, ''); sheet_(TAB.leads).getRange(hit.row, col).setValue(token); }

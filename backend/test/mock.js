@@ -106,8 +106,19 @@ const ctx = {
       };
     }
     return {
-      getFoldersByName: n => { const list = driveFolders[n] ? [driveFolders[n]] : []; let i = 0; return {hasNext: () => i < list.length, next: () => list[i++]}; },
-      createFolder: n => (driveFolders[n] = new MFolder(n)),
+      getFoldersByName: n => {
+        let f = driveFolders[n];
+        if (!f && n === 'SOS Abdichtung - Kundenfotos' && driveFolders['SOS Abdichtung - Schadensfotos']) f = driveFolders['SOS Abdichtung - Schadensfotos'];
+        if (!f && n === 'SOS Abdichtung - Schadensfotos' && driveFolders['SOS Abdichtung - Kundenfotos']) f = driveFolders['SOS Abdichtung - Kundenfotos'];
+        const list = f ? [f] : []; let i = 0; return {hasNext: () => i < list.length, next: () => list[i++]};
+      },
+      createFolder: n => {
+        const f = new MFolder(n);
+        driveFolders[n] = f;
+        if (n === 'SOS Abdichtung - Kundenfotos') driveFolders['SOS Abdichtung - Schadensfotos'] = f;
+        if (n === 'SOS Abdichtung - Schadensfotos') driveFolders['SOS Abdichtung - Kundenfotos'] = f;
+        return f;
+      },
       createFile: b => ({getUrl: () => 'https://drive.google.com/file/d/test/view'})
     };
   })(),

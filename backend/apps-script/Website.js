@@ -97,7 +97,7 @@ function photos_(b) {
   var driveFolderUrl = '';
   if (typeof DriveApp !== 'undefined') {
     try {
-      var rootFolder = ensureDriveFolder_('SOS Abdichtung - Schadensfotos');
+      var rootFolder = ensureDriveFolder_('SOS Abdichtung - Kundenfotos') || ensureDriveFolder_('SOS Abdichtung - Schadensfotos');
       if (rootFolder) {
         var leadFolder = ensureDriveFolder_(id, rootFolder);
         if (leadFolder) {
