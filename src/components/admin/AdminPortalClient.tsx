@@ -90,6 +90,7 @@ type AdminTab =
   | "analytics"
   | "searchconsole"
   | "maps"
+  | "strategy"
   | "seo"
   | "hilfe";
 
@@ -479,6 +480,213 @@ const DEFAULT_LOCATIONS: BusinessLocation[] = [
   },
 ];
 
+export interface RegionalMarket {
+  city: string;
+  name_de: string;
+  name_en: string;
+  postal: string;
+  altbauten: number;
+  primaryIssue_de: string;
+  primaryIssue_en: string;
+  cpl: number;
+  avgTicket: number;
+  competitorsCount: number;
+  competitivePressure: "Sehr Hoch" | "Hoch" | "Mittel";
+  recBudget: number;
+  recPlan_de: string;
+  recPlan_en: string;
+  topCompetitor: string;
+}
+
+const REGIONAL_MARKETS: RegionalMarket[] = [
+  {
+    city: "Essen",
+    name_de: "Essen (Hauptsitz / Ruhrgebiet-Zentrum)",
+    name_en: "Essen (Headquarters / Ruhr Hub)",
+    postal: "45144 / 45138",
+    altbauten: 14200,
+    primaryIssue_de: "Aufsteigende Mauerfeuchte, Bergschäden & Keller-Schimmel",
+    primaryIssue_en: "Capillary rising damp, mining settlement cracks & cellar mold",
+    cpl: 19,
+    avgTicket: 6200,
+    competitorsCount: 4,
+    competitivePressure: "Sehr Hoch",
+    recBudget: 150,
+    recPlan_de: "Marktführer Essen & Ruhrgebiet (Dominanz)",
+    recPlan_en: "Market Leader Essen & Ruhr (Dominance)",
+    topCompetitor: "ISOTEC Fachbetrieb & ATG",
+  },
+  {
+    city: "Wuppertal",
+    name_de: "Wuppertal (Bergisches Land)",
+    name_en: "Wuppertal (Bergisch Region)",
+    postal: "42103 / 42285",
+    altbauten: 11800,
+    primaryIssue_de: "Hangdruckwasser, Schiefergestein & Starkregen-Überflutung",
+    primaryIssue_en: "Hillside hydrostatic pressure, slate masonry & stormwater inundation",
+    cpl: 17,
+    avgTicket: 5400,
+    competitorsCount: 3,
+    competitivePressure: "Hoch",
+    recBudget: 100,
+    recPlan_de: "Wupper-Hangschutz & Horizontalsperre",
+    recPlan_en: "Hillside Drainage & Damp Barrier",
+    topCompetitor: "Regionale Meisterbetriebe & Isotec",
+  },
+  {
+    city: "Solingen",
+    name_de: "Solingen (Klingenstadt / Südstadt)",
+    name_en: "Solingen (Blade City / South)",
+    postal: "42651 / 42653",
+    altbauten: 6500,
+    primaryIssue_de: "Historische Bruchstein- & Fachwerkfundamente",
+    primaryIssue_en: "Historic rubble stone & timber frame basements",
+    cpl: 16,
+    avgTicket: 5100,
+    competitorsCount: 2,
+    competitivePressure: "Mittel",
+    recBudget: 75,
+    recPlan_de: "Fachwerk- & Bruchstein-Spezialist",
+    recPlan_en: "Timber & Rubble Stone Specialist",
+    topCompetitor: "Lokale Dach- und Bautenschutzbetriebe",
+  },
+  {
+    city: "Remscheid",
+    name_de: "Remscheid (Höhenlagen)",
+    name_en: "Remscheid (High Elevations)",
+    postal: "42853 / 42897",
+    altbauten: 5900,
+    primaryIssue_de: "Höchste Niederschlagsmenge NRW, extreme Witterungsbelastung",
+    primaryIssue_en: "Highest annual rainfall in NRW, severe weather exposure",
+    cpl: 15,
+    avgTicket: 4900,
+    competitorsCount: 2,
+    competitivePressure: "Mittel",
+    recBudget: 75,
+    recPlan_de: "Wetterfeste Außenabdichtung & Keller",
+    recPlan_en: "Weatherproof Exterior Barrier & Basement",
+    topCompetitor: "Lokale Sanierer",
+  },
+  {
+    city: "Düsseldorf",
+    name_de: "Düsseldorf (Rhein-Metropole)",
+    name_en: "Düsseldorf (Rhine Metropolitan Area)",
+    postal: "40210 / 40477",
+    altbauten: 18500,
+    primaryIssue_de: "Schwankender Grundwasserspiegel Rhein, hochwertige Keller",
+    primaryIssue_en: "Rhine water table fluctuations & premium cellar spaces",
+    cpl: 24,
+    avgTicket: 7800,
+    competitorsCount: 5,
+    competitivePressure: "Sehr Hoch",
+    recBudget: 200,
+    recPlan_de: "Premium Weisse Wanne & Druckwasser",
+    recPlan_en: "Premium White Tank & Water Pressure Defense",
+    topCompetitor: "Isotec Rhein-Ruhr & Bautenschutz-Konzerne",
+  },
+  {
+    city: "Bochum",
+    name_de: "Bochum & Mittleres Ruhrgebiet",
+    name_en: "Bochum & Central Ruhr Area",
+    postal: "44787 / 44801",
+    altbauten: 12400,
+    primaryIssue_de: "Setzungsrisse, Bodensenkungen & drückendes Sickerwasser",
+    primaryIssue_en: "Settlement cracks, ground subsidence & seepage water",
+    cpl: 18,
+    avgTicket: 5600,
+    competitorsCount: 3,
+    competitivePressure: "Hoch",
+    recBudget: 110,
+    recPlan_de: "Rissverpressung & Schleierinjektion",
+    recPlan_en: "Crack Injection & Curtain Grouting",
+    topCompetitor: "ATG & Regionale Betriebe",
+  },
+];
+
+export interface CompetitorData {
+  id: string;
+  name: string;
+  type_de: string;
+  type_en: string;
+  budgetEst: string;
+  pricingEst: string;
+  strengths_de: string;
+  strengths_en: string;
+  weaknesses_de: string;
+  weaknesses_en: string;
+  sosStrategy_de: string;
+  sosStrategy_en: string;
+  status_de: string;
+  status_en: string;
+}
+
+const COMPETITOR_INTEL: CompetitorData[] = [
+  {
+    id: "isotec",
+    name: "ISOTEC Fachbetriebe (NRW / Ruhrgebiet)",
+    type_de: "Franchise-Konzern (Bundesweit)",
+    type_en: "Franchise Network (Nationwide)",
+    budgetEst: "5.000 – 12.000 € / Monat",
+    pricingEst: "320 – 480 € / m² (Sehr hoch)",
+    strengths_de: "Hohe Markenbekanntheit durch TV & Radio, geschulte Vertriebler.",
+    strengths_en: "High brand recognition through TV & radio ads, trained sales reps.",
+    weaknesses_de: "25-35% teurer wegen Franchise-Lizenzaufschlägen, 2-4 Wochen Angebotsdauer, kein Online-Rechner, Callcenter-Barriere.",
+    weaknesses_en: "25-35% more expensive due to franchise fees, 2-4 weeks quote wait, no transparent calculator, call center hurdles.",
+    sosStrategy_de: "Preis-Vorteil (-25% bei identischer WTA-Qualität) & Festpreis-Angebot binnen 24 Stunden mit digitaler Signatur.",
+    sosStrategy_en: "25% price advantage with identical WTA certification & 24h binding quote with digital signature.",
+    status_de: "Sehr aktiv auf Google Ads (Platz 1-2)",
+    status_en: "Highly active on Google Ads (Rank 1-2)",
+  },
+  {
+    id: "atg",
+    name: "ATG Deutschland (Mauerwerksabdichtung)",
+    type_de: "Überregionaler Direktvertrieb",
+    type_en: "Regional Direct Sales Organization",
+    budgetEst: "3.500 – 8.000 € / Monat",
+    pricingEst: "4.500 – 12.000 € Pauschalpreise",
+    strengths_de: "Aggressive Tageszeitungs- & Online-Suchanzeigen, schnelle Vor-Ort-Termine durch reine Vertriebsbeauftragte.",
+    strengths_en: "Aggressive newspaper & search ads, fast on-site sales meetings with commission reps.",
+    weaknesses_de: "Aggressiver Abschlussdruck, intransparente Festpreise ohne detailliertes Einzelaufmaß, keine digitale Selbstbedienung.",
+    weaknesses_en: "Heavy sales pressure, intransparent flat rates without itemized bill of quantities, no digital customer self-service.",
+    sosStrategy_de: "100% Preistransparenz im Rechner, digitaler Foto-Upload vorab zur Vermeidung unnötiger Hausbesuche, zertifizierte GoBD-Abrechnung.",
+    sosStrategy_en: "100% pricing transparency, instant Drive photo upload before visit, certified GoBD invoicing with § 35a tax credit.",
+    status_de: "Aktiv auf Suchbegriffen 'nasse Wände'",
+    status_en: "Active on keywords 'nasse Wände'",
+  },
+  {
+    id: "regional",
+    name: "Regionale Handwerks- & Dachdeckerbetriebe",
+    type_de: "Lokale Kleinbetriebe (Essen, Wuppertal)",
+    type_en: "Local Tradesmen (Essen, Wuppertal)",
+    budgetEst: "< 500 € / Monat (Minimal)",
+    pricingEst: "180 – 260 € / m² (Günstig)",
+    strengths_de: "Lokale Bekanntheit, persönliche Weiterempfehlungen.",
+    strengths_en: "Local word-of-mouth reputation, personal neighborhood ties.",
+    weaknesses_de: "Veraltete Websites, keine Google Maps SEO Optimierung, keine 24/7 Notdienst-Hotline, oft keine WTA-Spezialisierung für Injektionen.",
+    weaknesses_en: "Outdated websites, zero Google Maps optimization, unstaffed phones after hours, lack of specialized WTA certification.",
+    sosStrategy_de: "Google Maps 3-Pack dominieren, mobile 1-Klick Erreichbarkeit & TÜV/WTA Gütesiegel als Qualitätsnachweis hervorheben.",
+    sosStrategy_en: "Dominate Google Maps 3-pack, 1-tap call & WhatsApp accessibility, TÜV & WTA certificates as proof of quality.",
+    status_de: "Geringe Werbeaktivität",
+    status_en: "Minimal online ad activity",
+  },
+  {
+    id: "drymat",
+    name: "Drymat / Nischen-Anbieter (Elektrophysikalisch)",
+    type_de: "Geräte-Verkauf ohne Baumaßnahme",
+    type_en: "Device Sales without Masonry Work",
+    budgetEst: "1.000 – 2.500 € / Monat",
+    pricingEst: "3.800 – 7.500 € pro Steuergerät",
+    strengths_de: "Keine Bauarbeiten / kein Schmutz im Keller.",
+    strengths_en: "Zero drilling or excavation mess in basement.",
+    weaknesses_de: "Von führenden Bauexperten (WTA / DHBV) bei drückendem Wasser als unzureichend eingestuft, keine Beseitigung von Schimmelsporen.",
+    weaknesses_en: "Dismissed by structural civil engineers (WTA / DHBV) for hydrostatic moisture, does not remediate toxic mold spores.",
+    sosStrategy_de: "Aufklärung über WTA-geprüfte physikalische Horizontalsperren & Injektionsverfahren mit echter 10-Jahres-Garantie.",
+    sosStrategy_en: "Educational walkthrough on WTA-certified horizontal barriers with 10-year physical structural warranty.",
+    status_de: "Nischen-Anzeigen auf Google",
+    status_en: "Niche Google search ads",
+  },
+];
+
 function eur(n: number) {
   return n.toLocaleString("de-DE", { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + " €";
 }
@@ -600,6 +808,11 @@ export default function AdminPortalClient() {
     }
     return true;
   });
+
+  // Predictive Regional Strategy & Competitor Intelligence state
+  const [selectedPredictiveCity, setSelectedPredictiveCity] = useState<string>("Essen");
+  const [targetLeadsGoal, setTargetLeadsGoal] = useState<number>(20);
+  const [competitorFilter, setCompetitorFilter] = useState<string>("all");
 
   // Service Catalog (Preisliste) State — Live editable for any service
   const [serviceCatalog, setServiceCatalog] = useState<typeof WTA_TEMPLATES>(() => {
@@ -2180,6 +2393,7 @@ export default function AdminPortalClient() {
               ["analytics", t("Analytics (GA4)", "Analytics (GA4)"), BarChart3],
               ["searchconsole", t("Search Console", "Search Console"), Search],
               ["maps", t("Google Maps", "Google Maps"), MapPin],
+              ["strategy", t("KI-Prognose & Strategie", "Predictive Strategy"), Sparkles],
               ["hilfe", t("Hilfe & Guide", "Help & Guide"), HelpCircle],
             ] as const
           ).map(([k, label, Icon]) => (
@@ -2245,21 +2459,21 @@ export default function AdminPortalClient() {
                 )}
               </div>
             </button>
-            <div className="bg-white rounded-2xl p-4 sm:p-5 border border-slate-200 shadow-sm flex flex-col justify-between space-y-2.5 min-w-0">
+            <div className="bg-white rounded-2xl p-4 sm:p-5 border border-slate-200 shadow-sm flex flex-col justify-between space-y-2 min-w-0">
               <div>
                 <div className="text-base sm:text-lg font-extrabold text-emerald-700 flex items-center gap-1.5">
                   <TrendingUp className="w-5 h-5 text-emerald-600 shrink-0" />
                   <span>Google Marketing Suite</span>
                 </div>
                 <div className="text-xs text-slate-500 mt-0.5">
-                  {t("4 separate Google Marketing Tabs:", "4 separate Google Marketing tabs:")}
+                  {t("Separate Google Marketing & Strategie Tabs:", "Separate Google Marketing & Strategy tabs:")}
                 </div>
               </div>
-              <div className="grid grid-cols-2 gap-1.5 pt-1">
+              <div className="grid grid-cols-2 gap-1.5 pt-0.5">
                 <button
                   type="button"
                   onClick={() => setTab("ads")}
-                  className="px-2.5 py-1.5 rounded-lg bg-emerald-50 hover:bg-emerald-100 text-emerald-900 font-bold text-xs flex items-center gap-1 border border-emerald-200 truncate"
+                  className="px-2 py-1.5 rounded-lg bg-emerald-50 hover:bg-emerald-100 text-emerald-900 font-bold text-xs flex items-center gap-1 border border-emerald-200 truncate"
                   title="Google Ads Express"
                 >
                   <Rocket className="w-3.5 h-3.5 text-emerald-700 shrink-0" />
@@ -2268,7 +2482,7 @@ export default function AdminPortalClient() {
                 <button
                   type="button"
                   onClick={() => setTab("analytics")}
-                  className="px-2.5 py-1.5 rounded-lg bg-sky-50 hover:bg-sky-100 text-sky-900 font-bold text-xs flex items-center gap-1 border border-sky-200 truncate"
+                  className="px-2 py-1.5 rounded-lg bg-sky-50 hover:bg-sky-100 text-sky-900 font-bold text-xs flex items-center gap-1 border border-sky-200 truncate"
                   title="Google Analytics 4"
                 >
                   <BarChart3 className="w-3.5 h-3.5 text-sky-700 shrink-0" />
@@ -2277,7 +2491,7 @@ export default function AdminPortalClient() {
                 <button
                   type="button"
                   onClick={() => setTab("searchconsole")}
-                  className="px-2.5 py-1.5 rounded-lg bg-amber-50 hover:bg-amber-100 text-amber-900 font-bold text-xs flex items-center gap-1 border border-amber-200 truncate"
+                  className="px-2 py-1.5 rounded-lg bg-amber-50 hover:bg-amber-100 text-amber-900 font-bold text-xs flex items-center gap-1 border border-amber-200 truncate"
                   title="Google Search Console"
                 >
                   <Search className="w-3.5 h-3.5 text-amber-700 shrink-0" />
@@ -2286,13 +2500,21 @@ export default function AdminPortalClient() {
                 <button
                   type="button"
                   onClick={() => setTab("maps")}
-                  className="px-2.5 py-1.5 rounded-lg bg-purple-50 hover:bg-purple-100 text-purple-900 font-bold text-xs flex items-center gap-1 border border-purple-200 truncate"
+                  className="px-2 py-1.5 rounded-lg bg-purple-50 hover:bg-purple-100 text-purple-900 font-bold text-xs flex items-center gap-1 border border-purple-200 truncate"
                   title="Google Maps Unternehmensprofil"
                 >
                   <MapPin className="w-3.5 h-3.5 text-purple-700 shrink-0" />
                   <span>Maps</span>
                 </button>
               </div>
+              <button
+                type="button"
+                onClick={() => setTab("strategy")}
+                className="w-full mt-1 px-2.5 py-1.5 rounded-lg bg-gradient-to-r from-emerald-700 to-[#0f2537] hover:opacity-95 text-white font-extrabold text-[11px] flex items-center justify-center gap-1.5 shadow-xs transition"
+              >
+                <Sparkles className="w-3.5 h-3.5 text-amber-300 shrink-0" />
+                <span>{t("KI-Prognose & Wettbewerber →", "Predictive Strategy & Competitors →")}</span>
+              </button>
             </div>
           </div>
 
@@ -7834,6 +8056,475 @@ export default function AdminPortalClient() {
           </div>
         </div>
       )}
+
+      {/* DEDICATED TAB: KI-PROGNOSE, REGIONALE STRATEGIE & WETTBEWERBER-ANALYSE */}
+      {tab === "strategy" && (() => {
+        const curMarket = REGIONAL_MARKETS.find((m) => m.city === selectedPredictiveCity) || REGIONAL_MARKETS[0];
+        const estSpendMonth = targetLeadsGoal * curMarket.cpl;
+        const estSpendWeek = Math.ceil(estSpendMonth / 4.33);
+        const estImpressions = Math.round(targetLeadsGoal * curMarket.cpl * 14.8);
+        const estClicks = Math.round(targetLeadsGoal * 8.4);
+        const estDeals = Math.max(1, Math.round(targetLeadsGoal * 0.40));
+        const estRevenue = estDeals * curMarket.avgTicket;
+        const estRoas = Math.round(estRevenue / Math.max(1, estSpendMonth));
+        const estProfit = Math.round(estRevenue * 0.38);
+
+        const filteredCompetitors = competitorFilter === "all"
+          ? COMPETITOR_INTEL
+          : COMPETITOR_INTEL.filter((c) => c.id === competitorFilter);
+
+        return (
+          <div className="space-y-6">
+            {/* Header Card */}
+            <div className="bg-white rounded-2xl p-5 sm:p-7 border border-slate-200 shadow-sm space-y-4">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-4">
+                <div className="space-y-1">
+                  <div className="inline-flex items-center gap-2 px-2.5 py-1 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-[11px] font-black uppercase tracking-wider">
+                    <Sparkles className="w-3.5 h-3.5 text-emerald-600" />
+                    <span>{t("KI-Marktprognose & Regionales Strategie-Cockpit", "AI Market Predictive Forecast & Regional Strategy Cockpit")}</span>
+                  </div>
+                  <h3 className="text-xl sm:text-2xl font-black text-slate-900 flex items-center gap-2">
+                    <span>{t("Regionale Wachstumsziele & Wettbewerber-Abwehr in NRW", "Regional Growth Targets & Competitor Intelligence in NRW")}</span>
+                  </h3>
+                  <p className="text-xs sm:text-sm text-slate-600 max-w-3xl leading-relaxed">
+                    {t(
+                      "Wählen Sie Ihre Zielregion (z. B. Essen HQ oder Wuppertal) und Ihr monatliches Anfrage-Ziel. Die KI berechnet das nötige Werbebudget, prognostiziert den Sanierungsumsatz und liefert die passenden Gegenmaßnahmen gegen Großkonzerne wie ISOTEC und ATG.",
+                      "Select your target city and monthly inquiry target. The predictive engine calculates required ad spend, forecasts contract revenue, and arms your business with tactical counters against competitors like ISOTEC and ATG."
+                    )}
+                  </p>
+                </div>
+
+                <div className="flex flex-wrap items-center gap-2 shrink-0">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setWeeklyBudget(estSpendWeek);
+                      setCampaignActive(true);
+                      if (typeof window !== "undefined") {
+                        localStorage.setItem("sos_marketing_budget", String(estSpendWeek));
+                        localStorage.setItem("sos_marketing_active", "true");
+                      }
+                      showToast(
+                        t(
+                          `✓ Strategie für ${curMarket.city} aktiviert! Wochenbudget auf ${estSpendWeek} € synchronisiert.`,
+                          `✓ Strategy for ${curMarket.city} applied! Weekly budget synced to ${estSpendWeek} €.`
+                        )
+                      );
+                    }}
+                    className="px-4 py-2.5 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white font-black text-xs inline-flex items-center gap-2 shadow-xs transition"
+                  >
+                    <Rocket className="w-4 h-4" />
+                    <span>{t(`Strategie für ${curMarket.city} anwenden (${estSpendWeek} €/Wo.)`, `Adopt Strategy for ${curMarket.city} (${estSpendWeek} €/wk)`)}</span>
+                  </button>
+                </div>
+              </div>
+
+              {/* Regional Selector Strip */}
+              <div className="space-y-3 pt-1">
+                <div className="flex items-center justify-between">
+                  <span className="text-xs font-bold text-slate-700 uppercase tracking-wider flex items-center gap-1.5">
+                    <MapPin className="w-3.5 h-3.5 text-emerald-700" />
+                    <span>{t("1. Zielregion in NRW wählen:", "1. Select Target Region in NRW:")}</span>
+                  </span>
+                  <span className="text-[11px] text-slate-500 font-medium">
+                    {t("Marktdaten & Wettbewerbsdichte aktualisieren sich live", "Market metrics & competitor density update in realtime")}
+                  </span>
+                </div>
+
+                <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2">
+                  {REGIONAL_MARKETS.map((m) => {
+                    const isSelected = m.city === selectedPredictiveCity;
+                    return (
+                      <button
+                        key={m.city}
+                        type="button"
+                        onClick={() => {
+                          setSelectedPredictiveCity(m.city);
+                          showToast(t(`Region gewechselt zu: ${m.city}`, `Switched region to: ${m.city}`));
+                        }}
+                        className={`p-3 rounded-xl border text-left flex flex-col justify-between space-y-1 transition-all ${
+                          isSelected
+                            ? "bg-emerald-900 text-white border-emerald-900 shadow-sm ring-2 ring-emerald-500/40"
+                            : "bg-slate-50 hover:bg-slate-100 text-slate-800 border-slate-200"
+                        }`}
+                      >
+                        <div className="flex items-center justify-between">
+                          <span className="font-extrabold text-xs truncate">{m.city}</span>
+                          <span
+                            className={`text-[9px] font-bold px-1.5 py-0.2 rounded-full ${
+                              isSelected ? "bg-emerald-700 text-white" : "bg-slate-200 text-slate-700"
+                            }`}
+                          >
+                            PLZ {m.postal.split(" ")[0]}
+                          </span>
+                        </div>
+                        <div className={`text-[10px] ${isSelected ? "text-emerald-200" : "text-slate-500"}`}>
+                          ~{m.altbauten.toLocaleString()} Altbauten
+                        </div>
+                        <div className="text-[10px] font-bold pt-1 border-t border-slate-200/20">
+                          {m.competitivePressure}er Wettbewerb
+                        </div>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+
+              {/* Goal Setting Slider & Environmental Factors */}
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 pt-2">
+                {/* Target Lead Slider */}
+                <div className="lg:col-span-2 bg-slate-50 border border-slate-200 rounded-xl p-4 sm:p-5 space-y-3">
+                  <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                    <div>
+                      <span className="text-xs font-bold text-slate-700 uppercase tracking-wider block">
+                        {t("2. Gewünschtes monatliches Anfrage-Ziel:", "2. Monthly Target Inquiries Goal:")}
+                      </span>
+                      <p className="text-[11px] text-slate-500">
+                        {t("Stellen Sie ein, wie viele qualifizierte Leads Ihr Betrieb in diesem Monat annehmen kann.", "Configure how many customer cases your team can service this month.")}
+                      </p>
+                    </div>
+                    <div className="text-right">
+                      <span className="text-2xl sm:text-3xl font-black text-emerald-800">{targetLeadsGoal}</span>
+                      <span className="text-xs font-bold text-slate-500 ml-1">Leads / {t("Monat", "month")}</span>
+                    </div>
+                  </div>
+
+                  <input
+                    type="range"
+                    min="10"
+                    max="60"
+                    step="5"
+                    value={targetLeadsGoal}
+                    onChange={(e) => setTargetLeadsGoal(Number(e.target.value))}
+                    className="w-full accent-emerald-700 h-2 bg-slate-200 rounded-lg cursor-pointer"
+                  />
+                  <div className="flex justify-between text-[10px] text-slate-500 font-bold">
+                    <span>10 Leads (Teilzeit / Puffer)</span>
+                    <span>20 Leads (Standard Betrieb)</span>
+                    <span>40 Leads (Wachstum)</span>
+                    <span>60 Leads (Vollauslastung)</span>
+                  </div>
+                </div>
+
+                {/* Weather & Rainfall Factor */}
+                <div className="bg-gradient-to-br from-sky-50 to-emerald-50/40 border border-sky-200 rounded-xl p-4 sm:p-5 flex flex-col justify-between space-y-2">
+                  <div className="space-y-1">
+                    <span className="text-[10px] font-black uppercase tracking-wider text-sky-800 flex items-center gap-1.5">
+                      <Clock className="w-3.5 h-3.5 text-sky-600" />
+                      <span>{t("Witterungs- & Niederschlags-Faktor", "Weather & Rainfall Multiplier")}</span>
+                    </span>
+                    <h5 className="font-extrabold text-slate-900 text-xs sm:text-sm">
+                      {t("Herbst / Winter Starkregen-Spitze (+45% Anfragen)", "Fall / Winter Storm Peak (+45% Inquiries)")}
+                    </h5>
+                    <p className="text-[11px] text-slate-600 leading-snug">
+                      In {curMarket.city} führen Grundwasseranstieg und nasse Fundamente aktuell zu einer überdurchschnittlich hohen Nachfrage nach Kellersanierung.
+                    </p>
+                  </div>
+                  <div className="pt-2 border-t border-sky-200/60 text-[10px] font-bold text-sky-900 flex items-center gap-1">
+                    <span>✓ Empfehlung: Kampagne aktiv geschaltet lassen</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* PREDICTIVE FORECAST 4-KPI MATRIX */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+              {/* Card 1: Required Ad Spend */}
+              <div className="bg-white rounded-2xl p-4 sm:p-5 border border-slate-200 shadow-sm space-y-2">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-slate-500 block">
+                  {t("1. Benötigtes Werbebudget", "1. Required Ad Spend")}
+                </span>
+                <div className="text-2xl sm:text-3xl font-black text-slate-900">
+                  {estSpendWeek} € <span className="text-xs font-bold text-slate-500">/ Woche</span>
+                </div>
+                <div className="text-xs font-semibold text-emerald-800">
+                  ~{estSpendMonth} € / Monat (CPL: ~{curMarket.cpl} €)
+                </div>
+                <p className="text-[11px] text-slate-500 pt-2 border-t border-slate-100">
+                  {t("Basiert auf realen Google Ads Klickpreisen im Raum", "Based on verified Google Ads CPCs in")} {curMarket.city}.
+                </p>
+              </div>
+
+              {/* Card 2: Impressions & Clicks */}
+              <div className="bg-white rounded-2xl p-4 sm:p-5 border border-slate-200 shadow-sm space-y-2">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-slate-500 block">
+                  {t("2. Prognostizierte Klicks & Views", "2. Predicted Clicks & Impressions")}
+                </span>
+                <div className="text-2xl sm:text-3xl font-black text-emerald-800">
+                  {estClicks} <span className="text-xs font-bold text-slate-500">Klicks</span>
+                </div>
+                <div className="text-xs font-semibold text-slate-600">
+                  ~{estImpressions.toLocaleString()} Google Einblendungen
+                </div>
+                <p className="text-[11px] text-slate-500 pt-2 border-t border-slate-100">
+                  Ø CTR 6,8 % (über dem Branchendurchschnitt von 4,2 %).
+                </p>
+              </div>
+
+              {/* Card 3: Estimated Contracts Won */}
+              <div className="bg-white rounded-2xl p-4 sm:p-5 border border-slate-200 shadow-sm space-y-2">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-slate-500 block">
+                  {t("3. Erwartete Sanierungsaufträge", "3. Projected Closed Contracts")}
+                </span>
+                <div className="text-2xl sm:text-3xl font-black text-[#0f2537]">
+                  {estDeals} <span className="text-xs font-bold text-slate-500">Aufträge</span>
+                </div>
+                <div className="text-xs font-semibold text-emerald-800">
+                  40% Handwerker-Abschlussquote
+                </div>
+                <p className="text-[11px] text-slate-500 pt-2 border-t border-slate-100">
+                  Von {targetLeadsGoal} Vor-Ort-Besichtigungen und Festpreis-Angeboten.
+                </p>
+              </div>
+
+              {/* Card 4: Forecasted Gross Revenue & ROAS */}
+              <div className="bg-gradient-to-br from-emerald-50 via-white to-slate-50 rounded-2xl p-4 sm:p-5 border-2 border-emerald-500/40 shadow-sm space-y-2">
+                <span className="text-[10px] font-black uppercase tracking-wider text-emerald-900 block">
+                  {t("4. Prognostizierter Umsatz & Ertrag", "4. Forecasted Revenue & Margin")}
+                </span>
+                <div className="text-2xl sm:text-3xl font-black text-emerald-900">
+                  {eur(estRevenue)}
+                </div>
+                <div className="text-xs font-extrabold text-emerald-800">
+                  ROAS: {estRoas}x · ~{eur(estProfit)} {t("Deckungsbeitrag", "Gross Margin")}
+                </div>
+                <p className="text-[11px] text-slate-600 pt-2 border-t border-emerald-200/60">
+                  Durchschnittlicher Auftragswert: {eur(curMarket.avgTicket)} in {curMarket.city}.
+                </p>
+              </div>
+            </div>
+
+            {/* ADOPT STRATEGY ACTION BAR */}
+            <div className="bg-[#0f2537] text-white rounded-2xl p-5 sm:p-6 space-y-4 shadow-md">
+              <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 border-b border-slate-800 pb-4">
+                <div className="space-y-1">
+                  <div className="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 text-[11px] font-bold border border-emerald-500/30">
+                    <Rocket className="w-3.5 h-3.5" />
+                    <span>{t("Empfohlene Taktik für", "Recommended Tactics for")} {curMarket.city}</span>
+                  </div>
+                  <h4 className="text-lg sm:text-xl font-black text-white">
+                    {curMarket.recPlan_de}
+                  </h4>
+                  <p className="text-xs text-slate-300 max-w-2xl leading-relaxed">
+                    Hauptproblem in {curMarket.city}: <strong>{curMarket.primaryIssue_de}</strong>. Wettbewerbsdruck: <strong>{curMarket.competitivePressure}</strong> durch {curMarket.topCompetitor}.
+                  </p>
+                </div>
+
+                <div className="flex flex-wrap items-center gap-2 shrink-0">
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setWeeklyBudget(estSpendWeek);
+                      setCampaignActive(true);
+                      if (typeof window !== "undefined") {
+                        localStorage.setItem("sos_marketing_budget", String(estSpendWeek));
+                        localStorage.setItem("sos_marketing_active", "true");
+                      }
+                      showToast(t(`✓ Strategie übernommen! Google Ads Wochenbudget auf ${estSpendWeek} € angepasst.`, `✓ Strategy applied! Google Ads weekly budget set to ${estSpendWeek} €.`));
+                    }}
+                    className="min-h-[44px] px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-black text-xs inline-flex items-center gap-2 transition"
+                  >
+                    <Check className="w-4 h-4" />
+                    <span>{t(`Diese Strategie jetzt aktivieren (${estSpendWeek} €/Wo.)`, `Activate This Strategy Now (${estSpendWeek} €/wk)`)}</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => setTab("ads")}
+                    className="min-h-[44px] px-4 py-2.5 rounded-xl bg-slate-800 hover:bg-slate-700 text-white font-bold text-xs inline-flex items-center gap-1.5 transition"
+                  >
+                    <span>Google Ads Cockpit ↗</span>
+                  </button>
+                </div>
+              </div>
+
+              {/* 3 Strategic Execution Pillars */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-3.5 text-xs">
+                <div className="bg-slate-900/80 p-3.5 rounded-xl border border-slate-800 space-y-1.5">
+                  <strong className="text-emerald-400 block font-bold">1. Sofortige Google Ads Schaltung:</strong>
+                  <p className="text-slate-300 text-[11px] leading-relaxed">
+                    Ausspielung auf Suchbegriffe &quot;Kellersanierung {curMarket.city}&quot; und &quot;feuchte Wände {curMarket.city}&quot; mit 0157 58830177 Anruferweiterung.
+                  </p>
+                </div>
+                <div className="bg-slate-900/80 p-3.5 rounded-xl border border-slate-800 space-y-1.5">
+                  <strong className="text-sky-400 block font-bold">2. Google Maps 3-Pack Position 1:</strong>
+                  <p className="text-slate-300 text-[11px] leading-relaxed">
+                    Standortadresse Niebuhrstr. 46 (Essen) &amp; Stützpunkte im Bergischen Land für maximale lokale Auffindbarkeit.
+                  </p>
+                </div>
+                <div className="bg-slate-900/80 p-3.5 rounded-xl border border-slate-800 space-y-1.5">
+                  <strong className="text-amber-400 block font-bold">3. 24h Festpreis &amp; § 35a Vorteil:</strong>
+                  <p className="text-slate-300 text-[11px] leading-relaxed">
+                    Kunden werben mit 20% Steuererstattung auf Handwerkerlohn und digitaler Schadensanalyse ohne lange Wartezeiten.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* REAL COMPETITOR INTELLIGENCE RADAR (NRW) */}
+            <div className="bg-white rounded-2xl p-5 sm:p-7 border border-slate-200 shadow-sm space-y-5">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-4">
+                <div className="space-y-1">
+                  <div className="inline-flex items-center gap-2 px-2.5 py-0.5 rounded-full bg-slate-900 text-white text-[11px] font-black uppercase tracking-wider">
+                    <Search className="w-3.5 h-3.5 text-emerald-400" />
+                    <span>{t("Wettbewerbs-Radar & Marktteilnehmer (NRW / Ruhrgebiet)", "Competitor Intelligence Radar (NRW / Ruhr)")}</span>
+                  </div>
+                  <h4 className="text-lg sm:text-xl font-black text-slate-900">
+                    {t("Was die Konkurrenz in Ihrer Region unternimmt & wie wir sie schlagen", "What Competitors in Your Region Are Doing & How We Win")}
+                  </h4>
+                  <p className="text-xs text-slate-600 max-w-2xl leading-relaxed">
+                    {t(
+                      "Detaillierte Analyse der aktiven Marktteilnehmer in Essen, Wuppertal und NRW. Nutzen Sie die Schwachstellen von Großkonzernen und regionalen Betrieben gezielt aus.",
+                      "Detailed analysis of active competitors across Essen, Wuppertal, and NRW. Exploit large franchise overheads and slow response times to win contracts."
+                    )}
+                  </p>
+                </div>
+
+                <div className="flex flex-wrap items-center gap-1.5 shrink-0">
+                  {[
+                    ["all", t("Alle Wettbewerber", "All Competitors")],
+                    ["isotec", "ISOTEC"],
+                    ["atg", "ATG Deutschland"],
+                    ["regional", t("Regionale Betriebe", "Local Tradesmen")],
+                    ["drymat", "Drymat"],
+                  ].map(([k, label]) => (
+                    <button
+                      key={k}
+                      type="button"
+                      onClick={() => setCompetitorFilter(k)}
+                      className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
+                        competitorFilter === k
+                          ? "bg-emerald-700 text-white font-black"
+                          : "bg-slate-100 hover:bg-slate-200 text-slate-700"
+                      }`}
+                    >
+                      {label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Competitor Cards Grid */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                {filteredCompetitors.map((comp) => (
+                  <div
+                    key={comp.id}
+                    className="bg-slate-50 border border-slate-200 rounded-xl p-4 sm:p-5 flex flex-col justify-between space-y-3.5 hover:border-emerald-500/50 transition-colors shadow-2xs"
+                  >
+                    <div className="space-y-2">
+                      <div className="flex items-start justify-between gap-2">
+                        <div>
+                          <span className="text-[10px] font-bold text-slate-500 uppercase tracking-wider block">
+                            {isEn ? comp.type_en : comp.type_de}
+                          </span>
+                          <h5 className="font-extrabold text-slate-900 text-sm sm:text-base mt-0.5">
+                            {comp.name}
+                          </h5>
+                        </div>
+                        <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-amber-100 text-amber-900 border border-amber-300 shrink-0">
+                          {isEn ? comp.status_en : comp.status_de}
+                        </span>
+                      </div>
+
+                      <div className="grid grid-cols-2 gap-2 text-xs pt-1">
+                        <div className="bg-white p-2 rounded-lg border border-slate-200">
+                          <span className="text-[10px] text-slate-500 block">Geschätztes Werbebudget:</span>
+                          <strong className="text-slate-900 text-[11px]">{comp.budgetEst}</strong>
+                        </div>
+                        <div className="bg-white p-2 rounded-lg border border-slate-200">
+                          <span className="text-[10px] text-slate-500 block">Preispunkt / Niveau:</span>
+                          <strong className="text-rose-700 text-[11px]">{comp.pricingEst}</strong>
+                        </div>
+                      </div>
+
+                      <div className="space-y-1.5 text-xs pt-1">
+                        <div>
+                          <strong className="text-slate-700 text-[11px]">Stärken:</strong>{" "}
+                          <span className="text-slate-600 text-[11px]">{isEn ? comp.strengths_en : comp.strengths_de}</span>
+                        </div>
+                        <div>
+                          <strong className="text-rose-700 text-[11px]">Schwachstellen (Angriffsfläche):</strong>{" "}
+                          <span className="text-slate-600 text-[11px]">{isEn ? comp.weaknesses_en : comp.weaknesses_de}</span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="p-3 bg-emerald-50/90 rounded-lg border border-emerald-200 space-y-1 text-xs">
+                      <strong className="text-emerald-950 font-bold flex items-center gap-1.5 text-[11px]">
+                        <CheckCircle2 className="w-3.5 h-3.5 text-emerald-700 shrink-0" />
+                        <span>{t("SOS Abdichtung Sieger-Strategie:", "SOS Abdichtung Winning Strategy:")}</span>
+                      </strong>
+                      <p className="text-emerald-900 text-[11px] leading-snug">
+                        {isEn ? comp.sosStrategy_en : comp.sosStrategy_de}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Head-to-Head Comparison Scorecard Table */}
+              <div className="pt-2 border-t border-slate-100 space-y-2.5">
+                <div className="flex items-center justify-between">
+                  <h5 className="font-extrabold text-slate-900 text-xs uppercase tracking-wider">
+                    {t("Direkter Leistungs- & Wettbewerbsvergleich", "Head-to-Head Feature Comparison")}
+                  </h5>
+                  <span className="text-[10px] text-slate-500 font-semibold">Warum Kunden sich für SOS Abdichtung entscheiden</span>
+                </div>
+
+                <div className="overflow-x-auto">
+                  <table className="w-full text-left text-xs border border-slate-200 rounded-xl overflow-hidden">
+                    <thead className="bg-slate-900 text-white font-extrabold uppercase text-[10px]">
+                      <tr>
+                        <th className="p-3">Kriterium / Service</th>
+                        <th className="p-3 bg-emerald-800 text-emerald-100 font-black">SOS Abdichtung (Sie)</th>
+                        <th className="p-3">ISOTEC Fachbetriebe</th>
+                        <th className="p-3">ATG Deutschland</th>
+                        <th className="p-3">Lokale Kleinbetriebe</th>
+                      </tr>
+                    </thead>
+                    <tbody className="divide-y divide-slate-100 text-slate-700">
+                      <tr>
+                        <td className="p-3 font-bold text-slate-900">Preistransparenz</td>
+                        <td className="p-3 bg-emerald-50 text-emerald-900 font-black">✓ 100% Online-Rechner</td>
+                        <td className="p-3 text-slate-500">Keine Preise online</td>
+                        <td className="p-3 text-slate-500">Intransparente Pauschalen</td>
+                        <td className="p-3 text-slate-500">Nur nach Besichtigung</td>
+                      </tr>
+                      <tr>
+                        <td className="p-3 font-bold text-slate-900">Angebotsdauer</td>
+                        <td className="p-3 bg-emerald-50 text-emerald-900 font-black">✓ Binnen 24 Stunden</td>
+                        <td className="p-3 text-slate-500">2 – 4 Wochen</td>
+                        <td className="p-3 text-slate-500">7 – 14 Tage</td>
+                        <td className="p-3 text-slate-500">1 – 3 Wochen</td>
+                      </tr>
+                      <tr>
+                        <td className="p-3 font-bold text-slate-900">Digitale Schadensfotos (Drive)</td>
+                        <td className="p-3 bg-emerald-50 text-emerald-900 font-black">✓ Direkt vom Smartphone</td>
+                        <td className="p-3 text-slate-500">Nur per E-Mail</td>
+                        <td className="p-3 text-slate-500">Nicht vorhanden</td>
+                        <td className="p-3 text-slate-500">Nicht vorhanden</td>
+                      </tr>
+                      <tr>
+                        <td className="p-3 font-bold text-slate-900">24/7 Notdienst-Erreichbarkeit</td>
+                        <td className="p-3 bg-emerald-50 text-emerald-900 font-black">✓ 0157 58830177 &amp; WhatsApp</td>
+                        <td className="p-3 text-slate-500">Nur Werktags 08–17 Uhr</td>
+                        <td className="p-3 text-slate-500">Callcenter Hotline</td>
+                        <td className="p-3 text-slate-500">Nur Anrufbeantworter</td>
+                      </tr>
+                      <tr>
+                        <td className="p-3 font-bold text-slate-900">Steuerabzug § 35a Handwerkerlohn</td>
+                        <td className="p-3 bg-emerald-50 text-emerald-900 font-black">✓ Automatisch berechnet (20%)</td>
+                        <td className="p-3 text-slate-600">Ja, auf Anfrage</td>
+                        <td className="p-3 text-slate-500">Oft Pauschalen ohne Trennung</td>
+                        <td className="p-3 text-slate-600">Variabel</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        );
+      })()}
 
       {/* TAB 8: HILFE & GOOGLE-SETUP */}
       {tab === "hilfe" && (
