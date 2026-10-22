@@ -1324,4 +1324,245 @@ export const CITY_PAGES: CityPage[] = [
     ],
     nearby: ["remscheid", "solingen", "wuppertal"],
   },
+
+  // Essen
+  {
+    slug: "essen",
+    name: "Essen",
+    keyword: "Kellersanierung Essen",
+    title: "Kellersanierung Essen | Feuchte Keller trockenlegen",
+    metaDescription:
+      "Kellersanierung Essen: Feuchte Keller & nasse Wände von innen trockenlegen. Kostenlose Feuchtemessung vor Ort, Festpreis & 10 Jahre Garantie.",
+    h1: "Kellersanierung Essen: Feuchte Keller dauerhaft trockenlegen",
+    lede:
+      "Vom historischen Süden in Rüttenscheid, Bredeney und Werden bis zu den Zechenkolonien im Essener Norden: Bergsenkungen, drückendes Grundwasser und alte Ziegelkeller erfordern eine genaue Analyse.",
+    plz: ["45127", "45128", "45130", "45131", "45133", "45144", "45147", "45239", "45326"],
+    districts: ["Essen-Mitte", "Rüttenscheid", "Bredeney", "Werden", "Frohnhausen", "Borbeck", "Steele", "Kettwig"],
+    geo: { lat: 51.4556, lng: 7.0116 },
+    responseTime: "24 bis 48 Stunden",
+    localFactors: [
+      {
+        name: "Bergbau-Senkungen & Setzungsrisse",
+        text: "Durch den früheren Steinkohleabbau und Grundwasserwiederanstieg im Ruhrgebiet kommt es häufig zu feinen Rissen im Mauerwerk und an der Bodenplatte, durch die Wasser eindringt.",
+      },
+      {
+        name: "Schwankender Grundwasserspiegel an der Ruhr",
+        text: "In Werden, Kettwig und Steele beeinflusst die Ruhr den Grundwasserstand maßgeblich. Nach Starkregen drückt Grund- und Sickerwasser von unten und seitlich an die Kellerwand.",
+      },
+      {
+        name: "Großer Altbaubestand vor 1970",
+        text: "Über 16.000 Ein- und Mehrfamilienhäuser in Essen wurden vor 1970 errichtet. Meist fehlt eine intakte Horizontalsperre, sodass Bodenfeuchte kapillar aufsteigt.",
+      },
+    ],
+    sections: [
+      {
+        heading: "Rüttenscheid, Frohnhausen und Südviertel: Altbauten mit aufsteigender Feuchte",
+        paragraphs: [
+          "In den dicht bebauten Wohnquartieren von Essen-Rüttenscheid, Frohnhausen und Holsterhausen stehen tausende Gründerzeit- und Nachkriegsbauten. Ihre Keller wurden häufig als einfache Lagerräume aus Ziegeln oder Mischmauerwerk errichtet. Nach Jahrzehnten ist die ursprüngliche Bitumensperre versprödet, Putz platzt ab und Mauersalze treten hervor.",
+          "Weil die Häuser direkt an Gehwegen oder Nachbargebäuden stehen, ist eine Außenaufgrabung wirtschaftlich und bautechnisch kaum möglich. Wir sanieren diese Keller von innen: Mit einer chemischen Horizontalsperre im Injektionsverfahren stoppen wir den kapillaren Wassertransport dauerhaft. Anschließend reguliert ein diffusionsoffener Sanierputz das Raumklima und lagert Restfeuchte und Salze schadensfrei ein.",
+        ],
+      },
+      {
+        heading: "Essen-Süd, Werden und Kettwig: Druckwasser und Hanglagen",
+        paragraphs: [
+          "Im Ruhrtal rund um Werden und Kettwig sowie an den Hängen des Baldeneysees sind Keller einer doppelten Belastung ausgesetzt: Auf der Hangseite drückt Schichten- und Sickerwasser gegen die Außenwand, während talwärts der Grundwasserspiegel nach Regentagen rasch ansteigt.",
+          "Gegen solche Druckwasserbelastungen setzen wir mehrlagige mineralische Dichtungsschlämmen mit verstärkter Hohlkehle am Wand-Boden-Übergang ein. Risse im Fundament werden vorab im Hochdruck-Injektionsverfahren mit elastischem Polyurethanharz dauerhaft abgedichtet. Sie erhalten vorab eine kostenlose Schadensanalyse vor Ort mit verbindlichem Festpreis.",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        q: "Wie schnell sind Sie in Essen vor Ort?",
+        a: "Da unser Betriebssitz in Essen (Niebuhrstraße) liegt, erreichen wir jeden Essener Stadtteil – von Altenessen bis Kettwig – innerhalb von 24 Stunden. Die Feuchtemessung vor Ort ist für Sie unverbindlich und kostenfrei.",
+      },
+      {
+        q: "Muss für eine Kellersanierung in Essen der Vorgarten aufgegraben werden?",
+        a: "Nein. Wir arbeiten zu 100 % von der Innenseite des Gebäudes. Vorgärten, Terrassen, Zufahrten und Pflasterungen bleiben vollständig unberührt.",
+      },
+      {
+        q: "Welche Garantie bietet sos-abdichtung auf die Kellersanierung?",
+        a: "Sie erhalten 25 Jahre Produktgarantie auf die chemische Injektionsflüssigkeit unseres Systempartners SchimmelPeter® sowie 10 Jahre Handwerksgarantie auf die ordnungsgemäße Ausführung durch sos-abdichtung.",
+      },
+    ],
+    nearby: ["wuppertal", "bochum", "duesseldorf"],
+  },
+
+  // Düsseldorf
+  {
+    slug: "duesseldorf",
+    name: "Düsseldorf",
+    keyword: "Kellersanierung Düsseldorf",
+    title: "Kellersanierung Düsseldorf | Keller abdichten vom Profi",
+    metaDescription:
+      "Kellersanierung Düsseldorf: Nasse Keller & drückendes Wasser von innen abdichten. Kostenlose Feuchtemessung, Festpreis und 10 Jahre Garantie.",
+    h1: "Kellersanierung Düsseldorf: Keller trockenlegen ohne Aufgraben",
+    lede:
+      "Hoher Rhein-Grundwasserspiegel, wertvolle Wohn- und Nutzflächen im Souterrain: In Düsseldorf erfordert feuchtes Mauerwerk professionelle Abdichtungssysteme mit garantierter Dichtigkeit.",
+    plz: ["40210", "40213", "40477", "40545", "40547", "40597", "40625"],
+    districts: ["Düsseldorf-Mitte", "Oberkassel", "Pempelfort", "Unterbilk", "Gerresheim", "Benrath", "Grafenberg"],
+    geo: { lat: 51.2277, lng: 6.7735 },
+    responseTime: "24 bis 48 Stunden",
+    localFactors: [
+      {
+        name: "Rhein-Hochwasser & Grundwasserdruck",
+        text: "In rheinnahen Stadtteilen wie Oberkassel, Bilk und Pempelfort drückt das Rhein-Grundwasser bei Pegelanstieg mit starkem hydrostatischem Druck gegen Bodenplatte und Kellerwände.",
+      },
+      {
+        name: "Hochwertig genutzte Souterrain-Räume",
+        text: "In Düsseldorf werden Untergeschosse häufig als Büros, Einliegerwohnungen oder Praxisräume genutzt. Nässe und Schimmel gefährden hier direkt teure Bausubstanz und Mieteinnahmen.",
+      },
+      {
+        name: "Kies- und Sandböden der Rheinterrasse",
+        text: "Die durchlässigen Böden leiten Regenwasser extrem schnell in tiefere Schichten ab, was zu plötzlichen Wasseranstiegen am Kellerfundament führt.",
+      },
+    ],
+    sections: [
+      {
+        heading: "Oberkassel, Pempelfort und Bilk: Druckwasserdichte Innenabdichtung",
+        paragraphs: [
+          "Die historischen Stadthäuser in Düsseldorf-Oberkassel und Pempelfort besitzen repräsentative Altbaukeller. Wenn der Rhein Hochwasser führt, steigt das Grundwasser in den Kies- und Sandböden rasant an. Feuchtigkeit drückt durch poröse Fugen im Mauerwerk und führt zu Schimmelbildung hinter Sockelleisten und Verkleidungen.",
+          "Unsere druckwasserdichte Innenabdichtung nach WTA-Merkblatt dichtet das Mauerwerk dauerhaft gegen drückendes Wasser ab. In Kombination mit einer tiefenwirksamen Horizontalsperre gegen kapillar aufsteigende Feuchte schaffen wir ein trockenes, gesundes Raumklima – ohne teure Erdarbeiten vor dem Haus.",
+        ],
+      },
+      {
+        heading: "Gerresheim und Benrath: Hangwasser und Sanierung von Souterrainwohnungen",
+        paragraphs: [
+          "In den Randlagen von Düsseldorf, wie am Gerresheimer Hang oder in Benrath, treffen Schichtenwasser und Altbausubstanz aufeinander. Nasse Wände im bewohnten Souterrain mindern den Wert der Immobilie erheblich.",
+          "Wir analysieren bei der kostenlosen Feuchtemessung vor Ort exakt die Ursache (Kondensfeuchte, kapillarer Aufstieg oder drückendes Sickerwasser) und erstellen Ihnen ein transparentes Festpreisangebot. Bei vermieteten Wohnungen stellen wir auf Wunsch alle nötigen Messprotokolle für Mieter und Hausverwaltungen aus.",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        q: "Hält die Innenabdichtung auch bei Rhein-Hochwasser dicht?",
+        a: "Ja. Unser mehrlagiges mineralisches Dichtungssystem hält hydrostatischem Druckwasser stand und wird speziell an den hochwassergefährdeten Wand-Boden-Anschlüssen mit druckfesten Hohlkehlen verstärkt.",
+      },
+      {
+        q: "Können wir den Keller während der Sanierung weiter betreten?",
+        a: "Ja, der Arbeitsbereich wird staubdicht abgeschottet. Es gibt keine großflächigen Baustellen im Außenbereich, und Ihr Garten sowie Gehwege bleiben komplett unberührt.",
+      },
+      {
+        q: "Wie läuft der erste Vor-Ort-Termin in Düsseldorf ab?",
+        a: "Bautenschutz-Experte Shahzad Mahmood prüft mit digitaler HF-Messtechnik die Feuchtigkeitsverteilung im Mauerwerk. Sie erhalten sofort eine klare Diagnose und ein verbindliches Festpreisangebot.",
+      },
+    ],
+    nearby: ["wuppertal", "essen", "solingen"],
+  },
+
+  // Bochum
+  {
+    slug: "bochum",
+    name: "Bochum",
+    keyword: "Kellersanierung Bochum",
+    title: "Kellersanierung Bochum | Feuchte Keller sanieren & sperren",
+    metaDescription:
+      "Kellersanierung Bochum: Nasse Kellerwände & Setzungsrisse von innen sanieren. Kostenlose Feuchtemessung vor Ort, Festpreis & 10 Jahre Garantie.",
+    h1: "Kellersanierung Bochum: Nasse Keller dauerhaft trockenlegen",
+    lede:
+      "Von Ehrenfeld und Stiepel bis Langendreer und Wattenscheid: Ehemalige Bergbaugebiete, Lehmböden und feuchtes Mauerwerk verlangen maßgeschneiderte Lösungen ohne Erdarbeiten.",
+    plz: ["44787", "44789", "44791", "44799", "44801", "44803", "44866"],
+    districts: ["Bochum-Mitte", "Ehrenfeld", "Wattenscheid", "Stiepel", "Weitmar", "Langendreer", "Wiemelhausen"],
+    geo: { lat: 51.4818, lng: 7.2162 },
+    responseTime: "24 bis 48 Stunden",
+    localFactors: [
+      {
+        name: "Löss- und Lehmböden im mittleren Ruhrgebiet",
+        text: "Schwere Böden stauen Niederschlagswasser lange an der Außenwand. Ohne intakte Vertikal- oder Innenabdichtung dringt Wasser seitlich ins Kellergefüge.",
+      },
+      {
+        name: "Bergschäden & Risse im Fundament",
+        text: "Tiefenbohrungen und Setzungen aus der Bergbauhistorie hinterlassen feine Bewegungsrisse in Betonböden und Kellerwänden.",
+      },
+      {
+        name: "Altbauten der Zechenära",
+        text: "Viele Bergarbeitersiedlungen und Mehrfamilienhäuser in Wattenscheid und Ehrenfeld besitzen Ziegelmauerwerk ohne jede vertikale Sperrbahn.",
+      },
+    ],
+    sections: [
+      {
+        heading: "Bochum-Ehrenfeld und Mitte: Ziegelkeller ohne Aufgraben sanieren",
+        paragraphs: [
+          "In den dicht bebauten Straßen von Bochum-Ehrenfeld, Weitmar und Mitte reihen sich Mehrfamilienhäuser aneinander. Wenn hier der Keller feucht wird, zieht der Modergeruch schnell bis ins Erdgeschoss. Feuchte Wände zersetzen den Mörtel und lassen Salze auskristallisieren.",
+          "Mit unserem Injektionsverfahren bringen wir eine Paraffin-Harz-Horizontalsperre ein, die ohne statische Schwächung das kapillare Aufsteigen von Wasser stoppt. Durch die Sanierung von innen entfallen Straßenabsperrungen, Grabarbeiten und Vorgartenschäden komplett.",
+        ],
+      },
+      {
+        heading: "Stiepel und Ruhrtal: Hanglagen und drückendes Schichtenwasser",
+        paragraphs: [
+          "Im grünen Süden Bochums, rund um Stiepel und die Ruhrhänge, sind viele Häuser in steile Hanglagen gebaut. Hier sammelt sich Hangwasser oberhalb des Gebäudes und drückt gegen die erdberührte Rückwand.",
+          "Wir schützen diese Wände mit mehrschichtigen flexiblen Dichtungsschlämmen und dichten wasserführende Risse im Mauerwerk per Hochdruckverpressung ab. Das schützt die Bausubstanz nachhaltig und sichert den Immobilienwert.",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        q: "Können Risse im Kellerboden in Bochum abgedichtet werden?",
+        a: "Ja, mit unserem elastischen Polyurethanharz-Injektionsverfahren verpressen wir Setzungs- und Arbeitsrisse dauerhaft wasserdicht, selbst bei anstehendem Druckwasser.",
+      },
+      {
+        q: "Ist die Vor-Ort-Besichtigung in Bochum kostenlos?",
+        a: "Ja, wir führen bei Ihnen in Bochum eine kostenfreie Feuchtigkeitsmessung mit digitaler Messtechnik durch und erstellen Ihnen einen garantierten Festpreis.",
+      },
+    ],
+    nearby: ["essen", "dortmund", "wuppertal"],
+  },
+
+  // Dortmund
+  {
+    slug: "dortmund",
+    name: "Dortmund",
+    keyword: "Kellersanierung Dortmund",
+    title: "Kellersanierung Dortmund | Keller trockenlegen & dichten",
+    metaDescription:
+      "Kellersanierung Dortmund: Feuchte Keller & aufsteigende Feuchte von innen sanieren. Kostenlose Feuchtemessung vor Ort, Festpreis & Garantie.",
+    h1: "Kellersanierung Dortmund: Keller sanieren ohne Aufgraben",
+    lede:
+      "Vom Kreuzviertel und Hörde am Phoenix-See bis nach Brackel und Mengede: Trockene Keller schützen die Bausubstanz und sichern den Wert Ihrer Immobilie in Dortmund.",
+    plz: ["44135", "44137", "44139", "44225", "44263", "44309", "44359"],
+    districts: ["Dortmund-Innenstadt", "Kreuzviertel", "Hörde", "Hombruch", "Aplerbeck", "Brackel", "Mengede"],
+    geo: { lat: 51.5136, lng: 7.4653 },
+    responseTime: "24 bis 48 Stunden",
+    localFactors: [
+      {
+        name: "Grundwasseranstieg nach Zechenstilllegungen",
+        text: "Durch das regulierte Abpumpen und den Grubenwasseranstieg im östlichen Ruhrgebiet steigen die Pegel in tieferen Erdschichten seit Jahren wieder an.",
+      },
+      {
+        name: "Gründerzeitviertel im Kreuzviertel und Kaiserviertel",
+        text: "Dicht bebaute Blockrandstrukturen mit historischen Vollziegelkellern, die bei aufsteigender Feuchte rasch Salzausblühungen bilden.",
+      },
+      {
+        name: "Urbane Sanierungsanforderungen am Phoenix-See",
+        text: "Moderne Souterrains und modernisierte Bestandsgebäude verlangen hochwertige Nutzbarkeit ohne Feuchtegeruch und Schimmelsporen.",
+      },
+    ],
+    sections: [
+      {
+        heading: "Dortmunder Kreuzviertel: Sanierung von Altbaukellern von innen",
+        paragraphs: [
+          "Das Dortmunder Kreuzviertel und das Kaiserviertel zählen zu den gefragtesten Wohngegenden im Ruhrgebiet. Viele Häuser stammen aus der Jahrhundertwende. Feuchte Kellermauern und schimmelnde Abstellräume sind hier ein bekanntes Problem, das oft durch aufsteigende Nässe im Fundamentbereich verursacht wird.",
+          "Weil Vorgärten oder Zufahrten nicht existieren, ist eine Innenabdichtung der einzig denkbare Sanierungsweg. Wir bohren in geringen Abständen Injektionskanäle und sättigen das Mauerwerk mit unserem paraffingelösten Dichtstoff. Die Wand bleibt atmungsaktiv, trocknet nach oben hin ab und ist dauerhaft vor neuem Wasser geschützt.",
+        ],
+      },
+      {
+        heading: "Hörde, Hombruch und Aplerbeck: Schutz vor drückendem Sickerwasser",
+        paragraphs: [
+          "In Stadtteilen wie Hörde oder Aplerbeck sorgt starker Regen regelmäßig für Staunässe in bindigen Lehmböden. Das Wasser dringt durch unzureichend abgedichtete Wand-Boden-Fugen in den Keller ein.",
+          "Unsere mineralischen Dichtungsschlämmen bilden in Verbindung mit einer Hohlkehlenausbildung eine unüberwindbare Barriere. Ihr Keller wird wieder als sauberer Lagerraum oder Hobbyraum nutzbar – mit 10 Jahren Handwerksgarantie.",
+        ],
+      },
+    ],
+    faqs: [
+      {
+        q: "Wie lange dauert eine Kellersanierung in Dortmund?",
+        a: "Je nach Kellergröße dauert die Ausführung meist nur 2 bis 4 Werktage. Der Keller bleibt währenddessen begehbar, und es entstehen keine Behinderungen vor dem Haus.",
+      },
+      {
+        q: "Gibt es Fördermöglichkeiten für die Kellersanierung in NRW?",
+        a: "Ja, für handwerkliche Sanierungsmaßnahmen an selbstgenutzten Immobilien können Eigentümer 20 % der Arbeitskosten (Handwerkerleistung gem. § 35a EStG) direkt steuerlich geltend machen. Wir weisen den Lohnanteil auf der Rechnung separat GoBD-konform aus.",
+      },
+    ],
+    nearby: ["bochum", "essen", "wuppertal"],
+  },
 ];
+

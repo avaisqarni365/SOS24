@@ -66,9 +66,18 @@ export function businessNode() {
         closes: "14:00",
       },
     ],
-    areaServed: ["Wuppertal", "Solingen", "Remscheid", "Velbert", "Haan", "Wermelskirchen"].map(
-      (name) => ({ "@type": "City", name })
-    ),
+    areaServed: [
+      "Wuppertal",
+      "Essen",
+      "Düsseldorf",
+      "Bochum",
+      "Dortmund",
+      "Solingen",
+      "Remscheid",
+      "Velbert",
+      "Haan",
+      "Wermelskirchen",
+    ].map((name) => ({ "@type": "City", name })),
     memberOf: { "@type": "Organization", name: "SchimmelPeter®", url: "https://www.schimmelpeter.de" },
     sameAs: [PARTNER_URL],
     knowsAbout: [
