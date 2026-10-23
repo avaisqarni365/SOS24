@@ -68,7 +68,7 @@ export function ServicesRail() {
             </h2>
           </div>
           <p className="sc-body">
-            {hy("Welche Leistung Ihr Keller braucht, entscheidet die Messung. Jedes Verfahren hat eine eigene Seite: mit 3D-Modell, der Physik dahinter, Zahlen, Ablauf und Fragen.")}
+            {hy("Als Bautenschutz-Fachbetrieb sanieren wir feuchte Kellerwände von innen, legen Mauerwerk trocken und beseitigen Schimmel im Keller dauerhaft. Welche Leistung Ihr Keller braucht, entscheidet die kostenlose Feuchtigkeitsmessung. Jedes Verfahren hat eine eigene Seite: mit 3D-Modell, der Physik dahinter, Zahlen, Ablauf und Fragen.")}
           </p>
         </div>
         <ServiceCardGrid />

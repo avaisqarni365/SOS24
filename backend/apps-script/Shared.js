@@ -224,11 +224,20 @@ function hashPw_(pass, salt) {
   for (var i = 0; i < 1000; i++) h = Utilities.base64Encode(Utilities.computeHmacSha256Signature(h, String(salt)));
   return h;
 }
+/* SHA-256 of passwords that have been public (the old setup default was in this repository):
+   they are refused for login and as a new password. Only the fingerprint is kept here. */
+var LEAKED_PW_SHA256 = ['8b76348c8c1a7c54f81dd532e8078161f98908a3e4444e8f750d7e0c2ef176ba'];
+function leakedPw_(plain) {
+  var hex = Utilities.computeDigest(Utilities.DigestAlgorithm.SHA_256, String(plain), Utilities.Charset.UTF_8)
+    .map(function (b) { return ('0' + (b & 255).toString(16)).slice(-2); }).join('');
+  return LEAKED_PW_SHA256.indexOf(hex) >= 0;
+}
 function setUserPw_(sh, row, plain) {
   plain = String(plain || '');
   var c = function (n) { return USER_COLS.indexOf(n) + 1; };
   sh.getRange(row, c('Neues Passwort')).setValue('');
   if (plain.length < PW_MIN) return 'Passwort zu kurz (mind. ' + PW_MIN + ' Zeichen) – bitte ein neues eintragen.';
+  if (leakedPw_(plain)) return 'Dieses Passwort ist öffentlich bekannt – bitte ein anderes eintragen.';
   var salt = Utilities.getUuid().replace(/-/g, '');
   sh.getRange(row, c('Passwort (verschlüsselt)'), 1, 2).setValues([[hashPw_(plain, salt), salt]]);
   return '';

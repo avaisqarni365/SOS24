@@ -5580,6 +5580,11 @@ footer .logo__svg { height: 3.1rem; }
 }
 html[data-theme="dark"] .mnav__foot { background: rgb(255 255 255 / 0.04); border-color: rgb(255 255 255 / 0.12); }
 
+/* while someone types into a form the assistant button steps aside: on phones it sat on the
+   right edge of the fields; it comes back as soon as the field is left */
+.bot-launcher { transition: opacity 160ms ease; }
+body:has(main :is(input, select, textarea):focus) .bot-launcher { opacity: 0; pointer-events: none; }
+
 /* the consent question sits above the phone's contact bar, and in the corner from 640px */
 .consent { bottom: calc(4.75rem + env(safe-area-inset-bottom, 0px)); }
 @media (min-width: 640px) { .consent { bottom: 1rem; } }

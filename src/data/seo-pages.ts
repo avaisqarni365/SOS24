@@ -5,6 +5,8 @@ export interface LayerNote { name: string; text: string }
 export interface ServicePage {
   slug: string;
   navTitle: string;
+  /** the service exactly as it is named in the Google Business Profile */
+  serviceName: string;
   keyword: string;
   title: string;
   metaDescription: string;
@@ -40,12 +42,13 @@ export const SERVICE_PAGES: ServicePage[] = [
   // 1. Kellersanierung
   {
     slug: "kellersanierung",
+    serviceName: "Kellersanierung von innen (ohne Aufgraben)",
     navTitle: "Kellersanierung",
-    keyword: "Keller trockenlegen",
-    title: "Keller trockenlegen ohne Aufgraben | Kellersanierung",
+    keyword: "Feuchte Kellerwände sanieren",
+    title: "Feuchte Kellerwände sanieren | Kellersanierung von innen",
     metaDescription:
-      "Keller trockenlegen ohne Aufgraben: Ursache messen, von innen sanieren, verbindliches Angebot, 10 Jahre Garantie auf die Arbeit. Messung kostenlos.",
-    h1: "Keller trockenlegen: nasse Keller dauerhaft sanieren, ohne Aufgraben",
+      "Feuchte Kellerwände sanieren ohne Aufgraben: Ursache messen, Keller von innen trockenlegen, Festpreis, 10 Jahre Garantie auf die Arbeit. Messung kostenlos.",
+    h1: "Feuchte Kellerwände sanieren: den Keller von innen trockenlegen, ohne Aufgraben",
     lede:
       "Ob muffiger Geruch, Salzränder oder Schimmel in der Ecke: Ein feuchter Keller hat fast immer eine messbare Ursache. Wir finden sie und sanieren von innen, damit Garten, Einfahrt und Pflaster unberührt bleiben.",
     symptoms: [
@@ -114,7 +117,7 @@ export const SERVICE_PAGES: ServicePage[] = [
         ],
       },
       {
-        heading: "Nach Wasserschaden oder Starkregen: erst messen, dann trocknen",
+        heading: "Wasserschaden im Keller nach Starkregen: erst messen, dann trocknen",
         paragraphs: [
           "Läuft der Keller nach einem Rohrbruch oder einem Starkregen voll, stehen zuerst Abpumpen und Ausräumen an. Danach kommt die eigentliche Frage: Ist die Wand nur oberflächlich nass geworden und trocknet mit guter Lüftung und technischer Trocknung wieder ab, oder hat das Ereignis einen Schaden sichtbar gemacht, der schon lange bestand? Diese Unterscheidung treffen wir mit der Feuchtemessung vor Ort, bevor Geld in Trocknungsgeräte oder neuen Putz fließt.",
           "Zeigt die Messung, dass das Mauerwerk auch in der Tiefe durchfeuchtet ist und Salze enthält, reicht Trocknen allein nicht aus. Dann wird die Trocknung Teil der Kellersanierung: Wir entfernen durchnässten Putz, bauen bei Bedarf eine Horizontalsperre ein und begleiten die Austrocknung mit einer Schutzentfeuchtung, bis der Sanierputz aufgebracht werden kann. Die Messwerte halten wir schriftlich fest. Das schafft Klarheit über den Zustand vor der Sanierung und hilft auch im Gespräch mit Ihrer Versicherung.",
@@ -163,6 +166,7 @@ export const SERVICE_PAGES: ServicePage[] = [
   // 2. Horizontalsperre
   {
     slug: "horizontalsperre",
+    serviceName: "Horizontalsperre im Injektionsverfahren",
     navTitle: "Horizontalsperre",
     keyword: "Feuchte Wände trockenlegen",
     title: "Feuchte Wände trockenlegen | Horizontalsperre Wuppertal",
@@ -226,7 +230,7 @@ export const SERVICE_PAGES: ServicePage[] = [
         ],
       },
       {
-        heading: "So wirkt die SchimmelPeter-Injektion",
+        heading: "Mauerwerkstrockenlegung: so wirkt die SchimmelPeter-Injektion",
         paragraphs: [
           "Als SchimmelPeter® Partnerbetrieb erneuern wir defekte Horizontalsperren ohne aufwendige Erdarbeiten. Dazu setzen wir im feuchten Mauerwerk eine Reihe von Bohrlöchern im Abstand von bis zu 20 cm. In diese Bohrlöcher bringen wir eine genau berechnete Menge Injektionsmittel ein. Der Wirkstoff ist ein in Paraffin gelöster Kunststoff, der sich im Mauerwerk wie ein flüssiger Schutzschild verhält. Wie viel Material eine Wand braucht, ermitteln wir vorher bei der Schadensanalyse, denn Baustoff, Wandstärke und Durchfeuchtung unterscheiden sich von Haus zu Haus.",
           "Im Mauerwerk verteilt sich das Mittel vollständig innerhalb der Injektionszone. Dort verbindet es sich als hydrophobes, also wasserabweisendes Polymer mit den Kapillarwänden des Baustoffs. So entsteht eine neue, wasserabweisende Sperrschicht, an der das von unten aufsteigende Wasser nicht mehr vorbeikommt. Die aufsteigende Feuchtigkeit wird zuverlässig gestoppt, und das Mauerwerk oberhalb der Sperre erhält keinen Nachschub mehr. Für Sie bedeutet das: kein Bagger vor dem Haus, keine aufgerissenen Beete und keine Arbeiten auf dem Grundstück des Nachbarn.",
@@ -291,11 +295,12 @@ export const SERVICE_PAGES: ServicePage[] = [
   // 3. Kellerinnenabdichtung
   {
     slug: "kellerinnenabdichtung",
+    serviceName: "Kellerinnenabdichtung nach WTA-Standard",
     navTitle: "Kellerinnenabdichtung",
     keyword: "Keller von innen abdichten",
     title: "Keller von innen abdichten | Innenabdichtung Wuppertal",
     metaDescription:
-      "Keller von innen abdichten statt aufgraben: Hohlkehle, mineralische Dichtungsschlämme und Sanierputz, auch gegen drückendes Wasser. Festpreis.",
+      "Keller von innen abdichten nach WTA statt aufgraben: Hohlkehle, mineralische Dichtungsschlämme und Sanierputz, auch gegen drückendes Wasser. Festpreis.",
     h1: "Keller von innen abdichten, auch gegen drückendes Wasser",
     lede:
       "Wenn Feuchte seitlich durch die erdberührte Kellerwand kommt, muss die Wand selbst abgedichtet werden. Wir tun das von innen mit mineralischen Dichtungsschlämmen, einer sauber ausgebildeten Hohlkehle und einem Sanierputz, ganz ohne Erdarbeiten.",
@@ -330,7 +335,7 @@ export const SERVICE_PAGES: ServicePage[] = [
     ],
     sections: [
       {
-        heading: "Wann eine Innenabdichtung die richtige Wahl ist",
+        heading: "Feuchte Kellerwände abdichten: wann die Innenabdichtung die richtige Wahl ist",
         paragraphs: [
           "Nach der reinen Lehre gehört eine Abdichtung auf die Außenseite der Kellerwand, dorthin, wo das Wasser ankommt. In der Praxis ist die Außenseite aber oft nicht erreichbar: Das Nachbarhaus steht direkt an der Grenze, eine Garage oder Terrasse ist angebaut, oder das Haus steht am Hang mit Stützmauern und Treppen. In all diesen Fällen ist die Innenabdichtung die wirtschaftliche und technisch sinnvolle Lösung. Sie spart die Erdarbeiten und damit bis zu 60 Prozent der Kosten einer Außenaufgrabung.",
           "Eingesetzt werden Dichtschlämmen und mineralische Dichtsysteme, die fest mit dem Mauerwerk verbunden sein müssen. Mürbe Fugen, lose Steine und alte Beschichtungen entfernen wir deshalb vollständig, Bruchsteinwände egalisieren wir mit Sperrmörtel. Eine aufwendige Vortrocknung ist nicht nötig: Die Lösung von SchimmelPeter hat eine sehr geringe Oberflächenspannung und verteilt sich selbst in wassergesättigtem Mauerwerk mit über 90 % Durchfeuchtung. Steigt zusätzlich Feuchte kapillar auf, ergänzen wir eine Horizontalsperre, denn oft ist erst die Kombination beider Verfahren die dauerhafte Lösung.",
@@ -395,12 +400,13 @@ export const SERVICE_PAGES: ServicePage[] = [
   // 4. Schimmelbeseitigung
   {
     slug: "schimmelbeseitigung",
+    serviceName: "Schimmelbeseitigung & Klimaplatten",
     navTitle: "Schimmelbeseitigung",
-    keyword: "Schimmelbeseitigung Wuppertal",
-    title: "Schimmelbeseitigung Wuppertal | Ursache finden & beheben",
+    keyword: "Schimmel im Keller",
+    title: "Schimmel im Keller entfernen | Schimmelbeseitigung Wuppertal",
     metaDescription:
-      "Schimmelbeseitigung Wuppertal: Ursachenanalyse per Messung, sporensichere Entfernung ohne Chlor und Calciumsilikat gegen Kondensat.",
-    h1: "Schimmelbeseitigung Wuppertal: erst die Ursache, dann der Schimmel",
+      "Schimmel im Keller oder in der Wohnung? Schimmelsanierung mit Ursachenmessung, sporensicherer Entfernung ohne Chlor und Klimaplatten gegen Kondensat.",
+    h1: "Schimmel im Keller und in der Wohnung: erst die Ursache, dann der Schimmel",
     lede:
       "Schimmel wächst nur dort, wo über längere Zeit zu viel Feuchtigkeit ist. Wer ihn nur abwischt, sieht ihn wieder. Wir finden heraus, woher die Feuchte kommt, entfernen den Befall sporensicher und sorgen dafür, dass die Fläche trocken bleibt.",
     symptoms: [
@@ -434,7 +440,7 @@ export const SERVICE_PAGES: ServicePage[] = [
     ],
     sections: [
       {
-        heading: "Warum wir immer mit der Ursache anfangen",
+        heading: "Schimmelsanierung: warum wir immer mit der Ursache anfangen",
         paragraphs: [
           "Schimmel ist kein eigenständiges Problem, sondern das sichtbare Zeichen für zu viel Feuchtigkeit an einer Oberfläche. Sporen sind in jeder Raumluft vorhanden. Sie keimen erst aus, wenn sie auf einer Fläche landen, die über längere Zeit feucht bleibt. Eine Schimmelbeseitigung ohne Ursachenanalyse behandelt also nur das Symptom. In den meisten Fällen steht man nach wenigen Monaten wieder vor demselben Fleck, weil sich an der Feuchtequelle nichts geändert hat.",
           "Bei der Ursachenanalyse messen wir die Feuchte im Wandbaustoff, die Oberflächentemperatur der betroffenen Stelle, die Raumtemperatur und die relative Luftfeuchte. Aus diesen Werten ergibt sich, ob an der Wand der Taupunkt unterschritten wird oder ob die Nässe aus dem Mauerwerk selbst kommt. Diese Unterscheidung ist entscheidend: Kondensat an einer kalten Außenecke verlangt eine andere Lösung als aufsteigende Feuchte oder ein undichter Boden-Wand-Anschluss im Keller.",
@@ -456,7 +462,7 @@ export const SERVICE_PAGES: ServicePage[] = [
         ],
       },
       {
-        heading: "Calciumsilikat gegen Kondensat an kalten Wänden",
+        heading: "Klimaplatten aus Calciumsilikat gegen Kondensat an kalten Wänden",
         paragraphs: [
           "Viele Schimmelschäden in Wuppertaler Altbauwohnungen entstehen an ungedämmten Außenwänden, Fensterlaibungen und Ecken, die im Winter deutlich kälter sind als die übrige Wand. Dort kondensiert die Luftfeuchte, und die Stelle wird dauerhaft feucht. Für solche Wärmebrücken setzen wir Calciumsilikatplatten ein. Das Material ist kapillaraktiv, nimmt anfallendes Kondensat auf, verteilt es in der Fläche und gibt es wieder an die Raumluft ab, sobald diese trockener ist.",
           "Hinzu kommt die hohe Alkalität des Materials, die Schimmelwachstum auf der Oberfläche hemmt, ganz ohne Biozide. Gleichzeitig hebt die Platte die Oberflächentemperatur an, sodass der Taupunkt seltener unterschritten wird. Für Häuser, deren Fassade aus Gründen des Denkmalschutzes oder wegen der Nachbarbebauung nicht außen gedämmt werden kann, ist diese Innendämmung oft der praktikabelste Weg. Wichtig bleibt ein angepasstes Lüftungsverhalten, das wir nach der Sanierung mit Ihnen besprechen.",
@@ -512,12 +518,13 @@ export const SERVICE_PAGES: ServicePage[] = [
   // 5. Feuchtemessung
   {
     slug: "feuchtemessung",
+    serviceName: "Kostenlose Feuchtigkeitsmessung & Schadensanalyse",
     navTitle: "Feuchtemessung & Gutachten",
-    keyword: "Feuchtemessung & Schimmel-Gutachten",
-    title: "Feuchtemessung & Schimmel-Gutachten | Wuppertal",
+    keyword: "Feuchtigkeitsmessung",
+    title: "Kostenlose Feuchtigkeitsmessung & Schadensanalyse",
     metaDescription:
-      "Feuchtemessung & Schimmel-Gutachten im Raum Wuppertal: kapillare und hygroskopische Feuchte, Taupunkt, Salze. Kostenlose Erstmessung vor Ort.",
-    h1: "Feuchtemessung & Schimmel-Gutachten: wissen, woher die Nässe kommt",
+      "Kostenlose Feuchtigkeitsmessung vor Ort im Raum Wuppertal: kapillare und hygroskopische Feuchte, Taupunkt, Salze. Schadensanalyse und Schimmel-Gutachten.",
+    h1: "Kostenlose Feuchtigkeitsmessung & Schadensanalyse: wissen, woher die Nässe kommt",
     lede:
       "Feuchte Wand, was tun? Bevor Geld in Putz, Farbe oder Entfeuchter fließt, sollte klar sein, welche Art von Feuchte in der Wand steckt und woher sie kommt. Genau das klärt eine fachgerechte Messung.",
     symptoms: [
@@ -631,6 +638,7 @@ export const SERVICE_PAGES: ServicePage[] = [
   // 6. Rissverpressung
   {
     slug: "rissverpressung",
+    serviceName: "Rissverpressung im Mauerwerk & Beton",
     navTitle: "Rissverpressung",
     keyword: "Rissverpressung Keller",
     title: "Rissverpressung Keller | Wasserführende Risse abdichten",
@@ -732,6 +740,7 @@ export const SERVICE_PAGES: ServicePage[] = [
   // 7. Dachabdichtung
   {
     slug: "dachabdichtung",
+    serviceName: "Dachabdichtung: Flachdach, Dachterrasse & Garage",
     navTitle: "Dachabdichtung",
     keyword: "Dachabdichtung",
     title: "Dachabdichtung Wuppertal: Flachdach & Garage dicht",
@@ -796,6 +805,7 @@ export const SERVICE_PAGES: ServicePage[] = [
   // 8. Balkon & Terrasse
   {
     slug: "balkon-terrasse",
+    serviceName: "Balkon- und Terrassenabdichtung",
     navTitle: "Balkon & Terrasse",
     keyword: "Balkon abdichten",
     title: "Balkon abdichten in Wuppertal: fugenlos & begehbar",
@@ -860,11 +870,12 @@ export const SERVICE_PAGES: ServicePage[] = [
   // 9. Sockelabdichtung
   {
     slug: "sockelabdichtung",
+    serviceName: "Sockelabdichtung & Mauerwerkstrockenlegung",
     navTitle: "Sockelabdichtung",
     keyword: "Sockel abdichten",
     title: "Sockel abdichten: Schutz vor Spritzwasser & Feuchte",
     metaDescription:
-      "Sockel abdichten in Wuppertal: Spritzwasserzone freilegen, zweilagig beschichten, sauber anschlie\u00dfen. Der Putz h\u00e4lt wieder. 10 Jahre Garantie auf die Arbeit.",
+      "Sockel abdichten als Teil der Mauerwerkstrockenlegung: Spritzwasserzone freilegen, zweilagig beschichten, sauber anschließen. 10 Jahre Garantie auf die Arbeit.",
     h1: "Sockel abdichten: die Spritzwasserzone dauerhaft dicht",
     lede:
       "Der Sockel ist die h\u00e4rtest beanspruchte Zone am Haus: Spritzwasser von oben, Erdfeuchte von unten, Frost im Winter. Wenn dort Putz platzt und Farbe bl\u00e4ttert, hilft kein Anstrich, sondern eine Abdichtung.",

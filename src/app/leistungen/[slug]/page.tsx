@@ -74,7 +74,9 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
     {
       "@type": "Service",
       "@id": `${abs(path)}#service`,
-      name: page.navTitle,
+      // named as in the Google Business Profile, so Google can match the page to the listed service
+      name: page.serviceName,
+      alternateName: page.navTitle,
       serviceType: page.keyword,
       description: page.lede,
       url: abs(path),
@@ -107,7 +109,7 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
       <span data-sc-progress aria-hidden="true" />
       <Navbar />
       <main id="main" className="svc-page">
-        <ServiceHero h1={page.h1} lede={page.lede} navTitle={page.navTitle} crumbs={crumbs} film={SERVICE_FILMS[page.slug]} />
+        <ServiceHero h1={page.h1} lede={page.lede} navTitle={page.navTitle} label={page.serviceName} crumbs={crumbs} film={SERVICE_FILMS[page.slug]} />
         <ChapterNav items={chapters} label={`Kapitel: ${page.navTitle}`} />
 
         <ServiceOverview facts={SERVICE_FACTS[page.slug] ?? []} symptoms={page.symptoms} navTitle={page.navTitle} />

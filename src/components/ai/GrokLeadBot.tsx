@@ -259,7 +259,7 @@ export default function GrokLeadBot() {
     <>
       {/* Floating Trigger: 48px FAB on mobile above sticky action bar, elegant navy pill on desktop */}
       {!open && (
-        <div className="fixed bottom-[5.25rem] sm:bottom-6 right-4 sm:right-6 z-40">
+        <div className="bot-launcher fixed bottom-[5.25rem] sm:bottom-6 right-4 sm:right-6 z-40">
           <button
             type="button"
             onClick={() => setOpen(true)}

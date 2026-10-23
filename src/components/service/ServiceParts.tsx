@@ -16,12 +16,15 @@ export function ServiceHero({
   h1,
   lede,
   navTitle,
+  label,
   crumbs,
   film,
 }: {
   h1: string;
   lede: string;
   navTitle: string;
+  /** the label above the heading: the service as named in the Google Business Profile */
+  label?: string;
   crumbs: { name: string; path: string }[];
   film?: Film;
 }) {
@@ -32,7 +35,7 @@ export function ServiceHero({
           <Breadcrumbs items={crumbs} />
           {/* a plain label, like every other eyebrow: no pill shape */}
           <p className="sc-label svc-hero__label">
-            {navTitle} · <PartnerLink>SchimmelPeter® Partnerbetrieb</PartnerLink>
+            {label || navTitle} · <PartnerLink>SchimmelPeter® Partnerbetrieb</PartnerLink>
           </p>
           <h1 id="page-title" className="sc-display svc-hero__title">
             {h1}
