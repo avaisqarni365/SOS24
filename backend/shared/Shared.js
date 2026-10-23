@@ -184,6 +184,29 @@ var DEFAULT_CATALOG = [
 
 function clip_(s, n) { return String(s == null ? '' : s).replace(/[\u0000-\u001f]/g, ' ').trim().slice(0, n || 200); }
 function cell_(s, n) { s = clip_(s, n); return /^[=+\-@]/.test(s) ? "'" + s : s; }
+
+/* Compares two tokens in time that does not depend on where they first differ. */
+function safeEq_(a, b) {
+  a = String(a); b = String(b);
+  var diff = a.length ^ b.length;
+  for (var i = 0; i < Math.max(a.length, b.length); i++) diff |= (a.charCodeAt(i) || 0) ^ (b.charCodeAt(i) || 0);
+  return diff === 0;
+}
+
+/* Contact channels a lead may name; anything else is stored as 'whatsapp'. */
+var CHANNELS = ['whatsapp', 'phone', 'telefon', 'email', 'call', 'video'];
+
+/* At most CONTACT_MAX requests of one kind per e-mail address and per phone number per hour,
+   so a stranger's address cannot be flooded with our confirmation mails. */
+var CONTACT_MAX = 5;
+function contactLimit_(kind, email, phone) {
+  var cache = CacheService.getScriptCache();
+  var ids = [String(email || '').toLowerCase(), String(phone || '').replace(/\D/g, '')].filter(function (v) { return v.length >= 5; });
+  var keys = ids.map(function (v) { return 'cl_' + kind + '_' + Utilities.base64EncodeWebSafe(Utilities.computeDigest(Utilities.DigestAlgorithm.MD5, v)); });
+  for (var i = 0; i < keys.length; i++) if (Number(cache.get(keys[i]) || 0) >= CONTACT_MAX) return false;
+  keys.forEach(function (k) { cache.put(k, String(Number(cache.get(k) || 0) + 1), 3600); });
+  return true;
+}
 function iso_(v) { return v instanceof Date ? v.toISOString() : (v == null ? '' : String(v)); }
 
 function usersSheet_() {

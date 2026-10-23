@@ -17,6 +17,7 @@ import {
 } from 'lucide-react';
 import { COMPANY, COMPANY_INFO } from '@/data/content-data';
 import { submitLeadToWorkspace } from '@/lib/backend';
+import SendError from '@/components/ui/SendError';
 import {
   INSPECTION_SLOTS,
   buildGoogleCalendarUrl,
@@ -31,11 +32,13 @@ interface OnlineAppointmentBookingProps {
 }
 
 export default function OnlineAppointmentBooking({ hideHeader = false, className = '', place }: OnlineAppointmentBookingProps) {
-  const tomorrowStr = new Date(Date.now() + 86400000).toISOString().slice(0, 10);
+  // tomorrow on the office's calendar, not in UTC (which is still "today" until 01:00/02:00 in Germany)
+  const tomorrowStr = new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Berlin' }).format(new Date(Date.now() + 86400000));
 
   const [selectedDate, setSelectedDate] = useState<string>(tomorrowStr);
   const [selectedSlot, setSelectedSlot] = useState<InspectionSlot>(INSPECTION_SLOTS[0]);
   const [name, setName] = useState<string>('');
+  const [sendError, setSendError] = useState<string>('');
   const [phone, setPhone] = useState<string>('');
   const [address, setAddress] = useState<string>(place ? `${place}` : '');
   const [damageType, setDamageType] = useState<string>('Feuchter Keller / Nasse Wände');
@@ -63,6 +66,7 @@ export default function OnlineAppointmentBooking({ hideHeader = false, className
     if (!name.trim() || !phone.trim() || !address.trim()) return;
 
     setSubmitting(true);
+    setSendError('');
     try {
       const res = await submitLeadToWorkspace({
         name: name.trim(),
@@ -75,18 +79,21 @@ export default function OnlineAppointmentBooking({ hideHeader = false, className
         channel: 'phone',
       });
 
-      const id = res.id || 'A-1004';
-      setAssignedLeadId(id);
+      if (!res.ok || !res.id) {
+        setSendError(res.error || 'server');
+        return;
+      }
+      setAssignedLeadId(res.id);
       setBookedSuccess(true);
     } catch {
-      setBookedSuccess(true);
+      setSendError('network');
     } finally {
       setSubmitting(false);
     }
   };
 
   const calTitle = `SOS Abdichtung · Vor-Ort-Feuchtigkeitsmessung (${name})`;
-  const calDesc = `Kostenlose Vor-Ort-Schadensanalyse & Feuchtemessung durch Inhaber Shahzad Mahmood (${COMPANY_INFO.phoneDisplay}).\nSchadensart: ${damageType}\nKunde: ${name} (${phone})\nAdresse: ${address}\nVorgangs-ID: ${assignedLeadId || 'A-1004'}`;
+  const calDesc = `Kostenlose Vor-Ort-Schadensanalyse & Feuchtemessung durch Inhaber Shahzad Mahmood (${COMPANY_INFO.phoneDisplay}).\nSchadensart: ${damageType}\nKunde: ${name} (${phone})\nAdresse: ${address}\nVorgangs-ID: ${assignedLeadId}`;
   const calLocation = address || 'Objektadresse NRW';
 
   const googleCalLink = buildGoogleCalendarUrl({
@@ -372,6 +379,7 @@ export default function OnlineAppointmentBooking({ hideHeader = false, className
                 <span>100 % unverbindlich &amp; kostenfrei. Keine Anfahrtskosten in NRW.</span>
               </div>
 
+              <SendError error={sendError} what="Ihre Terminanfrage" />
               <button
                 type="submit"
                 disabled={submitting}

@@ -69,15 +69,10 @@ function photoToken_(id) {
 function photos_(b) {
   var id = String(b.id || '');
   var cache = CacheService.getScriptCache(), raw = cache.get('up_' + id), tok = raw ? JSON.parse(raw) : null;
-  if (!/^A-\d+$/.test(id)) return {ok: false, error: 'token'};
-  if (!tok || (b.k && tok.k !== String(b.k || ''))) {
-    // Also allow if customer token matches lead's Kundentoken
-    var hitCheck = findLead_(id);
-    if (!hitCheck || (b.k && String(hitCheck.values[leadCol_('Kundentoken') - 1]) !== String(b.k) && (!tok || tok.k !== String(b.k)))) {
-      return {ok: false, error: 'token'};
-    }
-    if (!tok) tok = {k: String(b.k || ''), n: 0};
-  }
+  var k = String(b.k || '');
+  if (!/^A-\d+$/.test(id) || !k || !leadByToken_(id, k)) return {ok: false, error: 'token'};
+  // keep the running count, so the PHOTO_MAX limit holds across tokens
+  tok = {k: k, n: tok ? Number(tok.n) || 0 : 0};
   var list = Array.isArray(b.images) ? b.images : [];
   if (!list.length) return {ok: false, error: 'empty'};
   if (tok.n + list.length > PHOTO_MAX) return {ok: false, error: 'too_many'};
@@ -169,6 +164,8 @@ function book_(b) {
   var address = clip_(p.address || p.plz || b.address || b.plz || 'Raum Wuppertal', 200);
   var damageType = clip_(p.damageType || p.to || p.service || b.damageType || 'Feuchtemessung vor Ort', 200);
   if (!name || (!phone && !email)) return {ok: false, error: 'contact'};
+  if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return {ok: false, error: 'email'};
+  if (!contactLimit_('book', email, phone)) return {ok: false, error: 'limit'};
 
   var en = (p.lang || b.lang) === 'en', src = p.src || b.src || {};
   var srcTxt = [src.utm_source, src.utm_medium, src.utm_campaign].filter(Boolean).join(' / ') || src.ref || 'Website-Terminbuchung';
@@ -176,11 +173,16 @@ function book_(b) {
   var lock = LockService.getScriptLock(); lock.waitLock(20000);
   var a, leadId, token, calId = '';
   try {
+    // only a free slot, checked under the lock so two visitors cannot take the same one
+    var day = freeSlots_(type, 21).filter(function (d) { return d.date === date; })[0];
+    if (!day || day.slots.indexOf(time) < 0) return {ok: false, error: 'slot'};
+
     ensureLeadHeader_();
-    var reqLead = p.leadId || b.leadId;
-    leadId = reqLead && /^A-\d+$/.test(reqLead) ? reqLead : nextId_();
+    // a booking joins an existing lead only when the caller proves it owns that lead
+    var reqLead = String(p.leadId || b.leadId || ''), reqK = String(p.k || b.k || '');
+    var existingHit = /^A-\d+$/.test(reqLead) ? leadByToken_(reqLead, reqK) : null;
+    leadId = existingHit ? reqLead : nextId_();
     token = Utilities.getUuid().replace(/-/g, '');
-    var existingHit = findLead_(leadId);
     a = {
       nr: nextApptNr_(), status: 'Gebucht', type: type, date: date, time: time, min: T.min,
       name: name, phone: phone, email: email, address: address, to: damageType,
@@ -231,7 +233,7 @@ function book_(b) {
 function hit_(b) {
   var p = String(b.p || '/').slice(0, 80);
   if (p.charAt(0) !== '/' || /[<>"]/.test(p)) return {ok: false};
-  var s = clip_(b.s || 'Direkt', 40), d = ['Handy', 'Tablet', 'Computer'].indexOf(b.d) >= 0 ? b.d : 'Computer', l = b.l === 'en' ? 'EN' : 'DE';
+  var s = cell_(String(b.s || 'Direkt').replace(/\|/g, ' '), 40), d = ['Handy', 'Tablet', 'Computer'].indexOf(b.d) >= 0 ? b.d : 'Computer', l = b.l === 'en' ? 'EN' : 'DE';
   var day = Utilities.formatDate(new Date(), 'Europe/Berlin', 'yyyy-MM-dd'), key = [day, p, s, d, l].join('|');
   var lock = LockService.getScriptLock();
   if (!lock.tryLock(3000)) return {ok: false};

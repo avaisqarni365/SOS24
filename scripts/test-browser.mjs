@@ -132,23 +132,19 @@ await new Promise((r) => setTimeout(r, 2000));
 const title = await evaluate("document.title");
 console.log(`Page title: "${title}"`);
 
-// Click the 1-Click Quick Access button to log in
+// Log in with ADMIN_TEST_PASS; the build must carry its SHA-256 in NEXT_PUBLIC_ADMIN_PASS_SHA256.
+const adminPass = process.env.ADMIN_TEST_PASS || "";
+if (!adminPass) console.log("ADMIN_TEST_PASS is not set: the dashboard stays locked and the tab checks will fail.");
 const loginResult = await evaluate(`
   (() => {
-    const btns = Array.from(document.querySelectorAll('button'));
-    const quickBtn = btns.find(b => (b.textContent || '').includes('Schnellzugriff') || (b.textContent || '').includes('Quick Access'));
-    if (quickBtn) {
-      quickBtn.click();
-      return "quick_button_clicked";
-    }
-    const submitBtn = btns.find(b => (b.textContent || '').includes('anmelden') || (b.textContent || '').includes('Log in'));
-    if (submitBtn) {
-      const passInput = document.querySelector('input[type="password"]');
-      if (passInput) passInput.value = 'SOS2026!Wuppertal';
-      submitBtn.click();
-      return "submit_button_clicked";
-    }
-    return "no_button_found";
+    const input = document.querySelector('input[type="password"]');
+    const form = input && input.form;
+    if (!input || !form) return "no_login_form";
+    const setter = Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, 'value').set;
+    setter.call(input, ${JSON.stringify(adminPass)});
+    input.dispatchEvent(new Event('input', { bubbles: true }));
+    form.requestSubmit();
+    return "submitted";
   })()
 `);
 console.log(`Login action result: ${loginResult}`);

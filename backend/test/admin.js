@@ -34,7 +34,8 @@ assert.strictEqual(lockedRes.error, 'locked', 'Account must lock out after multi
 
 // Clear lockout in cache for valid login
 cache['admfail_shahzad'] = '0';
-const goodLogin = ctx.login('shahzad', 'SOS2026!Wuppertal');
+M.seedAdminPw();
+const goodLogin = ctx.login('shahzad', M.TEST_PW);
 assert(goodLogin.ok && goodLogin.token, 'Owner Shahzad Mahmood must log in successfully');
 assert(/^[0-9a-f]{64}$/.test(goodLogin.token), 'Session token must be 64-char hex string');
 const token = goodLogin.token;

@@ -97,7 +97,9 @@ const sigRes = post({
 assert(sigRes.ok && sigRes.signedAt, 'Signature response: ' + JSON.stringify(sigRes));
 assert(driveFolders['SOS Abdichtung - Verträge'], 'Contracts folder created in Drive');
 assert.strictEqual(driveFolders['SOS Abdichtung - Verträge'].files.length, 1, 'Signature PNG stored in Drive');
-const loginRes = ctx.login('shahzad', 'SOS2026!Wuppertal');
+assert(!ctx.login('shahzad', 'irgendwas').ok, 'no login before the owner sets a password');
+M.seedAdminPw();
+const loginRes = ctx.login('shahzad', M.TEST_PW);
 assert(loginRes.ok && loginRes.token, 'Admin login failed: ' + JSON.stringify(loginRes));
 const admToken = loginRes.token;
 const leadDetail = ctx.api(admToken, 'api_lead', [r1.id]);

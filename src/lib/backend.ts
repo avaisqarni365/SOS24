@@ -651,10 +651,13 @@ export async function submitLeadToWorkspace(
     };
 
     const remoteRes = await postToGas<LeadSubmissionResponse>(payload);
-    if (remoteRes?.id) assignedId = remoteRes.id;
-    if (remoteRes?.up) assignedToken = remoteRes.up;
+    // The enquiry only counts once the server has stored it: a made-up local ID would
+    // tell the visitor "sent" while nobody ever sees the request.
+    if (!remoteRes?.ok || !remoteRes.id) return { ok: false, error: remoteRes?.error || 'server' };
+    assignedId = remoteRes.id;
+    if (remoteRes.up) assignedToken = remoteRes.up;
   } catch {
-    // Use local sequential ID A-1003, A-1004...
+    return { ok: false, error: 'network' };
   }
 
   const lines = buildDefaultLinesForDamage(lead.damageType, area);
@@ -809,7 +812,21 @@ export async function uploadDamagePhotosToDrive(params: {
       note: params.note || '',
     });
   } catch {
-    return { ok: true, n: params.images.length };
+    return { ok: false, error: 'network' };
+  }
+}
+
+/** Free appointment slots for the next three weeks, straight from the office calendar. */
+export async function fetchFreeSlots(
+  type: 'visit' | 'video' | 'call' = 'visit'
+): Promise<{ date: string; slots: string[] }[] | null> {
+  try {
+    const res = await fetch(`${GAS_API_URL}?action=slots&type=${type}`);
+    if (!res.ok) return null;
+    const data = (await res.json()) as { ok?: boolean; days?: { date: string; slots: string[] }[] };
+    return data.ok && Array.isArray(data.days) ? data.days.filter((d) => d.slots && d.slots.length > 0) : null;
+  } catch {
+    return null;
   }
 }
 
@@ -827,10 +844,12 @@ export async function bookMoistureInspection(params: {
   damageType?: string;
   note?: string;
   leadId?: string;
-}): Promise<{ ok: boolean; nr?: string; lead?: string; up?: string; date?: string; time?: string }> {
+  /** the lead's token: without it the server books on a new lead */
+  k?: string;
+}): Promise<{ ok: boolean; nr?: string; lead?: string; up?: string; date?: string; time?: string; error?: string }> {
   const store = getWorkspaceStore();
   const nr = `T-${1001 + store.appointments.length}`;
-  const leadId = params.leadId || `A-${1001 + store.leads.length}`;
+  const leadId = params.leadId || '';
 
   const nextAppt: WorkspaceAppointment = {
     nr,
@@ -870,17 +889,11 @@ export async function bookMoistureInspection(params: {
         address: params.address,
         damageType: params.damageType || 'Vor-Ort-Feuchtigkeitsmessung',
         note: params.note || '',
-        leadId,
+        ...(leadId && params.k ? { leadId, k: params.k } : {}),
       },
     });
   } catch {
-    return {
-      ok: true,
-      nr,
-      lead: leadId,
-      date: params.date,
-      time: params.time,
-    };
+    return { ok: false, error: 'network' };
   }
 }
 
@@ -922,7 +935,7 @@ export async function signContractDigitally(params: {
       signature: params.signatureDataUrl,
     });
   } catch {
-    return { ok: true, signedAt };
+    return { ok: false, error: 'network' };
   }
 }
 

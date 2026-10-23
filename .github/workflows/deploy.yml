@@ -80,6 +80,8 @@ jobs:
         run: pnpm run build
         env:
           PAGES_BASE_PATH: ${{ steps.pages.outputs.base_path }}
+          # SHA-256 of the /admin demo password (Settings → Variables); unset keeps /admin locked
+          NEXT_PUBLIC_ADMIN_PASS_SHA256: ${{ vars.ADMIN_PASS_SHA256 }}
 
       - name: Prefix site paths for a sub-folder preview
         run: node scripts/apply-base-path.mjs
