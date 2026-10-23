@@ -159,7 +159,7 @@ export default function OnlineAppointmentBooking({ hideHeader = false, className
               <span>Online-Terminplaner · 100 % Kostenfrei</span>
             </div>
             <h2 className="text-2xl sm:text-4xl font-black text-[#0f2537] tracking-tight">
-              Vor-Ort-Feuchtemessung {activePlace ? `in ${activePlace} ` : ''}direkt online buchen
+              Online buchen: Vor-Ort-Feuchtemessung{activePlace ? ` in ${activePlace}` : ''}
             </h2>
             <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
               Wählen Sie Tag und Zeitfenster. Inhaber <strong>{COMPANY_INFO.owner}</strong> ruft Sie zur Bestätigung an und misst

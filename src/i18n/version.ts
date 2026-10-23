@@ -1,2 +1,2 @@
 /** Content hash of public/i18n/en.json (written by the translation install). */
-export const I18N_VERSION = "f5b6f2b9ac";
+export const I18N_VERSION = "77c8d50584";
