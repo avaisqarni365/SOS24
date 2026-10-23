@@ -3,7 +3,7 @@
 import { COMPANY_INFO } from "@/data/content-data";
 
 /** Shown when a form could not reach the office: what happened, and the two ways that always work. */
-export default function SendError({ error, what = "Ihre Anfrage" }: { error?: string; what?: string }) {
+export default function SendError({ error, what = "Ihre Anfrage", plural = false, title }: { error?: string; what?: string; plural?: boolean; title?: string }) {
   if (!error) return null;
   const why =
     error === "limit"
@@ -15,7 +15,7 @@ export default function SendError({ error, what = "Ihre Anfrage" }: { error?: st
           : "Die Verbindung zu unserem Büro hat nicht geklappt.";
   return (
     <div role="alert" className="rounded-xl border border-red-700 bg-white p-4 text-sm leading-relaxed text-ink">
-      <p className="font-bold text-red-700">{what} wurde nicht gesendet.</p>
+      <p className="font-bold text-red-700">{title || `${what} ${plural ? "wurden" : "wurde"} nicht gesendet.`}</p>
       <p className="mt-1">
         {why} Bitte rufen Sie uns an unter{" "}
         <a href={`tel:${COMPANY_INFO.phoneTel}`} className="font-bold underline underline-offset-2">

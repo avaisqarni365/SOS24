@@ -578,7 +578,7 @@ export default function GrokLeadBot() {
                         <Loader2 className="w-4 h-4 animate-spin" /> Freie Termine werden geladen …
                       </p>
                     ) : freeDays.length === 0 ? (
-                      <SendError error="server" what="Die Online-Terminbuchung" />
+                      <SendError error="server" title="Online-Termine sind gerade nicht abrufbar." />
                     ) : (
                       <div className="grid grid-cols-2 gap-2">
                         <select
@@ -703,7 +703,7 @@ export default function GrokLeadBot() {
                         ))}
                       </div>
                     )}
-                    <SendError error={photoError} what="Ihre Fotos" />
+                    <SendError error={photoError} what="Ihre Fotos" plural />
                     <button
                       type="submit"
                       disabled={photoSending || photos.length === 0}
