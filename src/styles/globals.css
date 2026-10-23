@@ -7857,9 +7857,9 @@ html[data-theme="dark"] .qv-city__plz > span { background: rgb(255 255 255 / 0.0
   #kontakt .contact-card__person > div { padding-top: 0.2rem !important; }
   #kontakt .sc-section > .grid { margin-top: 1.75rem !important; gap: 1.5rem !important; }
   #kontakt .sc-section > .grid > div:first-child { padding: 1.15rem !important; }
-  #kontakt form > div.grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 0.6rem !important; }
+  /* one field per row on phones: two to a row cut every placeholder and label short */
+  #kontakt form > div.grid { gap: 0.75rem !important; }
   #kontakt form button { padding-inline: 0.7rem !important; font-size: 0.85rem !important; }
-  #kontakt form label { font-size: 0.68rem !important; }
 }
 .contact-page__top { padding-bottom: 0 !important; }
 .contact-page #kontakt > .sc-section { padding-top: 1.5rem !important; }
