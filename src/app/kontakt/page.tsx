@@ -52,6 +52,17 @@ export default function KontaktPage() {
             <h1 id="page-title" className="sc-display mt-5">
               Kontakt: <em>kostenlose Feuchtemessung.</em>
             </h1>
+            <div className="mt-4 p-4 rounded-2xl bg-emerald-50 border border-emerald-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-sm">
+              <div className="text-emerald-950 font-medium">
+                📅 <strong>Direkten Vor-Ort-Wunschtermin buchen?</strong> Nutzen Sie unseren interaktiven Online-Terminplaner.
+              </div>
+              <a
+                href="/termin/"
+                className="inline-flex items-center justify-center gap-2 px-4 py-2 bg-emerald-700 hover:bg-emerald-800 text-white font-bold rounded-xl text-xs shrink-0 transition-colors shadow-xs"
+              >
+                Zum Online-Terminplaner →
+              </a>
+            </div>
           </div>
         </section>
         <ContactForm />
