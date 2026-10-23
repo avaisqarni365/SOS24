@@ -1,13 +1,15 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { MessageCircle } from "lucide-react";
 import Navbar from "@/components/sections/Navbar";
 import Footer from "@/components/sections/Footer";
 import HomeSteps from "@/components/sections/HomeSteps";
+import OnlineAppointmentBooking from "@/components/sections/OnlineAppointmentBooking";
 import JsonLd from "@/components/seo/JsonLd";
 import { Breadcrumbs, LayerStack, Prose, FaqList, LinkGrid } from "@/components/seo/SubpageParts";
 import { CITY_PAGES } from "@/data/seo-pages";
 import { SERVICE_CARDS } from "@/data/services";
-import { COMPANY_INFO } from "@/data/content-data";
+import { COMPANY, COMPANY_INFO } from "@/data/content-data";
 import { BUSINESS_ID, WEBSITE_ID, abs, businessNode, websiteNode, breadcrumbNode, faqNode, OG_IMAGE } from "@/lib/site";
 import { hy } from "@/lib/hyphenate";
 
@@ -89,8 +91,17 @@ export default function CityPage({ params }: { params: { city: string } }) {
               </h1>
               <p className="sc-lede mt-6 text-ink font-medium">{hy(page.lede)}</p>
               <div className="mt-8 flex flex-wrap gap-3">
-                <a href={`/kontakt/?ort=${encodeURIComponent(page.name)}`} className="btn-shine inline-flex min-h-[48px] items-center rounded-full px-6 text-sm font-semibold shadow-sm hover:opacity-95 transition-opacity">
-                  Kostenlose Feuchtemessung anfragen <span aria-hidden="true">&nbsp;→</span>
+                <a href={`/termin/?ort=${encodeURIComponent(page.name)}`} className="btn-shine inline-flex min-h-[48px] items-center rounded-full px-6 text-sm font-semibold shadow-sm hover:opacity-95 transition-opacity">
+                  Vor-Ort-Termin in {page.name} buchen <span aria-hidden="true">&nbsp;→</span>
+                </a>
+                <a
+                  href={`https://wa.me/${COMPANY.whatsappNumber}?text=${encodeURIComponent(`Hallo Herr Mahmood, ich habe ein Feuchtigkeitsproblem im Keller in ${page.name} und wünsche eine kostenlose Feuchtemessung.`)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex min-h-[48px] items-center gap-2 rounded-full bg-[#25D366] hover:bg-[#1ebe5d] text-white px-5 text-sm font-bold shadow-xs transition-colors"
+                >
+                  <MessageCircle className="w-4 h-4" />
+                  <span>WhatsApp</span>
                 </a>
                 <a href={`tel:${COMPANY_INFO.phoneTel}`} className="inline-flex min-h-[48px] items-center rounded-full border border-line/20 bg-surface px-6 text-sm font-semibold text-ink hover:border-accent-deep transition-colors">
                   {COMPANY_INFO.phoneDisplay}
@@ -121,6 +132,9 @@ export default function CityPage({ params }: { params: { city: string } }) {
           </div>
         </section>
 
+        {/* Embedded Interactive Booking Engine pre-filled for this city */}
+        <OnlineAppointmentBooking place={page.name} className="border-y border-slate-200/80 my-2" />
+
         <section className="surface-bone-2 sc-section">
           <div className="sc-wrap grid gap-12">
             <LinkGrid
@@ -132,7 +146,7 @@ export default function CityPage({ params }: { params: { city: string } }) {
           </div>
         </section>
 
-        <HomeSteps formHref={`/kontakt/?ort=${encodeURIComponent(page.name)}`} />
+        <HomeSteps formHref={`/termin/?ort=${encodeURIComponent(page.name)}`} />
       </main>
       <Footer />
     </>

@@ -27,21 +27,36 @@ import {
 interface OnlineAppointmentBookingProps {
   hideHeader?: boolean;
   className?: string;
+  place?: string;
 }
 
-export default function OnlineAppointmentBooking({ hideHeader = false, className = '' }: OnlineAppointmentBookingProps) {
+export default function OnlineAppointmentBooking({ hideHeader = false, className = '', place }: OnlineAppointmentBookingProps) {
   const tomorrowStr = new Date(Date.now() + 86400000).toISOString().slice(0, 10);
 
   const [selectedDate, setSelectedDate] = useState<string>(tomorrowStr);
   const [selectedSlot, setSelectedSlot] = useState<InspectionSlot>(INSPECTION_SLOTS[0]);
   const [name, setName] = useState<string>('');
   const [phone, setPhone] = useState<string>('');
-  const [address, setAddress] = useState<string>('');
+  const [address, setAddress] = useState<string>(place ? `${place}` : '');
   const [damageType, setDamageType] = useState<string>('Feuchter Keller / Nasse Wände');
   const [notes, setNotes] = useState<string>('');
   const [submitting, setSubmitting] = useState<boolean>(false);
   const [bookedSuccess, setBookedSuccess] = useState<boolean>(false);
   const [assignedLeadId, setAssignedLeadId] = useState<string>('');
+  const [activePlace, setActivePlace] = useState<string>(place || '');
+
+  React.useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const params = new URLSearchParams(window.location.search);
+      const queryOrt = params.get('ort') || params.get('city');
+      if (queryOrt) {
+        setActivePlace(queryOrt);
+        if (!address) {
+          setAddress(queryOrt);
+        }
+      }
+    }
+  }, [address]);
 
   const handleBooking = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -109,7 +124,7 @@ export default function OnlineAppointmentBooking({ hideHeader = false, className
               <span>Online-Terminplaner · 100 % Kostenfrei</span>
             </div>
             <h2 className="text-2xl sm:text-4xl font-black text-[#0f2537] tracking-tight">
-              Vor-Ort-Feuchtemessung direkt online buchen
+              Vor-Ort-Feuchtemessung {activePlace ? `in ${activePlace} ` : ''}direkt online buchen
             </h2>
             <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
               Wählen Sie Ihren Wunschtermin. Inhaber <strong>{COMPANY_INFO.owner}</strong> begutachtet Ihren Feuchteschaden
