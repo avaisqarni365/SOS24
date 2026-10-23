@@ -95,7 +95,7 @@ function RegionMap() {
       aria-labelledby="region-map-title"
     >
       <title id="region-map-title">
-        Karte des Servicegebiets: Wuppertal, Solingen, Remscheid, Velbert, Haan und Wermelskirchen, Sitz in Essen
+        Karte des Servicegebiets: Wuppertal, Solingen, Remscheid, Velbert, Haan, Wermelskirchen und Düsseldorf, Sitz in Essen
       </title>
       <rect width={MAP_W} height={MAP_H} className="region-map__bg" />
       <g className="region-map__context">
