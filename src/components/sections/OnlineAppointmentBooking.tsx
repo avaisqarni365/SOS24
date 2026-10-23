@@ -90,22 +90,22 @@ export default function OnlineAppointmentBooking() {
   };
 
   return (
-    <section id="termin" className="py-14 sm:py-20 bg-slate-900 text-white relative overflow-hidden">
-      {/* Background Glow */}
-      <div className="absolute top-0 right-1/4 w-96 h-96 bg-emerald-600/10 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-0 left-1/4 w-96 h-96 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
+    <section id="termin" className="py-14 sm:py-20 bg-[#f8fafc] text-slate-900 relative overflow-hidden border-y border-slate-200/80">
+      {/* Background Soft Glow */}
+      <div className="absolute top-0 right-1/4 w-96 h-96 bg-emerald-500/5 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-0 left-1/4 w-96 h-96 bg-emerald-600/5 rounded-full blur-3xl pointer-events-none" />
 
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-12 space-y-3">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/30 text-emerald-400 text-xs font-bold uppercase tracking-wider">
-            <Calendar className="w-3.5 h-3.5" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-100 border border-emerald-300 text-emerald-900 text-xs font-black uppercase tracking-wider shadow-xs">
+            <Calendar className="w-3.5 h-3.5 text-emerald-700" />
             <span>Online-Terminplaner · 100 % Kostenfrei</span>
           </div>
-          <h2 className="text-2xl sm:text-4xl font-black text-white tracking-tight">
+          <h2 className="text-2xl sm:text-4xl font-black text-[#0f2537] tracking-tight">
             Vor-Ort-Feuchtemessung direkt online buchen
           </h2>
-          <p className="text-slate-300 text-sm sm:text-base leading-relaxed">
+          <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
             Wählen Sie Ihren Wunschtermin. Inhaber <strong>{COMPANY_INFO.owner}</strong> begutachtet Ihren Feuchteschaden
             persönlich vor Ort mit elektronischer CM-Messtechnik – kostenfrei in ganz NRW.
           </p>

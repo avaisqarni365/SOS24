@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useMemo, useEffect } from 'react';
+import React, { useState } from 'react';
 import {
   Calculator,
   CheckCircle2,
@@ -13,7 +13,7 @@ import {
   Loader2,
 } from 'lucide-react';
 import { COMPANY } from '@/data/content-data';
-import { logDiagnosticCalculation, submitLeadToWorkspace } from '@/lib/backend';
+import { submitLeadToWorkspace } from '@/lib/backend';
 
 type DamageCategory = 'horizontalsperre' | 'kellerinnenabdichtung' | 'schimmel' | 'rissinjektion';
 type SeverityLevel = 'leicht' | 'mittel' | 'stark';
@@ -27,8 +27,6 @@ const CATEGORY_CONFIG: Record<
     minQty: number;
     maxQty: number;
     defaultQty: number;
-    baseMinPerUnit: number;
-    baseMaxPerUnit: number;
     recommendedMethod: string;
     durationDays: string;
   }
@@ -39,8 +37,6 @@ const CATEGORY_CONFIG: Record<
     minQty: 3,
     maxQty: 60,
     defaultQty: 12,
-    baseMinPerUnit: 115,
-    baseMaxPerUnit: 175,
     recommendedMethod: 'Niederdruck-/gravimetrische Bohrlochinjektion (Silan-Siloxan / Paraffin-System nach WTA)',
     durationDays: '1 bis 2 Arbeitstage',
   },
@@ -50,8 +46,6 @@ const CATEGORY_CONFIG: Record<
     minQty: 5,
     maxQty: 120,
     defaultQty: 20,
-    baseMinPerUnit: 95,
-    baseMaxPerUnit: 155,
     recommendedMethod: 'Negativabdichtung (Dichtungsschlämme MDS) + mehrlagiges WTA-Sanierputzsystem inkl. Hohlkehle',
     durationDays: '2 bis 4 Arbeitstage',
   },
@@ -61,8 +55,6 @@ const CATEGORY_CONFIG: Record<
     minQty: 3,
     maxQty: 80,
     defaultQty: 12,
-    baseMinPerUnit: 75,
-    baseMaxPerUnit: 135,
     recommendedMethod: 'Sporensichere Tiefendesinfektion + kapillaraktive Calciumsilikat-Klimaplatte zur Taupunktanhebung',
     durationDays: '1 bis 2 Arbeitstage',
   },
@@ -72,36 +64,31 @@ const CATEGORY_CONFIG: Record<
     minQty: 1,
     maxQty: 30,
     defaultQty: 5,
-    baseMinPerUnit: 130,
-    baseMaxPerUnit: 210,
     recommendedMethod: 'Hochdruck-Verpressung über Bohrpacker mit elastischem 2K-Polyurethan- oder Epoxidharz',
     durationDays: '1 Arbeitstag',
   },
 };
 
-const SEVERITY_MULTIPLIER: Record<SeverityLevel, { label: string; factor: number; hint: string }> = {
+const SEVERITY_CONFIG: Record<SeverityLevel, { label: string; hint: string }> = {
   leicht: {
     label: 'Leicht (erste Feuchteflecken / muffiger Geruch)',
-    factor: 0.9,
     hint: 'Geringer Vorbereitungsaufwand am Altputz',
   },
   mittel: {
     label: 'Deutlich (Salzausblühungen / abblätternder Putz)',
-    factor: 1.0,
     hint: 'Inkl. Altputzabschlag im Schadensbereich & Salzbehandlung',
   },
   stark: {
     label: 'Stark (drückende Nässe / dicker Altbau-Bruchstein)',
-    factor: 1.22,
     hint: 'Erhöhter Injektionsmittelbedarf & mehrlagiger Systemaufbau',
   },
 };
 
-const MATERIAL_MULTIPLIER: Record<WallMaterial, { label: string; factor: number }> = {
-  ziegel: { label: 'Ziegelmauerwerk / Kalksandstein', factor: 1.0 },
-  beton: { label: 'Beton / Hohlblockstein', factor: 0.95 },
-  bruchstein: { label: 'Bruchstein / Naturstein (Altbau Wuppertal)', factor: 1.18 },
-  unklar: { label: 'Noch unklar (wird vor Ort gemessen)', factor: 1.05 },
+const MATERIAL_CONFIG: Record<WallMaterial, { label: string }> = {
+  ziegel: { label: 'Ziegelmauerwerk / Kalksandstein' },
+  beton: { label: 'Beton / Hohlblockstein' },
+  bruchstein: { label: 'Bruchstein / Naturstein (Altbau NRW)' },
+  unklar: { label: 'Noch unklar (wird vor Ort gemessen)' },
 };
 
 export default function QuoteCalculator() {
@@ -123,40 +110,15 @@ export default function QuoteCalculator() {
     setCloudLeadId('');
   };
 
-  const estimate = useMemo(() => {
-    const sevFactor = SEVERITY_MULTIPLIER[severity].factor;
-    const matFactor = MATERIAL_MULTIPLIER[material].factor;
-    const rawMin = Math.round((quantity * config.baseMinPerUnit * sevFactor * matFactor) / 50) * 50;
-    const rawMax = Math.round((quantity * config.baseMaxPerUnit * sevFactor * matFactor) / 50) * 50;
-    const minTotal = Math.max(450, rawMin);
-    const maxTotal = Math.max(minTotal + 150, rawMax);
-    const taxCredit20 = Math.round(minTotal * 0.6 * 0.2);
-    return { minTotal, maxTotal, taxCredit20 };
-  }, [category, quantity, severity, material, config]);
-
-  // Log anonymous diagnostic check to Google Sheets (`Strecken`) when parameters settle
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      logDiagnosticCalculation({
-        plz,
-        damageType: config.label,
-        area: quantity,
-        severity,
-      });
-    }, 2200);
-    return () => clearTimeout(timer);
-  }, [category, quantity, severity, plz, config.label]);
-
   const whatsappSummary = encodeURIComponent(
     `Hallo Herr Mahmood (${COMPANY.name}),\n\n` +
-      `ich habe den Online-Sanierungsrechner genutzt:\n` +
-      `• Maßnahme: ${config.label}\n` +
-      `• Umfang: ca. ${quantity} ${config.unit}\n` +
-      `• Mauerwerk: ${MATERIAL_MULTIPLIER[material].label}\n` +
-      `• Ausprägung: ${SEVERITY_MULTIPLIER[severity].label}\n` +
-      `• Objektort: ${plz}\n` +
-      `• Orientierungsrahmen: ${estimate.minTotal.toLocaleString('de-DE')} € – ${estimate.maxTotal.toLocaleString('de-DE')} €\n\n` +
-      `Ich bitte um eine kostenlose Vor-Ort-Feuchtemessung und ein verbindliches Festpreisangebot.`
+      `ich habe den Sanierungs- & Aufmaßplaner auf Ihrer Website genutzt:\n` +
+      `• Schadensart: ${config.label}\n` +
+      `• Geschätzter Umfang: ca. ${quantity} ${config.unit}\n` +
+      `• Mauerwerk: ${MATERIAL_CONFIG[material].label}\n` +
+      `• Schadensgrad: ${SEVERITY_CONFIG[severity].label}\n` +
+      `• Objektort: ${plz}\n\n` +
+      `Ich bitte um eine kostenlose Vor-Ort-Feuchtemessung und die Erstellung eines verbindlichen Festpreisangebots.`
   );
 
   const handleDirectCloudRequest = async (e: React.FormEvent) => {
@@ -171,7 +133,7 @@ export default function QuoteCalculator() {
         damageType: config.label,
         severity,
         areaOrLength: quantity,
-        message: `Kalkulator: ${quantity} ${config.unit}, Mauerwerk: ${MATERIAL_MULTIPLIER[material].label}, Richtwert: ${estimate.minTotal}–${estimate.maxTotal} €`,
+        message: `Aufmaß-Anfrage: ${config.label}, Umfang: ${quantity} ${config.unit}, Mauerwerk: ${MATERIAL_CONFIG[material].label}, Grad: ${SEVERITY_CONFIG[severity].label}`,
         source: 'Sanierungsrechner',
       });
       setCloudLeadId(res.id || 'A-1001');
@@ -186,13 +148,13 @@ export default function QuoteCalculator() {
         <div className="max-w-3xl mb-10">
           <span className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-brand-700 bg-brand-100 px-3 py-1 rounded-full mb-3">
             <Calculator className="w-3.5 h-3.5" />
-            Interaktiver Sanierungs- &amp; Kostenrechner 2026
+            Interaktiver Sanierungs- &amp; Aufmaßplaner 2026
           </span>
           <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-brand-950 tracking-tight mb-3">
-            Was kostet Ihre Kellerabdichtung oder Horizontalsperre?
+            Sanierungsaufwand &amp; Verfahren für Ihr Objekt ermitteln
           </h2>
           <p className="text-slate-600 text-base leading-relaxed">
-            Berechnen Sie in 30 Sekunden einen realistischen Orientierungsrahmen für Ihr Objekt in Wuppertal und Umgebung – inklusive empfohlenem WTA-Sanierungsverfahren und steuerlicher Förderung (§ 35a EStG Handwerkerbonus).
+            Wählen Sie Schadensbild, Wandfläche und Mauerwerk: Sie sehen sofort das bautechnisch empfohlene WTA-Verfahren und den Arbeitsumfang. Ein millimetergenaues, verbindliches Festpreisangebot erhalten Sie direkt nach der kostenlosen Feuchtemessung vor Ort – ehrlich, transparent und ohne ungenaue Schätzformeln.
           </p>
         </div>
 
@@ -258,7 +220,7 @@ export default function QuoteCalculator() {
                 3. Grad der Durchfeuchtung / Schädigung
               </label>
               <div className="grid sm:grid-cols-3 gap-2.5">
-                {(Object.keys(SEVERITY_MULTIPLIER) as SeverityLevel[]).map((lvl) => {
+                {(Object.keys(SEVERITY_CONFIG) as SeverityLevel[]).map((lvl) => {
                   const active = severity === lvl;
                   return (
                     <button
@@ -271,8 +233,8 @@ export default function QuoteCalculator() {
                           : 'bg-white border-slate-200 text-slate-700 hover:border-slate-300'
                       }`}
                     >
-                      <div className="font-bold mb-1">{SEVERITY_MULTIPLIER[lvl].label}</div>
-                      <div className="text-[11px] text-slate-500">{SEVERITY_MULTIPLIER[lvl].hint}</div>
+                      <div className="font-bold mb-1">{SEVERITY_CONFIG[lvl].label}</div>
+                      <div className="text-[11px] text-slate-500">{SEVERITY_CONFIG[lvl].hint}</div>
                     </button>
                   );
                 })}
@@ -291,9 +253,9 @@ export default function QuoteCalculator() {
                   onChange={(e) => setMaterial(e.target.value as WallMaterial)}
                   className="w-full px-4 py-3 rounded-xl border border-slate-300 bg-white text-slate-900 text-sm font-medium focus:border-brand-600 outline-none"
                 >
-                  {(Object.keys(MATERIAL_MULTIPLIER) as WallMaterial[]).map((mat) => (
+                  {(Object.keys(MATERIAL_CONFIG) as WallMaterial[]).map((mat) => (
                     <option key={mat} value={mat}>
-                      {MATERIAL_MULTIPLIER[mat].label}
+                      {MATERIAL_CONFIG[mat].label}
                     </option>
                   ))}
                 </select>
@@ -318,14 +280,15 @@ export default function QuoteCalculator() {
           {/* Right: Result Card */}
           <div className="lg:col-span-5 bg-brand-950 text-white rounded-2xl p-6 sm:p-8 shadow-elevated space-y-6">
             <div>
-              <span className="text-xs font-bold uppercase tracking-wider text-brand-300">
-                Unverbindlicher Orientierungsrahmen (inkl. MwSt.)
+              <span className="inline-flex items-center gap-1.5 text-xs font-black uppercase tracking-wider text-emerald-400 bg-emerald-950/80 px-2.5 py-1 rounded-full border border-emerald-500/30">
+                <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
+                Fachgerechte Aufmaß- &amp; Schadensanalyse
               </span>
-              <div className="text-3xl sm:text-4xl font-extrabold text-white mt-2 tracking-tight">
-                {estimate.minTotal.toLocaleString('de-DE')} € – {estimate.maxTotal.toLocaleString('de-DE')} €
+              <div className="text-2xl sm:text-3xl font-black text-white mt-2.5 tracking-tight leading-snug">
+                Verbindlicher Festpreis nach Vor-Ort-Messung
               </div>
-              <p className="text-xs text-slate-300 mt-1">
-                Abzgl. bis zu <strong>ca. {estimate.taxCredit20.toLocaleString('de-DE')} € Steuerbonus</strong> nach § 35a EStG (20 % auf Arbeits- &amp; Fahrtkosten).
+              <p className="text-xs text-slate-300 mt-2 leading-relaxed">
+                Keine ungenauen Schätzformeln aus dem Internet: Sie erhalten ein verbindliches, millimetergenaues Festpreisangebot direkt nach der <strong>kostenlosen Vor-Ort-Feuchtemessung</strong> durch Inhaber Shahzad Mahmood.
               </p>
             </div>
 
@@ -337,19 +300,27 @@ export default function QuoteCalculator() {
                 <div className="font-semibold text-white mt-0.5">{config.recommendedMethod}</div>
               </div>
               <div className="flex justify-between pt-2 border-t border-brand-800/80 text-xs">
+                <span className="text-slate-300">Geschätzter Umfang:</span>
+                <span className="font-bold text-white">{quantity} {category === 'horizontalsperre' || category === 'rissinjektion' ? 'lfm' : 'm²'}</span>
+              </div>
+              <div className="flex justify-between text-xs">
                 <span className="text-slate-300">Geschätzte Ausführungsdauer:</span>
                 <span className="font-bold text-brand-300">{config.durationDays}</span>
               </div>
               <div className="flex justify-between text-xs">
                 <span className="text-slate-300">Vor-Ort-Feuchtemessung:</span>
-                <span className="font-bold text-brand-300">0,00 € (Kostenlos)</span>
+                <span className="font-bold text-emerald-400">0,00 € (Kostenlos &amp; unverbindlich)</span>
+              </div>
+              <div className="flex justify-between text-xs pt-1 border-t border-brand-800/60">
+                <span className="text-slate-300">§ 35a EStG Steuerbonus:</span>
+                <span className="font-bold text-emerald-300">20 % Handwerkerleistung</span>
               </div>
             </div>
 
             <ul className="space-y-2 text-xs text-slate-200">
               <li className="flex items-center gap-2">
                 <CheckCircle2 className="w-4 h-4 text-brand-400 shrink-0" />
-                Inklusive kapazitiver Tiefenfeuchtemessung &amp; Salzanalyse vorab
+                Inklusive kapazitiver Tiefenfeuchtemessung &amp; Salzanalyse vor Ort
               </li>
               <li className="flex items-center gap-2">
                 <CheckCircle2 className="w-4 h-4 text-brand-400 shrink-0" />
@@ -365,16 +336,16 @@ export default function QuoteCalculator() {
             {cloudLeadId ? (
               <div className="bg-brand-900/90 border border-brand-500 rounded-xl p-4 text-xs space-y-1.5">
                 <div className="font-bold text-brand-300 text-sm">
-                  ✓ Kalkulation gespeichert (Nr. {cloudLeadId})
+                  ✓ Aufmaß &amp; Schadensdaten gespeichert (Nr. {cloudLeadId})
                 </div>
                 <p className="text-slate-200">
-                  Herr Shahzad Mahmood hat Ihre Berechnung erhalten und meldet sich kurzfristig telefonisch bei Ihnen.
+                  Herr Shahzad Mahmood hat Ihre Schadensparameter erhalten und meldet sich kurzfristig telefonisch zur Abstimmung der kostenlosen Vor-Ort-Messung.
                 </p>
               </div>
             ) : (
               <form onSubmit={handleDirectCloudRequest} className="bg-brand-900/60 border border-brand-800 rounded-xl p-3.5 space-y-2.5">
                 <div className="text-xs font-bold text-brand-300">
-                  ⚡ Berechnung direkt für kostenlose Messung vormerken:
+                  ⚡ Daten direkt für kostenlose Vor-Ort-Messung vormerken:
                 </div>
                 <div className="grid grid-cols-2 gap-2">
                   <input
@@ -402,7 +373,7 @@ export default function QuoteCalculator() {
                   className="w-full inline-flex items-center justify-center gap-2 bg-brand-600 hover:bg-brand-500 text-white font-bold px-4 py-2.5 rounded-lg text-xs transition-colors"
                 >
                   {sendingCloud ? <Loader2 className="w-3.5 h-3.5 animate-spin" /> : <Send className="w-3.5 h-3.5" />}
-                  Richtpreis &amp; kostenlose Messung anfordern
+                  Kostenlose Vor-Ort-Messung anfordern
                 </button>
               </form>
             )}
@@ -415,7 +386,7 @@ export default function QuoteCalculator() {
                 className="w-full inline-flex items-center justify-center gap-2 bg-[#25D366] hover:bg-[#1ebe5d] text-white font-bold px-5 py-3.5 rounded-xl transition-colors text-sm shadow-sm"
               >
                 <MessageSquare className="w-4 h-4" />
-                Ergebnis per WhatsApp senden &amp; Messung buchen
+                Aufmaß per WhatsApp senden &amp; Vor-Ort-Termin buchen
               </a>
 
               <a

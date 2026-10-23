@@ -143,13 +143,13 @@ export function RegionSection() {
       <div className="sc-wrap">
         <div className="grid gap-6 lg:grid-cols-[1fr_1fr] lg:items-end" data-sc-in>
           <div>
-            <p className="sc-label">Servicegebiet PLZ 42</p>
+            <p className="sc-label">Servicegebiet NRW · Ruhrgebiet &amp; Bergisches Land</p>
             <h2 id="region-title" className="sc-display mt-3 text-4xl sm:text-5xl lg:text-6xl">
-              Wuppertal und das Bergische Land.
+              Wuppertal, Essen &amp; ganz NRW.
             </h2>
           </div>
           <p className="sc-body">
-            {hy("Hanglagen, Grundwasser im Tal der Wupper, viel Altbau aus Ziegel und Bruchstein ohne zeitgemäße Horizontalsperre: Die Region hat ihre eigenen Kellerprobleme. Klicken Sie auf Ihre Stadt.")}
+            {hy("Essen, Wuppertal, Düsseldorf, Bochum und das Bergische Land: Hanglagen, hoher Grundwasserspiegel, Bergsenkungen und Altbauten aus Ziegel und Bruchstein ohne intakte Horizontalsperre. Klicken Sie auf Ihre Stadt.")}
           </p>
         </div>
         <div className="mt-10 grid gap-6 lg:grid-cols-[1.2fr_1fr] lg:items-start">
