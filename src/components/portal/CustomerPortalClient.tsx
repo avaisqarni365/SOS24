@@ -35,6 +35,7 @@ import {
 } from '@/lib/backend';
 import { buildGoogleCalendarUrl, downloadIcsFile, INSPECTION_SLOTS } from '@/lib/calendar';
 import { COMPANY_INFO } from '@/data/content-data';
+import SendError from '@/components/ui/SendError';
 
 function CustomerPortalInner() {
   const searchParams = useSearchParams();
@@ -56,6 +57,7 @@ function CustomerPortalInner() {
   // Signature state
   const [signerName, setSignerName] = useState('');
   const [signing, setSigning] = useState(false);
+  const [signError, setSignError] = useState('');
   const [signSuccess, setSignSuccess] = useState(false);
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const drawingRef = useRef(false);
@@ -66,7 +68,8 @@ function CustomerPortalInner() {
       if (!activeLeadId) return;
       const store = getWorkspaceStore();
       const normalized = activeLeadId.toUpperCase().trim();
-      const l = store.leads.find((x) => x.id.toUpperCase() === normalized) || null;
+      // the ID alone opens nothing: the link's token must match as well
+      const l = store.leads.find((x) => x.id.toUpperCase() === normalized && !!token && x.token === token) || null;
       setLead(l);
 
       if (l) {
@@ -80,7 +83,7 @@ function CustomerPortalInner() {
 
     updateFromStore();
     return subscribeWorkspaceStore(updateFromStore);
-  }, [activeLeadId, signerName]);
+  }, [activeLeadId, signerName, token]);
 
   // Canvas drawing handlers for touch/mouse
   const startDraw = (e: React.MouseEvent<HTMLCanvasElement> | React.TouchEvent<HTMLCanvasElement>) => {
@@ -133,16 +136,18 @@ function CustomerPortalInner() {
     if (!canvas) return;
     const signatureDataUrl = canvas.toDataURL('image/png');
     setSigning(true);
+    setSignError('');
     try {
-      await signContractDigitally({
+      const res = await signContractDigitally({
         id: lead.id,
         token: token || lead.token,
         signer: signerName || lead.name,
         signatureDataUrl,
       });
-      setSignSuccess(true);
+      if (res.ok) setSignSuccess(true);
+      else setSignError(res.error || 'server');
     } catch {
-      // Handled gracefully
+      setSignError('network');
     } finally {
       setSigning(false);
     }
@@ -156,12 +161,16 @@ function CustomerPortalInner() {
     try {
       const files = Array.from(e.target.files);
       const encoded = await Promise.all(files.map((f) => processFileForUpload(f, 1200)));
-      await uploadDamagePhotosToDrive({
+      const up = await uploadDamagePhotosToDrive({
         id: lead.id,
         token: token || lead.token,
         images: encoded,
         note: 'Über Kunden-Portal hochgeladen',
       });
+      if (!up.ok) {
+        setPhotoSuccessMsg('Die Fotos wurden nicht hochgeladen. Bitte senden Sie sie per WhatsApp.');
+        return;
+      }
       setPhotoSuccessMsg(`${files.length} Foto(s) erfolgreich in Google Drive gespeichert.`);
       e.target.value = '';
     } catch {
@@ -480,6 +489,7 @@ function CustomerPortalInner() {
                         Hiermit beauftrage ich die Firma <strong>SOS Abdichtung (Inh. Shahzad Mahmood)</strong> verbindlich mit der Ausführung der oben aufgeführten Sanierungsmaßnahmen zum Festpreis von <strong>{gross.toLocaleString('de-DE', { minimumFractionDigits: 2 })} € inkl. MwSt.</strong> gemäß VOB/B und SchimmelPeter® Qualitätskriterien.
                       </div>
 
+                      <SendError error={signError} what="Ihre Unterschrift" />
                       <button
                         type="submit"
                         disabled={signing || !signerName}

@@ -14,6 +14,7 @@ import {
 } from 'lucide-react';
 import { COMPANY } from '@/data/content-data';
 import { submitLeadToWorkspace } from '@/lib/backend';
+import SendError from '@/components/ui/SendError';
 
 type DamageCategory = 'horizontalsperre' | 'kellerinnenabdichtung' | 'schimmel' | 'rissinjektion';
 type SeverityLevel = 'leicht' | 'mittel' | 'stark';
@@ -101,6 +102,7 @@ export default function QuoteCalculator() {
   const [quickName, setQuickName] = useState<string>('');
   const [sendingCloud, setSendingCloud] = useState(false);
   const [cloudLeadId, setCloudLeadId] = useState<string>('');
+  const [sendError, setSendError] = useState<string>('');
 
   const config = CATEGORY_CONFIG[category];
 
@@ -125,6 +127,7 @@ export default function QuoteCalculator() {
     e.preventDefault();
     if (!quickName.trim() || !quickPhone.trim()) return;
     setSendingCloud(true);
+    setSendError('');
     try {
       const res = await submitLeadToWorkspace({
         name: quickName.trim(),
@@ -136,7 +139,8 @@ export default function QuoteCalculator() {
         message: `Aufmaß-Anfrage: ${config.label}, Umfang: ${quantity} ${config.unit}, Mauerwerk: ${MATERIAL_CONFIG[material].label}, Grad: ${SEVERITY_CONFIG[severity].label}`,
         source: 'Sanierungsrechner',
       });
-      setCloudLeadId(res.id || 'A-1001');
+      if (res.ok && res.id) setCloudLeadId(res.id);
+      else setSendError(res.error || 'server');
     } finally {
       setSendingCloud(false);
     }
@@ -367,6 +371,7 @@ export default function QuoteCalculator() {
                     className="px-3 py-2 rounded-lg bg-brand-950/90 border border-brand-700 text-white placeholder-slate-400 text-xs outline-none focus:border-brand-400"
                   />
                 </div>
+                <SendError error={sendError} />
                 <button
                   type="submit"
                   disabled={sendingCloud}

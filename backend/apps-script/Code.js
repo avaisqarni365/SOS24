@@ -104,6 +104,8 @@ function saveLead_(b) {
   var name = clip_(c.name, 80), phone = clip_(c.phone, 40), email = clip_(c.email, 120);
   if (!name || (!phone && !email)) return {ok: false, error: 'contact'};
   if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return {ok: false, error: 'email'};
+  if (!contactLimit_('lead', email, phone)) return {ok: false, error: 'limit'};
+  var channel = CHANNELS.indexOf(String(c.channel || '').toLowerCase()) >= 0 ? String(c.channel).toLowerCase() : 'whatsapp';
 
   var s = b.state || {
     f1: {
@@ -154,13 +156,13 @@ function saveLead_(b) {
     var msgText = clip_(c.note || b.message || '', 1000);
 
     sheet_(TAB.leads).appendRow([
-      id, now, STATUS[0], 'Shahzad Mahmood', '', cell_(name, 80), cell_(phone, 40), cell_(email, 120), clip_(c.channel || 'whatsapp', 20),
+      id, now, STATUS[0], 'Shahzad Mahmood', '', cell_(name, 80), cell_(phone, 40), cell_(email, 120), channel,
       cell_(objAddr), cell_(dmgType), clip_(areaVal ? areaVal + ' ' + areaUnit : '', 20), areaVal || '', est.asmMin || '',
       dateStr, HH[(s.f1 && s.f1.hh) || 0] || 'Bestandsbau', cell_(sevLabel, 60), 'Messung vor Ort', 'nein', cell_(dmgType, 300),
       est.n || areaVal || 1, round_(est.volLow), round_(est.volHigh), Math.round(est.kgMin) + '–' + Math.round(est.kgMax) + ' kg Material',
       VEH_DE[est.vehicle] || 'Messfahrzeug', est.crew, round_(est.hours),
       {high: 'Hoch', medium: 'Mittel', low: 'Standard'}[est.conf] || 'Standard', master.version, cell_(srcTxt, 120), b.lang === 'en' ? 'EN' : 'DE',
-      cell_(msgText, 1000), clip_(s.ref || '', 20), now, JSON.stringify(s).slice(0, 45000), cell_(dmgType, 120), '', token, '',
+      cell_(msgText, 1000), cell_(s.ref || '', 20), now, JSON.stringify(s).slice(0, 45000), cell_(dmgType, 120), '', token, '',
       'Eigentümer / Selbstzahler', ''
     ]);
 
@@ -243,17 +245,18 @@ function notifyOffice_(id, name, phone, email, objAddr, dmgType, areaStr, sevLab
 
 /* ------------------------------------------------------------------ customer portal & digital signature (action: 'sign' / 'accept') */
 
+/* A lead is only returned for its own token: the stored Kundentoken, or the
+   upload token handed out with it. No token, no lead. */
 function leadByToken_(id, k) {
-  if (!id) return null;
+  k = String(k || '');
+  if (!id || !k) return null;
   var hit = findLead_(id);
   if (!hit) return null;
   var stored = String(hit.values[leadCol_('Kundentoken') - 1] || '');
-  if (k && stored && stored !== k) {
-    var rawUp = CacheService.getScriptCache().get('up_' + id);
-    var upTok = rawUp ? JSON.parse(rawUp) : null;
-    if (!upTok || upTok.k !== String(k)) return null;
-  }
-  return hit;
+  if (stored && safeEq_(stored, k)) return hit;
+  var rawUp = CacheService.getScriptCache().get('up_' + id);
+  var upTok = rawUp ? JSON.parse(rawUp) : null;
+  return upTok && upTok.k && safeEq_(String(upTok.k), k) ? hit : null;
 }
 
 function portal_(id, k) {
@@ -432,7 +435,7 @@ function saveDraft_(b) {
   if (b.consent === false) return {ok: false, error: 'consent'};
   var s = b.state;
   if (!s || typeof s !== 'object' || !s.ref) return {ok: false, error: 'state'};
-  var ref = clip_(s.ref, 20), token = clip_(b.token, 40);
+  var ref = cell_(s.ref, 20), token = clip_(b.token, 40);
   var sh = sheet_(TAB.drafts), data = sh.getDataRange().getValues();
   var now = new Date(), until = new Date(now.getTime() + 30 * 864e5), payload = JSON.stringify(s).slice(0, 45000);
   for (var i = 1; i < data.length; i++) {
@@ -558,8 +561,9 @@ function setup() {
   // Default admin user for owner Shahzad Mahmood if none exists
   var ush = usersSheet_();
   if (ush.getLastRow() < 2) {
+    // No default password: it would be public in this repository. The owner types one under
+    // „Neues Passwort“; the first login hashes it and clears the column.
     ush.appendRow(['shahzad', 'Shahzad Mahmood', 'ja', '', '', '', '']);
-    setUserPw_(ush, 2, 'SOS2026!Wuppertal');
   }
 
   var me = Session.getEffectiveUser().getEmail() || 'simplypizza2020@gmail.com';

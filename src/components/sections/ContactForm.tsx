@@ -27,6 +27,7 @@ import {
   downloadIcsFile,
   INSPECTION_SLOTS,
 } from '@/lib/calendar';
+import SendError from '@/components/ui/SendError';
 import {
   submitLeadToWorkspace,
   uploadDamagePhotosToDrive,
@@ -60,6 +61,8 @@ export default function ContactForm({ compact = false, defaultDamage, place }: C
     { file: File; preview: string; isPdf?: boolean }[]
   >([]);
   const [photoError, setPhotoError] = useState<string>('');
+  const [sendError, setSendError] = useState<string>('');
+  const [signError, setSignError] = useState<string>('');
   const mountedAtRef = useRef<number>(Date.now());
 
   const [formData, setFormData] = useState({
@@ -171,12 +174,16 @@ export default function ContactForm({ compact = false, defaultDamage, place }: C
         }
       }
       if (encoded.length > 0) {
-        await uploadDamagePhotosToDrive({
+        const up = await uploadDamagePhotosToDrive({
           id: targetLeadId,
           token: targetToken,
           images: encoded,
           note: formData.message,
         });
+        if (!up.ok) {
+          setPhotoError('Die Fotos wurden nicht hochgeladen. Bitte senden Sie sie per WhatsApp.');
+          return;
+        }
         setPhotosUploadedCount((prev) => prev + encoded.length);
         setUploadedPreviews((prev) => [...prev, ...previews]);
         setSelectedPhotos([]);
@@ -189,6 +196,7 @@ export default function ContactForm({ compact = false, defaultDamage, place }: C
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitting(true);
+    setSendError('');
     try {
       const elapsed = Date.now() - mountedAtRef.current;
       const slot = INSPECTION_SLOTS.find((s) => s.id === formData.preferredTimeSlot);
@@ -211,8 +219,12 @@ export default function ContactForm({ compact = false, defaultDamage, place }: C
         elapsed
       );
 
-      const id = res.id || 'A-1003';
-      const tok = res.up || 'local-token';
+      if (!res.ok || !res.id) {
+        setSendError(res.error || 'server');
+        return;
+      }
+      const id = res.id;
+      const tok = res.up || '';
       setLeadId(id);
       setUploadToken(tok);
 
@@ -254,11 +266,11 @@ export default function ContactForm({ compact = false, defaultDamage, place }: C
         channel: 'whatsapp',
         source: 'Kontaktformular WhatsApp (/kontakt/)',
       });
-      id = res.id || 'A-1003';
-      tok = res.up || 'local-token';
+      id = res.ok && res.id ? res.id : '';
+      tok = res.up || '';
       setLeadId(id);
       setUploadToken(tok);
-      if (selectedPhotos.length > 0) {
+      if (id && selectedPhotos.length > 0) {
         await uploadPhotosForLead(id, tok, selectedPhotos);
       }
     }
@@ -320,14 +332,19 @@ export default function ContactForm({ compact = false, defaultDamage, place }: C
     e.preventDefault();
     if (!signMode || !canvasRef.current || !signerName.trim()) return;
     setSigning(true);
+    setSignError('');
     try {
       const dataUrl = canvasRef.current.toDataURL('image/png');
-      await signContractDigitally({
+      const res = await signContractDigitally({
         id: signMode.id,
         token: signMode.k,
         signer: signerName.trim(),
         signatureDataUrl: dataUrl,
       });
+      if (!res.ok) {
+        setSignError(res.error || 'server');
+        return;
+      }
       setSignSuccess(true);
     } finally {
       setSigning(false);
@@ -436,6 +453,7 @@ export default function ContactForm({ compact = false, defaultDamage, place }: C
                   )}
                   Auftrag {signMode.id} verbindlich digital unterzeichnen
                 </button>
+                <SendError error={signError} what="Ihre Unterschrift" />
               </form>
             )}
           </div>
@@ -1062,6 +1080,7 @@ export default function ContactForm({ compact = false, defaultDamage, place }: C
                   </label>
                 </div>
 
+                <SendError error={sendError} />
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
                   <button
                     type="submit"

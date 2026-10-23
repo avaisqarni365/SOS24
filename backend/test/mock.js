@@ -173,4 +173,8 @@ function load(project, files) {
   }
 }
 const setActive = (sheet, row) => { ACTIVE_SHEET = sheet; ACTIVE_ROW = row; };
-module.exports = {ctx, sheets, alerts, mails, puts, props, cache, calEvents, driveFolders, REPO, load, setActive, ss};
+/* The owner's account has no password until one is typed into „Neues Passwort“; tests do the same. */
+const TEST_PW = 'nur-fuer-tests-0815';
+function seedAdminPw() { const sh = sheets['Benutzer']; assert(sh && sh.data[1], 'Benutzer tab with the owner row'); sh.data[1][3] = TEST_PW; }
+
+module.exports = {TEST_PW, seedAdminPw, ctx, sheets, alerts, mails, puts, props, cache, calEvents, driveFolders, REPO, load, setActive, ss};
