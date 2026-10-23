@@ -152,45 +152,32 @@ export default function Navbar() {
       </div>
 
       <div className="site-header__bar band-ink">
-        <div className="site-wrap flex h-16 items-center justify-between gap-2.5 sm:h-[4.5rem] lg:gap-4">
+        <div className="site-wrap flex h-16 items-center justify-between gap-3 sm:h-[4.5rem] lg:gap-4">
           <a href="/" aria-label="sos-abdichtung, zur Startseite" className="shrink-0">
             <Logo />
           </a>
 
-          <div className="flex shrink-0 items-center gap-1.5 sm:gap-2.5">
+          <div className="flex shrink-0 items-center gap-2 sm:gap-2.5">
             <ColorControl compact className="header-tone" />
             <AppearanceMenu />
-            <div className="hidden md:block">
+            <div className="hidden sm:block">
               <LanguageSelector />
             </div>
 
-            {/* Direct WhatsApp Quick Button */}
+            {/* Recovered Contact Formula Button */}
             <a
-              href={COMPANY_INFO.whatsappUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex min-h-[38px] sm:min-h-[42px] items-center gap-1.5 rounded-full bg-[#25D366] hover:bg-[#1ebe5d] text-white px-2.5 sm:px-3.5 text-xs sm:text-sm font-bold transition-all shadow-xs shrink-0"
-              aria-label="WhatsApp Chat"
+              href="/kontakt/"
+              onClick={(e) => handleNavClick(e, "/kontakt/")}
+              className="header-cta hidden min-h-[44px] items-center gap-2 whitespace-nowrap rounded-full px-5 text-[0.9375rem] font-semibold sm:inline-flex"
             >
-              <MessageCircle className="h-4 w-4 shrink-0" aria-hidden="true" />
-              <span className="hidden xs:inline sm:inline">WhatsApp</span>
-            </a>
-
-            {/* Direct Appointment Button next to WhatsApp Button */}
-            <a
-              href="/termin/"
-              className="inline-flex min-h-[38px] sm:min-h-[42px] items-center gap-1.5 rounded-full bg-emerald-700 hover:bg-emerald-600 text-white px-2.5 sm:px-3.5 text-xs sm:text-sm font-black transition-all shadow-xs shrink-0 border border-emerald-500/40"
-              aria-label="Online-Termin buchen"
-            >
-              <Calendar className="h-4 w-4 text-emerald-200 shrink-0" aria-hidden="true" />
-              <span>Termin buchen</span>
+              {t("nav.cta")}
             </a>
 
             <button
               ref={burgerRef}
               type="button"
               onClick={() => setOpen(!open)}
-              className="inline-flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-full border border-[var(--line-strong)] bg-surface text-[var(--bone)] hover:border-accent-deep"
+              className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[var(--line-strong)] bg-surface text-[var(--bone)] hover:border-accent-deep"
               aria-label={open ? "Menü schließen" : "Menü öffnen"}
               aria-expanded={open}
               aria-controls="mobile-menu"
