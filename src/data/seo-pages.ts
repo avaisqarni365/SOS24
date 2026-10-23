@@ -1380,6 +1380,19 @@ export const CITY_PAGES: CityPage[] = [
           "Gegen solche Druckwasserbelastungen setzen wir mehrlagige mineralische Dichtungsschlämmen mit verstärkter Hohlkehle am Wand-Boden-Übergang ein. Risse im Fundament werden vorab im Hochdruck-Injektionsverfahren mit elastischem Polyurethanharz dauerhaft abgedichtet. Sie erhalten vorab eine kostenlose Schadensanalyse vor Ort mit verbindlichem Festpreis.",
         ],
       },
+      {
+        "heading": "Feuchte Kellerwände sanieren in Essen: kurze Wege vom eigenen Sitz",
+        "paragraphs": [
+          "Unser Betrieb hat seinen Sitz in Essen, in der Niebuhrstraße 46. Für Essener Kunden heißt das: kurze Anfahrt, schnelle Termine für die kostenlose Feuchtigkeitsmessung und Kontrollmessungen ohne lange Wartezeit, wenn die Wand nach der Sanierung austrocknet.",
+          "Ob Zechenhaus im Essener Norden, Gründerzeitbau in Holsterhausen oder Einfamilienhaus in Kettwig: Wir messen zuerst, woher die Feuchte kommt, und sanieren den Keller dann von innen, ohne den Garten aufzugraben."
+        ],
+        "bullets": [
+          "Kostenlose Feuchtigkeitsmessung und Schadensanalyse vor Ort",
+          "Horizontalsperre im Injektionsverfahren gegen aufsteigende Feuchte",
+          "Kellerinnenabdichtung nach WTA-Standard, auch bei drückendem Wasser",
+          "Schimmelbeseitigung im Keller und in Wohnräumen, mit Klimaplatten gegen Kondensat"
+        ]
+      }
     ],
     faqs: [
       {
@@ -1394,6 +1407,14 @@ export const CITY_PAGES: CityPage[] = [
         q: "Welche Garantie bietet sos-abdichtung auf die Kellersanierung?",
         a: "Sie erhalten 25 Jahre Produktgarantie auf die chemische Injektionsflüssigkeit unseres Systempartners SchimmelPeter® sowie 10 Jahre Handwerksgarantie auf die ordnungsgemäße Ausführung durch sos-abdichtung.",
       },
+      {
+        "q": "Wie schnell sind Sie für eine Feuchtigkeitsmessung in Essen vor Ort?",
+        "a": "Da unser Sitz in Essen ist, sind wir in der Regel innerhalb von 24 bis 48 Stunden vor Ort. Die Messung und die Schadensanalyse sind kostenlos und unverbindlich."
+      },
+      {
+        "q": "Was hilft gegen Schimmel im Keller in einem Essener Altbau?",
+        "a": "Zuerst die Ursache: Wir messen, ob die Feuchte aus dem Mauerwerk aufsteigt, seitlich eindringt oder als Kondensat an kalten Wänden entsteht. Danach wird der Befall sporensicher entfernt und die Ursache beseitigt, etwa mit einer Horizontalsperre, einer Innenabdichtung oder Klimaplatten."
+      }
     ],
     nearby: ["wuppertal", "bochum", "duesseldorf"],
   },
@@ -1442,6 +1463,18 @@ export const CITY_PAGES: CityPage[] = [
           "Wir analysieren bei der kostenlosen Feuchtemessung vor Ort exakt die Ursache (Kondensfeuchte, kapillarer Aufstieg oder drückendes Sickerwasser) und erstellen Ihnen ein transparentes Festpreisangebot. Bei vermieteten Wohnungen stellen wir auf Wunsch alle nötigen Messprotokolle für Mieter und Hausverwaltungen aus.",
         ],
       },
+      {
+        "heading": "Schimmel im Keller und in Souterrainwohnungen in Düsseldorf",
+        "paragraphs": [
+          "In Düsseldorf werden Keller und Souterrains oft als Wohnraum, Büro oder Hobbyraum genutzt. Dort reicht ein feuchter Fleck nicht als Schönheitsfehler: Er ist häufig der Anfang von Schimmel. Typisch sind Kondensat an kalten Außenwänden, seitlich eindringende Feuchte und in Rheinnähe drückendes Grundwasser bei hohen Pegelständen.",
+          "Mit einer Feuchtigkeitsmessung unterscheiden wir diese Ursachen, bevor saniert wird. Die Messwerte bekommen Sie schriftlich, auch als Grundlage für Gespräche mit Vermietern, Mietern oder einer Hausverwaltung."
+        ],
+        "bullets": [
+          "Messung von Wandfeuchte, Oberflächentemperatur und Luftfeuchte",
+          "Schimmelsanierung mit sporensicherer Entfernung ohne Chlor",
+          "Innenabdichtung gegen drückendes Wasser, ohne Aufgraben"
+        ]
+      }
     ],
     faqs: [
       {
@@ -1456,6 +1489,14 @@ export const CITY_PAGES: CityPage[] = [
         q: "Wie läuft der erste Vor-Ort-Termin in Düsseldorf ab?",
         a: "Bautenschutz-Experte Shahzad Mahmood prüft mit digitaler HF-Messtechnik die Feuchtigkeitsverteilung im Mauerwerk. Sie erhalten sofort eine klare Diagnose und ein verbindliches Festpreisangebot.",
       },
+      {
+        "q": "Kann ein Souterrain in Düsseldorf von innen abgedichtet werden?",
+        "a": "Ja. Erdberührte Wände lassen sich von innen mit mineralischen Dichtungsschlämmen, einer Hohlkehle und Sanierputz abdichten, auch gegen drückendes Wasser. Ob das reicht oder zusätzlich eine Horizontalsperre nötig ist, zeigt die Messung."
+      },
+      {
+        "q": "Wer zahlt die Feuchtigkeitsmessung in Düsseldorf?",
+        "a": "Die erste Feuchtigkeitsmessung vor Ort ist bei uns kostenlos und unverbindlich, für Eigentümer, Mieter und Hausverwaltungen gleichermaßen."
+      }
     ],
     nearby: ["wuppertal", "essen", "solingen"],
   },
@@ -1504,6 +1545,18 @@ export const CITY_PAGES: CityPage[] = [
           "Wir schützen diese Wände mit mehrschichtigen flexiblen Dichtungsschlämmen und dichten wasserführende Risse im Mauerwerk per Hochdruckverpressung ab. Das schützt die Bausubstanz nachhaltig und sichert den Immobilienwert.",
         ],
       },
+      {
+        "heading": "Feuchte Kellerwände sanieren in Bochum: Zechenhäuser und Nachkriegsbauten",
+        "paragraphs": [
+          "Viele Bochumer Häuser stammen aus der Zechenzeit oder aus dem Wiederaufbau nach dem Krieg. Ihre Keller haben oft keine oder keine intakte Horizontalsperre mehr, und Bergsenkungen können Risse verursachen, durch die Wasser eindringt. Beides zeigt sich als feuchte Kellerwand, Salzränder oder Schimmel im Keller.",
+          "Wir messen, welche Ursache vorliegt, und kombinieren die passenden Verfahren: eine Horizontalsperre im Injektionsverfahren gegen aufsteigende Feuchte, eine Rissverpressung für wasserführende Risse und eine Innenabdichtung für erdberührte Wände."
+        ],
+        "bullets": [
+          "Kostenlose Feuchtigkeitsmessung und Schadensanalyse in Bochum",
+          "Rissverpressung im Mauerwerk und Beton mit PU-Harz oder Epoxid",
+          "Mauerwerkstrockenlegung ohne Aufgraben, mit 10 Jahren Garantie auf die Arbeit"
+        ]
+      }
     ],
     faqs: [
       {
@@ -1514,6 +1567,14 @@ export const CITY_PAGES: CityPage[] = [
         q: "Ist die Vor-Ort-Besichtigung in Bochum kostenlos?",
         a: "Ja, wir führen bei Ihnen in Bochum eine kostenfreie Feuchtigkeitsmessung mit digitaler Messtechnik durch und erstellen Ihnen einen garantierten Festpreis.",
       },
+      {
+        "q": "Woran erkenne ich in Bochum, ob ein Riss im Keller durch Bergsenkung entstanden ist?",
+        "a": "Setzungs- und Bergsenkungsrisse verlaufen oft schräg oder treppenförmig durch das Mauerwerk und können sich über Jahre verändern. Ob ein Riss wasserführend ist und verpresst werden muss, zeigt die Besichtigung mit Feuchtigkeitsmessung."
+      },
+      {
+        "q": "Was kostet es, feuchte Kellerwände in Bochum sanieren zu lassen?",
+        "a": "Das hängt von Ursache, Wandlänge und Wanddicke ab. Nach der kostenlosen Messung erhalten Sie ein verbindliches Festpreisangebot ohne Nachforderungen."
+      }
     ],
     nearby: ["essen", "dortmund", "wuppertal"],
   },
@@ -1562,6 +1623,18 @@ export const CITY_PAGES: CityPage[] = [
           "Unsere mineralischen Dichtungsschlämmen bilden in Verbindung mit einer Hohlkehlenausbildung eine unüberwindbare Barriere. Ihr Keller wird wieder als sauberer Lagerraum oder Hobbyraum nutzbar – mit 10 Jahren Handwerksgarantie.",
         ],
       },
+      {
+        "heading": "Schimmel im Keller und nasse Wände in Dortmund",
+        "paragraphs": [
+          "In Dortmund treffen Gründerzeitviertel, Nachkriegsbauten und Siedlungen der Zechenzeit aufeinander. Wo der Bergbau endete, ist das Grundwasser vielerorts wieder gestiegen. Keller, die jahrzehntelang trocken waren, können dadurch feucht werden: mit dunklen Rändern an den Wänden, muffigem Geruch und Schimmel im Keller.",
+          "Wir prüfen mit einer Feuchtigkeitsmessung, ob das Wasser von unten aufsteigt, seitlich drückt oder als Kondensat entsteht, und sanieren den Keller dann gezielt von innen."
+        ],
+        "bullets": [
+          "Horizontalsperre im Injektionsverfahren für ältere Mauerwerkskeller",
+          "Kellerinnenabdichtung nach WTA-Standard gegen drückendes Sickerwasser",
+          "Schimmelbeseitigung und Klimaplatten gegen Kondensat"
+        ]
+      }
     ],
     faqs: [
       {
@@ -1572,6 +1645,14 @@ export const CITY_PAGES: CityPage[] = [
         q: "Gibt es Fördermöglichkeiten für die Kellersanierung in NRW?",
         a: "Ja, für handwerkliche Sanierungsmaßnahmen an selbstgenutzten Immobilien können Eigentümer 20 % der Arbeitskosten (Handwerkerleistung gem. § 35a EStG) direkt steuerlich geltend machen. Wir weisen den Lohnanteil auf der Rechnung separat GoBD-konform aus.",
       },
+      {
+        "q": "Warum wird mein Keller in Dortmund erst jetzt feucht?",
+        "a": "Häufig ändern sich die Verhältnisse im Boden, etwa durch steigendes Grundwasser nach dem Ende des Bergbaus, oder eine alte Abdichtung hat ihr Lebensende erreicht. Die Feuchtigkeitsmessung zeigt, welche Ursache bei Ihnen vorliegt."
+      },
+      {
+        "q": "Muss für die Kellersanierung in Dortmund aufgegraben werden?",
+        "a": "In den meisten Fällen nicht. Horizontalsperre, Innenabdichtung und Rissverpressung werden von innen ausgeführt, Garten und Einfahrt bleiben unberührt."
+      }
     ],
     nearby: ["bochum", "essen", "wuppertal"],
   },

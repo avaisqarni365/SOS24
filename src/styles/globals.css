@@ -8319,7 +8319,7 @@ html[data-theme="dark"] .steps4__cta a:is([href^="tel:"], [href*="wa.me"]) .step
   .more__card { flex-direction: row; align-items: center; gap: 0.6rem; padding: 0.7rem; border-radius: 16px; }
   .more__ico { display: grid; }
   .more__body { padding: 0; gap: 0.1rem; }
-  .more__k { font-size: 0.58rem; letter-spacing: 0.1em; }
+  .more__k { font-size: 0.6875rem; letter-spacing: 0.08em; }
   .more__t { font-size: 0.9rem; }
 
   /* the towns: three framed tiles a row */
