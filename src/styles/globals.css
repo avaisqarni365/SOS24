@@ -5492,7 +5492,16 @@ footer .logo__svg { height: 3.1rem; }
   .mnav { padding-top: calc(4.5rem + env(safe-area-inset-top, 0px)); }
 }
 .mnav__prefs { margin-top: 2.25rem; padding-top: 1.25rem; border-top: 1px solid rgb(var(--c-line) / 0.14); display: grid; gap: 1rem; }
-.mnav__prefs .mnav__lang { margin: 0; padding: 0; border: 0; }
+/* grid-column: the old two-column menu (min-width: 900px) put .mnav__lang in column 2, which
+   split this block in two and crushed the colour swatches into a quarter of it */
+.mnav__prefs .mnav__lang { margin: 0; padding: 0; border: 0; grid-column: auto; }
+/* the booking link spans the foot on every width, styled like the WhatsApp link: one filled
+   action (the call), the others outlined, no third colour */
+.mnav__termin { grid-column: 1 / -1; border: 1px solid rgb(var(--c-line) / 0.24); color: var(--ink-on-surface); }
+.mnav__termin:hover, .mnav__wa:hover { border-color: var(--pw-accent); }
+/* two columns of services: each row's rule lines up across both */
+.mnav__block--services .mnav__list li { display: flex; }
+.mnav__block--services .mnav__list a { flex: 1; }
 
 @media (min-width: 1024px) {
   .mnav-scrim {
