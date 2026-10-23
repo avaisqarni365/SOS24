@@ -8,7 +8,7 @@ import { abs, businessNode, websiteNode, breadcrumbNode, BUSINESS_ID, WEBSITE_ID
 
 const TITLE = "Kontakt: kostenlose Feuchtemessung anfragen | sos-abdichtung";
 const DESCRIPTION =
-  "Kostenlose Feuchtemessung in Wuppertal und PLZ 42 anfragen: per Telefon, WhatsApp oder Formular. Shahzad Mahmood meldet sich meist noch am selben Tag.";
+  "Kostenlose Feuchtemessung in NRW anfragen: per Telefon, WhatsApp oder Formular. Shahzad Mahmood meldet sich meist noch am selben Tag.";
 const PATH = "/kontakt/";
 
 export const metadata: Metadata = {

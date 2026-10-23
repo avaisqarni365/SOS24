@@ -467,7 +467,7 @@ export default function ContactForm({ compact = false, defaultDamage, place }: C
                 Kostenlose Feuchtigkeitsmessung vor Ort
               </span>
               <h2 className="text-2xl sm:text-3xl font-extrabold text-ink tracking-tight mb-3">
-                Jetzt kostenlose Schadensanalyse in Wuppertal &amp; Region anfordern
+                Jetzt kostenlose Schadensanalyse in NRW anfordern
               </h2>
               <p className="text-ink-soft text-sm sm:text-base leading-relaxed">
                 Inhaber <strong>{COMPANY_INFO.owner}</strong> begutachtet Ihren Feuchteschaden
@@ -769,8 +769,7 @@ export default function ContactForm({ compact = false, defaultDamage, place }: C
                     Anfrage für kostenlose Vor-Ort-Besichtigung &amp; Foto-Diagnose
                   </h3>
                   <p className="text-xs text-slate-500 mt-1">
-                    Unverbindlich &amp; kostenfrei im Raum Wuppertal, Solingen, Remscheid, Velbert
-                    &amp; Bergisches Land.
+                    Unverbindlich &amp; kostenfrei in Wuppertal, Essen, Düsseldorf, Bochum, Dortmund, im Bergischen Land und ganz NRW.
                   </p>
                 </div>
 

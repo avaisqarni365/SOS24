@@ -16,7 +16,7 @@ export const COMPANY_INFO = {
   title: "Inhaber & Bautenschutz-Experte",
   street: "Niebuhrstraße 46",
   city: "45144 Essen",
-  operatingRegion: "Wuppertal & Bergisches Land (PLZ 42xxx)",
+  operatingRegion: "NRW: Wuppertal, Essen, Düsseldorf, Bochum, Dortmund & Bergisches Land",
   phoneDisplay: "+49 (0)172 2064177",
   phoneTel: "+491722064177",
   email: "info@sos-abdichtung.de",
@@ -45,7 +45,7 @@ export const SERVICES: ServiceItem[] = [
     id: "feuchte-waende",
     icon: "🧱",
     title: "Feuchte Wände & Horizontalsperre",
-    badge: "Bestseller Wuppertal",
+    badge: "Bestseller",
     shortDesc: "Aufsteigende Bodenfeuchtigkeit dauerhaft stoppen mittels moderner chemischer Injektionstechnik ohne Aufgraben.",
     benefits: [
       "Injektion mit in Paraffin gelöstem Kunststoff",
@@ -101,7 +101,7 @@ export const SERVICES: ServiceItem[] = [
 
 export const FAQS = [
   {
-    q: "Wie erkenne ich, ob mein Keller in Wuppertal von aufsteigender Feuchtigkeit betroffen ist?",
+    q: "Wie erkenne ich, ob mein Keller von aufsteigender Feuchtigkeit betroffen ist?",
     a: "Typisch sind dunkle Feuchteränder im unteren Wandbereich, abblätternde Farbe, aufgequollener Putz, weiße Salzausblühungen, Schimmel an Sockelleisten und ein muffiger Geruch. Steigt die Feuchte gleichmäßig von unten nach oben, spricht vieles für kapillar aufsteigende Feuchte und eine defekte Horizontalsperre. Einzelne, klar abgegrenzte Flecken kommen dagegen meist von Rohrschäden oder Wasser von außen. Sicher ist erst die Messung im Mauerwerk."
   },
   {
@@ -117,7 +117,7 @@ export const FAQS = [
     a: "Nein! Das Injektionsverfahren zur Horizontalsperre und die Kellerinnenabdichtung erfolgen vollständig von der Rauminnenseite. Teure Erdarbeiten, beschädigte Einfahrten oder zerstörte Vorgärten entfallen komplett."
   },
   {
-    q: "Wie hoch sind die Kosten für eine Kellersanierung im Raum Wuppertal / PLZ 42?",
+    q: "Wie hoch sind die Kosten für eine Kellersanierung?",
     a: "Die Kosten hängen vom Wandbaustoff (Ziegel, Bruchstein, Beton), der Mauerstärke und dem Durchfeuchtungsgrad ab. Eine Horizontalsperre per Injektion von innen ist deutlich günstiger als eine Außenabdichtung mit Aufgraben. Wir bieten Ihnen nach der kostenlosen Erstmessung ein verbindliches Festpreisangebot."
   },
   {

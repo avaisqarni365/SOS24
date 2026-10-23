@@ -11,7 +11,7 @@ const OUT = path.resolve(process.argv[2] || "out");
 const SITE = readFileSync("src/lib/site.ts", "utf8").match(/SITE_URL = "([^"]+)"/)?.[1] ?? "";
 /** Back-office pages: must be noindex and must not be in the sitemap. */
 const PRIVATE = new Set(["/admin/", "/mein-auftrag/"]);
-const HOME_KEYWORD = "Kellersanierung Wuppertal";
+const HOME_KEYWORD = "Kellersanierung";
 
 const errors: string[] = [];
 const warnings: string[] = [];

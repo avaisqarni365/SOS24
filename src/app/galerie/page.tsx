@@ -16,7 +16,7 @@ import { hy } from "@/lib/hyphenate";
 
 const TITLE = "Galerie: Filme, Bilder und Kundenstimmen | sos-abdichtung";
 const DESCRIPTION =
-  "Kurze Filme zu jedem Verfahren, Bilder von Team, Wagen und Baustelle, Schadensbilder aus der Praxis und Kundenstimmen. SOS-Abdichtung im Raum PLZ 42.";
+  "Kurze Filme zu jedem Verfahren, Bilder von Team, Wagen und Baustelle, Schadensbilder aus der Praxis und Kundenstimmen. SOS-Abdichtung in NRW.";
 const PATH = "/galerie/";
 
 export const metadata: Metadata = {

@@ -23,13 +23,13 @@ export default function Hero() {
         <div className="hero__grid">
           <div className="hero__copy">
           <p className="sc-label">
-            <PartnerLink>SchimmelPeter® Partnerbetrieb</PartnerLink> · Wuppertal &amp; Bergisches Land
+            <PartnerLink>SchimmelPeter® Partnerbetrieb</PartnerLink> · Wuppertal, Essen, Düsseldorf, Bochum, Dortmund &amp; NRW
           </p>
           <h1
             id="hero-title"
             className="sc-display hero__title mt-5"
           >
-            Kellersanierung Wuppertal.{" "}
+            Kellersanierung von innen.{" "}
             <em>Trocken, Schicht für Schicht.</em>
           </h1>
           <p className="sc-lede mt-6">

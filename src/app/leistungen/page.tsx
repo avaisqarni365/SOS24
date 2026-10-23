@@ -16,7 +16,7 @@ import { GUIDE } from "@/data/guide";
 
 const TITLE = "Leistungen: Kellersanierung & Abdichtung | sos-abdichtung";
 const DESCRIPTION =
-  "Alle Leistungen: Kellersanierung, Horizontalsperre, Innenabdichtung, Schimmelbeseitigung, Feuchtemessung und Rissverpressung in Wuppertal und PLZ 42.";
+  "Alle Leistungen: Kellersanierung, Horizontalsperre, Innenabdichtung, Schimmelbeseitigung, Feuchtemessung und Rissverpressung in NRW, von innen.";
 const PATH = "/leistungen/";
 
 export const metadata: Metadata = {

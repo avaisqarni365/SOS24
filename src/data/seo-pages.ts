@@ -169,7 +169,7 @@ export const SERVICE_PAGES: ServicePage[] = [
     serviceName: "Horizontalsperre im Injektionsverfahren",
     navTitle: "Horizontalsperre",
     keyword: "Feuchte Wände trockenlegen",
-    title: "Feuchte Wände trockenlegen | Horizontalsperre Wuppertal",
+    title: "Feuchte Wände trockenlegen | Horizontalsperre per Injektion",
     metaDescription:
       "Feuchte Wände trockenlegen ohne Aufgraben: Horizontalsperre per SchimmelPeter-Injektion, keine Vortrocknung, 10 Jahre Garantie auf die Arbeit.",
     h1: "Feuchte Wände trockenlegen mit einer Horizontalsperre im Injektionsverfahren",
@@ -298,7 +298,7 @@ export const SERVICE_PAGES: ServicePage[] = [
     serviceName: "Kellerinnenabdichtung nach WTA-Standard",
     navTitle: "Kellerinnenabdichtung",
     keyword: "Keller von innen abdichten",
-    title: "Keller von innen abdichten | Innenabdichtung Wuppertal",
+    title: "Keller von innen abdichten | Innenabdichtung nach WTA",
     metaDescription:
       "Keller von innen abdichten nach WTA statt aufgraben: Hohlkehle, mineralische Dichtungsschlämme und Sanierputz, auch gegen drückendes Wasser. Festpreis.",
     h1: "Keller von innen abdichten, auch gegen drückendes Wasser",
@@ -403,7 +403,7 @@ export const SERVICE_PAGES: ServicePage[] = [
     serviceName: "Schimmelbeseitigung & Klimaplatten",
     navTitle: "Schimmelbeseitigung",
     keyword: "Schimmel im Keller",
-    title: "Schimmel im Keller entfernen | Schimmelbeseitigung Wuppertal",
+    title: "Schimmel im Keller entfernen | Schimmelbeseitigung NRW",
     metaDescription:
       "Schimmel im Keller oder in der Wohnung? Schimmelsanierung mit Ursachenmessung, sporensicherer Entfernung ohne Chlor und Klimaplatten gegen Kondensat.",
     h1: "Schimmel im Keller und in der Wohnung: erst die Ursache, dann der Schimmel",
@@ -523,7 +523,7 @@ export const SERVICE_PAGES: ServicePage[] = [
     keyword: "Feuchtigkeitsmessung",
     title: "Kostenlose Feuchtigkeitsmessung & Schadensanalyse",
     metaDescription:
-      "Kostenlose Feuchtigkeitsmessung vor Ort im Raum Wuppertal: kapillare und hygroskopische Feuchte, Taupunkt, Salze. Schadensanalyse und Schimmel-Gutachten.",
+      "Kostenlose Feuchtigkeitsmessung vor Ort in ganz NRW: kapillare und hygroskopische Feuchte, Taupunkt, Salze. Schadensanalyse und Schimmel-Gutachten.",
     h1: "Kostenlose Feuchtigkeitsmessung & Schadensanalyse: wissen, woher die Nässe kommt",
     lede:
       "Feuchte Wand, was tun? Bevor Geld in Putz, Farbe oder Entfeuchter fließt, sollte klar sein, welche Art von Feuchte in der Wand steckt und woher sie kommt. Genau das klärt eine fachgerechte Messung.",
@@ -643,7 +643,7 @@ export const SERVICE_PAGES: ServicePage[] = [
     keyword: "Rissverpressung Keller",
     title: "Rissverpressung Keller | Wasserführende Risse abdichten",
     metaDescription:
-      "Rissverpressung Keller: wasserführende Risse in Beton und Mauerwerk mit PU-Harz oder Epoxid dauerhaft schließen, auch in WU-Beton. Raum Wuppertal.",
+      "Rissverpressung Keller: wasserführende Risse in Beton und Mauerwerk mit PU-Harz oder Epoxid dauerhaft schließen, auch in WU-Beton. In ganz NRW.",
     h1: "Rissverpressung Keller: wasserführende Risse dauerhaft schließen",
     lede:
       "Ein Riss in der Kellerwand, durch den Wasser sickert, lässt sich nicht einfach zuspachteln. Wir verpressen ihn unter hohem Druck mit PU-Harz oder Epoxid und füllen ihn damit über den gesamten Wandquerschnitt.",
@@ -743,9 +743,9 @@ export const SERVICE_PAGES: ServicePage[] = [
     serviceName: "Dachabdichtung: Flachdach, Dachterrasse & Garage",
     navTitle: "Dachabdichtung",
     keyword: "Dachabdichtung",
-    title: "Dachabdichtung Wuppertal: Flachdach & Garage dicht",
+    title: "Dachabdichtung: Flachdach & Garage dauerhaft dicht",
     metaDescription:
-      "Dachabdichtung in Wuppertal: Flachdach, Steildach, Dachterrasse und Garagendach dauerhaft dicht. Pr\u00fcfung kostenlos, 10 Jahre Garantie auf die Arbeit.",
+      "Dachabdichtung in NRW: Flachdach, Steildach, Dachterrasse und Garagendach dauerhaft dicht. Pr\u00fcfung kostenlos, 10 Jahre Garantie auf die Arbeit.",
     h1: "Dachabdichtung: Flachdach, Dachterrasse und Garagendach dauerhaft dicht",
     lede:
       "Ein undichtes Dach meldet sich selten dort, wo das Wasser eintritt. Wir suchen die Eintrittsstelle systematisch, dichten vollfl\u00e4chig ab und pr\u00fcfen jede Naht, bevor wir abnehmen.",
@@ -808,7 +808,7 @@ export const SERVICE_PAGES: ServicePage[] = [
     serviceName: "Balkon- und Terrassenabdichtung",
     navTitle: "Balkon & Terrasse",
     keyword: "Balkon abdichten",
-    title: "Balkon abdichten in Wuppertal: fugenlos & begehbar",
+    title: "Balkon abdichten: fugenlos & begehbar | sos-abdichtung",
     metaDescription:
       "Balkon abdichten ohne Abriss: Fl\u00fcssigkunststoff dichtet fugenlos bis unter die T\u00fcr. F\u00fcr Balkon, Loggia und Terrasse. 10 Jahre Garantie auf die Arbeit.",
     h1: "Balkon abdichten: fugenlos dicht, auch am T\u00fcranschluss",

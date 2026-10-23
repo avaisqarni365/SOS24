@@ -119,7 +119,7 @@ export const DE: Record<string, string> = {
     "gallery.eyebrow": "AUS DER PRAXIS",
     "gallery.h1": "So sieht Sanierung aus.",
     "gallery.accent": "Schadensbilder und Arbeitsschritte.",
-    "gallery.sub": "Bilder aus dem SchimmelPeter®-Netzwerk: typische Schäden und die Verfahren, die Shahzad Mahmood als Partnerbetrieb im Raum Wuppertal, Solingen, Remscheid und im Bergischen Land einsetzt.",
+    "gallery.sub": "Bilder aus dem SchimmelPeter®-Netzwerk: typische Schäden und die Verfahren, die Shahzad Mahmood als Partnerbetrieb in Wuppertal, Essen, Düsseldorf, Bochum, Dortmund und im Bergischen Land einsetzt.",
     "gallery.filterAll": "Alle Bilder",
     "gallery.filterHorizontal": "Horizontalsperre",
     "gallery.filterKeller": "Keller & Mauerwerk",

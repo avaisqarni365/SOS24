@@ -6,7 +6,7 @@ import JsonLd from "@/components/seo/JsonLd";
 import { Breadcrumbs } from "@/components/seo/SubpageParts";
 import { SITE_URL, BUSINESS_ID, WEBSITE_ID, abs, breadcrumbNode, OG_IMAGE } from "@/lib/site";
 
-const TITLE = "Admin & Backoffice | sos-abdichtung Wuppertal";
+const TITLE = "Admin & Backoffice | sos-abdichtung";
 const DESCRIPTION =
   "Internes Admin-Portal und Backoffice für sos-abdichtung (Shahzad Mahmood): Schadensanfragen, Google Drive Fotos, GoBD-Belege und Termine verwalten.";
 
