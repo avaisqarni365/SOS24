@@ -24,7 +24,12 @@ import {
   type InspectionSlot,
 } from '@/lib/calendar';
 
-export default function OnlineAppointmentBooking() {
+interface OnlineAppointmentBookingProps {
+  hideHeader?: boolean;
+  className?: string;
+}
+
+export default function OnlineAppointmentBooking({ hideHeader = false, className = '' }: OnlineAppointmentBookingProps) {
   const tomorrowStr = new Date(Date.now() + 86400000).toISOString().slice(0, 10);
 
   const [selectedDate, setSelectedDate] = useState<string>(tomorrowStr);
@@ -90,26 +95,28 @@ export default function OnlineAppointmentBooking() {
   };
 
   return (
-    <section id="termin" className="py-14 sm:py-20 bg-[#f8fafc] text-slate-900 relative overflow-hidden border-y border-slate-200/80">
+    <section id="termin" className={`py-10 sm:py-16 lg:py-20 bg-[#f8fafc] text-slate-900 relative overflow-hidden border-y border-slate-200/80 ${className}`}>
       {/* Background Soft Glow */}
       <div className="absolute top-0 right-1/4 w-96 h-96 bg-emerald-500/5 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-0 left-1/4 w-96 h-96 bg-emerald-600/5 rounded-full blur-3xl pointer-events-none" />
 
-      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Section Header */}
-        <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-12 space-y-3">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-100 border border-emerald-300 text-emerald-900 text-xs font-black uppercase tracking-wider shadow-xs">
-            <Calendar className="w-3.5 h-3.5 text-emerald-700" />
-            <span>Online-Terminplaner · 100 % Kostenfrei</span>
+      <div className="max-w-5xl mx-auto px-3.5 sm:px-6 lg:px-8 relative z-10">
+        {/* Section Header (hidden on standalone /termin/ page to avoid duplicate titles) */}
+        {!hideHeader && (
+          <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-12 space-y-3">
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-100 border border-emerald-300 text-emerald-900 text-xs font-black uppercase tracking-wider shadow-xs">
+              <Calendar className="w-3.5 h-3.5 text-emerald-700" />
+              <span>Online-Terminplaner · 100 % Kostenfrei</span>
+            </div>
+            <h2 className="text-2xl sm:text-4xl font-black text-[#0f2537] tracking-tight">
+              Vor-Ort-Feuchtemessung direkt online buchen
+            </h2>
+            <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
+              Wählen Sie Ihren Wunschtermin. Inhaber <strong>{COMPANY_INFO.owner}</strong> begutachtet Ihren Feuchteschaden
+              persönlich vor Ort mit elektronischer CM-Messtechnik – kostenfrei in ganz NRW.
+            </p>
           </div>
-          <h2 className="text-2xl sm:text-4xl font-black text-[#0f2537] tracking-tight">
-            Vor-Ort-Feuchtemessung direkt online buchen
-          </h2>
-          <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
-            Wählen Sie Ihren Wunschtermin. Inhaber <strong>{COMPANY_INFO.owner}</strong> begutachtet Ihren Feuchteschaden
-            persönlich vor Ort mit elektronischer CM-Messtechnik – kostenfrei in ganz NRW.
-          </p>
-        </div>
+        )}
 
         {bookedSuccess ? (
           /* Success Card with Google Calendar Integration */
@@ -192,7 +199,7 @@ export default function OnlineAppointmentBooking() {
           /* Interactive Booking Form */
           <form
             onSubmit={handleBooking}
-            className="bg-white text-slate-900 rounded-3xl p-6 sm:p-8 lg:p-10 shadow-2xl border border-slate-200/80 space-y-7"
+            className="bg-white text-slate-900 rounded-2xl sm:rounded-3xl p-4 sm:p-8 lg:p-10 shadow-xl sm:shadow-2xl border border-slate-200/90 space-y-6 sm:space-y-7"
           >
             {/* Step 1: Choose Slot */}
             <div className="space-y-3">
@@ -216,7 +223,7 @@ export default function OnlineAppointmentBooking() {
                     value={selectedDate}
                     onChange={(e) => setSelectedDate(e.target.value)}
                     required
-                    className="w-full min-h-[46px] px-3.5 py-2.5 rounded-xl border border-slate-300 bg-slate-50 focus:bg-white text-sm font-bold text-slate-900 focus:ring-2 focus:ring-emerald-600/30 focus:border-emerald-600 outline-none"
+                    className="w-full min-h-[48px] px-3.5 py-2.5 rounded-xl border border-slate-300 bg-slate-50 focus:bg-white text-base sm:text-sm font-bold text-slate-900 focus:ring-2 focus:ring-emerald-600/30 focus:border-emerald-600 outline-none transition"
                   />
                 </div>
 
@@ -224,7 +231,7 @@ export default function OnlineAppointmentBooking() {
                   <label className="block text-xs font-bold text-slate-700 mb-1">
                     Zeitfenster für die Feuchtemessung *
                   </label>
-                  <div className="grid grid-cols-2 gap-2">
+                  <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 gap-2">
                     {INSPECTION_SLOTS.map((slot) => {
                       const isSelected = selectedSlot.id === slot.id;
                       return (
@@ -232,7 +239,7 @@ export default function OnlineAppointmentBooking() {
                           key={slot.id}
                           type="button"
                           onClick={() => setSelectedSlot(slot)}
-                          className={`p-2.5 rounded-xl border text-left transition-all ${
+                          className={`min-h-[50px] p-2.5 sm:p-3 rounded-xl border text-left transition-all ${
                             isSelected
                               ? 'bg-emerald-50 border-emerald-600 ring-2 ring-emerald-500/30 shadow-xs'
                               : 'bg-slate-50 hover:bg-slate-100 border-slate-200 text-slate-700'
@@ -272,7 +279,7 @@ export default function OnlineAppointmentBooking() {
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     placeholder="Vor- und Nachname"
-                    className="w-full min-h-[46px] px-3.5 py-2.5 rounded-xl border border-slate-300 bg-white text-sm font-semibold text-slate-900 focus:ring-2 focus:ring-emerald-600/30 focus:border-emerald-600 outline-none"
+                    className="w-full min-h-[48px] px-3.5 py-2.5 rounded-xl border border-slate-300 bg-white text-base sm:text-sm font-semibold text-slate-900 focus:ring-2 focus:ring-emerald-600/30 focus:border-emerald-600 outline-none transition"
                   />
                 </div>
 
@@ -287,7 +294,7 @@ export default function OnlineAppointmentBooking() {
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
                     placeholder="z. B. 0172 2064177"
-                    className="w-full min-h-[46px] px-3.5 py-2.5 rounded-xl border border-slate-300 bg-white text-sm font-semibold text-slate-900 focus:ring-2 focus:ring-emerald-600/30 focus:border-emerald-600 outline-none"
+                    className="w-full min-h-[48px] px-3.5 py-2.5 rounded-xl border border-slate-300 bg-white text-base sm:text-sm font-semibold text-slate-900 focus:ring-2 focus:ring-emerald-600/30 focus:border-emerald-600 outline-none transition"
                   />
                 </div>
 
@@ -302,7 +309,7 @@ export default function OnlineAppointmentBooking() {
                     value={address}
                     onChange={(e) => setAddress(e.target.value)}
                     placeholder="z. B. Niebuhrstr. 46, Essen"
-                    className="w-full min-h-[46px] px-3.5 py-2.5 rounded-xl border border-slate-300 bg-white text-sm font-semibold text-slate-900 focus:ring-2 focus:ring-emerald-600/30 focus:border-emerald-600 outline-none"
+                    className="w-full min-h-[48px] px-3.5 py-2.5 rounded-xl border border-slate-300 bg-white text-base sm:text-sm font-semibold text-slate-900 focus:ring-2 focus:ring-emerald-600/30 focus:border-emerald-600 outline-none transition"
                   />
                 </div>
               </div>
@@ -316,7 +323,7 @@ export default function OnlineAppointmentBooking() {
                     id="b-damage"
                     value={damageType}
                     onChange={(e) => setDamageType(e.target.value)}
-                    className="w-full min-h-[46px] px-3.5 py-2.5 rounded-xl border border-slate-300 bg-white text-sm font-semibold text-slate-900 focus:ring-2 focus:ring-emerald-600/30 focus:border-emerald-600 outline-none"
+                    className="w-full min-h-[48px] px-3.5 py-2.5 rounded-xl border border-slate-300 bg-white text-base sm:text-sm font-semibold text-slate-900 focus:ring-2 focus:ring-emerald-600/30 focus:border-emerald-600 outline-none transition"
                   >
                     <option value="Feuchter Keller / Nasse Wände">Feuchter Keller / Nasse Wände</option>
                     <option value="Aufsteigende Feuchte / Horizontalsperre">Aufsteigende Feuchte / Horizontalsperre</option>
@@ -337,7 +344,7 @@ export default function OnlineAppointmentBooking() {
                     value={notes}
                     onChange={(e) => setNotes(e.target.value)}
                     placeholder="z. B. Altbau, Keller riecht muffig"
-                    className="w-full min-h-[46px] px-3.5 py-2.5 rounded-xl border border-slate-300 bg-white text-sm font-semibold text-slate-900 focus:ring-2 focus:ring-emerald-600/30 focus:border-emerald-600 outline-none"
+                    className="w-full min-h-[48px] px-3.5 py-2.5 rounded-xl border border-slate-300 bg-white text-base sm:text-sm font-semibold text-slate-900 focus:ring-2 focus:ring-emerald-600/30 focus:border-emerald-600 outline-none transition"
                   />
                 </div>
               </div>
@@ -353,7 +360,7 @@ export default function OnlineAppointmentBooking() {
               <button
                 type="submit"
                 disabled={submitting}
-                className="min-h-[50px] px-8 py-3.5 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white font-black text-sm inline-flex items-center justify-center gap-2 shadow-lg transition-all"
+                className="w-full sm:w-auto min-h-[52px] px-8 py-3.5 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white font-black text-sm inline-flex items-center justify-center gap-2 shadow-lg transition-all"
               >
                 {submitting ? (
                   <>

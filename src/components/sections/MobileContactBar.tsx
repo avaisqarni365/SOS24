@@ -13,9 +13,9 @@ export default function MobileContactBar() {
         <MessageCircle aria-hidden="true" />
         WhatsApp
       </a>
-      <a href="/kontakt/" className="is-primary">
+      <a href="/termin/" className="is-primary">
         <CalendarCheck aria-hidden="true" />
-        Messung anfragen
+        Termin buchen
       </a>
     </nav>
   );

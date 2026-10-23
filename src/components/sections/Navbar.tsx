@@ -4,7 +4,7 @@ import { PartnerLink, PartnerText, PartnerBadge } from "@/components/brand/Partn
 
 import React, { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
-import { Menu, Phone, X, MessageCircle, ShieldCheck } from "lucide-react";
+import { Menu, Phone, X, MessageCircle, ShieldCheck, Calendar } from "lucide-react";
 import { COMPANY_INFO } from "@/data/content-data";
 import { SERVICE_CARDS } from "@/data/services";
 import Logo from "@/components/brand/Logo";
@@ -25,8 +25,9 @@ const CITIES = [
   { slug: "wermelskirchen", name: "Wermelskirchen" },
 ];
 
-/** The flat top level of the menu: the five places the site actually goes. */
+/** The flat top level of the menu: the main places the site actually goes. */
 const PRIMARY: { href: string; key?: string; label?: string }[] = [
+  { href: "/termin/", label: "📅 Online-Termin buchen" },
   { href: "/leistungen/", label: "Leistungen" },
   { href: "/labor/", key: "nav.simulation" },
   { href: "/galerie/", key: "nav.gallery" },
@@ -138,35 +139,58 @@ export default function Navbar() {
               <Phone className="h-3.5 w-3.5" aria-hidden="true" />
               {COMPANY_INFO.phoneDisplay}
             </a>
-            <a href={COMPANY_INFO.whatsappUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 font-semibold">
+            <a href={COMPANY_INFO.whatsappUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 font-semibold text-emerald-200 hover:text-white transition-colors">
               <MessageCircle className="h-3.5 w-3.5" aria-hidden="true" />
               WhatsApp
+            </a>
+            <a href="/termin/" className="flex items-center gap-1.5 font-bold bg-white text-emerald-950 hover:bg-emerald-50 px-2.5 py-0.5 rounded-full text-xs shadow-xs transition-colors">
+              <Calendar className="h-3.5 w-3.5 text-emerald-700" aria-hidden="true" />
+              Termin buchen
             </a>
           </nav>
         </div>
       </div>
 
       <div className="site-header__bar band-ink">
-        <div className="site-wrap flex h-16 items-center justify-between gap-3 sm:h-[4.5rem] lg:gap-4">
+        <div className="site-wrap flex h-16 items-center justify-between gap-2.5 sm:h-[4.5rem] lg:gap-4">
           <a href="/" aria-label="sos-abdichtung, zur Startseite" className="shrink-0">
             <Logo />
           </a>
 
-
-          <div className="flex shrink-0 items-center gap-2 sm:gap-2.5">
+          <div className="flex shrink-0 items-center gap-1.5 sm:gap-2.5">
             <ColorControl compact className="header-tone" />
             <AppearanceMenu />
-            <div className="hidden sm:block">
+            <div className="hidden md:block">
               <LanguageSelector />
             </div>
-            <a href="/kontakt/" onClick={(e) => handleNavClick(e, "/kontakt/")} className="header-cta hidden min-h-[44px] items-center gap-2 whitespace-nowrap rounded-full px-5 text-[0.9375rem] font-semibold sm:inline-flex">
-              {t("nav.cta")}
+
+            {/* Direct WhatsApp Quick Button */}
+            <a
+              href={COMPANY_INFO.whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex min-h-[38px] sm:min-h-[42px] items-center gap-1.5 rounded-full bg-[#25D366] hover:bg-[#1ebe5d] text-white px-2.5 sm:px-3.5 text-xs sm:text-sm font-bold transition-all shadow-xs shrink-0"
+              aria-label="WhatsApp Chat"
+            >
+              <MessageCircle className="h-4 w-4 shrink-0" aria-hidden="true" />
+              <span className="hidden xs:inline sm:inline">WhatsApp</span>
             </a>
+
+            {/* Direct Appointment Button next to WhatsApp Button */}
+            <a
+              href="/termin/"
+              className="inline-flex min-h-[38px] sm:min-h-[42px] items-center gap-1.5 rounded-full bg-emerald-700 hover:bg-emerald-600 text-white px-2.5 sm:px-3.5 text-xs sm:text-sm font-black transition-all shadow-xs shrink-0 border border-emerald-500/40"
+              aria-label="Online-Termin buchen"
+            >
+              <Calendar className="h-4 w-4 text-emerald-200 shrink-0" aria-hidden="true" />
+              <span>Termin buchen</span>
+            </a>
+
             <button
               ref={burgerRef}
               type="button"
               onClick={() => setOpen(!open)}
-              className="inline-flex h-11 w-11 items-center justify-center rounded-full border border-[var(--line-strong)] bg-surface text-[var(--bone)] hover:border-accent-deep "
+              className="inline-flex h-10 w-10 sm:h-11 sm:w-11 items-center justify-center rounded-full border border-[var(--line-strong)] bg-surface text-[var(--bone)] hover:border-accent-deep"
               aria-label={open ? "Menü schließen" : "Menü öffnen"}
               aria-expanded={open}
               aria-controls="mobile-menu"
@@ -265,6 +289,14 @@ export default function Navbar() {
                 <small>WhatsApp</small>
                 Foto senden
               </span>
+            </a>
+            <a
+              href="/termin/"
+              onClick={() => setOpen(false)}
+              className="mnav__termin col-span-2 flex items-center justify-center gap-2 py-3 bg-emerald-700 hover:bg-emerald-600 text-white rounded-2xl font-black text-sm shadow-sm transition-colors"
+            >
+              <Calendar className="h-4 w-4 text-emerald-200" aria-hidden="true" />
+              <span>Online-Wunschtermin buchen (Kostenlos)</span>
             </a>
           </div>
         </div>
