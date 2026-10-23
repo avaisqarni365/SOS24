@@ -34,7 +34,6 @@ import {
   signContractDigitally,
   resizeImageToBase64,
   processFileForUpload,
-  NOTIFY_EMAIL_DEFAULT,
   type EncodedPhoto,
 } from '@/lib/backend';
 
@@ -596,9 +595,6 @@ export default function ContactForm({ compact = false, defaultDamage, place }: C
                         <Camera className="w-4 h-4 text-emerald-700" />
                         Hochgeladene Schadensfotos ({uploadedPreviews.length})
                       </span>
-                      <span className="text-[11px] text-emerald-700">
-                        Cloud: {NOTIFY_EMAIL_DEFAULT}
-                      </span>
                     </div>
                     <div className="flex flex-wrap gap-2">
                       {uploadedPreviews.map((up, i) => (
@@ -987,9 +983,7 @@ export default function ContactForm({ compact = false, defaultDamage, place }: C
                           Schadensfotos &amp; Dokumente beifügen (optional, bis zu 6 Dateien)
                         </span>
                         <span className="text-xs text-slate-600 block mt-0.5">
-                          Direkt vom Smartphone aufnehmen oder auswählen (Fotos, PDF-Pläne, Gutachten) – wird automatisch im{' '}
-                          <strong>Google Drive ({NOTIFY_EMAIL_DEFAULT})</strong> und im{' '}
-                          <strong>Admin-Dashboard</strong> gespeichert.
+                          Direkt vom Smartphone aufnehmen oder auswählen (Fotos, PDF-Pläne, Gutachten). Die Dateien kommen mit Ihrer Anfrage direkt bei uns an.
                         </span>
                       </div>
                     </div>

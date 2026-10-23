@@ -31,7 +31,6 @@ import {
   type WorkspaceLead,
   type WorkspaceGoBDDoc,
   type WorkspaceAppointment,
-  NOTIFY_EMAIL_DEFAULT,
 } from '@/lib/backend';
 import { buildGoogleCalendarUrl, downloadIcsFile, INSPECTION_SLOTS } from '@/lib/calendar';
 import { COMPANY_INFO } from '@/data/content-data';
