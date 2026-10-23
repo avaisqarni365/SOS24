@@ -9,6 +9,8 @@ import { SERVICE_PAGES, CITY_PAGES } from "../src/data/seo-pages.ts";
 
 const OUT = path.resolve(process.argv[2] || "out");
 const SITE = readFileSync("src/lib/site.ts", "utf8").match(/SITE_URL = "([^"]+)"/)?.[1] ?? "";
+/** Back-office pages: must be noindex and must not be in the sitemap. */
+const PRIVATE = new Set(["/admin/", "/mein-auftrag/"]);
 const HOME_KEYWORD = "Kellersanierung Wuppertal";
 
 const errors: string[] = [];
@@ -92,7 +94,9 @@ for (const [route, html] of htmlByRoute) {
   if (h1s.length !== 1) err(route, `${h1s.length} <h1> elements (exactly one expected)`);
   if (!canonical) err(route, "no canonical link");
   else if (canonical !== SITE + route) err(route, `canonical ${canonical} should be ${SITE + route}`);
-  if (/noindex/.test(robots)) err(route, "page is set to noindex");
+  if (PRIVATE.has(route)) {
+    if (!/noindex/.test(robots)) err(route, "private page is indexable (needs noindex)");
+  } else if (/noindex/.test(robots)) err(route, "page is set to noindex");
   if (!ogImage) err(route, "no og:image (share preview)");
 
   for (const m of html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)) {
@@ -154,7 +158,12 @@ for (const loc of locs) {
   if (!loc.startsWith(SITE)) err("/sitemap.xml", `${loc} is not on ${SITE}`);
   else if (!fileFor(loc.slice(SITE.length) || "/")) err("/sitemap.xml", `${loc} has no page`);
 }
-for (const route of htmlByRoute.keys()) if (!locs.includes(SITE + route)) warn("/sitemap.xml", `${route} is not listed`);
+for (const route of htmlByRoute.keys()) {
+  const listed = locs.includes(SITE + route);
+  if (PRIVATE.has(route)) {
+    if (listed) err("/sitemap.xml", `${route} is private and must not be listed`);
+  } else if (!listed) warn("/sitemap.xml", `${route} is not listed`);
+}
 const robots = existsSync(path.join(OUT, "robots.txt")) ? readFileSync(path.join(OUT, "robots.txt"), "utf8") : "";
 if (!robots.includes(`Sitemap: ${SITE}/sitemap.xml`)) err("/robots.txt", "no Sitemap line for the site");
 if (!existsSync(path.join(OUT, "llms.txt"))) warn("/llms.txt", "missing");
