@@ -6,6 +6,7 @@ import "@/styles/globals.css";
 import { SITE_URL, OG_IMAGE } from "@/lib/site";
 import MobileContactBar from "@/components/sections/MobileContactBar";
 import ConsentBanner from "@/components/consent/ConsentBanner";
+import JustifyFit from "@/components/ui/JustifyFit";
 import { APPEARANCE_BOOT } from "@/components/navigation/AppearanceMenu";
 import { COLOR_BOOT } from "@/lib/tone";
 import { I18N_BOOT } from "@/i18n/boot";
@@ -104,6 +105,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           {children}
           <HeadingFit />
           <LabelFit />
+          <JustifyFit />
           <Reveal />
           <GrokLeadBot />
           <MobileContactBar />

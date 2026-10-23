@@ -9011,8 +9011,9 @@ main .sc-lede {
 main :is(p, li, dd):not(.sc-lede):not(.sc-label):not([class*="font-mono"]):not([class*="text-xs"]):not([class*="kicker"]) { line-height: 1.5; }
 main .sc-body { font-size: 1.0625rem !important; line-height: 1.5 !important; color: var(--ink-soft) !important; max-width: 42em; }
 
-/* space: sections breathe; a heading block sits clear of what follows */
-.sc-section { padding-block: clamp(5rem, 2.75rem + 6.5vw, 10rem); }
+/* space: sections are set apart, not separated by empty bands. 5–10rem a side left
+   260px of white between two sections on a laptop; now about 64px on phones, 110px wide */
+.sc-section { padding-block: clamp(2rem, 1.25rem + 2vw, 3.5rem); }
 .sc-section > .sc-wrap > :is(h2, .sc-display) + :is(.sc-lede, .sc-body, p) { margin-top: 1rem; }
 
 /* motion: one curve for every control and card */
