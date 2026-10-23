@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import { PartnerLink, PartnerBadge } from "@/components/brand/PartnerLink";
 import { Phone, Mail, MapPin, ChevronDown } from "lucide-react";
+import ConsentSettingsLink from "@/components/consent/ConsentSettingsLink";
 import { SHOTS } from "@/components/brand/BrandShot";
 import { COMPANY_INFO } from "@/data/content-data";
 import { SERVICE_CARDS } from "@/data/services";
@@ -93,7 +94,8 @@ export default function Footer() {
           <div className="site-footer__legal">
             <p>
               © 2026 sos-abdichtung · Inh. {COMPANY_INFO.owner} · <a href="/impressum/">Impressum</a> ·{" "}
-              <a href="/datenschutz/">Datenschutz</a> · <a href="/mein-auftrag/">Mein Auftrag</a> · <a href="/admin/">Mitarbeiter-Login</a>
+              <a href="/datenschutz/">Datenschutz</a> · <ConsentSettingsLink /> · <a href="/mein-auftrag/">Mein Auftrag</a> ·{" "}
+              <a href="/admin/">Mitarbeiter-Login</a>
             </p>
             <p>
               <PartnerLink>SchimmelPeter®</PartnerLink> ist eine Marke der SchimmelPeter GmbH.

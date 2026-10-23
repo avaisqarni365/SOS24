@@ -5,6 +5,7 @@ import "@/styles/scrollcraft.css";
 import "@/styles/globals.css";
 import { SITE_URL, OG_IMAGE } from "@/lib/site";
 import MobileContactBar from "@/components/sections/MobileContactBar";
+import ConsentBanner from "@/components/consent/ConsentBanner";
 import { APPEARANCE_BOOT } from "@/components/navigation/AppearanceMenu";
 import { COLOR_BOOT } from "@/lib/tone";
 import { I18N_BOOT } from "@/i18n/boot";
@@ -92,18 +93,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       suppressHydrationWarning
     >
       <head>
-        {/* Google tag (gtag.js) */}
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-X723SXRK6F" />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `
-              window.dataLayer = window.dataLayer || [];
-              function gtag(){dataLayer.push(arguments);}
-              gtag('js', new Date());
-              gtag('config', 'G-X723SXRK6F');
-            `,
-          }}
-        />
+        {/* Google Analytics loads only after consent: see ConsentBanner */}
         {/* theme and text size before first paint (see AppearanceMenu) */}
         <script dangerouslySetInnerHTML={{ __html: APPEARANCE_BOOT }} />
         <script dangerouslySetInnerHTML={{ __html: COLOR_BOOT }} />
@@ -117,6 +107,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Reveal />
           <GrokLeadBot />
           <MobileContactBar />
+          <ConsentBanner />
         </LanguageProvider>
       </body>
     </html>
