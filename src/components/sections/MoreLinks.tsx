@@ -155,7 +155,7 @@ export default function MoreLinks() {
         </ul>
         <div className="more__area">
           <p className="more__area-k">
-            <MapPin aria-hidden="true" /> Servicegebiet PLZ 42 <span>Stadt antippen: Karte, Postleitzahlen und Anfahrt</span>
+            <MapPin aria-hidden="true" /> Einsatzgebiet <span>Stadt antippen: Karte, Postleitzahlen und Anfahrt</span>
           </p>
           <CityFrames cities={cities} map={map} />
         </div>
