@@ -4318,7 +4318,8 @@ a[href^="tel:"] .contact-row__v { font-variant-numeric: tabular-nums; letter-spa
    room so the change of ground registers. */
 .sc-section { padding-block: clamp(4.5rem, 3rem + 4.5vw, 8rem); }
 .band-ink.sc-section { padding-block: clamp(5.5rem, 3.5rem + 6vw, 10rem); }
-.sc-section + .sc-section:not([class*="band"]) { padding-top: clamp(4rem, 2.5rem + 4vw, 7rem); }
+/* two plain sections in a row: the same step as everywhere (this gave up to 7rem on top) */
+.sc-section + .sc-section:not([class*="band"]) { padding-top: clamp(2rem, 1.25rem + 2vw, 3.5rem); }
 
 /* The services index breaks its own grid: the two services most people arrive
    for take half a row each, and the remaining four sit a third wide beneath
@@ -5492,7 +5493,16 @@ footer .logo__svg { height: 3.1rem; }
   .mnav { padding-top: calc(4.5rem + env(safe-area-inset-top, 0px)); }
 }
 .mnav__prefs { margin-top: 2.25rem; padding-top: 1.25rem; border-top: 1px solid rgb(var(--c-line) / 0.14); display: grid; gap: 1rem; }
-.mnav__prefs .mnav__lang { margin: 0; padding: 0; border: 0; }
+/* grid-column: the old two-column menu (min-width: 900px) put .mnav__lang in column 2, which
+   split this block in two and crushed the colour swatches into a quarter of it */
+.mnav__prefs .mnav__lang { margin: 0; padding: 0; border: 0; grid-column: auto; }
+/* the booking link spans the foot on every width, styled like the WhatsApp link: one filled
+   action (the call), the others outlined, no third colour */
+.mnav__termin { grid-column: 1 / -1; border: 1px solid rgb(var(--c-line) / 0.24); color: var(--ink-on-surface); }
+.mnav__termin:hover, .mnav__wa:hover { border-color: var(--pw-accent); }
+/* two columns of services: each row's rule lines up across both */
+.mnav__block--services .mnav__list li { display: flex; }
+.mnav__block--services .mnav__list a { flex: 1; }
 
 @media (min-width: 1024px) {
   .mnav-scrim {
@@ -5570,6 +5580,15 @@ footer .logo__svg { height: 3.1rem; }
   .mnav-scrim, .mnav { animation: none !important; }
 }
 html[data-theme="dark"] .mnav__foot { background: rgb(255 255 255 / 0.04); border-color: rgb(255 255 255 / 0.12); }
+
+/* while someone types into a form the assistant button steps aside: on phones it sat on the
+   right edge of the fields; it comes back as soon as the field is left */
+.bot-launcher { transition: opacity 160ms ease; }
+body:has(main :is(input, select, textarea):focus) .bot-launcher { opacity: 0; pointer-events: none; }
+
+/* the consent question sits above the phone's contact bar, and in the corner from 640px */
+.consent { bottom: calc(4.75rem + env(safe-area-inset-bottom, 0px)); }
+@media (min-width: 640px) { .consent { bottom: 1rem; } }
 
 /* the header slider: only where the bar has room for it */
 .header-tone { display: none !important; }
@@ -7844,9 +7863,9 @@ html[data-theme="dark"] .qv-city__plz > span { background: rgb(255 255 255 / 0.0
   #kontakt .contact-card__person > div { padding-top: 0.2rem !important; }
   #kontakt .sc-section > .grid { margin-top: 1.75rem !important; gap: 1.5rem !important; }
   #kontakt .sc-section > .grid > div:first-child { padding: 1.15rem !important; }
-  #kontakt form > div.grid { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 0.6rem !important; }
+  /* one field per row on phones: two to a row cut every placeholder and label short */
+  #kontakt form > div.grid { gap: 0.75rem !important; }
   #kontakt form button { padding-inline: 0.7rem !important; font-size: 0.85rem !important; }
-  #kontakt form label { font-size: 0.68rem !important; }
 }
 .contact-page__top { padding-bottom: 0 !important; }
 .contact-page #kontakt > .sc-section { padding-top: 1.5rem !important; }
@@ -8300,7 +8319,7 @@ html[data-theme="dark"] .steps4__cta a:is([href^="tel:"], [href*="wa.me"]) .step
   .more__card { flex-direction: row; align-items: center; gap: 0.6rem; padding: 0.7rem; border-radius: 16px; }
   .more__ico { display: grid; }
   .more__body { padding: 0; gap: 0.1rem; }
-  .more__k { font-size: 0.58rem; letter-spacing: 0.1em; }
+  .more__k { font-size: 0.6875rem; letter-spacing: 0.08em; }
   .more__t { font-size: 0.9rem; }
 
   /* the towns: three framed tiles a row */
@@ -8993,8 +9012,9 @@ main .sc-lede {
 main :is(p, li, dd):not(.sc-lede):not(.sc-label):not([class*="font-mono"]):not([class*="text-xs"]):not([class*="kicker"]) { line-height: 1.5; }
 main .sc-body { font-size: 1.0625rem !important; line-height: 1.5 !important; color: var(--ink-soft) !important; max-width: 42em; }
 
-/* space: sections breathe; a heading block sits clear of what follows */
-.sc-section { padding-block: clamp(5rem, 2.75rem + 6.5vw, 10rem); }
+/* space: sections are set apart, not separated by empty bands. 5–10rem a side left
+   260px of white between two sections on a laptop; now about 64px on phones, 110px wide */
+.sc-section { padding-block: clamp(2rem, 1.25rem + 2vw, 3.5rem); }
 .sc-section > .sc-wrap > :is(h2, .sc-display) + :is(.sc-lede, .sc-body, p) { margin-top: 1rem; }
 
 /* motion: one curve for every control and card */

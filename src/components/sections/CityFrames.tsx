@@ -33,6 +33,10 @@ const TONE: Record<string, string> = {
   velbert: "var(--ic-green)",
   haan: "var(--ic-red)",
   wermelskirchen: "var(--ic-water)",
+  essen: "var(--ic-green)",
+  duesseldorf: "var(--ic-red)",
+  bochum: "var(--ic-water)",
+  dortmund: "var(--ic-green)",
 };
 const tone = (slug: string) => ({ ["--ic" as string]: TONE[slug] ?? "var(--ic-water)" });
 
@@ -105,7 +109,7 @@ export default function CityFrames({ cities, map }: { cities: CityFrame[]; map: 
               </g>
             </svg>
             <div className="qv-city__body">
-              <p className="qv__k">Servicegebiet PLZ 42</p>
+              <p className="qv__k">Einsatzgebiet</p>
               <h2 id="city-qv-title" className="qv__t">
                 Kellersanierung in {active.name}
               </h2>

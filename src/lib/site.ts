@@ -1,4 +1,5 @@
 import { COMPANY_INFO } from "@/data/content-data";
+import { SERVICE_PAGES } from "@/data/seo-pages";
 
 export const SITE_URL = "https://sos-abdichtung.de";
 export const SITE_NAME = "sos-abdichtung";
@@ -27,7 +28,7 @@ export function businessNode() {
     alternateName: "sos-abdichtung, SchimmelPeter® Partnerbetrieb",
     legalName: `sos-abdichtung, Inh. ${COMPANY_INFO.owner}`,
     description:
-      "Fachbetrieb für Kellersanierung ohne Aufgraben, Horizontalsperren im Injektionsverfahren, Kellerinnenabdichtung und Schimmelbeseitigung in Wuppertal und dem Bergischen Land (PLZ 42).",
+      "Bautenschutz-Fachbetrieb für Kellersanierung von innen ohne Aufgraben, Horizontalsperren im Injektionsverfahren, Kellerinnenabdichtung nach WTA, Mauerwerkstrockenlegung und Schimmelpilzsanierung in Wuppertal, Essen, Düsseldorf, Bochum, Dortmund und dem Bergischen Land.",
     url: SITE_URL,
     telephone: COMPANY_INFO.phoneTel,
     email: COMPANY_INFO.email,
@@ -80,15 +81,34 @@ export function businessNode() {
     ].map((name) => ({ "@type": "City", name })),
     memberOf: { "@type": "Organization", name: "SchimmelPeter®", url: "https://www.schimmelpeter.de" },
     sameAs: [PARTNER_URL],
+    // the categories of the Google Business Profile, as far as the work is what we do
     knowsAbout: [
+      "Bautenschutz",
       "Kellersanierung",
+      "Feuchte Kellerwände sanieren",
       "Horizontalsperre",
       "Injektionsverfahren",
+      "Mauerwerkstrockenlegung",
+      "Bautrocknung",
       "Kellerinnenabdichtung",
       "Schimmelbeseitigung",
-      "Feuchtemessung",
+      "Schimmelpilzsanierung",
+      "Klimaplatten",
+      "Wasserschaden im Keller",
+      "Feuchtigkeitsmessung",
       "Rissverpressung",
+      "Sockelabdichtung",
+      "Balkonabdichtung",
     ],
+    // the services exactly as listed in the Google Business Profile, each with its page
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: "Leistungen",
+      itemListElement: SERVICE_PAGES.map((p) => ({
+        "@type": "Offer",
+        itemOffered: { "@type": "Service", name: p.serviceName, url: abs(`/leistungen/${p.slug}/`) },
+      })),
+    },
   };
 }
 

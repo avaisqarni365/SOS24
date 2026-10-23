@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import {
   MessageSquare,
   X,
@@ -17,11 +17,13 @@ import { COMPANY } from '@/data/content-data';
 import {
   askWaterproofingBot,
   bookMoistureInspection,
+  fetchFreeSlots,
   submitLeadToWorkspace,
   uploadDamagePhotosToDrive,
   resizeImageToBase64,
   type EncodedPhoto,
 } from '@/lib/backend';
+import SendError from '@/components/ui/SendError';
 
 interface ChatMessage {
   role: 'bot' | 'user';
@@ -96,6 +98,9 @@ export default function GrokLeadBot() {
   const [bookType, setBookType] = useState<'visit' | 'video' | 'call'>('visit');
   const [bookLoading, setBookLoading] = useState(false);
   const [bookDone, setBookDone] = useState<{ nr: string; date: string; time: string } | null>(null);
+  const [bookError, setBookError] = useState('');
+  // free slots from the office calendar; null while loading, [] when none could be loaded
+  const [freeDays, setFreeDays] = useState<{ date: string; slots: string[] }[] | null>(null);
 
   // Photo Upload State (action: 'photos' -> Google Drive)
   const [photoName, setPhotoName] = useState('');
@@ -104,6 +109,7 @@ export default function GrokLeadBot() {
   const [photos, setPhotos] = useState<{ file: File; preview: string }[]>([]);
   const [photoSending, setPhotoSending] = useState(false);
   const [photoSuccessId, setPhotoSuccessId] = useState<string>('');
+  const [photoError, setPhotoError] = useState('');
   const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   const diagResult = (() => {
@@ -118,6 +124,23 @@ export default function GrokLeadBot() {
     const taxBonus = Math.round(minPrice * 0.6 * 0.2);
     return { ...rates, minPrice, maxPrice, taxBonus };
   })();
+
+  // slots load only when the booking tab is open, and again for another appointment type
+  useEffect(() => {
+    if (activeTab !== 'book') return;
+    let live = true;
+    setFreeDays(null);
+    fetchFreeSlots(bookType).then((days) => {
+      if (!live) return;
+      const list = days || [];
+      setFreeDays(list);
+      setBookDate(list[0]?.date || '');
+      setBookTime(list[0]?.slots[0] || '');
+    });
+    return () => {
+      live = false;
+    };
+  }, [activeTab, bookType]);
 
   const sendMessage = async (textToSend: string) => {
     const trimmed = textToSend.trim();
@@ -138,14 +161,13 @@ export default function GrokLeadBot() {
 
   const handleBookSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!bookName.trim() || !bookPhone.trim()) return;
+    if (!bookName.trim() || !bookPhone.trim() || !bookDate || !bookTime) return;
     setBookLoading(true);
+    setBookError('');
     try {
-      const targetDate =
-        bookDate || new Date(Date.now() + 2 * 86400000).toISOString().slice(0, 10);
       const res = await bookMoistureInspection({
         type: bookType,
-        date: targetDate,
+        date: bookDate,
         time: bookTime,
         name: bookName.trim(),
         phone: bookPhone.trim(),
@@ -153,11 +175,13 @@ export default function GrokLeadBot() {
         damageType: diagResult.label,
         note: `Gebucht über KI-Berater (${diagMeasure} ${diagResult.unit})`,
       });
-      setBookDone({
-        nr: res.nr || 'T-1001',
-        date: res.date || targetDate,
-        time: res.time || bookTime,
-      });
+      if (!res.ok || !res.nr) {
+        setBookError(res.error || 'server');
+        // a slot taken meanwhile: show the calendar as it is now
+        if (res.error === 'slot') fetchFreeSlots(bookType).then((d) => setFreeDays(d || []));
+        return;
+      }
+      setBookDone({ nr: res.nr, date: res.date || bookDate, time: res.time || bookTime });
     } finally {
       setBookLoading(false);
     }
@@ -178,6 +202,7 @@ export default function GrokLeadBot() {
     e.preventDefault();
     if (!photoName.trim() || !photoPhone.trim() || photos.length === 0) return;
     setPhotoSending(true);
+    setPhotoError('');
     try {
       const leadRes = await submitLeadToWorkspace({
         name: photoName.trim(),
@@ -189,7 +214,11 @@ export default function GrokLeadBot() {
         channel: 'whatsapp',
         source: 'Chatbot Foto-Upload',
       });
-      const id = leadRes.id || 'A-1001';
+      if (!leadRes.ok || !leadRes.id) {
+        setPhotoError(leadRes.error || 'server');
+        return;
+      }
+      const id = leadRes.id;
       const token = leadRes.up || '';
       const encoded: EncodedPhoto[] = [];
       for (const p of photos) {
@@ -200,12 +229,11 @@ export default function GrokLeadBot() {
         }
       }
       if (encoded.length > 0) {
-        await uploadDamagePhotosToDrive({
-          id,
-          token,
-          images: encoded,
-          note: photoNote,
-        });
+        const up = await uploadDamagePhotosToDrive({ id, token, images: encoded, note: photoNote });
+        if (!up.ok) {
+          setPhotoError(up.error || 'server');
+          return;
+        }
       }
       setPhotoSuccessId(id);
     } finally {
@@ -231,7 +259,7 @@ export default function GrokLeadBot() {
     <>
       {/* Floating Trigger: 48px FAB on mobile above sticky action bar, elegant navy pill on desktop */}
       {!open && (
-        <div className="fixed bottom-[5.25rem] sm:bottom-6 right-4 sm:right-6 z-40">
+        <div className="bot-launcher fixed bottom-[5.25rem] sm:bottom-6 right-4 sm:right-6 z-40">
           <button
             type="button"
             onClick={() => setOpen(true)}
@@ -545,29 +573,47 @@ export default function GrokLeadBot() {
                       placeholder="Objektadresse (Straße, PLZ Ort)"
                       className="w-full px-3 py-2.5 rounded-xl border border-slate-300 bg-white text-slate-900"
                     />
-                    <div className="grid grid-cols-2 gap-2">
-                      <input
-                        type="date"
-                        value={bookDate}
-                        onChange={(e) => setBookDate(e.target.value)}
-                        className="w-full px-3 py-2.5 rounded-xl border border-slate-300 bg-white text-slate-900"
-                      />
-                      <select
-                        value={bookTime}
-                        onChange={(e) => setBookTime(e.target.value)}
-                        className="w-full px-3 py-2.5 rounded-xl border border-slate-300 bg-white text-slate-900"
-                      >
-                        <option value="09:00">09:00 Uhr</option>
-                        <option value="10:00">10:00 Uhr</option>
-                        <option value="12:00">12:00 Uhr</option>
-                        <option value="14:00">14:00 Uhr</option>
-                        <option value="16:00">16:00 Uhr</option>
-                        <option value="17:30">17:30 Uhr</option>
-                      </select>
-                    </div>
+                    {freeDays === null ? (
+                      <p className="flex items-center gap-2 text-slate-600">
+                        <Loader2 className="w-4 h-4 animate-spin" /> Freie Termine werden geladen …
+                      </p>
+                    ) : freeDays.length === 0 ? (
+                      <SendError error="server" title="Online-Termine sind gerade nicht abrufbar." />
+                    ) : (
+                      <div className="grid grid-cols-2 gap-2">
+                        <select
+                          aria-label="Tag"
+                          value={bookDate}
+                          onChange={(e) => {
+                            setBookDate(e.target.value);
+                            setBookTime(freeDays.find((d) => d.date === e.target.value)?.slots[0] || '');
+                          }}
+                          className="w-full px-3 py-2.5 rounded-xl border border-slate-300 bg-white text-slate-900"
+                        >
+                          {freeDays.map((d) => (
+                            <option key={d.date} value={d.date}>
+                              {new Date(d.date + 'T12:00:00').toLocaleDateString('de-DE', { weekday: 'short', day: '2-digit', month: '2-digit' })}
+                            </option>
+                          ))}
+                        </select>
+                        <select
+                          aria-label="Uhrzeit"
+                          value={bookTime}
+                          onChange={(e) => setBookTime(e.target.value)}
+                          className="w-full px-3 py-2.5 rounded-xl border border-slate-300 bg-white text-slate-900"
+                        >
+                          {(freeDays.find((d) => d.date === bookDate)?.slots || []).map((t) => (
+                            <option key={t} value={t}>
+                              {t} Uhr
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+                    )}
+                    <SendError error={bookError} what="Ihre Terminbuchung" />
                     <button
                       type="submit"
-                      disabled={bookLoading}
+                      disabled={bookLoading || !freeDays || freeDays.length === 0 || !bookTime}
                       className="w-full bg-brand-700 hover:bg-brand-800 text-white font-bold py-3 rounded-xl flex items-center justify-center gap-2"
                     >
                       {bookLoading ? <Loader2 className="w-4 h-4 animate-spin" /> : <Calendar className="w-4 h-4" />}
@@ -657,6 +703,7 @@ export default function GrokLeadBot() {
                         ))}
                       </div>
                     )}
+                    <SendError error={photoError} what="Ihre Fotos" plural />
                     <button
                       type="submit"
                       disabled={photoSending || photos.length === 0}

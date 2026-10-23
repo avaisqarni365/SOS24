@@ -64,8 +64,9 @@ const ctx = {
   LockService: {getScriptLock: () => ({waitLock() {}, tryLock() { return true; }, releaseLock() {}})},
   Utilities: {
     base64EncodeWebSafe: b => Buffer.from(b).toString('base64url'),
-    computeDigest: (a, s) => [...require('crypto').createHash('md5').update(s).digest()],
-    DigestAlgorithm: {MD5: 1},
+    computeDigest: (a, s) => [...require('crypto').createHash(a === 2 ? 'sha256' : 'md5').update(s).digest()].map((b) => (b > 127 ? b - 256 : b)),
+    DigestAlgorithm: {MD5: 1, SHA_256: 2},
+    Charset: {UTF_8: 'UTF-8'},
     getUuid: () => require('crypto').randomUUID(),
     formatDate: (d, tz, fmt) => {
       const dt = d instanceof Date && !isNaN(d) ? d : new Date('2026-10-16T12:00:00Z');
@@ -173,4 +174,8 @@ function load(project, files) {
   }
 }
 const setActive = (sheet, row) => { ACTIVE_SHEET = sheet; ACTIVE_ROW = row; };
-module.exports = {ctx, sheets, alerts, mails, puts, props, cache, calEvents, driveFolders, REPO, load, setActive, ss};
+/* The owner's account has no password until one is typed into „Neues Passwort“; tests do the same. */
+const TEST_PW = 'nur-fuer-tests-0815';
+function seedAdminPw() { const sh = sheets['Benutzer']; assert(sh && sh.data[1], 'Benutzer tab with the owner row'); sh.data[1][3] = TEST_PW; }
+
+module.exports = {TEST_PW, seedAdminPw, ctx, sheets, alerts, mails, puts, props, cache, calEvents, driveFolders, REPO, load, setActive, ss};

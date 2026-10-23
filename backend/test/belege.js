@@ -17,7 +17,8 @@ ctx.setup();
 console.log('--- SOS ABDICHTUNG GOBD & § 35a INVOICING TEST SUITE ---');
 
 // 1. Authenticate Admin session
-const loginRes = ctx.login('shahzad', 'SOS2026!Wuppertal');
+M.seedAdminPw();
+const loginRes = ctx.login('shahzad', M.TEST_PW);
 assert(loginRes.ok && loginRes.token, 'Admin session authenticated');
 const token = loginRes.token;
 

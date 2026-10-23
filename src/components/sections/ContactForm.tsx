@@ -27,13 +27,13 @@ import {
   downloadIcsFile,
   INSPECTION_SLOTS,
 } from '@/lib/calendar';
+import SendError from '@/components/ui/SendError';
 import {
   submitLeadToWorkspace,
   uploadDamagePhotosToDrive,
   signContractDigitally,
   resizeImageToBase64,
   processFileForUpload,
-  NOTIFY_EMAIL_DEFAULT,
   type EncodedPhoto,
 } from '@/lib/backend';
 
@@ -60,6 +60,8 @@ export default function ContactForm({ compact = false, defaultDamage, place }: C
     { file: File; preview: string; isPdf?: boolean }[]
   >([]);
   const [photoError, setPhotoError] = useState<string>('');
+  const [sendError, setSendError] = useState<string>('');
+  const [signError, setSignError] = useState<string>('');
   const mountedAtRef = useRef<number>(Date.now());
 
   const [formData, setFormData] = useState({
@@ -171,12 +173,16 @@ export default function ContactForm({ compact = false, defaultDamage, place }: C
         }
       }
       if (encoded.length > 0) {
-        await uploadDamagePhotosToDrive({
+        const up = await uploadDamagePhotosToDrive({
           id: targetLeadId,
           token: targetToken,
           images: encoded,
           note: formData.message,
         });
+        if (!up.ok) {
+          setPhotoError('Die Fotos wurden nicht hochgeladen. Bitte senden Sie sie per WhatsApp.');
+          return;
+        }
         setPhotosUploadedCount((prev) => prev + encoded.length);
         setUploadedPreviews((prev) => [...prev, ...previews]);
         setSelectedPhotos([]);
@@ -189,6 +195,7 @@ export default function ContactForm({ compact = false, defaultDamage, place }: C
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitting(true);
+    setSendError('');
     try {
       const elapsed = Date.now() - mountedAtRef.current;
       const slot = INSPECTION_SLOTS.find((s) => s.id === formData.preferredTimeSlot);
@@ -211,8 +218,12 @@ export default function ContactForm({ compact = false, defaultDamage, place }: C
         elapsed
       );
 
-      const id = res.id || 'A-1003';
-      const tok = res.up || 'local-token';
+      if (!res.ok || !res.id) {
+        setSendError(res.error || 'server');
+        return;
+      }
+      const id = res.id;
+      const tok = res.up || '';
       setLeadId(id);
       setUploadToken(tok);
 
@@ -254,11 +265,11 @@ export default function ContactForm({ compact = false, defaultDamage, place }: C
         channel: 'whatsapp',
         source: 'Kontaktformular WhatsApp (/kontakt/)',
       });
-      id = res.id || 'A-1003';
-      tok = res.up || 'local-token';
+      id = res.ok && res.id ? res.id : '';
+      tok = res.up || '';
       setLeadId(id);
       setUploadToken(tok);
-      if (selectedPhotos.length > 0) {
+      if (id && selectedPhotos.length > 0) {
         await uploadPhotosForLead(id, tok, selectedPhotos);
       }
     }
@@ -320,14 +331,19 @@ export default function ContactForm({ compact = false, defaultDamage, place }: C
     e.preventDefault();
     if (!signMode || !canvasRef.current || !signerName.trim()) return;
     setSigning(true);
+    setSignError('');
     try {
       const dataUrl = canvasRef.current.toDataURL('image/png');
-      await signContractDigitally({
+      const res = await signContractDigitally({
         id: signMode.id,
         token: signMode.k,
         signer: signerName.trim(),
         signatureDataUrl: dataUrl,
       });
+      if (!res.ok) {
+        setSignError(res.error || 'server');
+        return;
+      }
       setSignSuccess(true);
     } finally {
       setSigning(false);
@@ -365,8 +381,8 @@ export default function ContactForm({ compact = false, defaultDamage, place }: C
             {signSuccess ? (
               <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-5 text-emerald-950 space-y-2">
                 <p className="font-bold text-base sm:text-lg">
-                  ✓ Vielen Dank, {signerName}! Ihre digitale Unterschrift zu {signMode.id} wurde in
-                  Google Drive (`SOS Abdichtung - Verträge`) und im Admin-Portal hinterlegt.
+                  ✓ Vielen Dank, {signerName}! Ihre Unterschrift zu Auftrag {signMode.id} ist bei uns
+                  angekommen. Eine Bestätigung erhalten Sie per E-Mail.
                 </p>
                 <p className="text-sm text-slate-600">
                   Herr Shahzad Mahmood setzt sich umgehend mit Ihnen zur finalen Terminabstimmung in
@@ -436,6 +452,7 @@ export default function ContactForm({ compact = false, defaultDamage, place }: C
                   )}
                   Auftrag {signMode.id} verbindlich digital unterzeichnen
                 </button>
+                <SendError error={signError} what="Ihre Unterschrift" />
               </form>
             )}
           </div>
@@ -443,13 +460,13 @@ export default function ContactForm({ compact = false, defaultDamage, place }: C
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
           {/* Left Column: Direct Contact & Guarantees */}
-          <div className="lg:col-span-5 space-y-6">
+          <div className="lg:col-span-5 space-y-6 order-last lg:order-none">
             <div>
               <span className="inline-block text-xs font-bold uppercase tracking-wider text-emerald-800 bg-emerald-100 px-3 py-1 rounded-full mb-3">
                 Kostenlose Feuchtigkeitsmessung vor Ort
               </span>
               <h2 className="text-2xl sm:text-3xl font-extrabold text-ink tracking-tight mb-3">
-                Jetzt kostenlose Schadensanalyse in Wuppertal &amp; Region anfordern
+                Jetzt kostenlose Schadensanalyse in NRW anfordern
               </h2>
               <p className="text-ink-soft text-sm sm:text-base leading-relaxed">
                 Inhaber <strong>{COMPANY_INFO.owner}</strong> begutachtet Ihren Feuchteschaden
@@ -564,10 +581,9 @@ export default function ContactForm({ compact = false, defaultDamage, place }: C
                     Ihre Schadensanfrage ist eingegangen!
                   </h3>
                   <p className="text-slate-600 text-sm leading-relaxed">
-                    Vielen Dank, <strong>{formData.name}</strong>. Ihre Anfrage (`{leadId}`)
-                    {photosUploadedCount > 0
-                      ? ` sowie ${photosUploadedCount} Schadensfoto(s) wurden erfolgreich in Google Drive (SOS Abdichtung - Schadensfotos / ${leadId}) und im Admin-Portal gespeichert.`
-                      : ' wurde erfolgreich im System und Google Workspace gespeichert.'}
+                    Vielen Dank, <strong>{formData.name}</strong>. Ihre Anfrage {leadId}
+                    {photosUploadedCount > 0 ? ` und ${photosUploadedCount} Foto(s) sind` : ' ist'} bei uns angekommen.
+                    Herr {COMPANY_INFO.owner.split(' ').pop()} ruft Sie in der Regel noch am selben Werktag an.
                   </p>
                 </div>
 
@@ -578,9 +594,6 @@ export default function ContactForm({ compact = false, defaultDamage, place }: C
                       <span className="flex items-center gap-1.5">
                         <Camera className="w-4 h-4 text-emerald-700" />
                         Hochgeladene Schadensfotos ({uploadedPreviews.length})
-                      </span>
-                      <span className="text-[11px] text-emerald-700">
-                        Cloud: {NOTIFY_EMAIL_DEFAULT}
                       </span>
                     </div>
                     <div className="flex flex-wrap gap-2">
@@ -618,7 +631,7 @@ export default function ContactForm({ compact = false, defaultDamage, place }: C
                       Weitere Schadensfotos zu {leadId} nachreichen?
                     </strong>
                     <span className="text-slate-500">
-                      Werden direkt dem Vorgang {leadId} im Admin-Portal &amp; Google Drive zugeordnet.
+                      Sie werden Ihrer Anfrage {leadId} zugeordnet.
                     </span>
                   </div>
                   <label
@@ -725,11 +738,11 @@ export default function ContactForm({ compact = false, defaultDamage, place }: C
 
                 <div className="flex flex-wrap items-center justify-center gap-4 pt-2 text-xs">
                   <Link
-                    href="/admin/"
-                    className="inline-flex items-center gap-1.5 font-bold text-emerald-700 hover:text-emerald-800 underline"
+                    href={`/mein-auftrag/?id=${encodeURIComponent(leadId)}&k=${encodeURIComponent(uploadToken)}`}
+                    className="inline-flex min-h-[44px] items-center gap-1.5 font-bold text-emerald-700 hover:text-emerald-800 underline"
                   >
                     <FolderOpen className="w-3.5 h-3.5" />
-                    Vorgang {leadId} &amp; Fotos im Admin-Portal ansehen →
+                    Ihre Anfrage {leadId} ansehen →
                   </Link>
                   <button
                     type="button"
@@ -752,8 +765,7 @@ export default function ContactForm({ compact = false, defaultDamage, place }: C
                     Anfrage für kostenlose Vor-Ort-Besichtigung &amp; Foto-Diagnose
                   </h3>
                   <p className="text-xs text-slate-500 mt-1">
-                    Unverbindlich &amp; kostenfrei im Raum Wuppertal, Solingen, Remscheid, Velbert
-                    &amp; Bergisches Land.
+                    Unverbindlich &amp; kostenfrei in Wuppertal, Essen, Düsseldorf, Bochum, Dortmund, im Bergischen Land und ganz NRW.
                   </p>
                 </div>
 
@@ -766,7 +778,7 @@ export default function ContactForm({ compact = false, defaultDamage, place }: C
                       Ihr Name *
                     </label>
                     <input
-                      id="contact-name"
+                      id="contact-name" autoComplete="name"
                       name="name"
                       type="text"
                       required
@@ -785,13 +797,13 @@ export default function ContactForm({ compact = false, defaultDamage, place }: C
                       Telefon / Mobil für Rückruf *
                     </label>
                     <input
-                      id="contact-phone"
+                      id="contact-phone" autoComplete="tel"
                       name="phone"
                       type="tel"
                       required
                       value={formData.phone}
                       onChange={handleChange}
-                      placeholder="z. B. 0172 2064177"
+                      placeholder="z. B. 0170 1234567"
                       className={inputCls}
                     />
                   </div>
@@ -806,7 +818,7 @@ export default function ContactForm({ compact = false, defaultDamage, place }: C
                       E-Mail-Adresse (optional)
                     </label>
                     <input
-                      id="contact-email"
+                      id="contact-email" autoComplete="email"
                       name="email"
                       type="email"
                       value={formData.email}
@@ -971,9 +983,7 @@ export default function ContactForm({ compact = false, defaultDamage, place }: C
                           Schadensfotos &amp; Dokumente beifügen (optional, bis zu 6 Dateien)
                         </span>
                         <span className="text-xs text-slate-600 block mt-0.5">
-                          Direkt vom Smartphone aufnehmen oder auswählen (Fotos, PDF-Pläne, Gutachten) – wird automatisch im{' '}
-                          <strong>Google Drive ({NOTIFY_EMAIL_DEFAULT})</strong> und im{' '}
-                          <strong>Admin-Dashboard</strong> gespeichert.
+                          Direkt vom Smartphone aufnehmen oder auswählen (Fotos, PDF-Pläne, Gutachten). Die Dateien kommen mit Ihrer Anfrage direkt bei uns an.
                         </span>
                       </div>
                     </div>
@@ -1062,6 +1072,7 @@ export default function ContactForm({ compact = false, defaultDamage, place }: C
                   </label>
                 </div>
 
+                <SendError error={sendError} />
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
                   <button
                     type="submit"

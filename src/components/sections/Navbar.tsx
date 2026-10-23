@@ -15,7 +15,7 @@ import { useLanguage } from "@/i18n/LanguageContext";
 
 /* The 3D viewer, the scanner and the measurement proof are one tab now
    (/labor/), not two anchors into a very long landing page. */
-/** The six towns of the service area (kept small here: no page texts in the menu bundle). */
+/** Every city page, in the order of seo-pages.ts CITY_PAGES (kept small here: no page texts in the menu bundle). */
 const CITIES = [
   { slug: "wuppertal", name: "Wuppertal" },
   { slug: "solingen", name: "Solingen" },
@@ -23,11 +23,15 @@ const CITIES = [
   { slug: "velbert", name: "Velbert" },
   { slug: "haan", name: "Haan" },
   { slug: "wermelskirchen", name: "Wermelskirchen" },
+  { slug: "essen", name: "Essen" },
+  { slug: "duesseldorf", name: "Düsseldorf" },
+  { slug: "bochum", name: "Bochum" },
+  { slug: "dortmund", name: "Dortmund" },
 ];
 
 /** The flat top level of the menu: the main places the site actually goes. */
 const PRIMARY: { href: string; key?: string; label?: string }[] = [
-  { href: "/termin/", label: "📅 Online-Termin buchen" },
+  { href: "/termin/", label: "Termin buchen" },
   { href: "/leistungen/", label: "Leistungen" },
   { href: "/labor/", key: "nav.simulation" },
   { href: "/galerie/", key: "nav.gallery" },
@@ -220,7 +224,7 @@ export default function Navbar() {
             </section>
 
             <section className="mnav__block mnav__block--cities" aria-labelledby="mnav-cities">
-              <p id="mnav-cities" className="mnav__kicker">Servicegebiet PLZ 42</p>
+              <p id="mnav-cities" className="mnav__kicker">Einsatzgebiet</p>
               <ul className="mnav__chips">
                 {CITIES.map((c) => (
                   <li key={c.slug}>
@@ -280,10 +284,13 @@ export default function Navbar() {
             <a
               href="/termin/"
               onClick={() => setOpen(false)}
-              className="mnav__termin col-span-2 flex items-center justify-center gap-2 py-3 bg-emerald-700 hover:bg-emerald-600 text-white rounded-2xl font-black text-sm shadow-sm transition-colors"
+              className="mnav__termin"
             >
-              <Calendar className="h-4 w-4 text-emerald-200" aria-hidden="true" />
-              <span>Online-Wunschtermin buchen (Kostenlos)</span>
+              <Calendar className="h-4 w-4" aria-hidden="true" />
+              <span>
+                <small>Kostenlos</small>
+                Termin online buchen
+              </span>
             </a>
           </div>
         </div>

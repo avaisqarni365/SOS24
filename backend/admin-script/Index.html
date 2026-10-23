@@ -163,7 +163,7 @@ body.locked .top nav,body.locked .top .me{display:none}
     <a href="#/statistik" data-nav="stats">Statistik</a>
     <a href="#/hilfe" data-nav="help">Hilfe</a>
   </nav>
-  <div class="me"><span id="me-name"></span><a href="#" id="sheet-link" target="_blank" rel="noopener">Tabelle</a><a href="<?= siteUrl ?>" target="_blank" rel="noopener">Website</a><a href="#" id="logout">Abmelden</a></div>
+  <div class="me"><span id="me-name"></span><a href="#" id="sheet-link" target="_blank" rel="noopener">Tabelle</a><a href="<?= siteUrl ?>" target="_blank" rel="noopener">Website</a><a href="#" id="change-pw">Passwort ändern</a><a href="#" id="logout">Abmelden</a></div>
 </header>
 <main id="app"><p class="loading">Daten werden geladen …</p></main>
 <div id="toast" class="toast" role="status" hidden></div>
@@ -216,7 +216,9 @@ body.locked .top nav,body.locked .top .me{display:none}
       google.script.run.withSuccessHandler(function (r) {
         b.disabled = false;
         if (!r || !r.ok) {
-          f.querySelector('.login-err').textContent = r && r.error === 'locked' ? 'Zu viele Versuche – bitte in 15 Minuten erneut versuchen.' : 'Benutzername oder Passwort stimmt nicht.';
+          f.querySelector('.login-err').textContent = r && r.error === 'locked' ? 'Zu viele Versuche – bitte in 15 Minuten erneut versuchen.'
+            : r && r.error === 'leaked' ? 'Dieses Passwort ist gesperrt, weil es öffentlich bekannt war. Tragen Sie in der Tabelle im Blatt „Benutzer“ unter „Neues Passwort“ ein neues ein (mind. 8 Zeichen) und melden Sie sich damit an.'
+            : 'Benutzername oder Passwort stimmt nicht.';
           f.pass.value = ''; f.pass.focus(); return;
         }
         setToken(r.token); loginShown = false; document.body.classList.remove('locked');
@@ -226,6 +228,29 @@ body.locked .top nav,body.locked .top .me{display:none}
       }).withFailureHandler(function (e) { b.disabled = false; f.querySelector('.login-err').textContent = 'Anmeldung nicht möglich: ' + (e && e.message || e); }).login(f.user.value, f.pass.value);
     });
   }
+  document.getElementById('change-pw').addEventListener('click', function (ev) {
+    ev.preventDefault();
+    if (!TOKEN) { showLogin(); return; }
+    app.innerHTML = '<form class="card login" id="pwform"><h1>Passwort ändern</h1>' +
+      '<label>Aktuelles Passwort<input class="input" name="cur" type="password" autocomplete="current-password" required></label>' +
+      '<label>Neues Passwort (mind. 8 Zeichen)<input class="input" name="neu" type="password" autocomplete="new-password" minlength="8" required></label>' +
+      '<label>Neues Passwort wiederholen<input class="input" name="neu2" type="password" autocomplete="new-password" minlength="8" required></label>' +
+      '<p class="login-err" role="alert"></p><button class="btn primary" type="submit">Speichern</button> <a href="#/">Abbrechen</a></form>';
+    var f = document.getElementById('pwform'), err = f.querySelector('.login-err');
+    f.cur.focus();
+    f.addEventListener('submit', function (e2) {
+      e2.preventDefault();
+      if (f.neu.value !== f.neu2.value) { err.textContent = 'Die beiden neuen Passwörter sind nicht gleich.'; return; }
+      var b = f.querySelector('button'); b.disabled = true;
+      run('api_changePassword', f.cur.value, f.neu.value).then(function (r) {
+        b.disabled = false;
+        if (!r || !r.ok) { err.textContent = (r && r.error) || 'Nicht gespeichert.'; return; }
+        toast('Passwort geändert.');
+        location.hash = '#/';
+        reload().then(routeTo);
+      }).catch(function (e) { b.disabled = false; err.textContent = (e && e.message) || String(e); });
+    });
+  });
   document.getElementById('logout').addEventListener('click', function (ev) {
     ev.preventDefault();
     google.script.run.withSuccessHandler(function () {}).logout(TOKEN);

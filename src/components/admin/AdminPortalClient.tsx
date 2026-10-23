@@ -79,6 +79,8 @@ import {
   ADMIN_WEBAPP_URL,
 } from "@/lib/backend";
 
+const ADMIN_PASS_SHA256 = (process.env.NEXT_PUBLIC_ADMIN_PASS_SHA256 || "").trim().toLowerCase();
+
 type AdminTab =
   | "overview"
   | "leads"
@@ -1225,18 +1227,17 @@ export default function AdminPortalClient() {
   const curLead = leads.find((l) => l.id === selectedLeadId) || leads[0];
   const curDoc = docs.find((d) => d.nr === selectedDocNr) || docs[0];
 
-  const handleLogin = (e: React.FormEvent) => {
+  // This page ships to every visitor, so it holds no password: only the SHA-256 of one,
+  // set at build time. Without it the demo stays locked and the real back office is in Google.
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (pass === "SOS2026!Wuppertal" || pass === "2026" || pass === "admin") {
+    const digest = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(pass));
+    const hex = Array.from(new Uint8Array(digest), (b) => b.toString(16).padStart(2, "0")).join("");
+    if (ADMIN_PASS_SHA256 && hex === ADMIN_PASS_SHA256) {
       setUnlocked(true);
       setLoginErr("");
     } else {
-      setLoginErr(
-        t(
-          "Ungültiges Passwort. Test-Passwort: SOS2026!Wuppertal",
-          "Invalid password. Master password: SOS2026!Wuppertal"
-        )
-      );
+      setLoginErr(t("Ungültiges Passwort.", "Invalid password."));
     }
   };
 
@@ -1968,37 +1969,34 @@ export default function AdminPortalClient() {
               autoComplete="current-password"
               value={pass}
               onChange={(e) => setPass(e.target.value)}
-              placeholder={t("Standard: SOS2026!Wuppertal", "Default: SOS2026!Wuppertal")}
               className={inputCls}
             />
           </div>
           {loginErr && <p className="text-xs font-bold text-red-600">{loginErr}</p>}
           <button
             type="submit"
-            className="w-full min-h-[48px] bg-[#0f2537] hover:bg-slate-800 text-white font-bold py-3 px-4 rounded-xl text-sm transition-colors"
+            disabled={!ADMIN_PASS_SHA256}
+            className="w-full min-h-[48px] bg-[#0f2537] hover:bg-slate-800 disabled:opacity-50 text-white font-bold py-3 px-4 rounded-xl text-sm transition-colors"
           >
             {t("Im Admin-Portal anmelden →", "Log in to Admin Dashboard →")}
           </button>
-          <button
-            type="button"
-            onClick={() => {
-              setPass("SOS2026!Wuppertal");
-              setUnlocked(true);
-            }}
-            className="w-full min-h-[48px] bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-3 px-4 rounded-xl text-xs sm:text-sm transition-colors"
-          >
-            {t("⚡ 1-Klick Schnellzugriff öffnen", "⚡ 1-Click Quick Access (Shahzad Mahmood)")}
-          </button>
         </form>
 
-        <div className="mt-5 pt-4 border-t border-slate-200 text-xs text-slate-600 space-y-1.5 break-words">
-          <div>
-            <strong>{t("Verknüpftes Google-Konto:", "Linked Google Account:")}</strong>{" "}
-            <span className="break-all">{NOTIFY_EMAIL_DEFAULT}</span>
-          </div>
-          <div>
-            <strong>{t("Inhaber:", "Business Owner:")}</strong> {COMPANY_INFO.owner} ({COMPANY_INFO.phoneDisplay})
-          </div>
+        <div className="mt-5 pt-4 border-t border-slate-200 text-xs text-slate-600 space-y-2 break-words">
+          <p>
+            {t(
+              "Kundendaten, Termine und Belege verwalten Sie im Google-Backoffice:",
+              "Customer data, appointments and invoices live in the Google back office:"
+            )}
+          </p>
+          <a
+            href={ADMIN_WEBAPP_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex min-h-[44px] items-center font-bold text-[#0f2537] underline underline-offset-2"
+          >
+            {t("Google-Backoffice öffnen →", "Open the Google back office →")}
+          </a>
         </div>
       </div>
     );

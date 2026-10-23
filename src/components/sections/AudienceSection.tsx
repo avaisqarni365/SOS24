@@ -28,7 +28,7 @@ const PATHS = [
     kicker: "Für Hausverwaltungen, Vermieter & Unternehmen",
     title: "Mehrere Objekte, ein Ansprechpartner.",
     points: [
-      "Mehrfamilienhäuser, Wohnanlagen und Gewerbekeller im Raum PLZ 42",
+      "Mehrfamilienhäuser, Wohnanlagen und Gewerbekeller in ganz NRW",
       "Schriftliche Messprotokolle zu jeder Phase, für Eigentümerversammlung oder Versicherung",
       `Festpreis je Objekt, direkter Draht zu ${COMPANY_INFO.owner}`,
     ],

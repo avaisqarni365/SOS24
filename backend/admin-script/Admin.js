@@ -37,6 +37,11 @@ function login(user, pass) {
   var rows = n > 1 ? sh.getRange(2, 1, n - 1, USER_COLS.length).getValues() : [], hit = -1;
   for (var i = 0; i < rows.length; i++) if (String(rows[i][c('Benutzername')]).trim().toLowerCase() === u && u) { hit = i; break; }
   var ok = false, name = '', row = hit + 2;
+  // the old default password was public: it never opens the admin, whatever the sheet still holds
+  if (leakedPw_(pass)) {
+    cache.put(key, String(fails + 1), LOCK_SECONDS);
+    return {ok: false, error: 'leaked'};
+  }
   if (hit >= 0 && /^(ja|yes|x|1|true)$/i.test(String(rows[hit][c('Aktiv')]).trim())) {
     var r = rows[hit], plain = String(r[c('Neues Passwort')] || '');
     if (plain) {
@@ -82,6 +87,21 @@ function api(token, fn, args) {
   if (!/^api_[A-Za-z]+$/.test(name) || typeof globalThis[name + '_'] !== 'function') throw new Error('Unbekannte Aktion.');
   CURRENT_ = s;
   try { return globalThis[name + '_'].apply(null, Array.isArray(args) ? args : []); } finally { CURRENT_ = null; }
+}
+
+/* Change the signed-in user's own password: the current one is asked for again. */
+function api_changePassword_(current, next) {
+  if (!CURRENT_) throw new Error('LOGIN');
+  var sh = usersSheet_(), n = sh.getLastRow(), c = function (k) { return USER_COLS.indexOf(k); };
+  var rows = n > 1 ? sh.getRange(2, 1, n - 1, USER_COLS.length).getValues() : [];
+  for (var i = 0; i < rows.length; i++) {
+    if (String(rows[i][c('Benutzername')]).trim().toLowerCase() !== CURRENT_.user) continue;
+    if (hashPw_(String(current || ''), rows[i][c('Salt')]) !== String(rows[i][c('Passwort (verschlüsselt)')])) return {ok: false, error: 'Das aktuelle Passwort stimmt nicht.'};
+    if (String(next || '') === String(current || '')) return {ok: false, error: 'Das neue Passwort muss sich vom alten unterscheiden.'};
+    var err = setUserPw_(sh, i + 2, next);
+    return err ? {ok: false, error: err} : {ok: true};
+  }
+  throw new Error('LOGIN');
 }
 
 function guard_() {

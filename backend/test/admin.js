@@ -34,7 +34,8 @@ assert.strictEqual(lockedRes.error, 'locked', 'Account must lock out after multi
 
 // Clear lockout in cache for valid login
 cache['admfail_shahzad'] = '0';
-const goodLogin = ctx.login('shahzad', 'SOS2026!Wuppertal');
+M.seedAdminPw();
+const goodLogin = ctx.login('shahzad', M.TEST_PW);
 assert(goodLogin.ok && goodLogin.token, 'Owner Shahzad Mahmood must log in successfully');
 assert(/^[0-9a-f]{64}$/.test(goodLogin.token), 'Session token must be 64-char hex string');
 const token = goodLogin.token;
@@ -100,5 +101,34 @@ puts.length = 0;
 const pubRes = ctx.api(token, 'api_publishWebsite');
 assert(pubRes.ok, '1-Click Website Publishing succeeded');
 console.log('✓ [6/6] Waterproofing Catalog & 1-Click Publishing verified.');
+
+// 7. Leaked passwords and the change-password action
+{
+  const crypto = require('crypto');
+  const known = 'alt-und-oeffentlich-1';
+  assert(/^[0-9a-f]{64}$/.test(ctx.LEAKED_PW_SHA256[0]), 'the real leaked fingerprint is listed');
+  ctx.LEAKED_PW_SHA256.push(crypto.createHash('sha256').update(known).digest('hex'));
+  const row = M.sheets['Benutzer'].data[1], saved = row.slice();
+  // refused at login even when the sheet holds exactly its hash
+  row[4] = ctx.hashPw_(known, row[5]);
+  M.cache['admfail_shahzad'] = '0';
+  assert.strictEqual(ctx.login('shahzad', known).error, 'leaked', 'leaked password must not log in');
+  M.sheets['Benutzer'].data[1] = saved;
+  // refused as a new password
+  assert(/öffentlich bekannt/.test(ctx.setUserPw_(M.sheets['Benutzer'], 2, known)), 'leaked password refused as new password');
+  M.sheets['Benutzer'].data[1] = saved.slice();
+  M.cache['admfail_shahzad'] = '0';
+  // change password: wrong current one, same one, too short, then a real change
+  const sess = ctx.login('shahzad', M.TEST_PW).token;
+  assert(sess, 'login with the test password');
+  assert(!ctx.api(sess, 'api_changePassword', ['falsch', 'neues-passwort-42']).ok, 'wrong current password refused');
+  assert(!ctx.api(sess, 'api_changePassword', [M.TEST_PW, M.TEST_PW]).ok, 'same password refused');
+  assert(!ctx.api(sess, 'api_changePassword', [M.TEST_PW, 'kurz']).ok, 'short password refused');
+  assert(ctx.api(sess, 'api_changePassword', [M.TEST_PW, 'neues-passwort-42']).ok, 'password changed');
+  M.cache['admfail_shahzad'] = '0';
+  assert(!ctx.login('shahzad', M.TEST_PW).ok, 'old password no longer works');
+  assert(ctx.login('shahzad', 'neues-passwort-42').ok, 'new password works');
+  console.log('✓ [7/7] Leaked passwords refused; change password works');
+}
 
 console.log('\nALL ADMIN & SPA TESTS PASSED SUCCESSFULLY!\n');

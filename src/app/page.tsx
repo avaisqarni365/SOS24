@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Navbar from "@/components/sections/Navbar";
 import Footer from "@/components/sections/Footer";
 import Hero from "@/components/scroll/Hero";
-import { ServicesRail } from "@/components/scroll/HomeSections";
+import { ServicesRail, RegionSection } from "@/components/scroll/HomeSections";
 import MoreLinks from "@/components/sections/MoreLinks";
 import HomeSteps from "@/components/sections/HomeSteps";
 import OnlineAppointmentBooking from "@/components/sections/OnlineAppointmentBooking";
@@ -12,9 +12,9 @@ import JsonLd from "@/components/seo/JsonLd";
 import { SERVICE_CARDS } from "@/data/services";
 import { SITE_URL, BUSINESS_ID, WEBSITE_ID, abs, businessNode, websiteNode, breadcrumbNode, OG_IMAGE } from "@/lib/site";
 
-const TITLE = "Kellersanierung Wuppertal ohne Aufgraben | sos-abdichtung";
+const TITLE = "Kellersanierung ohne Aufgraben in NRW | sos-abdichtung";
 const DESCRIPTION =
-  "Kellersanierung Wuppertal ohne Aufgraben: nasse Keller trockenlegen. SchimmelPeter® Partner, kostenlose Messung, 10 Jahre Garantie auf die Arbeit.";
+  "Kellersanierung ohne Aufgraben in Wuppertal, Essen, Düsseldorf, Bochum, Dortmund und NRW. Kostenlose Feuchtigkeitsmessung, 10 Jahre Garantie auf die Arbeit.";
 
 export const metadata: Metadata = {
   title: TITLE,
@@ -59,18 +59,20 @@ export default function Home() {
       <div className="sc-grain" aria-hidden="true" />
       <Navbar />
       <ScrollSectionRail />
-      {/* Four stops and the footer: the first frame (claim, call, WhatsApp,
-          the figures and the film), the services and one row of links to
-          the detail pages, then the four steps from the call to the dry wall.
-          The contact form has its own page (/kontakt/); the steps and the
-          footer lead there. Who we work for, the service area and the
-          FAQ live on /leistungen/, the team in the Galerie, the process and
-          the proof in the Scientific Lab. */}
+      {/* The first frame (claim, call, WhatsApp, the figures and the film),
+          the services and one row of links to the detail pages, the four
+          steps from the call to the dry wall, the service area with every
+          city page (the page ranks for "Kellersanierung Wuppertal", so the
+          area belongs here too), then the booking. The contact form has its
+          own page (/kontakt/). Who we work for and the FAQ live on
+          /leistungen/, the team in the Galerie, the process and the proof in
+          the Scientific Lab. */}
       <main id="main" className="home">
         <Hero />
         <ServicesRail />
         <MoreLinks />
         <HomeSteps />
+        <RegionSection />
         <OnlineAppointmentBooking />
       </main>
       <Footer />

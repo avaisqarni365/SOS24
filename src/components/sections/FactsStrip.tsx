@@ -19,9 +19,10 @@ const HOME_FACTS: Fact[] = [
   { value: "10 Jahre", label: "Garantie auf die Arbeit", Icon: ShieldCheck },
   { value: "25 Jahre", label: "Produktgarantie SchimmelPeter®", Icon: BadgeCheck },
   { value: "Ohne", label: "Aufgraben", Icon: Shovel },
-  { value: "24 h", label: "bis zum Termin vor Ort", Icon: Clock },
+  { value: "24–48 h", label: "bis zum Termin vor Ort", Icon: Clock },
   { value: "5", label: "Messhöhen je Messpunkt", Icon: Ruler },
-  { value: "6", label: "Städte im Servicegebiet", Icon: MapPin },
+  // one per city page (seo-pages.ts CITY_PAGES); kept as text so the hero bundle stays small
+  { value: "10", label: "Städte mit eigener Seite", Icon: MapPin },
 ];
 
 /**

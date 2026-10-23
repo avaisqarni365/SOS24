@@ -5,7 +5,7 @@ import { abs } from "@/lib/site";
 export const dynamic = "force-static";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const lastModified = new Date("2026-10-01");
+  const lastModified = new Date("2026-10-23");
   return [
     { url: abs("/"), lastModified, changeFrequency: "monthly", priority: 1 },
     ...SERVICE_PAGES.map((s) => ({
@@ -28,7 +28,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: abs("/kontakt/"), lastModified, changeFrequency: "yearly", priority: 0.8 },
     { url: abs("/impressum/"), lastModified, changeFrequency: "yearly", priority: 0.2 },
     { url: abs("/datenschutz/"), lastModified, changeFrequency: "yearly", priority: 0.2 },
-    { url: abs("/admin/"), lastModified, changeFrequency: "monthly", priority: 0.3 },
-    { url: abs("/mein-auftrag/"), lastModified, changeFrequency: "weekly", priority: 0.5 },
   ];
 }

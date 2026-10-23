@@ -68,7 +68,7 @@ export function ServicesRail() {
             </h2>
           </div>
           <p className="sc-body">
-            {hy("Welche Leistung Ihr Keller braucht, entscheidet die Messung. Jedes Verfahren hat eine eigene Seite: mit 3D-Modell, der Physik dahinter, Zahlen, Ablauf und Fragen.")}
+            {hy("Als Bautenschutz-Fachbetrieb sanieren wir feuchte Kellerwände von innen, legen Mauerwerk trocken und beseitigen Schimmel im Keller dauerhaft. Welche Leistung Ihr Keller braucht, entscheidet die kostenlose Feuchtigkeitsmessung. Jedes Verfahren hat eine eigene Seite: mit 3D-Modell, der Physik dahinter, Zahlen, Ablauf und Fragen.")}
           </p>
         </div>
         <ServiceCardGrid />
@@ -87,6 +87,10 @@ export function ServicesRail() {
     filled and linked, the neighbours give context, Essen marks the office. */
 function RegionMap() {
   const byslug = Object.fromEntries(CITY_PAGES.map((c) => [c.slug, c]));
+  // Essen, Düsseldorf, Bochum and Dortmund have their centre outside this frame: drawn as
+  // context, so no label sits off the map and no link hides from sight (their cards link them)
+  const inFrame = (a: { cx: number; cy: number }) => a.cx >= 0 && a.cx <= MAP_W && a.cy >= 0 && a.cy <= MAP_H;
+  const linked = MAP_AREAS.filter((a) => a.slug && inFrame(a));
   return (
     <svg data-i18n=""
       viewBox={`0 0 ${MAP_W} ${MAP_H}`}
@@ -99,11 +103,11 @@ function RegionMap() {
       </title>
       <rect width={MAP_W} height={MAP_H} className="region-map__bg" />
       <g className="region-map__context">
-        {MAP_AREAS.filter((a) => !a.slug).map((a) => (
+        {MAP_AREAS.filter((a) => !linked.includes(a)).map((a) => (
           <path key={a.name} d={a.d} />
         ))}
       </g>
-      {MAP_AREAS.filter((a) => a.slug).map((a) => {
+      {linked.map((a) => {
         const city = byslug[a.slug!];
         const big = a.slug === "wuppertal";
         return (

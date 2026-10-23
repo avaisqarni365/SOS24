@@ -8,7 +8,7 @@ import { abs, businessNode, websiteNode, breadcrumbNode, BUSINESS_ID, WEBSITE_ID
 
 const TITLE = "Kontakt: kostenlose Feuchtemessung anfragen | sos-abdichtung";
 const DESCRIPTION =
-  "Kostenlose Feuchtemessung in Wuppertal und PLZ 42 anfragen: per Telefon, WhatsApp oder Formular. Shahzad Mahmood meldet sich meist noch am selben Tag.";
+  "Kostenlose Feuchtemessung in NRW anfragen: per Telefon, WhatsApp oder Formular. Shahzad Mahmood meldet sich meist noch am selben Tag.";
 const PATH = "/kontakt/";
 
 export const metadata: Metadata = {
@@ -46,23 +46,20 @@ export default function KontaktPage() {
       <JsonLd graph={graph} />
       <Navbar />
       <main id="main" className="contact-page">
-        <section className="sc-page-top contact-page__top" aria-labelledby="page-title">
+        {/* no sc-page-top here: its 6.5rem on top of the header left a blank band above the
+            heading; the form should be the first thing a phone shows after it */}
+        <section className="contact-page__top pt-[5.5rem] sm:pt-28 lg:pt-36" aria-labelledby="page-title">
           <div className="sc-wrap">
             <Breadcrumbs items={crumbs} />
-            <h1 id="page-title" className="sc-display mt-5">
+            <h1 id="page-title" className="sc-display mt-3">
               Kontakt: <em>kostenlose Feuchtemessung.</em>
             </h1>
-            <div className="mt-4 p-4 rounded-2xl bg-emerald-50 border border-emerald-200 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-sm">
-              <div className="text-emerald-950 font-medium">
-                📅 <strong>Direkten Vor-Ort-Wunschtermin buchen?</strong> Nutzen Sie unseren interaktiven Online-Terminplaner.
-              </div>
-              <a
-                href="/termin/"
-                className="inline-flex items-center justify-center gap-2 px-4 py-2 bg-emerald-700 hover:bg-emerald-800 text-white font-bold rounded-xl text-xs shrink-0 transition-colors shadow-xs"
-              >
+            <p className="mt-2 text-sm sm:text-base">
+              Lieber gleich einen Tag aussuchen?{" "}
+              <a href="/termin/" className="font-bold underline underline-offset-2">
                 Zum Online-Terminplaner →
               </a>
-            </div>
+            </p>
           </div>
         </section>
         <ContactForm />

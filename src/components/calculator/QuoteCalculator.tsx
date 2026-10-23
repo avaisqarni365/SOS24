@@ -14,6 +14,7 @@ import {
 } from 'lucide-react';
 import { COMPANY } from '@/data/content-data';
 import { submitLeadToWorkspace } from '@/lib/backend';
+import SendError from '@/components/ui/SendError';
 
 type DamageCategory = 'horizontalsperre' | 'kellerinnenabdichtung' | 'schimmel' | 'rissinjektion';
 type SeverityLevel = 'leicht' | 'mittel' | 'stark';
@@ -101,6 +102,7 @@ export default function QuoteCalculator() {
   const [quickName, setQuickName] = useState<string>('');
   const [sendingCloud, setSendingCloud] = useState(false);
   const [cloudLeadId, setCloudLeadId] = useState<string>('');
+  const [sendError, setSendError] = useState<string>('');
 
   const config = CATEGORY_CONFIG[category];
 
@@ -125,6 +127,7 @@ export default function QuoteCalculator() {
     e.preventDefault();
     if (!quickName.trim() || !quickPhone.trim()) return;
     setSendingCloud(true);
+    setSendError('');
     try {
       const res = await submitLeadToWorkspace({
         name: quickName.trim(),
@@ -136,14 +139,15 @@ export default function QuoteCalculator() {
         message: `Aufmaß-Anfrage: ${config.label}, Umfang: ${quantity} ${config.unit}, Mauerwerk: ${MATERIAL_CONFIG[material].label}, Grad: ${SEVERITY_CONFIG[severity].label}`,
         source: 'Sanierungsrechner',
       });
-      setCloudLeadId(res.id || 'A-1001');
+      if (res.ok && res.id) setCloudLeadId(res.id);
+      else setSendError(res.error || 'server');
     } finally {
       setSendingCloud(false);
     }
   };
 
   return (
-    <section id="rechner" className="py-16 lg:py-24 bg-white">
+    <section id="rechner" className="py-8 lg:py-12 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mb-10">
           <span className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-brand-700 bg-brand-100 px-3 py-1 rounded-full mb-3">
@@ -367,6 +371,7 @@ export default function QuoteCalculator() {
                     className="px-3 py-2 rounded-lg bg-brand-950/90 border border-brand-700 text-white placeholder-slate-400 text-xs outline-none focus:border-brand-400"
                   />
                 </div>
+                <SendError error={sendError} />
                 <button
                   type="submit"
                   disabled={sendingCloud}
