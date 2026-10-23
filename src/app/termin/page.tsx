@@ -133,7 +133,7 @@ export default function TerminPage() {
         </section>
 
         {/* Step-by-Step Walkthrough */}
-        <section className="py-12 sm:py-16 bg-white border-b border-slate-200/80">
+        <section className="py-8 sm:py-10 bg-white border-b border-slate-200/80">
           <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
             <div className="text-center max-w-xl mx-auto space-y-2">
               <span className="text-xs font-black uppercase tracking-wider text-emerald-800">Transparenter Ablauf</span>
@@ -197,7 +197,7 @@ export default function TerminPage() {
         </section>
 
         {/* FAQs */}
-        <section className="py-12 sm:py-16 bg-[#f8fafc]">
+        <section className="py-8 sm:py-10 bg-[#f8fafc]">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
             <div className="text-center space-y-1.5">
               <span className="text-xs font-black uppercase tracking-wider text-emerald-800">Häufige Fragen</span>

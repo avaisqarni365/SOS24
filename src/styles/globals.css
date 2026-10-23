@@ -4318,7 +4318,8 @@ a[href^="tel:"] .contact-row__v { font-variant-numeric: tabular-nums; letter-spa
    room so the change of ground registers. */
 .sc-section { padding-block: clamp(4.5rem, 3rem + 4.5vw, 8rem); }
 .band-ink.sc-section { padding-block: clamp(5.5rem, 3.5rem + 6vw, 10rem); }
-.sc-section + .sc-section:not([class*="band"]) { padding-top: clamp(4rem, 2.5rem + 4vw, 7rem); }
+/* two plain sections in a row: the same step as everywhere (this gave up to 7rem on top) */
+.sc-section + .sc-section:not([class*="band"]) { padding-top: clamp(2rem, 1.25rem + 2vw, 3.5rem); }
 
 /* The services index breaks its own grid: the two services most people arrive
    for take half a row each, and the remaining four sit a third wide beneath

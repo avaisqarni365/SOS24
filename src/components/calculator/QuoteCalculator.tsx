@@ -147,7 +147,7 @@ export default function QuoteCalculator() {
   };
 
   return (
-    <section id="rechner" className="py-16 lg:py-24 bg-white">
+    <section id="rechner" className="py-8 lg:py-12 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-3xl mb-10">
           <span className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-brand-700 bg-brand-100 px-3 py-1 rounded-full mb-3">
