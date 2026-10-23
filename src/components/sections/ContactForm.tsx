@@ -382,8 +382,8 @@ export default function ContactForm({ compact = false, defaultDamage, place }: C
             {signSuccess ? (
               <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-5 text-emerald-950 space-y-2">
                 <p className="font-bold text-base sm:text-lg">
-                  ✓ Vielen Dank, {signerName}! Ihre digitale Unterschrift zu {signMode.id} wurde in
-                  Google Drive (`SOS Abdichtung - Verträge`) und im Admin-Portal hinterlegt.
+                  ✓ Vielen Dank, {signerName}! Ihre Unterschrift zu Auftrag {signMode.id} ist bei uns
+                  angekommen. Eine Bestätigung erhalten Sie per E-Mail.
                 </p>
                 <p className="text-sm text-slate-600">
                   Herr Shahzad Mahmood setzt sich umgehend mit Ihnen zur finalen Terminabstimmung in
@@ -461,7 +461,7 @@ export default function ContactForm({ compact = false, defaultDamage, place }: C
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10 items-start">
           {/* Left Column: Direct Contact & Guarantees */}
-          <div className="lg:col-span-5 space-y-6">
+          <div className="lg:col-span-5 space-y-6 order-last lg:order-none">
             <div>
               <span className="inline-block text-xs font-bold uppercase tracking-wider text-emerald-800 bg-emerald-100 px-3 py-1 rounded-full mb-3">
                 Kostenlose Feuchtigkeitsmessung vor Ort
@@ -582,10 +582,9 @@ export default function ContactForm({ compact = false, defaultDamage, place }: C
                     Ihre Schadensanfrage ist eingegangen!
                   </h3>
                   <p className="text-slate-600 text-sm leading-relaxed">
-                    Vielen Dank, <strong>{formData.name}</strong>. Ihre Anfrage (`{leadId}`)
-                    {photosUploadedCount > 0
-                      ? ` sowie ${photosUploadedCount} Schadensfoto(s) wurden erfolgreich in Google Drive (SOS Abdichtung - Schadensfotos / ${leadId}) und im Admin-Portal gespeichert.`
-                      : ' wurde erfolgreich im System und Google Workspace gespeichert.'}
+                    Vielen Dank, <strong>{formData.name}</strong>. Ihre Anfrage {leadId}
+                    {photosUploadedCount > 0 ? ` und ${photosUploadedCount} Foto(s) sind` : ' ist'} bei uns angekommen.
+                    Herr {COMPANY_INFO.owner.split(' ').pop()} ruft Sie in der Regel noch am selben Werktag an.
                   </p>
                 </div>
 
@@ -636,7 +635,7 @@ export default function ContactForm({ compact = false, defaultDamage, place }: C
                       Weitere Schadensfotos zu {leadId} nachreichen?
                     </strong>
                     <span className="text-slate-500">
-                      Werden direkt dem Vorgang {leadId} im Admin-Portal &amp; Google Drive zugeordnet.
+                      Sie werden Ihrer Anfrage {leadId} zugeordnet.
                     </span>
                   </div>
                   <label
@@ -743,11 +742,11 @@ export default function ContactForm({ compact = false, defaultDamage, place }: C
 
                 <div className="flex flex-wrap items-center justify-center gap-4 pt-2 text-xs">
                   <Link
-                    href="/admin/"
-                    className="inline-flex items-center gap-1.5 font-bold text-emerald-700 hover:text-emerald-800 underline"
+                    href={`/mein-auftrag/?id=${encodeURIComponent(leadId)}&k=${encodeURIComponent(uploadToken)}`}
+                    className="inline-flex min-h-[44px] items-center gap-1.5 font-bold text-emerald-700 hover:text-emerald-800 underline"
                   >
                     <FolderOpen className="w-3.5 h-3.5" />
-                    Vorgang {leadId} &amp; Fotos im Admin-Portal ansehen →
+                    Ihre Anfrage {leadId} ansehen →
                   </Link>
                   <button
                     type="button"
@@ -784,7 +783,7 @@ export default function ContactForm({ compact = false, defaultDamage, place }: C
                       Ihr Name *
                     </label>
                     <input
-                      id="contact-name"
+                      id="contact-name" autoComplete="name"
                       name="name"
                       type="text"
                       required
@@ -803,13 +802,13 @@ export default function ContactForm({ compact = false, defaultDamage, place }: C
                       Telefon / Mobil für Rückruf *
                     </label>
                     <input
-                      id="contact-phone"
+                      id="contact-phone" autoComplete="tel"
                       name="phone"
                       type="tel"
                       required
                       value={formData.phone}
                       onChange={handleChange}
-                      placeholder="z. B. 0172 2064177"
+                      placeholder="z. B. 0170 1234567"
                       className={inputCls}
                     />
                   </div>
@@ -824,7 +823,7 @@ export default function ContactForm({ compact = false, defaultDamage, place }: C
                       E-Mail-Adresse (optional)
                     </label>
                     <input
-                      id="contact-email"
+                      id="contact-email" autoComplete="email"
                       name="email"
                       type="email"
                       value={formData.email}

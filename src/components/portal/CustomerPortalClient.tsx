@@ -268,8 +268,9 @@ function CustomerPortalInner() {
                 type="text"
                 value={searchId}
                 onChange={(e) => setSearchId(e.target.value)}
+                aria-label="Vorgangsnummer"
                 placeholder="z. B. A-1001"
-                className="flex-1 px-4 py-2.5 rounded-xl border border-slate-300 text-sm font-bold uppercase focus:border-emerald-700 outline-none"
+                className="flex-1 min-h-[44px] px-4 py-2.5 rounded-xl border border-slate-300 text-sm font-bold uppercase focus:border-emerald-700 outline-none"
               />
               <button
                 type="submit"

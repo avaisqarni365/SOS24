@@ -87,9 +87,8 @@ export default function ConsentBanner() {
         Darf diese Website Google Analytics nutzen?
       </p>
       <p id="consent-text" className="mt-1.5 text-[0.8125rem] leading-relaxed text-ink-soft">
-        Damit sehen wir, welche Seiten gelesen werden und welche Anfragen über Google kommen. Google Analytics setzt
-        dafür Cookies; Daten können in die USA übertragen werden. Ohne Ihre Zustimmung wird nichts geladen. Sie können
-        Ihre Wahl jederzeit über „Cookie-Einstellungen“ unten auf jeder Seite ändern.{" "}
+        So sehen wir, welche Seiten gelesen werden. Google setzt dafür Cookies, Daten können in die USA gehen. Ohne
+        Ihr Ja wird nichts geladen; ändern können Sie das jederzeit unter „Cookie-Einstellungen“.{" "}
         <a href="/datenschutz/#analyse" className="font-semibold underline underline-offset-2">
           Mehr erfahren
         </a>

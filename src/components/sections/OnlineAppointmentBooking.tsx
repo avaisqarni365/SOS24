@@ -25,6 +25,23 @@ import {
   type InspectionSlot,
 } from '@/lib/calendar';
 
+/** ISO date (yyyy-mm-dd) on the office's calendar, n days from now. */
+const berlinDay = (n: number) => new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Berlin' }).format(new Date(Date.now() + n * 86400000));
+/** 0 = Sunday … 6 = Saturday, for an ISO date (noon, so no time zone moves the day) */
+const weekday = (iso: string) => new Date(iso + 'T12:00:00').getDay();
+/** The next bookable days from tomorrow: Monday to Saturday, as the office opens. */
+function bookableDays(count: number) {
+  const out: string[] = [];
+  for (let i = 1; out.length < count && i < 21; i++) {
+    const iso = berlinDay(i);
+    if (weekday(iso) !== 0) out.push(iso);
+  }
+  return out;
+}
+/** Saturdays the office closes at 14:00: only the windows that fit. */
+const slotsFor = (iso: string) => (iso && weekday(iso) === 6 ? INSPECTION_SLOTS.filter((x) => x.id === 'morning' || x.id === 'midday') : INSPECTION_SLOTS);
+const dayLabel = (iso: string) => new Date(iso + 'T12:00:00').toLocaleDateString('de-DE', { weekday: 'short', day: '2-digit', month: '2-digit' });
+
 interface OnlineAppointmentBookingProps {
   hideHeader?: boolean;
   className?: string;
@@ -32,11 +49,22 @@ interface OnlineAppointmentBookingProps {
 }
 
 export default function OnlineAppointmentBooking({ hideHeader = false, className = '', place }: OnlineAppointmentBookingProps) {
-  // tomorrow on the office's calendar, not in UTC (which is still "today" until 01:00/02:00 in Germany)
-  const tomorrowStr = new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Berlin' }).format(new Date(Date.now() + 86400000));
-
-  const [selectedDate, setSelectedDate] = useState<string>(tomorrowStr);
+  // the days are worked out in the visitor's browser: the page is built once, the calendar moves on
+  const [days, setDays] = useState<string[]>([]);
+  const [otherDay, setOtherDay] = useState(false);
+  const [selectedDate, setSelectedDate] = useState<string>('');
   const [selectedSlot, setSelectedSlot] = useState<InspectionSlot>(INSPECTION_SLOTS[0]);
+  const tomorrowStr = days[0] || '';
+  React.useEffect(() => {
+    const next = bookableDays(6);
+    setDays(next);
+    setSelectedDate((d) => d || next[0]);
+  }, []);
+  const pickDate = (iso: string) => {
+    setSelectedDate(iso);
+    const fits = slotsFor(iso);
+    setSelectedSlot((cur) => (fits.some((x) => x.id === cur.id) ? cur : fits[0]));
+  };
   const [name, setName] = useState<string>('');
   const [sendError, setSendError] = useState<string>('');
   const [phone, setPhone] = useState<string>('');
@@ -63,7 +91,7 @@ export default function OnlineAppointmentBooking({ hideHeader = false, className
 
   const handleBooking = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!name.trim() || !phone.trim() || !address.trim()) return;
+    if (!name.trim() || !phone.trim() || !address.trim() || !selectedDate || weekday(selectedDate) === 0) return;
 
     setSubmitting(true);
     setSendError('');
@@ -134,8 +162,8 @@ export default function OnlineAppointmentBooking({ hideHeader = false, className
               Vor-Ort-Feuchtemessung {activePlace ? `in ${activePlace} ` : ''}direkt online buchen
             </h2>
             <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
-              Wählen Sie Ihren Wunschtermin. Inhaber <strong>{COMPANY_INFO.owner}</strong> begutachtet Ihren Feuchteschaden
-              persönlich vor Ort mit elektronischer CM-Messtechnik – kostenfrei in ganz NRW.
+              Wählen Sie Tag und Zeitfenster. Inhaber <strong>{COMPANY_INFO.owner}</strong> ruft Sie zur Bestätigung an und misst
+              die Feuchte bei Ihnen vor Ort – kostenfrei in ganz NRW.
             </p>
           </div>
         )}
@@ -149,13 +177,14 @@ export default function OnlineAppointmentBooking({ hideHeader = false, className
 
             <div className="space-y-2">
               <span className="text-xs font-black uppercase tracking-wider text-emerald-700 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200">
-                Wunschtermin reserviert · Vorgang {assignedLeadId}
+                Wunschtermin angefragt · Vorgang {assignedLeadId}
               </span>
               <h3 className="text-2xl sm:text-3xl font-black text-slate-900">
                 Vielen Dank, {name}!
               </h3>
               <p className="text-sm text-slate-600 max-w-md mx-auto">
-                Ihr Termin zur kostenlosen Vor-Ort-Feuchtemessung wurde erfolgreich im System und im Google Kalender hinterlegt.
+                Ihr Wunschtermin ist bei uns angekommen. Herr {COMPANY_INFO.owner.split(' ').pop()} ruft Sie in der Regel noch am selben
+                Werktag an und bestätigt den Termin.
               </p>
             </div>
 
@@ -169,7 +198,7 @@ export default function OnlineAppointmentBooking({ hideHeader = false, className
                 {new Date(selectedDate).toLocaleDateString('de-DE', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
               </div>
               <div className="text-sm font-extrabold text-emerald-800">
-                {selectedSlot.icon} {selectedSlot.label}: {selectedSlot.timeRange}
+                {selectedSlot.label}: {selectedSlot.timeRange}
               </div>
               <div className="text-xs text-slate-600 flex items-start gap-1.5 pt-1 border-t border-slate-200">
                 <MapPin className="w-3.5 h-3.5 shrink-0 mt-0.5 text-slate-400" />
@@ -186,7 +215,7 @@ export default function OnlineAppointmentBooking({ hideHeader = false, className
                 className="w-full min-h-[48px] bg-emerald-700 hover:bg-emerald-800 text-white font-extrabold text-sm px-5 py-3 rounded-xl flex items-center justify-center gap-2 shadow-md transition-colors"
               >
                 <Calendar className="w-4 h-4" />
-                <span>📅 In Google Kalender speichern ↗</span>
+                <span>Vorläufig in Google Kalender eintragen ↗</span>
               </a>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
@@ -214,7 +243,8 @@ export default function OnlineAppointmentBooking({ hideHeader = false, className
             </div>
 
             <div className="pt-2 text-xs text-slate-500">
-              Herr Shahzad Mahmood meldet sich vorab telefonisch bei Ihnen unter <strong>{phone}</strong>.
+              Wir rufen Sie unter <strong>{phone}</strong> an. Eilig? Rufen Sie direkt an:{' '}
+              <a href={`tel:${COMPANY_INFO.phoneTel}`} className="font-bold underline underline-offset-2">{COMPANY_INFO.phoneDisplay}</a>
             </div>
           </div>
         ) : (
@@ -230,36 +260,73 @@ export default function OnlineAppointmentBooking({ hideHeader = false, className
                   <span className="w-5 h-5 rounded-full bg-emerald-100 text-emerald-900 flex items-center justify-center text-[10px]">1</span>
                   <span>Wunschdatum &amp; Zeitfenster wählen</span>
                 </span>
-                <span className="text-[11px] font-semibold text-slate-500">Montag bis Samstag</span>
+                <span className="text-xs font-semibold text-slate-600">Montag bis Samstag</span>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-12 gap-3 items-center">
-                <div className="sm:col-span-5">
-                  <label htmlFor="booking-date" className="block text-xs font-bold text-slate-700 mb-1">
-                    Datum der Besichtigung *
-                  </label>
-                  <input
-                    id="booking-date"
-                    type="date"
-                    min={tomorrowStr}
-                    value={selectedDate}
-                    onChange={(e) => setSelectedDate(e.target.value)}
-                    required
-                    className="w-full min-h-[48px] px-3.5 py-2.5 rounded-xl border border-slate-300 bg-slate-50 focus:bg-white text-base sm:text-sm font-bold text-slate-900 focus:ring-2 focus:ring-emerald-600/30 focus:border-emerald-600 outline-none transition"
-                  />
-                </div>
+              <div className="grid grid-cols-1 sm:grid-cols-12 gap-3 items-start">
+                <fieldset className="sm:col-span-5">
+                  <legend className="block text-xs font-bold text-slate-700 mb-1">Tag *</legend>
+                  <div className="grid grid-cols-3 gap-2">
+                    {days.map((iso) => {
+                      const on = !otherDay && selectedDate === iso;
+                      return (
+                        <button
+                          key={iso}
+                          type="button"
+                          aria-pressed={on}
+                          onClick={() => {
+                            setOtherDay(false);
+                            pickDate(iso);
+                          }}
+                          className={`min-h-[48px] rounded-xl border text-sm font-bold transition-colors ${
+                            on ? 'bg-emerald-50 border-emerald-600 ring-2 ring-emerald-500/30 text-slate-900' : 'bg-slate-50 hover:bg-slate-100 border-slate-200 text-slate-700'
+                          }`}
+                        >
+                          {dayLabel(iso)}
+                        </button>
+                      );
+                    })}
+                  </div>
+                  {otherDay ? (
+                    <div className="mt-2">
+                      <label htmlFor="booking-date" className="block text-xs font-bold text-slate-700 mb-1">
+                        Anderer Tag
+                      </label>
+                      <input
+                        id="booking-date"
+                        type="date"
+                        min={tomorrowStr}
+                        value={selectedDate}
+                        onChange={(e) => {
+                          const v = e.target.value;
+                          e.target.setCustomValidity(v && weekday(v) === 0 ? 'Sonntags sind keine Termine möglich. Bitte Montag bis Samstag wählen.' : '');
+                          pickDate(v);
+                        }}
+                        required
+                        className="w-full min-h-[48px] px-3.5 py-2.5 rounded-xl border border-slate-300 bg-white text-base sm:text-sm font-bold text-slate-900 focus:ring-2 focus:ring-emerald-600/30 focus:border-emerald-600 outline-none transition"
+                      />
+                    </div>
+                  ) : (
+                    <button
+                      type="button"
+                      onClick={() => setOtherDay(true)}
+                      className="mt-2 min-h-[44px] text-sm font-bold text-emerald-800 underline underline-offset-2"
+                    >
+                      Anderer Tag …
+                    </button>
+                  )}
+                </fieldset>
 
-                <div className="sm:col-span-7">
-                  <label className="block text-xs font-bold text-slate-700 mb-1">
-                    Zeitfenster für die Feuchtemessung *
-                  </label>
-                  <div className="grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-2 gap-2">
-                    {INSPECTION_SLOTS.map((slot) => {
+                <fieldset className="sm:col-span-7">
+                  <legend className="block text-xs font-bold text-slate-700 mb-1">Zeitfenster *</legend>
+                  <div className="grid grid-cols-2 gap-2">
+                    {slotsFor(selectedDate).map((slot) => {
                       const isSelected = selectedSlot.id === slot.id;
                       return (
                         <button
                           key={slot.id}
                           type="button"
+                          aria-pressed={isSelected}
                           onClick={() => setSelectedSlot(slot)}
                           className={`min-h-[50px] p-2.5 sm:p-3 rounded-xl border text-left transition-all ${
                             isSelected
@@ -268,17 +335,15 @@ export default function OnlineAppointmentBooking({ hideHeader = false, className
                           }`}
                         >
                           <div className="flex items-center justify-between">
-                            <span className="font-extrabold text-xs text-slate-900">
-                              {slot.icon} {slot.label}
-                            </span>
+                            <span className="font-extrabold text-sm text-slate-900">{slot.label}</span>
                             {isSelected && <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />}
                           </div>
-                          <div className="text-[11px] text-slate-500 mt-0.5">{slot.timeRange}</div>
+                          <div className="text-xs text-slate-600 mt-0.5">{slot.timeRange}</div>
                         </button>
                       );
                     })}
                   </div>
-                </div>
+                </fieldset>
               </div>
             </div>
 
@@ -297,6 +362,7 @@ export default function OnlineAppointmentBooking({ hideHeader = false, className
                   <input
                     id="b-name"
                     type="text"
+                    autoComplete="name"
                     required
                     value={name}
                     onChange={(e) => setName(e.target.value)}
@@ -312,10 +378,11 @@ export default function OnlineAppointmentBooking({ hideHeader = false, className
                   <input
                     id="b-phone"
                     type="tel"
+                    autoComplete="tel"
                     required
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
-                    placeholder="z. B. 0172 2064177"
+                    placeholder="z. B. 0170 1234567"
                     className="w-full min-h-[48px] px-3.5 py-2.5 rounded-xl border border-slate-300 bg-white text-base sm:text-sm font-semibold text-slate-900 focus:ring-2 focus:ring-emerald-600/30 focus:border-emerald-600 outline-none transition"
                   />
                 </div>
@@ -327,10 +394,11 @@ export default function OnlineAppointmentBooking({ hideHeader = false, className
                   <input
                     id="b-addr"
                     type="text"
+                    autoComplete="street-address"
                     required
                     value={address}
                     onChange={(e) => setAddress(e.target.value)}
-                    placeholder="z. B. Niebuhrstr. 46, Essen"
+                    placeholder="z. B. Hauptstr. 12, 42103 Wuppertal"
                     className="w-full min-h-[48px] px-3.5 py-2.5 rounded-xl border border-slate-300 bg-white text-base sm:text-sm font-semibold text-slate-900 focus:ring-2 focus:ring-emerald-600/30 focus:border-emerald-600 outline-none transition"
                   />
                 </div>
@@ -376,7 +444,7 @@ export default function OnlineAppointmentBooking({ hideHeader = false, className
             <div className="pt-2 border-t border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
               <div className="flex items-center gap-2 text-xs text-slate-500">
                 <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0" />
-                <span>100 % unverbindlich &amp; kostenfrei. Keine Anfahrtskosten in NRW.</span>
+                <span>Unverbindlich und kostenfrei. Wir rufen Sie zur Bestätigung an.</span>
               </div>
 
               <SendError error={sendError} what="Ihre Terminanfrage" />
@@ -388,12 +456,12 @@ export default function OnlineAppointmentBooking({ hideHeader = false, className
                 {submitting ? (
                   <>
                     <Loader2 className="w-4 h-4 animate-spin" />
-                    <span>Termin wird reserviert...</span>
+                    <span>Wird gesendet …</span>
                   </>
                 ) : (
                   <>
                     <Calendar className="w-4 h-4" />
-                    <span>Vor-Ort-Termin verbindlich reservieren →</span>
+                    <span>Wunschtermin anfragen →</span>
                   </>
                 )}
               </button>

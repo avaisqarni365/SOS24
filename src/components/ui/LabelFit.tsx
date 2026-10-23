@@ -5,13 +5,14 @@ import { usePathname } from "next/navigation";
 
 /** The small labels above headings that must stay on one line. */
 const SELECTOR = ".sc-label, .hero-film__k";
-/** never smaller than this, so a label stays readable */
-const MIN_PX = 7.5;
+/** never smaller than this, so a label stays readable (7.5px set the hero label at 8.5px on phones) */
+const MIN_PX = 10;
 
 /** Shrink one label (letter-spacing first, then size) until it fits its box. */
 function fit(el: HTMLElement) {
   el.style.removeProperty("font-size");
   el.style.removeProperty("letter-spacing");
+  el.style.removeProperty("white-space");
   const box = el.clientWidth;
   if (!box || el.scrollWidth <= box + 1) return;
   const cs = getComputedStyle(el);
@@ -25,11 +26,14 @@ function fit(el: HTMLElement) {
     el.style.setProperty("letter-spacing", `${spacing.toFixed(2)}px`, "important");
     el.style.setProperty("font-size", `${size.toFixed(2)}px`, "important");
   }
+  // still too long at the smallest readable size: two lines read better than tiny type
+  if (el.scrollWidth > box + 1) el.style.setProperty("white-space", "normal", "important");
 }
 
 /**
- * Keeps every small label on a single line: on narrow screens, or in a
- * longer translation, it tightens the label instead of letting it wrap.
+ * Keeps every small label on a single line where it can: on narrow screens, or in a
+ * longer translation, it tightens the label first, and only wraps it when even
+ * MIN_PX would not fit.
  * Runs on load, when fonts arrive, on resize, after a page change and when
  * the language changes.
  */

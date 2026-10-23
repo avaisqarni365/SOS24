@@ -75,30 +75,30 @@ export default function TerminPage() {
     <>
       <JsonLd graph={graph} />
       <Navbar />
-      <main id="main" className="appointment-page pt-20 sm:pt-24 lg:pt-28">
-        {/* Responsive Header */}
-        <section className="sc-page-top pb-6 sm:pb-8" aria-labelledby="page-title">
+      <main id="main" className="appointment-page pt-[4.75rem] sm:pt-24 lg:pt-32">
+        {/* A visitor who lands here wants a date: the heading, one line, then the form.
+            What happens at the visit follows underneath. */}
+        <section className="pb-3" aria-labelledby="page-title">
           <div className="sc-wrap max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
             <Breadcrumbs items={crumbs} />
+            <h1 id="page-title" className="sc-display mt-3 text-2xl sm:text-4xl lg:text-5xl font-black text-[#0f2537] tracking-tight leading-tight">
+              Vor-Ort-Termin: <em>kostenlose Feuchtemessung.</em>
+            </h1>
+            <p className="mt-2 text-slate-700 text-sm sm:text-base">
+              Tag und Zeitfenster wählen, Name und Telefon eintragen: fertig. Wir rufen Sie zur Bestätigung an.
+            </p>
+          </div>
+        </section>
 
-            <div className="mt-4 sm:mt-6 space-y-3">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-100 border border-emerald-300 text-emerald-900 text-xs font-black uppercase tracking-wider shadow-xs">
-                <Calendar className="w-3.5 h-3.5 text-emerald-700" />
-                <span>Online-Terminplaner · Kostenfreie Vor-Ort-Messung</span>
-              </div>
+        <OnlineAppointmentBooking hideHeader={true} className="!py-4 sm:!py-8 !border-0 !bg-transparent" />
 
-              <h1 id="page-title" className="sc-display text-2xl sm:text-4xl lg:text-5xl font-black text-[#0f2537] tracking-tight leading-tight">
-                Vor-Ort-Termin: <em>kostenlose Feuchtemessung.</em>
-              </h1>
-
-              <p className="text-slate-600 max-w-3xl text-sm sm:text-base lg:text-lg leading-relaxed">
-                Wählen Sie Ihren Wunschtermin direkt im Kalender. Inhaber <strong>Shahzad Mahmood</strong> prüft Ihren Feuchteschaden
-                persönlich mit elektronischer CM-Messtechnik – 100 % kostenfrei, transparent und ohne Anfahrtskosten in ganz NRW.
-              </p>
-            </div>
-
-            {/* 3 Responsive Trust Badges */}
-            <div className="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-3">
+        <section className="pb-10 sm:pb-14" aria-label="Was Sie erwartet">
+          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+            <p className="text-slate-700 max-w-3xl text-sm sm:text-base leading-relaxed">
+              Inhaber <strong>Shahzad Mahmood</strong> prüft Ihren Feuchteschaden persönlich mit elektronischer
+              CM-Messtechnik – kostenfrei, transparent und ohne Anfahrtskosten in ganz NRW.
+            </p>
+            <div className="mt-5 grid grid-cols-1 sm:grid-cols-3 gap-3">
               <div className="flex items-center gap-3 p-3.5 rounded-2xl bg-white border border-slate-200/90 shadow-xs">
                 <div className="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-800 flex items-center justify-center shrink-0">
                   <ShieldCheck className="w-5 h-5" />
@@ -131,9 +131,6 @@ export default function TerminPage() {
             </div>
           </div>
         </section>
-
-        {/* The Interactive Booking Engine */}
-        <OnlineAppointmentBooking hideHeader={true} className="border-t border-slate-200/60" />
 
         {/* Step-by-Step Walkthrough */}
         <section className="py-12 sm:py-16 bg-white border-b border-slate-200/80">
