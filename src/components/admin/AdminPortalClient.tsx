@@ -1922,6 +1922,36 @@ export default function AdminPortalClient() {
     </div>
   );
 
+  // One login: without a build-time hash this page has no password of its own and
+  // sends the owner to the Google back office, which checks the "Benutzer" sheet.
+  if (!ADMIN_PASS_SHA256) {
+    return (
+      <div className="max-w-md mx-auto bg-white rounded-2xl p-6 sm:p-8 shadow-xl border border-slate-200 font-plex text-slate-900">
+        <div className="flex items-center justify-between gap-3 mb-4">
+          <div className="w-10 h-10 rounded-2xl bg-emerald-100 text-emerald-800 flex items-center justify-center font-bold text-lg">
+            SOS
+          </div>
+          <LanguageSwitcher />
+        </div>
+        <h2 className="text-xl sm:text-2xl font-extrabold text-[#0f2537] mb-1">
+          {t("Admin-Zugang (Shahzad Mahmood)", "Admin Access (Shahzad Mahmood)")}
+        </h2>
+        <p className="text-sm text-slate-600 mb-6 leading-relaxed">
+          {t(
+            "Anfragen, Termine, Fotos und Belege verwalten Sie im Google-Backoffice. Dort melden Sie sich mit Ihrem Benutzernamen und Passwort an: ein Login für alles.",
+            "Enquiries, appointments, photos and invoices live in the Google back office. Log in there with your username and password: one login for everything."
+          )}
+        </p>
+        <a
+          href={ADMIN_WEBAPP_URL}
+          className="w-full min-h-[48px] inline-flex items-center justify-center bg-[#0f2537] hover:bg-slate-800 text-white font-bold py-3 px-4 rounded-xl text-sm transition-colors"
+        >
+          {t("Zum Backoffice anmelden →", "Log in to the back office →")}
+        </a>
+      </div>
+    );
+  }
+
   // Login Screen
   if (!unlocked) {
     return (
