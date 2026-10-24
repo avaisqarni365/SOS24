@@ -22,7 +22,7 @@ const HOME_FACTS: Fact[] = [
   { value: "24–48 h", label: "bis zum Termin vor Ort", Icon: Clock },
   { value: "5", label: "Messhöhen je Messpunkt", Icon: Ruler },
   // one per city page (seo-pages.ts CITY_PAGES); kept as text so the hero bundle stays small
-  { value: "10", label: "Städte mit eigener Seite", Icon: MapPin },
+  { value: "18", label: "Städte mit eigener Seite", Icon: MapPin },
 ];
 
 /**

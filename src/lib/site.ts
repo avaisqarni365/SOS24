@@ -1,5 +1,5 @@
 import { COMPANY_INFO } from "@/data/content-data";
-import { SERVICE_PAGES } from "@/data/seo-pages";
+import { SERVICE_PAGES, CITY_PAGES } from "@/data/seo-pages";
 
 export const SITE_URL = "https://sos-abdichtung.de";
 export const SITE_NAME = "sos-abdichtung";
@@ -28,7 +28,7 @@ export function businessNode() {
     alternateName: "sos-abdichtung, SchimmelPeter® Partnerbetrieb",
     legalName: `sos-abdichtung, Inh. ${COMPANY_INFO.owner}`,
     description:
-      "Bautenschutz-Fachbetrieb für Kellersanierung von innen ohne Aufgraben, Horizontalsperren im Injektionsverfahren, Kellerinnenabdichtung nach WTA, Mauerwerkstrockenlegung und Schimmelpilzsanierung in Wuppertal, Essen, Düsseldorf, Bochum, Dortmund und dem Bergischen Land.",
+      "Bautenschutz-Fachbetrieb für Kellersanierung von innen ohne Aufgraben, Horizontalsperren im Injektionsverfahren, Kellerinnenabdichtung nach WTA, Mauerwerkstrockenlegung und Schimmelpilzsanierung in ganz NRW: Köln, Düsseldorf, Duisburg, Essen, Dortmund, Bochum, Gelsenkirchen, Wuppertal und das Bergische Land.",
     url: SITE_URL,
     telephone: COMPANY_INFO.phoneTel,
     email: COMPANY_INFO.email,
@@ -67,18 +67,11 @@ export function businessNode() {
         closes: "14:00",
       },
     ],
+    // every city with its own page, plus the state
     areaServed: [
-      "Wuppertal",
-      "Essen",
-      "Düsseldorf",
-      "Bochum",
-      "Dortmund",
-      "Solingen",
-      "Remscheid",
-      "Velbert",
-      "Haan",
-      "Wermelskirchen",
-    ].map((name) => ({ "@type": "City", name })),
+      ...CITY_PAGES.map((c) => ({ "@type": "City", name: c.name, url: abs(`/kellersanierung/${c.slug}/`) })),
+      { "@type": "State", name: "Nordrhein-Westfalen" },
+    ],
     memberOf: { "@type": "Organization", name: "SchimmelPeter®", url: "https://www.schimmelpeter.de" },
     sameAs: [PARTNER_URL],
     // the categories of the Google Business Profile, as far as the work is what we do

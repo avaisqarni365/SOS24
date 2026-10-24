@@ -16,7 +16,7 @@ export const COMPANY_INFO = {
   title: "Inhaber & Bautenschutz-Experte",
   street: "Niebuhrstraße 46",
   city: "45144 Essen",
-  operatingRegion: "NRW: Wuppertal, Essen, Düsseldorf, Bochum, Dortmund & Bergisches Land",
+  operatingRegion: "ganz NRW: Ruhrgebiet, Rheinland & Bergisches Land",
   phoneDisplay: "+49 (0)172 2064177",
   phoneTel: "+491722064177",
   email: "info@sos-abdichtung.de",

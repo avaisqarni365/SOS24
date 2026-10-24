@@ -14,7 +14,7 @@ import { SITE_URL, BUSINESS_ID, WEBSITE_ID, abs, businessNode, websiteNode, brea
 
 const TITLE = "Kellersanierung ohne Aufgraben in NRW | sos-abdichtung";
 const DESCRIPTION =
-  "Kellersanierung ohne Aufgraben in Wuppertal, Essen, Düsseldorf, Bochum, Dortmund und NRW. Kostenlose Feuchtigkeitsmessung, 10 Jahre Garantie auf die Arbeit.";
+  "Kellersanierung ohne Aufgraben in Köln, Düsseldorf, Duisburg, Essen, Dortmund, Wuppertal und ganz NRW. Kostenlose Feuchtigkeitsmessung, 10 Jahre Garantie.";
 
 export const metadata: Metadata = {
   title: TITLE,

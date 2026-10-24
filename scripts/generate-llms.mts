@@ -10,7 +10,7 @@ const SITE = "https://sos-abdichtung.de";
 const lines: string[] = [
   "# sos-abdichtung",
   "",
-  "> Bautenschutz-Fachbetrieb für Kellersanierung von innen ohne Aufgraben, feuchte Kellerwände, Horizontalsperren im Injektionsverfahren, Kellerinnenabdichtung nach WTA, Mauerwerkstrockenlegung, Schimmel im Keller und in Wohnräumen (Schimmelsanierung mit Klimaplatten), kostenlose Feuchtigkeitsmessung und Rissverpressung. Im Einsatz in Wuppertal, Essen, Düsseldorf, Bochum, Dortmund und dem Bergischen Land. Offizieller SchimmelPeter® Partnerbetrieb.",
+  "> Bautenschutz-Fachbetrieb für Kellersanierung von innen ohne Aufgraben, feuchte Kellerwände, Horizontalsperren im Injektionsverfahren, Kellerinnenabdichtung nach WTA, Mauerwerkstrockenlegung, Schimmel im Keller und in Wohnräumen (Schimmelsanierung mit Klimaplatten), kostenlose Feuchtigkeitsmessung und Rissverpressung. Im Einsatz in ganz NRW, unter anderem in Köln, Düsseldorf, Duisburg, Essen, Dortmund, Bochum, Gelsenkirchen, Wuppertal und dem Bergischen Land; Sitz in Essen. Offizieller SchimmelPeter® Partnerbetrieb.",
   "",
   "## Kerninformationen",
   `- Inhaber: ${COMPANY_INFO.owner}`,

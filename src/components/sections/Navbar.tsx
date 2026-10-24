@@ -27,6 +27,14 @@ const CITIES = [
   { slug: "duesseldorf", name: "Düsseldorf" },
   { slug: "bochum", name: "Bochum" },
   { slug: "dortmund", name: "Dortmund" },
+  { slug: "koeln", name: "Köln" },
+  { slug: "duisburg", name: "Duisburg" },
+  { slug: "gelsenkirchen", name: "Gelsenkirchen" },
+  { slug: "oberhausen", name: "Oberhausen" },
+  { slug: "muelheim-an-der-ruhr", name: "Mülheim an der Ruhr" },
+  { slug: "hagen", name: "Hagen" },
+  { slug: "leverkusen", name: "Leverkusen" },
+  { slug: "bottrop", name: "Bottrop" },
 ];
 
 /** The flat top level of the menu: the main places the site actually goes. */
