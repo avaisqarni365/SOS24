@@ -5586,6 +5586,11 @@ html[data-theme="dark"] .mnav__foot { background: rgb(255 255 255 / 0.04); borde
 .bot-launcher { transition: opacity 160ms ease; }
 body:has(main :is(input, select, textarea):focus) .bot-launcher { opacity: 0; pointer-events: none; }
 
+/* the NRW map is taller than the old Wuppertal window: it gets the room to stay readable */
+.region-map--nrw { max-height: min(88svh, 820px); margin-inline: auto; }
+.region-map__hq circle { fill: var(--pw-accent, #0b63a8); stroke: #ffffff; stroke-width: 3px; vector-effect: non-scaling-stroke; }
+.region-map--nrw .region-map__hq text { paint-order: stroke; stroke: #121915; stroke-linejoin: round; }
+
 /* the consent question sits above the phone's contact bar, and in the corner from 640px */
 .consent { bottom: calc(4.75rem + env(safe-area-inset-bottom, 0px)); }
 @media (min-width: 640px) { .consent { bottom: 1rem; } }

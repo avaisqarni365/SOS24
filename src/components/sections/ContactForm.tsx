@@ -765,7 +765,7 @@ export default function ContactForm({ compact = false, defaultDamage, place }: C
                     Anfrage für kostenlose Vor-Ort-Besichtigung &amp; Foto-Diagnose
                   </h3>
                   <p className="text-xs text-slate-500 mt-1">
-                    Unverbindlich &amp; kostenfrei in Wuppertal, Essen, Düsseldorf, Bochum, Dortmund, im Bergischen Land und ganz NRW.
+                    Unverbindlich &amp; kostenfrei in ganz NRW: Köln, Düsseldorf, Duisburg, Essen, Dortmund, Wuppertal und weitere Städte.
                   </p>
                 </div>
 

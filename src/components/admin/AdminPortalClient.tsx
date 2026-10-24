@@ -7205,7 +7205,7 @@ export default function AdminPortalClient() {
                 <span className="text-[11px] font-bold text-slate-700">{t("3. Zusätzliche Baustellen- & Fahrzeugfotos für Google:", "3. Additional Job Site & Vehicle Photos for Google:")}</span>
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
                   <a
-                    href="/img/brand/brand-van.webp"
+                    href="/img/brand/servicewagen.webp"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="p-2 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-lg text-center text-[10px] font-bold text-slate-700 block transition-colors"

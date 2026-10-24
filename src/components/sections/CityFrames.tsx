@@ -37,6 +37,14 @@ const TONE: Record<string, string> = {
   duesseldorf: "var(--ic-red)",
   bochum: "var(--ic-water)",
   dortmund: "var(--ic-green)",
+  koeln: "var(--ic-red)",
+  duisburg: "var(--ic-water)",
+  gelsenkirchen: "var(--ic-green)",
+  oberhausen: "var(--ic-red)",
+  "muelheim-an-der-ruhr": "var(--ic-water)",
+  hagen: "var(--ic-green)",
+  leverkusen: "var(--ic-red)",
+  bottrop: "var(--ic-water)",
 };
 const tone = (slug: string) => ({ ["--ic" as string]: TONE[slug] ?? "var(--ic-water)" });
 

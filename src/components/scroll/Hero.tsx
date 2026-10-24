@@ -23,7 +23,7 @@ export default function Hero() {
         <div className="hero__grid">
           <div className="hero__copy">
           <p className="sc-label">
-            <PartnerLink>SchimmelPeter® Partnerbetrieb</PartnerLink> · Wuppertal, Essen, Düsseldorf, Bochum, Dortmund &amp; NRW
+            <PartnerLink>SchimmelPeter® Partnerbetrieb</PartnerLink> · Köln, Düsseldorf, Essen, Dortmund, Wuppertal &amp; ganz NRW
           </p>
           <h1
             id="hero-title"
