@@ -128,10 +128,10 @@ function RegionMap() {
       })}
       {/* the office: Niebuhrstraße 46, Essen */}
       <g className="region-map__hq" transform={`translate(${MAP_ESSEN.x} ${MAP_ESSEN.y})`}>
-        <circle r={9 * k} />
-        <text x={14 * k} y={-10 * k} style={{ fontSize: `${17 * k}px` }}>
-          Sitz
-        </text>
+        {/* the highlighted Essen area names the place; a text label here collided with Bochum */}
+        <circle r={9 * k}>
+          <title>Unser Sitz: Niebuhrstraße 46, 45144 Essen</title>
+        </circle>
       </g>
     </svg>
   );
