@@ -1,13 +1,13 @@
 # sos-abdichtung
 
-> Bautenschutz-Fachbetrieb für Kellersanierung von innen ohne Aufgraben, feuchte Kellerwände, Horizontalsperren im Injektionsverfahren, Kellerinnenabdichtung nach WTA, Mauerwerkstrockenlegung, Schimmel im Keller und in Wohnräumen (Schimmelsanierung mit Klimaplatten), kostenlose Feuchtigkeitsmessung und Rissverpressung. Im Einsatz in Wuppertal, Essen, Düsseldorf, Bochum, Dortmund und dem Bergischen Land. Offizieller SchimmelPeter® Partnerbetrieb.
+> Bautenschutz-Fachbetrieb für Kellersanierung von innen ohne Aufgraben, feuchte Kellerwände, Horizontalsperren im Injektionsverfahren, Kellerinnenabdichtung nach WTA, Mauerwerkstrockenlegung, Schimmel im Keller und in Wohnräumen (Schimmelsanierung mit Klimaplatten), kostenlose Feuchtigkeitsmessung und Rissverpressung. Im Einsatz in ganz NRW, unter anderem in Köln, Düsseldorf, Duisburg, Essen, Dortmund, Bochum, Gelsenkirchen, Wuppertal und dem Bergischen Land; Sitz in Essen. Offizieller SchimmelPeter® Partnerbetrieb.
 
 ## Kerninformationen
 - Inhaber: Shahzad Mahmood
 - Sitz: Niebuhrstraße 46, 45144 Essen
 - Telefon: +49 (0)172 2064177
 - E-Mail: info@sos-abdichtung.de
-- Servicegebiet: Wuppertal, Solingen, Remscheid, Velbert, Haan, Wermelskirchen, Essen, Düsseldorf, Bochum, Dortmund
+- Servicegebiet: Wuppertal, Solingen, Remscheid, Velbert, Haan, Wermelskirchen, Essen, Düsseldorf, Bochum, Dortmund, Köln, Duisburg, Gelsenkirchen, Oberhausen, Mülheim an der Ruhr, Hagen, Leverkusen, Bottrop
 - Feuchtemessung vor Ort: kostenlos und unverbindlich
 - Garantie: 10 Jahre von sos-abdichtung auf die ausgeführten Arbeiten; zusätzlich 25 Jahre Produktgarantie des Herstellers SchimmelPeter GmbH
 - Verfahren: Horizontalsperre per Injektion (in Paraffin gelöster Kunststoff, Bohrlöcher im Abstand bis 20 cm, meist ohne Vortrocknung), Innenabdichtung mit MDS, Schimmelsanierung mit TÜV-geprüftem Standard
@@ -53,9 +53,17 @@ Jedes Messprotokoll wird dem Kunden immer schriftlich übergeben, nach jeder Pha
 - [Kellersanierung Düsseldorf](https://sos-abdichtung.de/kellersanierung/duesseldorf/): vor Ort in 24 bis 48 Stunden. PLZ 40210, 40213, 40477, 40545, 40547, 40597, 40625
 - [Kellersanierung Bochum](https://sos-abdichtung.de/kellersanierung/bochum/): vor Ort in 24 bis 48 Stunden. PLZ 44787, 44789, 44791, 44799, 44801, 44803, 44866
 - [Kellersanierung Dortmund](https://sos-abdichtung.de/kellersanierung/dortmund/): vor Ort in 24 bis 48 Stunden. PLZ 44135, 44137, 44139, 44225, 44263, 44309, 44359
+- [Kellersanierung Köln](https://sos-abdichtung.de/kellersanierung/koeln/): vor Ort in 24 bis 48 Stunden. PLZ 50667, 50672, 50674, 50676, 50733, 50735, 50823, 50825, 50931, 50933, 50937, 50968, 50996, 51063, 51065, 51105, 51143
+- [Kellersanierung Duisburg](https://sos-abdichtung.de/kellersanierung/duisburg/): vor Ort in 24 bis 48 Stunden. PLZ 47051, 47053, 47055, 47057, 47058, 47059, 47119, 47137, 47166, 47169, 47178, 47198, 47226, 47228, 47239, 47249, 47259, 47279
+- [Kellersanierung Gelsenkirchen](https://sos-abdichtung.de/kellersanierung/gelsenkirchen/): vor Ort in 24 bis 48 Stunden. PLZ 45879, 45881, 45883, 45884, 45886, 45888, 45889, 45891, 45892, 45894, 45896, 45897, 45899
+- [Kellersanierung Oberhausen](https://sos-abdichtung.de/kellersanierung/oberhausen/): vor Ort in 24 bis 48 Stunden. PLZ 46045, 46047, 46049, 46117, 46119, 46145, 46147, 46149
+- [Kellersanierung Mülheim an der Ruhr](https://sos-abdichtung.de/kellersanierung/muelheim-an-der-ruhr/): vor Ort in 24 bis 48 Stunden. PLZ 45468, 45470, 45472, 45473, 45475, 45476, 45478, 45479, 45481
+- [Kellersanierung Hagen](https://sos-abdichtung.de/kellersanierung/hagen/): vor Ort in 24 bis 48 Stunden. PLZ 58089, 58091, 58093, 58095, 58097, 58099, 58119, 58135
+- [Kellersanierung Leverkusen](https://sos-abdichtung.de/kellersanierung/leverkusen/): vor Ort in 24 bis 48 Stunden. PLZ 51371, 51373, 51375, 51377, 51379, 51381
+- [Kellersanierung Bottrop](https://sos-abdichtung.de/kellersanierung/bottrop/): vor Ort in 24 bis 48 Stunden. PLZ 46236, 46238, 46240, 46242, 46244
 
 ## Häufige Fragen
-### Wie erkenne ich, ob mein Keller in Wuppertal von aufsteigender Feuchtigkeit betroffen ist?
+### Wie erkenne ich, ob mein Keller von aufsteigender Feuchtigkeit betroffen ist?
 Typisch sind dunkle Feuchteränder im unteren Wandbereich, abblätternde Farbe, aufgequollener Putz, weiße Salzausblühungen, Schimmel an Sockelleisten und ein muffiger Geruch. Steigt die Feuchte gleichmäßig von unten nach oben, spricht vieles für kapillar aufsteigende Feuchte und eine defekte Horizontalsperre. Einzelne, klar abgegrenzte Flecken kommen dagegen meist von Rohrschäden oder Wasser von außen. Sicher ist erst die Messung im Mauerwerk.
 
 ### Was sind die häufigsten Ursachen für einen nassen Keller?
@@ -67,7 +75,7 @@ In das feuchte Mauerwerk werden Bohrlöcher im Abstand von bis zu 20 cm gesetzt,
 ### Muss für die Sanierung der Garten oder das Pflaster aufgegraben werden?
 Nein! Das Injektionsverfahren zur Horizontalsperre und die Kellerinnenabdichtung erfolgen vollständig von der Rauminnenseite. Teure Erdarbeiten, beschädigte Einfahrten oder zerstörte Vorgärten entfallen komplett.
 
-### Wie hoch sind die Kosten für eine Kellersanierung im Raum Wuppertal / PLZ 42?
+### Wie hoch sind die Kosten für eine Kellersanierung?
 Die Kosten hängen vom Wandbaustoff (Ziegel, Bruchstein, Beton), der Mauerstärke und dem Durchfeuchtungsgrad ab. Eine Horizontalsperre per Injektion von innen ist deutlich günstiger als eine Außenabdichtung mit Aufgraben. Wir bieten Ihnen nach der kostenlosen Erstmessung ein verbindliches Festpreisangebot.
 
 ### Gibt es eine Garantie auf die ausgeführten Arbeiten?

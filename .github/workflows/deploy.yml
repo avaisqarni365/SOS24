@@ -80,7 +80,7 @@ jobs:
         run: pnpm run build
         env:
           PAGES_BASE_PATH: ${{ steps.pages.outputs.base_path }}
-          # SHA-256 of the /admin demo password (Settings → Variables); unset keeps /admin locked
+          # SHA-256 of the /admin demo password (Settings → Variables); unset (the default) makes /admin a link to the Google back office
           NEXT_PUBLIC_ADMIN_PASS_SHA256: ${{ vars.ADMIN_PASS_SHA256 }}
 
       - name: Prefix site paths for a sub-folder preview
@@ -96,3 +96,9 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+      # only for the live domain; a failed ping never fails the deploy
+      - name: Notify search engines (IndexNow)
+        if: steps.pages.outputs.base_path == ''
+        continue-on-error: true
+        run: node scripts/indexnow.mjs
