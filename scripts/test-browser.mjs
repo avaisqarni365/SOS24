@@ -132,7 +132,7 @@ await new Promise((r) => setTimeout(r, 2000));
 const title = await evaluate("document.title");
 console.log(`Page title: "${title}"`);
 
-// Log in with ADMIN_TEST_PASS; the build must carry its SHA-256 in NEXT_PUBLIC_ADMIN_PASS_SHA256.
+// Log in with ADMIN_TEST_PASS: the back office's password for "shahzad" (the page asks the live backend).
 const adminPass = process.env.ADMIN_TEST_PASS || "";
 if (!adminPass) console.log("ADMIN_TEST_PASS is not set: the dashboard stays locked and the tab checks will fail.");
 const loginResult = await evaluate(`
@@ -150,7 +150,7 @@ const loginResult = await evaluate(`
 console.log(`Login action result: ${loginResult}`);
 
 // Wait for dashboard to unlock
-await new Promise((r) => setTimeout(r, 600));
+await new Promise((r) => setTimeout(r, 4000));
 
 // Test tabs
 const tabsToTest = [

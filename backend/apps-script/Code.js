@@ -62,6 +62,7 @@ function doPost(e) {
       case 'saveDraft': return json(saveDraft_(body));
       case 'resend': return json(resend_(String(body.email || ''), String(body.lang || 'de')));
       case 'chat': return json(aiChat_(body));
+      case 'adminLogin': return json(adminLogin_(body));
       default: return json({ok: false, error: 'unknown_action'});
     }
   } catch (err) {
