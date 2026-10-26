@@ -4,7 +4,7 @@
  * current wordmark (full colour on the van, a white print on the hoodies).
  */
 export const SHOTS = {
-  van: { src: "/img/brand/servicewagen.webp", w: 432, h: 300, alt: "Servicewagen von SOS-Abdichtung mit Firmenlogo vor einem Wohnhaus" },
+  van: { src: "/img/brand/servicewagen.webp?v=3", w: 432, h: 300, alt: "Servicewagen von SOS-Abdichtung mit Firmenlogo vor einem Wohnhaus" },
   roofer: { src: "/img/brand/brand-roofer.webp", w: 300, h: 446, alt: "Mitarbeiter in SOS-Abdichtung-Arbeitskleidung verschweißt eine Bitumenbahn auf dem Flachdach" },
   walker: { src: "/img/brand/brand-walker.webp", w: 198, h: 302, alt: "Mitarbeiter in SOS-Abdichtung-Arbeitskleidung mit Werkzeuggürtel und Dachbahn" },
   bohrung: { src: "/img/gallery/bohrung-injektion.webp", w: 679, h: 450, alt: "Handwerker bohrt mit dem Bohrhammer die Löcher für die Injektion in eine feuchte Wand" },

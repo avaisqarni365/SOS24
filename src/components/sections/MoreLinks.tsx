@@ -88,7 +88,7 @@ const CARDS = [
     href: "/galerie/",
     Icon: Images,
     tone: "var(--ic-red)",
-    img: "/img/brand/servicewagen.webp",
+    img: "/img/brand/servicewagen.webp?v=3",
     w: 432,
     h: 300,
     pos: "50% 50%",
