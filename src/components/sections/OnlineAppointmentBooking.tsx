@@ -76,18 +76,16 @@ export default function OnlineAppointmentBooking({ hideHeader = false, className
   const [assignedLeadId, setAssignedLeadId] = useState<string>('');
   const [activePlace, setActivePlace] = useState<string>(place || '');
 
+  // ?ort= (from the map's place card or a city page) fills the address once;
+  // the visitor can then clear or change it freely
   React.useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const params = new URLSearchParams(window.location.search);
-      const queryOrt = params.get('ort') || params.get('city');
-      if (queryOrt) {
-        setActivePlace(queryOrt);
-        if (!address) {
-          setAddress(queryOrt);
-        }
-      }
+    const params = new URLSearchParams(window.location.search);
+    const queryOrt = params.get('ort') || params.get('city');
+    if (queryOrt) {
+      setActivePlace(queryOrt);
+      setAddress((a) => a || queryOrt);
     }
-  }, [address]);
+  }, []);
 
   const handleBooking = async (e: React.FormEvent) => {
     e.preventDefault();
