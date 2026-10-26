@@ -119,7 +119,7 @@ export const SERVICE_PAGES: ServicePage[] = [
       {
         heading: "Wasserschaden im Keller nach Starkregen: erst messen, dann trocknen",
         paragraphs: [
-          "Läuft der Keller nach einem Rohrbruch oder einem Starkregen voll, stehen zuerst Abpumpen und Ausräumen an. Danach kommt die eigentliche Frage: Ist die Wand nur oberflächlich nass geworden und trocknet mit guter Lüftung und technischer Trocknung wieder ab, oder hat das Ereignis einen Schaden sichtbar gemacht, der schon lange bestand? Diese Unterscheidung treffen wir mit der Feuchtemessung vor Ort, bevor Geld in Trocknungsgeräte oder neuen Putz fließt.",
+          "Läuft der Keller nach einem Rohrbruch oder einem Starkregen voll, stehen zuerst Abpumpen und Ausräumen an. Diese akute Wasserschadensanierung übernehmen wir nicht, dafür sind Notdienst und Trocknungsfirmen zuständig. Danach kommt die eigentliche Frage: Ist die Wand nur oberflächlich nass geworden und trocknet mit guter Lüftung und technischer Trocknung wieder ab, oder hat das Ereignis einen Schaden sichtbar gemacht, der schon lange bestand? Diese Unterscheidung treffen wir mit der Feuchtemessung vor Ort, bevor Geld in Trocknungsgeräte oder neuen Putz fließt.",
           "Zeigt die Messung, dass das Mauerwerk auch in der Tiefe durchfeuchtet ist und Salze enthält, reicht Trocknen allein nicht aus. Dann wird die Trocknung Teil der Kellersanierung: Wir entfernen durchnässten Putz, bauen bei Bedarf eine Horizontalsperre ein und begleiten die Austrocknung mit einer Schutzentfeuchtung, bis der Sanierputz aufgebracht werden kann. Die Messwerte halten wir schriftlich fest. Das schafft Klarheit über den Zustand vor der Sanierung und hilft auch im Gespräch mit Ihrer Versicherung.",
         ],
       },
@@ -156,7 +156,7 @@ export const SERVICE_PAGES: ServicePage[] = [
         a: "Ein fachgerecht abgedichteter und verputzter Keller ist trocken genug für Hobbyraum, Büro oder Lager. Für einen Aufenthaltsraum im baurechtlichen Sinn gelten zusätzliche Anforderungen an Belichtung, Raumhöhe und Wärmeschutz. Das sollten Sie vorab mit Ihrem Architekten oder der Bauaufsicht klären.",
       },
       {
-        q: "Was kostet eine Kellersanierung in Wuppertal?",
+        q: "Was kostet es, einen Keller trockenzulegen?",
         a: "Die Kosten richten sich nach Wandbaustoff, Mauerstärke, Länge der betroffenen Wände und Durchfeuchtungsgrad. Pauschale Meterpreise wären unseriös, weil ein Bruchsteinkeller in Barmen anders zu behandeln ist als ein Betonkeller aus den Siebzigerjahren. Nach der kostenlosen Messung erhalten Sie ein verbindliches Festpreisangebot.",
       },
     ],
@@ -288,6 +288,10 @@ export const SERVICE_PAGES: ServicePage[] = [
         q: "Welche Garantie erhalte ich auf die Horizontalsperre?",
         a: "Sie erhalten zwei getrennte Zusagen. Auf die Wirksamkeit des Produkts gibt es 25 Jahre Produktgarantie des Herstellers SchimmelPeter GmbH. Zusätzlich gibt sos-abdichtung 10 Jahre Garantie auf die ausgeführten Arbeiten.",
       },
+      {
+        q: "Geht eine Mauertrockenlegung auch von innen?",
+        a: "Ja. Die Bohrlöcher für die Injektion setzen wir in der Regel vom Keller oder vom Raum aus, ein Aufgraben von außen ist dafür nicht nötig. So lässt sich feuchtes Mauerwerk sanieren, auch wenn außen Terrasse, Einfahrt oder das Nachbarhaus angrenzen. Ob zusätzlich eine Innenabdichtung gegen seitlich eindringende Feuchte nötig ist, zeigt die Messung vor Ort.",
+      },
     ],
     related: ["kellersanierung", "kellerinnenabdichtung", "feuchtemessung"],
   },
@@ -392,6 +396,10 @@ export const SERVICE_PAGES: ServicePage[] = [
       {
         q: "Warum reicht ein Bitumenanstrich von innen nicht?",
         a: "Bitumen haftet auf feuchtem Mauerwerk schlecht und wird von innen durch den Wasserdruck von der Wand weggedrückt. Mineralische Dichtungsschlämmen verbinden sich dagegen mit dem Untergrund und sind für die Anwendung von innen geeignet. Deshalb entfernen wir alte Bitumenanstriche vor der Sanierung vollständig.",
+      },
+      {
+        q: "Feuchte Wände sanieren: von innen oder von außen?",
+        a: "Eine Außenabdichtung hält das Wasser vor der Wand, verlangt aber das Aufgraben bis zum Fundament, mit Erdarbeiten und oft beschädigten Außenanlagen. Die Innenabdichtung nach WTA erreicht die Wand vom Keller aus und ist für die meisten Altbauten die wirtschaftlichere Lösung, auch bei drückendem Wasser. Steigt die Feuchte dagegen im Mauerwerk auf, gehört eine Horizontalsperre dazu. Welche Kombination Ihre Wand braucht, entscheidet die kostenlose Feuchtemessung.",
       },
     ],
     related: ["kellersanierung", "horizontalsperre", "rissverpressung"],
@@ -510,6 +518,10 @@ export const SERVICE_PAGES: ServicePage[] = [
       {
         q: "Erstellen Sie auch für Mieter eine Dokumentation?",
         a: "Ja, unsere Messung und Dokumentation richtet sich an Eigentümer ebenso wie an Mieter. Sie hält fest, wo welche Feuchte gemessen wurde und welche Ursache sich daraus ergibt. Die rechtliche Bewertung übernimmt im Streitfall ein Anwalt oder Mieterverein.",
+      },
+      {
+        q: "Woran erkenne ich eine gute Fachfirma für Schimmelbeseitigung?",
+        a: "An drei Dingen: Sie misst die Feuchte, bevor sie ein Angebot macht, und nennt Ihnen die Ursache. Sie entfernt den Befall sporensicher und ohne Chlor, statt ihn nur zu überstreichen. Und sie beseitigt die Ursache, damit der Schimmel nicht wiederkommt, mit schriftlicher Garantie. Wir sind SchimmelPeter-Partner, die Messung vor Ort ist kostenlos und auf die Arbeit geben wir 10 Jahre Garantie.",
       },
     ],
     related: ["feuchtemessung", "kellersanierung", "horizontalsperre"],
