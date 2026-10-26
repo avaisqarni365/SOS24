@@ -7,6 +7,7 @@ import { SERVICE_FACTS } from "@/data/service-facts";
 import { CHEMISTRY } from "@/data/chemistry";
 import ServiceGrid from "@/components/sections/ServiceGrid";
 import FeuchteScanner from "@/components/interactive/FeuchteScanner";
+import RegionExplorer, { type ExplorerCity, type ExplorerMap } from "@/components/sections/RegionExplorer";
 import { hy } from "@/lib/hyphenate";
 
 /* ------------------------------------------------------------- scanner -- */
@@ -86,65 +87,59 @@ export function ServicesRail() {
 /** Short names where the full one would cover its neighbours on the map. */
 const MAP_LABEL: Record<string, string> = { "Mülheim an der Ruhr": "Mülheim", "Wermelskirchen": "Wermelsk." };
 
+/** Office: Niebuhrstraße 46, 45144 Essen. */
+const OFFICE = { lat: 51.4466, lng: 6.98 };
+
+/** Road distance and drive time from the office, estimated from the
+    straight line (x 1.3 for the roads, 55 km/h on average). */
+function drive(geo: { lat: number; lng: number }) {
+  const R = 6371;
+  const rad = (v: number) => (v * Math.PI) / 180;
+  const a =
+    Math.sin(rad(geo.lat - OFFICE.lat) / 2) ** 2 +
+    Math.cos(rad(OFFICE.lat)) * Math.cos(rad(geo.lat)) * Math.sin(rad(geo.lng - OFFICE.lng) / 2) ** 2;
+  const road = 2 * R * Math.asin(Math.sqrt(a)) * 1.3;
+  const five = (v: number) => Math.max(5, Math.round(v / 5) * 5);
+  return { km: five(road), min: five((road / 55) * 60) };
+}
+
 /** The service area on real municipal boundaries: every city with its own page is
     filled and linked, the neighbours give context, a pin marks the office in Essen.
     The frame is fitted to those cities, so a new city page widens the map by itself. */
-function RegionMap() {
-  const pages = new Set(CITY_PAGES.map((c) => c.slug));
+function regionData(): { map: ExplorerMap; cities: ExplorerCity[] } {
+  const pages = new Map(CITY_PAGES.map((c) => [c.slug, c]));
   const linked = MAP_AREAS.filter((a) => a.slug && pages.has(a.slug));
   const xs: number[] = [], ys: number[] = [];
   linked.forEach((a) => Array.from(a.d.matchAll(/(-?\d+(?:\.\d+)?) (-?\d+(?:\.\d+)?)/g)).forEach((m) => { xs.push(+m[1]); ys.push(+m[2]); }));
   const pad = 36;
   const x0 = Math.min(...xs) - pad, y0 = Math.min(...ys) - pad, w = Math.max(...xs) + pad - x0, h = Math.max(...ys) + pad - y0;
-  // labels keep the size they had in the old 800-wide map, relative to the frame
-  const k = w / MAP_W;
-  const label = { fontSize: `${21 * k}px`, strokeWidth: `${4 * k}px` };
-  return (
-    <svg data-i18n=""
-      viewBox={`${x0.toFixed(0)} ${y0.toFixed(0)} ${w.toFixed(0)} ${h.toFixed(0)}`}
-      className="region-map region-map--nrw"
-      role="img"
-      aria-labelledby="region-map-title"
-    >
-      <title id="region-map-title">
-        {`Karte des Einsatzgebiets in NRW: ${linked.map((a) => a.name).join(", ")}; Sitz in Essen`}
-      </title>
-      <rect x={x0} y={y0} width={w} height={h} className="region-map__bg" />
-      <g className="region-map__context">
-        {MAP_AREAS.filter((a) => !linked.includes(a)).map((a) => (
-          <path key={a.name} d={a.d} />
-        ))}
-      </g>
-      {linked.map((a) => {
-        const office = a.slug === "essen";
-        return (
-          <a key={a.name} href={`/kellersanierung/${a.slug}/`} className={`region-map__area${office ? " is-main" : ""}`}>
-            <path d={a.d} />
-            <text x={a.cx} y={a.cy} textAnchor="middle" style={label}>
-              {MAP_LABEL[a.name] || a.name}
-            </text>
-          </a>
-        );
-      })}
-      {/* the office: Niebuhrstraße 46, Essen */}
-      <g className="region-map__hq" transform={`translate(${MAP_ESSEN.x} ${MAP_ESSEN.y})`}>
-        {/* the highlighted Essen area names the place; a text label here collided with Bochum */}
-        <circle r={9 * k}>
-          <title>Unser Sitz: Niebuhrstraße 46, 45144 Essen</title>
-        </circle>
-      </g>
-    </svg>
-  );
+  // the list follows CITY_PAGES; the map areas carry the outlines
+  const cities = CITY_PAGES.flatMap((c) => {
+    const a = linked.find((m) => m.slug === c.slug);
+    if (!a) return [];
+    return [{ slug: c.slug, name: c.name, label: MAP_LABEL[c.name] || c.name, plz: c.plz, districts: c.districts, response: c.responseTime, ...drive(c.geo), d: a.d, cx: a.cx, cy: a.cy }];
+  });
+  return {
+    cities,
+    map: {
+      vb: `${x0.toFixed(0)} ${y0.toFixed(0)} ${w.toFixed(0)} ${h.toFixed(0)}`,
+      frame: { x: x0, y: y0, w, h },
+      // labels keep the size they had in the old 800-wide map, relative to the frame
+      k: w / MAP_W,
+      context: MAP_AREAS.filter((a) => !linked.includes(a)).map((a) => a.d),
+      hq: MAP_ESSEN,
+    },
+  };
 }
 
 export function RegionSection() {
+  const { map, cities } = regionData();
   return (
     <section
       id="servicegebiet"
-      className="sc-section band-mint"
+      className="sc-section rx-band"
       aria-labelledby="region-title"
       data-sc-act="flow"
-     
     >
       <div className="sc-wrap">
         <div className="grid gap-6 lg:grid-cols-[1fr_1fr] lg:items-end" data-sc-in>
@@ -155,34 +150,10 @@ export function RegionSection() {
             </h2>
           </div>
           <p className="sc-body">
-            {hy("Vom Rhein in Köln, Düsseldorf und Duisburg über das Ruhrgebiet bis ins Bergische Land: Hochwasser und Grundwasser, Bergsenkungen, Hanglagen und Altbauten aus Ziegel und Bruchstein ohne intakte Horizontalsperre. Unser Sitz ist in Essen. Klicken Sie auf Ihre Stadt.")}
+            {hy("Vom Rhein in Köln, Düsseldorf und Duisburg über das Ruhrgebiet bis ins Bergische Land: Hochwasser und Grundwasser, Bergsenkungen, Hanglagen und Altbauten aus Ziegel und Bruchstein ohne intakte Horizontalsperre. Unser Sitz ist in Essen. Suchen Sie Ihre Stadt oder Postleitzahl.")}
           </p>
         </div>
-        <div className="mt-10 grid gap-6 lg:grid-cols-[1.2fr_1fr] lg:items-start">
-          <figure className="region-map__frame">
-            <RegionMap />
-            <figcaption className="no-justify">
-              <span className="region-map__key region-map__key--area" aria-hidden="true" /> Einsatzgebiet
-              <span className="region-map__key region-map__key--hq" aria-hidden="true" /> Sitz
-              <span className="region-map__credit">Gemeindegrenzen: Land NRW, via Code for Germany</span>
-            </figcaption>
-          </figure>
-          <div className="grid gap-6">
-            <ul className="grid grid-cols-2 gap-3">
-              {CITY_PAGES.map((c) => (
-                <li key={c.slug}>
-                  <a href={`/kellersanierung/${c.slug}/`} className="city-card">
-                    <span className="city-card__name">{c.name}</span>
-                    <span className="city-card__time">Vor Ort in {c.responseTime}</span>
-                    <span className="city-card__go" aria-hidden="true">
-                      →
-                    </span>
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
+        <RegionExplorer map={map} cities={cities} />
       </div>
     </section>
   );
