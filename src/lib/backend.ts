@@ -592,6 +592,18 @@ async function postToGas<T = Record<string, unknown>>(payload: Record<string, un
 }
 
 /**
+ * The website's /admin signs in with the Google back office's username and password
+ * (sheet "Benutzer"): one login for both. Errors: 'login', 'locked', 'leaked', 'network'.
+ */
+export async function adminLogin(user: string, pass: string): Promise<{ ok: boolean; name?: string; error?: string }> {
+  try {
+    return await postToGas<{ ok: boolean; name?: string; error?: string }>({ action: 'adminLogin', user, pass });
+  } catch {
+    return { ok: false, error: 'network' };
+  }
+}
+
+/**
  * 1. Submit inquiry (action: 'lead') to Google Sheets (`Anfragen`) AND sync to Admin Dashboard
  */
 export async function submitLeadToWorkspace(

@@ -26,43 +26,15 @@ function startPage_(p) {
   return '';
 }
 
-var SESSION_TTL = 21600, LOCK_TRIES = 5, LOCK_SECONDS = 900;
+var SESSION_TTL = 21600;
 var CURRENT_ = null;
 
 function login(user, pass) {
-  var u = String(user || '').trim().toLowerCase().slice(0, 60), cache = CacheService.getScriptCache(), key = 'admfail_' + u;
-  var fails = Number(cache.get(key) || 0);
-  if (fails >= LOCK_TRIES) return {ok: false, error: 'locked'};
-  var sh = usersSheet_(), n = sh.getLastRow(), c = function (k) { return USER_COLS.indexOf(k); };
-  var rows = n > 1 ? sh.getRange(2, 1, n - 1, USER_COLS.length).getValues() : [], hit = -1;
-  for (var i = 0; i < rows.length; i++) if (String(rows[i][c('Benutzername')]).trim().toLowerCase() === u && u) { hit = i; break; }
-  var ok = false, name = '', row = hit + 2;
-  // the old default password was public: it never opens the admin, whatever the sheet still holds
-  if (leakedPw_(pass)) {
-    cache.put(key, String(fails + 1), LOCK_SECONDS);
-    return {ok: false, error: 'leaked'};
-  }
-  if (hit >= 0 && /^(ja|yes|x|1|true)$/i.test(String(rows[hit][c('Aktiv')]).trim())) {
-    var r = rows[hit], plain = String(r[c('Neues Passwort')] || '');
-    if (plain) {
-      var err = setUserPw_(sh, row, plain);
-      if (!err) r = sh.getRange(row, 1, 1, USER_COLS.length).getValues()[0];
-    }
-    if (r[c('Passwort (verschlüsselt)')] && hashPw_(pass, r[c('Salt')]) === String(r[c('Passwort (verschlüsselt)')])) {
-      ok = true;
-      name = String(r[c('Name')] || r[c('Benutzername')]);
-    }
-  }
-  if (!ok) {
-    cache.put(key, String(fails + 1), LOCK_SECONDS);
-    Utilities.sleep(600);
-    return {ok: false, error: fails + 1 >= LOCK_TRIES ? 'locked' : 'login'};
-  }
-  cache.remove(key);
-  sh.getRange(row, c('Letzte Anmeldung') + 1).setValue(new Date());
+  var r = checkLogin_(user, pass);
+  if (!r.ok) return r;
   var token = Utilities.getUuid().replace(/-/g, '') + Utilities.getUuid().replace(/-/g, '');
-  cache.put('adm_' + token, JSON.stringify({user: u, name: name}), SESSION_TTL);
-  return {ok: true, token: token, name: name};
+  CacheService.getScriptCache().put('adm_' + token, JSON.stringify({user: r.user, name: r.name}), SESSION_TTL);
+  return {ok: true, token: token, name: r.name};
 }
 
 function logout(token) {

@@ -23,7 +23,7 @@ for (const k of ['', 'x', victim.up.slice(0, 31), victim.up + '0']) {
   const r = get({action: 'portal', id: victim.id, k});
   assert(!r.ok && r.error === 'not_found', 'portal with k=' + JSON.stringify(k) + ' leaked: ' + JSON.stringify(r));
 }
-console.log('✓ [1/6] portal: no data without the right token');
+console.log('✓ [1/7] portal: no data without the right token');
 
 // 2. Nobody signs a contract for someone else.
 mails.length = 0;
@@ -32,7 +32,7 @@ assert(!forged.ok && forged.error === 'not_found', 'sign without token: ' + JSON
 const status = sheets['Anfragen'].data[1][2];
 assert.notStrictEqual(status, 'Gebucht', 'lead was marked as booked by a stranger');
 assert.strictEqual(mails.length, 0, 'no order confirmation mailed for a forged signature');
-console.log('✓ [2/6] sign: rejected without the lead token');
+console.log('✓ [2/7] sign: rejected without the lead token');
 
 // 3. Photo upload needs the token.
 for (const k of [undefined, '', 'wrong']) {
@@ -40,7 +40,7 @@ for (const k of [undefined, '', 'wrong']) {
   assert(!r.ok && r.error === 'token', 'photos with k=' + JSON.stringify(k) + ': ' + JSON.stringify(r));
 }
 assert(post({action: 'photos', id: victim.id, k: victim.up, images: [{type: 'image/jpeg', data: jpg}]}).ok, 'owner can upload');
-console.log('✓ [3/6] photos: rejected without the lead token');
+console.log('✓ [3/7] photos: rejected without the lead token');
 
 // 4. A booking that names someone else's lead gets its own lead, and never their token.
 const day = ctx.freeSlots_('visit').filter(d => d.slots.length)[0];
@@ -56,7 +56,7 @@ const own = post({action: 'booking', consent: true, t: 9000, booking: {
   email: 'erika@example.de', address: '42103 Wuppertal', leadId: victim.id, k: victim.up
 }});
 assert(own.ok && own.lead === victim.id, 'owner can book on their own lead: ' + JSON.stringify(own));
-console.log('✓ [4/6] booking: joins a lead only with its token');
+console.log('✓ [4/7] booking: joins a lead only with its token');
 
 // 5. Only free slots can be booked.
 const events = calEvents.length;
@@ -72,7 +72,7 @@ for (const s of bad) {
   assert(!r.ok && r.error === 'slot', 'booked ' + JSON.stringify(s) + ': ' + JSON.stringify(r));
 }
 assert.strictEqual(calEvents.length, events, 'no calendar event for a rejected slot');
-console.log('✓ [5/6] booking: past, closed and taken slots rejected');
+console.log('✓ [5/7] booking: past, closed and taken slots rejected');
 
 // 6. One address cannot be flooded, and nothing lands in the sheet as a formula.
 let limited = null;
@@ -94,6 +94,17 @@ ctx.hit_({p: '/', s: '=IMAGE("http://x")|x', d: 'Handy'});
 ctx.flushHits();
 const visits = (sheets['Besuche'] || {data: []}).data.flat().filter(v => typeof v === 'string' && /^=/.test(v));
 assert.deepStrictEqual(visits, [], 'formula written to the visits tab');
-console.log('✓ [6/6] limits per address, no formula injection');
+console.log('✓ [6/7] limits per address, no formula injection');
+
+// 7. The website's /admin asks with the back office login: same password, same lockout.
+M.seedAdminPw();
+assert.strictEqual(post({action: 'adminLogin', user: 'shahzad', pass: 'falsch-1234'}).error, 'login', 'wrong password refused');
+const good = post({action: 'adminLogin', user: 'Shahzad', pass: M.TEST_PW});
+assert(good.ok && good.name && !good.token, 'right password opens, nothing secret comes back: ' + JSON.stringify(good));
+assert(!post({action: 'adminLogin', user: '', pass: M.TEST_PW}).ok, 'no username, no login');
+for (let i = 0; i < 4; i++) post({action: 'adminLogin', user: 'shahzad', pass: 'falsch-' + i});
+assert.strictEqual(post({action: 'adminLogin', user: 'shahzad', pass: 'falsch-x'}).error, 'locked', 'fifth wrong try locks');
+assert.strictEqual(post({action: 'adminLogin', user: 'shahzad', pass: M.TEST_PW}).error, 'locked', 'locked even with the right password');
+console.log('✓ [7/7] website admin login: back office password, lockout after five tries');
 
 console.log('\nALL SECURITY TESTS PASSED SUCCESSFULLY!');

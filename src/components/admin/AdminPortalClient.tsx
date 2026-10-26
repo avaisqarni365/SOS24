@@ -63,6 +63,8 @@ import {
   Building2,
 } from "lucide-react";
 import { COMPANY, COMPANY_INFO } from "@/data/content-data";
+import { useLanguage } from "@/i18n/LanguageContext";
+import { LogoWordmark } from "@/components/brand/Logo";
 import { buildGoogleCalendarUrl, downloadIcsFile, INSPECTION_SLOTS } from "@/lib/calendar";
 import {
   getWorkspaceStore,
@@ -77,9 +79,9 @@ import {
   NOTIFY_EMAIL_DEFAULT,
   GAS_API_URL,
   ADMIN_WEBAPP_URL,
+  adminLogin,
 } from "@/lib/backend";
 
-const ADMIN_PASS_SHA256 = (process.env.NEXT_PUBLIC_ADMIN_PASS_SHA256 || "").trim().toLowerCase();
 
 type AdminTab =
   | "overview"
@@ -97,6 +99,7 @@ type AdminTab =
   | "hilfe";
 
 type SupportedLang = "en" | "de";
+const ADMIN_SESSION_KEY = "sos_admin_session";
 
 const STATUS_OPTIONS: LeadStatus[] = [
   "Neu",
@@ -697,25 +700,8 @@ const inputCls =
   "w-full min-h-[44px] px-3.5 py-2.5 rounded-xl border border-slate-300 bg-white text-slate-900 text-base sm:text-sm focus:outline-none focus:ring-2 focus:ring-emerald-700 focus:border-emerald-700";
 
 export default function AdminPortalClient() {
-  const [lang, setLang] = useState<SupportedLang>("en");
-
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const saved = localStorage.getItem("sos_admin_lang");
-      if (saved === "de" || saved === "en") {
-        setLang(saved);
-      } else {
-        setLang("en");
-      }
-    }
-  }, []);
-
-  const changeLang = (l: SupportedLang) => {
-    setLang(l);
-    if (typeof window !== "undefined") {
-      localStorage.setItem("sos_admin_lang", l);
-    }
-  };
+  const { lang, setLang } = useLanguage();
+  const changeLang = (l: SupportedLang) => setLang(l);
 
   const isEn = lang === "en";
   const t = (de: string, en: string) => (isEn ? en : de);
@@ -724,6 +710,16 @@ export default function AdminPortalClient() {
   const [user, setUser] = useState("shahzad");
   const [pass, setPass] = useState("");
   const [loginErr, setLoginErr] = useState("");
+  const [checking, setChecking] = useState(false);
+
+  // a signed-in tab stays signed in until it is closed or "Abmelden" is pressed
+  useEffect(() => {
+    try {
+      if (sessionStorage.getItem(ADMIN_SESSION_KEY)) setUnlocked(true);
+    } catch {
+      // storage blocked: sign in again on reload
+    }
+  }, []);
 
   const [tab, setTab] = useState<AdminTab>("overview");
   const [leads, setLeads] = useState<WorkspaceLead[]>(() => getWorkspaceStore().leads);
@@ -1227,17 +1223,41 @@ export default function AdminPortalClient() {
   const curLead = leads.find((l) => l.id === selectedLeadId) || leads[0];
   const curDoc = docs.find((d) => d.nr === selectedDocNr) || docs[0];
 
-  // This page ships to every visitor, so it holds no password: only the SHA-256 of one,
-  // set at build time. Without it the demo stays locked and the real back office is in Google.
+  // One login: the back office checks username and password against its "Benutzer" sheet,
+  // with the same lockout. This page keeps no password of its own.
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    const digest = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(pass));
-    const hex = Array.from(new Uint8Array(digest), (b) => b.toString(16).padStart(2, "0")).join("");
-    if (ADMIN_PASS_SHA256 && hex === ADMIN_PASS_SHA256) {
+    setChecking(true);
+    setLoginErr("");
+    const r = await adminLogin(user.trim(), pass);
+    setChecking(false);
+    if (r.ok) {
+      setPass("");
       setUnlocked(true);
-      setLoginErr("");
-    } else {
-      setLoginErr(t("Ungültiges Passwort.", "Invalid password."));
+      try {
+        sessionStorage.setItem(ADMIN_SESSION_KEY, r.name || user);
+      } catch {
+        // signed in for this page view
+      }
+      return;
+    }
+    setLoginErr(
+      r.error === "locked"
+        ? t("Zu viele Versuche. Bitte 15 Minuten warten.", "Too many attempts. Please wait 15 minutes.")
+        : r.error === "leaked"
+        ? t("Dieses Passwort ist gesperrt. Bitte im Backoffice ein neues festlegen.", "This password is blocked. Please set a new one in the back office.")
+        : r.error === "network"
+        ? t("Keine Verbindung. Bitte erneut versuchen.", "No connection. Please try again.")
+        : t("Benutzername oder Passwort falsch.", "Wrong username or password.")
+    );
+  };
+
+  const logout = () => {
+    setUnlocked(false);
+    try {
+      sessionStorage.removeItem(ADMIN_SESSION_KEY);
+    } catch {
+      // nothing stored
     }
   };
 
@@ -1922,113 +1942,41 @@ export default function AdminPortalClient() {
     </div>
   );
 
-  // One login: without a build-time hash this page has no password of its own and
-  // sends the owner to the Google back office, which checks the "Benutzer" sheet.
-  if (!ADMIN_PASS_SHA256) {
-    return (
-      <div className="max-w-md mx-auto bg-white rounded-2xl p-6 sm:p-8 shadow-xl border border-slate-200 font-plex text-slate-900">
-        <div className="flex items-center justify-between gap-3 mb-4">
-          <div className="w-10 h-10 rounded-2xl bg-emerald-100 text-emerald-800 flex items-center justify-center font-bold text-lg">
-            SOS
-          </div>
-          <LanguageSwitcher />
-        </div>
-        <h2 className="text-xl sm:text-2xl font-extrabold text-[#0f2537] mb-1">
-          {t("Admin-Zugang (Shahzad Mahmood)", "Admin Access (Shahzad Mahmood)")}
-        </h2>
-        <p className="text-sm text-slate-600 mb-6 leading-relaxed">
-          {t(
-            "Anfragen, Termine, Fotos und Belege verwalten Sie im Google-Backoffice. Dort melden Sie sich mit Ihrem Benutzernamen und Passwort an: ein Login für alles.",
-            "Enquiries, appointments, photos and invoices live in the Google back office. Log in there with your username and password: one login for everything."
-          )}
-        </p>
-        <a
-          href={ADMIN_WEBAPP_URL}
-          className="w-full min-h-[48px] inline-flex items-center justify-center bg-[#0f2537] hover:bg-slate-800 text-white font-bold py-3 px-4 rounded-xl text-sm transition-colors"
-        >
-          {t("Zum Backoffice anmelden →", "Log in to the back office →")}
-        </a>
-      </div>
-    );
-  }
-
-  // Login Screen
+  // Login Screen: the site's logo, white card and red button; one login with the back office
   if (!unlocked) {
     return (
-      <div className="max-w-md mx-auto bg-white rounded-2xl p-6 sm:p-8 shadow-xl border border-slate-200 font-plex text-slate-900">
-        <div className="flex items-center justify-between gap-3 mb-4">
-          <div className="w-10 h-10 rounded-2xl bg-emerald-100 text-emerald-800 flex items-center justify-center font-bold text-lg">
-            SOS
-          </div>
-          <LanguageSwitcher />
-        </div>
-
-        <h2 className="text-xl sm:text-2xl font-extrabold text-[#0f2537] mb-1">
-          {t("Admin-Zugang (Shahzad Mahmood)", "Admin Access (Shahzad Mahmood)")}
+      <section className="admin-gate" aria-labelledby="admin-gate-title">
+        <LogoWordmark className="admin-gate__logo" title="SOS-Abdichtung" />
+        <p className="sc-label">{t("Admin & Backoffice", "Admin & back office")}</p>
+        <h2 id="admin-gate-title" className="admin-gate__t">
+          {t("Anmelden", "Log in")}
         </h2>
-        <p className="text-xs text-slate-500 mb-6 leading-relaxed">
+        <p className="admin-gate__d">
           {t(
-            `Geben Sie das Master-Passwort ein, um alle Kundenanfragen, Google Drive Schadensfotos & Dokumente (${totalPhotosCount} Dateien), Verträge und GoBD-Belege zu verwalten.`,
-            `Enter master password to access customer inquiries, Google Drive damage photos & documents (${totalPhotosCount} files), contracts, and GoBD invoices.`
+            "Ein Login für alles: derselbe Benutzername und dasselbe Passwort wie im Google-Backoffice.",
+            "One login for everything: the same username and password as in the Google back office."
           )}
         </p>
-
-        <form onSubmit={handleLogin} className="space-y-4">
-          <div>
-            <label htmlFor="adm-user" className="block text-xs font-bold text-slate-800 mb-1.5">
-              {t("Benutzername", "Username")}
-            </label>
-            <input
-              id="adm-user"
-              type="text"
-              required
-              autoComplete="username"
-              value={user}
-              onChange={(e) => setUser(e.target.value)}
-              className={inputCls}
-            />
-          </div>
-          <div>
-            <label htmlFor="adm-pass" className="block text-xs font-bold text-slate-800 mb-1.5">
-              {t("Passwort / PIN", "Password / PIN")}
-            </label>
-            <input
-              id="adm-pass"
-              type="password"
-              required
-              autoComplete="current-password"
-              value={pass}
-              onChange={(e) => setPass(e.target.value)}
-              className={inputCls}
-            />
-          </div>
-          {loginErr && <p className="text-xs font-bold text-red-600">{loginErr}</p>}
-          <button
-            type="submit"
-            disabled={!ADMIN_PASS_SHA256}
-            className="w-full min-h-[48px] bg-[#0f2537] hover:bg-slate-800 disabled:opacity-50 text-white font-bold py-3 px-4 rounded-xl text-sm transition-colors"
-          >
-            {t("Im Admin-Portal anmelden →", "Log in to Admin Dashboard →")}
+        <form onSubmit={handleLogin} className="admin-gate__form">
+          <label htmlFor="adm-user">{t("Benutzername", "Username")}</label>
+          <input id="adm-user" type="text" required autoComplete="username" autoCapitalize="none" value={user} onChange={(e) => setUser(e.target.value)} />
+          <label htmlFor="adm-pass">{t("Passwort", "Password")}</label>
+          <input id="adm-pass" type="password" required autoComplete="current-password" value={pass} onChange={(e) => setPass(e.target.value)} />
+          {loginErr && (
+            <p className="admin-gate__err" role="alert">
+              {loginErr}
+            </p>
+          )}
+          <button type="submit" className="btn-shine admin-gate__btn" disabled={checking}>
+            {checking ? t("Wird geprüft …", "Checking …") : t("Anmelden", "Log in")} <span aria-hidden="true">→</span>
           </button>
         </form>
-
-        <div className="mt-5 pt-4 border-t border-slate-200 text-xs text-slate-600 space-y-2 break-words">
-          <p>
-            {t(
-              "Kundendaten, Termine und Belege verwalten Sie im Google-Backoffice:",
-              "Customer data, appointments and invoices live in the Google back office:"
-            )}
-          </p>
-          <a
-            href={ADMIN_WEBAPP_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex min-h-[44px] items-center font-bold text-[#0f2537] underline underline-offset-2"
-          >
-            {t("Google-Backoffice öffnen →", "Open the Google back office →")}
+        <p className="admin-gate__alt">
+          <a href={ADMIN_WEBAPP_URL} target="_blank" rel="noopener noreferrer">
+            {t("Google-Backoffice öffnen", "Open the Google back office")} ↗
           </a>
-        </div>
-      </div>
+        </p>
+      </section>
     );
   }
 
@@ -2396,7 +2344,7 @@ export default function AdminPortalClient() {
             </a>
             <button
               type="button"
-              onClick={() => setUnlocked(false)}
+              onClick={logout}
               className="min-h-[38px] inline-flex items-center gap-1.5 text-slate-600 hover:text-slate-900 bg-slate-100 hover:bg-slate-200 px-3 py-1.5 rounded-xl font-bold border border-slate-200"
             >
               <LogOut className="w-3.5 h-3.5" />

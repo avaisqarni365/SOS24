@@ -8947,3 +8947,28 @@ html[data-theme="dark"] .rx__facts > div { background: rgb(255 255 255 / 0.05); 
 html[data-theme="dark"] .rx__plz > span { background: rgb(255 255 255 / 0.06); border-color: rgb(255 255 255 / 0.12); }
 html[data-theme="dark"] .rx__btn:not(.rx__btn--solid) { color: #f2f6fb; border-color: rgb(255 255 255 / 0.2); }
 @media (prefers-reduced-motion: reduce) { .rx__chip, .rx__book, .rx__book > svg, .region-map__area path { transition: none; } .rx__card { animation: none; } .rx__book:hover { transform: none; } }
+
+/* ===========================================================================
+   ADMIN - the start page: the site's own logo, white card and red button,
+   leading to the one login in the Google back office.
+   ========================================================================= */
+.admin-gate { max-width: 30rem; margin: 1rem auto 0; padding: 2rem 1.75rem; border-radius: 24px; background: #ffffff; border: 1px solid rgb(var(--c-line) / 0.1); box-shadow: 0 1px 2px rgb(0 0 0 / 0.04), 0 24px 48px -24px rgb(15 37 55 / 0.28); text-align: center; }
+.admin-gate__logo { display: block; width: min(15rem, 80%); height: auto; margin: 0 auto 1.5rem; }
+.admin-gate__t { margin: 0.4rem 0 0.6rem; font-family: var(--font-display); font-size: 2rem; font-weight: 800; color: #071628; }
+.admin-gate__d { margin: 0 0 1.5rem; font-size: 1.05rem; line-height: 1.6; color: #33435a; }
+.admin-gate__btn { display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; width: 100%; min-height: 52px; border-radius: 999px; font-size: 1.05rem; font-weight: 700; }
+.admin-gate__form { display: grid; gap: 0.4rem; text-align: left; }
+.admin-gate__form label { margin-top: 0.5rem; font-size: 0.95rem; font-weight: 700; color: #071628; }
+.admin-gate__form input { min-height: 52px; padding: 0 1rem; border-radius: 14px; border: 1px solid rgb(var(--c-line) / 0.25); background: #ffffff; font: inherit; font-size: 1.05rem; color: #071628; }
+.admin-gate__form input:focus { outline: 3px solid rgb(var(--pw-accent-rgb) / 0.3); border-color: var(--pw-accent); }
+.admin-gate__form .admin-gate__btn { margin-top: 1rem; }
+.admin-gate__btn:disabled { opacity: 0.7; cursor: progress; }
+.admin-gate__err { margin: 0.5rem 0 0; padding: 0.6rem 0.8rem; border-radius: 12px; background: #fdecea; color: #8f1d14; font-weight: 700; font-size: 0.95rem; }
+.admin-gate__alt { margin: 1.25rem 0 0; font-size: 0.95rem; }
+.admin-gate__alt a { font-weight: 700; color: var(--pw-deep); text-decoration: underline; text-underline-offset: 3px; }
+html[data-theme="dark"] .admin-gate__form label { color: #f2f6fb; }
+html[data-theme="dark"] .admin-gate__form input { background: rgb(255 255 255 / 0.06); border-color: rgb(255 255 255 / 0.2); color: #f2f6fb; }
+html[data-theme="dark"] .admin-gate__alt a { color: var(--pw-on-dark); }
+html[data-theme="dark"] .admin-gate { background: rgb(255 255 255 / 0.05); border-color: rgb(255 255 255 / 0.12); box-shadow: none; }
+html[data-theme="dark"] .admin-gate__t { color: #f2f6fb; }
+html[data-theme="dark"] .admin-gate__d { color: #c9d6e3; }

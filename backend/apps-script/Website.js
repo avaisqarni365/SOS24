@@ -263,3 +263,10 @@ function flushHits() {
     if (raw) { writeHits_(JSON.parse(raw)); cache.remove('hits'); }
   } finally { lock.releaseLock(); }
 }
+
+/* The website's /admin asks here with the back office's username and password:
+   one login for both. Only yes/no and the display name go back. */
+function adminLogin_(body) {
+  var r = checkLogin_(String(body.user || ''), String(body.pass || ''));
+  return r.ok ? {ok: true, name: r.name} : {ok: false, error: r.error};
+}
