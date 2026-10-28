@@ -1,8 +1,9 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { CalendarPlus, Phone, MapPin } from "lucide-react";
+import { CalendarPlus, Phone, MapPin, MessageCircle, Mail, Search, FolderOpen, Video, Home, PhoneCall } from "lucide-react";
 import { adminCall } from "@/lib/adminApi";
+import { DataTable, Drawer, Field, Segments, status, dayDe, telHref, waHref, mapsHref, type Column } from "@/components/admin/AdminKit";
 
 type T = (de: string, en: string) => string;
 
@@ -23,6 +24,8 @@ interface Appt {
   lead: string;
   calendar: string;
   note: string;
+  received?: string;
+  source?: string;
 }
 interface ApptData {
   appts: Appt[];
@@ -30,158 +33,255 @@ interface ApptData {
   statuses: string[];
   types: Record<string, { de: string; en: string }>;
 }
+type Seg = "today" | "next" | "open" | "past" | "cancelled" | "all";
 
-const day = (iso: string) => {
-  const d = new Date(iso + "T12:00:00");
-  return isNaN(+d) ? iso : d.toLocaleDateString("de-DE", { weekday: "short", day: "2-digit", month: "2-digit", year: "numeric" });
-};
+const TYPE_ICON: Record<string, typeof Home> = { visit: Home, video: Video, call: PhoneCall };
+const town = (a: string) => (a.split(",").pop() || "").replace(/^\s*\d{5}\s*/, "").trim();
+const addDays = (iso: string, n: number) => new Date(new Date(iso + "T12:00:00").getTime() + n * 864e5).toISOString().slice(0, 10);
 
 /**
- * The real appointments from the Google Sheet: today, upcoming and past, with status
- * changes and the Google Calendar entry. Moving a slot stays in the back office's
- * calendar view for now, because it checks clashes against the opening hours.
+ * Termine: the real appointments from the Google Sheet as one table with filters and
+ * pages; a row opens the detail with everything about the visit and the actions.
  */
 export default function AdminAppointments({ t, isEn, onSessionEnd, onOpenLead }: { t: T; isEn: boolean; onSessionEnd: () => void; onOpenLead: (id: string) => void }) {
   const [data, setData] = useState<ApptData | null>(null);
   const [err, setErr] = useState("");
-  const [busy, setBusy] = useState("");
-  const [past, setPast] = useState(false);
+  const [busy, setBusy] = useState(false);
+  const [seg, setSeg] = useState<Seg>("next");
+  const [q, setQ] = useState("");
+  const [openNr, setOpenNr] = useState("");
+  const [note, setNote] = useState("");
 
-  const fail = useCallback(
-    (e: string) => {
-      if (e === "login") onSessionEnd();
-      else setErr(e);
-    },
-    [onSessionEnd]
-  );
-  const load = useCallback(() => {
-    adminCall<ApptData>("api_appts").then((r) => (r.ok ? (setData(r.data), setErr("")) : fail(r.error)));
+  const fail = useCallback((e: string) => (e === "login" ? onSessionEnd() : setErr(e)), [onSessionEnd]);
+  useEffect(() => {
+    adminCall<ApptData>("api_appts").then((r) => {
+      if (!r.ok) return fail(r.error);
+      setData(r.data);
+      // the first look: today if there is something today, else what comes next
+      if (r.data.appts.some((a) => a.date === r.data.today && a.status !== "Abgesagt")) setSeg("today");
+    });
   }, [fail]);
-  useEffect(load, [load]);
 
-  const replace = (a: Appt) => setData((d) => (d ? { ...d, appts: d.appts.map((x) => (x.nr === a.nr ? a : x)) } : d));
-  const update = async (nr: string, p: Record<string, unknown>) => {
-    setBusy(nr);
-    const r = await adminCall<Appt>("api_apptUpdate", nr, p);
-    setBusy("");
-    if (r.ok) replace(r.data);
-    else fail(r.error);
-  };
-  const toCalendar = async (nr: string) => {
-    setBusy(nr);
-    const r = await adminCall<Appt>("api_apptCalendar", nr);
-    setBusy("");
-    if (r.ok) replace(r.data);
-    else fail(r.error);
-  };
+  const typeLabel = (k: string) => (data?.types[k] ? (isEn ? data.types[k].en : data.types[k].de) : k);
 
-  const groups = useMemo(() => {
+  const split = useMemo(() => {
     if (!data) return null;
-    const live = data.appts.filter((a) => a.status !== "Abgesagt");
+    const d = data.today, week = addDays(d, 7), live = (a: Appt) => a.status !== "Abgesagt";
     return {
-      today: live.filter((a) => a.date === data.today),
-      next: live.filter((a) => a.date > data.today),
-      past: data.appts.filter((a) => a.date < data.today || a.status === "Abgesagt").reverse(),
+      today: data.appts.filter((a) => live(a) && a.date === d),
+      next: data.appts.filter((a) => live(a) && a.date >= d && a.status !== "Erledigt"),
+      open: data.appts.filter((a) => a.status === "Gebucht" && a.date >= d),
+      past: data.appts.filter((a) => live(a) && (a.date < d || a.status === "Erledigt")),
+      cancelled: data.appts.filter((a) => !live(a)),
+      all: data.appts,
+      week: data.appts.filter((a) => live(a) && a.date >= d && a.date < week).length,
     };
   }, [data]);
 
-  if (!data || !groups) return <div className="at__card">{err ? t(`Laden fehlgeschlagen: ${err}`, `Loading failed: ${err}`) : t("Lade Termine aus der Google-Tabelle …", "Loading appointments …")}</div>;
+  const rows = useMemo(() => {
+    if (!split) return [];
+    const needle = q.trim().toLowerCase();
+    return split[seg].filter((a) => !needle || [a.nr, a.name, a.phone, a.email, a.address, a.lead, a.to].join(" ").toLowerCase().includes(needle));
+  }, [split, seg, q]);
 
-  const table = (list: Appt[]) =>
-    list.length ? (
-      <div className="at__wrap">
-        <table className="at__table">
-          <thead>
-            <tr>
-              <th scope="col">{t("Datum", "Date")}</th>
-              <th scope="col">{t("Zeit", "Time")}</th>
-              <th scope="col">{t("Art", "Type")}</th>
-              <th scope="col">{t("Kunde", "Customer")}</th>
-              <th scope="col">{t("Adresse", "Address")}</th>
-              <th scope="col">Status</th>
-              <th scope="col">{t("Kalender", "Calendar")}</th>
-            </tr>
-          </thead>
-          <tbody>
-            {list.map((a) => (
-              <tr key={a.nr} className={busy === a.nr ? "is-busy" : ""}>
-                <td className="at__strong">{day(a.date)}</td>
-                <td>
-                  {a.time} <span className="at__dim">· {a.min} min</span>
-                </td>
-                <td>{(data.types[a.type] && (isEn ? data.types[a.type].en : data.types[a.type].de)) || a.type}</td>
-                <td>
-                  <span className="at__strong">{a.name}</span>
-                  <span className="at__sub">
-                    {a.phone && (
-                      <a href={`tel:${a.phone.replace(/[^\d+]/g, "")}`}>
-                        <Phone aria-hidden="true" /> {a.phone}
-                      </a>
-                    )}
-                    {a.lead && (
-                      <button type="button" className="at__link" onClick={() => onOpenLead(a.lead)}>
-                        {a.lead}
-                      </button>
-                    )}
-                  </span>
-                </td>
-                <td>
-                  {a.address ? (
-                    <a href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(a.address)}`} target="_blank" rel="noopener noreferrer">
-                      <MapPin aria-hidden="true" /> {a.address}
-                    </a>
-                  ) : (
-                    "—"
-                  )}
-                </td>
-                <td>
-                  <select value={a.status} aria-label={t(`Status von ${a.nr}`, `Status of ${a.nr}`)} disabled={busy === a.nr} onChange={(e) => update(a.nr, { status: e.target.value })}>
-                    {data.statuses.map((s) => (
-                      <option key={s} value={s}>
-                        {s}
-                      </option>
-                    ))}
-                  </select>
-                </td>
-                <td>
-                  {a.calendar ? (
-                    <span className="at__ok">{t("Im Kalender", "In calendar")}</span>
-                  ) : (
-                    <button type="button" className="at__btn" disabled={busy === a.nr || a.status === "Abgesagt"} onClick={() => toCalendar(a.nr)}>
-                      <CalendarPlus aria-hidden="true" /> {t("Eintragen", "Add")}
-                    </button>
-                  )}
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
-    ) : (
-      <p className="at__empty">{t("Keine Termine.", "No appointments.")}</p>
-    );
+  const cur = data?.appts.find((a) => a.nr === openNr) || null;
+  useEffect(() => setNote(cur?.note || ""), [cur?.nr, cur?.note]);
+
+  const replace = (a: Appt) => setData((d) => (d ? { ...d, appts: d.appts.map((x) => (x.nr === a.nr ? a : x)) } : d));
+  const call = async (fn: string, ...args: unknown[]) => {
+    setBusy(true);
+    const r = await adminCall<Appt>(fn, ...args);
+    setBusy(false);
+    if (r.ok) {
+      replace(r.data);
+      setErr("");
+    } else fail(r.error);
+  };
+
+  if (!data || !split) return <div className="at__card">{err ? t(`Laden fehlgeschlagen: ${err}`, `Loading failed: ${err}`) : t("Lade Termine aus der Google-Tabelle …", "Loading appointments …")}</div>;
+
+  const columns: Column<Appt>[] = [
+    {
+      key: "when",
+      label: t("Termin", "When"),
+      sort: (a) => a.date + a.time,
+      cell: (a) => (
+        <>
+          <span className="at__strong">{dayDe(a.date, true)}</span>
+          <span className="at__sub">
+            {a.time} · {a.min} min
+          </span>
+        </>
+      ),
+    },
+    {
+      key: "type",
+      label: t("Art", "Type"),
+      sort: (a) => a.type,
+      cell: (a) => {
+        const I = TYPE_ICON[a.type] || Home;
+        return (
+          <span className="dt__type">
+            <I aria-hidden="true" /> {typeLabel(a.type).replace(/\s*\(.*\)$/, "")}
+          </span>
+        );
+      },
+    },
+    {
+      key: "who",
+      label: t("Kunde", "Customer"),
+      sort: (a) => a.name.toLowerCase(),
+      cell: (a) => (
+        <>
+          <span className="at__strong">{a.name}</span>
+          {a.phone && <span className="at__sub">{a.phone}</span>}
+        </>
+      ),
+    },
+    { key: "town", label: t("Ort", "Town"), sort: (a) => town(a.address), cell: (a) => town(a.address) || "—" },
+    { key: "status", label: "Status", sort: (a) => a.status, cell: (a) => status(a.status) },
+    { key: "cal", label: t("Kalender", "Calendar"), cell: (a) => (a.calendar ? <span className="at__ok">✓</span> : <span className="at__dim">—</span>) },
+  ];
 
   return (
     <div className="at">
+      <div className="at__kpis">
+        <div>
+          <span>{t("Heute", "Today")}</span>
+          <strong>{split.today.length}</strong>
+        </div>
+        <div>
+          <span>{t("Nächste 7 Tage", "Next 7 days")}</span>
+          <strong>{split.week}</strong>
+        </div>
+        <div>
+          <span>{t("Noch zu bestätigen", "To confirm")}</span>
+          <strong className={split.open.length ? "is-bad" : ""}>{split.open.length}</strong>
+        </div>
+      </div>
+
+      <div className="at__tools">
+        <Segments
+          value={seg}
+          onChange={setSeg}
+          label={t("Termine filtern", "Filter appointments")}
+          items={[
+            ["today", t("Heute", "Today"), split.today.length],
+            ["next", t("Kommend", "Upcoming"), split.next.length],
+            ["open", t("Zu bestätigen", "To confirm"), split.open.length],
+            ["past", t("Vergangen", "Past"), split.past.length],
+            ["cancelled", t("Abgesagt", "Cancelled"), split.cancelled.length],
+            ["all", t("Alle", "All"), split.all.length],
+          ]}
+        />
+        <label className="at__search">
+          <Search aria-hidden="true" />
+          <span className="visually-hidden">{t("Termine durchsuchen", "Search appointments")}</span>
+          <input type="search" value={q} onChange={(e) => setQ(e.target.value)} placeholder={t("Name, Telefon, Ort, Anfrage …", "Name, phone, town, inquiry …")} />
+        </label>
+      </div>
+
       {err && <p className="at__err">{err}</p>}
-      <section className="at__card">
-        <h2 className="at__h">
-          {t("Heute", "Today")} <span>{groups.today.length}</span>
-        </h2>
-        {table(groups.today)}
-      </section>
-      <section className="at__card">
-        <h2 className="at__h">
-          {t("Kommende Termine", "Upcoming")} <span>{groups.next.length}</span>
-        </h2>
-        {table(groups.next)}
-      </section>
-      <section className="at__card">
-        <button type="button" className="at__fold" onClick={() => setPast(!past)} aria-expanded={past}>
-          {t("Vergangene & abgesagte Termine", "Past & cancelled")} <span>{groups.past.length}</span>
-        </button>
-        {past && table(groups.past)}
-      </section>
+
+      <DataTable
+        rows={rows}
+        columns={columns}
+        rowKey={(a) => a.nr}
+        onOpen={(a) => setOpenNr(a.nr)}
+        activeKey={openNr}
+        t={t}
+        empty={t("Keine Termine in dieser Ansicht.", "No appointments in this view.")}
+        initialSort={{ key: "when", dir: seg === "past" || seg === "cancelled" ? -1 : 1 }}
+      />
+
+      <Drawer
+        open={!!cur}
+        onClose={() => setOpenNr("")}
+        t={t}
+        title={cur ? `${cur.name}` : ""}
+        sub={cur ? `${dayDe(cur.date, true)}${cur.date.slice(0, 4)} · ${cur.time} · ${cur.min} min · ${cur.nr}` : ""}
+      >
+        {cur && (
+          <>
+            <div className="dw__acts">
+              {cur.phone && (
+                <a className="at__btn" href={telHref(cur.phone)}>
+                  <Phone aria-hidden="true" /> {t("Anrufen", "Call")}
+                </a>
+              )}
+              {cur.phone && (
+                <a className="at__btn" href={waHref(cur.phone)} target="_blank" rel="noopener noreferrer">
+                  <MessageCircle aria-hidden="true" /> WhatsApp
+                </a>
+              )}
+              {cur.email && (
+                <a className="at__btn" href={`mailto:${cur.email}`}>
+                  <Mail aria-hidden="true" /> {t("E-Mail", "E-mail")}
+                </a>
+              )}
+              {cur.address && (
+                <a className="at__btn" href={mapsHref(cur.address)} target="_blank" rel="noopener noreferrer">
+                  <MapPin aria-hidden="true" /> {t("Route", "Route")}
+                </a>
+              )}
+            </div>
+
+            <dl className="dw__grid">
+              <Field label={t("Art", "Type")}>{typeLabel(cur.type)}</Field>
+              <Field label="Status">
+                <select value={cur.status} disabled={busy} onChange={(e) => call("api_apptUpdate", cur.nr, { status: e.target.value })} aria-label="Status">
+                  {data.statuses.map((s) => (
+                    <option key={s}>{s}</option>
+                  ))}
+                </select>
+              </Field>
+              <Field label={t("Adresse", "Address")} wide>
+                {cur.address}
+              </Field>
+              <Field label={t("Telefon", "Phone")}>{cur.phone}</Field>
+              <Field label={t("E-Mail", "E-mail")}>{cur.email}</Field>
+              <Field label={t("Schadensbild", "Damage")} wide>
+                {cur.to}
+              </Field>
+              <Field label={t("Nachricht des Kunden", "Customer's message")} wide>
+                {cur.message}
+              </Field>
+              <Field label={t("Quelle", "Source")}>{cur.source || ""}</Field>
+              <Field label={t("Google Kalender", "Google Calendar")}>
+                {cur.calendar ? (
+                  <span className="at__ok">{t("Eingetragen", "Added")}</span>
+                ) : (
+                  <button type="button" className="at__btn" disabled={busy || cur.status === "Abgesagt"} onClick={() => call("api_apptCalendar", cur.nr)}>
+                    <CalendarPlus aria-hidden="true" /> {t("Eintragen & bestätigen", "Add & confirm")}
+                  </button>
+                )}
+              </Field>
+            </dl>
+
+            <label className="dw__note">
+              {t("Interne Notiz", "Internal note")}
+              <textarea rows={3} value={note} onChange={(e) => setNote(e.target.value)} placeholder={t("z. B. Schlüssel beim Nachbarn, Hund im Garten …", "e.g. key with the neighbour …")} />
+            </label>
+            <div className="dw__acts">
+              <button type="button" className="at__btn" disabled={busy || note === (cur.note || "")} onClick={() => call("api_apptUpdate", cur.nr, { note })}>
+                {t("Notiz speichern", "Save note")}
+              </button>
+              {cur.lead && (
+                <button
+                  type="button"
+                  className="btn-shine at__new"
+                  onClick={() => {
+                    setOpenNr("");
+                    onOpenLead(cur.lead);
+                  }}
+                >
+                  <FolderOpen aria-hidden="true" /> {t(`Anfrage ${cur.lead} öffnen`, `Open inquiry ${cur.lead}`)}
+                </button>
+              )}
+            </div>
+          </>
+        )}
+      </Drawer>
     </div>
   );
 }

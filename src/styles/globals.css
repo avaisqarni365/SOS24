@@ -9200,3 +9200,75 @@ html[data-theme="dark"] .at__table select { background: #182230; color: #f2f6fb;
 /* site headline rules are strong; inside the admin tables the headings stay small */
 .adm h2.at__h, .adm p.at__h { font-size: 1.2rem !important; line-height: 1.3 !important; letter-spacing: 0 !important; margin: 0 !important; }
 .at__table a[href^="tel:"] { white-space: nowrap; }
+
+/* ===========================================================================
+   ADMIN KIT - the one table (sortable, pages, active row) and the detail
+   panel (right side on desktop, full screen on phones) for every admin list.
+   ========================================================================= */
+.dt { display: grid; gap: 0.6rem; }
+.dt__sort { display: inline-flex; align-items: center; gap: 0.25rem; padding: 0; border: 0; background: none; font: inherit; color: inherit; letter-spacing: inherit; text-transform: inherit; cursor: pointer; }
+.dt__sort svg { width: 0.9rem; height: 0.9rem; }
+.at__table tbody tr.is-active { background: rgb(var(--pw-accent-rgb) / 0.07); box-shadow: inset 4px 0 0 var(--pw-accent); }
+.at__table tbody tr[tabindex]:hover td:first-child { box-shadow: inset 3px 0 0 rgb(var(--pw-accent-rgb) / 0.5); }
+.dt__foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0.6rem; padding: 0 0.25rem; font-size: 0.9rem; color: #33435a; }
+.dt__size { display: inline-flex; align-items: center; gap: 0.4rem; }
+.dt__size select { min-height: 36px; padding: 0 0.4rem; border-radius: 10px; border: 1px solid rgb(var(--c-line) / 0.25); background: #ffffff; font: inherit; }
+.dt__pager { display: inline-flex; align-items: center; gap: 0.5rem; font-weight: 700; }
+.dt__pager .at__btn { min-width: 40px; justify-content: center; padding: 0; }
+.dt__pager svg { width: 1.1rem; height: 1.1rem; }
+.dt__type { display: inline-flex; align-items: center; gap: 0.4rem; }
+.dt__type svg { width: 1rem; height: 1rem; color: var(--pw-deep); flex: none; }
+.at__table td .at__sub { display: block; color: #5b6b80; font-size: 0.85rem; margin-top: 0.15rem; }
+
+.dw { position: fixed; z-index: 80; inset: 0; background: rgb(7 12 20 / 0.42); display: flex; justify-content: flex-end; animation: dw-fade 160ms ease-out; }
+.dw__panel { width: min(36rem, 100vw); height: 100%; overflow-y: auto; background: #ffffff; box-shadow: -24px 0 48px -24px rgb(0 0 0 / 0.45); display: flex; flex-direction: column; outline: none; animation: dw-in 220ms var(--ease-out-apple, ease-out); }
+@keyframes dw-fade { from { opacity: 0; } }
+@keyframes dw-in { from { transform: translateX(24px); opacity: 0.6; } }
+.dw__head { position: sticky; top: 0; z-index: 1; display: flex; align-items: flex-start; justify-content: space-between; gap: 0.75rem; padding: 1rem 1.25rem; background: #ffffff; border-bottom: 1px solid rgb(var(--c-line) / 0.1); }
+.dw__t { margin: 0; font-family: var(--font-display); font-size: 1.3rem; font-weight: 800; line-height: 1.25; color: #071628; }
+.dw__sub { margin: 0.2rem 0 0; font-size: 0.95rem; color: #5b6b80; }
+.dw__x { flex: none; display: grid; place-items: center; width: 44px; height: 44px; border-radius: 12px; border: 1px solid rgb(var(--c-line) / 0.16); background: #ffffff; cursor: pointer; }
+.dw__x svg { width: 1.2rem; height: 1.2rem; }
+.dw__body { display: grid; gap: 1rem; padding: 1.1rem 1.25rem 2rem; }
+.dw__acts { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.dw__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.6rem; margin: 0; }
+.dw__f { margin: 0; padding: 0.6rem 0.75rem; border-radius: 12px; background: #f6f8fa; min-width: 0; }
+.dw__f--wide { grid-column: 1 / -1; }
+.dw__f dt { font-size: 0.8125rem; font-weight: 700; color: #5b6b80; }
+.dw__f dd { margin: 0.2rem 0 0; font-size: 1rem; font-weight: 600; color: #071628; overflow-wrap: anywhere; }
+.dw__f select { min-height: 40px; padding: 0 0.5rem; border-radius: 10px; border: 1px solid rgb(var(--c-line) / 0.25); background: #ffffff; font: inherit; font-weight: 700; }
+.dw__note { display: grid; gap: 0.3rem; font-size: 0.9rem; font-weight: 700; color: #0f2537; }
+.dw__note textarea { min-height: 5rem; padding: 0.6rem 0.75rem; border-radius: 12px; border: 1px solid rgb(var(--c-line) / 0.25); font: inherit; font-size: 1rem; resize: vertical; }
+.dw__lines { border: 1px solid rgb(var(--c-line) / 0.1); border-radius: 14px; overflow: hidden; }
+.dw__lines table { width: 100%; border-collapse: collapse; font-size: 0.95rem; }
+.dw__lines th { padding: 0.55rem 0.75rem; background: #f4f6f8; text-align: left; font-size: 0.8125rem; font-weight: 800; color: #33435a; }
+.dw__lines td { padding: 0.6rem 0.75rem; border-top: 1px solid rgb(var(--c-line) / 0.08); vertical-align: top; }
+.dw__lines td .at__sub { display: block; color: #5b6b80; font-size: 0.85rem; }
+.dw__sum { display: grid; gap: 0.2rem; margin: 0; padding: 0.75rem; background: #fbfcfd; border-top: 1px solid rgb(var(--c-line) / 0.1); }
+.dw__sum div { display: flex; justify-content: space-between; gap: 1rem; font-size: 0.95rem; }
+.dw__sum dt { color: #5b6b80; }
+.dw__sum dd { margin: 0; font-weight: 700; }
+.dw__sum .is-total { font-size: 1.1rem; }
+.dw__sum .is-total dd { font-weight: 800; color: #071628; }
+.dw__h { margin: 0 0 0.35rem; font-weight: 800; color: #071628; }
+.dw__hist ul { margin: 0; padding: 0 0 0 1.1rem; display: grid; gap: 0.25rem; font-size: 0.95rem; color: #33435a; }
+.dw__pay { display: grid; gap: 0.6rem; padding: 0.9rem; border-radius: 14px; border: 1px solid rgb(var(--pw-accent-rgb) / 0.3); background: rgb(var(--pw-accent-rgb) / 0.04); }
+.dw__pay label { display: grid; gap: 0.3rem; font-weight: 700; font-size: 0.9rem; }
+.dw__pay :is(input, select) { min-height: 44px; padding: 0 0.75rem; border-radius: 12px; border: 1px solid rgb(var(--c-line) / 0.25); background: #ffffff; font: inherit; font-size: 1rem; }
+@media (max-width: 639px) {
+  .dw__panel { width: 100vw; }
+  .dw__grid { grid-template-columns: 1fr; }
+}
+@media (prefers-reduced-motion: reduce) { .dw, .dw__panel { animation: none; } }
+html[data-theme="dark"] :is(.dw__panel, .dw__head, .dw__x) { background: #121a24; color: #f2f6fb; border-color: rgb(255 255 255 / 0.12); }
+html[data-theme="dark"] .dw__t, html[data-theme="dark"] .dw__f dd, html[data-theme="dark"] .dw__h, html[data-theme="dark"] .dw__sum .is-total dd { color: #f2f6fb; }
+html[data-theme="dark"] :is(.dw__f, .dw__sum) { background: rgb(255 255 255 / 0.05); }
+html[data-theme="dark"] .dw__lines th { background: #182230; color: #c9d6e3; }
+html[data-theme="dark"] :is(.dw__hist ul, .dt__foot) { color: #c9d6e3; }
+/* the panel title and the table dates hold against the site paragraph rules */
+.dw .dw__t { font-size: 1.3rem !important; font-weight: 800 !important; line-height: 1.25 !important; margin: 0 !important; color: #071628; }
+.dw .dw__sub { font-size: 0.95rem !important; margin: 0.2rem 0 0 !important; }
+html[data-theme="dark"] .dw .dw__t { color: #f2f6fb; }
+.at__table td .at__strong { white-space: nowrap; }
+.at__status--Abgesagt { background: #fdecea; color: #8f1d14; }
+.at__status--Verschoben, .at__status--Bestätigt { background: #e8f1fd; color: #0a4f8a; }
