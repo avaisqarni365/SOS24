@@ -73,6 +73,7 @@ import AdminInvoices from "@/components/admin/AdminInvoices";
 import AdminPhotos from "@/components/admin/AdminPhotos";
 import AdminQuote from "@/components/admin/AdminQuote";
 import AdminDocEditor from "@/components/admin/AdminDocEditor";
+import { LeadForm } from "@/components/admin/AdminForms";
 import { adminSignIn, adminSignOut, adminCall, hasAdminSession, type SheetLead } from "@/lib/adminApi";
 import { buildGoogleCalendarUrl, downloadIcsFile, INSPECTION_SLOTS } from "@/lib/calendar";
 import {
@@ -136,8 +137,8 @@ const fromSheet = (l: SheetLead): WorkspaceLead => ({
   name: l.name,
   phone: l.phone,
   email: l.email,
-  address: l.to || l.from || "",
-  damageType: l.service,
+  address: l.from || "",
+  damageType: l.service || l.to,
   area: "",
   date: l.date || "",
   notes: l.notes,
@@ -780,6 +781,9 @@ export default function AdminPortalClient() {
   // the invoice editor opens over any page (Belege, Aufmaß); the list reloads after a change
   const [editNr, setEditNr] = useState("");
   const [docsVersion, setDocsVersion] = useState(0);
+  // upserts: the enquiry form (new or edit) and a new appointment for an enquiry
+  const [leadForm, setLeadForm] = useState<"new" | WorkspaceLead | null>(null);
+  const [apptFor, setApptFor] = useState<string | null>(null);
   // the page follows the address, so every page can be bookmarked and the back button works
   const setTab = (next: AdminTab) => {
     setTabState(next);
@@ -2728,11 +2732,46 @@ export default function AdminPortalClient() {
       )}
 
       {/* TAB 2: INQUIRIES & DRIVE PHOTOS & DOCUMENTS */}
-      {tab === "leads" && leadView === "table" && <AdminLeadsTable leads={leads} t={t} onOpen={openLead} />}
+      {tab === "leads" && leadView === "table" && <AdminLeadsTable leads={leads} t={t} onOpen={openLead} onNew={() => setLeadForm("new")} />}
       {tab === "leads" && leadView === "detail" && (
-        <button type="button" className="at__back" onClick={() => setLeadView("table")}>
-          ← {t("Alle Anfragen", "All inquiries")}
-        </button>
+        <div className="dw__acts">
+          <button type="button" className="at__back" onClick={() => setLeadView("table")}>
+            ← {t("Alle Anfragen", "All inquiries")}
+          </button>
+          {curLead && realRef.current && (
+            <>
+              <button type="button" className="at__btn" onClick={() => setLeadForm(curLead)}>
+                {t("Kundendaten bearbeiten", "Edit customer data")}
+              </button>
+              <button
+                type="button"
+                className="at__btn"
+                onClick={() => {
+                  setApptFor(curLead.id);
+                  setTab("termine");
+                }}
+              >
+                {t("Termin anlegen", "New appointment")}
+              </button>
+              <button type="button" className="btn-shine at__new" onClick={() => setTab("planer")}>
+                {t("Aufmaß & Angebot", "Survey & quote")}
+              </button>
+            </>
+          )}
+        </div>
+      )}
+      {leadForm && (
+        <LeadForm
+          t={t}
+          lead={leadForm === "new" ? null : leadForm}
+          onClose={() => setLeadForm(null)}
+          onSessionEnd={logout}
+          onSaved={async (l) => {
+            setLeadForm(null);
+            await loadReal();
+            openLead(l.id);
+          }}
+        />
       )}
       {tab === "leads" && leadView === "detail" && curLead && (
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
@@ -3180,7 +3219,7 @@ export default function AdminPortalClient() {
         />
       )}
 
-      {tab === "termine" && <AdminAppointments t={t} isEn={isEn} onSessionEnd={logout} onOpenLead={openLead} />}
+      {tab === "termine" && <AdminAppointments t={t} isEn={isEn} onSessionEnd={logout} onOpenLead={openLead} leads={leads} createFor={apptFor} onCreateDone={() => setApptFor(null)} />}
 
       {tab === "seo" && (
         <div className="space-y-6">

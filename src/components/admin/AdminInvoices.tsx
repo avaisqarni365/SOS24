@@ -29,8 +29,8 @@ interface Doc {
   laborGross: number;
   pdfUrl: string;
   sentAt: string;
-  /** title, detail, unit, qty, price, labour */
-  items: [string, string, string, number, number, boolean][];
+  /** title, detail, unit, qty, price, labour, optional */
+  items: [string, string, string, number, number, boolean, boolean?][];
 }
 interface Raw {
   payments?: { date: string; amount: number; method: string }[];
@@ -338,10 +338,11 @@ export default function AdminInvoices({ t, onSessionEnd, onOpenLead, onEdit, ver
                     </tr>
                   </thead>
                   <tbody>
-                    {cur.items.map(([title, detail, unit, qty, price], i) => (
-                      <tr key={i}>
+                    {cur.items.map(([title, detail, unit, qty, price, , opt], i) => (
+                      <tr key={i} className={opt ? "is-opt" : undefined}>
                         <td>
                           <span className="at__strong">{title}</span>
+                          {opt && <span className="dt__opt">{t("Option", "Option")}</span>}
                           {detail && <span className="at__sub">{detail}</span>}
                         </td>
                         <td className="at__num">

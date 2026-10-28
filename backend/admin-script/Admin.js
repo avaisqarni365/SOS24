@@ -133,6 +133,92 @@ function api_rateList_() {
   });
 }
 
+/* Upserts from the admin: a new enquiry (phone call, fair, walk-in), changes to an enquiry's
+   customer data, a new appointment with the same clash check as the booking page. */
+var LEAD_EDIT = {name: ['Name', 80], phone: ['Telefon', 40], email: ['E-Mail', 120], address: ['Von', 200], service: ['Nach', 200],
+  message: ['Nachricht', 1000], channel: ['Kontaktweg', 40], source: ['Quelle', 120], payer: ['Kostenträger', 60]};
+function api_leadCreate_(p) {
+  var email = guard_();
+  p = p || {};
+  var name = cell_(p.name, 80);
+  if (!String(name).trim()) throw new Error('Name des Kunden eintragen.');
+  if (!String(p.phone || '').trim() && !String(p.email || '').trim()) throw new Error('Telefon oder E-Mail eintragen.');
+  var lock = LockService.getScriptLock(); lock.waitLock(20000);
+  var id;
+  try {
+    ensureLeadHeader_();
+    id = nextId_();
+    var row = LEAD_COLS.map(function () { return ''; }), set = function (col, v) { row[LEAD_COLS.indexOf(col)] = v; };
+    set('ID', id); set('Eingang', new Date()); set('Status', STATUS[0]); set('Zuständig', CURRENT_ && CURRENT_.name || 'Shahzad Mahmood');
+    set('Name', name); set('Telefon', cell_(p.phone, 40)); set('E-Mail', cell_(p.email, 120));
+    set('Kontaktweg', cell_(p.channel || 'Telefon', 40)); set('Von', cell_(p.address, 200)); set('Nach', cell_(p.service, 200));
+    set('Leistung', cell_(p.service, 120)); set('Quelle', cell_(p.source || 'Admin (' + (p.channel || 'Telefon') + ')', 120));
+    set('Sprache', 'DE'); set('Nachricht', cell_(p.message, 1000)); set('Kundentoken', Utilities.getUuid().replace(/-/g, ''));
+    set('Kostenträger', PAYERS.indexOf(p.payer) >= 0 ? p.payer : PAYERS[0]);
+    if (/^\d{4}-\d{2}-\d{2}$/.test(String(p.date || ''))) set('Termin', p.date);
+    sheet_(TAB.leads).appendRow(row);
+    sheet_(TAB.audit).appendRow([new Date(), email, TAB.leads, id, '', 'Anfrage im Admin angelegt']);
+  } finally { lock.releaseLock(); }
+  return api_lead_(id).lead;
+}
+function api_leadEdit_(id, p) {
+  var email = guard_();
+  p = p || {};
+  var lock = LockService.getScriptLock(); lock.waitLock(20000);
+  try {
+    var hit = findLead_(id); if (!hit) throw new Error('Anfrage ' + id + ' nicht gefunden.');
+    var sh = sheet_(TAB.leads), now = new Date(), audit = sheet_(TAB.audit);
+    Object.keys(LEAD_EDIT).forEach(function (k) {
+      if (p[k] === undefined) return;
+      var col = leadCol_(LEAD_EDIT[k][0]), val = cell_(p[k], LEAD_EDIT[k][1]), old = hit.values[col - 1];
+      if (k === 'payer' && PAYERS.indexOf(p[k]) < 0) return;
+      if (String(old) === String(val)) return;
+      sh.getRange(hit.row, col).setValue(val);
+      if (k === 'service') sh.getRange(hit.row, leadCol_('Leistung')).setValue(cell_(p[k], 120));
+      audit.appendRow([now, email, TAB.leads, id + ' · ' + LEAD_EDIT[k][0], k === 'message' ? '(Text)' : old, k === 'message' ? '(Text geändert)' : val]);
+    });
+    if (p.date !== undefined && (p.date === '' || /^\d{4}-\d{2}-\d{2}$/.test(String(p.date)))) sh.getRange(hit.row, leadCol_('Termin')).setValue(p.date);
+  } finally { lock.releaseLock(); }
+  return api_lead_(id).lead;
+}
+function apptClash_(date, time, min, exceptNr) {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(date) || !/^\d{2}:\d{2}$/.test(time)) return 'Datum oder Uhrzeit ungültig.';
+  var m = time.split(':'), s = Number(m[0]) * 60 + Number(m[1]), h = apptHours_()[new Date(date + 'T12:00:00').getDay()];
+  if (!h || s < h[0] * 60 || s + min > h[1] * 60) return 'Die Zeit ' + time + ' am ' + date + ' liegt außerhalb der Geschäftszeiten.';
+  if (apptBlocked_().indexOf(date) >= 0) return 'Der ' + date + ' ist gesperrt.';
+  var clash = allAppts_().some(function (x) {
+    if (x.nr === exceptNr || x.status === 'Abgesagt' || x.date !== date) return false;
+    var t = x.time.split(':'), xs = Number(t[0]) * 60 + Number(t[1]);
+    return s < xs + x.min && s + min > xs;
+  });
+  return clash ? 'Die Zeit ' + time + ' am ' + date + ' ist bereits belegt.' : '';
+}
+function api_apptCreate_(p) {
+  var email = guard_();
+  p = p || {};
+  var type = APPT_TYPES[p.type] ? p.type : 'visit', T = APPT_TYPES[type], date = String(p.date || ''), time = String(p.time || '');
+  var lead = /^A-\d{1,8}$/.test(String(p.lead || '')) ? findLead_(p.lead) : null;
+  var L = lead ? leadObj_(lead.values) : {};
+  var name = cell_(p.name || L.name, 80), phone = cell_(p.phone || L.phone, 40), mail = cell_(p.email || L.email, 120);
+  var address = cell_(p.address || L.from, 200), damage = cell_(p.damage || L.to || L.service, 200);
+  if (!String(name).trim()) throw new Error('Name eintragen oder eine Anfrage wählen.');
+  var lock = LockService.getScriptLock(); lock.waitLock(20000);
+  var a;
+  try {
+    var why = apptClash_(date, time, T.min, '');
+    if (why) throw new Error(why);
+    a = {nr: nextApptNr_(), status: 'Bestätigt', type: type, date: date, time: time, min: T.min, name: name, phone: phone, email: mail,
+      address: address, to: damage, message: cell_(p.message, 1000), lead: lead ? String(p.lead) : '', lang: 'DE', source: 'Admin'};
+    var sh = sheet_(TAB.appts);
+    sh.appendRow([a.nr, new Date(), a.status, T.de, "'" + date, "'" + time, T.min, name, phone, mail, address, damage, a.message, a.lead, 'DE', 'Admin', '', cell_(p.note, 500)]);
+    sheet_(TAB.audit).appendRow([new Date(), email, TAB.appts, a.nr, '', 'Termin im Admin angelegt: ' + date + ' ' + time]);
+    if (lead && String(lead.values[leadCol_('Status') - 1]) === STATUS[0]) sheet_(TAB.leads).getRange(lead.row, leadCol_('Status')).setValue(STATUS[1]);
+  } finally { lock.releaseLock(); }
+  if (p.calendar) { try { api_apptCalendar_(a.nr); } catch (err) { console.error(err); } }
+  if (p.notify && a.email) { try { apptMails_(apptByNr_(a.nr), 'booked'); } catch (err) { console.error(err); } }
+  return apptByNr_(a.nr);
+}
+
 /* Website content: channels, news and reviews (see siteContent_ in Shared.js). */
 function api_siteContent_() {
   guard_();
@@ -335,7 +421,7 @@ function api_update_(id, patch) {
 function api_saveQuote_(id, lines) {
   var email = guard_();
   if (!Array.isArray(lines) || !lines.length || lines.length > 40) throw new Error('Ungültige Positionen.');
-  var clean = lines.map(function (l) { return [clip_(l[0], 80), clip_(l[1], 160), Number(l[2]) || 0, clip_(l[3], 10), Number(l[4]) || 0]; })
+  var clean = lines.map(function (l) { return [clip_(l[0], 80), clip_(l[1], 160), Number(l[2]) || 0, clip_(l[3], 10), Number(l[4]) || 0, !!l[5]]; })
     .filter(function (l) { return l[0]; });
   var lock = LockService.getScriptLock(); lock.waitLock(20000);
   var res;

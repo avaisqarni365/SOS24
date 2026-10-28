@@ -8,8 +8,8 @@ import { eur } from "@/components/admin/AdminKit";
 
 type T = (de: string, en: string) => string;
 
-/** title, detail, qty, unit, price (as api_lead_ / api_saveQuote_ in Admin.js use them) */
-type QLine = [string, string, number, string, number];
+/** title, detail, qty, unit, price, optional (upsell: shown with its price, not in the total) */
+type QLine = [string, string, number, string, number, boolean?];
 interface Rate {
   key: string;
   label: string;
@@ -67,13 +67,15 @@ export default function AdminQuote({ t, leads, startId, onSessionEnd, onOpenDoc 
     });
   }, [id, fail]);
 
-  const total = useMemo(() => lines.reduce((s, l) => s + (Number(l[2]) || 0) * (Number(l[4]) || 0), 0), [lines]);
+  const total = useMemo(() => lines.reduce((s, l) => s + (l[5] ? 0 : (Number(l[2]) || 0) * (Number(l[4]) || 0)), 0), [lines]);
+  const optTotal = useMemo(() => lines.reduce((s, l) => s + (l[5] ? (Number(l[2]) || 0) * (Number(l[4]) || 0) : 0), 0), [lines]);
+  const [asOption, setAsOption] = useState(false);
   const pick = useMemo(() => {
     const needle = q.trim().toLowerCase();
     return leads.filter((l) => !needle || [l.id, l.name, l.address].join(" ").toLowerCase().includes(needle)).slice(0, 40);
   }, [leads, q]);
 
-  const edit = (i: number, k: number, v: string | number) => {
+  const edit = (i: number, k: number, v: string | number | boolean) => {
     setLines(lines.map((l, j) => (j === i ? (Object.assign([...l], { [k]: v }) as QLine) : l)));
     setDirty(true);
     setMsg("");
@@ -103,9 +105,12 @@ export default function AdminQuote({ t, leads, startId, onSessionEnd, onOpenDoc 
       t(`Guten Tag ${view?.lead.name || ""},`, `Hello ${view?.lead.name || ""},`),
       "",
       t("hier unser Festpreis-Angebot:", "here is our fixed-price quote:"),
-      ...lines.filter((l) => l[0]).map((l) => `• ${l[0]}: ${de(l[2])} ${l[3]} × ${eur(l[4])} = ${eur(l[2] * l[4])}`),
+      ...lines.filter((l) => l[0] && !l[5]).map((l) => `• ${l[0]}: ${de(l[2])} ${l[3]} × ${eur(l[4])} = ${eur(l[2] * l[4])}`),
       "",
       t(`Gesamt: ${eur(total)} inkl. MwSt.`, `Total: ${eur(total)} incl. VAT`),
+      ...(lines.some((l) => l[5] && l[0])
+        ? ["", t("Optional zubuchbar:", "Optional extras:"), ...lines.filter((l) => l[5] && l[0]).map((l) => `+ ${l[0]}: ${eur(l[2] * l[4])}`)]
+        : []),
       t("10 Jahre Garantie auf die Arbeit. Bei Fragen: 0172 2064177.", "10-year guarantee on the work."),
       "",
       "Shahzad Mahmood · SOS-Abdichtung",
@@ -176,6 +181,7 @@ export default function AdminQuote({ t, leads, startId, onSessionEnd, onOpenDoc 
                     <th scope="col">{t("Einheit", "Unit")}</th>
                     <th scope="col" className="at__num">{t("Preis €", "Price €")}</th>
                     <th scope="col" className="at__num">{t("Summe", "Sum")}</th>
+                    <th scope="col">{t("Option", "Option")}</th>
                     <th scope="col">
                       <span className="visually-hidden">{t("Löschen", "Delete")}</span>
                     </th>
@@ -197,7 +203,13 @@ export default function AdminQuote({ t, leads, startId, onSessionEnd, onOpenDoc 
                       <td className="at__num">
                         <input className="qt__in qt__in--num" inputMode="decimal" defaultValue={de(l[4])} key={`p${i}-${l[4]}`} onBlur={(e) => edit(i, 4, num(e.target.value))} aria-label={t("Preis", "Price")} />
                       </td>
-                      <td className="at__num at__strong">{eur(l[2] * l[4])}</td>
+                      <td className={`at__num at__strong${l[5] ? " qt__opt" : ""}`}>{l[5] ? "+ " : ""}{eur(l[2] * l[4])}</td>
+                      <td>
+                        <label className="ed__check" title={t("Upsell: im Angebot zur Wahl, nicht in der Summe", "Upsell: offered, not in the total")}>
+                          <input type="checkbox" checked={!!l[5]} onChange={(e) => edit(i, 5, e.target.checked)} />
+                          <span className="visually-hidden">{t("Optional", "Optional")}</span>
+                        </label>
+                      </td>
                       <td>
                         <button
                           type="button"
@@ -219,13 +231,17 @@ export default function AdminQuote({ t, leads, startId, onSessionEnd, onOpenDoc 
 
             <div className="qt__add">
               <span className="at__dim">{t("Aus der Preisliste:", "From the price list:")}</span>
+              <label className="ed__check qt__asopt">
+                <input type="checkbox" checked={asOption} onChange={(e) => setAsOption(e.target.checked)} />
+                {t("als Option (Upsell)", "as option (upsell)")}
+              </label>
               {rates.map((r) => (
                 <button
                   key={r.key}
                   type="button"
                   className="at__chip"
                   onClick={() => {
-                    setLines([...lines, [r.label.replace(/\s*je\s+\S+$/i, ""), "", 1, r.unit, r.price]]);
+                    setLines([...lines, [r.label.replace(/\s*je\s+\S+$/i, ""), "", 1, r.unit, r.price, asOption]]);
                     setDirty(true);
                   }}
                 >
@@ -247,6 +263,7 @@ export default function AdminQuote({ t, leads, startId, onSessionEnd, onOpenDoc 
             <div className="qt__total">
               <span>{t("Festpreis gesamt (inkl. MwSt.)", "Fixed price total (incl. VAT)")}</span>
               <strong>{eur(total)}</strong>
+              {optTotal > 0 && <span className="qt__opt">{t(`+ Optionen bis ${eur(optTotal)}`, `+ options up to ${eur(optTotal)}`)}</span>}
               {total > 0 && total < view.minPrice && <em className="at__err">{t(`Unter dem Mindestauftragswert von ${eur(view.minPrice)}.`, `Below the minimum order of ${eur(view.minPrice)}.`)}</em>}
             </div>
 

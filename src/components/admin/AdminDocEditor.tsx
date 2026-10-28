@@ -16,6 +16,8 @@ interface Line {
   vat: number;
   disc: number;
   labour: boolean;
+  /** upsell in a quote: shown with its price, not in the total */
+  opt?: boolean;
 }
 /** A document as the back office stores it (newDoc_ / cleanDoc_ in Belege.js). */
 interface Raw {
@@ -121,7 +123,7 @@ export default function AdminDocEditor({ nr, t, onClose, onChanged, onSessionEnd
   };
 
   // a quick sum while typing; the exact totals (rounding, VAT split) come from the back office on save
-  const quick = useMemo(() => (d ? d.lines.reduce((s, l) => s + l.qty * l.price * (1 - (l.disc || 0) / 100), 0) : 0), [d]);
+  const quick = useMemo(() => (d ? d.lines.reduce((s, l) => s + (l.opt ? 0 : l.qty * l.price * (1 - (l.disc || 0) / 100)), 0) : 0), [d]);
 
   const run = async <R,>(fn: string, ...args: unknown[]) => {
     setBusy(true);
@@ -309,7 +311,7 @@ export default function AdminDocEditor({ nr, t, onClose, onChanged, onSessionEnd
             <legend>{t("Positionen", "Lines")}</legend>
             <div className="ed__lines">
               {d.lines.map((l, i) => (
-                <div key={i} className="ed__line">
+                <div key={i} className={`ed__line${l.opt ? " is-opt" : ""}`}>
                   <span className="ed__pos">{i + 1}</span>
                   <div className="ed__line-main">
                     <input className="ed__title" value={l.title} placeholder={t("Bezeichnung", "Title")} onChange={(e) => setLine(i, { title: e.target.value })} aria-label={t(`Position ${i + 1} Bezeichnung`, `Line ${i + 1} title`)} />
@@ -345,10 +347,19 @@ export default function AdminDocEditor({ nr, t, onClose, onChanged, onSessionEnd
                         <input type="checkbox" checked={l.labour} onChange={(e) => setLine(i, { labour: e.target.checked })} />
                         {t("Arbeitslohn § 35a", "Labour § 35a")}
                       </label>
+                      {d.type === "offer" && (
+                        <label className="ed__check" title={t("Upsell: im Angebot zur Wahl, nicht in der Summe", "Upsell: offered, not in the total")}>
+                          <input type="checkbox" checked={!!l.opt} onChange={(e) => setLine(i, { opt: e.target.checked })} />
+                          {t("Optional (Upsell)", "Optional (upsell)")}
+                        </label>
+                      )}
                     </div>
                   </div>
                   <div className="ed__line-side">
-                    <span className="at__strong">{eur(l.qty * l.price * (1 - (l.disc || 0) / 100))}</span>
+                    <span className={`at__strong${l.opt ? " qt__opt" : ""}`}>
+                      {l.opt ? "+ " : ""}
+                      {eur(l.qty * l.price * (1 - (l.disc || 0) / 100))}
+                    </span>
                     <div className="ed__line-acts">
                       <button type="button" className="at__btn" onClick={() => move(i, -1)} aria-label={t("Nach oben", "Up")} disabled={i === 0}>
                         <ArrowUp aria-hidden="true" />
