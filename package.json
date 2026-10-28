@@ -12,7 +12,8 @@
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
     "verify": "node --experimental-strip-types --no-warnings scripts/verify-site.mts",
-    "check": "pnpm typecheck && pnpm build && pnpm verify",
+    "check": "pnpm typecheck && pnpm test:backend && pnpm build && pnpm verify",
+    "test:backend": "node backend/test/run.js && node backend/test/admin.js && node backend/test/belege.js && node backend/test/security.js && node backend/test/site.js",
     "release": "node scripts/deploy.mjs"
   },
   "dependencies": {

@@ -4,6 +4,7 @@ import Footer from "@/components/sections/Footer";
 import Hero from "@/components/scroll/Hero";
 import { ServicesRail, RegionSection } from "@/components/scroll/HomeSections";
 import MoreLinks from "@/components/sections/MoreLinks";
+import SiteFeed from "@/components/sections/SiteFeed";
 import HomeSteps from "@/components/sections/HomeSteps";
 import OnlineAppointmentBooking from "@/components/sections/OnlineAppointmentBooking";
 import ScrollSectionRail from "@/components/navigation/ScrollSectionRail";
@@ -73,6 +74,7 @@ export default function Home() {
         <MoreLinks />
         <HomeSteps />
         <RegionSection />
+        <SiteFeed />
         <OnlineAppointmentBooking />
       </main>
       <Footer />
