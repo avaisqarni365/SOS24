@@ -373,11 +373,29 @@ function moveDate_(f1, long) {
 }
 function day_(v) { return v instanceof Date ? Utilities.formatDate(v, 'Europe/Berlin', 'yyyy-MM-dd') : (v == null ? '' : String(v)); }
 
+/* The highest number in column A of a tab ("A-1007" -> 1007). Both scripts (website and
+   back office) create enquiries and appointments and each keeps its own script properties,
+   so the next number always continues from the sheet as well. */
+function maxNo_(tab, prefix) {
+  var sh = ss_().getSheetByName(tab), max = 0;
+  if (!sh || sh.getLastRow() < 2) return 0;
+  sh.getRange(2, 1, sh.getLastRow() - 1, 1).getValues().forEach(function (r) {
+    var m = String(r[0]).match(new RegExp('^' + prefix + '(\\d+)$'));
+    if (m) max = Math.max(max, Number(m[1]));
+  });
+  return max;
+}
 function nextId_() {
   var props = PropertiesService.getScriptProperties();
-  var n = Number(props.getProperty('NEXT_ID') || 1001);
+  var n = Math.max(Number(props.getProperty('NEXT_ID') || 1001), maxNo_(TAB.leads, 'A-') + 1);
   props.setProperty('NEXT_ID', String(n + 1));
   return 'A-' + n;
+}
+function nextApptNr_() {
+  var props = PropertiesService.getScriptProperties();
+  var n = Math.max(Number(props.getProperty('NEXT_APPT') || 1001), maxNo_(TAB.appts, 'T-') + 1);
+  props.setProperty('NEXT_APPT', String(n + 1));
+  return 'T-' + n;
 }
 function de_(x, d) { return String(round_(x, d)).replace('.', ','); }
 function round_(x, d) { var f = Math.pow(10, d == null ? 1 : d); return Math.round((Number(x) || 0) * f) / f; }
@@ -557,9 +575,12 @@ function quoteLines_(s, values, master, R) {
   return {est: est, lines: lines};
 }
 
+/* An optional quote line (upsell) is stored with this prefix in the title; it is shown
+   with its price but never counted in the total. */
+var OPT_PREFIX = 'Optional: ';
 function quoteTotal_(lines, minPrice) {
   var sum = 0;
-  lines.forEach(function (l) { sum += (Number(l[2]) || 0) * (Number(l[4]) || 0); });
+  lines.forEach(function (l) { if (!l[5]) sum += (Number(l[2]) || 0) * (Number(l[4]) || 0); });
   return Math.max(Number(minPrice) || 0, Math.round(sum * 100) / 100);
 }
 
@@ -568,9 +589,9 @@ function writeQuote_(id, lines, masterVersion, R) {
   data.forEach(function (r) { if (r[0] === id) version = Math.max(version, Number(r[1]) + 1); });
   var start = q.getLastRow() + 1, now = new Date();
   q.getRange(start, 1, lines.length, QUOTE_COLS.length).setValues(lines.map(function (l) {
-    return [id, version, now, masterVersion, cell_(l[0], 80), cell_(l[1], 160), Number(l[2]) || 0, clip_(l[3], 10), Number(l[4]) || 0, ''];
+    return [id, version, now, masterVersion, cell_((l[5] ? OPT_PREFIX : '') + l[0], 90), cell_(l[1], 160), Number(l[2]) || 0, clip_(l[3], 10), Number(l[4]) || 0, ''];
   }));
-  q.getRange(start, 10, lines.length, 1).setFormulasR1C1(lines.map(function () { return ['=R[0]C[-3]*R[0]C[-1]']; }));
+  q.getRange(start, 10, lines.length, 1).setFormulasR1C1(lines.map(function (l) { return [l[5] ? '=0' : '=R[0]C[-3]*R[0]C[-1]']; }));
   q.getRange(start + lines.length, 1, 1, QUOTE_COLS.length).setValues([[id, version, now, masterVersion, 'Summe', 'mindestens ' + R.min_price + ' €', '', '', '', '']]);
   q.getRange(start + lines.length, 10).setFormula('=MAX(' + R.min_price + ',SUM(J' + start + ':J' + (start + lines.length - 1) + '))');
   q.getRange(start + lines.length, 1, 1, QUOTE_COLS.length).setFontWeight('bold').setBorder(true, null, null, null, null, null);
@@ -586,7 +607,11 @@ function latestQuote_(id) {
   var data = sh.getDataRange().getValues(), best = 0, lines = [];
   data.forEach(function (r) { if (r[0] === id) best = Math.max(best, Number(r[1]) || 0); });
   if (!best) return null;
-  data.forEach(function (r) { if (r[0] === id && Number(r[1]) === best && r[4] !== 'Summe') lines.push([String(r[4]), String(r[5]), Number(r[6]) || 0, String(r[7]), Number(r[8]) || 0]); });
+  data.forEach(function (r) {
+    if (r[0] !== id || Number(r[1]) !== best || r[4] === 'Summe') return;
+    var title = String(r[4]), opt = title.indexOf(OPT_PREFIX) === 0;
+    lines.push([opt ? title.slice(OPT_PREFIX.length) : title, String(r[5]), Number(r[6]) || 0, String(r[7]), Number(r[8]) || 0, opt]);
+  });
   return {version: best, lines: lines};
 }
 

@@ -60,7 +60,8 @@ function cents_(x) { return Math.round((Number(x) || 0) * 100) / 100; }
 
 function docTotals_(doc) {
   var small = !!doc.small, gross = doc.priceMode !== 'net';
-  var lines = (doc.lines || []).map(function (l) {
+  // optional lines (upsells in a quote) are shown with their price but not counted
+  var lines = (doc.lines || []).filter(function (l) { return !l.opt; }).map(function (l) {
     var base = cents_((Number(l.qty) || 0) * (Number(l.price) || 0));
     var amt = cents_(base * (1 - Math.min(100, Math.max(0, Number(l.disc) || 0)) / 100));
     return {amt: amt, base: base, vat: small ? 0 : Number(l.vat) || 0, labour: !!l.labour};
@@ -163,7 +164,7 @@ function newDoc_(type, leadId) {
       if (x[0] === '' && !(Number(x[2]) * Number(x[4]))) return;
       doc.lines.push({
         title: String(x[0]), detail: String(x[1] || ''), qty: Number(x[2]) || 1, unit: String(x[3] || 'Pausch.'), price: Number(x[4]) || 0,
-        vat: c.small ? 0 : c.vat, disc: 0,
+        vat: c.small ? 0 : c.vat, disc: 0, opt: type === 'offer' && !!x[5],
         labour: /facharbeiter|arbeit|lohn|montage|injektionstechnik|35a/i.test(String(x[0] + ' ' + x[1]))
       });
     });
@@ -195,7 +196,7 @@ function cleanDoc_(d, old) {
   doc.lines = d.lines.map(function (l) {
     var vat = Number(l.vat); if ([0, 7, 19].indexOf(vat) < 0) vat = c.vat;
     return {title: s(l.title, 120), detail: s(l.detail, 400), qty: Number(l.qty) || 0, unit: s(l.unit, 12), price: Number(l.price) || 0,
-      vat: c.small ? 0 : vat, disc: Math.max(0, Math.min(100, Number(l.disc) || 0)), labour: !!l.labour};
+      vat: c.small ? 0 : vat, disc: Math.max(0, Math.min(100, Number(l.disc) || 0)), labour: !!l.labour, opt: doc.type === 'offer' && !!l.opt};
   }).filter(function (l) { return l.title || l.detail || l.price; });
   return doc;
 }
@@ -247,13 +248,18 @@ function renderDoc_(doc) {
   if (to.kind === 'firma' && to.vatId) meta.push(['Ihre USt-IdNr.', to.vatId]);
   if (!offer && doc.type !== 'storno' && doc.due) meta.push(['Zahlbar bis', dayDe_(doc.due)]);
 
-  var rows = doc.lines.map(function (l, i) {
+  var row = function (l, i) {
     var base = cents_(l.qty * l.price), amt = cents_(base * (1 - (l.disc || 0) / 100));
     return '<tr><td class="c">' + (i + 1) + '</td><td><b>' + h_(l.title) + '</b>' + (l.detail ? '<div class="d">' + nl_(l.detail) + '</div>' : '') +
       (l.disc ? '<div class="d">abzüglich ' + numDe_(l.disc) + ' % Rabatt</div>' : '') + '</td>' +
       '<td class="r">' + numDe_(l.qty) + ' ' + h_(l.unit) + '</td><td class="r">' + eurDe_(l.price) + '</td>' +
       (doc.small ? '' : '<td class="r">' + l.vat + ' %</td>') + '<td class="r">' + eurDe_(amt) + '</td></tr>';
-  }).join('');
+  };
+  var rows = doc.lines.filter(function (l) { return !l.opt; }).map(row).join('');
+  // upsells: listed after the total, with their price, so the customer can choose them
+  var opts = doc.lines.filter(function (l) { return l.opt; });
+  var optTable = opts.length ? '<p class="txt" style="margin-top:12pt"><b>Optionale Zusatzleistungen</b> (nicht im Gesamtbetrag enthalten, auf Wunsch zubuchbar)</p>' +
+    '<table class="pos"><tbody>' + opts.map(function (l, i) { return row(l, i).replace('<td class="c">' + (i + 1) + '</td>', '<td class="c">O' + (i + 1) + '</td>'); }).join('') + '</tbody></table>' : '';
   var sumRows = '';
   if (t.discount) sumRows += '<tr><td>Summe Positionen</td><td class="r">' + eurDe_(t.lines) + '</td></tr><tr><td>Rabatt' +
     (doc.discount.type === 'pct' ? ' ' + numDe_(doc.discount.value) + ' %' : '') + '</td><td class="r">−' + eurDe_(t.discount) + '</td></tr>';
@@ -314,7 +320,7 @@ function renderDoc_(doc) {
     (doc.intro ? '<p class="txt">' + nl_(doc.intro) + '</p>' : '') +
     '<table class="pos"><thead><tr><th class="c">Pos.</th><th>Fachleistung / Beschreibung</th><th class="r">Menge</th><th class="r">' + (gross ? 'Einzelpreis brutto' : 'Einzelpreis netto') + '</th>' +
     (doc.small ? '' : '<th class="r">USt</th>') + '<th class="r">Betrag</th></tr></thead><tbody>' + rows + '</tbody></table>' +
-    '<table class="sum">' + sumRows + '</table>' +
+    '<table class="sum">' + sumRows + '</table>' + optTable +
     (notes.length ? '<div class="notes">' + notes.map(function (n) { return '<p>' + n + '</p>'; }).join('') + '</div>' : '') +
     (doc.outro ? '<p class="txt" style="margin-top:14pt">' + nl_(doc.outro) + '</p>' : '') +
     '<p class="txt">Mit freundlichen Grüßen<br><b>' + h_(c.owner || c.name) + '</b><br>' + h_(c.name) + '</p>' +
@@ -540,6 +546,7 @@ function api_docCopy_(nr, type) {
   var o = hit.doc, c = company_(), t = DOC_TEXT[type];
   var d = JSON.parse(JSON.stringify(o));
   d.nr = 'E-' + Utilities.getUuid().slice(0, 8); d.type = type; d.status = 'Entwurf'; d.date = today_(); d.payments = []; d.sent = ''; d.pdf = ''; d.pdfId = '';
+  if (type !== 'offer') d.lines = (d.lines || []).filter(function (l) { return !l.opt; });
   d.ref = o.nr; d.intro = o.intro && o.type === type ? o.intro : t.intro.replace('Sehr geehrte Damen und Herren,', o.to.name ? 'Guten Tag ' + o.to.name + ',' : 'Sehr geehrte Damen und Herren,');
   d.outro = t.outro; d.subject = String(o.subject || '').replace(/^Festpreis-Angebot|^Angebot/, DOC_TYPES[type]).replace(/^Rechnung|^Abschlagsrechnung/, DOC_TYPES[type]);
   d.validUntil = type === 'offer' ? addDays_(d.date, c.offer_days) : ''; d.payDays = c.pay_days; d.due = type === 'offer' ? '' : addDays_(d.date, c.pay_days);
@@ -616,7 +623,7 @@ function uiFormatDoc_(doc) {
     pdfUrl: doc.pdf || '',
     sentAt: doc.sent || '',
     items: (doc.lines || []).map(function (l) {
-      return [l.title || '', l.detail || '', l.unit || 'lfm', Number(l.qty) || 1, Number(l.price) || 0, !!l.labour];
+      return [l.title || '', l.detail || '', l.unit || 'lfm', Number(l.qty) || 1, Number(l.price) || 0, !!l.labour, !!l.opt];
     })
   };
 }

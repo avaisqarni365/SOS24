@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { Search } from "lucide-react";
+import { Plus, Search } from "lucide-react";
 import type { WorkspaceLead } from "@/lib/backend";
 import { DataTable, Segments, status, type Column } from "@/components/admin/AdminKit";
 
@@ -18,7 +18,7 @@ const sortable = (s: string) => s.replace(/^(\d{2})\.(\d{2})\.(\d{2,4}),?\s*(.*)
  * All enquiries at a glance: status filter with counts, search, sortable columns, pages.
  * A click on a row opens the single view.
  */
-export default function AdminLeadsTable({ leads, t, onOpen }: { leads: WorkspaceLead[]; t: T; onOpen: (id: string) => void }) {
+export default function AdminLeadsTable({ leads, t, onOpen, onNew }: { leads: WorkspaceLead[]; t: T; onOpen: (id: string) => void; onNew: () => void }) {
   const [q, setQ] = useState("");
   const [seg, setSeg] = useState("");
 
@@ -64,6 +64,9 @@ export default function AdminLeadsTable({ leads, t, onOpen }: { leads: Workspace
           <span className="visually-hidden">{t("Anfragen durchsuchen", "Search inquiries")}</span>
           <input type="search" value={q} onChange={(e) => setQ(e.target.value)} placeholder={t("Name, Telefon, Ort, Nr. …", "Name, phone, town, no. …")} />
         </label>
+        <button type="button" className="btn-shine at__new" onClick={onNew}>
+          <Plus aria-hidden="true" /> {t("Neue Anfrage", "New inquiry")}
+        </button>
       </div>
       <DataTable
         rows={rows}

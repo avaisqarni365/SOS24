@@ -9360,3 +9360,17 @@ html[data-theme="dark"] .ed__bar { background: linear-gradient(to top, #121a24 7
 
 /* the quote page keeps its buttons at the end of the quote, not floating over it */
 .qt .ed__bar { position: static; background: none; padding: 0; }
+
+/* upserts and upsells: optional lines in quotes look like an offer, not a cost */
+.qt__opt { color: #0b5e40 !important; font-style: normal; font-weight: 700; }
+.ed__line.is-opt { border-style: dashed; border-color: rgb(12 110 74 / 0.45); background: #f3faf6; }
+.dw__lines tr.is-opt td { background: #f3faf6; }
+.dt__opt { display: inline-block; margin-left: 0.4rem; padding: 0.05rem 0.45rem; border-radius: 999px; background: #e6f6ee; color: #0b5e40; font-size: 0.75rem; font-weight: 800; vertical-align: middle; }
+.qt__asopt { display: inline-flex !important; min-height: 40px; padding: 0 0.6rem; border-radius: 999px; border: 1px dashed rgb(12 110 74 / 0.5); color: #0b5e40 !important; }
+.dw__move { display: grid; gap: 0.6rem; padding: 0.85rem; border-radius: 14px; border: 1px solid rgb(var(--c-line) / 0.12); background: #fbfcfd; }
+.dw__move .dw__h { display: flex; align-items: center; gap: 0.4rem; margin: 0; }
+.dw__move .dw__h svg { width: 1.05rem; height: 1.05rem; color: var(--pw-deep); }
+.dw__move label { display: grid; gap: 0.25rem; font-size: 0.85rem; font-weight: 700; color: #33435a; }
+.dw__move input:not([type="checkbox"]) { min-height: 42px; padding: 0 0.65rem; border-radius: 10px; border: 1px solid rgb(var(--c-line) / 0.22); font: inherit; }
+.dw__move .ed__check { display: flex; align-items: center; gap: 0.4rem; }
+html[data-theme="dark"] :is(.ed__line.is-opt, .dw__lines tr.is-opt td, .dw__move) { background: rgb(255 255 255 / 0.05); }

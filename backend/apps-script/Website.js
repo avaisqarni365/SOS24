@@ -135,13 +135,6 @@ function photos_(b) {
 
 /* ------------------------------------------------------------------ Appointment Booking (action: 'booking' / 'book') */
 
-function nextApptNr_() {
-  var props = PropertiesService.getScriptProperties();
-  var n = Number(props.getProperty('NEXT_APPT') || 1001);
-  props.setProperty('NEXT_APPT', String(n + 1));
-  return 'T-' + n;
-}
-
 function book_(b) {
   if (b.hp) return {ok: true, nr: 'T-0000'};
   if (b.t !== undefined && !(Number(b.t) > 1000)) return {ok: false, error: 'too_fast'};

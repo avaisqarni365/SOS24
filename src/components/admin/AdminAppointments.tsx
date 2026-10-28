@@ -1,7 +1,9 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { CalendarPlus, Phone, MapPin, MessageCircle, Mail, Search, FolderOpen, Video, Home, PhoneCall } from "lucide-react";
+import { CalendarPlus, Phone, MapPin, MessageCircle, Mail, Search, FolderOpen, Video, Home, PhoneCall, Plus, CalendarClock } from "lucide-react";
+import type { WorkspaceLead } from "@/lib/backend";
+import { ApptForm } from "@/components/admin/AdminForms";
 import { adminCall } from "@/lib/adminApi";
 import { DataTable, Drawer, Field, Segments, status, dayDe, telHref, waHref, mapsHref, type Column } from "@/components/admin/AdminKit";
 
@@ -43,7 +45,24 @@ const addDays = (iso: string, n: number) => new Date(new Date(iso + "T12:00:00")
  * Termine: the real appointments from the Google Sheet as one table with filters and
  * pages; a row opens the detail with everything about the visit and the actions.
  */
-export default function AdminAppointments({ t, isEn, onSessionEnd, onOpenLead }: { t: T; isEn: boolean; onSessionEnd: () => void; onOpenLead: (id: string) => void }) {
+export default function AdminAppointments({
+  t,
+  isEn,
+  onSessionEnd,
+  onOpenLead,
+  leads,
+  createFor,
+  onCreateDone,
+}: {
+  t: T;
+  isEn: boolean;
+  onSessionEnd: () => void;
+  onOpenLead: (id: string) => void;
+  leads: WorkspaceLead[];
+  /** an enquiry to create an appointment for ("" = free), from the enquiry's single view */
+  createFor: string | null;
+  onCreateDone: () => void;
+}) {
   const [data, setData] = useState<ApptData | null>(null);
   const [err, setErr] = useState("");
   const [busy, setBusy] = useState(false);
@@ -51,6 +70,11 @@ export default function AdminAppointments({ t, isEn, onSessionEnd, onOpenLead }:
   const [q, setQ] = useState("");
   const [openNr, setOpenNr] = useState("");
   const [note, setNote] = useState("");
+  const [creating, setCreating] = useState<string | null>(null);
+  const [move, setMove] = useState({ date: "", time: "", notify: true });
+  useEffect(() => {
+    if (createFor !== null) setCreating(createFor);
+  }, [createFor]);
 
   const fail = useCallback((e: string) => (e === "login" ? onSessionEnd() : setErr(e)), [onSessionEnd]);
   useEffect(() => {
@@ -85,7 +109,10 @@ export default function AdminAppointments({ t, isEn, onSessionEnd, onOpenLead }:
   }, [split, seg, q]);
 
   const cur = data?.appts.find((a) => a.nr === openNr) || null;
-  useEffect(() => setNote(cur?.note || ""), [cur?.nr, cur?.note]);
+  useEffect(() => {
+    setNote(cur?.note || "");
+    setMove({ date: cur?.date || "", time: cur?.time || "", notify: true });
+  }, [cur?.nr, cur?.note, cur?.date, cur?.time]);
 
   const replace = (a: Appt) => setData((d) => (d ? { ...d, appts: d.appts.map((x) => (x.nr === a.nr ? a : x)) } : d));
   const call = async (fn: string, ...args: unknown[]) => {
@@ -179,7 +206,29 @@ export default function AdminAppointments({ t, isEn, onSessionEnd, onOpenLead }:
           <span className="visually-hidden">{t("Termine durchsuchen", "Search appointments")}</span>
           <input type="search" value={q} onChange={(e) => setQ(e.target.value)} placeholder={t("Name, Telefon, Ort, Anfrage …", "Name, phone, town, inquiry …")} />
         </label>
+        <button type="button" className="btn-shine at__new" onClick={() => setCreating("")}>
+          <Plus aria-hidden="true" /> {t("Neuer Termin", "New appointment")}
+        </button>
       </div>
+
+      {creating !== null && (
+        <ApptForm<Appt>
+          t={t}
+          leads={leads}
+          leadId={creating}
+          onSessionEnd={onSessionEnd}
+          onClose={() => {
+            setCreating(null);
+            onCreateDone();
+          }}
+          onSaved={(a) => {
+            setData((d) => (d ? { ...d, appts: [...d.appts, a] } : d));
+            setCreating(null);
+            onCreateDone();
+            setOpenNr(a.nr);
+          }}
+        />
+      )}
 
       {err && <p className="at__err">{err}</p>}
 
@@ -257,6 +306,36 @@ export default function AdminAppointments({ t, isEn, onSessionEnd, onOpenLead }:
                 )}
               </Field>
             </dl>
+
+            {cur.status !== "Abgesagt" && cur.status !== "Erledigt" && (
+              <div className="dw__move">
+                <p className="dw__h">
+                  <CalendarClock aria-hidden="true" /> {t("Verschieben", "Move")}
+                </p>
+                <div className="ed__row">
+                  <label>
+                    {t("Neues Datum", "New date")}
+                    <input type="date" value={move.date} onChange={(e) => setMove({ ...move, date: e.target.value })} />
+                  </label>
+                  <label>
+                    {t("Neue Uhrzeit", "New time")}
+                    <input type="time" step={900} value={move.time} onChange={(e) => setMove({ ...move, time: e.target.value })} />
+                  </label>
+                </div>
+                <label className="ed__check">
+                  <input type="checkbox" checked={move.notify} disabled={!cur.email} onChange={(e) => setMove({ ...move, notify: e.target.checked })} />
+                  {t("Kunde per E-Mail informieren", "Tell the customer by e-mail")}
+                </label>
+                <button
+                  type="button"
+                  className="at__btn"
+                  disabled={busy || !move.date || !move.time || (move.date === cur.date && move.time === cur.time)}
+                  onClick={() => call("api_apptUpdate", cur.nr, { date: move.date, time: move.time, notify: move.notify && !!cur.email })}
+                >
+                  {t("Termin verschieben", "Move appointment")}
+                </button>
+              </div>
+            )}
 
             <label className="dw__note">
               {t("Interne Notiz", "Internal note")}
