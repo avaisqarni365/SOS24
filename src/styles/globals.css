@@ -9025,3 +9025,50 @@ html[data-theme="dark"] .admin-gate__d { color: #c9d6e3; }
 }
 html[data-theme="dark"] #termin .book-hero__name { color: #f2f6fb !important; }
 html[data-theme="dark"] #termin .book-hero__role { color: #c9d6e3 !important; }
+
+/* ===========================================================================
+   ADMIN - one dashboard: a fixed menu on the left in three groups (Betrieb,
+   Marketing, Hilfe), every page with its own address, content on the right.
+   Phones and tablets open the menu from the left.
+   ========================================================================= */
+.adm-wrap { width: 100%; max-width: 92rem; margin: 0 auto; padding: 0 clamp(0.75rem, 2vw, 1.5rem); }
+.adm { display: grid; gap: 1.5rem; align-items: start; }
+.adm__main { min-width: 0; }
+.adm__side { display: flex; flex-direction: column; gap: 1rem; padding: 1.1rem 0.9rem; background: #ffffff; border: 1px solid rgb(var(--c-line) / 0.1); border-radius: 22px; box-shadow: 0 1px 2px rgb(0 0 0 / 0.04), 0 20px 40px -28px rgb(15 37 55 / 0.3); }
+.adm__brand { display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; padding: 0 0.35rem 0.75rem; border-bottom: 1px solid rgb(var(--c-line) / 0.08); }
+.adm__logo { width: 9.5rem; height: auto; }
+.adm__brand-k { font-size: 0.8125rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: var(--pw-deep); }
+.adm__nav { display: grid; gap: 1rem; }
+.adm__group-k { margin: 0 0 0.35rem; padding: 0 0.6rem; font-size: 0.8125rem; font-weight: 800; letter-spacing: 0.08em; text-transform: uppercase; color: #5b6b80; }
+.adm__group ul { display: grid; gap: 0.15rem; margin: 0; padding: 0; list-style: none; }
+.adm__link { display: flex; align-items: center; gap: 0.65rem; min-height: 44px; padding: 0 0.7rem; border-radius: 12px; font-size: 0.98rem; font-weight: 650; color: #0f2537; transition: background 140ms, color 140ms; }
+.adm__link svg { width: 1.15rem; height: 1.15rem; flex: none; color: #5b6b80; }
+.adm__link:hover, .adm__link:focus-visible { background: rgb(var(--pw-accent-rgb) / 0.06); }
+.adm__link.is-on { background: var(--pw-accent); color: #ffffff; }
+.adm__link.is-on svg { color: #ffffff; }
+.adm__count { margin-left: auto; min-width: 1.6rem; padding: 0.05rem 0.45rem; border-radius: 999px; background: rgb(var(--pw-accent-rgb) / 0.1); color: var(--pw-deep); font-size: 0.8125rem; font-weight: 800; text-align: center; }
+.adm__link.is-on .adm__count { background: rgb(255 255 255 / 0.22); color: #ffffff; }
+.adm__foot { display: grid; gap: 0.6rem; padding: 0.85rem 0.35rem 0; border-top: 1px solid rgb(var(--c-line) / 0.08); }
+.adm__foot-link { font-size: 0.9rem; font-weight: 700; color: var(--pw-deep); text-decoration: underline; text-underline-offset: 3px; }
+.adm__logout { display: inline-flex; align-items: center; justify-content: center; gap: 0.45rem; min-height: 44px; border-radius: 12px; border: 1px solid rgb(var(--c-line) / 0.18); background: #ffffff; font-weight: 700; color: #0f2537; cursor: pointer; }
+.adm__logout svg { width: 1rem; height: 1rem; }
+.adm__bar { display: flex; align-items: center; gap: 0.75rem; }
+.adm__menu-btn { display: inline-flex; align-items: center; gap: 0.45rem; min-height: 44px; padding: 0 1rem; border-radius: 12px; border: 1px solid rgb(var(--c-line) / 0.18); background: #ffffff; font-weight: 800; color: #0f2537; cursor: pointer; }
+.adm__bar-t { font-family: var(--font-display); font-size: 1.25rem; font-weight: 800; color: #071628; }
+.adm__scrim { display: none; }
+@media (min-width: 1024px) {
+  .adm { grid-template-columns: 17rem minmax(0, 1fr); }
+  .adm__side { position: sticky; top: 6.5rem; max-height: calc(100vh - 8rem); overflow-y: auto; }
+  .adm__menu-btn { display: none; }
+}
+@media (max-width: 1023px) {
+  .adm__side { position: fixed; z-index: 60; top: 0; bottom: 0; left: 0; width: min(19rem, 86vw); border-radius: 0 22px 22px 0; overflow-y: auto; transform: translateX(-105%); transition: transform 220ms var(--ease-out-apple, ease-out); }
+  .adm__side.is-open { transform: none; }
+  .adm__scrim { display: block; position: fixed; z-index: 59; inset: 0; border: 0; background: rgb(7 12 20 / 0.45); }
+}
+@media (prefers-reduced-motion: reduce) { .adm__side { transition: none; } .adm__link { transition: none; } }
+html[data-theme="dark"] :is(.adm__side, .adm__logout, .adm__menu-btn) { background: #121a24; border-color: rgb(255 255 255 / 0.12); color: #f2f6fb; }
+html[data-theme="dark"] .adm__link { color: #e6ecf5; }
+html[data-theme="dark"] :is(.adm__link svg, .adm__group-k) { color: #9fb0c4; }
+html[data-theme="dark"] .adm__bar-t { color: #f2f6fb; }
+html[data-theme="dark"] :is(.adm__brand-k, .adm__foot-link) { color: var(--pw-on-dark); }

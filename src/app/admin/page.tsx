@@ -57,7 +57,7 @@ export default function AdminPage() {
       <Navbar />
       <main id="main" className="min-h-screen bg-canvas text-ink pt-20 sm:pt-24 lg:pt-32 pb-20 overflow-x-clip">
         <h1 className="sr-only">Admin-Portal &amp; GoBD-Backoffice</h1>
-        <div className="sc-wrap">
+        <div className="adm-wrap">
           <AdminPortalClient />
         </div>
       </main>
