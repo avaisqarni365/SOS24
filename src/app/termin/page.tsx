@@ -100,31 +100,31 @@ export default function TerminPage() {
             </p>
             <div className="mt-5 grid grid-cols-1 sm:grid-cols-3 gap-3">
               <div className="flex items-center gap-3 p-3.5 rounded-2xl bg-white border border-slate-200/90 shadow-xs">
-                <div className="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-800 flex items-center justify-center shrink-0">
+                <div className="w-10 h-10 rounded-xl bg-[rgb(var(--pw-accent-rgb)/0.12)] text-[var(--pw-deep)] flex items-center justify-center shrink-0">
                   <ShieldCheck className="w-5 h-5" />
                 </div>
                 <div>
-                  <div className="text-xs font-black text-slate-900">100 % Kostenfrei</div>
+                  <div className="text-sm font-black text-slate-900">100 % Kostenfrei</div>
                   <div className="text-[11px] text-slate-500">Keine Anfahrts- oder Messgebühren</div>
                 </div>
               </div>
 
               <div className="flex items-center gap-3 p-3.5 rounded-2xl bg-white border border-slate-200/90 shadow-xs">
-                <div className="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-800 flex items-center justify-center shrink-0">
+                <div className="w-10 h-10 rounded-xl bg-[rgb(var(--pw-accent-rgb)/0.12)] text-[var(--pw-deep)] flex items-center justify-center shrink-0">
                   <Clock className="w-5 h-5" />
                 </div>
                 <div>
-                  <div className="text-xs font-black text-slate-900">Flexible Zeitfenster</div>
+                  <div className="text-sm font-black text-slate-900">Flexible Zeitfenster</div>
                   <div className="text-[11px] text-slate-500">Vormittags &amp; nachmittags wählbar</div>
                 </div>
               </div>
 
               <div className="flex items-center gap-3 p-3.5 rounded-2xl bg-white border border-slate-200/90 shadow-xs">
-                <div className="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-800 flex items-center justify-center shrink-0">
+                <div className="w-10 h-10 rounded-xl bg-[rgb(var(--pw-accent-rgb)/0.12)] text-[var(--pw-deep)] flex items-center justify-center shrink-0">
                   <CheckCircle2 className="w-5 h-5" />
                 </div>
                 <div>
-                  <div className="text-xs font-black text-slate-900">Inhaber persönlich</div>
+                  <div className="text-sm font-black text-slate-900">Inhaber persönlich</div>
                   <div className="text-[11px] text-slate-500">Herr Shahzad Mahmood vor Ort</div>
                 </div>
               </div>
@@ -136,57 +136,57 @@ export default function TerminPage() {
         <section className="py-8 sm:py-10 bg-white border-b border-slate-200/80">
           <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
             <div className="text-center max-w-xl mx-auto space-y-2">
-              <span className="text-xs font-black uppercase tracking-wider text-emerald-800">Transparenter Ablauf</span>
+              <span className="text-sm font-black uppercase tracking-wider text-[var(--pw-deep)]">Transparenter Ablauf</span>
               <h2 className="text-xl sm:text-3xl font-black text-[#0f2537]">In 3 Schritten zu trockenen Kellerwänden</h2>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
               <div className="p-5 sm:p-6 rounded-2xl bg-slate-50 border border-slate-200 space-y-2.5">
-                <div className="w-8 h-8 rounded-full bg-emerald-700 text-white font-black text-sm flex items-center justify-center">1</div>
+                <div className="w-8 h-8 rounded-full bg-[var(--pw-accent)] text-white font-black text-sm flex items-center justify-center">1</div>
                 <div className="font-extrabold text-slate-900 text-base">Wunschtermin buchen</div>
-                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
                   Tragen Sie Ihr Wunschdatum und Ihre Schadensadresse ein. Sie erhalten sofort eine Bestätigung für Ihren Kalender.
                 </p>
               </div>
 
               <div className="p-5 sm:p-6 rounded-2xl bg-slate-50 border border-slate-200 space-y-2.5">
-                <div className="w-8 h-8 rounded-full bg-emerald-700 text-white font-black text-sm flex items-center justify-center">2</div>
+                <div className="w-8 h-8 rounded-full bg-[var(--pw-accent)] text-white font-black text-sm flex items-center justify-center">2</div>
                 <div className="font-extrabold text-slate-900 text-base">Ursachenanalyse vor Ort</div>
-                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
                   Herr Mahmood führt elektronische Feuchtemessungen durch, identifiziert die Ursache (Druckwasser, Kapillarfeuchte, Kondensat) und erklärt die Lage.
                 </p>
               </div>
 
               <div className="p-5 sm:p-6 rounded-2xl bg-slate-50 border border-slate-200 space-y-2.5">
-                <div className="w-8 h-8 rounded-full bg-emerald-700 text-white font-black text-sm flex items-center justify-center">3</div>
+                <div className="w-8 h-8 rounded-full bg-[var(--pw-accent)] text-white font-black text-sm flex items-center justify-center">3</div>
                 <div className="font-extrabold text-slate-900 text-base">Verbindlicher Festpreis</div>
-                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                <p className="text-sm sm:text-base text-slate-600 leading-relaxed">
                   Sie erhalten ein verbindliches Festpreisangebot ohne Nachforderungen – inklusive bis zu 10 Jahren Garantie auf die Dichtigkeit.
                 </p>
               </div>
             </div>
 
             {/* Direct Urgent Assistance Card */}
-            <div className="p-5 sm:p-6 rounded-3xl bg-emerald-900 text-white flex flex-col md:flex-row items-center justify-between gap-5 shadow-lg">
+            <div className="p-5 sm:p-6 rounded-3xl bg-[#0f2537] text-white flex flex-col md:flex-row items-center justify-between gap-5 shadow-lg">
               <div className="space-y-1 text-center md:text-left">
-                <div className="text-base sm:text-lg font-black text-emerald-200">Dringender Wassereintritt nach Regen?</div>
-                <p className="text-xs sm:text-sm text-slate-200 max-w-lg">
+                <div className="text-base sm:text-lg font-black text-white">Dringender Wassereintritt nach Regen?</div>
+                <p className="text-sm sm:text-base text-slate-200 max-w-lg">
                   Wenn Wasser akut im Keller steht oder die Drainage versagt, erreichen Sie Inhaber Shahzad Mahmood auch direkt per Telefon oder WhatsApp.
                 </p>
               </div>
               <div className="flex flex-wrap items-center justify-center gap-2.5 shrink-0 w-full md:w-auto">
                 <a
                   href={`tel:${COMPANY_INFO.phoneTel}`}
-                  className="w-full sm:w-auto min-h-[46px] px-5 py-2.5 rounded-xl bg-white text-emerald-950 font-black text-xs sm:text-sm flex items-center justify-center gap-2 shadow-xs hover:bg-slate-100 transition-colors"
+                  className="w-full sm:w-auto min-h-[46px] px-5 py-2.5 rounded-xl bg-white text-[#0f2537] font-black text-sm sm:text-base flex items-center justify-center gap-2 shadow-xs hover:bg-slate-100 transition-colors"
                 >
-                  <Phone className="w-4 h-4 text-emerald-700" />
+                  <Phone className="w-4 h-4 text-[var(--pw-deep)]" />
                   <span>{COMPANY_INFO.phoneDisplay}</span>
                 </a>
                 <a
                   href={COMPANY_INFO.whatsappUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-full sm:w-auto min-h-[46px] px-5 py-2.5 rounded-xl bg-[#25D366] hover:bg-[#1ebe5d] text-white font-black text-xs sm:text-sm flex items-center justify-center gap-2 shadow-xs transition-colors"
+                  className="w-full sm:w-auto min-h-[46px] px-5 py-2.5 rounded-xl bg-[#25D366] hover:bg-[#1ebe5d] text-white font-black text-sm sm:text-base flex items-center justify-center gap-2 shadow-xs transition-colors"
                 >
                   <MessageCircle className="w-4 h-4" />
                   <span>WhatsApp Chat</span>
@@ -200,7 +200,7 @@ export default function TerminPage() {
         <section className="py-8 sm:py-10 bg-[#f8fafc]">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
             <div className="text-center space-y-1.5">
-              <span className="text-xs font-black uppercase tracking-wider text-emerald-800">Häufige Fragen</span>
+              <span className="text-sm font-black uppercase tracking-wider text-[var(--pw-deep)]">Häufige Fragen</span>
               <h2 className="text-xl sm:text-2xl font-black text-[#0f2537]">Fragen zur Vor-Ort-Feuchtemessung</h2>
             </div>
 
@@ -208,10 +208,10 @@ export default function TerminPage() {
               {FAQS.map((faq, idx) => (
                 <div key={idx} className="p-4 sm:p-5 rounded-2xl bg-white border border-slate-200/90 shadow-2xs space-y-2">
                   <div className="flex items-start gap-2.5 font-black text-slate-900 text-sm sm:text-base">
-                    <HelpCircle className="w-4 h-4 text-emerald-700 mt-1 shrink-0" />
+                    <HelpCircle className="w-4 h-4 text-[var(--pw-deep)] mt-1 shrink-0" />
                     <span>{faq.q}</span>
                   </div>
-                  <p className="text-xs sm:text-sm text-slate-600 pl-6 leading-relaxed">
+                  <p className="text-sm sm:text-base text-slate-600 pl-6 leading-relaxed">
                     {faq.a}
                   </p>
                 </div>

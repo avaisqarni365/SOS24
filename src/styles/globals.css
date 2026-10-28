@@ -8731,13 +8731,12 @@ main p.sc-lede { text-align: justify !important; hyphens: auto; -webkit-hyphens:
 }
 @media (prefers-reduced-motion: reduce) { .hero-cine__v { animation: none; } }
 
-/* the mould film is upright: on wide screens it plays sharp in a portrait
-   frame on the right, and the backdrop is the same film, blurred */
+/* the films are upright: up to 1100px they fill the hero sharp; wider screens
+   play them sharp in a portrait frame on the right over the same film, blurred */
 .hero-cine__frame { display: none; }
-@media (min-aspect-ratio: 4/5) {
-  .hero-cine__v { filter: blur(22px) brightness(0.55) saturate(1.1); transform: scale(1.12); }
-}
 @media (min-aspect-ratio: 4/5) and (min-width: 1100px) {
+  /* the sharp film is in the frame; the backdrop is the same film, blurred */
+  .hero-cine__v { filter: blur(22px) brightness(0.55) saturate(1.1); transform: scale(1.12); }
   .hero-cine__frame {
     display: block;
     position: absolute;
