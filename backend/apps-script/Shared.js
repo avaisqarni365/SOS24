@@ -20,7 +20,8 @@ var TAB = {
   appts: 'Termine',
   visits: 'Besuche',
   users: 'Benutzer',
-  docs: 'Belege'
+  docs: 'Belege',
+  site: 'Website'
 };
 
 var DOC_COLS = ['Nr', 'Art', 'Status', 'Anfrage', 'Datum', 'Kunde', 'Netto €', 'USt €', 'Brutto €', 'Fällig', 'Bezahlt am', 'Bezahlt €', 'PDF', 'Erstellt von', 'Geändert', 'Bezug', 'Daten (JSON)'];
@@ -278,6 +279,79 @@ function checkLogin_(user, pass) {
   cache.remove(key);
   sh.getRange(row, c('Letzte Anmeldung') + 1).setValue(new Date());
   return {ok: true, user: u, name: name};
+}
+
+/* Website content the owner keeps up to date in the admin: the channels (tab
+   "Konfiguration", keys social_*) and news and customer reviews (tab "Website").
+   The site reads the visible part through the website API, action "content". */
+var SOCIAL_KEYS = ['instagram', 'facebook', 'youtube', 'tiktok', 'linkedin', 'google_reviews', 'whatsapp_channel'];
+var SITE_COLS = ['Art', 'Datum', 'Titel', 'Text', 'Link', 'Name', 'Ort', 'Sterne', 'Sichtbar'];
+var SITE_KINDS = ['Aktuell', 'Stimme'];
+function siteSheet_() {
+  var s = ss_(), sh = s.getSheetByName(TAB.site);
+  if (!sh) {
+    sh = s.insertSheet(TAB.site);
+    sh.getRange(1, 1, 1, SITE_COLS.length).setValues([SITE_COLS]).setFontWeight('bold').setBackground('#0b251c').setFontColor('#ffffff');
+    sh.setFrozenRows(1);
+  }
+  return sh;
+}
+function httpsUrl_(v) {
+  v = String(v || '').trim();
+  return /^https:\/\/[^\s"'<>]{4,300}$/.test(v) ? v : '';
+}
+function siteContent_(all) {
+  var social = {};
+  SOCIAL_KEYS.forEach(function (k) { var u = httpsUrl_(config_('social_' + k)); if (u) social[k] = u; });
+  var sh = siteSheet_(), n = sh.getLastRow(), c = function (k) { return SITE_COLS.indexOf(k); };
+  var rows = n > 1 ? sh.getRange(2, 1, n - 1, SITE_COLS.length).getValues() : [];
+  var items = rows.map(function (r) {
+    return {
+      kind: SITE_KINDS.indexOf(String(r[c('Art')])) >= 0 ? String(r[c('Art')]) : 'Aktuell',
+      date: r[c('Datum')] instanceof Date ? Utilities.formatDate(r[c('Datum')], 'Europe/Berlin', 'yyyy-MM-dd') : String(r[c('Datum')] || ''),
+      title: String(r[c('Titel')] || ''),
+      text: String(r[c('Text')] || ''),
+      link: httpsUrl_(r[c('Link')]),
+      name: String(r[c('Name')] || ''),
+      place: String(r[c('Ort')] || ''),
+      stars: Math.max(0, Math.min(5, Number(r[c('Sterne')]) || 0)),
+      visible: /^(ja|yes|x|1|true)$/i.test(String(r[c('Sichtbar')]).trim())
+    };
+  }).filter(function (it) { return it.title || it.text; });
+  if (!all) items = items.filter(function (it) { return it.visible; });
+  items.sort(function (a, b) { return a.date < b.date ? 1 : a.date > b.date ? -1 : 0; });
+  return {
+    ok: true,
+    social: social,
+    news: items.filter(function (it) { return it.kind === 'Aktuell'; }).slice(0, all ? 200 : 6),
+    reviews: items.filter(function (it) { return it.kind === 'Stimme'; }).slice(0, all ? 200 : 6)
+  };
+}
+function saveSiteContent_(payload, user) {
+  payload = payload || {};
+  var social = payload.social || {};
+  SOCIAL_KEYS.forEach(function (k) { if (social[k] !== undefined) setConfig_('social_' + k, httpsUrl_(social[k])); });
+  var list = [].concat(payload.news || [], payload.reviews || []).slice(0, 400);
+  var day = function (v) { return /^\d{4}-\d{2}-\d{2}$/.test(String(v || '')) ? String(v) : Utilities.formatDate(new Date(), 'Europe/Berlin', 'yyyy-MM-dd'); };
+  var rows = list.map(function (it) {
+    return [
+      SITE_KINDS.indexOf(it.kind) >= 0 ? it.kind : 'Aktuell',
+      day(it.date),
+      cell_(it.title, 120),
+      cell_(it.text, 1500),
+      httpsUrl_(it.link),
+      cell_(it.name, 80),
+      cell_(it.place, 80),
+      Math.max(0, Math.min(5, Number(it.stars) || 0)),
+      it.visible === false ? 'nein' : 'ja'
+    ];
+  }).filter(function (r) { return r[2] || r[3]; });
+  var sh = siteSheet_();
+  if (sh.getLastRow() > 1) sh.getRange(2, 1, sh.getLastRow() - 1, SITE_COLS.length).clearContent();
+  if (rows.length) sh.getRange(2, 1, rows.length, SITE_COLS.length).setValues(rows);
+  CacheService.getScriptCache().remove('site_content');
+  try { sheet_(TAB.audit).appendRow([new Date(), user || '', TAB.site, '—', '', 'Website-Inhalte gespeichert (' + rows.length + ' Einträge)']); } catch (e) {}
+  return siteContent_(true);
 }
 
 var ADMIN_URL = 'https://sos-abdichtung.de/admin/';

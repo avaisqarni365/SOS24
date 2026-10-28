@@ -9,7 +9,10 @@ const {ctx, sheets, driveFolders} = M;
 
 // Load apps-script and admin-script modules
 M.load('apps-script', ['Estimator.js', 'Shared.js', 'Code.js', 'Website.js']);
+// both projects share one test context: keep each one's own HTTP entrance
+const siteDoPost = ctx.doPost;
 M.load('admin-script', ['Config.js', 'Belege.js', 'Termine.js', 'Admin.js']);
+const adminDoPost = ctx.doPost;
 
 // Initialize Google Sheet database structure
 ctx.setup();
@@ -33,7 +36,7 @@ expectedCols.forEach((col, idx) => {
 console.log('✓ [1/6] Belege Tab Schema verified: 17 columns match GoBD specification.');
 
 // 2. Seed Lead A-1001 in Anfragen
-const post = b => ctx.doPost({postData: {contents: JSON.stringify(b)}});
+const post = b => siteDoPost({postData: {contents: JSON.stringify(b)}});
 post({
   action: 'lead',
   consent: true,

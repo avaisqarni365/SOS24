@@ -5,7 +5,10 @@ const {ctx, sheets, alerts, mails, puts, calEvents, driveFolders} = M;
 
 // Load both Website API and Admin modules
 M.load('apps-script', ['Estimator.js', 'Shared.js', 'Code.js', 'Website.js']);
+// both projects share one test context: keep each one's own HTTP entrance
+const siteDoPost = ctx.doPost;
 M.load('admin-script', ['Config.js', 'Belege.js', 'Termine.js', 'Admin.js']);
+const adminDoPost = ctx.doPost;
 
 // 1. Setup initializes all relational database tabs (Anfragen, Positionen, Angebote, Katalog, Regeln, Preise, Protokoll, Entwürfe, Konfiguration, Strecken, Termine, Besuche, Benutzer, Belege)
 ctx.setup();
@@ -19,7 +22,7 @@ assert.strictEqual(ctx.company_().owner, 'Shahzad Mahmood');
 console.log('✓ [1/7] Setup & Relational Sheets initialized:', Object.keys(sheets).join(', '));
 
 // 2. Website Lead Intake (action: 'lead' & action: 'quick') -> ID A-1001
-const post = b => ctx.doPost({postData: {contents: JSON.stringify(b)}});
+const post = b => siteDoPost({postData: {contents: JSON.stringify(b)}});
 const state = {
   ref: 'SOS-TEST1',
   f1: {from: 'Friedrich-Ebert-Str. 40, 42103 Wuppertal', to: 'Kellerwand Nord', km: '15', dateMode: 'fixed', date: '2026-11-10', hh: 1, service: 'Kellerabdichtung'},

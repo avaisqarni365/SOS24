@@ -8,7 +8,10 @@ const {ctx, sheets, alerts, mails, puts, driveFolders, cache} = M;
 
 // Load apps-script and admin-script modules
 M.load('apps-script', ['Estimator.js', 'Shared.js', 'Code.js', 'Website.js']);
+// both projects share one test context: keep each one's own HTTP entrance
+const siteDoPost = ctx.doPost;
 M.load('admin-script', ['Config.js', 'Belege.js', 'Termine.js', 'Admin.js']);
+const adminDoPost = ctx.doPost;
 
 // Initialize Google Sheet database structure
 ctx.setup();
@@ -51,7 +54,7 @@ assert(boot.statuses.includes('Neu') && boot.statuses.includes('Gebucht'), 'Stat
 console.log('✓ [3/6] Admin Bootstrap: Session active,', boot.leads.length, 'leads loaded, statuses:', boot.statuses.join(', '));
 
 // 5. Intake Test Lead and Update through Pipeline
-const post = b => ctx.doPost({postData: {contents: JSON.stringify(b)}});
+const post = b => siteDoPost({postData: {contents: JSON.stringify(b)}});
 const newLeadRes = post({
   action: 'lead',
   consent: true,

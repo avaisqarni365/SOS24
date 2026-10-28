@@ -1,8 +1,9 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
 import {
+  Megaphone,
   ShieldCheck,
   FolderOpen,
   Camera,
@@ -65,6 +66,8 @@ import {
 import { COMPANY, COMPANY_INFO } from "@/data/content-data";
 import { useLanguage } from "@/i18n/LanguageContext";
 import { LogoWordmark } from "@/components/brand/Logo";
+import AdminSiteContent from "@/components/admin/AdminSiteContent";
+import { adminSignIn, adminSignOut, adminCall, hasAdminSession, type SheetLead } from "@/lib/adminApi";
 import { buildGoogleCalendarUrl, downloadIcsFile, INSPECTION_SLOTS } from "@/lib/calendar";
 import {
   getWorkspaceStore,
@@ -79,7 +82,6 @@ import {
   NOTIFY_EMAIL_DEFAULT,
   GAS_API_URL,
   ADMIN_WEBAPP_URL,
-  adminLogin,
 } from "@/lib/backend";
 
 
@@ -96,7 +98,8 @@ type AdminTab =
   | "maps"
   | "strategy"
   | "seo"
-  | "hilfe";
+  | "hilfe"
+  | "website";
 
 type SupportedLang = "en" | "de";
 
@@ -115,9 +118,32 @@ const TAB_HASH: Record<AdminTab, string> = {
   maps: "google-maps",
   seo: "seo",
   hilfe: "hilfe",
+  website: "website",
 };
 const HASH_TAB = Object.fromEntries(Object.entries(TAB_HASH).map(([k, v]) => [v, k])) as Record<string, AdminTab>;
-const ADMIN_SESSION_KEY = "sos_admin_session";
+
+const fromSheet = (l: SheetLead): WorkspaceLead => ({
+  id: l.id,
+  received: l.received ? new Date(l.received).toLocaleString("de-DE", { dateStyle: "short", timeStyle: "short" }) : "",
+  status: l.status as LeadStatus,
+  owner: l.owner,
+  name: l.name,
+  phone: l.phone,
+  email: l.email,
+  address: l.to || l.from || "",
+  damageType: l.service,
+  area: "",
+  date: l.date || "",
+  notes: l.notes,
+  message: l.message,
+  source: l.source,
+  photosDriveUrl: l.photosDrive,
+  photos: [],
+  token: "",
+  handover: l.handover || {},
+  handoverNote: "",
+  lines: [],
+});
 
 const STATUS_OPTIONS: LeadStatus[] = [
   "Neu",
@@ -729,11 +755,14 @@ export default function AdminPortalClient() {
   const [pass, setPass] = useState("");
   const [loginErr, setLoginErr] = useState("");
   const [checking, setChecking] = useState(false);
+  // live: the enquiries come from the Google Sheet, not from the browser's sample data
+  const realRef = useRef(false);
+  const [live, setLive] = useState<{ at: string; count: number; state: "load" | "ok" | "error" } | null>(null);
 
   // a signed-in tab stays signed in until it is closed or "Abmelden" is pressed
   useEffect(() => {
     try {
-      if (sessionStorage.getItem(ADMIN_SESSION_KEY)) setUnlocked(true);
+      if (hasAdminSession()) setUnlocked(true);
     } catch {
       // storage blocked: sign in again on reload
     }
@@ -945,7 +974,7 @@ export default function AdminPortalClient() {
   // Sync state with BroadcastChannel & localStorage
   useEffect(() => {
     const unsub = subscribeWorkspaceStore((store) => {
-      setLeads(store.leads);
+      if (!realRef.current) setLeads(store.leads);
       setDocs(store.docs);
       setAppointments(store.appointments);
     });
@@ -1255,7 +1284,8 @@ export default function AdminPortalClient() {
     setDocs(nextDocs);
     if (nextApts) setAppointments(nextApts);
     saveWorkspaceStore({
-      leads: nextLeads,
+      // real customer data stays in the Google Sheet, never in the browser
+      leads: realRef.current ? getWorkspaceStore().leads : nextLeads,
       docs: nextDocs,
       appointments: nextApts || appointments,
     });
@@ -1270,16 +1300,11 @@ export default function AdminPortalClient() {
     e.preventDefault();
     setChecking(true);
     setLoginErr("");
-    const r = await adminLogin(user.trim(), pass);
+    const r = await adminSignIn(user.trim(), pass);
     setChecking(false);
     if (r.ok) {
       setPass("");
       setUnlocked(true);
-      try {
-        sessionStorage.setItem(ADMIN_SESSION_KEY, r.name || user);
-      } catch {
-        // signed in for this page view
-      }
       return;
     }
     setLoginErr(
@@ -1293,14 +1318,35 @@ export default function AdminPortalClient() {
     );
   };
 
-  const logout = () => {
+  const logout = useCallback(() => {
     setUnlocked(false);
-    try {
-      sessionStorage.removeItem(ADMIN_SESSION_KEY);
-    } catch {
-      // nothing stored
+    realRef.current = false;
+    setLive(null);
+    setLeads(getWorkspaceStore().leads);
+    adminSignOut();
+  }, []);
+
+  // the real enquiries from the Google Sheet (back office): loaded after login and on demand
+  const loadReal = useCallback(async () => {
+    setLive((v) => ({ at: v?.at || "", count: v?.count || 0, state: "load" }));
+    const r = await adminCall<{ leads: SheetLead[] }>("api_bootstrap");
+    if (!r.ok) {
+      if (r.error === "login") {
+        logout();
+        setLoginErr(t("Sitzung abgelaufen. Bitte neu anmelden.", "Session expired. Please log in again."));
+      } else setLive((v) => ({ at: v?.at || "", count: v?.count || 0, state: "error" }));
+      return;
     }
-  };
+    realRef.current = true;
+    const real = r.data.leads.map(fromSheet);
+    setLeads(real);
+    if (real[0]) setSelectedLeadId(real[0].id);
+    setLive({ at: new Date().toLocaleTimeString("de-DE", { hour: "2-digit", minute: "2-digit" }), count: real.length, state: "ok" });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [logout]);
+  useEffect(() => {
+    if (unlocked) loadReal();
+  }, [unlocked, loadReal]);
 
   const calcLeadTotal = (lead: WorkspaceLead) =>
     (lead.lines || []).reduce((sum, item) => sum + item.qty * item.price, 0);
@@ -2381,6 +2427,7 @@ export default function AdminPortalClient() {
                 ["drive", t("Fotos & Drive", "Photos & Drive"), Camera, totalPhotosCount],
               ]],
               [t("Marketing", "Marketing"), [
+                ["website", t("Website & Kanäle", "Website & channels"), Megaphone, 0],
                 ["strategy", t("KI-Strategie", "AI strategy"), Sparkles, 0],
                 ["ads", t("Google Ads", "Google Ads"), Rocket, 0],
                 ["analytics", t("Analytics", "Analytics"), BarChart3, 0],
@@ -2451,9 +2498,21 @@ export default function AdminPortalClient() {
               maps: t("Google Maps & Profil", "Google Maps & profile"),
               seo: t("SEO & Inhalte", "SEO & content"),
               hilfe: t("Hilfe & Anleitung", "Help & guide"),
+              website: t("Website & Kanäle", "Website & channels"),
             }[tab]
           }</span>
+          {live && (
+            <button type="button" className={`adm__live is-${live.state}`} onClick={loadReal} title={t("Neu laden", "Reload")}>
+              {live.state === "load"
+                ? t("Lädt aus Google-Tabelle …", "Loading from Google Sheet …")
+                : live.state === "error"
+                ? t("Google-Tabelle nicht erreichbar · erneut versuchen", "Google Sheet unreachable · retry")
+                : t(`Live · Google-Tabelle · ${live.count} Anfragen · ${live.at} ⟳`, `Live · Google Sheet · ${live.count} inquiries · ${live.at} ⟳`)}
+            </button>
+          )}
         </div>
+
+      {tab === "website" && <AdminSiteContent t={t} onSessionEnd={logout} />}
 
       {/* TAB 1: OVERVIEW */}
       {tab === "overview" && (
@@ -2737,6 +2796,17 @@ export default function AdminPortalClient() {
                         l.id === curLead.id ? { ...l, status: nextStatus } : l
                       );
                       persistAll(nextLeads, docs);
+                      if (realRef.current) {
+                        // written to the Google Sheet; on failure the old status comes back
+                        const id = curLead.id, before = curLead.status;
+                        adminCall("api_update", id, { status: nextStatus }).then((r) => {
+                          if (!r.ok) {
+                            setLeads((ls) => ls.map((l) => (l.id === id ? { ...l, status: before } : l)));
+                            showToast(t(`Status nicht gespeichert: ${r.error}`, `Status not saved: ${r.error}`));
+                            if (r.error === "login") logout();
+                          }
+                        });
+                      }
                       showToast(t(`Status für ${curLead.id} auf "${nextStatus}" gesetzt.`, `Status for ${curLead.id} updated to "${STATUS_I18N[nextStatus]?.en || nextStatus}".`));
                     }}
                     className="w-full min-h-[38px] px-2.5 py-1 rounded-lg border border-slate-300 bg-white font-bold text-slate-900 text-base sm:text-xs"

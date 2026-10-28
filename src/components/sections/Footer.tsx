@@ -8,6 +8,7 @@ import { SERVICE_CARDS } from "@/data/services";
 import { CITY_PAGES } from "@/data/seo-pages";
 import Logo from "@/components/brand/Logo";
 import FooterFold from "@/components/sections/FooterFold";
+import { SocialLinks } from "@/components/sections/SiteFeed";
 
 const PAGES: [string, string][] = [
   ["/leistungen/", "Alle Leistungen"],
@@ -49,6 +50,7 @@ export default function Footer() {
           <div className="site-footer__id">
             <Logo />
             <PartnerBadge className="site-footer__badge" />
+            <SocialLinks />
           </div>
         </div>
 

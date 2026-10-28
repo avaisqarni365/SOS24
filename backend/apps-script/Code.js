@@ -31,6 +31,13 @@ function doGet(e) {
     if (p.action === 'draft') return json(loadDraft_(String(p.ref || ''), String(p.token || '')));
     if (p.action === 'portal') return json(portal_(String(p.id || ''), String(p.k || '')));
     if (p.action === 'slots') return json(slots_(String(p.type || 'all')));
+    if (p.action === 'content') {
+      var cache = CacheService.getScriptCache(), hit = cache.get('site_content');
+      if (hit) return json(JSON.parse(hit));
+      var content = siteContent_(false);
+      cache.put('site_content', JSON.stringify(content), 300);
+      return json(content);
+    }
     return json({ok: false, error: 'unknown_action'});
   } catch (err) {
     console.error(err);

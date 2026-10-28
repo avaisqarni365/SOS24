@@ -37,6 +37,35 @@ function login(user, pass) {
   return {ok: true, token: token, name: r.name};
 }
 
+/* The website's /admin talks to the back office over HTTP: login, logout and the same
+   api_ functions the back office page calls, each behind the session token. */
+function doPost(e) {
+  var b = {};
+  try { b = JSON.parse((e && e.postData && e.postData.contents) || '{}'); } catch (err) {}
+  var out = function (o) { return ContentService.createTextOutput(JSON.stringify(o)).setMimeType(ContentService.MimeType.JSON); };
+  if (b.action === 'login') return out(login(b.user, b.pass));
+  if (b.action === 'logout') return out(logout(b.token));
+  if (b.action === 'api') {
+    try {
+      return out({ok: true, data: api(b.token, b.fn, b.args)});
+    } catch (err) {
+      var m = String((err && err.message) || err);
+      return out({ok: false, error: m === 'LOGIN' ? 'login' : m});
+    }
+  }
+  return out({ok: false, error: 'unknown_action'});
+}
+
+/* Website content: channels, news and reviews (see siteContent_ in Shared.js). */
+function api_siteContent_() {
+  guard_();
+  return siteContent_(true);
+}
+function api_siteSave_(payload) {
+  var user = guard_();
+  return saveSiteContent_(payload, user);
+}
+
 function logout(token) {
   if (/^[0-9a-f]{64}$/.test(String(token || ''))) CacheService.getScriptCache().remove('adm_' + token);
   return {ok: true};
