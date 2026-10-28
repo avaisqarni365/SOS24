@@ -270,7 +270,7 @@ export default function OnlineAppointmentBooking({ hideHeader = false, className
                   width={160}
                   height={160}
                   alt={COMPANY_INFO.owner}
-                  loading="lazy"
+                  loading="eager"
                   decoding="async"
                 />
                 <div>
