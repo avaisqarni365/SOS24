@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import { Search } from "lucide-react";
 import type { WorkspaceLead } from "@/lib/backend";
+import { DataTable, Segments, status, type Column } from "@/components/admin/AdminKit";
 
 type T = (de: string, en: string) => string;
 
@@ -10,84 +11,69 @@ const STATUS = ["Neu", "In Arbeit", "Angebot raus", "Gebucht", "Erledigt", "Verl
 
 /** "Essen" from "Niebuhrstraße 46, 45144 Essen" or "45144 Essen". */
 const town = (a: string) => (a.split(",").pop() || "").replace(/^\s*\d{5}\s*/, "").trim() || a;
+/** "28.10.26, 16:29" back to a sortable "26-10-28 16:29". */
+const sortable = (s: string) => s.replace(/^(\d{2})\.(\d{2})\.(\d{2,4}),?\s*(.*)$/, "$3-$2-$1 $4");
 
 /**
- * All enquiries at a glance: search, status filter with counts, newest first.
+ * All enquiries at a glance: status filter with counts, search, sortable columns, pages.
  * A click on a row opens the single view.
  */
 export default function AdminLeadsTable({ leads, t, onOpen }: { leads: WorkspaceLead[]; t: T; onOpen: (id: string) => void }) {
   const [q, setQ] = useState("");
-  const [status, setStatus] = useState("");
+  const [seg, setSeg] = useState("");
 
   const counts = useMemo(() => Object.fromEntries(STATUS.map((s) => [s, leads.filter((l) => l.status === s).length])), [leads]);
   const rows = useMemo(() => {
     const needle = q.trim().toLowerCase();
     return leads.filter(
-      (l) =>
-        (!status || l.status === status) &&
-        (!needle || [l.id, l.name, l.phone, l.email, l.address, l.damageType, l.message].join(" ").toLowerCase().includes(needle))
+      (l) => (!seg || l.status === seg) && (!needle || [l.id, l.name, l.phone, l.email, l.address, l.damageType, l.message].join(" ").toLowerCase().includes(needle))
     );
-  }, [leads, q, status]);
+  }, [leads, q, seg]);
+
+  const columns: Column<WorkspaceLead>[] = [
+    { key: "id", label: t("Nr.", "No."), sort: (l) => Number(l.id.replace(/\D/g, "")) || 0, className: "at__nr", cell: (l) => l.id },
+    { key: "received", label: t("Eingang", "Received"), sort: (l) => sortable(l.received), cell: (l) => l.received },
+    {
+      key: "who",
+      label: t("Kunde", "Customer"),
+      sort: (l) => l.name.toLowerCase(),
+      cell: (l) => (
+        <>
+          <span className="at__strong">{l.name || "—"}</span>
+          {l.phone && <span className="at__sub">{l.phone}</span>}
+        </>
+      ),
+    },
+    { key: "town", label: t("Ort", "Town"), sort: (l) => town(l.address), cell: (l) => town(l.address) || "—" },
+    { key: "what", label: t("Anliegen", "Request"), className: "at__clip", cell: (l) => l.damageType || l.message || "—" },
+    { key: "date", label: t("Wunschtermin", "Preferred date"), sort: (l) => l.date || "", cell: (l) => (l.date ? l.date.split("-").reverse().join(".") : "—") },
+    { key: "status", label: "Status", sort: (l) => STATUS.indexOf(l.status), cell: (l) => status(l.status) },
+  ];
 
   return (
     <div className="at">
       <div className="at__tools">
+        <Segments
+          value={seg}
+          onChange={setSeg}
+          label={t("Nach Status filtern", "Filter by status")}
+          items={[["", t("Alle", "All"), leads.length] as [string, string, number], ...STATUS.map((s) => [s, s, counts[s]] as [string, string, number])]}
+        />
         <label className="at__search">
           <Search aria-hidden="true" />
           <span className="visually-hidden">{t("Anfragen durchsuchen", "Search inquiries")}</span>
           <input type="search" value={q} onChange={(e) => setQ(e.target.value)} placeholder={t("Name, Telefon, Ort, Nr. …", "Name, phone, town, no. …")} />
         </label>
-        <div className="at__chips" role="group" aria-label={t("Nach Status filtern", "Filter by status")}>
-          <button type="button" className={`at__chip${status ? "" : " is-on"}`} onClick={() => setStatus("")}>
-            {t("Alle", "All")} <span>{leads.length}</span>
-          </button>
-          {STATUS.map((s) => (
-            <button key={s} type="button" className={`at__chip at__chip--${s.replace(/\s/g, "")}${status === s ? " is-on" : ""}`} onClick={() => setStatus(status === s ? "" : s)}>
-              {s} <span>{counts[s]}</span>
-            </button>
-          ))}
-        </div>
       </div>
-
-      <div className="at__wrap">
-        <table className="at__table">
-          <thead>
-            <tr>
-              <th scope="col">{t("Nr.", "No.")}</th>
-              <th scope="col">{t("Eingang", "Received")}</th>
-              <th scope="col">{t("Kunde", "Customer")}</th>
-              <th scope="col">{t("Ort", "Town")}</th>
-              <th scope="col">{t("Anliegen", "Request")}</th>
-              <th scope="col">{t("Telefon", "Phone")}</th>
-              <th scope="col">Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            {rows.map((l) => (
-              <tr key={l.id} tabIndex={0} onClick={() => onOpen(l.id)} onKeyDown={(e) => (e.key === "Enter" || e.key === " ") && (e.preventDefault(), onOpen(l.id))}>
-                <td className="at__nr">{l.id}</td>
-                <td>{l.received}</td>
-                <td className="at__strong">{l.name || "—"}</td>
-                <td>{town(l.address) || "—"}</td>
-                <td className="at__clip">{l.damageType || l.message || "—"}</td>
-                <td>
-                  {l.phone ? (
-                    <a href={`tel:${l.phone.replace(/[^\d+]/g, "")}`} onClick={(e) => e.stopPropagation()}>
-                      {l.phone}
-                    </a>
-                  ) : (
-                    "—"
-                  )}
-                </td>
-                <td>
-                  <span className={`at__status at__status--${l.status.replace(/\s/g, "")}`}>{l.status}</span>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-        {!rows.length && <p className="at__empty">{t("Keine Anfrage passt zur Suche.", "No inquiry matches.")}</p>}
-      </div>
+      <DataTable
+        rows={rows}
+        columns={columns}
+        rowKey={(l) => l.id}
+        onOpen={(l) => onOpen(l.id)}
+        t={t}
+        empty={t("Keine Anfrage passt zur Suche.", "No inquiry matches.")}
+        initialSort={{ key: "id", dir: -1 }}
+      />
     </div>
   );
 }
