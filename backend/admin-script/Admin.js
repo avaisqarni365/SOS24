@@ -56,6 +56,83 @@ function doPost(e) {
   return out({ok: false, error: 'unknown_action'});
 }
 
+/* Photos of an enquiry live in Drive: "SOS Abdichtung - Kundenfotos/<Anfrage-Nr.>" (the website
+   saves customer uploads there). Without an id: one entry per enquiry folder; with an id: its
+   photos with a small preview (data URL), newest first. */
+var PHOTO_ROOTS = ['SOS Abdichtung - Kundenfotos', 'SOS Abdichtung - Schadensfotos'];
+var ADMIN_PHOTO_TYPES = ['image/jpeg', 'image/png', 'image/webp', 'image/heic', 'image/heif'];
+function photoRoot_(create) {
+  for (var i = 0; i < PHOTO_ROOTS.length; i++) {
+    var it = DriveApp.getFoldersByName(PHOTO_ROOTS[i]);
+    if (it.hasNext()) return it.next();
+  }
+  return create ? DriveApp.createFolder(PHOTO_ROOTS[0]) : null;
+}
+function api_photos_(id) {
+  guard_();
+  var root = photoRoot_(false);
+  if (!root) return {folders: [], photos: []};
+  if (!id) {
+    var folders = [], it = root.getFolders();
+    while (it.hasNext() && folders.length < 500) {
+      var f = it.next(), n = 0, last = '', files = f.getFiles();
+      while (files.hasNext()) {
+        var file = files.next();
+        n++;
+        var at = iso_(file.getDateCreated());
+        if (at > last) last = at;
+      }
+      folders.push({lead: f.getName(), count: n, last: last, url: f.getUrl()});
+    }
+    folders.sort(function (a, b) { return a.last < b.last ? 1 : -1; });
+    return {folders: folders, photos: []};
+  }
+  if (!/^A-\d{1,8}$/.test(String(id))) throw new Error('Ungültige Anfrage-Nr.');
+  var sub = root.getFoldersByName(String(id));
+  if (!sub.hasNext()) return {folders: [], photos: []};
+  var folder = sub.next(), out = [], fit = folder.getFiles();
+  while (fit.hasNext() && out.length < 80) {
+    var fl = fit.next(), thumb = '';
+    try {
+      var tb = fl.getThumbnail();
+      if (tb) thumb = 'data:' + (tb.getContentType() || 'image/png') + ';base64,' + Utilities.base64Encode(tb.getBytes());
+    } catch (err) {}
+    out.push({id: fl.getId(), name: fl.getName(), type: fl.getMimeType(), at: iso_(fl.getDateCreated()), size: fl.getSize(), url: fl.getUrl(), thumb: thumb});
+  }
+  out.sort(function (a, b) { return a.at < b.at ? 1 : -1; });
+  return {folders: [{lead: String(id), count: out.length, url: folder.getUrl()}], photos: out};
+}
+/* Photos from the admin, e.g. taken on site: at most 10 per call, 8 MB each, images only. */
+function api_photoUpload_(id, images) {
+  var email = guard_();
+  if (!/^A-\d{1,8}$/.test(String(id)) || !findLead_(id)) throw new Error('Anfrage ' + id + ' nicht gefunden.');
+  if (!Array.isArray(images) || !images.length || images.length > 10) throw new Error('1 bis 10 Fotos auswählen.');
+  var root = photoRoot_(true), folder = ensureDriveFolder_(String(id), root), n = 0;
+  images.forEach(function (im, i) {
+    var type = String(im && im.type || ''), data = String(im && im.data || '').replace(/^data:[^,]*,/, '');
+    if (ADMIN_PHOTO_TYPES.indexOf(type) < 0 || !data || data.length > 8 * 1024 * 1024 * 4 / 3) return;
+    var ext = type.split('/')[1].replace('jpeg', 'jpg');
+    folder.createFile(Utilities.newBlob(Utilities.base64Decode(data), type, 'Admin-' + Utilities.formatDate(new Date(), 'Europe/Berlin', 'yyyyMMdd-HHmmss') + '-' + (i + 1) + '.' + ext));
+    n++;
+  });
+  if (!n) throw new Error('Keine gültigen Fotos (JPG, PNG, WebP, HEIC; max. 8 MB).');
+  sheet_(TAB.audit).appendRow([new Date(), email, 'Fotos', id, '', n + ' Foto(s) im Admin hochgeladen']);
+  return api_photos_(id);
+}
+
+/* The price list (tab "Preise" over the defaults) as building blocks for a quote. */
+function api_rateList_() {
+  guard_();
+  var R = rates_(), labels = {};
+  DEFAULT_RATES.forEach(function (d) { labels[d[0]] = {label: d[1], unit: d[3]}; });
+  var sh = ss_().getSheetByName(TAB.rates);
+  if (sh && sh.getLastRow() > 1) sh.getDataRange().getValues().slice(1).forEach(function (x) { if (x[0]) labels[String(x[0])] = {label: String(x[1] || x[0]), unit: String(x[3] || '')}; });
+  return Object.keys(R).filter(function (k) { return k !== 'min_price'; }).map(function (k) {
+    var l = labels[k] || {label: k, unit: ''};
+    return {key: k, label: l.label, unit: String(l.unit).replace(/^€\/?/, '') || 'Pausch.', price: R[k]};
+  });
+}
+
 /* Website content: channels, news and reviews (see siteContent_ in Shared.js). */
 function api_siteContent_() {
   guard_();

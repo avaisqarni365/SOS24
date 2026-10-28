@@ -94,11 +94,20 @@ const ctx = {
       this.getUrl = () => 'https://drive.google.com/drive/folders/' + encodeURIComponent(this.name);
       this.getFoldersByName = n => { const list = this.subs[n] ? [this.subs[n]] : []; let i = 0; return {hasNext: () => i < list.length, next: () => list[i++]}; };
       this.createFolder = n => (this.subs[n] = new MFolder(n));
+      const iter = list => { let i = 0; return {hasNext: () => i < list.length, next: () => list[i++]}; };
+      this.getFolders = () => iter(Object.values(this.subs));
+      this.getFiles = () => iter(this.files);
       this.getFilesByName = n => { const list = this.files.filter(f => f.name === n); let i = 0; return {hasNext: () => i < list.length, next: () => list[i++]}; };
       this.createFile = b => {
         const fname = b && b.getName ? b.getName() : (b && b.name ? b.name : 'file');
         const file = {
           name: fname,
+          getName: () => fname,
+          getId: () => 'id-' + fname,
+          getMimeType: () => (b && b.getContentType ? b.getContentType() : 'image/jpeg'),
+          getDateCreated: () => new Date(),
+          getSize: () => 1234,
+          getThumbnail: () => null,
           setTrashed: () => {},
           getUrl: () => 'https://drive.google.com/file/d/test-' + encodeURIComponent(this.name + '-' + fname) + '/view'
         };

@@ -134,7 +134,7 @@ export function DataTable<R>({
  * The detail panel: slides in from the right on wide screens, fills the screen on phones.
  * Esc, the close button or a click beside it closes it.
  */
-export function Drawer({ open, title, sub, onClose, children, t }: { open: boolean; title: ReactNode; sub?: ReactNode; onClose: () => void; children: ReactNode; t: T }) {
+export function Drawer({ open, title, sub, onClose, children, t, wide }: { open: boolean; title: ReactNode; sub?: ReactNode; onClose: () => void; children: ReactNode; t: T; wide?: boolean }) {
   const panel = useRef<HTMLDivElement>(null);
   useEffect(() => {
     if (!open) return;
@@ -150,7 +150,7 @@ export function Drawer({ open, title, sub, onClose, children, t }: { open: boole
   if (!open) return null;
   return (
     <div className="dw" role="presentation" onClick={onClose}>
-      <div className="dw__panel" role="dialog" aria-modal="true" aria-label={typeof title === "string" ? title : undefined} tabIndex={-1} ref={panel} onClick={(e) => e.stopPropagation()}>
+      <div className={`dw__panel${wide ? " dw__panel--wide" : ""}`} role="dialog" aria-modal="true" aria-label={typeof title === "string" ? title : undefined} tabIndex={-1} ref={panel} onClick={(e) => e.stopPropagation()}>
         <div className="dw__head">
           <div>
             {/* blocks, not paragraphs: the site sizes every paragraph in the page */}

@@ -3,7 +3,6 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { FileDown, Mail, Banknote, PencilLine, Plus, Search, FolderOpen, Phone } from "lucide-react";
 import { adminCall } from "@/lib/adminApi";
-import { ADMIN_WEBAPP_URL } from "@/lib/backend";
 import { DataTable, Drawer, Field, Segments, status, dayDe, eur, telHref, type Column } from "@/components/admin/AdminKit";
 
 type T = (de: string, en: string) => string;
@@ -39,15 +38,14 @@ interface Raw {
 }
 type Seg = "all" | "offer" | "invoice" | "open" | "overdue" | "draft";
 
-const editor = (nr?: string) => ADMIN_WEBAPP_URL + (nr ? `?b=${encodeURIComponent(nr)}` : "");
 const OPEN = ["Offen", "Überfällig", "Teilbezahlt"];
 
 /**
  * Belege: the real quotes and invoices from the Google Sheet (GoBD numbers, PDFs in Drive)
  * as one table; a row opens the document with its lines, totals, payments and history.
- * Writing the lines of a new or draft document happens in the back office's invoice editor.
+ * New documents and drafts open in the invoice editor (AdminDocEditor).
  */
-export default function AdminInvoices({ t, onSessionEnd, onOpenLead }: { t: T; onSessionEnd: () => void; onOpenLead: (id: string) => void }) {
+export default function AdminInvoices({ t, onSessionEnd, onOpenLead, onEdit, version }: { t: T; onSessionEnd: () => void; onOpenLead: (id: string) => void; onEdit: (nr: string) => void; version: number }) {
   const [docs, setDocs] = useState<Doc[] | null>(null);
   const [err, setErr] = useState("");
   const [note, setNote] = useState("");
@@ -62,7 +60,8 @@ export default function AdminInvoices({ t, onSessionEnd, onOpenLead }: { t: T; o
   const load = useCallback(() => {
     adminCall<{ docs: Doc[] }>("api_docs").then((r) => (r.ok ? (setDocs(r.data.docs), setErr("")) : fail(r.error)));
   }, [fail]);
-  useEffect(load, [load]);
+  // reload after the editor saved, issued, copied or cancelled something
+  useEffect(load, [load, version]);
 
   // payments and history come with the full document, fetched when it is opened
   useEffect(() => {
@@ -170,9 +169,23 @@ export default function AdminInvoices({ t, onSessionEnd, onOpenLead }: { t: T; o
           <span className="visually-hidden">{t("Belege durchsuchen", "Search documents")}</span>
           <input type="search" value={q} onChange={(e) => setQ(e.target.value)} placeholder={t("Nr., Kunde, Anfrage …", "No., customer, inquiry …")} />
         </label>
-        <a className="btn-shine at__new" href={editor()} target="_blank" rel="noopener noreferrer">
-          <Plus aria-hidden="true" /> {t("Neuer Beleg", "New document")}
-        </a>
+        {(["offer", "invoice"] as const).map((type) => (
+          <button
+            key={type}
+            type="button"
+            className={type === "offer" ? "btn-shine at__new" : "at__btn"}
+            disabled={busy}
+            onClick={async () => {
+              setBusy(true);
+              const r = await adminCall<string>("api_docNew", type, "");
+              setBusy(false);
+              if (r.ok) onEdit(r.data);
+              else fail(r.error);
+            }}
+          >
+            <Plus aria-hidden="true" /> {type === "offer" ? t("Neues Angebot", "New quote") : t("Neue Rechnung", "New invoice")}
+          </button>
+        ))}
       </div>
 
       {err && <p className="at__err">{err}</p>}
@@ -194,9 +207,16 @@ export default function AdminInvoices({ t, onSessionEnd, onOpenLead }: { t: T; o
           <>
             <div className="dw__acts">
               {cur.status === "Entwurf" ? (
-                <a className="btn-shine at__new" href={editor(cur.nr)} target="_blank" rel="noopener noreferrer">
-                  <PencilLine aria-hidden="true" /> {t("Im Beleg-Editor bearbeiten", "Edit in the invoice editor")}
-                </a>
+                <button
+                  type="button"
+                  className="btn-shine at__new"
+                  onClick={() => {
+                    setOpenNr("");
+                    onEdit(cur.nr);
+                  }}
+                >
+                  <PencilLine aria-hidden="true" /> {t("Bearbeiten", "Edit")}
+                </button>
               ) : (
                 <>
                   <button
@@ -229,6 +249,18 @@ export default function AdminInvoices({ t, onSessionEnd, onOpenLead }: { t: T; o
                     </button>
                   )}
                 </>
+              )}
+              {cur.status !== "Entwurf" && (
+                <button
+                  type="button"
+                  className="at__btn"
+                  onClick={() => {
+                    setOpenNr("");
+                    onEdit(cur.nr);
+                  }}
+                >
+                  <PencilLine aria-hidden="true" /> {cur.type === "offer" ? t("Als Rechnung übernehmen / Kopieren", "To invoice / copy") : t("Kopieren / Stornieren", "Copy / cancel")}
+                </button>
               )}
               {cur.phone && (
                 <a className="at__btn" href={telHref(cur.phone)}>
