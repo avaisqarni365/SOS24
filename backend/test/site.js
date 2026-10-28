@@ -23,7 +23,7 @@ for (const token of [undefined, '', 'x'.repeat(64)]) {
   assert(!r.ok && r.error === 'login', 'api without a session: ' + JSON.stringify(r));
 }
 assert(!admin({action: 'login', user: 'shahzad', pass: 'falsch-123'}).ok, 'wrong password refused');
-console.log('✓ [1/4] admin over HTTP: nothing without the login');
+console.log('✓ [1/5] admin over HTTP: nothing without the login');
 
 // 2. Login, then the real enquiries from the sheet.
 const lead = site({action: 'lead', consent: true, t: 9000, lang: 'de', contact: {name: 'Erika Muster', phone: '0170 1111111', email: 'erika@example.de', channel: 'whatsapp', note: 'Feuchte Kellerwand'}});
@@ -35,7 +35,7 @@ assert(boot.ok && boot.data.leads.some(l => l.id === lead.id && l.name === 'Erik
 const upd = admin({action: 'api', token: login.token, fn: 'api_update', args: [lead.id, {status: 'In Arbeit'}]});
 assert(upd.ok && upd.data.status === 'In Arbeit', 'status change saved: ' + JSON.stringify(upd));
 assert(!admin({action: 'api', token: login.token, fn: 'eval', args: []}).ok, 'only api_ functions can be called');
-console.log('✓ [2/4] admin over HTTP: real enquiries, status change');
+console.log('✓ [2/5] admin over HTTP: real enquiries, status change');
 
 // 3. Website content: saved in the sheet, only https links.
 const saved = admin({action: 'api', token: login.token, fn: 'api_siteSave', args: [{
@@ -53,13 +53,28 @@ assert(!saved.data.social.facebook && !saved.data.social.youtube, 'non-https lin
 assert.strictEqual(saved.data.news.length, 3, 'admin sees drafts too');
 assert.strictEqual(saved.data.reviews[0].stars, 5, 'stars capped at 5');
 assert(saved.data.news.every(n => !/^=/.test(n.title)), 'no formula in the sheet');
-console.log('✓ [3/4] website content: saved, https only, no formulas');
+console.log('✓ [3/5] website content: saved, https only, no formulas');
 
 // 4. The public feed shows only what is visible, newest first.
 const pub = content();
 assert(pub.ok && pub.social.instagram, 'public channels');
 assert.deepStrictEqual(pub.news.map(n => n.date), ['2026-10-26', '2026-10-20'], 'drafts hidden, newest first');
 assert.strictEqual(pub.reviews.length, 1, 'review published');
-console.log('✓ [4/4] public content feed: visible entries only');
+console.log('✓ [4/5] public content feed: visible entries only');
+
+// 5. Photos from the admin and the price list for quotes.
+const png = Buffer.from([0x89, 0x50, 0x4e, 0x47, 1, 2, 3]).toString('base64');
+const call = (fn, ...args) => admin({action: 'api', token: login.token, fn, args});
+assert(!admin({action: 'api', token: '', fn: 'api_photos', args: []}).ok, 'photos need the login');
+assert(!call('api_photoUpload', 'A-9999', [{type: 'image/png', data: png}]).ok, 'unknown enquiry refused');
+assert(!call('api_photoUpload', lead.id, [{type: 'text/html', data: png}]).ok, 'non-images refused');
+const up = call('api_photoUpload', lead.id, [{type: 'image/png', data: png}, {type: 'image/jpeg', data: png}]);
+assert(up.ok && up.data.photos.length === 2, 'two photos saved: ' + JSON.stringify(up));
+const folders = call('api_photos');
+assert(folders.ok && folders.data.folders.some(f => f.lead === lead.id && f.count === 2), 'folder summary lists the enquiry');
+assert(!call('api_photos', '../etc').ok, 'only enquiry numbers as folder names');
+const rates = call('api_rateList');
+assert(rates.ok && rates.data.some(r => r.key === 'horizontalsperre_m' && r.price > 0) && !rates.data.some(r => r.key === 'min_price'), 'price list for the quote builder');
+console.log('✓ [5/5] photos (list, upload, checks) and price list');
 
 console.log('\nALL WEBSITE CONTENT TESTS PASSED SUCCESSFULLY!');
