@@ -28,9 +28,9 @@ export const metadata: Metadata = {
 
 const PICTURES: BrandGalleryItem[] = [
   { shot: "van", title: "Servicewagen", note: "Werkzeug und Messtechnik an Bord", detail: "Unser Servicewagen kommt zur kostenlosen Messung und bleibt während der Sanierung vor Ort, mit Feuchtemessgerät, CM-Messkoffer, Wärmebildkamera und Injektionstechnik an Bord." },
-  { shot: "roofer", title: "Dachabdichtung", note: "verschweißt, Naht für Naht", detail: "Die Elastomerbitumen-Bahn wird vollflächig aufgeschweißt. An den Nähten schmelzen beide Bahnen zu einem Material zusammen." },
+  { shot: "risse", title: "Rissabdichtung", note: "Riss für Riss", detail: "Ein Riss im Kellerboden wird geöffnet, gereinigt und mit Dichtmörtel geschlossen. Führt er Wasser, wird er mit Harz verpresst, damit er dauerhaft dicht bleibt." },
   { shot: "bohrung", title: "Horizontalsperre", note: "Bohrloch für Bohrloch", detail: "Eine Reihe Bohrlöcher knapp über dem Boden, höchstens 20 cm auseinander. Darüber kommt die Injektionscreme in die Wand." },
-  { shot: "walker", title: "Ein Team", note: "eine Arbeitskleidung", detail: "Wer bei Ihnen arbeitet, trägt die Arbeitskleidung von SOS-Abdichtung. Sie haben einen festen Ansprechpartner, vom ersten Anruf bis zur Abnahme." },
+  { shot: "spachteln", title: "Sanierputz", note: "Schicht für Schicht", detail: "Nach der Abdichtung kommt der Sanierputz auf die Wand. Er nimmt Salze aus dem Mauerwerk auf und lässt Feuchte als Dampf entweichen, damit der Putz nicht wieder abplatzt." },
 ];
 
 export default function GaleriePage() {
