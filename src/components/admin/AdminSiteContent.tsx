@@ -33,7 +33,8 @@ export default function AdminSiteContent({ t, onSessionEnd }: { t: T; onSessionE
   useEffect(() => {
     adminCall<SiteContent & { ok: boolean }>("api_siteContent").then((r) => {
       if (r.ok) {
-        setData({ social: r.data.social || {}, news: r.data.news || [], reviews: r.data.reviews || [] });
+        const d = r.data || ({} as Partial<SiteContent>);
+        setData({ social: d.social || {}, news: d.news || [], reviews: d.reviews || [] });
         setState("idle");
       } else if (r.error === "login") onSessionEnd();
       else {
