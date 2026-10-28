@@ -1,12 +1,12 @@
 /**
- * A picture from the client's brand sheet: the service van and the crew.
- * Each is its own small file, cut from the sheet and re-lettered with the
- * current wordmark (full colour on the van, a white print on the hoodies).
+ * Real pictures only: the service van with the company wordmark, and photos
+ * of real jobs with real tools (drilling, crack sealing, rendering). No
+ * generated crew pictures.
  */
 export const SHOTS = {
   van: { src: "/img/brand/servicewagen.webp?v=3", w: 432, h: 300, alt: "Servicewagen von SOS-Abdichtung mit Firmenlogo vor einem Wohnhaus" },
-  roofer: { src: "/img/brand/brand-roofer.webp", w: 300, h: 446, alt: "Mitarbeiter in SOS-Abdichtung-Arbeitskleidung verschweißt eine Bitumenbahn auf dem Flachdach" },
-  walker: { src: "/img/brand/brand-walker.webp", w: 198, h: 302, alt: "Mitarbeiter in SOS-Abdichtung-Arbeitskleidung mit Werkzeuggürtel und Dachbahn" },
+  risse: { src: "/img/sp/risse-abdichten-kellerboden-320.webp", w: 320, h: 213, alt: "Handwerker schließt einen Riss im Kellerboden mit der Kelle" },
+  spachteln: { src: "/img/sp/sanierputz-spachteln-320.webp", w: 320, h: 213, alt: "Sanierputz wird mit der Glättkelle auf die Wand gezogen" },
   bohrung: { src: "/img/gallery/bohrung-injektion.webp", w: 679, h: 450, alt: "Handwerker bohrt mit dem Bohrhammer die Löcher für die Injektion in eine feuchte Wand" },
 } as const;
 

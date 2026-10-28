@@ -7264,12 +7264,12 @@ export default function AdminPortalClient() {
                     ✨ {t("Saniertes Kellerzimmer ↗", "Finished Cellar ↗")}
                   </a>
                   <a
-                    href="/media/film-feuchtemessung.webp"
+                    href="/img/sp/feuchte-wand-aufsteigende-feuchtigkeit-960.webp"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="p-2 bg-slate-50 hover:bg-slate-100 border border-slate-200 rounded-lg text-center text-[10px] font-bold text-slate-700 block transition-colors"
                   >
-                    🔬 {t("Feuchtemessung Gerät ↗", "Diagnostic Device ↗")}
+                    🔬 {t("Feuchte Wand ↗", "Damp wall ↗")}
                   </a>
                   <a
                     href="/img/gallery/feuchterand-sockel-960.webp"
