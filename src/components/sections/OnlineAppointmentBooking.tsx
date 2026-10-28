@@ -145,15 +145,15 @@ export default function OnlineAppointmentBooking({ hideHeader = false, className
   return (
     <section id="termin" className={`py-10 sm:py-16 lg:py-20 bg-[#f8fafc] text-slate-900 relative overflow-hidden border-y border-slate-200/80 ${className}`}>
       {/* Background Soft Glow */}
-      <div className="absolute top-0 right-1/4 w-96 h-96 bg-emerald-500/5 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-0 left-1/4 w-96 h-96 bg-emerald-600/5 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-0 right-1/4 w-96 h-96 bg-[rgb(var(--pw-accent-rgb)/0.05)] rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-0 left-1/4 w-96 h-96 bg-[rgb(var(--pw-accent-rgb)/0.05)] rounded-full blur-3xl pointer-events-none" />
 
       <div className="max-w-5xl mx-auto px-3.5 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header (hidden on standalone /termin/ page to avoid duplicate titles) */}
         {!hideHeader && (
           <div className="text-center max-w-2xl mx-auto mb-8 sm:mb-12 space-y-3">
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-100 border border-emerald-300 text-emerald-900 text-xs font-black uppercase tracking-wider shadow-xs">
-              <Calendar className="w-3.5 h-3.5 text-emerald-700" />
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[rgb(var(--pw-accent-rgb)/0.12)] border border-[rgb(var(--pw-accent-rgb)/0.3)] text-[var(--pw-deep)] text-sm font-black uppercase tracking-wider shadow-xs">
+              <Calendar className="w-3.5 h-3.5 text-[var(--pw-deep)]" />
               <span>Online-Terminplaner · 100 % Kostenfrei</span>
             </div>
             <h2 className="text-2xl sm:text-4xl font-black text-[#0f2537] tracking-tight">
@@ -168,13 +168,13 @@ export default function OnlineAppointmentBooking({ hideHeader = false, className
 
         {bookedSuccess ? (
           /* Success Card with Google Calendar Integration */
-          <div className="bg-white text-slate-900 rounded-3xl p-6 sm:p-10 shadow-2xl border border-emerald-500/50 space-y-6 text-center max-w-2xl mx-auto animate-in fade-in zoom-in-95 duration-200">
-            <div className="w-16 h-16 rounded-2xl bg-emerald-100 text-emerald-700 flex items-center justify-center mx-auto shadow-inner">
+          <div className="bg-white text-slate-900 rounded-3xl p-6 sm:p-10 shadow-2xl border border-[rgb(var(--pw-accent-rgb)/0.5)] space-y-6 text-center max-w-2xl mx-auto animate-in fade-in zoom-in-95 duration-200">
+            <div className="w-16 h-16 rounded-2xl bg-[rgb(var(--pw-accent-rgb)/0.12)] text-[var(--pw-deep)] flex items-center justify-center mx-auto shadow-inner">
               <CheckCircle2 className="w-9 h-9" />
             </div>
 
             <div className="space-y-2">
-              <span className="text-xs font-black uppercase tracking-wider text-emerald-700 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200">
+              <span className="text-sm font-black uppercase tracking-wider text-[var(--pw-deep)] bg-[rgb(var(--pw-accent-rgb)/0.06)] px-3 py-1 rounded-full border border-[rgb(var(--pw-accent-rgb)/0.3)]">
                 Wunschtermin angefragt · Vorgang {assignedLeadId}
               </span>
               <h3 className="text-2xl sm:text-3xl font-black text-slate-900">
@@ -188,17 +188,17 @@ export default function OnlineAppointmentBooking({ hideHeader = false, className
 
             {/* Scheduled Slot Summary Card */}
             <div className="bg-slate-50 border border-slate-200 rounded-2xl p-4 sm:p-5 text-left space-y-2.5 max-w-md mx-auto">
-              <div className="flex items-center gap-2 text-xs font-bold text-slate-500 uppercase tracking-wider">
-                <Clock className="w-4 h-4 text-emerald-600" />
+              <div className="flex items-center gap-2 text-sm font-bold text-slate-500 uppercase tracking-wider">
+                <Clock className="w-4 h-4 text-[var(--pw-deep)]" />
                 <span>Termindetails</span>
               </div>
               <div className="text-base font-black text-slate-900">
                 {new Date(selectedDate).toLocaleDateString('de-DE', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
               </div>
-              <div className="text-sm font-extrabold text-emerald-800">
+              <div className="text-sm font-extrabold text-[var(--pw-deep)]">
                 {selectedSlot.label}: {selectedSlot.timeRange}
               </div>
-              <div className="text-xs text-slate-600 flex items-start gap-1.5 pt-1 border-t border-slate-200">
+              <div className="text-sm text-slate-600 flex items-start gap-1.5 pt-1 border-t border-slate-200">
                 <MapPin className="w-3.5 h-3.5 shrink-0 mt-0.5 text-slate-400" />
                 <span>{address}</span>
               </div>
@@ -210,7 +210,7 @@ export default function OnlineAppointmentBooking({ hideHeader = false, className
                 href={googleCalLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full min-h-[48px] bg-emerald-700 hover:bg-emerald-800 text-white font-extrabold text-sm px-5 py-3 rounded-xl flex items-center justify-center gap-2 shadow-md transition-colors"
+                className="w-full min-h-[48px] bg-[var(--pw-accent)] hover:bg-[var(--pw-deep)] text-white font-extrabold text-sm px-5 py-3 rounded-xl flex items-center justify-center gap-2 shadow-md transition-colors"
               >
                 <Calendar className="w-4 h-4" />
                 <span>Vorläufig in Google Kalender eintragen ↗</span>
@@ -220,7 +220,7 @@ export default function OnlineAppointmentBooking({ hideHeader = false, className
                 <button
                   type="button"
                   onClick={handleDownloadIcs}
-                  className="min-h-[44px] bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-xs px-3 py-2 rounded-xl flex items-center justify-center gap-1.5 transition-colors"
+                  className="min-h-[44px] bg-slate-100 hover:bg-slate-200 text-slate-800 font-bold text-sm px-3 py-2 rounded-xl flex items-center justify-center gap-1.5 transition-colors"
                 >
                   <Download className="w-3.5 h-3.5 text-slate-600" />
                   <span>Apple / Outlook (.ics)</span>
@@ -232,7 +232,7 @@ export default function OnlineAppointmentBooking({ hideHeader = false, className
                   )}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="min-h-[44px] bg-[#25D366] hover:bg-[#1ebe5d] text-white font-bold text-xs px-3 py-2 rounded-xl flex items-center justify-center gap-1.5 transition-colors"
+                  className="min-h-[44px] bg-[#25D366] hover:bg-[#1ebe5d] text-white font-bold text-sm px-3 py-2 rounded-xl flex items-center justify-center gap-1.5 transition-colors"
                 >
                   <MessageSquare className="w-3.5 h-3.5" />
                   <span>WhatsApp-Bestätigung</span>
@@ -240,7 +240,7 @@ export default function OnlineAppointmentBooking({ hideHeader = false, className
               </div>
             </div>
 
-            <div className="pt-2 text-xs text-slate-500">
+            <div className="pt-2 text-sm text-slate-500">
               Wir rufen Sie unter <strong>{phone}</strong> an. Eilig? Rufen Sie direkt an:{' '}
               <a href={`tel:${COMPANY_INFO.phoneTel}`} className="font-bold underline underline-offset-2">{COMPANY_INFO.phoneDisplay}</a>
             </div>
@@ -251,19 +251,54 @@ export default function OnlineAppointmentBooking({ hideHeader = false, className
             onSubmit={handleBooking}
             className="bg-white text-slate-900 rounded-2xl sm:rounded-3xl p-4 sm:p-8 lg:p-10 shadow-xl sm:shadow-2xl border border-slate-200/90 space-y-6 sm:space-y-7"
           >
+            {/* Who comes: a real job photo (drilling the injection holes) and the owner himself */}
+            <div className="book-hero">
+              <img
+                className="book-hero__photo"
+                src="/img/gallery/bohrung-injektion.webp"
+                width={679}
+                height={450}
+                alt="Bohrung für die Injektion: Handwerker mit Bohrhammer an einer feuchten Wand"
+                loading="lazy"
+                decoding="async"
+              />
+              <div className="book-hero__side">
+              <div className="book-hero__who">
+                <img
+                  className="book-hero__face"
+                  src="/img/gallery/shahzad-mahmood-160.webp"
+                  width={160}
+                  height={160}
+                  alt={COMPANY_INFO.owner}
+                  loading="lazy"
+                  decoding="async"
+                />
+                <div>
+                  <p className="book-hero__name">{COMPANY_INFO.owner}</p>
+                  <p className="book-hero__role">Inhaber · ruft Sie zur Bestätigung an</p>
+                </div>
+              </div>
+              <ul className="book-hero__facts">
+                <li>Messung vor Ort kostenlos</li>
+                <li>10 Jahre Garantie auf die Arbeit</li>
+                <li>SchimmelPeter-Partner</li>
+              </ul>
+              </div>
+            </div>
+
             {/* Step 1: Choose Slot */}
             <div className="space-y-3">
               <div className="flex items-center justify-between">
-                <span className="text-xs font-black uppercase tracking-wider text-emerald-800 flex items-center gap-1.5">
-                  <span className="w-5 h-5 rounded-full bg-emerald-100 text-emerald-900 flex items-center justify-center text-[10px]">1</span>
+                <span className="text-sm font-black uppercase tracking-wider text-[var(--pw-deep)] flex items-center gap-1.5">
+                  <span className="w-5 h-5 rounded-full bg-[rgb(var(--pw-accent-rgb)/0.12)] text-[var(--pw-deep)] flex items-center justify-center text-xs">1</span>
                   <span>Wunschdatum &amp; Zeitfenster wählen</span>
                 </span>
-                <span className="text-xs font-semibold text-slate-600">Montag bis Samstag</span>
+                <span className="text-sm font-semibold text-slate-600">Montag bis Samstag</span>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-12 gap-3 items-start">
                 <fieldset className="sm:col-span-5">
-                  <legend className="block text-xs font-bold text-slate-700 mb-1">Tag *</legend>
+                  <legend className="block text-sm font-bold text-slate-700 mb-1">Tag *</legend>
                   <div className="grid grid-cols-3 gap-2">
                     {days.map((iso) => {
                       const on = !otherDay && selectedDate === iso;
@@ -277,7 +312,7 @@ export default function OnlineAppointmentBooking({ hideHeader = false, className
                             pickDate(iso);
                           }}
                           className={`min-h-[48px] rounded-xl border text-sm font-bold transition-colors ${
-                            on ? 'bg-emerald-50 border-emerald-600 ring-2 ring-emerald-500/30 text-slate-900' : 'bg-slate-50 hover:bg-slate-100 border-slate-200 text-slate-700'
+                            on ? 'bg-[rgb(var(--pw-accent-rgb)/0.06)] border-[var(--pw-accent)] ring-2 ring-[rgb(var(--pw-accent-rgb)/0.3)] text-slate-900' : 'bg-slate-50 hover:bg-slate-100 border-slate-200 text-slate-700'
                           }`}
                         >
                           {dayLabel(iso)}
@@ -287,7 +322,7 @@ export default function OnlineAppointmentBooking({ hideHeader = false, className
                   </div>
                   {otherDay ? (
                     <div className="mt-2">
-                      <label htmlFor="booking-date" className="block text-xs font-bold text-slate-700 mb-1">
+                      <label htmlFor="booking-date" className="block text-sm font-bold text-slate-700 mb-1">
                         Anderer Tag
                       </label>
                       <input
@@ -301,14 +336,14 @@ export default function OnlineAppointmentBooking({ hideHeader = false, className
                           pickDate(v);
                         }}
                         required
-                        className="w-full min-h-[48px] px-3.5 py-2.5 rounded-xl border border-slate-300 bg-white text-base sm:text-sm font-bold text-slate-900 focus:ring-2 focus:ring-emerald-600/30 focus:border-emerald-600 outline-none transition"
+                        className="w-full min-h-[48px] px-3.5 py-2.5 rounded-xl border border-slate-300 bg-white text-base sm:text-sm font-bold text-slate-900 focus:ring-2 focus:ring-[rgb(var(--pw-accent-rgb)/0.3)] focus:border-[var(--pw-accent)] outline-none transition"
                       />
                     </div>
                   ) : (
                     <button
                       type="button"
                       onClick={() => setOtherDay(true)}
-                      className="mt-2 min-h-[44px] text-sm font-bold text-emerald-800 underline underline-offset-2"
+                      className="mt-2 min-h-[44px] text-sm font-bold text-[var(--pw-deep)] underline underline-offset-2"
                     >
                       Anderer Tag …
                     </button>
@@ -316,7 +351,7 @@ export default function OnlineAppointmentBooking({ hideHeader = false, className
                 </fieldset>
 
                 <fieldset className="sm:col-span-7">
-                  <legend className="block text-xs font-bold text-slate-700 mb-1">Zeitfenster *</legend>
+                  <legend className="block text-sm font-bold text-slate-700 mb-1">Zeitfenster *</legend>
                   <div className="grid grid-cols-2 gap-2">
                     {slotsFor(selectedDate).map((slot) => {
                       const isSelected = selectedSlot.id === slot.id;
@@ -328,15 +363,15 @@ export default function OnlineAppointmentBooking({ hideHeader = false, className
                           onClick={() => setSelectedSlot(slot)}
                           className={`min-h-[50px] p-2.5 sm:p-3 rounded-xl border text-left transition-all ${
                             isSelected
-                              ? 'bg-emerald-50 border-emerald-600 ring-2 ring-emerald-500/30 shadow-xs'
+                              ? 'bg-[rgb(var(--pw-accent-rgb)/0.06)] border-[var(--pw-accent)] ring-2 ring-[rgb(var(--pw-accent-rgb)/0.3)] shadow-xs'
                               : 'bg-slate-50 hover:bg-slate-100 border-slate-200 text-slate-700'
                           }`}
                         >
                           <div className="flex items-center justify-between">
                             <span className="font-extrabold text-sm text-slate-900">{slot.label}</span>
-                            {isSelected && <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600" />}
+                            {isSelected && <CheckCircle2 className="w-3.5 h-3.5 text-[var(--pw-deep)]" />}
                           </div>
-                          <div className="text-xs text-slate-600 mt-0.5">{slot.timeRange}</div>
+                          <div className="text-sm text-slate-600 mt-0.5">{slot.timeRange}</div>
                         </button>
                       );
                     })}
@@ -347,14 +382,14 @@ export default function OnlineAppointmentBooking({ hideHeader = false, className
 
             {/* Step 2: Contact Details */}
             <div className="space-y-3 pt-3 border-t border-slate-100">
-              <span className="text-xs font-black uppercase tracking-wider text-emerald-800 flex items-center gap-1.5">
-                <span className="w-5 h-5 rounded-full bg-emerald-100 text-emerald-900 flex items-center justify-center text-[10px]">2</span>
+              <span className="text-sm font-black uppercase tracking-wider text-[var(--pw-deep)] flex items-center gap-1.5">
+                <span className="w-5 h-5 rounded-full bg-[rgb(var(--pw-accent-rgb)/0.12)] text-[var(--pw-deep)] flex items-center justify-center text-xs">2</span>
                 <span>Ihre Kontaktdaten &amp; Schadensadresse</span>
               </span>
 
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 <div>
-                  <label htmlFor="b-name" className="block text-xs font-bold text-slate-700 mb-1">
+                  <label htmlFor="b-name" className="block text-sm font-bold text-slate-700 mb-1">
                     Ihr Name *
                   </label>
                   <input
@@ -365,12 +400,12 @@ export default function OnlineAppointmentBooking({ hideHeader = false, className
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     placeholder="Vor- und Nachname"
-                    className="w-full min-h-[48px] px-3.5 py-2.5 rounded-xl border border-slate-300 bg-white text-base sm:text-sm font-semibold text-slate-900 focus:ring-2 focus:ring-emerald-600/30 focus:border-emerald-600 outline-none transition"
+                    className="w-full min-h-[48px] px-3.5 py-2.5 rounded-xl border border-slate-300 bg-white text-base sm:text-sm font-semibold text-slate-900 focus:ring-2 focus:ring-[rgb(var(--pw-accent-rgb)/0.3)] focus:border-[var(--pw-accent)] outline-none transition"
                   />
                 </div>
 
                 <div>
-                  <label htmlFor="b-phone" className="block text-xs font-bold text-slate-700 mb-1">
+                  <label htmlFor="b-phone" className="block text-sm font-bold text-slate-700 mb-1">
                     Telefonnummer für Rückruf *
                   </label>
                   <input
@@ -381,12 +416,12 @@ export default function OnlineAppointmentBooking({ hideHeader = false, className
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
                     placeholder="z. B. 0170 1234567"
-                    className="w-full min-h-[48px] px-3.5 py-2.5 rounded-xl border border-slate-300 bg-white text-base sm:text-sm font-semibold text-slate-900 focus:ring-2 focus:ring-emerald-600/30 focus:border-emerald-600 outline-none transition"
+                    className="w-full min-h-[48px] px-3.5 py-2.5 rounded-xl border border-slate-300 bg-white text-base sm:text-sm font-semibold text-slate-900 focus:ring-2 focus:ring-[rgb(var(--pw-accent-rgb)/0.3)] focus:border-[var(--pw-accent)] outline-none transition"
                   />
                 </div>
 
                 <div>
-                  <label htmlFor="b-addr" className="block text-xs font-bold text-slate-700 mb-1">
+                  <label htmlFor="b-addr" className="block text-sm font-bold text-slate-700 mb-1">
                     Adresse &amp; PLZ (Schadensort) *
                   </label>
                   <input
@@ -397,21 +432,21 @@ export default function OnlineAppointmentBooking({ hideHeader = false, className
                     value={address}
                     onChange={(e) => setAddress(e.target.value)}
                     placeholder="z. B. Hauptstr. 12, 42103 Wuppertal"
-                    className="w-full min-h-[48px] px-3.5 py-2.5 rounded-xl border border-slate-300 bg-white text-base sm:text-sm font-semibold text-slate-900 focus:ring-2 focus:ring-emerald-600/30 focus:border-emerald-600 outline-none transition"
+                    className="w-full min-h-[48px] px-3.5 py-2.5 rounded-xl border border-slate-300 bg-white text-base sm:text-sm font-semibold text-slate-900 focus:ring-2 focus:ring-[rgb(var(--pw-accent-rgb)/0.3)] focus:border-[var(--pw-accent)] outline-none transition"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
                 <div>
-                  <label htmlFor="b-damage" className="block text-xs font-bold text-slate-700 mb-1">
+                  <label htmlFor="b-damage" className="block text-sm font-bold text-slate-700 mb-1">
                     Art des Feuchtigkeitsschadens
                   </label>
                   <select
                     id="b-damage"
                     value={damageType}
                     onChange={(e) => setDamageType(e.target.value)}
-                    className="w-full min-h-[48px] px-3.5 py-2.5 rounded-xl border border-slate-300 bg-white text-base sm:text-sm font-semibold text-slate-900 focus:ring-2 focus:ring-emerald-600/30 focus:border-emerald-600 outline-none transition"
+                    className="w-full min-h-[48px] px-3.5 py-2.5 rounded-xl border border-slate-300 bg-white text-base sm:text-sm font-semibold text-slate-900 focus:ring-2 focus:ring-[rgb(var(--pw-accent-rgb)/0.3)] focus:border-[var(--pw-accent)] outline-none transition"
                   >
                     <option value="Feuchter Keller / Nasse Wände">Feuchter Keller / Nasse Wände</option>
                     <option value="Aufsteigende Feuchte / Horizontalsperre">Aufsteigende Feuchte / Horizontalsperre</option>
@@ -423,7 +458,7 @@ export default function OnlineAppointmentBooking({ hideHeader = false, className
                 </div>
 
                 <div>
-                  <label htmlFor="b-notes" className="block text-xs font-bold text-slate-700 mb-1">
+                  <label htmlFor="b-notes" className="block text-sm font-bold text-slate-700 mb-1">
                     Bemerkung (optional)
                   </label>
                   <input
@@ -432,7 +467,7 @@ export default function OnlineAppointmentBooking({ hideHeader = false, className
                     value={notes}
                     onChange={(e) => setNotes(e.target.value)}
                     placeholder="z. B. Altbau, Keller riecht muffig"
-                    className="w-full min-h-[48px] px-3.5 py-2.5 rounded-xl border border-slate-300 bg-white text-base sm:text-sm font-semibold text-slate-900 focus:ring-2 focus:ring-emerald-600/30 focus:border-emerald-600 outline-none transition"
+                    className="w-full min-h-[48px] px-3.5 py-2.5 rounded-xl border border-slate-300 bg-white text-base sm:text-sm font-semibold text-slate-900 focus:ring-2 focus:ring-[rgb(var(--pw-accent-rgb)/0.3)] focus:border-[var(--pw-accent)] outline-none transition"
                   />
                 </div>
               </div>
@@ -440,8 +475,8 @@ export default function OnlineAppointmentBooking({ hideHeader = false, className
 
             {/* Trust and Submit Button */}
             <div className="pt-2 border-t border-slate-100 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-              <div className="flex items-center gap-2 text-xs text-slate-500">
-                <ShieldCheck className="w-4 h-4 text-emerald-600 shrink-0" />
+              <div className="flex items-center gap-2 text-sm text-slate-500">
+                <ShieldCheck className="w-4 h-4 text-[var(--pw-deep)] shrink-0" />
                 <span>Unverbindlich und kostenfrei. Wir rufen Sie zur Bestätigung an.</span>
               </div>
 
@@ -449,7 +484,7 @@ export default function OnlineAppointmentBooking({ hideHeader = false, className
               <button
                 type="submit"
                 disabled={submitting}
-                className="w-full sm:w-auto min-h-[52px] px-8 py-3.5 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white font-black text-sm inline-flex items-center justify-center gap-2 shadow-lg transition-all"
+                className="w-full sm:w-auto min-h-[52px] px-8 py-3.5 rounded-xl bg-[var(--pw-accent)] hover:bg-[var(--pw-deep)] text-white font-black text-sm inline-flex items-center justify-center gap-2 shadow-lg transition-all"
               >
                 {submitting ? (
                   <>
