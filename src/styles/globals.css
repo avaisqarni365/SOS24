@@ -8731,6 +8731,32 @@ main p.sc-lede { text-align: justify !important; hyphens: auto; -webkit-hyphens:
 }
 @media (prefers-reduced-motion: reduce) { .hero-cine__v { animation: none; } }
 
+/* the mould film is upright: on wide screens it plays sharp in a portrait
+   frame on the right, and the backdrop is the same film, blurred */
+.hero-cine__frame { display: none; }
+@media (min-aspect-ratio: 4/5) {
+  .hero-cine__v { filter: blur(22px) brightness(0.55) saturate(1.1); transform: scale(1.12); }
+}
+@media (min-aspect-ratio: 4/5) and (min-width: 1100px) {
+  .hero-cine__frame {
+    display: block;
+    position: absolute;
+    z-index: 1;
+    top: 50%;
+    right: max(4vw, calc((100vw - 82rem) / 2));
+    height: min(70%, 38rem);
+    aspect-ratio: 9 / 16;
+    transform: translateY(-50%);
+    border-radius: 28px;
+    overflow: hidden;
+    border: 1px solid rgb(255 255 255 / 0.28);
+    box-shadow: 0 40px 80px -30px rgb(0 0 0 / 0.75), 0 0 0 8px rgb(255 255 255 / 0.06);
+    background: #0b111a;
+  }
+  .hero-cine__fv { display: block; width: 100%; height: 100%; object-fit: cover; }
+  .hero.band-ink .hero__copy { max-width: min(44rem, calc(100vw - 30rem)); }
+}
+
 /* phones: the film's caption (not a label above a heading) may take two lines
    rather than be cut */
 @media (max-width: 639px) {
@@ -8980,3 +9006,23 @@ html[data-theme="dark"] .admin-gate__d { color: #c9d6e3; }
 /* tripled classes outweigh the older section-specific label rules */
 .sc-label.sc-label.sc-label, .hv__kicker.hv__kicker.hv__kicker, .l3d__label.l3d__label.l3d__label, main p.font-mono.text-xs.text-xs { font-size: 0.8125rem !important; }
 .sc-label { letter-spacing: 0.1em; }
+
+/* ===========================================================================
+   BOOKING - a real job photo and the owner at the top of the form: who comes,
+   with which tools, and what it costs (nothing).
+   ========================================================================= */
+.book-hero { display: grid; gap: 0.9rem; margin: 0 0 0.5rem; }
+.book-hero__side { display: grid; gap: 0.9rem; align-content: center; }
+.book-hero__photo { display: block; width: 100%; aspect-ratio: 16 / 7; height: auto; object-fit: cover; object-position: 60% 55%; border-radius: 18px; }
+.book-hero__who { display: flex; align-items: center; gap: 0.8rem; }
+.book-hero__face { width: 56px; height: 56px; flex: none; border-radius: 50%; object-fit: cover; object-position: 50% 20%; background: #f4f6f8; border: 2px solid #ffffff; box-shadow: 0 0 0 2px rgb(var(--pw-accent-rgb) / 0.35); }
+#termin .book-hero__name { margin: 0; font-weight: 800 !important; font-size: 1.05rem !important; line-height: 1.3 !important; color: #071628 !important; }
+#termin .book-hero__role { margin: 0; font-size: 0.95rem !important; line-height: 1.35 !important; color: #33435a !important; }
+.book-hero__facts { display: flex; flex-wrap: wrap; gap: 0.4rem; margin: 0; padding: 0; list-style: none; }
+#termin .book-hero__facts li { line-height: 1.3 !important; padding: 0.25rem 0.6rem; border-radius: 999px; background: rgb(var(--pw-accent-rgb) / 0.07); border: 1px solid rgb(var(--pw-accent-rgb) / 0.2); font-size: 0.85rem !important; font-weight: 700; color: var(--pw-deep); white-space: nowrap; }
+@media (min-width: 768px) {
+  .book-hero { grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); align-items: center; gap: 1.5rem; }
+  .book-hero__photo { aspect-ratio: 16 / 9; }
+}
+html[data-theme="dark"] #termin .book-hero__name { color: #f2f6fb !important; }
+html[data-theme="dark"] #termin .book-hero__role { color: #c9d6e3 !important; }
