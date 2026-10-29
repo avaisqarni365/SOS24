@@ -17,11 +17,9 @@ export const COMPANY_INFO = {
   street: "Niebuhrstraße 46",
   city: "45144 Essen",
   operatingRegion: "ganz NRW: Ruhrgebiet, Rheinland & Bergisches Land",
-  // the main number for calls is the Wuppertal landline; the mobile stays the WhatsApp number
-  phoneDisplay: "+49 (0)202 57491115",
-  phoneTel: "+4920257491115",
-  mobileDisplay: "+49 (0)172 2064177",
-  mobileTel: "+491722064177",
+  // the main number (Essen, as in the Impressum) for calls and WhatsApp; Wuppertal has its own in LOCATIONS
+  phoneDisplay: "+49 (0)172 2064177",
+  phoneTel: "+491722064177",
   email: "info@sos-abdichtung.de",
   whatsappUrl: "https://wa.me/491722064177?text=Hallo%20Herr%20Mahmood%2C%20ich%20habe%20ein%20Feuchtigkeitsproblem%20in%20meinem%20Geb%C3%A4ude%20im%20Raum%20Wuppertal%20(PLZ%2042)%20und%20w%C3%BCnsche%20eine%20kostenlose%20Beratung.",
   certifications: [
@@ -33,7 +31,7 @@ export const COMPANY_INFO = {
 };
 
 /**
- * The two locations, each with one address and one phone, exactly as in the Google Business
+ * The two locations, each with its address and the one phone number, exactly as in the Google Business
  * Profile and on the SchimmelPeter partner page: Google trusts a local business whose name,
  * address and phone (NAP) agree everywhere. Essen is the registered office (Impressum).
  */
@@ -54,8 +52,8 @@ export const LOCATIONS = [
     street: "Remscheider Str. 45",
     postalCode: "42369",
     locality: "Wuppertal",
-    phoneDisplay: "+49 (0)202 57491115",
-    phoneTel: "+4920257491115",
+    phoneDisplay: "+49 (0)172 2064177",
+    phoneTel: "+491722064177",
     geo: { lat: 51.2316, lng: 7.2096 },
   },
 ] as const;
