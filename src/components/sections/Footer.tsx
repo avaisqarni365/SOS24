@@ -3,7 +3,7 @@ import { PartnerLink, PartnerBadge } from "@/components/brand/PartnerLink";
 import { Phone, Mail, MapPin, ChevronDown } from "lucide-react";
 import ConsentSettingsLink from "@/components/consent/ConsentSettingsLink";
 import { SHOTS } from "@/components/brand/BrandShot";
-import { COMPANY_INFO } from "@/data/content-data";
+import { COMPANY_INFO, LOCATIONS } from "@/data/content-data";
 import { SERVICE_CARDS } from "@/data/services";
 import { CITY_PAGES } from "@/data/seo-pages";
 import Logo from "@/components/brand/Logo";
@@ -80,14 +80,19 @@ export default function Footer() {
 
         <div className="site-footer__base">
           <address id="footer-kontakt" className="site-footer__addr">
-            <span>
-              <MapPin aria-hidden="true" />
-              {COMPANY_INFO.owner} · {COMPANY_INFO.street}, {COMPANY_INFO.city}
-            </span>
-            <a href={`tel:${COMPANY_INFO.phoneTel}`}>
-              <Phone aria-hidden="true" />
-              {COMPANY_INFO.phoneDisplay}
-            </a>
+            {/* both locations, each with its own address and number, as everywhere else */}
+            {LOCATIONS.map((l) => (
+              <span key={l.key} className="site-footer__loc">
+                <MapPin aria-hidden="true" />
+                <span>
+                  {l.label}: {l.street}, {l.postalCode} {l.locality} ·{" "}
+                  <a href={`tel:${l.phoneTel}`}>
+                    <Phone aria-hidden="true" />
+                    {l.phoneDisplay}
+                  </a>
+                </span>
+              </span>
+            ))}
             <a href={`mailto:${COMPANY_INFO.email}`}>
               <Mail aria-hidden="true" />
               {COMPANY_INFO.email}

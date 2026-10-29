@@ -950,11 +950,11 @@ export const CITY_PAGES: CityPage[] = [
   {
     slug: "wuppertal",
     name: "Wuppertal",
-    keyword: "Feuchter Keller Wuppertal",
-    title: "Feuchter Keller Wuppertal | Von Vohwinkel bis Beyenburg",
+    keyword: "Kellersanierung Wuppertal",
+    title: "Kellersanierung Wuppertal | Feuchter Keller, ohne Aufgraben",
     metaDescription:
-      "Feuchter Keller Wuppertal: Hangwasser, Bruchsteinkeller und Gründerzeit-Altbauten trockenlegen. Vor Ort in 24 Stunden, Messung kostenlos.",
-    h1: "Feuchter Keller Wuppertal: so wird er trocken, auch in Hanglage",
+      "Kellersanierung Wuppertal: feuchter Keller, Hangwasser, Bruchstein- und Gründerzeitkeller von innen trockenlegen. Standort Remscheider Str. 45, Messung kostenlos.",
+    h1: "Kellersanierung Wuppertal: Ihr feuchter Keller wird trocken, auch in Hanglage",
     lede:
       "Zwischen Vohwinkel und Beyenburg stehen viele Häuser am Hang oder nah an der Wupper. Wir kennen die typischen Kellerschäden dieser Stadt und sind in Wuppertal in der Regel innerhalb von 24 Stunden bei Ihnen.",
     plz: [

@@ -9,7 +9,7 @@ import JsonLd from "@/components/seo/JsonLd";
 import { Breadcrumbs, LayerStack, Prose, FaqList, LinkGrid } from "@/components/seo/SubpageParts";
 import { CITY_PAGES } from "@/data/seo-pages";
 import { SERVICE_CARDS } from "@/data/services";
-import { COMPANY, COMPANY_INFO } from "@/data/content-data";
+import { COMPANY, COMPANY_INFO, LOCATIONS } from "@/data/content-data";
 import { BUSINESS_ID, WEBSITE_ID, abs, businessNode, websiteNode, breadcrumbNode, faqNode, OG_IMAGE } from "@/lib/site";
 import { hy } from "@/lib/hyphenate";
 
@@ -116,6 +116,18 @@ export default function CityPage({ params }: { params: { city: string } }) {
                   <dt className="sc-label text-accent-deep font-bold">Stadtteile</dt>
                   <dd className="mt-1 text-sm font-semibold text-ink leading-relaxed">{page.districts.join(" · ")}</dd>
                 </div>
+                {LOCATIONS.filter((l) => l.key === page.slug).map((l) => (
+                  // the town where we have a location shows it: address and number, as in Google Maps
+                  <div key={l.key} className="rounded-2xl border border-accent-deep/30 bg-surface p-4 shadow-sm sm:col-span-3">
+                    <dt className="sc-label text-accent-deep font-bold">Unser Standort in {l.locality}</dt>
+                    <dd className="mt-1 text-sm font-semibold text-ink leading-relaxed">
+                      {l.street}, {l.postalCode} {l.locality} ·{" "}
+                      <a href={`tel:${l.phoneTel}`} className="underline underline-offset-2">
+                        {l.phoneDisplay}
+                      </a>
+                    </dd>
+                  </div>
+                ))}
                 <div className="rounded-2xl border border-line/12 bg-surface p-4 shadow-sm sm:col-span-3">
                   <dt className="sc-label text-accent-deep font-bold">Postleitzahlen</dt>
                   <dd className="mt-1 font-mono text-xs font-semibold text-ink leading-relaxed tracking-wider">{page.plz.join(" ")}</dd>

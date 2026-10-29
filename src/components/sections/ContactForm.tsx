@@ -21,7 +21,7 @@ import {
   Calendar,
   Download,
 } from 'lucide-react';
-import { COMPANY, COMPANY_INFO } from '@/data/content-data';
+import { COMPANY, COMPANY_INFO, LOCATIONS } from '@/data/content-data';
 import {
   buildGoogleCalendarUrl,
   downloadIcsFile,
@@ -525,7 +525,7 @@ export default function ContactForm({ compact = false, defaultDamage, place }: C
                     {COMPANY.serviceAreaSummary}
                   </p>
                   <p className="text-xs text-slate-500 mt-0.5">
-                    Sitz: {COMPANY_INFO.street}, {COMPANY_INFO.city}
+                    {LOCATIONS.map((l) => `${l.label}: ${l.street}, ${l.postalCode} ${l.locality}`).join(" · ")}
                   </p>
                 </div>
               </div>
