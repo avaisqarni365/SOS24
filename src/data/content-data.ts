@@ -31,7 +31,7 @@ export const COMPANY_INFO = {
 };
 
 /**
- * The two locations, each with one address and one phone, exactly as in the Google Business
+ * The two locations, each with its address and the one phone number, exactly as in the Google Business
  * Profile and on the SchimmelPeter partner page: Google trusts a local business whose name,
  * address and phone (NAP) agree everywhere. Essen is the registered office (Impressum).
  */
@@ -52,8 +52,8 @@ export const LOCATIONS = [
     street: "Remscheider Str. 45",
     postalCode: "42369",
     locality: "Wuppertal",
-    phoneDisplay: "+49 (0)202 57491115",
-    phoneTel: "+4920257491115",
+    phoneDisplay: "+49 (0)172 2064177",
+    phoneTel: "+491722064177",
     geo: { lat: 51.2316, lng: 7.2096 },
   },
 ] as const;

@@ -73,7 +73,7 @@ export function businessNode() {
       { "@type": "State", name: "Nordrhein-Westfalen" },
     ],
     memberOf: { "@type": "Organization", name: "SchimmelPeter®", url: "https://www.schimmelpeter.de" },
-    // the second location, with its own address and landline (as on the SchimmelPeter partner page)
+    // the second location, with its own address (one phone number for both)
     department: LOCATIONS.slice(1).map((l) => ({
       "@type": ["HomeAndConstructionBusiness", "LocalBusiness"],
       "@id": `${SITE_URL}/#standort-${l.key}`,
