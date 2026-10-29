@@ -1,4 +1,4 @@
-import { COMPANY_INFO } from "@/data/content-data";
+import { COMPANY_INFO, LOCATIONS } from "@/data/content-data";
 import { SERVICE_PAGES, CITY_PAGES } from "@/data/seo-pages";
 
 export const SITE_URL = "https://sos-abdichtung.de";
@@ -30,7 +30,7 @@ export function businessNode() {
     description:
       "Bautenschutz-Fachbetrieb für Kellersanierung von innen ohne Aufgraben, Horizontalsperren im Injektionsverfahren, Kellerinnenabdichtung nach WTA, Mauerwerkstrockenlegung und Schimmelpilzsanierung in ganz NRW: Köln, Düsseldorf, Duisburg, Essen, Dortmund, Bochum, Gelsenkirchen, Wuppertal und das Bergische Land.",
     url: SITE_URL,
-    telephone: COMPANY_INFO.phoneTel,
+    telephone: LOCATIONS[0].phoneTel,
     email: COMPANY_INFO.email,
     founder: {
       "@type": "Person",
@@ -73,6 +73,19 @@ export function businessNode() {
       { "@type": "State", name: "Nordrhein-Westfalen" },
     ],
     memberOf: { "@type": "Organization", name: "SchimmelPeter®", url: "https://www.schimmelpeter.de" },
+    // the second location, with its own address and landline (as on the SchimmelPeter partner page)
+    department: LOCATIONS.slice(1).map((l) => ({
+      "@type": ["HomeAndConstructionBusiness", "LocalBusiness"],
+      "@id": `${SITE_URL}/#standort-${l.key}`,
+      name: `sos-abdichtung ${l.locality}`,
+      url: abs(`/kellersanierung/${l.key}/`),
+      telephone: l.phoneTel,
+      email: COMPANY_INFO.email,
+      image: `${SITE_URL}/img/gallery/shahzad-mahmood-480.webp`,
+      priceRange: "€€",
+      address: { "@type": "PostalAddress", streetAddress: l.street, addressLocality: l.locality, postalCode: l.postalCode, addressCountry: "DE" },
+      geo: { "@type": "GeoCoordinates", latitude: l.geo.lat, longitude: l.geo.lng },
+    })),
     sameAs: [PARTNER_URL],
     // the categories of the Google Business Profile, as far as the work is what we do
     knowsAbout: [
