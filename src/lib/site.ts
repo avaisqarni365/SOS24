@@ -6,6 +6,8 @@ export const SITE_NAME = "sos-abdichtung";
 export const PARTNER_URL = "https://www.schimmelpeter.de/partner/wuppertal-kellersanierung";
 /** The main Facebook page "SOS-Abdichtung" (Essen; same name, address and phone as the Google Business Profile). The town pages are not listed here. */
 export const FACEBOOK_URL = "https://www.facebook.com/profile.php?id=61596178164338";
+/** The YouTube channel with the films as Shorts. */
+export const YOUTUBE_URL = "https://www.youtube.com/@SOS-Abdichtung";
 
 /** Share preview (WhatsApp, Facebook, LinkedIn, X): JPEG, because not every
     messenger renders WebP previews. */
@@ -75,7 +77,7 @@ export function businessNode() {
       { "@type": "State", name: "Nordrhein-Westfalen" },
     ],
     memberOf: { "@type": "Organization", name: "SchimmelPeter®", url: "https://www.schimmelpeter.de" },
-    sameAs: [PARTNER_URL, FACEBOOK_URL],
+    sameAs: [PARTNER_URL, FACEBOOK_URL, YOUTUBE_URL],
     // the categories of the Google Business Profile, as far as the work is what we do
     knowsAbout: [
       "Bautenschutz",

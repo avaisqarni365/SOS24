@@ -84,6 +84,8 @@ export default function FilmPage({ params }: { params: { slug: string } }) {
       inLanguage: "de-DE",
       isFamilyFriendly: true,
       publisher: { "@id": BUSINESS_ID },
+      // the same film as a Short on the channel
+      sameAs: page.youtube,
       ...(service ? { about: { "@type": "Service", name: service.serviceName, url: abs(`/leistungen/${service.slug}/`) } } : {}),
       // the chapters as key moments: each links to the page with ?t=<start>
       hasPart: film.chapters.map((c, i) => ({
@@ -123,13 +125,21 @@ export default function FilmPage({ params }: { params: { slug: string } }) {
             <div className="mt-8">
               <FilmPlayer film={film} title={page.title} />
             </div>
-            {service ? (
-              <p className="mt-8">
+            <p className="mt-8 flex flex-wrap gap-3">
+              {service ? (
                 <a href={`/leistungen/${service.slug}/`} className="btn-shine inline-flex min-h-[48px] items-center rounded-full px-6 text-sm font-semibold shadow-sm">
                   Mehr zur {service.navTitle} <span aria-hidden="true">&nbsp;→</span>
                 </a>
-              </p>
-            ) : null}
+              ) : null}
+              <a
+                href={page.youtube}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex min-h-[48px] items-center rounded-full border border-line/20 bg-surface px-6 text-sm font-semibold text-ink hover:border-accent-deep transition-colors"
+              >
+                Auf YouTube ansehen
+              </a>
+            </p>
           </div>
         </section>
 
