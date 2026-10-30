@@ -4,6 +4,8 @@ import { SERVICE_PAGES, CITY_PAGES } from "@/data/seo-pages";
 export const SITE_URL = "https://sos-abdichtung.de";
 export const SITE_NAME = "sos-abdichtung";
 export const PARTNER_URL = "https://www.schimmelpeter.de/partner/wuppertal-kellersanierung";
+/** The business's own Facebook page (same name, address and phone as the Google Business Profile). */
+export const FACEBOOK_URL = "https://www.facebook.com/profile.php?id=61596032881421";
 
 /** Share preview (WhatsApp, Facebook, LinkedIn, X): JPEG, because not every
     messenger renders WebP previews. */
@@ -73,7 +75,7 @@ export function businessNode() {
       { "@type": "State", name: "Nordrhein-Westfalen" },
     ],
     memberOf: { "@type": "Organization", name: "SchimmelPeter®", url: "https://www.schimmelpeter.de" },
-    sameAs: [PARTNER_URL],
+    sameAs: [PARTNER_URL, FACEBOOK_URL],
     // the categories of the Google Business Profile, as far as the work is what we do
     knowsAbout: [
       "Bautenschutz",
