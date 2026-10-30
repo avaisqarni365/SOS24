@@ -277,7 +277,7 @@ export default function Navbar() {
 
           <div className="mnav__social">
             <span className="mnav__kicker">Folgen Sie uns</span>
-            <SocialLinks variant="icons" />
+            <SocialLinks variant="mini" />
           </div>
 
           <div className="mnav__foot">
