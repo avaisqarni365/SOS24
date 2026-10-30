@@ -6,12 +6,11 @@ import { REEL, SERVICE_FILMS } from "@/data/films";
 
 /**
  * The playlist, all upright films: first the inspection, then every film of
- * the gallery one by one, and from the top again. `skip` jumps over a stretch
- * of a film ([from, to], seconds): in the inspection, the shots of the red
- * injection packers right after the drilling.
+ * the gallery one by one, and from the top again. (The shots of the red
+ * injection packers are cut out of the files themselves; ?v for the new cut.)
  */
-const FILMS: { src: string; skip?: [number, number] }[] = [
-  { src: "/media/hero-cine-tall.mp4", skip: [5.4, 6.5] },
+const FILMS: { src: string }[] = [
+  { src: "/media/hero-cine-tall.mp4?v=2" },
   { src: REEL.src },
   ...Object.values(SERVICE_FILMS).map((f) => ({ src: f.src })),
 ];
@@ -65,29 +64,8 @@ export default function HeroCine() {
       v.play().catch(() => {});
     };
     const onEnded = (e: Event) => next(e.target as HTMLVideoElement);
-    // jump over a film's `skip` stretch; checked on every frame where the
-    // browser can (requestVideoFrameCallback), so no skipped frame shows
-    const jump = (v: HTMLVideoElement) => {
-      const skip = FILMS[Number(v.dataset.film || 0)].skip;
-      if (skip && v.currentTime >= skip[0] && v.currentTime < skip[1]) v.currentTime = skip[1];
-    };
-    const onTime = (e: Event) => jump(e.target as HTMLVideoElement);
-    type FrameVideo = HTMLVideoElement & { requestVideoFrameCallback?: (cb: () => void) => number };
-    let alive = true;
-    vids.forEach((v) => {
-      const fv = v as FrameVideo;
-      if (!fv.requestVideoFrameCallback) return;
-      const tick = () => {
-        if (!alive) return;
-        jump(v);
-        fv.requestVideoFrameCallback!(tick);
-      };
-      fv.requestVideoFrameCallback(tick);
-    });
-
     vids.forEach((v) => {
       v.addEventListener("ended", onEnded);
-      v.addEventListener("timeupdate", onTime);
       v.addEventListener("playing", onPlay);
       v.addEventListener("pause", onPause);
       v.addEventListener("loadeddata", start);
@@ -101,10 +79,8 @@ export default function HeroCine() {
     if (vids.some((v) => !v.paused)) setPlaying(true);
     start();
     return () => {
-      alive = false;
       vids.forEach((v) => {
         v.removeEventListener("ended", onEnded);
-        v.removeEventListener("timeupdate", onTime);
         v.removeEventListener("playing", onPlay);
         v.removeEventListener("pause", onPause);
         v.removeEventListener("loadeddata", start);

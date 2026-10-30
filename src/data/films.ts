@@ -23,16 +23,17 @@ const film = (slug: string, title: string, seconds: number, chapters: [string, n
 });
 
 export const REEL: Film = {
-  src: "/media/sos-reel.mp4",
+  // re-cut without the red injection packers: 12 s, ?v for the new file
+  src: "/media/sos-reel.mp4?v=3",
   poster: "/media/sos-reel-poster.webp",
-  seconds: 13,
+  seconds: 12,
   title: "So arbeiten wir",
   chapters: [
     { label: "Messen", at: 0 },
     { label: "Beraten", at: 2.3 },
     { label: "Abdichten", at: 3.75 },
-    { label: "Übergabe", at: 8.45 },
-    { label: "Kontakt", at: 10.55 },
+    { label: "Übergabe", at: 7.15 },
+    { label: "Kontakt", at: 9.25 },
   ],
 };
 
@@ -69,7 +70,7 @@ export const FILM_PAGES: FilmPage[] = [
     film: REEL,
     title: "So arbeiten wir: vom Messen bis zur Übergabe",
     description:
-      "Unser Ablauf in 13 Sekunden: Feuchtemessung vor Ort, Beratung mit dem Messergebnis, Abdichtung von innen und Übergabe an den Kunden.",
+      "Unser Ablauf in 12 Sekunden: Feuchtemessung vor Ort, Beratung mit dem Messergebnis, Abdichtung von innen und Übergabe an den Kunden.",
     uploadDate: "2026-10-08T16:37:04+02:00",
     youtube: "https://www.youtube.com/shorts/JDBJRVKIb3o",
   },
