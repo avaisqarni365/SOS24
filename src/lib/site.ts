@@ -73,19 +73,6 @@ export function businessNode() {
       { "@type": "State", name: "Nordrhein-Westfalen" },
     ],
     memberOf: { "@type": "Organization", name: "SchimmelPeter®", url: "https://www.schimmelpeter.de" },
-    // the second location, with its own address (one phone number for both)
-    department: LOCATIONS.slice(1).map((l) => ({
-      "@type": ["HomeAndConstructionBusiness", "LocalBusiness"],
-      "@id": `${SITE_URL}/#standort-${l.key}`,
-      name: `sos-abdichtung ${l.locality}`,
-      url: abs(`/kellersanierung/${l.key}/`),
-      telephone: l.phoneTel,
-      email: COMPANY_INFO.email,
-      image: `${SITE_URL}/img/gallery/shahzad-mahmood-480.webp`,
-      priceRange: "€€",
-      address: { "@type": "PostalAddress", streetAddress: l.street, addressLocality: l.locality, postalCode: l.postalCode, addressCountry: "DE" },
-      geo: { "@type": "GeoCoordinates", latitude: l.geo.lat, longitude: l.geo.lng },
-    })),
     sameAs: [PARTNER_URL],
     // the categories of the Google Business Profile, as far as the work is what we do
     knowsAbout: [

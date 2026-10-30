@@ -168,6 +168,16 @@ const robots = existsSync(path.join(OUT, "robots.txt")) ? readFileSync(path.join
 if (!robots.includes(`Sitemap: ${SITE}/sitemap.xml`)) err("/robots.txt", "no Sitemap line for the site");
 if (!existsSync(path.join(OUT, "llms.txt"))) warn("/llms.txt", "missing");
 
+// ------------------------------------------------------------ unpublished address
+// The Wuppertal address is only for the SchimmelPeter partner listing, never on this site.
+for (const [route, html] of htmlByRoute) {
+  if (/Remscheider Str/i.test(html)) err(route, "shows the Wuppertal partner address (Remscheider Str.), which must not be published");
+}
+for (const f of ["llms.txt", "llms-full.txt", "i18n/en.json"]) {
+  const p = path.join(OUT, f);
+  if (existsSync(p) && /Remscheider Str/i.test(readFileSync(p, "utf8"))) err(`/${f}`, "contains the Wuppertal partner address");
+}
+
 // ------------------------------------------------------------ thin city pages
 // The words written for this one town (the template around them is the same
 // on every city page). Under ~400, Google sees a near-duplicate of the other
