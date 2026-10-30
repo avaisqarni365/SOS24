@@ -150,7 +150,12 @@ export function RegionSection() {
             </h2>
           </div>
           <p className="sc-body">
-            {hy("Vom Rhein in Köln, Düsseldorf und Duisburg über das Ruhrgebiet bis ins Bergische Land: Hochwasser und Grundwasser, Bergsenkungen, Hanglagen und Altbauten aus Ziegel und Bruchstein ohne intakte Horizontalsperre. Unser Sitz ist in Essen. Suchen Sie Ihre Stadt oder Postleitzahl.")}
+            {hy("Vom Rhein in Köln, Düsseldorf und Duisburg über das Ruhrgebiet bis ins Bergische Land: Hochwasser und Grundwasser, Bergsenkungen, Hanglagen und Altbauten aus Ziegel und Bruchstein ohne intakte Horizontalsperre. Unser Sitz ist in Essen: ")}
+            {/* the office town by name, so Essen searches go to the Essen page and not to this one */}
+            <a href="/kellersanierung/essen/" className="font-semibold underline underline-offset-2">
+              Kellersanierung in Essen
+            </a>
+            {hy(". Suchen Sie Ihre Stadt oder Postleitzahl.")}
           </p>
         </div>
         <RegionExplorer map={map} cities={cities} />

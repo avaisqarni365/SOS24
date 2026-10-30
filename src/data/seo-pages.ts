@@ -36,6 +36,16 @@ export interface CityPage {
   sections: PageSection[];
   faqs: Faq[];
   nearby: string[];
+  /** the city's Wikipedia article: links the page's City node to the known entity */
+  wiki?: string;
+  /**
+   * The services as they are done in this city, each a card with its own anchor
+   * (#slug). Service pages link here with "<Leistung> <Stadt>", so a search such
+   * as "Rissverpressung Essen" lands on the city page, not on the home page.
+   */
+  localServices?: { slug: string; heading: string; text: string }[];
+  /** the city's districts grouped by area, each with what is typical for its cellars */
+  districtGroups?: { name: string; districts: string[]; text: string }[];
 }
 
 export const SERVICE_PAGES: ServicePage[] = [
@@ -1353,82 +1363,165 @@ export const CITY_PAGES: CityPage[] = [
     slug: "essen",
     name: "Essen",
     keyword: "Kellersanierung Essen",
-    title: "Kellersanierung Essen | Feuchte Keller trockenlegen",
+    title: "Kellersanierung Essen | Abdichtung & Rissverpressung",
     metaDescription:
-      "Kellersanierung Essen: Feuchte Keller & nasse Wände von innen trockenlegen. Kostenlose Feuchtemessung vor Ort, Festpreis & 10 Jahre Garantie.",
-    h1: "Kellersanierung Essen: Feuchte Keller dauerhaft trockenlegen",
+      "Kellersanierung Essen vom Betrieb vor Ort, Niebuhrstraße 46: Keller abdichten, Rissverpressung, Horizontalsperre. Kostenlose Feuchtemessung, Festpreis.",
+    h1: "Kellersanierung Essen: Keller abdichten vom Fachbetrieb vor Ort",
     lede:
-      "Vom historischen Süden in Rüttenscheid, Bredeney und Werden bis zu den Zechenkolonien im Essener Norden: Bergsenkungen, drückendes Grundwasser und alte Ziegelkeller erfordern eine genaue Analyse.",
-    plz: ["45127", "45128", "45130", "45131", "45133", "45144", "45147", "45239", "45326"],
-    districts: ["Essen-Mitte", "Rüttenscheid", "Bredeney", "Werden", "Frohnhausen", "Borbeck", "Steele", "Kettwig"],
+      "Unser Sitz ist in Essen, in der Niebuhrstraße 46. Von Karnap bis Kettwig sind wir in der Regel innerhalb von 24 Stunden bei Ihnen, messen kostenlos, woher die Feuchte kommt, und dichten Ihren Keller dann von innen ab, ohne Aufgraben und zum Festpreis.",
+    plz: [
+      "45127", "45128", "45130", "45131", "45133", "45134", "45136", "45138", "45139", "45141", "45143",
+      "45144", "45145", "45147", "45149", "45219", "45239", "45257", "45259", "45276", "45277", "45279",
+      "45289", "45307", "45309", "45326", "45327", "45329", "45355", "45356", "45357", "45359",
+    ],
+    districts: ["Rüttenscheid", "Frohnhausen", "Holsterhausen", "Altenessen", "Borbeck", "Steele", "Kray", "Werden", "Kettwig", "Bredeney"],
     geo: { lat: 51.4556, lng: 7.0116 },
-    responseTime: "24 bis 48 Stunden",
+    responseTime: "24 Stunden",
+    wiki: "https://de.wikipedia.org/wiki/Essen",
     localFactors: [
       {
-        name: "Bergbau-Senkungen & Setzungsrisse",
-        text: "Durch den früheren Steinkohleabbau und Grundwasserwiederanstieg im Ruhrgebiet kommt es häufig zu feinen Rissen im Mauerwerk und an der Bodenplatte, durch die Wasser eindringt.",
+        name: "Bergsenkungen und Setzungsrisse",
+        text: "Unter weiten Teilen der Stadt wurde über Jahrhunderte Steinkohle abgebaut. Der Boden hat sich dabei ungleichmäßig gesenkt, Kellerwände und Bodenplatten haben Risse bekommen, durch die heute Wasser eindringt.",
       },
       {
-        name: "Schwankender Grundwasserspiegel an der Ruhr",
-        text: "In Werden, Kettwig und Steele beeinflusst die Ruhr den Grundwasserstand maßgeblich. Nach Starkregen drückt Grund- und Sickerwasser von unten und seitlich an die Kellerwand.",
+        name: "Grundwasser im Emscherbruch",
+        text: "Im Essener Norden liegt das Gelände durch die Senkungen so tief, dass das Grundwasser dauerhaft abgepumpt wird. Kellersohlen stehen hier dicht über dem Wasserspiegel, nach langem Regen drückt es von unten.",
       },
       {
-        name: "Großer Altbaubestand vor 1970",
-        text: "Über 16.000 Ein- und Mehrfamilienhäuser in Essen wurden vor 1970 errichtet. Meist fehlt eine intakte Horizontalsperre, sodass Bodenfeuchte kapillar aufsteigt.",
+        name: "Ruhr, Baldeneysee und Hanglagen im Süden",
+        text: "In Werden, Kettwig, Heisingen und Kupferdreh bestimmen die Ruhr und die Hänge, wie nass ein Keller wird: Sickerwasser am Hang, steigendes Grundwasser im Tal.",
+      },
+      {
+        name: "Altbauten ohne Horizontalsperre",
+        text: "Gründerzeithäuser in Rüttenscheid und Holsterhausen und die Zechenhäuser im Norden haben Keller aus Ziegel oder Mischmauerwerk, deren Sperrschicht längst versagt hat. Die Feuchte steigt kapillar auf.",
+      },
+    ],
+    localServices: [
+      {
+        slug: "kellersanierung",
+        heading: "Kellersanierung in Essen",
+        text: "Wir messen zuerst, woher die Nässe kommt, und kombinieren dann nur die Verfahren, die Ihr Keller braucht: Horizontalsperre, Innenabdichtung, Rissverpressung und Sanierputz. Alles von innen, ohne den Vorgarten aufzugraben, mit Festpreis und 10 Jahren Garantie auf die Arbeit.",
+      },
+      {
+        slug: "kellerinnenabdichtung",
+        heading: "Keller abdichten in Essen",
+        text: "Gegen Wasser, das seitlich durch die Wand oder am Boden-Wand-Anschluss eindringt, dichten wir die erdberührten Wände von innen ab: mineralische Dichtungsschlämme, Hohlkehle und Sanierputz nach WTA. Das hält auch zeitweise drückendem Wasser stand, wie es im Ruhrtal und im Emscherbruch vorkommt.",
+      },
+      {
+        slug: "rissverpressung",
+        heading: "Rissverpressung in Essen",
+        text: "Setzungsrisse aus dem Bergbau sind in Essen der häufigste Weg, auf dem Wasser in Betonkeller kommt. Wir verpressen wasserführende Risse unter Druck mit PU-Harz, das sich im Riss ausdehnt und elastisch bleibt, wenn sich das Haus weiter bewegt. Tragende Risse schließen wir kraftschlüssig mit Epoxid.",
+      },
+      {
+        slug: "horizontalsperre",
+        heading: "Horizontalsperre in Essen",
+        text: "Steigt die Feuchte im Mauerwerk eines Altbaus von unten auf, setzen wir knapp über dem Kellerboden eine neue Sperrschicht per Injektion. Der Kunststoff in Paraffin braucht keine Vortrocknung, die Wand bleibt diffusionsoffen. Der Hersteller SchimmelPeter garantiert die Wirksamkeit 25 Jahre.",
+      },
+      {
+        slug: "schimmelbeseitigung",
+        heading: "Schimmel im Keller in Essen",
+        text: "Schimmel im Keller ist fast immer ein Feuchteproblem. Wir klären per Messung, ob die Nässe aus der Wand kommt oder als Kondensat aus der Luft, entfernen den Befall sporensicher und beseitigen die Ursache, damit er nicht wiederkommt.",
+      },
+      {
+        slug: "feuchtemessung",
+        heading: "Feuchtemessung in Essen",
+        text: "Die Messung ist kostenlos: Inhaber Shahzad Mahmood misst die Feuchte in mehreren Wandhöhen, prüft Salze, Oberflächentemperatur und Raumklima und erklärt Ihnen vor Ort, was die Werte bedeuten. Sie bekommen das Protokoll und ein verbindliches Festpreisangebot.",
+      },
+    ],
+    districtGroups: [
+      {
+        name: "Essener Norden",
+        districts: ["Altenessen", "Karnap", "Vogelheim", "Katernberg", "Stoppenberg", "Schonnebeck"],
+        text: "Zechenhäuser und Siedlungen aus der Bergbauzeit, Gelände mit Bergsenkungen und hohem Grundwasser. Typisch sind Risse in Wand und Bodenplatte und Wasser, das nach langem Regen von unten kommt.",
+      },
+      {
+        name: "Mitte, Süd- und Westviertel",
+        districts: ["Rüttenscheid", "Südviertel", "Holsterhausen", "Frohnhausen", "Huttrop", "Altendorf"],
+        text: "Dicht bebaute Gründerzeit- und Nachkriegsstraßen, Häuser direkt am Gehweg. Die alte Sperrschicht hat versagt, die Feuchte steigt auf, Salze sprengen den Putz. Von außen ist hier meist kein Platz zum Aufgraben.",
+      },
+      {
+        name: "Essener Westen",
+        districts: ["Borbeck", "Bedingrade", "Schönebeck", "Frintrop", "Dellwig", "Gerschede"],
+        text: "Gemischter Bestand aus Altbauten, Siedlungshäusern und Einfamilienhäusern der 1950er bis 1970er Jahre. Häufig eine Mischung aus aufsteigender Feuchte im Mauerwerk und undichten Anschlüssen an der Bodenplatte.",
+      },
+      {
+        name: "Essener Osten",
+        districts: ["Steele", "Kray", "Horst", "Freisenbruch", "Überruhr", "Leithe"],
+        text: "Zwischen Ruhr und ehemaligen Zechen: Hanglagen über dem Fluss, Bergsenkungen in Kray und Leithe. Feuchte kommt hier je nach Lage seitlich vom Hang oder durch Risse.",
+      },
+      {
+        name: "Essener Süden und das Ruhrtal",
+        districts: ["Bredeney", "Werden", "Kettwig", "Heisingen", "Kupferdreh", "Rellinghausen"],
+        text: "Villen und Einfamilienhäuser am Hang und am Baldeneysee. Die bergseitige Kellerwand ist oft nass, im Tal steigt das Grundwasser mit der Ruhr. Hier ist eine Innenabdichtung gegen drückendes Wasser der häufigste Weg.",
       },
     ],
     sections: [
       {
-        heading: "Rüttenscheid, Frohnhausen und Südviertel: Altbauten mit aufsteigender Feuchte",
+        heading: "Bergsenkungen: warum so viele Essener Keller Risse haben",
         paragraphs: [
-          "In den dicht bebauten Wohnquartieren von Essen-Rüttenscheid, Frohnhausen und Holsterhausen stehen tausende Gründerzeit- und Nachkriegsbauten. Ihre Keller wurden häufig als einfache Lagerräume aus Ziegeln oder Mischmauerwerk errichtet. Nach Jahrzehnten ist die ursprüngliche Bitumensperre versprödet, Putz platzt ab und Mauersalze treten hervor.",
-          "Weil die Häuser direkt an Gehwegen oder Nachbargebäuden stehen, ist eine Außenaufgrabung wirtschaftlich und bautechnisch kaum möglich. Wir sanieren diese Keller von innen: Mit einer chemischen Horizontalsperre im Injektionsverfahren stoppen wir den kapillaren Wassertransport dauerhaft. Anschließend reguliert ein diffusionsoffener Sanierputz das Raumklima und lagert Restfeuchte und Salze schadensfrei ein.",
+          "Essen ist mit dem Bergbau gewachsen, von den Stollen im Ruhrtal bis zu den großen Schachtanlagen im Norden. Wo unter Tage Kohle abgebaut wurde, hat sich das Gelände darüber gesenkt, nicht überall gleich, sondern in Mulden und Stufen. Ein Haus, das auf einer solchen Stufe steht, wird ungleichmäßig belastet: Die Bodenplatte reißt, an den Wandecken öffnen sich Fugen, im Beton entstehen Risse, die bis durch die Wand gehen.",
+          "Solange diese Risse trocken bleiben, sind sie meist harmlos. Steigt aber das Grundwasser, oder staut sich Regenwasser vor der Wand, werden sie zum Weg ins Haus. Wir prüfen deshalb zuerst, ob ein Riss Wasser führt und ob er sich noch bewegt. Wasserführende Risse verpressen wir mit PU-Harz, das elastisch bleibt; erst danach wird die Fläche abgedichtet. Wenn Sie einen Bergschaden vermuten, dokumentieren wir Verlauf, Breite und Feuchte der Risse so, dass Sie die Unterlagen für Ihre Ansprüche verwenden können.",
         ],
       },
       {
-        heading: "Essen-Süd, Werden und Kettwig: Druckwasser und Hanglagen",
+        heading: "Gründerzeit und Nachkriegsbau: aufsteigende Feuchte in Rüttenscheid und Holsterhausen",
         paragraphs: [
-          "Im Ruhrtal rund um Werden und Kettwig sowie an den Hängen des Baldeneysees sind Keller einer doppelten Belastung ausgesetzt: Auf der Hangseite drückt Schichten- und Sickerwasser gegen die Außenwand, während talwärts der Grundwasserspiegel nach Regentagen rasch ansteigt.",
-          "Gegen solche Druckwasserbelastungen setzen wir mehrlagige mineralische Dichtungsschlämmen mit verstärkter Hohlkehle am Wand-Boden-Übergang ein. Risse im Fundament werden vorab im Hochdruck-Injektionsverfahren mit elastischem Polyurethanharz dauerhaft abgedichtet. Sie erhalten vorab eine kostenlose Schadensanalyse vor Ort mit verbindlichem Festpreis.",
+          "In Rüttenscheid, Holsterhausen, Frohnhausen und im Südviertel stehen Straßenzüge, deren Keller als einfache Lagerräume aus Ziegel oder Mischmauerwerk gebaut wurden. Nach Jahrzehnten ist die ursprüngliche Sperrschicht versprödet oder fehlt ganz. Die Feuchte steigt aus dem Fundament in die Wand, und mit ihr die Salze, die den Putz absprengen und die weißen Ränder hinterlassen.",
+          "Weil diese Häuser direkt am Gehweg oder Wand an Wand mit dem Nachbarn stehen, ist eine Aufgrabung von außen kaum möglich. Wir setzen deshalb von innen eine Horizontalsperre im Injektionsverfahren und bringen danach einen Sanierputz auf, der die Restfeuchte verdunsten lässt und die Salze aufnimmt, ohne dass sie an der Oberfläche wieder ausblühen.",
         ],
       },
       {
-        "heading": "Feuchte Kellerwände sanieren in Essen: kurze Wege vom eigenen Sitz",
-        "paragraphs": [
-          "Unser Betrieb hat seinen Sitz in Essen, in der Niebuhrstraße 46. Für Essener Kunden heißt das: kurze Anfahrt, schnelle Termine für die kostenlose Feuchtigkeitsmessung und Kontrollmessungen ohne lange Wartezeit, wenn die Wand nach der Sanierung austrocknet.",
-          "Ob Zechenhaus im Essener Norden, Gründerzeitbau in Holsterhausen oder Einfamilienhaus in Kettwig: Wir messen zuerst, woher die Feuchte kommt, und sanieren den Keller dann von innen, ohne den Garten aufzugraben."
+        heading: "Ruhrtal und Baldeneysee: drückendes Wasser in Werden und Kettwig",
+        paragraphs: [
+          "Im Süden der Stadt stehen viele Häuser am Hang über der Ruhr oder unten im Tal. Am Hang sickert Regenwasser im Boden abwärts und staut sich an der bergseitigen Kellerwand, die dann deutlich nasser ist als die anderen. Im Tal steigt das Grundwasser nach langem Regen mit dem Fluss. Das Hochwasser im Juli 2021 hat gezeigt, wie schnell das gehen kann.",
+          "Gegen zeitweise drückendes Wasser reicht eine Sperrschicht allein nicht. Wir dichten die betroffenen Wände von innen mit mehrlagiger mineralischer Dichtungsschlämme ab, mit einer Hohlkehle am Übergang zum Boden, und verpressen vorher die Risse. So bezahlen Sie nur an den Wänden für eine Abdichtung, an denen das Wasser tatsächlich drückt.",
         ],
-        "bullets": [
-          "Kostenlose Feuchtigkeitsmessung und Schadensanalyse vor Ort",
-          "Horizontalsperre im Injektionsverfahren gegen aufsteigende Feuchte",
-          "Kellerinnenabdichtung nach WTA-Standard, auch bei drückendem Wasser",
-          "Schimmelbeseitigung im Keller und in Wohnräumen, mit Klimaplatten gegen Kondensat"
-        ]
-      }
+      },
+      {
+        heading: "Was eine Kellersanierung in Essen kostet",
+        paragraphs: [
+          "Den Preis bestimmen vier Dinge: die Ursache der Feuchte, die Länge und Höhe der betroffenen Wände, das Mauerwerk (Ziegel, Bruchstein oder Beton) und wie viel Salz darin steckt. Eine Horizontalsperre an einer Wand kostet deshalb einen Bruchteil einer kompletten Innenabdichtung aller Kellerwände. Seriös beziffern lässt sich das erst nach der Messung.",
+          "Darum messen wir zuerst, kostenlos und unverbindlich, und geben Ihnen danach einen Festpreis, der sich nicht mehr ändert. Gegenüber einer Außenabdichtung mit Bagger, Drainage und neuem Pflaster ist die Sanierung von innen fast immer deutlich günstiger. Eine erste Einordnung gibt Ihnen unser Kostenrechner.",
+        ],
+        bullets: [
+          "Kostenlose Feuchtemessung mit Protokoll, auch für Kontrollmessungen nach der Sanierung",
+          "Verbindlicher Festpreis nach der Messung, ohne Nachträge",
+          "10 Jahre Garantie auf die Arbeit, 25 Jahre Herstellergarantie auf die Wirksamkeit",
+          "Kurze Wege: Unser Sitz ist in Essen, Niebuhrstraße 46",
+        ],
+      },
     ],
     faqs: [
       {
         q: "Wie schnell sind Sie in Essen vor Ort?",
-        a: "Da unser Betriebssitz in Essen (Niebuhrstraße) liegt, erreichen wir jeden Essener Stadtteil – von Altenessen bis Kettwig – innerhalb von 24 Stunden. Die Feuchtemessung vor Ort ist für Sie unverbindlich und kostenfrei.",
+        a: "Unser Sitz ist in Essen, in der Niebuhrstraße 46. Deshalb sind wir in jedem Essener Stadtteil, von Karnap bis Kettwig, in der Regel innerhalb von 24 Stunden bei Ihnen. Schicken Sie vorab gern Fotos per WhatsApp an 0172 2064177. Die Feuchtemessung vor Ort ist kostenlos und unverbindlich.",
+      },
+      {
+        q: "Was kostet eine Kellersanierung in Essen?",
+        a: "Das hängt von der Ursache, der Wandfläche, dem Mauerwerk und dem Salzgehalt ab, deshalb nennen wir keinen Pauschalpreis aus der Ferne. Nach der kostenlosen Messung bekommen Sie einen verbindlichen Festpreis. Eine Sanierung von innen ist fast immer deutlich günstiger als eine Außenabdichtung mit Aufgraben.",
       },
       {
         q: "Muss für eine Kellersanierung in Essen der Vorgarten aufgegraben werden?",
-        a: "Nein. Wir arbeiten zu 100 % von der Innenseite des Gebäudes. Vorgärten, Terrassen, Zufahrten und Pflasterungen bleiben vollständig unberührt.",
+        a: "Nein. Horizontalsperre, Rissverpressung und Innenabdichtung werden von innen ausgeführt. Vorgarten, Terrasse, Einfahrt und Pflaster bleiben unberührt, und der Keller ist während der Arbeiten meist weiter begehbar.",
       },
       {
-        q: "Welche Garantie bietet sos-abdichtung auf die Kellersanierung?",
-        a: "Sie erhalten 25 Jahre Produktgarantie auf die chemische Injektionsflüssigkeit unseres Systempartners SchimmelPeter® sowie 10 Jahre Handwerksgarantie auf die ordnungsgemäße Ausführung durch sos-abdichtung.",
+        q: "Mein Keller hat Risse. Kann das ein Bergschaden sein?",
+        a: "In Essen ist das gut möglich, denn große Teile der Stadt liegen über ehemaligem Bergbau. Wir dokumentieren Verlauf, Breite und Feuchte der Risse und verpressen wasserführende Risse dauerhaft. Ob ein Bergschaden vorliegt und Ansprüche bestehen, klärt ein Sachverständiger oder die Schlichtungsstelle Bergschaden NRW; unsere Dokumentation können Sie dafür verwenden.",
       },
       {
-        "q": "Wie schnell sind Sie für eine Feuchtigkeitsmessung in Essen vor Ort?",
-        "a": "Da unser Sitz in Essen ist, sind wir in der Regel innerhalb von 24 bis 48 Stunden vor Ort. Die Messung und die Schadensanalyse sind kostenlos und unverbindlich."
+        q: "Welche Garantie bekomme ich?",
+        a: "sos-abdichtung gibt 10 Jahre Garantie auf die ausgeführte Arbeit. Zusätzlich garantiert der Hersteller SchimmelPeter GmbH 25 Jahre lang die Wirksamkeit des Injektionsmittels.",
       },
       {
-        "q": "Was hilft gegen Schimmel im Keller in einem Essener Altbau?",
-        "a": "Zuerst die Ursache: Wir messen, ob die Feuchte aus dem Mauerwerk aufsteigt, seitlich eindringt oder als Kondensat an kalten Wänden entsteht. Danach wird der Befall sporensicher entfernt und die Ursache beseitigt, etwa mit einer Horizontalsperre, einer Innenabdichtung oder Klimaplatten."
-      }
+        q: "Was hilft gegen Schimmel im Keller in einem Essener Altbau?",
+        a: "Zuerst die Ursache: Wir messen, ob die Feuchte aus dem Mauerwerk aufsteigt, seitlich eindringt oder als Kondensat an kalten Wänden entsteht. Danach wird der Befall sporensicher entfernt und die Ursache beseitigt, etwa mit einer Horizontalsperre, einer Innenabdichtung oder Klimaplatten.",
+      },
+      {
+        q: "Arbeiten Sie auch in den Nachbarstädten von Essen?",
+        a: "Ja. Von unserem Sitz in Essen fahren wir regelmäßig nach Mülheim an der Ruhr, Gelsenkirchen, Bottrop, Oberhausen, Bochum und Velbert, in der Regel ebenfalls innerhalb von 24 Stunden.",
+      },
     ],
-    nearby: ["wuppertal", "bochum", "duesseldorf"],
+    nearby: ["muelheim-an-der-ruhr", "gelsenkirchen", "bottrop", "oberhausen", "bochum", "velbert"],
   },
 
   // Düsseldorf
