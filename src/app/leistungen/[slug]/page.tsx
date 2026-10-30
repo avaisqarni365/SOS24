@@ -19,7 +19,7 @@ import FoldSync from "@/components/service/FoldSync";
 import ServiceTools from "@/components/service/ServiceTools";
 import WebComponents from "@/components/wc/WebComponents";
 import { Layers3, BookOpen } from "lucide-react";
-import { SERVICE_FILMS } from "@/data/films";
+import { SERVICE_FILMS, FILM_PAGES } from "@/data/films";
 import { KIT } from "@/data/kit";
 import { SERVICE_PAGES, CITY_PAGES } from "@/data/seo-pages";
 import { BUSINESS_ID, WEBSITE_ID, abs, businessNode, websiteNode, breadcrumbNode, faqNode, OG_IMAGE } from "@/lib/site";
@@ -163,6 +163,13 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
         <section id="fragen" className="sc-section svc-faq" aria-label={`Fragen zu ${page.navTitle}`}>
           <div className="sc-wrap grid gap-12">
             <FaqList faqs={faqs} title={`Fragen zu ${page.navTitle}`} />
+            {FILM_PAGES.some((f) => f.service === page.slug) ? (
+              // the film of this service has its own watch page, where Google can index it
+              <LinkGrid
+                title={`Film: ${page.navTitle}`}
+                links={FILM_PAGES.filter((f) => f.service === page.slug).map((f) => ({ href: `/filme/${f.slug}/`, label: `Film ansehen: ${f.title}`, sub: `${f.film.seconds} Sekunden, ohne Ton` }))}
+              />
+            ) : null}
             <LinkGrid title="Verwandte Leistungen" links={related} />
             <LinkGrid
               title={`${page.navTitle} in Ihrer Stadt`}

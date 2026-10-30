@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { SERVICE_PAGES, CITY_PAGES } from "@/data/seo-pages";
+import { FILM_PAGES } from "@/data/films";
 import { abs } from "@/lib/site";
 
 export const dynamic = "force-static";
@@ -22,6 +23,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
     })),
     { url: abs("/leistungen/"), lastModified, changeFrequency: "monthly", priority: 0.9 },
     { url: abs("/labor/"), lastModified, changeFrequency: "monthly", priority: 0.7 },
+    { url: abs("/filme/"), lastModified, changeFrequency: "monthly", priority: 0.7 },
+    ...FILM_PAGES.map((f) => ({
+      url: abs(`/filme/${f.slug}/`),
+      lastModified,
+      changeFrequency: "yearly" as const,
+      priority: 0.6,
+    })),
     { url: abs("/galerie/"), lastModified, changeFrequency: "monthly", priority: 0.6 },
     { url: abs("/kostenrechner/"), lastModified, changeFrequency: "monthly", priority: 0.7 },
     { url: abs("/termin/"), lastModified, changeFrequency: "monthly", priority: 0.9 },

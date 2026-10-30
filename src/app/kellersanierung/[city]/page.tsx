@@ -8,6 +8,7 @@ import OnlineAppointmentBooking from "@/components/sections/OnlineAppointmentBoo
 import JsonLd from "@/components/seo/JsonLd";
 import { Breadcrumbs, LayerStack, Prose, FaqList, LinkGrid } from "@/components/seo/SubpageParts";
 import { CITY_PAGES } from "@/data/seo-pages";
+import { FILM_PAGES } from "@/data/films";
 import { SERVICE_CARDS } from "@/data/services";
 import { COMPANY, COMPANY_INFO, LOCATIONS } from "@/data/content-data";
 import { BUSINESS_ID, WEBSITE_ID, abs, businessNode, websiteNode, breadcrumbNode, faqNode, OG_IMAGE } from "@/lib/site";
@@ -320,6 +321,14 @@ export default function CityPage({ params }: { params: { city: string } }) {
           <div className="sc-wrap grid gap-12">
             <FaqList faqs={page.faqs} title={`Fragen aus ${page.name}`} />
             <LinkGrid title={local.length ? `Weitere Leistungen in ${page.name}` : `Leistungen in ${page.name}`} links={otherServices} />
+            <LinkGrid
+              title="Filme aus unserer Arbeit"
+              links={FILM_PAGES.filter((f) => !f.service || local.some((l) => l.slug === f.service) || f.service === "kellersanierung").map((f) => ({
+                href: `/filme/${f.slug}/`,
+                label: f.title,
+                sub: `Film, ${f.film.seconds} Sekunden`,
+              }))}
+            />
             {nearby.length > 0 && <LinkGrid title="In der Nähe" links={nearby} />}
           </div>
         </section>
