@@ -72,7 +72,7 @@ export const FILM_PAGES: FilmPage[] = [
     description:
       "Unser Ablauf in 12 Sekunden: Feuchtemessung vor Ort, Beratung mit dem Messergebnis, Abdichtung von innen und Übergabe an den Kunden.",
     uploadDate: "2026-10-08T16:37:04+02:00",
-    youtube: "https://www.youtube.com/shorts/JDBJRVKIb3o",
+    youtube: "https://www.youtube.com/shorts/Llqz_HsAQbY",
   },
   {
     slug: "kellersanierung",
