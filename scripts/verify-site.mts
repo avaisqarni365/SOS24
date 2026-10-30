@@ -168,6 +168,25 @@ const robots = existsSync(path.join(OUT, "robots.txt")) ? readFileSync(path.join
 if (!robots.includes(`Sitemap: ${SITE}/sitemap.xml`)) err("/robots.txt", "no Sitemap line for the site");
 if (!existsSync(path.join(OUT, "llms.txt"))) warn("/llms.txt", "missing");
 
+// ------------------------------------------------------------ thin city pages
+// The words written for this one town (the template around them is the same
+// on every city page). Under ~400, Google sees a near-duplicate of the other
+// towns: a doorway page rather than a local one.
+const THIN_WORDS = 400;
+const words = (s: string) => s.split(/\s+/).filter(Boolean).length;
+for (const c of CITY_PAGES) {
+  const own = [
+    c.lede,
+    ...c.localFactors.map((l) => `${l.name} ${l.text}`),
+    ...c.sections.flatMap((s) => [s.heading, ...s.paragraphs, ...(s.bullets ?? [])]),
+    ...c.faqs.flatMap((f) => [f.q, f.a]),
+    ...(c.localServices ?? []).map((s) => `${s.heading} ${s.text}`),
+    ...(c.districtGroups ?? []).map((g) => `${g.name} ${g.text}`),
+  ].join(" ");
+  const n = words(own);
+  if (n < THIN_WORDS) warn(`/kellersanierung/${c.slug}/`, `thin: ${n} words of its own (aim for ${THIN_WORDS}+)`);
+}
+
 // ------------------------------------------------------------ report
 const ok = (b: boolean) => (b ? "ok " : "-- ");
 console.log(`\nKeywords (${SITE})`);

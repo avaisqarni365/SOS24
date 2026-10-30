@@ -5503,6 +5503,10 @@ html[data-theme="dark"] .mnav__foot { background: rgb(255 255 255 / 0.04); borde
 /* while someone types into a form the assistant button steps aside: on phones it sat on the
    right edge of the fields; it comes back as soon as the field is left */
 .bot-launcher { transition: opacity 160ms ease; }
+/* the city pages' contact bar sits at the bottom below lg: the assistant button moves above it */
+@media (max-width: 1023px) {
+  body:has(.city-cta-bar) .bot-launcher { bottom: 5.25rem; }
+}
 body:has(main :is(input, select, textarea):focus) .bot-launcher { opacity: 0; pointer-events: none; }
 
 /* the NRW map is taller than the old Wuppertal window: it gets the room to stay readable */

@@ -166,7 +166,12 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
             <LinkGrid title="Verwandte Leistungen" links={related} />
             <LinkGrid
               title={`${page.navTitle} in Ihrer Stadt`}
-              links={CITY_PAGES.map((c) => ({ href: `/kellersanierung/${c.slug}/`, label: c.name, sub: `Reaktion ${c.responseTime}` }))}
+              links={CITY_PAGES.map((c) =>
+                // a city with its own card for this service gets the deep link, so "<Leistung> <Stadt>" ranks there
+                c.localServices?.some((s) => s.slug === page.slug)
+                  ? { href: `/kellersanierung/${c.slug}/#${page.slug}`, label: `${page.navTitle} ${c.name}`, sub: `Reaktion ${c.responseTime}` }
+                  : { href: `/kellersanierung/${c.slug}/`, label: c.name, sub: `Reaktion ${c.responseTime}` },
+              )}
             />
           </div>
         </section>

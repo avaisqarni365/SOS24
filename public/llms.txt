@@ -49,7 +49,7 @@ Jedes Messprotokoll wird dem Kunden immer schriftlich übergeben, nach jeder Pha
 - [Kellersanierung Velbert](https://sos-abdichtung.de/kellersanierung/velbert/): vor Ort in 24 bis 48 Stunden. PLZ 42549, 42551, 42553, 42555
 - [Kellersanierung Haan](https://sos-abdichtung.de/kellersanierung/haan/): vor Ort in 24 bis 48 Stunden. PLZ 42781
 - [Kellersanierung Wermelskirchen](https://sos-abdichtung.de/kellersanierung/wermelskirchen/): vor Ort in 24 bis 48 Stunden. PLZ 42929
-- [Kellersanierung Essen](https://sos-abdichtung.de/kellersanierung/essen/): vor Ort in 24 bis 48 Stunden. PLZ 45127, 45128, 45130, 45131, 45133, 45144, 45147, 45239, 45326
+- [Kellersanierung Essen](https://sos-abdichtung.de/kellersanierung/essen/): vor Ort in 24 Stunden. PLZ 45127, 45128, 45130, 45131, 45133, 45134, 45136, 45138, 45139, 45141, 45143, 45144, 45145, 45147, 45149, 45219, 45239, 45257, 45259, 45276, 45277, 45279, 45289, 45307, 45309, 45326, 45327, 45329, 45355, 45356, 45357, 45359
 - [Kellersanierung Düsseldorf](https://sos-abdichtung.de/kellersanierung/duesseldorf/): vor Ort in 24 bis 48 Stunden. PLZ 40210, 40213, 40477, 40545, 40547, 40597, 40625
 - [Kellersanierung Bochum](https://sos-abdichtung.de/kellersanierung/bochum/): vor Ort in 24 bis 48 Stunden. PLZ 44787, 44789, 44791, 44799, 44801, 44803, 44866
 - [Kellersanierung Dortmund](https://sos-abdichtung.de/kellersanierung/dortmund/): vor Ort in 24 bis 48 Stunden. PLZ 44135, 44137, 44139, 44225, 44263, 44309, 44359

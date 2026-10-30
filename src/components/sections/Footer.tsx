@@ -85,7 +85,7 @@ export default function Footer() {
               <span key={l.key} className="site-footer__loc">
                 <MapPin aria-hidden="true" />
                 <span>
-                  {l.label}: {l.street}, {l.postalCode} {l.locality} ·{" "}
+                  <a href={`/kellersanierung/${l.key}/`}>{l.label}</a>: {l.street}, {l.postalCode} {l.locality} ·{" "}
                   <a href={`tel:${l.phoneTel}`}>
                     <Phone aria-hidden="true" />
                     {l.phoneDisplay}
