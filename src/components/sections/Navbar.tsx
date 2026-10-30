@@ -160,11 +160,6 @@ export default function Navbar() {
               <Calendar className="h-3.5 w-3.5 text-emerald-700" aria-hidden="true" />
               Termin buchen
             </a>
-            {/* wide screens only: on narrower ones the strip has no room, the menu and footer show them */}
-            <span className="hidden 2xl:flex items-center gap-5">
-              <span aria-hidden="true" className="h-4 w-px bg-surface/30" />
-              <SocialLinks variant="mini" />
-            </span>
           </nav>
         </div>
       </div>
