@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { Star, ExternalLink } from "lucide-react";
 import { GAS_API_URL } from "@/lib/backend";
 import type { SiteContent, SocialKey } from "@/lib/adminApi";
+import { FACEBOOK_URL, INSTAGRAM_URL, TIKTOK_URL, YOUTUBE_URL } from "@/lib/social";
 
 /**
  * What the owner publishes in the admin ("Website & Kanäle"): channel links, news and
@@ -38,18 +39,35 @@ const SOCIAL: Record<SocialKey, { label: string; path: string }> = {
 };
 
 /** The channels as icons, in the footer of every page. */
-export function SocialLinks() {
+/** The channels that exist today, so the icons are in the page from the first paint
+    (and for crawlers); a link set in the admin replaces its default. */
+const DEFAULT_SOCIAL: Partial<Record<SocialKey, string>> = {
+  instagram: INSTAGRAM_URL,
+  facebook: FACEBOOK_URL,
+  youtube: YOUTUBE_URL,
+  tiktok: TIKTOK_URL,
+};
+
+/**
+ * The channels in their brand colours. `icons`: round buttons (footer);
+ * `labels`: buttons with the channel name ("Folgen Sie uns"); `mini`: small
+ * icons for the header strip and the phone menu.
+ */
+export function SocialLinks({ variant = "icons", className = "" }: { variant?: "icons" | "labels" | "mini"; className?: string }) {
   const data = useSiteContent();
-  const keys = data ? (Object.keys(SOCIAL) as SocialKey[]).filter((k) => data.social?.[k]) : [];
+  const links = { ...DEFAULT_SOCIAL };
+  for (const [k, v] of Object.entries(data?.social ?? {})) if (v) links[k as SocialKey] = v;
+  const keys = (Object.keys(SOCIAL) as SocialKey[]).filter((k) => links[k]);
   if (!keys.length) return null;
   return (
-    <ul className="social" aria-label="SOS-Abdichtung in sozialen Netzwerken">
+    <ul className={`social social--${variant} ${className}`} aria-label="SOS-Abdichtung in sozialen Netzwerken">
       {keys.map((k) => (
         <li key={k}>
-          <a href={data!.social[k]} target="_blank" rel="noopener noreferrer" aria-label={SOCIAL[k].label} title={SOCIAL[k].label}>
+          <a href={links[k]} target="_blank" rel="noopener noreferrer" data-net={k} aria-label={SOCIAL[k].label} title={SOCIAL[k].label}>
             <svg viewBox="0 0 24 24" aria-hidden="true">
               <path d={SOCIAL[k].path} />
             </svg>
+            {variant === "labels" ? <span>{SOCIAL[k].label}</span> : null}
           </a>
         </li>
       ))}

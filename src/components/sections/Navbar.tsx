@@ -12,6 +12,7 @@ import LanguageSelector from "@/components/navigation/LanguageSelector";
 import AppearanceMenu from "@/components/navigation/AppearanceMenu";
 import ColorControl from "@/components/navigation/ColorControl";
 import { useLanguage } from "@/i18n/LanguageContext";
+import { SocialLinks } from "@/components/sections/SiteFeed";
 
 /* The 3D viewer, the scanner and the measurement proof are one tab now
    (/labor/), not two anchors into a very long landing page. */
@@ -159,6 +160,11 @@ export default function Navbar() {
               <Calendar className="h-3.5 w-3.5 text-emerald-700" aria-hidden="true" />
               Termin buchen
             </a>
+            {/* wide screens only: on narrower ones the strip has no room, the menu and footer show them */}
+            <span className="hidden 2xl:flex items-center gap-5">
+              <span aria-hidden="true" className="h-4 w-px bg-surface/30" />
+              <SocialLinks variant="mini" />
+            </span>
           </nav>
         </div>
       </div>
@@ -267,6 +273,11 @@ export default function Navbar() {
                 <LanguageSelector />
               </div>
             </div>
+          </div>
+
+          <div className="mnav__social">
+            <span className="mnav__kicker">Folgen Sie uns</span>
+            <SocialLinks variant="icons" />
           </div>
 
           <div className="mnav__foot">

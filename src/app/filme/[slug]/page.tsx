@@ -4,6 +4,7 @@ import Navbar from "@/components/sections/Navbar";
 import Footer from "@/components/sections/Footer";
 import HomeSteps from "@/components/sections/HomeSteps";
 import FilmPlayer from "@/components/sections/FilmPlayer";
+import { SocialLinks } from "@/components/sections/SiteFeed";
 import JsonLd from "@/components/seo/JsonLd";
 import { Breadcrumbs, LinkGrid } from "@/components/seo/SubpageParts";
 import { FILM_PAGES, isoDuration } from "@/data/films";
@@ -140,6 +141,10 @@ export default function FilmPage({ params }: { params: { slug: string } }) {
                 Auf YouTube ansehen
               </a>
             </p>
+            <div className="social-follow">
+              <p className="social-follow__h">Alle Filme auch auf</p>
+              <SocialLinks variant="icons" />
+            </div>
           </div>
         </section>
 
