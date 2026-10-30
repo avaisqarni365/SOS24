@@ -24,3 +24,4 @@ User-agent: CCBot
 Allow: /
 
 Sitemap: https://sos-abdichtung.de/sitemap.xml
+Sitemap: https://sos-abdichtung.de/video-sitemap.xml

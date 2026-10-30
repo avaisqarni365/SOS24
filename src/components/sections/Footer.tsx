@@ -14,6 +14,7 @@ const PAGES: [string, string][] = [
   ["/leistungen/", "Alle Leistungen"],
   ["/labor/", "Scientific Lab"],
   ["/galerie/", "Galerie"],
+  ["/filme/", "Filme"],
   ["/kostenrechner/", "Angebotsrechner"],
   ["/leistungen/#faq", "Häufige Fragen"],
   ["/kontakt/", "Kontakt"],

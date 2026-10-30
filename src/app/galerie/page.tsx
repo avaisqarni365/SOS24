@@ -76,7 +76,8 @@ export default function GaleriePage() {
               So arbeiten wir, <em>Verfahren für Verfahren.</em>
             </h2>
             <p className="sc-body mt-5">
-              {hy("Zehn kurze Filme ohne Ton: einer über unsere Arbeit und einer zu jeder Leistung. Tippen Sie auf einen Film, er öffnet sich groß.")}
+              {hy("Fünf kurze Filme ohne Ton: einer über unsere Arbeit und einer zu jeder Leistung, die wir gefilmt haben. Tippen Sie auf einen Film, er öffnet sich groß. Jeder Film hat auch eine eigene Seite: ")}
+              <a href="/filme/" className="font-semibold underline underline-offset-2">alle Filme</a>.
             </p>
             <FilmWall films={films} />
           </div>
