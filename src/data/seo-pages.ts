@@ -1041,6 +1041,64 @@ export const CITY_PAGES: CityPage[] = [
         a: "Ja, die Arbeiten finden im Keller statt und verändern die Fassade nicht. Ob auch für Eingriffe im Inneren eine denkmalrechtliche Erlaubnis nötig ist, sollten Sie vorab mit der Unteren Denkmalbehörde der Stadt Wuppertal klären. Die technische Beschreibung der geplanten Maßnahmen stellen wir Ihnen dafür gern zur Verfügung.",
       },
     ],
+    wiki: "https://de.wikipedia.org/wiki/Wuppertal",
+    localServices: [
+      {
+        slug: "kellerinnenabdichtung",
+        heading: "Keller abdichten in Wuppertal",
+        text: "Am Hang staut sich Sickerwasser an der bergseitigen Wand. Wir dichten genau diese Wand von innen ab, mit mehrlagiger Dichtungsschlämme und einer Hohlkehle am Wandfuß, und sparen die trockenen Wände aus. So zahlen Sie nur für die Abdichtung, die wirklich nötig ist."
+      },
+      {
+        slug: "horizontalsperre",
+        heading: "Horizontalsperre in Wuppertal",
+        text: "In den Bruchstein- und Ziegelkellern von Elberfeld und Barmen fehlt die Sperrschicht meist ganz. Wir verfüllen die Hohlräume im Bruchstein und setzen dann per Injektion eine neue Sperre, ohne Vortrocknung, auch wenn die Wand nach einem bergischen Regenwinter sehr nass ist."
+      },
+      {
+        slug: "rissverpressung",
+        heading: "Rissverpressung in Wuppertal",
+        text: "In den Betonkellern jüngerer Häuser am Hang drückt das Wasser durch Risse und Arbeitsfugen. Wir verpressen sie unter Druck mit PU-Harz, das im Riss aufschäumt und elastisch bleibt, und dichten danach die Fläche ab."
+      },
+      {
+        slug: "schimmelbeseitigung",
+        heading: "Schimmel im Keller in Wuppertal",
+        text: "Feuchte Hangwände kühlen aus, die Luft kondensiert daran, und es entsteht Schimmel, oft auch im Souterrain. Wir messen, ob die Nässe aus der Wand oder aus der Luft kommt, entfernen den Befall sporensicher und beseitigen die Ursache."
+      }
+    ],
+    districtGroups: [
+      {
+        name: "Elberfeld und Barmen",
+        districts: [
+          "Elberfeld",
+          "Briller Viertel",
+          "Ölberg",
+          "Barmen",
+          "Heckinghausen"
+        ],
+        text: "Gründerzeitviertel mit Bruchstein- und Ziegelkellern ohne Sperrschicht, Häuser in geschlossener Reihe. Typisch sind aufsteigende Feuchte und Salze, die den Putz absprengen."
+      },
+      {
+        name: "Die Hanglagen",
+        districts: [
+          "Cronenberg",
+          "Ronsdorf",
+          "Küllenhahn",
+          "Uellendahl",
+          "Katernberg"
+        ],
+        text: "Häuser auf den Südhöhen und an den Nordhängen. Nach Regen staut sich Schichtenwasser an der bergseitigen Wand, die Talseite bleibt trocken."
+      },
+      {
+        name: "Entlang der Wupper",
+        districts: [
+          "Vohwinkel",
+          "Sonnborn",
+          "Oberbarmen",
+          "Langerfeld",
+          "Beyenburg"
+        ],
+        text: "Die Talsohle nah am Fluss, oft unter der Schwebebahn. Feuchte Böden, und bei Hochwasser wie 2021 kommt das Wasser auch von unten."
+      }
+    ],
     nearby: ["solingen", "remscheid", "velbert"],
   },
 
@@ -1102,6 +1160,61 @@ export const CITY_PAGES: CityPage[] = [
         q: "Lässt sich ein Gräfrather Schieferhaus sanieren, ohne die Fassade anzufassen?",
         a: "Ja. Horizontalsperre, Innenabdichtung und Sanierputz werden ausschließlich im Keller eingebaut. Schieferkleid und Fachwerk bleiben vollständig erhalten, und außen sind keine Erdarbeiten nötig.",
       },
+    ],
+    wiki: "https://de.wikipedia.org/wiki/Solingen",
+    localServices: [
+      {
+        slug: "kellerinnenabdichtung",
+        heading: "Keller abdichten in Solingen",
+        text: "An den steilen Bachtälern zur Wupper drückt Hang- und Sickerwasser gegen die bergseitige Kellerwand. Wir dichten sie von innen ab, mit Dichtungsschlämme, Hohlkehle und Sanierputz, ohne den Hang aufzugraben."
+      },
+      {
+        slug: "horizontalsperre",
+        heading: "Horizontalsperre in Solingen",
+        text: "In den Bruchsteinkellern von Gräfrath und Burg fehlt jede Sperrschicht. Wir verfüllen die Hohlräume im Mauerwerk und setzen per Injektion eine neue Sperre; Fachwerk und Schieferfassade bleiben unberührt."
+      },
+      {
+        slug: "rissverpressung",
+        heading: "Rissverpressung in Solingen",
+        text: "Viele Keller aus dem Wiederaufbau nach dem Krieg haben Risse und undichte Arbeitsfugen. Wasserführende Risse verpressen wir mit PU-Harz, das elastisch bleibt; tragende Risse schließen wir mit Epoxid."
+      },
+      {
+        slug: "feuchtemessung",
+        heading: "Feuchtemessung in Solingen",
+        text: "Ob Hangwasser, aufsteigende Feuchte oder ein Riss: Die kostenlose Messung in mehreren Wandhöhen zeigt, woher die Nässe kommt. Sie bekommen das Protokoll schriftlich und danach einen Festpreis."
+      }
+    ],
+    districtGroups: [
+      {
+        name: "Gräfrath und Burg",
+        districts: [
+          "Gräfrath",
+          "Burg",
+          "Unterburg",
+          "Widdert"
+        ],
+        text: "Fachwerk- und Schieferhäuser auf Bruchsteinkellern ohne Sperrschicht, in Unterburg direkt an der Wupper. Aufsteigende Feuchte und, am Fluss, Hochwasser."
+      },
+      {
+        name: "Mitte, Wald und Ohligs",
+        districts: [
+          "Solingen-Mitte",
+          "Wald",
+          "Ohligs",
+          "Merscheid",
+          "Aufderhöhe"
+        ],
+        text: "Wiederaufbau und Nachkriegsbauten. Häufig Risse und undichte Arbeitsfugen in Betonkellern, dazu undichte Anschlüsse an der Bodenplatte."
+      },
+      {
+        name: "Die Talhänge",
+        districts: [
+          "Höhscheid",
+          "Rupelrath",
+          "Glüder"
+        ],
+        text: "Häuser an den Bachtälern zur Wupper. Die bergseitige Wand bekommt Hang- und Sickerwasser ab und ist deutlich nasser als die übrigen."
+      }
     ],
     nearby: ["wuppertal", "remscheid", "wermelskirchen"],
   },
@@ -1165,6 +1278,59 @@ export const CITY_PAGES: CityPage[] = [
         a: "In Remscheid regnet es das ganze Jahr über viel, im Winterhalbjahr verdunstet jedoch deutlich weniger. Der Boden bleibt länger gesättigt, und Sickerwasser steht länger an der Kellerwand an. Ob es sich um eindringendes Wasser oder Kondensat handelt, zeigt die Messung vor Ort.",
       },
     ],
+    wiki: "https://de.wikipedia.org/wiki/Remscheid",
+    localServices: [
+      {
+        slug: "horizontalsperre",
+        heading: "Horizontalsperre in Remscheid",
+        text: "Die Bruchsteinkeller in Lennep und Lüttringhausen haben keine Sperrschicht. Wir verfüllen die Hohlräume, setzen im Abstand von bis zu 20 cm die Bohrlöcher und injizieren eine neue Sperre, ohne Vortrocknung, auch in sehr nassem Mauerwerk."
+      },
+      {
+        slug: "kellerinnenabdichtung",
+        heading: "Keller abdichten in Remscheid",
+        text: "Sickerwasser folgt den Klüften im Fels und tritt genau an der Kellerwand aus. Wir dichten die betroffenen Wände von innen ab, mit mehrlagiger Dichtungsschlämme und sorgfältiger Hohlkehle."
+      },
+      {
+        slug: "feuchtemessung",
+        heading: "Feuchtemessung in Remscheid",
+        text: "Im regenreichen Remscheid trocknet eine Wand langsamer als anderswo. Wir messen kostenlos, wie nass sie ist und wie viel Salz sie trägt, und planen danach auch die Trocknungszeit ein."
+      },
+      {
+        slug: "schimmelbeseitigung",
+        heading: "Schimmel im Keller in Remscheid",
+        text: "Dauerhaft nasse Wände und kühle Keller sind ideale Bedingungen für Schimmel. Wir entfernen ihn sporensicher und beseitigen die Ursache, damit er nicht wiederkommt."
+      }
+    ],
+    districtGroups: [
+      {
+        name: "Lennep und Lüttringhausen",
+        districts: [
+          "Lennep",
+          "Lüttringhausen",
+          "Klausen"
+        ],
+        text: "Historische Ortskerne mit verschieferten Fachwerkhäusern auf Bruchsteinsockeln. Enge Gassen, keine Sperrschicht, Aufgraben praktisch unmöglich."
+      },
+      {
+        name: "Alt-Remscheid und Süd",
+        districts: [
+          "Alt-Remscheid",
+          "Hasten",
+          "Vieringhausen",
+          "Reinshagen"
+        ],
+        text: "Gemischter Bestand auf den Höhen und an den Hängen. Sickerwasser aus den Klüften im Fels und aufsteigende Feuchte im alten Mauerwerk."
+      },
+      {
+        name: "Die Täler zur Wupper",
+        districts: [
+          "Müngsten",
+          "Morsbach",
+          "Westhausen"
+        ],
+        text: "Häuser am Talhang mit großen Höhenunterschieden. Die bergseitige Wand ist oft monatelang nass."
+      }
+    ],
     nearby: ["wuppertal", "solingen", "wermelskirchen"],
   },
 
@@ -1223,6 +1389,59 @@ export const CITY_PAGES: CityPage[] = [
         a: "Ja, in vielen Fällen. Entscheidend ist, ob Bodenfeuchte oder zeitweise drückendes Wasser anliegt. Dafür gibt es mehrlagige Innenabdichtungen, die auch Druckwasser standhalten, kombiniert mit einer Horizontalsperre im Mauerwerk.",
       },
     ],
+    wiki: "https://de.wikipedia.org/wiki/Velbert",
+    localServices: [
+      {
+        slug: "horizontalsperre",
+        heading: "Horizontalsperre in Velbert",
+        text: "Die Fachwerk- und Schieferhäuser in Neviges und Langenberg stehen auf Bruchsteinkellern ohne Sperrschicht. Wir verfüllen die Hohlräume und setzen per Injektion eine neue Sperre; Fassade und Fachwerk bleiben unberührt."
+      },
+      {
+        slug: "kellerinnenabdichtung",
+        heading: "Keller abdichten in Velbert",
+        text: "Rund um Velbert-Mitte stehen viele Häuser im Hang, in Langenberg und Neviges sammelt sich Wasser in den Tälern. Wir dichten die betroffenen Wände von innen ab, mit Dichtungsschlämme, Hohlkehle und Sanierputz."
+      },
+      {
+        slug: "rissverpressung",
+        heading: "Rissverpressung in Velbert",
+        text: "In Betonkellern am Hang drückt das Wasser durch Risse und Fugen. Wir verpressen sie mit PU-Harz, das im Riss aufschäumt und elastisch bleibt."
+      },
+      {
+        slug: "schimmelbeseitigung",
+        heading: "Schimmel im Keller in Velbert",
+        text: "Feuchte Talkeller und kühle Hangwände begünstigen Schimmel. Wir klären per Messung die Ursache, entfernen den Befall sporensicher und beseitigen die Feuchte."
+      }
+    ],
+    districtGroups: [
+      {
+        name: "Neviges",
+        districts: [
+          "Neviges",
+          "Tönisheide",
+          "Siebeneick"
+        ],
+        text: "Wallfahrtsort am Hardenberger Bach mit alten Fachwerk- und Schieferhäusern. Bruchsteinkeller ohne Sperrschicht, im Tal feuchte Böden."
+      },
+      {
+        name: "Langenberg",
+        districts: [
+          "Langenberg",
+          "Nierenhof",
+          "Bonsfeld"
+        ],
+        text: "Historischer Ortskern im Deilbachtal. Wasser aus den Hängen sammelt sich im Tal; die Keller sind von unten und von der Seite belastet."
+      },
+      {
+        name: "Velbert-Mitte",
+        districts: [
+          "Velbert-Mitte",
+          "Birth",
+          "Losenburg",
+          "Dalbecksbaum"
+        ],
+        text: "Höhenrücken mit Hangbebauung zu allen Seiten. Typisch ist Sickerwasser an der bergseitigen Wand und undichte Anschlüsse an der Bodenplatte."
+      }
+    ],
     nearby: ["wuppertal", "haan"],
   },
 
@@ -1280,6 +1499,48 @@ export const CITY_PAGES: CityPage[] = [
         q: "Macht der Kalkstein in Gruiten die Sanierung schwieriger?",
         a: "Er macht sie nicht schwieriger, aber anders. Im verkarsteten Kalk fließt Wasser über Spalten und tritt oft punktuell an der Kellerwand aus, statt die Wand gleichmäßig zu durchfeuchten. Diese Stellen finden wir bei der Messung und dichten sie gezielt ab.",
       },
+    ],
+    wiki: "https://de.wikipedia.org/wiki/Haan",
+    localServices: [
+      {
+        slug: "kellerinnenabdichtung",
+        heading: "Keller abdichten in Haan",
+        text: "Im verkarsteten Kalkstein bei Gruiten tritt Wasser an unerwarteten Stellen aus, im Düsseltal steigt es nach Starkregen schnell. Wir dichten die betroffenen Wände von innen ab, auch gegen zeitweise drückendes Wasser."
+      },
+      {
+        slug: "schimmelbeseitigung",
+        heading: "Schimmel im Souterrain in Haan",
+        text: "Viele Untergeschosse in der Gartenstadt sind Wohnung oder Büro. Dort wird Schimmel schnell zum Gesundheitsthema. Wir klären per Messung die Ursache, entfernen den Befall und schützen die Wand, wo nötig mit Klimaplatten."
+      },
+      {
+        slug: "horizontalsperre",
+        heading: "Horizontalsperre in Haan",
+        text: "In den alten Häusern von Gruiten-Dorf steigt die Feuchte im Mauerwerk auf. Wir setzen per Injektion eine neue Sperrschicht knapp über dem Kellerboden, ohne Vortrocknung."
+      },
+      {
+        slug: "feuchtemessung",
+        heading: "Feuchtemessung in Haan",
+        text: "Wo Wasser im Kalkstein über Spalten fließt, ist die Ursache nicht immer dort, wo der Fleck ist. Die kostenlose Messung zeigt, woher die Nässe wirklich kommt."
+      }
+    ],
+    districtGroups: [
+      {
+        name: "Gartenstadt Haan",
+        districts: [
+          "Haan-Mitte",
+          "Unterhaan",
+          "Oberhaan"
+        ],
+        text: "Wohngebiete mit vielen genutzten Untergeschossen. Häufig Kondensat und Schimmel im Souterrain und undichte Anschlüsse an der Bodenplatte."
+      },
+      {
+        name: "Gruiten",
+        districts: [
+          "Gruiten",
+          "Gruiten-Dorf"
+        ],
+        text: "Altes Dorf an der Düssel auf verkarstetem Kalkstein. Wasser von unten im Tal, an unerwarteten Stellen austretendes Kluftwasser und aufsteigende Feuchte im alten Mauerwerk."
+      }
     ],
     nearby: ["solingen", "wuppertal"],
   },
@@ -1354,6 +1615,57 @@ export const CITY_PAGES: CityPage[] = [
         q: "Welche Garantie erhalte ich auf die Kellersanierung?",
         a: "Auf die Wirksamkeit des Injektionsmittels gibt es 25 Jahre Produktgarantie des Herstellers SchimmelPeter GmbH. Unabhängig davon gibt sos-abdichtung 10 Jahre Garantie auf die ausgeführten Arbeiten.",
       },
+    ],
+    wiki: "https://de.wikipedia.org/wiki/Wermelskirchen",
+    localServices: [
+      {
+        slug: "horizontalsperre",
+        heading: "Horizontalsperre in Wermelskirchen",
+        text: "Die bergischen Häuser in der Innenstadt und in Dabringhausen stehen auf Bruchsteinsockeln ohne Sperrschicht. Wir verfüllen die Hohlräume und setzen per Injektion eine neue Sperre, ohne Vortrocknung."
+      },
+      {
+        slug: "kellerinnenabdichtung",
+        heading: "Keller abdichten in Wermelskirchen",
+        text: "An den Talhängen von Eifgenbach und Dhünn tritt Sickerwasser aus den Klüften im Fels an der Kellerwand aus. Wir dichten die bergseitige Wand von innen ab, mit Dichtungsschlämme und Hohlkehle."
+      },
+      {
+        slug: "rissverpressung",
+        heading: "Rissverpressung in Wermelskirchen",
+        text: "In den jüngeren Wohngebieten sind es oft einzelne Risse oder Fugen, durch die Wasser kommt. Wir verpressen sie gezielt mit PU-Harz, statt den ganzen Keller abzudichten."
+      },
+      {
+        slug: "feuchtemessung",
+        heading: "Feuchtemessung in Wermelskirchen",
+        text: "Die kostenlose Messung zeigt, ob eine ganze Wand nass ist oder nur ein Riss Wasser führt. Danach wissen Sie, ob ein punktueller Eingriff genügt."
+      }
+    ],
+    districtGroups: [
+      {
+        name: "Innenstadt und Dabringhausen",
+        districts: [
+          "Wermelskirchen-Mitte",
+          "Dabringhausen"
+        ],
+        text: "Alte Ortskerne mit Schiefer- und Fachwerkhäusern auf Bruchsteinsockeln. Aufsteigende Feuchte und Salze im Mauerwerk."
+      },
+      {
+        name: "Dhünn und die Täler",
+        districts: [
+          "Dhünn",
+          "Eifgen",
+          "Tente"
+        ],
+        text: "Häuser an den tief eingeschnittenen Talhängen. Die bergseitige Wand bekommt Sickerwasser aus dem Fels ab."
+      },
+      {
+        name: "Jüngere Wohngebiete",
+        districts: [
+          "Hünger",
+          "Hilgen",
+          "Pohlhausen"
+        ],
+        text: "Häuser der letzten Jahrzehnte mit Betonkellern. Meist punktuelle Schäden an Rissen und Fugen statt flächig nasser Wände."
+      }
     ],
     nearby: ["remscheid", "solingen", "wuppertal"],
   },
@@ -1603,6 +1915,64 @@ export const CITY_PAGES: CityPage[] = [
         "a": "Die erste Feuchtigkeitsmessung vor Ort ist bei uns kostenlos und unverbindlich, für Eigentümer, Mieter und Hausverwaltungen gleichermaßen."
       }
     ],
+    wiki: "https://de.wikipedia.org/wiki/D%C3%BCsseldorf",
+    localServices: [
+      {
+        slug: "kellerinnenabdichtung",
+        heading: "Keller abdichten in Düsseldorf",
+        text: "In Oberkassel, Bilk und Pempelfort steigt das Grundwasser mit dem Rhein und drückt gegen Bodenplatte und Wände. Wir dichten die Wände von innen bis über den zu erwartenden Wasserstand ab, mit Hohlkehle am Wandfuß."
+      },
+      {
+        slug: "schimmelbeseitigung",
+        heading: "Schimmel im Souterrain in Düsseldorf",
+        text: "Wird das Untergeschoss als Büro, Praxis oder Einliegerwohnung genutzt, gefährdet Schimmel Gesundheit und Mieteinnahmen. Wir klären die Ursache, entfernen den Befall sporensicher und schützen die Wand dauerhaft."
+      },
+      {
+        slug: "horizontalsperre",
+        heading: "Horizontalsperre in Düsseldorf",
+        text: "In den Altbauten von Pempelfort, Flingern und Unterbilk steigt die Feuchte im Ziegel auf. Wir setzen per Injektion eine neue Sperrschicht, ohne Vortrocknung, und messen nach, bis die Wand trocken ist."
+      },
+      {
+        slug: "rissverpressung",
+        heading: "Rissverpressung in Düsseldorf",
+        text: "Wo Grundwasser drückt, findet es jeden Riss und jede Arbeitsfuge. Wir verpressen wasserführende Risse unter Druck mit PU-Harz, bevor die Fläche abgedichtet wird."
+      }
+    ],
+    districtGroups: [
+      {
+        name: "Am Rhein",
+        districts: [
+          "Oberkassel",
+          "Niederkassel",
+          "Altstadt",
+          "Unterbilk",
+          "Hamm",
+          "Volmerswerth"
+        ],
+        text: "Ufernahe Lagen, in denen das Grundwasser mit dem Rhein steigt. Typisch ist Wasser von unten und am Wandfuß, oft Tage nach dem Höchststand."
+      },
+      {
+        name: "Gründerzeitviertel",
+        districts: [
+          "Pempelfort",
+          "Derendorf",
+          "Flingern",
+          "Bilk",
+          "Friedrichstadt"
+        ],
+        text: "Dichte Altbauten mit genutzten Souterrains. Aufsteigende Feuchte im Ziegel und Kondensat in bewohnten Untergeschossen."
+      },
+      {
+        name: "Osten und Süden",
+        districts: [
+          "Gerresheim",
+          "Grafenberg",
+          "Benrath",
+          "Urdenbach"
+        ],
+        text: "Hanglagen im Osten, Villen und Einfamilienhäuser im Süden. Hangwasser an der bergseitigen Wand, in Rheinnähe zusätzlich Grundwasser."
+      }
+    ],
     nearby: ["wuppertal", "essen", "solingen"],
   },
 
@@ -1681,6 +2051,71 @@ export const CITY_PAGES: CityPage[] = [
         "a": "Das hängt von Ursache, Wandlänge und Wanddicke ab. Nach der kostenlosen Messung erhalten Sie ein verbindliches Festpreisangebot ohne Nachforderungen."
       }
     ],
+    wiki: "https://de.wikipedia.org/wiki/Bochum",
+    localServices: [
+      {
+        slug: "rissverpressung",
+        heading: "Rissverpressung in Bochum",
+        text: "Setzungen aus der Bergbauzeit haben Risse in Betonböden und Kellerwänden hinterlassen. Wir prüfen, ob sie Wasser führen und sich noch bewegen, und verpressen sie mit elastischem PU-Harz."
+      },
+      {
+        slug: "kellerinnenabdichtung",
+        heading: "Keller abdichten in Bochum",
+        text: "Lehmböden stauen das Regenwasser lange an der Außenwand, im Ruhrtal bei Stiepel drückt Schichtenwasser. Wir dichten die erdberührten Wände von innen ab, mit Dichtungsschlämme, Hohlkehle und Sanierputz."
+      },
+      {
+        slug: "horizontalsperre",
+        heading: "Horizontalsperre in Bochum",
+        text: "Die Zechenhäuser in Wattenscheid und Ehrenfeld haben Ziegelkeller ohne wirksame Sperrschicht. Wir setzen per Injektion eine neue, ohne Vortrocknung und ohne Aufgraben."
+      },
+      {
+        slug: "schimmelbeseitigung",
+        heading: "Schimmel im Keller in Bochum",
+        text: "Feuchte Ziegelwände und kühle Keller lassen Schimmel wachsen. Wir entfernen ihn sporensicher und beseitigen die Ursache."
+      }
+    ],
+    districtGroups: [
+      {
+        name: "Mitte und Ehrenfeld",
+        districts: [
+          "Bochum-Mitte",
+          "Ehrenfeld",
+          "Wiemelhausen",
+          "Altenbochum"
+        ],
+        text: "Gründerzeit und Wiederaufbau, Ziegelkeller ohne Sperrschicht. Aufsteigende Feuchte und Salze im Mauerwerk."
+      },
+      {
+        name: "Wattenscheid und der Norden",
+        districts: [
+          "Wattenscheid",
+          "Gerthe",
+          "Riemke",
+          "Hofstede"
+        ],
+        text: "Bergarbeitersiedlungen und Zechenhäuser. Setzungsrisse aus dem Bergbau und Wasser, das sich im Lehm an der Wand staut."
+      },
+      {
+        name: "Der Süden am Ruhrtal",
+        districts: [
+          "Stiepel",
+          "Weitmar",
+          "Dahlhausen",
+          "Linden"
+        ],
+        text: "Hanglagen über der Ruhr. Schichtenwasser an der bergseitigen Wand, im Tal steigendes Grundwasser."
+      },
+      {
+        name: "Der Osten",
+        districts: [
+          "Langendreer",
+          "Werne",
+          "Laer",
+          "Querenburg"
+        ],
+        text: "Siedlungen und Einfamilienhäuser auf ehemaligem Bergbaugebiet. Risse in Bodenplatte und Wand sind hier der häufigste Weg für das Wasser."
+      }
+    ],
     nearby: ["essen", "dortmund", "wuppertal"],
   },
 
@@ -1757,6 +2192,62 @@ export const CITY_PAGES: CityPage[] = [
       {
         "q": "Muss für die Kellersanierung in Dortmund aufgegraben werden?",
         "a": "In den meisten Fällen nicht. Horizontalsperre, Innenabdichtung und Rissverpressung werden von innen ausgeführt, Garten und Einfahrt bleiben unberührt."
+      }
+    ],
+    wiki: "https://de.wikipedia.org/wiki/Dortmund",
+    localServices: [
+      {
+        slug: "horizontalsperre",
+        heading: "Horizontalsperre in Dortmund",
+        text: "Im Kreuzviertel und Kaiserviertel haben die Gründerzeithäuser Vollziegelkeller, in denen die Feuchte aufsteigt und Salze ausblühen. Wir setzen per Injektion eine neue Sperrschicht, ohne Vortrocknung."
+      },
+      {
+        slug: "kellerinnenabdichtung",
+        heading: "Keller abdichten in Dortmund",
+        text: "In Hörde, Hombruch und Aplerbeck drückt Sickerwasser gegen die Kellerwand. Wir dichten die erdberührten Wände von innen ab, mit Dichtungsschlämme, Hohlkehle und Sanierputz."
+      },
+      {
+        slug: "rissverpressung",
+        heading: "Rissverpressung in Dortmund",
+        text: "Wo unter der Stadt Kohle abgebaut wurde, haben Setzungen Risse in Wand und Bodenplatte hinterlassen. Wasserführende Risse verpressen wir mit PU-Harz, das elastisch bleibt."
+      },
+      {
+        slug: "schimmelbeseitigung",
+        heading: "Schimmel im Keller in Dortmund",
+        text: "Ob im Altbau oder im modernisierten Souterrain: Wir klären per Messung, woher die Feuchte kommt, entfernen den Schimmel sporensicher und beseitigen die Ursache."
+      }
+    ],
+    districtGroups: [
+      {
+        name: "Innenstadt und Gründerzeitviertel",
+        districts: [
+          "Kreuzviertel",
+          "Kaiserviertel",
+          "Innenstadt-Nord",
+          "Innenstadt-Ost"
+        ],
+        text: "Dichte Blockrandbebauung mit historischen Vollziegelkellern. Aufsteigende Feuchte, Salzausblühungen und kein Platz zum Aufgraben."
+      },
+      {
+        name: "Der Süden",
+        districts: [
+          "Hörde",
+          "Hombruch",
+          "Aplerbeck",
+          "Syburg"
+        ],
+        text: "Hanglagen zum Ardey und zur Ruhr, rund um den Phoenix-See modernisierter Bestand. Sickerwasser an der Wand und hohe Ansprüche an trockene Souterrains."
+      },
+      {
+        name: "Norden und Osten",
+        districts: [
+          "Mengede",
+          "Huckarde",
+          "Eving",
+          "Brackel",
+          "Scharnhorst"
+        ],
+        text: "Zechensiedlungen und Bergbaugelände. Setzungsrisse und Feuchte im Ziegel der Siedlungshäuser."
       }
     ],
     nearby: ["bochum", "essen", "wuppertal"],
