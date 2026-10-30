@@ -8,6 +8,9 @@ export const PARTNER_URL = "https://www.schimmelpeter.de/partner/wuppertal-kelle
 export const FACEBOOK_URL = "https://www.facebook.com/profile.php?id=61596178164338";
 /** The YouTube channel with the films as Shorts. */
 export const YOUTUBE_URL = "https://www.youtube.com/@SOS-Abdichtung";
+/** Instagram and TikTok, with the same films as Reels and posts. */
+export const INSTAGRAM_URL = "https://www.instagram.com/sos_abdichtung/";
+export const TIKTOK_URL = "https://www.tiktok.com/@sos_abdichtung";
 
 /** Share preview (WhatsApp, Facebook, LinkedIn, X): JPEG, because not every
     messenger renders WebP previews. */
@@ -77,7 +80,7 @@ export function businessNode() {
       { "@type": "State", name: "Nordrhein-Westfalen" },
     ],
     memberOf: { "@type": "Organization", name: "SchimmelPeter®", url: "https://www.schimmelpeter.de" },
-    sameAs: [PARTNER_URL, FACEBOOK_URL, YOUTUBE_URL],
+    sameAs: [PARTNER_URL, FACEBOOK_URL, YOUTUBE_URL, INSTAGRAM_URL, TIKTOK_URL],
     // the categories of the Google Business Profile, as far as the work is what we do
     knowsAbout: [
       "Bautenschutz",
