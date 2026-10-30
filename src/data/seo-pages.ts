@@ -1518,7 +1518,7 @@ export const CITY_PAGES: CityPage[] = [
       },
       {
         q: "Arbeiten Sie auch in den Nachbarstädten von Essen?",
-        a: "Ja. Von unserem Sitz in Essen fahren wir regelmäßig nach Mülheim an der Ruhr, Gelsenkirchen, Bottrop, Oberhausen, Bochum und Velbert, in der Regel ebenfalls innerhalb von 24 Stunden.",
+        a: "Ja. Von unserem Sitz in Essen fahren wir regelmäßig nach Mülheim an der Ruhr, Gelsenkirchen, Bottrop, Oberhausen, Bochum und Velbert, in der Regel innerhalb von 24 bis 48 Stunden.",
       },
     ],
     nearby: ["muelheim-an-der-ruhr", "gelsenkirchen", "bottrop", "oberhausen", "bochum", "velbert"],
@@ -1963,93 +1963,124 @@ export const CITY_PAGES: CityPage[] = [
     slug: "gelsenkirchen",
     name: "Gelsenkirchen",
     keyword: "Kellersanierung Gelsenkirchen",
-    title: "Kellersanierung Gelsenkirchen | Keller trockenlegen",
-    metaDescription: "Kellersanierung Gelsenkirchen ohne Aufgraben: feuchte Kellerwände, Bergsenkungsrisse, Schimmel im Keller. Kostenlose Feuchtigkeitsmessung, Festpreis.",
-    "h1": "Kellersanierung Gelsenkirchen: feuchte Keller dauerhaft sanieren",
-    lede: "Gelsenkirchen ist durch den Bergbau gewachsen, und der Bergbau hat Spuren im Boden hinterlassen. Viele Keller in Zechensiedlungen und Altbauten kämpfen mit Setzungsrissen, aufsteigender Feuchte und Schimmel.",
-    plz: [
-      "45879",
-      "45881",
-      "45883",
-      "45884",
-      "45886",
-      "45888",
-      "45889",
-      "45891",
-      "45892",
-      "45894",
-      "45896",
-      "45897",
-      "45899"
-    ],
-    districts: [
-      "Altstadt",
-      "Buer",
-      "Horst",
-      "Schalke",
-      "Bismarck",
-      "Erle",
-      "Resse",
-      "Ückendorf",
-      "Hassel"
-    ],
-    geo: {
-      lat: 51.5177,
-      lng: 7.0857
-    },
+    title: "Kellersanierung Gelsenkirchen | Risse & feuchte Keller",
+    metaDescription:
+      "Kellersanierung Gelsenkirchen ohne Aufgraben: Bergsenkungsrisse verpressen, feuchte Keller abdichten, von Buer bis Ückendorf. Messung kostenlos, Festpreis.",
+    h1: "Kellersanierung Gelsenkirchen: Risse und feuchte Keller dauerhaft sanieren",
+    lede:
+      "Gelsenkirchen ist mit dem Bergbau gewachsen, und der Bergbau hat Spuren im Boden hinterlassen: Setzungsrisse, ein künstlich niedrig gehaltenes Grundwasser und viele Siedlungshäuser ohne Sperrschicht. Von unserem Sitz in Essen sind wir schnell in Buer, Horst oder Ückendorf, messen kostenlos und sanieren von innen.",
+    plz: ["45879", "45881", "45883", "45884", "45886", "45888", "45889", "45891", "45892", "45894", "45896", "45897", "45899"],
+    districts: ["Altstadt", "Schalke", "Ückendorf", "Rotthausen", "Bismarck", "Erle", "Resse", "Buer", "Hassel", "Horst"],
+    geo: { lat: 51.5177, lng: 7.0857 },
     responseTime: "24 bis 48 Stunden",
+    wiki: "https://de.wikipedia.org/wiki/Gelsenkirchen",
     localFactors: [
       {
         name: "Bergsenkungen und Setzungsrisse",
-        text: "Unter großen Teilen der Stadt wurde Kohle abgebaut. Der Boden hat sich gesetzt; Risse in Kellerwand und Bodenplatte lassen Wasser eindringen."
+        text: "Unter fast dem ganzen Stadtgebiet wurde Kohle abgebaut, von Consolidation in Bismarck bis Nordstern in Horst. Der Boden hat sich ungleichmäßig gesetzt; Risse in Kellerwand und Bodenplatte lassen heute Wasser durch.",
       },
       {
         name: "Gepumptes Grundwasser im Emschertal",
-        text: "Weil sich Flächen abgesenkt haben, wird das Grundwasser im Emscherraum dauerhaft abgepumpt. Ändert sich der Wasserstand, merken es zuerst die Keller."
+        text: "Zwischen Emscher und Rhein-Herne-Kanal liegen Flächen so tief, dass das Grundwasser dauerhaft abgepumpt wird. Keller stehen hier dicht über dem Wasserspiegel und merken jede Änderung zuerst.",
       },
       {
-        name: "Zechensiedlungen und Nachkriegsbauten",
-        text: "Siedlungshäuser aus Ziegel und schnell gebaute Häuser der Nachkriegszeit haben selten eine intakte Horizontalsperre. Die Feuchte steigt im Mauerwerk auf."
-      }
+        name: "Siedlungshäuser aus Ziegel",
+        text: "Die Zechensiedlungen in Bismarck, Hassel und Buer und die schnell gebauten Häuser der Nachkriegszeit haben selten eine Horizontalsperre, die noch wirkt. Die Feuchte steigt im Ziegel auf.",
+      },
+      {
+        name: "Kalte Kellerwände im Sommer",
+        text: "Wird an warmen Tagen gelüftet, schlägt sich die feuchte Luft an den kühlen Wänden nieder. Viele Keller, die als nass gelten, haben in Wahrheit ein Kondensatproblem.",
+      },
+    ],
+    localServices: [
+      {
+        slug: "rissverpressung",
+        heading: "Rissverpressung in Gelsenkirchen",
+        text: "Bergsenkungsrisse sind in Gelsenkirchen der häufigste Weg, auf dem Wasser in den Keller kommt. Wir prüfen, ob ein Riss Wasser führt und ob er noch arbeitet, und verpressen ihn dann unter Druck mit PU-Harz, das im Riss aufschäumt und elastisch bleibt, wenn sich der Boden weiter bewegt.",
+      },
+      {
+        slug: "kellerinnenabdichtung",
+        heading: "Keller abdichten in Gelsenkirchen",
+        text: "Wo das Grundwasser im Emschertal nah an der Kellersohle steht, dichten wir die erdberührten Wände von innen ab: Dichtungsschlämme in mehreren Lagen, eine Hohlkehle am Boden-Wand-Anschluss und Sanierputz. Einfahrt und Vorgarten bleiben unberührt.",
+      },
+      {
+        slug: "horizontalsperre",
+        heading: "Horizontalsperre in Gelsenkirchen",
+        text: "In Siedlungshäusern aus Ziegel steigt die Feuchte meist aus dem Fundament auf. Knapp über dem Kellerboden setzen wir per Injektion eine neue Sperrschicht, ohne Vortrocknung. Danach trocknet die Wand nach oben ab, wir messen nach, bis die Zielwerte erreicht sind.",
+      },
+      {
+        slug: "schimmelbeseitigung",
+        heading: "Schimmel im Keller in Gelsenkirchen",
+        text: "Ob der Schimmel aus der nassen Wand kommt oder aus Kondensat, zeigt die Messung von Wandfeuchte, Oberflächentemperatur und Raumklima. Wir entfernen den Befall sporensicher und beseitigen dann die Ursache, damit er nicht zurückkommt.",
+      },
+    ],
+    districtGroups: [
+      {
+        name: "Gelsenkirchen-Süd und Mitte",
+        districts: ["Altstadt", "Schalke", "Ückendorf", "Rotthausen", "Neustadt", "Bulmke-Hüllen"],
+        text: "Dichte Bebauung aus Gründerzeit und Wiederaufbau. Die alten Sperrschichten haben versagt, die Feuchte steigt auf, Salze sprengen den Putz. Von außen fehlt fast immer der Platz zum Aufgraben.",
+      },
+      {
+        name: "Entlang der Emscher",
+        districts: ["Bismarck", "Heßler", "Horst", "Erle", "Feldmark"],
+        text: "Tief liegendes Gelände mit gepumptem Grundwasser und alten Zechenstandorten. Typisch sind Wasser von unten nach langem Regen und Risse an der Bodenplatte.",
+      },
+      {
+        name: "Buer und der Norden",
+        districts: ["Buer", "Hassel", "Scholven", "Resse", "Beckhausen"],
+        text: "Siedlungshäuser, Einfamilienhäuser und der Altbaukern von Buer. Häufig eine Mischung aus aufsteigender Feuchte im Ziegel und Setzungsrissen aus dem Bergbau.",
+      },
     ],
     sections: [
       {
-        heading: "Feuchte Kellerwände sanieren in Gelsenkirchen",
+        heading: "Bergsenkungsrisse: erst prüfen, dann verpressen",
         paragraphs: [
-          "Wir messen zuerst, woher die Feuchte kommt: aufsteigend aus dem Fundament, seitlich durch die Wand oder durch einen Riss. Danach sanieren wir gezielt mit Horizontalsperre im Injektionsverfahren, Rissverpressung und Kellerinnenabdichtung nach WTA, ohne Aufgraben."
+          "Wo unter Tage Kohle abgebaut wurde, hat sich die Oberfläche gesenkt, nicht gleichmäßig, sondern in Mulden und Stufen. Ein Haus, das darauf steht, wird schief belastet, und im Keller zeigt sich das zuerst: Risse an den Wandecken, an Fenstern und quer durch die Bodenplatte. Solange sie trocken bleiben, sind viele davon harmlos.",
+          "Gefährlich werden sie, wenn Wasser durchkommt. Dann reicht Zuspachteln nicht, weil der Riss weiter arbeitet. Wir messen Breite und Feuchte, prüfen, ob er sich bewegt, und verpressen wasserführende Risse mit elastischem PU-Harz. Erst danach dichten wir die Fläche ab. Vermuten Sie einen Bergschaden, dokumentieren wir die Risse so, dass Sie die Unterlagen für Ihre Ansprüche verwenden können.",
         ],
-        bullets: [
-          "Kostenlose Feuchtigkeitsmessung und Schadensanalyse",
-          "Rissverpressung bei Bergsenkungsrissen",
-          "Festpreis nach der Messung, 10 Jahre Garantie auf die Arbeit"
-        ]
       },
       {
-        heading: "Schimmel im Keller in Buer, Horst und Erle",
+        heading: "Feuchte Keller in Zechensiedlungen und Nachkriegshäusern",
         paragraphs: [
-          "Schimmel im Keller ist fast immer eine Folge der Feuchte im Mauerwerk oder von Kondensat an kalten Wänden. Wir beseitigen den Befall sporensicher und dann die Ursache, mit Abdichtung oder Klimaplatten."
-        ]
-      }
+          "Die Siedlungshäuser in Bismarck, Hassel und Buer wurden schnell und sparsam gebaut, die Keller als Lagerraum aus Ziegel, mit einer dünnen Pappe als Sperrschicht, die nach Jahrzehnten zerfallen ist. Die Feuchte steigt im Mauerwerk auf, der Putz blüht weiß aus und bröckelt, es riecht muffig.",
+          "Hier hilft eine Horizontalsperre im Injektionsverfahren, von innen gesetzt, mit einem Sanierputz, der die Restfeuchte verdunsten lässt und die Salze aufnimmt. Weil die Häuser oft Wand an Wand stehen, ist das auch der einzige Weg, der ohne Aufgraben beim Nachbarn auskommt.",
+        ],
+      },
+      {
+        heading: "Was eine Kellersanierung in Gelsenkirchen kostet",
+        paragraphs: [
+          "Den Preis bestimmen die Ursache, die Länge der betroffenen Wände, das Mauerwerk und die Zahl der Risse. Ein einzelner verpresster Riss kostet einen Bruchteil einer Innenabdichtung aller Wände. Deshalb messen wir zuerst, kostenlos, und geben Ihnen danach einen Festpreis, der sich nicht mehr ändert.",
+        ],
+        bullets: [
+          "Kostenlose Feuchtemessung mit Protokoll",
+          "Festpreis nach der Messung, ohne Nachträge",
+          "10 Jahre Garantie auf die Arbeit, 25 Jahre Herstellergarantie auf die Wirksamkeit",
+        ],
+      },
     ],
     faqs: [
       {
         q: "Wer zahlt Bergschäden am Keller in Gelsenkirchen?",
-        a: "Bei Schäden durch den Steinkohlenbergbau kann ein Anspruch gegen den Bergbautreibenden bestehen; das prüft die zuständige Stelle für Bergschäden. Wir dokumentieren Feuchte und Risse mit Messprotokoll, das Sie dafür verwenden können."
+        a: "Bei Schäden durch den Steinkohlenbergbau kann ein Anspruch gegen das Bergbauunternehmen bestehen. Ob ein Bergschaden vorliegt, klärt ein Sachverständiger oder die Schlichtungsstelle Bergschaden NRW. Wir dokumentieren Feuchte und Risse mit Messprotokoll, das Sie dafür verwenden können.",
       },
       {
-        q: "Kann ein feuchter Keller ohne Aufgraben trocken werden?",
-        a: "Ja. Die Verfahren werden von innen ausgeführt: Bohrlöcher für die Horizontalsperre, Verpressen der Risse und eine Innenabdichtung der erdberührten Wände."
+        q: "Kann ein feuchter Keller in Gelsenkirchen ohne Aufgraben trocken werden?",
+        a: "Ja. Horizontalsperre, Rissverpressung und Innenabdichtung werden von innen ausgeführt. Vorgarten, Einfahrt und die Wand zum Nachbarn bleiben unberührt.",
       },
       {
         q: "Wie schnell sind Sie in Gelsenkirchen vor Ort?",
-        a: "Von unserem Sitz in Essen aus in der Regel innerhalb von 24 bis 48 Stunden; die Messung ist kostenlos."
-      }
+        a: "Von unserem Sitz in Essen aus in der Regel innerhalb von 24 bis 48 Stunden, in Buer, Horst und Ückendorf ebenso wie in Resse. Fotos vorab per WhatsApp an 0172 2064177 helfen bei der ersten Einschätzung. Die Messung ist kostenlos.",
+      },
+      {
+        q: "Ist jeder Riss im Keller gefährlich?",
+        a: "Nein. Feine, trockene Risse, die sich nicht weiter öffnen, sind oft nur ein Schönheitsfehler. Führt ein Riss Wasser oder wird er breiter, sollte er verpresst werden. Das klären wir bei der kostenlosen Messung.",
+      },
+      {
+        q: "Was kostet die Kellersanierung in Gelsenkirchen?",
+        a: "Das hängt von Ursache, Wandfläche, Mauerwerk und Rissen ab. Nach der kostenlosen Messung erhalten Sie ein verbindliches Festpreisangebot; die Sanierung von innen ist fast immer deutlich günstiger als eine Außenabdichtung.",
+      },
     ],
-    nearby: [
-      "bottrop",
-      "essen",
-      "bochum"
-    ]
+    nearby: ["essen", "bottrop", "bochum", "oberhausen"],
   },
   // Oberhausen
   {
@@ -2057,174 +2088,247 @@ export const CITY_PAGES: CityPage[] = [
     name: "Oberhausen",
     keyword: "Kellersanierung Oberhausen",
     title: "Kellersanierung Oberhausen | Feuchte Keller sanieren",
-    metaDescription: "Kellersanierung Oberhausen ohne Aufgraben: feuchte Kellerwände in Zechenhäusern und Altbauten von innen sanieren. Kostenlose Feuchtigkeitsmessung.",
-    "h1": "Kellersanierung Oberhausen: feuchte Keller von innen trockenlegen",
-    lede: "Von der Siedlung Eisenheim bis Sterkrade und Osterfeld: In Oberhausen stehen viele Häuser aus der Zeit von Kohle und Stahl. Ihre Keller sind oft feucht, weil die alte Horizontalsperre nicht mehr wirkt.",
-    plz: [
-      "46045",
-      "46047",
-      "46049",
-      "46117",
-      "46119",
-      "46145",
-      "46147",
-      "46149"
-    ],
-    districts: [
-      "Alt-Oberhausen",
-      "Sterkrade",
-      "Osterfeld",
-      "Styrum",
-      "Lirich",
-      "Schmachtendorf",
-      "Holten"
-    ],
-    geo: {
-      lat: 51.4963,
-      lng: 6.8638
-    },
+    metaDescription:
+      "Kellersanierung Oberhausen ohne Aufgraben: feuchte Keller in Zechenhäusern und Altbauten von Sterkrade bis Alstaden. Messung kostenlos, Festpreis.",
+    h1: "Kellersanierung Oberhausen: feuchte Keller von innen trockenlegen",
+    lede:
+      "Von der Siedlung Eisenheim bis Sterkrade und Osterfeld stehen in Oberhausen viele Häuser aus der Zeit von Kohle und Stahl. Ihre Keller sind oft feucht, weil die alte Sperrschicht nicht mehr wirkt oder das Grundwasser an der Emscher hoch steht. Wir messen kostenlos, woher die Nässe kommt, und sanieren von innen.",
+    plz: ["46045", "46047", "46049", "46117", "46119", "46145", "46147", "46149"],
+    districts: ["Alt-Oberhausen", "Alstaden", "Lirich", "Sterkrade", "Holten", "Schmachtendorf", "Königshardt", "Osterfeld", "Klosterhardt", "Rothebusch"],
+    geo: { lat: 51.4963, lng: 6.8638 },
     responseTime: "24 bis 48 Stunden",
+    wiki: "https://de.wikipedia.org/wiki/Oberhausen",
     localFactors: [
       {
         name: "Arbeitersiedlungen aus Ziegel",
-        text: "Oberhausen hat einige der ältesten Arbeitersiedlungen im Ruhrgebiet. Ihre Ziegelkeller sind ohne moderne Abdichtung gebaut; die Feuchte steigt aus dem Boden auf."
+        text: "Eisenheim, gebaut ab 1846, gilt als älteste Arbeitersiedlung im Ruhrgebiet, und viele weitere folgten. Ihre Ziegelkeller haben keine moderne Abdichtung, die Feuchte steigt aus dem Boden auf.",
       },
       {
-        name: "Bergsenkung und Emscher",
-        text: "Der frühere Bergbau hat den Boden abgesenkt, die Emscher fließt durch die Stadt. Risse und ein wechselnder Grundwasserstand bringen Wasser an die Kellerwand."
+        name: "Emscher, Kanal und Grundwasser",
+        text: "Emscher und Rhein-Herne-Kanal laufen quer durch die Stadt. Im abgesenkten Gelände daneben wird das Grundwasser gepumpt; nach langem Regen steht es an Bodenplatte und Wandfuß.",
       },
       {
-        name: "Nachkriegsbauten",
-        text: "Viele Häuser wurden nach dem Krieg schnell wieder aufgebaut. Abdichtung und Horizontalsperre fehlen oder sind nach Jahrzehnten unwirksam."
-      }
+        name: "Bergsenkung",
+        text: "Unter Osterfeld und Sterkrade wurde Kohle abgebaut. Der Boden hat sich gesetzt, und Risse in Kellerwand und Boden sind heute ein Weg für das Wasser.",
+      },
+      {
+        name: "Wiederaufbau nach dem Krieg",
+        text: "Viele Häuser wurden nach 1945 schnell wieder aufgebaut, oft auf alten Kellern. Abdichtung und Sperrschicht fehlen oder sind nach Jahrzehnten unwirksam.",
+      },
+    ],
+    localServices: [
+      {
+        slug: "horizontalsperre",
+        heading: "Horizontalsperre in Oberhausen",
+        text: "In den Ziegelkellern der Siedlungen und Altbauten steigt die Feuchte meist aus dem Fundament auf. Wir setzen knapp über dem Boden per Injektion eine neue Sperrschicht, ohne Vortrocknung, und messen nach, bis die Wand trocken ist.",
+      },
+      {
+        slug: "kellerinnenabdichtung",
+        heading: "Keller abdichten in Oberhausen",
+        text: "Wo das Grundwasser an Emscher und Kanal nah an der Kellersohle steht, dichten wir die erdberührten Wände von innen ab: Dichtungsschlämme, Hohlkehle am Wandfuß und Sanierputz. Das hält auch zeitweise drückendem Wasser stand.",
+      },
+      {
+        slug: "kellersanierung",
+        heading: "Kellersanierung in Oberhausen",
+        text: "Oft kommen mehrere Ursachen zusammen: aufsteigende Feuchte, Wasser von außen und ein Riss. Wir messen jede Wand einzeln und kombinieren nur die Verfahren, die sie braucht, zum Festpreis und mit 10 Jahren Garantie auf die Arbeit.",
+      },
+      {
+        slug: "schimmelbeseitigung",
+        heading: "Schimmel im Keller in Oberhausen",
+        text: "Riecht der Keller muffig oder zeigen sich dunkle Flecken, ist meist schon Schimmel da. Wir entfernen ihn sporensicher, klären per Messung, ob die Nässe aus der Wand oder aus der Luft kommt, und beseitigen die Ursache.",
+      },
+    ],
+    districtGroups: [
+      {
+        name: "Alt-Oberhausen",
+        districts: ["Innenstadt", "Lirich", "Alstaden", "Marienkirche", "Bermensfeld"],
+        text: "Gründerzeitstraßen und Wiederaufbau rund um die Innenstadt, in Alstaden nah an der Ruhr. Typisch ist aufsteigende Feuchte im alten Mauerwerk, in Ruhrnähe zusätzlich Wasser von unten.",
+      },
+      {
+        name: "Sterkrade",
+        districts: ["Sterkrade-Mitte", "Holten", "Schmachtendorf", "Königshardt", "Tackenberg", "Buschhausen"],
+        text: "Gewachsener Ortskern, Siedlungen und viele Einfamilienhäuser. Häufig undichte Anschlüsse an der Bodenplatte und Risse aus Bergsenkungen.",
+      },
+      {
+        name: "Osterfeld",
+        districts: ["Osterfeld-Mitte", "Eisenheim", "Klosterhardt", "Rothebusch", "Vondern"],
+        text: "Zechensiedlungen und Bergbaugelände. Ziegelkeller ohne Sperrschicht, dazu Setzungsrisse und ein Grundwasser, das im abgesenkten Gelände nah an der Sohle steht.",
+      },
     ],
     sections: [
       {
-        heading: "Feuchte Kellerwände sanieren in Oberhausen",
+        heading: "Siedlungshäuser: Feuchte, die aus dem Boden steigt",
         paragraphs: [
-          "Mit der kostenlosen Feuchtigkeitsmessung finden wir die Ursache. Gegen aufsteigende Feuchte setzen wir eine Horizontalsperre im Injektionsverfahren, gegen Wasser von außen eine Kellerinnenabdichtung nach WTA, wasserführende Risse werden verpresst."
+          "Die Häuser in Eisenheim, Klosterhardt oder rund um die alten Hütten wurden für die Arbeiter von Kohle und Stahl gebaut, mit einfachen Kellern aus Ziegel. Eine Sperrschicht gegen aufsteigende Feuchte gab es oft gar nicht, oder sie bestand aus Pappe, die längst zerfallen ist. Das Ergebnis kennen viele Oberhausener: ein dunkler Feuchterand, weiße Salze und abplatzender Putz.",
+          "Weil viele dieser Häuser unter Denkmalschutz oder in geschlossener Reihe stehen, kommt eine Aufgrabung kaum in Frage. Eine Horizontalsperre von innen und ein Sanierputz lösen das Problem, ohne die Fassade oder den Garten anzufassen.",
         ],
-        bullets: [
-          "Horizontalsperre ohne Aufgraben",
-          "Innenabdichtung erdberührter Wände",
-          "Verbindliches Festpreisangebot nach der Messung"
-        ]
       },
       {
-        heading: "Schimmel im Keller und muffiger Geruch",
+        heading: "Wasser von unten an Emscher und Kanal",
         paragraphs: [
-          "Riecht der Keller muffig oder zeigen sich dunkle Flecken, ist meist schon Schimmel im Spiel. Wir entfernen ihn sporensicher und sorgen dafür, dass die Wand trocken bleibt."
-        ]
-      }
+          "In den tief liegenden Lagen entlang der Emscher hält die Emschergenossenschaft das Grundwasser mit Pumpen niedrig. Die Kellersohle liegt dort trotzdem oft nur knapp darüber. Nach langem Regen drückt das Wasser durch den Boden-Wand-Anschluss oder durch Risse in der Bodenplatte.",
+          "Dann reicht eine Sperrschicht allein nicht. Wir verpressen die Risse und dichten die Wände von innen bis über die Wasserlinie ab, mit einer Hohlkehle am Übergang zum Boden, an der das meiste Wasser hereinkommt.",
+        ],
+      },
+      {
+        heading: "Was eine Kellersanierung in Oberhausen kostet",
+        paragraphs: [
+          "Eine Horizontalsperre an zwei Wänden ist etwas anderes als eine Innenabdichtung des ganzen Kellers. Den Preis bestimmen Ursache, Wandfläche, Mauerwerk und Salzgehalt, deshalb messen wir zuerst, kostenlos, und geben Ihnen danach einen Festpreis.",
+        ],
+        bullets: [
+          "Kostenlose Feuchtemessung und Schadensanalyse",
+          "Verbindlicher Festpreis nach der Messung",
+          "10 Jahre Garantie auf die Arbeit, 25 Jahre Herstellergarantie auf die Wirksamkeit",
+        ],
+      },
     ],
     faqs: [
       {
         q: "Lohnt sich eine Kellersanierung in einem Oberhausener Zechenhaus?",
-        a: "Ja, denn ein trockener Keller schützt die Bausubstanz und macht den Raum wieder nutzbar. Mit der Injektion von innen bleibt der Aufwand überschaubar; den Festpreis erfahren Sie nach der Messung."
+        a: "Ja, denn ein trockener Keller schützt die Bausubstanz und macht den Raum wieder nutzbar. Mit der Injektion von innen bleibt der Aufwand überschaubar; den Festpreis erfahren Sie nach der kostenlosen Messung.",
+      },
+      {
+        q: "Darf ich in einem denkmalgeschützten Siedlungshaus sanieren?",
+        a: "Die Arbeiten finden im Keller statt und verändern die Fassade nicht. Ob auch innen eine Erlaubnis nötig ist, klären Sie vorab mit der Unteren Denkmalbehörde der Stadt Oberhausen; die technische Beschreibung der Maßnahmen geben wir Ihnen dafür mit.",
       },
       {
         q: "Wie lange dauert es, bis die Wand trocken ist?",
-        a: "Die Sperre stoppt den Nachschub sofort; die gespeicherte Feuchte verdunstet je nach Wanddicke in einigen Monaten. Wir messen nach, bis die Zielwerte erreicht sind."
+        a: "Die Sperre stoppt den Nachschub sofort; die gespeicherte Feuchte verdunstet je nach Wanddicke in einigen Monaten. Wir messen nach, bis die Zielwerte erreicht sind.",
       },
       {
-        q: "Ist die Messung in Oberhausen kostenlos?",
-        a: "Ja, die Feuchtigkeitsmessung und Schadensanalyse vor Ort ist kostenlos und unverbindlich."
-      }
+        q: "Wie schnell sind Sie in Oberhausen vor Ort?",
+        a: "Von unserem Sitz in Essen in der Regel innerhalb von 24 bis 48 Stunden, in Sterkrade, Osterfeld und Alt-Oberhausen. Die Feuchtemessung ist kostenlos und unverbindlich.",
+      },
+      {
+        q: "Was kostet die Kellersanierung in Oberhausen?",
+        a: "Das hängt von Ursache, Wandfläche und Mauerwerk ab. Nach der kostenlosen Messung bekommen Sie einen verbindlichen Festpreis, ohne Nachträge.",
+      },
     ],
-    nearby: [
-      "duisburg",
-      "bottrop",
-      "muelheim-an-der-ruhr"
-    ]
+    nearby: ["muelheim-an-der-ruhr", "bottrop", "duisburg", "essen"],
   },
   // Mülheim an der Ruhr
   {
     slug: "muelheim-an-der-ruhr",
     name: "Mülheim an der Ruhr",
     keyword: "Kellersanierung Mülheim",
-    title: "Kellersanierung Mülheim an der Ruhr | Keller trocken",
-    metaDescription: "Kellersanierung Mülheim an der Ruhr ohne Aufgraben: feuchte Kellerwände an Hang und Ruhr von innen sanieren. Kostenlose Feuchtigkeitsmessung, Festpreis.",
-    "h1": "Kellersanierung Mülheim an der Ruhr: feuchte Keller sanieren",
-    lede: "Zwischen den Hängen von Saarn und Speldorf und dem Ruhrufer in Broich und Mintard bekommen Keller Wasser von mehreren Seiten: als Hangwasser, als Grundwasser und als aufsteigende Feuchte im alten Mauerwerk.",
-    plz: [
-      "45468",
-      "45470",
-      "45472",
-      "45473",
-      "45475",
-      "45476",
-      "45478",
-      "45479",
-      "45481"
-    ],
-    districts: [
-      "Altstadt",
-      "Saarn",
-      "Speldorf",
-      "Broich",
-      "Heißen",
-      "Dümpten",
-      "Styrum",
-      "Menden",
-      "Holthausen"
-    ],
-    geo: {
-      lat: 51.4275,
-      lng: 6.8825
-    },
+    title: "Kellersanierung Mülheim | Abdichtung in Saarn & Broich",
+    metaDescription:
+      "Kellersanierung Mülheim an der Ruhr: Keller abdichten gegen Hang- und Grundwasser in Saarn, Broich, Speldorf und Heißen. Messung kostenlos, Festpreis.",
+    h1: "Kellersanierung Mülheim an der Ruhr: Keller abdichten an Hang und Ruhr",
+    lede:
+      "Zwischen den Hängen von Saarn und Holthausen und dem Ruhrufer in Broich und Mintard bekommen Keller Wasser von mehreren Seiten: als Hangwasser, als Grundwasser und als aufsteigende Feuchte im alten Mauerwerk. Mülheim grenzt an Essen, unseren Sitz; wir messen kostenlos und dichten von innen ab.",
+    plz: ["45468", "45470", "45472", "45473", "45475", "45476", "45478", "45479", "45481"],
+    districts: ["Altstadt", "Saarn", "Selbeck", "Mintard", "Speldorf", "Broich", "Menden", "Holthausen", "Heißen", "Dümpten", "Styrum"],
+    geo: { lat: 51.4275, lng: 6.8825 },
     responseTime: "24 bis 48 Stunden",
+    wiki: "https://de.wikipedia.org/wiki/M%C3%BClheim_an_der_Ruhr",
     localFactors: [
       {
         name: "Hanglagen zur Ruhr",
-        text: "An den Hängen von Saarn, Menden und Holthausen läuft Schichtenwasser nach Regen an der bergseitigen Kellerwand entlang und drückt durch Fugen und Risse."
+        text: "An den Hängen von Saarn, Menden und Holthausen sickert Regenwasser im Boden abwärts und staut sich an der bergseitigen Kellerwand. Es drückt durch Fugen und Risse.",
       },
       {
         name: "Ruhr und Grundwasser",
-        text: "In Broich, Mintard und Styrum folgt der Grundwasserstand der Ruhr. Bei hohem Pegel steht Wasser an Bodenplatte und Wandfuß."
+        text: "In Broich, Mintard und Styrum folgt der Grundwasserstand der Ruhr. Bei hohem Pegel steht Wasser an Bodenplatte und Wandfuß.",
       },
       {
-        name: "Villen und Altbauten",
-        text: "Die alten Häuser in der Innenstadt und in Speldorf haben oft Bruchstein- oder Ziegelkeller ohne wirksame Horizontalsperre."
-      }
+        name: "Altbauten und Villen",
+        text: "Die Häuser in der Altstadt, in Broich und Speldorf haben oft Bruchstein- oder Ziegelkeller ohne Sperrschicht, die noch wirkt. Die Feuchte steigt auf.",
+      },
+      {
+        name: "Bergbau im Norden",
+        text: "Mülheim war die erste Stadt im Ruhrgebiet ohne Zeche, doch in Heißen und Dümpten wurde lange Kohle abgebaut. Setzungsrisse gibt es dort bis heute.",
+      },
+    ],
+    localServices: [
+      {
+        slug: "kellerinnenabdichtung",
+        heading: "Keller abdichten in Mülheim",
+        text: "Gegen Hang- und Schichtenwasser dichten wir die betroffene Wand von innen ab: mehrlagige Dichtungsschlämme, eine Hohlkehle am Boden-Wand-Anschluss und Sanierputz. Das hält auch drückendem Wasser stand, ohne dass der Hang aufgegraben werden muss.",
+      },
+      {
+        slug: "horizontalsperre",
+        heading: "Horizontalsperre in Mülheim",
+        text: "In den Altbauten der Innenstadt, in Broich und Speldorf steigt die Feuchte meist im Mauerwerk auf. Wir setzen per Injektion eine neue Sperrschicht, auch in Bruchstein, dessen Hohlräume wir vorher verfüllen.",
+      },
+      {
+        slug: "rissverpressung",
+        heading: "Rissverpressung in Mülheim",
+        text: "In Heißen und Dümpten stammen viele Risse aus dem Bergbau, am Hang aus dem Druck des Bodens. Wasserführende Risse verpressen wir unter Druck mit PU-Harz, das elastisch bleibt; tragende Risse schließen wir mit Epoxid.",
+      },
+      {
+        slug: "schimmelbeseitigung",
+        heading: "Schimmel im Souterrain in Mülheim",
+        text: "Am Hang wird das Souterrain oft als Wohnraum genutzt. Kondensat und eindringende Feuchte führen dort schnell zu Schimmel. Wir entfernen ihn sporensicher und beseitigen die Ursache, wo nötig mit Klimaplatten.",
+      },
+    ],
+    districtGroups: [
+      {
+        name: "Linksruhr: Saarn, Speldorf und Broich",
+        districts: ["Saarn", "Selbeck", "Mintard", "Speldorf", "Broich"],
+        text: "Hanglagen, Villen und Einfamilienhäuser zwischen Ruhr und Wald. Die bergseitige Kellerwand ist oft nass, unten an der Ruhr steigt das Grundwasser. Hier ist eine Innenabdichtung gegen drückendes Wasser der häufigste Weg.",
+      },
+      {
+        name: "Innenstadt und Süden",
+        districts: ["Altstadt", "Eppinghofen", "Menden", "Holthausen", "Raadt"],
+        text: "Gründerzeit und Wiederaufbau in der Stadtmitte, Hanglagen im Süden. Typisch ist aufsteigende Feuchte im alten Mauerwerk, am Hang zusätzlich seitlich eindringendes Wasser.",
+      },
+      {
+        name: "Der Norden",
+        districts: ["Heißen", "Dümpten", "Styrum", "Winkhausen"],
+        text: "Ehemaliges Bergbaugebiet und Siedlungshäuser. Setzungsrisse in Wand und Bodenplatte und Ziegelkeller ohne Sperrschicht.",
+      },
     ],
     sections: [
       {
-        heading: "Feuchte Kellerwände sanieren in Mülheim",
+        heading: "Hangwasser in Saarn, Menden und Holthausen",
         paragraphs: [
-          "Hangwasser, Grundwasser oder aufsteigende Feuchte verlangen jeweils ein anderes Verfahren. Wir messen deshalb zuerst und sanieren dann von innen: mit Kellerinnenabdichtung nach WTA, Horizontalsperre im Injektionsverfahren oder beidem."
+          "Wer am Hang über der Ruhr wohnt, kennt das Bild: Die Wand zum Hang ist nass, die zum Tal trocken. Regen versickert oben, läuft im Boden abwärts und staut sich an der Kellerwand, die in den Hang hineingebaut ist. Bei Starkregen drückt das Wasser durch Fugen und am Wandfuß in den Keller.",
+          "Eine Sperrschicht allein hilft dagegen nicht. Wir dichten die bergseitige Wand von innen mit Dichtungsschlämme in mehreren Lagen ab, mit einer Hohlkehle am Übergang zum Boden. An den übrigen Wänden reicht oft eine Horizontalsperre und ein Sanierputz. So zahlen Sie nur für die Abdichtung, die jede Wand wirklich braucht.",
         ],
-        bullets: [
-          "Kostenlose Feuchtigkeitsmessung vor Ort",
-          "Abdichtung gegen Hang- und Schichtenwasser",
-          "Kurze Wege von unserem Sitz in Essen"
-        ]
       },
       {
-        heading: "Schimmel im Keller und im Souterrain",
+        heading: "An der Ruhr: Grundwasser in Broich, Mintard und Styrum",
         paragraphs: [
-          "Wer im Hang wohnt, nutzt das Souterrain oft als Wohnraum. Kondensat und eindringende Feuchte führen dort schnell zu Schimmel; wir entfernen ihn und beseitigen die Ursache, auch mit Klimaplatten."
-        ]
-      }
+          "In den Lagen nah am Fluss folgt das Grundwasser dem Pegel der Ruhr. Bei hohem Wasserstand steht es an der Bodenplatte, und es drückt von unten durch den Boden-Wand-Anschluss. Das Hochwasser im Juli 2021 hat gezeigt, wie schnell die Ruhr steigen kann.",
+          "Nach einem Wasserschaden messen wir zuerst, wie tief die Nässe ins Mauerwerk gezogen ist. Dann dichten wir den Keller von innen ab, damit er beim nächsten Hochwasser trocken bleibt.",
+        ],
+      },
+      {
+        heading: "Was eine Kellersanierung in Mülheim kostet",
+        paragraphs: [
+          "Den Preis bestimmen die Ursache, die Länge der betroffenen Wände und das Mauerwerk. Eine Innenabdichtung an der Hangwand kostet einen Bruchteil einer Abdichtung des ganzen Kellers. Deshalb messen wir zuerst, kostenlos, und nennen Ihnen danach einen Festpreis.",
+        ],
+        bullets: [
+          "Kostenlose Feuchtemessung vor Ort, mit Protokoll",
+          "Abdichtung nur an den Wänden, an denen das Wasser drückt",
+          "Kurze Wege von unserem Sitz in Essen",
+        ],
+      },
     ],
     faqs: [
       {
         q: "Hilft eine Innenabdichtung gegen Hangwasser in Mülheim?",
-        a: "Ja. Die erdberührte Wand wird von innen mit mineralischen Dichtungsschlämmen und einer Hohlkehle abgedichtet; das hält auch drückendem Wasser stand, ohne dass der Hang aufgegraben werden muss."
+        a: "Ja. Die erdberührte Wand wird von innen mit mineralischen Dichtungsschlämmen und einer Hohlkehle abgedichtet; das hält auch drückendem Wasser stand, ohne dass der Hang aufgegraben werden muss.",
+      },
+      {
+        q: "Suchen Sie einen Abdichter in Saarn?",
+        a: "Saarn liegt wenige Minuten von unserem Sitz in Essen. Wir messen in Saarn, Selbeck und Mintard kostenlos, woher die Feuchte kommt, und dichten den Keller dann von innen ab, zum Festpreis.",
       },
       {
         q: "Wie schnell sind Sie in Mülheim vor Ort?",
-        a: "Mülheim grenzt an Essen, unseren Sitz; einen Termin für die kostenlose Messung bekommen Sie meist innerhalb von 24 bis 48 Stunden."
+        a: "Mülheim grenzt an Essen, unseren Sitz; einen Termin für die kostenlose Messung bekommen Sie in der Regel innerhalb von 24 bis 48 Stunden.",
       },
       {
         q: "Was kostet die Kellersanierung in Mülheim?",
-        a: "Das hängt von Ursache, Wandlänge und Wanddicke ab. Nach der kostenlosen Messung erhalten Sie ein verbindliches Festpreisangebot."
-      }
+        a: "Das hängt von Ursache, Wandlänge und Wanddicke ab. Nach der kostenlosen Messung erhalten Sie ein verbindliches Festpreisangebot.",
+      },
+      {
+        q: "Mein Keller stand beim Hochwasser unter Wasser. Was nun?",
+        a: "Erst trocknen und messen: Ob das Wasser nur eingedrungen ist oder die Wand dauerhaft durchfeuchtet bleibt, zeigt die Messung. Danach dichten wir von innen ab, damit beim nächsten Hochwasser kein Wasser mehr durchkommt.",
+      },
     ],
-    nearby: [
-      "essen",
-      "oberhausen",
-      "duisburg"
-    ]
+    nearby: ["essen", "oberhausen", "duisburg", "duesseldorf"],
   },
   // Hagen
   {
@@ -2403,84 +2507,124 @@ export const CITY_PAGES: CityPage[] = [
     slug: "bottrop",
     name: "Bottrop",
     keyword: "Kellersanierung Bottrop",
-    title: "Kellersanierung Bottrop | Feuchte Keller trockenlegen",
-    metaDescription: "Kellersanierung Bottrop ohne Aufgraben: feuchte Kellerwände und Bergsenkungsrisse von innen sanieren. Kostenlose Feuchtigkeitsmessung, Festpreis, Garantie.",
-    "h1": "Kellersanierung Bottrop: feuchte Keller dauerhaft sanieren",
-    lede: "In Bottrop endete 2018 mit der Zeche Prosper-Haniel der deutsche Steinkohlenbergbau. Geblieben sind abgesenkte Böden, Setzungsrisse und viele Keller, in denen die Feuchte steigt.",
-    plz: [
-      "46236",
-      "46238",
-      "46240",
-      "46242",
-      "46244"
-    ],
-    districts: [
-      "Stadtmitte",
-      "Eigen",
-      "Batenbrock",
-      "Fuhlenbrock",
-      "Boy",
-      "Welheim",
-      "Vonderort",
-      "Kirchhellen"
-    ],
-    geo: {
-      lat: 51.5236,
-      lng: 6.9285
-    },
+    title: "Kellersanierung Bottrop | Bergschäden & feuchte Keller",
+    metaDescription:
+      "Kellersanierung Bottrop ohne Aufgraben: Setzungsrisse verpressen, feuchte Keller abdichten, von Welheim bis Kirchhellen. Messung kostenlos, Festpreis.",
+    h1: "Kellersanierung Bottrop: feuchte Keller und Setzungsrisse dauerhaft sanieren",
+    lede:
+      "In Bottrop endete 2018 mit der Zeche Prosper-Haniel der deutsche Steinkohlenbergbau. Geblieben sind abgesenkte Böden, Setzungsrisse und Siedlungshäuser, in deren Kellern die Feuchte steigt. Von unserem Sitz in Essen sind wir schnell in Welheim, Eigen oder Kirchhellen, messen kostenlos und sanieren von innen.",
+    plz: ["46236", "46238", "46240", "46242", "46244"],
+    districts: ["Stadtmitte", "Eigen", "Batenbrock", "Boy", "Welheim", "Ebel", "Fuhlenbrock", "Vonderort", "Grafenwald", "Kirchhellen"],
+    geo: { lat: 51.5236, lng: 6.9285 },
     responseTime: "24 bis 48 Stunden",
+    wiki: "https://de.wikipedia.org/wiki/Bottrop",
     localFactors: [
       {
         name: "Bergsenkungen",
-        text: "Über Jahrzehnte wurde unter Bottrop Kohle abgebaut. Der Boden hat sich gesetzt; Risse in Wänden und Bodenplatten lassen Wasser in den Keller."
+        text: "Über mehr als hundert Jahre wurde unter Bottrop Kohle abgebaut, zuletzt bis 2018. Der Boden hat sich ungleichmäßig gesetzt; Risse in Wänden und Bodenplatten lassen Wasser in den Keller.",
       },
       {
-        name: "Grundwasser nach dem Bergbau",
-        text: "Mit dem Ende des Bergbaus ändert sich die Wasserhaltung. Wo das Grundwasser steigt, werden bisher trockene Keller feucht."
+        name: "Gepumptes Grundwasser",
+        text: "Im abgesenkten Süden an der Emscher, in Ebel und Welheim, hält die Emschergenossenschaft das Grundwasser mit Pumpen niedrig. Die Kellersohlen liegen dort nur knapp darüber.",
       },
       {
-        name: "Zechensiedlungen",
-        text: "Siedlungshäuser in Welheim, Batenbrock und Eigen haben Ziegelkeller ohne wirksame Horizontalsperre."
-      }
+        name: "Zechensiedlungen aus Ziegel",
+        text: "Die Siedlungshäuser in Welheim, Batenbrock, Boy und Eigen haben Ziegelkeller ohne Sperrschicht, die noch wirkt. Die Feuchte steigt im Mauerwerk auf.",
+      },
+      {
+        name: "Kirchhellen: Sand und Einfamilienhäuser",
+        text: "Im ländlichen Norden stehen vor allem Einfamilienhäuser auf sandigem Boden. Typisch sind undichte Anschlüsse an der Bodenplatte und Kondensat in kühlen Kellern.",
+      },
+    ],
+    localServices: [
+      {
+        slug: "rissverpressung",
+        heading: "Rissverpressung in Bottrop",
+        text: "Bergsenkungsrisse sind in Bottrop der häufigste Weg für das Wasser. Wir prüfen, ob ein Riss Wasser führt und ob er noch arbeitet, und verpressen ihn mit PU-Harz, das elastisch bleibt, wenn sich der Boden weiter setzt.",
+      },
+      {
+        slug: "horizontalsperre",
+        heading: "Horizontalsperre in Bottrop",
+        text: "In den Ziegelkellern der Siedlungen steigt die Feuchte aus dem Fundament. Knapp über dem Kellerboden setzen wir per Injektion eine neue Sperrschicht, ohne Vortrocknung, und messen nach, bis die Wand trocken ist.",
+      },
+      {
+        slug: "kellerinnenabdichtung",
+        heading: "Keller abdichten in Bottrop",
+        text: "Wo das Grundwasser an der Emscher nah an der Kellersohle steht, dichten wir die erdberührten Wände von innen ab: Dichtungsschlämme, Hohlkehle am Wandfuß und Sanierputz. Garten und Einfahrt bleiben unberührt.",
+      },
+      {
+        slug: "feuchtemessung",
+        heading: "Feuchtemessung in Bottrop",
+        text: "Die Messung ist kostenlos: Wir messen die Feuchte in mehreren Wandhöhen, prüfen Salze, Oberflächentemperatur und Raumklima und dokumentieren Risse mit Verlauf und Breite. Das Protokoll bekommen Sie schriftlich, auch für die Klärung eines Bergschadens.",
+      },
+    ],
+    districtGroups: [
+      {
+        name: "Bottrop-Süd an der Emscher",
+        districts: ["Ebel", "Welheim", "Welheimer Mark", "Batenbrock-Süd", "Boy"],
+        text: "Tief liegendes Gelände, Zechensiedlungen und gepumptes Grundwasser. Typisch sind Wasser von unten nach langem Regen und Risse in der Bodenplatte.",
+      },
+      {
+        name: "Stadtmitte und Bottrop-Nord",
+        districts: ["Stadtmitte", "Eigen", "Fuhlenbrock", "Batenbrock-Nord", "Vonderort", "Lehmkuhle"],
+        text: "Altbauten, Wiederaufbau und Siedlungshäuser rund um die Innenstadt. Häufig aufsteigende Feuchte im Ziegel und Setzungsrisse aus dem Bergbau.",
+      },
+      {
+        name: "Kirchhellen",
+        districts: ["Kirchhellen-Mitte", "Grafenwald", "Feldhausen"],
+        text: "Einfamilienhäuser auf sandigem Boden. Seltener Bergschäden, häufiger undichte Anschlüsse am Wandfuß und Schimmel durch Kondensat im kühlen Keller.",
+      },
     ],
     sections: [
       {
-        heading: "Feuchte Kellerwände sanieren in Bottrop",
+        heading: "Nach dem Bergbau: Risse, die Wasser führen",
         paragraphs: [
-          "Wir messen, ob die Feuchte aufsteigt, durch Risse eindringt oder seitlich drückt, und kombinieren dann die passenden Verfahren: Horizontalsperre im Injektionsverfahren, Rissverpressung und Kellerinnenabdichtung nach WTA, ohne Aufgraben."
+          "Als Prosper-Haniel 2018 schloss, endete die Kohle, nicht aber ihre Folgen. Wo unter Tage abgebaut wurde, hat sich die Oberfläche gesenkt, in Mulden und Stufen. Häuser darauf werden ungleich belastet, und im Keller zeigt sich das als Riss an Ecken, Fenstern und quer durch die Bodenplatte.",
+          "Führt ein solcher Riss Wasser, reicht Zuspachteln nicht, weil er weiter arbeitet. Wir messen Breite und Feuchte, prüfen, ob er sich bewegt, und verpressen ihn mit elastischem PU-Harz. Vermuten Sie einen Bergschaden, dokumentieren wir die Risse so, dass Sie die Unterlagen für Ihre Ansprüche verwenden können.",
         ],
-        bullets: [
-          "Rissverpressung bei Setzungsrissen",
-          "Mauerwerkstrockenlegung von innen",
-          "Kostenlose Feuchtigkeitsmessung und Festpreis"
-        ]
       },
       {
-        heading: "Schimmel im Keller in Bottroper Siedlungshäusern",
+        heading: "Feuchte Siedlungshäuser in Welheim, Batenbrock und Eigen",
         paragraphs: [
-          "Feuchte Ziegelwände und wenig Lüftung lassen im Keller schnell Schimmel wachsen. Wir beseitigen ihn sporensicher und dann die Ursache."
-        ]
-      }
+          "Die Gartenstadt Welheim und die vielen Siedlungen der Stadt wurden für die Bergleute gebaut, mit einfachen Kellern aus Ziegel. Die Sperrschicht ist längst zerfallen, die Feuchte steigt auf, und mit ihr die Salze, die den Putz absprengen und den muffigen Geruch bringen.",
+          "Eine Horizontalsperre von innen, dazu ein Sanierputz, der die Restfeuchte verdunsten lässt: So wird der Keller trocken, ohne die Fassade, den Garten oder die Wand zum Nachbarn anzufassen.",
+        ],
+      },
+      {
+        heading: "Was eine Kellersanierung in Bottrop kostet",
+        paragraphs: [
+          "Den Preis bestimmen die Ursache, die Länge der betroffenen Wände, das Mauerwerk und die Zahl der Risse. Deshalb messen wir zuerst, kostenlos, und geben Ihnen danach einen Festpreis, der sich nicht mehr ändert.",
+        ],
+        bullets: [
+          "Kostenlose Feuchtemessung mit Protokoll",
+          "Festpreis nach der Messung, ohne Nachträge",
+          "10 Jahre Garantie auf die Arbeit, 25 Jahre Herstellergarantie auf die Wirksamkeit",
+        ],
+      },
     ],
     faqs: [
       {
         q: "Wer kommt für Bergschäden am Haus in Bottrop auf?",
-        a: "Bei Schäden durch den Steinkohlenbergbau kann ein Anspruch gegen den Bergbautreibenden bestehen. Unser Messprotokoll dokumentiert Feuchte und Risse und hilft Ihnen bei der Klärung."
+        a: "Bei Schäden durch den Steinkohlenbergbau kann ein Anspruch gegen das Bergbauunternehmen bestehen, auch nach dem Ende des Bergbaus. Ob ein Bergschaden vorliegt, klärt ein Sachverständiger oder die Schlichtungsstelle Bergschaden NRW. Unser Messprotokoll dokumentiert Feuchte und Risse und hilft Ihnen dabei.",
       },
       {
         q: "Muss für die Sanierung der Garten aufgegraben werden?",
-        a: "Nein. Horizontalsperre, Rissverpressung und Innenabdichtung führen wir von innen aus."
+        a: "Nein. Horizontalsperre, Rissverpressung und Innenabdichtung führen wir von innen aus. Garten, Einfahrt und Terrasse bleiben unberührt.",
       },
       {
-        q: "Ist die Messung in Bottrop kostenlos?",
-        a: "Ja, die Feuchtigkeitsmessung und Schadensanalyse vor Ort ist kostenlos und unverbindlich; von Essen aus sind wir meist innerhalb von 24 bis 48 Stunden da."
-      }
+        q: "Werden die Keller in Bottrop nach dem Ende des Bergbaus nasser?",
+        a: "In den abgesenkten Gebieten wird das Grundwasser weiter abgepumpt, das ist eine Daueraufgabe. Wo sich der Wasserstand trotzdem ändert oder neue Risse entstehen, kann ein bisher trockener Keller feucht werden. Die Messung zeigt, ob das bei Ihnen der Fall ist.",
+      },
+      {
+        q: "Wie schnell sind Sie in Bottrop vor Ort?",
+        a: "Von unserem Sitz in Essen in der Regel innerhalb von 24 bis 48 Stunden, auch in Kirchhellen und Grafenwald. Die Feuchtemessung ist kostenlos und unverbindlich.",
+      },
+      {
+        q: "Was kostet die Kellersanierung in Bottrop?",
+        a: "Das hängt von Ursache, Wandfläche, Mauerwerk und Rissen ab. Nach der kostenlosen Messung bekommen Sie einen verbindlichen Festpreis.",
+      },
     ],
-    nearby: [
-      "gelsenkirchen",
-      "oberhausen",
-      "essen"
-    ]
+    nearby: ["gelsenkirchen", "oberhausen", "essen"],
   },
 ];
 
