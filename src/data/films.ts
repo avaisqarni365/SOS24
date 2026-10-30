@@ -59,6 +59,8 @@ export interface FilmPage {
   description: string;
   uploadDate: string;
   service?: string;
+  /** the same film as a Short on the YouTube channel */
+  youtube: string;
 }
 
 export const FILM_PAGES: FilmPage[] = [
@@ -69,6 +71,7 @@ export const FILM_PAGES: FilmPage[] = [
     description:
       "Unser Ablauf in 13 Sekunden: Feuchtemessung vor Ort, Beratung mit dem Messergebnis, Abdichtung von innen und Übergabe an den Kunden.",
     uploadDate: "2026-10-08T16:37:04+02:00",
+    youtube: "https://www.youtube.com/shorts/JDBJRVKIb3o",
   },
   {
     slug: "kellersanierung",
@@ -78,6 +81,7 @@ export const FILM_PAGES: FilmPage[] = [
       "Eine Kellersanierung von innen, ohne Aufgraben: der Befund an der feuchten Wand, die Abdichtung, der trockene Keller und die Übergabe.",
     uploadDate: "2026-10-09T15:44:29+02:00",
     service: "kellersanierung",
+    youtube: "https://www.youtube.com/shorts/DBlWxjaVtAM",
   },
   {
     slug: "keller-von-innen-abdichten",
@@ -87,6 +91,7 @@ export const FILM_PAGES: FilmPage[] = [
       "Eine Kellerinnenabdichtung Schritt für Schritt: Befund, Vorbereitung des Untergrunds, Dichtungsschlämme, Sanierputz und das Ergebnis.",
     uploadDate: "2026-10-09T15:44:29+02:00",
     service: "kellerinnenabdichtung",
+    youtube: "https://www.youtube.com/shorts/7DoXppirIr4",
   },
   {
     slug: "schimmel-im-keller-beseitigen",
@@ -96,6 +101,7 @@ export const FILM_PAGES: FilmPage[] = [
       "Schimmelbeseitigung im Keller: der Befund, die Messung der Ursache, die sporensichere Entfernung, der Schutz der Wand und das Ergebnis.",
     uploadDate: "2026-10-09T15:44:29+02:00",
     service: "schimmelbeseitigung",
+    youtube: "https://www.youtube.com/shorts/1iD-yY5igUM",
   },
   {
     slug: "sockel-abdichten",
@@ -105,6 +111,7 @@ export const FILM_PAGES: FilmPage[] = [
       "Eine Sockelabdichtung vor Ort: die Begehung, der Befund am feuchten Sockel, die Vorbereitung der Fläche und die Abdichtung.",
     uploadDate: "2026-10-09T15:44:29+02:00",
     service: "sockelabdichtung",
+    youtube: "https://www.youtube.com/shorts/Dg6R1d8jetM",
   },
 ];
 
