@@ -7866,7 +7866,9 @@ html[data-theme="dark"] .steps4__btn-i { background: rgb(255 255 255 / 0.08); co
 
 /* brand and the ways in */
 .site-footer__top { display: grid; justify-items: start; max-width: 44rem; }
-.site-footer__id { display: flex; align-items: center; gap: 1rem; }
+.site-footer__id { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem; }
+/* the channels get their own line under the logo, full width on phones */
+.site-footer__id .social-follow { flex-basis: 100%; margin-top: 0.25rem; }
 .site-footer .logo__svg { height: 2.7rem; }
 .site-footer__badge { display: block; height: 2.6rem; padding: 0.3rem 0.5rem; border-radius: 10px; background: #ffffff; box-shadow: 0 6px 16px -10px rgb(6 20 40 / 0.45); }
 .site-footer__badge img { display: block; width: auto; height: 100%; }
@@ -9093,15 +9095,34 @@ html[data-theme="dark"] :is(.adm__brand-k, .adm__foot-link) { color: var(--pw-on
 .feed__stars { display: flex; gap: 0.15rem; margin: 0; color: #f5a623; }
 .feed__stars svg { width: 1.05rem; height: 1.05rem; fill: currentColor; }
 .feed__who { font-weight: 700; color: #071628; }
-.social { display: flex; flex-wrap: wrap; gap: 0.5rem; margin: 0.75rem 0 0; padding: 0; list-style: none; }
-.social a { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 50%; background: rgb(255 255 255 / 0.9); border: 1px solid rgb(var(--c-line) / 0.12); color: #0f2537; transition: background 140ms, color 140ms; }
-.social a:hover, .social a:focus-visible { background: var(--pw-accent); color: #ffffff; }
-.social svg { width: 1.2rem; height: 1.2rem; fill: currentColor; }
+/* the channels in their own brand colours, white marks: recognisable on any background */
+.social { display: flex; flex-wrap: wrap; gap: 0.6rem; margin: 0.75rem 0 0; padding: 0; list-style: none; }
+.social a { --net: #0f2537; display: grid; place-items: center; width: 46px; height: 46px; border-radius: 50%; background: var(--net); color: #ffffff; box-shadow: 0 4px 14px rgb(0 0 0 / 0.18); transition: transform 140ms, box-shadow 140ms; }
+.social a:hover, .social a:focus-visible { transform: translateY(-2px); box-shadow: 0 8px 20px rgb(0 0 0 / 0.25); }
+.social svg { width: 1.35rem; height: 1.35rem; fill: currentColor; flex: none; }
+.social a[data-net="instagram"] { --net: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285aeb 90%); }
+.social a[data-net="facebook"] { --net: #1877f2; }
+.social a[data-net="youtube"] { --net: #ff0000; }
+.social a[data-net="tiktok"] { --net: #000000; }
+.social a[data-net="tiktok"] svg { filter: drop-shadow(1.5px 1.5px 0 #fe2c55) drop-shadow(-1.5px -1.5px 0 #25f4ee); }
+.social a[data-net="linkedin"] { --net: #0a66c2; }
+.social a[data-net="google_reviews"] { --net: #fbbc04; color: #202124; }
+.social a[data-net="whatsapp_channel"] { --net: #25d366; }
+/* with the channel name: "Folgen Sie uns" */
+.social--labels a { width: auto; height: 48px; padding: 0 1.1rem 0 0.9rem; gap: 0.55rem; border-radius: 999px; display: inline-flex; align-items: center; font-weight: 700; font-size: 0.95rem; }
+/* small, for the header strip and the phone menu */
+.social--mini { gap: 0.4rem; margin: 0; flex-wrap: nowrap; }
+.social--mini a { width: 28px; height: 28px; box-shadow: none; }
+.social--mini svg { width: 0.95rem; height: 0.95rem; }
+.social--mini a[data-net="tiktok"] svg { filter: drop-shadow(1px 1px 0 #fe2c55) drop-shadow(-1px -1px 0 #25f4ee); }
+.social-follow { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem 1.25rem; margin-top: 1.25rem; }
+.social-follow__h { margin: 0; font-weight: 800; font-size: 1.05rem; }
+.social-follow .social { margin: 0; }
 html[data-theme="dark"] .feed { background: transparent; }
 html[data-theme="dark"] .feed__card { background: rgb(255 255 255 / 0.05); border-color: rgb(255 255 255 / 0.12); box-shadow: none; }
 html[data-theme="dark"] :is(.feed__t, .feed__who) { color: #f2f6fb; }
 html[data-theme="dark"] .feed__x { color: #c9d6e3; }
-html[data-theme="dark"] .social a { background: rgb(255 255 255 / 0.08); color: #f2f6fb; }
+html[data-theme="dark"] .social a { box-shadow: 0 0 0 1px rgb(255 255 255 / 0.18); }
 /* the admin page "Website & Kanäle" */
 .asc { display: grid; gap: 1.25rem; }
 .asc__card { padding: 1.25rem; border-radius: 20px; background: #ffffff; border: 1px solid rgb(var(--c-line) / 0.1); display: grid; gap: 0.75rem; }
@@ -9378,3 +9399,6 @@ html[data-theme="dark"] .ed__bar { background: linear-gradient(to top, #121a24 7
 .dw__move input:not([type="checkbox"]) { min-height: 42px; padding: 0 0.65rem; border-radius: 10px; border: 1px solid rgb(var(--c-line) / 0.22); font: inherit; }
 .dw__move .ed__check { display: flex; align-items: center; gap: 0.4rem; }
 html[data-theme="dark"] :is(.ed__line.is-opt, .dw__lines tr.is-opt td, .dw__move) { background: rgb(255 255 255 / 0.05); }
+/* the phone menu: the channels above the call buttons */
+.mnav__social { display: grid; gap: 0.5rem; padding: 0.75rem 1.5rem; border-top: 1px solid rgb(var(--c-line) / 0.16); background: var(--paper-1); }
+.mnav__social .social { margin: 0; }

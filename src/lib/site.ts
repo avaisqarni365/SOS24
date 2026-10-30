@@ -4,13 +4,8 @@ import { SERVICE_PAGES, CITY_PAGES } from "@/data/seo-pages";
 export const SITE_URL = "https://sos-abdichtung.de";
 export const SITE_NAME = "sos-abdichtung";
 export const PARTNER_URL = "https://www.schimmelpeter.de/partner/wuppertal-kellersanierung";
-/** The main Facebook page "SOS-Abdichtung" (Essen; same name, address and phone as the Google Business Profile). The town pages are not listed here. */
-export const FACEBOOK_URL = "https://www.facebook.com/profile.php?id=61596178164338";
-/** The YouTube channel with the films as Shorts. */
-export const YOUTUBE_URL = "https://www.youtube.com/@SOS-Abdichtung";
-/** Instagram and TikTok, with the same films as Reels and posts. */
-export const INSTAGRAM_URL = "https://www.instagram.com/sos_abdichtung/";
-export const TIKTOK_URL = "https://www.tiktok.com/@sos_abdichtung";
+export { FACEBOOK_URL, YOUTUBE_URL, INSTAGRAM_URL, TIKTOK_URL } from "@/lib/social";
+import { FACEBOOK_URL, YOUTUBE_URL, INSTAGRAM_URL, TIKTOK_URL } from "@/lib/social";
 
 /** Share preview (WhatsApp, Facebook, LinkedIn, X): JPEG, because not every
     messenger renders WebP previews. */

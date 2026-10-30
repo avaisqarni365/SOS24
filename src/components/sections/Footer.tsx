@@ -51,7 +51,11 @@ export default function Footer() {
           <div className="site-footer__id">
             <Logo />
             <PartnerBadge className="site-footer__badge" />
-            <SocialLinks />
+            {/* the channels, named and in their colours: clear on the van photo too */}
+            <div className="social-follow">
+              <p className="social-follow__h">Folgen Sie uns</p>
+              <SocialLinks variant="labels" />
+            </div>
           </div>
         </div>
 
