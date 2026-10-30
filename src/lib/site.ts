@@ -4,8 +4,8 @@ import { SERVICE_PAGES, CITY_PAGES } from "@/data/seo-pages";
 export const SITE_URL = "https://sos-abdichtung.de";
 export const SITE_NAME = "sos-abdichtung";
 export const PARTNER_URL = "https://www.schimmelpeter.de/partner/wuppertal-kellersanierung";
-/** The business's own Facebook page (same name, address and phone as the Google Business Profile). */
-export const FACEBOOK_URL = "https://www.facebook.com/profile.php?id=61596032881421";
+/** The main Facebook page "SOS-Abdichtung" (Essen; same name, address and phone as the Google Business Profile). The town pages are not listed here. */
+export const FACEBOOK_URL = "https://www.facebook.com/profile.php?id=61596178164338";
 
 /** Share preview (WhatsApp, Facebook, LinkedIn, X): JPEG, because not every
     messenger renders WebP previews. */
