@@ -963,7 +963,7 @@ export const CITY_PAGES: CityPage[] = [
     keyword: "Kellersanierung Wuppertal",
     title: "Kellersanierung Wuppertal | Feuchter Keller, ohne Aufgraben",
     metaDescription:
-      "Kellersanierung Wuppertal: feuchter Keller, Hangwasser, Bruchstein- und Gründerzeitkeller von innen trockenlegen. Standort Remscheider Str. 45, Messung kostenlos.",
+      "Kellersanierung Wuppertal: feuchter Keller, Hangwasser, Bruchstein- und Gründerzeitkeller von innen trockenlegen. Messung kostenlos, Festpreis.",
     h1: "Kellersanierung Wuppertal: Ihr feuchter Keller wird trocken, auch in Hanglage",
     lede:
       "Zwischen Vohwinkel und Beyenburg stehen viele Häuser am Hang oder nah an der Wupper. Wir kennen die typischen Kellerschäden dieser Stadt und sind in Wuppertal in der Regel innerhalb von 24 Stunden bei Ihnen.",

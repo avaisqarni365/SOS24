@@ -17,7 +17,7 @@ export const COMPANY_INFO = {
   street: "Niebuhrstraße 46",
   city: "45144 Essen",
   operatingRegion: "ganz NRW: Ruhrgebiet, Rheinland & Bergisches Land",
-  // the main number (Essen, as in the Impressum) for calls and WhatsApp; Wuppertal has its own in LOCATIONS
+  // the one number (Essen, as in the Impressum) for calls and WhatsApp
   phoneDisplay: "+49 (0)172 2064177",
   phoneTel: "+491722064177",
   email: "info@sos-abdichtung.de",
@@ -31,9 +31,10 @@ export const COMPANY_INFO = {
 };
 
 /**
- * The two locations, each with its address and the one phone number, exactly as in the Google Business
- * Profile and on the SchimmelPeter partner page: Google trusts a local business whose name,
- * address and phone (NAP) agree everywhere. Essen is the registered office (Impressum).
+ * The location shown on the website, with its address and phone, exactly as in the Google Business
+ * Profile: Google trusts a local business whose name, address and phone (NAP) agree everywhere.
+ * Essen is the registered office (Impressum). The Wuppertal address is only for the SchimmelPeter
+ * partner listing and is deliberately not published here.
  */
 export const LOCATIONS = [
   {
@@ -45,16 +46,6 @@ export const LOCATIONS = [
     phoneDisplay: "+49 (0)172 2064177",
     phoneTel: "+491722064177",
     geo: { lat: 51.4429, lng: 6.9806 },
-  },
-  {
-    key: "wuppertal",
-    label: "Wuppertal",
-    street: "Remscheider Str. 45",
-    postalCode: "42369",
-    locality: "Wuppertal",
-    phoneDisplay: "+49 (0)172 2064177",
-    phoneTel: "+491722064177",
-    geo: { lat: 51.2316, lng: 7.2096 },
   },
 ] as const;
 
