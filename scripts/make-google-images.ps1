@@ -82,7 +82,7 @@ $formatCenter = New-Object System.Drawing.StringFormat
 $formatCenter.Alignment = [System.Drawing.StringAlignment]::Center
 
 $gCover.DrawString("Kellersanierung & Schimmelbeseitigung", $fontTitle, $textBrushWhite, [float]($coverW / 2), 305, $formatCenter)
-$gCover.DrawString("TUV-gepruefter Fachbetrieb * Wuppertal * Solingen * Remscheid * NRW", $fontSub, $textBrushCyan, [float]($coverW / 2), 365, $formatCenter)
+$gCover.DrawString("Fachbetrieb aus Essen * Ruhrgebiet * Bergisches Land * NRW", $fontSub, $textBrushCyan, [float]($coverW / 2), 365, $formatCenter)
 $gCover.DrawString("Horizontalsperren - Kellerinnenabdichtung - Rissinjektion - 10 Jahre Garantie", $fontDesc, $textBrushMuted, [float]($coverW / 2), 405, $formatCenter)
 
 # Emerald CTA Bar

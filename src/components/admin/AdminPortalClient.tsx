@@ -720,8 +720,8 @@ const COMPETITOR_INTEL: CompetitorData[] = [
     strengths_en: "Local word-of-mouth reputation, personal neighborhood ties.",
     weaknesses_de: "Veraltete Websites, keine Google Maps SEO Optimierung, keine 24/7 Notdienst-Hotline, oft keine WTA-Spezialisierung für Injektionen.",
     weaknesses_en: "Outdated websites, zero Google Maps optimization, unstaffed phones after hours, lack of specialized WTA certification.",
-    sosStrategy_de: "Google Maps 3-Pack dominieren, mobile 1-Klick Erreichbarkeit & TÜV/WTA Gütesiegel als Qualitätsnachweis hervorheben.",
-    sosStrategy_en: "Dominate Google Maps 3-pack, 1-tap call & WhatsApp accessibility, TÜV & WTA certificates as proof of quality.",
+    sosStrategy_de: "Google Maps 3-Pack dominieren, mobile 1-Klick Erreichbarkeit & WTA-Verfahren & Messprotokolle als Qualitätsnachweis hervorheben.",
+    sosStrategy_en: "Dominate Google Maps 3-pack, 1-tap call & WhatsApp accessibility, WTA methods & measurement reports as proof of quality.",
     status_de: "Geringe Werbeaktivität",
     status_en: "Minimal online ad activity",
   },
@@ -4877,8 +4877,8 @@ export default function AdminPortalClient() {
                     key: "srv_mds",
                   },
                   {
-                    title_de: "Schimmelbeseitigung (TÜV)",
-                    title_en: "Mold Remediation (TÜV Certified)",
+                    title_de: "Schimmelbeseitigung",
+                    title_en: "Mold Remediation",
                     desc_de: "Fachgerechte Schimmelsanierung, Sporenentfernung und diffusionsoffene Calciumsilikat-Klimaplatten.",
                     desc_en: "Professional mold remediation, spore neutralization, and calcium silicate insulating boards.",
                     key: "srv_schimmel",
@@ -5038,7 +5038,7 @@ export default function AdminPortalClient() {
                       />
                     </div>
                     <p className="text-[11px] text-slate-500 leading-snug">
-                      {t("Professionelles Titelbild mit TÜV-Qualitätsversprechen, Leistungsübersicht & 24/7 Notdienst-Hotline.", "Professional cover banner with TÜV certification, services overview & emergency hotline.")}
+                      {t("Professionelles Titelbild mit Qualitätsversprechen, Leistungsübersicht & 24/7 Notdienst-Hotline.", "Professional cover banner with quality promise, services overview & emergency hotline.")}
                     </p>
                   </div>
 
@@ -5508,7 +5508,7 @@ export default function AdminPortalClient() {
               <div className="p-3 bg-slate-50 rounded-xl border border-slate-200 space-y-1.5 text-xs">
                 <strong className="text-slate-900 block font-bold">3. Schimmelbeseitigung-Review:</strong>
                 <p className="text-[11px] text-slate-600 italic">
-                  „Schimmelbeseitigung und Klimaplatte im Altbau nach TÜV-Richtlinien. Sehr sauber gearbeitet, Top Fachbetrieb.“
+                  „Schimmelbeseitigung und Klimaplatte im Altbau. Sehr sauber gearbeitet, Top Fachbetrieb.“
                 </p>
                 <div className="text-[10px] text-emerald-700 font-semibold">Gemini zitiert diesen Text für „Schimmelbeseitigung Wuppertal“</div>
               </div>

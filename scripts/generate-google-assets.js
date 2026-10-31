@@ -67,7 +67,7 @@ const logoHtml = `<!DOCTYPE html>
       ${svg}
     </div>
     <div class="tagline">Kellersanierung & Bautenschutz</div>
-    <div class="sub">TÜV-zertifizierter Fachbetrieb</div>
+    <div class="sub">Fachbetrieb aus Essen</div>
   </div>
 </body>
 </html>`;
@@ -194,7 +194,7 @@ const coverHtml = `<!DOCTYPE html>
       ${svg}
     </div>
     <div class="badge-row">
-      <div class="badge">✓ TÜV Rheinland Sachkunde</div>
+      <div class="badge">✓ SchimmelPeter® Partnerbetrieb</div>
       <div class="badge">✓ WTA-zertifiziert</div>
       <div class="badge">✓ 10 Jahre Garantie</div>
     </div>
