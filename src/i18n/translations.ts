@@ -36,7 +36,7 @@ export const DE: Record<string, string> = {
     "hero.sub": "sos-abdichtung stoppt aufsteigende Feuchtigkeit, saniert nasse Kellerwände und beseitigt Schimmel im Raum Wuppertal und Bergisches Land. Das WTA-Injektionsverfahren verdrängt Wasser auf molekularer Ebene — sauber von der Innenseite, ohne Baggerarbeiten und mit 10 Jahren Garantie.",
     "hero.ctaPrimary": "Kostenlose Vor-Ort-Analyse anfragen",
     "hero.ctaSecondary": "3D-Injektionsmodell ansehen",
-    "hero.trustStrip": "WTA-MERKBLATT 4-4-04 · TÜV-GEPRÜFTE BAUSTOFFE · 10 JAHRE GARANTIE · OHNE AUFGRABEN · PLZ 42",
+    "hero.trustStrip": "WTA-MERKBLATT 4-4-04 · 10 JAHRE GARANTIE · OHNE AUFGRABEN · PLZ 42",
     "hero.stat1Val": "42",
     "hero.stat1Label": "PLZ-Region Wuppertal · Solingen · Remscheid",
     "hero.stat2Val": "100%",

@@ -21,7 +21,7 @@ const STRINGS: Record<string, string> = {
     "hero.sub": "sos-abdichtung stops rising damp, restores wet basement masonry, and eliminates mould in Wuppertal and the Bergisches Land region. Our WTA-certified chemical injection displaces water at molecular level — executed cleanly from the inside with zero excavation and backed by a 10-year warranty.",
     "hero.ctaPrimary": "Request Free On-Site Analysis",
     "hero.ctaSecondary": "Explore 3D Injection Model",
-    "hero.trustStrip": "WTA CODE 4-4-04 · TÜV-TESTED MATERIALS · 10-YEAR WARRANTY · ZERO EXCAVATION · PLZ 42",
+    "hero.trustStrip": "WTA CODE 4-4-04 · 10-YEAR WARRANTY · ZERO EXCAVATION · PLZ 42",
     "hero.stat1Val": "42",
     "hero.stat1Label": "PLZ Postal Region Wuppertal · Solingen · Remscheid",
     "hero.stat2Val": "100%",
