@@ -103,11 +103,13 @@ Jedes Messprotokoll wird dem Kunden immer schriftlich übergeben, nach jeder Pha
   - [Rissverpressung in Düsseldorf](https://sos-abdichtung.de/kellersanierung/duesseldorf/#rissverpressung)
   - [Feuchtemessung in Düsseldorf](https://sos-abdichtung.de/kellersanierung/duesseldorf/#feuchtemessung)
   - [Sockel abdichten in Düsseldorf](https://sos-abdichtung.de/kellersanierung/duesseldorf/#sockelabdichtung)
-- [Kellersanierung Bochum](https://sos-abdichtung.de/kellersanierung/bochum/): vor Ort in 24 bis 48 Stunden. PLZ 44787, 44789, 44791, 44799, 44801, 44803, 44866
+- [Kellersanierung Bochum](https://sos-abdichtung.de/kellersanierung/bochum/): vor Ort in 24 bis 48 Stunden. PLZ 44787, 44789, 44791, 44793, 44795, 44797, 44799, 44801, 44803, 44805, 44807, 44809, 44866, 44867, 44869, 44879, 44892, 44894
   - [Rissverpressung in Bochum](https://sos-abdichtung.de/kellersanierung/bochum/#rissverpressung)
   - [Keller abdichten in Bochum](https://sos-abdichtung.de/kellersanierung/bochum/#kellerinnenabdichtung)
   - [Horizontalsperre in Bochum](https://sos-abdichtung.de/kellersanierung/bochum/#horizontalsperre)
   - [Schimmel im Keller in Bochum](https://sos-abdichtung.de/kellersanierung/bochum/#schimmelbeseitigung)
+  - [Feuchtemessung in Bochum](https://sos-abdichtung.de/kellersanierung/bochum/#feuchtemessung)
+  - [Sockel abdichten in Bochum](https://sos-abdichtung.de/kellersanierung/bochum/#sockelabdichtung)
 - [Kellersanierung Dortmund](https://sos-abdichtung.de/kellersanierung/dortmund/): vor Ort in 24 bis 48 Stunden. PLZ 44135, 44137, 44139, 44141, 44143, 44145, 44147, 44149, 44225, 44227, 44229, 44263, 44265, 44267, 44269, 44287, 44289, 44309, 44319, 44328, 44329, 44339, 44357, 44359, 44369, 44379, 44388
   - [Horizontalsperre in Dortmund](https://sos-abdichtung.de/kellersanierung/dortmund/#horizontalsperre)
   - [Keller abdichten in Dortmund](https://sos-abdichtung.de/kellersanierung/dortmund/#kellerinnenabdichtung)
@@ -122,11 +124,13 @@ Jedes Messprotokoll wird dem Kunden immer schriftlich übergeben, nach jeder Pha
   - [Feuchtemessung in Köln](https://sos-abdichtung.de/kellersanierung/koeln/#feuchtemessung)
   - [Rissverpressung in Köln](https://sos-abdichtung.de/kellersanierung/koeln/#rissverpressung)
   - [Sockel abdichten in Köln](https://sos-abdichtung.de/kellersanierung/koeln/#sockelabdichtung)
-- [Kellersanierung Duisburg](https://sos-abdichtung.de/kellersanierung/duisburg/): vor Ort in 24 bis 48 Stunden. PLZ 47051, 47053, 47055, 47057, 47058, 47059, 47119, 47137, 47166, 47169, 47178, 47198, 47226, 47228, 47239, 47249, 47259, 47279
+- [Kellersanierung Duisburg](https://sos-abdichtung.de/kellersanierung/duisburg/): vor Ort in 24 bis 48 Stunden. PLZ 47051, 47053, 47055, 47057, 47058, 47059, 47119, 47137, 47138, 47139, 47166, 47167, 47169, 47178, 47179, 47198, 47199, 47226, 47228, 47229, 47239, 47249, 47259, 47269, 47279
   - [Keller abdichten in Duisburg](https://sos-abdichtung.de/kellersanierung/duisburg/#kellerinnenabdichtung)
   - [Rissverpressung in Duisburg](https://sos-abdichtung.de/kellersanierung/duisburg/#rissverpressung)
   - [Horizontalsperre in Duisburg](https://sos-abdichtung.de/kellersanierung/duisburg/#horizontalsperre)
   - [Schimmel im Keller in Duisburg](https://sos-abdichtung.de/kellersanierung/duisburg/#schimmelbeseitigung)
+  - [Feuchtemessung in Duisburg](https://sos-abdichtung.de/kellersanierung/duisburg/#feuchtemessung)
+  - [Sockel abdichten in Duisburg](https://sos-abdichtung.de/kellersanierung/duisburg/#sockelabdichtung)
 - [Kellersanierung Gelsenkirchen](https://sos-abdichtung.de/kellersanierung/gelsenkirchen/): vor Ort in 24 bis 48 Stunden. PLZ 45879, 45881, 45883, 45884, 45886, 45888, 45889, 45891, 45892, 45894, 45896, 45897, 45899
   - [Rissverpressung in Gelsenkirchen](https://sos-abdichtung.de/kellersanierung/gelsenkirchen/#rissverpressung)
   - [Keller abdichten in Gelsenkirchen](https://sos-abdichtung.de/kellersanierung/gelsenkirchen/#kellerinnenabdichtung)
@@ -281,10 +285,13 @@ Von Ehrenfeld und Stiepel bis Langendreer und Wattenscheid: Ehemalige Bergbaugeb
 - Löss- und Lehmböden im mittleren Ruhrgebiet: Schwere Böden stauen Niederschlagswasser lange an der Außenwand. Ohne intakte Vertikal- oder Innenabdichtung dringt Wasser seitlich ins Kellergefüge.
 - Bergschäden & Risse im Fundament: Tiefenbohrungen und Setzungen aus der Bergbauhistorie hinterlassen feine Bewegungsrisse in Betonböden und Kellerwänden.
 - Altbauten der Zechenära: Viele Bergarbeitersiedlungen und Mehrfamilienhäuser in Wattenscheid und Ehrenfeld besitzen Ziegelmauerwerk ohne jede vertikale Sperrbahn.
+- Hanglagen zum Ruhrtal: Im Süden fällt das Gelände von Weitmar und Stiepel zur Ruhr hin ab. Regenwasser läuft im Boden den Hang hinunter und staut sich an der bergseitigen Kellerwand, während die Talseite oft trocken bleibt.
+- Nachkriegsbau in der Innenstadt: Die Bochumer Innenstadt wurde im Krieg schwer getroffen und in den 1950er Jahren schnell wieder aufgebaut. Viele dieser Häuser haben dünne Kellerwände und nur einen Bitumenanstrich als Abdichtung, der heute nicht mehr hält.
 - Mitte und Ehrenfeld (Bochum-Mitte, Ehrenfeld, Wiemelhausen, Altenbochum): Gründerzeit und Wiederaufbau, Ziegelkeller ohne Sperrschicht. Aufsteigende Feuchte und Salze im Mauerwerk.
 - Wattenscheid und der Norden (Wattenscheid, Gerthe, Riemke, Hofstede): Bergarbeitersiedlungen und Zechenhäuser. Setzungsrisse aus dem Bergbau und Wasser, das sich im Lehm an der Wand staut.
 - Der Süden am Ruhrtal (Stiepel, Weitmar, Dahlhausen, Linden): Hanglagen über der Ruhr. Schichtenwasser an der bergseitigen Wand, im Tal steigendes Grundwasser.
 - Der Osten (Langendreer, Werne, Laer, Querenburg): Siedlungen und Einfamilienhäuser auf ehemaligem Bergbaugebiet. Risse in Bodenplatte und Wand sind hier der häufigste Weg für das Wasser.
+- Der Westen (Höntrop, Eppendorf, Günnigfeld, Leithe, Westenfeld): Gründerzeithäuser im alten Wattenscheider Kern und Einfamilienhäuser der 1960er und 1970er Jahre. Aufsteigende Feuchte im Altbau, seitliche Feuchte über alte Außenabdichtungen.
 
 ### Kellersanierung Dortmund
 Vom Kreuzviertel und Hörde am Phoenix-See bis nach Brackel und Mengede: Trockene Keller schützen die Bausubstanz und sichern den Wert Ihrer Immobilie in Dortmund.
@@ -316,9 +323,11 @@ Duisburg liegt am Zusammenfluss von Rhein und Ruhr, und der Bergbau hat den Bode
 - Bergsenkungen im Norden und links des Rheins: In Walsum, Hamborn und Meiderich und links des Rheins in Homberg und Rheinhausen hat der Steinkohlenbergbau den Boden absinken lassen. Setzungsrisse sind dort häufig der Weg, auf dem Wasser hereinkommt.
 - Gepumptes Grundwasser links des Rheins: Wo sich das Gelände links des Rheins gesenkt hat, hält die LINEG das Grundwasser mit Pumpen niedrig. Die Kellersohlen liegen dort oft nur knapp darüber.
 - Altbauten aus der Industriezeit: Neudorf, Duissern und Hochfeld haben viele Häuser aus der Gründerzeit und den Jahren um 1900 mit Ziegelkellern, deren Horizontalsperre längst nicht mehr wirkt.
+- Seen und Kiesböden im Süden: Rund um die Sechs-Seen-Platte in Wedau und Buchholz liegen Kies und Sand im Untergrund, das Grundwasser steht nah unter dem Gelände. Kellerböden und Wandfüße bekommen hier bei nassen Jahren Wasser von unten ab.
 - Duisburger Norden (Walsum, Hamborn, Marxloh, Meiderich, Beeck, Ruhrort): Zechen- und Hüttensiedlungen, Bergsenkungen und die Nähe zu Rhein und Ruhr. Typisch sind Setzungsrisse und Wasser, das nach Hochwasser von unten kommt.
 - Mitte und Süden (Altstadt, Neudorf, Duissern, Hochfeld, Wanheimerort, Huckingen): Gründerzeit und Wiederaufbau rund um die Innenstadt, im Süden Einfamilienhäuser am Rhein. Häufig aufsteigende Feuchte im Ziegel, in Rheinnähe zusätzlich Grundwasser.
 - Links des Rheins (Homberg, Baerl, Rheinhausen, Rumeln-Kaldenhausen): Abgesenktes Gelände mit gepumptem Grundwasser und Setzungsrissen aus dem Bergbau. Hier ist eine Kombination aus Rissverpressung und Innenabdichtung der häufigste Weg.
+- Der Süden an den Seen (Wedau, Buchholz, Bissingheim, Großenbaum, Rahm): Einfamilien- und Doppelhäuser mit genutzten Kellern. Kies im Untergrund und Grundwasser nah unter dem Gelände, Feuchte von unten und am Wandfuß.
 
 ### Kellersanierung Gelsenkirchen
 Gelsenkirchen ist mit dem Bergbau gewachsen, und der Bergbau hat Spuren im Boden hinterlassen: Setzungsrisse, ein künstlich niedrig gehaltenes Grundwasser und viele Siedlungshäuser ohne Sperrschicht. Von unserem Sitz in Essen sind wir schnell in Buer, Horst oder Ückendorf, messen kostenlos und sanieren von innen.

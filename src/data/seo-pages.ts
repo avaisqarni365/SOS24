@@ -2097,14 +2097,14 @@ export const CITY_PAGES: CityPage[] = [
     slug: "bochum",
     name: "Bochum",
     keyword: "Kellersanierung Bochum",
-    title: "Kellersanierung Bochum | Feuchte Keller sanieren & sperren",
+    title: "Kellersanierung Bochum | Keller abdichten ohne Aufgraben",
     metaDescription:
       "Kellersanierung Bochum: Nasse Kellerwände & Setzungsrisse von innen sanieren. Kostenlose Feuchtemessung vor Ort, Festpreis & 10 Jahre Garantie.",
     h1: "Kellersanierung Bochum: Nasse Keller dauerhaft trockenlegen",
     lede:
       "Von Ehrenfeld und Stiepel bis Langendreer und Wattenscheid: Ehemalige Bergbaugebiete, Lehmböden und feuchtes Mauerwerk verlangen maßgeschneiderte Lösungen ohne Erdarbeiten.",
-    plz: ["44787", "44789", "44791", "44799", "44801", "44803", "44866"],
-    districts: ["Bochum-Mitte", "Ehrenfeld", "Wattenscheid", "Stiepel", "Weitmar", "Langendreer", "Wiemelhausen"],
+    plz: ["44787", "44789", "44791", "44793", "44795", "44797", "44799", "44801", "44803", "44805", "44807", "44809", "44866", "44867", "44869", "44879", "44892", "44894"],
+    districts: ["Bochum-Mitte", "Ehrenfeld", "Wiemelhausen", "Altenbochum", "Wattenscheid", "Gerthe", "Riemke", "Stiepel", "Weitmar", "Linden", "Dahlhausen", "Langendreer", "Werne", "Querenburg"],
     geo: { lat: 51.4818, lng: 7.2162 },
     responseTime: "24 bis 48 Stunden",
     localFactors: [
@@ -2120,6 +2120,14 @@ export const CITY_PAGES: CityPage[] = [
         name: "Altbauten der Zechenära",
         text: "Viele Bergarbeitersiedlungen und Mehrfamilienhäuser in Wattenscheid und Ehrenfeld besitzen Ziegelmauerwerk ohne jede vertikale Sperrbahn.",
       },
+      {
+        "name": "Hanglagen zum Ruhrtal",
+        "text": "Im Süden fällt das Gelände von Weitmar und Stiepel zur Ruhr hin ab. Regenwasser läuft im Boden den Hang hinunter und staut sich an der bergseitigen Kellerwand, während die Talseite oft trocken bleibt."
+      },
+      {
+        "name": "Nachkriegsbau in der Innenstadt",
+        "text": "Die Bochumer Innenstadt wurde im Krieg schwer getroffen und in den 1950er Jahren schnell wieder aufgebaut. Viele dieser Häuser haben dünne Kellerwände und nur einen Bitumenanstrich als Abdichtung, der heute nicht mehr hält."
+      }
     ],
     sections: [
       {
@@ -2147,6 +2155,20 @@ export const CITY_PAGES: CityPage[] = [
           "Rissverpressung im Mauerwerk und Beton mit PU-Harz oder Epoxid",
           "Mauerwerkstrockenlegung ohne Aufgraben, mit 10 Jahren Garantie auf die Arbeit"
         ]
+      },
+      {
+        "heading": "Langendreer, Werne und Laer: Zechensiedlungen im Bochumer Osten",
+        "paragraphs": [
+          "Im Osten der Stadt prägen Bergarbeitersiedlungen das Bild: Reihen- und Doppelhäuser mit kleinen, flachen Kellern aus Ziegel. Die Wände haben keine Sperrschicht, und Setzungen aus der Bergbauzeit haben Risse hinterlassen, durch die bei Regen Wasser eindringt.",
+          "Wir verpressen die Risse mit PU-Harz, setzen eine Horizontalsperre gegen aufsteigende Feuchte und schützen die Wände mit Sanierputz. Weil die Siedlungshäuser dicht an dicht stehen, ist das Arbeiten von innen hier fast immer der einzige Weg."
+        ]
+      },
+      {
+        "heading": "Wattenscheid und Höntrop: Altbauten und Einfamilienhäuser im Westen",
+        "paragraphs": [
+          "In Wattenscheid stehen Gründerzeithäuser im alten Ortskern neben Einfamilienhäusern aus den 1960er und 1970er Jahren in Höntrop und Eppendorf. Die Altbauten haben meist aufsteigende Feuchte im Mauerwerk, die jüngeren Häuser eher eine gealterte Außenabdichtung, über die Feuchte seitlich in den Keller kommt.",
+          "Mit der kostenlosen Messung klären wir zuerst, welcher Fall vorliegt. Danach setzen wir die passende Maßnahme um, von der Horizontalsperre bis zur Innenabdichtung mit Dichtungsschlämme und Hohlkehle."
+        ]
       }
     ],
     faqs: [
@@ -2165,6 +2187,18 @@ export const CITY_PAGES: CityPage[] = [
       {
         "q": "Was kostet es, feuchte Kellerwände in Bochum sanieren zu lassen?",
         "a": "Das hängt von Ursache, Wandlänge und Wanddicke ab. Nach der kostenlosen Messung erhalten Sie ein verbindliches Festpreisangebot ohne Nachforderungen."
+      },
+      {
+        "q": "Wie schnell sind Sie in Bochum vor Ort?",
+        "a": "Von unserem Sitz in Essen sind wir in der Regel innerhalb von 24 bis 48 Stunden in Bochum, von Wattenscheid bis Langendreer und von Gerthe bis Stiepel."
+      },
+      {
+        "q": "Wie lange dauert eine Kellersanierung in Bochum?",
+        "a": "Die Arbeiten selbst dauern meist zwei bis vier Werktage. Danach trocknet das Mauerwerk über einige Monate aus; wir messen nach und geben Ihnen das Protokoll schriftlich."
+      },
+      {
+        "q": "Muss am Hang in Stiepel oder Weitmar aufgegraben werden?",
+        "a": "Meist nicht. Die bergseitige Wand, an der sich das Wasser staut, dichten wir von innen mit Dichtungsschlämme und Hohlkehle ab. Garten und Böschung bleiben unberührt."
       }
     ],
     wiki: "https://de.wikipedia.org/wiki/Bochum",
@@ -2188,6 +2222,16 @@ export const CITY_PAGES: CityPage[] = [
         slug: "schimmelbeseitigung",
         heading: "Schimmel im Keller in Bochum",
         text: "Feuchte Ziegelwände und kühle Keller lassen Schimmel wachsen. Wir entfernen ihn sporensicher und beseitigen die Ursache."
+      },
+      {
+        "slug": "feuchtemessung",
+        "heading": "Feuchtemessung in Bochum",
+        "text": "Am Hang im Süden ist oft nur eine Wand nass, in den Zechensiedlungen kommt die Feuchte von unten und durch Risse. Wir messen kostenlos, woher sie bei Ihnen kommt."
+      },
+      {
+        "slug": "sockelabdichtung",
+        "heading": "Sockel abdichten in Bochum",
+        "text": "Bei Siedlungs- und Reihenhäusern zieht Spritzwasser in den Sockel und weiter in die Kellerwand. Wir dichten den Sockel ab und schließen ihn an die Kellerabdichtung an."
       }
     ],
     districtGroups: [
@@ -2230,6 +2274,17 @@ export const CITY_PAGES: CityPage[] = [
           "Querenburg"
         ],
         text: "Siedlungen und Einfamilienhäuser auf ehemaligem Bergbaugebiet. Risse in Bodenplatte und Wand sind hier der häufigste Weg für das Wasser."
+      },
+      {
+        "name": "Der Westen",
+        "districts": [
+          "Höntrop",
+          "Eppendorf",
+          "Günnigfeld",
+          "Leithe",
+          "Westenfeld"
+        ],
+        "text": "Gründerzeithäuser im alten Wattenscheider Kern und Einfamilienhäuser der 1960er und 1970er Jahre. Aufsteigende Feuchte im Altbau, seitliche Feuchte über alte Außenabdichtungen."
       }
     ],
     nearby: ["essen", "dortmund", "wuppertal"],
@@ -2599,14 +2654,14 @@ export const CITY_PAGES: CityPage[] = [
     slug: "duisburg",
     name: "Duisburg",
     keyword: "Kellersanierung Duisburg",
-    title: "Kellersanierung Duisburg | Nasse Keller an Rhein & Ruhr",
+    title: "Kellersanierung Duisburg | Keller abdichten ohne Aufgraben",
     metaDescription:
       "Kellersanierung Duisburg ohne Aufgraben: Grundwasser an Rhein und Ruhr, Bergsenkungsrisse, nasse Altbaukeller von innen sanieren. Messung kostenlos.",
     h1: "Kellersanierung Duisburg: nasse Keller an Rhein und Ruhr trockenlegen",
     lede:
       "Duisburg liegt am Zusammenfluss von Rhein und Ruhr, und der Bergbau hat den Boden auf beiden Rheinseiten verändert. Beides merkt man im Keller: Grundwasser, das von außen drückt, und Risse, durch die es eindringt. Wir messen kostenlos und sanieren von innen.",
-    plz: ["47051", "47053", "47055", "47057", "47058", "47059", "47119", "47137", "47166", "47169", "47178", "47198", "47226", "47228", "47239", "47249", "47259", "47279"],
-    districts: ["Altstadt", "Neudorf", "Duissern", "Hochfeld", "Hamborn", "Meiderich", "Walsum", "Rheinhausen", "Homberg", "Huckingen"],
+    plz: ["47051", "47053", "47055", "47057", "47058", "47059", "47119", "47137", "47138", "47139", "47166", "47167", "47169", "47178", "47179", "47198", "47199", "47226", "47228", "47229", "47239", "47249", "47259", "47269", "47279"],
+    districts: ["Altstadt", "Neudorf", "Duissern", "Hochfeld", "Hamborn", "Marxloh", "Meiderich", "Ruhrort", "Walsum", "Rheinhausen", "Homberg", "Huckingen", "Wedau", "Buchholz"],
     geo: { lat: 51.4344, lng: 6.7623 },
     responseTime: "24 bis 48 Stunden",
     wiki: "https://de.wikipedia.org/wiki/Duisburg",
@@ -2627,6 +2682,10 @@ export const CITY_PAGES: CityPage[] = [
         name: "Altbauten aus der Industriezeit",
         text: "Neudorf, Duissern und Hochfeld haben viele Häuser aus der Gründerzeit und den Jahren um 1900 mit Ziegelkellern, deren Horizontalsperre längst nicht mehr wirkt.",
       },
+      {
+        "name": "Seen und Kiesböden im Süden",
+        "text": "Rund um die Sechs-Seen-Platte in Wedau und Buchholz liegen Kies und Sand im Untergrund, das Grundwasser steht nah unter dem Gelände. Kellerböden und Wandfüße bekommen hier bei nassen Jahren Wasser von unten ab."
+      }
     ],
     localServices: [
       {
@@ -2649,6 +2708,16 @@ export const CITY_PAGES: CityPage[] = [
         heading: "Schimmel im Keller in Duisburg",
         text: "Wo Kellerräume als Lager oder Hobbyraum genutzt werden, folgt auf die Feuchte oft der Schimmel. Wir entfernen ihn sporensicher und beseitigen die Ursache, damit er nicht wiederkommt.",
       },
+      {
+        "slug": "feuchtemessung",
+        "heading": "Feuchtemessung in Duisburg",
+        "text": "Grundwasser, aufsteigende Feuchte oder Kondensat: Wir messen kostenlos, woher die Nässe in Ihrem Keller kommt, und geben Ihnen das Ergebnis schriftlich."
+      },
+      {
+        "slug": "sockelabdichtung",
+        "heading": "Sockel abdichten in Duisburg",
+        "text": "Bei den Altbauten im Norden und in Hochfeld ist der Sockel zur Straße oft durchfeuchtet, der Putz platzt ab. Wir dichten den Sockel ab und schließen ihn an die Abdichtung der Kellerwand an."
+      }
     ],
     districtGroups: [
       {
@@ -2666,6 +2735,17 @@ export const CITY_PAGES: CityPage[] = [
         districts: ["Homberg", "Baerl", "Rheinhausen", "Rumeln-Kaldenhausen"],
         text: "Abgesenktes Gelände mit gepumptem Grundwasser und Setzungsrissen aus dem Bergbau. Hier ist eine Kombination aus Rissverpressung und Innenabdichtung der häufigste Weg.",
       },
+      {
+        "name": "Der Süden an den Seen",
+        "districts": [
+          "Wedau",
+          "Buchholz",
+          "Bissingheim",
+          "Großenbaum",
+          "Rahm"
+        ],
+        "text": "Einfamilien- und Doppelhäuser mit genutzten Kellern. Kies im Untergrund und Grundwasser nah unter dem Gelände, Feuchte von unten und am Wandfuß."
+      }
     ],
     sections: [
       {
@@ -2689,6 +2769,20 @@ export const CITY_PAGES: CityPage[] = [
           "Schimmel im Keller ist fast immer eine Folge von Feuchte in der Wand oder von Kondensat an kalten Flächen. Die Messung zeigt, welche Ursache vorliegt; danach entfernen wir den Befall und beheben den Grund.",
         ],
       },
+      {
+        "heading": "Hamborn, Marxloh und Meiderich: Arbeiterhäuser mit Ziegelkellern",
+        "paragraphs": [
+          "Im Duisburger Norden stehen viele Mehrfamilien- und Arbeiterhäuser aus der Zeit, als Thyssen und die Zechen die Stadtteile wachsen ließen. Die Keller sind aus Ziegel gemauert und haben keine Sperrschicht gegen aufsteigende Feuchte. Dazu kommen Setzungen aus der Bergbauzeit, die Risse in Wänden und Böden hinterlassen haben.",
+          "Wir setzen in diesen Häusern eine Horizontalsperre per Injektion, verpressen wasserführende Risse mit PU-Harz und schützen die Wände mit Sanierputz. Weil die Häuser meist bewohnt und vermietet sind, arbeiten wir Raum für Raum, und die Hausverwaltung bekommt nach jeder Phase ein Messprotokoll."
+        ]
+      },
+      {
+        "heading": "Huckingen, Wedau und Buchholz: Einfamilienhäuser im Duisburger Süden",
+        "paragraphs": [
+          "Im Süden der Stadt überwiegen Einfamilien- und Doppelhäuser mit voll genutzten Kellern: Hobbyraum, Waschküche, oft auch ein Gästezimmer. Feuchte fällt hier früh auf, an Flecken am Wandfuß, an Schimmel hinter Schränken und an einem muffigen Geruch.",
+          "Häufig kommt die Feuchte über eine gealterte Außenabdichtung oder bei hohem Grundwasser von unten. Wir dichten die Wände von innen mit Dichtungsschlämme ab und führen eine Hohlkehle am Übergang zur Bodenplatte aus. Garten, Terrasse und Einfahrt bleiben dabei unberührt."
+        ]
+      }
     ],
     faqs: [
       {
@@ -2707,6 +2801,18 @@ export const CITY_PAGES: CityPage[] = [
         q: "Was kostet die Kellersanierung in Duisburg?",
         a: "Das hängt von Ursache, Wandfläche, Mauerwerk und Rissen ab. Nach der kostenlosen Messung bekommen Sie einen verbindlichen Festpreis, ohne Nachträge.",
       },
+      {
+        "q": "Wie lange dauert eine Kellersanierung in Duisburg?",
+        "a": "Die Arbeiten selbst dauern meist zwei bis vier Werktage. Danach trocknet das Mauerwerk über einige Monate aus; wir messen nach und geben Ihnen das Protokoll schriftlich."
+      },
+      {
+        "q": "Sanieren Sie auch Keller in Mehrfamilienhäusern und für Hausverwaltungen in Duisburg?",
+        "a": "Ja. Für Hausverwaltungen und Eigentümergemeinschaften erstellen wir ein schriftliches Angebot mit Messprotokoll für die Eigentümerversammlung. Wir arbeiten raumweise, damit die Mieter ihre Keller möglichst weiter nutzen können."
+      },
+      {
+        "q": "Hilft eine Innenabdichtung bei hohem Rheinpegel?",
+        "a": "Eine Innenabdichtung nach WTA hält Wasser ab, das von außen gegen Wand und Boden drückt, auch wenn das Grundwasser mit dem Rhein steigt. Wichtig ist der dichte Anschluss zwischen Wand und Bodenplatte; den führen wir mit einer Hohlkehle aus."
+      }
     ],
     nearby: ["oberhausen", "muelheim-an-der-ruhr", "duesseldorf", "essen"],
   },
