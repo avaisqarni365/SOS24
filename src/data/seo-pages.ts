@@ -961,7 +961,7 @@ export const CITY_PAGES: CityPage[] = [
     slug: "wuppertal",
     name: "Wuppertal",
     keyword: "Kellersanierung Wuppertal",
-    title: "Kellersanierung Wuppertal | Feuchter Keller, ohne Aufgraben",
+    title: "Kellersanierung Wuppertal | Keller abdichten ohne Aufgraben",
     metaDescription:
       "Kellersanierung Wuppertal: feuchter Keller, Hangwasser, Bruchstein- und Gründerzeitkeller von innen trockenlegen. Messung kostenlos, Festpreis.",
     h1: "Kellersanierung Wuppertal: Ihr feuchter Keller wird trocken, auch in Hanglage",
@@ -1003,6 +1003,10 @@ export const CITY_PAGES: CityPage[] = [
         name: "Talsohle an der Wupper",
         text: "In den Lagen nah am Fluss sind die Böden feuchter, und bei Hochwasser wie im Juli 2021 können Keller auch von unten volllaufen.",
       },
+      {
+        "name": "Schiefer, Grauwacke und Kalk im Untergrund",
+        "text": "Unter Wuppertal liegen Tonschiefer und Grauwacke, in Elberfeld und Dornap auch Massenkalk. Das Gestein lässt Regenwasser nur schlecht versickern, es läuft auf den Gesteinsschichten den Hang hinab und staut sich an Kellerwänden."
+      }
     ],
     sections: [
       {
@@ -1026,6 +1030,20 @@ export const CITY_PAGES: CityPage[] = [
           "Nach einem Wasserschaden messen wir zunächst, wie tief die Nässe ins Mauerwerk eingedrungen ist und ob die Wand von selbst abtrocknen kann. Ist sie dauerhaft durchfeuchtet, wird die Trocknung Teil einer vollständigen Kellersanierung mit Horizontalsperre und Sanierputz. Wasserführende Risse in Betonkellern jüngerer Häuser verpressen wir mit PU-Harz. Die kostenlose Messung vor Ort zeigt, welcher Weg bei Ihrem Keller der richtige ist.",
         ],
       },
+      {
+        "heading": "Cronenberg, Ronsdorf und Vohwinkel: Einfamilienhäuser in den Außenbezirken",
+        "paragraphs": [
+          "In den Außenbezirken stehen viele Einfamilien- und Doppelhäuser, oft mit Schieferfassade und Keller aus Bruchstein oder Ziegel. Viele davon liegen am Hang: Die bergseitige Wand steht im Erdreich und bekommt nach jedem Regen Schichtenwasser ab, die Talseite bleibt trocken.",
+          "Wir dichten die bergseitige Wand von innen ab, mit Dichtungsschlämme und einer Hohlkehle am Übergang zum Boden. Wo zusätzlich Feuchte von unten aufsteigt, setzen wir eine Horizontalsperre per Injektion. Garten und Böschung bleiben unberührt, das spart am Hang viel Aufwand."
+        ]
+      },
+      {
+        "heading": "Mehrfamilienhäuser in Elberfeld und Barmen: Sanierung im bewohnten Haus",
+        "paragraphs": [
+          "Die Gründerzeithäuser im Briller Viertel, am Ölberg und in Barmen sind meist vermietet oder gehören Eigentümergemeinschaften. Feuchte Keller betreffen hier alle Parteien, und die Sanierung muss im bewohnten Haus funktionieren.",
+          "Wir arbeiten Kellerraum für Kellerraum, sodass immer nur ein Teil gesperrt ist. Für die Hausverwaltung oder die Eigentümerversammlung bekommen Sie ein schriftliches Angebot mit Messprotokoll, nach jeder Phase ein weiteres Protokoll."
+        ]
+      }
     ],
     faqs: [
       {
@@ -1040,6 +1058,22 @@ export const CITY_PAGES: CityPage[] = [
         q: "Sanieren Sie auch Keller in denkmalgeschützten Häusern?",
         a: "Ja, die Arbeiten finden im Keller statt und verändern die Fassade nicht. Ob auch für Eingriffe im Inneren eine denkmalrechtliche Erlaubnis nötig ist, sollten Sie vorab mit der Unteren Denkmalbehörde der Stadt Wuppertal klären. Die technische Beschreibung der geplanten Maßnahmen stellen wir Ihnen dafür gern zur Verfügung.",
       },
+      {
+        "q": "Was kostet eine Kellersanierung in Wuppertal?",
+        "a": "Das hängt davon ab, ob die Feuchte von unten aufsteigt, vom Hang drückt oder als Kondensat entsteht, und wie groß die Fläche ist. Wir messen zuerst kostenlos vor Ort und nennen Ihnen danach einen schriftlichen Festpreis."
+      },
+      {
+        "q": "Wie lange dauert eine Kellersanierung in Wuppertal?",
+        "a": "Die Arbeiten selbst dauern meist zwei bis vier Werktage. Danach trocknet die Wand über einige Monate aus; wir messen nach und geben Ihnen das Protokoll."
+      },
+      {
+        "q": "Hilft eine Innenabdichtung auch nach Hochwasser an der Wupper?",
+        "a": "Eine Innenabdichtung hält Wasser ab, das von außen gegen die Wand und den Boden drückt. Nach einem Hochwasser messen wir zuerst, wie nass das Mauerwerk ist, trocknen wenn nötig und dichten dann ab, damit das nächste Hochwasser nicht wieder in den Keller kommt."
+      },
+      {
+        "q": "Sanieren Sie auch Keller in Mehrfamilienhäusern und für Hausverwaltungen?",
+        "a": "Ja. Wir arbeiten in bewohnten Häusern raumweise und erstellen für Hausverwaltungen und Eigentümergemeinschaften ein schriftliches Angebot mit Messprotokoll."
+      }
     ],
     wiki: "https://de.wikipedia.org/wiki/Wuppertal",
     localServices: [
@@ -1062,6 +1096,16 @@ export const CITY_PAGES: CityPage[] = [
         slug: "schimmelbeseitigung",
         heading: "Schimmel im Keller in Wuppertal",
         text: "Feuchte Hangwände kühlen aus, die Luft kondensiert daran, und es entsteht Schimmel, oft auch im Souterrain. Wir messen, ob die Nässe aus der Wand oder aus der Luft kommt, entfernen den Befall sporensicher und beseitigen die Ursache."
+      },
+      {
+        "slug": "feuchtemessung",
+        "heading": "Feuchtemessung in Wuppertal",
+        "text": "Am Hang ist oft nur eine Wand nass, im Tal kommt die Feuchte von unten. Wir messen kostenlos, woher sie bei Ihnen kommt, und geben Ihnen das Ergebnis schriftlich."
+      },
+      {
+        "slug": "sockelabdichtung",
+        "heading": "Sockel abdichten in Wuppertal",
+        "text": "Bei Häusern mit Schieferfassade und an den Straßen der Talsohle zieht Spritzwasser in den Sockel und weiter in den Keller. Wir dichten den Sockel ab und schließen ihn an die Kellerwand an."
       }
     ],
     districtGroups: [
@@ -1097,6 +1141,16 @@ export const CITY_PAGES: CityPage[] = [
           "Beyenburg"
         ],
         text: "Die Talsohle nah am Fluss, oft unter der Schwebebahn. Feuchte Böden, und bei Hochwasser wie 2021 kommt das Wasser auch von unten."
+      },
+      {
+        "name": "Der Norden",
+        "districts": [
+          "Dönberg",
+          "Nächstebreck",
+          "Hatzfeld",
+          "Siebeneick"
+        ],
+        "text": "Einfamilien- und Bauernhäuser in den nördlichen Höhenlagen, teils mit Bruchsteinkellern. Schichtenwasser am Hang und Feuchte aus Wänden ohne Sperrschicht."
       }
     ],
     nearby: ["solingen", "remscheid", "velbert"],
@@ -1841,14 +1895,14 @@ export const CITY_PAGES: CityPage[] = [
     slug: "duesseldorf",
     name: "Düsseldorf",
     keyword: "Kellersanierung Düsseldorf",
-    title: "Kellersanierung Düsseldorf | Keller abdichten vom Profi",
+    title: "Kellersanierung Düsseldorf | Keller abdichten von innen",
     metaDescription:
       "Kellersanierung Düsseldorf: Nasse Keller & drückendes Wasser von innen abdichten. Kostenlose Feuchtemessung, Festpreis und 10 Jahre Garantie.",
     h1: "Kellersanierung Düsseldorf: Keller trockenlegen ohne Aufgraben",
     lede:
       "Hoher Rhein-Grundwasserspiegel, wertvolle Wohn- und Nutzflächen im Souterrain: In Düsseldorf erfordert feuchtes Mauerwerk professionelle Abdichtungssysteme mit garantierter Dichtigkeit.",
-    plz: ["40210", "40213", "40477", "40545", "40547", "40597", "40625"],
-    districts: ["Düsseldorf-Mitte", "Oberkassel", "Pempelfort", "Unterbilk", "Gerresheim", "Benrath", "Grafenberg"],
+    plz: ["40210", "40211", "40212", "40213", "40215", "40217", "40219", "40221", "40223", "40225", "40227", "40229", "40231", "40233", "40235", "40237", "40239", "40468", "40470", "40472", "40474", "40476", "40477", "40479", "40489", "40545", "40547", "40549", "40589", "40591", "40593", "40595", "40597", "40599", "40625", "40627", "40629"],
+    districts: ["Düsseldorf-Mitte", "Oberkassel", "Pempelfort", "Unterbilk", "Bilk", "Flingern", "Derendorf", "Gerresheim", "Grafenberg", "Benrath", "Eller", "Wersten", "Kaiserswerth", "Heerdt"],
     geo: { lat: 51.2277, lng: 6.7735 },
     responseTime: "24 bis 48 Stunden",
     localFactors: [
@@ -1864,6 +1918,14 @@ export const CITY_PAGES: CityPage[] = [
         name: "Kies- und Sandböden der Rheinterrasse",
         text: "Die durchlässigen Böden leiten Regenwasser extrem schnell in tiefere Schichten ab, was zu plötzlichen Wasseranstiegen am Kellerfundament führt.",
       },
+      {
+        "name": "Nachkriegs- und Siedlungsbau im Süden",
+        "text": "In Eller, Wersten, Holthausen und Garath stehen viele Häuser aus den 1950er bis 1970er Jahren. Ihre Kellerwände wurden damals meist nur mit einem Bitumenanstrich geschützt, der heute spröde ist. Feuchte dringt dann an der Wand und am Übergang zur Bodenplatte ein."
+      },
+      {
+        "name": "Altbauten im Norden und in Kaiserswerth",
+        "text": "Kaiserswerth, Wittlaer und Angermund liegen nah am Rhein und haben viele ältere Häuser mit Ziegel- und Bruchsteinkellern. Hier kommen aufsteigende Feuchte und das Grundwasser aus der Rheinniederung zusammen."
+      }
     ],
     sections: [
       {
@@ -1891,6 +1953,20 @@ export const CITY_PAGES: CityPage[] = [
           "Schimmelsanierung mit sporensicherer Entfernung ohne Chlor",
           "Innenabdichtung gegen drückendes Wasser, ohne Aufgraben"
         ]
+      },
+      {
+        "heading": "Eller, Wersten und Garath: Keller der Nachkriegshäuser abdichten",
+        "paragraphs": [
+          "Im Düsseldorfer Süden und Osten sind Reihen- und Doppelhäuser aus der Nachkriegszeit typisch. Viele Eigentümer bauen den Keller heute aus, als Büro, Gästezimmer oder Waschraum. Genau dann zeigt sich, dass die alte Abdichtung nicht mehr hält: Feuchte Flecken am Wandfuß, ein muffiger Geruch und Schimmel hinter Möbeln.",
+          "Wir dichten diese Keller von innen ab: Alter Putz und loser Anstrich kommen herunter, dann folgen Dichtungsschlämme in zwei Lagen, eine Hohlkehle am Übergang von Wand und Boden und ein Sanierputz, der Restfeuchte aufnimmt. So wird der Keller wieder nutzbar, ohne dass Garten oder Terrasse aufgegraben werden."
+        ]
+      },
+      {
+        "heading": "Kaiserswerth, Wittlaer und Angermund: Feuchte Altbaukeller am Rhein",
+        "paragraphs": [
+          "Im Düsseldorfer Norden stehen viele ältere Häuser in Rheinnähe, teils unter Denkmalschutz. Ihre Keller haben keine Sperrschicht gegen aufsteigende Feuchte, und bei hohem Rheinpegel steigt auch das Grundwasser im Untergrund.",
+          "Wir setzen hier eine Horizontalsperre per Injektion, damit die Wand von unten keine Feuchte mehr zieht, und dichten den Wandfuß gegen Grundwasser ab. Die Fassade und der Garten bleiben unberührt, was gerade bei denkmalgeschützten Häusern wichtig ist."
+        ]
       }
     ],
     faqs: [
@@ -1913,6 +1989,14 @@ export const CITY_PAGES: CityPage[] = [
       {
         "q": "Wer zahlt die Feuchtigkeitsmessung in Düsseldorf?",
         "a": "Die erste Feuchtigkeitsmessung vor Ort ist bei uns kostenlos und unverbindlich, für Eigentümer, Mieter und Hausverwaltungen gleichermaßen."
+      },
+      {
+        "q": "Was kostet eine Kellersanierung in Düsseldorf?",
+        "a": "Der Preis richtet sich nach der Ursache und der Fläche. Deshalb messen wir zuerst kostenlos vor Ort, wo und wie die Feuchte eindringt, und geben Ihnen danach einen schriftlichen Festpreis."
+      },
+      {
+        "q": "Sanieren Sie auch Keller in Mehrfamilienhäusern und Eigentümergemeinschaften?",
+        "a": "Ja. Für Eigentümergemeinschaften und Hausverwaltungen in Düsseldorf erstellen wir ein schriftliches Angebot mit Messprotokoll, das in der Eigentümerversammlung vorgelegt werden kann. Die Arbeiten führen wir so aus, dass die Mieter ihre Kellerräume möglichst weiter nutzen können."
       }
     ],
     wiki: "https://de.wikipedia.org/wiki/D%C3%BCsseldorf",
@@ -1936,6 +2020,16 @@ export const CITY_PAGES: CityPage[] = [
         slug: "rissverpressung",
         heading: "Rissverpressung in Düsseldorf",
         text: "Wo Grundwasser drückt, findet es jeden Riss und jede Arbeitsfuge. Wir verpressen wasserführende Risse unter Druck mit PU-Harz, bevor die Fläche abgedichtet wird."
+      },
+      {
+        "slug": "feuchtemessung",
+        "heading": "Feuchtemessung in Düsseldorf",
+        "text": "Ob Rhein-Grundwasser, aufsteigende Feuchte oder Kondensat im Souterrain: Wir messen kostenlos und unverbindlich, woher die Nässe kommt, und geben Ihnen das Ergebnis schriftlich."
+      },
+      {
+        "slug": "sockelabdichtung",
+        "heading": "Sockel abdichten in Düsseldorf",
+        "text": "Bei Altbauten in Flingern, Bilk und Pempelfort ist der Sockel zur Straße oft durchfeuchtet und der Putz platzt ab. Wir dichten den Sockel ab und verbinden ihn mit der Abdichtung der Kellerwand."
       }
     ],
     districtGroups: [
@@ -1971,6 +2065,28 @@ export const CITY_PAGES: CityPage[] = [
           "Urdenbach"
         ],
         text: "Hanglagen im Osten, Villen und Einfamilienhäuser im Süden. Hangwasser an der bergseitigen Wand, in Rheinnähe zusätzlich Grundwasser."
+      },
+      {
+        "name": "Der Norden",
+        "districts": [
+          "Kaiserswerth",
+          "Wittlaer",
+          "Angermund",
+          "Lohausen",
+          "Unterrath"
+        ],
+        "text": "Ältere Häuser in Rheinnähe, teils denkmalgeschützt. Aufsteigende Feuchte in Ziegel- und Bruchsteinkellern und Grundwasser bei hohem Rheinpegel."
+      },
+      {
+        "name": "Südosten",
+        "districts": [
+          "Eller",
+          "Wersten",
+          "Holthausen",
+          "Hassels",
+          "Garath"
+        ],
+        "text": "Reihen- und Doppelhäuser aus den 1950er bis 1970er Jahren. Spröde Bitumenanstriche, Feuchte am Wandfuß und ausgebaute Keller, in denen Schimmel entsteht."
       }
     ],
     nearby: ["wuppertal", "essen", "solingen"],
@@ -2124,14 +2240,14 @@ export const CITY_PAGES: CityPage[] = [
     slug: "dortmund",
     name: "Dortmund",
     keyword: "Kellersanierung Dortmund",
-    title: "Kellersanierung Dortmund | Keller trockenlegen & dichten",
+    title: "Kellersanierung Dortmund | Keller abdichten ohne Aufgraben",
     metaDescription:
       "Kellersanierung Dortmund: Feuchte Keller & aufsteigende Feuchte von innen sanieren. Kostenlose Feuchtemessung vor Ort, Festpreis & Garantie.",
     h1: "Kellersanierung Dortmund: Keller sanieren ohne Aufgraben",
     lede:
       "Vom Kreuzviertel und Hörde am Phoenix-See bis nach Brackel und Mengede: Trockene Keller schützen die Bausubstanz und sichern den Wert Ihrer Immobilie in Dortmund.",
-    plz: ["44135", "44137", "44139", "44225", "44263", "44309", "44359"],
-    districts: ["Dortmund-Innenstadt", "Kreuzviertel", "Hörde", "Hombruch", "Aplerbeck", "Brackel", "Mengede"],
+    plz: ["44135", "44137", "44139", "44141", "44143", "44145", "44147", "44149", "44225", "44227", "44229", "44263", "44265", "44267", "44269", "44287", "44289", "44309", "44319", "44328", "44329", "44339", "44357", "44359", "44369", "44379", "44388"],
+    districts: ["Innenstadt-West", "Innenstadt-Nord", "Innenstadt-Ost", "Kreuzviertel", "Eving", "Scharnhorst", "Brackel", "Aplerbeck", "Hörde", "Hombruch", "Lütgendortmund", "Huckarde", "Mengede"],
     geo: { lat: 51.5136, lng: 7.4653 },
     responseTime: "24 bis 48 Stunden",
     localFactors: [
@@ -2147,6 +2263,18 @@ export const CITY_PAGES: CityPage[] = [
         name: "Urbane Sanierungsanforderungen am Phoenix-See",
         text: "Moderne Souterrains und modernisierte Bestandsgebäude verlangen hochwertige Nutzbarkeit ohne Feuchtegeruch und Schimmelsporen.",
       },
+      {
+        "name": "Emscher-Niederung im Norden",
+        "text": "Durch Huckarde, Mengede und den Dortmunder Norden zieht sich die Niederung der Emscher. Das Gelände liegt tief, der Boden ist lehmig und hält Wasser lange fest. Kellerwände stehen hier oft monatelang im feuchten Erdreich."
+      },
+      {
+        "name": "Wiederaufbau nach dem Krieg",
+        "text": "Große Teile der Innenstadt wurden nach 1945 schnell wieder aufgebaut, oft mit Trümmerziegeln und ohne Sperrschicht im Keller. Diese Häuser zeigen heute typische Schäden durch aufsteigende Feuchte: Salzränder, mürber Putz und muffiger Geruch."
+      },
+      {
+        "name": "Zechensiedlungen in Eving und Lütgendortmund",
+        "text": "Die Siedlungshäuser der Bergleute haben flache Keller aus Ziegel, oft ohne Abdichtung der Außenwand. Setzungen aus der Bergbauzeit haben zusätzlich Risse in Wand und Boden hinterlassen."
+      }
     ],
     sections: [
       {
@@ -2174,6 +2302,20 @@ export const CITY_PAGES: CityPage[] = [
           "Kellerinnenabdichtung nach WTA-Standard gegen drückendes Sickerwasser",
           "Schimmelbeseitigung und Klimaplatten gegen Kondensat"
         ]
+      },
+      {
+        "heading": "Der Dortmunder Norden: Emscher, Lehmboden und Zechenhäuser",
+        "paragraphs": [
+          "In Eving, Huckarde, Mengede und Scharnhorst stehen viele Häuser aus der Zeit, in der Zechen wie Minister Stein und Hansa die Stadtteile prägten. Die Keller sind aus Ziegel gemauert, die Außenwände wurden selten abgedichtet. Dazu kommt der lehmige Boden der Emscher-Niederung, der Regenwasser lange an der Wand hält.",
+          "Typisch ist hier eine Kombination aus seitlich eindringender Feuchte und Rissen aus alten Setzungen. Wir messen beides getrennt: Wo Wasser durch Risse kommt, verpressen wir sie mit PU-Harz. Wo die Wand flächig nass ist, dichten wir sie von innen mit mineralischer Dichtungsschlämme ab. Den Garten und die Zufahrt rühren wir dabei nicht an."
+        ]
+      },
+      {
+        "heading": "Lütgendortmund, Kirchlinde und der Westen: Siedlungshäuser trocken legen",
+        "paragraphs": [
+          "Im Dortmunder Westen sind Doppel- und Reihenhäuser aus den 1920er bis 1960er Jahren typisch. Die Keller werden heute oft als Hobbyraum, Waschküche oder Werkstatt genutzt, und gerade dort fällt Feuchte schnell auf: an Kartons, die schimmeln, und an der Farbe, die abblättert.",
+          "Wir setzen in diesen Häusern meist eine Horizontalsperre per Injektion, damit keine Feuchte mehr aus dem Fundament aufsteigt, und schützen die Wandflächen mit Sanierputz. Nach der Sanierung bekommen Sie das Messprotokoll schriftlich, damit Sie sehen, wie die Wand abtrocknet."
+        ]
       }
     ],
     faqs: [
@@ -2192,6 +2334,18 @@ export const CITY_PAGES: CityPage[] = [
       {
         "q": "Muss für die Kellersanierung in Dortmund aufgegraben werden?",
         "a": "In den meisten Fällen nicht. Horizontalsperre, Innenabdichtung und Rissverpressung werden von innen ausgeführt, Garten und Einfahrt bleiben unberührt."
+      },
+      {
+        "q": "Was kostet eine Kellersanierung in Dortmund?",
+        "a": "Das hängt von der Ursache und der Fläche ab: Eine Horizontalsperre an einer Wand ist eine andere Arbeit als die Abdichtung eines ganzen Kellers. Deshalb messen wir zuerst kostenlos vor Ort und nennen Ihnen danach einen schriftlichen Festpreis."
+      },
+      {
+        "q": "Sanieren Sie auch Bergschäden im Keller in Dortmund?",
+        "a": "Wir dichten Risse ab, durch die Wasser eindringt, und verpressen sie mit elastischem PU-Harz. Ob ein Riss ein Bergschaden ist, der über die Bergbau-Gesellschaft reguliert wird, klärt ein Gutachter; unsere Messung und unser Protokoll können Sie dafür verwenden."
+      },
+      {
+        "q": "Wie schnell sind Sie in Dortmund vor Ort?",
+        "a": "Von unserem Sitz in Essen sind wir in der Regel innerhalb von 24 bis 48 Stunden in Dortmund, von der Innenstadt bis nach Mengede, Aplerbeck oder Lütgendortmund."
       }
     ],
     wiki: "https://de.wikipedia.org/wiki/Dortmund",
@@ -2215,6 +2369,16 @@ export const CITY_PAGES: CityPage[] = [
         slug: "schimmelbeseitigung",
         heading: "Schimmel im Keller in Dortmund",
         text: "Ob im Altbau oder im modernisierten Souterrain: Wir klären per Messung, woher die Feuchte kommt, entfernen den Schimmel sporensicher und beseitigen die Ursache."
+      },
+      {
+        "slug": "feuchtemessung",
+        "heading": "Feuchtemessung in Dortmund",
+        "text": "Bevor wir etwas empfehlen, messen wir kostenlos, woher die Feuchte kommt: von unten aus dem Fundament, seitlich durch die Wand oder als Kondensat. Das Ergebnis bekommen Sie schriftlich."
+      },
+      {
+        "slug": "sockelabdichtung",
+        "heading": "Sockel abdichten in Dortmund",
+        "text": "Bei Siedlungs- und Reihenhäusern im Westen und Norden ist oft der Sockel die Schwachstelle: Spritzwasser zieht in den Putz und weiter in den Keller. Wir dichten den Sockel ab und schließen ihn sauber an die Kellerwand an."
       }
     ],
     districtGroups: [
@@ -2248,6 +2412,17 @@ export const CITY_PAGES: CityPage[] = [
           "Scharnhorst"
         ],
         text: "Zechensiedlungen und Bergbaugelände. Setzungsrisse und Feuchte im Ziegel der Siedlungshäuser."
+      },
+      {
+        "name": "Der Westen",
+        "districts": [
+          "Lütgendortmund",
+          "Kirchlinde",
+          "Marten",
+          "Dorstfeld",
+          "Oespel"
+        ],
+        "text": "Siedlungs- und Reihenhäuser aus den 1920er bis 1960er Jahren. Aufsteigende Feuchte im Ziegel und genutzte Hobbykeller, in denen Schimmel schnell auffällt."
       }
     ],
     nearby: ["bochum", "essen", "wuppertal"],
@@ -2257,13 +2432,13 @@ export const CITY_PAGES: CityPage[] = [
     slug: "koeln",
     name: "Köln",
     keyword: "Kellersanierung Köln",
-    title: "Kellersanierung Köln | Keller abdichten gegen Rheinwasser",
+    title: "Kellersanierung Köln | Keller abdichten & trockenlegen",
     metaDescription:
       "Kellersanierung Köln ohne Aufgraben: Keller abdichten gegen Rhein-Hochwasser und Grundwasser, Altbaukeller trockenlegen. Messung kostenlos, Festpreis.",
     h1: "Kellersanierung Köln: feuchte Keller dauerhaft trockenlegen",
     lede:
       "Ob Gründerzeitbau in Ehrenfeld und Nippes oder Einfamilienhaus in Rodenkirchen: In Köln entscheiden der Rhein, der Grundwasserstand und das Alter des Mauerwerks, warum ein Keller nass wird. Wir messen kostenlos, woher die Feuchte kommt, und sanieren von innen, ohne Hof oder Garten aufzugraben.",
-    plz: ["50667", "50672", "50674", "50676", "50733", "50735", "50823", "50825", "50931", "50933", "50937", "50968", "50996", "51063", "51065", "51105", "51143"],
+    plz: ["50667", "50668", "50670", "50672", "50674", "50676", "50677", "50678", "50679", "50733", "50735", "50737", "50739", "50765", "50767", "50769", "50823", "50825", "50827", "50829", "50858", "50859", "50931", "50933", "50935", "50937", "50939", "50968", "50969", "50996", "50997", "50999", "51061", "51063", "51065", "51067", "51069", "51103", "51105", "51107", "51109", "51143", "51145", "51147", "51149"],
     districts: ["Innenstadt", "Ehrenfeld", "Nippes", "Lindenthal", "Sülz", "Rodenkirchen", "Köln-Mülheim", "Kalk", "Porz", "Chorweiler"],
     geo: { lat: 50.9375, lng: 6.9603 },
     responseTime: "24 bis 48 Stunden",
@@ -2307,6 +2482,16 @@ export const CITY_PAGES: CityPage[] = [
         heading: "Feuchtemessung in Köln",
         text: "Nach einem Hochwasser ist die Oberfläche oft schnell trocken, das Mauerwerk innen aber noch nass und voller Salze. Wir messen in mehreren Wandhöhen und Tiefen, kostenlos, und Sie bekommen das Protokoll schriftlich.",
       },
+      {
+        "slug": "rissverpressung",
+        "heading": "Rissverpressung in Köln",
+        "text": "In Bodenplatten und Kellerwänden der Altbauten und Siedlungshäuser führen Risse oft Wasser, besonders bei hohem Grundwasser. Wir verpressen sie mit PU-Harz, das elastisch bleibt und den Riss dauerhaft schließt."
+      },
+      {
+        "slug": "sockelabdichtung",
+        "heading": "Sockel abdichten in Köln",
+        "text": "Bei Einfamilienhäusern in den Vororten ist häufig der Sockel durchfeuchtet: Spritzwasser zieht in den Putz und weiter in die Kellerwand. Wir dichten den Sockel ab und schließen ihn an die Kellerabdichtung an."
+      }
     ],
     districtGroups: [
       {
@@ -2324,6 +2509,17 @@ export const CITY_PAGES: CityPage[] = [
         districts: ["Chorweiler", "Longerich", "Brück", "Rath/Heumar", "Junkersdorf"],
         text: "Einfamilien- und Reihenhäuser der Nachkriegsjahrzehnte. Häufig undichte Anschlüsse an der Bodenplatte und Kondensat in kühlen, wenig gelüfteten Kellern.",
       },
+      {
+        "name": "Westliche Vororte",
+        "districts": [
+          "Müngersdorf",
+          "Weiden",
+          "Lövenich",
+          "Bocklemünd",
+          "Pesch"
+        ],
+        "text": "Einfamilien- und Doppelhäuser mit genutzten Kellern. Feuchte über alte Außenabdichtungen und den Sockel, oft auch Kondensat in kalten Kellerräumen."
+      }
     ],
     sections: [
       {
@@ -2351,6 +2547,20 @@ export const CITY_PAGES: CityPage[] = [
           "Schimmel im Keller entsteht in Kölner Altbauten oft an kalten Außenwänden, wenn warme, feuchte Luft dort kondensiert. Wir entfernen den Befall sporensicher und beseitigen die Ursache, zum Beispiel mit Klimaplatten aus Calciumsilikat oder einer Abdichtung der Wand.",
         ],
       },
+      {
+        "heading": "Rechtsrheinisch: Kalk, Mülheim, Höhenberg und Porz",
+        "paragraphs": [
+          "Auf der rechten Rheinseite stehen viele Arbeiterhäuser und Mehrfamilienhäuser aus der Zeit der Industrie, dazu Siedlungen aus den 1950er und 1960er Jahren. Die Keller sind aus Ziegel gemauert und haben selten eine funktionierende Sperrschicht. In Mülheim und Porz kommt die Nähe zum Rhein dazu: Steigt der Pegel, steigt mit Verzögerung auch das Grundwasser.",
+          "Wir messen zuerst, welcher Anteil der Feuchte von unten aufsteigt und welcher seitlich oder durch den Boden drückt. Danach setzen wir eine Horizontalsperre per Injektion oder dichten die Wände von innen mit Dichtungsschlämme ab, oft beides. Gerissene Bodenplatten und Wände verpressen wir zusätzlich mit PU-Harz."
+        ]
+      },
+      {
+        "heading": "Westliche Vororte: Einfamilienhäuser in Weiden, Lövenich und Müngersdorf",
+        "paragraphs": [
+          "In den westlichen Stadtteilen überwiegen Einfamilien- und Doppelhäuser mit voll genutzten Kellern. Hier kommt die Feuchte selten vom Rhein, sondern meist aus einer gealterten Außenabdichtung, über den Sockel oder als Kondensat in schlecht gelüfteten Räumen.",
+          "Gerade bei Kondensat hilft keine Abdichtung, sondern eine Dämmung der kalten Wand mit Klimaplatten und richtiges Lüften. Deshalb klären wir mit der kostenlosen Messung zuerst die Ursache, bevor wir ein Verfahren empfehlen."
+        ]
+      }
     ],
     faqs: [
       {
@@ -2373,6 +2583,14 @@ export const CITY_PAGES: CityPage[] = [
         q: "Was kostet die Kellersanierung in Köln?",
         a: "Das hängt von Ursache, Wandfläche, Mauerwerk und Wasserdruck ab. Nach der kostenlosen Messung erhalten Sie ein verbindliches Festpreisangebot.",
       },
+      {
+        "q": "Sanieren Sie auch Keller in Mehrfamilienhäusern in Köln?",
+        "a": "Ja. Für Eigentümergemeinschaften und Hausverwaltungen erstellen wir ein schriftliches Angebot mit Messprotokoll für die Eigentümerversammlung. Die Arbeiten planen wir so, dass die Kellerräume der Mieter möglichst nutzbar bleiben."
+      },
+      {
+        "q": "Wie lange dauert eine Kellersanierung in Köln?",
+        "a": "Eine Horizontalsperre oder die Abdichtung eines Kellerraums dauert meist zwei bis vier Werktage. Danach braucht die Wand einige Monate, um auszutrocknen; das messen wir nach und geben Ihnen das Protokoll."
+      }
     ],
     nearby: ["leverkusen", "duesseldorf", "solingen"],
   },
