@@ -9400,5 +9400,8 @@ html[data-theme="dark"] .ed__bar { background: linear-gradient(to top, #121a24 7
 .dw__move .ed__check { display: flex; align-items: center; gap: 0.4rem; }
 html[data-theme="dark"] :is(.ed__line.is-opt, .dw__lines tr.is-opt td, .dw__move) { background: rgb(255 255 255 / 0.05); }
 /* the phone menu: the channels above the call buttons */
-.mnav__social { display: grid; gap: 0.5rem; padding: 0.75rem 1.5rem; border-top: 1px solid rgb(var(--c-line) / 0.16); background: var(--paper-1); }
-.mnav__social .social { margin: 0; }
+.mnav__social { display: flex; align-items: center; justify-content: space-between; gap: 0.75rem; padding: 0.45rem 1.5rem; border-top: 1px solid rgb(var(--c-line) / 0.16); background: var(--paper-1); }
+.mnav__social .mnav__kicker { margin: 0; }
+/* one slim line in the menu: small, but still easy to tap */
+.mnav__social .social--mini a { width: 34px; height: 34px; }
+.mnav__social .social--mini svg { width: 1.05rem; height: 1.05rem; }
