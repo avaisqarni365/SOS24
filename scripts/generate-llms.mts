@@ -4,6 +4,8 @@ import { writeFileSync } from "node:fs";
 import { COMPANY_INFO, FAQS } from "../src/data/content-data.ts";
 import { SERVICE_PAGES, CITY_PAGES } from "../src/data/seo-pages.ts";
 import { PHASES } from "../src/data/proof.ts";
+import { FILM_PAGES } from "../src/data/films.ts";
+import { FACEBOOK_URL, INSTAGRAM_URL, TIKTOK_URL, YOUTUBE_URL } from "../src/lib/social.ts";
 
 const SITE = "https://sos-abdichtung.de";
 
@@ -35,16 +37,31 @@ const lines: string[] = [
   "## Weitere Seiten",
   `- [Angebotsrechner Kellersanierung](${SITE}/kostenrechner/): Umfang des Vorhabens einschätzen und das Festpreis-Angebot nach kostenloser Messung anfragen (keine Preisangaben)`,
   `- [Galerie](${SITE}/galerie/): Schadensbilder und Arbeitsschritte aus dem SchimmelPeter-Netzwerk`,
+  `- [Filme](${SITE}/filme/): kurze Filme aus unserer Arbeit, jeder auf einer eigenen Seite mit Kapiteln`,
   `- 3D-Modelle auf jeder Leistungsseite und auf der Startseite: Keller von innen und außen, Garage (Rissverpressung), Wohnraum (Schimmel), Schritt für Schritt mit Material und Zahlen`,
   "",
   "## Nachweis in jeder Phase",
   "Jedes Messprotokoll wird dem Kunden immer schriftlich übergeben, nach jeder Phase.",
   ...PHASES.map((p) => `${p.n}. ${p.title}: ${p.measure} Kunde erhält: ${p.proof}. Prüfkriterium: ${p.criterion}`),
   "",
-  "## Servicegebiet",
-  ...CITY_PAGES.map(
-    (c) => `- [Kellersanierung ${c.name}](${SITE}/kellersanierung/${c.slug}/): vor Ort in ${c.responseTime}. PLZ ${c.plz.join(", ")}`
+  "## Filme aus unserer Arbeit",
+  // each film has its own watch page (VideoObject with chapters) and is the same film as on YouTube
+  ...FILM_PAGES.map(
+    (f) => `- [${f.title}](${SITE}/filme/${f.slug}/) (${f.film.seconds} Sekunden, auch auf YouTube: ${f.youtube}): ${f.description}`
   ),
+  "",
+  "## Profile in sozialen Netzwerken",
+  `- YouTube: ${YOUTUBE_URL}`,
+  `- Instagram: ${INSTAGRAM_URL}`,
+  `- TikTok: ${TIKTOK_URL}`,
+  `- Facebook: ${FACEBOOK_URL}`,
+  "",
+  "## Servicegebiet",
+  ...CITY_PAGES.flatMap((c) => [
+    `- [Kellersanierung ${c.name}](${SITE}/kellersanierung/${c.slug}/): vor Ort in ${c.responseTime}. PLZ ${c.plz.join(", ")}`,
+    // the services as done in this town, each with its own anchor on the city page
+    ...(c.localServices ?? []).map((s) => `  - [${s.heading}](${SITE}/kellersanierung/${c.slug}/#${s.slug})`),
+  ]),
   "",
   "## Häufige Fragen",
   ...FAQS.flatMap((f) => [`### ${f.q}`, f.a, ""]),
@@ -63,6 +80,14 @@ const fullLines: string[] = [
   "### Schimmelpilzsanierung nach Leitfaden des Umweltbundesamtes & TÜV Süd",
   "Sporenbindung, Tiefendesinfektion mit chlorfreien Bioziden, Feinreinigung mit HEPA-gefilterten Industriestaubsaugern und Aufbringen kapillaraktiver Calciumsilikat-Klimaplatten zur dauerhaften Vermeidung von Kondensatfeuchte.",
   "",
+  "## Die Städte im Detail",
+  ...CITY_PAGES.flatMap((c) => [
+    `### Kellersanierung ${c.name}`,
+    `${c.lede}`,
+    ...c.localFactors.map((f) => `- ${f.name}: ${f.text}`),
+    ...(c.districtGroups ?? []).map((g) => `- ${g.name} (${g.districts.join(", ")}): ${g.text}`),
+    "",
+  ]),
   "## Rechtliche Angaben & E-E-A-T Nachweise",
   `- Name: ${COMPANY_INFO.fullName}`,
   `- Inhaber: ${COMPANY_INFO.owner}`,
