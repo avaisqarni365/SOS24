@@ -62,6 +62,8 @@ Jedes Messprotokoll wird dem Kunden immer schriftlich übergeben, nach jeder Pha
   - [Horizontalsperre in Wuppertal](https://sos-abdichtung.de/kellersanierung/wuppertal/#horizontalsperre)
   - [Rissverpressung in Wuppertal](https://sos-abdichtung.de/kellersanierung/wuppertal/#rissverpressung)
   - [Schimmel im Keller in Wuppertal](https://sos-abdichtung.de/kellersanierung/wuppertal/#schimmelbeseitigung)
+  - [Feuchtemessung in Wuppertal](https://sos-abdichtung.de/kellersanierung/wuppertal/#feuchtemessung)
+  - [Sockel abdichten in Wuppertal](https://sos-abdichtung.de/kellersanierung/wuppertal/#sockelabdichtung)
 - [Kellersanierung Solingen](https://sos-abdichtung.de/kellersanierung/solingen/): vor Ort in 24 bis 48 Stunden. PLZ 42651, 42653, 42655, 42657, 42659, 42697, 42699, 42719
   - [Keller abdichten in Solingen](https://sos-abdichtung.de/kellersanierung/solingen/#kellerinnenabdichtung)
   - [Horizontalsperre in Solingen](https://sos-abdichtung.de/kellersanierung/solingen/#horizontalsperre)
@@ -94,26 +96,32 @@ Jedes Messprotokoll wird dem Kunden immer schriftlich übergeben, nach jeder Pha
   - [Horizontalsperre in Essen](https://sos-abdichtung.de/kellersanierung/essen/#horizontalsperre)
   - [Schimmel im Keller in Essen](https://sos-abdichtung.de/kellersanierung/essen/#schimmelbeseitigung)
   - [Feuchtemessung in Essen](https://sos-abdichtung.de/kellersanierung/essen/#feuchtemessung)
-- [Kellersanierung Düsseldorf](https://sos-abdichtung.de/kellersanierung/duesseldorf/): vor Ort in 24 bis 48 Stunden. PLZ 40210, 40213, 40477, 40545, 40547, 40597, 40625
+- [Kellersanierung Düsseldorf](https://sos-abdichtung.de/kellersanierung/duesseldorf/): vor Ort in 24 bis 48 Stunden. PLZ 40210, 40211, 40212, 40213, 40215, 40217, 40219, 40221, 40223, 40225, 40227, 40229, 40231, 40233, 40235, 40237, 40239, 40468, 40470, 40472, 40474, 40476, 40477, 40479, 40489, 40545, 40547, 40549, 40589, 40591, 40593, 40595, 40597, 40599, 40625, 40627, 40629
   - [Keller abdichten in Düsseldorf](https://sos-abdichtung.de/kellersanierung/duesseldorf/#kellerinnenabdichtung)
   - [Schimmel im Souterrain in Düsseldorf](https://sos-abdichtung.de/kellersanierung/duesseldorf/#schimmelbeseitigung)
   - [Horizontalsperre in Düsseldorf](https://sos-abdichtung.de/kellersanierung/duesseldorf/#horizontalsperre)
   - [Rissverpressung in Düsseldorf](https://sos-abdichtung.de/kellersanierung/duesseldorf/#rissverpressung)
+  - [Feuchtemessung in Düsseldorf](https://sos-abdichtung.de/kellersanierung/duesseldorf/#feuchtemessung)
+  - [Sockel abdichten in Düsseldorf](https://sos-abdichtung.de/kellersanierung/duesseldorf/#sockelabdichtung)
 - [Kellersanierung Bochum](https://sos-abdichtung.de/kellersanierung/bochum/): vor Ort in 24 bis 48 Stunden. PLZ 44787, 44789, 44791, 44799, 44801, 44803, 44866
   - [Rissverpressung in Bochum](https://sos-abdichtung.de/kellersanierung/bochum/#rissverpressung)
   - [Keller abdichten in Bochum](https://sos-abdichtung.de/kellersanierung/bochum/#kellerinnenabdichtung)
   - [Horizontalsperre in Bochum](https://sos-abdichtung.de/kellersanierung/bochum/#horizontalsperre)
   - [Schimmel im Keller in Bochum](https://sos-abdichtung.de/kellersanierung/bochum/#schimmelbeseitigung)
-- [Kellersanierung Dortmund](https://sos-abdichtung.de/kellersanierung/dortmund/): vor Ort in 24 bis 48 Stunden. PLZ 44135, 44137, 44139, 44225, 44263, 44309, 44359
+- [Kellersanierung Dortmund](https://sos-abdichtung.de/kellersanierung/dortmund/): vor Ort in 24 bis 48 Stunden. PLZ 44135, 44137, 44139, 44141, 44143, 44145, 44147, 44149, 44225, 44227, 44229, 44263, 44265, 44267, 44269, 44287, 44289, 44309, 44319, 44328, 44329, 44339, 44357, 44359, 44369, 44379, 44388
   - [Horizontalsperre in Dortmund](https://sos-abdichtung.de/kellersanierung/dortmund/#horizontalsperre)
   - [Keller abdichten in Dortmund](https://sos-abdichtung.de/kellersanierung/dortmund/#kellerinnenabdichtung)
   - [Rissverpressung in Dortmund](https://sos-abdichtung.de/kellersanierung/dortmund/#rissverpressung)
   - [Schimmel im Keller in Dortmund](https://sos-abdichtung.de/kellersanierung/dortmund/#schimmelbeseitigung)
-- [Kellersanierung Köln](https://sos-abdichtung.de/kellersanierung/koeln/): vor Ort in 24 bis 48 Stunden. PLZ 50667, 50672, 50674, 50676, 50733, 50735, 50823, 50825, 50931, 50933, 50937, 50968, 50996, 51063, 51065, 51105, 51143
+  - [Feuchtemessung in Dortmund](https://sos-abdichtung.de/kellersanierung/dortmund/#feuchtemessung)
+  - [Sockel abdichten in Dortmund](https://sos-abdichtung.de/kellersanierung/dortmund/#sockelabdichtung)
+- [Kellersanierung Köln](https://sos-abdichtung.de/kellersanierung/koeln/): vor Ort in 24 bis 48 Stunden. PLZ 50667, 50668, 50670, 50672, 50674, 50676, 50677, 50678, 50679, 50733, 50735, 50737, 50739, 50765, 50767, 50769, 50823, 50825, 50827, 50829, 50858, 50859, 50931, 50933, 50935, 50937, 50939, 50968, 50969, 50996, 50997, 50999, 51061, 51063, 51065, 51067, 51069, 51103, 51105, 51107, 51109, 51143, 51145, 51147, 51149
   - [Keller abdichten in Köln](https://sos-abdichtung.de/kellersanierung/koeln/#kellerinnenabdichtung)
   - [Horizontalsperre in Köln](https://sos-abdichtung.de/kellersanierung/koeln/#horizontalsperre)
   - [Schimmel im Souterrain in Köln](https://sos-abdichtung.de/kellersanierung/koeln/#schimmelbeseitigung)
   - [Feuchtemessung in Köln](https://sos-abdichtung.de/kellersanierung/koeln/#feuchtemessung)
+  - [Rissverpressung in Köln](https://sos-abdichtung.de/kellersanierung/koeln/#rissverpressung)
+  - [Sockel abdichten in Köln](https://sos-abdichtung.de/kellersanierung/koeln/#sockelabdichtung)
 - [Kellersanierung Duisburg](https://sos-abdichtung.de/kellersanierung/duisburg/): vor Ort in 24 bis 48 Stunden. PLZ 47051, 47053, 47055, 47057, 47058, 47059, 47119, 47137, 47166, 47169, 47178, 47198, 47226, 47228, 47239, 47249, 47259, 47279
   - [Keller abdichten in Duisburg](https://sos-abdichtung.de/kellersanierung/duisburg/#kellerinnenabdichtung)
   - [Rissverpressung in Duisburg](https://sos-abdichtung.de/kellersanierung/duisburg/#rissverpressung)
@@ -190,9 +198,11 @@ Zwischen Vohwinkel und Beyenburg stehen viele Häuser am Hang oder nah an der Wu
 - Gründerzeitkeller aus Bruchstein und Ziegel: Die Altbauviertel in Elberfeld und Barmen, etwa das Briller Viertel oder der Ölberg, entstanden größtenteils im späten 19. und frühen 20. Jahrhundert. Ihre Keller besitzen selten eine funktionierende Horizontalsperre.
 - Regenreiches Bergisches Klima: Feuchte Westwinde regnen sich an den bergischen Höhen ab, entsprechend oft und ergiebig regnet es in Wuppertal. Die Böden kommen zwischen den Regenperioden kaum zur Ruhe.
 - Talsohle an der Wupper: In den Lagen nah am Fluss sind die Böden feuchter, und bei Hochwasser wie im Juli 2021 können Keller auch von unten volllaufen.
+- Schiefer, Grauwacke und Kalk im Untergrund: Unter Wuppertal liegen Tonschiefer und Grauwacke, in Elberfeld und Dornap auch Massenkalk. Das Gestein lässt Regenwasser nur schlecht versickern, es läuft auf den Gesteinsschichten den Hang hinab und staut sich an Kellerwänden.
 - Elberfeld und Barmen (Elberfeld, Briller Viertel, Ölberg, Barmen, Heckinghausen): Gründerzeitviertel mit Bruchstein- und Ziegelkellern ohne Sperrschicht, Häuser in geschlossener Reihe. Typisch sind aufsteigende Feuchte und Salze, die den Putz absprengen.
 - Die Hanglagen (Cronenberg, Ronsdorf, Küllenhahn, Uellendahl, Katernberg): Häuser auf den Südhöhen und an den Nordhängen. Nach Regen staut sich Schichtenwasser an der bergseitigen Wand, die Talseite bleibt trocken.
 - Entlang der Wupper (Vohwinkel, Sonnborn, Oberbarmen, Langerfeld, Beyenburg): Die Talsohle nah am Fluss, oft unter der Schwebebahn. Feuchte Böden, und bei Hochwasser wie 2021 kommt das Wasser auch von unten.
+- Der Norden (Dönberg, Nächstebreck, Hatzfeld, Siebeneick): Einfamilien- und Bauernhäuser in den nördlichen Höhenlagen, teils mit Bruchsteinkellern. Schichtenwasser am Hang und Feuchte aus Wänden ohne Sperrschicht.
 
 ### Kellersanierung Solingen
 Die Klingenstadt reicht vom steilen Wuppertal bei Burg bis in die flacheren Lagen im Westen. Entsprechend unterschiedlich sind die Ursachen feuchter Keller, und entsprechend genau muss man hinschauen.
@@ -258,9 +268,13 @@ Hoher Rhein-Grundwasserspiegel, wertvolle Wohn- und Nutzflächen im Souterrain: 
 - Rhein-Hochwasser & Grundwasserdruck: In rheinnahen Stadtteilen wie Oberkassel, Bilk und Pempelfort drückt das Rhein-Grundwasser bei Pegelanstieg mit starkem hydrostatischem Druck gegen Bodenplatte und Kellerwände.
 - Hochwertig genutzte Souterrain-Räume: In Düsseldorf werden Untergeschosse häufig als Büros, Einliegerwohnungen oder Praxisräume genutzt. Nässe und Schimmel gefährden hier direkt teure Bausubstanz und Mieteinnahmen.
 - Kies- und Sandböden der Rheinterrasse: Die durchlässigen Böden leiten Regenwasser extrem schnell in tiefere Schichten ab, was zu plötzlichen Wasseranstiegen am Kellerfundament führt.
+- Nachkriegs- und Siedlungsbau im Süden: In Eller, Wersten, Holthausen und Garath stehen viele Häuser aus den 1950er bis 1970er Jahren. Ihre Kellerwände wurden damals meist nur mit einem Bitumenanstrich geschützt, der heute spröde ist. Feuchte dringt dann an der Wand und am Übergang zur Bodenplatte ein.
+- Altbauten im Norden und in Kaiserswerth: Kaiserswerth, Wittlaer und Angermund liegen nah am Rhein und haben viele ältere Häuser mit Ziegel- und Bruchsteinkellern. Hier kommen aufsteigende Feuchte und das Grundwasser aus der Rheinniederung zusammen.
 - Am Rhein (Oberkassel, Niederkassel, Altstadt, Unterbilk, Hamm, Volmerswerth): Ufernahe Lagen, in denen das Grundwasser mit dem Rhein steigt. Typisch ist Wasser von unten und am Wandfuß, oft Tage nach dem Höchststand.
 - Gründerzeitviertel (Pempelfort, Derendorf, Flingern, Bilk, Friedrichstadt): Dichte Altbauten mit genutzten Souterrains. Aufsteigende Feuchte im Ziegel und Kondensat in bewohnten Untergeschossen.
 - Osten und Süden (Gerresheim, Grafenberg, Benrath, Urdenbach): Hanglagen im Osten, Villen und Einfamilienhäuser im Süden. Hangwasser an der bergseitigen Wand, in Rheinnähe zusätzlich Grundwasser.
+- Der Norden (Kaiserswerth, Wittlaer, Angermund, Lohausen, Unterrath): Ältere Häuser in Rheinnähe, teils denkmalgeschützt. Aufsteigende Feuchte in Ziegel- und Bruchsteinkellern und Grundwasser bei hohem Rheinpegel.
+- Südosten (Eller, Wersten, Holthausen, Hassels, Garath): Reihen- und Doppelhäuser aus den 1950er bis 1970er Jahren. Spröde Bitumenanstriche, Feuchte am Wandfuß und ausgebaute Keller, in denen Schimmel entsteht.
 
 ### Kellersanierung Bochum
 Von Ehrenfeld und Stiepel bis Langendreer und Wattenscheid: Ehemalige Bergbaugebiete, Lehmböden und feuchtes Mauerwerk verlangen maßgeschneiderte Lösungen ohne Erdarbeiten.
@@ -277,9 +291,13 @@ Vom Kreuzviertel und Hörde am Phoenix-See bis nach Brackel und Mengede: Trocken
 - Grundwasseranstieg nach Zechenstilllegungen: Durch das regulierte Abpumpen und den Grubenwasseranstieg im östlichen Ruhrgebiet steigen die Pegel in tieferen Erdschichten seit Jahren wieder an.
 - Gründerzeitviertel im Kreuzviertel und Kaiserviertel: Dicht bebaute Blockrandstrukturen mit historischen Vollziegelkellern, die bei aufsteigender Feuchte rasch Salzausblühungen bilden.
 - Urbane Sanierungsanforderungen am Phoenix-See: Moderne Souterrains und modernisierte Bestandsgebäude verlangen hochwertige Nutzbarkeit ohne Feuchtegeruch und Schimmelsporen.
+- Emscher-Niederung im Norden: Durch Huckarde, Mengede und den Dortmunder Norden zieht sich die Niederung der Emscher. Das Gelände liegt tief, der Boden ist lehmig und hält Wasser lange fest. Kellerwände stehen hier oft monatelang im feuchten Erdreich.
+- Wiederaufbau nach dem Krieg: Große Teile der Innenstadt wurden nach 1945 schnell wieder aufgebaut, oft mit Trümmerziegeln und ohne Sperrschicht im Keller. Diese Häuser zeigen heute typische Schäden durch aufsteigende Feuchte: Salzränder, mürber Putz und muffiger Geruch.
+- Zechensiedlungen in Eving und Lütgendortmund: Die Siedlungshäuser der Bergleute haben flache Keller aus Ziegel, oft ohne Abdichtung der Außenwand. Setzungen aus der Bergbauzeit haben zusätzlich Risse in Wand und Boden hinterlassen.
 - Innenstadt und Gründerzeitviertel (Kreuzviertel, Kaiserviertel, Innenstadt-Nord, Innenstadt-Ost): Dichte Blockrandbebauung mit historischen Vollziegelkellern. Aufsteigende Feuchte, Salzausblühungen und kein Platz zum Aufgraben.
 - Der Süden (Hörde, Hombruch, Aplerbeck, Syburg): Hanglagen zum Ardey und zur Ruhr, rund um den Phoenix-See modernisierter Bestand. Sickerwasser an der Wand und hohe Ansprüche an trockene Souterrains.
 - Norden und Osten (Mengede, Huckarde, Eving, Brackel, Scharnhorst): Zechensiedlungen und Bergbaugelände. Setzungsrisse und Feuchte im Ziegel der Siedlungshäuser.
+- Der Westen (Lütgendortmund, Kirchlinde, Marten, Dorstfeld, Oespel): Siedlungs- und Reihenhäuser aus den 1920er bis 1960er Jahren. Aufsteigende Feuchte im Ziegel und genutzte Hobbykeller, in denen Schimmel schnell auffällt.
 
 ### Kellersanierung Köln
 Ob Gründerzeitbau in Ehrenfeld und Nippes oder Einfamilienhaus in Rodenkirchen: In Köln entscheiden der Rhein, der Grundwasserstand und das Alter des Mauerwerks, warum ein Keller nass wird. Wir messen kostenlos, woher die Feuchte kommt, und sanieren von innen, ohne Hof oder Garten aufzugraben.
@@ -290,6 +308,7 @@ Ob Gründerzeitbau in Ehrenfeld und Nippes oder Einfamilienhaus in Rodenkirchen:
 - Am Rhein (Altstadt, Deutz, Rodenkirchen, Weiß, Porz, Zündorf, Köln-Mülheim, Niehl): Ufernahe Lagen, in denen das Grundwasser mit dem Rhein steigt. Typisch ist Wasser von unten und am Wandfuß, oft erst Tage nach dem Höchststand des Flusses. Hier ist eine Innenabdichtung gegen drückendes Wasser der häufigste Weg.
 - Gründerzeitviertel (Ehrenfeld, Nippes, Südstadt, Sülz, Lindenthal, Kalk): Dichte Altbauten mit Ziegelkellern, Häuser direkt am Gehweg. Die Sperrschicht hat versagt, die Feuchte steigt auf, Salze sprengen den Putz. Von außen ist kein Platz zum Aufgraben.
 - Außenbezirke (Chorweiler, Longerich, Brück, Rath/Heumar, Junkersdorf): Einfamilien- und Reihenhäuser der Nachkriegsjahrzehnte. Häufig undichte Anschlüsse an der Bodenplatte und Kondensat in kühlen, wenig gelüfteten Kellern.
+- Westliche Vororte (Müngersdorf, Weiden, Lövenich, Bocklemünd, Pesch): Einfamilien- und Doppelhäuser mit genutzten Kellern. Feuchte über alte Außenabdichtungen und den Sockel, oft auch Kondensat in kalten Kellerräumen.
 
 ### Kellersanierung Duisburg
 Duisburg liegt am Zusammenfluss von Rhein und Ruhr, und der Bergbau hat den Boden auf beiden Rheinseiten verändert. Beides merkt man im Keller: Grundwasser, das von außen drückt, und Risse, durch die es eindringt. Wir messen kostenlos und sanieren von innen.

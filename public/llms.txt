@@ -62,6 +62,8 @@ Jedes Messprotokoll wird dem Kunden immer schriftlich übergeben, nach jeder Pha
   - [Horizontalsperre in Wuppertal](https://sos-abdichtung.de/kellersanierung/wuppertal/#horizontalsperre)
   - [Rissverpressung in Wuppertal](https://sos-abdichtung.de/kellersanierung/wuppertal/#rissverpressung)
   - [Schimmel im Keller in Wuppertal](https://sos-abdichtung.de/kellersanierung/wuppertal/#schimmelbeseitigung)
+  - [Feuchtemessung in Wuppertal](https://sos-abdichtung.de/kellersanierung/wuppertal/#feuchtemessung)
+  - [Sockel abdichten in Wuppertal](https://sos-abdichtung.de/kellersanierung/wuppertal/#sockelabdichtung)
 - [Kellersanierung Solingen](https://sos-abdichtung.de/kellersanierung/solingen/): vor Ort in 24 bis 48 Stunden. PLZ 42651, 42653, 42655, 42657, 42659, 42697, 42699, 42719
   - [Keller abdichten in Solingen](https://sos-abdichtung.de/kellersanierung/solingen/#kellerinnenabdichtung)
   - [Horizontalsperre in Solingen](https://sos-abdichtung.de/kellersanierung/solingen/#horizontalsperre)
@@ -94,26 +96,32 @@ Jedes Messprotokoll wird dem Kunden immer schriftlich übergeben, nach jeder Pha
   - [Horizontalsperre in Essen](https://sos-abdichtung.de/kellersanierung/essen/#horizontalsperre)
   - [Schimmel im Keller in Essen](https://sos-abdichtung.de/kellersanierung/essen/#schimmelbeseitigung)
   - [Feuchtemessung in Essen](https://sos-abdichtung.de/kellersanierung/essen/#feuchtemessung)
-- [Kellersanierung Düsseldorf](https://sos-abdichtung.de/kellersanierung/duesseldorf/): vor Ort in 24 bis 48 Stunden. PLZ 40210, 40213, 40477, 40545, 40547, 40597, 40625
+- [Kellersanierung Düsseldorf](https://sos-abdichtung.de/kellersanierung/duesseldorf/): vor Ort in 24 bis 48 Stunden. PLZ 40210, 40211, 40212, 40213, 40215, 40217, 40219, 40221, 40223, 40225, 40227, 40229, 40231, 40233, 40235, 40237, 40239, 40468, 40470, 40472, 40474, 40476, 40477, 40479, 40489, 40545, 40547, 40549, 40589, 40591, 40593, 40595, 40597, 40599, 40625, 40627, 40629
   - [Keller abdichten in Düsseldorf](https://sos-abdichtung.de/kellersanierung/duesseldorf/#kellerinnenabdichtung)
   - [Schimmel im Souterrain in Düsseldorf](https://sos-abdichtung.de/kellersanierung/duesseldorf/#schimmelbeseitigung)
   - [Horizontalsperre in Düsseldorf](https://sos-abdichtung.de/kellersanierung/duesseldorf/#horizontalsperre)
   - [Rissverpressung in Düsseldorf](https://sos-abdichtung.de/kellersanierung/duesseldorf/#rissverpressung)
+  - [Feuchtemessung in Düsseldorf](https://sos-abdichtung.de/kellersanierung/duesseldorf/#feuchtemessung)
+  - [Sockel abdichten in Düsseldorf](https://sos-abdichtung.de/kellersanierung/duesseldorf/#sockelabdichtung)
 - [Kellersanierung Bochum](https://sos-abdichtung.de/kellersanierung/bochum/): vor Ort in 24 bis 48 Stunden. PLZ 44787, 44789, 44791, 44799, 44801, 44803, 44866
   - [Rissverpressung in Bochum](https://sos-abdichtung.de/kellersanierung/bochum/#rissverpressung)
   - [Keller abdichten in Bochum](https://sos-abdichtung.de/kellersanierung/bochum/#kellerinnenabdichtung)
   - [Horizontalsperre in Bochum](https://sos-abdichtung.de/kellersanierung/bochum/#horizontalsperre)
   - [Schimmel im Keller in Bochum](https://sos-abdichtung.de/kellersanierung/bochum/#schimmelbeseitigung)
-- [Kellersanierung Dortmund](https://sos-abdichtung.de/kellersanierung/dortmund/): vor Ort in 24 bis 48 Stunden. PLZ 44135, 44137, 44139, 44225, 44263, 44309, 44359
+- [Kellersanierung Dortmund](https://sos-abdichtung.de/kellersanierung/dortmund/): vor Ort in 24 bis 48 Stunden. PLZ 44135, 44137, 44139, 44141, 44143, 44145, 44147, 44149, 44225, 44227, 44229, 44263, 44265, 44267, 44269, 44287, 44289, 44309, 44319, 44328, 44329, 44339, 44357, 44359, 44369, 44379, 44388
   - [Horizontalsperre in Dortmund](https://sos-abdichtung.de/kellersanierung/dortmund/#horizontalsperre)
   - [Keller abdichten in Dortmund](https://sos-abdichtung.de/kellersanierung/dortmund/#kellerinnenabdichtung)
   - [Rissverpressung in Dortmund](https://sos-abdichtung.de/kellersanierung/dortmund/#rissverpressung)
   - [Schimmel im Keller in Dortmund](https://sos-abdichtung.de/kellersanierung/dortmund/#schimmelbeseitigung)
-- [Kellersanierung Köln](https://sos-abdichtung.de/kellersanierung/koeln/): vor Ort in 24 bis 48 Stunden. PLZ 50667, 50672, 50674, 50676, 50733, 50735, 50823, 50825, 50931, 50933, 50937, 50968, 50996, 51063, 51065, 51105, 51143
+  - [Feuchtemessung in Dortmund](https://sos-abdichtung.de/kellersanierung/dortmund/#feuchtemessung)
+  - [Sockel abdichten in Dortmund](https://sos-abdichtung.de/kellersanierung/dortmund/#sockelabdichtung)
+- [Kellersanierung Köln](https://sos-abdichtung.de/kellersanierung/koeln/): vor Ort in 24 bis 48 Stunden. PLZ 50667, 50668, 50670, 50672, 50674, 50676, 50677, 50678, 50679, 50733, 50735, 50737, 50739, 50765, 50767, 50769, 50823, 50825, 50827, 50829, 50858, 50859, 50931, 50933, 50935, 50937, 50939, 50968, 50969, 50996, 50997, 50999, 51061, 51063, 51065, 51067, 51069, 51103, 51105, 51107, 51109, 51143, 51145, 51147, 51149
   - [Keller abdichten in Köln](https://sos-abdichtung.de/kellersanierung/koeln/#kellerinnenabdichtung)
   - [Horizontalsperre in Köln](https://sos-abdichtung.de/kellersanierung/koeln/#horizontalsperre)
   - [Schimmel im Souterrain in Köln](https://sos-abdichtung.de/kellersanierung/koeln/#schimmelbeseitigung)
   - [Feuchtemessung in Köln](https://sos-abdichtung.de/kellersanierung/koeln/#feuchtemessung)
+  - [Rissverpressung in Köln](https://sos-abdichtung.de/kellersanierung/koeln/#rissverpressung)
+  - [Sockel abdichten in Köln](https://sos-abdichtung.de/kellersanierung/koeln/#sockelabdichtung)
 - [Kellersanierung Duisburg](https://sos-abdichtung.de/kellersanierung/duisburg/): vor Ort in 24 bis 48 Stunden. PLZ 47051, 47053, 47055, 47057, 47058, 47059, 47119, 47137, 47166, 47169, 47178, 47198, 47226, 47228, 47239, 47249, 47259, 47279
   - [Keller abdichten in Duisburg](https://sos-abdichtung.de/kellersanierung/duisburg/#kellerinnenabdichtung)
   - [Rissverpressung in Duisburg](https://sos-abdichtung.de/kellersanierung/duisburg/#rissverpressung)
