@@ -46,6 +46,8 @@ export interface CityPage {
   localServices?: { slug: string; heading: string; text: string }[];
   /** the city's districts grouped by area, each with what is typical for its cellars */
   districtGroups?: { name: string; districts: string[]; text: string }[];
+  /** a film from FILM_PAGES (slug) shown on the page, so the city page carries the work on video */
+  film?: string;
 }
 
 export const SERVICE_PAGES: ServicePage[] = [
@@ -1856,6 +1858,13 @@ export const CITY_PAGES: CityPage[] = [
           "Kurze Wege: Unser Sitz ist in Essen, Niebuhrstraße 46",
         ],
       },
+      {
+        "heading": "Mehrfamilienhäuser in Essen: Kellersanierung im bewohnten Haus",
+        "paragraphs": [
+          "In Rüttenscheid, Holsterhausen, Frohnhausen und Altenessen sind viele Häuser vermietet oder gehören Eigentümergemeinschaften. Ein feuchter Keller betrifft dort alle Parteien: Kellerverschläge riechen muffig, eingelagerte Möbel schimmeln, und am Wandfuß platzt der Putz ab.",
+          "Wir arbeiten in diesen Häusern Kellerraum für Kellerraum, sodass immer nur ein Teil gesperrt ist und die Mieter ihre Keller sonst weiter nutzen können. Die Hausverwaltung bekommt ein schriftliches Angebot mit Messprotokoll für die Eigentümerversammlung und nach jeder Phase ein weiteres Protokoll. Weil unser Betrieb in Essen sitzt, sind wir für Rückfragen und Nachmessungen schnell wieder vor Ort."
+        ]
+      }
     ],
     faqs: [
       {
@@ -1886,7 +1895,16 @@ export const CITY_PAGES: CityPage[] = [
         q: "Arbeiten Sie auch in den Nachbarstädten von Essen?",
         a: "Ja. Von unserem Sitz in Essen fahren wir regelmäßig nach Mülheim an der Ruhr, Gelsenkirchen, Bottrop, Oberhausen, Bochum und Velbert, in der Regel innerhalb von 24 bis 48 Stunden.",
       },
+      {
+        "q": "Wie lange dauert eine Kellersanierung in Essen?",
+        "a": "Die Arbeiten selbst dauern meist zwei bis vier Werktage, je nach Fläche und Verfahren. Danach trocknet das Mauerwerk über einige Monate aus; wir messen nach und geben Ihnen das Protokoll schriftlich."
+      },
+      {
+        "q": "Sanieren Sie auch Keller für Hausverwaltungen und Eigentümergemeinschaften in Essen?",
+        "a": "Ja. Für Hausverwaltungen und Eigentümergemeinschaften erstellen wir ein schriftliches Angebot mit Messprotokoll für die Eigentümerversammlung. Wir arbeiten raumweise im bewohnten Haus, damit die Mieter ihre Keller möglichst weiter nutzen können."
+      }
     ],
+    film: "kellersanierung",
     nearby: ["muelheim-an-der-ruhr", "gelsenkirchen", "bottrop", "oberhausen", "bochum", "velbert"],
   },
 
