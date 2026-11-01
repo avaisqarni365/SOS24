@@ -5,6 +5,7 @@ import Navbar from "@/components/sections/Navbar";
 import Footer from "@/components/sections/Footer";
 import HomeSteps from "@/components/sections/HomeSteps";
 import OnlineAppointmentBooking from "@/components/sections/OnlineAppointmentBooking";
+import FilmPlayer from "@/components/sections/FilmPlayer";
 import JsonLd from "@/components/seo/JsonLd";
 import { Breadcrumbs, LayerStack, Prose, FaqList, LinkGrid } from "@/components/seo/SubpageParts";
 import { CITY_PAGES } from "@/data/seo-pages";
@@ -53,6 +54,7 @@ export default function CityPage({ params }: { params: { city: string } }) {
     { name: `Kellersanierung ${page.name}`, path },
   ];
   const local = page.localServices ?? [];
+  const film = page.film ? FILM_PAGES.find((f) => f.slug === page.film) : undefined;
   const cityId = `${abs(path)}#city`;
   const serviceId = `${abs(path)}#service`;
 
@@ -235,7 +237,7 @@ export default function CityPage({ params }: { params: { city: string } }) {
               <div className="max-w-3xl">
                 <p className="sc-label text-accent-deep font-bold">Leistungen vor Ort</p>
                 <h2 id="local-title" className="sc-display mt-3 text-3xl sm:text-4xl text-ink">
-                  Was wir in {page.name} für Ihren Keller tun
+                  Kellersanierung {page.name}: was wir für Ihren Keller tun
                 </h2>
                 <p className="sc-lede mt-3 text-ink font-medium">
                   {hy("Jedes Verfahren gegen eine bestimmte Ursache. Welches Ihr Keller braucht, zeigt die kostenlose Messung.")}
@@ -304,6 +306,24 @@ export default function CityPage({ params }: { params: { city: string } }) {
                   </li>
                 ))}
               </ul>
+            </div>
+          </section>
+        ) : null}
+
+        {film ? (
+          <section className="surface-bone-2 sc-section" aria-labelledby="film-title">
+            <div className="sc-wrap grid gap-8 lg:grid-cols-[1fr_minmax(0,24rem)] lg:items-center">
+              <div className="max-w-2xl">
+                <p className="sc-label text-accent-deep font-bold">Im Film</p>
+                <h2 id="film-title" className="sc-display mt-3 text-3xl sm:text-4xl text-ink">
+                  So läuft eine Kellersanierung in {page.name} ab
+                </h2>
+                <p className="sc-lede mt-3 text-ink font-medium">{hy(film.description)}</p>
+                <a href={`/filme/${film.slug}/`} className="mt-5 inline-flex items-center gap-1.5 text-sm font-bold text-accent-deep hover:underline underline-offset-4">
+                  Film mit Kapiteln ansehen <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                </a>
+              </div>
+              <FilmPlayer film={film.film} title={film.title} />
             </div>
           </section>
         ) : null}
