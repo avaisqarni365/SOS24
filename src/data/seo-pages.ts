@@ -2849,6 +2849,10 @@ export const CITY_PAGES: CityPage[] = [
         name: "Kalte Kellerwände im Sommer",
         text: "Wird an warmen Tagen gelüftet, schlägt sich die feuchte Luft an den kühlen Wänden nieder. Viele Keller, die als nass gelten, haben in Wahrheit ein Kondensatproblem.",
       },
+      {
+        "name": "Wiederaufbau nach dem Krieg",
+        "text": "Die Gelsenkirchener Innenstadt und viele Zechenviertel wurden im Krieg schwer getroffen und in den 1950er Jahren schnell wieder aufgebaut. Die Keller dieser Häuser haben oft nur einen Bitumenanstrich als Abdichtung, der heute spröde ist."
+      }
     ],
     localServices: [
       {
@@ -2871,6 +2875,16 @@ export const CITY_PAGES: CityPage[] = [
         heading: "Schimmel im Keller in Gelsenkirchen",
         text: "Ob der Schimmel aus der nassen Wand kommt oder aus Kondensat, zeigt die Messung von Wandfeuchte, Oberflächentemperatur und Raumklima. Wir entfernen den Befall sporensicher und beseitigen dann die Ursache, damit er nicht zurückkommt.",
       },
+      {
+        "slug": "feuchtemessung",
+        "heading": "Feuchtemessung in Gelsenkirchen",
+        "text": "Riss, aufsteigende Feuchte oder Kondensat: Wir messen kostenlos, woher die Nässe in Ihrem Keller kommt, und geben Ihnen das Ergebnis schriftlich."
+      },
+      {
+        "slug": "sockelabdichtung",
+        "heading": "Sockel abdichten in Gelsenkirchen",
+        "text": "Bei Siedlungs- und Reihenhäusern zieht Spritzwasser in den Sockel und weiter in die Kellerwand. Wir dichten den Sockel ab und schließen ihn an die Kellerabdichtung an."
+      }
     ],
     districtGroups: [
       {
@@ -2915,6 +2929,20 @@ export const CITY_PAGES: CityPage[] = [
           "10 Jahre Garantie auf die Arbeit, 25 Jahre Herstellergarantie auf die Wirksamkeit",
         ],
       },
+      {
+        "heading": "Schalke, Ückendorf und Rotthausen: Sanierung im bewohnten Mehrfamilienhaus",
+        "paragraphs": [
+          "Im Süden der Stadt stehen viele Mehrfamilienhäuser aus der Gründerzeit und dem Wiederaufbau, meist vermietet oder im Besitz von Eigentümergemeinschaften. Feuchte Keller betreffen hier alle Parteien: Kellerverschläge riechen muffig, Kartons schimmeln, der Putz platzt am Wandfuß ab.",
+          "Wir arbeiten in diesen Häusern Kellerraum für Kellerraum, damit immer nur ein Teil gesperrt ist. Die Hausverwaltung bekommt ein schriftliches Angebot mit Messprotokoll für die Eigentümerversammlung und nach jeder Phase ein weiteres Protokoll."
+        ]
+      },
+      {
+        "heading": "Buer, Resse und Hassel: Einfamilienhäuser im Gelsenkirchener Norden",
+        "paragraphs": [
+          "Im Norden überwiegen Einfamilien- und Doppelhäuser, viele aus den 1950er bis 1970er Jahren, dazu Zechensiedlungen in Hassel und Scholven. Die Keller werden oft als Hobbyraum oder Waschküche genutzt, und dort fällt Feuchte schnell auf.",
+          "Typisch sind eine gealterte Außenabdichtung und Risse aus Setzungen. Wir messen zuerst kostenlos, woher die Feuchte kommt, verpressen wasserführende Risse mit PU-Harz und dichten die Wände von innen mit Dichtungsschlämme und Hohlkehle ab, ohne Garten oder Einfahrt aufzugraben."
+        ]
+      }
     ],
     faqs: [
       {
@@ -2937,6 +2965,14 @@ export const CITY_PAGES: CityPage[] = [
         q: "Was kostet die Kellersanierung in Gelsenkirchen?",
         a: "Das hängt von Ursache, Wandfläche, Mauerwerk und Rissen ab. Nach der kostenlosen Messung erhalten Sie ein verbindliches Festpreisangebot; die Sanierung von innen ist fast immer deutlich günstiger als eine Außenabdichtung.",
       },
+      {
+        "q": "Wie lange dauert eine Kellersanierung in Gelsenkirchen?",
+        "a": "Die Arbeiten selbst dauern meist zwei bis vier Werktage. Danach trocknet das Mauerwerk über einige Monate aus; wir messen nach und geben Ihnen das Protokoll schriftlich."
+      },
+      {
+        "q": "Sanieren Sie auch Keller in Mehrfamilienhäusern und für Hausverwaltungen?",
+        "a": "Ja. Für Hausverwaltungen und Eigentümergemeinschaften in Gelsenkirchen erstellen wir ein schriftliches Angebot mit Messprotokoll und arbeiten raumweise, damit die Mieter ihre Keller möglichst weiter nutzen können."
+      }
     ],
     nearby: ["essen", "bottrop", "bochum", "oberhausen"],
   },
@@ -3119,6 +3155,16 @@ export const CITY_PAGES: CityPage[] = [
         heading: "Schimmel im Souterrain in Mülheim",
         text: "Am Hang wird das Souterrain oft als Wohnraum genutzt. Kondensat und eindringende Feuchte führen dort schnell zu Schimmel. Wir entfernen ihn sporensicher und beseitigen die Ursache, wo nötig mit Klimaplatten.",
       },
+      {
+        "slug": "feuchtemessung",
+        "heading": "Feuchtemessung in Mülheim",
+        "text": "Am Hang in Saarn und Menden ist oft nur eine Wand nass, an der Ruhr kommt die Feuchte von unten. Wir messen kostenlos, woher sie bei Ihnen kommt, und geben Ihnen das Ergebnis schriftlich."
+      },
+      {
+        "slug": "sockelabdichtung",
+        "heading": "Sockel abdichten in Mülheim",
+        "text": "Bei Altbauten und Villen in Speldorf und Broich ist der Sockel oft durchfeuchtet, der Putz platzt ab. Wir dichten den Sockel ab und schließen ihn an die Abdichtung der Kellerwand an."
+      }
     ],
     districtGroups: [
       {
@@ -3136,6 +3182,14 @@ export const CITY_PAGES: CityPage[] = [
         districts: ["Heißen", "Dümpten", "Styrum", "Winkhausen"],
         text: "Ehemaliges Bergbaugebiet und Siedlungshäuser. Setzungsrisse in Wand und Bodenplatte und Ziegelkeller ohne Sperrschicht.",
       },
+      {
+        "name": "Fulerum und Heimaterde",
+        "districts": [
+          "Heimaterde",
+          "Fulerum"
+        ],
+        "text": "Gartenstadt- und Siedlungshäuser mit kleinen Ziegelkellern. Aufsteigende Feuchte in Wänden ohne Sperrschicht und feuchte Sockel."
+      }
     ],
     sections: [
       {
@@ -3163,6 +3217,20 @@ export const CITY_PAGES: CityPage[] = [
           "Kurze Wege von unserem Sitz in Essen",
         ],
       },
+      {
+        "heading": "Heißen, Dümpten und Winkhausen: Siedlungs- und Reihenhäuser im Norden",
+        "paragraphs": [
+          "Im Mülheimer Norden wurde bis ins 20. Jahrhundert Kohle abgebaut. Hier stehen viele Siedlungs- und Reihenhäuser mit Ziegelkellern ohne Sperrschicht, dazu Einfamilienhäuser aus den 1950er bis 1970er Jahren. Setzungen haben in manchen Kellern Risse hinterlassen, durch die bei Regen Wasser eindringt.",
+          "Wir verpressen wasserführende Risse mit PU-Harz, setzen gegen aufsteigende Feuchte eine Horizontalsperre per Injektion und schützen die Wände mit Sanierputz. Garten und Einfahrt bleiben unberührt."
+        ]
+      },
+      {
+        "heading": "Innenstadt und Eppinghofen: Mehrfamilienhäuser im bewohnten Haus sanieren",
+        "paragraphs": [
+          "In der Innenstadt und in Eppinghofen sind die Häuser meist vermietet oder gehören Eigentümergemeinschaften. Feuchte Keller betreffen hier alle Parteien, und die Sanierung muss im bewohnten Haus funktionieren.",
+          "Wir arbeiten Kellerraum für Kellerraum, sodass immer nur ein Teil gesperrt ist. Die Hausverwaltung bekommt ein schriftliches Angebot mit Messprotokoll für die Eigentümerversammlung und nach jeder Phase ein weiteres Protokoll."
+        ]
+      }
     ],
     faqs: [
       {
@@ -3185,6 +3253,14 @@ export const CITY_PAGES: CityPage[] = [
         q: "Mein Keller stand beim Hochwasser unter Wasser. Was nun?",
         a: "Erst trocknen und messen: Ob das Wasser nur eingedrungen ist oder die Wand dauerhaft durchfeuchtet bleibt, zeigt die Messung. Danach dichten wir von innen ab, damit beim nächsten Hochwasser kein Wasser mehr durchkommt.",
       },
+      {
+        "q": "Wie lange dauert eine Kellersanierung in Mülheim?",
+        "a": "Die Arbeiten selbst dauern meist zwei bis vier Werktage. Danach trocknet das Mauerwerk über einige Monate aus; wir messen nach und geben Ihnen das Protokoll schriftlich."
+      },
+      {
+        "q": "Sanieren Sie auch Keller in Mehrfamilienhäusern und für Hausverwaltungen in Mülheim?",
+        "a": "Ja. Für Hausverwaltungen und Eigentümergemeinschaften erstellen wir ein schriftliches Angebot mit Messprotokoll und arbeiten raumweise, damit die Mieter ihre Keller möglichst weiter nutzen können."
+      }
     ],
     nearby: ["essen", "oberhausen", "duisburg", "duesseldorf"],
   },
