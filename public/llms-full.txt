@@ -136,6 +136,8 @@ Jedes Messprotokoll wird dem Kunden immer schriftlich übergeben, nach jeder Pha
   - [Keller abdichten in Gelsenkirchen](https://sos-abdichtung.de/kellersanierung/gelsenkirchen/#kellerinnenabdichtung)
   - [Horizontalsperre in Gelsenkirchen](https://sos-abdichtung.de/kellersanierung/gelsenkirchen/#horizontalsperre)
   - [Schimmel im Keller in Gelsenkirchen](https://sos-abdichtung.de/kellersanierung/gelsenkirchen/#schimmelbeseitigung)
+  - [Feuchtemessung in Gelsenkirchen](https://sos-abdichtung.de/kellersanierung/gelsenkirchen/#feuchtemessung)
+  - [Sockel abdichten in Gelsenkirchen](https://sos-abdichtung.de/kellersanierung/gelsenkirchen/#sockelabdichtung)
 - [Kellersanierung Oberhausen](https://sos-abdichtung.de/kellersanierung/oberhausen/): vor Ort in 24 bis 48 Stunden. PLZ 46045, 46047, 46049, 46117, 46119, 46145, 46147, 46149
   - [Horizontalsperre in Oberhausen](https://sos-abdichtung.de/kellersanierung/oberhausen/#horizontalsperre)
   - [Keller abdichten in Oberhausen](https://sos-abdichtung.de/kellersanierung/oberhausen/#kellerinnenabdichtung)
@@ -146,6 +148,8 @@ Jedes Messprotokoll wird dem Kunden immer schriftlich übergeben, nach jeder Pha
   - [Horizontalsperre in Mülheim](https://sos-abdichtung.de/kellersanierung/muelheim-an-der-ruhr/#horizontalsperre)
   - [Rissverpressung in Mülheim](https://sos-abdichtung.de/kellersanierung/muelheim-an-der-ruhr/#rissverpressung)
   - [Schimmel im Souterrain in Mülheim](https://sos-abdichtung.de/kellersanierung/muelheim-an-der-ruhr/#schimmelbeseitigung)
+  - [Feuchtemessung in Mülheim](https://sos-abdichtung.de/kellersanierung/muelheim-an-der-ruhr/#feuchtemessung)
+  - [Sockel abdichten in Mülheim](https://sos-abdichtung.de/kellersanierung/muelheim-an-der-ruhr/#sockelabdichtung)
 - [Kellersanierung Hagen](https://sos-abdichtung.de/kellersanierung/hagen/): vor Ort in 24 bis 48 Stunden. PLZ 58089, 58091, 58093, 58095, 58097, 58099, 58119, 58135
   - [Keller abdichten in Hagen](https://sos-abdichtung.de/kellersanierung/hagen/#kellerinnenabdichtung)
   - [Horizontalsperre in Hagen](https://sos-abdichtung.de/kellersanierung/hagen/#horizontalsperre)
@@ -335,6 +339,7 @@ Gelsenkirchen ist mit dem Bergbau gewachsen, und der Bergbau hat Spuren im Boden
 - Gepumptes Grundwasser im Emschertal: Zwischen Emscher und Rhein-Herne-Kanal liegen Flächen so tief, dass das Grundwasser dauerhaft abgepumpt wird. Keller stehen hier dicht über dem Wasserspiegel und merken jede Änderung zuerst.
 - Siedlungshäuser aus Ziegel: Die Zechensiedlungen in Bismarck, Hassel und Buer und die schnell gebauten Häuser der Nachkriegszeit haben selten eine Horizontalsperre, die noch wirkt. Die Feuchte steigt im Ziegel auf.
 - Kalte Kellerwände im Sommer: Wird an warmen Tagen gelüftet, schlägt sich die feuchte Luft an den kühlen Wänden nieder. Viele Keller, die als nass gelten, haben in Wahrheit ein Kondensatproblem.
+- Wiederaufbau nach dem Krieg: Die Gelsenkirchener Innenstadt und viele Zechenviertel wurden im Krieg schwer getroffen und in den 1950er Jahren schnell wieder aufgebaut. Die Keller dieser Häuser haben oft nur einen Bitumenanstrich als Abdichtung, der heute spröde ist.
 - Gelsenkirchen-Süd und Mitte (Altstadt, Schalke, Ückendorf, Rotthausen, Neustadt, Bulmke-Hüllen): Dichte Bebauung aus Gründerzeit und Wiederaufbau. Die alten Sperrschichten haben versagt, die Feuchte steigt auf, Salze sprengen den Putz. Von außen fehlt fast immer der Platz zum Aufgraben.
 - Entlang der Emscher (Bismarck, Heßler, Horst, Erle, Feldmark): Tief liegendes Gelände mit gepumptem Grundwasser und alten Zechenstandorten. Typisch sind Wasser von unten nach langem Regen und Risse an der Bodenplatte.
 - Buer und der Norden (Buer, Hassel, Scholven, Resse, Beckhausen): Siedlungshäuser, Einfamilienhäuser und der Altbaukern von Buer. Häufig eine Mischung aus aufsteigender Feuchte im Ziegel und Setzungsrissen aus dem Bergbau.
@@ -358,6 +363,7 @@ Zwischen den Hängen von Saarn und Holthausen und dem Ruhrufer in Broich und Min
 - Linksruhr: Saarn, Speldorf und Broich (Saarn, Selbeck, Mintard, Speldorf, Broich): Hanglagen, Villen und Einfamilienhäuser zwischen Ruhr und Wald. Die bergseitige Kellerwand ist oft nass, unten an der Ruhr steigt das Grundwasser. Hier ist eine Innenabdichtung gegen drückendes Wasser der häufigste Weg.
 - Innenstadt und Süden (Altstadt, Eppinghofen, Menden, Holthausen, Raadt): Gründerzeit und Wiederaufbau in der Stadtmitte, Hanglagen im Süden. Typisch ist aufsteigende Feuchte im alten Mauerwerk, am Hang zusätzlich seitlich eindringendes Wasser.
 - Der Norden (Heißen, Dümpten, Styrum, Winkhausen): Ehemaliges Bergbaugebiet und Siedlungshäuser. Setzungsrisse in Wand und Bodenplatte und Ziegelkeller ohne Sperrschicht.
+- Fulerum und Heimaterde (Heimaterde, Fulerum): Gartenstadt- und Siedlungshäuser mit kleinen Ziegelkellern. Aufsteigende Feuchte in Wänden ohne Sperrschicht und feuchte Sockel.
 
 ### Kellersanierung Hagen
 Hagen liegt am Rand des Sauerlands zwischen Volme, Ennepe, Lenne und Ruhr. Steile Hänge, viel Regen und alte Keller aus Bruchstein machen Feuchte im Keller hier besonders häufig, und das Hochwasser im Juli 2021 hat viele Keller in den Tälern geflutet. Wir messen kostenlos und dichten von innen ab.
