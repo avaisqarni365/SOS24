@@ -1390,6 +1390,11 @@ export const CITY_PAGES: CityPage[] = [
     wiki: "https://de.wikipedia.org/wiki/Solingen",
     localServices: [
       {
+        "slug": "kellersanierung",
+        "heading": "Kellersanierung in Solingen",
+        "text": "Wir messen zuerst, woher die Nässe kommt: aufsteigend im Bruchstein der alten Häuser in Gräfrath und Burg, seitlich vom Hang an den Bachtälern zur Wupper oder von unten aus den feuchten Böden an der Ohligser Heide. Dann kombinieren wir nur die Verfahren, die Ihr Keller braucht, also Horizontalsperre, Innenabdichtung, Rissverpressung und Sanierputz. Alles von innen, ohne Aufgraben, mit 10 Jahren Garantie auf die Arbeit."
+      },
+      {
         slug: "kellerinnenabdichtung",
         heading: "Keller abdichten in Solingen",
         text: "An den steilen Bachtälern zur Wupper drückt Hang- und Sickerwasser gegen die bergseitige Kellerwand. Wir dichten sie von innen ab, mit Dichtungsschlämme, Hohlkehle und Sanierputz, ohne den Hang aufzugraben."
@@ -1560,6 +1565,11 @@ export const CITY_PAGES: CityPage[] = [
     wiki: "https://de.wikipedia.org/wiki/Remscheid",
     localServices: [
       {
+        "slug": "kellersanierung",
+        "heading": "Kellersanierung in Remscheid",
+        "text": "Wir messen zuerst, woher die Nässe kommt: aufsteigend in den Bruchsteinkellern der Schieferhäuser in Lennep und Lüttringhausen, seitlich vom Hang oder als Wasser, das nach dem vielen Regen auf den Höhen durch den klüftigen Fels drückt. Dann kombinieren wir nur die Verfahren, die Ihr Keller braucht, also Horizontalsperre, Innenabdichtung, Rissverpressung und Sanierputz. Alles von innen, ohne Aufgraben, mit 10 Jahren Garantie auf die Arbeit."
+      },
+      {
         slug: "horizontalsperre",
         heading: "Horizontalsperre in Remscheid",
         text: "Die Bruchsteinkeller in Lennep und Lüttringhausen haben keine Sperrschicht. Wir verfüllen die Hohlräume, setzen im Abstand von bis zu 20 cm die Bohrlöcher und injizieren eine neue Sperre, ohne Vortrocknung, auch in sehr nassem Mauerwerk."
@@ -1724,6 +1734,11 @@ export const CITY_PAGES: CityPage[] = [
     wiki: "https://de.wikipedia.org/wiki/Velbert",
     localServices: [
       {
+        "slug": "kellersanierung",
+        "heading": "Kellersanierung in Velbert",
+        "text": "Wir messen zuerst, woher die Nässe kommt: aufsteigend in den Bruchsteinkellern der historischen Ortskerne von Neviges und Langenberg, seitlich vom Hang rund um Velbert-Mitte und Tönisheide oder aus den engen Bachtälern. Dann kombinieren wir nur die Verfahren, die Ihr Keller braucht, also Horizontalsperre, Innenabdichtung, Rissverpressung und Sanierputz. Alles von innen, ohne Aufgraben, mit 10 Jahren Garantie auf die Arbeit."
+      },
+      {
         slug: "horizontalsperre",
         heading: "Horizontalsperre in Velbert",
         text: "Die Fachwerk- und Schieferhäuser in Neviges und Langenberg stehen auf Bruchsteinkellern ohne Sperrschicht. Wir verfüllen die Hohlräume und setzen per Injektion eine neue Sperre; Fassade und Fachwerk bleiben unberührt."
@@ -1879,6 +1894,11 @@ export const CITY_PAGES: CityPage[] = [
     wiki: "https://de.wikipedia.org/wiki/Haan",
     localServices: [
       {
+        "slug": "kellersanierung",
+        "heading": "Kellersanierung in Haan",
+        "text": "Wir messen zuerst, woher die Nässe kommt: von unten im Düsseltal und im Kalkstein bei Gruiten, seitlich durch die Wand der Souterrainwohnungen in der Gartenstadt oder aufsteigend im Mauerwerk der älteren Häuser in Haan-Mitte. Dann kombinieren wir nur die Verfahren, die Ihr Keller braucht, also Horizontalsperre, Innenabdichtung, Rissverpressung und Sanierputz. Alles von innen, ohne Aufgraben, mit 10 Jahren Garantie auf die Arbeit."
+      },
+      {
         slug: "kellerinnenabdichtung",
         heading: "Keller abdichten in Haan",
         text: "Im verkarsteten Kalkstein bei Gruiten tritt Wasser an unerwarteten Stellen aus, im Düsseltal steigt es nach Starkregen schnell. Wir dichten die betroffenen Wände von innen ab, auch gegen zeitweise drückendes Wasser."
@@ -2027,6 +2047,11 @@ export const CITY_PAGES: CityPage[] = [
     ],
     wiki: "https://de.wikipedia.org/wiki/Wermelskirchen",
     localServices: [
+      {
+        "slug": "kellersanierung",
+        "heading": "Kellersanierung in Wermelskirchen",
+        "text": "Wir messen zuerst, woher die Nässe kommt: aufsteigend in den Bruchsteinsockeln der Schieferhäuser in der Innenstadt und in Dabringhausen, seitlich vom Talhang an Eifgenbach und Dhünn oder als Wasser, das nach langem Regen durch den klüftigen Fels drückt. Dann kombinieren wir nur die Verfahren, die Ihr Keller braucht, also Horizontalsperre, Innenabdichtung, Rissverpressung und Sanierputz. Alles von innen, ohne Aufgraben, mit 10 Jahren Garantie auf die Arbeit."
+      },
       {
         slug: "horizontalsperre",
         heading: "Horizontalsperre in Wermelskirchen",
@@ -2636,6 +2661,11 @@ export const CITY_PAGES: CityPage[] = [
     wiki: "https://de.wikipedia.org/wiki/Bochum",
     localServices: [
       {
+        "slug": "kellersanierung",
+        "heading": "Kellersanierung in Bochum",
+        "text": "Wir messen zuerst, woher die Nässe kommt: durch Bergschadensrisse im Fundament, aufsteigend in den Ziegelkellern der Zechenhäuser in Ehrenfeld, Langendreer und Werne oder als Schichtenwasser an den Hängen zum Ruhrtal in Stiepel. Dann kombinieren wir nur die Verfahren, die Ihr Keller braucht, also Rissverpressung, Horizontalsperre, Innenabdichtung und Sanierputz. Alles von innen, ohne Aufgraben, mit 10 Jahren Garantie auf die Arbeit."
+      },
+      {
         slug: "rissverpressung",
         heading: "Rissverpressung in Bochum",
         text: "Setzungen aus der Bergbauzeit haben Risse in Betonböden und Kellerwänden hinterlassen. Wir prüfen, ob sie Wasser führen und sich noch bewegen, und verpressen sie mit elastischem PU-Harz."
@@ -2837,6 +2867,11 @@ export const CITY_PAGES: CityPage[] = [
     ],
     wiki: "https://de.wikipedia.org/wiki/Dortmund",
     localServices: [
+      {
+        "slug": "kellersanierung",
+        "heading": "Kellersanierung in Dortmund",
+        "text": "Wir messen zuerst, woher die Nässe kommt: aufsteigend in den Gründerzeitkellern im Kreuzviertel, von unten durch das seit den Zechenstilllegungen gestiegene Grundwasser in der Emscher-Niederung oder als Sickerwasser in Hörde, Hombruch und Aplerbeck. Dann kombinieren wir nur die Verfahren, die Ihr Keller braucht, also Horizontalsperre, Innenabdichtung, Rissverpressung und Sanierputz. Alles von innen, ohne Aufgraben, mit 10 Jahren Garantie auf die Arbeit."
+      },
       {
         slug: "horizontalsperre",
         heading: "Horizontalsperre in Dortmund",
@@ -3130,6 +3165,11 @@ export const CITY_PAGES: CityPage[] = [
     ],
     localServices: [
       {
+        "slug": "kellersanierung",
+        "heading": "Kellersanierung in Duisburg",
+        "text": "Wir messen zuerst, woher die Nässe kommt: von unten als Grundwasser an Rhein und Ruhr, durch Bergsenkungsrisse im Norden und links des Rheins oder aufsteigend in den Ziegelkellern der Arbeiterhäuser in Hamborn, Marxloh und Meiderich. Dann kombinieren wir nur die Verfahren, die Ihr Keller braucht, also Horizontalsperre, Innenabdichtung, Rissverpressung und Sanierputz. Alles von innen, ohne Aufgraben, mit 10 Jahren Garantie auf die Arbeit."
+      },
+      {
         slug: "kellerinnenabdichtung",
         heading: "Keller abdichten in Duisburg",
         text: "Wo das Grundwasser an Rhein und Ruhr nah an der Kellersohle steht, dichten wir die erdberührten Wände von innen ab: Dichtungsschlämme in mehreren Lagen, eine Hohlkehle am Wandfuß und Sanierputz. Das hält auch drückendem Wasser stand.",
@@ -3296,6 +3336,11 @@ export const CITY_PAGES: CityPage[] = [
       }
     ],
     localServices: [
+      {
+        "slug": "kellersanierung",
+        "heading": "Kellersanierung in Gelsenkirchen",
+        "text": "Wir messen zuerst, woher die Nässe kommt: durch Setzungsrisse aus dem Bergbau, von unten im Emschertal, wo das Grundwasser dauerhaft gepumpt wird, oder aufsteigend in den Ziegelkellern der Siedlungshäuser in Schalke, Ückendorf und Rotthausen. Dann kombinieren wir nur die Verfahren, die Ihr Keller braucht, also Rissverpressung, Horizontalsperre, Innenabdichtung und Sanierputz. Alles von innen, ohne Aufgraben, mit 10 Jahren Garantie auf die Arbeit."
+      },
       {
         slug: "rissverpressung",
         heading: "Rissverpressung in Gelsenkirchen",
@@ -3577,6 +3622,11 @@ export const CITY_PAGES: CityPage[] = [
     ],
     localServices: [
       {
+        "slug": "kellersanierung",
+        "heading": "Kellersanierung in Mülheim an der Ruhr",
+        "text": "Wir messen zuerst, woher die Nässe kommt: seitlich als Hangwasser in Saarn, Menden und Holthausen, von unten als Grundwasser an der Ruhr in Broich, Mintard und Styrum oder durch Bergbaurisse in Heißen und Dümpten. Dann kombinieren wir nur die Verfahren, die Ihr Keller braucht, also Horizontalsperre, Innenabdichtung, Rissverpressung und Sanierputz. Alles von innen, ohne Aufgraben, mit 10 Jahren Garantie auf die Arbeit."
+      },
+      {
         slug: "kellerinnenabdichtung",
         heading: "Keller abdichten in Mülheim",
         text: "Gegen Hang- und Schichtenwasser dichten wir die betroffene Wand von innen ab: mehrlagige Dichtungsschlämme, eine Hohlkehle am Boden-Wand-Anschluss und Sanierputz. Das hält auch drückendem Wasser stand, ohne dass der Hang aufgegraben werden muss.",
@@ -3741,6 +3791,11 @@ export const CITY_PAGES: CityPage[] = [
     ],
     localServices: [
       {
+        "slug": "kellersanierung",
+        "heading": "Kellersanierung in Hagen",
+        "text": "Wir messen zuerst, woher die Nässe kommt: als Schichtenwasser an den Hängen am Sauerlandrand, nach Hochwasser an Volme, Ennepe, Lenne oder Ruhr oder aufsteigend in den Bruchsteinkellern der Altbauten in Wehringhausen, Haspe und Hohenlimburg. Dann kombinieren wir nur die Verfahren, die Ihr Keller braucht, also Horizontalsperre, Innenabdichtung, Rissverpressung und Sanierputz. Alles von innen, ohne Aufgraben, mit 10 Jahren Garantie auf die Arbeit."
+      },
+      {
         slug: "kellerinnenabdichtung",
         heading: "Keller abdichten in Hagen",
         text: "Gegen Hang- und Schichtenwasser dichten wir die bergseitige Wand von innen ab: mehrlagige Dichtungsschlämme, eine Hohlkehle am Boden-Wand-Anschluss und Sanierputz. Das hält auch drückendem Wasser stand, ohne dass der Hang aufgegraben werden muss.",
@@ -3861,6 +3916,11 @@ export const CITY_PAGES: CityPage[] = [
     ],
     localServices: [
       {
+        "slug": "kellersanierung",
+        "heading": "Kellersanierung in Leverkusen",
+        "text": "Wir messen zuerst, woher die Nässe kommt: von unten als Grundwasser am Rhein in Wiesdorf, Hitdorf und Rheindorf, als Restfeuchte nach dem Hochwasser an Wupper und Dhünn in Opladen und Schlebusch oder aufsteigend im Mauerwerk der Siedlungs- und Nachkriegshäuser. Dann kombinieren wir nur die Verfahren, die Ihr Keller braucht, also Horizontalsperre, Innenabdichtung, Rissverpressung und Sanierputz. Alles von innen, ohne Aufgraben, mit 10 Jahren Garantie auf die Arbeit."
+      },
+      {
         slug: "feuchtemessung",
         heading: "Feuchtemessung in Leverkusen",
         text: "Nach einem Hochwasser sieht die Wand oft trocken aus, ist innen aber noch nass und voller Salze. Wir messen kostenlos in mehreren Höhen und Tiefen, prüfen die Salze und zeigen Ihnen, ob die Wand von selbst abtrocknet oder saniert werden muss.",
@@ -3975,6 +4035,11 @@ export const CITY_PAGES: CityPage[] = [
       },
     ],
     localServices: [
+      {
+        "slug": "kellersanierung",
+        "heading": "Kellersanierung in Bottrop",
+        "text": "Wir messen zuerst, woher die Nässe kommt: durch wasserführende Risse aus dem Bergbau, von unten in Bottrop-Süd an der Emscher, wo das Grundwasser gepumpt wird, oder aufsteigend in den Ziegelkellern der Zechensiedlungen in Welheim, Batenbrock und Eigen. Dann kombinieren wir nur die Verfahren, die Ihr Keller braucht, also Rissverpressung, Horizontalsperre, Innenabdichtung und Sanierputz. Alles von innen, ohne Aufgraben, mit 10 Jahren Garantie auf die Arbeit."
+      },
       {
         slug: "rissverpressung",
         heading: "Rissverpressung in Bottrop",
