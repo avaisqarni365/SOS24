@@ -1163,14 +1163,14 @@ export const CITY_PAGES: CityPage[] = [
     slug: "solingen",
     name: "Solingen",
     keyword: "Kellersanierung Solingen",
-    title: "Kellersanierung Solingen | Feuchte Keller trockenlegen",
+    title: "Kellersanierung Solingen | Keller abdichten ohne Aufgraben",
     metaDescription:
       "Kellersanierung Solingen: feuchte Keller von Gräfrath bis Ohligs von innen trockenlegen. Kostenlose Messung, 10 Jahre Garantie auf die Arbeit.",
     h1: "Kellersanierung Solingen: von der Wupper bis zur Ohligser Heide",
     lede:
       "Die Klingenstadt reicht vom steilen Wuppertal bei Burg bis in die flacheren Lagen im Westen. Entsprechend unterschiedlich sind die Ursachen feuchter Keller, und entsprechend genau muss man hinschauen.",
     plz: ["42651", "42653", "42655", "42657", "42659", "42697", "42699", "42719"],
-    districts: ["Solingen-Mitte", "Ohligs", "Wald", "Gräfrath", "Höhscheid", "Aufderhöhe", "Merscheid", "Burg"],
+    districts: ["Solingen-Mitte", "Ohligs", "Wald", "Gräfrath", "Höhscheid", "Aufderhöhe", "Merscheid", "Burg", "Unterburg", "Widdert", "Rupelrath", "Glüder", "Hackhausen", "Caspersbroich"],
     geo: { lat: 51.171, lng: 7.083 },
     responseTime: "24 bis 48 Stunden",
     localFactors: [
@@ -1190,6 +1190,10 @@ export const CITY_PAGES: CityPage[] = [
         name: "Wupper-Hochwasser",
         text: "In Unterburg und anderen Lagen direkt an der Wupper hat das Hochwasser im Juli 2021 gezeigt, wie schnell Keller volllaufen können.",
       },
+      {
+        "name": "Feuchte Böden an der Ohligser Heide",
+        "text": "Im flacheren Westen der Stadt liegen rund um die Ohligser Heide feuchte Sand- und Lehmböden. Bei nassen Wintern steht das Wasser hier lange im Boden und drückt von unten gegen Kellerboden und Wandfuß."
+      }
     ],
     sections: [
       {
@@ -1206,6 +1210,20 @@ export const CITY_PAGES: CityPage[] = [
           "Für diese Keller ist eine flächige Sanierung selten nötig. Häufig reicht es, wasserführende Risse mit PU-Harz zu verpressen und die Übergänge zwischen Bodenplatte und Wand gezielt von innen abzudichten. Die nach dem Krieg neu aufgebaute Innenstadt und Teile von Wald zeigen ähnliche Schadensbilder. Die kostenlose Feuchtemessung vor Ort klärt, ob ein punktueller Eingriff genügt oder ob die Wand großflächig betroffen ist und mehr braucht.",
         ],
       },
+      {
+        "heading": "Mitte, Wald und Höhscheid: Kellersanierung im bewohnten Mehrfamilienhaus",
+        "paragraphs": [
+          "In der Solinger Innenstadt, in Wald und in Höhscheid stehen viele Mehrfamilienhäuser aus dem Wiederaufbau und aus der Zeit davor, meist vermietet oder im Besitz von Eigentümergemeinschaften. Ein feuchter Keller betrifft hier alle Parteien: Die Kellerverschläge riechen muffig, Kartons und Möbel schimmeln, und am Wandfuß platzt der Putz ab.",
+          "Wir arbeiten in diesen Häusern Kellerraum für Kellerraum, damit immer nur ein Teil gesperrt ist und die Mieter ihre Keller weiter nutzen können. Die Hausverwaltung bekommt vorab ein schriftliches Angebot mit Messprotokoll für die Eigentümerversammlung und nach jeder Phase ein weiteres Protokoll."
+        ]
+      },
+      {
+        "heading": "Unterburg und die Lagen an der Wupper: Keller nach Hochwasser trockenlegen",
+        "paragraphs": [
+          "Das Hochwasser im Juli 2021 hat in Unterburg und an anderen Stellen an der Wupper Keller bis unter die Decke geflutet. In vielen Häusern ist das Wasser längst abgepumpt, das Mauerwerk aber noch nass, und Salze aus dem Flusswasser wandern mit der Feuchte nach oben. Der Putz blüht aus, und es riecht muffig, obwohl der Keller von außen trocken wirkt.",
+          "Mit der kostenlosen Messung klären wir zuerst, wie tief und wie hoch die Nässe im Mauerwerk sitzt. Danach entfernen wir den belasteten Putz, setzen bei Bedarf eine Horizontalsperre, dichten die Wände von innen ab und bringen einen Sanierputz auf, der Salze aufnehmen kann. So trocknet die Wand weiter aus, ohne dass neue Schäden an der Oberfläche entstehen."
+        ]
+      }
     ],
     faqs: [
       {
@@ -1216,6 +1234,26 @@ export const CITY_PAGES: CityPage[] = [
         q: "Lässt sich ein Gräfrather Schieferhaus sanieren, ohne die Fassade anzufassen?",
         a: "Ja. Horizontalsperre, Innenabdichtung und Sanierputz werden ausschließlich im Keller eingebaut. Schieferkleid und Fachwerk bleiben vollständig erhalten, und außen sind keine Erdarbeiten nötig.",
       },
+      {
+        "q": "Wie lange dauert eine Kellersanierung in Solingen?",
+        "a": "Die Arbeiten selbst dauern meist zwei bis vier Werktage. Danach trocknet das Mauerwerk über einige Monate aus; wir messen nach und geben Ihnen das Protokoll schriftlich."
+      },
+      {
+        "q": "Sanieren Sie auch Keller in Mehrfamilienhäusern und für Hausverwaltungen in Solingen?",
+        "a": "Ja. Für Hausverwaltungen und Eigentümergemeinschaften erstellen wir ein schriftliches Angebot mit Messprotokoll für die Eigentümerversammlung. Wir arbeiten raumweise, damit die Mieter ihre Keller möglichst weiter nutzen können."
+      },
+      {
+        "q": "Muss bei einem Haus am Hang in Höhscheid oder an den Bachtälern aufgegraben werden?",
+        "a": "Meist nicht. Die bergseitige Wand, an der sich Hang- und Sickerwasser staut, dichten wir von innen mit Dichtungsschlämme und Hohlkehle ab. Garten, Böschung und Einfahrt bleiben unberührt."
+      },
+      {
+        "q": "Mein Keller wurde 2021 an der Wupper überflutet. Ist es für eine Sanierung zu spät?",
+        "a": "Nein. Auch Jahre nach einem Hochwasser sitzen oft noch Feuchte und Salze im Mauerwerk. Die kostenlose Messung zeigt, wie viel davon noch vorhanden ist, und danach planen wir Abdichtung und Sanierputz passend dazu."
+      },
+      {
+        "q": "Was passiert bei der kostenlosen Feuchtemessung in Solingen?",
+        "a": "Wir messen die Feuchte in mehreren Wandhöhen und an mehreren Wänden, prüfen Risse, Anschlüsse und den Sockel und klären so, woher die Nässe kommt. Sie bekommen das Ergebnis schriftlich und danach ein Angebot zum Festpreis."
+      }
     ],
     wiki: "https://de.wikipedia.org/wiki/Solingen",
     localServices: [
@@ -1238,6 +1276,16 @@ export const CITY_PAGES: CityPage[] = [
         slug: "feuchtemessung",
         heading: "Feuchtemessung in Solingen",
         text: "Ob Hangwasser, aufsteigende Feuchte oder ein Riss: Die kostenlose Messung in mehreren Wandhöhen zeigt, woher die Nässe kommt. Sie bekommen das Protokoll schriftlich und danach einen Festpreis."
+      },
+      {
+        "slug": "schimmelbeseitigung",
+        "heading": "Schimmel im Keller in Solingen",
+        "text": "Nasse Wände nach Hochwasser oder Hangwasser sind ideale Bedingungen für Schimmel. Wir entfernen ihn sporensicher und beseitigen die Ursache, damit er nicht wiederkommt."
+      },
+      {
+        "slug": "sockelabdichtung",
+        "heading": "Sockel abdichten in Solingen",
+        "text": "Bei Siedlungs- und Reihenhäusern in Ohligs und Wald zieht Spritzwasser in den Sockel und weiter in die Kellerwand. Wir dichten den Sockel ab und schließen ihn an die Kellerabdichtung an."
       }
     ],
     districtGroups: [
@@ -1270,6 +1318,15 @@ export const CITY_PAGES: CityPage[] = [
           "Glüder"
         ],
         text: "Häuser an den Bachtälern zur Wupper. Die bergseitige Wand bekommt Hang- und Sickerwasser ab und ist deutlich nasser als die übrigen."
+      },
+      {
+        "name": "Der Westen an der Ohligser Heide",
+        "districts": [
+          "Hackhausen",
+          "Caspersbroich",
+          "Mankhaus"
+        ],
+        "text": "Einfamilien- und Reihenhäuser im flacheren Westen. Feuchte Böden und Wasser, das bei nassen Wintern von unten an Kellerboden und Wandfuß drückt."
       }
     ],
     nearby: ["wuppertal", "remscheid", "wermelskirchen"],
@@ -1280,14 +1337,14 @@ export const CITY_PAGES: CityPage[] = [
     slug: "remscheid",
     name: "Remscheid",
     keyword: "Kellersanierung Remscheid",
-    title: "Kellersanierung Remscheid | Nasse Kellerwände sanieren",
+    title: "Kellersanierung Remscheid | Keller abdichten ohne Aufgraben",
     metaDescription:
       "Kellersanierung Remscheid: nasse Kellerwände in Lennep, Lüttringhausen und Alt-Remscheid ohne Aufgraben trockenlegen. Kostenlose Messung.",
     h1: "Kellersanierung Remscheid: trockene Keller trotz Höhenlage und Regen",
     lede:
       "Remscheid liegt höher als jede andere Stadt im Bergischen Land und bekommt entsprechend viel Regen ab. Für Keller heißt das: Die Wände sind oft über Monate nass, und nur eine sorgfältig geplante Sanierung bringt sie dauerhaft zur Ruhe.",
     plz: ["42853", "42855", "42857", "42859", "42897", "42899"],
-    districts: ["Alt-Remscheid", "Süd", "Lennep", "Lüttringhausen", "Hasten", "Vieringhausen", "Reinshagen"],
+    districts: ["Alt-Remscheid", "Süd", "Lennep", "Lüttringhausen", "Hasten", "Vieringhausen", "Reinshagen", "Klausen", "Müngsten", "Morsbach", "Westhausen", "Hackenberg", "Bergisch Born", "Kremenholl"],
     geo: { lat: 51.179, lng: 7.194 },
     responseTime: "24 bis 48 Stunden",
     localFactors: [
@@ -1323,6 +1380,20 @@ export const CITY_PAGES: CityPage[] = [
           "Gegen eine solche wechselnde Belastung reicht eine einfache Sperre nicht. Wir kombinieren an den betroffenen Wänden eine mehrlagige Innenabdichtung aus mineralischen Dichtungsschlämmen mit einer sorgfältig ausgebildeten Hohlkehle. Wasserführende Risse in Betonteilen werden vorher mit PU-Harz verpresst. Weil die Trocknung im feuchten Remscheider Klima länger dauert als anderswo, planen wir bei Bedarf eine Schutzentfeuchtung ein, bevor der Sanierputz aufgebracht wird. So entsteht kein Zeitdruck, der später zu Schäden führt.",
         ],
       },
+      {
+        "heading": "Hasten, Vieringhausen und Alt-Remscheid: Werkstattkeller und Mehrfamilienhäuser",
+        "paragraphs": [
+          "Remscheid ist eine Stadt der Werkzeugmacher, und das sieht man vielen Häusern in Hasten, Vieringhausen und Alt-Remscheid noch an. Unter Wohnhäusern liegen ehemalige Werkstätten und Lagerkeller aus Bruchstein oder Ziegel, daneben Mehrfamilienhäuser aus der Gründerzeit und dem Wiederaufbau, meist vermietet oder im Besitz von Eigentümergemeinschaften.",
+          "In diesen Kellern kommen aufsteigende Feuchte im alten Mauerwerk und Sickerwasser vom Hang zusammen. Wir messen zuerst kostenlos, welcher Anteil überwiegt, und arbeiten dann Kellerraum für Kellerraum, damit die Mieter ihre Keller weiter nutzen können. Die Hausverwaltung bekommt ein schriftliches Angebot mit Messprotokoll für die Eigentümerversammlung."
+        ]
+      },
+      {
+        "heading": "Hackenberg, Reinshagen und Bergisch Born: Einfamilienhäuser der 1950er bis 1970er Jahre",
+        "paragraphs": [
+          "In den Siedlungen am Stadtrand stehen viele Einfamilien-, Doppel- und Reihenhäuser aus der Nachkriegszeit. Ihre Keller sind aus Beton oder Kalksandstein und haben außen nur einen Bitumenanstrich, der nach Jahrzehnten im nassen Remscheider Boden spröde geworden ist. Feuchte dringt dann an Arbeitsfugen, Rohrdurchführungen und Rissen ein.",
+          "Hier reicht oft eine gezielte Sanierung: Wasserführende Risse verpressen wir mit PU-Harz, die Übergänge zwischen Wand und Bodenplatte dichten wir mit einer Hohlkehle ab, und betroffene Wände bekommen eine Innenabdichtung aus Dichtungsschlämme. Garten, Terrasse und Einfahrt bleiben dabei unberührt."
+        ]
+      }
     ],
     faqs: [
       {
@@ -1333,6 +1404,26 @@ export const CITY_PAGES: CityPage[] = [
         q: "Warum ist mein Keller im Winter nasser als im Sommer?",
         a: "In Remscheid regnet es das ganze Jahr über viel, im Winterhalbjahr verdunstet jedoch deutlich weniger. Der Boden bleibt länger gesättigt, und Sickerwasser steht länger an der Kellerwand an. Ob es sich um eindringendes Wasser oder Kondensat handelt, zeigt die Messung vor Ort.",
       },
+      {
+        "q": "Wie schnell sind Sie in Remscheid vor Ort?",
+        "a": "In der Regel innerhalb von 24 bis 48 Stunden, in Lennep und Lüttringhausen ebenso wie in Alt-Remscheid, Hasten und den Tälern zur Wupper."
+      },
+      {
+        "q": "Wie lange dauert eine Kellersanierung in Remscheid?",
+        "a": "Die Arbeiten selbst dauern meist zwei bis vier Werktage. Im regenreichen Remscheider Klima trocknet das Mauerwerk danach etwas länger aus als anderswo; wir messen nach und geben Ihnen das Protokoll schriftlich."
+      },
+      {
+        "q": "Sanieren Sie auch Keller in Mehrfamilienhäusern und für Hausverwaltungen in Remscheid?",
+        "a": "Ja. Für Hausverwaltungen und Eigentümergemeinschaften erstellen wir ein schriftliches Angebot mit Messprotokoll für die Eigentümerversammlung. Wir arbeiten raumweise, damit die Mieter ihre Keller möglichst weiter nutzen können."
+      },
+      {
+        "q": "Kann ich einen alten Gewölbekeller in Lennep als Hobbyraum nutzen?",
+        "a": "Oft ja. Mit Horizontalsperre, Abdichtung der erdberührten Wände und einem diffusionsoffenen Sanierputz wird der Gewölbekeller deutlich trockener. Wie weit er sich nutzen lässt, hängt von der Lage und der Lüftung ab; das klären wir bei der kostenlosen Messung."
+      },
+      {
+        "q": "Muss am Hang zur Wupper aufgegraben werden?",
+        "a": "Meist nicht. Die bergseitige Wand, an der sich das Sickerwasser aus dem Fels staut, dichten wir von innen mit mehrlagiger Dichtungsschlämme und Hohlkehle ab. Garten und Böschung bleiben unberührt."
+      }
     ],
     wiki: "https://de.wikipedia.org/wiki/Remscheid",
     localServices: [
@@ -1355,6 +1446,16 @@ export const CITY_PAGES: CityPage[] = [
         slug: "schimmelbeseitigung",
         heading: "Schimmel im Keller in Remscheid",
         text: "Dauerhaft nasse Wände und kühle Keller sind ideale Bedingungen für Schimmel. Wir entfernen ihn sporensicher und beseitigen die Ursache, damit er nicht wiederkommt."
+      },
+      {
+        "slug": "rissverpressung",
+        "heading": "Rissverpressung in Remscheid",
+        "text": "In den Betonkellern der Nachkriegssiedlungen dringt Wasser oft durch Risse und Arbeitsfugen ein. Wasserführende Risse verpressen wir mit PU-Harz, das elastisch bleibt; tragende Risse schließen wir mit Epoxid."
+      },
+      {
+        "slug": "sockelabdichtung",
+        "heading": "Sockel abdichten in Remscheid",
+        "text": "Bei viel Regen zieht Spritzwasser in den Sockel und weiter in die Kellerwand, bei Schieferhäusern auch in den Bruchsteinsockel. Wir dichten den Sockel ab und schließen ihn an die Kellerabdichtung an."
       }
     ],
     districtGroups: [
@@ -1385,6 +1486,15 @@ export const CITY_PAGES: CityPage[] = [
           "Westhausen"
         ],
         text: "Häuser am Talhang mit großen Höhenunterschieden. Die bergseitige Wand ist oft monatelang nass."
+      },
+      {
+        "name": "Die Siedlungen am Stadtrand",
+        "districts": [
+          "Hackenberg",
+          "Kremenholl",
+          "Bergisch Born"
+        ],
+        "text": "Einfamilien-, Doppel- und Reihenhäuser der 1950er bis 1970er Jahre. Gealterte Außenabdichtung, Risse und undichte Arbeitsfugen in Betonkellern."
       }
     ],
     nearby: ["wuppertal", "solingen", "wermelskirchen"],
