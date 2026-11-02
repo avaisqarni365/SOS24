@@ -2921,12 +2921,12 @@ export const CITY_PAGES: CityPage[] = [
     keyword: "Kellersanierung Köln",
     title: "Kellersanierung Köln | Keller abdichten & trockenlegen",
     metaDescription:
-      "Kellersanierung Köln ohne Aufgraben: Keller abdichten gegen Rhein-Hochwasser und Grundwasser, Altbaukeller trockenlegen. Messung kostenlos, Festpreis.",
+      "Kellersanierung Köln ohne Aufgraben: Keller abdichten gegen Rhein-Hochwasser und Grundwasser, Altbaukeller trockenlegen. Messung kostenlos, 10 Jahre Garantie.",
     h1: "Kellersanierung Köln: feuchte Keller dauerhaft trockenlegen",
     lede:
       "Ob Gründerzeitbau in Ehrenfeld und Nippes oder Einfamilienhaus in Rodenkirchen: In Köln entscheiden der Rhein, der Grundwasserstand und das Alter des Mauerwerks, warum ein Keller nass wird. Wir messen kostenlos, woher die Feuchte kommt, und sanieren von innen, ohne Hof oder Garten aufzugraben.",
     plz: ["50667", "50668", "50670", "50672", "50674", "50676", "50677", "50678", "50679", "50733", "50735", "50737", "50739", "50765", "50767", "50769", "50823", "50825", "50827", "50829", "50858", "50859", "50931", "50933", "50935", "50937", "50939", "50968", "50969", "50996", "50997", "50999", "51061", "51063", "51065", "51067", "51069", "51103", "51105", "51107", "51109", "51143", "51145", "51147", "51149"],
-    districts: ["Innenstadt", "Ehrenfeld", "Nippes", "Lindenthal", "Sülz", "Rodenkirchen", "Köln-Mülheim", "Kalk", "Porz", "Chorweiler"],
+    districts: ["Innenstadt", "Altstadt-Süd", "Deutz", "Ehrenfeld", "Bickendorf", "Nippes", "Longerich", "Lindenthal", "Sülz", "Braunsfeld", "Müngersdorf", "Weiden", "Lövenich", "Rodenkirchen", "Bayenthal", "Zollstock", "Köln-Mülheim", "Dellbrück", "Kalk", "Höhenberg", "Porz", "Chorweiler"],
     geo: { lat: 50.9375, lng: 6.9603 },
     responseTime: "24 bis 48 Stunden",
     wiki: "https://de.wikipedia.org/wiki/K%C3%B6ln",
@@ -2949,6 +2949,11 @@ export const CITY_PAGES: CityPage[] = [
       },
     ],
     localServices: [
+      {
+        "slug": "kellersanierung",
+        "heading": "Kellersanierung in Köln",
+        "text": "Wir messen zuerst, woher die Nässe kommt: aufsteigend im Ziegelmauerwerk der Gründerzeithäuser in Ehrenfeld, Nippes und der Südstadt, von unten als Grundwasser in Rheinnähe oder nach Hochwasser in Rodenkirchen und Porz. Dann kombinieren wir nur die Verfahren, die Ihr Keller braucht, also Horizontalsperre, druckwasserdichte Innenabdichtung, Rissverpressung und Sanierputz. Alles von innen, ohne Hof oder Garten aufzugraben, mit 10 Jahren Garantie auf die Arbeit."
+      },
       {
         slug: "kellerinnenabdichtung",
         heading: "Keller abdichten in Köln",
@@ -3077,6 +3082,10 @@ export const CITY_PAGES: CityPage[] = [
       {
         "q": "Wie lange dauert eine Kellersanierung in Köln?",
         "a": "Eine Horizontalsperre oder die Abdichtung eines Kellerraums dauert meist zwei bis vier Werktage. Danach braucht die Wand einige Monate, um auszutrocknen; das messen wir nach und geben Ihnen das Protokoll."
+      },
+      {
+        "q": "Sanieren Sie auch Keller in denkmalgeschützten Altbauten in Köln?",
+        "a": "Ja. Die Arbeiten finden im Keller statt und verändern die Fassade nicht, das ist gerade bei den Gründerzeithäusern in der Südstadt, in Ehrenfeld oder Nippes wichtig. Ob für Eingriffe im Inneren eine denkmalrechtliche Erlaubnis nötig ist, klären Sie am besten vorab mit dem Stadtkonservator der Stadt Köln. Die technische Beschreibung der geplanten Maßnahmen stellen wir Ihnen dafür gern zur Verfügung."
       }
     ],
     nearby: ["leverkusen", "duesseldorf", "solingen"],
