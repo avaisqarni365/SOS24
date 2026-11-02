@@ -191,7 +191,7 @@ export const SERVICE_PAGES: ServicePage[] = [
         "a": "Auf die Wirksamkeit des Injektionsmittels gibt es 25 Jahre Produktgarantie des Herstellers SchimmelPeter GmbH. Unabhängig davon gibt sos-abdichtung 10 Jahre Garantie auf die ausgeführten Arbeiten."
       },
     ],
-    related: ["horizontalsperre", "kellerinnenabdichtung", "feuchtemessung"],
+    related: ["horizontalsperre", "kellerinnenabdichtung", "feuchtemessung", "sockelabdichtung"],
   },
 
   // 2. Horizontalsperre
@@ -324,7 +324,7 @@ export const SERVICE_PAGES: ServicePage[] = [
         a: "Ja. Die Bohrlöcher für die Injektion setzen wir in der Regel vom Keller oder vom Raum aus, ein Aufgraben von außen ist dafür nicht nötig. So lässt sich feuchtes Mauerwerk sanieren, auch wenn außen Terrasse, Einfahrt oder das Nachbarhaus angrenzen. Ob zusätzlich eine Innenabdichtung gegen seitlich eindringende Feuchte nötig ist, zeigt die Messung vor Ort.",
       },
     ],
-    related: ["kellersanierung", "kellerinnenabdichtung", "feuchtemessung"],
+    related: ["kellersanierung", "kellerinnenabdichtung", "feuchtemessung", "sockelabdichtung"],
   },
 
   // 3. Kellerinnenabdichtung
@@ -441,7 +441,7 @@ export const SERVICE_PAGES: ServicePage[] = [
         "a": "In den meisten Fällen ja. Ein fachgerecht abgedichteter und verputzter Keller ist trocken genug für Hobbyraum, Werkstatt oder Lager. Für einen Aufenthaltsraum im baurechtlichen Sinn gelten zusätzliche Anforderungen an Belichtung, Raumhöhe und Wärmeschutz."
       },
     ],
-    related: ["kellersanierung", "horizontalsperre", "rissverpressung"],
+    related: ["kellersanierung", "horizontalsperre", "rissverpressung", "sockelabdichtung"],
   },
 
   // 4. Schimmelbeseitigung
@@ -804,7 +804,7 @@ export const SERVICE_PAGES: ServicePage[] = [
         "a": "Das hängt von Zahl und Länge der Risse ab. Einzelne Risse sind oft an einem Arbeitstag verpresst. Nach dem Aushärten entfernen wir die Packer und verschließen die Bohrlöcher bündig mit Mörtel."
       },
     ],
-    related: ["kellerinnenabdichtung", "kellersanierung", "horizontalsperre"],
+    related: ["kellerinnenabdichtung", "kellersanierung", "horizontalsperre", "balkon-terrasse"],
   },
 
   // 7. Dachabdichtung
@@ -1267,7 +1267,7 @@ export const CITY_PAGES: CityPage[] = [
         "text": "Einfamilien- und Bauernhäuser in den nördlichen Höhenlagen, teils mit Bruchsteinkellern. Schichtenwasser am Hang und Feuchte aus Wänden ohne Sperrschicht."
       }
     ],
-    nearby: ["solingen", "remscheid", "velbert"],
+    nearby: ["solingen", "remscheid", "velbert", "haan", "hagen"],
   },
 
   // Solingen
@@ -1441,7 +1441,7 @@ export const CITY_PAGES: CityPage[] = [
         "text": "Einfamilien- und Reihenhäuser im flacheren Westen. Feuchte Böden und Wasser, das bei nassen Wintern von unten an Kellerboden und Wandfuß drückt."
       }
     ],
-    nearby: ["wuppertal", "remscheid", "wermelskirchen"],
+    nearby: ["wuppertal", "remscheid", "wermelskirchen", "haan", "leverkusen"],
   },
 
   // Remscheid
@@ -1764,7 +1764,7 @@ export const CITY_PAGES: CityPage[] = [
         text: "Höhenrücken mit Hangbebauung zu allen Seiten. Typisch ist Sickerwasser an der bergseitigen Wand und undichte Anschlüsse an der Bodenplatte."
       }
     ],
-    nearby: ["wuppertal", "haan"],
+    nearby: ["wuppertal", "haan", "essen"],
   },
 
   // Haan
@@ -1908,7 +1908,7 @@ export const CITY_PAGES: CityPage[] = [
         text: "Altes Dorf an der Düssel auf verkarstetem Kalkstein. Wasser von unten im Tal, an unerwarteten Stellen austretendes Kluftwasser und aufsteigende Feuchte im alten Mauerwerk."
       }
     ],
-    nearby: ["solingen", "wuppertal"],
+    nearby: ["solingen", "wuppertal", "velbert", "duesseldorf"],
   },
 
 
@@ -2066,7 +2066,7 @@ export const CITY_PAGES: CityPage[] = [
         text: "Häuser der letzten Jahrzehnte mit Betonkellern. Meist punktuelle Schäden an Rissen und Fugen statt flächig nasser Wände."
       }
     ],
-    nearby: ["remscheid", "solingen", "wuppertal"],
+    nearby: ["remscheid", "solingen", "wuppertal", "leverkusen"],
   },
 
   // Essen
@@ -2450,7 +2450,7 @@ export const CITY_PAGES: CityPage[] = [
         "text": "Reihen- und Doppelhäuser aus den 1950er bis 1970er Jahren. Spröde Bitumenanstriche, Feuchte am Wandfuß und ausgebaute Keller, in denen Schimmel entsteht."
       }
     ],
-    nearby: ["wuppertal", "essen", "solingen"],
+    nearby: ["duisburg", "haan", "solingen", "leverkusen", "koeln"],
   },
 
   // Bochum
@@ -2648,7 +2648,7 @@ export const CITY_PAGES: CityPage[] = [
         "text": "Gründerzeithäuser im alten Wattenscheider Kern und Einfamilienhäuser der 1960er und 1970er Jahre. Aufsteigende Feuchte im Altbau, seitliche Feuchte über alte Außenabdichtungen."
       }
     ],
-    nearby: ["essen", "dortmund", "wuppertal"],
+    nearby: ["essen", "dortmund", "gelsenkirchen", "hagen", "wuppertal"],
   },
 
   // Dortmund
@@ -2841,7 +2841,7 @@ export const CITY_PAGES: CityPage[] = [
         "text": "Siedlungs- und Reihenhäuser aus den 1920er bis 1960er Jahren. Aufsteigende Feuchte im Ziegel und genutzte Hobbykeller, in denen Schimmel schnell auffällt."
       }
     ],
-    nearby: ["bochum", "essen", "wuppertal"],
+    nearby: ["bochum", "hagen", "essen"],
   },
   // Köln
   {

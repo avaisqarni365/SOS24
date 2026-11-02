@@ -99,13 +99,12 @@ export default function FilmPage({ params }: { params: { slug: string } }) {
     },
   ];
 
-  // the towns that have their own card for this service
-  const towns = service
-    ? CITY_PAGES.filter((c) => c.localServices?.some((s) => s.slug === service.slug)).map((c) => ({
-        href: `/kellersanierung/${c.slug}/#${service.slug}`,
-        label: `${service.navTitle} ${c.name}`,
-      }))
-    : CITY_PAGES.map((c) => ({ href: `/kellersanierung/${c.slug}/`, label: `Kellersanierung ${c.name}` }));
+  // every town: a deep link where the town has its own card for this service, the town page otherwise
+  const towns = CITY_PAGES.map((c) =>
+    service && c.localServices?.some((s) => s.slug === service.slug)
+      ? { href: `/kellersanierung/${c.slug}/#${service.slug}`, label: `${service.navTitle} ${c.name}` }
+      : { href: `/kellersanierung/${c.slug}/`, label: `Kellersanierung ${c.name}` },
+  );
   const others = FILM_PAGES.filter((f) => f.slug !== page.slug).map((f) => ({ href: `/filme/${f.slug}/`, label: f.title, sub: `${f.film.seconds} Sekunden` }));
 
   return (
