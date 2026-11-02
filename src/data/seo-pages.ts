@@ -2767,12 +2767,12 @@ export const CITY_PAGES: CityPage[] = [
     keyword: "Kellersanierung Dortmund",
     title: "Kellersanierung Dortmund | Keller abdichten ohne Aufgraben",
     metaDescription:
-      "Kellersanierung Dortmund: Feuchte Keller & aufsteigende Feuchte von innen sanieren. Kostenlose Feuchtemessung vor Ort, Festpreis & Garantie.",
+      "Kellersanierung Dortmund: aufsteigende Feuchte, Grundwasser und Bergschadensrisse von innen sanieren. Kostenlose Feuchtemessung vor Ort, 10 Jahre Garantie.",
     h1: "Kellersanierung Dortmund: Keller sanieren ohne Aufgraben",
     lede:
-      "Vom Kreuzviertel und Hörde am Phoenix-See bis nach Brackel und Mengede: Trockene Keller schützen die Bausubstanz und sichern den Wert Ihrer Immobilie in Dortmund.",
+      "Vom Kreuzviertel und Hörde am Phoenix-See bis nach Eving und Mengede: In Dortmund werden Keller vor allem durch aufsteigende Feuchte in Gründerzeit- und Nachkriegskellern, Grundwasser in der Emscher-Niederung und Risse aus der Bergbauzeit nass. Wir messen kostenlos, woher die Feuchte kommt, und sanieren von innen, ohne Aufgraben.",
     plz: ["44135", "44137", "44139", "44141", "44143", "44145", "44147", "44149", "44225", "44227", "44229", "44263", "44265", "44267", "44269", "44287", "44289", "44309", "44319", "44328", "44329", "44339", "44357", "44359", "44369", "44379", "44388"],
-    districts: ["Innenstadt-West", "Innenstadt-Nord", "Innenstadt-Ost", "Kreuzviertel", "Eving", "Scharnhorst", "Brackel", "Aplerbeck", "Hörde", "Hombruch", "Lütgendortmund", "Huckarde", "Mengede"],
+    districts: ["Innenstadt-West", "Innenstadt-Nord", "Innenstadt-Ost", "Kreuzviertel", "Kaiserviertel", "Körne", "Eving", "Derne", "Scharnhorst", "Brackel", "Asseln", "Wickede", "Aplerbeck", "Hörde", "Wellinghofen", "Kirchhörde", "Hombruch", "Barop", "Dorstfeld", "Lütgendortmund", "Kirchlinde", "Huckarde", "Mengede"],
     geo: { lat: 51.5136, lng: 7.4653 },
     responseTime: "24 bis 48 Stunden",
     localFactors: [
@@ -2850,7 +2850,7 @@ export const CITY_PAGES: CityPage[] = [
       },
       {
         q: "Gibt es Fördermöglichkeiten für die Kellersanierung in NRW?",
-        a: "Ja, für handwerkliche Sanierungsmaßnahmen an selbstgenutzten Immobilien können Eigentümer 20 % der Arbeitskosten (Handwerkerleistung gem. § 35a EStG) direkt steuerlich geltend machen. Wir weisen den Lohnanteil auf der Rechnung separat GoBD-konform aus.",
+        a: "Einen eigenen Zuschuss für die Kellersanierung gibt es in der Regel nicht. Für die selbst bewohnte Wohnung oder das eigene Haus können Sie aber 20 Prozent der Arbeitskosten als Handwerkerleistung nach § 35a EStG direkt von der Einkommensteuer abziehen, höchstens 1.200 Euro im Jahr. Bei vermieteten Häusern zählen die Kosten zu den Werbungskosten. Wir weisen den Lohnanteil auf der Rechnung getrennt aus; ob und wie Sie ihn absetzen können, klärt im Zweifel Ihr Steuerberater.",
       },
       {
         "q": "Warum wird mein Keller in Dortmund erst jetzt feucht?",
@@ -2871,6 +2871,10 @@ export const CITY_PAGES: CityPage[] = [
       {
         "q": "Wie schnell sind Sie in Dortmund vor Ort?",
         "a": "Von unserem Sitz in Essen sind wir in der Regel innerhalb von 24 bis 48 Stunden in Dortmund, von der Innenstadt bis nach Mengede, Aplerbeck oder Lütgendortmund."
+      },
+      {
+        "q": "Sanieren Sie auch Keller in Mehrfamilienhäusern und für Hausverwaltungen in Dortmund?",
+        "a": "Ja. Im Kreuzviertel, im Kaiserviertel und in der Nordstadt stehen viele Mehrfamilienhäuser aus der Gründerzeit und dem Wiederaufbau. Wir sanieren Kellerraum für Kellerraum, damit die Mieter ihre Keller weiter nutzen können, und geben der Hausverwaltung ein schriftliches Angebot mit Messprotokoll, das sie direkt in der Eigentümerversammlung vorlegen kann."
       }
     ],
     wiki: "https://de.wikipedia.org/wiki/Dortmund",
