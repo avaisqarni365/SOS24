@@ -1081,7 +1081,7 @@ export const CITY_PAGES: CityPage[] = [
     keyword: "Kellersanierung Wuppertal",
     title: "Kellersanierung Wuppertal | Keller abdichten ohne Aufgraben",
     metaDescription:
-      "Kellersanierung Wuppertal: feuchter Keller, Hangwasser, Bruchstein- und Gründerzeitkeller von innen trockenlegen. Messung kostenlos, Festpreis.",
+      "Kellersanierung Wuppertal vom SchimmelPeter®-Partnerbetrieb: Hangwasser, Bruchstein- und Gründerzeitkeller von innen trockenlegen. Messung kostenlos.",
     h1: "Kellersanierung Wuppertal: Ihr feuchter Keller wird trocken, auch in Hanglage",
     lede:
       "Zwischen Vohwinkel und Beyenburg stehen viele Häuser am Hang oder nah an der Wupper. Wir kennen die typischen Kellerschäden dieser Stadt und sind in Wuppertal in der Regel innerhalb von 24 Stunden bei Ihnen.",
@@ -1161,6 +1161,13 @@ export const CITY_PAGES: CityPage[] = [
           "Die Gründerzeithäuser im Briller Viertel, am Ölberg und in Barmen sind meist vermietet oder gehören Eigentümergemeinschaften. Feuchte Keller betreffen hier alle Parteien, und die Sanierung muss im bewohnten Haus funktionieren.",
           "Wir arbeiten Kellerraum für Kellerraum, sodass immer nur ein Teil gesperrt ist. Für die Hausverwaltung oder die Eigentümerversammlung bekommen Sie ein schriftliches Angebot mit Messprotokoll, nach jeder Phase ein weiteres Protokoll."
         ]
+      },
+      {
+        "heading": "SchimmelPeter®-Partnerbetrieb für die Region Wuppertal",
+        "paragraphs": [
+          "Für die Region Wuppertal sind wir Partnerbetrieb der SchimmelPeter GmbH. Auf der Partnerseite des Herstellers für Wuppertal sind sos-abdichtung und Inhaber Shahzad Mahmood als Ansprechpartner für die Kellersanierung genannt. Die Horizontalsperre setzen wir mit dem SchimmelPeter®-Injektionsmittel und nach den Vorgaben des Herstellers.",
+          "Für Sie heißt das doppelte Sicherheit: Der Hersteller garantiert 25 Jahre lang die Wirksamkeit des Injektionsmittels, und auf unsere ausgeführte Arbeit geben wir 10 Jahre Garantie. Unser Betriebssitz ist in Essen; in Wuppertal sind wir in der Regel innerhalb von 24 Stunden bei Ihnen, von Vohwinkel bis Beyenburg."
+        ]
       }
     ],
     faqs: [
@@ -1191,10 +1198,19 @@ export const CITY_PAGES: CityPage[] = [
       {
         "q": "Sanieren Sie auch Keller in Mehrfamilienhäusern und für Hausverwaltungen?",
         "a": "Ja. Wir arbeiten in bewohnten Häusern raumweise und erstellen für Hausverwaltungen und Eigentümergemeinschaften ein schriftliches Angebot mit Messprotokoll."
+      },
+      {
+        "q": "Sind Sie SchimmelPeter-Partner in Wuppertal?",
+        "a": "Ja. Für die Region Wuppertal sind wir Partnerbetrieb der SchimmelPeter GmbH und auf deren Partnerseite für Wuppertal aufgeführt. Wir setzen das SchimmelPeter®-Injektionsmittel ein, dessen Wirksamkeit der Hersteller 25 Jahre garantiert. Unser Betriebssitz ist in Essen, in der Niebuhrstraße 46."
       }
     ],
     wiki: "https://de.wikipedia.org/wiki/Wuppertal",
     localServices: [
+      {
+        "slug": "kellersanierung",
+        "heading": "Kellersanierung in Wuppertal",
+        "text": "Wir messen zuerst, woher die Nässe kommt: von unten aufsteigend, seitlich vom Hang oder bei Hochwasser aus der Talsohle der Wupper. Dann kombinieren wir nur die Verfahren, die Ihr Keller braucht, also Horizontalsperre mit dem SchimmelPeter®-Injektionsmittel, Innenabdichtung, Rissverpressung und Sanierputz. Alles von innen, ohne Aufgraben am Hang, mit 10 Jahren Garantie auf die Arbeit."
+      },
       {
         slug: "kellerinnenabdichtung",
         heading: "Keller abdichten in Wuppertal",
