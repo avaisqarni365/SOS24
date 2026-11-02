@@ -2310,14 +2310,14 @@ export const CITY_PAGES: CityPage[] = [
     slug: "duesseldorf",
     name: "Düsseldorf",
     keyword: "Kellersanierung Düsseldorf",
-    title: "Kellersanierung Düsseldorf | Keller abdichten von innen",
+    title: "Kellersanierung Düsseldorf | Keller abdichten ohne Aufgraben",
     metaDescription:
-      "Kellersanierung Düsseldorf: Nasse Keller & drückendes Wasser von innen abdichten. Kostenlose Feuchtemessung, Festpreis und 10 Jahre Garantie.",
+      "Kellersanierung Düsseldorf: Keller und Souterrain von innen abdichten, auch gegen drückendes Rheinwasser. Kostenlose Feuchtemessung, 10 Jahre Garantie.",
     h1: "Kellersanierung Düsseldorf: Keller trockenlegen ohne Aufgraben",
     lede:
-      "Hoher Rhein-Grundwasserspiegel, wertvolle Wohn- und Nutzflächen im Souterrain: In Düsseldorf erfordert feuchtes Mauerwerk professionelle Abdichtungssysteme mit garantierter Dichtigkeit.",
+      "Zwischen Kaiserswerth und Benrath stehen viele Keller im Einflussbereich des Rheins: hoher Grundwasserstand, Kies- und Sandböden und Souterrains, die als Wohnung oder Büro genutzt werden. Wir messen kostenlos, woher die Feuchte kommt, und dichten Ihren Keller von innen ab, ohne Aufgraben. In Düsseldorf sind wir in der Regel innerhalb von 24 bis 48 Stunden bei Ihnen.",
     plz: ["40210", "40211", "40212", "40213", "40215", "40217", "40219", "40221", "40223", "40225", "40227", "40229", "40231", "40233", "40235", "40237", "40239", "40468", "40470", "40472", "40474", "40476", "40477", "40479", "40489", "40545", "40547", "40549", "40589", "40591", "40593", "40595", "40597", "40599", "40625", "40627", "40629"],
-    districts: ["Düsseldorf-Mitte", "Oberkassel", "Pempelfort", "Unterbilk", "Bilk", "Flingern", "Derendorf", "Gerresheim", "Grafenberg", "Benrath", "Eller", "Wersten", "Kaiserswerth", "Heerdt"],
+    districts: ["Düsseldorf-Mitte", "Oberkassel", "Pempelfort", "Unterbilk", "Bilk", "Flingern", "Düsseltal", "Derendorf", "Golzheim", "Gerresheim", "Grafenberg", "Benrath", "Eller", "Wersten", "Garath", "Kaiserswerth", "Heerdt", "Lörick", "Rath", "Unterrath"],
     geo: { lat: 51.2277, lng: 6.7735 },
     responseTime: "24 bis 48 Stunden",
     localFactors: [
@@ -2412,10 +2412,27 @@ export const CITY_PAGES: CityPage[] = [
       {
         "q": "Sanieren Sie auch Keller in Mehrfamilienhäusern und Eigentümergemeinschaften?",
         "a": "Ja. Für Eigentümergemeinschaften und Hausverwaltungen in Düsseldorf erstellen wir ein schriftliches Angebot mit Messprotokoll, das in der Eigentümerversammlung vorgelegt werden kann. Die Arbeiten führen wir so aus, dass die Mieter ihre Kellerräume möglichst weiter nutzen können."
+      },
+      {
+        "q": "Wie schnell sind Sie in Düsseldorf vor Ort?",
+        "a": "In Düsseldorf sind wir in der Regel innerhalb von 24 bis 48 Stunden bei Ihnen, von Kaiserswerth bis Garath. Unser Betrieb sitzt in Essen, über die A52 ist Düsseldorf schnell erreicht. Schicken Sie vorab gern Fotos per WhatsApp an 0172 2064177, dann kann Herr Mahmood den Schaden schon vor dem Termin grob einschätzen. Die Feuchtemessung vor Ort ist kostenlos."
+      },
+      {
+        "q": "Muss für eine Kellersanierung in Düsseldorf aufgegraben werden?",
+        "a": "In den meisten Fällen nicht. Gerade in Bilk, Flingern oder Pempelfort stehen die Häuser direkt am Gehweg oder Wand an Wand mit dem Nachbarn, eine Aufgrabung wäre dort kaum möglich. Horizontalsperre, Innenabdichtung und Rissverpressung führen wir von innen aus. Ob in Ihrem Fall zusätzlich etwas von außen nötig ist, sagen wir Ihnen nach der Messung offen."
+      },
+      {
+        "q": "Wie lange dauert eine Kellersanierung in Düsseldorf?",
+        "a": "Die Arbeiten selbst dauern meist zwei bis vier Werktage, je nach Fläche und Verfahren. Danach trocknet das Mauerwerk über einige Monate aus; wir messen nach und geben Ihnen das Protokoll schriftlich. Ein Souterrain, das als Wohnung oder Büro genutzt wird, sanieren wir auf Wunsch abschnittsweise, damit es weiter nutzbar bleibt."
       }
     ],
     wiki: "https://de.wikipedia.org/wiki/D%C3%BCsseldorf",
     localServices: [
+      {
+        "slug": "kellersanierung",
+        "heading": "Kellersanierung in Düsseldorf",
+        "text": "Wir messen zuerst, woher die Nässe kommt: aufsteigend im Mauerwerk der Gründerzeithäuser in Flingern, Derendorf und Unterbilk, seitlich als Hangwasser in Gerresheim oder von unten als Grundwasser in Rheinnähe. Dann kombinieren wir nur die Verfahren, die Ihr Keller braucht, also Horizontalsperre, druckwasserdichte Innenabdichtung, Rissverpressung und Sanierputz. Alles von innen, ohne Aufgraben, mit 10 Jahren Garantie auf die Arbeit."
+      },
       {
         slug: "kellerinnenabdichtung",
         heading: "Keller abdichten in Düsseldorf",
