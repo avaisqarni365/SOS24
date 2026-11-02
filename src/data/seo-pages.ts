@@ -803,6 +803,10 @@ export const SERVICE_PAGES: ServicePage[] = [
         "q": "Wie lange dauert eine Rissverpressung?",
         "a": "Das hängt von Zahl und Länge der Risse ab. Einzelne Risse sind oft an einem Arbeitstag verpresst. Nach dem Aushärten entfernen wir die Packer und verschließen die Bohrlöcher bündig mit Mörtel."
       },
+      {
+        "q": "Bieten Sie die Rissverpressung auch in Essen an?",
+        "a": "Ja. Unser Sitz ist in Essen, in der Niebuhrstraße 46, und Rissverpressung gehört dort zu unseren häufigsten Aufträgen, weil viele Essener Keller Setzungsrisse aus dem Bergbau haben. Wir sind in Essen meist innerhalb von 24 Stunden vor Ort, prüfen den Riss kostenlos und verpressen ihn von innen, ohne Aufgraben. Genauso arbeiten wir im übrigen Ruhrgebiet, im Bergischen Land und im Rheinland."
+      },
     ],
     related: ["kellerinnenabdichtung", "kellersanierung", "horizontalsperre", "balkon-terrasse"],
   },
@@ -2074,7 +2078,7 @@ export const CITY_PAGES: CityPage[] = [
     slug: "essen",
     name: "Essen",
     keyword: "Kellersanierung Essen",
-    title: "Kellersanierung Essen | Abdichtung in Essen ohne Aufgraben",
+    title: "Kellersanierung Essen | Abdichtung & Rissverpressung Essen",
     metaDescription:
       "Kellersanierung Essen und Abdichtung vom Betrieb vor Ort, Niebuhrstraße 46: Keller, Sockel, Balkon, Dach, Rissverpressung. Kostenlose Feuchtemessung.",
     h1: "Kellersanierung Essen: Abdichtung vom Fachbetrieb vor Ort",
@@ -2121,7 +2125,7 @@ export const CITY_PAGES: CityPage[] = [
       {
         slug: "rissverpressung",
         heading: "Rissverpressung in Essen",
-        text: "Setzungsrisse aus dem Bergbau sind in Essen der häufigste Weg, auf dem Wasser in Betonkeller kommt. Wir verpressen wasserführende Risse unter Druck mit PU-Harz, das sich im Riss ausdehnt und elastisch bleibt, wenn sich das Haus weiter bewegt. Tragende Risse schließen wir kraftschlüssig mit Epoxid.",
+        text: "Setzungsrisse aus dem Bergbau sind in Essen der häufigste Weg, auf dem Wasser in Betonkeller kommt, dazu undichte Arbeitsfugen zwischen Bodenplatte und Wand in den Betonkellern der 1960er und 1970er Jahre, etwa in Kray, Steele oder Altenessen. Wir verpressen wasserführende Risse von innen unter Druck mit PU-Harz, das sich im Riss ausdehnt und elastisch bleibt, wenn sich das Haus weiter bewegt. Tragende Risse schließen wir kraftschlüssig mit Epoxid. Einzelne Risse sind oft an einem Arbeitstag verpresst.",
       },
       {
         slug: "horizontalsperre",
@@ -2275,6 +2279,10 @@ export const CITY_PAGES: CityPage[] = [
       {
         "q": "Ist eine Abdichtung von innen genauso gut wie von außen?",
         "a": "Gegen Wasser, das seitlich durch die Kellerwand kommt, ist eine fachgerechte Innenabdichtung aus mineralischer Dichtungsschlämme dauerhaft wirksam, auch bei zeitweise drückendem Wasser. Sie spart das Aufgraben, das in Essen bei Reihenhäusern, Hanglagen und gepflasterten Einfahrten oft kaum möglich ist. Wo eine Außenabdichtung wirklich nötig ist, sagen wir Ihnen das nach der Messung offen."
+      },
+      {
+        "q": "Wie läuft eine Rissverpressung in Essen ab?",
+        "a": "Zuerst sehen wir uns den Riss an, messen seine Breite und prüfen, ob er Wasser führt und ob er sich noch bewegt. Dann bohren wir von innen schräg zum Riss, setzen Injektionspacker und pressen das Harz unter Druck ein, bis der Riss über den ganzen Wandquerschnitt gefüllt ist: PU-Harz bei wasserführenden und beweglichen Rissen, Epoxid bei tragenden. Nach dem Aushärten entfernen wir die Packer und verschließen die Bohrlöcher. Ein Aufgraben im Vorgarten ist dafür nicht nötig."
       }
     ],
     film: "kellersanierung",
