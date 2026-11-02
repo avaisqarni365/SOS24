@@ -1505,14 +1505,14 @@ export const CITY_PAGES: CityPage[] = [
     slug: "velbert",
     name: "Velbert",
     keyword: "Kellersanierung Velbert",
-    title: "Kellersanierung Velbert | Neviges, Langenberg & Mitte",
+    title: "Kellersanierung Velbert | Keller abdichten ohne Aufgraben",
     metaDescription:
       "Kellersanierung Velbert: feuchte Keller in Neviges, Langenberg und Velbert-Mitte von innen abdichten. Kostenlose Feuchtemessung, Festpreis.",
     h1: "Kellersanierung Velbert: Altstadtkeller und Hanghäuser trockenlegen",
     lede:
       "Velbert vereint drei sehr unterschiedliche Stadtteile: die Schlossstadt auf der Höhe, den Wallfahrtsort Neviges und das historische Langenberg im Deilbachtal. Jeder bringt eigene Kellerprobleme mit.",
     plz: ["42549", "42551", "42553", "42555"],
-    districts: ["Velbert-Mitte", "Neviges", "Langenberg", "Tönisheide", "Nierenhof"],
+    districts: ["Velbert-Mitte", "Neviges", "Langenberg", "Tönisheide", "Nierenhof", "Siebeneick", "Bonsfeld", "Birth", "Losenburg", "Dalbecksbaum"],
     geo: { lat: 51.340, lng: 7.043 },
     responseTime: "24 bis 48 Stunden",
     localFactors: [
@@ -1544,6 +1544,20 @@ export const CITY_PAGES: CityPage[] = [
           "Solche Keller sanieren wir deshalb gezielt. Die belastete Wand erhält eine Innenabdichtung mit Hohlkehle, Durchführungen und Arbeitsfugen werden gesondert abgedichtet, und Risse in Betonwänden verpressen wir mit PU-Harz. An den übrigen Wänden genügt häufig eine Horizontalsperre mit Sanierputz. Nach der kostenlosen Messung wissen Sie, welche Wand welche Maßnahme braucht, und erhalten dafür ein verbindliches Festpreisangebot. Außenanlagen, Treppen und Stützmauern am Hang bleiben unberührt.",
         ],
       },
+      {
+        "heading": "Birth, Losenburg und Velbert-Mitte: Kellersanierung im Mehrfamilienhaus",
+        "paragraphs": [
+          "In Velbert-Mitte und in den Wohngebieten Birth und Losenburg stehen viele Mehrfamilienhäuser aus den 1950er bis 1970er Jahren, meist vermietet oder im Besitz von Eigentümergemeinschaften. Ein feuchter Keller betrifft hier alle Parteien: Die Kellerverschläge riechen muffig, Kartons und Möbel schimmeln, und am Wandfuß platzt der Putz ab.",
+          "Wir arbeiten in diesen Häusern Kellerraum für Kellerraum, damit immer nur ein Teil gesperrt ist und die Mieter ihre Keller weiter nutzen können. Die Hausverwaltung bekommt vorab ein schriftliches Angebot mit Messprotokoll für die Eigentümerversammlung und nach jeder Phase ein weiteres Protokoll."
+        ]
+      },
+      {
+        "heading": "Ein- und Zweifamilienhäuser der Nachkriegszeit: gezielt statt flächig sanieren",
+        "paragraphs": [
+          "Zwischen den alten Ortskernen und den Siedlungen stehen in Velbert viele Ein- und Zweifamilienhäuser aus der Nachkriegszeit. Ihre Keller sind aus Beton oder Kalksandstein und außen nur mit einem Bitumenanstrich geschützt, der nach Jahrzehnten spröde geworden ist. Feuchte dringt dann an Arbeitsfugen, Rohrdurchführungen und Rissen ein, meist nach längeren Regenperioden.",
+          "Hier reicht oft eine gezielte Sanierung: Wasserführende Risse verpressen wir mit PU-Harz, den Übergang zwischen Wand und Bodenplatte dichten wir mit einer Hohlkehle ab, und nur die wirklich betroffenen Wände bekommen eine Innenabdichtung. Garten, Terrasse und Einfahrt bleiben dabei unberührt."
+        ]
+      }
     ],
     faqs: [
       {
@@ -1554,6 +1568,26 @@ export const CITY_PAGES: CityPage[] = [
         q: "Mein Haus in Langenberg liegt direkt am Bach. Ist eine Sanierung von innen trotzdem möglich?",
         a: "Ja, in vielen Fällen. Entscheidend ist, ob Bodenfeuchte oder zeitweise drückendes Wasser anliegt. Dafür gibt es mehrlagige Innenabdichtungen, die auch Druckwasser standhalten, kombiniert mit einer Horizontalsperre im Mauerwerk.",
       },
+      {
+        "q": "Wie lange dauert eine Kellersanierung in Velbert?",
+        "a": "Die Arbeiten selbst dauern meist zwei bis vier Werktage. Danach trocknet das Mauerwerk über einige Monate aus; wir messen nach und geben Ihnen das Protokoll schriftlich."
+      },
+      {
+        "q": "Sanieren Sie auch Keller in Mehrfamilienhäusern und für Hausverwaltungen in Velbert?",
+        "a": "Ja. Für Hausverwaltungen und Eigentümergemeinschaften erstellen wir ein schriftliches Angebot mit Messprotokoll für die Eigentümerversammlung. Wir arbeiten raumweise, damit die Mieter ihre Keller möglichst weiter nutzen können."
+      },
+      {
+        "q": "Muss bei einem Haus am Hang in Velbert aufgegraben werden?",
+        "a": "Meist nicht. Die bergseitige Wand, an der sich Hang- und Sickerwasser staut, dichten wir von innen mit Dichtungsschlämme und Hohlkehle ab. Garten, Böschung und Stützmauern bleiben unberührt."
+      },
+      {
+        "q": "Was passiert bei der kostenlosen Feuchtemessung in Velbert?",
+        "a": "Wir messen die Feuchte in mehreren Wandhöhen und an mehreren Wänden, prüfen Risse, Anschlüsse und den Sockel und klären so, woher die Nässe kommt. Sie bekommen das Ergebnis schriftlich und danach ein Angebot zum Festpreis."
+      },
+      {
+        "q": "Welche Garantie erhalte ich auf die Kellersanierung?",
+        "a": "Auf die Wirksamkeit des Injektionsmittels gibt es 25 Jahre Produktgarantie des Herstellers SchimmelPeter GmbH. Unabhängig davon gibt sos-abdichtung 10 Jahre Garantie auf die ausgeführten Arbeiten."
+      }
     ],
     wiki: "https://de.wikipedia.org/wiki/Velbert",
     localServices: [
@@ -1576,6 +1610,16 @@ export const CITY_PAGES: CityPage[] = [
         slug: "schimmelbeseitigung",
         heading: "Schimmel im Keller in Velbert",
         text: "Feuchte Talkeller und kühle Hangwände begünstigen Schimmel. Wir klären per Messung die Ursache, entfernen den Befall sporensicher und beseitigen die Feuchte."
+      },
+      {
+        "slug": "feuchtemessung",
+        "heading": "Feuchtemessung in Velbert",
+        "text": "Am Hang in Velbert-Mitte ist oft nur eine Wand nass, in Langenberg und Neviges kommt die Feuchte von unten. Wir messen kostenlos, woher sie bei Ihnen kommt, und geben Ihnen das Ergebnis schriftlich."
+      },
+      {
+        "slug": "sockelabdichtung",
+        "heading": "Sockel abdichten in Velbert",
+        "text": "Bei Schieferhäusern in Langenberg und Neviges und bei Siedlungshäusern zieht Spritzwasser in den Sockel und weiter in die Kellerwand. Wir dichten den Sockel ab und schließen ihn an die Kellerabdichtung an."
       }
     ],
     districtGroups: [
@@ -1616,7 +1660,7 @@ export const CITY_PAGES: CityPage[] = [
     slug: "haan",
     name: "Haan",
     keyword: "Kellersanierung Haan",
-    title: "Kellersanierung Haan | Keller trockenlegen, auch in Gruiten",
+    title: "Kellersanierung Haan | Keller abdichten ohne Aufgraben",
     metaDescription:
       "Kellersanierung Haan: Keller und Souterrainwohnungen in Haan und Gruiten trockenlegen. Ohne Aufgraben, kostenlose Messung, Festpreisangebot.",
     h1: "Kellersanierung Haan: Keller und Souterrain dauerhaft trockenlegen",
@@ -1655,6 +1699,20 @@ export const CITY_PAGES: CityPage[] = [
           "Hier ist die genaue Ursachenanalyse besonders wichtig. Kommt die Feuchte aus der Wand, helfen Horizontalsperre und Innenabdichtung. Handelt es sich um Kondensat, sind Calciumsilikatplatten an den kalten Flächen und ein angepasstes Lüftungskonzept die bessere Lösung. Häufig liegt eine Kombination vor. Nach der Messung erhalten Sie ein Konzept, das beides berücksichtigt, und einen Festpreis, mit dem Sie als Eigentümer oder Vermieter sicher planen können.",
         ],
       },
+      {
+        "heading": "Haan-Mitte: Kellersanierung im bewohnten Mehrfamilienhaus",
+        "paragraphs": [
+          "Rund um die Haaner Innenstadt stehen viele Mehrfamilienhäuser, meist vermietet oder im Besitz von Eigentümergemeinschaften. Ein feuchter Keller betrifft hier alle Parteien: Die Kellerverschläge riechen muffig, Kartons und Möbel schimmeln, und am Wandfuß platzt der Putz ab.",
+          "Wir arbeiten in diesen Häusern Kellerraum für Kellerraum, damit immer nur ein Teil gesperrt ist und die Mieter ihre Keller weiter nutzen können. Die Hausverwaltung bekommt vorab ein schriftliches Angebot mit Messprotokoll für die Eigentümerversammlung und nach jeder Phase ein weiteres Protokoll."
+        ]
+      },
+      {
+        "heading": "Unterhaan und Oberhaan: Einfamilienhäuser der 1950er bis 1980er Jahre",
+        "paragraphs": [
+          "In Unterhaan und Oberhaan überwiegen Ein- und Zweifamilienhäuser aus der Nachkriegszeit und den folgenden Jahrzehnten. Ihre Keller sind aus Beton oder Kalksandstein und außen nur mit einem Bitumenanstrich geschützt, der heute spröde ist. Feuchte dringt dann an Arbeitsfugen, Rohrdurchführungen und Rissen ein.",
+          "Hier reicht oft eine gezielte Sanierung: Wasserführende Risse verpressen wir mit PU-Harz, den Übergang zwischen Wand und Bodenplatte dichten wir mit einer Hohlkehle ab, und nur die wirklich betroffenen Wände bekommen eine Innenabdichtung. Garten, Terrasse und Einfahrt bleiben dabei unberührt."
+        ]
+      }
     ],
     faqs: [
       {
@@ -1665,6 +1723,26 @@ export const CITY_PAGES: CityPage[] = [
         q: "Macht der Kalkstein in Gruiten die Sanierung schwieriger?",
         a: "Er macht sie nicht schwieriger, aber anders. Im verkarsteten Kalk fließt Wasser über Spalten und tritt oft punktuell an der Kellerwand aus, statt die Wand gleichmäßig zu durchfeuchten. Diese Stellen finden wir bei der Messung und dichten sie gezielt ab.",
       },
+      {
+        "q": "Wie schnell sind Sie in Haan vor Ort?",
+        "a": "In der Regel innerhalb von 24 bis 48 Stunden, in Haan-Mitte, Unterhaan und Oberhaan ebenso wie in Gruiten."
+      },
+      {
+        "q": "Wie lange dauert eine Kellersanierung in Haan?",
+        "a": "Die Arbeiten selbst dauern meist zwei bis vier Werktage. Danach trocknet das Mauerwerk über einige Monate aus; wir messen nach und geben Ihnen das Protokoll schriftlich."
+      },
+      {
+        "q": "Sanieren Sie auch Keller in Mehrfamilienhäusern und für Hausverwaltungen in Haan?",
+        "a": "Ja. Für Hausverwaltungen und Eigentümergemeinschaften erstellen wir ein schriftliches Angebot mit Messprotokoll für die Eigentümerversammlung. Wir arbeiten raumweise, damit die Mieter ihre Keller möglichst weiter nutzen können."
+      },
+      {
+        "q": "Muss für die Kellersanierung in Haan aufgegraben werden?",
+        "a": "Meist nicht. Horizontalsperre, Innenabdichtung, Rissverpressung und Sanierputz bauen wir von innen ein. Garten, Terrasse und Einfahrt bleiben unberührt."
+      },
+      {
+        "q": "Was passiert bei der kostenlosen Feuchtemessung in Haan?",
+        "a": "Wir messen die Feuchte in mehreren Wandhöhen und an mehreren Wänden, prüfen Risse, Anschlüsse und den Sockel und klären so, ob die Nässe aus der Wand kommt oder Kondensat ist. Sie bekommen das Ergebnis schriftlich und danach ein Angebot zum Festpreis."
+      }
     ],
     wiki: "https://de.wikipedia.org/wiki/Haan",
     localServices: [
@@ -1687,6 +1765,16 @@ export const CITY_PAGES: CityPage[] = [
         slug: "feuchtemessung",
         heading: "Feuchtemessung in Haan",
         text: "Wo Wasser im Kalkstein über Spalten fließt, ist die Ursache nicht immer dort, wo der Fleck ist. Die kostenlose Messung zeigt, woher die Nässe wirklich kommt."
+      },
+      {
+        "slug": "rissverpressung",
+        "heading": "Rissverpressung in Haan",
+        "text": "In den Betonkellern der Einfamilienhäuser in Unterhaan und Oberhaan dringt Wasser oft durch Risse und Arbeitsfugen ein. Wir verpressen sie mit PU-Harz, das elastisch bleibt."
+      },
+      {
+        "slug": "sockelabdichtung",
+        "heading": "Sockel abdichten in Haan",
+        "text": "Bei den Fachwerkhäusern in Gruiten-Dorf und bei vielen Siedlungshäusern ist der Sockel durchfeuchtet, der Putz platzt ab. Wir dichten den Sockel ab und schließen ihn an die Kellerabdichtung an."
       }
     ],
     districtGroups: [
@@ -1717,14 +1805,14 @@ export const CITY_PAGES: CityPage[] = [
     slug: "wermelskirchen",
     name: "Wermelskirchen",
     keyword: "Kellersanierung Wermelskirchen",
-    title: "Kellersanierung Wermelskirchen | Dabringhausen & Dhünn",
+    title: "Kellersanierung Wermelskirchen | Keller abdichten von innen",
     metaDescription:
       "Kellersanierung Wermelskirchen: feuchte Keller in der Innenstadt, Dabringhausen und Dhünn von innen trockenlegen. Kostenlose Messung vor Ort.",
     h1: "Kellersanierung Wermelskirchen: trockene Keller auf der bergischen Hochfläche",
     lede:
       "Wermelskirchen liegt auf einer Hochfläche zwischen Wupper und Dhünn, umgeben von tief eingeschnittenen Bachtälern wie dem Eifgental. Wir sanieren feuchte Keller in der Innenstadt ebenso wie in Dabringhausen und Dhünn, von innen und ohne Aufgraben.",
     plz: ["42929"],
-    districts: ["Wermelskirchen-Mitte", "Dabringhausen", "Dhünn", "Tente", "Hünger"],
+    districts: ["Wermelskirchen-Mitte", "Dabringhausen", "Dhünn", "Tente", "Hünger", "Eifgen", "Hilgen", "Pohlhausen"],
     geo: { lat: 51.139, lng: 7.216 },
     responseTime: "24 bis 48 Stunden",
     localFactors: [
@@ -1767,6 +1855,13 @@ export const CITY_PAGES: CityPage[] = [
           "Für diese Keller ist eine flächige Sanierung selten nötig. Häufig reicht es, wasserführende Risse mit PU-Harz zu verpressen und den Boden-Wand-Anschluss gezielt von innen abzudichten. Nicht jede nasse Stelle kommt allerdings aus dem Erdreich. Undichte Wasser- oder Abwasserleitungen, eine unzureichende Drainage oder Kondenswasser in schlecht belüfteten Räumen können ganz ähnlich aussehen. Die kostenlose Messung vor Ort klärt, welche Ursache vorliegt und ob ein punktueller Eingriff genügt.",
         ],
       },
+      {
+        "heading": "Innenstadt: Kellersanierung im bewohnten Mehrfamilienhaus",
+        "paragraphs": [
+          "In der Wermelskirchener Innenstadt stehen neben den alten Schieferhäusern viele Mehrfamilienhäuser, meist vermietet oder im Besitz von Eigentümergemeinschaften. Ein feuchter Keller betrifft hier alle Parteien: Die Kellerverschläge riechen muffig, Kartons und Möbel schimmeln, und am Wandfuß platzt der Putz ab.",
+          "Wir arbeiten in diesen Häusern Kellerraum für Kellerraum, damit immer nur ein Teil gesperrt ist und die Mieter ihre Keller weiter nutzen können. Die Hausverwaltung bekommt vorab ein schriftliches Angebot mit Messprotokoll für die Eigentümerversammlung und nach jeder Phase ein weiteres Protokoll."
+        ]
+      }
     ],
     faqs: [
       {
@@ -1781,6 +1876,22 @@ export const CITY_PAGES: CityPage[] = [
         q: "Welche Garantie erhalte ich auf die Kellersanierung?",
         a: "Auf die Wirksamkeit des Injektionsmittels gibt es 25 Jahre Produktgarantie des Herstellers SchimmelPeter GmbH. Unabhängig davon gibt sos-abdichtung 10 Jahre Garantie auf die ausgeführten Arbeiten.",
       },
+      {
+        "q": "Wie lange dauert eine Kellersanierung in Wermelskirchen?",
+        "a": "Die Arbeiten selbst dauern meist zwei bis vier Werktage. Auf der regenreichen Hochfläche trocknet das Mauerwerk danach etwas länger aus als anderswo; wir messen nach und geben Ihnen das Protokoll schriftlich."
+      },
+      {
+        "q": "Sanieren Sie auch Keller in Mehrfamilienhäusern und für Hausverwaltungen in Wermelskirchen?",
+        "a": "Ja. Für Hausverwaltungen und Eigentümergemeinschaften erstellen wir ein schriftliches Angebot mit Messprotokoll für die Eigentümerversammlung. Wir arbeiten raumweise, damit die Mieter ihre Keller möglichst weiter nutzen können."
+      },
+      {
+        "q": "Muss am Hang in Dhünn oder im Eifgental aufgegraben werden?",
+        "a": "Meist nicht. Die bergseitige Wand, an der sich das Sickerwasser aus dem Fels staut, dichten wir von innen mit Dichtungsschlämme und Hohlkehle ab. Garten und Böschung bleiben unberührt."
+      },
+      {
+        "q": "Warum ist mein Keller im Winter nasser als im Sommer?",
+        "a": "Auf der Hochfläche regnet es das ganze Jahr über viel, im Winterhalbjahr verdunstet jedoch deutlich weniger. Der Boden bleibt länger gesättigt, und Sickerwasser steht länger an der Kellerwand an. Ob es sich um eindringendes Wasser oder Kondensat handelt, zeigt die Messung vor Ort."
+      }
     ],
     wiki: "https://de.wikipedia.org/wiki/Wermelskirchen",
     localServices: [
@@ -1803,6 +1914,16 @@ export const CITY_PAGES: CityPage[] = [
         slug: "feuchtemessung",
         heading: "Feuchtemessung in Wermelskirchen",
         text: "Die kostenlose Messung zeigt, ob eine ganze Wand nass ist oder nur ein Riss Wasser führt. Danach wissen Sie, ob ein punktueller Eingriff genügt."
+      },
+      {
+        "slug": "schimmelbeseitigung",
+        "heading": "Schimmel im Keller in Wermelskirchen",
+        "text": "Dauerhaft nasse Wände und kühle Keller sind ideale Bedingungen für Schimmel. Wir entfernen ihn sporensicher und beseitigen die Ursache, damit er nicht wiederkommt."
+      },
+      {
+        "slug": "sockelabdichtung",
+        "heading": "Sockel abdichten in Wermelskirchen",
+        "text": "Bei viel Regen zieht Spritzwasser in den Sockel und weiter in die Kellerwand, bei Schieferhäusern auch in den Bruchsteinsockel. Wir dichten den Sockel ab und schließen ihn an die Kellerabdichtung an."
       }
     ],
     districtGroups: [

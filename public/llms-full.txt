@@ -69,26 +69,36 @@ Jedes Messprotokoll wird dem Kunden immer schriftlich übergeben, nach jeder Pha
   - [Horizontalsperre in Solingen](https://sos-abdichtung.de/kellersanierung/solingen/#horizontalsperre)
   - [Rissverpressung in Solingen](https://sos-abdichtung.de/kellersanierung/solingen/#rissverpressung)
   - [Feuchtemessung in Solingen](https://sos-abdichtung.de/kellersanierung/solingen/#feuchtemessung)
+  - [Schimmel im Keller in Solingen](https://sos-abdichtung.de/kellersanierung/solingen/#schimmelbeseitigung)
+  - [Sockel abdichten in Solingen](https://sos-abdichtung.de/kellersanierung/solingen/#sockelabdichtung)
 - [Kellersanierung Remscheid](https://sos-abdichtung.de/kellersanierung/remscheid/): vor Ort in 24 bis 48 Stunden. PLZ 42853, 42855, 42857, 42859, 42897, 42899
   - [Horizontalsperre in Remscheid](https://sos-abdichtung.de/kellersanierung/remscheid/#horizontalsperre)
   - [Keller abdichten in Remscheid](https://sos-abdichtung.de/kellersanierung/remscheid/#kellerinnenabdichtung)
   - [Feuchtemessung in Remscheid](https://sos-abdichtung.de/kellersanierung/remscheid/#feuchtemessung)
   - [Schimmel im Keller in Remscheid](https://sos-abdichtung.de/kellersanierung/remscheid/#schimmelbeseitigung)
+  - [Rissverpressung in Remscheid](https://sos-abdichtung.de/kellersanierung/remscheid/#rissverpressung)
+  - [Sockel abdichten in Remscheid](https://sos-abdichtung.de/kellersanierung/remscheid/#sockelabdichtung)
 - [Kellersanierung Velbert](https://sos-abdichtung.de/kellersanierung/velbert/): vor Ort in 24 bis 48 Stunden. PLZ 42549, 42551, 42553, 42555
   - [Horizontalsperre in Velbert](https://sos-abdichtung.de/kellersanierung/velbert/#horizontalsperre)
   - [Keller abdichten in Velbert](https://sos-abdichtung.de/kellersanierung/velbert/#kellerinnenabdichtung)
   - [Rissverpressung in Velbert](https://sos-abdichtung.de/kellersanierung/velbert/#rissverpressung)
   - [Schimmel im Keller in Velbert](https://sos-abdichtung.de/kellersanierung/velbert/#schimmelbeseitigung)
+  - [Feuchtemessung in Velbert](https://sos-abdichtung.de/kellersanierung/velbert/#feuchtemessung)
+  - [Sockel abdichten in Velbert](https://sos-abdichtung.de/kellersanierung/velbert/#sockelabdichtung)
 - [Kellersanierung Haan](https://sos-abdichtung.de/kellersanierung/haan/): vor Ort in 24 bis 48 Stunden. PLZ 42781
   - [Keller abdichten in Haan](https://sos-abdichtung.de/kellersanierung/haan/#kellerinnenabdichtung)
   - [Schimmel im Souterrain in Haan](https://sos-abdichtung.de/kellersanierung/haan/#schimmelbeseitigung)
   - [Horizontalsperre in Haan](https://sos-abdichtung.de/kellersanierung/haan/#horizontalsperre)
   - [Feuchtemessung in Haan](https://sos-abdichtung.de/kellersanierung/haan/#feuchtemessung)
+  - [Rissverpressung in Haan](https://sos-abdichtung.de/kellersanierung/haan/#rissverpressung)
+  - [Sockel abdichten in Haan](https://sos-abdichtung.de/kellersanierung/haan/#sockelabdichtung)
 - [Kellersanierung Wermelskirchen](https://sos-abdichtung.de/kellersanierung/wermelskirchen/): vor Ort in 24 bis 48 Stunden. PLZ 42929
   - [Horizontalsperre in Wermelskirchen](https://sos-abdichtung.de/kellersanierung/wermelskirchen/#horizontalsperre)
   - [Keller abdichten in Wermelskirchen](https://sos-abdichtung.de/kellersanierung/wermelskirchen/#kellerinnenabdichtung)
   - [Rissverpressung in Wermelskirchen](https://sos-abdichtung.de/kellersanierung/wermelskirchen/#rissverpressung)
   - [Feuchtemessung in Wermelskirchen](https://sos-abdichtung.de/kellersanierung/wermelskirchen/#feuchtemessung)
+  - [Schimmel im Keller in Wermelskirchen](https://sos-abdichtung.de/kellersanierung/wermelskirchen/#schimmelbeseitigung)
+  - [Sockel abdichten in Wermelskirchen](https://sos-abdichtung.de/kellersanierung/wermelskirchen/#sockelabdichtung)
 - [Kellersanierung Essen](https://sos-abdichtung.de/kellersanierung/essen/): vor Ort in 24 Stunden. PLZ 45127, 45128, 45130, 45131, 45133, 45134, 45136, 45138, 45139, 45141, 45143, 45144, 45145, 45147, 45149, 45219, 45239, 45257, 45259, 45276, 45277, 45279, 45289, 45307, 45309, 45326, 45327, 45329, 45355, 45356, 45357, 45359
   - [Kellersanierung in Essen](https://sos-abdichtung.de/kellersanierung/essen/#kellersanierung)
   - [Keller abdichten in Essen](https://sos-abdichtung.de/kellersanierung/essen/#kellerinnenabdichtung)
@@ -218,9 +228,11 @@ Die Klingenstadt reicht vom steilen Wuppertal bei Burg bis in die flacheren Lage
 - Schieferhäuser in Gräfrath: Rund um den Gräfrather Markt stehen Fachwerk- und Schieferhäuser, deren Keller aus Bruchstein gemauert sind und keine Sperrschicht besitzen.
 - Wiederaufbau nach dem Krieg: Die Solinger Innenstadt wurde im Zweiten Weltkrieg weitgehend zerstört und neu aufgebaut. Keller aus dieser Zeit zeigen nicht selten Risse und undichte Arbeitsfugen.
 - Wupper-Hochwasser: In Unterburg und anderen Lagen direkt an der Wupper hat das Hochwasser im Juli 2021 gezeigt, wie schnell Keller volllaufen können.
+- Feuchte Böden an der Ohligser Heide: Im flacheren Westen der Stadt liegen rund um die Ohligser Heide feuchte Sand- und Lehmböden. Bei nassen Wintern steht das Wasser hier lange im Boden und drückt von unten gegen Kellerboden und Wandfuß.
 - Gräfrath und Burg (Gräfrath, Burg, Unterburg, Widdert): Fachwerk- und Schieferhäuser auf Bruchsteinkellern ohne Sperrschicht, in Unterburg direkt an der Wupper. Aufsteigende Feuchte und, am Fluss, Hochwasser.
 - Mitte, Wald und Ohligs (Solingen-Mitte, Wald, Ohligs, Merscheid, Aufderhöhe): Wiederaufbau und Nachkriegsbauten. Häufig Risse und undichte Arbeitsfugen in Betonkellern, dazu undichte Anschlüsse an der Bodenplatte.
 - Die Talhänge (Höhscheid, Rupelrath, Glüder): Häuser an den Bachtälern zur Wupper. Die bergseitige Wand bekommt Hang- und Sickerwasser ab und ist deutlich nasser als die übrigen.
+- Der Westen an der Ohligser Heide (Hackhausen, Caspersbroich, Mankhaus): Einfamilien- und Reihenhäuser im flacheren Westen. Feuchte Böden und Wasser, das bei nassen Wintern von unten an Kellerboden und Wandfuß drückt.
 
 ### Kellersanierung Remscheid
 Remscheid liegt höher als jede andere Stadt im Bergischen Land und bekommt entsprechend viel Regen ab. Für Keller heißt das: Die Wände sind oft über Monate nass, und nur eine sorgfältig geplante Sanierung bringt sie dauerhaft zur Ruhe.
@@ -231,6 +243,7 @@ Remscheid liegt höher als jede andere Stadt im Bergischen Land und bekommt ents
 - Lennep und Lüttringhausen (Lennep, Lüttringhausen, Klausen): Historische Ortskerne mit verschieferten Fachwerkhäusern auf Bruchsteinsockeln. Enge Gassen, keine Sperrschicht, Aufgraben praktisch unmöglich.
 - Alt-Remscheid und Süd (Alt-Remscheid, Hasten, Vieringhausen, Reinshagen): Gemischter Bestand auf den Höhen und an den Hängen. Sickerwasser aus den Klüften im Fels und aufsteigende Feuchte im alten Mauerwerk.
 - Die Täler zur Wupper (Müngsten, Morsbach, Westhausen): Häuser am Talhang mit großen Höhenunterschieden. Die bergseitige Wand ist oft monatelang nass.
+- Die Siedlungen am Stadtrand (Hackenberg, Kremenholl, Bergisch Born): Einfamilien-, Doppel- und Reihenhäuser der 1950er bis 1970er Jahre. Gealterte Außenabdichtung, Risse und undichte Arbeitsfugen in Betonkellern.
 
 ### Kellersanierung Velbert
 Velbert vereint drei sehr unterschiedliche Stadtteile: die Schlossstadt auf der Höhe, den Wallfahrtsort Neviges und das historische Langenberg im Deilbachtal. Jeder bringt eigene Kellerprobleme mit.
