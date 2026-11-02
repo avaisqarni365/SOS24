@@ -95,9 +95,9 @@ export const SERVICE_PAGES: ServicePage[] = [
     ],
     sections: [
       {
-        heading: "Warum Keller in Wuppertal so oft feucht sind",
+        heading: "Warum Keller im Ruhrgebiet und im Bergischen Land so oft feucht sind",
         paragraphs: [
-          "Wuppertal liegt im engen Tal der Wupper, und viele Häuser stehen an Hängen, die zur Talsohle hin abfallen. Regenwasser versickert oberhalb der Gebäude, läuft als Hang- und Schichtenwasser durch den Boden und trifft bergseitig direkt auf die Kellerwand. Dazu kommt ein großer Bestand an Gründerzeithäusern in Elberfeld und Barmen, deren Keller aus Bruchstein oder Ziegel gemauert wurden, ohne Abdichtung nach heutigem Verständnis. Eine Horizontalsperre fehlt dort meistens ganz, oder die alte Bitumenpappe in der Fuge hat längst ihre Wirkung verloren.",
+          "Von unserem Sitz in Essen aus arbeiten wir in zwei sehr unterschiedlichen Landschaften. Im Ruhrgebiet, von Duisburg bis Dortmund, stehen viele Zechen- und Gründerzeithäuser mit Ziegelkellern ohne Sperrschicht. Senkungen aus der Bergbauzeit haben Risse in Wände und Böden gebracht, und in Flussnähe an Ruhr, Emscher und Rhein steht das Grundwasser oft nah unter dem Gelände. Im Bergischen Land, in Wuppertal, Solingen, Remscheid und Velbert, stehen viele Häuser am Hang. Regenwasser versickert oberhalb der Gebäude, läuft als Hang- und Schichtenwasser durch den Boden und trifft bergseitig direkt auf die Kellerwand. Dazu kommen Bruchsteinkeller in alten Ortskernen, in denen eine Horizontalsperre meistens ganz fehlt oder die alte Bitumenpappe in der Fuge längst ihre Wirkung verloren hat.",
           "Das Ergebnis ist fast immer eine Mischung aus mehreren Feuchtequellen: Wasser steigt kapillar aus dem Fundament auf, dringt seitlich durch die erdberührte Wand ein und schlägt sich im Sommer als Kondensat an den kühlen Flächen nieder. Wer nur eine dieser Ursachen behandelt, etwa mit einem neuen Anstrich oder einem Luftentfeuchter, hat nach wenigen Monaten wieder dieselben Flecken. Eine dauerhafte Kellersanierung beginnt deshalb mit der Frage, welcher Anteil der Nässe woher kommt, und diese Frage beantwortet nur eine Messung im Mauerwerk.",
         ],
       },
@@ -117,7 +117,7 @@ export const SERVICE_PAGES: ServicePage[] = [
       {
         heading: "Sanierung von innen statt Außenaufgrabung",
         paragraphs: [
-          "Fachlich betrachtet ist eine vollständige Außenabdichtung oft die wirksamste Methode, denn sie hält das Wasser dort auf, wo es ankommt. Dafür muss aber das Erdreich rund um das Haus bis zum Fundament ausgehoben werden. In Wuppertal heißt das oft: Reihenhaus mit Nachbarwand, Hanglage mit Stützmauer, Vorgarten mit Treppe und gepflasterte Einfahrt. Wo Aufgraben nicht möglich oder unverhältnismäßig ist, sind Innenabdichtung und Injektion die bewährte Alternative. Welcher Weg der richtige ist, entscheidet die Messung. Bei der Innensanierung bleibt draußen alles so, wie es ist.",
+          "Fachlich betrachtet ist eine vollständige Außenabdichtung oft die wirksamste Methode, denn sie hält das Wasser dort auf, wo es ankommt. Dafür muss aber das Erdreich rund um das Haus bis zum Fundament ausgehoben werden. Im Ruhrgebiet und im Bergischen Land heißt das oft: Reihenhaus mit Nachbarwand, Hanglage mit Stützmauer, Vorgarten mit Treppe und gepflasterte Einfahrt. Wo Aufgraben nicht möglich oder unverhältnismäßig ist, sind Innenabdichtung und Injektion die bewährte Alternative. Welcher Weg der richtige ist, entscheidet die Messung. Bei der Innensanierung bleibt draußen alles so, wie es ist.",
           "Gegenüber einer Außenaufgrabung sparen Sie auf diesem Weg bis zu 60 Prozent der Kosten. Das liegt nicht an billigeren Materialien, sondern am Wegfall von Bagger, Verbau, Entsorgung und Wiederherstellung der Außenanlagen. Wichtig ist, dass die Innensanierung als System geplant wird. Eine Innenabdichtung allein hält zwar das Wasser aus dem Raum, das Mauerwerk dahinter bleibt aber nass. Erst zusammen mit einer Horizontalsperre und abgedichteten Anschlüssen an den Querwänden entsteht ein trockener, dauerhaft nutzbarer Keller.",
         ],
         bullets: [
@@ -134,6 +134,13 @@ export const SERVICE_PAGES: ServicePage[] = [
           "Läuft der Keller nach einem Rohrbruch oder einem Starkregen voll, stehen zuerst Abpumpen und Ausräumen an. Diese akute Wasserschadensanierung übernehmen wir nicht, dafür sind Notdienst und Trocknungsfirmen zuständig. Danach kommt die eigentliche Frage: Ist die Wand nur oberflächlich nass geworden und trocknet mit guter Lüftung und technischer Trocknung wieder ab, oder hat das Ereignis einen Schaden sichtbar gemacht, der schon lange bestand? Diese Unterscheidung treffen wir mit der Feuchtemessung vor Ort, bevor Geld in Trocknungsgeräte oder neuen Putz fließt.",
           "Zeigt die Messung, dass das Mauerwerk auch in der Tiefe durchfeuchtet ist und Salze enthält, reicht Trocknen allein nicht aus. Dann wird die Trocknung Teil der Kellersanierung: Wir entfernen durchnässten Putz, bauen bei Bedarf eine Horizontalsperre ein und begleiten die Austrocknung mit einer Schutzentfeuchtung, bis der Sanierputz aufgebracht werden kann. Die Messwerte halten wir schriftlich fest. Das schafft Klarheit über den Zustand vor der Sanierung und hilft auch im Gespräch mit Ihrer Versicherung.",
         ],
+      },
+      {
+        "heading": "Kellersanierung im Mehrfamilienhaus und für Hausverwaltungen",
+        "paragraphs": [
+          "In Mehrfamilienhäusern betrifft ein feuchter Keller alle Parteien: Die Kellerverschläge riechen muffig, Kartons und Möbel schimmeln, und am Wandfuß platzt der Putz ab. Für Hausverwaltungen und Eigentümergemeinschaften ist dabei wichtig, dass die Sanierung nachvollziehbar geplant und im bewohnten Haus durchführbar ist.",
+          "Wir arbeiten deshalb Kellerraum für Kellerraum, damit immer nur ein Teil gesperrt ist und die Mieter ihre Keller weiter nutzen können. Vorab erhalten Sie ein schriftliches Angebot mit Messprotokoll, das Sie in der Eigentümerversammlung vorlegen können, und nach jeder Phase ein weiteres Protokoll."
+        ]
       },
     ],
     steps: [
@@ -156,7 +163,7 @@ export const SERVICE_PAGES: ServicePage[] = [
     ],
     faqs: [
       {
-        q: "Wie lange dauert eine Kellersanierung in einem Wuppertaler Altbau?",
+        q: "Wie lange dauert eine Kellersanierung in einem Altbau?",
         a: "Das hängt von der Zahl der betroffenen Wände und vom Durchfeuchtungsgrad ab. Die eigentlichen Abdichtungsarbeiten sind in einem üblichen Einfamilienhauskeller meist in wenigen Tagen erledigt. Länger dauert die Austrocknung des Mauerwerks danach, die wir mit Sanierputz und bei Bedarf einer Schutzentfeuchtung begleiten.",
       },
       {
@@ -169,7 +176,19 @@ export const SERVICE_PAGES: ServicePage[] = [
       },
       {
         q: "Was kostet es, einen Keller trockenzulegen?",
-        a: "Die Kosten richten sich nach Wandbaustoff, Mauerstärke, Länge der betroffenen Wände und Durchfeuchtungsgrad. Pauschale Meterpreise wären unseriös, weil ein Bruchsteinkeller in Barmen anders zu behandeln ist als ein Betonkeller aus den Siebzigerjahren. Nach der kostenlosen Messung erhalten Sie ein verbindliches Festpreisangebot.",
+        a: "Die Kosten richten sich nach Wandbaustoff, Mauerstärke, Länge der betroffenen Wände und Durchfeuchtungsgrad. Pauschale Meterpreise wären unseriös, weil ein Bruchsteinkeller aus der Gründerzeit anders zu behandeln ist als ein Betonkeller aus den Siebzigerjahren. Nach der kostenlosen Messung erhalten Sie ein verbindliches Festpreisangebot.",
+      },
+      {
+        "q": "In welchen Städten sanieren Sie Keller?",
+        "a": "Von unserem Sitz in Essen aus im ganzen Ruhrgebiet, im Bergischen Land und im Rheinland, unter anderem in Essen, Mülheim, Gelsenkirchen, Bochum, Dortmund, Duisburg, Düsseldorf, Köln, Wuppertal, Solingen, Remscheid, Velbert, Haan und Wermelskirchen. In der Region Wuppertal arbeiten wir als Partnerbetrieb von SchimmelPeter."
+      },
+      {
+        "q": "Sanieren Sie auch Keller für Hausverwaltungen und Eigentümergemeinschaften?",
+        "a": "Ja. Sie erhalten ein schriftliches Angebot mit Messprotokoll für die Eigentümerversammlung. Wir arbeiten raumweise, damit die Mieter ihre Keller möglichst weiter nutzen können, und dokumentieren jede Phase."
+      },
+      {
+        "q": "Welche Garantie erhalte ich auf die Kellersanierung?",
+        "a": "Auf die Wirksamkeit des Injektionsmittels gibt es 25 Jahre Produktgarantie des Herstellers SchimmelPeter GmbH. Unabhängig davon gibt sos-abdichtung 10 Jahre Garantie auf die ausgeführten Arbeiten."
       },
     ],
     related: ["horizontalsperre", "kellerinnenabdichtung", "feuchtemessung"],
@@ -413,6 +432,14 @@ export const SERVICE_PAGES: ServicePage[] = [
         q: "Feuchte Wände sanieren: von innen oder von außen?",
         a: "Eine Außenabdichtung hält das Wasser vor der Wand, verlangt aber das Aufgraben bis zum Fundament, mit Erdarbeiten und oft beschädigten Außenanlagen. Die Innenabdichtung nach WTA erreicht die Wand vom Keller aus und ist für die meisten Altbauten die wirtschaftlichere Lösung, auch bei drückendem Wasser. Steigt die Feuchte dagegen im Mauerwerk auf, gehört eine Horizontalsperre dazu. Welche Kombination Ihre Wand braucht, entscheidet die kostenlose Feuchtemessung.",
       },
+      {
+        "q": "Was ist eine Hohlkehle und warum ist sie so wichtig?",
+        "a": "Die Hohlkehle ist eine gerundete Ausbildung aus Sperrmörtel am Übergang von Kellerboden zu Wand. An dieser Kante dringt Wasser am häufigsten ein, weil hier zwei Bauteile aufeinandertreffen. Die Rundung sorgt dafür, dass die Abdichtung ohne scharfen Knick durchläuft und dort nicht reißt."
+      },
+      {
+        "q": "Kann ich den Keller nach der Innenabdichtung als Hobbyraum nutzen?",
+        "a": "In den meisten Fällen ja. Ein fachgerecht abgedichteter und verputzter Keller ist trocken genug für Hobbyraum, Werkstatt oder Lager. Für einen Aufenthaltsraum im baurechtlichen Sinn gelten zusätzliche Anforderungen an Belichtung, Raumhöhe und Wärmeschutz."
+      },
     ],
     related: ["kellersanierung", "horizontalsperre", "rissverpressung"],
   },
@@ -484,7 +511,7 @@ export const SERVICE_PAGES: ServicePage[] = [
       {
         heading: "Klimaplatten aus Calciumsilikat gegen Kondensat an kalten Wänden",
         paragraphs: [
-          "Viele Schimmelschäden in Wuppertaler Altbauwohnungen entstehen an ungedämmten Außenwänden, Fensterlaibungen und Ecken, die im Winter deutlich kälter sind als die übrige Wand. Dort kondensiert die Luftfeuchte, und die Stelle wird dauerhaft feucht. Für solche Wärmebrücken setzen wir Calciumsilikatplatten ein. Das Material ist kapillaraktiv, nimmt anfallendes Kondensat auf, verteilt es in der Fläche und gibt es wieder an die Raumluft ab, sobald diese trockener ist.",
+          "Viele Schimmelschäden in Altbauwohnungen im Ruhrgebiet und im Bergischen Land entstehen an ungedämmten Außenwänden, Fensterlaibungen und Ecken, die im Winter deutlich kälter sind als die übrige Wand. Dort kondensiert die Luftfeuchte, und die Stelle wird dauerhaft feucht. Für solche Wärmebrücken setzen wir Calciumsilikatplatten ein. Das Material ist kapillaraktiv, nimmt anfallendes Kondensat auf, verteilt es in der Fläche und gibt es wieder an die Raumluft ab, sobald diese trockener ist.",
           "Hinzu kommt die hohe Alkalität des Materials, die Schimmelwachstum auf der Oberfläche hemmt, ganz ohne Biozide. Gleichzeitig hebt die Platte die Oberflächentemperatur an, sodass der Taupunkt seltener unterschritten wird. Für Häuser, deren Fassade aus Gründen des Denkmalschutzes oder wegen der Nachbarbebauung nicht außen gedämmt werden kann, ist diese Innendämmung oft der praktikabelste Weg. Wichtig bleibt ein angepasstes Lüftungsverhalten, das wir nach der Sanierung mit Ihnen besprechen.",
         ],
       },
@@ -655,6 +682,10 @@ export const SERVICE_PAGES: ServicePage[] = [
         q: "Was bedeutet der Taupunkt beim Thema Schimmel?",
         a: "Der Taupunkt ist die Temperatur, bei der Wasserdampf aus der Luft zu Wasser kondensiert. Ist eine Wandoberfläche kälter als der Taupunkt der Raumluft, schlägt sich dort Feuchtigkeit nieder, und Schimmel findet ideale Bedingungen. Schon bevor sichtbares Tauwasser entsteht, kann eine dauerhaft hohe Feuchte an der Oberfläche für Schimmelwachstum ausreichen.",
       },
+      {
+        "q": "Bekomme ich das Ergebnis der Messung schriftlich?",
+        "a": "Ja. Sie erhalten die Messwerte und unsere Einschätzung der Ursache schriftlich. Das hilft bei der Entscheidung, im Gespräch mit Vermieter, Hausverwaltung oder Versicherung und beim Immobilienkauf."
+      },
     ],
     related: ["schimmelbeseitigung", "horizontalsperre", "kellersanierung"],
   },
@@ -725,6 +756,13 @@ export const SERVICE_PAGES: ServicePage[] = [
           "Wir bohren dazu beidseitig des Risses schräg in das Bauteil, sodass die Bohrungen den Riss in der Tiefe kreuzen, und setzen Injektionspacker. Über diese wird das Harz mit hohem Druck eingepresst, bis es an den benachbarten Packern oder an der Rissoberfläche austritt. Nach dem Aushärten werden die Packer entfernt und die Bohrlöcher verschlossen. Der Riss ist dann über den gesamten Querschnitt gefüllt, nicht nur oberflächlich zugespachtelt.",
         ],
       },
+      {
+        "heading": "Risse aus Bergsenkungen im Ruhrgebiet",
+        "paragraphs": [
+          "Im Ruhrgebiet hat der Steinkohlenbergbau den Boden unter vielen Stadtteilen absinken lassen. Die Senkungen sind heute weitgehend abgeklungen, die Risse in Kellerwänden und Bodenplatten sind aber geblieben. Viele davon sind trocken und harmlos, andere führen bei Regen oder hohem Grundwasser Wasser in den Keller.",
+          "Wir prüfen bei der kostenlosen Messung, welche Risse Wasser führen und ob sie sich noch bewegen. Wasserführende Risse verpressen wir von innen mit PU-Harz, das elastisch bleibt und kleine Bewegungen mitmacht. Bei Rissen, die statisch bedenklich wirken, empfehlen wir vorher die Einschätzung durch einen Statiker."
+        ]
+      },
     ],
     steps: [
       {
@@ -756,6 +794,14 @@ export const SERVICE_PAGES: ServicePage[] = [
       {
         q: "Wie erkenne ich, ob ein Riss statisch bedenklich ist?",
         a: "Warnzeichen sind Risse, die breiter werden, schräg über Wandecken verlaufen oder mit klemmenden Türen und Fenstern einhergehen. Mit einfachen Gipsmarken lässt sich beobachten, ob sich ein Riss bewegt. Bei Verdacht auf Setzungen empfehlen wir, vor der Abdichtung einen Tragwerksplaner hinzuzuziehen.",
+      },
+      {
+        "q": "Muss für die Rissverpressung aufgegraben werden?",
+        "a": "Nein. Wir setzen die Bohrpacker von innen schräg zum Riss und pressen das Harz von der Kellerseite aus in die Wand. Garten, Einfahrt und Außenanlagen bleiben unberührt."
+      },
+      {
+        "q": "Wie lange dauert eine Rissverpressung?",
+        "a": "Das hängt von Zahl und Länge der Risse ab. Einzelne Risse sind oft an einem Arbeitstag verpresst. Nach dem Aushärten entfernen wir die Packer und verschließen die Bohrlöcher bündig mit Mörtel."
       },
     ],
     related: ["kellerinnenabdichtung", "kellersanierung", "horizontalsperre"],
@@ -802,6 +848,20 @@ export const SERVICE_PAGES: ServicePage[] = [
           "Auf die Arbeit geben wir 10 Jahre Garantie. Die Abnahme erfolgt gemeinsam am fertigen Dach, mit Pr\u00fcfung aller N\u00e4hte.",
         ],
       },
+      {
+        "heading": "Garagendächer und Flachdächer der 1960er und 1970er Jahre",
+        "paragraphs": [
+          "Viele Flachdächer auf Garagen, Anbauten und Bungalows stammen aus den 1960er und 1970er Jahren. Ihre Dachbahnen sind nach Jahrzehnten Sonne und Frost spröde geworden, die Nähte öffnen sich, und an der Attika und den Abläufen sammelt sich Wasser. Oft wurde über die Jahre mehrfach geflickt, ohne dass das Dach wirklich dicht wurde.",
+          "Wir prüfen zuerst, ob die alte Lage trocken und tragfähig ist. Ist sie das, arbeiten wir darauf; ist die Dämmung durchfeuchtet, muss der nasse Bereich heraus. Danach dichten wir vollflächig mit zwei Lagen Elastomerbitumen ab, mit sauber eingearbeiteten Anschlüssen an Attika, Wand und Ablauf."
+        ]
+      },
+      {
+        "heading": "Dachterrassen über Wohnraum",
+        "paragraphs": [
+          "Bei einer Dachterrasse liegt unter der Abdichtung ein bewohnter Raum. Ein Leck zeigt sich hier als Fleck an der Decke, oft weit entfernt von der Stelle, an der das Wasser eintritt. Kritisch sind vor allem der Türanschluss, die Randabschlüsse und die Abläufe.",
+          "Wir suchen die Eintrittsstelle systematisch, nehmen dafür bei Bedarf den Belag an den verdächtigen Stellen auf und dichten Anschlüsse und Fläche neu ab. Danach kommt wieder ein begehbarer Belag auf die Terrasse."
+        ]
+      },
     ],
     steps: [
       { title: "Dachpr\u00fcfung", text: "Besichtigung von Fl\u00e4che, N\u00e4hten und Anschl\u00fcssen; bei Bedarf Feuchtemessung in der D\u00e4mmung." },
@@ -821,6 +881,14 @@ export const SERVICE_PAGES: ServicePage[] = [
       {
         q: "Welche Dacharten decken Sie ab?",
         a: "Flachd\u00e4cher, Dachterrassen, Garagend\u00e4cher und die Abdichtungsdetails am Steildach, etwa Kehlen, Gauben und Durchdringungen. F\u00fcr jede Form gilt derselbe Ablauf: pr\u00fcfen, verbindlich anbieten, vollfl\u00e4chig abdichten, gemeinsam abnehmen.",
+      },
+      {
+        "q": "Wie lange dauert die Abdichtung eines Garagendachs?",
+        "a": "Das hängt von Fläche und Zustand ab. Ein normales Garagendach ist oft in ein bis zwei Arbeitstagen abgedichtet. Größere Flachdächer und Dachterrassen planen wir nach der Prüfung vor Ort."
+      },
+      {
+        "q": "Kann bei Regen abgedichtet werden?",
+        "a": "Nein. Die Bahnen werden nur auf trockenem Untergrund verschweißt, sonst hält die Verbindung nicht. Wir planen die Arbeiten deshalb nach dem Wetter und sichern ein geöffnetes Dach bei Regen ab."
       },
     ],
     related: ["balkon-terrasse", "sockelabdichtung", "rissverpressung"],
@@ -867,6 +935,20 @@ export const SERVICE_PAGES: ServicePage[] = [
           "Vor dem Angebot pr\u00fcfen wir Gef\u00e4lle, Anschlussh\u00f6hen und den Zustand des Untergrunds. Sie erhalten einen Festpreis und 10 Jahre Garantie auf die Arbeit.",
         ],
       },
+      {
+        "heading": "Balkone im Mehrfamilienhaus: Abdichtung für Eigentümergemeinschaften",
+        "paragraphs": [
+          "In Mehrfamilienhäusern ist ein undichter Balkon selten nur das Problem einer Wohnung. Das Wasser läuft in die Balkonplatte, tritt an der Unterseite oder in der Wohnung darunter aus, und mit jedem Winter platzen weitere Fliesen ab. Oft sind gleich mehrere Balkone eines Hauses betroffen.",
+          "Für Hausverwaltungen und Eigentümergemeinschaften prüfen wir die Balkone vor dem Angebot einzeln und halten den Befund schriftlich fest. So lässt sich in der Eigentümerversammlung entscheiden, welche Balkone sofort und welche später abgedichtet werden."
+        ]
+      },
+      {
+        "heading": "Loggia und Terrasse über Wohnraum",
+        "paragraphs": [
+          "Liegt unter der Loggia oder Terrasse ein Wohnraum oder eine Garage, muss die Abdichtung besonders zuverlässig sein. Undicht wird es auch hier fast immer an den Details: am Türanschluss, an der Aufkantung zur Wand und an den Abläufen.",
+          "Flüssigkunststoff wird an diesen Stellen mit Vlies armiert und an Tür und Wand hochgezogen, sodass keine offene Kante bleibt. Danach folgt die Fläche in zwei Lagen und eine begehbare Nutzschicht."
+        ]
+      },
     ],
     steps: [
       { title: "Pr\u00fcfung vor Ort", text: "Belag, Gef\u00e4lle, T\u00fcranschluss und Entw\u00e4sserung: wir suchen die tats\u00e4chliche Eintrittsstelle." },
@@ -886,6 +968,14 @@ export const SERVICE_PAGES: ServicePage[] = [
       {
         q: "H\u00e4lt Fl\u00fcssigkunststoff auch unter der Balkont\u00fcr?",
         a: "Ja, das ist seine St\u00e4rke. Die Abdichtung wird mit Vlies armiert und mindestens 15 Zentimeter an T\u00fcr und Wand hochgezogen, bei niedrigen Schwellen mit speziellem Anschlussprofil. Genau an dieser Stelle versagen Bahnenabdichtungen am h\u00e4ufigsten.",
+      },
+      {
+        "q": "Dichten Sie auch Balkone für Hausverwaltungen ab?",
+        "a": "Ja. Wir prüfen jeden Balkon einzeln, halten den Befund schriftlich fest und erstellen ein Angebot, das Sie in der Eigentümerversammlung vorlegen können."
+      },
+      {
+        "q": "Kann bei jedem Wetter abgedichtet werden?",
+        "a": "Nein. Flüssigkunststoff braucht einen trockenen Untergrund und geeignete Temperaturen. Wir planen die Arbeiten deshalb nach dem Wetter; nach dem Auftrag ist die Fläche nach wenigen Stunden regenfest."
       },
     ],
     related: ["dachabdichtung", "sockelabdichtung", "rissverpressung"],
@@ -932,6 +1022,20 @@ export const SERVICE_PAGES: ServicePage[] = [
           "Die Arbeiten betreffen nur die Sockelzone; Garten und Pflaster bleiben bis auf den schmalen Arbeitsstreifen unber\u00fchrt. Auf die Arbeit geben wir 10 Jahre Garantie.",
         ],
       },
+      {
+        "heading": "Sockel und Keller zusammen sanieren",
+        "paragraphs": [
+          "Ein nasser Sockel kommt selten allein. Hinter dem abplatzenden Sockelputz ist oft auch die Kellerwand feucht, weil das Wasser vom Sockel weiter ins Mauerwerk zieht oder weil Erdfeuchte von außen ansteht. Wer nur den Sockel abdichtet, sieht den Schaden dann innen im Keller weiter wachsen.",
+          "Deshalb messen wir vor dem Angebot außen am Sockel und innen dahinter. Ist auch der Keller betroffen, planen wir Sockelabdichtung, Horizontalsperre und Kellerinnenabdichtung zusammen und schließen sie sauber aneinander an."
+        ]
+      },
+      {
+        "heading": "Altbau, Klinker und Siedlungshaus",
+        "paragraphs": [
+          "Bei Altbauten mit Putzsockel platzt typischerweise der Putz in den unteren 30 bis 50 Zentimetern ab. Bei Klinkerfassaden zeigen sich Salzausblühungen und ausgewaschene Fugen, bei Siedlungs- und Reihenhäusern oft ein dunkler Feuchterand direkt über dem Pflaster.",
+          "Der Aufbau der Abdichtung richtet sich nach dem Haus: Wir wählen Beschichtung, Anschlusshöhe und Sockelputz passend zu Mauerwerk und Fassade, damit der Sockel dicht wird und trotzdem zum Haus passt."
+        ]
+      },
     ],
     steps: [
       { title: "Messung & Befund", text: "Feuchtemessung am Sockel und innen dahinter: Spritzwasser, Erdfeuchte oder beides." },
@@ -951,6 +1055,14 @@ export const SERVICE_PAGES: ServicePage[] = [
       {
         q: "Was kostet eine Sockelabdichtung?",
         a: "Das h\u00e4ngt von L\u00e4nge, Zustand und Anschlussh\u00f6hen ab. Nach der kostenlosen Messung vor Ort erhalten Sie ein verbindliches Festpreisangebot; versteckte Nachtr\u00e4ge gibt es nicht.",
+      },
+      {
+        "q": "Wie lange dauert eine Sockelabdichtung?",
+        "a": "Das hängt von Länge, Zustand und Untergrund ab. Bei einem Einfamilienhaus dauern die Arbeiten meist wenige Tage, einschließlich Freilegen, Beschichten und Sockelputz."
+      },
+      {
+        "q": "Kann die Sockelabdichtung zusammen mit der Kellersanierung gemacht werden?",
+        "a": "Ja, und oft ist das sinnvoll. Wir planen beides zusammen und schließen die Sockelabdichtung an die Abdichtung der Kellerwand an, damit keine neue Eintrittskante entsteht."
       },
     ],
     related: ["dachabdichtung", "balkon-terrasse", "kellersanierung"],
