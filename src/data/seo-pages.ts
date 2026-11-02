@@ -2556,12 +2556,12 @@ export const CITY_PAGES: CityPage[] = [
     keyword: "Kellersanierung Bochum",
     title: "Kellersanierung Bochum | Keller abdichten ohne Aufgraben",
     metaDescription:
-      "Kellersanierung Bochum: Nasse Kellerwände & Setzungsrisse von innen sanieren. Kostenlose Feuchtemessung vor Ort, Festpreis & 10 Jahre Garantie.",
+      "Kellersanierung Bochum: Bergschadensrisse, nasse Kellerwände und Hangwasser von innen sanieren. Kostenlose Feuchtemessung vor Ort, 10 Jahre Garantie.",
     h1: "Kellersanierung Bochum: Nasse Keller dauerhaft trockenlegen",
     lede:
-      "Von Ehrenfeld und Stiepel bis Langendreer und Wattenscheid: Ehemalige Bergbaugebiete, Lehmböden und feuchtes Mauerwerk verlangen maßgeschneiderte Lösungen ohne Erdarbeiten.",
+      "Von Wattenscheid bis Langendreer und von Gerthe bis Stiepel: In Bochum werden Keller vor allem durch Risse aus dem Bergbau, aufsteigende Feuchte in den Ziegelkellern der Zechenhäuser und Schichtenwasser an den Hängen zum Ruhrtal nass. Wir messen kostenlos, woher die Feuchte kommt, und sanieren von innen, ohne Aufgraben.",
     plz: ["44787", "44789", "44791", "44793", "44795", "44797", "44799", "44801", "44803", "44805", "44807", "44809", "44866", "44867", "44869", "44879", "44892", "44894"],
-    districts: ["Bochum-Mitte", "Ehrenfeld", "Wiemelhausen", "Altenbochum", "Wattenscheid", "Gerthe", "Riemke", "Stiepel", "Weitmar", "Linden", "Dahlhausen", "Langendreer", "Werne", "Querenburg"],
+    districts: ["Bochum-Mitte", "Ehrenfeld", "Hamme", "Hofstede", "Grumme", "Wiemelhausen", "Altenbochum", "Laer", "Wattenscheid", "Höntrop", "Eppendorf", "Hordel", "Gerthe", "Harpen", "Riemke", "Stiepel", "Weitmar", "Linden", "Dahlhausen", "Langendreer", "Werne", "Querenburg"],
     geo: { lat: 51.4818, lng: 7.2162 },
     responseTime: "24 bis 48 Stunden",
     localFactors: [
@@ -2656,6 +2656,14 @@ export const CITY_PAGES: CityPage[] = [
       {
         "q": "Muss am Hang in Stiepel oder Weitmar aufgegraben werden?",
         "a": "Meist nicht. Die bergseitige Wand, an der sich das Wasser staut, dichten wir von innen mit Dichtungsschlämme und Hohlkehle ab. Garten und Böschung bleiben unberührt."
+      },
+      {
+        "q": "Wer zahlt, wenn die Risse im Keller in Bochum ein Bergschaden sind?",
+        "a": "Das hängt vom Einzelfall ab. In Bochum wurde bis in die 1970er Jahre Steinkohle gefördert, Bergschäden sind deshalb in vielen Stadtteilen möglich. Ob ein Bergschaden vorliegt und Ansprüche bestehen, klärt ein Sachverständiger oder die Schlichtungsstelle Bergschaden NRW. Wir dokumentieren Verlauf, Breite und Feuchte der Risse und verpressen wasserführende Risse dauerhaft; unsere Dokumentation können Sie für die Klärung verwenden."
+      },
+      {
+        "q": "Sanieren Sie auch Keller in Mehrfamilienhäusern und für Hausverwaltungen in Bochum?",
+        "a": "Ja. Gerade in Ehrenfeld, Mitte und Hamme stehen viele Mehrfamilienhäuser aus der Gründerzeit und der Nachkriegszeit. Wir sanieren Kellerraum für Kellerraum, damit die Mieter ihre Keller weiter nutzen können, und geben der Hausverwaltung ein schriftliches Angebot mit Messprotokoll, das sie direkt in der Eigentümerversammlung vorlegen kann."
       }
     ],
     wiki: "https://de.wikipedia.org/wiki/Bochum",
