@@ -3149,7 +3149,7 @@ export const CITY_PAGES: CityPage[] = [
     lede:
       "Duisburg liegt am Zusammenfluss von Rhein und Ruhr, und der Bergbau hat den Boden auf beiden Rheinseiten verändert. Beides merkt man im Keller: Grundwasser, das von außen drückt, und Risse, durch die es eindringt. Wir messen kostenlos und sanieren von innen.",
     plz: ["47051", "47053", "47055", "47057", "47058", "47059", "47119", "47137", "47138", "47139", "47166", "47167", "47169", "47178", "47179", "47198", "47199", "47226", "47228", "47229", "47239", "47249", "47259", "47269", "47279"],
-    districts: ["Altstadt", "Neudorf", "Duissern", "Hochfeld", "Hamborn", "Marxloh", "Meiderich", "Ruhrort", "Walsum", "Rheinhausen", "Homberg", "Huckingen", "Wedau", "Buchholz"],
+    districts: ["Altstadt", "Neudorf", "Duissern", "Dellviertel", "Hochfeld", "Wanheimerort", "Ruhrort", "Hamborn", "Marxloh", "Obermarxloh", "Neumühl", "Meiderich", "Beeck", "Laar", "Walsum", "Aldenrade", "Rheinhausen", "Homberg", "Baerl", "Rumeln-Kaldenhausen", "Huckingen", "Wedau", "Buchholz", "Großenbaum"],
     geo: { lat: 51.4344, lng: 6.7623 },
     responseTime: "24 bis 48 Stunden",
     wiki: "https://de.wikipedia.org/wiki/Duisburg",
@@ -3275,6 +3275,13 @@ export const CITY_PAGES: CityPage[] = [
           "Im Süden der Stadt überwiegen Einfamilien- und Doppelhäuser mit voll genutzten Kellern: Hobbyraum, Waschküche, oft auch ein Gästezimmer. Feuchte fällt hier früh auf, an Flecken am Wandfuß, an Schimmel hinter Schränken und an einem muffigen Geruch.",
           "Häufig kommt die Feuchte über eine gealterte Außenabdichtung oder bei hohem Grundwasser von unten. Wir dichten die Wände von innen mit Dichtungsschlämme ab und führen eine Hohlkehle am Übergang zur Bodenplatte aus. Garten, Terrasse und Einfahrt bleiben dabei unberührt."
         ]
+      },
+      {
+        "heading": "Neudorf, Duissern und Ruhrort: Altbaukeller in der Innenstadt",
+        "paragraphs": [
+          "In Neudorf, Duissern und im Dellviertel stehen viele Mehrfamilienhäuser aus der Zeit um 1900, mit Kellern aus Vollziegel und ohne funktionierende Sperrschicht. Die Feuchte steigt hier von unten ins Mauerwerk, die Salze blühen in den unteren Wandbereichen aus und der Putz wird mürbe. Abhilfe schafft eine Horizontalsperre im Injektionsverfahren, von innen gesetzt, dazu ein Sanierputz, der die Restfeuchte verdunsten lässt.",
+          "In Ruhrort und Hochfeld, nah an Rhein, Ruhr und den Hafenbecken, kommt das Grundwasser hinzu, das mit dem Rheinpegel steigt und fällt. Dort reicht eine Sperrschicht allein nicht: Wand und Boden brauchen eine Innenabdichtung, die drückendem Wasser standhält, mit einer dichten Hohlkehle am Übergang zur Bodenplatte. Welche Kombination Ihr Keller braucht, zeigt die kostenlose Messung."
+        ]
       }
     ],
     faqs: [
@@ -3305,6 +3312,10 @@ export const CITY_PAGES: CityPage[] = [
       {
         "q": "Hilft eine Innenabdichtung bei hohem Rheinpegel?",
         "a": "Eine Innenabdichtung nach WTA hält Wasser ab, das von außen gegen Wand und Boden drückt, auch wenn das Grundwasser mit dem Rhein steigt. Wichtig ist der dichte Anschluss zwischen Wand und Bodenplatte; den führen wir mit einer Hohlkehle aus."
+      },
+      {
+        "q": "Muss für eine Kellersanierung in Duisburg aufgegraben werden?",
+        "a": "In den meisten Fällen nicht. Die Arbeiterhäuser in Hamborn, Marxloh und Meiderich und die Altbauten in Neudorf stehen oft Wand an Wand oder direkt am Gehweg, eine Aufgrabung wäre dort kaum möglich. Horizontalsperre, Innenabdichtung und Rissverpressung führen wir von innen aus. Ob in Ihrem Fall zusätzlich etwas von außen nötig ist, sagen wir Ihnen nach der Messung offen."
       }
     ],
     nearby: ["oberhausen", "muelheim-an-der-ruhr", "duesseldorf", "essen"],
