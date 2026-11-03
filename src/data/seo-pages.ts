@@ -696,12 +696,12 @@ export const SERVICE_PAGES: ServicePage[] = [
     serviceName: "Rissverpressung im Mauerwerk & Beton",
     navTitle: "Rissverpressung",
     keyword: "Rissverpressung Keller",
-    title: "Rissverpressung Keller | Wasserführende Risse abdichten",
+    title: "Rissverpressung Keller | Fachbetrieb aus Essen für NRW",
     metaDescription:
-      "Rissverpressung Keller: wasserführende Risse in Beton und Mauerwerk mit PU-Harz oder Epoxid dauerhaft schließen, auch in WU-Beton. In ganz NRW.",
+      "Rissverpressung Keller vom Fachbetrieb aus Essen: wasserführende Risse in Beton und Mauerwerk mit PU-Harz oder Epoxid schließen, von innen. Prüfung kostenlos.",
     h1: "Rissverpressung Keller: wasserführende Risse dauerhaft schließen",
     lede:
-      "Ein Riss in der Kellerwand, durch den Wasser sickert, lässt sich nicht einfach zuspachteln. Wir verpressen ihn unter hohem Druck mit PU-Harz oder Epoxid und füllen ihn damit über den gesamten Wandquerschnitt.",
+      "Ein Riss in der Kellerwand, durch den Wasser sickert, lässt sich nicht einfach zuspachteln. Wir verpressen ihn unter hohem Druck mit PU-Harz oder Epoxid und füllen ihn damit über den gesamten Wandquerschnitt. Unser Sitz ist in Essen; von dort arbeiten wir im ganzen Ruhrgebiet, im Bergischen Land und im Rheinland.",
     symptoms: [
       "Feuchte oder nasse Linie entlang eines Risses in Wand oder Bodenplatte",
       "Wasser, das bei Regen sichtbar aus einem Riss oder einer Fuge läuft",
@@ -763,6 +763,20 @@ export const SERVICE_PAGES: ServicePage[] = [
           "Wir prüfen bei der kostenlosen Messung, welche Risse Wasser führen und ob sie sich noch bewegen. Wasserführende Risse verpressen wir von innen mit PU-Harz, das elastisch bleibt und kleine Bewegungen mitmacht. Bei Rissen, die statisch bedenklich wirken, empfehlen wir vorher die Einschätzung durch einen Statiker."
         ]
       },
+      {
+        "heading": "Rissverpressung vom Fachbetrieb: was den Unterschied macht",
+        "paragraphs": [
+          "Injektionssets aus dem Baumarkt versprechen, einen Riss in einer Stunde selbst zu schließen. Bei einem trockenen, feinen Riss mag das gehen. Bei einem Riss, der Wasser führt, scheitert es meist an drei Dingen: Die Packer sitzen nicht schräg im Bauteil, sondern kleben auf der Oberfläche; der Druck reicht nicht, um das Harz bis zur Erdseite zu bringen; und das Harz passt nicht zum Zustand des Risses. Das Ergebnis ist ein Riss, der außen zu und innen weiter nass ist.",
+          "Ein Fachbetrieb klärt vorher, ob der Riss noch arbeitet, wie breit und wie tief er ist und ob Wasser unter Druck ansteht. Danach richten sich Bohrbild, Packerabstand, Harz und Druck. Wir dokumentieren den Riss mit Messprotokoll, verpressen ihn über den ganzen Querschnitt und geben 10 Jahre Garantie auf die Arbeit."
+        ]
+      },
+      {
+        "heading": "Wovon die Kosten einer Rissverpressung abhängen",
+        "paragraphs": [
+          "Den Preis bestimmen vor allem die Länge der Risse, die Dicke des Bauteils, die Zahl der Packer und das Harz. Ein kurzer Riss in einer Betonwand ist an einem Vormittag verpresst, mehrere lange Risse in Wand und Bodenplatte brauchen mehr Zeit und Material. Steht Wasser unter Druck im Riss, kommt ein schnell schäumendes Harz für den ersten Stopp hinzu.",
+          "Weil sich das erst vor Ort sicher sagen lässt, prüfen wir den Riss kostenlos und nennen Ihnen danach einen Festpreis, der sich nicht mehr ändert. Oft reicht die Rissverpressung allein; eine Abdichtung der ganzen Wand ist dann nicht nötig."
+        ]
+      },
     ],
     steps: [
       {
@@ -806,6 +820,14 @@ export const SERVICE_PAGES: ServicePage[] = [
       {
         "q": "Bieten Sie die Rissverpressung auch in Essen an?",
         "a": "Ja. Unser Sitz ist in Essen, in der Niebuhrstraße 46, und Rissverpressung gehört dort zu unseren häufigsten Aufträgen, weil viele Essener Keller Setzungsrisse aus dem Bergbau haben. Wir sind in Essen meist innerhalb von 24 Stunden vor Ort, prüfen den Riss kostenlos und verpressen ihn von innen, ohne Aufgraben. Genauso arbeiten wir im übrigen Ruhrgebiet, im Bergischen Land und im Rheinland."
+      },
+      {
+        "q": "Was kostet eine Rissverpressung im Keller?",
+        "a": "Das hängt von der Länge der Risse, der Dicke der Wand oder Bodenplatte, der Zahl der Packer und dem nötigen Harz ab. Nach der kostenlosen Prüfung vor Ort bekommen Sie einen verbindlichen Festpreis. Eine gezielte Rissverpressung ist meist deutlich günstiger als eine Abdichtung der ganzen Wand."
+      },
+      {
+        "q": "Kann ich einen Riss im Keller selbst verpressen?",
+        "a": "Feine, trockene Risse lassen sich mit Sets aus dem Baumarkt oft verschließen. Bei einem Riss, der Wasser führt, sollte eine Fachfirma ran: Die Packer müssen schräg im Bauteil sitzen, das Harz muss mit ausreichend Druck bis zur Erdseite vordringen und zum Zustand des Risses passen. Sonst ist der Riss nur außen zu und bleibt innen nass."
       },
     ],
     related: ["kellerinnenabdichtung", "kellersanierung", "horizontalsperre", "balkon-terrasse"],

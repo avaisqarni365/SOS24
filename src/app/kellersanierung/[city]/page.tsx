@@ -8,7 +8,7 @@ import OnlineAppointmentBooking from "@/components/sections/OnlineAppointmentBoo
 import FilmPlayer from "@/components/sections/FilmPlayer";
 import JsonLd from "@/components/seo/JsonLd";
 import { Breadcrumbs, LayerStack, Prose, FaqList, LinkGrid } from "@/components/seo/SubpageParts";
-import { CITY_PAGES } from "@/data/seo-pages";
+import { CITY_PAGES, SERVICE_PAGES } from "@/data/seo-pages";
 import { FILM_PAGES } from "@/data/films";
 import { SERVICE_CARDS } from "@/data/services";
 import { COMPANY, COMPANY_INFO, LOCATIONS } from "@/data/content-data";
@@ -249,7 +249,8 @@ export default function CityPage({ params }: { params: { city: string } }) {
                     <h3 className="text-xl font-bold text-ink">{s.heading}</h3>
                     <p className="mt-3 flex-1 text-sm leading-relaxed text-ink font-medium">{hy(s.text)}</p>
                     <a href={`/leistungen/${s.slug}/`} className="mt-5 inline-flex items-center gap-1.5 text-sm font-bold text-accent-deep hover:underline underline-offset-4">
-                      Mehr zum Verfahren <ArrowRight className="h-4 w-4" aria-hidden="true" />
+                      {/* the service name as anchor text, so each card's link says where it goes */}
+                      {SERVICE_PAGES.find((p) => p.slug === s.slug)?.navTitle ?? "Verfahren"}: so läuft es ab <ArrowRight className="h-4 w-4" aria-hidden="true" />
                     </a>
                   </li>
                 ))}
