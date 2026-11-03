@@ -1164,7 +1164,7 @@ export const CITY_PAGES: CityPage[] = [
     slug: "wuppertal",
     name: "Wuppertal",
     keyword: "Kellersanierung Wuppertal",
-    title: "Kellersanierung Wuppertal | Kellertrockenlegung am Hang",
+    title: "Kellersanierung Wuppertal | Kellerabdichtung & Trockenlegung",
     metaDescription:
       "Kellersanierung Wuppertal vom SchimmelPeter®-Partnerbetrieb: Hangwasser, Bruchstein- und Gründerzeitkeller von innen trockenlegen. Messung kostenlos.",
     h1: "Kellersanierung Wuppertal: Ihr feuchter Keller wird trocken, auch in Hanglage",
@@ -1299,6 +1299,14 @@ export const CITY_PAGES: CityPage[] = [
       {
         "q": "Suchen Sie einen Abdichter in Wuppertal?",
         "a": "Wir dichten in Wuppertal Keller, Sockel, Balkone und Terrassen ab, von Elberfeld und Barmen bis Cronenberg, Ronsdorf und Vohwinkel. Im Keller arbeiten wir von innen, ohne den Hang aufzugraben: Horizontalsperre gegen aufsteigende Feuchte, Mauerwerksabdichtung gegen Wasser von außen, Rissverpressung bei wasserführenden Rissen. Vor dem Angebot messen wir kostenlos und geben Ihnen das Ergebnis schriftlich."
+      },
+      {
+        "q": "Nasser Keller in Wuppertal: Was ist zu tun?",
+        "a": "Steht Wasser im Keller, zuerst abpumpen und Strom in den betroffenen Räumen abschalten. Danach kommt es auf die Ursache an: Am Hang drückt Schichtenwasser durch die bergseitige Wand, im Tal an der Wupper steigt Grundwasser, im Bruchstein- und Ziegelkeller der Altbauten zieht Feuchte von unten nach. Wir messen kostenlos, woher das Wasser kommt, und dichten von innen ab, ohne den Hang aufzugraben."
+      },
+      {
+        "q": "Keller trockenlegen in Wuppertal: Geht das ohne Aufgraben?",
+        "a": "Ja, in den allermeisten Fällen. Gegen Feuchte, die in den Bruchstein- und Ziegelkellern der Altbauten in Elberfeld und Barmen aufsteigt, setzen wir eine Horizontalsperre per Injektion. Gegen Wasser vom Hang, etwa auf den Südhöhen oder am Ölberg, dichten wir die bergseitige Wand von innen ab. Sanierputz nimmt die Salze auf. Die Messung vorab ist kostenlos."
       }
     ],
     wiki: "https://de.wikipedia.org/wiki/Wuppertal",
@@ -1499,6 +1507,18 @@ export const CITY_PAGES: CityPage[] = [
       {
         "q": "Feuchte Wände im Keller in Solingen: Welche Mauerwerksabdichtung hilft?",
         "a": "Das hängt vom Mauerwerk ab. In den Bruchstein- und Schieferkellern von Gräfrath und Burg setzen wir die Horizontalsperre in die Mörtelfuge und verfüllen Hohlräume vorher. Drückt am Hang Wasser von außen, folgt eine Mauerwerksabdichtung von innen mit mehrlagiger Dichtungsschlämme, Hohlkehle und Sanierputz. In den Ziegelkellern von Ohligs und Wald reicht oft die Horizontalsperre. Die kostenlose Messung zeigt, was Ihr Keller braucht."
+      },
+      {
+        "q": "Wie finde ich in Solingen eine gute Firma für Kellerabdichtung?",
+        "a": "Eine gute Firma misst, bevor sie anbietet, und gibt Ihnen das Ergebnis schriftlich. Das Angebot sollte Ursache, Verfahren und Wandlängen nennen und ein Festpreis sein. Bei den Schieferhäusern in Gräfrath und den Kotten an der Wupper sollte der Betrieb Bruchstein kennen, denn dort werden vor der Horizontalsperre Hohlräume verfüllt. Wir messen kostenlos und geben 10 Jahre Garantie auf die Arbeit."
+      },
+      {
+        "q": "Nasser Keller in Solingen: Was hilft?",
+        "a": "Das hängt davon ab, woher das Wasser kommt. An den steilen Bachtälern in Höhscheid oder Widdert drückt Wasser vom Hang gegen die Wand, an der Wupper in Unterburg und Glüder kommt es nach Hochwasser von unten, und in den Altbauten in Ohligs und Wald steigt Feuchte im Mauerwerk auf. Wir messen kostenlos und kombinieren dann Innenabdichtung, Horizontalsperre und Sanierputz so, wie Ihr Keller es braucht."
+      },
+      {
+        "q": "Keller trockenlegen in Solingen: Wie läuft das ab?",
+        "a": "Zuerst messen wir kostenlos Feuchte und Salze in mehreren Höhen. Steigt die Feuchte im Mauerwerk auf, wie oft in Ohligs, Wald und in den Kotten an der Wupper, setzen wir eine Horizontalsperre; im Bruchstein verfüllen wir vorher die Hohlräume. Drückt Wasser vom Hang, dichten wir die Wand von innen ab. Zum Schluss kommt Sanierputz, der die Salze aufnimmt."
       }
     ],
     wiki: "https://de.wikipedia.org/wiki/Solingen",
@@ -1687,6 +1707,14 @@ export const CITY_PAGES: CityPage[] = [
       {
         "q": "Nasser Keller in Remscheid: Hilft eine Mauerwerksabdichtung von innen?",
         "a": "Ja, wenn das Wasser von außen kommt. In Remscheid drückt es oft als Schichtenwasser durch den klüftigen Fels gegen die bergseitige Wand, besonders nach langem Regen. Dann dichten wir das Mauerwerk von innen mit mehrlagiger Dichtungsschlämme und Hohlkehle ab, ohne den Hang aufzugraben. Sind die Wände dagegen gleichmäßig feucht mit Salzrändern, steigt die Feuchte auf, und eine Horizontalsperre ist der erste Schritt."
+      },
+      {
+        "q": "Wie finde ich in Remscheid eine gute Firma für Kellersanierung?",
+        "a": "Eine gute Firma misst, bevor sie anbietet, und gibt Ihnen das Ergebnis schriftlich. Das Angebot sollte Ursache, Verfahren und Wandlängen nennen und ein Festpreis sein. In Remscheid kommt Wasser oft durch klüftigen Fels und alte Bruchsteinwände; fragen Sie, wie der Betrieb damit umgeht. Wir verfüllen Hohlräume vor der Injektion, messen kostenlos und geben 10 Jahre Garantie auf die Arbeit."
+      },
+      {
+        "q": "Keller trockenlegen in Remscheid: Was ist nötig?",
+        "a": "Auf den regenreichen Höhen bleiben Remscheider Keller lange nass, und durch klüftigen Fels läuft Wasser bis an die Wand. Wir messen kostenlos, ob die Feuchte aufsteigt oder von außen kommt. Dann setzen wir eine Horizontalsperre, im Bruchstein von Lennep und Lüttringhausen nach dem Verfüllen der Hohlräume, und dichten erdberührte Wände von innen ab. Aufgegraben wird nicht."
       }
     ],
     wiki: "https://de.wikipedia.org/wiki/Remscheid",
@@ -1725,6 +1753,11 @@ export const CITY_PAGES: CityPage[] = [
         "slug": "sockelabdichtung",
         "heading": "Sockel abdichten in Remscheid",
         "text": "Bei viel Regen zieht Spritzwasser in den Sockel und weiter in die Kellerwand, bei Schieferhäusern auch in den Bruchsteinsockel. Wir dichten den Sockel ab und schließen ihn an die Kellerabdichtung an."
+      },
+      {
+        "slug": "balkon-terrasse",
+        "heading": "Balkon und Terrasse abdichten in Remscheid",
+        "text": "Auf den Höhen in Lennep, Hasten und Reinshagen trifft der Regen Balkone und Terrassen besonders oft. An vielen Mehrfamilienhäusern ist die alte Abdichtung undicht, unter der Platte platzt der Putz ab, und bei Häusern am Hang liegt die Terrasse oft über einem Kellerraum. Wir finden die undichte Stelle und dichten Fläche und Wandanschluss fugenlos ab."
       }
     ],
     districtGroups: [
@@ -1766,7 +1799,7 @@ export const CITY_PAGES: CityPage[] = [
         "text": "Einfamilien-, Doppel- und Reihenhäuser der 1950er bis 1970er Jahre. Gealterte Außenabdichtung, Risse und undichte Arbeitsfugen in Betonkellern."
       }
     ],
-    nearby: ["wuppertal", "solingen", "wermelskirchen"],
+    nearby: ["wuppertal", "solingen", "wermelskirchen", "hagen"],
   },
 
   // Velbert
@@ -1864,6 +1897,18 @@ export const CITY_PAGES: CityPage[] = [
       {
         "q": "Nasser Keller und feuchte Wände in Velbert: Was tun?",
         "a": "Zuerst klären, woher die Nässe kommt. In Langenberg und Neviges steigt sie oft im Bruchstein auf und zeigt sich als feuchter Streifen mit Salzrändern; dann hilft eine Horizontalsperre. Ist die bergseitige Wand in Hanglage großflächig nass, drückt Wasser von außen, und wir dichten das Mauerwerk von innen ab. Streichen oder verputzen Sie nichts vorher. Die Messung ist kostenlos, Fotos können Sie per WhatsApp an 0172 2064177 schicken."
+      },
+      {
+        "q": "Wie finde ich in Velbert eine gute Firma für Kellersanierung?",
+        "a": "Eine gute Firma misst, bevor sie anbietet, und gibt Ihnen das Ergebnis schriftlich. Das Angebot sollte Ursache, Verfahren und Wandlängen nennen und ein Festpreis sein. Für die Bruchsteinkeller in Langenberg und Neviges sollte der Betrieb erklären, wie er Hohlräume vor der Horizontalsperre verfüllt. Wir kommen aus dem Nachbarort Essen, messen kostenlos und geben 10 Jahre Garantie auf die Arbeit."
+      },
+      {
+        "q": "Was ist eine Mauerwerksabdichtung von innen, und wann braucht man sie in Velbert?",
+        "a": "Sie schützt eine erdberührte Kellerwand gegen Wasser, das von außen drückt: alter Putz runter, Risse verpressen, Dichtungsschlämme in mehreren Lagen, Hohlkehle am Boden, Sanierputz darüber. In Velbert braucht man sie vor allem an Häusern am Hang in Velbert-Mitte und Tönisheide und in den Tallagen von Langenberg und Neviges, wo Wasser seitlich gegen die Wand läuft."
+      },
+      {
+        "q": "Keller trockenlegen in Velbert: Geht das von innen?",
+        "a": "Ja. In den historischen Ortskernen von Langenberg und Neviges steigt die Feuchte in Bruchsteinwänden auf; dort hilft eine Horizontalsperre, nachdem die Hohlräume verfüllt sind. An den Hängen in Velbert-Mitte und Tönisheide drückt Wasser seitlich; dort dichten wir die Wand von innen mit Dichtungsschlämme und Hohlkehle ab. Wir messen kostenlos, was Ihr Keller braucht."
       }
     ],
     wiki: "https://de.wikipedia.org/wiki/Velbert",
@@ -1902,6 +1947,11 @@ export const CITY_PAGES: CityPage[] = [
         "slug": "sockelabdichtung",
         "heading": "Sockel abdichten in Velbert",
         "text": "Bei Schieferhäusern in Langenberg und Neviges und bei Siedlungshäusern zieht Spritzwasser in den Sockel und weiter in die Kellerwand. Wir dichten den Sockel ab und schließen ihn an die Kellerabdichtung an."
+      },
+      {
+        "slug": "balkon-terrasse",
+        "heading": "Balkon und Terrasse abdichten in Velbert",
+        "text": "An den Mehrfamilienhäusern in Birth, Losenburg und Velbert-Mitte sind viele Balkone aus den 1960er und 1970er Jahren undicht geworden; unter der Platte platzt der Putz ab. Bei den Häusern am Hang in Tönisheide, Neviges und Langenberg liegt die Terrasse oft über einem Kellerraum. Wir finden die undichte Stelle und dichten Fläche und Wandanschluss fugenlos ab."
       }
     ],
     districtGroups: [
@@ -2036,6 +2086,18 @@ export const CITY_PAGES: CityPage[] = [
       {
         "q": "Feuchte Wände im Keller in Haan und Gruiten: Was hilft?",
         "a": "In den Kalksteinhäusern von Gruiten und den älteren Häusern in Haan-Mitte steigt die Feuchte oft im Mauerwerk auf, weil die Sperrschicht fehlt; dann hilft eine Horizontalsperre mit Sanierputz. Liegt das Haus im Düsseltal oder am Hang und ist die erdberührte Wand nach Regen nass, braucht es zusätzlich eine Mauerwerksabdichtung von innen. Wir messen kostenlos und erklären Ihnen, was zutrifft."
+      },
+      {
+        "q": "Wie finde ich in Haan eine gute Firma für Kellerabdichtung?",
+        "a": "Eine gute Firma misst, bevor sie anbietet, und gibt Ihnen das Ergebnis schriftlich. Das Angebot sollte Ursache, Verfahren und Wandlängen nennen und ein Festpreis sein. Bei Souterrainwohnungen in Haan sollte der Betrieb auch sagen, wie der Raum während der Arbeiten genutzt werden kann. Wir messen kostenlos und geben 10 Jahre Garantie auf die Arbeit."
+      },
+      {
+        "q": "Nasser Keller in Haan oder Gruiten: Woher kommt das Wasser?",
+        "a": "In Gruiten und im Düsseltal steigt das Grundwasser nach langem Regen, und im klüftigen Kalkstein läuft Wasser schnell bis an die Kellerwand. In Haan-Mitte, Unterhaan und Oberhaan ist es häufiger Feuchte, die in älterem Mauerwerk aufsteigt, oder ein undichter Anschluss an der Bodenplatte. Wir messen kostenlos und dichten dann gezielt von innen ab."
+      },
+      {
+        "q": "Wie lässt sich ein Souterrain in Haan dauerhaft trockenlegen?",
+        "a": "Ein Souterrain liegt halb im Erdreich, die Feuchte kommt oft von zwei Seiten: aufsteigend im Mauerwerk und seitlich durch die erdberührte Wand. Wir setzen eine Horizontalsperre, dichten die Außenwände von innen ab und schließen mit Sanierputz oder Klimaplatten ab, damit kein Schimmel entsteht. So wird der Raum in Haan-Mitte, Unterhaan oder Gruiten wieder bewohnbar."
       }
     ],
     wiki: "https://de.wikipedia.org/wiki/Haan",
@@ -2074,6 +2136,11 @@ export const CITY_PAGES: CityPage[] = [
         "slug": "sockelabdichtung",
         "heading": "Sockel abdichten in Haan",
         "text": "Bei den Fachwerkhäusern in Gruiten-Dorf und bei vielen Siedlungshäusern ist der Sockel durchfeuchtet, der Putz platzt ab. Wir dichten den Sockel ab und schließen ihn an die Kellerabdichtung an."
+      },
+      {
+        "slug": "balkon-terrasse",
+        "heading": "Balkon und Terrasse abdichten in Haan",
+        "text": "In der Gartenstadt Haan haben viele Einfamilienhäuser eine Terrasse über dem Souterrain oder einem Kellerraum; ist sie undicht, wird es darunter feucht. An den Mehrfamilienhäusern in Haan-Mitte und Unterhaan platzt unter alten Balkonen der Putz ab. Wir finden die undichte Stelle und dichten Fläche und Wandanschluss fugenlos ab."
       }
     ],
     districtGroups: [
@@ -2198,6 +2265,14 @@ export const CITY_PAGES: CityPage[] = [
       {
         "q": "Nasser Keller und feuchte Wände in Wermelskirchen: Was hilft?",
         "a": "In den Schiefer- und Bruchsteinkellern von Wermelskirchen, Dabringhausen und Dhünn steigt die Feuchte oft durch die Mörtelfugen auf; dann setzen wir eine Horizontalsperre in die Fuge. Drückt Wasser vom Talhang gegen die Wand, braucht das Mauerwerk eine Abdichtung von innen mit Dichtungsschlämme und Hohlkehle. Häufig ist es beides. Die Messung ist kostenlos, und Sie bekommen das Ergebnis schriftlich."
+      },
+      {
+        "q": "Feuchte Kellerwände in Wermelskirchen: Hilft eine Mauerwerksabdichtung von innen?",
+        "a": "Ja, wenn das Wasser von außen gegen die Wand drückt, etwa an den Talhängen in Dhünn und im Eifgental. Wir verpressen Risse, tragen Dichtungsschlämme in mehreren Lagen auf, bilden eine Hohlkehle am Boden und schließen mit Sanierputz ab. Steigt die Feuchte in den Bruchsteinsockeln der alten Ortskerne zusätzlich auf, kommt eine Horizontalsperre dazu. Die Messung vorab ist kostenlos."
+      },
+      {
+        "q": "Keller trockenlegen in Wermelskirchen: Lohnt sich das im Altbau?",
+        "a": "Ja, auch bei den Schieferhäusern mit Bruchsteinsockel in der Innenstadt und in Dabringhausen. Wir verfüllen zuerst die Hohlräume im Mauerwerk, setzen dann die Horizontalsperre und dichten die Wände zum Hang von innen ab. Die Fassade bleibt unberührt. Wir messen kostenlos und sagen Ihnen offen, ob sich die Sanierung bei Ihrem Keller lohnt."
       }
     ],
     wiki: "https://de.wikipedia.org/wiki/Wermelskirchen",
@@ -2236,6 +2311,11 @@ export const CITY_PAGES: CityPage[] = [
         "slug": "sockelabdichtung",
         "heading": "Sockel abdichten in Wermelskirchen",
         "text": "Bei viel Regen zieht Spritzwasser in den Sockel und weiter in die Kellerwand, bei Schieferhäusern auch in den Bruchsteinsockel. Wir dichten den Sockel ab und schließen ihn an die Kellerabdichtung an."
+      },
+      {
+        "slug": "balkon-terrasse",
+        "heading": "Balkon und Terrasse abdichten in Wermelskirchen",
+        "text": "In der regenreichen Höhenlage halten alte Abdichtungen auf Balkonen und Terrassen nicht ewig. An den Mehrfamilienhäusern in der Innenstadt platzt unter der Platte der Putz ab, bei Häusern am Hang in Dhünn oder Dabringhausen liegt die Terrasse oft über einem Kellerraum. Wir finden die undichte Stelle und dichten Fläche und Wandanschluss fugenlos ab."
       }
     ],
     districtGroups: [
@@ -2505,10 +2585,22 @@ export const CITY_PAGES: CityPage[] = [
       {
         "q": "Feuchte Wände im Keller in Essen: Brauche ich eine Mauerwerksabdichtung?",
         "a": "Nur wenn das Wasser von außen kommt. Ist die erdberührte Wand großflächig nass, nach Regen stärker, wie oft in Hanglagen im Süden oder bei Grundwasser im Norden an der Emscher, dichten wir das Mauerwerk von innen ab. Zeigt sich dagegen ein feuchter Streifen mit Salzrändern unten an der Wand, wie in vielen Zechen- und Gründerzeithäusern, steigt die Feuchte auf, und eine Horizontalsperre hilft. Wir messen kostenlos und sind von unserem Sitz in Essen aus schnell bei Ihnen."
+      },
+      {
+        "q": "Wie finde ich in Essen eine gute Firma für Kellersanierung?",
+        "a": "Eine gute Firma misst, bevor sie anbietet, und gibt Ihnen das Ergebnis schriftlich. Das Angebot sollte Ursache, Verfahren und Wandlängen nennen und ein Festpreis sein. Fragen Sie in Essen auch, ob Risse so dokumentiert werden, dass Sie die Unterlagen für eine Bergschadensklärung nutzen können. Unser Sitz ist in der Niebuhrstraße in Essen; wir messen kostenlos und geben 10 Jahre Garantie auf die Arbeit."
+      },
+      {
+        "q": "Nasser Keller in Essen: Was tun?",
+        "a": "Steht Wasser im Keller, zuerst abpumpen und den Strom in den betroffenen Räumen abschalten. Danach kommt es auf die Ursache an: Im Essener Norden drückt oft Grundwasser an der Emscher, im Süden an Ruhr und Baldeneysee Hang- und Grundwasser, und in Altbauten in Rüttenscheid oder Holsterhausen steigt Feuchte im Mauerwerk auf. Bergsenkungsrisse kommen überall dazu. Wir messen kostenlos und sind meist innerhalb von 24 Stunden vor Ort."
+      },
+      {
+        "q": "Keller trockenlegen in Essen: Welche Verfahren gibt es?",
+        "a": "Gegen aufsteigende Feuchte, wie in den Altbauten in Rüttenscheid, Holsterhausen oder Frohnhausen, hilft eine Horizontalsperre per Injektion. Gegen Wasser von außen, im Norden an der Emscher oder im Süden an der Ruhr, hilft eine Innenabdichtung mit Hohlkehle. Wasserführende Bergsenkungsrisse verpressen wir. Welche Kombination Ihr Keller braucht, zeigt die kostenlose Messung."
       }
     ],
     film: "kellersanierung",
-    nearby: ["muelheim-an-der-ruhr", "gelsenkirchen", "bottrop", "oberhausen", "bochum", "duisburg", "dortmund", "velbert"],
+    nearby: ["muelheim-an-der-ruhr", "gelsenkirchen", "bottrop", "oberhausen", "bochum", "duisburg", "dortmund", "velbert", "hagen"],
   },
 
   // Düsseldorf
@@ -2649,6 +2741,10 @@ export const CITY_PAGES: CityPage[] = [
       {
         "q": "Feuchte Wände im Souterrain in Düsseldorf: Welche Mauerwerksabdichtung hilft?",
         "a": "In Düsseldorf drückt in Rheinnähe oft Grundwasser gegen Wand und Boden, gerade in Oberkassel, Hamm und Kaiserswerth. Dann dichten wir das Mauerwerk von innen mit mehrlagiger Dichtungsschlämme ab, die auch drückendem Wasser standhält, mit Hohlkehle am Boden. In den Gründerzeitkellern von Bilk und Flingern steigt die Feuchte dagegen meist auf; dort ist eine Horizontalsperre der erste Schritt. Die Messung ist kostenlos."
+      },
+      {
+        "q": "Keller trockenlegen in Düsseldorf: Hilft das auch gegen Rheinwasser?",
+        "a": "Ja. Steigt das Grundwasser mit dem Rheinpegel, etwa in Oberkassel, Hamm oder Himmelgeist, drückt es von unten und seitlich gegen den Keller. Dagegen dichten wir Wände und Bodenanschluss von innen ab, ausgelegt für drückendes Wasser. In Gründerzeitkellern in Bilk, Flingern oder Pempelfort kommt oft eine Horizontalsperre gegen aufsteigende Feuchte dazu. Die Messung ist kostenlos."
       }
     ],
     wiki: "https://de.wikipedia.org/wiki/D%C3%BCsseldorf",
@@ -2884,6 +2980,10 @@ export const CITY_PAGES: CityPage[] = [
       {
         "q": "Nasser Keller in Bochum: Hilft eine Mauerwerksabdichtung von innen?",
         "a": "Ja, wenn das Wasser von außen kommt, etwa am Hang in Stiepel und Weitmar oder durch einen Bergschadensriss. Wir verpressen den Riss zuerst mit PU-Harz und dichten dann das Mauerwerk von innen mit mehrlagiger Dichtungsschlämme und Hohlkehle ab, ohne Garten oder Einfahrt aufzugraben. Steigt die Feuchte im Ziegel der Zechenhäuser auf, ist eine Horizontalsperre der richtige Weg. Die Messung ist kostenlos."
+      },
+      {
+        "q": "Keller trockenlegen in Bochum: Was hilft bei Zechenhäusern?",
+        "a": "Viele Zechenhäuser in Langendreer, Werne oder Hordel wurden ohne wirksame Sperrschicht gebaut, die Feuchte steigt im Ziegel auf. Dagegen setzen wir eine Horizontalsperre per Injektion. Kommt Wasser durch Bergsenkungsrisse, verpressen wir sie; drückt Hangwasser in Stiepel oder Weitmar, dichten wir die Wand von innen ab. Aufgraben ist dafür nicht nötig, die Messung ist kostenlos."
       }
     ],
     wiki: "https://de.wikipedia.org/wiki/Bochum",
@@ -3119,6 +3219,10 @@ export const CITY_PAGES: CityPage[] = [
       {
         "q": "Wie finde ich in Dortmund eine gute Firma für Kellerabdichtung?",
         "a": "Eine gute Firma misst, bevor sie anbietet, und gibt Ihnen das Messprotokoll schriftlich. Das Angebot nennt Ursache, Verfahren und Wandlängen und ist ein Festpreis. Fragen Sie nach der Garantie und ob Risse aus dem Bergbau eigens geprüft werden. Bei feuchten Wänden durch Wasser von außen gehört eine Mauerwerksabdichtung von innen dazu, bei aufsteigender Feuchte eine Horizontalsperre. Wir messen in Dortmund kostenlos und geben 10 Jahre Garantie auf die Arbeit."
+      },
+      {
+        "q": "Keller trockenlegen in Dortmund: Geht das ohne Aufgraben?",
+        "a": "Ja. In den Altbauten im Kreuzviertel, in der Nordstadt und in Hörde steigt die Feuchte meist im Mauerwerk auf; dagegen setzen wir eine Horizontalsperre per Injektion. In den Zechensiedlungen kommt Wasser oft durch Bergsenkungsrisse, die wir verpressen. Drückt Grundwasser, dichten wir Wand und Bodenanschluss von innen ab. Die Feuchtemessung vorab ist kostenlos."
       }
     ],
     wiki: "https://de.wikipedia.org/wiki/Dortmund",
@@ -3406,6 +3510,10 @@ export const CITY_PAGES: CityPage[] = [
       {
         "q": "Nasser Keller und feuchte Wände in Köln: Welche Mauerwerksabdichtung hilft?",
         "a": "In Rheinnähe, etwa in Rodenkirchen, Porz oder Köln-Mülheim, drückt bei hohem Pegel Grundwasser gegen Wand und Boden; dann dichten wir das Mauerwerk von innen mit mehrlagiger Dichtungsschlämme ab, die drückendem Wasser standhält. In den Gründerzeitkellern der Südstadt, von Ehrenfeld und Nippes steigt die Feuchte dagegen meist auf, und eine Horizontalsperre ist der erste Schritt. Wir messen kostenlos, bevor wir anbieten."
+      },
+      {
+        "q": "Keller trockenlegen in Köln: Was hilft im Gründerzeitkeller?",
+        "a": "In den Gründerzeitkellern der Südstadt, in Nippes oder Ehrenfeld steigt die Feuchte im Ziegel auf, weil die alte Sperrschicht fehlt oder verbraucht ist. Wir setzen eine Horizontalsperre per Injektion und tragen Sanierputz auf, der die Salze aufnimmt. Drückt bei hohem Rheinpegel Wasser von außen, kommt eine Innenabdichtung mit Hohlkehle dazu. Die Messung vorab ist kostenlos."
       }
     ],
     nearby: ["leverkusen", "duesseldorf", "solingen"],
@@ -3613,6 +3721,10 @@ export const CITY_PAGES: CityPage[] = [
       {
         "q": "Wie finde ich in Duisburg eine gute Firma für Kellerabdichtung?",
         "a": "Eine gute Firma misst, bevor sie anbietet, und gibt Ihnen das Ergebnis schriftlich. Das Angebot nennt Ursache, Verfahren und Wandlängen und ist ein Festpreis. Fragen Sie nach der Garantie und ob die Firma Keller mit drückendem Grundwasser am Rhein abdichtet. Wir messen in Duisburg kostenlos, von Hamborn bis Rheinhausen, und geben 10 Jahre Garantie auf die Arbeit."
+      },
+      {
+        "q": "Keller trockenlegen in Duisburg: Was hilft gegen Grundwasser?",
+        "a": "Nahe Rhein und Ruhr, etwa in Ruhrort, Homberg oder Rheinhausen, steigt das Grundwasser mit dem Pegel und drückt gegen Wand und Boden. Dagegen dichten wir von innen ab: Dichtungsschlämme in mehreren Lagen, Hohlkehle am Bodenanschluss, Sanierputz. Steigt zusätzlich Feuchte im Mauerwerk auf, setzen wir eine Horizontalsperre. Wir messen kostenlos, bevor wir anbieten."
       }
     ],
     nearby: ["oberhausen", "muelheim-an-der-ruhr", "duesseldorf", "essen", "bottrop"],
@@ -3813,6 +3925,10 @@ export const CITY_PAGES: CityPage[] = [
       {
         "q": "Warum sind die Kellerwände in meinem Gelsenkirchener Haus im Sommer feucht?",
         "a": "Oft ist es Kondensat: Warme, feuchte Sommerluft strömt beim Lüften in den kühlen Keller und schlägt sich an den Wänden nieder. Typisch sind nasse Stellen an Außenecken und Wasserrohren, ohne Salzränder. Dann hilft richtiges Lüften, morgens früh oder nachts, und keine Abdichtung. Ob es Kondensat, aufsteigende Feuchte oder Wasser von außen ist, zeigt unsere kostenlose Messung von Wandfeuchte, Oberflächentemperatur und Raumklima."
+      },
+      {
+        "q": "Keller trockenlegen in Gelsenkirchen: Was ist der erste Schritt?",
+        "a": "Die Messung. Im Emschertal drückt oft Grundwasser, in den Zechenhäusern in Buer, Hassel oder Ückendorf steigt Feuchte im Ziegel auf, und Bergsenkungsrisse lassen nach Regen Wasser durch. Jede Ursache braucht ein anderes Verfahren: Innenabdichtung, Horizontalsperre oder Rissverpressung. Wir messen kostenlos und bieten dann genau die Kombination an, die Ihr Keller braucht."
       }
     ],
     nearby: ["essen", "bottrop", "bochum", "oberhausen", "dortmund"],
@@ -3998,6 +4114,10 @@ export const CITY_PAGES: CityPage[] = [
       {
         "q": "Wie finde ich in Oberhausen eine gute Firma für Kellerabdichtung?",
         "a": "Eine gute Firma misst, bevor sie anbietet, und gibt Ihnen das Ergebnis schriftlich. Das Angebot sollte Ursache, Verfahren und Wandlängen nennen und ein Festpreis sein, keine Pauschale am Telefon. Fragen Sie auch nach der Garantie und ob die Firma Erfahrung mit denkmalgeschützten Siedlungshäusern hat. Als Fachbetrieb aus dem Nachbarort Essen messen wir in Oberhausen kostenlos und geben 10 Jahre Garantie auf die Arbeit."
+      },
+      {
+        "q": "Keller trockenlegen in Oberhausen: Geht das in Zechenhäusern?",
+        "a": "Ja. Viele Siedlungshäuser in Sterkrade, Osterfeld und Lirich haben keine wirksame Sperrschicht, die Feuchte steigt im Mauerwerk auf. Wir setzen eine Horizontalsperre per Injektion und tragen Sanierputz auf. Drückt an Emscher und Rhein-Herne-Kanal Grundwasser, dichten wir Wand und Bodenanschluss von innen ab. Garten und Einfahrt bleiben unberührt, die Messung ist kostenlos."
       }
     ],
     nearby: ["muelheim-an-der-ruhr", "bottrop", "duisburg", "essen", "gelsenkirchen"],
@@ -4202,6 +4322,10 @@ export const CITY_PAGES: CityPage[] = [
       {
         "q": "Nasser Keller in Mülheim nach Starkregen: Was kann ich tun?",
         "a": "Wasser entfernen, lüften und festhalten, wo es hereinkam. Kommt es am Hang durch die bergseitige Wand oder an der Fuge zum Boden, drückt Wasser von außen; das dichten wir von innen ab. Steht es am Bodenablauf, drückt es meist aus dem Kanal zurück, dann hilft eine Rückstausicherung vom Sanitärbetrieb. Fotos können Sie vorab per WhatsApp an 0172 2064177 schicken, die Messung vor Ort ist kostenlos."
+      },
+      {
+        "q": "Keller trockenlegen in Mülheim: Was hilft am Hang in Saarn?",
+        "a": "An den Hängen in Saarn, Menden und Holthausen drückt Schichtenwasser seitlich gegen die bergseitige Wand. Wir dichten sie von innen ab, mit Dichtungsschlämme in mehreren Lagen und einer Hohlkehle am Boden. In den Altbauten in Broich und Speldorf kommt oft eine Horizontalsperre gegen aufsteigende Feuchte dazu. Aufgegraben wird nicht, die Messung ist kostenlos."
       }
     ],
     nearby: ["essen", "oberhausen", "duisburg", "duesseldorf", "velbert", "gelsenkirchen", "bottrop"],
@@ -4211,14 +4335,14 @@ export const CITY_PAGES: CityPage[] = [
     slug: "hagen",
     name: "Hagen",
     keyword: "Kellersanierung Hagen",
-    title: "Kellersanierung Hagen | Hangwasser & Bruchsteinkeller",
+    title: "Kellersanierung Hagen | Keller abdichten & trockenlegen",
     metaDescription:
-      "Kellersanierung Hagen ohne Aufgraben: Keller abdichten gegen Hangwasser und Hochwasser an Volme, Ennepe und Lenne, Bruchstein trockenlegen. Messung kostenlos.",
+      "Kellersanierung Hagen ohne Aufgraben: nasse Keller abdichten und trockenlegen in Haspe, Hohenlimburg, Eilpe, Boele. Hangwasser, Bruchstein. Messung kostenlos.",
     h1: "Kellersanierung Hagen: feuchte Keller in Hang und Tal sanieren",
     lede:
       "Hagen liegt am Rand des Sauerlands zwischen Volme, Ennepe, Lenne und Ruhr. Steile Hänge, viel Regen und alte Keller aus Bruchstein machen Feuchte im Keller hier besonders häufig, und das Hochwasser im Juli 2021 hat viele Keller in den Tälern geflutet. Wir messen kostenlos und dichten von innen ab.",
     plz: ["58089", "58091", "58093", "58095", "58097", "58099", "58119", "58135"],
-    districts: ["Mitte", "Wehringhausen", "Altenhagen", "Eilpe", "Dahl", "Emst", "Haspe", "Westerbauer", "Spielbrink", "Hohenlimburg", "Elsey", "Berchum", "Halden", "Boele", "Vorhalle", "Fley", "Helfe"],
+    districts: ["Mitte", "Wehringhausen", "Altenhagen", "Kuhlerkamp", "Eilpe", "Delstern", "Selbecke", "Dahl", "Priorei", "Rummenohl", "Emst", "Haspe", "Westerbauer", "Spielbrink", "Hohenlimburg", "Elsey", "Holthausen", "Berchum", "Garenfeld", "Halden", "Boele", "Kabel", "Eckesey", "Vorhalle", "Fley", "Helfe"],
     geo: { lat: 51.3671, lng: 7.4633 },
     responseTime: "24 bis 48 Stunden",
     wiki: "https://de.wikipedia.org/wiki/Hagen",
@@ -4331,6 +4455,20 @@ export const CITY_PAGES: CityPage[] = [
           "In Wehringhausen und Altenhagen stehen viele Mehrfamilienhäuser aus der Gründerzeit, oft am Hang gebaut, mit Kellern aus Bruchstein oder Ziegel. Die Feuchte kommt hier meist von zwei Seiten: aufsteigend im alten Mauerwerk und seitlich an der Wand zum Hang.",
           "Wir sanieren Kellerraum für Kellerraum, damit die Mieter ihre Keller weiter nutzen können: eine Horizontalsperre gegen die aufsteigende Feuchte, eine Innenabdichtung an der Hangwand und Sanierputz. Die Hausverwaltung bekommt ein schriftliches Angebot mit Messprotokoll für die Eigentümerversammlung."
         ]
+      },
+      {
+        "heading": "Nasser Keller in Hagen: woher das Wasser kommt",
+        "paragraphs": [
+          "Ein nasser Keller in Hagen hat selten nur eine Ursache. Im Norden, in Boele, Kabel und Vorhalle, liegt Ruhrsandstein im Untergrund, und nahe Ruhr und Volmemündung kommt das Wasser eher von unten. Im Süden, in Eilpe, Dahl und Rummenohl, stehen die Häuser auf Schiefer und Grauwacke an steilen Hängen, und Schichtenwasser drückt seitlich gegen die bergseitige Wand. Rund um Hohenlimburg liegt Kalkstein, in dessen Klüften Wasser schnell weiterläuft.",
+          "Deshalb messen wir vor jedem Angebot: Feuchte in mehreren Höhen und Tiefen, dazu die Salze im Putz. Nasse Stellen unten am Wandfuß mit weißen Rändern sprechen für aufsteigende Feuchte, eine großflächig dunkle Wand zum Hang für Wasser von außen, eine nasse Linie für einen Riss. Erst danach entscheiden wir, ob Horizontalsperre, Mauerwerksabdichtung von innen, Rissverpressung oder eine Kombination nötig ist."
+        ]
+      },
+      {
+        "heading": "Kellerabdichtung in Haspe, Boele und Hohenlimburg",
+        "paragraphs": [
+          "In Haspe und Westerbauer stehen viele Arbeiterhäuser aus der Zeit der Hasper Hütte, mit Kellern aus Bruchstein oder Ziegel und einer Abdichtung, die längst verbraucht ist. In Boele, Kabel und Helfe sind es oft Siedlungs- und Einfamilienhäuser der 1950er bis 1970er Jahre, bei denen Wasser am Übergang von Wand und Bodenplatte eindringt. In Hohenlimburg und Elsey kommt nach Starkregen Wasser von der Lenne und vom Nahmerbach dazu.",
+          "Für alle drei Fälle gilt: Wir dichten von innen ab, ohne Garten, Einfahrt oder Hang aufzugraben. Die Hohlkehle am Boden-Wand-Anschluss, mehrlagige Dichtungsschlämme und Sanierputz halten auch drückendem Wasser stand. Von unserem Sitz in Essen sind wir meist innerhalb von 24 bis 48 Stunden in Hagen vor Ort."
+        ]
       }
     ],
     faqs: [
@@ -4369,23 +4507,35 @@ export const CITY_PAGES: CityPage[] = [
       {
         "q": "Feuchte Wände im Keller in Hagen: Was hilft?",
         "a": "An den Hängen drückt Schichtenwasser gegen die bergseitige Wand; dort hilft eine Mauerwerksabdichtung von innen mit Dichtungsschlämme und Hohlkehle. In den Bruchsteinkellern von Wehringhausen und Hohenlimburg steigt die Feuchte zusätzlich durch die Fugen auf, dann gehört eine Horizontalsperre dazu. Streichen Sie feuchte Wände nicht einfach über, sonst kommt die Feuchte wieder. Wir messen kostenlos, was Ihr Keller braucht."
+      },
+      {
+        "q": "Wie finde ich in Hagen eine gute Firma für Kellersanierung?",
+        "a": "Eine gute Firma misst, bevor sie anbietet, und gibt Ihnen das Ergebnis schriftlich. Das Angebot sollte Ursache, Verfahren und Wandlängen nennen und ein Festpreis sein. Fragen Sie in Hagen auch, ob der Betrieb Erfahrung mit Bruchsteinkellern und Hangwasser hat, denn beides ist hier häufig. Wir messen kostenlos, sanieren von innen und geben 10 Jahre Garantie auf die Arbeit."
+      },
+      {
+        "q": "Kellerabdichtung von innen in Hagen: Hält das bei Hangwasser?",
+        "a": "Ja, wenn sie richtig aufgebaut ist. Wir entfernen den alten Putz, verpressen Risse, tragen Dichtungsschlämme in mehreren Lagen auf und bilden eine Hohlkehle am Übergang zum Boden. Diese Abdichtung ist für drückendes Wasser ausgelegt. An den Hängen in Emst, Eilpe, Dahl oder Haspe spart sie die Aufgrabung, die dort oft kaum möglich wäre."
+      },
+      {
+        "q": "Keller trockenlegen in Hagen: Was hilft im Bruchsteinkeller?",
+        "a": "Im Bruchstein, wie in Wehringhausen, Haspe und Hohenlimburg, verfüllen wir zuerst die Hohlräume zwischen den Steinen. Dann setzen wir eine Horizontalsperre per Injektion gegen die aufsteigende Feuchte und dichten die Wand zum Hang von innen ab. Sanierputz nimmt die Salze auf, die oft noch vom Hochwasser 2021 in der Wand sitzen. Die Messung vorab ist kostenlos."
       }
     ],
-    nearby: ["wuppertal", "dortmund", "bochum"],
+    nearby: ["wuppertal", "dortmund", "bochum", "essen", "remscheid"],
   },
   // Leverkusen
   {
     slug: "leverkusen",
     name: "Leverkusen",
     keyword: "Kellersanierung Leverkusen",
-    title: "Kellersanierung Leverkusen | Keller nach Hochwasser",
+    title: "Kellersanierung Leverkusen | Keller abdichten & trockenlegen",
     metaDescription:
       "Kellersanierung Leverkusen ohne Aufgraben: Keller nach Hochwasser an Wupper und Dhünn trockenlegen, gegen Rhein-Grundwasser abdichten. Messung kostenlos.",
     h1: "Kellersanierung Leverkusen: feuchte Keller dauerhaft trockenlegen",
     lede:
       "Leverkusen liegt zwischen Rhein, Wupper und Dhünn. Das Hochwasser im Juli 2021 hat in Opladen und Schlebusch gezeigt, wie schnell Wasser in Keller kommt, und danach bleibt die Wand oft lange nass. Wir messen kostenlos, wie tief Feuchte und Salze sitzen, und sanieren von innen.",
     plz: ["51371", "51373", "51375", "51377", "51379", "51381"],
-    districts: ["Wiesdorf", "Manfort", "Bürrig", "Küppersteg", "Rheindorf", "Hitdorf", "Opladen", "Quettingen", "Bergisch Neukirchen", "Lützenkirchen", "Schlebusch", "Steinbüchel", "Alkenrath"],
+    districts: ["Wiesdorf", "Manfort", "Bürrig", "Küppersteg", "Rheindorf", "Hitdorf", "Opladen", "Quettingen", "Bergisch Neukirchen", "Lützenkirchen", "Schlebusch", "Steinbüchel", "Alkenrath", "Waldsiedlung"],
     geo: { lat: 51.0459, lng: 6.9844 },
     responseTime: "24 bis 48 Stunden",
     wiki: "https://de.wikipedia.org/wiki/Leverkusen",
@@ -4535,6 +4685,18 @@ export const CITY_PAGES: CityPage[] = [
       {
         "q": "Übernehmen Sie in Leverkusen auch die Bauwerksabdichtung?",
         "a": "Ja, soweit sie von innen oder am Sockel möglich ist: Kellerwände und Bodenanschluss gegen drückendes Wasser, Horizontalsperren gegen aufsteigende Feuchte, Rissverpressung, Sockel, Balkon und Terrasse. Für Neubauten mit Außenabdichtung vor dem Verfüllen der Baugrube sind wir nicht der richtige Ansprechpartner. Für bestehende Häuser in Wiesdorf, Opladen, Schlebusch oder Hitdorf messen wir kostenlos, welche Abdichtung nötig ist."
+      },
+      {
+        "q": "Wie finde ich in Leverkusen eine gute Firma für Kellersanierung?",
+        "a": "Eine gute Firma misst, bevor sie anbietet, und gibt Ihnen das Ergebnis schriftlich. Das Angebot sollte Ursache, Verfahren und Wandlängen nennen und ein Festpreis sein. Nach dem Hochwasser 2021 sollte der Betrieb in Leverkusen auch die Salze in der Wand messen, sonst kommen die Feuchteränder wieder. Wir messen beides kostenlos und geben 10 Jahre Garantie auf die Arbeit."
+      },
+      {
+        "q": "Nasser Keller in Leverkusen: Was hilft?",
+        "a": "In Wiesdorf, Rheindorf und Hitdorf steigt das Grundwasser mit dem Rheinpegel und drückt von unten und seitlich. In Opladen und Schlebusch sind es oft noch Folgen des Hochwassers an Wupper und Dhünn, in Bergisch Neukirchen und Lützenkirchen Sickerwasser am Hang. Gegen drückendes Wasser hilft eine Innenabdichtung mit Hohlkehle, gegen aufsteigende Feuchte eine Horizontalsperre. Die Messung vorab ist kostenlos."
+      },
+      {
+        "q": "Keller trockenlegen in Leverkusen: Geht das nach Hochwasser noch?",
+        "a": "Ja, auch Jahre danach. Nach dem Hochwasser 2021 an Wupper und Dhünn sitzen in vielen Wänden in Opladen und Schlebusch noch Feuchte und Salze. Wir messen beides in mehreren Tiefen, setzen wo nötig eine Horizontalsperre, dichten erdberührte Wände von innen ab und tragen Sanierputz auf, der die Salze aufnimmt. Die Messung ist kostenlos."
       }
     ],
     nearby: ["koeln", "solingen", "wermelskirchen", "duesseldorf"],
@@ -4709,6 +4871,10 @@ export const CITY_PAGES: CityPage[] = [
       {
         "q": "Wie finde ich in Bottrop eine gute Firma für Kellerabdichtung?",
         "a": "Eine gute Firma misst, bevor sie anbietet, und gibt Ihnen das Ergebnis schriftlich. Das Angebot sollte Ursache, Verfahren und Wandlängen nennen und ein Festpreis sein. Fragen Sie in Bottrop auch, ob Risse eigens geprüft und so dokumentiert werden, dass Sie die Unterlagen für eine Bergschadensklärung nutzen können. Als Fachbetrieb aus dem Nachbarort Essen messen wir kostenlos und geben 10 Jahre Garantie auf die Arbeit."
+      },
+      {
+        "q": "Keller trockenlegen in Bottrop: Was hilft bei Setzungsrissen?",
+        "a": "Führt ein Setzungsriss aus dem Bergbau Wasser, verpressen wir ihn mit PU-Harz, das im Riss aufschäumt und elastisch bleibt. Steigt in den Siedlungshäusern in Boy, Batenbrock oder Eigen zusätzlich Feuchte im Mauerwerk auf, setzen wir eine Horizontalsperre. Gegen Grundwasser im Süden an der Emscher dichten wir von innen ab. Die Messung vorab ist kostenlos."
       }
     ],
     nearby: ["gelsenkirchen", "oberhausen", "essen", "duisburg", "muelheim-an-der-ruhr"],

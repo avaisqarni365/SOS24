@@ -34,7 +34,7 @@ const REGIONS: { name: string; intro: string; towns: { slug: string; sub: string
       { slug: "bochum", sub: "Bergschäden und Hanglagen im Süden" },
       { slug: "dortmund", sub: "Nasse Keller im Altbau und in Zechensiedlungen" },
       { slug: "duisburg", sub: "Grundwasser an Rhein und Ruhr, Risse im Mauerwerk" },
-      { slug: "hagen", sub: "Schichtenwasser am Hang, Bruchsteinkeller" },
+      { slug: "hagen", sub: "Hangwasser in Eilpe und Haspe, Bruchstein in Hohenlimburg" },
     ],
   },
   {
