@@ -1387,7 +1387,7 @@ export const CITY_PAGES: CityPage[] = [
     keyword: "Kellersanierung Solingen",
     title: "Kellersanierung Solingen | Horizontalsperre & Abdichtung",
     metaDescription:
-      "Kellersanierung Solingen: feuchte Keller von Gräfrath bis Ohligs von innen trockenlegen. Kostenlose Messung, 10 Jahre Garantie auf die Arbeit.",
+      "Kellersanierung Solingen: Horizontalsperre und Abdichtung von innen, von Gräfrath bis Ohligs, auch im Bruchstein. Messung kostenlos, 10 Jahre Garantie.",
     h1: "Kellersanierung Solingen: von der Wupper bis zur Ohligser Heide",
     lede:
       "Die Klingenstadt reicht vom steilen Wuppertal bei Burg bis in die flacheren Lagen im Westen. Entsprechend unterschiedlich sind die Ursachen feuchter Keller, und entsprechend genau muss man hinschauen.",
@@ -2229,7 +2229,7 @@ export const CITY_PAGES: CityPage[] = [
         text: "Häuser der letzten Jahrzehnte mit Betonkellern. Meist punktuelle Schäden an Rissen und Fugen statt flächig nasser Wände."
       }
     ],
-    nearby: ["remscheid", "solingen", "wuppertal", "leverkusen"],
+    nearby: ["remscheid", "solingen", "wuppertal", "leverkusen", "koeln"],
   },
 
   // Essen
@@ -2467,7 +2467,7 @@ export const CITY_PAGES: CityPage[] = [
       }
     ],
     film: "kellersanierung",
-    nearby: ["muelheim-an-der-ruhr", "gelsenkirchen", "bottrop", "oberhausen", "bochum", "velbert"],
+    nearby: ["muelheim-an-der-ruhr", "gelsenkirchen", "bottrop", "oberhausen", "bochum", "duisburg", "dortmund", "velbert"],
   },
 
   // Düsseldorf
@@ -2477,7 +2477,7 @@ export const CITY_PAGES: CityPage[] = [
     keyword: "Kellersanierung Düsseldorf",
     title: "Kellersanierung Düsseldorf | Kellerabdichtung am Rhein",
     metaDescription:
-      "Kellersanierung Düsseldorf: Keller und Souterrain von innen abdichten, auch gegen drückendes Rheinwasser. Kostenlose Feuchtemessung, 10 Jahre Garantie.",
+      "Kellersanierung Düsseldorf: Kellerabdichtung von innen für Keller und Souterrain, auch gegen drückendes Rheinwasser. Messung kostenlos, 10 Jahre Garantie.",
     h1: "Kellersanierung Düsseldorf: Keller trockenlegen ohne Aufgraben",
     lede:
       "Zwischen Kaiserswerth und Benrath stehen viele Keller im Einflussbereich des Rheins: hoher Grundwasserstand, Kies- und Sandböden und Souterrains, die als Wohnung oder Büro genutzt werden. Ist Ihr Keller nass, messen wir als Fachbetrieb kostenlos, woher die Feuchte kommt, und übernehmen Kellerabdichtung oder Kellertrockenlegung von innen, ohne Aufgraben. In Düsseldorf sind wir in der Regel innerhalb von 24 bis 48 Stunden bei Ihnen.",
@@ -3345,10 +3345,10 @@ export const CITY_PAGES: CityPage[] = [
     keyword: "Kellersanierung Duisburg",
     title: "Kellersanierung Duisburg | Mauerwerksabdichtung & Risse",
     metaDescription:
-      "Kellersanierung Duisburg ohne Aufgraben: Grundwasser an Rhein und Ruhr, Bergsenkungsrisse, nasse Altbaukeller von innen sanieren. Messung kostenlos.",
-    h1: "Kellersanierung Duisburg: nasse Keller an Rhein und Ruhr trockenlegen",
+      "Kellersanierung Duisburg: Mauerwerksabdichtung und Horizontalsperre gegen Grundwasser an Rhein und Ruhr, Bergsenkungsrisse verpressen. Messung kostenlos.",
+    h1: "Kellersanierung Duisburg: Mauerwerk abdichten und nasse Keller trockenlegen",
     lede:
-      "Duisburg liegt am Zusammenfluss von Rhein und Ruhr, und der Bergbau hat den Boden auf beiden Rheinseiten verändert. Beides merkt man im Keller: Grundwasser, das von außen drückt, und Risse, durch die es eindringt. Wir messen kostenlos und sanieren von innen.",
+      "Duisburg liegt am Zusammenfluss von Rhein und Ruhr, und der Bergbau hat den Boden auf beiden Rheinseiten verändert. Beides merkt man im Keller: Grundwasser, das von außen drückt, und Risse, durch die es eindringt. Wir messen kostenlos, woher die Nässe kommt, und sanieren von innen: mit Mauerwerksabdichtung, Horizontalsperre und Rissverpressung, ohne Aufgraben.",
     plz: ["47051", "47053", "47055", "47057", "47058", "47059", "47119", "47137", "47138", "47139", "47166", "47167", "47169", "47178", "47179", "47198", "47199", "47226", "47228", "47229", "47239", "47249", "47259", "47269", "47279"],
     districts: ["Altstadt", "Neudorf", "Duissern", "Dellviertel", "Hochfeld", "Wanheimerort", "Ruhrort", "Hamborn", "Marxloh", "Obermarxloh", "Neumühl", "Meiderich", "Beeck", "Laar", "Walsum", "Aldenrade", "Rheinhausen", "Homberg", "Baerl", "Rumeln-Kaldenhausen", "Huckingen", "Wedau", "Buchholz", "Großenbaum"],
     geo: { lat: 51.4344, lng: 6.7623 },
