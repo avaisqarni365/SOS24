@@ -201,6 +201,10 @@ export const SERVICE_PAGES: ServicePage[] = [
         "q": "Nasser Keller: Was sollte ich zuerst tun?",
         "a": "Stehendes Wasser entfernen, lüften und mit Fotos festhalten, wo die Nässe auftritt: an einer Stelle, gleichmäßig unten an der Wand oder nur in kalten Ecken. Stellen Sie Möbel und Kartons von der Wand weg. Streichen oder verputzen Sie nichts, bevor die Ursache gemessen ist; sonst kommt die Feuchte durch die neue Schicht wieder. Fotos können Sie uns vorab per WhatsApp an 0172 2064177 schicken."
       },
+      {
+        "q": "Wie finde ich eine Firma für Kellersanierung in meiner Nähe?",
+        "a": "Achten Sie weniger auf die Entfernung als darauf, ob vor dem Angebot gemessen wird und Sie das Ergebnis schriftlich bekommen. Wir haben unseren Sitz in Essen und arbeiten im Ruhrgebiet, im Bergischen Land und im Rheinland. Für jede Stadt gibt es eine eigene Seite mit den typischen Kellerschäden vor Ort; die Übersicht finden Sie unter Kellersanierung NRW. Die Messung ist kostenlos, Fotos können Sie vorab per WhatsApp an 0172 2064177 schicken."
+      },
     ],
     related: ["horizontalsperre", "kellerinnenabdichtung", "feuchtemessung", "sockelabdichtung"],
   },
@@ -855,6 +859,10 @@ export const SERVICE_PAGES: ServicePage[] = [
         "q": "Kann ich einen Riss im Keller selbst verpressen?",
         "a": "Feine, trockene Risse lassen sich mit Sets aus dem Baumarkt oft verschließen. Bei einem Riss, der Wasser führt, sollte eine Fachfirma ran: Die Packer müssen schräg im Bauteil sitzen, das Harz muss mit ausreichend Druck bis zur Erdseite vordringen und zum Zustand des Risses passen. Sonst ist der Riss nur außen zu und bleibt innen nass."
       },
+      {
+        "q": "Kann man Risse im Mauerwerk verpressen?",
+        "a": "Ja, wenn der Riss Wasser führt oder feucht ist. In Ziegel- und Betonwänden setzen wir Bohrpacker schräg zum Riss und pressen PU-Harz ein, das im Riss aufschäumt und ihn von innen schließt. Bei Bruchstein und breiten, offenen Fugen verfüllen wir zuerst Hohlräume. Rein statische Risse, die sich weiter öffnen, gehören vorher in die Hand eines Tragwerksplaners; das sagen wir Ihnen nach der Messung offen. Als Fachfirma messen wir kostenlos und geben 10 Jahre Garantie auf die Arbeit."
+      },
     ],
     related: ["kellerinnenabdichtung", "kellersanierung", "horizontalsperre", "balkon-terrasse"],
   },
@@ -1287,6 +1295,10 @@ export const CITY_PAGES: CityPage[] = [
       {
         "q": "Brauche ich in Wuppertal eine Kellerabdichtung oder reicht eine Horizontalsperre?",
         "a": "Das hängt davon ab, woher das Wasser kommt. An der Hangseite der Häuser in Cronenberg, Ronsdorf oder auf dem Ölberg drückt es seitlich gegen die Wand; dort braucht es eine Kellerabdichtung von innen. Steigt die Feuchte im Bruchstein oder Ziegel auf, reicht oft die Horizontalsperre mit Sanierputz. Als Fachbetrieb messen wir beides kostenlos, bevor wir ein Angebot machen."
+      },
+      {
+        "q": "Suchen Sie einen Abdichter in Wuppertal?",
+        "a": "Wir dichten in Wuppertal Keller, Sockel, Balkone und Terrassen ab, von Elberfeld und Barmen bis Cronenberg, Ronsdorf und Vohwinkel. Im Keller arbeiten wir von innen, ohne den Hang aufzugraben: Horizontalsperre gegen aufsteigende Feuchte, Mauerwerksabdichtung gegen Wasser von außen, Rissverpressung bei wasserführenden Rissen. Vor dem Angebot messen wir kostenlos und geben Ihnen das Ergebnis schriftlich."
       }
     ],
     wiki: "https://de.wikipedia.org/wiki/Wuppertal",
@@ -1329,7 +1341,7 @@ export const CITY_PAGES: CityPage[] = [
       {
         "slug": "balkon-terrasse",
         "heading": "Balkon und Terrasse abdichten in Wuppertal",
-        "text": "An den Gründerzeithäusern im Briller Viertel und auf dem Ölberg sind Balkone oft undicht, bei Häusern am Hang liegt die Terrasse häufig über einem Kellerraum. Platzt unter dem Balkon der Putz ab oder wird es unter der Terrasse feucht, finden wir die undichte Stelle und dichten Fläche und Anschlüsse an die Hauswand dauerhaft ab."
+        "text": "An den Gründerzeithäusern im Briller Viertel und auf dem Ölberg sind Balkone oft undicht, bei Häusern am Hang liegt die Terrasse häufig über einem Kellerraum. Platzt unter dem Balkon der Putz ab oder wird es unter der Terrasse feucht, ist oft keine komplette Balkonsanierung nötig: Wir finden die undichte Stelle und dichten Fläche und Anschlüsse an die Hauswand dauerhaft ab."
       }
     ],
     districtGroups: [
@@ -1477,7 +1489,7 @@ export const CITY_PAGES: CityPage[] = [
         "a": "Wir messen die Feuchte in mehreren Wandhöhen und an mehreren Wänden, prüfen Risse, Anschlüsse und den Sockel und klären so, woher die Nässe kommt. Sie bekommen das Ergebnis schriftlich und danach ein Angebot zum Festpreis."
       },
       {
-        "q": "Lässt sich in Solingen nachträglich eine Horizontalsperre einbauen?",
+        "q": "Nachträgliche Horizontalsperre in Solingen: Lässt sie sich einbauen?",
         "a": "Ja, das ist der übliche Weg bei Altbauten. Wir bohren knapp über dem Kellerboden eine Reihe Löcher in die Wand und füllen sie mit einer Injektionscreme, die im Mauerwerk eine neue Sperrschicht bildet. Das funktioniert in Ziegel ebenso wie im Bruchstein der alten Häuser in Gräfrath und Burg, dessen Hohlräume wir vorher verfüllen. Aufgraben ist dafür nicht nötig."
       },
       {
@@ -4519,6 +4531,10 @@ export const CITY_PAGES: CityPage[] = [
       {
         "q": "Feuchte Wände im Keller in Leverkusen: Brauche ich eine Mauerwerksabdichtung?",
         "a": "Wenn Wasser von außen drückt, ja. Das ist am Rhein in Wiesdorf und Hitdorf und nach Hochwasser an Wupper und Dhünn häufig; dann dichten wir das Mauerwerk von innen mit mehrlagiger Dichtungsschlämme ab. In Opladen, Schlebusch und den Siedlungen der Nachkriegszeit steigt die Feuchte dagegen oft im Ziegel auf, und eine Horizontalsperre hilft. Die Messung ist kostenlos."
+      },
+      {
+        "q": "Übernehmen Sie in Leverkusen auch die Bauwerksabdichtung?",
+        "a": "Ja, soweit sie von innen oder am Sockel möglich ist: Kellerwände und Bodenanschluss gegen drückendes Wasser, Horizontalsperren gegen aufsteigende Feuchte, Rissverpressung, Sockel, Balkon und Terrasse. Für Neubauten mit Außenabdichtung vor dem Verfüllen der Baugrube sind wir nicht der richtige Ansprechpartner. Für bestehende Häuser in Wiesdorf, Opladen, Schlebusch oder Hitdorf messen wir kostenlos, welche Abdichtung nötig ist."
       }
     ],
     nearby: ["koeln", "solingen", "wermelskirchen", "duesseldorf"],
