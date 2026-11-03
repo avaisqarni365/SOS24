@@ -13,9 +13,9 @@ import JsonLd from "@/components/seo/JsonLd";
 import { SERVICE_CARDS } from "@/data/services";
 import { SITE_URL, BUSINESS_ID, WEBSITE_ID, abs, businessNode, websiteNode, breadcrumbNode, OG_IMAGE } from "@/lib/site";
 
-const TITLE = "Kellersanierung ohne Aufgraben in NRW | sos-abdichtung";
+const TITLE = "Abdichtung Essen & Kellersanierung NRW | sos-abdichtung";
 const DESCRIPTION =
-  "Kellersanierung ohne Aufgraben in Köln, Düsseldorf, Duisburg, Essen, Dortmund, Wuppertal und ganz NRW. Kostenlose Feuchtigkeitsmessung, 10 Jahre Garantie.";
+  "Abdichtung und Kellersanierung aus Essen für ganz NRW: ohne Aufgraben, dazu Sockel, Balkon, Rissverpressung. Kostenlose Feuchtemessung, 10 Jahre Garantie.";
 
 export const metadata: Metadata = {
   title: TITLE,
