@@ -2701,7 +2701,7 @@ export const CITY_PAGES: CityPage[] = [
         "text": "Reihen- und Doppelhäuser aus den 1950er bis 1970er Jahren. Spröde Bitumenanstriche, Feuchte am Wandfuß und ausgebaute Keller, in denen Schimmel entsteht."
       }
     ],
-    nearby: ["duisburg", "haan", "solingen", "leverkusen", "koeln"],
+    nearby: ["duisburg", "haan", "solingen", "leverkusen", "koeln", "muelheim-an-der-ruhr"],
   },
 
   // Bochum
@@ -3917,7 +3917,7 @@ export const CITY_PAGES: CityPage[] = [
     lede:
       "Zwischen den Hängen von Saarn und Holthausen und dem Ruhrufer in Broich und Mintard bekommen Keller Wasser von mehreren Seiten: als Hangwasser, als Grundwasser und als aufsteigende Feuchte im alten Mauerwerk. Mülheim grenzt an Essen, unseren Sitz; wir messen kostenlos und dichten von innen ab.",
     plz: ["45468", "45470", "45472", "45473", "45475", "45476", "45478", "45479", "45481"],
-    districts: ["Altstadt", "Eppinghofen", "Saarn", "Selbeck", "Mintard", "Speldorf", "Broich", "Menden", "Holthausen", "Raadt", "Ickten", "Heißen", "Heimaterde", "Fulerum", "Winkhausen", "Dümpten", "Styrum", "Mellinghofen"],
+    districts: ["Altstadt", "Eppinghofen", "Saarn", "Selbeck", "Mintard", "Speldorf", "Broich", "Menden", "Holthausen", "Raadt", "Ickten", "Heißen", "Heimaterde", "Fulerum", "Winkhausen", "Dümpten", "Styrum", "Mellinghofen", "Uhlenhorst", "Oemberg", "Papenbusch", "Rumbachtal"],
     geo: { lat: 51.4275, lng: 6.8825 },
     responseTime: "24 bis 48 Stunden",
     wiki: "https://de.wikipedia.org/wiki/M%C3%BClheim_an_der_Ruhr",
@@ -4052,6 +4052,13 @@ export const CITY_PAGES: CityPage[] = [
           "Die meisten Anfragen aus Mülheim betreffen den Keller: die nasse Hangwand in Saarn, Grundwasser an der Ruhr, aufsteigende Feuchte in den Altbauten von Broich und Speldorf. Oft hängt aber mehr daran. Ein durchfeuchteter Sockel leitet Spritzwasser in die Kellerwand, ein undichter Balkon oder eine Terrasse über dem Keller lässt Wasser von oben ins Mauerwerk.",
           "Als Abdichter schauen wir uns deshalb das ganze Haus an, nicht nur die nasse Stelle. Wir messen kostenlos, wo das Wasser herkommt, und dichten dann Keller, Sockel, Balkon oder Terrasse so ab, dass die Abdichtungen aneinander anschließen. Wasserführende Risse verpressen wir mit PU-Harz."
         ]
+      },
+      {
+        "heading": "Feuchte Wände im Ruhrsandstein: Mauerwerksabdichtung in Mülheim",
+        "paragraphs": [
+          "Viele ältere Häuser in Saarn, Broich und Mintard stehen auf Kellermauern aus Ruhrsandstein oder Bruchstein, gemauert mit Kalkmörtel und ohne Sperrschicht. Das Gestein selbst nimmt wenig Wasser auf, aber die Fugen saugen es wie ein Docht nach oben. Die Folge sind feuchte Wände bis in Kniehöhe, sandender Mörtel und Putz, der sich in Platten löst.",
+          "Bei solchem Mauerwerk setzen wir die Horizontalsperre in die Fuge, nicht in den Stein, und verfüllen Hohlräume vorher, damit die Injektionscreme nicht wegläuft. Drückt am Hang zusätzlich Wasser von außen, folgt eine Mauerwerksabdichtung von innen mit Dichtungsschlämme und Hohlkehle, darauf ein Sanierputz, der das alte Mauerwerk atmen lässt. In den Ziegel- und Betonkellern der Nachkriegshäuser in Heißen und Dümpten ist der Aufbau einfacher; welcher Weg passt, zeigt die kostenlose Messung."
+        ]
       }
     ],
     faqs: [
@@ -4090,6 +4097,14 @@ export const CITY_PAGES: CityPage[] = [
       {
         "q": "Kellertrockenlegung oder Kellerabdichtung: Was braucht mein Keller in Mülheim?",
         "a": "Am Hang in Saarn, Menden und Holthausen ist meist die bergseitige Wand nass, weil Wasser von außen drückt; dort hilft eine Kellerabdichtung von innen. In den Altbauten von Broich und Speldorf steigt die Feuchte eher im Mauerwerk auf, das braucht eine Kellertrockenlegung mit Horizontalsperre. Als Fachbetrieb messen wir kostenlos und dichten nur die Wände ab, die es wirklich brauchen."
+      },
+      {
+        "q": "Wie finde ich in Mülheim eine gute Firma für die Kellersanierung?",
+        "a": "Achten Sie darauf, dass vor dem Angebot gemessen wird und Sie das Messprotokoll schriftlich bekommen. Ein seriöses Angebot nennt die Ursache, die Verfahren und die Wandlängen und ist ein Festpreis. Fragen Sie auch, ob die Firma Erfahrung mit Bruchstein und Hanglage hat, denn beides ist in Mülheim häufig. Unser Sitz in Essen grenzt direkt an Mülheim; wir messen kostenlos und geben 10 Jahre Garantie auf die Arbeit."
+      },
+      {
+        "q": "Nasser Keller in Mülheim nach Starkregen: Was kann ich tun?",
+        "a": "Wasser entfernen, lüften und festhalten, wo es hereinkam. Kommt es am Hang durch die bergseitige Wand oder an der Fuge zum Boden, drückt Wasser von außen; das dichten wir von innen ab. Steht es am Bodenablauf, drückt es meist aus dem Kanal zurück, dann hilft eine Rückstausicherung vom Sanitärbetrieb. Fotos können Sie vorab per WhatsApp an 0172 2064177 schicken, die Messung vor Ort ist kostenlos."
       }
     ],
     nearby: ["essen", "oberhausen", "duisburg", "duesseldorf"],
