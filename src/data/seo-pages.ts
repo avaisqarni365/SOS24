@@ -2152,7 +2152,7 @@ export const CITY_PAGES: CityPage[] = [
       "45144", "45145", "45147", "45149", "45219", "45239", "45257", "45259", "45276", "45277", "45279",
       "45289", "45307", "45309", "45326", "45327", "45329", "45355", "45356", "45357", "45359",
     ],
-    districts: ["Rüttenscheid", "Frohnhausen", "Holsterhausen", "Altenessen", "Borbeck", "Steele", "Kray", "Werden", "Kettwig", "Bredeney"],
+    districts: ["Rüttenscheid", "Südviertel", "Huttrop", "Bergerhausen", "Holsterhausen", "Frohnhausen", "Altendorf", "Margarethenhöhe", "Haarzopf", "Fulerum", "Altenessen", "Karnap", "Vogelheim", "Katernberg", "Stoppenberg", "Schonnebeck", "Borbeck", "Bedingrade", "Schönebeck", "Frintrop", "Dellwig", "Gerschede", "Steele", "Kray", "Horst", "Freisenbruch", "Überruhr", "Leithe", "Bredeney", "Stadtwald", "Rellinghausen", "Heisingen", "Kupferdreh", "Burgaltendorf", "Werden", "Kettwig"],
     geo: { lat: 51.4556, lng: 7.0116 },
     responseTime: "24 Stunden",
     wiki: "https://de.wikipedia.org/wiki/Essen",
@@ -2296,6 +2296,20 @@ export const CITY_PAGES: CityPage[] = [
           "Abdichtung heißt für uns nicht nur Keller. In Essen dichten wir überall dort ab, wo Wasser ins Haus kommt: erdberührte Kellerwände und Bodenplatten von innen, Risse per Injektion, den Sockel in der Spritzwasserzone, Balkone und Terrassen mit Flüssigkunststoff sowie Flachdächer und Garagendächer mit Elastomerbitumen.",
           "Typisch für Essen sind zwei Schwachstellen. Im Süden, in Bredeney, Werden und Kettwig, stehen viele Häuser am Hang, und das Wasser drückt seitlich gegen Kellerwand und Sockel. Im Norden, in den Zechensiedlungen von Katernberg bis Karnap, sind es Setzungsrisse aus dem Bergbau und flache Garagendächer aus der Nachkriegszeit. Wir messen vorher kostenlos, woher das Wasser kommt, und schlagen nur die Abdichtung vor, die an dieser Stelle wirkt."
         ]
+      },
+      {
+        "heading": "Essener Norden: Zechenhäuser und Grundwasser an der Emscher",
+        "paragraphs": [
+          "In Katernberg, Stoppenberg, Karnap und Altenessen stehen viele Siedlungshäuser aus der Zeit der großen Zechen, von Zollverein bis Emil-Emscher. Ihre Keller sind aus Ziegel gemauert, die Sperrschicht aus Teerpappe ist nach hundert Jahren zerfallen. Die Feuchte steigt im Mauerwerk auf, der Putz wird mürbe und blüht weiß aus.",
+          "Nah an der Emscher kommt das Grundwasser hinzu. Das Gelände hat sich durch den Bergbau gesenkt, das Wasser wird dort dauerhaft abgepumpt, und die Kellersohlen liegen nur knapp darüber. Wir setzen in diesen Häusern eine Horizontalsperre per Injektion, dichten Wände und Boden-Wand-Anschluss von innen ab und verpressen Risse, durch die Wasser kommt. Weil die Häuser oft Wand an Wand stehen, geschieht alles von innen."
+        ]
+      },
+      {
+        "heading": "Margarethenhöhe, Frohnhausen und Borbeck: Keller im Essener Westen",
+        "paragraphs": [
+          "Die Margarethenhöhe ist eine denkmalgeschützte Gartenstadt, Frohnhausen und Holsterhausen sind dicht bebaute Wohnviertel aus Gründerzeit und Wiederaufbau, in Borbeck und Frintrop überwiegen Siedlungs- und Reihenhäuser. Gemeinsam ist ihnen der Ziegelkeller, in dem die Feuchte aufsteigt, oft verstärkt durch Kondensat, wenn im Sommer gelüftet wird.",
+          "Gerade bei denkmalgeschützten Häusern zählt, dass wir von innen arbeiten: Fassade, Sockel und Vorgarten bleiben unverändert. Ob für Arbeiten im Keller eine denkmalrechtliche Erlaubnis nötig ist, klären Sie am besten vorab mit der Unteren Denkmalbehörde der Stadt Essen; die technische Beschreibung der Maßnahmen bekommen Sie von uns dafür schriftlich."
+        ]
       }
     ],
     faqs: [
@@ -2346,6 +2360,14 @@ export const CITY_PAGES: CityPage[] = [
       {
         "q": "Wie läuft eine Rissverpressung in Essen ab?",
         "a": "Zuerst sehen wir uns den Riss an, messen seine Breite und prüfen, ob er Wasser führt und ob er sich noch bewegt. Dann bohren wir von innen schräg zum Riss, setzen Injektionspacker und pressen das Harz unter Druck ein, bis der Riss über den ganzen Wandquerschnitt gefüllt ist: PU-Harz bei wasserführenden und beweglichen Rissen, Epoxid bei tragenden. Nach dem Aushärten entfernen wir die Packer und verschließen die Bohrlöcher. Ein Aufgraben im Vorgarten ist dafür nicht nötig."
+      },
+      {
+        "q": "Kellertrockenlegung, Kellerabdichtung, Kellersanierung: Was brauche ich in Essen?",
+        "a": "Die Begriffe meinen oft dasselbe Ziel, einen trockenen Keller, aber unterschiedliche Wege. Kellertrockenlegung heißt meist, aufsteigende Feuchte mit einer Horizontalsperre zu stoppen. Kellerabdichtung heißt, die Wand gegen Wasser von außen abzudichten, bei uns von innen. Kellersanierung umfasst beides und dazu Rissverpressung, Sanierputz und Schimmelbeseitigung. Welche Kombination Ihr Keller braucht, zeigt die kostenlose Feuchtemessung."
+      },
+      {
+        "q": "Sanieren Sie auch Keller in der denkmalgeschützten Margarethenhöhe?",
+        "a": "Ja. Wir arbeiten im Keller von innen, Fassade, Fenster und Vorgarten bleiben unverändert. Ob für die Arbeiten eine denkmalrechtliche Erlaubnis nötig ist, klären Sie vorab mit der Unteren Denkmalbehörde der Stadt Essen. Die technische Beschreibung der geplanten Maßnahmen geben wir Ihnen dafür schriftlich mit."
       }
     ],
     film: "kellersanierung",
