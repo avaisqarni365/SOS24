@@ -3534,7 +3534,7 @@ export const CITY_PAGES: CityPage[] = [
         "a": "Nah an Rhein und Ruhr, in Ruhrort, Hochfeld oder Homberg, drückt Grundwasser gegen Wand und Boden; dort braucht der Keller eine Kellerabdichtung von innen. In den Arbeiterhäusern von Hamborn und Meiderich steigt dagegen die Feuchte im Ziegel auf, und eine Kellertrockenlegung mit Horizontalsperre ist der richtige Weg. Als Fachbetrieb messen wir kostenlos, welcher Fall vorliegt."
       }
     ],
-    nearby: ["oberhausen", "muelheim-an-der-ruhr", "duesseldorf", "essen"],
+    nearby: ["oberhausen", "muelheim-an-der-ruhr", "duesseldorf", "essen", "bottrop"],
   },
   // Gelsenkirchen
   {
@@ -4437,7 +4437,7 @@ export const CITY_PAGES: CityPage[] = [
     lede:
       "In Bottrop endete 2018 mit der Zeche Prosper-Haniel der deutsche Steinkohlenbergbau. Geblieben sind abgesenkte Böden, Setzungsrisse und Siedlungshäuser, in deren Kellern die Feuchte steigt. Von unserem Sitz in Essen sind wir schnell in Welheim, Eigen oder Kirchhellen, messen kostenlos und sanieren von innen.",
     plz: ["46236", "46238", "46240", "46242", "46244"],
-    districts: ["Stadtmitte", "Altstadt", "Eigen", "Fuhlenbrock", "Batenbrock-Nord", "Batenbrock-Süd", "Boy", "Welheim", "Welheimer Mark", "Ebel", "Lehmkuhle", "Vonderort", "Kirchhellen", "Grafenwald", "Feldhausen"],
+    districts: ["Stadtmitte", "Altstadt", "Eigen", "Fuhlenbrock", "Batenbrock-Nord", "Batenbrock-Süd", "Boy", "Welheim", "Welheimer Mark", "Ebel", "Lehmkuhle", "Vonderort", "Kirchhellen", "Grafenwald", "Feldhausen", "Overhagen", "Hardinghausen"],
     geo: { lat: 51.5236, lng: 6.9285 },
     responseTime: "24 bis 48 Stunden",
     wiki: "https://de.wikipedia.org/wiki/Bottrop",
@@ -4494,6 +4494,11 @@ export const CITY_PAGES: CityPage[] = [
         "slug": "sockelabdichtung",
         "heading": "Sockel abdichten in Bottrop",
         "text": "Bei Siedlungs- und Reihenhäusern zieht Spritzwasser in den Sockel und weiter in die Kellerwand, der Putz platzt ab. Wir dichten den Sockel ab und schließen ihn an die Abdichtung der Kellerwand an."
+      },
+      {
+        "slug": "balkon-terrasse",
+        "heading": "Balkon und Terrasse abdichten in Bottrop",
+        "text": "An den Mehrfamilienhäusern in der Stadtmitte, in Boy und Batenbrock sind viele Balkone aus den 1950er und 1960er Jahren undicht geworden; unter der Platte platzt der Putz ab. Bei den Einfamilienhäusern in Kirchhellen und Grafenwald liegt die Terrasse oft über einem Kellerraum. Wir finden die undichte Stelle und dichten Fläche und Wandanschluss fugenlos ab."
       }
     ],
     districtGroups: [
@@ -4545,6 +4550,13 @@ export const CITY_PAGES: CityPage[] = [
           "Im Norden ist Bottrop ländlich. In Kirchhellen, Grafenwald und Feldhausen stehen vor allem Einfamilienhäuser aus den 1960er bis 1990er Jahren auf sandigem Boden, Bergschäden sind hier seltener. Feucht wird der Keller trotzdem: an der Fuge zwischen Bodenplatte und Wand, durch eine gealterte Bitumenabdichtung außen oder durch Kondensat, wenn an warmen Tagen gelüftet wird.",
           "Weil die Keller oft als Hobbyraum, Gästezimmer oder Büro genutzt werden, fällt Feuchte hier schnell auf. Wir messen zuerst, ob Wasser von außen kommt oder sich Luftfeuchte an der kühlen Wand niederschlägt. Undichte Anschlüsse dichten wir von innen mit einer Hohlkehle und Dichtungsschlämme ab; gegen Kondensat helfen richtiges Lüften und, wo nötig, Klimaplatten."
         ]
+      },
+      {
+        "heading": "Nasser Keller und feuchte Wände in Bottrop: Mauerwerksabdichtung von innen",
+        "paragraphs": [
+          "Ein nasser Keller in Bottrop hat meist eine dieser Ursachen: Wasser, das nach Regen durch einen Bergsenkungsriss drückt, Grundwasser im tief liegenden Süden an der Emscher oder Feuchte, die im Ziegel der Siedlungshäuser aufsteigt. Feuchte Wände mit weißen Salzrändern unten am Wandfuß sprechen für aufsteigende Feuchte, nasse Stellen an einer Linie oder Ecke für einen Riss, eine großflächig dunkle erdberührte Wand für Wasser von außen.",
+          "Drückt das Wasser von außen, dichten wir das Mauerwerk von innen ab: alten Putz entfernen, Risse verpressen, Dichtungsschlämme in mehreren Lagen auftragen, eine Hohlkehle am Übergang zum Boden ausbilden und mit Sanierputz abschließen. Diese Mauerwerksabdichtung hält auch drückendem Wasser stand, und Garten, Einfahrt und die Wand zum Nachbarhaus bleiben unberührt."
+        ]
       }
     ],
     faqs: [
@@ -4579,9 +4591,13 @@ export const CITY_PAGES: CityPage[] = [
       {
         "q": "Kellerabdichtung oder Kellertrockenlegung: Was braucht ein Keller in Bottrop?",
         "a": "In Bottrop-Süd an der Emscher und bei Bergsenkungsrissen kommt das Wasser von außen; dann braucht es eine Kellerabdichtung von innen und eine Rissverpressung. In den Zechensiedlungen in Welheim, Batenbrock und Eigen steigt die Feuchte im Ziegel auf, und eine Kellertrockenlegung mit Horizontalsperre ist der richtige Weg. Als Fachbetrieb messen wir kostenlos, bevor wir ein Angebot machen."
+      },
+      {
+        "q": "Wie finde ich in Bottrop eine gute Firma für Kellerabdichtung?",
+        "a": "Eine gute Firma misst, bevor sie anbietet, und gibt Ihnen das Ergebnis schriftlich. Das Angebot sollte Ursache, Verfahren und Wandlängen nennen und ein Festpreis sein. Fragen Sie in Bottrop auch, ob Risse eigens geprüft und so dokumentiert werden, dass Sie die Unterlagen für eine Bergschadensklärung nutzen können. Als Fachbetrieb aus dem Nachbarort Essen messen wir kostenlos und geben 10 Jahre Garantie auf die Arbeit."
       }
     ],
-    nearby: ["gelsenkirchen", "oberhausen", "essen"],
+    nearby: ["gelsenkirchen", "oberhausen", "essen", "duisburg", "muelheim-an-der-ruhr"],
   },
 ];
 
