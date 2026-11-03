@@ -646,6 +646,13 @@ export const SERVICE_PAGES: ServicePage[] = [
           "Solche Unterlagen sind für Eigentümer und Mieter gleichermaßen nützlich, etwa bei Streit über die Ursache, im Gespräch mit einer Versicherung oder vor dem Kauf eines Hauses mit feuchtem Keller. Kommt es tatsächlich zu einem Gerichtsverfahren, bestellt das Gericht in der Regel einen eigenen Sachverständigen. Das sprechen wir offen an. Meist reicht jedoch eine saubere messtechnische Dokumentation, um die Frage nach der Ursache sachlich zu klären, bevor ein Streit überhaupt entsteht.",
         ],
       },
+      {
+        "heading": "Baufeuchtemessung und Feuchtigkeitsanalyse: was wir genau messen",
+        "paragraphs": [
+          "Eine Baufeuchtemessung zeigt, wie viel Wasser in Wand oder Boden steckt und wie es sich verteilt. Wir messen in mehreren Höhen und an mehreren Wänden, außen am Sockel und innen dahinter, dazu die Oberflächentemperatur, die Raumluftfeuchte und den Salzgehalt im Putz. Erst aus dem Muster ergibt sich die Feuchtigkeitsanalyse: Nimmt die Feuchte nach oben ab, steigt sie auf; ist eine Wand nass und die gegenüberliegende trocken, drückt Wasser von außen; sind nur die kalten Ecken feucht, ist es Kondensat.",
+          "Das Ergebnis bekommen Sie schriftlich als Messprotokoll mit Messpunkten und Werten. Es ist die Grundlage für unser Festpreisangebot und lässt sich auch beim Hauskauf, gegenüber der Hausverwaltung oder bei einem vermuteten Bergschaden verwenden."
+        ]
+      },
     ],
     steps: [
       {
@@ -1013,10 +1020,10 @@ export const SERVICE_PAGES: ServicePage[] = [
     serviceName: "Sockelabdichtung & Mauerwerkstrockenlegung",
     navTitle: "Sockelabdichtung",
     keyword: "Sockel abdichten",
-    title: "Sockel abdichten: Schutz vor Spritzwasser & Feuchte",
+    title: "Sockelabdichtung: Sockel abdichten gegen Spritzwasser",
     metaDescription:
-      "Sockel abdichten als Teil der Mauerwerkstrockenlegung: Spritzwasserzone freilegen, zweilagig beschichten, sauber anschließen. 10 Jahre Garantie auf die Arbeit.",
-    h1: "Sockel abdichten: die Spritzwasserzone dauerhaft dicht",
+      "Sockelabdichtung vom Fachbetrieb: Sockel abdichten gegen Spritzwasser und Erdfeuchte, auch nachträglich, mit sauberem Sockelanschluss. 10 Jahre Garantie.",
+    h1: "Sockelabdichtung: Sockel abdichten, Spritzwasserzone dauerhaft dicht",
     lede:
       "Der Sockel ist die h\u00e4rtest beanspruchte Zone am Haus: Spritzwasser von oben, Erdfeuchte von unten, Frost im Winter. Wenn dort Putz platzt und Farbe bl\u00e4ttert, hilft kein Anstrich, sondern eine Abdichtung.",
     symptoms: [
@@ -1029,7 +1036,7 @@ export const SERVICE_PAGES: ServicePage[] = [
     ],
     layers: [
       { name: "Freilegen", text: "Sockel bis unter die Gel\u00e4ndelinie freilegen, Altputz und lose Beschichtung entfernen." },
-      { name: "Dickbeschichtung", text: "Zwei Lagen Bitumen-Dickbeschichtung vom Fundamentansatz bis 30 cm \u00fcber Gel\u00e4nde." },
+      { name: "Dickbeschichtung", text: "Bitumen-Dickbeschichtung im erdber\u00fchrten Bereich, dar\u00fcber flexible Dichtungsschl\u00e4mme bis 30 cm \u00fcber Gel\u00e4nde." },
       { name: "Schutz & Drainung", text: "Noppenbahn als Schutz, bei Bedarf Kiesstreifen, damit Spritzwasser versickert statt steht." },
       { name: "Sockelputz", text: "Wasserabweisender Sockelputz und Anstrich: die Zone sieht wieder aus wie neu und bleibt es." },
     ],
@@ -1062,11 +1069,25 @@ export const SERVICE_PAGES: ServicePage[] = [
           "Der Aufbau der Abdichtung richtet sich nach dem Haus: Wir wählen Beschichtung, Anschlusshöhe und Sockelputz passend zu Mauerwerk und Fassade, damit der Sockel dicht wird und trotzdem zum Haus passt."
         ]
       },
+      {
+        "heading": "Sockelabdichtung nachträglich: so geht es am bestehenden Haus",
+        "paragraphs": [
+          "Die meisten Sockel, die wir abdichten, sind Jahrzehnte alt: Beim Bau wurde der Sockel nur verputzt und gestrichen, oder die alte Abdichtung ist spröde geworden. Eine nachträgliche Sockelabdichtung ist deshalb der Normalfall, kein Sonderfall. Wir legen dafür einen schmalen Streifen am Haus frei, entfernen den losen Altputz, dichten im erdberührten Bereich und in der Spritzwasserzone ab und schließen mit einem wasserabweisenden Sockelputz.",
+          "Wichtig ist, dass die neue Abdichtung an das anschließt, was schon da ist: unten an die Abdichtung der Kellerwand oder an das Fundament, oben an Putz, Klinker oder Wärmedämmung. Ist die Kellerwand dahinter feucht, planen wir Sockelabdichtung und Kellersanierung zusammen."
+        ]
+      },
+      {
+        "heading": "Sockelanschluss und Material: Bitumen oder Dichtungsschlämme?",
+        "paragraphs": [
+          "Unter der Geländelinie dichten wir meist mit einer kunststoffmodifizierten Bitumen-Dickbeschichtung ab, die sich elastisch an das Mauerwerk legt. Im sichtbaren Spritzwasserbereich, wo später Putz oder Farbe darauf soll, verwenden wir eine flexible mineralische Dichtungsschlämme, denn auf Bitumen hält kein Putz. Beide Schichten überlappen, damit am Übergang keine Lücke bleibt.",
+          "Der Sockelanschluss oben ist die zweite Schwachstelle. Bei gedämmten Fassaden muss die Abdichtung unter die Sockeldämmung reichen, bei Klinker an die unterste Fuge anschließen, bei Putzfassaden sauber in einer Abschlusskante enden. Wird der Anschluss schlampig ausgeführt, läuft das Wasser einfach hinter die neue Abdichtung."
+        ]
+      },
     ],
     steps: [
       { title: "Messung & Befund", text: "Feuchtemessung am Sockel und innen dahinter: Spritzwasser, Erdfeuchte oder beides." },
       { title: "Verbindliches Angebot", text: "Aufbau, Anschlussh\u00f6hen und Festpreis f\u00fcr Ihre Sockelzone." },
-      { title: "Freilegen & Abdichten", text: "Altputz herunter, zwei Lagen Dickbeschichtung, Schutzlage und Anschl\u00fcsse." },
+      { title: "Freilegen & Abdichten", text: "Altputz herunter, Abdichtung in zwei Lagen, Schutzlage und Anschl\u00fcsse." },
       { title: "Sockelputz & Abnahme", text: "Wasserabweisender Putz und Anstrich, dann gemeinsame Abnahme mit Protokoll." },
     ],
     faqs: [
@@ -1089,6 +1110,14 @@ export const SERVICE_PAGES: ServicePage[] = [
       {
         "q": "Kann die Sockelabdichtung zusammen mit der Kellersanierung gemacht werden?",
         "a": "Ja, und oft ist das sinnvoll. Wir planen beides zusammen und schließen die Sockelabdichtung an die Abdichtung der Kellerwand an, damit keine neue Eintrittskante entsteht."
+      },
+      {
+        "q": "Kann eine Sockelabdichtung nachträglich gemacht werden?",
+        "a": "Ja, bei bestehenden Häusern ist das der Regelfall. Freigelegt wird nur ein schmaler Streifen direkt am Haus, Beete und Pflaster daneben bleiben unberührt. Die neue Abdichtung wird unten an die Kellerabdichtung oder das Fundament und oben an Putz, Klinker oder Dämmung angeschlossen."
+      },
+      {
+        "q": "Womit wird der Sockel abgedichtet?",
+        "a": "Im erdberührten Bereich meist mit einer kunststoffmodifizierten Bitumen-Dickbeschichtung, im sichtbaren Spritzwasserbereich mit einer flexiblen mineralischen Dichtungsschlämme, auf der Sockelputz und Farbe halten. Beide Schichten überlappen. Welcher Aufbau zu Ihrem Haus passt, legen wir nach der kostenlosen Messung fest."
       },
     ],
     related: ["dachabdichtung", "balkon-terrasse", "kellersanierung"],
@@ -1416,6 +1445,10 @@ export const CITY_PAGES: CityPage[] = [
       {
         "q": "Was passiert bei der kostenlosen Feuchtemessung in Solingen?",
         "a": "Wir messen die Feuchte in mehreren Wandhöhen und an mehreren Wänden, prüfen Risse, Anschlüsse und den Sockel und klären so, woher die Nässe kommt. Sie bekommen das Ergebnis schriftlich und danach ein Angebot zum Festpreis."
+      },
+      {
+        "q": "Lässt sich in Solingen nachträglich eine Horizontalsperre einbauen?",
+        "a": "Ja, das ist der übliche Weg bei Altbauten. Wir bohren knapp über dem Kellerboden eine Reihe Löcher in die Wand und füllen sie mit einer Injektionscreme, die im Mauerwerk eine neue Sperrschicht bildet. Das funktioniert in Ziegel ebenso wie im Bruchstein der alten Häuser in Gräfrath und Burg, dessen Hohlräume wir vorher verfüllen. Aufgraben ist dafür nicht nötig."
       }
     ],
     wiki: "https://de.wikipedia.org/wiki/Solingen",
@@ -1920,6 +1953,10 @@ export const CITY_PAGES: CityPage[] = [
       {
         "q": "Was passiert bei der kostenlosen Feuchtemessung in Haan?",
         "a": "Wir messen die Feuchte in mehreren Wandhöhen und an mehreren Wänden, prüfen Risse, Anschlüsse und den Sockel und klären so, ob die Nässe aus der Wand kommt oder Kondensat ist. Sie bekommen das Ergebnis schriftlich und danach ein Angebot zum Festpreis."
+      },
+      {
+        "q": "Wie wird ein Keller in Haan trocken gelegt?",
+        "a": "Je nach Ursache unterschiedlich. Steigt die Feuchte in der Wand auf, setzen wir eine Horizontalsperre per Injektion. Kommt das Wasser seitlich vom Hang oder von unten aus dem Düsseltal, dichten wir die Wand von innen mit Dichtungsschlämme ab. Zum Schluss nimmt ein Sanierputz die Salze auf. Welche Schritte Ihr Keller braucht, zeigt die kostenlose Messung."
       }
     ],
     wiki: "https://de.wikipedia.org/wiki/Haan",
@@ -2909,6 +2946,13 @@ export const CITY_PAGES: CityPage[] = [
           "Im Dortmunder Westen sind Doppel- und Reihenhäuser aus den 1920er bis 1960er Jahren typisch. Die Keller werden heute oft als Hobbyraum, Waschküche oder Werkstatt genutzt, und gerade dort fällt Feuchte schnell auf: an Kartons, die schimmeln, und an der Farbe, die abblättert.",
           "Wir setzen in diesen Häusern meist eine Horizontalsperre per Injektion, damit keine Feuchte mehr aus dem Fundament aufsteigt, und schützen die Wandflächen mit Sanierputz. Nach der Sanierung bekommen Sie das Messprotokoll schriftlich, damit Sie sehen, wie die Wand abtrocknet."
         ]
+      },
+      {
+        "heading": "Nasser Keller und feuchte Wände in Dortmund: Kellerabdichtung oder Wandsanierung?",
+        "paragraphs": [
+          "Ob der Keller nass ist oder die Wände bis ins Erdgeschoss feucht sind, macht für die Sanierung einen Unterschied. Steht Wasser nach Regen am Boden oder läuft an einer Stelle die Wand herunter, kommt es meist von außen: Sickerwasser in Hörde und Hombruch, Grundwasser in der Emscher-Niederung, ein Riss aus der Bergbauzeit. Dann braucht der Keller eine Kellerabdichtung von innen oder eine Rissverpressung.",
+          "Sind dagegen die Wände gleichmäßig feucht, mit weißen Salzrändern und mürbem Putz bis einen Meter hoch, steigt die Feuchte im Mauerwerk auf, typisch für die Gründerzeithäuser im Kreuz- und Kaiserviertel. Hier hilft eine Wandsanierung mit Horizontalsperre und Sanierputz. Welcher Fall bei Ihnen vorliegt, zeigt die kostenlose Messung."
+        ]
       }
     ],
     faqs: [
@@ -2943,6 +2987,10 @@ export const CITY_PAGES: CityPage[] = [
       {
         "q": "Sanieren Sie auch Keller in Mehrfamilienhäusern und für Hausverwaltungen in Dortmund?",
         "a": "Ja. Im Kreuzviertel, im Kaiserviertel und in der Nordstadt stehen viele Mehrfamilienhäuser aus der Gründerzeit und dem Wiederaufbau. Wir sanieren Kellerraum für Kellerraum, damit die Mieter ihre Keller weiter nutzen können, und geben der Hausverwaltung ein schriftliches Angebot mit Messprotokoll, das sie direkt in der Eigentümerversammlung vorlegen kann."
+      },
+      {
+        "q": "Kellerabdichtung oder Horizontalsperre: Was braucht mein Keller in Dortmund?",
+        "a": "Kommt das Wasser von außen, etwa nach Regen oder bei hohem Grundwasser, braucht die Wand eine Abdichtung, bei uns von innen mit Dichtungsschlämme und Hohlkehle. Steigt die Feuchte im Mauerwerk auf, braucht sie eine Horizontalsperre. In vielen Dortmunder Altbauten ist beides nötig. Wir messen kostenlos und kombinieren nur, was Ihr Keller wirklich braucht."
       }
     ],
     wiki: "https://de.wikipedia.org/wiki/Dortmund",
@@ -3365,6 +3413,13 @@ export const CITY_PAGES: CityPage[] = [
           "In Neudorf, Duissern und im Dellviertel stehen viele Mehrfamilienhäuser aus der Zeit um 1900, mit Kellern aus Vollziegel und ohne funktionierende Sperrschicht. Die Feuchte steigt hier von unten ins Mauerwerk, die Salze blühen in den unteren Wandbereichen aus und der Putz wird mürbe. Abhilfe schafft eine Horizontalsperre im Injektionsverfahren, von innen gesetzt, dazu ein Sanierputz, der die Restfeuchte verdunsten lässt.",
           "In Ruhrort und Hochfeld, nah an Rhein, Ruhr und den Hafenbecken, kommt das Grundwasser hinzu, das mit dem Rheinpegel steigt und fällt. Dort reicht eine Sperrschicht allein nicht: Wand und Boden brauchen eine Innenabdichtung, die drückendem Wasser standhält, mit einer dichten Hohlkehle am Übergang zur Bodenplatte. Welche Kombination Ihr Keller braucht, zeigt die kostenlose Messung."
         ]
+      },
+      {
+        "heading": "Mauerwerksabdichtung und Horizontalsperre in Duisburg",
+        "paragraphs": [
+          "In Duisburg kommen Feuchte von unten und Wasser von außen oft zusammen. In den Ziegelkellern von Hamborn, Meiderich und Neudorf steigt die Feuchte auf, weil die alte Sperrschicht zerfallen ist; nah am Rhein drückt das Grundwasser zusätzlich gegen Wand und Boden. Eine Mauerwerksabdichtung allein hält das Wasser von außen ab, stoppt aber nicht die aufsteigende Feuchte, und eine Horizontalsperre allein hilft nicht gegen drückendes Wasser.",
+          "Wir setzen deshalb je nach Befund beides: die Horizontalsperre per Injektion knapp über dem Kellerboden und die Abdichtung der erdberührten Wände von innen, mit einer dichten Hohlkehle am Übergang zur Bodenplatte. Nach einem Wasserschaden messen wir zuerst, wie tief die Nässe ins Mauerwerk gezogen ist, und sanieren erst dann."
+        ]
       }
     ],
     faqs: [
@@ -3399,6 +3454,10 @@ export const CITY_PAGES: CityPage[] = [
       {
         "q": "Muss für eine Kellersanierung in Duisburg aufgegraben werden?",
         "a": "In den meisten Fällen nicht. Die Arbeiterhäuser in Hamborn, Marxloh und Meiderich und die Altbauten in Neudorf stehen oft Wand an Wand oder direkt am Gehweg, eine Aufgrabung wäre dort kaum möglich. Horizontalsperre, Innenabdichtung und Rissverpressung führen wir von innen aus. Ob in Ihrem Fall zusätzlich etwas von außen nötig ist, sagen wir Ihnen nach der Messung offen."
+      },
+      {
+        "q": "Mein Keller in Duisburg hatte einen Wasserschaden. Was nun?",
+        "a": "Zuerst das Wasser entfernen, lüften und festhalten, wo es hereinkam. Nach dem Abtrocknen der Oberfläche bleibt oft Feuchte tief im Mauerwerk, die Wochen später als Fleck oder Salzrand wiederkommt. Wir messen kostenlos, wie tief die Nässe sitzt und woher sie kam, und dichten den Keller dann von innen ab, damit er beim nächsten Starkregen oder hohen Rheinpegel trocken bleibt."
       }
     ],
     nearby: ["oberhausen", "muelheim-an-der-ruhr", "duesseldorf", "essen"],
@@ -3736,6 +3795,10 @@ export const CITY_PAGES: CityPage[] = [
       {
         "q": "Sanieren Sie auch Keller in Mehrfamilienhäusern und für Hausverwaltungen in Oberhausen?",
         "a": "Ja. Wir sanieren Kellerraum für Kellerraum, damit die Mieter ihre Keller weiter nutzen können, und geben der Hausverwaltung ein schriftliches Angebot mit Messprotokoll, das sie direkt in der Eigentümerversammlung vorlegen kann."
+      },
+      {
+        "q": "Wie wird ein feuchter Keller in Oberhausen saniert?",
+        "a": "Zuerst messen wir kostenlos, woher die Feuchte kommt: aufsteigend im Ziegel, von unten an Emscher und Rhein-Herne-Kanal oder als Kondensat. Danach bekommen Sie einen Festpreis. Die Sanierung selbst dauert meist zwei bis vier Werktage: Horizontalsperre per Injektion, Abdichtung der Wände von innen, wo nötig Rissverpressung, zum Schluss ein Sanierputz. Danach trocknet die Wand über einige Monate aus, und wir messen nach."
       }
     ],
     nearby: ["muelheim-an-der-ruhr", "bottrop", "duisburg", "essen"],
@@ -4148,6 +4211,11 @@ export const CITY_PAGES: CityPage[] = [
         "slug": "sockelabdichtung",
         "heading": "Sockel abdichten in Leverkusen",
         "text": "Nach einem Hochwasser oder durch Spritzwasser bleibt der Sockel oft lange feucht, der Putz platzt ab. Wir dichten den Sockel ab und schließen ihn an die Abdichtung der Kellerwand an."
+      },
+      {
+        "slug": "balkon-terrasse",
+        "heading": "Balkon und Terrasse abdichten in Leverkusen",
+        "text": "Bei einer Balkonsanierung in Leverkusen ist meist nicht der Belag das Problem, sondern die Abdichtung darunter und ihr Anschluss an die Hauswand. Läuft Wasser hinter die Fliesen, platzt unten der Putz ab, und bei Terrassen über einem Kellerraum wird es darunter feucht. Wir finden die undichte Stelle und dichten Fläche und Anschlüsse dauerhaft ab."
       }
     ],
     districtGroups: [
