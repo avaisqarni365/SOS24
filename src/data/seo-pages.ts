@@ -3092,12 +3092,12 @@ export const CITY_PAGES: CityPage[] = [
     keyword: "Kellersanierung Dortmund",
     title: "Kellersanierung Dortmund | Kellerabdichtung, nasse Keller",
     metaDescription:
-      "Kellersanierung Dortmund: aufsteigende Feuchte, Grundwasser und Bergschadensrisse von innen sanieren. Kostenlose Feuchtemessung vor Ort, 10 Jahre Garantie.",
+      "Kellersanierung Dortmund ohne Aufgraben: nasse Keller abdichten und trockenlegen, vom Kreuzviertel über Hörde bis Eving und Mengede. Messung kostenlos.",
     h1: "Kellersanierung Dortmund: nasse Keller und feuchte Wände von innen sanieren",
     lede:
       "Vom Kreuzviertel und Hörde am Phoenix-See bis nach Eving und Mengede: In Dortmund werden Keller vor allem durch aufsteigende Feuchte in Gründerzeit- und Nachkriegskellern, Grundwasser in der Emscher-Niederung und Risse aus der Bergbauzeit nass. Wir messen kostenlos, woher die Feuchte kommt, und sanieren von innen, ohne Aufgraben.",
     plz: ["44135", "44137", "44139", "44141", "44143", "44145", "44147", "44149", "44225", "44227", "44229", "44263", "44265", "44267", "44269", "44287", "44289", "44309", "44319", "44328", "44329", "44339", "44357", "44359", "44369", "44379", "44388"],
-    districts: ["Innenstadt-West", "Innenstadt-Nord", "Innenstadt-Ost", "Kreuzviertel", "Kaiserviertel", "Körne", "Eving", "Derne", "Scharnhorst", "Brackel", "Asseln", "Wickede", "Aplerbeck", "Hörde", "Wellinghofen", "Kirchhörde", "Hombruch", "Barop", "Dorstfeld", "Lütgendortmund", "Kirchlinde", "Huckarde", "Mengede"],
+    districts: ["Innenstadt-West", "Innenstadt-Nord", "Innenstadt-Ost", "Nordstadt", "Kreuzviertel", "Kaiserviertel", "Körne", "Wambel", "Eving", "Brechten", "Lindenhorst", "Derne", "Scharnhorst", "Kurl", "Husen", "Lanstrop", "Brackel", "Asseln", "Wickede", "Aplerbeck", "Sölde", "Berghofen", "Schüren", "Hörde", "Benninghofen", "Wellinghofen", "Kirchhörde", "Lücklemberg", "Syburg", "Hombruch", "Barop", "Eichlinghofen", "Dorstfeld", "Marten", "Oespel", "Kley", "Lütgendortmund", "Bövinghausen", "Kirchlinde", "Huckarde", "Westerfilde", "Bodelschwingh", "Mengede"],
     geo: { lat: 51.5136, lng: 7.4653 },
     responseTime: "24 bis 48 Stunden",
     localFactors: [
@@ -3110,8 +3110,8 @@ export const CITY_PAGES: CityPage[] = [
         text: "Dicht bebaute Blockrandstrukturen mit historischen Vollziegelkellern, die bei aufsteigender Feuchte rasch Salzausblühungen bilden.",
       },
       {
-        name: "Urbane Sanierungsanforderungen am Phoenix-See",
-        text: "Moderne Souterrains und modernisierte Bestandsgebäude verlangen hochwertige Nutzbarkeit ohne Feuchtegeruch und Schimmelsporen.",
+        name: "Hörde und der Phoenix-See",
+        text: "Arbeiterhäuser aus der Stahlzeit stehen hier neben neuen und modernisierten Häusern, deren Souterrains als Wohnraum dienen. Dort fällt schon wenig Feuchte als Geruch oder Schimmel auf.",
       },
       {
         "name": "Emscher-Niederung im Norden",
@@ -3131,14 +3131,14 @@ export const CITY_PAGES: CityPage[] = [
         heading: "Dortmunder Kreuzviertel: Sanierung von Altbaukellern von innen",
         paragraphs: [
           "Das Dortmunder Kreuzviertel und das Kaiserviertel zählen zu den gefragtesten Wohngegenden im Ruhrgebiet. Viele Häuser stammen aus der Jahrhundertwende. Feuchte Kellermauern und schimmelnde Abstellräume sind hier ein bekanntes Problem, das oft durch aufsteigende Nässe im Fundamentbereich verursacht wird.",
-          "Weil Vorgärten oder Zufahrten nicht existieren, ist eine Innenabdichtung der einzig denkbare Sanierungsweg. Wir bohren in geringen Abständen Injektionskanäle und sättigen das Mauerwerk mit unserem paraffingelösten Dichtstoff. Die Wand bleibt atmungsaktiv, trocknet nach oben hin ab und ist dauerhaft vor neuem Wasser geschützt.",
+          "Zwischen Haus und Gehweg ist im Kreuzviertel meist kein Platz zum Aufgraben, deshalb sanieren wir von innen. Gegen die aufsteigende Feuchte bohren wir in engen Abständen Löcher in die Wand und setzen per Injektion eine neue Horizontalsperre. Darüber kommt Sanierputz, der die Salze aufnimmt. Die Wand trocknet danach über einige Monate aus; wir messen nach und geben Ihnen das Protokoll.",
         ],
       },
       {
         heading: "Hörde, Hombruch und Aplerbeck: Schutz vor drückendem Sickerwasser",
         paragraphs: [
           "In Stadtteilen wie Hörde oder Aplerbeck sorgt starker Regen regelmäßig für Staunässe in bindigen Lehmböden. Das Wasser dringt durch unzureichend abgedichtete Wand-Boden-Fugen in den Keller ein.",
-          "Unsere mineralischen Dichtungsschlämmen bilden in Verbindung mit einer Hohlkehlenausbildung eine unüberwindbare Barriere. Ihr Keller wird wieder als sauberer Lagerraum oder Hobbyraum nutzbar – mit 10 Jahren Handwerksgarantie.",
+          "Wir dichten die erdberührten Wände von innen mit mineralischer Dichtungsschlämme in mehreren Lagen ab und bilden am Boden-Wand-Anschluss eine Hohlkehle, damit dort kein Wasser mehr durchkommt. Der Keller ist danach wieder als Lager- oder Hobbyraum nutzbar, mit 10 Jahren Garantie auf die Arbeit.",
         ],
       },
       {
@@ -3172,6 +3172,20 @@ export const CITY_PAGES: CityPage[] = [
         "paragraphs": [
           "Ob der Keller nass ist oder die Wände bis ins Erdgeschoss feucht sind, macht für die Sanierung einen Unterschied. Steht Wasser nach Regen am Boden oder läuft an einer Stelle die Wand herunter, kommt es meist von außen: Sickerwasser in Hörde und Hombruch, Grundwasser in der Emscher-Niederung, ein Riss aus der Bergbauzeit. Dann braucht der Keller eine Kellerabdichtung von innen oder eine Rissverpressung.",
           "Sind dagegen die Wände gleichmäßig feucht, mit weißen Salzrändern und mürbem Putz bis einen Meter hoch, steigt die Feuchte im Mauerwerk auf, typisch für die Gründerzeithäuser im Kreuz- und Kaiserviertel. Hier hilft eine Wandsanierung mit Horizontalsperre und Sanierputz. Welcher Fall bei Ihnen vorliegt, zeigt die kostenlose Messung."
+        ]
+      },
+      {
+        "heading": "Brackel, Asseln, Wickede und Aplerbeck: Einfamilienhäuser im Dortmunder Osten",
+        "paragraphs": [
+          "Im Osten stehen viele Ein- und Zweifamilienhäuser aus den 1950er bis 1970er Jahren, mit Kellern aus Kalksandstein oder Beton und einer Abdichtung aus Bitumen, die nach 50 Jahren spröde ist. Das Wasser kommt hier selten flächig, sondern an typischen Stellen: am Übergang von Wand und Bodenplatte, an Rohrdurchführungen, unter dem Kellerfenster und am Lichtschacht.",
+          "Deshalb muss der Keller nicht komplett saniert werden. Wir messen, wo die Feuchte eintritt, dichten diese Stellen von innen ab, setzen eine Hohlkehle am Bodenanschluss und dichten Rohrdurchführungen nach. Das ist schneller erledigt, und Sie bezahlen nur, was Ihr Keller braucht."
+        ]
+      },
+      {
+        "heading": "Hörde, Schüren und Berghofen: Arbeiterhäuser und neue Souterrains",
+        "paragraphs": [
+          "Hörde war über ein Jahrhundert Stahlstandort. Aus dieser Zeit stammen viele Arbeiter- und Mehrfamilienhäuser mit Ziegelkellern ohne Sperrschicht, in denen die Feuchte aufsteigt. Rund um den Phoenix-See sind dagegen neue und modernisierte Häuser entstanden, deren Souterrains als Wohnraum genutzt werden; dort fällt schon wenig Feuchte als Schimmel oder Geruch auf.",
+          "In Schüren, Berghofen und an den Hängen zum Ardey läuft nach Regen Wasser seitlich gegen die Kellerwand. Für die Altbauten setzen wir eine Horizontalsperre und Sanierputz, für die Wände zum Hang eine Innenabdichtung mit Hohlkehle. Ein Souterrain, das als Wohnraum dient, bekommt zusätzlich Klimaplatten, damit an der kühlen Wand kein Kondensat entsteht."
         ]
       }
     ],
@@ -3223,6 +3237,14 @@ export const CITY_PAGES: CityPage[] = [
       {
         "q": "Keller trockenlegen in Dortmund: Geht das ohne Aufgraben?",
         "a": "Ja. In den Altbauten im Kreuzviertel, in der Nordstadt und in Hörde steigt die Feuchte meist im Mauerwerk auf; dagegen setzen wir eine Horizontalsperre per Injektion. In den Zechensiedlungen kommt Wasser oft durch Bergsenkungsrisse, die wir verpressen. Drückt Grundwasser, dichten wir Wand und Bodenanschluss von innen ab. Die Feuchtemessung vorab ist kostenlos."
+      },
+      {
+        "q": "Nach Starkregen steht Wasser im Keller in Dortmund. Was tun?",
+        "a": "Zuerst den Strom in den betroffenen Räumen abschalten, das Wasser abpumpen und Fotos für die Versicherung machen. Starkregen trifft Dortmund immer wieder, besonders die tieferen Lagen im Westen und in der Emscher-Niederung. Wenn das Wasser abgepumpt ist, messen wir kostenlos, wo es hereingekommen ist: durch die Bodenfuge, einen Riss, den Lichtschacht oder die Wand. Dann dichten wir genau dort von innen ab."
+      },
+      {
+        "q": "Mein Keller in Dortmund riecht muffig, ist aber nicht nass. Was ist das?",
+        "a": "Oft ist es Feuchte im Mauerwerk, die man noch nicht sieht, oder Kondensat: Im Sommer schlägt sich warme Luft an den kühlen Kellerwänden nieder. Beides lässt sich messen. Steigt die Feuchte im Mauerwerk auf, hilft eine Horizontalsperre; ist es Kondensat, helfen richtiges Lüften, Wärmedämmung an der Wand oder Klimaplatten. Wir messen kostenlos und sagen Ihnen, was zutrifft."
       }
     ],
     wiki: "https://de.wikipedia.org/wiki/Dortmund",
