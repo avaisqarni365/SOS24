@@ -1106,24 +1106,13 @@ export const CITY_PAGES: CityPage[] = [
       "Kellersanierung Wuppertal vom SchimmelPeter®-Partnerbetrieb: Hangwasser, Bruchstein- und Gründerzeitkeller von innen trockenlegen. Messung kostenlos.",
     h1: "Kellersanierung Wuppertal: Ihr feuchter Keller wird trocken, auch in Hanglage",
     lede:
-      "Zwischen Vohwinkel und Beyenburg stehen viele Häuser am Hang oder nah an der Wupper. Wir kennen die typischen Kellerschäden dieser Stadt und sind in Wuppertal in der Regel innerhalb von 24 Stunden bei Ihnen.",
+      "Zwischen Vohwinkel und Beyenburg stehen viele Häuser am Hang oder nah an der Wupper. Ob Kellertrockenlegung, Abdichtung des Mauerwerks oder feuchte Wände bis ins Erdgeschoss: Wir messen kostenlos, woher die Nässe kommt, sanieren von innen, ohne Aufgraben, und sind in Wuppertal in der Regel innerhalb von 24 Stunden bei Ihnen.",
     plz: [
       "42103", "42105", "42107", "42109", "42111", "42113", "42115", "42117", "42119",
       "42275", "42277", "42279", "42281", "42283", "42285", "42287", "42289",
       "42327", "42329", "42349", "42369", "42389", "42399",
     ],
-    districts: [
-      "Elberfeld",
-      "Elberfeld-West",
-      "Barmen",
-      "Oberbarmen",
-      "Heckinghausen",
-      "Vohwinkel",
-      "Cronenberg",
-      "Ronsdorf",
-      "Uellendahl-Katernberg",
-      "Langerfeld-Beyenburg",
-    ],
+    districts: ["Elberfeld", "Elberfeld-West", "Briller Viertel", "Ölberg", "Arrenberg", "Nützenberg", "Barmen", "Unterbarmen", "Oberbarmen", "Wichlinghausen", "Heckinghausen", "Langerfeld", "Beyenburg", "Vohwinkel", "Sonnborn", "Varresbeck", "Cronenberg", "Küllenhahn", "Ronsdorf", "Lichtscheid", "Uellendahl", "Katernberg", "Dönberg", "Nächstebreck", "Hatzfeld"],
     geo: { lat: 51.256, lng: 7.151 },
     responseTime: "24 Stunden",
     localFactors: [
@@ -1190,6 +1179,13 @@ export const CITY_PAGES: CityPage[] = [
           "Für die Region Wuppertal sind wir Partnerbetrieb der SchimmelPeter GmbH. Auf der Partnerseite des Herstellers für Wuppertal sind sos-abdichtung und Inhaber Shahzad Mahmood als Ansprechpartner für die Kellersanierung genannt. Die Horizontalsperre setzen wir mit dem SchimmelPeter®-Injektionsmittel und nach den Vorgaben des Herstellers.",
           "Für Sie heißt das doppelte Sicherheit: Der Hersteller garantiert 25 Jahre lang die Wirksamkeit des Injektionsmittels, und auf unsere ausgeführte Arbeit geben wir 10 Jahre Garantie. Unser Betriebssitz ist in Essen; in Wuppertal sind wir in der Regel innerhalb von 24 Stunden bei Ihnen, von Vohwinkel bis Beyenburg."
         ]
+      },
+      {
+        "heading": "Kellertrockenlegung und Mauerwerksabdichtung: feuchte Wände in Wuppertal",
+        "paragraphs": [
+          "Feuchte Wände sind in Wuppertal selten nur ein Kellerproblem. In den Bruchstein- und Ziegelhäusern von Elberfeld und Barmen steigt die Feuchte im Mauerwerk auf, oft bis ins Erdgeschoss: Der Putz bröckelt am Wandfuß, die Tapete löst sich, es riecht muffig. Am Hang drückt zusätzlich Wasser seitlich gegen die Wand, die in den Berg gebaut ist.",
+          "Eine Kellertrockenlegung beginnt deshalb mit der Frage, woher das Wasser kommt. Steigt es auf, setzen wir eine Horizontalsperre per Injektion. Drückt es von außen, dichten wir das Mauerwerk von innen mit mehrlagiger Dichtungsschlämme und einer Hohlkehle ab. Führen Risse Wasser, verpressen wir sie. Ein Sanierputz nimmt danach die Salze auf und lässt die Wand austrocknen. Als Abdichter für Wuppertal kombinieren wir nur die Verfahren, die Ihre Wand wirklich braucht."
+        ]
       }
     ],
     faqs: [
@@ -1224,6 +1220,14 @@ export const CITY_PAGES: CityPage[] = [
       {
         "q": "Sind Sie SchimmelPeter-Partner in Wuppertal?",
         "a": "Ja. Für die Region Wuppertal sind wir Partnerbetrieb der SchimmelPeter GmbH und auf deren Partnerseite für Wuppertal aufgeführt. Wir setzen das SchimmelPeter®-Injektionsmittel ein, dessen Wirksamkeit der Hersteller 25 Jahre garantiert. Unser Betriebssitz ist in Essen, in der Niebuhrstraße 46."
+      },
+      {
+        "q": "Kellertrockenlegung, Mauerwerksabdichtung, Kellersanierung: Was brauche ich in Wuppertal?",
+        "a": "Die Begriffe meinen dasselbe Ziel, eine trockene Wand, aber unterschiedliche Wege. Kellertrockenlegung heißt meist, aufsteigende Feuchte mit einer Horizontalsperre zu stoppen. Mauerwerksabdichtung heißt, die Wand gegen Wasser von außen abzudichten, bei uns von innen. Kellersanierung umfasst beides und dazu Rissverpressung, Sanierputz und Schimmelbeseitigung. Was Ihr Keller braucht, zeigt die kostenlose Feuchtemessung."
+      },
+      {
+        "q": "Meine Wände im Erdgeschoss sind feucht. Kommt das aus dem Keller?",
+        "a": "Oft ja. In Altbauten ohne funktionierende Sperrschicht steigt die Feuchte aus dem Fundament durch die Kellerwand bis ins Erdgeschoss, typisch sind ein dunkler Rand und bröckelnder Putz bis etwa einen Meter Höhe. Mit einer Horizontalsperre knapp über dem Kellerboden stoppen wir das für das ganze Haus. Ob die Feuchte aufsteigt oder von außen kommt, klären wir bei der kostenlosen Messung."
       }
     ],
     wiki: "https://de.wikipedia.org/wiki/Wuppertal",
@@ -1262,6 +1266,11 @@ export const CITY_PAGES: CityPage[] = [
         "slug": "sockelabdichtung",
         "heading": "Sockel abdichten in Wuppertal",
         "text": "Bei Häusern mit Schieferfassade und an den Straßen der Talsohle zieht Spritzwasser in den Sockel und weiter in den Keller. Wir dichten den Sockel ab und schließen ihn an die Kellerwand an."
+      },
+      {
+        "slug": "balkon-terrasse",
+        "heading": "Balkon und Terrasse abdichten in Wuppertal",
+        "text": "An den Gründerzeithäusern im Briller Viertel und auf dem Ölberg sind Balkone oft undicht, bei Häusern am Hang liegt die Terrasse häufig über einem Kellerraum. Platzt unter dem Balkon der Putz ab oder wird es unter der Terrasse feucht, finden wir die undichte Stelle und dichten Fläche und Anschlüsse an die Hauswand dauerhaft ab."
       }
     ],
     districtGroups: [
