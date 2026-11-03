@@ -33,8 +33,8 @@ export default function Hero() {
             <em>Trocken, Schicht für Schicht.</em>
           </h1>
           <p className="sc-lede mt-6">
-            Wir stoppen aufsteigende Feuchtigkeit von innen — ohne Bagger, ohne
-            aufgerissenen Garten.
+            Abdichtung und Kellersanierung aus Essen: Wir stoppen Feuchtigkeit
+            von innen — ohne Bagger, ohne aufgerissenen Garten.
           </p>
 
           {/* Two taps, side by side: the call for anyone who wants it dealt
