@@ -3625,14 +3625,14 @@ export const CITY_PAGES: CityPage[] = [
     slug: "muelheim-an-der-ruhr",
     name: "Mülheim an der Ruhr",
     keyword: "Kellersanierung Mülheim",
-    title: "Kellersanierung Mülheim | Abdichtung in Saarn & Broich",
+    title: "Kellersanierung Mülheim an der Ruhr | Abdichter Saarn",
     metaDescription:
-      "Kellersanierung Mülheim an der Ruhr: Keller abdichten gegen Hang- und Grundwasser in Saarn, Broich, Speldorf und Heißen. Messung kostenlos, Festpreis.",
+      "Kellersanierung Mülheim an der Ruhr: Ihr Abdichter gegen Hang- und Grundwasser in Saarn, Broich, Speldorf und Heißen, von innen. Messung kostenlos.",
     h1: "Kellersanierung Mülheim an der Ruhr: Keller abdichten an Hang und Ruhr",
     lede:
       "Zwischen den Hängen von Saarn und Holthausen und dem Ruhrufer in Broich und Mintard bekommen Keller Wasser von mehreren Seiten: als Hangwasser, als Grundwasser und als aufsteigende Feuchte im alten Mauerwerk. Mülheim grenzt an Essen, unseren Sitz; wir messen kostenlos und dichten von innen ab.",
     plz: ["45468", "45470", "45472", "45473", "45475", "45476", "45478", "45479", "45481"],
-    districts: ["Altstadt", "Saarn", "Selbeck", "Mintard", "Speldorf", "Broich", "Menden", "Holthausen", "Heißen", "Dümpten", "Styrum"],
+    districts: ["Altstadt", "Eppinghofen", "Saarn", "Selbeck", "Mintard", "Speldorf", "Broich", "Menden", "Holthausen", "Raadt", "Ickten", "Heißen", "Heimaterde", "Fulerum", "Winkhausen", "Dümpten", "Styrum", "Mellinghofen"],
     geo: { lat: 51.4275, lng: 6.8825 },
     responseTime: "24 bis 48 Stunden",
     wiki: "https://de.wikipedia.org/wiki/M%C3%BClheim_an_der_Ruhr",
@@ -3689,6 +3689,11 @@ export const CITY_PAGES: CityPage[] = [
         "slug": "sockelabdichtung",
         "heading": "Sockel abdichten in Mülheim",
         "text": "Bei Altbauten und Villen in Speldorf und Broich ist der Sockel oft durchfeuchtet, der Putz platzt ab. Wir dichten den Sockel ab und schließen ihn an die Abdichtung der Kellerwand an."
+      },
+      {
+        "slug": "balkon-terrasse",
+        "heading": "Balkon und Terrasse abdichten in Mülheim",
+        "text": "Wenn unter dem Balkon der Putz abplatzt oder die Terrasse über einem Kellerraum liegt und es darunter feucht wird, ist meist der Belag oder sein Anschluss an die Hauswand undicht. Wir finden die Stelle und dichten Fläche und Anschlüsse dauerhaft ab, bei den Villen in Speldorf und Broich ebenso wie bei Reihenhäusern in Heißen."
       }
     ],
     districtGroups: [
@@ -3755,6 +3760,13 @@ export const CITY_PAGES: CityPage[] = [
           "In der Innenstadt und in Eppinghofen sind die Häuser meist vermietet oder gehören Eigentümergemeinschaften. Feuchte Keller betreffen hier alle Parteien, und die Sanierung muss im bewohnten Haus funktionieren.",
           "Wir arbeiten Kellerraum für Kellerraum, sodass immer nur ein Teil gesperrt ist. Die Hausverwaltung bekommt ein schriftliches Angebot mit Messprotokoll für die Eigentümerversammlung und nach jeder Phase ein weiteres Protokoll."
         ]
+      },
+      {
+        "heading": "Abdichter in Mülheim: vom Keller bis zum Balkon",
+        "paragraphs": [
+          "Die meisten Anfragen aus Mülheim betreffen den Keller: die nasse Hangwand in Saarn, Grundwasser an der Ruhr, aufsteigende Feuchte in den Altbauten von Broich und Speldorf. Oft hängt aber mehr daran. Ein durchfeuchteter Sockel leitet Spritzwasser in die Kellerwand, ein undichter Balkon oder eine Terrasse über dem Keller lässt Wasser von oben ins Mauerwerk.",
+          "Als Abdichter schauen wir uns deshalb das ganze Haus an, nicht nur die nasse Stelle. Wir messen kostenlos, wo das Wasser herkommt, und dichten dann Keller, Sockel, Balkon oder Terrasse so ab, dass die Abdichtungen aneinander anschließen. Wasserführende Risse verpressen wir mit PU-Harz."
+        ]
       }
     ],
     faqs: [
@@ -3785,6 +3797,10 @@ export const CITY_PAGES: CityPage[] = [
       {
         "q": "Sanieren Sie auch Keller in Mehrfamilienhäusern und für Hausverwaltungen in Mülheim?",
         "a": "Ja. Für Hausverwaltungen und Eigentümergemeinschaften erstellen wir ein schriftliches Angebot mit Messprotokoll und arbeiten raumweise, damit die Mieter ihre Keller möglichst weiter nutzen können."
+      },
+      {
+        "q": "Dichten Sie in Mülheim auch Sockel, Balkon und Terrasse ab?",
+        "a": "Ja. Neben der Kellersanierung dichten wir in Mülheim Sockel, Balkone und Terrassen ab und verpressen Risse. Oft gehört das zusammen: Ein nasser Sockel oder eine undichte Terrasse über dem Keller ist eine häufige Ursache für feuchte Kellerwände. Bei der kostenlosen Messung prüfen wir, welche Stelle wirklich undicht ist."
       }
     ],
     nearby: ["essen", "oberhausen", "duisburg", "duesseldorf"],
