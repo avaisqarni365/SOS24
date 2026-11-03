@@ -2666,7 +2666,7 @@ export const CITY_PAGES: CityPage[] = [
     lede:
       "Von Wattenscheid bis Langendreer und von Gerthe bis Stiepel: In Bochum werden Keller vor allem durch Risse aus dem Bergbau, aufsteigende Feuchte in den Ziegelkellern der Zechenhäuser und Schichtenwasser an den Hängen zum Ruhrtal nass. Wir messen kostenlos, woher die Feuchte kommt, und sanieren von innen, ohne Aufgraben.",
     plz: ["44787", "44789", "44791", "44793", "44795", "44797", "44799", "44801", "44803", "44805", "44807", "44809", "44866", "44867", "44869", "44879", "44892", "44894"],
-    districts: ["Bochum-Mitte", "Ehrenfeld", "Hamme", "Hofstede", "Grumme", "Wiemelhausen", "Altenbochum", "Laer", "Wattenscheid", "Höntrop", "Eppendorf", "Hordel", "Gerthe", "Harpen", "Riemke", "Stiepel", "Weitmar", "Linden", "Dahlhausen", "Langendreer", "Werne", "Querenburg"],
+    districts: ["Bochum-Mitte", "Ehrenfeld", "Kortländer", "Hamme", "Hofstede", "Riemke", "Grumme", "Wiemelhausen", "Altenbochum", "Laer", "Querenburg", "Steinkuhl", "Wattenscheid", "Günnigfeld", "Leithe", "Höntrop", "Eppendorf", "Sevinghausen", "Hordel", "Gerthe", "Hiltrop", "Bergen", "Harpen", "Kornharpen", "Stiepel", "Weitmar", "Linden", "Dahlhausen", "Langendreer", "Werne"],
     geo: { lat: 51.4818, lng: 7.2162 },
     responseTime: "24 bis 48 Stunden",
     localFactors: [
@@ -2731,6 +2731,13 @@ export const CITY_PAGES: CityPage[] = [
           "In Wattenscheid stehen Gründerzeithäuser im alten Ortskern neben Einfamilienhäusern aus den 1960er und 1970er Jahren in Höntrop und Eppendorf. Die Altbauten haben meist aufsteigende Feuchte im Mauerwerk, die jüngeren Häuser eher eine gealterte Außenabdichtung, über die Feuchte seitlich in den Keller kommt.",
           "Mit der kostenlosen Messung klären wir zuerst, welcher Fall vorliegt. Danach setzen wir die passende Maßnahme um, von der Horizontalsperre bis zur Innenabdichtung mit Dichtungsschlämme und Hohlkehle."
         ]
+      },
+      {
+        "heading": "Kellertrockenlegung oder Kellerabdichtung? Der richtige Weg für Ihren Keller in Bochum",
+        "paragraphs": [
+          "Wer in Bochum einen nassen Keller hat, bekommt oft zwei Ratschläge: den Keller trockenlegen oder ihn abdichten. Beides kann richtig sein, aber für verschiedene Schäden. Steigt die Feuchte im Ziegel der Zechenhäuser in Langendreer, Werne oder Gerthe auf, ist eine Kellertrockenlegung mit Horizontalsperre der richtige Weg. Drückt Wasser vom Hang gegen die Wand, wie in Stiepel und Weitmar, oder kommt es durch einen Bergschadensriss, braucht es eine Kellerabdichtung von innen oder eine Rissverpressung.",
+          "Häufig ist es eine Mischung. Deshalb messen wir als Fachbetrieb zuerst an mehreren Wänden und in mehreren Höhen, kostenlos, und schreiben Ihnen auf, welche Ursache wir gefunden haben. Erst dann bekommen Sie ein Festpreisangebot, das genau diese Ursachen behebt und nicht mehr."
+        ]
       }
     ],
     faqs: [
@@ -2769,6 +2776,10 @@ export const CITY_PAGES: CityPage[] = [
       {
         "q": "Sanieren Sie auch Keller in Mehrfamilienhäusern und für Hausverwaltungen in Bochum?",
         "a": "Ja. Gerade in Ehrenfeld, Mitte und Hamme stehen viele Mehrfamilienhäuser aus der Gründerzeit und der Nachkriegszeit. Wir sanieren Kellerraum für Kellerraum, damit die Mieter ihre Keller weiter nutzen können, und geben der Hausverwaltung ein schriftliches Angebot mit Messprotokoll, das sie direkt in der Eigentümerversammlung vorlegen kann."
+      },
+      {
+        "q": "Wie finde ich in Bochum einen seriösen Fachbetrieb für die Kellersanierung?",
+        "a": "Fragen Sie, ob vor dem Angebot gemessen wird und ob Sie das Messprotokoll schriftlich bekommen. Ein seriöses Angebot nennt die Ursache, die Verfahren und die Wandlängen und ist ein Festpreis; eine Pauschale am Telefon ist es nicht. Bei uns sind Messung und Protokoll kostenlos, Sie bekommen einen Festpreis und 10 Jahre Garantie auf die Arbeit. Und bei Rissen dokumentieren wir so, dass Sie die Unterlagen auch für eine Bergschadensklärung nutzen können."
       }
     ],
     wiki: "https://de.wikipedia.org/wiki/Bochum",
@@ -2807,6 +2818,11 @@ export const CITY_PAGES: CityPage[] = [
         "slug": "sockelabdichtung",
         "heading": "Sockel abdichten in Bochum",
         "text": "Bei Siedlungs- und Reihenhäusern zieht Spritzwasser in den Sockel und weiter in die Kellerwand. Wir dichten den Sockel ab und schließen ihn an die Kellerabdichtung an."
+      },
+      {
+        "slug": "balkon-terrasse",
+        "heading": "Balkon und Terrasse abdichten in Bochum",
+        "text": "An den Mehrfamilienhäusern in Ehrenfeld, Hamme und Wiemelhausen sind viele Balkone aus den 1950er und 1960er Jahren undicht geworden, bei Einfamilienhäusern in Stiepel und Weitmar liegt die Terrasse oft über einem Kellerraum. Wir finden die undichte Stelle und dichten Fläche und Anschluss an die Hauswand dauerhaft ab."
       }
     ],
     districtGroups: [
