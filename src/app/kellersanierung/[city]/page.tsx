@@ -50,7 +50,7 @@ export default function CityPage({ params }: { params: { city: string } }) {
   const whatsapp = `https://wa.me/${COMPANY.whatsappNumber}?text=${encodeURIComponent(`Hallo Herr Mahmood, ich habe ein Feuchtigkeitsproblem im Keller in ${page.name} und wünsche eine kostenlose Feuchtemessung.`)}`;
   const crumbs = [
     { name: "Startseite", path: "/" },
-    { name: "Servicegebiet", path: "/leistungen/#servicegebiet" },
+    { name: "Kellersanierung NRW", path: "/kellersanierung/" },
     { name: `Kellersanierung ${page.name}`, path },
   ];
   const local = page.localServices ?? [];
