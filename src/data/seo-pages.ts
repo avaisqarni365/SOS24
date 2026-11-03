@@ -3325,14 +3325,14 @@ export const CITY_PAGES: CityPage[] = [
     slug: "gelsenkirchen",
     name: "Gelsenkirchen",
     keyword: "Kellersanierung Gelsenkirchen",
-    title: "Kellersanierung Gelsenkirchen | Risse & feuchte Keller",
+    title: "Kellersanierung Gelsenkirchen | Nasser Keller & Risse",
     metaDescription:
-      "Kellersanierung Gelsenkirchen ohne Aufgraben: Bergsenkungsrisse verpressen, feuchte Keller abdichten, von Buer bis Ückendorf. Messung kostenlos, Festpreis.",
-    h1: "Kellersanierung Gelsenkirchen: Risse und feuchte Keller dauerhaft sanieren",
+      "Kellersanierung Gelsenkirchen: nasser Keller, Bergsenkungsrisse, Grundwasser im Emschertal. Von innen ohne Aufgraben, Buer bis Ückendorf. Messung kostenlos.",
+    h1: "Kellersanierung Gelsenkirchen: nasse Keller und Risse dauerhaft sanieren",
     lede:
-      "Gelsenkirchen ist mit dem Bergbau gewachsen, und der Bergbau hat Spuren im Boden hinterlassen: Setzungsrisse, ein künstlich niedrig gehaltenes Grundwasser und viele Siedlungshäuser ohne Sperrschicht. Von unserem Sitz in Essen sind wir schnell in Buer, Horst oder Ückendorf, messen kostenlos und sanieren von innen.",
+      "Gelsenkirchen ist mit dem Bergbau gewachsen, und der Bergbau hat Spuren im Boden hinterlassen: Setzungsrisse, ein künstlich niedrig gehaltenes Grundwasser und viele Siedlungshäuser ohne Sperrschicht. Ist Ihr Keller nass, messen wir kostenlos, ob Risse, aufsteigende Feuchte oder Grundwasser die Ursache sind, und sanieren von innen, ohne Aufgraben. Von unserem Sitz in Essen sind wir schnell in Buer, Horst oder Ückendorf.",
     plz: ["45879", "45881", "45883", "45884", "45886", "45888", "45889", "45891", "45892", "45894", "45896", "45897", "45899"],
-    districts: ["Altstadt", "Schalke", "Ückendorf", "Rotthausen", "Bismarck", "Erle", "Resse", "Buer", "Hassel", "Horst"],
+    districts: ["Altstadt", "Neustadt", "Schalke", "Schalke-Nord", "Bulmke-Hüllen", "Feldmark", "Ückendorf", "Rotthausen", "Heßler", "Bismarck", "Erle", "Resse", "Resser Mark", "Buer", "Beckhausen", "Sutum", "Hassel", "Scholven", "Horst"],
     geo: { lat: 51.5177, lng: 7.0857 },
     responseTime: "24 bis 48 Stunden",
     wiki: "https://de.wikipedia.org/wiki/Gelsenkirchen",
@@ -3451,6 +3451,13 @@ export const CITY_PAGES: CityPage[] = [
           "Im Norden überwiegen Einfamilien- und Doppelhäuser, viele aus den 1950er bis 1970er Jahren, dazu Zechensiedlungen in Hassel und Scholven. Die Keller werden oft als Hobbyraum oder Waschküche genutzt, und dort fällt Feuchte schnell auf.",
           "Typisch sind eine gealterte Außenabdichtung und Risse aus Setzungen. Wir messen zuerst kostenlos, woher die Feuchte kommt, verpressen wasserführende Risse mit PU-Harz und dichten die Wände von innen mit Dichtungsschlämme und Hohlkehle ab, ohne Garten oder Einfahrt aufzugraben."
         ]
+      },
+      {
+        "heading": "Nasser Keller in Gelsenkirchen: Wand, Boden oder Abfluss?",
+        "paragraphs": [
+          "Ein nasser Keller hat in Gelsenkirchen meist eine von drei Ursachen. Kommt das Wasser nach Regen an einer Stelle durch Wand oder Bodenplatte, ist es fast immer ein Riss oder eine Fuge, oft aus Bergsenkungen. Ist die Wand unten gleichmäßig feucht, mit weißen Salzrändern, steigt die Feuchte im Mauerwerk auf. Und steht das Wasser nach einem Starkregen plötzlich am Bodenablauf, drückt es aus dem Kanal zurück.",
+          "Die ersten beiden Fälle sanieren wir von innen: wasserführende Risse verpressen, eine neue Horizontalsperre setzen, Wände und Boden-Wand-Anschluss abdichten. Beim Rückstau aus dem Kanal hilft dagegen eine Rückstausicherung, die ein Sanitärbetrieb einbaut; das sagen wir Ihnen nach der Messung offen, statt eine Sanierung zu verkaufen, die das Problem nicht löst."
+        ]
       }
     ],
     faqs: [
@@ -3481,6 +3488,10 @@ export const CITY_PAGES: CityPage[] = [
       {
         "q": "Sanieren Sie auch Keller in Mehrfamilienhäusern und für Hausverwaltungen?",
         "a": "Ja. Für Hausverwaltungen und Eigentümergemeinschaften in Gelsenkirchen erstellen wir ein schriftliches Angebot mit Messprotokoll und arbeiten raumweise, damit die Mieter ihre Keller möglichst weiter nutzen können."
+      },
+      {
+        "q": "Was tun, wenn der Keller in Gelsenkirchen nach Starkregen nass ist?",
+        "a": "Zuerst das Wasser entfernen, gut lüften und mit Fotos festhalten, wo es hereinkam: durch die Wand, an der Fuge zum Boden oder aus dem Bodenablauf. Kommt es aus dem Ablauf, liegt meist ein Rückstau aus dem Kanal vor, dagegen hilft eine Rückstausicherung. Kommt es durch Wand oder Boden, messen wir kostenlos und verpressen oder dichten die Stelle von innen ab. Fotos können Sie vorab per WhatsApp an 0172 2064177 schicken."
       }
     ],
     nearby: ["essen", "bottrop", "bochum", "oberhausen"],
