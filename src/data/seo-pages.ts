@@ -2393,9 +2393,9 @@ export const CITY_PAGES: CityPage[] = [
       "Kellersanierung Düsseldorf: Keller und Souterrain von innen abdichten, auch gegen drückendes Rheinwasser. Kostenlose Feuchtemessung, 10 Jahre Garantie.",
     h1: "Kellersanierung Düsseldorf: Keller trockenlegen ohne Aufgraben",
     lede:
-      "Zwischen Kaiserswerth und Benrath stehen viele Keller im Einflussbereich des Rheins: hoher Grundwasserstand, Kies- und Sandböden und Souterrains, die als Wohnung oder Büro genutzt werden. Wir messen kostenlos, woher die Feuchte kommt, und dichten Ihren Keller von innen ab, ohne Aufgraben. In Düsseldorf sind wir in der Regel innerhalb von 24 bis 48 Stunden bei Ihnen.",
+      "Zwischen Kaiserswerth und Benrath stehen viele Keller im Einflussbereich des Rheins: hoher Grundwasserstand, Kies- und Sandböden und Souterrains, die als Wohnung oder Büro genutzt werden. Ist Ihr Keller nass, messen wir als Fachbetrieb kostenlos, woher die Feuchte kommt, und übernehmen Kellerabdichtung oder Kellertrockenlegung von innen, ohne Aufgraben. In Düsseldorf sind wir in der Regel innerhalb von 24 bis 48 Stunden bei Ihnen.",
     plz: ["40210", "40211", "40212", "40213", "40215", "40217", "40219", "40221", "40223", "40225", "40227", "40229", "40231", "40233", "40235", "40237", "40239", "40468", "40470", "40472", "40474", "40476", "40477", "40479", "40489", "40545", "40547", "40549", "40589", "40591", "40593", "40595", "40597", "40599", "40625", "40627", "40629"],
-    districts: ["Düsseldorf-Mitte", "Oberkassel", "Pempelfort", "Unterbilk", "Bilk", "Flingern", "Düsseltal", "Derendorf", "Golzheim", "Gerresheim", "Grafenberg", "Benrath", "Eller", "Wersten", "Garath", "Kaiserswerth", "Heerdt", "Lörick", "Rath", "Unterrath"],
+    districts: ["Düsseldorf-Mitte", "Altstadt", "Carlstadt", "Oberkassel", "Niederkassel", "Heerdt", "Lörick", "Pempelfort", "Derendorf", "Golzheim", "Stockum", "Lohausen", "Kaiserswerth", "Wittlaer", "Angermund", "Kalkum", "Unterbilk", "Bilk", "Hamm", "Flehe", "Flingern", "Düsseltal", "Grafenberg", "Gerresheim", "Ludenberg", "Rath", "Unterrath", "Eller", "Vennhausen", "Unterbach", "Wersten", "Holthausen", "Hassels", "Benrath", "Garath"],
     geo: { lat: 51.2277, lng: 6.7735 },
     responseTime: "24 bis 48 Stunden",
     localFactors: [
@@ -2460,6 +2460,13 @@ export const CITY_PAGES: CityPage[] = [
           "Im Düsseldorfer Norden stehen viele ältere Häuser in Rheinnähe, teils unter Denkmalschutz. Ihre Keller haben keine Sperrschicht gegen aufsteigende Feuchte, und bei hohem Rheinpegel steigt auch das Grundwasser im Untergrund.",
           "Wir setzen hier eine Horizontalsperre per Injektion, damit die Wand von unten keine Feuchte mehr zieht, und dichten den Wandfuß gegen Grundwasser ab. Die Fassade und der Garten bleiben unberührt, was gerade bei denkmalgeschützten Häusern wichtig ist."
         ]
+      },
+      {
+        "heading": "Nasser Keller in Düsseldorf: Kellerabdichtung, Kellertrockenlegung oder Horizontalsperre?",
+        "paragraphs": [
+          "Ein nasser Keller hat in Düsseldorf meist eine von drei Ursachen. Nah am Rhein drückt Grundwasser von unten und seitlich gegen Bodenplatte und Wand; dagegen hilft eine Kellerabdichtung, die drückendem Wasser standhält. In den Altbauten von Pempelfort, Bilk und Flingern steigt die Feuchte im Mauerwerk auf; hier ist eine Kellertrockenlegung mit Horizontalsperre der richtige Weg. Und wo Wasser nur an einer Stelle hereinkommt, ist es oft ein Riss oder eine Fuge, die wir verpressen.",
+          "Fachlich ist all das Bauwerksabdichtung, also der Schutz des Gebäudes gegen Wasser aus dem Boden. Wir führen sie von innen aus: mehrlagige Dichtungsschlämme mit Hohlkehle am Wandfuß, Horizontalsperre per Injektion, Rissverpressung mit PU-Harz und Sanierputz. Welche Verfahren Ihr Keller braucht, entscheiden wir erst nach der kostenlosen Messung, nicht am Telefon."
+        ]
       }
     ],
     faqs: [
@@ -2502,6 +2509,14 @@ export const CITY_PAGES: CityPage[] = [
       {
         "q": "Wie lange dauert eine Kellersanierung in Düsseldorf?",
         "a": "Die Arbeiten selbst dauern meist zwei bis vier Werktage, je nach Fläche und Verfahren. Danach trocknet das Mauerwerk über einige Monate aus; wir messen nach und geben Ihnen das Protokoll schriftlich. Ein Souterrain, das als Wohnung oder Büro genutzt wird, sanieren wir auf Wunsch abschnittsweise, damit es weiter nutzbar bleibt."
+      },
+      {
+        "q": "Woran erkenne ich eine gute Firma für die Kellersanierung in Düsseldorf?",
+        "a": "Ein seriöser Fachbetrieb misst zuerst und nennt den Preis danach, nicht umgekehrt. Achten Sie darauf, dass die Ursache mit Messwerten belegt wird, dass das Angebot die Verfahren und Wandlängen einzeln aufführt und einen Festpreis nennt, und dass es eine schriftliche Garantie auf die Arbeit gibt. Bei uns sind die Feuchtemessung und das Messprotokoll kostenlos, das Angebot ist ein Festpreis, und auf die Arbeit geben wir 10 Jahre Garantie."
+      },
+      {
+        "q": "Kellerabdichtung, Kellertrockenlegung, Kellersanierung: Was brauche ich in Düsseldorf?",
+        "a": "Kellerabdichtung schützt die Wand gegen Wasser von außen, in Rheinnähe auch gegen drückendes Grundwasser. Kellertrockenlegung heißt meist, aufsteigende Feuchte mit einer Horizontalsperre zu stoppen. Kellersanierung umfasst beides und dazu Rissverpressung, Sanierputz und Schimmelbeseitigung. Was Ihr Keller braucht, zeigt die kostenlose Feuchtemessung."
       }
     ],
     wiki: "https://de.wikipedia.org/wiki/D%C3%BCsseldorf",
