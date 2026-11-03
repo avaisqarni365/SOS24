@@ -1583,7 +1583,7 @@ export const CITY_PAGES: CityPage[] = [
     keyword: "Kellersanierung Remscheid",
     title: "Kellersanierung Remscheid | Kellertrockenlegung am Hang",
     metaDescription:
-      "Kellersanierung Remscheid: nasse Kellerwände in Lennep, Lüttringhausen und Alt-Remscheid ohne Aufgraben trockenlegen. Kostenlose Messung.",
+      "Kellersanierung Remscheid: Kellertrockenlegung und Kellerabdichtung am Hang, in Lennep, Lüttringhausen und Alt-Remscheid, ohne Aufgraben. Messung kostenlos.",
     h1: "Kellersanierung Remscheid: trockene Keller trotz Höhenlage und Regen",
     lede:
       "Remscheid liegt höher als jede andere Stadt im Bergischen Land und bekommt entsprechend viel Regen ab. Für Keller heißt das: Die Wände sind oft über Monate nass, und nur eine sorgfältig geplante Sanierung bringt sie dauerhaft zur Ruhe.",
@@ -1762,9 +1762,9 @@ export const CITY_PAGES: CityPage[] = [
     slug: "velbert",
     name: "Velbert",
     keyword: "Kellersanierung Velbert",
-    title: "Kellersanierung Velbert | Keller abdichten ohne Aufgraben",
+    title: "Kellersanierung Velbert | Kellertrockenlegung & Abdichtung",
     metaDescription:
-      "Kellersanierung Velbert: feuchte Keller in Neviges, Langenberg und Velbert-Mitte von innen abdichten. Kostenlose Feuchtemessung, Festpreis.",
+      "Kellersanierung Velbert: Kellertrockenlegung und Kellerabdichtung von innen in Neviges, Langenberg und Velbert-Mitte. Kostenlose Messung, Festpreis.",
     h1: "Kellersanierung Velbert: Altstadtkeller und Hanghäuser trockenlegen",
     lede:
       "Velbert vereint drei sehr unterschiedliche Stadtteile: die Schlossstadt auf der Höhe, den Wallfahrtsort Neviges und das historische Langenberg im Deilbachtal. Jeder bringt eigene Kellerprobleme mit: Bruchsteinkeller im Tal, Hangwasser auf der Höhe. Wir messen kostenlos, woher die Nässe kommt, und sanieren von innen, ohne Aufgraben.",
@@ -1930,7 +1930,7 @@ export const CITY_PAGES: CityPage[] = [
     slug: "haan",
     name: "Haan",
     keyword: "Kellersanierung Haan",
-    title: "Kellersanierung Haan | Keller abdichten ohne Aufgraben",
+    title: "Kellersanierung Haan | Keller trockenlegen in Haan & Gruiten",
     metaDescription:
       "Kellersanierung Haan: Keller und Souterrainwohnungen in Haan und Gruiten trockenlegen. Ohne Aufgraben, kostenlose Messung, Festpreisangebot.",
     h1: "Kellersanierung Haan: Keller und Souterrain dauerhaft trockenlegen",
@@ -2083,7 +2083,7 @@ export const CITY_PAGES: CityPage[] = [
         text: "Altes Dorf an der Düssel auf verkarstetem Kalkstein. Wasser von unten im Tal, an unerwarteten Stellen austretendes Kluftwasser und aufsteigende Feuchte im alten Mauerwerk."
       }
     ],
-    nearby: ["solingen", "wuppertal", "velbert", "duesseldorf"],
+    nearby: ["solingen", "wuppertal", "velbert", "duesseldorf", "remscheid"],
   },
 
 
@@ -2739,7 +2739,7 @@ export const CITY_PAGES: CityPage[] = [
         "text": "Reihen- und Doppelhäuser aus den 1950er bis 1970er Jahren. Spröde Bitumenanstriche, Feuchte am Wandfuß und ausgebaute Keller, in denen Schimmel entsteht."
       }
     ],
-    nearby: ["duisburg", "haan", "solingen", "leverkusen", "koeln", "muelheim-an-der-ruhr"],
+    nearby: ["duisburg", "haan", "solingen", "leverkusen", "koeln", "muelheim-an-der-ruhr", "velbert"],
   },
 
   // Bochum
@@ -2749,7 +2749,7 @@ export const CITY_PAGES: CityPage[] = [
     keyword: "Kellersanierung Bochum",
     title: "Kellersanierung Bochum | Bergschäden & Kellerabdichtung",
     metaDescription:
-      "Kellersanierung Bochum: Bergschadensrisse, nasse Kellerwände und Hangwasser von innen sanieren. Kostenlose Feuchtemessung vor Ort, 10 Jahre Garantie.",
+      "Kellersanierung Bochum: Bergschadensrisse verpressen, nasse Kellerwände und Hangwasser von innen abdichten. Kostenlose Feuchtemessung, 10 Jahre Garantie.",
     h1: "Kellersanierung Bochum: Nasse Keller dauerhaft trockenlegen",
     lede:
       "Von Wattenscheid bis Langendreer und von Gerthe bis Stiepel: In Bochum werden Keller vor allem durch Risse aus dem Bergbau, aufsteigende Feuchte in den Ziegelkellern der Zechenhäuser und Schichtenwasser an den Hängen zum Ruhrtal nass. Wir messen kostenlos, woher die Feuchte kommt, und sanieren von innen, ohne Aufgraben.",
@@ -3610,7 +3610,7 @@ export const CITY_PAGES: CityPage[] = [
     slug: "gelsenkirchen",
     name: "Gelsenkirchen",
     keyword: "Kellersanierung Gelsenkirchen",
-    title: "Kellersanierung Gelsenkirchen | Nasser Keller & Risse",
+    title: "Kellersanierung Gelsenkirchen | Nasse Keller abdichten",
     metaDescription:
       "Kellersanierung Gelsenkirchen: nasser Keller, Bergsenkungsrisse, Grundwasser im Emschertal. Von innen ohne Aufgraben, Buer bis Ückendorf. Messung kostenlos.",
     h1: "Kellersanierung Gelsenkirchen: nasse Keller und Risse dauerhaft sanieren",
@@ -4192,7 +4192,7 @@ export const CITY_PAGES: CityPage[] = [
         "a": "Wasser entfernen, lüften und festhalten, wo es hereinkam. Kommt es am Hang durch die bergseitige Wand oder an der Fuge zum Boden, drückt Wasser von außen; das dichten wir von innen ab. Steht es am Bodenablauf, drückt es meist aus dem Kanal zurück, dann hilft eine Rückstausicherung vom Sanitärbetrieb. Fotos können Sie vorab per WhatsApp an 0172 2064177 schicken, die Messung vor Ort ist kostenlos."
       }
     ],
-    nearby: ["essen", "oberhausen", "duisburg", "duesseldorf"],
+    nearby: ["essen", "oberhausen", "duisburg", "duesseldorf", "velbert", "gelsenkirchen", "bottrop"],
   },
   // Hagen
   {
