@@ -1156,7 +1156,7 @@ export const CITY_PAGES: CityPage[] = [
     slug: "wuppertal",
     name: "Wuppertal",
     keyword: "Kellersanierung Wuppertal",
-    title: "Kellersanierung Wuppertal | Keller abdichten ohne Aufgraben",
+    title: "Kellersanierung Wuppertal | Kellertrockenlegung am Hang",
     metaDescription:
       "Kellersanierung Wuppertal vom SchimmelPeter®-Partnerbetrieb: Hangwasser, Bruchstein- und Gründerzeitkeller von innen trockenlegen. Messung kostenlos.",
     h1: "Kellersanierung Wuppertal: Ihr feuchter Keller wird trocken, auch in Hanglage",
@@ -1385,7 +1385,7 @@ export const CITY_PAGES: CityPage[] = [
     slug: "solingen",
     name: "Solingen",
     keyword: "Kellersanierung Solingen",
-    title: "Kellersanierung Solingen | Keller abdichten ohne Aufgraben",
+    title: "Kellersanierung Solingen | Horizontalsperre & Abdichtung",
     metaDescription:
       "Kellersanierung Solingen: feuchte Keller von Gräfrath bis Ohligs von innen trockenlegen. Kostenlose Messung, 10 Jahre Garantie auf die Arbeit.",
     h1: "Kellersanierung Solingen: von der Wupper bis zur Ohligser Heide",
@@ -1572,7 +1572,7 @@ export const CITY_PAGES: CityPage[] = [
     slug: "remscheid",
     name: "Remscheid",
     keyword: "Kellersanierung Remscheid",
-    title: "Kellersanierung Remscheid | Keller abdichten ohne Aufgraben",
+    title: "Kellersanierung Remscheid | Kellertrockenlegung am Hang",
     metaDescription:
       "Kellersanierung Remscheid: nasse Kellerwände in Lennep, Lüttringhausen und Alt-Remscheid ohne Aufgraben trockenlegen. Kostenlose Messung.",
     h1: "Kellersanierung Remscheid: trockene Keller trotz Höhenlage und Regen",
@@ -2475,7 +2475,7 @@ export const CITY_PAGES: CityPage[] = [
     slug: "duesseldorf",
     name: "Düsseldorf",
     keyword: "Kellersanierung Düsseldorf",
-    title: "Kellersanierung Düsseldorf | Keller abdichten ohne Aufgraben",
+    title: "Kellersanierung Düsseldorf | Kellerabdichtung am Rhein",
     metaDescription:
       "Kellersanierung Düsseldorf: Keller und Souterrain von innen abdichten, auch gegen drückendes Rheinwasser. Kostenlose Feuchtemessung, 10 Jahre Garantie.",
     h1: "Kellersanierung Düsseldorf: Keller trockenlegen ohne Aufgraben",
@@ -2709,7 +2709,7 @@ export const CITY_PAGES: CityPage[] = [
     slug: "bochum",
     name: "Bochum",
     keyword: "Kellersanierung Bochum",
-    title: "Kellersanierung Bochum | Keller abdichten ohne Aufgraben",
+    title: "Kellersanierung Bochum | Bergschäden & Kellerabdichtung",
     metaDescription:
       "Kellersanierung Bochum: Bergschadensrisse, nasse Kellerwände und Hangwasser von innen sanieren. Kostenlose Feuchtemessung vor Ort, 10 Jahre Garantie.",
     h1: "Kellersanierung Bochum: Nasse Keller dauerhaft trockenlegen",
@@ -2936,10 +2936,10 @@ export const CITY_PAGES: CityPage[] = [
     slug: "dortmund",
     name: "Dortmund",
     keyword: "Kellersanierung Dortmund",
-    title: "Kellersanierung Dortmund | Keller abdichten ohne Aufgraben",
+    title: "Kellersanierung Dortmund | Kellerabdichtung, nasse Keller",
     metaDescription:
       "Kellersanierung Dortmund: aufsteigende Feuchte, Grundwasser und Bergschadensrisse von innen sanieren. Kostenlose Feuchtemessung vor Ort, 10 Jahre Garantie.",
-    h1: "Kellersanierung Dortmund: Keller sanieren ohne Aufgraben",
+    h1: "Kellersanierung Dortmund: nasse Keller und feuchte Wände von innen sanieren",
     lede:
       "Vom Kreuzviertel und Hörde am Phoenix-See bis nach Eving und Mengede: In Dortmund werden Keller vor allem durch aufsteigende Feuchte in Gründerzeit- und Nachkriegskellern, Grundwasser in der Emscher-Niederung und Risse aus der Bergbauzeit nass. Wir messen kostenlos, woher die Feuchte kommt, und sanieren von innen, ohne Aufgraben.",
     plz: ["44135", "44137", "44139", "44141", "44143", "44145", "44147", "44149", "44225", "44227", "44229", "44263", "44265", "44267", "44269", "44287", "44289", "44309", "44319", "44328", "44329", "44339", "44357", "44359", "44369", "44379", "44388"],
@@ -3343,7 +3343,7 @@ export const CITY_PAGES: CityPage[] = [
     slug: "duisburg",
     name: "Duisburg",
     keyword: "Kellersanierung Duisburg",
-    title: "Kellersanierung Duisburg | Keller abdichten ohne Aufgraben",
+    title: "Kellersanierung Duisburg | Mauerwerksabdichtung & Risse",
     metaDescription:
       "Kellersanierung Duisburg ohne Aufgraben: Grundwasser an Rhein und Ruhr, Bergsenkungsrisse, nasse Altbaukeller von innen sanieren. Messung kostenlos.",
     h1: "Kellersanierung Duisburg: nasse Keller an Rhein und Ruhr trockenlegen",
