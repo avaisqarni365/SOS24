@@ -3145,7 +3145,7 @@ export const CITY_PAGES: CityPage[] = [
         "text": "Siedlungs- und Reihenhäuser aus den 1920er bis 1960er Jahren. Aufsteigende Feuchte im Ziegel und genutzte Hobbykeller, in denen Schimmel schnell auffällt."
       }
     ],
-    nearby: ["bochum", "hagen", "essen"],
+    nearby: ["bochum", "hagen", "essen", "gelsenkirchen"],
   },
   // Köln
   {
@@ -3609,6 +3609,11 @@ export const CITY_PAGES: CityPage[] = [
         "slug": "sockelabdichtung",
         "heading": "Sockel abdichten in Gelsenkirchen",
         "text": "Bei Siedlungs- und Reihenhäusern zieht Spritzwasser in den Sockel und weiter in die Kellerwand. Wir dichten den Sockel ab und schließen ihn an die Kellerabdichtung an."
+      },
+      {
+        "slug": "balkon-terrasse",
+        "heading": "Balkon und Terrasse abdichten in Gelsenkirchen",
+        "text": "An den Mehrfamilienhäusern in Schalke, Ückendorf und der Neustadt sind viele Balkone aus dem Wiederaufbau undicht geworden; Putz platzt unter der Platte ab, Rost zeigt sich an den Kanten. Bei Einfamilienhäusern in Buer und Resse liegt die Terrasse oft über einem Kellerraum. Wir finden die undichte Stelle und dichten Fläche und Wandanschluss fugenlos ab."
       }
     ],
     districtGroups: [
@@ -3674,6 +3679,13 @@ export const CITY_PAGES: CityPage[] = [
           "Ein nasser Keller hat in Gelsenkirchen meist eine von drei Ursachen. Kommt das Wasser nach Regen an einer Stelle durch Wand oder Bodenplatte, ist es fast immer ein Riss oder eine Fuge, oft aus Bergsenkungen. Ist die Wand unten gleichmäßig feucht, mit weißen Salzrändern, steigt die Feuchte im Mauerwerk auf. Und steht das Wasser nach einem Starkregen plötzlich am Bodenablauf, drückt es aus dem Kanal zurück.",
           "Die ersten beiden Fälle sanieren wir von innen: wasserführende Risse verpressen, eine neue Horizontalsperre setzen, Wände und Boden-Wand-Anschluss abdichten. Beim Rückstau aus dem Kanal hilft dagegen eine Rückstausicherung, die ein Sanitärbetrieb einbaut; das sagen wir Ihnen nach der Messung offen, statt eine Sanierung zu verkaufen, die das Problem nicht löst."
         ]
+      },
+      {
+        "heading": "Feuchte Wände im Keller: Mauerwerksabdichtung in Gelsenkirchen",
+        "paragraphs": [
+          "Feuchte Wände sind in Gelsenkirchen der häufigste Grund, warum wir gerufen werden. Zeigt sich die Feuchte unten an der Wand als gleichmäßiger dunkler Streifen mit weißen Salzrändern, steigt sie im Ziegel auf; dann braucht das Mauerwerk eine neue Horizontalsperre. Ist dagegen die erdberührte Wand großflächig nass, besonders nach Regen oder in den tief liegenden Lagen an der Emscher, drückt das Wasser von außen, und die Wand braucht eine Mauerwerksabdichtung von innen.",
+          "Für die Mauerwerksabdichtung entfernen wir den alten Putz, verpressen vorhandene Risse und tragen Dichtungsschlämme in mehreren Lagen auf, mit einer Hohlkehle am Übergang zum Boden. Darauf kommt ein Sanierputz, der Restfeuchte verdunsten lässt. Die Wand bleibt atmungsaktiv, der Raum wird trocken und wieder nutzbar, ob als Lager, Waschküche oder Hobbyraum."
+        ]
       }
     ],
     faqs: [
@@ -3712,9 +3724,17 @@ export const CITY_PAGES: CityPage[] = [
       {
         "q": "Kellerabdichtung oder Kellertrockenlegung: Was hilft in Gelsenkirchen?",
         "a": "Im Emschertal, wo das Grundwasser gepumpt wird, und bei Bergsenkungsrissen kommt das Wasser von außen; dann braucht es eine Kellerabdichtung von innen und eine Rissverpressung. In den Ziegelkellern der Siedlungen in Schalke, Bismarck und Hassel steigt die Feuchte auf, und eine Kellertrockenlegung mit Horizontalsperre ist der richtige Weg. Als Fachbetrieb messen wir kostenlos, bevor wir anbieten."
+      },
+      {
+        "q": "Wie finde ich in Gelsenkirchen eine gute Firma für Kellerabdichtung?",
+        "a": "Eine gute Firma misst, bevor sie anbietet, und gibt Ihnen das Ergebnis schriftlich. Das Angebot sollte Ursache, Verfahren und Wandlängen nennen und ein Festpreis sein, keine Pauschale am Telefon. Fragen Sie nach der Garantie und danach, ob Bergsenkungsrisse eigens geprüft werden. Als Fachbetrieb aus dem Nachbarort Essen messen wir in Gelsenkirchen kostenlos und geben 10 Jahre Garantie auf die Arbeit."
+      },
+      {
+        "q": "Warum sind die Kellerwände in meinem Gelsenkirchener Haus im Sommer feucht?",
+        "a": "Oft ist es Kondensat: Warme, feuchte Sommerluft strömt beim Lüften in den kühlen Keller und schlägt sich an den Wänden nieder. Typisch sind nasse Stellen an Außenecken und Wasserrohren, ohne Salzränder. Dann hilft richtiges Lüften, morgens früh oder nachts, und keine Abdichtung. Ob es Kondensat, aufsteigende Feuchte oder Wasser von außen ist, zeigt unsere kostenlose Messung von Wandfeuchte, Oberflächentemperatur und Raumklima."
       }
     ],
-    nearby: ["essen", "bottrop", "bochum", "oberhausen"],
+    nearby: ["essen", "bottrop", "bochum", "oberhausen", "dortmund"],
   },
   // Oberhausen
   {
@@ -3883,7 +3903,7 @@ export const CITY_PAGES: CityPage[] = [
         "a": "In den Siedlungshäusern von Eisenheim, Osterfeld und Lirich steigt die Feuchte meist im Ziegel auf; dann ist eine Kellertrockenlegung mit Horizontalsperre der richtige Weg. An Emscher und Rhein-Herne-Kanal drückt Wasser von unten, und der Keller braucht zusätzlich eine Kellerabdichtung von innen. Als Fachbetrieb messen wir kostenlos und schreiben Ihnen die Ursache auf."
       }
     ],
-    nearby: ["muelheim-an-der-ruhr", "bottrop", "duisburg", "essen"],
+    nearby: ["muelheim-an-der-ruhr", "bottrop", "duisburg", "essen", "gelsenkirchen"],
   },
   // Mülheim an der Ruhr
   {
