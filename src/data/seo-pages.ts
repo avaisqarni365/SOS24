@@ -1652,7 +1652,7 @@ export const CITY_PAGES: CityPage[] = [
       "Kellersanierung Velbert: feuchte Keller in Neviges, Langenberg und Velbert-Mitte von innen abdichten. Kostenlose Feuchtemessung, Festpreis.",
     h1: "Kellersanierung Velbert: Altstadtkeller und Hanghäuser trockenlegen",
     lede:
-      "Velbert vereint drei sehr unterschiedliche Stadtteile: die Schlossstadt auf der Höhe, den Wallfahrtsort Neviges und das historische Langenberg im Deilbachtal. Jeder bringt eigene Kellerprobleme mit.",
+      "Velbert vereint drei sehr unterschiedliche Stadtteile: die Schlossstadt auf der Höhe, den Wallfahrtsort Neviges und das historische Langenberg im Deilbachtal. Jeder bringt eigene Kellerprobleme mit: Bruchsteinkeller im Tal, Hangwasser auf der Höhe. Wir messen kostenlos, woher die Nässe kommt, und sanieren von innen, ohne Aufgraben.",
     plz: ["42549", "42551", "42553", "42555"],
     districts: ["Velbert-Mitte", "Neviges", "Langenberg", "Tönisheide", "Nierenhof", "Siebeneick", "Bonsfeld", "Birth", "Losenburg", "Dalbecksbaum"],
     geo: { lat: 51.340, lng: 7.043 },
@@ -1812,7 +1812,7 @@ export const CITY_PAGES: CityPage[] = [
       "Kellersanierung Haan: Keller und Souterrainwohnungen in Haan und Gruiten trockenlegen. Ohne Aufgraben, kostenlose Messung, Festpreisangebot.",
     h1: "Kellersanierung Haan: Keller und Souterrain dauerhaft trockenlegen",
     lede:
-      "Zwischen der Gartenstadt Haan und dem alten Dorf Gruiten im Düsseltal liegen nur wenige Kilometer, aber sehr unterschiedliche Böden. Wir kennen beide Seiten und sanieren feuchte Keller und Souterrainwohnungen von innen.",
+      "Zwischen der Gartenstadt Haan und dem alten Dorf Gruiten im Düsseltal liegen nur wenige Kilometer, aber sehr unterschiedliche Böden. Wir kennen beide Seiten: Wir messen kostenlos, ob die Feuchte von unten, vom Hang oder aus dem Mauerwerk kommt, und sanieren Keller und Souterrainwohnungen von innen, ohne Aufgraben.",
     plz: ["42781"],
     districts: ["Haan-Mitte", "Unterhaan", "Oberhaan", "Gruiten", "Gruiten-Dorf"],
     geo: { lat: 51.193, lng: 7.013 },
@@ -3508,7 +3508,7 @@ export const CITY_PAGES: CityPage[] = [
     lede:
       "Von der Siedlung Eisenheim bis Sterkrade und Osterfeld stehen in Oberhausen viele Häuser aus der Zeit von Kohle und Stahl. Ihre Keller sind oft feucht, weil die alte Sperrschicht nicht mehr wirkt oder das Grundwasser an der Emscher hoch steht. Wir messen kostenlos, woher die Nässe kommt, und sanieren von innen.",
     plz: ["46045", "46047", "46049", "46117", "46119", "46145", "46147", "46149"],
-    districts: ["Alt-Oberhausen", "Alstaden", "Lirich", "Sterkrade", "Holten", "Schmachtendorf", "Königshardt", "Osterfeld", "Klosterhardt", "Rothebusch"],
+    districts: ["Alt-Oberhausen", "Innenstadt", "Marienkirche", "Bermensfeld", "Lirich", "Alstaden", "Sterkrade", "Tackenberg", "Buschhausen", "Holten", "Schmachtendorf", "Königshardt", "Osterfeld", "Eisenheim", "Klosterhardt", "Rothebusch", "Vondern"],
     geo: { lat: 51.4963, lng: 6.8638 },
     responseTime: "24 bis 48 Stunden",
     wiki: "https://de.wikipedia.org/wiki/Oberhausen",
@@ -3551,6 +3551,21 @@ export const CITY_PAGES: CityPage[] = [
         heading: "Schimmel im Keller in Oberhausen",
         text: "Riecht der Keller muffig oder zeigen sich dunkle Flecken, ist meist schon Schimmel da. Wir entfernen ihn sporensicher, klären per Messung, ob die Nässe aus der Wand oder aus der Luft kommt, und beseitigen die Ursache.",
       },
+      {
+        "slug": "rissverpressung",
+        "heading": "Rissverpressung in Oberhausen",
+        "text": "Setzungsrisse aus der Bergbauzeit und Risse an Arbeitsfugen lassen in Osterfeld und Sterkrade bei Regen Wasser in den Keller. Wir prüfen, ob ein Riss Wasser führt und ob er noch arbeitet, und verpressen ihn mit PU-Harz, das elastisch bleibt."
+      },
+      {
+        "slug": "feuchtemessung",
+        "heading": "Feuchtemessung in Oberhausen",
+        "text": "Aufsteigende Feuchte im Ziegel, Wasser von unten an der Emscher oder Kondensat: Wir messen kostenlos, woher die Nässe in Ihrem Keller kommt, und geben Ihnen das Ergebnis schriftlich."
+      },
+      {
+        "slug": "sockelabdichtung",
+        "heading": "Sockel abdichten in Oberhausen",
+        "text": "Bei Siedlungs- und Reihenhäusern zieht Spritzwasser in den Sockel und weiter in die Kellerwand. Wir dichten den Sockel ab und schließen ihn an die Abdichtung der Kellerwand an."
+      }
     ],
     districtGroups: [
       {
@@ -3595,6 +3610,20 @@ export const CITY_PAGES: CityPage[] = [
           "10 Jahre Garantie auf die Arbeit, 25 Jahre Herstellergarantie auf die Wirksamkeit",
         ],
       },
+      {
+        "heading": "Sterkrade, Holten und Königshardt: Einfamilienhäuser im Norden",
+        "paragraphs": [
+          "Im Oberhausener Norden überwiegen Ein- und Zweifamilienhäuser aus den 1950er bis 1980er Jahren. Die Keller werden als Hobbyraum, Waschküche oder Büro genutzt, und dort fällt Feuchte schnell auf: ein dunkler Rand am Wandfuß, ein muffiger Geruch, Schimmel hinter dem Regal.",
+          "Meist ist nicht der ganze Keller nass, sondern eine Stelle: die Fuge zwischen Bodenplatte und Wand, ein Riss, eine gealterte Bitumenabdichtung an der Wetterseite. Wir messen zuerst kostenlos und sanieren dann gezielt nur dort, wo das Wasser hereinkommt, von innen und ohne Aufgraben."
+        ]
+      },
+      {
+        "heading": "Alt-Oberhausen und Osterfeld: Mehrfamilienhäuser im bewohnten Haus sanieren",
+        "paragraphs": [
+          "Rund um die Marktstraße, in Lirich, Bermensfeld und Osterfeld stehen viele Mehrfamilienhäuser aus der Gründerzeit und dem Wiederaufbau, meist vermietet oder im Besitz von Eigentümergemeinschaften. Feuchte Keller betreffen hier alle Parteien.",
+          "Wir arbeiten Kellerraum für Kellerraum, damit immer nur ein Teil gesperrt ist. Die Hausverwaltung bekommt ein schriftliches Angebot mit Messprotokoll für die Eigentümerversammlung und nach jeder Phase ein weiteres Protokoll."
+        ]
+      }
     ],
     faqs: [
       {
@@ -3617,6 +3646,14 @@ export const CITY_PAGES: CityPage[] = [
         q: "Was kostet die Kellersanierung in Oberhausen?",
         a: "Das hängt von Ursache, Wandfläche und Mauerwerk ab. Nach der kostenlosen Messung bekommen Sie einen verbindlichen Festpreis, ohne Nachträge.",
       },
+      {
+        "q": "Muss für eine Kellersanierung in Oberhausen aufgegraben werden?",
+        "a": "In den meisten Fällen nicht. Gerade die Siedlungshäuser in Eisenheim, Osterfeld und Lirich stehen oft Wand an Wand, eine Aufgrabung wäre dort kaum möglich. Horizontalsperre, Innenabdichtung und Rissverpressung führen wir von innen aus; Garten, Einfahrt und die Wand zum Nachbarn bleiben unberührt."
+      },
+      {
+        "q": "Sanieren Sie auch Keller in Mehrfamilienhäusern und für Hausverwaltungen in Oberhausen?",
+        "a": "Ja. Wir sanieren Kellerraum für Kellerraum, damit die Mieter ihre Keller weiter nutzen können, und geben der Hausverwaltung ein schriftliches Angebot mit Messprotokoll, das sie direkt in der Eigentümerversammlung vorlegen kann."
+      }
     ],
     nearby: ["muelheim-an-der-ruhr", "bottrop", "duisburg", "essen"],
   },
@@ -3817,7 +3854,7 @@ export const CITY_PAGES: CityPage[] = [
     lede:
       "Hagen liegt am Rand des Sauerlands zwischen Volme, Ennepe, Lenne und Ruhr. Steile Hänge, viel Regen und alte Keller aus Bruchstein machen Feuchte im Keller hier besonders häufig, und das Hochwasser im Juli 2021 hat viele Keller in den Tälern geflutet. Wir messen kostenlos und dichten von innen ab.",
     plz: ["58089", "58091", "58093", "58095", "58097", "58099", "58119", "58135"],
-    districts: ["Mitte", "Wehringhausen", "Haspe", "Hohenlimburg", "Eilpe", "Dahl", "Boele", "Vorhalle", "Emst"],
+    districts: ["Mitte", "Wehringhausen", "Altenhagen", "Eilpe", "Dahl", "Emst", "Haspe", "Westerbauer", "Spielbrink", "Hohenlimburg", "Elsey", "Berchum", "Halden", "Boele", "Vorhalle", "Fley", "Helfe"],
     geo: { lat: 51.3671, lng: 7.4633 },
     responseTime: "24 bis 48 Stunden",
     wiki: "https://de.wikipedia.org/wiki/Hagen",
@@ -3865,6 +3902,16 @@ export const CITY_PAGES: CityPage[] = [
         heading: "Schimmel im Keller in Hagen",
         text: "Feuchte Bruchsteinwände kühlen stark aus, warme Luft kondensiert daran. Wir beseitigen den Schimmel sporensicher und die Ursache gleich mit, wo nötig mit Klimaplatten.",
       },
+      {
+        "slug": "rissverpressung",
+        "heading": "Rissverpressung in Hagen",
+        "text": "Am Hang drückt der Boden gegen die bergseitige Kellerwand, mit der Zeit entstehen Risse, durch die bei Regen Wasser kommt. Wir prüfen, ob ein Riss Wasser führt, und verpressen ihn unter Druck mit PU-Harz, das im Riss aufschäumt und elastisch bleibt."
+      },
+      {
+        "slug": "sockelabdichtung",
+        "heading": "Sockel abdichten in Hagen",
+        "text": "Bei den Altbauten in Wehringhausen, Haspe und Hohenlimburg ist der Sockel oft durchfeuchtet, der Putz platzt ab. Wir dichten den Sockel ab und schließen ihn an die Abdichtung der Kellerwand an."
+      }
     ],
     districtGroups: [
       {
@@ -3909,6 +3956,13 @@ export const CITY_PAGES: CityPage[] = [
           "Bruchsteinkeller wurden ohne Abdichtung gebaut: unregelmäßige Steine, Kalkmörtel, Hohlräume dazwischen. Eine Injektion allein würde in den Hohlräumen versickern. Wir verfüllen sie deshalb zuerst, setzen dann die Horizontalsperre und dichten die erdberührten Wände ab, wo Hangwasser drückt.",
         ],
       },
+      {
+        "heading": "Wehringhausen und Altenhagen: Kellersanierung im Gründerzeithaus",
+        "paragraphs": [
+          "In Wehringhausen und Altenhagen stehen viele Mehrfamilienhäuser aus der Gründerzeit, oft am Hang gebaut, mit Kellern aus Bruchstein oder Ziegel. Die Feuchte kommt hier meist von zwei Seiten: aufsteigend im alten Mauerwerk und seitlich an der Wand zum Hang.",
+          "Wir sanieren Kellerraum für Kellerraum, damit die Mieter ihre Keller weiter nutzen können: eine Horizontalsperre gegen die aufsteigende Feuchte, eine Innenabdichtung an der Hangwand und Sanierputz. Die Hausverwaltung bekommt ein schriftliches Angebot mit Messprotokoll für die Eigentümerversammlung."
+        ]
+      }
     ],
     faqs: [
       {
@@ -3927,6 +3981,18 @@ export const CITY_PAGES: CityPage[] = [
         q: "Wie schnell sind Sie in Hagen vor Ort?",
         a: "In der Regel innerhalb von 24 bis 48 Stunden. Die Feuchtigkeitsmessung und Schadensanalyse vor Ort ist kostenlos und unverbindlich.",
       },
+      {
+        "q": "Muss bei einem Haus am Hang in Hagen aufgegraben werden?",
+        "a": "In der Regel nicht. Gegen Hang- und Schichtenwasser dichten wir die bergseitige Wand von innen mit mehrlagiger Dichtungsschlämme und einer Hohlkehle am Boden ab; das hält auch drückendem Wasser stand. Gerade an den steilen Hängen in Emst, Eilpe oder Haspe wäre eine Aufgrabung aufwendig und teuer."
+      },
+      {
+        "q": "Wie lange dauert eine Kellersanierung in Hagen?",
+        "a": "Die Arbeiten selbst dauern meist zwei bis vier Werktage. Danach trocknet das Mauerwerk über einige Monate aus, bei dicken Bruchsteinwänden auch länger; wir messen nach und geben Ihnen das Protokoll schriftlich."
+      },
+      {
+        "q": "Sanieren Sie auch Keller in Mehrfamilienhäusern und für Hausverwaltungen in Hagen?",
+        "a": "Ja. Wir arbeiten raumweise, damit die Mieter ihre Keller möglichst weiter nutzen können, und geben der Hausverwaltung ein schriftliches Angebot mit Messprotokoll, das sie direkt in der Eigentümerversammlung vorlegen kann."
+      }
     ],
     nearby: ["wuppertal", "dortmund", "bochum"],
   },
@@ -3942,7 +4008,7 @@ export const CITY_PAGES: CityPage[] = [
     lede:
       "Leverkusen liegt zwischen Rhein, Wupper und Dhünn. Das Hochwasser im Juli 2021 hat in Opladen und Schlebusch gezeigt, wie schnell Wasser in Keller kommt, und danach bleibt die Wand oft lange nass. Wir messen kostenlos, wie tief Feuchte und Salze sitzen, und sanieren von innen.",
     plz: ["51371", "51373", "51375", "51377", "51379", "51381"],
-    districts: ["Wiesdorf", "Manfort", "Opladen", "Quettingen", "Schlebusch", "Steinbüchel", "Hitdorf", "Rheindorf", "Bergisch Neukirchen", "Lützenkirchen"],
+    districts: ["Wiesdorf", "Manfort", "Bürrig", "Küppersteg", "Rheindorf", "Hitdorf", "Opladen", "Quettingen", "Bergisch Neukirchen", "Lützenkirchen", "Schlebusch", "Steinbüchel", "Alkenrath"],
     geo: { lat: 51.0459, lng: 6.9844 },
     responseTime: "24 bis 48 Stunden",
     wiki: "https://de.wikipedia.org/wiki/Leverkusen",
@@ -3990,6 +4056,16 @@ export const CITY_PAGES: CityPage[] = [
         heading: "Schimmel nach Wasserschaden in Leverkusen",
         text: "Bleibt die Wand nach einem Hochwasser feucht, folgt oft Schimmel. Wir entfernen ihn sporensicher und beseitigen die Feuchte, damit er nicht wiederkommt.",
       },
+      {
+        "slug": "rissverpressung",
+        "heading": "Rissverpressung in Leverkusen",
+        "text": "Kommt das Wasser bei hohem Rheinpegel oder nach Starkregen an einer Stelle durch Wand oder Bodenplatte, ist es meist ein Riss oder eine undichte Arbeitsfuge. Wir verpressen ihn unter Druck mit PU-Harz, das im Riss aufschäumt und elastisch bleibt."
+      },
+      {
+        "slug": "sockelabdichtung",
+        "heading": "Sockel abdichten in Leverkusen",
+        "text": "Nach einem Hochwasser oder durch Spritzwasser bleibt der Sockel oft lange feucht, der Putz platzt ab. Wir dichten den Sockel ab und schließen ihn an die Abdichtung der Kellerwand an."
+      }
     ],
     districtGroups: [
       {
@@ -4029,6 +4105,13 @@ export const CITY_PAGES: CityPage[] = [
           "Bleibt die Wand nach einem Hochwasser feucht, folgt oft Schimmel. Wir entfernen ihn sporensicher und beseitigen die Feuchte, damit er nicht wiederkommt.",
         ],
       },
+      {
+        "heading": "Wiesdorf, Rheindorf und Hitdorf: Grundwasser am Rhein",
+        "paragraphs": [
+          "In den Stadtteilen am Rhein folgt das Grundwasser dem Pegel des Flusses. Steigt der Rhein, steigt mit etwas Verzögerung auch das Wasser im Boden, und es drückt von unten an Bodenplatte und Wandfuß. Viele Keller sind deshalb nicht dauerhaft nass, sondern immer dann, wenn der Rhein hoch steht.",
+          "Gegen dieses drückende Wasser hilft keine Sperrschicht allein. Wir dichten Wände und den Übergang zur Bodenplatte von innen ab, mit Dichtungsschlämme in mehreren Lagen und einer Hohlkehle, und verpressen Risse und Fugen, durch die das Wasser kommt. Welche Kombination Ihr Keller braucht, zeigt die kostenlose Messung."
+        ]
+      }
     ],
     faqs: [
       {
@@ -4047,6 +4130,18 @@ export const CITY_PAGES: CityPage[] = [
         q: "Wie schnell sind Sie in Leverkusen vor Ort?",
         a: "In der Regel innerhalb von 24 bis 48 Stunden; die Messung ist kostenlos und unverbindlich.",
       },
+      {
+        "q": "Muss für eine Kellersanierung in Leverkusen aufgegraben werden?",
+        "a": "In den meisten Fällen nicht. Innenabdichtung, Rissverpressung und Horizontalsperre führen wir von innen aus. Garten, Einfahrt und Terrasse bleiben unberührt."
+      },
+      {
+        "q": "Wie lange dauert eine Kellersanierung in Leverkusen?",
+        "a": "Die Arbeiten selbst dauern meist zwei bis vier Werktage. Nach einem Hochwasser braucht das Mauerwerk danach oft mehrere Monate, um auszutrocknen; wir messen nach und geben Ihnen das Protokoll schriftlich."
+      },
+      {
+        "q": "Sanieren Sie auch Keller in Mehrfamilienhäusern und für Hausverwaltungen in Leverkusen?",
+        "a": "Ja. Wir arbeiten raumweise, damit die Mieter ihre Keller möglichst weiter nutzen können, und geben der Hausverwaltung ein schriftliches Angebot mit Messprotokoll, das sie direkt in der Eigentümerversammlung vorlegen kann."
+      }
     ],
     nearby: ["koeln", "solingen", "wermelskirchen", "duesseldorf"],
   },
@@ -4062,7 +4157,7 @@ export const CITY_PAGES: CityPage[] = [
     lede:
       "In Bottrop endete 2018 mit der Zeche Prosper-Haniel der deutsche Steinkohlenbergbau. Geblieben sind abgesenkte Böden, Setzungsrisse und Siedlungshäuser, in deren Kellern die Feuchte steigt. Von unserem Sitz in Essen sind wir schnell in Welheim, Eigen oder Kirchhellen, messen kostenlos und sanieren von innen.",
     plz: ["46236", "46238", "46240", "46242", "46244"],
-    districts: ["Stadtmitte", "Eigen", "Batenbrock", "Boy", "Welheim", "Ebel", "Fuhlenbrock", "Vonderort", "Grafenwald", "Kirchhellen"],
+    districts: ["Stadtmitte", "Altstadt", "Eigen", "Fuhlenbrock", "Batenbrock-Nord", "Batenbrock-Süd", "Boy", "Welheim", "Welheimer Mark", "Ebel", "Lehmkuhle", "Vonderort", "Kirchhellen", "Grafenwald", "Feldhausen"],
     geo: { lat: 51.5236, lng: 6.9285 },
     responseTime: "24 bis 48 Stunden",
     wiki: "https://de.wikipedia.org/wiki/Bottrop",
@@ -4110,6 +4205,16 @@ export const CITY_PAGES: CityPage[] = [
         heading: "Feuchtemessung in Bottrop",
         text: "Die Messung ist kostenlos: Wir messen die Feuchte in mehreren Wandhöhen, prüfen Salze, Oberflächentemperatur und Raumklima und dokumentieren Risse mit Verlauf und Breite. Das Protokoll bekommen Sie schriftlich, auch für die Klärung eines Bergschadens.",
       },
+      {
+        "slug": "schimmelbeseitigung",
+        "heading": "Schimmel im Keller in Bottrop",
+        "text": "In den Siedlungshäusern kommt der Schimmel meist aus der nassen Wand, in den kühlen Kellern der Einfamilienhäuser in Kirchhellen oft aus Kondensat beim Lüften im Sommer. Die Messung zeigt, was bei Ihnen zutrifft. Wir entfernen den Befall sporensicher und beseitigen dann die Ursache."
+      },
+      {
+        "slug": "sockelabdichtung",
+        "heading": "Sockel abdichten in Bottrop",
+        "text": "Bei Siedlungs- und Reihenhäusern zieht Spritzwasser in den Sockel und weiter in die Kellerwand, der Putz platzt ab. Wir dichten den Sockel ab und schließen ihn an die Abdichtung der Kellerwand an."
+      }
     ],
     districtGroups: [
       {
@@ -4154,6 +4259,13 @@ export const CITY_PAGES: CityPage[] = [
           "10 Jahre Garantie auf die Arbeit, 25 Jahre Herstellergarantie auf die Wirksamkeit",
         ],
       },
+      {
+        "heading": "Kirchhellen und Grafenwald: Einfamilienhäuser auf Sand",
+        "paragraphs": [
+          "Im Norden ist Bottrop ländlich. In Kirchhellen, Grafenwald und Feldhausen stehen vor allem Einfamilienhäuser aus den 1960er bis 1990er Jahren auf sandigem Boden, Bergschäden sind hier seltener. Feucht wird der Keller trotzdem: an der Fuge zwischen Bodenplatte und Wand, durch eine gealterte Bitumenabdichtung außen oder durch Kondensat, wenn an warmen Tagen gelüftet wird.",
+          "Weil die Keller oft als Hobbyraum, Gästezimmer oder Büro genutzt werden, fällt Feuchte hier schnell auf. Wir messen zuerst, ob Wasser von außen kommt oder sich Luftfeuchte an der kühlen Wand niederschlägt. Undichte Anschlüsse dichten wir von innen mit einer Hohlkehle und Dichtungsschlämme ab; gegen Kondensat helfen richtiges Lüften und, wo nötig, Klimaplatten."
+        ]
+      }
     ],
     faqs: [
       {
@@ -4176,6 +4288,14 @@ export const CITY_PAGES: CityPage[] = [
         q: "Was kostet die Kellersanierung in Bottrop?",
         a: "Das hängt von Ursache, Wandfläche, Mauerwerk und Rissen ab. Nach der kostenlosen Messung bekommen Sie einen verbindlichen Festpreis.",
       },
+      {
+        "q": "Wie lange dauert eine Kellersanierung in Bottrop?",
+        "a": "Die Arbeiten selbst dauern meist zwei bis vier Werktage, eine einzelne Rissverpressung oft nur einen Tag. Danach trocknet das Mauerwerk über einige Monate aus; wir messen nach und geben Ihnen das Protokoll schriftlich."
+      },
+      {
+        "q": "Sanieren Sie auch Keller in Mehrfamilienhäusern und für Hausverwaltungen in Bottrop?",
+        "a": "Ja. In der Stadtmitte, in Eigen und Batenbrock stehen viele Mehrfamilienhäuser aus dem Wiederaufbau. Wir sanieren Kellerraum für Kellerraum, damit die Mieter ihre Keller weiter nutzen können, und geben der Hausverwaltung ein schriftliches Angebot mit Messprotokoll für die Eigentümerversammlung."
+      }
     ],
     nearby: ["gelsenkirchen", "oberhausen", "essen"],
   },
