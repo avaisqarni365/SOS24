@@ -3041,7 +3041,7 @@ export const CITY_PAGES: CityPage[] = [
     lede:
       "Ob Gründerzeitbau in Ehrenfeld und Nippes oder Einfamilienhaus in Rodenkirchen: In Köln entscheiden der Rhein, der Grundwasserstand und das Alter des Mauerwerks, warum ein Keller nass wird. Wir messen kostenlos, woher die Feuchte kommt, und sanieren von innen, ohne Hof oder Garten aufzugraben.",
     plz: ["50667", "50668", "50670", "50672", "50674", "50676", "50677", "50678", "50679", "50733", "50735", "50737", "50739", "50765", "50767", "50769", "50823", "50825", "50827", "50829", "50858", "50859", "50931", "50933", "50935", "50937", "50939", "50968", "50969", "50996", "50997", "50999", "51061", "51063", "51065", "51067", "51069", "51103", "51105", "51107", "51109", "51143", "51145", "51147", "51149"],
-    districts: ["Innenstadt", "Altstadt-Süd", "Deutz", "Ehrenfeld", "Bickendorf", "Nippes", "Longerich", "Lindenthal", "Sülz", "Braunsfeld", "Müngersdorf", "Weiden", "Lövenich", "Rodenkirchen", "Bayenthal", "Zollstock", "Köln-Mülheim", "Dellbrück", "Kalk", "Höhenberg", "Porz", "Chorweiler"],
+    districts: ["Innenstadt", "Altstadt-Nord", "Altstadt-Süd", "Neustadt-Nord", "Neustadt-Süd", "Deutz", "Ehrenfeld", "Neuehrenfeld", "Bickendorf", "Nippes", "Riehl", "Niehl", "Weidenpesch", "Longerich", "Lindenthal", "Sülz", "Klettenberg", "Braunsfeld", "Müngersdorf", "Junkersdorf", "Weiden", "Lövenich", "Rodenkirchen", "Sürth", "Rondorf", "Bayenthal", "Zollstock", "Köln-Mülheim", "Buchheim", "Holweide", "Dellbrück", "Kalk", "Vingst", "Höhenberg", "Ostheim", "Merheim", "Brück", "Porz", "Zündorf", "Chorweiler"],
     geo: { lat: 50.9375, lng: 6.9603 },
     responseTime: "24 bis 48 Stunden",
     wiki: "https://de.wikipedia.org/wiki/K%C3%B6ln",
@@ -3167,6 +3167,13 @@ export const CITY_PAGES: CityPage[] = [
           "In den westlichen Stadtteilen überwiegen Einfamilien- und Doppelhäuser mit voll genutzten Kellern. Hier kommt die Feuchte selten vom Rhein, sondern meist aus einer gealterten Außenabdichtung, über den Sockel oder als Kondensat in schlecht gelüfteten Räumen.",
           "Gerade bei Kondensat hilft keine Abdichtung, sondern eine Dämmung der kalten Wand mit Klimaplatten und richtiges Lüften. Deshalb klären wir mit der kostenlosen Messung zuerst die Ursache, bevor wir ein Verfahren empfehlen."
         ]
+      },
+      {
+        "heading": "Keller trockenlegen oder abdichten? Bauwerksabdichtung in Köln von innen",
+        "paragraphs": [
+          "Wer in Köln einen nassen Keller hat, sucht oft nach Kellertrockenlegung, nach Kellerabdichtung oder nach einer Innenabdichtung. Gemeint ist dasselbe Ziel, aber es sind verschiedene Arbeiten. In den Gründerzeithäusern der Neustadt, in Ehrenfeld und Nippes steigt die Feuchte meist im Ziegel auf; dort legen wir den Keller mit einer Horizontalsperre trocken. In Rheinnähe, in Rodenkirchen, Porz oder im Severinsviertel, steht das Grundwasser nach Hochwasser an der Wand an; dort braucht es eine Innenabdichtung, die drückendem Wasser standhält.",
+          "Beides gehört zur Bauwerksabdichtung, dem Schutz des Hauses gegen Wasser aus dem Boden. Als Fachbetrieb führen wir sie von innen aus, mit Dichtungsschlämme und Hohlkehle, Horizontalsperre per Injektion, Rissverpressung und Sanierputz. Dasselbe gilt rechtsrheinisch und in Leverkusen, wo Rhein, Wupper und Dhünn ähnliche Schäden hinterlassen. Welche Verfahren Ihr Keller braucht, zeigt die kostenlose Messung."
+        ]
       }
     ],
     faqs: [
@@ -3201,6 +3208,14 @@ export const CITY_PAGES: CityPage[] = [
       {
         "q": "Sanieren Sie auch Keller in denkmalgeschützten Altbauten in Köln?",
         "a": "Ja. Die Arbeiten finden im Keller statt und verändern die Fassade nicht, das ist gerade bei den Gründerzeithäusern in der Südstadt, in Ehrenfeld oder Nippes wichtig. Ob für Eingriffe im Inneren eine denkmalrechtliche Erlaubnis nötig ist, klären Sie am besten vorab mit dem Stadtkonservator der Stadt Köln. Die technische Beschreibung der geplanten Maßnahmen stellen wir Ihnen dafür gern zur Verfügung."
+      },
+      {
+        "q": "Ihr Sitz ist in Essen. Warum sollte ich eine Firma von dort nach Köln holen?",
+        "a": "Weil es bei der Kellersanierung weniger auf die Entfernung ankommt als darauf, dass der Betrieb zuerst misst und dann einen festen Preis nennt. Wir kommen für die kostenlose Feuchtemessung nach Köln, erstellen ein schriftliches Messprotokoll, nennen einen Festpreis und geben 10 Jahre Garantie auf die Arbeit. Die Sanierung selbst dauert meist zwei bis vier Werktage, in denen unser Team vor Ort ist."
+      },
+      {
+        "q": "Sanieren Sie auch Keller in Leverkusen und im Kölner Umland?",
+        "a": "Ja. Neben Köln arbeiten wir in Leverkusen, Düsseldorf, Solingen und im Bergischen Land. Die kostenlose Messung und das Festpreisangebot gelten dort genauso."
       }
     ],
     nearby: ["leverkusen", "duesseldorf", "solingen"],
