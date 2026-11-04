@@ -2855,28 +2855,28 @@ export const CITY_PAGES: CityPage[] = [
     slug: "bochum",
     name: "Bochum",
     keyword: "Kellersanierung Bochum",
-    title: "Kellersanierung Bochum | Bergschäden & Kellerabdichtung",
+    title: "Kellersanierung Bochum | Keller abdichten & trockenlegen",
     metaDescription:
-      "Kellersanierung Bochum: Bergschadensrisse verpressen, nasse Kellerwände und Hangwasser von innen abdichten. Kostenlose Feuchtemessung, 10 Jahre Garantie.",
+      "Kellersanierung Bochum ohne Aufgraben: nasse Keller abdichten und trockenlegen, Bergschadensrisse verpressen, Wattenscheid bis Langendreer. Messung kostenlos.",
     h1: "Kellersanierung Bochum: Nasse Keller dauerhaft trockenlegen",
     lede:
       "Von Wattenscheid bis Langendreer und von Gerthe bis Stiepel: In Bochum werden Keller vor allem durch Risse aus dem Bergbau, aufsteigende Feuchte in den Ziegelkellern der Zechenhäuser und Schichtenwasser an den Hängen zum Ruhrtal nass. Wir messen kostenlos, woher die Feuchte kommt, und sanieren von innen, ohne Aufgraben.",
     plz: ["44787", "44789", "44791", "44793", "44795", "44797", "44799", "44801", "44803", "44805", "44807", "44809", "44866", "44867", "44869", "44879", "44892", "44894"],
-    districts: ["Bochum-Mitte", "Ehrenfeld", "Kortländer", "Hamme", "Hofstede", "Riemke", "Grumme", "Wiemelhausen", "Altenbochum", "Laer", "Querenburg", "Steinkuhl", "Wattenscheid", "Günnigfeld", "Leithe", "Höntrop", "Eppendorf", "Sevinghausen", "Hordel", "Gerthe", "Hiltrop", "Bergen", "Harpen", "Kornharpen", "Stiepel", "Weitmar", "Linden", "Dahlhausen", "Langendreer", "Werne"],
+    districts: ["Bochum-Mitte", "Ehrenfeld", "Kortländer", "Hamme", "Hofstede", "Riemke", "Grumme", "Wiemelhausen", "Brenschede", "Altenbochum", "Laer", "Querenburg", "Hustadt", "Steinkuhl", "Wattenscheid", "Westenfeld", "Südfeldmark", "Günnigfeld", "Leithe", "Höntrop", "Eppendorf", "Sevinghausen", "Hordel", "Gerthe", "Hiltrop", "Bergen", "Harpen", "Rosenberg", "Kornharpen", "Voede", "Stiepel", "Weitmar", "Weitmar-Mark", "Linden", "Dahlhausen", "Langendreer", "Langendreer-Alter Bahnhof", "Ümmingen", "Werne"],
     geo: { lat: 51.4818, lng: 7.2162 },
     responseTime: "24 bis 48 Stunden",
     localFactors: [
       {
         name: "Löss- und Lehmböden im mittleren Ruhrgebiet",
-        text: "Schwere Böden stauen Niederschlagswasser lange an der Außenwand. Ohne intakte Vertikal- oder Innenabdichtung dringt Wasser seitlich ins Kellergefüge.",
+        text: "Lehmige Böden lassen Regenwasser nur langsam versickern, es steht lange an der Außenwand. Ist die alte Außenabdichtung verbraucht, zieht die Feuchte seitlich durch die Kellerwand.",
       },
       {
         name: "Bergschäden & Risse im Fundament",
-        text: "Tiefenbohrungen und Setzungen aus der Bergbauhistorie hinterlassen feine Bewegungsrisse in Betonböden und Kellerwänden.",
+        text: "Unter weiten Teilen der Stadt wurde bis in die 1970er Jahre Steinkohle abgebaut. Setzungen aus dieser Zeit haben in vielen Häusern Risse in Bodenplatte und Kellerwand hinterlassen, durch die bei Regen Wasser kommt.",
       },
       {
         name: "Altbauten der Zechenära",
-        text: "Viele Bergarbeitersiedlungen und Mehrfamilienhäuser in Wattenscheid und Ehrenfeld besitzen Ziegelmauerwerk ohne jede vertikale Sperrbahn.",
+        text: "Viele Bergarbeitersiedlungen und Mehrfamilienhäuser in Wattenscheid und Ehrenfeld haben Ziegelkeller ohne wirksame Sperrschicht, die Feuchte steigt im Mauerwerk auf.",
       },
       {
         "name": "Hanglagen zum Ruhrtal",
@@ -2891,15 +2891,15 @@ export const CITY_PAGES: CityPage[] = [
       {
         heading: "Bochum-Ehrenfeld und Mitte: Ziegelkeller ohne Aufgraben sanieren",
         paragraphs: [
-          "In den dicht bebauten Straßen von Bochum-Ehrenfeld, Weitmar und Mitte reihen sich Mehrfamilienhäuser aneinander. Wenn hier der Keller feucht wird, zieht der Modergeruch schnell bis ins Erdgeschoss. Feuchte Wände zersetzen den Mörtel und lassen Salze auskristallisieren.",
-          "Mit unserem Injektionsverfahren bringen wir eine Paraffin-Harz-Horizontalsperre ein, die ohne statische Schwächung das kapillare Aufsteigen von Wasser stoppt. Durch die Sanierung von innen entfallen Straßenabsperrungen, Grabarbeiten und Vorgartenschäden komplett.",
+          "In den dicht bebauten Straßen von Ehrenfeld, Mitte und Hamme stehen Mehrfamilienhäuser aus der Gründerzeit und dem Wiederaufbau Wand an Wand. Ihre Ziegelkeller haben oft keine intakte Sperrschicht mehr: Die Feuchte steigt im Mauerwerk auf, der Putz blüht weiß aus, und der muffige Geruch zieht ins Treppenhaus.",
+          "Wir bohren die Wand in einer Reihe knapp über dem Boden an und injizieren eine Horizontalsperre, die das Aufsteigen der Feuchte stoppt. Darauf kommt Sanierputz, der die Salze aufnimmt. Gearbeitet wird nur im Keller: Kein Gehweg wird aufgerissen, kein Vorgarten aufgegraben.",
         ],
       },
       {
         heading: "Stiepel und Ruhrtal: Hanglagen und drückendes Schichtenwasser",
         paragraphs: [
           "Im grünen Süden Bochums, rund um Stiepel und die Ruhrhänge, sind viele Häuser in steile Hanglagen gebaut. Hier sammelt sich Hangwasser oberhalb des Gebäudes und drückt gegen die erdberührte Rückwand.",
-          "Wir schützen diese Wände mit mehrschichtigen flexiblen Dichtungsschlämmen und dichten wasserführende Risse im Mauerwerk per Hochdruckverpressung ab. Das schützt die Bausubstanz nachhaltig und sichert den Immobilienwert.",
+          "Diese Wand dichten wir von innen ab: Dichtungsschlämme in mehreren Lagen, eine Hohlkehle am Übergang zum Boden und Sanierputz. Führt ein Riss Wasser, verpressen wir ihn vorher mit PU-Harz. Garten und Böschung bleiben, wie sie sind.",
         ],
       },
       {
@@ -2934,16 +2934,30 @@ export const CITY_PAGES: CityPage[] = [
           "Wer in Bochum einen nassen Keller hat, bekommt oft zwei Ratschläge: den Keller trockenlegen oder ihn abdichten. Beides kann richtig sein, aber für verschiedene Schäden. Steigt die Feuchte im Ziegel der Zechenhäuser in Langendreer, Werne oder Gerthe auf, ist eine Kellertrockenlegung mit Horizontalsperre der richtige Weg. Drückt Wasser vom Hang gegen die Wand, wie in Stiepel und Weitmar, oder kommt es durch einen Bergschadensriss, braucht es eine Kellerabdichtung von innen oder eine Rissverpressung.",
           "Häufig ist es eine Mischung. Deshalb messen wir als Fachbetrieb zuerst an mehreren Wänden und in mehreren Höhen, kostenlos, und schreiben Ihnen auf, welche Ursache wir gefunden haben. Erst dann bekommen Sie ein Festpreisangebot, das genau diese Ursachen behebt und nicht mehr."
         ]
+      },
+      {
+        "heading": "Querenburg, Hustadt und Steinkuhl: Keller aus den 1960er und 1970er Jahren",
+        "paragraphs": [
+          "Rund um die Ruhr-Universität sind in den 1960er und 1970er Jahren ganze Viertel neu entstanden, in Querenburg, der Hustadt und Steinkuhl. Die Keller sind aus Beton oder Kalksandstein und haben außen einen Bitumenanstrich, der nach 50 Jahren spröde ist. Das Wasser kommt dann nicht flächig, sondern an bestimmten Stellen: an der Fuge zwischen Wand und Bodenplatte, an Rohrdurchführungen und unter dem Lichtschacht.",
+          "Deshalb dichten wir gezielt diese Stellen ab, statt den ganzen Keller zu sanieren: Hohlkehle am Bodenanschluss, nachgedichtete Rohrdurchführungen, Innenabdichtung an den Wänden, die wirklich nass sind. Für Mehrfamilienhäuser und Wohnanlagen bekommt die Hausverwaltung ein Angebot mit Messprotokoll für jeden Kellerraum."
+        ]
+      },
+      {
+        "heading": "Dahlhausen und Linden: Keller im Ruhrtal",
+        "paragraphs": [
+          "Unten im Ruhrtal, in Dahlhausen und Teilen von Linden, liegen die Keller nah am Grundwasser. Steigt der Ruhrpegel nach langem Regen, steigt auch das Grundwasser, und es drückt von unten und von der Seite gegen Boden und Wand. Ein Anstrich hält das nicht auf.",
+          "Dagegen hilft eine Innenabdichtung, die für drückendes Wasser ausgelegt ist: mehrlagige Dichtungsschlämme an Wand und Bodenanschluss, eine Hohlkehle in der Ecke und abgedichtete Durchführungen. Wo zusätzlich Feuchte im Mauerwerk aufsteigt, kommt eine Horizontalsperre dazu. Was davon nötig ist, zeigt die kostenlose Messung."
+        ]
       }
     ],
     faqs: [
       {
         q: "Können Risse im Kellerboden in Bochum abgedichtet werden?",
-        a: "Ja, mit unserem elastischen Polyurethanharz-Injektionsverfahren verpressen wir Setzungs- und Arbeitsrisse dauerhaft wasserdicht, selbst bei anstehendem Druckwasser.",
+        a: "Ja. Wasserführende Setzungs- und Arbeitsrisse verpressen wir mit PU-Harz, das im Riss aufschäumt und elastisch bleibt. So bleibt der Riss auch dicht, wenn Wasser von außen drückt oder sich das Haus noch leicht bewegt.",
       },
       {
         q: "Ist die Vor-Ort-Besichtigung in Bochum kostenlos?",
-        a: "Ja, wir führen bei Ihnen in Bochum eine kostenfreie Feuchtigkeitsmessung mit digitaler Messtechnik durch und erstellen Ihnen einen garantierten Festpreis.",
+        a: "Ja. Wir messen bei Ihnen in Bochum kostenlos Feuchte und Salze an mehreren Wänden und in mehreren Höhen. Danach bekommen Sie das Messprotokoll und ein schriftliches Festpreisangebot.",
       },
       {
         "q": "Woran erkenne ich in Bochum, ob ein Riss im Keller durch Bergsenkung entstanden ist?",
@@ -2984,6 +2998,18 @@ export const CITY_PAGES: CityPage[] = [
       {
         "q": "Keller trockenlegen in Bochum: Was hilft bei Zechenhäusern?",
         "a": "Viele Zechenhäuser in Langendreer, Werne oder Hordel wurden ohne wirksame Sperrschicht gebaut, die Feuchte steigt im Ziegel auf. Dagegen setzen wir eine Horizontalsperre per Injektion. Kommt Wasser durch Bergsenkungsrisse, verpressen wir sie; drückt Hangwasser in Stiepel oder Weitmar, dichten wir die Wand von innen ab. Aufgraben ist dafür nicht nötig, die Messung ist kostenlos."
+      },
+      {
+        "q": "Nach Starkregen steht Wasser im Keller in Bochum. Was tun?",
+        "a": "Zuerst den Strom in den betroffenen Räumen abschalten, das Wasser abpumpen und Fotos für die Versicherung machen. Kommt das Wasser über den Bodenablauf, liegt es oft an einer fehlenden Rückstauklappe; das ist Sache des Installateurs. Kommt es durch Wand, Bodenfuge, Riss oder Lichtschacht, messen wir kostenlos, wo es eintritt, und dichten genau dort von innen ab."
+      },
+      {
+        "q": "Ich wohne im Reihenhaus einer Zechensiedlung in Bochum. Muss der Nachbar mitmachen?",
+        "a": "In der Regel nicht. Horizontalsperre und Innenabdichtung setzen wir nur in Ihrem Keller, auch an der Wand zum Nachbarhaus. Ist der Nachbarkeller ebenfalls nass, kann die Feuchte über die gemeinsame Wand nachziehen; das sehen wir bei der Messung und sagen es Ihnen offen. Saniert der Nachbar gleichzeitig, lohnt es sich oft für beide."
+      },
+      {
+        "q": "Mein Keller in Bochum riecht muffig, aber die Wände sehen trocken aus. Woran liegt das?",
+        "a": "Oft steckt Feuchte im Mauerwerk, die man noch nicht sieht, oder es ist Kondensat: Im Sommer schlägt sich warme Außenluft an den kühlen Kellerwänden nieder. Das lässt sich messen. Steigt die Feuchte in der Wand auf, hilft eine Horizontalsperre; ist es Kondensat, helfen richtiges Lüften und Klimaplatten. Wir messen kostenlos und sagen Ihnen, was zutrifft."
       }
     ],
     wiki: "https://de.wikipedia.org/wiki/Bochum",
@@ -3080,6 +3106,18 @@ export const CITY_PAGES: CityPage[] = [
           "Westenfeld"
         ],
         "text": "Gründerzeithäuser im alten Wattenscheider Kern und Einfamilienhäuser der 1960er und 1970er Jahre. Aufsteigende Feuchte im Altbau, seitliche Feuchte über alte Außenabdichtungen."
+      },
+      {
+        "name": "Harpen, Bergen und Hiltrop",
+        "districts": [
+          "Harpen",
+          "Rosenberg",
+          "Kornharpen",
+          "Voede",
+          "Bergen",
+          "Hiltrop"
+        ],
+        "text": "Siedlungs- und Einfamilienhäuser im Nordosten, viele auf ehemaligem Bergbaugebiet. Setzungsrisse und Wasser, das sich im Lehm an der Kellerwand staut."
       }
     ],
     nearby: ["essen", "dortmund", "gelsenkirchen", "hagen", "wuppertal"],

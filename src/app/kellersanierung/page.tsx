@@ -31,7 +31,7 @@ const REGIONS: { name: string; intro: string; towns: { slug: string; sub: string
       { slug: "oberhausen", sub: "Siedlungshäuser, Wasser an Emscher und Kanal" },
       { slug: "bottrop", sub: "Setzungsrisse nach dem Ende des Bergbaus" },
       { slug: "gelsenkirchen", sub: "Bergsenkungsrisse, Grundwasser im Emschertal" },
-      { slug: "bochum", sub: "Bergschäden und Hanglagen im Süden" },
+      { slug: "bochum", sub: "Bergschäden in Zechensiedlungen, Hangwasser in Stiepel" },
       { slug: "dortmund", sub: "Nasse Keller im Altbau und in Zechensiedlungen" },
       { slug: "duisburg", sub: "Grundwasser an Rhein und Ruhr, Risse im Mauerwerk" },
       { slug: "hagen", sub: "Hangwasser in Eilpe und Haspe, Bruchstein in Hohenlimburg" },
