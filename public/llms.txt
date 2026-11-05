@@ -7,7 +7,7 @@
 - Sitz: Niebuhrstraße 46, 45144 Essen
 - Telefon: +49 (0)172 2064177
 - E-Mail: info@sos-abdichtung.de
-- Servicegebiet: Wuppertal, Solingen, Remscheid, Velbert, Haan, Wermelskirchen, Essen, Düsseldorf, Bochum, Dortmund, Köln, Duisburg, Gelsenkirchen, Oberhausen, Mülheim an der Ruhr, Hagen, Leverkusen, Bottrop, Gladbeck, Herten, Recklinghausen
+- Servicegebiet: Wuppertal, Solingen, Remscheid, Velbert, Haan, Wermelskirchen, Essen, Düsseldorf, Bochum, Dortmund, Köln, Duisburg, Gelsenkirchen, Oberhausen, Mülheim an der Ruhr, Hagen, Leverkusen, Bottrop, Gladbeck, Herten, Recklinghausen, Herne, Witten, Hattingen
 - Feuchtemessung vor Ort: kostenlos und unverbindlich
 - Garantie: 10 Jahre von sos-abdichtung auf die ausgeführten Arbeiten; zusätzlich 25 Jahre Produktgarantie des Herstellers SchimmelPeter GmbH
 - Verfahren: Horizontalsperre per Injektion (in Paraffin gelöster Kunststoff, Bohrlöcher im Abstand bis 20 cm, meist ohne Vortrocknung), Innenabdichtung mit MDS, Schimmelsanierung mit Klimaplatten
@@ -247,6 +247,33 @@ Jedes Messprotokoll wird dem Kunden immer schriftlich übergeben, nach jeder Pha
   - [Schimmel im Keller in Recklinghausen](https://sos-abdichtung.de/kellersanierung/recklinghausen/#schimmelbeseitigung)
   - [Sockel abdichten in Recklinghausen](https://sos-abdichtung.de/kellersanierung/recklinghausen/#sockelabdichtung)
   - [Balkon und Terrasse abdichten in Recklinghausen](https://sos-abdichtung.de/kellersanierung/recklinghausen/#balkon-terrasse)
+- [Kellersanierung Herne](https://sos-abdichtung.de/kellersanierung/herne/): vor Ort in 24 bis 48 Stunden. PLZ 44623, 44625, 44627, 44628, 44629, 44649, 44651, 44652, 44653
+  - [Kellersanierung in Herne](https://sos-abdichtung.de/kellersanierung/herne/#kellersanierung)
+  - [Horizontalsperre in Herne](https://sos-abdichtung.de/kellersanierung/herne/#horizontalsperre)
+  - [Rissverpressung in Herne](https://sos-abdichtung.de/kellersanierung/herne/#rissverpressung)
+  - [Keller abdichten in Herne](https://sos-abdichtung.de/kellersanierung/herne/#kellerinnenabdichtung)
+  - [Feuchtemessung in Herne](https://sos-abdichtung.de/kellersanierung/herne/#feuchtemessung)
+  - [Schimmel im Keller in Herne](https://sos-abdichtung.de/kellersanierung/herne/#schimmelbeseitigung)
+  - [Sockel abdichten in Herne](https://sos-abdichtung.de/kellersanierung/herne/#sockelabdichtung)
+  - [Balkon und Terrasse abdichten in Herne](https://sos-abdichtung.de/kellersanierung/herne/#balkon-terrasse)
+- [Kellersanierung Witten](https://sos-abdichtung.de/kellersanierung/witten/): vor Ort in 24 bis 48 Stunden. PLZ 58452, 58453, 58454, 58455, 58456
+  - [Kellersanierung in Witten](https://sos-abdichtung.de/kellersanierung/witten/#kellersanierung)
+  - [Keller abdichten in Witten](https://sos-abdichtung.de/kellersanierung/witten/#kellerinnenabdichtung)
+  - [Horizontalsperre in Witten](https://sos-abdichtung.de/kellersanierung/witten/#horizontalsperre)
+  - [Rissverpressung in Witten](https://sos-abdichtung.de/kellersanierung/witten/#rissverpressung)
+  - [Feuchtemessung in Witten](https://sos-abdichtung.de/kellersanierung/witten/#feuchtemessung)
+  - [Schimmel im Keller in Witten](https://sos-abdichtung.de/kellersanierung/witten/#schimmelbeseitigung)
+  - [Sockel abdichten in Witten](https://sos-abdichtung.de/kellersanierung/witten/#sockelabdichtung)
+  - [Balkon und Terrasse abdichten in Witten](https://sos-abdichtung.de/kellersanierung/witten/#balkon-terrasse)
+- [Kellersanierung Hattingen](https://sos-abdichtung.de/kellersanierung/hattingen/): vor Ort in 24 bis 48 Stunden. PLZ 45525, 45527, 45529
+  - [Kellersanierung in Hattingen](https://sos-abdichtung.de/kellersanierung/hattingen/#kellersanierung)
+  - [Horizontalsperre in Hattingen](https://sos-abdichtung.de/kellersanierung/hattingen/#horizontalsperre)
+  - [Keller abdichten in Hattingen](https://sos-abdichtung.de/kellersanierung/hattingen/#kellerinnenabdichtung)
+  - [Rissverpressung in Hattingen](https://sos-abdichtung.de/kellersanierung/hattingen/#rissverpressung)
+  - [Feuchtemessung in Hattingen](https://sos-abdichtung.de/kellersanierung/hattingen/#feuchtemessung)
+  - [Schimmel im Keller in Hattingen](https://sos-abdichtung.de/kellersanierung/hattingen/#schimmelbeseitigung)
+  - [Sockel abdichten in Hattingen](https://sos-abdichtung.de/kellersanierung/hattingen/#sockelabdichtung)
+  - [Balkon und Terrasse abdichten in Hattingen](https://sos-abdichtung.de/kellersanierung/hattingen/#balkon-terrasse)
 
 ## Häufige Fragen
 ### Wie erkenne ich, ob mein Keller von aufsteigender Feuchtigkeit betroffen ist?
