@@ -36,6 +36,9 @@ const CITIES = [
   { slug: "hagen", name: "Hagen" },
   { slug: "leverkusen", name: "Leverkusen" },
   { slug: "bottrop", name: "Bottrop" },
+  { slug: "gladbeck", name: "Gladbeck" },
+  { slug: "herten", name: "Herten" },
+  { slug: "recklinghausen", name: "Recklinghausen" },
 ];
 
 /** The flat top level of the menu: the main places the site actually goes. */

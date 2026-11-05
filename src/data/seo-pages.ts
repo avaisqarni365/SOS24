@@ -2600,7 +2600,7 @@ export const CITY_PAGES: CityPage[] = [
       }
     ],
     film: "kellersanierung",
-    nearby: ["muelheim-an-der-ruhr", "gelsenkirchen", "bottrop", "oberhausen", "bochum", "duisburg", "dortmund", "velbert", "hagen"],
+    nearby: ["muelheim-an-der-ruhr", "gelsenkirchen", "bottrop", "oberhausen", "bochum", "duisburg", "dortmund", "velbert", "hagen", "gladbeck"],
   },
 
   // Düsseldorf
@@ -3120,7 +3120,7 @@ export const CITY_PAGES: CityPage[] = [
         "text": "Siedlungs- und Einfamilienhäuser im Nordosten, viele auf ehemaligem Bergbaugebiet. Setzungsrisse und Wasser, das sich im Lehm an der Kellerwand staut."
       }
     ],
-    nearby: ["essen", "dortmund", "gelsenkirchen", "hagen", "wuppertal"],
+    nearby: ["essen", "dortmund", "gelsenkirchen", "hagen", "wuppertal", "herten", "recklinghausen"],
   },
 
   // Dortmund
@@ -3991,7 +3991,7 @@ export const CITY_PAGES: CityPage[] = [
         "a": "Die Messung. Im Emschertal drückt oft Grundwasser, in den Zechenhäusern in Buer, Hassel oder Ückendorf steigt Feuchte im Ziegel auf, und Bergsenkungsrisse lassen nach Regen Wasser durch. Jede Ursache braucht ein anderes Verfahren: Innenabdichtung, Horizontalsperre oder Rissverpressung. Wir messen kostenlos und bieten dann genau die Kombination an, die Ihr Keller braucht."
       }
     ],
-    nearby: ["essen", "bottrop", "bochum", "oberhausen", "dortmund"],
+    nearby: ["essen", "bottrop", "bochum", "oberhausen", "dortmund", "gladbeck", "herten", "recklinghausen"],
   },
   // Oberhausen
   {
@@ -4937,7 +4937,614 @@ export const CITY_PAGES: CityPage[] = [
         "a": "Führt ein Setzungsriss aus dem Bergbau Wasser, verpressen wir ihn mit PU-Harz, das im Riss aufschäumt und elastisch bleibt. Steigt in den Siedlungshäusern in Boy, Batenbrock oder Eigen zusätzlich Feuchte im Mauerwerk auf, setzen wir eine Horizontalsperre. Gegen Grundwasser im Süden an der Emscher dichten wir von innen ab. Die Messung vorab ist kostenlos."
       }
     ],
-    nearby: ["gelsenkirchen", "oberhausen", "essen", "duisburg", "muelheim-an-der-ruhr"],
+    nearby: ["gelsenkirchen", "oberhausen", "essen", "duisburg", "muelheim-an-der-ruhr", "gladbeck"],
+  },
+  // Gladbeck
+  {
+    "slug": "gladbeck",
+    "name": "Gladbeck",
+    "keyword": "Kellersanierung Gladbeck",
+    "title": "Kellersanierung Gladbeck | Keller abdichten & trockenlegen",
+    "metaDescription": "Kellersanierung Gladbeck ohne Aufgraben: nasse Keller abdichten, Bergsenkungsrisse verpressen, von Brauck und Butendorf bis Zweckel. Messung kostenlos.",
+    "h1": "Kellersanierung Gladbeck: nasse Keller und feuchte Wände von innen sanieren",
+    "lede": "Von Brauck und Butendorf bis Rentfort und Zweckel: In Gladbeck werden Keller vor allem durch Risse aus der Bergbauzeit, aufsteigende Feuchte in den Ziegelkellern der Zechensiedlungen und Wasser in den tief liegenden Lagen im Süden nass. Gladbeck grenzt an Essen und Bottrop; wir sind schnell bei Ihnen, messen kostenlos, woher die Feuchte kommt, und sanieren von innen, ohne Aufgraben.",
+    "plz": [
+      "45964",
+      "45966",
+      "45968"
+    ],
+    "districts": [
+      "Gladbeck-Mitte",
+      "Brauck",
+      "Butendorf",
+      "Rosenhügel",
+      "Ellinghorst",
+      "Alt-Rentfort",
+      "Rentfort-Nord",
+      "Schultendorf",
+      "Zweckel"
+    ],
+    "geo": {
+      "lat": 51.5727,
+      "lng": 6.9877
+    },
+    "responseTime": "24 bis 48 Stunden",
+    "wiki": "https://de.wikipedia.org/wiki/Gladbeck",
+    "localFactors": [
+      {
+        "name": "Bergsenkungen",
+        "text": "Unter Gladbeck wurde jahrzehntelang Steinkohle abgebaut, unter anderem auf den Zechen Graf Moltke, Möller und Zweckel. Der Boden hat sich ungleichmäßig gesetzt; in vielen Häusern sind Risse in Kellerwand und Bodenplatte geblieben, durch die bei Regen Wasser kommt."
+      },
+      {
+        "name": "Zechensiedlungen aus Ziegel",
+        "text": "In Brauck, Butendorf und Zweckel stehen viele Siedlungshäuser, die für die Bergleute gebaut wurden. Ihre Ziegelkeller haben keine Sperrschicht, die noch wirkt; die Feuchte steigt im Mauerwerk auf und bringt Salze mit."
+      },
+      {
+        "name": "Tief liegender Süden",
+        "text": "Zum Süden hin, in Brauck und Butendorf, liegt das Gelände tiefer, Richtung Boye und Emscher. Nach langem Regen steht das Wasser dort näher an der Kellersohle und drückt von unten und von der Seite."
+      },
+      {
+        "name": "Einfamilienhäuser im Norden",
+        "text": "In Rentfort, Ellinghorst und Schultendorf stehen viele Ein- und Zweifamilienhäuser aus den 1950er bis 1980er Jahren. Ihre Bitumenabdichtung außen ist gealtert; das Wasser kommt an der Bodenfuge, an Rohrdurchführungen und am Lichtschacht."
+      }
+    ],
+    "sections": [
+      {
+        "heading": "Brauck und Butendorf: Siedlungshäuser im Gladbecker Süden",
+        "paragraphs": [
+          "Im Süden der Stadt prägen Bergarbeitersiedlungen das Bild: Reihen- und Doppelhäuser mit kleinen Ziegelkellern, gebaut ohne wirksame Sperrschicht. Die Feuchte steigt im Mauerwerk auf, der Putz blüht weiß aus und platzt ab, und der muffige Geruch zieht ins Erdgeschoss. Weil das Gelände hier tiefer liegt, kommt nach langem Regen oft noch Wasser von außen dazu.",
+          "Wir setzen eine Horizontalsperre per Injektion knapp über dem Kellerboden und dichten die erdberührten Wände von innen ab, mit Dichtungsschlämme in mehreren Lagen und einer Hohlkehle am Übergang zum Boden. Zum Schluss kommt Sanierputz, der die Salze aufnimmt. Weil die Häuser dicht an dicht stehen, arbeiten wir nur von innen; Garten und Wand zum Nachbarn bleiben unberührt."
+        ]
+      },
+      {
+        "heading": "Risse aus der Bergbauzeit: wann verpressen, wann beobachten?",
+        "paragraphs": [
+          "Nicht jeder Riss im Keller ist gefährlich, und nicht jeder muss verpresst werden. Haarrisse im Putz sind oft harmlos. Führt ein Riss aber Wasser, verläuft er schräg oder treppenförmig durch das Mauerwerk oder quer durch die Bodenplatte, lohnt ein genauer Blick, denn dann hat sich das Haus gesetzt.",
+          "Wir messen die Breite, prüfen die Feuchte rechts und links vom Riss und ob er sich noch bewegt. Wasserführende Risse verpressen wir mit PU-Harz, das im Riss aufschäumt und elastisch bleibt. Vermuten Sie einen Bergschaden, dokumentieren wir Verlauf, Breite und Feuchte so, dass Sie die Unterlagen für die Klärung verwenden können."
+        ]
+      },
+      {
+        "heading": "Rentfort, Ellinghorst und Zweckel: Keller in Einfamilienhäusern",
+        "paragraphs": [
+          "Im Norden und Westen Gladbecks wohnen viele Familien im eigenen Haus, oft gebaut in den 1950er bis 1980er Jahren. Die Keller sind aus Kalksandstein oder Beton und dienen als Hobbyraum, Waschküche oder Büro. Feucht werden sie meist an bestimmten Stellen: an der Fuge zwischen Wand und Bodenplatte, unter dem Kellerfenster, an Rohrdurchführungen oder durch Kondensat, wenn im Sommer gelüftet wird.",
+          "Deshalb muss nicht der ganze Keller saniert werden. Wir messen, wo die Feuchte eintritt, und dichten genau diese Stellen von innen ab. Ist es Kondensat, sagen wir Ihnen das offen; dann helfen richtiges Lüften und, wo nötig, Klimaplatten an der kühlen Wand."
+        ]
+      },
+      {
+        "heading": "Was eine Kellersanierung in Gladbeck kostet",
+        "paragraphs": [
+          "Den Preis bestimmen die Ursache, die Länge der betroffenen Wände, das Mauerwerk und die Zahl der Risse. Deshalb messen wir zuerst, kostenlos, und geben Ihnen danach ein schriftliches Festpreisangebot."
+        ],
+        "bullets": [
+          "Kostenlose Feuchtemessung mit schriftlichem Protokoll",
+          "Festpreis nach der Messung, ohne Nachträge",
+          "10 Jahre Garantie auf die Arbeit"
+        ]
+      }
+    ],
+    "faqs": [
+      {
+        "q": "Können Risse im Keller in Gladbeck dauerhaft abgedichtet werden?",
+        "a": "Ja. Wasserführende Risse aus Setzungen oder der Bergbauzeit verpressen wir mit PU-Harz, das im Riss aufschäumt und elastisch bleibt. So bleibt der Riss auch dicht, wenn Wasser von außen drückt oder sich das Haus noch leicht bewegt."
+      },
+      {
+        "q": "Wer zahlt, wenn die Risse im Keller in Gladbeck ein Bergschaden sind?",
+        "a": "Bei Schäden durch den Steinkohlenbergbau kann ein Anspruch gegen das Bergbauunternehmen bestehen, auch Jahrzehnte nach dem Ende einer Zeche. Ob ein Bergschaden vorliegt, klärt ein Sachverständiger oder die Schlichtungsstelle Bergschaden NRW. Wir dokumentieren Verlauf, Breite und Feuchte der Risse; diese Unterlagen können Sie für die Klärung nutzen."
+      },
+      {
+        "q": "Keller trockenlegen in Gladbeck: Geht das ohne Aufgraben?",
+        "a": "Ja, in den allermeisten Fällen. Gegen Feuchte, die im Ziegel der Siedlungshäuser in Brauck, Butendorf oder Zweckel aufsteigt, setzen wir eine Horizontalsperre per Injektion. Kommt Wasser von außen oder durch einen Riss, verpressen wir den Riss und dichten die Wand von innen ab. Garten und Einfahrt bleiben unberührt, die Messung ist kostenlos."
+      },
+      {
+        "q": "Nach Starkregen steht Wasser im Keller in Gladbeck. Was tun?",
+        "a": "Zuerst den Strom in den betroffenen Räumen abschalten, das Wasser abpumpen und Fotos für die Versicherung machen. Kommt das Wasser über den Bodenablauf, fehlt oft eine Rückstauklappe; das ist Sache des Installateurs. Kommt es durch Wand, Bodenfuge, Riss oder Lichtschacht, messen wir kostenlos, wo es eintritt, und dichten genau dort von innen ab."
+      },
+      {
+        "q": "Wie schnell sind Sie in Gladbeck vor Ort?",
+        "a": "Gladbeck grenzt an Essen, wo wir unseren Sitz haben. In der Regel sind wir innerhalb von 24 bis 48 Stunden bei Ihnen, in Brauck genauso wie in Rentfort oder Zweckel. Die Feuchtemessung ist kostenlos und unverbindlich."
+      },
+      {
+        "q": "Wie lange dauert eine Kellersanierung in Gladbeck?",
+        "a": "Die Arbeiten selbst dauern meist zwei bis vier Werktage, eine einzelne Rissverpressung oft nur einen Tag. Danach trocknet das Mauerwerk über einige Monate aus; wir messen nach und geben Ihnen das Protokoll schriftlich."
+      },
+      {
+        "q": "Wie finde ich in Gladbeck eine gute Firma für Kellersanierung?",
+        "a": "Eine gute Firma misst, bevor sie anbietet, und gibt Ihnen das Ergebnis schriftlich. Das Angebot sollte Ursache, Verfahren und Wandlängen nennen und ein Festpreis sein; eine Pauschale am Telefon ist es nicht. Fragen Sie auch, ob Risse eigens geprüft und dokumentiert werden. Bei uns sind Messung und Protokoll kostenlos, und Sie bekommen 10 Jahre Garantie auf die Arbeit."
+      },
+      {
+        "q": "Ich wohne im Reihenhaus einer Zechensiedlung in Gladbeck. Muss der Nachbar mitmachen?",
+        "a": "In der Regel nicht. Horizontalsperre und Innenabdichtung setzen wir nur in Ihrem Keller, auch an der Wand zum Nachbarhaus. Ist der Nachbarkeller ebenfalls nass, kann Feuchte über die gemeinsame Wand nachziehen; das sehen wir bei der Messung und sagen es Ihnen offen."
+      }
+    ],
+    "localServices": [
+      {
+        "slug": "kellersanierung",
+        "heading": "Kellersanierung in Gladbeck",
+        "text": "Wir messen zuerst, woher die Nässe kommt: durch Risse aus der Bergbauzeit, aufsteigend in den Ziegelkellern der Siedlungen in Brauck, Butendorf und Zweckel oder von außen in den tief liegenden Lagen im Süden. Dann kombinieren wir nur die Verfahren, die Ihr Keller braucht, also Rissverpressung, Horizontalsperre, Innenabdichtung und Sanierputz. Alles von innen, ohne Aufgraben, mit 10 Jahren Garantie auf die Arbeit."
+      },
+      {
+        "slug": "rissverpressung",
+        "heading": "Rissverpressung in Gladbeck",
+        "text": "Setzungen aus der Bergbauzeit haben Risse in Bodenplatten und Kellerwänden hinterlassen. Wir prüfen, ob ein Riss Wasser führt und sich noch bewegt, und verpressen ihn mit elastischem PU-Harz."
+      },
+      {
+        "slug": "horizontalsperre",
+        "heading": "Horizontalsperre in Gladbeck",
+        "text": "Die Siedlungshäuser haben Ziegelkeller ohne wirksame Sperrschicht. Knapp über dem Kellerboden setzen wir per Injektion eine neue, ohne Vortrocknung und ohne Aufgraben, und messen nach, bis die Wand trocken ist."
+      },
+      {
+        "slug": "kellerinnenabdichtung",
+        "heading": "Keller abdichten in Gladbeck",
+        "text": "Wo im Süden nach langem Regen Wasser von außen drückt, dichten wir die erdberührten Wände von innen ab: Dichtungsschlämme in mehreren Lagen, Hohlkehle am Wandfuß und Sanierputz."
+      },
+      {
+        "slug": "feuchtemessung",
+        "heading": "Feuchtemessung in Gladbeck",
+        "text": "Die Messung ist kostenlos: Feuchte in mehreren Wandhöhen, Salze, Oberflächentemperatur und Raumklima, dazu Risse mit Verlauf und Breite. Das Protokoll bekommen Sie schriftlich."
+      },
+      {
+        "slug": "schimmelbeseitigung",
+        "heading": "Schimmel im Keller in Gladbeck",
+        "text": "In den Siedlungshäusern kommt der Schimmel meist aus der nassen Wand, in den Einfamilienhäusern im Norden oft aus Kondensat. Wir entfernen ihn sporensicher und beseitigen die Ursache."
+      },
+      {
+        "slug": "sockelabdichtung",
+        "heading": "Sockel abdichten in Gladbeck",
+        "text": "Bei Siedlungs- und Reihenhäusern zieht Spritzwasser in den Sockel und weiter in die Kellerwand. Wir dichten den Sockel ab und schließen ihn an die Kellerabdichtung an."
+      },
+      {
+        "slug": "balkon-terrasse",
+        "heading": "Balkon und Terrasse abdichten in Gladbeck",
+        "text": "Bei vielen Einfamilienhäusern in Rentfort und Ellinghorst liegt die Terrasse über einem Kellerraum, an Mehrfamilienhäusern in der Stadtmitte sind ältere Balkone undicht geworden. Wir finden die undichte Stelle und dichten Fläche und Wandanschluss dauerhaft ab."
+      }
+    ],
+    "districtGroups": [
+      {
+        "name": "Der Süden",
+        "districts": [
+          "Brauck",
+          "Butendorf",
+          "Rosenhügel"
+        ],
+        "text": "Zechensiedlungen auf tiefer liegendem Gelände. Aufsteigende Feuchte im Ziegel, Setzungsrisse und nach langem Regen Wasser von außen."
+      },
+      {
+        "name": "Mitte",
+        "districts": [
+          "Gladbeck-Mitte",
+          "Schultendorf"
+        ],
+        "text": "Wiederaufbau und Mehrfamilienhäuser rund um die Innenstadt. Häufig gealterte Abdichtung und Feuchte im Mauerwerk."
+      },
+      {
+        "name": "Norden und Westen",
+        "districts": [
+          "Zweckel",
+          "Alt-Rentfort",
+          "Rentfort-Nord",
+          "Ellinghorst"
+        ],
+        "text": "Siedlungshäuser in Zweckel, Einfamilienhäuser in Rentfort und Ellinghorst. Undichte Bodenfugen, Rohrdurchführungen und Kondensat im kühlen Keller."
+      }
+    ],
+    "nearby": [
+      "bottrop",
+      "essen",
+      "gelsenkirchen",
+      "herten",
+      "recklinghausen"
+    ]
+  },
+  // Herten
+  {
+    "slug": "herten",
+    "name": "Herten",
+    "keyword": "Kellersanierung Herten",
+    "title": "Kellersanierung Herten | Keller abdichten & trockenlegen",
+    "metaDescription": "Kellersanierung Herten ohne Aufgraben: Bergschadensrisse verpressen, nasse Keller abdichten und trockenlegen, von Disteln bis Westerholt. Messung kostenlos.",
+    "h1": "Kellersanierung Herten: nasse Keller nach dem Bergbau dauerhaft trockenlegen",
+    "lede": "Herten war einmal eine der größten Bergbaustädte Europas; die Zechen Ewald und Schlägel & Eisen förderten bis zum Jahr 2000. Geblieben sind Setzungsrisse, Zechensiedlungen mit Ziegelkellern ohne Sperrschicht und tief liegendes Gelände am Emscherbruch. Wir messen kostenlos, woher die Feuchte in Ihrem Keller kommt, und sanieren von innen, ohne Aufgraben.",
+    "plz": [
+      "45699",
+      "45701"
+    ],
+    "districts": [
+      "Herten-Mitte",
+      "Herten-Süd",
+      "Disteln",
+      "Paschenberg",
+      "Langenbochum",
+      "Scherlebeck",
+      "Backum",
+      "Westerholt",
+      "Bertlich"
+    ],
+    "geo": {
+      "lat": 51.5953,
+      "lng": 7.1408
+    },
+    "responseTime": "24 bis 48 Stunden",
+    "wiki": "https://de.wikipedia.org/wiki/Herten",
+    "localFactors": [
+      {
+        "name": "Bergbau bis 2000",
+        "text": "Unter fast dem ganzen Stadtgebiet wurde Steinkohle abgebaut. Der Boden hat sich ungleichmäßig gesetzt, und in vielen Häusern sind Risse in Kellerwand und Bodenplatte geblieben, durch die Wasser kommt."
+      },
+      {
+        "name": "Emscherbruch im Süden",
+        "text": "Der Süden Hertens grenzt an den Emscherbruch, eine tief liegende, früher sumpfige Niederung. Das Grundwasser steht dort nah unter der Oberfläche und drückt nach langem Regen gegen Kellerwand und Boden."
+      },
+      {
+        "name": "Zechensiedlungen",
+        "text": "In Disteln, Langenbochum, Scherlebeck und Herten-Süd stehen viele Siedlungshäuser für die Bergleute, mit einfachen Ziegelkellern. Die Feuchte steigt im Mauerwerk auf, weil die alte Sperrschicht nicht mehr wirkt."
+      },
+      {
+        "name": "Fachwerk in Westerholt",
+        "text": "Im alten Ortskern von Westerholt stehen Fachwerkhäuser mit Bruchstein- und Ziegelsockeln. Hier steigt die Feuchte langsam, aber stetig in den Sockel und die Kellerwände."
+      }
+    ],
+    "sections": [
+      {
+        "heading": "Nach der Zeche: Risse und nasse Keller in Disteln, Langenbochum und Scherlebeck",
+        "paragraphs": [
+          "Als Ewald und Schlägel & Eisen schlossen, endete die Förderung, nicht aber ihre Folgen. Wo unter Tage abgebaut wurde, hat sich die Oberfläche in Mulden und Stufen gesenkt. Häuser darauf werden ungleich belastet; im Keller zeigt sich das als Riss an Ecken, Fenstern und quer durch die Bodenplatte. Führt ein solcher Riss Wasser, reicht Zuspachteln nicht.",
+          "Wir messen Breite und Feuchte, prüfen, ob sich der Riss noch bewegt, und verpressen ihn mit elastischem PU-Harz. In den Siedlungshäusern kommt oft eine Horizontalsperre gegen aufsteigende Feuchte im Ziegel dazu. Vermuten Sie einen Bergschaden, dokumentieren wir die Risse so, dass Sie die Unterlagen für Ihre Ansprüche verwenden können."
+        ]
+      },
+      {
+        "heading": "Herten-Süd und Paschenberg: Keller am Emscherbruch",
+        "paragraphs": [
+          "Im Süden der Stadt liegt das Gelände tief, Richtung Emscherbruch. Nach langem Regen steigt das Grundwasser hier schnell, und es drückt von unten und von der Seite gegen den Keller. Ein Anstrich hält das nicht auf; das Wasser kommt an der Fuge zwischen Wand und Boden, durch Risse und an Rohrdurchführungen.",
+          "Dagegen hilft eine Innenabdichtung, die für drückendes Wasser ausgelegt ist: mehrlagige Dichtungsschlämme an Wand und Bodenanschluss, eine Hohlkehle in der Ecke und abgedichtete Durchführungen. Wasserführende Risse verpressen wir vorher. Was davon nötig ist, zeigt die kostenlose Messung."
+        ]
+      },
+      {
+        "heading": "Westerholt und Bertlich: Fachwerk und alte Sockel",
+        "paragraphs": [
+          "Der alte Ortskern von Westerholt ist für seine Fachwerkhäuser bekannt. Die alten Häuser haben Sockel und Keller aus Bruchstein oder Ziegel ohne Sperrschicht; die Feuchte steigt auf, der Putz am Sockel platzt ab, und das Holz darüber leidet mit.",
+          "Wir verfüllen bei Bruchstein zuerst die Hohlräume im Mauerwerk, setzen dann eine Horizontalsperre und schließen mit einem Sanierputz ab, der Salze aufnimmt und die Restfeuchte verdunsten lässt. Die Fassade bleibt, wie sie ist."
+        ]
+      },
+      {
+        "heading": "Was eine Kellersanierung in Herten kostet",
+        "paragraphs": [
+          "Den Preis bestimmen die Ursache, die Länge der betroffenen Wände, das Mauerwerk und die Zahl der Risse. Deshalb messen wir zuerst, kostenlos, und geben Ihnen danach ein schriftliches Festpreisangebot."
+        ],
+        "bullets": [
+          "Kostenlose Feuchtemessung mit schriftlichem Protokoll",
+          "Festpreis nach der Messung, ohne Nachträge",
+          "10 Jahre Garantie auf die Arbeit"
+        ]
+      }
+    ],
+    "faqs": [
+      {
+        "q": "Wer zahlt, wenn die Risse im Keller in Herten ein Bergschaden sind?",
+        "a": "Bei Schäden durch den Steinkohlenbergbau kann ein Anspruch gegen das Bergbauunternehmen bestehen, auch nach dem Ende der Förderung. Ob ein Bergschaden vorliegt, klärt ein Sachverständiger oder die Schlichtungsstelle Bergschaden NRW. Wir dokumentieren Verlauf, Breite und Feuchte der Risse; diese Unterlagen können Sie für die Klärung nutzen."
+      },
+      {
+        "q": "Keller trockenlegen in Herten: Was hilft bei Zechenhäusern?",
+        "a": "Viele Zechenhäuser in Disteln, Langenbochum oder Scherlebeck wurden ohne wirksame Sperrschicht gebaut, die Feuchte steigt im Ziegel auf. Dagegen setzen wir eine Horizontalsperre per Injektion. Kommt Wasser durch Bergsenkungsrisse, verpressen wir sie; drückt im Süden Grundwasser, dichten wir die Wand von innen ab. Aufgraben ist nicht nötig, die Messung ist kostenlos."
+      },
+      {
+        "q": "Wird mein Keller in Herten nach dem Ende des Bergbaus nasser?",
+        "a": "Das kann passieren. In den abgesenkten Gebieten wird das Grundwasser dauerhaft abgepumpt; wo sich der Wasserstand trotzdem ändert oder neue Risse entstehen, kann ein bisher trockener Keller feucht werden. Die Messung zeigt, ob das bei Ihnen der Fall ist und woher die Feuchte kommt."
+      },
+      {
+        "q": "Nach Starkregen steht Wasser im Keller in Herten. Was tun?",
+        "a": "Zuerst den Strom in den betroffenen Räumen abschalten, das Wasser abpumpen und Fotos für die Versicherung machen. Kommt das Wasser über den Bodenablauf, fehlt oft eine Rückstauklappe; das ist Sache des Installateurs. Kommt es durch Wand, Bodenfuge, Riss oder Lichtschacht, messen wir kostenlos, wo es eintritt, und dichten genau dort von innen ab."
+      },
+      {
+        "q": "Wie schnell sind Sie in Herten vor Ort?",
+        "a": "Von unserem Sitz in Essen in der Regel innerhalb von 24 bis 48 Stunden, in Herten-Mitte genauso wie in Westerholt oder Bertlich. Die Feuchtemessung ist kostenlos und unverbindlich."
+      },
+      {
+        "q": "Wie lange dauert eine Kellersanierung in Herten?",
+        "a": "Die Arbeiten selbst dauern meist zwei bis vier Werktage, eine einzelne Rissverpressung oft nur einen Tag. Danach trocknet das Mauerwerk über einige Monate aus; wir messen nach und geben Ihnen das Protokoll schriftlich."
+      },
+      {
+        "q": "Wie finde ich in Herten eine gute Firma für Kellerabdichtung?",
+        "a": "Eine gute Firma misst, bevor sie anbietet, und gibt Ihnen das Ergebnis schriftlich. Das Angebot sollte Ursache, Verfahren und Wandlängen nennen und ein Festpreis sein. Fragen Sie in Herten auch, ob Risse eigens geprüft und für eine Bergschadensklärung dokumentiert werden. Bei uns sind Messung und Protokoll kostenlos, und Sie bekommen 10 Jahre Garantie auf die Arbeit."
+      },
+      {
+        "q": "Mein Keller in Herten riecht muffig, aber die Wände sehen trocken aus. Woran liegt das?",
+        "a": "Oft steckt Feuchte im Mauerwerk, die man noch nicht sieht, oder es ist Kondensat: Im Sommer schlägt sich warme Luft an den kühlen Kellerwänden nieder. Steigt die Feuchte in der Wand auf, hilft eine Horizontalsperre; ist es Kondensat, helfen richtiges Lüften und Klimaplatten. Wir messen kostenlos und sagen Ihnen, was zutrifft."
+      }
+    ],
+    "localServices": [
+      {
+        "slug": "kellersanierung",
+        "heading": "Kellersanierung in Herten",
+        "text": "Wir messen zuerst, woher die Nässe kommt: durch Risse aus dem Bergbau, aufsteigend in den Ziegelkellern der Siedlungen in Disteln, Langenbochum und Scherlebeck oder von unten im Süden am Emscherbruch. Dann kombinieren wir nur die Verfahren, die Ihr Keller braucht, also Rissverpressung, Horizontalsperre, Innenabdichtung und Sanierputz. Alles von innen, ohne Aufgraben, mit 10 Jahren Garantie auf die Arbeit."
+      },
+      {
+        "slug": "rissverpressung",
+        "heading": "Rissverpressung in Herten",
+        "text": "Bergsenkungsrisse sind in Herten einer der häufigsten Wege für das Wasser. Wir prüfen, ob ein Riss Wasser führt und noch arbeitet, und verpressen ihn mit PU-Harz, das elastisch bleibt."
+      },
+      {
+        "slug": "horizontalsperre",
+        "heading": "Horizontalsperre in Herten",
+        "text": "In den Ziegelkellern der Zechensiedlungen und den alten Sockeln in Westerholt steigt die Feuchte auf. Wir setzen per Injektion eine neue Sperrschicht, ohne Vortrocknung und ohne Aufgraben."
+      },
+      {
+        "slug": "kellerinnenabdichtung",
+        "heading": "Keller abdichten in Herten",
+        "text": "Im Süden am Emscherbruch drückt nach langem Regen Grundwasser. Wir dichten Wände und Bodenanschluss von innen ab, mit Dichtungsschlämme, Hohlkehle und Sanierputz."
+      },
+      {
+        "slug": "feuchtemessung",
+        "heading": "Feuchtemessung in Herten",
+        "text": "Die Messung ist kostenlos: Feuchte in mehreren Wandhöhen, Salze, Oberflächentemperatur und Raumklima, dazu Risse mit Verlauf und Breite. Das Protokoll bekommen Sie schriftlich, auch für die Klärung eines Bergschadens."
+      },
+      {
+        "slug": "schimmelbeseitigung",
+        "heading": "Schimmel im Keller in Herten",
+        "text": "Feuchte Ziegelwände und kühle Keller lassen Schimmel wachsen. Wir entfernen ihn sporensicher und beseitigen die Ursache, damit er nicht wiederkommt."
+      },
+      {
+        "slug": "sockelabdichtung",
+        "heading": "Sockel abdichten in Herten",
+        "text": "An Siedlungshäusern und den Fachwerkhäusern in Westerholt zieht Spritzwasser in den Sockel. Wir dichten den Sockel ab und schließen ihn an die Kellerabdichtung an."
+      },
+      {
+        "slug": "balkon-terrasse",
+        "heading": "Balkon und Terrasse abdichten in Herten",
+        "text": "An Mehrfamilienhäusern in Herten-Mitte sind ältere Balkone undicht geworden, bei Einfamilienhäusern liegt die Terrasse oft über einem Kellerraum. Wir finden die undichte Stelle und dichten Fläche und Wandanschluss dauerhaft ab."
+      }
+    ],
+    "districtGroups": [
+      {
+        "name": "Der Süden am Emscherbruch",
+        "districts": [
+          "Herten-Süd",
+          "Paschenberg"
+        ],
+        "text": "Tief liegendes Gelände nahe der früheren Zeche Ewald. Grundwasser nah unter der Oberfläche, Risse aus dem Bergbau."
+      },
+      {
+        "name": "Mitte und die Zechensiedlungen",
+        "districts": [
+          "Herten-Mitte",
+          "Disteln",
+          "Langenbochum",
+          "Scherlebeck",
+          "Backum"
+        ],
+        "text": "Siedlungshäuser und Wiederaufbau. Aufsteigende Feuchte im Ziegel und Setzungsrisse in Wand und Bodenplatte."
+      },
+      {
+        "name": "Westerholt und Bertlich",
+        "districts": [
+          "Westerholt",
+          "Bertlich"
+        ],
+        "text": "Fachwerk im alten Ortskern und Einfamilienhäuser. Feuchte Sockel und Kellerwände aus Bruchstein und Ziegel."
+      }
+    ],
+    "nearby": [
+      "recklinghausen",
+      "gladbeck",
+      "gelsenkirchen",
+      "bochum",
+      "bottrop"
+    ]
+  },
+  // Recklinghausen
+  {
+    "slug": "recklinghausen",
+    "name": "Recklinghausen",
+    "keyword": "Kellersanierung Recklinghausen",
+    "title": "Kellersanierung Recklinghausen | Keller abdichten",
+    "metaDescription": "Kellersanierung Recklinghausen ohne Aufgraben: nasse Keller abdichten und trockenlegen, Risse verpressen, von Hochlarmark bis Suderwich. Messung kostenlos.",
+    "h1": "Kellersanierung Recklinghausen: nasse Keller und feuchte Wände von innen sanieren",
+    "lede": "Von der Altstadt und dem Paulusviertel bis Hochlarmark, Suderwich und Speckhorn: In Recklinghausen werden Keller vor allem durch aufsteigende Feuchte in Altbau- und Siedlungskellern, Risse aus der Bergbauzeit und Wasser in den tiefen Lagen im Süden am Rhein-Herne-Kanal nass. Wir messen kostenlos, woher die Feuchte kommt, und sanieren von innen, ohne Aufgraben.",
+    "plz": [
+      "45657",
+      "45659",
+      "45661",
+      "45663",
+      "45665"
+    ],
+    "districts": [
+      "Altstadt",
+      "Paulusviertel",
+      "Nordviertel",
+      "Ostviertel",
+      "Westviertel",
+      "Hillen",
+      "Grullbad",
+      "Hillerheide",
+      "Hochlarmark",
+      "König-Ludwig",
+      "Röllinghausen",
+      "Suderwich",
+      "Essel",
+      "Berghausen",
+      "Speckhorn",
+      "Bockholt",
+      "Stuckenbusch",
+      "Quellberg"
+    ],
+    "geo": {
+      "lat": 51.6141,
+      "lng": 7.1979
+    },
+    "responseTime": "24 bis 48 Stunden",
+    "wiki": "https://de.wikipedia.org/wiki/Recklinghausen",
+    "localFactors": [
+      {
+        "name": "Bergbau im Süden",
+        "text": "Unter dem Süden der Stadt wurde über ein Jahrhundert Steinkohle abgebaut, unter anderem auf den Zechen Recklinghausen und König Ludwig. In Hochlarmark, Grullbad und König-Ludwig sind in vielen Häusern Setzungsrisse geblieben, durch die Wasser in den Keller kommt."
+      },
+      {
+        "name": "Tiefe Lagen am Kanal",
+        "text": "Im Süden grenzt die Stadt an den Rhein-Herne-Kanal und die Emscher-Niederung. Das Gelände liegt tief, das Grundwasser steht nah unter der Oberfläche und drückt nach langem Regen gegen Kellerwand und Boden."
+      },
+      {
+        "name": "Altbauten rund um die Altstadt",
+        "text": "Im Paulusviertel, im Nord- und Ostviertel stehen viele Gründerzeit- und Vorkriegshäuser mit Ziegelkellern. Die alte Sperrschicht ist verbraucht; die Feuchte steigt im Mauerwerk auf, Salze lassen den Putz abplatzen."
+      },
+      {
+        "name": "Einfamilienhäuser im Norden",
+        "text": "Zur Haard hin, in Speckhorn, Bockholt und Berghausen, stehen vor allem Einfamilienhäuser auf sandigem Boden. Bergschäden sind hier seltener; typisch sind undichte Bodenfugen, Rohrdurchführungen und Kondensat im kühlen Keller."
+      }
+    ],
+    "sections": [
+      {
+        "heading": "Paulusviertel, Nord- und Ostviertel: Altbaukeller rund um die Altstadt",
+        "paragraphs": [
+          "Rund um den alten Wallring stehen viele Mehrfamilienhäuser aus der Gründerzeit und den Jahrzehnten danach. Ihre Ziegelkeller wurden mit einer einfachen Sperrschicht oder ganz ohne gebaut. Heute steigt die Feuchte im Mauerwerk auf, an den Wänden zeigen sich weiße Salzränder, und der muffige Geruch zieht ins Treppenhaus.",
+          "Wir setzen eine Horizontalsperre per Injektion knapp über dem Kellerboden, tragen Sanierputz auf, der die Salze aufnimmt, und dichten erdberührte Wände von innen ab, wo Wasser von außen kommt. Gearbeitet wird nur im Keller, Raum für Raum, damit Mieter und Eigentümer ihre Keller weiter nutzen können. Die Hausverwaltung bekommt ein schriftliches Angebot mit Messprotokoll."
+        ]
+      },
+      {
+        "heading": "Hochlarmark, Grullbad und König-Ludwig: Zechensiedlungen im Süden",
+        "paragraphs": [
+          "Im Süden der Stadt prägen Bergarbeitersiedlungen das Bild, in Hochlarmark ebenso wie rund um die früheren Schachtanlagen von König Ludwig. Die Häuser haben kleine Ziegelkeller ohne wirksame Sperrschicht, und Setzungen aus der Bergbauzeit haben Risse hinterlassen. Weil das Gelände zum Kanal hin tief liegt, drückt nach langem Regen zusätzlich Grundwasser.",
+          "Wir verpressen wasserführende Risse mit PU-Harz, setzen eine Horizontalsperre gegen die aufsteigende Feuchte und dichten Wand und Bodenanschluss von innen ab, wo Wasser drückt. Vermuten Sie einen Bergschaden, dokumentieren wir die Risse so, dass Sie die Unterlagen für die Klärung nutzen können."
+        ]
+      },
+      {
+        "heading": "Suderwich, Speckhorn und Berghausen: Keller in Einfamilienhäusern",
+        "paragraphs": [
+          "Im Osten und Norden ist Recklinghausen grüner und ländlicher. In Suderwich, Essel, Speckhorn und Berghausen stehen viele Ein- und Zweifamilienhäuser aus den 1950er bis 1990er Jahren. Die Keller sind aus Kalksandstein oder Beton; feucht werden sie meist an bestimmten Stellen: an der Bodenfuge, unter dem Kellerfenster, an Rohrdurchführungen oder durch Kondensat im Sommer.",
+          "Deshalb muss nicht der ganze Keller saniert werden. Wir messen, wo die Feuchte eintritt, setzen eine Hohlkehle am Bodenanschluss, dichten Durchführungen nach und dichten nur die Wände ab, die wirklich nass sind. Ist es Kondensat, sagen wir Ihnen das offen."
+        ]
+      },
+      {
+        "heading": "Was eine Kellersanierung in Recklinghausen kostet",
+        "paragraphs": [
+          "Den Preis bestimmen die Ursache, die Länge der betroffenen Wände, das Mauerwerk und die Zahl der Risse. Deshalb messen wir zuerst, kostenlos, und geben Ihnen danach ein schriftliches Festpreisangebot."
+        ],
+        "bullets": [
+          "Kostenlose Feuchtemessung mit schriftlichem Protokoll",
+          "Festpreis nach der Messung, ohne Nachträge",
+          "10 Jahre Garantie auf die Arbeit"
+        ]
+      }
+    ],
+    "faqs": [
+      {
+        "q": "Keller trockenlegen in Recklinghausen: Geht das ohne Aufgraben?",
+        "a": "Ja, in den allermeisten Fällen. Gegen Feuchte, die in den Altbaukellern im Paulusviertel oder in den Siedlungshäusern in Hochlarmark aufsteigt, setzen wir eine Horizontalsperre per Injektion. Kommt Wasser von außen oder durch einen Riss, verpressen wir den Riss und dichten die Wand von innen ab. Garten, Einfahrt und Gehweg bleiben unberührt."
+      },
+      {
+        "q": "Wer zahlt, wenn die Risse im Keller in Recklinghausen ein Bergschaden sind?",
+        "a": "Bei Schäden durch den Steinkohlenbergbau kann ein Anspruch gegen das Bergbauunternehmen bestehen, auch lange nach dem Ende einer Zeche. Ob ein Bergschaden vorliegt, klärt ein Sachverständiger oder die Schlichtungsstelle Bergschaden NRW. Wir dokumentieren Verlauf, Breite und Feuchte der Risse; diese Unterlagen können Sie für die Klärung nutzen."
+      },
+      {
+        "q": "Sanieren Sie auch Keller in Mehrfamilienhäusern und für Hausverwaltungen in Recklinghausen?",
+        "a": "Ja. Gerade rund um die Altstadt, im Paulusviertel und im Nord- und Ostviertel stehen viele Mehrfamilienhäuser. Wir sanieren Kellerraum für Kellerraum, damit die Mieter ihre Keller weiter nutzen können, und geben der Hausverwaltung ein schriftliches Angebot mit Messprotokoll für die Eigentümerversammlung."
+      },
+      {
+        "q": "Nach Starkregen steht Wasser im Keller in Recklinghausen. Was tun?",
+        "a": "Zuerst den Strom in den betroffenen Räumen abschalten, das Wasser abpumpen und Fotos für die Versicherung machen. Kommt das Wasser über den Bodenablauf, fehlt oft eine Rückstauklappe; das ist Sache des Installateurs. Kommt es durch Wand, Bodenfuge, Riss oder Lichtschacht, messen wir kostenlos, wo es eintritt, und dichten genau dort von innen ab."
+      },
+      {
+        "q": "Wie schnell sind Sie in Recklinghausen vor Ort?",
+        "a": "Von unserem Sitz in Essen in der Regel innerhalb von 24 bis 48 Stunden, in der Altstadt genauso wie in Suderwich oder Speckhorn. Die Feuchtemessung ist kostenlos und unverbindlich."
+      },
+      {
+        "q": "Wie lange dauert eine Kellersanierung in Recklinghausen?",
+        "a": "Die Arbeiten selbst dauern meist zwei bis vier Werktage, eine einzelne Rissverpressung oft nur einen Tag. Danach trocknet das Mauerwerk über einige Monate aus; wir messen nach und geben Ihnen das Protokoll schriftlich."
+      },
+      {
+        "q": "Wie finde ich in Recklinghausen eine gute Firma für Kellersanierung?",
+        "a": "Eine gute Firma misst, bevor sie anbietet, und gibt Ihnen das Ergebnis schriftlich. Das Angebot sollte Ursache, Verfahren und Wandlängen nennen und ein Festpreis sein; eine Pauschale am Telefon ist es nicht. Bei uns sind Messung und Protokoll kostenlos, Sie bekommen einen Festpreis und 10 Jahre Garantie auf die Arbeit."
+      },
+      {
+        "q": "Mein Keller in Recklinghausen riecht muffig, aber die Wände sehen trocken aus. Woran liegt das?",
+        "a": "Oft steckt Feuchte im Mauerwerk, die man noch nicht sieht, oder es ist Kondensat: Im Sommer schlägt sich warme Luft an den kühlen Kellerwänden nieder. Steigt die Feuchte in der Wand auf, hilft eine Horizontalsperre; ist es Kondensat, helfen richtiges Lüften und Klimaplatten. Wir messen kostenlos und sagen Ihnen, was zutrifft."
+      }
+    ],
+    "localServices": [
+      {
+        "slug": "kellersanierung",
+        "heading": "Kellersanierung in Recklinghausen",
+        "text": "Wir messen zuerst, woher die Nässe kommt: aufsteigend in den Altbaukellern rund um die Altstadt, durch Risse aus dem Bergbau in Hochlarmark und Grullbad oder von unten in den tiefen Lagen am Kanal. Dann kombinieren wir nur die Verfahren, die Ihr Keller braucht, also Horizontalsperre, Rissverpressung, Innenabdichtung und Sanierputz. Alles von innen, ohne Aufgraben, mit 10 Jahren Garantie auf die Arbeit."
+      },
+      {
+        "slug": "horizontalsperre",
+        "heading": "Horizontalsperre in Recklinghausen",
+        "text": "Die Gründerzeitkeller im Paulusviertel und die Siedlungshäuser im Süden haben keine wirksame Sperrschicht mehr. Wir setzen per Injektion eine neue, ohne Vortrocknung und ohne Aufgraben."
+      },
+      {
+        "slug": "rissverpressung",
+        "heading": "Rissverpressung in Recklinghausen",
+        "text": "Setzungen aus der Bergbauzeit haben im Süden der Stadt Risse in Bodenplatten und Kellerwänden hinterlassen. Wir prüfen, ob sie Wasser führen, und verpressen sie mit elastischem PU-Harz."
+      },
+      {
+        "slug": "kellerinnenabdichtung",
+        "heading": "Keller abdichten in Recklinghausen",
+        "text": "In den tiefen Lagen am Rhein-Herne-Kanal drückt nach langem Regen Grundwasser. Wir dichten Wände und Bodenanschluss von innen ab, mit Dichtungsschlämme, Hohlkehle und Sanierputz."
+      },
+      {
+        "slug": "feuchtemessung",
+        "heading": "Feuchtemessung in Recklinghausen",
+        "text": "Die Messung ist kostenlos: Feuchte in mehreren Wandhöhen, Salze, Oberflächentemperatur und Raumklima, dazu Risse mit Verlauf und Breite. Das Protokoll bekommen Sie schriftlich."
+      },
+      {
+        "slug": "schimmelbeseitigung",
+        "heading": "Schimmel im Keller in Recklinghausen",
+        "text": "In den Altbaukellern kommt der Schimmel meist aus der nassen Wand, in den Einfamilienhäusern im Norden oft aus Kondensat. Wir entfernen ihn sporensicher und beseitigen die Ursache."
+      },
+      {
+        "slug": "sockelabdichtung",
+        "heading": "Sockel abdichten in Recklinghausen",
+        "text": "Bei Altbauten und Siedlungshäusern zieht Spritzwasser in den Sockel und weiter in die Kellerwand. Wir dichten den Sockel ab und schließen ihn an die Kellerabdichtung an."
+      },
+      {
+        "slug": "balkon-terrasse",
+        "heading": "Balkon und Terrasse abdichten in Recklinghausen",
+        "text": "An Mehrfamilienhäusern rund um die Altstadt sind viele ältere Balkone undicht geworden, bei Einfamilienhäusern in Suderwich und Speckhorn liegt die Terrasse oft über einem Kellerraum. Wir finden die undichte Stelle und dichten Fläche und Wandanschluss dauerhaft ab."
+      }
+    ],
+    "districtGroups": [
+      {
+        "name": "Rund um die Altstadt",
+        "districts": [
+          "Altstadt",
+          "Paulusviertel",
+          "Nordviertel",
+          "Ostviertel",
+          "Westviertel",
+          "Quellberg"
+        ],
+        "text": "Gründerzeit- und Vorkriegshäuser mit Ziegelkellern. Aufsteigende Feuchte und Salze im Mauerwerk."
+      },
+      {
+        "name": "Der Süden",
+        "districts": [
+          "Hochlarmark",
+          "Grullbad",
+          "König-Ludwig",
+          "Hillerheide",
+          "Hillen",
+          "Röllinghausen"
+        ],
+        "text": "Zechensiedlungen und tief liegendes Gelände zum Kanal hin. Setzungsrisse, aufsteigende Feuchte und drückendes Grundwasser."
+      },
+      {
+        "name": "Osten und Norden",
+        "districts": [
+          "Suderwich",
+          "Essel",
+          "Berghausen",
+          "Speckhorn",
+          "Bockholt",
+          "Stuckenbusch"
+        ],
+        "text": "Einfamilienhäuser auf sandigem Boden. Undichte Bodenfugen, Rohrdurchführungen und Kondensat im kühlen Keller."
+      }
+    ],
+    "nearby": [
+      "herten",
+      "gladbeck",
+      "bochum",
+      "gelsenkirchen",
+      "dortmund"
+    ]
   },
 ];
 
