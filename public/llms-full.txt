@@ -7,7 +7,7 @@
 - Sitz: Niebuhrstraße 46, 45144 Essen
 - Telefon: +49 (0)172 2064177
 - E-Mail: info@sos-abdichtung.de
-- Servicegebiet: Wuppertal, Solingen, Remscheid, Velbert, Haan, Wermelskirchen, Essen, Düsseldorf, Bochum, Dortmund, Köln, Duisburg, Gelsenkirchen, Oberhausen, Mülheim an der Ruhr, Hagen, Leverkusen, Bottrop, Gladbeck, Herten, Recklinghausen
+- Servicegebiet: Wuppertal, Solingen, Remscheid, Velbert, Haan, Wermelskirchen, Essen, Düsseldorf, Bochum, Dortmund, Köln, Duisburg, Gelsenkirchen, Oberhausen, Mülheim an der Ruhr, Hagen, Leverkusen, Bottrop, Gladbeck, Herten, Recklinghausen, Herne, Witten, Hattingen
 - Feuchtemessung vor Ort: kostenlos und unverbindlich
 - Garantie: 10 Jahre von sos-abdichtung auf die ausgeführten Arbeiten; zusätzlich 25 Jahre Produktgarantie des Herstellers SchimmelPeter GmbH
 - Verfahren: Horizontalsperre per Injektion (in Paraffin gelöster Kunststoff, Bohrlöcher im Abstand bis 20 cm, meist ohne Vortrocknung), Innenabdichtung mit MDS, Schimmelsanierung mit Klimaplatten
@@ -247,6 +247,33 @@ Jedes Messprotokoll wird dem Kunden immer schriftlich übergeben, nach jeder Pha
   - [Schimmel im Keller in Recklinghausen](https://sos-abdichtung.de/kellersanierung/recklinghausen/#schimmelbeseitigung)
   - [Sockel abdichten in Recklinghausen](https://sos-abdichtung.de/kellersanierung/recklinghausen/#sockelabdichtung)
   - [Balkon und Terrasse abdichten in Recklinghausen](https://sos-abdichtung.de/kellersanierung/recklinghausen/#balkon-terrasse)
+- [Kellersanierung Herne](https://sos-abdichtung.de/kellersanierung/herne/): vor Ort in 24 bis 48 Stunden. PLZ 44623, 44625, 44627, 44628, 44629, 44649, 44651, 44652, 44653
+  - [Kellersanierung in Herne](https://sos-abdichtung.de/kellersanierung/herne/#kellersanierung)
+  - [Horizontalsperre in Herne](https://sos-abdichtung.de/kellersanierung/herne/#horizontalsperre)
+  - [Rissverpressung in Herne](https://sos-abdichtung.de/kellersanierung/herne/#rissverpressung)
+  - [Keller abdichten in Herne](https://sos-abdichtung.de/kellersanierung/herne/#kellerinnenabdichtung)
+  - [Feuchtemessung in Herne](https://sos-abdichtung.de/kellersanierung/herne/#feuchtemessung)
+  - [Schimmel im Keller in Herne](https://sos-abdichtung.de/kellersanierung/herne/#schimmelbeseitigung)
+  - [Sockel abdichten in Herne](https://sos-abdichtung.de/kellersanierung/herne/#sockelabdichtung)
+  - [Balkon und Terrasse abdichten in Herne](https://sos-abdichtung.de/kellersanierung/herne/#balkon-terrasse)
+- [Kellersanierung Witten](https://sos-abdichtung.de/kellersanierung/witten/): vor Ort in 24 bis 48 Stunden. PLZ 58452, 58453, 58454, 58455, 58456
+  - [Kellersanierung in Witten](https://sos-abdichtung.de/kellersanierung/witten/#kellersanierung)
+  - [Keller abdichten in Witten](https://sos-abdichtung.de/kellersanierung/witten/#kellerinnenabdichtung)
+  - [Horizontalsperre in Witten](https://sos-abdichtung.de/kellersanierung/witten/#horizontalsperre)
+  - [Rissverpressung in Witten](https://sos-abdichtung.de/kellersanierung/witten/#rissverpressung)
+  - [Feuchtemessung in Witten](https://sos-abdichtung.de/kellersanierung/witten/#feuchtemessung)
+  - [Schimmel im Keller in Witten](https://sos-abdichtung.de/kellersanierung/witten/#schimmelbeseitigung)
+  - [Sockel abdichten in Witten](https://sos-abdichtung.de/kellersanierung/witten/#sockelabdichtung)
+  - [Balkon und Terrasse abdichten in Witten](https://sos-abdichtung.de/kellersanierung/witten/#balkon-terrasse)
+- [Kellersanierung Hattingen](https://sos-abdichtung.de/kellersanierung/hattingen/): vor Ort in 24 bis 48 Stunden. PLZ 45525, 45527, 45529
+  - [Kellersanierung in Hattingen](https://sos-abdichtung.de/kellersanierung/hattingen/#kellersanierung)
+  - [Horizontalsperre in Hattingen](https://sos-abdichtung.de/kellersanierung/hattingen/#horizontalsperre)
+  - [Keller abdichten in Hattingen](https://sos-abdichtung.de/kellersanierung/hattingen/#kellerinnenabdichtung)
+  - [Rissverpressung in Hattingen](https://sos-abdichtung.de/kellersanierung/hattingen/#rissverpressung)
+  - [Feuchtemessung in Hattingen](https://sos-abdichtung.de/kellersanierung/hattingen/#feuchtemessung)
+  - [Schimmel im Keller in Hattingen](https://sos-abdichtung.de/kellersanierung/hattingen/#schimmelbeseitigung)
+  - [Sockel abdichten in Hattingen](https://sos-abdichtung.de/kellersanierung/hattingen/#sockelabdichtung)
+  - [Balkon und Terrasse abdichten in Hattingen](https://sos-abdichtung.de/kellersanierung/hattingen/#balkon-terrasse)
 
 ## Häufige Fragen
 ### Wie erkenne ich, ob mein Keller von aufsteigender Feuchtigkeit betroffen ist?
@@ -511,6 +538,36 @@ Von der Altstadt und dem Paulusviertel bis Hochlarmark, Suderwich und Speckhorn:
 - Rund um die Altstadt (Altstadt, Paulusviertel, Nordviertel, Ostviertel, Westviertel, Quellberg): Gründerzeit- und Vorkriegshäuser mit Ziegelkellern. Aufsteigende Feuchte und Salze im Mauerwerk.
 - Der Süden (Hochlarmark, Grullbad, König-Ludwig, Hillerheide, Hillen, Röllinghausen): Zechensiedlungen und tief liegendes Gelände zum Kanal hin. Setzungsrisse, aufsteigende Feuchte und drückendes Grundwasser.
 - Osten und Norden (Suderwich, Essel, Berghausen, Speckhorn, Bockholt, Stuckenbusch): Einfamilienhäuser auf sandigem Boden. Undichte Bodenfugen, Rohrdurchführungen und Kondensat im kühlen Keller.
+
+### Kellersanierung Herne
+Von Herne-Mitte und Sodingen bis Wanne, Eickel und Röhlinghausen: In Herne werden Keller vor allem durch aufsteigende Feuchte in den Ziegelkellern der dicht bebauten Altbauviertel, Risse aus der Bergbauzeit und hohes Grundwasser am Rhein-Herne-Kanal nass. Wir messen kostenlos, woher die Feuchte kommt, und sanieren von innen, ohne Aufgraben.
+- Dicht bebaute Altbauviertel: Herne gehört zu den am dichtesten besiedelten Städten Deutschlands. In Herne-Mitte, Wanne und Eickel stehen Mehrfamilienhäuser aus der Gründerzeit und dem Wiederaufbau Wand an Wand, mit Ziegelkellern ohne Sperrschicht, die noch wirkt.
+- Bergbau unter der ganzen Stadt: Zechen wie Shamrock, Friedrich der Große, Pluto, Unser Fritz und Mont Cenis haben unter fast dem ganzen Stadtgebiet Kohle gefördert. Setzungen aus dieser Zeit haben Risse in Kellerwänden und Bodenplatten hinterlassen.
+- Kanal und Emscher im Norden: Im Norden, in Crange, Baukau und Horsthausen, liegen die Häuser nah am Rhein-Herne-Kanal und der Emscher. Das Gelände ist abgesenkt, das Grundwasser steht hoch und drückt nach langem Regen gegen Kellerwand und Boden.
+- Siedlungshäuser: Neben den Mietshäusern gibt es viele Zechensiedlungen, etwa in Sodingen, Börnig und Röhlinghausen. Ihre kleinen Ziegelkeller wurden ohne wirksame Abdichtung gebaut.
+- Herne-Mitte und Süd (Herne-Mitte, Herne-Süd, Holsterhausen): Gründerzeit und Wiederaufbau, dicht bebaut. Aufsteigende Feuchte und Salze in Ziegelkellern von Mehrfamilienhäusern.
+- Wanne-Eickel (Wanne, Wanne-Süd, Bickern, Unser Fritz, Eickel, Röhlinghausen): Mietshäuser und Zechensiedlungen. Feuchte im Mauerwerk, Setzungsrisse und im Norden hohes Grundwasser.
+- Der Norden am Kanal (Crange, Baukau, Horsthausen): Abgesenktes Gelände an Kanal und Emscher. Drückendes Grundwasser an Wand und Bodenanschluss.
+- Der Osten (Sodingen, Börnig, Holthausen): Zechensiedlungen und Einfamilienhäuser. Setzungsrisse aus dem Bergbau und aufsteigende Feuchte im Ziegel.
+
+### Kellersanierung Witten
+Von Witten-Mitte und Annen bis Bommern und Herbede: In Witten werden Keller vor allem durch Wasser vom Hang, hohes Grundwasser im Ruhrtal, aufsteigende Feuchte in Altbauten und Risse aus dem frühen Bergbau nass. Wir messen kostenlos, woher die Feuchte kommt, und sanieren von innen, ohne Aufgraben.
+- Hanglagen zur Ruhr: Bommern, Heven und Herbede liegen an den Hängen des Ruhrtals. Regenwasser läuft im Boden den Hang hinunter und staut sich an der bergseitigen Kellerwand, während die Talseite oft trocken bleibt.
+- Grundwasser im Ruhrtal: Unten im Tal, nah an der Ruhr, steht das Grundwasser hoch. Steigt der Fluss nach langem Regen, steigt es mit und drückt von unten gegen Boden und Wand.
+- Früher Bergbau: Rund um das Muttental gilt Witten als eine der Wiegen des Ruhrbergbaus. Hier wurde schon früh in geringer Tiefe abgebaut; Setzungen und Risse in Kellerwand und Bodenplatte sind deshalb auch in alten Wohnlagen keine Seltenheit.
+- Altbauten in Mitte und Annen: In Witten-Mitte und Annen stehen viele Mehrfamilienhäuser aus der Gründerzeit und den Jahrzehnten danach. Ihre Ziegel- und Bruchsteinkeller haben keine Sperrschicht, die noch wirkt.
+- Mitte und der Norden (Witten-Mitte, Annen, Rüdinghausen, Stockum, Düren, Crengeldanz): Altbauten und Mehrfamilienhäuser. Aufsteigende Feuchte in Ziegel- und Bruchsteinkellern, Setzungsrisse.
+- Der Süden an der Ruhr (Bommern, Heven, Herbede, Vormholz, Durchholz): Hanglagen und Ruhrtal. Wasser vom Hang an der bergseitigen Wand, im Tal hohes Grundwasser, Risse aus dem frühen Bergbau.
+
+### Kellersanierung Hattingen
+Von der Altstadt und Welper bis Blankenstein, Niederwenigern und Elfringhausen: In Hattingen werden Keller vor allem durch aufsteigende Feuchte in alten Bruchstein- und Ziegelkellern, Wasser vom Hang und hohes Grundwasser im Ruhrtal nass. Wir messen kostenlos, woher die Feuchte kommt, und sanieren von innen, ohne Aufgraben.
+- Fachwerk-Altstadt: Die Hattinger Altstadt ist für ihre Fachwerkhäuser bekannt. Viele stehen auf Kellern und Sockeln aus Ruhrsandstein oder Ziegel, ohne Sperrschicht. Die Feuchte steigt auf und zieht bis in den Sockel.
+- Hanglagen: Hattingen liegt im Hügelland südlich der Ruhr. In Blankenstein, Bredenscheid oder Elfringhausen stehen viele Häuser am Hang; das Wasser im Boden läuft gegen die bergseitige Kellerwand.
+- Ruhrtal: In Winz-Baak, Welper und an der Ruhraue liegen die Keller nah am Grundwasser. Steigt der Fluss nach langem Regen, drückt das Wasser von unten und von der Seite.
+- Industrie- und Siedlungshäuser: Rund um die frühere Henrichshütte in Welper entstanden viele Arbeiter- und Siedlungshäuser. Ihre einfachen Ziegelkeller haben keine Abdichtung mehr, die noch wirkt.
+- Altstadt und Mitte (Altstadt, Hattingen-Mitte, Südstadt, Holthausen): Fachwerk und alte Bürgerhäuser. Aufsteigende Feuchte in Bruchstein- und Ziegelkellern, Salze im Putz.
+- Das Ruhrtal (Welper, Winz-Baak, Niederwenigern): Siedlungshäuser und Einfamilienhäuser nah an der Ruhr. Hohes Grundwasser, aufsteigende Feuchte im Ziegel.
+- Der hügelige Süden (Blankenstein, Bredenscheid-Stüter, Niederbonsfeld, Oberbonsfeld, Elfringhausen): Häuser am Hang. Wasser an der bergseitigen Wand, Bruchsteinkeller in den alten Ortskernen.
 
 ## Rechtliche Angaben & E-E-A-T Nachweise
 - Name: sos-abdichtung, SchimmelPeter® Partnerbetrieb

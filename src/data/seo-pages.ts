@@ -2600,7 +2600,7 @@ export const CITY_PAGES: CityPage[] = [
       }
     ],
     film: "kellersanierung",
-    nearby: ["muelheim-an-der-ruhr", "gelsenkirchen", "bottrop", "oberhausen", "bochum", "duisburg", "dortmund", "velbert", "hagen", "gladbeck"],
+    nearby: ["muelheim-an-der-ruhr", "gelsenkirchen", "bottrop", "oberhausen", "bochum", "duisburg", "dortmund", "velbert", "hagen", "gladbeck", "hattingen"],
   },
 
   // Düsseldorf
@@ -3120,7 +3120,7 @@ export const CITY_PAGES: CityPage[] = [
         "text": "Siedlungs- und Einfamilienhäuser im Nordosten, viele auf ehemaligem Bergbaugebiet. Setzungsrisse und Wasser, das sich im Lehm an der Kellerwand staut."
       }
     ],
-    nearby: ["essen", "dortmund", "gelsenkirchen", "hagen", "wuppertal", "herten", "recklinghausen"],
+    nearby: ["essen", "dortmund", "gelsenkirchen", "hagen", "wuppertal", "herten", "recklinghausen", "witten", "hattingen", "herne"],
   },
 
   // Dortmund
@@ -3372,7 +3372,7 @@ export const CITY_PAGES: CityPage[] = [
         "text": "Siedlungs- und Reihenhäuser aus den 1920er bis 1960er Jahren. Aufsteigende Feuchte im Ziegel und genutzte Hobbykeller, in denen Schimmel schnell auffällt."
       }
     ],
-    nearby: ["bochum", "hagen", "essen", "gelsenkirchen"],
+    nearby: ["bochum", "hagen", "essen", "gelsenkirchen", "witten"],
   },
   // Köln
   {
@@ -3991,7 +3991,7 @@ export const CITY_PAGES: CityPage[] = [
         "a": "Die Messung. Im Emschertal drückt oft Grundwasser, in den Zechenhäusern in Buer, Hassel oder Ückendorf steigt Feuchte im Ziegel auf, und Bergsenkungsrisse lassen nach Regen Wasser durch. Jede Ursache braucht ein anderes Verfahren: Innenabdichtung, Horizontalsperre oder Rissverpressung. Wir messen kostenlos und bieten dann genau die Kombination an, die Ihr Keller braucht."
       }
     ],
-    nearby: ["essen", "bottrop", "bochum", "oberhausen", "dortmund", "gladbeck", "herten", "recklinghausen"],
+    nearby: ["essen", "bottrop", "bochum", "oberhausen", "dortmund", "gladbeck", "herten", "recklinghausen", "herne"],
   },
   // Oberhausen
   {
@@ -4581,7 +4581,7 @@ export const CITY_PAGES: CityPage[] = [
         "a": "Im Bruchstein, wie in Wehringhausen, Haspe und Hohenlimburg, verfüllen wir zuerst die Hohlräume zwischen den Steinen. Dann setzen wir eine Horizontalsperre per Injektion gegen die aufsteigende Feuchte und dichten die Wand zum Hang von innen ab. Sanierputz nimmt die Salze auf, die oft noch vom Hochwasser 2021 in der Wand sitzen. Die Messung vorab ist kostenlos."
       }
     ],
-    nearby: ["wuppertal", "dortmund", "bochum", "essen", "remscheid"],
+    nearby: ["wuppertal", "dortmund", "bochum", "essen", "remscheid", "witten"],
   },
   // Leverkusen
   {
@@ -5327,7 +5327,7 @@ export const CITY_PAGES: CityPage[] = [
       "gladbeck",
       "gelsenkirchen",
       "bochum",
-      "bottrop"
+      "bottrop", "herne"
     ]
   },
   // Recklinghausen
@@ -5543,7 +5543,625 @@ export const CITY_PAGES: CityPage[] = [
       "gladbeck",
       "bochum",
       "gelsenkirchen",
+      "dortmund", "herne"
+    ]
+  },
+  // Herne
+  {
+    "slug": "herne",
+    "name": "Herne",
+    "keyword": "Kellersanierung Herne",
+    "title": "Kellersanierung Herne | Keller abdichten & trockenlegen",
+    "metaDescription": "Kellersanierung Herne ohne Aufgraben: Altbaukeller trockenlegen, Bergschadensrisse verpressen, von Wanne-Eickel bis Sodingen. Messung kostenlos.",
+    "h1": "Kellersanierung Herne: nasse Keller in Herne und Wanne-Eickel von innen sanieren",
+    "lede": "Von Herne-Mitte und Sodingen bis Wanne, Eickel und Röhlinghausen: In Herne werden Keller vor allem durch aufsteigende Feuchte in den Ziegelkellern der dicht bebauten Altbauviertel, Risse aus der Bergbauzeit und hohes Grundwasser am Rhein-Herne-Kanal nass. Wir messen kostenlos, woher die Feuchte kommt, und sanieren von innen, ohne Aufgraben.",
+    "plz": [
+      "44623",
+      "44625",
+      "44627",
+      "44628",
+      "44629",
+      "44649",
+      "44651",
+      "44652",
+      "44653"
+    ],
+    "districts": [
+      "Herne-Mitte",
+      "Herne-Süd",
+      "Baukau",
+      "Horsthausen",
+      "Holsterhausen",
+      "Börnig",
+      "Sodingen",
+      "Holthausen",
+      "Wanne",
+      "Wanne-Süd",
+      "Bickern",
+      "Unser Fritz",
+      "Crange",
+      "Eickel",
+      "Röhlinghausen"
+    ],
+    "geo": {
+      "lat": 51.5388,
+      "lng": 7.2257
+    },
+    "responseTime": "24 bis 48 Stunden",
+    "wiki": "https://de.wikipedia.org/wiki/Herne",
+    "localFactors": [
+      {
+        "name": "Dicht bebaute Altbauviertel",
+        "text": "Herne gehört zu den am dichtesten besiedelten Städten Deutschlands. In Herne-Mitte, Wanne und Eickel stehen Mehrfamilienhäuser aus der Gründerzeit und dem Wiederaufbau Wand an Wand, mit Ziegelkellern ohne Sperrschicht, die noch wirkt."
+      },
+      {
+        "name": "Bergbau unter der ganzen Stadt",
+        "text": "Zechen wie Shamrock, Friedrich der Große, Pluto, Unser Fritz und Mont Cenis haben unter fast dem ganzen Stadtgebiet Kohle gefördert. Setzungen aus dieser Zeit haben Risse in Kellerwänden und Bodenplatten hinterlassen."
+      },
+      {
+        "name": "Kanal und Emscher im Norden",
+        "text": "Im Norden, in Crange, Baukau und Horsthausen, liegen die Häuser nah am Rhein-Herne-Kanal und der Emscher. Das Gelände ist abgesenkt, das Grundwasser steht hoch und drückt nach langem Regen gegen Kellerwand und Boden."
+      },
+      {
+        "name": "Siedlungshäuser",
+        "text": "Neben den Mietshäusern gibt es viele Zechensiedlungen, etwa in Sodingen, Börnig und Röhlinghausen. Ihre kleinen Ziegelkeller wurden ohne wirksame Abdichtung gebaut."
+      }
+    ],
+    "sections": [
+      {
+        "heading": "Herne-Mitte, Wanne und Eickel: Altbaukeller in Mehrfamilienhäusern",
+        "paragraphs": [
+          "In den Straßen rund um die Bahnhofstraße, in Wanne und in Eickel stehen Mietshäuser aus der Zeit, als Herne mit dem Bergbau schnell wuchs. Ihre Ziegelkeller haben eine Sperrschicht, die längst verbraucht ist, oder gar keine. Die Feuchte steigt im Mauerwerk auf, der Putz blüht weiß aus, Kellerverschläge riechen muffig, und eingelagerte Sachen schimmeln.",
+          "Wir setzen eine Horizontalsperre per Injektion knapp über dem Kellerboden und tragen Sanierputz auf, der die Salze aufnimmt. Erdberührte Wände, an denen Wasser von außen kommt, dichten wir von innen ab. Gearbeitet wird Kellerraum für Kellerraum, damit Mieter ihre Keller weiter nutzen können; die Hausverwaltung bekommt ein Angebot mit Messprotokoll für die Eigentümerversammlung."
+        ]
+      },
+      {
+        "heading": "Crange, Baukau und Horsthausen: Keller am Rhein-Herne-Kanal",
+        "paragraphs": [
+          "Im Norden der Stadt hat der Bergbau das Gelände abgesenkt; ohne die Pumpen an der Emscher stünde hier vielerorts Wasser. Das Grundwasser liegt entsprechend nah unter den Kellersohlen. Nach langem Regen drückt es von unten und von der Seite, und es kommt an der Fuge zwischen Wand und Boden, durch Risse und an Rohrdurchführungen in den Keller.",
+          "Dagegen hilft eine Innenabdichtung, die für drückendes Wasser ausgelegt ist: Dichtungsschlämme in mehreren Lagen an Wand und Bodenanschluss, eine Hohlkehle in der Ecke und abgedichtete Durchführungen. Wasserführende Risse verpressen wir vorher mit PU-Harz."
+        ]
+      },
+      {
+        "heading": "Sodingen, Börnig und Röhlinghausen: Zechensiedlungen und Bergschäden",
+        "paragraphs": [
+          "Rund um die früheren Schachtanlagen stehen Siedlungshäuser mit kleinen, flachen Kellern aus Ziegel. Setzungen aus der Bergbauzeit haben Risse hinterlassen, die schräg oder treppenförmig durch das Mauerwerk laufen oder quer durch die Bodenplatte. Führt ein solcher Riss Wasser, reicht Zuspachteln nicht.",
+          "Wir messen Breite und Feuchte, prüfen, ob sich der Riss noch bewegt, und verpressen ihn mit elastischem PU-Harz. Gegen die aufsteigende Feuchte im Ziegel setzen wir eine Horizontalsperre. Vermuten Sie einen Bergschaden, dokumentieren wir die Risse so, dass Sie die Unterlagen für die Klärung verwenden können."
+        ]
+      },
+      {
+        "heading": "Was eine Kellersanierung in Herne kostet",
+        "paragraphs": [
+          "Den Preis bestimmen die Ursache, die Länge der betroffenen Wände, das Mauerwerk und die Zahl der Risse. Deshalb messen wir zuerst, kostenlos, und geben Ihnen danach ein schriftliches Festpreisangebot."
+        ],
+        "bullets": [
+          "Kostenlose Feuchtemessung mit schriftlichem Protokoll",
+          "Festpreis nach der Messung, ohne Nachträge",
+          "10 Jahre Garantie auf die Arbeit"
+        ]
+      }
+    ],
+    "faqs": [
+      {
+        "q": "Keller trockenlegen in Herne: Was hilft im Altbau?",
+        "a": "In den Altbaukellern in Herne-Mitte, Wanne und Eickel steigt die Feuchte meist im Ziegel auf, weil die alte Sperrschicht verbraucht ist. Dagegen setzen wir eine Horizontalsperre per Injektion und tragen Sanierputz auf. Kommt zusätzlich Wasser von außen, dichten wir die erdberührte Wand von innen ab. Aufgegraben wird nicht, die Messung ist kostenlos."
+      },
+      {
+        "q": "Sanieren Sie auch Keller in Mehrfamilienhäusern und für Hausverwaltungen in Herne?",
+        "a": "Ja, das ist in Herne sogar der häufigste Fall. Wir sanieren Kellerraum für Kellerraum, damit die Mieter ihre Keller weiter nutzen können, stimmen die Termine mit der Hausverwaltung ab und geben ihr ein schriftliches Angebot mit Messprotokoll, das sie in der Eigentümerversammlung vorlegen kann."
+      },
+      {
+        "q": "Wer zahlt, wenn die Risse im Keller in Herne ein Bergschaden sind?",
+        "a": "Bei Schäden durch den Steinkohlenbergbau kann ein Anspruch gegen das Bergbauunternehmen bestehen, auch Jahrzehnte nach dem Ende der Zechen. Ob ein Bergschaden vorliegt, klärt ein Sachverständiger oder die Schlichtungsstelle Bergschaden NRW. Wir dokumentieren Verlauf, Breite und Feuchte der Risse; diese Unterlagen können Sie für die Klärung nutzen."
+      },
+      {
+        "q": "Nach Starkregen steht Wasser im Keller in Herne. Was tun?",
+        "a": "Zuerst den Strom in den betroffenen Räumen abschalten, das Wasser abpumpen und Fotos für die Versicherung machen. Kommt das Wasser über den Bodenablauf, fehlt oft eine Rückstauklappe; das ist Sache des Installateurs. Kommt es durch Wand, Bodenfuge, Riss oder Lichtschacht, messen wir kostenlos, wo es eintritt, und dichten genau dort von innen ab."
+      },
+      {
+        "q": "Wie schnell sind Sie in Herne vor Ort?",
+        "a": "Von unserem Sitz in Essen in der Regel innerhalb von 24 bis 48 Stunden, in Herne-Mitte genauso wie in Wanne-Eickel oder Sodingen. Die Feuchtemessung ist kostenlos und unverbindlich."
+      },
+      {
+        "q": "Wie lange dauert eine Kellersanierung in Herne?",
+        "a": "Die Arbeiten selbst dauern meist zwei bis vier Werktage, in einem großen Mehrfamilienhaus auch länger, eine einzelne Rissverpressung oft nur einen Tag. Danach trocknet das Mauerwerk über einige Monate aus; wir messen nach und geben Ihnen das Protokoll schriftlich."
+      },
+      {
+        "q": "Wie finde ich in Herne eine gute Firma für Kellerabdichtung?",
+        "a": "Eine gute Firma misst, bevor sie anbietet, und gibt Ihnen das Ergebnis schriftlich. Das Angebot sollte Ursache, Verfahren und Wandlängen nennen und ein Festpreis sein; eine Pauschale am Telefon ist es nicht. Bei uns sind Messung und Protokoll kostenlos, und Sie bekommen 10 Jahre Garantie auf die Arbeit."
+      },
+      {
+        "q": "Mein Keller in Herne riecht muffig, aber die Wände sehen trocken aus. Woran liegt das?",
+        "a": "Oft steckt Feuchte im Mauerwerk, die man noch nicht sieht, oder es ist Kondensat: Im Sommer schlägt sich warme Luft an den kühlen Kellerwänden nieder. Steigt die Feuchte in der Wand auf, hilft eine Horizontalsperre; ist es Kondensat, helfen richtiges Lüften und Klimaplatten. Wir messen kostenlos und sagen Ihnen, was zutrifft."
+      }
+    ],
+    "localServices": [
+      {
+        "slug": "kellersanierung",
+        "heading": "Kellersanierung in Herne",
+        "text": "Wir messen zuerst, woher die Nässe kommt: aufsteigend in den Altbaukellern in Herne-Mitte, Wanne und Eickel, durch Risse aus dem Bergbau in den Siedlungen oder von unten im Norden am Kanal. Dann kombinieren wir nur die Verfahren, die Ihr Keller braucht, also Horizontalsperre, Rissverpressung, Innenabdichtung und Sanierputz. Alles von innen, ohne Aufgraben, mit 10 Jahren Garantie auf die Arbeit."
+      },
+      {
+        "slug": "horizontalsperre",
+        "heading": "Horizontalsperre in Herne",
+        "text": "Die Ziegelkeller der Mietshäuser und Zechensiedlungen haben keine wirksame Sperrschicht mehr. Wir setzen per Injektion eine neue, ohne Vortrocknung und ohne Aufgraben, und messen nach, bis die Wand trocken ist."
+      },
+      {
+        "slug": "rissverpressung",
+        "heading": "Rissverpressung in Herne",
+        "text": "Setzungen aus der Bergbauzeit haben Risse in Bodenplatten und Kellerwänden hinterlassen. Wir prüfen, ob sie Wasser führen und sich noch bewegen, und verpressen sie mit elastischem PU-Harz."
+      },
+      {
+        "slug": "kellerinnenabdichtung",
+        "heading": "Keller abdichten in Herne",
+        "text": "In Crange, Baukau und Horsthausen steht das Grundwasser hoch. Wir dichten Wände und Bodenanschluss von innen ab, mit Dichtungsschlämme, Hohlkehle und Sanierputz."
+      },
+      {
+        "slug": "feuchtemessung",
+        "heading": "Feuchtemessung in Herne",
+        "text": "Die Messung ist kostenlos: Feuchte in mehreren Wandhöhen, Salze, Oberflächentemperatur und Raumklima, dazu Risse mit Verlauf und Breite. Das Protokoll bekommen Sie schriftlich, auch für die Hausverwaltung."
+      },
+      {
+        "slug": "schimmelbeseitigung",
+        "heading": "Schimmel im Keller in Herne",
+        "text": "In den Kellerverschlägen der Mietshäuser wächst Schimmel an der nassen Wand und auf eingelagerten Sachen. Wir entfernen ihn sporensicher und beseitigen die Ursache."
+      },
+      {
+        "slug": "sockelabdichtung",
+        "heading": "Sockel abdichten in Herne",
+        "text": "An Altbauten und Siedlungshäusern zieht Spritzwasser in den Sockel und weiter in die Kellerwand. Wir dichten den Sockel ab und schließen ihn an die Kellerabdichtung an."
+      },
+      {
+        "slug": "balkon-terrasse",
+        "heading": "Balkon und Terrasse abdichten in Herne",
+        "text": "An vielen Mehrfamilienhäusern aus den 1950er und 1960er Jahren sind die Balkone undicht geworden; unter der Platte platzt der Putz ab. Wir finden die undichte Stelle und dichten Fläche und Wandanschluss dauerhaft ab."
+      }
+    ],
+    "districtGroups": [
+      {
+        "name": "Herne-Mitte und Süd",
+        "districts": [
+          "Herne-Mitte",
+          "Herne-Süd",
+          "Holsterhausen"
+        ],
+        "text": "Gründerzeit und Wiederaufbau, dicht bebaut. Aufsteigende Feuchte und Salze in Ziegelkellern von Mehrfamilienhäusern."
+      },
+      {
+        "name": "Wanne-Eickel",
+        "districts": [
+          "Wanne",
+          "Wanne-Süd",
+          "Bickern",
+          "Unser Fritz",
+          "Eickel",
+          "Röhlinghausen"
+        ],
+        "text": "Mietshäuser und Zechensiedlungen. Feuchte im Mauerwerk, Setzungsrisse und im Norden hohes Grundwasser."
+      },
+      {
+        "name": "Der Norden am Kanal",
+        "districts": [
+          "Crange",
+          "Baukau",
+          "Horsthausen"
+        ],
+        "text": "Abgesenktes Gelände an Kanal und Emscher. Drückendes Grundwasser an Wand und Bodenanschluss."
+      },
+      {
+        "name": "Der Osten",
+        "districts": [
+          "Sodingen",
+          "Börnig",
+          "Holthausen"
+        ],
+        "text": "Zechensiedlungen und Einfamilienhäuser. Setzungsrisse aus dem Bergbau und aufsteigende Feuchte im Ziegel."
+      }
+    ],
+    "nearby": [
+      "bochum",
+      "gelsenkirchen",
+      "herten",
+      "recklinghausen",
       "dortmund"
+    ]
+  },
+  // Witten
+  {
+    "slug": "witten",
+    "name": "Witten",
+    "keyword": "Kellersanierung Witten",
+    "title": "Kellersanierung Witten | Keller abdichten & trockenlegen",
+    "metaDescription": "Kellersanierung Witten ohne Aufgraben: nasse Keller abdichten und trockenlegen, Hangwasser in Bommern, Ruhrtal in Herbede, Altbau in Annen. Messung kostenlos.",
+    "h1": "Kellersanierung Witten: nasse Keller im Ruhrtal und am Hang trockenlegen",
+    "lede": "Von Witten-Mitte und Annen bis Bommern und Herbede: In Witten werden Keller vor allem durch Wasser vom Hang, hohes Grundwasser im Ruhrtal, aufsteigende Feuchte in Altbauten und Risse aus dem frühen Bergbau nass. Wir messen kostenlos, woher die Feuchte kommt, und sanieren von innen, ohne Aufgraben.",
+    "plz": [
+      "58452",
+      "58453",
+      "58454",
+      "58455",
+      "58456"
+    ],
+    "districts": [
+      "Witten-Mitte",
+      "Annen",
+      "Rüdinghausen",
+      "Stockum",
+      "Düren",
+      "Heven",
+      "Crengeldanz",
+      "Bommern",
+      "Herbede",
+      "Vormholz",
+      "Durchholz"
+    ],
+    "geo": {
+      "lat": 51.4436,
+      "lng": 7.3528
+    },
+    "responseTime": "24 bis 48 Stunden",
+    "wiki": "https://de.wikipedia.org/wiki/Witten",
+    "localFactors": [
+      {
+        "name": "Hanglagen zur Ruhr",
+        "text": "Bommern, Heven und Herbede liegen an den Hängen des Ruhrtals. Regenwasser läuft im Boden den Hang hinunter und staut sich an der bergseitigen Kellerwand, während die Talseite oft trocken bleibt."
+      },
+      {
+        "name": "Grundwasser im Ruhrtal",
+        "text": "Unten im Tal, nah an der Ruhr, steht das Grundwasser hoch. Steigt der Fluss nach langem Regen, steigt es mit und drückt von unten gegen Boden und Wand."
+      },
+      {
+        "name": "Früher Bergbau",
+        "text": "Rund um das Muttental gilt Witten als eine der Wiegen des Ruhrbergbaus. Hier wurde schon früh in geringer Tiefe abgebaut; Setzungen und Risse in Kellerwand und Bodenplatte sind deshalb auch in alten Wohnlagen keine Seltenheit."
+      },
+      {
+        "name": "Altbauten in Mitte und Annen",
+        "text": "In Witten-Mitte und Annen stehen viele Mehrfamilienhäuser aus der Gründerzeit und den Jahrzehnten danach. Ihre Ziegel- und Bruchsteinkeller haben keine Sperrschicht, die noch wirkt."
+      }
+    ],
+    "sections": [
+      {
+        "heading": "Bommern, Heven und Herbede: Wasser vom Hang",
+        "paragraphs": [
+          "Wer in Bommern oder Herbede am Hang wohnt, kennt das Bild: Die Kellerwand zum Berg hin ist nass, oft nur im unteren Drittel, die Wand zur Talseite ist trocken. Nach Regen sammelt sich das Wasser oberhalb des Hauses im Boden und drückt gegen die erdberührte Wand. Ist die alte Außenabdichtung verbraucht, kommt es durch.",
+          "Wir dichten die bergseitige Wand von innen ab: alten Putz entfernen, Dichtungsschlämme in mehreren Lagen, eine Hohlkehle am Übergang zum Boden und Sanierputz. Böschung, Garten und Terrasse bleiben, wie sie sind. Führt ein Riss Wasser, verpressen wir ihn vorher mit PU-Harz."
+        ]
+      },
+      {
+        "heading": "Witten-Mitte und Annen: Altbaukeller mit aufsteigender Feuchte",
+        "paragraphs": [
+          "In der Innenstadt und in Annen stehen Mehrfamilienhäuser Wand an Wand. Ihre Keller sind aus Ziegel, in den ältesten Häusern auch aus Ruhrsandstein, und haben keine wirksame Sperrschicht mehr. Die Feuchte steigt im Mauerwerk auf, weiße Salzränder zeigen, wie hoch.",
+          "Wir setzen eine Horizontalsperre per Injektion knapp über dem Kellerboden; in Bruchsteinwänden verfüllen wir vorher die Hohlräume zwischen den Steinen. Danach kommt Sanierputz, der die Salze aufnimmt. Gearbeitet wird nur im Keller, Raum für Raum."
+        ]
+      },
+      {
+        "heading": "Risse aus dem frühen Bergbau",
+        "paragraphs": [
+          "Im Wittener Süden wurde Kohle schon abgebaut, als es noch keine tiefen Schächte gab, in Stollen nah unter der Oberfläche. Wo sich der Boden darüber gesetzt hat, zeigen sich Risse in Kellerwand und Bodenplatte, auch in Häusern, die weit weg von einer großen Zeche stehen.",
+          "Wir messen Breite und Feuchte, prüfen, ob sich der Riss noch bewegt, und verpressen wasserführende Risse mit elastischem PU-Harz. Die Dokumentation können Sie verwenden, wenn ein Bergschaden geklärt werden soll."
+        ]
+      },
+      {
+        "heading": "Was eine Kellersanierung in Witten kostet",
+        "paragraphs": [
+          "Den Preis bestimmen die Ursache, die Länge der betroffenen Wände, das Mauerwerk und die Zahl der Risse. Deshalb messen wir zuerst, kostenlos, und geben Ihnen danach ein schriftliches Festpreisangebot."
+        ],
+        "bullets": [
+          "Kostenlose Feuchtemessung mit schriftlichem Protokoll",
+          "Festpreis nach der Messung, ohne Nachträge",
+          "10 Jahre Garantie auf die Arbeit"
+        ]
+      }
+    ],
+    "faqs": [
+      {
+        "q": "Muss am Hang in Bommern oder Herbede aufgegraben werden?",
+        "a": "Meist nicht. Die bergseitige Wand, an der sich das Wasser staut, dichten wir von innen mit Dichtungsschlämme und Hohlkehle ab. Das hält auch Wasser stand, das von außen drückt. Garten, Böschung und Terrasse bleiben unberührt."
+      },
+      {
+        "q": "Keller trockenlegen in Witten: Geht das ohne Aufgraben?",
+        "a": "Ja, in den allermeisten Fällen. Gegen Feuchte, die in den Altbaukellern in Witten-Mitte und Annen aufsteigt, setzen wir eine Horizontalsperre per Injektion. Gegen Wasser vom Hang oder Grundwasser im Ruhrtal dichten wir die Wand von innen ab. Die Messung vorab ist kostenlos."
+      },
+      {
+        "q": "Mein Keller in Witten liegt nah an der Ruhr. Was hilft gegen das Grundwasser?",
+        "a": "Eine Innenabdichtung, die für drückendes Wasser ausgelegt ist: mehrlagige Dichtungsschlämme an Wand und Bodenanschluss, eine Hohlkehle in der Ecke und abgedichtete Rohrdurchführungen. Ein einfacher Anstrich reicht nicht. Wo zusätzlich Feuchte im Mauerwerk aufsteigt, kommt eine Horizontalsperre dazu."
+      },
+      {
+        "q": "Nach Starkregen steht Wasser im Keller in Witten. Was tun?",
+        "a": "Zuerst den Strom in den betroffenen Räumen abschalten, das Wasser abpumpen und Fotos für die Versicherung machen. Kommt das Wasser über den Bodenablauf, fehlt oft eine Rückstauklappe; das ist Sache des Installateurs. Kommt es durch Wand, Bodenfuge, Riss oder Lichtschacht, messen wir kostenlos, wo es eintritt, und dichten genau dort von innen ab."
+      },
+      {
+        "q": "Wie schnell sind Sie in Witten vor Ort?",
+        "a": "Von unserem Sitz in Essen in der Regel innerhalb von 24 bis 48 Stunden, in Witten-Mitte genauso wie in Bommern oder Herbede. Die Feuchtemessung ist kostenlos und unverbindlich."
+      },
+      {
+        "q": "Wie lange dauert eine Kellersanierung in Witten?",
+        "a": "Die Arbeiten selbst dauern meist zwei bis vier Werktage. Danach trocknet das Mauerwerk über einige Monate aus; wir messen nach und geben Ihnen das Protokoll schriftlich."
+      },
+      {
+        "q": "Wie finde ich in Witten eine gute Firma für Kellersanierung?",
+        "a": "Eine gute Firma misst, bevor sie anbietet, und gibt Ihnen das Ergebnis schriftlich. Das Angebot sollte Ursache, Verfahren und Wandlängen nennen und ein Festpreis sein. Fragen Sie am Hang auch, ob die Wand von innen abgedichtet werden kann, bevor aufgegraben wird. Bei uns sind Messung und Protokoll kostenlos, und Sie bekommen 10 Jahre Garantie auf die Arbeit."
+      },
+      {
+        "q": "Wer zahlt, wenn die Risse im Keller in Witten ein Bergschaden sind?",
+        "a": "Bei Schäden durch den Steinkohlenbergbau kann ein Anspruch bestehen, auch lange nach dem Ende des Abbaus. Ob ein Bergschaden vorliegt, klärt ein Sachverständiger oder die Schlichtungsstelle Bergschaden NRW. Wir dokumentieren Verlauf, Breite und Feuchte der Risse; diese Unterlagen können Sie für die Klärung nutzen."
+      }
+    ],
+    "localServices": [
+      {
+        "slug": "kellersanierung",
+        "heading": "Kellersanierung in Witten",
+        "text": "Wir messen zuerst, woher die Nässe kommt: vom Hang in Bommern und Herbede, als Grundwasser im Ruhrtal, aufsteigend in den Altbaukellern in Mitte und Annen oder durch Risse aus dem Bergbau. Dann kombinieren wir nur die Verfahren, die Ihr Keller braucht, also Innenabdichtung, Horizontalsperre, Rissverpressung und Sanierputz. Alles von innen, ohne Aufgraben, mit 10 Jahren Garantie auf die Arbeit."
+      },
+      {
+        "slug": "kellerinnenabdichtung",
+        "heading": "Keller abdichten in Witten",
+        "text": "Am Hang drückt Schichtenwasser gegen die bergseitige Wand, im Tal Grundwasser von unten. Wir dichten die erdberührten Wände von innen ab, mit Dichtungsschlämme, Hohlkehle und Sanierputz."
+      },
+      {
+        "slug": "horizontalsperre",
+        "heading": "Horizontalsperre in Witten",
+        "text": "In den Ziegel- und Bruchsteinkellern in Witten-Mitte und Annen steigt die Feuchte auf. Wir setzen per Injektion eine neue Sperrschicht, im Bruchstein nach dem Verfüllen der Hohlräume."
+      },
+      {
+        "slug": "rissverpressung",
+        "heading": "Rissverpressung in Witten",
+        "text": "Setzungen aus dem frühen Bergbau haben Risse in Kellerwänden und Bodenplatten hinterlassen. Wir prüfen, ob sie Wasser führen, und verpressen sie mit elastischem PU-Harz."
+      },
+      {
+        "slug": "feuchtemessung",
+        "heading": "Feuchtemessung in Witten",
+        "text": "Am Hang ist oft nur eine Wand nass, im Altbau kommt die Feuchte von unten. Wir messen kostenlos an mehreren Wänden und in mehreren Höhen und geben Ihnen das Protokoll schriftlich."
+      },
+      {
+        "slug": "schimmelbeseitigung",
+        "heading": "Schimmel im Keller in Witten",
+        "text": "Feuchte Wände und kühle Keller lassen Schimmel wachsen. Wir entfernen ihn sporensicher und beseitigen die Ursache, damit er nicht wiederkommt."
+      },
+      {
+        "slug": "sockelabdichtung",
+        "heading": "Sockel abdichten in Witten",
+        "text": "Am Hang trifft Regen- und Spritzwasser den Sockel besonders stark. Wir dichten den Sockel ab und schließen ihn an die Kellerabdichtung an."
+      },
+      {
+        "slug": "balkon-terrasse",
+        "heading": "Balkon und Terrasse abdichten in Witten",
+        "text": "Bei Häusern am Hang liegt die Terrasse oft über einem Kellerraum, an Mehrfamilienhäusern in der Innenstadt sind ältere Balkone undicht geworden. Wir finden die undichte Stelle und dichten Fläche und Wandanschluss dauerhaft ab."
+      }
+    ],
+    "districtGroups": [
+      {
+        "name": "Mitte und der Norden",
+        "districts": [
+          "Witten-Mitte",
+          "Annen",
+          "Rüdinghausen",
+          "Stockum",
+          "Düren",
+          "Crengeldanz"
+        ],
+        "text": "Altbauten und Mehrfamilienhäuser. Aufsteigende Feuchte in Ziegel- und Bruchsteinkellern, Setzungsrisse."
+      },
+      {
+        "name": "Der Süden an der Ruhr",
+        "districts": [
+          "Bommern",
+          "Heven",
+          "Herbede",
+          "Vormholz",
+          "Durchholz"
+        ],
+        "text": "Hanglagen und Ruhrtal. Wasser vom Hang an der bergseitigen Wand, im Tal hohes Grundwasser, Risse aus dem frühen Bergbau."
+      }
+    ],
+    "nearby": [
+      "bochum",
+      "hattingen",
+      "dortmund",
+      "hagen",
+      "herne"
+    ]
+  },
+  // Hattingen
+  {
+    "slug": "hattingen",
+    "name": "Hattingen",
+    "keyword": "Kellersanierung Hattingen",
+    "title": "Kellersanierung Hattingen | Keller abdichten & trockenlegen",
+    "metaDescription": "Kellersanierung Hattingen ohne Aufgraben: Altstadtkeller trockenlegen, Hangwasser und Ruhr-Grundwasser abdichten, Welper bis Niederwenigern. Messung kostenlos.",
+    "h1": "Kellersanierung Hattingen: feuchte Altstadtkeller und nasse Hangkeller trockenlegen",
+    "lede": "Von der Altstadt und Welper bis Blankenstein, Niederwenigern und Elfringhausen: In Hattingen werden Keller vor allem durch aufsteigende Feuchte in alten Bruchstein- und Ziegelkellern, Wasser vom Hang und hohes Grundwasser im Ruhrtal nass. Wir messen kostenlos, woher die Feuchte kommt, und sanieren von innen, ohne Aufgraben.",
+    "plz": [
+      "45525",
+      "45527",
+      "45529"
+    ],
+    "districts": [
+      "Hattingen-Mitte",
+      "Altstadt",
+      "Südstadt",
+      "Welper",
+      "Blankenstein",
+      "Holthausen",
+      "Winz-Baak",
+      "Niederwenigern",
+      "Bredenscheid-Stüter",
+      "Niederbonsfeld",
+      "Oberbonsfeld",
+      "Elfringhausen"
+    ],
+    "geo": {
+      "lat": 51.3989,
+      "lng": 7.1858
+    },
+    "responseTime": "24 bis 48 Stunden",
+    "wiki": "https://de.wikipedia.org/wiki/Hattingen",
+    "localFactors": [
+      {
+        "name": "Fachwerk-Altstadt",
+        "text": "Die Hattinger Altstadt ist für ihre Fachwerkhäuser bekannt. Viele stehen auf Kellern und Sockeln aus Ruhrsandstein oder Ziegel, ohne Sperrschicht. Die Feuchte steigt auf und zieht bis in den Sockel."
+      },
+      {
+        "name": "Hanglagen",
+        "text": "Hattingen liegt im Hügelland südlich der Ruhr. In Blankenstein, Bredenscheid oder Elfringhausen stehen viele Häuser am Hang; das Wasser im Boden läuft gegen die bergseitige Kellerwand."
+      },
+      {
+        "name": "Ruhrtal",
+        "text": "In Winz-Baak, Welper und an der Ruhraue liegen die Keller nah am Grundwasser. Steigt der Fluss nach langem Regen, drückt das Wasser von unten und von der Seite."
+      },
+      {
+        "name": "Industrie- und Siedlungshäuser",
+        "text": "Rund um die frühere Henrichshütte in Welper entstanden viele Arbeiter- und Siedlungshäuser. Ihre einfachen Ziegelkeller haben keine Abdichtung mehr, die noch wirkt."
+      }
+    ],
+    "sections": [
+      {
+        "heading": "Altstadt und Mitte: Keller unter alten Häusern",
+        "paragraphs": [
+          "Unter den Fachwerk- und Bürgerhäusern der Altstadt liegen Keller aus Ruhrsandstein und Ziegel, viele davon älter als jede Bauvorschrift zur Abdichtung. Die Feuchte steigt durch die Fugen auf, Salze lassen den Putz abplatzen, und in schlecht belüfteten Gewölben riecht es muffig. Bei denkmalgeschützten Häusern muss die Sanierung außerdem zur alten Bausubstanz passen.",
+          "Wir verfüllen bei Bruchstein zuerst die Hohlräume zwischen den Steinen, setzen dann eine Horizontalsperre per Injektion und tragen einen Sanierputz auf, der Salze aufnimmt und die Restfeuchte verdunsten lässt. Fassade und Fachwerk bleiben unberührt; bei Denkmälern stimmen Sie die Maßnahme vorher mit der Denkmalbehörde ab, unser Messprotokoll hilft dabei."
+        ]
+      },
+      {
+        "heading": "Blankenstein, Bredenscheid und Elfringhausen: Keller am Hang",
+        "paragraphs": [
+          "Im hügeligen Süden der Stadt ist oft nur die Kellerwand zum Berg hin nass. Nach Regen sammelt sich das Wasser oberhalb des Hauses im Boden und drückt gegen die erdberührte Wand; bei Häusern aus Bruchstein findet es seinen Weg durch jede offene Fuge.",
+          "Wir dichten die bergseitige Wand von innen ab, mit Dichtungsschlämme in mehreren Lagen, einer Hohlkehle am Übergang zum Boden und Sanierputz. Garten und Böschung bleiben, wie sie sind. Steigt zusätzlich Feuchte im Mauerwerk auf, kommt eine Horizontalsperre dazu."
+        ]
+      },
+      {
+        "heading": "Welper und Winz-Baak: Siedlungshäuser im Ruhrtal",
+        "paragraphs": [
+          "Unten im Ruhrtal stehen viele Siedlungs- und Arbeiterhäuser aus der Zeit der Henrichshütte. Die Keller sind aus Ziegel, die Sperrschicht ist verbraucht, und weil das Grundwasser hier hoch steht, kommt nach langem Regen Wasser an der Bodenfuge und durch Risse.",
+          "Wir kombinieren eine Horizontalsperre gegen die aufsteigende Feuchte mit einer Innenabdichtung für Wand und Bodenanschluss und verpressen wasserführende Risse mit PU-Harz. Was davon Ihr Keller braucht, zeigt die kostenlose Messung."
+        ]
+      },
+      {
+        "heading": "Was eine Kellersanierung in Hattingen kostet",
+        "paragraphs": [
+          "Den Preis bestimmen die Ursache, die Länge der betroffenen Wände, das Mauerwerk und die Zahl der Risse. Deshalb messen wir zuerst, kostenlos, und geben Ihnen danach ein schriftliches Festpreisangebot."
+        ],
+        "bullets": [
+          "Kostenlose Feuchtemessung mit schriftlichem Protokoll",
+          "Festpreis nach der Messung, ohne Nachträge",
+          "10 Jahre Garantie auf die Arbeit"
+        ]
+      }
+    ],
+    "faqs": [
+      {
+        "q": "Kann ein Keller unter einem alten Haus in der Hattinger Altstadt trockengelegt werden?",
+        "a": "Ja. Bei Bruchstein verfüllen wir zuerst die Hohlräume im Mauerwerk, dann setzen wir eine Horizontalsperre per Injektion und tragen Sanierputz auf. Gearbeitet wird von innen; Fassade und Fachwerk bleiben unberührt. Bei denkmalgeschützten Häusern sollte die Maßnahme vorher mit der Denkmalbehörde abgestimmt werden."
+      },
+      {
+        "q": "Keller trockenlegen in Hattingen: Geht das ohne Aufgraben?",
+        "a": "Ja, in den allermeisten Fällen. Gegen aufsteigende Feuchte setzen wir eine Horizontalsperre, gegen Wasser vom Hang oder Grundwasser im Ruhrtal dichten wir die Wand von innen ab. Garten, Böschung und Einfahrt bleiben unberührt. Die Messung vorab ist kostenlos."
+      },
+      {
+        "q": "Muss am Hang in Blankenstein oder Elfringhausen aufgegraben werden?",
+        "a": "Meist nicht. Die bergseitige Wand, an der sich das Wasser staut, dichten wir von innen mit Dichtungsschlämme und Hohlkehle ab. Das hält auch Wasser stand, das von außen drückt."
+      },
+      {
+        "q": "Nach Starkregen steht Wasser im Keller in Hattingen. Was tun?",
+        "a": "Zuerst den Strom in den betroffenen Räumen abschalten, das Wasser abpumpen und Fotos für die Versicherung machen. Kommt das Wasser über den Bodenablauf, fehlt oft eine Rückstauklappe; das ist Sache des Installateurs. Kommt es durch Wand, Bodenfuge, Riss oder Lichtschacht, messen wir kostenlos, wo es eintritt, und dichten genau dort von innen ab."
+      },
+      {
+        "q": "Wie schnell sind Sie in Hattingen vor Ort?",
+        "a": "Hattingen grenzt an Essen, wo wir unseren Sitz haben. In der Regel sind wir innerhalb von 24 bis 48 Stunden bei Ihnen, in der Altstadt genauso wie in Niederwenigern oder Elfringhausen. Die Feuchtemessung ist kostenlos und unverbindlich."
+      },
+      {
+        "q": "Wie lange dauert eine Kellersanierung in Hattingen?",
+        "a": "Die Arbeiten selbst dauern meist zwei bis vier Werktage, bei Bruchsteinkellern mit verfüllten Hohlräumen auch etwas länger. Danach trocknet das Mauerwerk über einige Monate aus; wir messen nach und geben Ihnen das Protokoll schriftlich."
+      },
+      {
+        "q": "Wie finde ich in Hattingen eine gute Firma für Kellersanierung?",
+        "a": "Eine gute Firma misst, bevor sie anbietet, und gibt Ihnen das Ergebnis schriftlich. Das Angebot sollte Ursache, Verfahren und Wandlängen nennen und ein Festpreis sein. Fragen Sie bei Bruchstein, ob die Hohlräume vor der Horizontalsperre verfüllt werden. Bei uns sind Messung und Protokoll kostenlos, und Sie bekommen 10 Jahre Garantie auf die Arbeit."
+      },
+      {
+        "q": "Mein Keller in Hattingen riecht muffig, aber die Wände sehen trocken aus. Woran liegt das?",
+        "a": "Oft steckt Feuchte im Mauerwerk, die man noch nicht sieht, oder es ist Kondensat: Im Sommer schlägt sich warme Luft an den kühlen Kellerwänden nieder, besonders in alten Gewölbekellern. Steigt die Feuchte in der Wand auf, hilft eine Horizontalsperre; ist es Kondensat, helfen richtiges Lüften und Klimaplatten. Wir messen kostenlos und sagen Ihnen, was zutrifft."
+      }
+    ],
+    "localServices": [
+      {
+        "slug": "kellersanierung",
+        "heading": "Kellersanierung in Hattingen",
+        "text": "Wir messen zuerst, woher die Nässe kommt: aufsteigend in den Bruchstein- und Ziegelkellern der Altstadt, vom Hang in Blankenstein und Elfringhausen oder als Grundwasser im Ruhrtal in Welper und Winz-Baak. Dann kombinieren wir nur die Verfahren, die Ihr Keller braucht, also Horizontalsperre, Innenabdichtung, Rissverpressung und Sanierputz. Alles von innen, ohne Aufgraben, mit 10 Jahren Garantie auf die Arbeit."
+      },
+      {
+        "slug": "horizontalsperre",
+        "heading": "Horizontalsperre in Hattingen",
+        "text": "In den alten Kellern der Altstadt und den Siedlungshäusern in Welper steigt die Feuchte auf. Wir setzen per Injektion eine neue Sperrschicht, im Bruchstein nach dem Verfüllen der Hohlräume."
+      },
+      {
+        "slug": "kellerinnenabdichtung",
+        "heading": "Keller abdichten in Hattingen",
+        "text": "Am Hang drückt Wasser gegen die bergseitige Wand, im Ruhrtal Grundwasser von unten. Wir dichten die erdberührten Wände von innen ab, mit Dichtungsschlämme, Hohlkehle und Sanierputz."
+      },
+      {
+        "slug": "rissverpressung",
+        "heading": "Rissverpressung in Hattingen",
+        "text": "Führt ein Riss in Kellerwand oder Bodenplatte Wasser, verpressen wir ihn mit elastischem PU-Harz, das auch kleine Bewegungen mitmacht."
+      },
+      {
+        "slug": "feuchtemessung",
+        "heading": "Feuchtemessung in Hattingen",
+        "text": "Am Hang ist oft nur eine Wand nass, im Altbau kommt die Feuchte von unten. Wir messen kostenlos Feuchte und Salze an mehreren Wänden und in mehreren Höhen und geben Ihnen das Protokoll schriftlich."
+      },
+      {
+        "slug": "schimmelbeseitigung",
+        "heading": "Schimmel im Keller in Hattingen",
+        "text": "In alten Gewölbekellern und kühlen Hangkellern wächst Schimmel leicht. Wir entfernen ihn sporensicher und beseitigen die Ursache."
+      },
+      {
+        "slug": "sockelabdichtung",
+        "heading": "Sockel abdichten in Hattingen",
+        "text": "An Fachwerkhäusern und Siedlungshäusern zieht Spritzwasser in den Sockel. Wir dichten den Sockel ab und schließen ihn an die Kellerabdichtung an."
+      },
+      {
+        "slug": "balkon-terrasse",
+        "heading": "Balkon und Terrasse abdichten in Hattingen",
+        "text": "Bei Häusern am Hang liegt die Terrasse oft über einem Kellerraum, an älteren Mehrfamilienhäusern sind Balkone undicht geworden. Wir finden die undichte Stelle und dichten Fläche und Wandanschluss dauerhaft ab."
+      }
+    ],
+    "districtGroups": [
+      {
+        "name": "Altstadt und Mitte",
+        "districts": [
+          "Altstadt",
+          "Hattingen-Mitte",
+          "Südstadt",
+          "Holthausen"
+        ],
+        "text": "Fachwerk und alte Bürgerhäuser. Aufsteigende Feuchte in Bruchstein- und Ziegelkellern, Salze im Putz."
+      },
+      {
+        "name": "Das Ruhrtal",
+        "districts": [
+          "Welper",
+          "Winz-Baak",
+          "Niederwenigern"
+        ],
+        "text": "Siedlungshäuser und Einfamilienhäuser nah an der Ruhr. Hohes Grundwasser, aufsteigende Feuchte im Ziegel."
+      },
+      {
+        "name": "Der hügelige Süden",
+        "districts": [
+          "Blankenstein",
+          "Bredenscheid-Stüter",
+          "Niederbonsfeld",
+          "Oberbonsfeld",
+          "Elfringhausen"
+        ],
+        "text": "Häuser am Hang. Wasser an der bergseitigen Wand, Bruchsteinkeller in den alten Ortskernen."
+      }
+    ],
+    "nearby": [
+      "essen",
+      "bochum",
+      "witten",
+      "velbert",
+      "wuppertal"
     ]
   },
 ];
