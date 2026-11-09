@@ -17,7 +17,9 @@ const expectedTabs = ['Anfragen', 'Positionen', 'Angebote', 'Katalog', 'Regeln',
 expectedTabs.forEach(t => assert(sheets[t], 'Missing sheet tab: ' + t));
 const fromSheet = JSON.parse(JSON.stringify(ctx.masterFromSheet_()));
 assert(fromSheet.items.length === 11, 'Catalog items seeded');
-assert.strictEqual(ctx.config_('notify_email'), 'simplypizza2020@gmail.com');
+assert.strictEqual(ctx.config_('notify_email'), 'simplypizza2020@gmail.com, info@sos-abdichtung.de');
+assert.strictEqual(ctx.officeTo_(), 'simplypizza2020@gmail.com,info@sos-abdichtung.de', 'office mails go to every address');
+assert.strictEqual(ctx.officeReply_(), 'simplypizza2020@gmail.com', 'customers reply to the first address');
 assert.strictEqual(ctx.company_().owner, 'Shahzad Mahmood');
 console.log('✓ [1/7] Setup & Relational Sheets initialized:', Object.keys(sheets).join(', '));
 
