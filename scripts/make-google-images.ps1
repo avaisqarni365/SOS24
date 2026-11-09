@@ -114,6 +114,6 @@ Write-Host "Cover 1200x675 saved: $outPath2"
 $cleanLogo.Dispose()
 
 # 4. Copy open-graph cover as alternative JPEG
-Copy-Item "D:\SOS24\public\og-image.jpg" "D:\SOS24\public\google-profile\02-alternative-cover-1200x630.jpg" -Force
+Copy-Item "D:\SOS24\public\og-image-v2.jpg" "D:\SOS24\public\google-profile\02-alternative-cover-1200x630.jpg" -Force
 
 Write-Host "All Google profile images created successfully."
