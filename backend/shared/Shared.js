@@ -362,6 +362,42 @@ function adminUrl_(id) {
 }
 function adminLink_(id) { return 'Im Admin öffnen: ' + adminUrl_(id); }
 
+/* WhatsApp alert to the office's own phone, sent next to the office e-mail for every new
+   enquiry, booking, photo upload and signed order. Uses the free CallMeBot API, which
+   only delivers to a number whose owner activated it from that phone. Tab "Konfiguration":
+     whatsapp_notify   the office number with country code, digits only, e.g. 491722064177
+     whatsapp_apikey   the key CallMeBot replies with after activation (never in this repo)
+   Without both keys nothing is sent. Never throws: a failed alert must not lose a lead. */
+function whatsappAlert_(text) {
+  var phone = String(config_('whatsapp_notify') || '').replace(/\D/g, '').replace(/^00/, '');
+  var key = String(config_('whatsapp_apikey') || '').trim();
+  if (!phone || !key) return false;
+  try {
+    var res = UrlFetchApp.fetch('https://api.callmebot.com/whatsapp.php?phone=' + encodeURIComponent('+' + phone) +
+      '&text=' + encodeURIComponent(String(text || '').slice(0, 1200)) + '&apikey=' + encodeURIComponent(key),
+      {muteHttpExceptions: true});
+    if (res.getResponseCode() !== 200) console.error('WhatsApp alert HTTP ' + res.getResponseCode() + ': ' + res.getContentText().slice(0, 200));
+    return res.getResponseCode() === 200;
+  } catch (err) { console.error('WhatsApp alert:', err); return false; }
+}
+
+/* Office e-mail recipients. "notify_email" in tab "Konfiguration" may list several addresses,
+   separated by comma or semicolon; every office mail goes to all of them. */
+function officeTo_() {
+  var list = String(config_('notify_email') || Session.getEffectiveUser().getEmail() || '').split(/[,;\s]+/), out = [];
+  list.forEach(function (x) { x = x.trim().toLowerCase(); if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(x) && out.indexOf(x) < 0) out.push(x); });
+  return out.join(',');
+}
+/* The one address customers reply to: the first office address. */
+function officeReply_() { return officeTo_().split(',')[0] || ''; }
+
+/* Run once from the script editor after entering the two keys: sends a test message. */
+function testWhatsApp() {
+  var ok = whatsappAlert_('SOS Abdichtung: Test. Ab jetzt kommt hier jede neue Anfrage von sos-abdichtung.de an.');
+  console.log(ok ? 'WhatsApp gesendet.' : 'Nicht gesendet: whatsapp_notify und whatsapp_apikey im Tab Konfiguration prüfen.');
+  return ok;
+}
+
 function moveDate_(f1, long) {
   f1 = f1 || {};
   var ok = function (x) { return /^\d{4}-\d{2}-\d{2}$/.test(String(x || '')); }, de = function (x) { return x.split('-').reverse().join('.'); };
@@ -658,11 +694,15 @@ function apptMails_(a, kind, note) {
   try {
     var mail = {to: a.email, subject: subject, body: body, name: 'SOS Abdichtung – Shahzad Mahmood'};
     if (file) mail.attachments = [file];
-    var office = String(config_('notify_email') || Session.getEffectiveUser().getEmail() || '');
-    if (office) mail.replyTo = office;
+    var office = officeTo_();
+    if (office) mail.replyTo = officeReply_();
     if (a.email) MailApp.sendEmail(mail);
     if (kind === 'booked') {
       apptCalendarSync_(a);
+    }
+    if (kind === 'booked') {
+      whatsappAlert_('📅 Neuer Mess-Termin ' + a.nr + '\n' + T.de + ' · ' + when + '\n' + a.name + ' · ' + a.phone +
+        '\n' + (a.address || '—') + '\n' + (a.to || '') + '\n' + adminUrl_(a.lead));
     }
     if (kind === 'booked' && office) {
       MailApp.sendEmail({

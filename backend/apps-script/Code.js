@@ -223,7 +223,9 @@ function saveQuick_(b) {
 }
 
 function notifyOffice_(id, name, phone, email, objAddr, dmgType, areaStr, sevLabel, dateStr, note, est) {
-  var to = config_('notify_email') || Session.getEffectiveUser().getEmail();
+  whatsappAlert_('🔔 Neue Anfrage ' + id + '\n' + name + ' · ' + (phone || email || '—') + '\n' + (objAddr || '—') + ' · ' + (dmgType || '—') +
+    (note ? '\n„' + clip_(note, 200) + '“' : '') + '\n' + adminUrl_(id));
+  var to = officeTo_();
   if (!to) return;
   var url = '';
   try { url = SpreadsheetApp.getActive().getUrl(); } catch (e) {}
@@ -336,7 +338,8 @@ function accept_(id, k, confirm, sig, signer) {
     res = {ok: true, status: 'Gebucht', signedAt: nowIso, signer: signerName, signature: sig || sigUrl, sigDriveUrl: sigUrl};
   } finally { lock.releaseLock(); }
 
-  var to = config_('notify_email') || Session.getEffectiveUser().getEmail();
+  whatsappAlert_('✅ Auftrag digital unterschrieben: ' + id + '\n' + (res.signer || '') + ' · ' + (hit.values[leadCol_('Telefon') - 1] || '—') + '\n' + adminUrl_(id));
+  var to = officeTo_();
   if (to) {
     var v = hit.values;
     try {
@@ -578,7 +581,9 @@ function setup() {
   ['notify_email', 'firma_email'].forEach(function (k) {
     if (OLD_EMAILS.indexOf(String(config_(k)).toLowerCase()) >= 0) setConfig_(k, 'simplypizza2020@gmail.com');
   });
-  setConfig_('notify_email', config_('notify_email') || 'simplypizza2020@gmail.com' || me);
+  setConfig_('notify_email', config_('notify_email') || 'simplypizza2020@gmail.com, info@sos-abdichtung.de' || me);
+  setConfig_('whatsapp_notify', config_('whatsapp_notify') || '491722064177');
+  setConfig_('whatsapp_apikey', config_('whatsapp_apikey') || '');
   setConfig_('github_repo', config_('github_repo') || 'avaisqarni365/SOS24');
 
   ScriptApp.getProjectTriggers().forEach(function (t) { ScriptApp.deleteTrigger(t); });
@@ -628,7 +633,7 @@ function daily() {
     var age = (now - new Date(r[1])) / 864e5;
     if ((r[2] === 'Neu' && age > 1) || (r[2] === 'Angebot raus' && age > 3)) open.push(r[0] + ' · ' + r[2] + ' · ' + r[5] + ' · seit ' + Math.floor(age) + ' Tagen\n   ' + adminUrl_(r[0]));
   });
-  var to = config_('notify_email');
+  var to = officeTo_();
   if (open.length && to) MailApp.sendEmail({to: to, subject: 'SOS Abdichtung: ' + open.length + ' offene Sanierungsanfragen', body: open.join('\n') + '\n\n' + SpreadsheetApp.getActive().getUrl()});
 }
 

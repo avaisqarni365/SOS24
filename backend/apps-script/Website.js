@@ -112,7 +112,8 @@ function photos_(b) {
     sheet_(TAB.leads).getRange(hit.row, col).setValue(cell_((old ? old + '\n' : '') + 'Schadensfotos: ' + tok.n + ' per E-Mail erhalten' + (driveFolderUrl ? ' und in Google Drive gespeichert' + driveText : '') + (note ? ' – ' + note : ''), 2000));
   }
 
-  var to = config_('notify_email') || Session.getEffectiveUser().getEmail();
+  whatsappAlert_('📷 ' + blobs.length + ' Schadensfoto(s) zu Anfrage ' + id + (name ? ' – ' + name : '') + '\n' + adminUrl_(id));
+  var to = officeTo_();
   if (to) {
     try {
       MailApp.sendEmail({
