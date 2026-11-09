@@ -13,7 +13,7 @@ export const OG_IMAGE = {
   url: "/og-image.jpg",
   width: 1200,
   height: 630,
-  alt: "sos-abdichtung: Kellersanierung Wuppertal, Haus mit nassem Keller im Schnitt",
+  alt: "sos-abdichtung: Kellersanierung & Abdichtung ohne Aufgraben, Inhaber Shahzad Mahmood bei der Bohrung für eine Horizontalsperre",
 };
 
 export const abs = (path: string) => `${SITE_URL}${path.startsWith("/") ? path : `/${path}`}`;
