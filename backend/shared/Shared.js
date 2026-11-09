@@ -381,6 +381,16 @@ function whatsappAlert_(text) {
   } catch (err) { console.error('WhatsApp alert:', err); return false; }
 }
 
+/* Office e-mail recipients. "notify_email" in tab "Konfiguration" may list several addresses,
+   separated by comma or semicolon; every office mail goes to all of them. */
+function officeTo_() {
+  var list = String(config_('notify_email') || Session.getEffectiveUser().getEmail() || '').split(/[,;\s]+/), out = [];
+  list.forEach(function (x) { x = x.trim().toLowerCase(); if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(x) && out.indexOf(x) < 0) out.push(x); });
+  return out.join(',');
+}
+/* The one address customers reply to: the first office address. */
+function officeReply_() { return officeTo_().split(',')[0] || ''; }
+
 /* Run once from the script editor after entering the two keys: sends a test message. */
 function testWhatsApp() {
   var ok = whatsappAlert_('SOS Abdichtung: Test. Ab jetzt kommt hier jede neue Anfrage von sos-abdichtung.de an.');
@@ -684,8 +694,8 @@ function apptMails_(a, kind, note) {
   try {
     var mail = {to: a.email, subject: subject, body: body, name: 'SOS Abdichtung – Shahzad Mahmood'};
     if (file) mail.attachments = [file];
-    var office = String(config_('notify_email') || Session.getEffectiveUser().getEmail() || '');
-    if (office) mail.replyTo = office;
+    var office = officeTo_();
+    if (office) mail.replyTo = officeReply_();
     if (a.email) MailApp.sendEmail(mail);
     if (kind === 'booked') {
       apptCalendarSync_(a);

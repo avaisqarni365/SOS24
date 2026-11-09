@@ -113,7 +113,7 @@ function photos_(b) {
   }
 
   whatsappAlert_('📷 ' + blobs.length + ' Schadensfoto(s) zu Anfrage ' + id + (name ? ' – ' + name : '') + '\n' + adminUrl_(id));
-  var to = config_('notify_email') || Session.getEffectiveUser().getEmail();
+  var to = officeTo_();
   if (to) {
     try {
       MailApp.sendEmail({
