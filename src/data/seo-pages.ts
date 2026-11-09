@@ -1117,6 +1117,27 @@ export const SERVICE_PAGES: ServicePage[] = [
           "Der Sockelanschluss oben ist die zweite Schwachstelle. Bei gedämmten Fassaden muss die Abdichtung unter die Sockeldämmung reichen, bei Klinker an die unterste Fuge anschließen, bei Putzfassaden sauber in einer Abschlusskante enden. Wird der Anschluss schlampig ausgeführt, läuft das Wasser einfach hinter die neue Abdichtung."
         ]
       },
+      {
+        "heading": "Sockel nass trotz neuem Putz? Die häufigsten Ursachen",
+        "paragraphs": [
+          "Wenn der Sockel kurz nach dem Neuverputzen wieder dunkel wird, liegt es fast nie am Putz selbst. Häufig liegt das Pflaster oder die Terrasse direkt an der Wand und höher als die alte Abdichtung, Regen läuft dann hinter den Sockelputz. Oft fehlt ein Spritzschutzstreifen aus Kies, ein Fallrohr läuft vor dem Haus aus, oder Beete werden direkt an der Wand gegossen.",
+          "Ein zweiter häufiger Grund: Die Feuchte kommt gar nicht von außen, sondern steigt im Mauerwerk aus dem Fundament auf. Dann hilft eine Sockelabdichtung allein nicht, sondern erst zusammen mit einer Horizontalsperre. Deshalb messen wir vorher, in welcher Höhe und auf welcher Seite die Wand nass ist."
+        ]
+      },
+      {
+        "heading": "Was eine Sockelabdichtung kostet: die Faktoren",
+        "paragraphs": [
+          "Den Preis bestimmen vor allem die Länge des Sockels, wie tief wir unter Gelände freilegen müssen, ob Pflaster oder eine Terrasse aufgenommen werden muss und in welchem Zustand Putz und Mauerwerk sind. Klinker, Naturstein oder ein gedämmter Sockel brauchen einen anderen Aufbau als ein verputztes Siedlungshaus.",
+          "Deshalb geben wir keinen Pauschalpreis am Telefon. Nach der kostenlosen Besichtigung mit Feuchtemessung bekommen Sie ein schriftliches Festpreisangebot, in dem Länge, Aufbau und Nebenarbeiten einzeln stehen."
+        ]
+      },
+      {
+        "heading": "Klinker, Naturstein und gedämmte Sockel",
+        "paragraphs": [
+          "Bei Klinker ist der Stein selbst meist dicht, das Wasser kommt durch ausgewaschene Fugen. Dann werden die Fugen erneuert und der Bereich unter Gelände abgedichtet, eine Beschichtung auf dem Sichtklinker ist selten nötig. Natursteinsockel brauchen diffusionsoffene Materialien, damit Feuchte aus dem Stein entweichen kann.",
+          "Bei gedämmten Fassaden mit Wärmedämmverbundsystem muss der Sockel mit Perimeterdämmplatten ausgeführt und darunter abgedichtet werden. Fehlt diese Abdichtung, zieht Feuchte in die Dämmung, und die Platten lösen sich. Wir schließen die Sockelabdichtung so an, dass Dämmung, Putz und Kellerwand zusammenpassen."
+        ]
+      }
     ],
     steps: [
       { title: "Messung & Befund", text: "Feuchtemessung am Sockel und innen dahinter: Spritzwasser, Erdfeuchte oder beides." },
@@ -1153,6 +1174,26 @@ export const SERVICE_PAGES: ServicePage[] = [
         "q": "Womit wird der Sockel abgedichtet?",
         "a": "Im erdberührten Bereich meist mit einer kunststoffmodifizierten Bitumen-Dickbeschichtung, im sichtbaren Spritzwasserbereich mit einer flexiblen mineralischen Dichtungsschlämme, auf der Sockelputz und Farbe halten. Beide Schichten überlappen. Welcher Aufbau zu Ihrem Haus passt, legen wir nach der kostenlosen Messung fest."
       },
+      {
+        "q": "Muss für die Sockelabdichtung das Pflaster am Haus aufgenommen werden?",
+        "a": "Meist ja, aber nur ein schmaler Streifen. Damit die Abdichtung unter das Gelände reicht, nehmen wir etwa 30 bis 50 Zentimeter Pflaster entlang der Wand auf und legen es danach wieder, oft mit einem Spritzschutzstreifen aus Kies dazwischen. Größere Flächen bleiben unberührt."
+      },
+      {
+        "q": "Was ist ein Spritzschutzstreifen und brauche ich einen?",
+        "a": "Ein Streifen aus grobem Kies direkt an der Hauswand. Er bremst das zurückspritzende Regenwasser und lässt es schnell versickern. Bei Häusern mit Pflaster bis an die Wand verlängert er die Lebensdauer des Sockelputzes deutlich. Wir empfehlen ihn fast immer zusammen mit der Sockelabdichtung."
+      },
+      {
+        "q": "Hilft eine Sockelabdichtung auch gegen feuchte Kellerwände?",
+        "a": "Nur, wenn die Feuchte von außen über den Sockel kommt. Steigt sie im Mauerwerk auf oder drückt Wasser gegen die erdberührte Kellerwand, braucht es zusätzlich eine Horizontalsperre oder eine Kellerabdichtung von innen. Die Messung zeigt, welcher Fall vorliegt, und wir schließen Sockel und Keller sauber aneinander an."
+      },
+      {
+        "q": "Welcher Putz gehört auf den Sockel?",
+        "a": "Ein Sockelputz, der Wasser abweist und trotzdem Feuchte aus der Wand verdunsten lässt, auf einer Abdichtung im Spritzwasserbereich. Normaler Fassadenputz oder Zementputz direkt auf feuchtem Mauerwerk platzt nach wenigen Wintern ab. Bei salzbelasteten Wänden setzen wir einen Sanierputz ein."
+      },
+      {
+        "q": "Kann ich den Sockel selbst abdichten?",
+        "a": "Einen frischen Anstrich können Sie selbst machen, eine dauerhafte Abdichtung ist schwieriger: Der Sockel muss unter Gelände freigelegt, der Untergrund vorbereitet und die Abdichtung an Wand, Fenster und Kellerabdichtung angeschlossen werden. Fehler zeigen sich oft erst nach dem nächsten Winter. Lassen Sie zumindest kostenlos messen, woher die Feuchte kommt."
+      }
     ],
     related: ["dachabdichtung", "balkon-terrasse", "kellersanierung"],
   },
@@ -4187,9 +4228,9 @@ export const CITY_PAGES: CityPage[] = [
     slug: "muelheim-an-der-ruhr",
     name: "Mülheim an der Ruhr",
     keyword: "Kellersanierung Mülheim",
-    title: "Kellersanierung Mülheim an der Ruhr | Abdichter Saarn",
+    title: "Kellersanierung Mülheim | Abdichter in Saarn & Broich",
     metaDescription:
-      "Kellersanierung Mülheim an der Ruhr: Ihr Abdichter gegen Hang- und Grundwasser in Saarn, Broich, Speldorf und Heißen, von innen. Messung kostenlos.",
+      "Kellersanierung Mülheim vom Abdichter vor Ort: nasse Keller in Saarn, Broich, Speldorf und Heißen von innen abdichten. In 24–48 h da, Messung kostenlos.",
     h1: "Kellersanierung Mülheim an der Ruhr: Keller abdichten an Hang und Ruhr",
     lede:
       "Zwischen den Hängen von Saarn und Holthausen und dem Ruhrufer in Broich und Mintard bekommen Keller Wasser von mehreren Seiten: als Hangwasser, als Grundwasser und als aufsteigende Feuchte im alten Mauerwerk. Mülheim grenzt an Essen, unseren Sitz; wir messen kostenlos und dichten von innen ab.",
