@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { GA_TRACKING_ID } from "@/lib/analytics";
+import { GA_TRACKING_ID, trackContactClicks } from "@/lib/analytics";
 
 /** The visitor's answer, kept in this browser only. */
 export const CONSENT_KEY = "sos_consent";
@@ -61,7 +61,12 @@ export default function ConsentBanner() {
     else if (choice === null) setOpen(true);
     const reopen = () => setOpen(true);
     window.addEventListener(CONSENT_OPEN_EVENT, reopen);
-    return () => window.removeEventListener(CONSENT_OPEN_EVENT, reopen);
+    // Phone/WhatsApp taps: only reach Google once consent loaded gtag (trackConversion checks that).
+    const stopContactClicks = trackContactClicks();
+    return () => {
+      window.removeEventListener(CONSENT_OPEN_EVENT, reopen);
+      stopContactClicks();
+    };
   }, []);
 
   const decide = (choice: Choice) => {

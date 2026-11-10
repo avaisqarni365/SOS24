@@ -4,6 +4,8 @@
  * appointment booking, digital contract E-signature, AI chatbot, and /admin/ dashboard.
  */
 
+import { trackConversion } from './analytics';
+
 export const GAS_API_URL =
   process.env.NEXT_PUBLIC_GAS_API_URL ||
   'https://script.google.com/macros/s/AKfycbzBjzDgaBJDMy-ctRI_PaGKdBe8z-CvzFW-bRv_TAvhLL-Fnr0I8r8QAo5DN9cxQoTK/exec';
@@ -668,6 +670,12 @@ export async function submitLeadToWorkspace(
     if (!remoteRes?.ok || !remoteRes.id) return { ok: false, error: remoteRes?.error || 'server' };
     assignedId = remoteRes.id;
     if (remoteRes.up) assignedToken = remoteRes.up;
+    // Counted for Google Ads only after the server stored it; no personal data, only where it came from.
+    // Does nothing unless the visitor accepted Google Analytics.
+    trackConversion('generate_lead', {
+      lead_source: lead.source || (typeof window !== 'undefined' ? window.location.pathname : 'Website'),
+      damage_type: lead.damageType,
+    });
   } catch {
     return { ok: false, error: 'network' };
   }
