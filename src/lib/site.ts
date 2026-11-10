@@ -10,7 +10,7 @@ import { FACEBOOK_URL, YOUTUBE_URL, INSTAGRAM_URL, TIKTOK_URL } from "@/lib/soci
 /** Share preview (WhatsApp, Facebook, LinkedIn, X): JPEG, because not every
     messenger renders WebP previews. */
 export const OG_IMAGE = {
-  url: "/og-image.jpg",
+  url: "/og-image-v2.jpg",
   width: 1200,
   height: 630,
   alt: "sos-abdichtung: Kellersanierung & Abdichtung ohne Aufgraben, Inhaber Shahzad Mahmood bei der Bohrung für eine Horizontalsperre",
