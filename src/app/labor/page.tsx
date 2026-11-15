@@ -21,9 +21,9 @@ import { hy } from "@/lib/hyphenate";
 import { Home, Layers, ShieldCheck, SprayCan, Gauge, Wrench, Umbrella, Sun, PanelBottom, FlaskConical, Box, ScanLine, ClipboardCheck, Sigma, Ruler, type LucideIcon } from "lucide-react";
 import { SITE_URL, BUSINESS_ID, WEBSITE_ID, abs, businessNode, websiteNode, breadcrumbNode, OG_IMAGE } from "@/lib/site";
 
-const TITLE = "Scientific Lab | Verfahren, Chemie & Nachweis";
+const TITLE = "Abdichtungsverfahren erklärt | Chemie, 3D-Modell & Nachweis";
 const DESCRIPTION =
-  "Neun Verfahren mit Film, chemischer Reaktion und 3D-Modell, dazu der Feuchte-Scanner, Geräte und Material und der Messnachweis in jeder Phase.";
+  "Abdichtungsverfahren im Detail: neun Verfahren mit Film, chemischer Reaktion und 3D-Modell, dazu Feuchte-Scanner, Geräte, Material und Messnachweis.";
 
 export const metadata: Metadata = {
   title: TITLE,

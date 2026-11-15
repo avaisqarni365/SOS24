@@ -147,6 +147,28 @@ export default function FilmPage({ params }: { params: { slug: string } }) {
           </div>
         </section>
 
+        <section className="sc-section" aria-labelledby="film-shows">
+          <div className="sc-wrap max-w-3xl">
+            <h2 id="film-shows" className="sc-display text-3xl">
+              Was der Film zeigt
+            </h2>
+            <p className="mt-3 text-ink-soft">Der Film hat keinen Ton. Hier steht, was in jedem Abschnitt zu sehen ist.</p>
+            <ol className="mt-6 grid gap-5">
+              {film.chapters.map((c, i) => (
+                <li key={c.label}>
+                  <h3 className="font-semibold text-ink">
+                    <a href={`${path}?t=${Math.floor(c.at)}`} className="hover:underline">
+                      {i + 1}. {c.label}
+                    </a>{" "}
+                    <span className="font-mono text-xs font-normal text-ink-soft">ab Sekunde {Math.floor(c.at)}</span>
+                  </h3>
+                  <p className="mt-1 text-ink">{hy(page.shows[i])}</p>
+                </li>
+              ))}
+            </ol>
+          </div>
+        </section>
+
         <section className="surface-bone-2 sc-section">
           <div className="sc-wrap grid gap-12">
             <LinkGrid title={service ? `${service.navTitle} in Ihrer Stadt` : "In Ihrer Stadt"} links={towns} />

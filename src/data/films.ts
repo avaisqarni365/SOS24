@@ -62,6 +62,8 @@ export interface FilmPage {
   service?: string;
   /** the same film as a Short on the YouTube channel */
   youtube: string;
+  /** what each chapter shows, in the order of film.chapters (the films are silent, so this is their text) */
+  shows: string[];
 }
 
 export const FILM_PAGES: FilmPage[] = [
@@ -73,6 +75,13 @@ export const FILM_PAGES: FilmPage[] = [
       "Unser Ablauf in 12 Sekunden: Feuchtemessung vor Ort, Beratung mit dem Messergebnis, Abdichtung von innen und Übergabe an den Kunden.",
     uploadDate: "2026-10-08T16:37:04+02:00",
     youtube: "https://www.youtube.com/shorts/Llqz_HsAQbY",
+    shows: [
+      "Vor Ort nehmen wir den Schaden auf: Wo ist die Wand feucht, wo löst sich der Putz, und was zeigt das Messgerät?",
+      "Am Tisch besprechen wir das Messergebnis mit dem Kunden und erklären, welches Verfahren zu diesem Schaden passt.",
+      "Dann wird gearbeitet: Wir bohren in das Mauerwerk, setzen die Sperre und dichten die Wand von innen ab.",
+      "Im fertigen Raum zeigen wir dem Kunden, was gemacht wurde und worauf er in Zukunft achten sollte.",
+      "Ihr Ansprechpartner ist Inhaber Shahzad Mahmood. Die Feuchtemessung vor Ort ist kostenlos.",
+    ],
   },
   {
     slug: "kellersanierung",
@@ -83,6 +92,13 @@ export const FILM_PAGES: FilmPage[] = [
     uploadDate: "2026-10-09T15:44:29+02:00",
     service: "kellersanierung",
     youtube: "https://www.youtube.com/shorts/DBlWxjaVtAM",
+    shows: [
+      "Im Keller prüfen wir die feuchte Wand: Wo ist sie nass, und wie hoch reicht die Feuchte?",
+      "Abgedichtet wird von innen, mit Dichtungsschlämme in zwei Lagen. Das Material rühren wir vor Ort frisch an.",
+      "Der Keller nach der Sanierung: Die Wände sind neu verputzt, der Raum ist wieder nutzbar.",
+      "Zum Schluss gehen wir mit dem Kunden durch den Raum und zeigen ihm die fertigen Wände.",
+      "Ihr Ansprechpartner ist Inhaber Shahzad Mahmood. Die Feuchtemessung vor Ort ist kostenlos.",
+    ],
   },
   {
     slug: "keller-von-innen-abdichten",
@@ -93,6 +109,14 @@ export const FILM_PAGES: FilmPage[] = [
     uploadDate: "2026-10-09T15:44:29+02:00",
     service: "kellerinnenabdichtung",
     youtube: "https://www.youtube.com/shorts/7DoXppirIr4",
+    shows: [
+      "Die Kellerwand unter dem Fenster hat dunkle Feuchteflecken, der alte Putz ist durchfeuchtet.",
+      "Wir schlagen den losen Putz ab, bis der tragfähige Untergrund freiliegt.",
+      "Darauf kommt die Dichtungsschlämme: zwei Lagen, mit einer Hohlkehle am Übergang von der Wand zum Boden.",
+      "Über die Abdichtung kommt Sanierputz nach WTA. Er nimmt die Salze aus der Wand auf, ohne abzuplatzen.",
+      "Das Ergebnis: eine helle, glatt verputzte Kellerwand.",
+      "Ihr Ansprechpartner ist Inhaber Shahzad Mahmood. Die Feuchtemessung vor Ort ist kostenlos.",
+    ],
   },
   {
     slug: "schimmel-im-keller-beseitigen",
@@ -103,6 +127,14 @@ export const FILM_PAGES: FilmPage[] = [
     uploadDate: "2026-10-09T15:44:29+02:00",
     service: "schimmelbeseitigung",
     youtube: "https://www.youtube.com/shorts/1iD-yY5igUM",
+    shows: [
+      "Die Kellerwand ist großflächig von schwarzem Schimmel befallen, der Putz darunter ist feucht.",
+      "Bevor etwas entfernt wird, messen wir: Kommt die Feuchte aus der Wand oder aus der Raumluft?",
+      "Dann entfernen wir den Befall von der Wand, ohne die Sporen im Raum zu verteilen.",
+      "Zum Schutz kommen Calciumsilikat-Platten an die Wand. Sie halten die Oberfläche warm und hemmen neuen Schimmel.",
+      "Das Ergebnis: eine saubere, neu aufgebaute Wand.",
+      "Ihr Ansprechpartner ist Inhaber Shahzad Mahmood. Die Feuchtemessung vor Ort ist kostenlos.",
+    ],
   },
   {
     slug: "sockel-abdichten",
@@ -113,6 +145,13 @@ export const FILM_PAGES: FilmPage[] = [
     uploadDate: "2026-10-09T15:44:29+02:00",
     service: "sockelabdichtung",
     youtube: "https://www.youtube.com/shorts/Dg6R1d8jetM",
+    shows: [
+      "Wir sehen uns den Sockel außen am Haus an, rund um das Gebäude.",
+      "Am Sockel platzt der Putz ab. Wir halten den Schaden fest und messen die Feuchte.",
+      "Der Sockel wird freigelegt, gereinigt und geprüft, damit die Abdichtung auf festem Grund sitzt.",
+      "Abgedichtet wird mit Bitumen-Dickbeschichtung (KMB) in zwei Lagen. Danach ist der Sockel gegen Spritzwasser und Erdfeuchte geschützt.",
+      "Ihr Ansprechpartner ist Inhaber Shahzad Mahmood. Die Feuchtemessung vor Ort ist kostenlos.",
+    ],
   },
 ];
 
