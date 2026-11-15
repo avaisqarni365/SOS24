@@ -85,7 +85,7 @@ export default function QuickView({
           {children}
           {owner && (
             <div className="qv__owner">
-              <img src="/img/gallery/shahzad-mahmood-160.webp" width={160} height={176} alt="" loading="lazy" />
+              <img src="/img/gallery/shahzad-mahmood-160.webp" width={160} height={176} alt="Shahzad Mahmood, Inhaber von sos-abdichtung" loading="lazy" />
               <p>
                 <strong>Shahzad Mahmood</strong>
                 <span>Inhaber, berät Sie persönlich · <PartnerLink>SchimmelPeter® Partnerbetrieb</PartnerLink></span>

@@ -107,7 +107,7 @@ export default function HeroFilm({ film, label = "Imagefilm" }: { film: Film; la
         </button>
         <span className="hero-film__tag">{label}</span>
         <span className={`hero-film__owner${chapter === chapters.length - 1 ? " is-hidden" : ""}`}>
-          <img src="/img/gallery/shahzad-mahmood-160.webp" width={160} height={176} alt="" loading="lazy" />
+          <img src="/img/gallery/shahzad-mahmood-160.webp" width={160} height={176} alt="Shahzad Mahmood, Inhaber von sos-abdichtung" loading="lazy" />
           <span>
             <strong>Shahzad Mahmood</strong>
             Ihr Ansprechpartner
@@ -129,7 +129,7 @@ export default function HeroFilm({ film, label = "Imagefilm" }: { film: Film; la
           ))}
         </ol>
         <span className="hero-film__who">
-          <img src="/img/gallery/shahzad-mahmood-160.webp" width={160} height={176} alt="" loading="lazy" />
+          <img src="/img/gallery/shahzad-mahmood-160.webp" width={160} height={176} alt="Shahzad Mahmood, Inhaber von sos-abdichtung" loading="lazy" />
           <span>
             <strong>Shahzad Mahmood</strong>
             Ihr Ansprechpartner

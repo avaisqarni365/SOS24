@@ -25,7 +25,7 @@ export default function FilmWall({ films }: { films: WallFilm[] }) {
           <li key={f.slug}>
             <button type="button" className="filmwall__card" onClick={() => setActive(f)} aria-haspopup="dialog">
               <span className="filmwall__poster">
-                <img src={f.poster} alt="" width={432} height={768} loading="lazy" decoding="async" />
+                <img src={f.poster} alt={`Standbild aus dem Film „${f.title}“`} width={432} height={768} loading="lazy" decoding="async" />
                 <span className="filmwall__play" aria-hidden="true">
                   <Play />
                 </span>

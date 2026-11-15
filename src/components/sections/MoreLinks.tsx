@@ -16,6 +16,7 @@ const CARDS = [
     w: 320,
     h: 213,
     pos: "50% 50%",
+    alt: "Riss im Kellerboden wird von Hand verschlossen",
     k: "Scientific Lab",
     title: "Verfahren im Detail",
     text: "Jedes Verfahren als Szenario, Film, Gleichung und 3D-Modell.",
@@ -28,6 +29,7 @@ const CARDS = [
     w: 432,
     h: 300,
     pos: "50% 50%",
+    alt: "Servicewagen von sos-abdichtung",
     k: "Galerie & Team",
     title: "Filme und Bilder",
     text: "Unser Team im Einsatz, der Servicewagen und Stimmen von Kunden.",
@@ -40,6 +42,7 @@ const CARDS = [
     w: 480,
     h: 320,
     pos: "50% 50%",
+    alt: "Feuchte Wand mit Salzrand über der Fußleiste durch aufsteigende Feuchtigkeit",
     k: "Für wen",
     title: "Haus oder Bestand",
     text: "Für Hausbesitzer, Hausverwaltungen, Vermieter und Unternehmen.",
@@ -52,6 +55,7 @@ const CARDS = [
     w: 679,
     h: 450,
     pos: "50% 50%",
+    alt: "Bohrung in die feuchte Wand für die Injektion einer Horizontalsperre",
     k: "Angebotsrechner",
     title: "Ihr Angebot planen",
     text: "Fläche und Schadensbild angeben, das Angebot kommt nach der Messung.",
@@ -74,7 +78,7 @@ export default function MoreLinks() {
                   <c.Icon />
                 </span>
                 <span className="more__img">
-                  <img src={c.img} width={c.w} height={c.h} alt="" loading="lazy" decoding="async" style={{ objectPosition: c.pos }} />
+                  <img src={c.img} width={c.w} height={c.h} alt={c.alt} loading="lazy" decoding="async" style={{ objectPosition: c.pos }} />
                 </span>
                 <span className="more__body">
                   <span className="more__k">{c.k}</span>
