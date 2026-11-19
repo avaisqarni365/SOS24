@@ -14,6 +14,8 @@ import { SERVICE_CARDS } from "@/data/services";
 import { COMPANY, COMPANY_INFO, LOCATIONS } from "@/data/content-data";
 import { BUSINESS_ID, WEBSITE_ID, abs, businessNode, websiteNode, breadcrumbNode, faqNode, OG_IMAGE } from "@/lib/site";
 import { hy } from "@/lib/hyphenate";
+import { cityPage } from "@/data/page-overrides";
+import PagePhotos from "@/components/seo/PagePhotos";
 
 export const dynamicParams = false;
 
@@ -22,7 +24,7 @@ export function generateStaticParams() {
 }
 
 export function generateMetadata({ params }: { params: { city: string } }): Metadata {
-  const page = CITY_PAGES.find((c) => c.slug === params.city);
+  const page = cityPage(params.city);
   if (!page) return {};
   const path = `/kellersanierung/${page.slug}/`;
   return {
@@ -42,7 +44,7 @@ const TRUST = [
 ];
 
 export default function CityPage({ params }: { params: { city: string } }) {
-  const page = CITY_PAGES.find((c) => c.slug === params.city);
+  const page = cityPage(params.city);
   if (!page) notFound();
   const path = `/kellersanierung/${page.slug}/`;
   const location = LOCATIONS.find((l) => l.key === page.slug);
@@ -334,6 +336,8 @@ export default function CityPage({ params }: { params: { city: string } }) {
             <Prose sections={page.sections} />
           </div>
         </section>
+
+        <PagePhotos photos={page.photos} id="photos-title" title={`Bilder aus unserer Arbeit in ${page.name}`} />
 
         {/* Embedded Interactive Booking Engine pre-filled for this city */}
         <OnlineAppointmentBooking place={page.name} className="border-y border-slate-200/80 my-2" />
