@@ -3,6 +3,8 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import Link from "next/link";
 import {
+  FilePenLine,
+  Images,
   Megaphone,
   ShieldCheck,
   FolderOpen,
@@ -71,6 +73,8 @@ import AdminLeadsTable from "@/components/admin/AdminLeadsTable";
 import AdminAppointments from "@/components/admin/AdminAppointments";
 import AdminInvoices from "@/components/admin/AdminInvoices";
 import AdminPhotos from "@/components/admin/AdminPhotos";
+import AdminMedia from "@/components/admin/AdminMedia";
+import AdminPages from "@/components/admin/AdminPages";
 import AdminQuote from "@/components/admin/AdminQuote";
 import AdminDocEditor from "@/components/admin/AdminDocEditor";
 import { LeadForm } from "@/components/admin/AdminForms";
@@ -106,7 +110,9 @@ type AdminTab =
   | "strategy"
   | "seo"
   | "hilfe"
-  | "website";
+  | "website"
+  | "media"
+  | "pages";
 
 type SupportedLang = "en" | "de";
 
@@ -126,6 +132,8 @@ const TAB_HASH: Record<AdminTab, string> = {
   seo: "seo",
   hilfe: "hilfe",
   website: "website",
+  media: "mediathek",
+  pages: "seiten",
 };
 const HASH_TAB = Object.fromEntries(Object.entries(TAB_HASH).map(([k, v]) => [v, k])) as Record<string, AdminTab>;
 
@@ -2007,7 +2015,7 @@ export default function AdminPortalClient() {
       );
       persistAll(nextLeads, docs);
       setAdminUploading(false);
-      showToast(t(`✓ ${newPhotos.length} Datei(en) hinzugefügt & in Google Drive synchronisiert.`, `✓ ${newPhotos.length} file(s) added & synced to Google Drive.`));
+      showToast(t(`${newPhotos.length} Datei(en) nur in diesem Browser abgelegt, nicht in Google Drive. Zum Speichern bitte „Fotos & Drive“ nutzen.`, `${newPhotos.length} file(s) kept in this browser only, not in Google Drive. To save them, use "Photos & Drive".`));
     });
   };
 
@@ -2449,6 +2457,8 @@ export default function AdminPortalClient() {
                 ["drive", t("Fotos & Drive", "Photos & Drive"), Camera, 0],
               ]],
               [t("Marketing", "Marketing"), [
+                ["pages", t("Seiten & Fotos", "Pages & photos"), FilePenLine, 0],
+                ["media", t("Mediathek", "Media library"), Images, 0],
                 ["website", t("Website & Kanäle", "Website & channels"), Megaphone, 0],
                 ["strategy", t("KI-Strategie", "AI strategy"), Sparkles, 0],
                 ["ads", t("Google Ads", "Google Ads"), Rocket, 0],
@@ -2521,6 +2531,8 @@ export default function AdminPortalClient() {
               seo: t("SEO & Inhalte", "SEO & content"),
               hilfe: t("Hilfe & Anleitung", "Help & guide"),
               website: t("Website & Kanäle", "Website & channels"),
+              media: t("Mediathek", "Media library"),
+              pages: t("Seiten & Fotos", "Pages & photos"),
             }[tab]
           }</span>
           {live && (
@@ -2535,6 +2547,8 @@ export default function AdminPortalClient() {
         </div>
 
       {tab === "website" && <AdminSiteContent t={t} onSessionEnd={logout} />}
+      {tab === "media" && <AdminMedia t={t} onSessionEnd={logout} />}
+      {tab === "pages" && <AdminPages t={t} onSessionEnd={logout} onOpenMedia={() => setTab("media")} />}
 
       {/* TAB 1: OVERVIEW */}
       {tab === "overview" && (

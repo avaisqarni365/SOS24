@@ -21,6 +21,8 @@ import WebComponents from "@/components/wc/WebComponents";
 import { Layers3, BookOpen } from "lucide-react";
 import { SERVICE_FILMS, FILM_PAGES } from "@/data/films";
 import { KIT } from "@/data/kit";
+import { servicePage } from "@/data/page-overrides";
+import PagePhotos from "@/components/seo/PagePhotos";
 import { SERVICE_PAGES, CITY_PAGES } from "@/data/seo-pages";
 import { BUSINESS_ID, WEBSITE_ID, abs, businessNode, websiteNode, breadcrumbNode, faqNode, OG_IMAGE } from "@/lib/site";
 
@@ -35,7 +37,7 @@ export function generateStaticParams() {
 }
 
 export function generateMetadata({ params }: { params: { slug: string } }): Metadata {
-  const page = SERVICE_PAGES.find((s) => s.slug === params.slug);
+  const page = servicePage(params.slug);
   if (!page) return {};
   const path = `/leistungen/${page.slug}/`;
   return {
@@ -47,7 +49,7 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
 }
 
 export default function ServicePage({ params }: { params: { slug: string } }) {
-  const page = SERVICE_PAGES.find((s) => s.slug === params.slug);
+  const page = servicePage(params.slug);
   if (!page) notFound();
   const path = `/leistungen/${page.slug}/`;
   const faqs = [...page.faqs, ...(SCIENCE[page.slug]?.faqs ?? [])];
@@ -159,6 +161,8 @@ export default function ServicePage({ params }: { params: { slug: string } }) {
             </div>
           </section>
         </ChapterFold>
+
+        <PagePhotos photos={page.photos} id="photos-title" title={`Bilder: ${page.navTitle}`} />
 
         <section id="fragen" className="sc-section svc-faq" aria-label={`Fragen zu ${page.navTitle}`}>
           <div className="sc-wrap grid gap-12">
