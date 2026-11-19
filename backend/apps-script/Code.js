@@ -653,7 +653,8 @@ function aiChat_(b) {
         "Antworte fachkundig, vertrauenswürdig und kompakt auf " + (lang === 'en' ? 'Englisch' : 'Deutsch') + ". " +
         "Biete dem Kunden immer an, die kostenlose Feuchtemessung vor Ort zu buchen, Schadensfotos hochzuladen oder Herrn Mahmood direkt per WhatsApp (+49 172 2064177) zu kontaktieren.";
 
-      var url = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=' + encodeURIComponent(apiKey);
+      var model = String(PropertiesService.getScriptProperties().getProperty('GEMINI_MODEL') || 'gemini-3.5-flash-lite').replace(/[^\w.\-]/g, '');
+      var url = 'https://generativelanguage.googleapis.com/v1beta/models/' + model + ':generateContent?key=' + encodeURIComponent(apiKey);
       var payload = {
         contents: [{ role: 'user', parts: [{ text: systemInstruction + "\n\nKundenfrage: " + msg }] }],
         generationConfig: { maxOutputTokens: 400, temperature: 0.65 }
