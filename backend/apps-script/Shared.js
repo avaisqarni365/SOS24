@@ -805,3 +805,156 @@ function githubPut_(repo, branch, token, path, content, message) {
   });
   if (res.getResponseCode() >= 300) throw new Error('GitHub ' + res.getResponseCode() + ' für ' + path + ': ' + res.getContentText().slice(0, 300));
 }
+
+/* ---------- Automations ----------
+ * Run by the daily trigger (07:00, see daily() in apps-script/Code.js) and switched on per item in
+ * the admin ("Automatik"); all are off until the owner turns them on. They only ever write to the
+ * office addresses (officeTo_), never to a customer.
+ * key -> [config key, label, what it does] */
+var AUTOS = {
+  weekly: ['auto_wochenbericht', 'Wochenbericht', 'Jeden Montag: Anfragen, Termine, Besuche und geplante Beiträge der Woche als E-Mail.'],
+  posts: ['auto_beitraege', 'Erinnerung an geplante Beiträge', 'An jedem Tag mit einem geplanten Beitrag: eine E-Mail mit Thema und den Plattformen, die noch offen sind.'],
+  reviews: ['auto_bewertungen', 'Erinnerung: um Bewertung bitten', 'Am Tag, nachdem ein Auftrag auf „Erledigt“ gesetzt wurde: eine E-Mail mit dem Kunden und einem fertigen WhatsApp-Text samt Bewertungslink.']
+};
+var REVIEW_LINK = 'https://g.page/r/CQzHYAe67UCTEBM/review';
+var AUTO_POSTS_TAB = 'Beiträge';
+var REVIEW_TAB = 'Bewertungsanfragen';
+/* Where a customer lives, from the address of the enquiry ("Musterweg 3, 44787 Bochum").
+ * Returns {town, area, key}: key 'wuppertal' is the Bergisches Land (postcodes 42…), which has its own
+ * Google profile; everything else belongs to the Essen profile. */
+function reviewRegion_(address) {
+  var m = String(address || '').match(/\b(\d{5})\s+([A-Za-zÄÖÜäöüß][A-Za-zÄÖÜäöüß .\-]{1,40})/), plz = m ? m[1] : '', p2 = plz.slice(0, 2);
+  var town = m ? m[2].replace(/\s+/g, ' ').replace(/[ .\-]+$/, '') : '';
+  var area = p2 === '42' ? 'im Bergischen Land' : (p2 === '40' || p2 === '41') ? 'im Raum Düsseldorf' : (p2 === '50' || p2 === '51') ? 'im Raum Köln'
+    : ['44', '45', '46', '47', '58', '59'].indexOf(p2) >= 0 ? 'im Ruhrgebiet' : 'in NRW';
+  return {town: town, area: area, key: p2 === '42' ? 'wuppertal' : 'essen'};
+}
+/* The review link for a region. The Wuppertal profile's link is only used once the owner has
+ * entered it (Konfiguration: review_link_wuppertal); until then every request points to Essen. */
+function reviewLink_(key) {
+  var own = key === 'wuppertal' ? String(config_('review_link_wuppertal') || '').trim() : '';
+  return /^https:\/\/(g\.page|maps\.app\.goo\.gl|search\.google\.com|www\.google\.com)\//.test(own) ? own : REVIEW_LINK;
+}
+/* The complete message that asks a customer for a review, and the WhatsApp link that opens it.
+ * It names the customer's town and the work done, says why a review helps and what is useful to
+ * mention. It never suggests the wording or the number of stars: the review is the customer's own. */
+function reviewAsk_(name, phone, address, service) {
+  var to = String(phone || '').replace(/[^\d+]/g, '').replace(/^\+/, '').replace(/^00/, '').replace(/^0/, '49');
+  var r = reviewRegion_(address), link = reviewLink_(r.key), job = String(service || '').replace(/\s+/g, ' ').trim().slice(0, 80);
+  var where = r.town ? 'in ' + r.town + ' und ' + r.area : r.area;
+  var text = [
+    'Guten Tag ' + String(name || '').trim() + ',',
+    '',
+    'vielen Dank für Ihr Vertrauen und Ihren Auftrag' + (r.town ? ' in ' + r.town : '') + '! Ich hoffe, Sie sind mit dem Ergebnis zufrieden.',
+    '',
+    'Darf ich Sie um einen kleinen Gefallen bitten? Als kleiner Handwerksbetrieb leben wir von Empfehlungen. Ihre ehrliche Bewertung bei Google hilft anderen Hausbesitzern ' + where + ', bei Feuchtigkeit im Haus den richtigen Betrieb zu finden.',
+    '',
+    'Es dauert nur eine Minute: ' + link,
+    '',
+    'Hilfreich für andere ist, wenn Sie kurz schreiben, was gemacht wurde' + (job ? ' (' + job + ')' : '') + ', in welchem Ort, und wie Sie Beratung, Sauberkeit und Ergebnis erlebt haben. Schreiben Sie bitte ganz offen, auch wenn etwas nicht gepasst hat.',
+    '',
+    'Herzlichen Dank und viele Grüße',
+    'Shahzad Mahmood, sos-abdichtung, 0172 2064177'
+  ].join('\n');
+  return {text: text, wa: to.length >= 8 ? 'https://wa.me/' + to + '?text=' + encodeURIComponent(text) : '', town: r.town, area: r.area, region: r.key, link: link};
+}
+/* Enquiry IDs whose customer was already asked or has already reviewed (admin tab "Bewertungen"). */
+function reviewAsked_() {
+  var out = {};
+  autoRows_(REVIEW_TAB).forEach(function (r) { if (r[0] && (r[2] || r[3])) out[String(r[0])] = true; });
+  return out;
+}
+function autoOn_(k) { return !!AUTOS[k] && /^(ja|yes|1|true)$/i.test(String(config_(AUTOS[k][0]) || '')); }
+function autoDay_(d) { return Utilities.formatDate(d, 'Europe/Berlin', 'yyyy-MM-dd'); }
+function autoIsDate_(d) { return !!d && typeof d.getTime === 'function' && !isNaN(d.getTime()); }
+function autoDe_(iso) { return iso.slice(8, 10) + '.' + iso.slice(5, 7) + '.'; }
+function autoRows_(name) {
+  var sh = ss_().getSheetByName(name);
+  return sh && sh.getLastRow() > 1 ? sh.getDataRange().getValues().slice(1) : [];
+}
+/* Posts from the admin's tab "Beiträge": [{id, date, topic, open: [platform keys without a tick]}] */
+function autoPosts_() {
+  return autoRows_(AUTO_POSTS_TAB).filter(function (r) { return r[0]; }).map(function (r) {
+    var parse = function (v) { try { return JSON.parse(String(v || '{}')) || {}; } catch (err) { return {}; } };
+    var pf = parse(r[5]), done = parse(r[8]);
+    return {id: String(r[0]), date: String(day_(r[1]) || '').replace(/^'/, ''), topic: String(r[3] || ''),
+      open: Object.keys(pf).filter(function (k) { return pf[k] && !done[k]; })};
+  });
+}
+/* Status changes from the audit log: [{id, at (Date)}] for enquiries set to `status` */
+function autoStatusLog_(status) {
+  return autoRows_(TAB.audit).filter(function (r) {
+    return autoIsDate_(r[0]) && String(r[2]) === TAB.leads && / · Status$/.test(String(r[3])) && String(r[5]) === status;
+  }).map(function (r) { return {id: String(r[3]).replace(/ · Status$/, ''), at: r[0]}; });
+}
+
+function autoWeekly_(now) {
+  var end = autoDay_(now), start = autoDay_(new Date(now.getTime() - 7 * 864e5)), next = autoDay_(new Date(now.getTime() + 7 * 864e5));
+  var inWeek = function (d) { return autoIsDate_(d) && autoDay_(d) >= start && autoDay_(d) < end; };
+  var leads = autoRows_(TAB.leads).filter(function (r) { return r[0]; });
+  var fresh = leads.filter(function (r) { return inWeek(r[1]); });
+  var open = {};
+  leads.forEach(function (r) { var s = String(r[2]); if (['Neu', 'In Arbeit', 'Angebot raus'].indexOf(s) >= 0) open[s] = (open[s] || 0) + 1; });
+  var booked = autoStatusLog_('Gebucht').filter(function (x) { return inWeek(x.at); }).length;
+  var done = autoStatusLog_('Erledigt').filter(function (x) { return inWeek(x.at); }).length;
+  var views = 0, visits = 0;
+  autoRows_(TAB.visits).forEach(function (r) {
+    var d = String(day_(r[0])).replace(/^'/, '');
+    if (d >= start && d < end) { views += Number(r[5]) || 0; visits += Number(r[6]) || 0; }
+  });
+  var appts = allAppts_().filter(function (a) { return a.status !== 'Abgesagt' && a.date >= end && a.date < next; })
+    .sort(function (a, b) { return (a.date + a.time) < (b.date + b.time) ? -1 : 1; });
+  var posts = autoPosts_().filter(function (p) { return p.date >= end && p.date < next; });
+  var L = [];
+  L.push('Guten Morgen,', '', 'hier ist der Wochenbericht für ' + autoDe_(start) + ' bis ' + autoDe_(autoDay_(new Date(now.getTime() - 864e5))) + '.', '');
+  L.push('LETZTE 7 TAGE');
+  L.push('  Neue Anfragen: ' + fresh.length);
+  fresh.slice(0, 15).forEach(function (r) { L.push('    ' + r[0] + ' · ' + r[5] + ' · ' + r[2]); });
+  L.push('  Gebucht: ' + booked + ' · Erledigt: ' + done);
+  L.push(views ? '  Website: ' + visits + ' Besuche, ' + views + ' Seitenaufrufe' : '  Website: keine Besuche gezählt');
+  L.push('', 'OFFEN');
+  L.push('  Neu: ' + (open['Neu'] || 0) + ' · In Arbeit: ' + (open['In Arbeit'] || 0) + ' · Angebot raus: ' + (open['Angebot raus'] || 0));
+  L.push('', 'DIESE WOCHE');
+  L.push('  Termine: ' + appts.length);
+  appts.slice(0, 15).forEach(function (a) { L.push('    ' + autoDe_(a.date) + ' ' + a.time + ' · ' + a.name + (a.address ? ' · ' + a.address : '')); });
+  L.push('  Geplante Beiträge: ' + posts.length);
+  posts.forEach(function (p) { L.push('    ' + autoDe_(p.date) + ' · ' + p.topic); });
+  L.push('', 'Admin: ' + adminUrl_(''));
+  return {subject: 'sos-abdichtung: Wochenbericht (' + fresh.length + ' neue Anfragen, ' + appts.length + ' Termine)', body: L.join('\n')};
+}
+function autoPostsToday_(now) {
+  var today = autoDay_(now), due = autoPosts_().filter(function (p) { return p.date === today && p.open.length; });
+  if (!due.length) return null;
+  var names = {facebook: 'Facebook', instagram: 'Instagram', tiktok: 'TikTok', youtube: 'YouTube', gbp: 'Google-Unternehmensprofil'};
+  var L = ['Guten Morgen,', '', 'für heute ' + (due.length === 1 ? 'ist ein Beitrag' : 'sind ' + due.length + ' Beiträge') + ' geplant:', ''];
+  due.forEach(function (p) { L.push('  ' + p.id + ' · ' + p.topic, '    noch offen: ' + p.open.map(function (k) { return names[k] || k; }).join(', ')); });
+  L.push('', 'Texte kopieren und abhaken: ' + adminUrl_('').replace(/\?.*$/, '') + '#beitraege');
+  return {subject: 'sos-abdichtung: ' + due.length + (due.length === 1 ? ' Beitrag' : ' Beiträge') + ' für heute geplant', body: L.join('\n')};
+}
+function autoReviews_(now) {
+  var y = autoDay_(new Date(now.getTime() - 864e5)), ids = {};
+  autoStatusLog_('Erledigt').forEach(function (x) { if (autoDay_(x.at) === y) ids[x.id] = true; });
+  var asked = reviewAsked_();
+  var leads = autoRows_(TAB.leads).filter(function (r) { return ids[String(r[0])] && !asked[String(r[0])] && String(r[2]) === 'Erledigt'; });
+  if (!leads.length) return null;
+  var L = ['Guten Morgen,', '', 'gestern ' + (leads.length === 1 ? 'wurde ein Auftrag' : 'wurden ' + leads.length + ' Aufträge') + ' abgeschlossen. Jetzt ist der beste Moment, um eine Google-Bewertung zu bitten:', ''];
+  leads.forEach(function (r) {
+    var name = String(r[5] || ''), ask = reviewAsk_(name, r[6], r[9], r[10]);
+    L.push('  ' + r[0] + ' · ' + name + (r[6] ? ' · ' + r[6] : ''));
+    if (ask.wa) L.push('    WhatsApp mit fertigem Text: ' + ask.wa);
+    L.push('');
+  });
+  L.push('Bitte alle Kunden fragen, nicht nur die zufriedenen, und nichts als Gegenleistung anbieten (Regel von Google).');
+  L.push('Abhaken, wer gefragt wurde: ' + adminUrl_('').replace(/\?.*$/, '') + '#bewertungen');
+  return {subject: 'sos-abdichtung: ' + leads.length + (leads.length === 1 ? ' Kunde' : ' Kunden') + ' um Bewertung bitten', body: L.join('\n')};
+}
+/* Sends what is due today. opt.monday overrides the weekday (tests). Returns the keys that were sent. */
+function runAutomations_(now, opt) {
+  var to = officeTo_(), sent = [];
+  if (!to) return sent;
+  var monday = opt && opt.monday !== undefined ? !!opt.monday : Utilities.formatDate(now, 'Europe/Berlin', 'u') === '1';
+  var send = function (key, mail) { if (mail) { MailApp.sendEmail({to: to, subject: mail.subject, body: mail.body, name: 'sos-abdichtung Admin'}); sent.push(key); setConfig_('auto_last_' + key, "'" + autoDay_(now)); } };
+  [['weekly', function () { return monday ? autoWeekly_(now) : null; }], ['posts', function () { return autoPostsToday_(now); }], ['reviews', function () { return autoReviews_(now); }]]
+    .forEach(function (x) { if (!autoOn_(x[0])) return; try { send(x[0], x[1]()); } catch (err) { console.error('Automation ' + x[0] + ': ' + err); } });
+  return sent;
+}

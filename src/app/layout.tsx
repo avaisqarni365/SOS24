@@ -15,6 +15,7 @@ import HeadingFit from "@/components/ui/HeadingFit";
 import LabelFit from "@/components/ui/LabelFit";
 import Reveal from "@/components/ui/Reveal";
 import GrokLeadBot from "@/components/ai/GrokLeadBot";
+import VisitBeacon from "@/components/analytics/VisitBeacon";
 
 // Self-hosted fonts: no request to Google at runtime (DSGVO) and no build-time fetch.
 // Upright type only: IBM Plex Sans for headings and text, IBM Plex Mono for
@@ -110,6 +111,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <GrokLeadBot />
           <MobileContactBar />
           <ConsentBanner />
+          <VisitBeacon />
         </LanguageProvider>
       </body>
     </html>

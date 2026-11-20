@@ -635,6 +635,7 @@ function daily() {
   });
   var to = officeTo_();
   if (open.length && to) MailApp.sendEmail({to: to, subject: 'SOS Abdichtung: ' + open.length + ' offene Sanierungsanfragen', body: open.join('\n') + '\n\n' + SpreadsheetApp.getActive().getUrl()});
+  try { runAutomations_(now); } catch (err) { console.error(err); }
 }
 
 /* ------------------------------------------------------------------ AI Chatbot (Gemini & Intelligent Waterproofing Advisor) */

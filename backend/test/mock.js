@@ -69,7 +69,7 @@ const ctx = {
     Charset: {UTF_8: 'UTF-8'},
     getUuid: () => require('crypto').randomUUID(),
     formatDate: (d, tz, fmt) => {
-      const dt = d instanceof Date && !isNaN(d) ? d : new Date('2026-10-16T12:00:00Z');
+      const dt = d && typeof d.getTime === 'function' && !isNaN(d.getTime()) ? d : new Date('2026-10-16T12:00:00Z');
       const iso = dt.toISOString().slice(0, 10);
       if (fmt === 'yyyy-MM-dd') return iso;
       if (fmt === 'dd.MM.yyyy') return iso.slice(8, 10) + '.' + iso.slice(5, 7) + '.' + iso.slice(0, 4);
