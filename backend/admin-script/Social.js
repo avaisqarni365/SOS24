@@ -218,7 +218,7 @@ function api_aiReply_(p) {
 /* ---------- Automations (definitions and mail texts: Shared.js) ---------- */
 function api_automations_() {
   guard_();
-  return {to: officeTo_(), hour: 7, items: Object.keys(AUTOS).map(function (k) { return {key: k, label: AUTOS[k][1], text: AUTOS[k][2], on: autoOn_(k)}; })};
+  return {to: officeTo_(), hour: 7, items: Object.keys(AUTOS).map(function (k) { return {key: k, label: AUTOS[k][1], text: AUTOS[k][2], on: autoOn_(k), last: String(config_('auto_last_' + k) || '').replace(/^'/, '')}; })};
 }
 function api_automationSet_(key, on) {
   var user = guard_();
@@ -237,4 +237,127 @@ function api_automationTest_(key) {
   if (!mail) return {sent: false, to: to, why: key === 'posts' ? 'Für heute ist kein Beitrag geplant; es gäbe heute keine E-Mail.' : 'Gestern wurde kein Auftrag auf „Erledigt“ gesetzt; es gäbe heute keine E-Mail.'};
   MailApp.sendEmail({to: to, subject: '[Test] ' + mail.subject, body: mail.body, name: 'sos-abdichtung Admin'});
   return {sent: true, to: to};
+}
+
+/* ---------- Review requests ----------
+ * Finished jobs and whether the customer was asked for a Google review. The owner sends the
+ * WhatsApp himself; the admin only prepares the text and remembers who was asked. */
+var REVIEW_COLS = ['Anfrage', 'Kunde', 'Gefragt am', 'Bewertet am', 'Von'];
+function api_reviews_() {
+  guard_();
+  var marks = {}, finished = {};
+  tabRows_(REVIEW_TAB, REVIEW_COLS).forEach(function (r) {
+    if (r[0]) marks[String(r[0])] = {asked: String(day_(r[2]) || '').replace(/^'/, ''), got: String(day_(r[3]) || '').replace(/^'/, '')};
+  });
+  autoStatusLog_('Erledigt').forEach(function (x) { finished[x.id] = autoDay_(x.at); });
+  var items = allLeads_().filter(function (l) { return l.status === 'Erledigt'; }).map(function (l) {
+    var m = marks[l.id] || {}, a = reviewAsk_(l.name, l.phone, l.from, l.to);
+    return {id: l.id, name: l.name, phone: l.phone, finished: finished[l.id] || '', asked: m.asked || '', got: m.got || '', text: a.text, wa: a.wa, town: a.town, area: a.area, region: a.region, service: l.to};
+  });
+  var rank = function (x) { return x.got ? 2 : x.asked ? 1 : 0; };
+  items.sort(function (a, b) { return rank(a) - rank(b) || (a.finished < b.finished ? 1 : a.finished > b.finished ? -1 : 0); });
+  return {link: REVIEW_LINK, items: items.slice(0, 200),
+    open: items.filter(function (x) { return !x.asked && !x.got; }).length,
+    asked: items.filter(function (x) { return x.asked; }).length,
+    got: items.filter(function (x) { return x.got; }).length};
+}
+/* field: 'asked' | 'got' */
+function api_reviewMark_(id, field, on) {
+  var user = guard_();
+  id = String(id || '');
+  if (field !== 'asked' && field !== 'got') throw new Error('Unbekanntes Feld.');
+  var lead = allLeads_().filter(function (l) { return l.id === id; })[0];
+  if (!lead) throw new Error('Anfrage ' + id + ' nicht gefunden.');
+  var lock = LockService.getScriptLock(); lock.waitLock(20000);
+  try {
+    var sh = tab_(REVIEW_TAB, REVIEW_COLS), rows = tabRows_(REVIEW_TAB, REVIEW_COLS), at = -1, col = field === 'asked' ? 2 : 3;
+    rows.forEach(function (r, i) { if (String(r[0]) === id) at = i; });
+    var row = at >= 0 ? rows[at].slice() : [id, lead.name, '', '', user];
+    row[2] = String(day_(row[2]) || '').replace(/^'/, ''); row[3] = String(day_(row[3]) || '').replace(/^'/, '');
+    row[col] = on ? autoDay_(new Date()) : '';
+    if (field === 'got' && on && !row[2]) row[2] = row[3];
+    row[2] = row[2] ? "'" + row[2] : ''; row[3] = row[3] ? "'" + row[3] : ''; row[4] = user;
+    if (at >= 0) sh.getRange(at + 2, 1, 1, REVIEW_COLS.length).setValues([row]); else sh.appendRow(row);
+    sheet_(TAB.audit).appendRow([new Date(), user, REVIEW_TAB, id, '', (field === 'asked' ? 'Um Bewertung gebeten' : 'Bewertung erhalten') + (on ? '' : ' (zurückgenommen)')]);
+  } finally { lock.releaseLock(); }
+  return api_reviews_();
+}
+
+/* ---------- Today: what needs doing, for the overview ---------- */
+function api_today_() {
+  guard_();
+  var now = new Date(), today = autoDay_(now), tomorrow = autoDay_(new Date(now.getTime() + 864e5));
+  var label = function (k) { return PLATFORMS[k] ? PLATFORMS[k][0] : k; };
+  var post = function (p) { return {id: p.id, date: p.date, topic: p.topic, open: p.open.map(label)}; };
+  var posts = autoPosts_().filter(function (p) { return p.date && p.open.length; });
+  var appt = function (a) { return {nr: a.nr, date: a.date, time: a.time, name: a.name, address: a.address, type: a.type}; };
+  var appts = allAppts_().filter(function (a) { return a.status !== 'Abgesagt'; }).sort(function (a, b) { return a.time < b.time ? -1 : 1; });
+  var fresh = allLeads_().filter(function (l) { return l.status === 'Neu'; });
+  return {date: today,
+    postsToday: posts.filter(function (p) { return p.date === today; }).map(post),
+    postsLate: posts.filter(function (p) { return p.date < today; }).slice(-10).map(post),
+    apptsToday: appts.filter(function (a) { return a.date === today; }).map(appt),
+    apptsTomorrow: appts.filter(function (a) { return a.date === tomorrow; }).map(appt),
+    leadsNew: fresh.length,
+    leads: fresh.slice(0, 5).map(function (l) { return {id: l.id, name: l.name, received: l.received}; }),
+    reviewsOpen: api_reviews_().open,
+    autosOn: Object.keys(AUTOS).filter(autoOn_).length, autosAll: Object.keys(AUTOS).length};
+}
+
+/* ---------- AI: a plan of post ideas ----------
+ * p: {count: 3 | 6 | 9, focus}. Returns ideas with a suggested date (Mon, Wed, Fri from tomorrow);
+ * nothing is saved until the owner picks ideas and calls api_postsAdd. */
+function planDates_(now, n) {
+  var out = [], t = now.getTime();
+  for (var i = 1; out.length < n && i < 120; i++) {
+    var d = autoDay_(new Date(t + i * 864e5)), wd = new Date(Date.UTC(+d.slice(0, 4), +d.slice(5, 7) - 1, +d.slice(8, 10))).getUTCDay();
+    if (wd === 1 || wd === 3 || wd === 5) out.push(d);
+  }
+  return out;
+}
+function api_aiPlan_(p) {
+  guard_();
+  p = p || {};
+  var count = [3, 6, 9].indexOf(Number(p.count)) >= 0 ? Number(p.count) : 6;
+  var focus = pageText_(p.focus, 200, 'Schwerpunkt'), now = new Date();
+  var have = tabRows_(POSTS_TAB, POST_COLS).filter(function (r) { return r[0]; }).map(function (r) { return String(r[3]); }).slice(-30);
+  var prompt = [
+    'Plane ' + count + ' Beiträge für die sozialen Medien des Betriebs für die nächsten Wochen.',
+    'Heutiges Datum: ' + autoDay_(now) + '. Berücksichtige die Jahreszeit (zum Beispiel Starkregen, Heizperiode, Frost, Frühjahrs-Check).',
+    focus ? 'Schwerpunkt des Inhabers: ' + focus : '',
+    'Mische die Themen: typische Schäden erkennen, Ablauf einer Sanierung, die kostenlose Feuchtemessung, Tipps für Hausbesitzer, einzelne Leistungen, Orte im Ruhrgebiet.',
+    have.length ? 'Diese Themen gibt es schon, bitte nicht wiederholen:\n- ' + have.join('\n- ') : '',
+    '',
+    'Gib NUR ein JSON-Array mit genau ' + count + ' Objekten zurück. Jedes Objekt hat zwei Schlüssel:',
+    '"topic": das Thema in höchstens 80 Zeichen, konkret und ohne Hashtags.',
+    '"text": 2 bis 3 Stichpunkte in einem kurzen Absatz: was der Beitrag sagen soll und welches Foto oder Video dazu passt.'
+  ].filter(function (x) { return x !== ''; }).join('\n');
+  var raw = gemini_(prompt, {json: true, max: 1800}), arr = null;
+  try { arr = JSON.parse(raw); } catch (err) {
+    var m = raw.match(/\[[\s\S]*\]/);
+    try { arr = m ? JSON.parse(m[0]) : null; } catch (err2) { arr = null; }
+  }
+  if (arr && !Array.isArray(arr) && Array.isArray(arr.items)) arr = arr.items;
+  if (!Array.isArray(arr)) throw new Error('Die KI-Antwort war nicht lesbar. Bitte noch einmal versuchen.');
+  var dates = planDates_(now, count), ideas = [];
+  arr.forEach(function (x) {
+    if (!x || typeof x.topic !== 'string' || ideas.length >= count) return;
+    var topic = aiClean_(x.topic, 120).replace(/\n/g, ' '), text = aiClean_(typeof x.text === 'string' ? x.text : '', 600);
+    if (topic.length < 3) return;
+    ideas.push({topic: topic, text: text, date: dates[ideas.length] || '', warnings: aiWarnings_(topic + ' ' + text)});
+  });
+  if (!ideas.length) throw new Error('Die KI hat keine Themen geliefert. Bitte noch einmal versuchen.');
+  return {ideas: ideas};
+}
+/* Saves picked ideas as posts (topic, notes, date); the platform texts are written later. */
+function api_postsAdd_(list) {
+  guard_();
+  list = Array.isArray(list) ? list : [];
+  if (!list.length) throw new Error('Bitte mindestens ein Thema auswählen.');
+  if (list.length > 12) throw new Error('Höchstens 12 Beiträge auf einmal.');
+  var ids = [];
+  list.forEach(function (x) { ids.push(api_postSave_({topic: x && x.topic, text: x && x.text, date: x && x.date}).id); });
+  var out = api_posts_();
+  out.added = ids;
+  return out;
 }

@@ -1,10 +1,11 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { Check, Copy, ExternalLink, Film, ImagePlus, Plus, Sparkles, Trash2 } from "lucide-react";
+import { CalendarPlus, Check, Copy, ExternalLink, Film, ImagePlus, Plus, Sparkles, Trash2 } from "lucide-react";
 import { adminCall } from "@/lib/adminApi";
 import { DataTable, Drawer, Segments, dayDe, type Column } from "@/components/admin/AdminKit";
 import type { MediaItem } from "@/components/admin/AdminMedia";
+import AdminPostPlan from "@/components/admin/AdminPostPlan";
 
 type T = (de: string, en: string) => string;
 type Platform = "facebook" | "instagram" | "tiktok" | "youtube" | "gbp";
@@ -54,6 +55,8 @@ export default function AdminSocial({ t, onSessionEnd, onOpenMedia }: { t: T; on
   const [busy, setBusy] = useState<"" | "save" | "ai" | "delete">("");
   const [copied, setCopied] = useState("");
   const [picking, setPicking] = useState(false);
+  const [planning, setPlanning] = useState(false);
+  const [note, setNote] = useState("");
 
   const fail = useCallback((e: string) => (e === "login" ? onSessionEnd() : setErr(e)), [onSessionEnd]);
   useEffect(() => {
@@ -147,11 +150,31 @@ export default function AdminSocial({ t, onSessionEnd, onOpenMedia }: { t: T; on
             ["all", t("Alle", "All"), state.posts.length],
           ]}
         />
+        <button type="button" className="at__btn" onClick={() => { setNote(""); setPlanning(true); }}>
+          <CalendarPlus aria-hidden="true" /> {t("Wochenplan mit KI", "Week plan with AI")}
+        </button>
         <button type="button" className="btn-shine at__new" onClick={() => open(EMPTY)}>
           <Plus aria-hidden="true" /> {t("Neuer Beitrag", "New post")}
         </button>
       </div>
       {err && <p className="at__err" role="alert">{err}</p>}
+      {note && <p className="pg__hint" role="status">{note}</p>}
+
+      <Drawer open={planning} onClose={() => setPlanning(false)} t={t} wide title={t("Wochenplan mit KI", "Week plan with AI")} sub={t("Themen vorschlagen lassen, auswählen, als geplante Beiträge anlegen", "Get topic suggestions, pick, save as planned posts")}>
+        {planning && (
+          <AdminPostPlan<PostsState>
+            t={t}
+            ai={state.ai}
+            onSessionEnd={onSessionEnd}
+            onAdded={(next, n) => {
+              setState(next);
+              setPlanning(false);
+              setFilter("open");
+              setNote(t(`${n} ${n === 1 ? "Beitrag" : "Beiträge"} angelegt. Öffnen Sie einen Beitrag, um die Texte für die Plattformen zu schreiben.`, `${n} ${n === 1 ? "post" : "posts"} saved. Open a post to write the platform texts.`));
+            }}
+          />
+        )}
+      </Drawer>
 
       <DataTable rows={rows} columns={columns} rowKey={(p) => p.id} onOpen={open} activeKey={draft?.id || ""} t={t} empty={t("Noch keine Beiträge. Mit „Neuer Beitrag“ beginnen.", "No posts yet. Start with \"New post\".")} initialSort={{ key: "date", dir: 1 }} />
 

@@ -80,6 +80,8 @@ import AdminSocial from "@/components/admin/AdminSocial";
 import AdminAssistant from "@/components/admin/AdminAssistant";
 import AdminNumbers from "@/components/admin/AdminNumbers";
 import AdminAutomations from "@/components/admin/AdminAutomations";
+import AdminReviews from "@/components/admin/AdminReviews";
+import AdminToday from "@/components/admin/AdminToday";
 import AdminQuote from "@/components/admin/AdminQuote";
 import AdminDocEditor from "@/components/admin/AdminDocEditor";
 import { LeadForm } from "@/components/admin/AdminForms";
@@ -112,6 +114,7 @@ type AdminTab =
   | "social"
   | "assistant"
   | "auto"
+  | "reviews"
   | "hilfe"
   | "website"
   | "media"
@@ -131,6 +134,7 @@ const TAB_HASH: Record<AdminTab, string> = {
   social: "beitraege",
   assistant: "ki-assistent",
   auto: "automatik",
+  reviews: "bewertungen",
   hilfe: "hilfe",
   website: "website",
   media: "mediathek",
@@ -2472,6 +2476,7 @@ export default function AdminPortalClient() {
                 ["website", t("Website & Kanäle", "Website & channels"), Globe, 0],
                 ["social", t("Beiträge & Social Media", "Posts & social media"), Megaphone, 0],
                 ["assistant", t("KI-Assistent", "AI assistant"), Sparkles, 0],
+                ["reviews", t("Bewertungen", "Reviews"), Star, 0],
                 ["auto", t("Automatik", "Automations"), Zap, 0],
                 ["numbers", t("Google & Zahlen", "Google & numbers"), BarChart3, 0],
               ]],
@@ -2534,6 +2539,7 @@ export default function AdminPortalClient() {
               social: t("Beiträge & Social Media", "Posts & social media"),
               assistant: t("KI-Assistent", "AI assistant"),
               auto: t("Automatik", "Automations"),
+              reviews: t("Bewertungen", "Reviews"),
               numbers: t("Google & Zahlen", "Google & numbers"),
               hilfe: t("Hilfe & Anleitung", "Help & guide"),
               website: t("Website & Kanäle", "Website & channels"),
@@ -2558,11 +2564,13 @@ export default function AdminPortalClient() {
       {tab === "social" && <AdminSocial t={t} onSessionEnd={logout} onOpenMedia={() => setTab("media")} />}
       {tab === "assistant" && <AdminAssistant t={t} onSessionEnd={logout} />}
       {tab === "auto" && <AdminAutomations t={t} lang={lang} onSessionEnd={logout} />}
+      {tab === "reviews" && <AdminReviews t={t} onSessionEnd={logout} />}
       {tab === "numbers" && <AdminNumbers t={t} onSessionEnd={logout} />}
 
       {/* TAB 1: OVERVIEW */}
       {tab === "overview" && (
         <div className="space-y-6">
+          <AdminToday t={t} onGo={setTab} onSessionEnd={logout} />
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-4">
             <button
               type="button"

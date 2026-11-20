@@ -818,6 +818,52 @@ var AUTOS = {
 };
 var REVIEW_LINK = 'https://g.page/r/CQzHYAe67UCTEBM/review';
 var AUTO_POSTS_TAB = 'Beiträge';
+var REVIEW_TAB = 'Bewertungsanfragen';
+/* Where a customer lives, from the address of the enquiry ("Musterweg 3, 44787 Bochum").
+ * Returns {town, area, key}: key 'wuppertal' is the Bergisches Land (postcodes 42…), which has its own
+ * Google profile; everything else belongs to the Essen profile. */
+function reviewRegion_(address) {
+  var m = String(address || '').match(/\b(\d{5})\s+([A-Za-zÄÖÜäöüß][A-Za-zÄÖÜäöüß .\-]{1,40})/), plz = m ? m[1] : '', p2 = plz.slice(0, 2);
+  var town = m ? m[2].replace(/\s+/g, ' ').replace(/[ .\-]+$/, '') : '';
+  var area = p2 === '42' ? 'im Bergischen Land' : (p2 === '40' || p2 === '41') ? 'im Raum Düsseldorf' : (p2 === '50' || p2 === '51') ? 'im Raum Köln'
+    : ['44', '45', '46', '47', '58', '59'].indexOf(p2) >= 0 ? 'im Ruhrgebiet' : 'in NRW';
+  return {town: town, area: area, key: p2 === '42' ? 'wuppertal' : 'essen'};
+}
+/* The review link for a region. The Wuppertal profile's link is only used once the owner has
+ * entered it (Konfiguration: review_link_wuppertal); until then every request points to Essen. */
+function reviewLink_(key) {
+  var own = key === 'wuppertal' ? String(config_('review_link_wuppertal') || '').trim() : '';
+  return /^https:\/\/(g\.page|maps\.app\.goo\.gl|search\.google\.com|www\.google\.com)\//.test(own) ? own : REVIEW_LINK;
+}
+/* The complete message that asks a customer for a review, and the WhatsApp link that opens it.
+ * It names the customer's town and the work done, says why a review helps and what is useful to
+ * mention. It never suggests the wording or the number of stars: the review is the customer's own. */
+function reviewAsk_(name, phone, address, service) {
+  var to = String(phone || '').replace(/[^\d+]/g, '').replace(/^\+/, '').replace(/^00/, '').replace(/^0/, '49');
+  var r = reviewRegion_(address), link = reviewLink_(r.key), job = String(service || '').replace(/\s+/g, ' ').trim().slice(0, 80);
+  var where = r.town ? 'in ' + r.town + ' und ' + r.area : r.area;
+  var text = [
+    'Guten Tag ' + String(name || '').trim() + ',',
+    '',
+    'vielen Dank für Ihr Vertrauen und Ihren Auftrag' + (r.town ? ' in ' + r.town : '') + '! Ich hoffe, Sie sind mit dem Ergebnis zufrieden.',
+    '',
+    'Darf ich Sie um einen kleinen Gefallen bitten? Als kleiner Handwerksbetrieb leben wir von Empfehlungen. Ihre ehrliche Bewertung bei Google hilft anderen Hausbesitzern ' + where + ', bei Feuchtigkeit im Haus den richtigen Betrieb zu finden.',
+    '',
+    'Es dauert nur eine Minute: ' + link,
+    '',
+    'Hilfreich für andere ist, wenn Sie kurz schreiben, was gemacht wurde' + (job ? ' (' + job + ')' : '') + ', in welchem Ort, und wie Sie Beratung, Sauberkeit und Ergebnis erlebt haben. Schreiben Sie bitte ganz offen, auch wenn etwas nicht gepasst hat.',
+    '',
+    'Herzlichen Dank und viele Grüße',
+    'Shahzad Mahmood, sos-abdichtung, 0172 2064177'
+  ].join('\n');
+  return {text: text, wa: to.length >= 8 ? 'https://wa.me/' + to + '?text=' + encodeURIComponent(text) : '', town: r.town, area: r.area, region: r.key, link: link};
+}
+/* Enquiry IDs whose customer was already asked or has already reviewed (admin tab "Bewertungen"). */
+function reviewAsked_() {
+  var out = {};
+  autoRows_(REVIEW_TAB).forEach(function (r) { if (r[0] && (r[2] || r[3])) out[String(r[0])] = true; });
+  return out;
+}
 function autoOn_(k) { return !!AUTOS[k] && /^(ja|yes|1|true)$/i.test(String(config_(AUTOS[k][0]) || '')); }
 function autoDay_(d) { return Utilities.formatDate(d, 'Europe/Berlin', 'yyyy-MM-dd'); }
 function autoIsDate_(d) { return !!d && typeof d.getTime === 'function' && !isNaN(d.getTime()); }
@@ -888,17 +934,18 @@ function autoPostsToday_(now) {
 function autoReviews_(now) {
   var y = autoDay_(new Date(now.getTime() - 864e5)), ids = {};
   autoStatusLog_('Erledigt').forEach(function (x) { if (autoDay_(x.at) === y) ids[x.id] = true; });
-  var leads = autoRows_(TAB.leads).filter(function (r) { return ids[String(r[0])] && String(r[2]) === 'Erledigt'; });
+  var asked = reviewAsked_();
+  var leads = autoRows_(TAB.leads).filter(function (r) { return ids[String(r[0])] && !asked[String(r[0])] && String(r[2]) === 'Erledigt'; });
   if (!leads.length) return null;
   var L = ['Guten Morgen,', '', 'gestern ' + (leads.length === 1 ? 'wurde ein Auftrag' : 'wurden ' + leads.length + ' Aufträge') + ' abgeschlossen. Jetzt ist der beste Moment, um eine Google-Bewertung zu bitten:', ''];
   leads.forEach(function (r) {
-    var name = String(r[5] || ''), phone = String(r[6] || '').replace(/[^\d+]/g, '').replace(/^\+/, '').replace(/^00/, '').replace(/^0/, '49');
-    var text = 'Guten Tag ' + name + ', vielen Dank für Ihren Auftrag! Ich hoffe, Sie sind mit Ihrem Keller zufrieden. Wenn ja, würde mir eine kurze Bewertung bei Google sehr helfen. Sie dauert nur eine Minute: ' + REVIEW_LINK + ' Viele Grüße, Shahzad Mahmood, sos-abdichtung';
+    var name = String(r[5] || ''), ask = reviewAsk_(name, r[6], r[9], r[10]);
     L.push('  ' + r[0] + ' · ' + name + (r[6] ? ' · ' + r[6] : ''));
-    if (phone.length >= 8) L.push('    WhatsApp mit fertigem Text: https://wa.me/' + phone + '?text=' + encodeURIComponent(text));
+    if (ask.wa) L.push('    WhatsApp mit fertigem Text: ' + ask.wa);
     L.push('');
   });
   L.push('Bitte alle Kunden fragen, nicht nur die zufriedenen, und nichts als Gegenleistung anbieten (Regel von Google).');
+  L.push('Abhaken, wer gefragt wurde: ' + adminUrl_('').replace(/\?.*$/, '') + '#bewertungen');
   return {subject: 'sos-abdichtung: ' + leads.length + (leads.length === 1 ? ' Kunde' : ' Kunden') + ' um Bewertung bitten', body: L.join('\n')};
 }
 /* Sends what is due today. opt.monday overrides the weekday (tests). Returns the keys that were sent. */
@@ -906,7 +953,7 @@ function runAutomations_(now, opt) {
   var to = officeTo_(), sent = [];
   if (!to) return sent;
   var monday = opt && opt.monday !== undefined ? !!opt.monday : Utilities.formatDate(now, 'Europe/Berlin', 'u') === '1';
-  var send = function (key, mail) { if (mail) { MailApp.sendEmail({to: to, subject: mail.subject, body: mail.body, name: 'sos-abdichtung Admin'}); sent.push(key); } };
+  var send = function (key, mail) { if (mail) { MailApp.sendEmail({to: to, subject: mail.subject, body: mail.body, name: 'sos-abdichtung Admin'}); sent.push(key); setConfig_('auto_last_' + key, "'" + autoDay_(now)); } };
   [['weekly', function () { return monday ? autoWeekly_(now) : null; }], ['posts', function () { return autoPostsToday_(now); }], ['reviews', function () { return autoReviews_(now); }]]
     .forEach(function (x) { if (!autoOn_(x[0])) return; try { send(x[0], x[1]()); } catch (err) { console.error('Automation ' + x[0] + ': ' + err); } });
   return sent;

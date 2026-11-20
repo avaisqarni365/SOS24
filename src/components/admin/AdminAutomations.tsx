@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { Send } from "lucide-react";
 import { adminCall } from "@/lib/adminApi";
+import { dayDe } from "@/components/admin/AdminKit";
 
 type T = (de: string, en: string) => string;
 
@@ -11,6 +12,7 @@ interface Auto {
   label: string;
   text: string;
   on: boolean;
+  last?: string;
 }
 interface State {
   to: string;
@@ -90,6 +92,7 @@ export default function AdminAutomations({ t, lang, onSessionEnd }: { t: T; lang
                   <div>
                     <h3>{label}</h3>
                     <p>{text}</p>
+                    <p className="au__last">{a.last ? t(`Zuletzt gesendet: ${dayDe(a.last, true)}`, `Last sent: ${dayDe(a.last, true)}`) : t("Noch nie gesendet.", "Never sent yet.")}</p>
                   </div>
                   <button
                     type="button"
