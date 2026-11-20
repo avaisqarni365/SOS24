@@ -32,6 +32,10 @@ export default function DatenschutzPage() {
             Google Analytics wird nur geladen, wenn Sie dem ausdrücklich zustimmen. Ohne Zustimmung setzt diese Website
             keine Cookies.
           </li>
+          <li>
+            Seitenaufrufe zählen wir selbst, ohne Cookies und ohne Kennung: gespeichert wird nur ein Tageszähler je
+            Seite.
+          </li>
           <li>Schriftarten werden von unserem eigenen Server geladen, nicht von Google oder anderen Anbietern.</li>
           <li>
             Wenn Sie ein Formular absenden, Fotos hochladen oder einen Termin buchen, werden Ihre Angaben an unser
@@ -113,8 +117,26 @@ export default function DatenschutzPage() {
         </p>
       </section>
 
+      <section id="besuchszaehlung">
+        <h2>6. Besuchszählung ohne Cookies</h2>
+        <p>
+          Damit wir wissen, welche Seiten gelesen werden, zählt diese Website Seitenaufrufe selbst. Dabei wird kein
+          Cookie gesetzt, nichts in Ihrem Browser gespeichert und keine Kennung vergeben. Bei einem Seitenaufruf
+          werden nur vier Angaben an unser Büro-System bei Google (Google Workspace, siehe Abschnitt 5) gesendet: die
+          aufgerufene Seite, die grobe Herkunft (zum Beispiel „Google“, „Facebook“ oder „Direkt“), die Geräteklasse
+          (Handy, Tablet oder Computer) und die Sprache. Gespeichert wird daraus ausschließlich ein Tageszähler, etwa
+          „Startseite, Google, Handy: 12 Aufrufe“. Ihre IP-Adresse wird zur Übertragung technisch benötigt, von uns
+          aber weder gespeichert noch ausgewertet. Ein Rückschluss auf einzelne Personen ist aus den Zählern nicht
+          möglich.
+        </p>
+        <p>
+          Rechtsgrundlage ist unser berechtigtes Interesse an einer einfachen Reichweitenmessung (Art. 6 Abs. 1 lit. f
+          DSGVO). Wenn Ihr Browser „Do Not Track“ oder „Global Privacy Control“ sendet, wird Ihr Besuch nicht gezählt.
+        </p>
+      </section>
+
       <section id="analyse">
-        <h2>6. Webanalyse mit Google Analytics (nur mit Ihrer Einwilligung)</h2>
+        <h2>7. Webanalyse mit Google Analytics (nur mit Ihrer Einwilligung)</h2>
         <p>
           Wenn Sie zustimmen, nutzen wir Google Analytics 4, einen Dienst der Google Ireland Limited, Gordon House,
           Barrow Street, Dublin 4, Irland. Google Analytics erfasst, welche Seiten Sie aufrufen, wie Sie auf unsere
@@ -137,7 +159,7 @@ export default function DatenschutzPage() {
       </section>
 
       <section>
-        <h2>7. Interaktive Karte (OpenStreetMap)</h2>
+        <h2>8. Interaktive Karte (OpenStreetMap)</h2>
         <p>
           Im Abschnitt Servicegebiet können Sie eine interaktive Karte laden. Sie stammt von der OpenStreetMap Foundation,
           St John&apos;s Innovation Centre, Cowley Road, Cambridge, CB4 0WS, Vereinigtes Königreich. Die Karte wird erst
@@ -149,7 +171,7 @@ export default function DatenschutzPage() {
       </section>
 
       <section>
-        <h2>8. Digitaler Fachberater</h2>
+        <h2>9. Digitaler Fachberater</h2>
         <p>
           Fragen, die Sie dem digitalen Fachberater unten rechts stellen, leiten wir über unser Büro-System an Google
           Gemini weiter, einen Dienst der Google Ireland Limited, der die Antwort formuliert. Bitte geben Sie dort keine
@@ -160,7 +182,7 @@ export default function DatenschutzPage() {
       </section>
 
       <section>
-        <h2>9. Speicherdauer</h2>
+        <h2>10. Speicherdauer</h2>
         <p>
           Anfragen speichern wir, solange sie für die Bearbeitung nötig sind. Kommt ein Auftrag zustande, gelten die
           gesetzlichen Aufbewahrungsfristen des Handels- und Steuerrechts (in der Regel sechs bzw. zehn Jahre).
@@ -168,7 +190,7 @@ export default function DatenschutzPage() {
       </section>
 
       <section>
-        <h2>10. Ihre Rechte</h2>
+        <h2>11. Ihre Rechte</h2>
         <p>Sie haben das Recht auf</p>
         <ul>
           <li>Auskunft über Ihre bei uns gespeicherten Daten (Art. 15 DSGVO),</li>

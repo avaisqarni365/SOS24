@@ -9407,6 +9407,22 @@ html[data-theme="dark"] :is(.md__drop-s, .md__sub, .pg__hint, .pg__bar:not(.is-d
 .nm__tools span { font-size: 0.875rem; color: #5b6b80; }
 html[data-theme="dark"] .adm .sc__warn { color: #6b4a00 !important; }
 html[data-theme="dark"] .sc__lead { color: #b8c4d3; }
+.au__head { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; }
+.au__head h3 { margin: 0; font-size: 1.05rem; font-weight: 800; color: #071628; }
+.au__head p { margin: 0.25rem 0 0; max-width: 46rem; color: #3b4a5e; }
+.au__switch { flex: none; display: inline-flex; align-items: center; gap: 0.5rem; min-height: 44px; padding: 0 0.25rem; border: 0; background: none; font: inherit; font-weight: 800; color: #3b4a5e; cursor: pointer; }
+.au__switch span { position: relative; width: 3rem; height: 1.7rem; border-radius: 999px; background: #c3ccd8; transition: background 0.15s; }
+.au__switch span::after { content: ""; position: absolute; top: 0.2rem; left: 0.2rem; width: 1.3rem; height: 1.3rem; border-radius: 50%; background: #ffffff; box-shadow: 0 1px 3px rgb(0 0 0 / 0.3); transition: transform 0.15s; }
+.au__switch.is-on { color: #0a6b3d; }
+.au__switch.is-on span { background: #12925a; }
+.au__switch.is-on span::after { transform: translateX(1.3rem); }
+.au__switch:disabled { opacity: 0.6; cursor: wait; }
+.au__switch:focus-visible { outline: 3px solid var(--pw-accent); outline-offset: 3px; border-radius: 12px; }
+@media (prefers-reduced-motion: reduce) { .au__switch span, .au__switch span::after { transition: none; } }
+html[data-theme="dark"] .au__head h3 { color: #f2f6fb; }
+html[data-theme="dark"] :is(.au__head p, .au__switch) { color: #b8c4d3; }
+html[data-theme="dark"] .au__switch.is-on { color: #6fdca6; }
+
 html[data-theme="dark"] :is(.nm__tools a, .sc__icon) { background: #121a24; border-color: rgb(255 255 255 / 0.12); color: #f2f6fb; }
 html[data-theme="dark"] :is(.nm__tools span, .nm__axis) { color: #b8c4d3; }
 /* messages keep their light background in dark mode, so their text must stay dark */

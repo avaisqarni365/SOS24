@@ -214,3 +214,27 @@ function api_aiReply_(p) {
   var out = aiClean_(gemini_(prompt, {max: 600}), 1500);
   return {text: out, warnings: aiWarnings_(out)};
 }
+
+/* ---------- Automations (definitions and mail texts: Shared.js) ---------- */
+function api_automations_() {
+  guard_();
+  return {to: officeTo_(), hour: 7, items: Object.keys(AUTOS).map(function (k) { return {key: k, label: AUTOS[k][1], text: AUTOS[k][2], on: autoOn_(k)}; })};
+}
+function api_automationSet_(key, on) {
+  var user = guard_();
+  if (!AUTOS[key]) throw new Error('Unbekannte Automatik.');
+  setConfig_(AUTOS[key][0], on ? 'ja' : 'nein');
+  sheet_(TAB.audit).appendRow([new Date(), user, TAB.config, AUTOS[key][0], '', AUTOS[key][1] + (on ? ' eingeschaltet' : ' ausgeschaltet')]);
+  return api_automations_();
+}
+/* Sends one of the mails now, so the owner sees what it looks like. */
+function api_automationTest_(key) {
+  guard_();
+  if (!AUTOS[key]) throw new Error('Unbekannte Automatik.');
+  var to = officeTo_();
+  if (!to) throw new Error('Es ist keine Büro-Adresse hinterlegt (Konfiguration: notify_email).');
+  var now = new Date(), mail = key === 'weekly' ? autoWeekly_(now) : key === 'posts' ? autoPostsToday_(now) : autoReviews_(now);
+  if (!mail) return {sent: false, to: to, why: key === 'posts' ? 'Für heute ist kein Beitrag geplant; es gäbe heute keine E-Mail.' : 'Gestern wurde kein Auftrag auf „Erledigt“ gesetzt; es gäbe heute keine E-Mail.'};
+  MailApp.sendEmail({to: to, subject: '[Test] ' + mail.subject, body: mail.body, name: 'sos-abdichtung Admin'});
+  return {sent: true, to: to};
+}

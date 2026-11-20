@@ -805,3 +805,109 @@ function githubPut_(repo, branch, token, path, content, message) {
   });
   if (res.getResponseCode() >= 300) throw new Error('GitHub ' + res.getResponseCode() + ' für ' + path + ': ' + res.getContentText().slice(0, 300));
 }
+
+/* ---------- Automations ----------
+ * Run by the daily trigger (07:00, see daily() in apps-script/Code.js) and switched on per item in
+ * the admin ("Automatik"); all are off until the owner turns them on. They only ever write to the
+ * office addresses (officeTo_), never to a customer.
+ * key -> [config key, label, what it does] */
+var AUTOS = {
+  weekly: ['auto_wochenbericht', 'Wochenbericht', 'Jeden Montag: Anfragen, Termine, Besuche und geplante Beiträge der Woche als E-Mail.'],
+  posts: ['auto_beitraege', 'Erinnerung an geplante Beiträge', 'An jedem Tag mit einem geplanten Beitrag: eine E-Mail mit Thema und den Plattformen, die noch offen sind.'],
+  reviews: ['auto_bewertungen', 'Erinnerung: um Bewertung bitten', 'Am Tag, nachdem ein Auftrag auf „Erledigt“ gesetzt wurde: eine E-Mail mit dem Kunden und einem fertigen WhatsApp-Text samt Bewertungslink.']
+};
+var REVIEW_LINK = 'https://g.page/r/CQzHYAe67UCTEBM/review';
+var AUTO_POSTS_TAB = 'Beiträge';
+function autoOn_(k) { return !!AUTOS[k] && /^(ja|yes|1|true)$/i.test(String(config_(AUTOS[k][0]) || '')); }
+function autoDay_(d) { return Utilities.formatDate(d, 'Europe/Berlin', 'yyyy-MM-dd'); }
+function autoIsDate_(d) { return !!d && typeof d.getTime === 'function' && !isNaN(d.getTime()); }
+function autoDe_(iso) { return iso.slice(8, 10) + '.' + iso.slice(5, 7) + '.'; }
+function autoRows_(name) {
+  var sh = ss_().getSheetByName(name);
+  return sh && sh.getLastRow() > 1 ? sh.getDataRange().getValues().slice(1) : [];
+}
+/* Posts from the admin's tab "Beiträge": [{id, date, topic, open: [platform keys without a tick]}] */
+function autoPosts_() {
+  return autoRows_(AUTO_POSTS_TAB).filter(function (r) { return r[0]; }).map(function (r) {
+    var parse = function (v) { try { return JSON.parse(String(v || '{}')) || {}; } catch (err) { return {}; } };
+    var pf = parse(r[5]), done = parse(r[8]);
+    return {id: String(r[0]), date: String(day_(r[1]) || '').replace(/^'/, ''), topic: String(r[3] || ''),
+      open: Object.keys(pf).filter(function (k) { return pf[k] && !done[k]; })};
+  });
+}
+/* Status changes from the audit log: [{id, at (Date)}] for enquiries set to `status` */
+function autoStatusLog_(status) {
+  return autoRows_(TAB.audit).filter(function (r) {
+    return autoIsDate_(r[0]) && String(r[2]) === TAB.leads && / · Status$/.test(String(r[3])) && String(r[5]) === status;
+  }).map(function (r) { return {id: String(r[3]).replace(/ · Status$/, ''), at: r[0]}; });
+}
+
+function autoWeekly_(now) {
+  var end = autoDay_(now), start = autoDay_(new Date(now.getTime() - 7 * 864e5)), next = autoDay_(new Date(now.getTime() + 7 * 864e5));
+  var inWeek = function (d) { return autoIsDate_(d) && autoDay_(d) >= start && autoDay_(d) < end; };
+  var leads = autoRows_(TAB.leads).filter(function (r) { return r[0]; });
+  var fresh = leads.filter(function (r) { return inWeek(r[1]); });
+  var open = {};
+  leads.forEach(function (r) { var s = String(r[2]); if (['Neu', 'In Arbeit', 'Angebot raus'].indexOf(s) >= 0) open[s] = (open[s] || 0) + 1; });
+  var booked = autoStatusLog_('Gebucht').filter(function (x) { return inWeek(x.at); }).length;
+  var done = autoStatusLog_('Erledigt').filter(function (x) { return inWeek(x.at); }).length;
+  var views = 0, visits = 0;
+  autoRows_(TAB.visits).forEach(function (r) {
+    var d = String(day_(r[0])).replace(/^'/, '');
+    if (d >= start && d < end) { views += Number(r[5]) || 0; visits += Number(r[6]) || 0; }
+  });
+  var appts = allAppts_().filter(function (a) { return a.status !== 'Abgesagt' && a.date >= end && a.date < next; })
+    .sort(function (a, b) { return (a.date + a.time) < (b.date + b.time) ? -1 : 1; });
+  var posts = autoPosts_().filter(function (p) { return p.date >= end && p.date < next; });
+  var L = [];
+  L.push('Guten Morgen,', '', 'hier ist der Wochenbericht für ' + autoDe_(start) + ' bis ' + autoDe_(autoDay_(new Date(now.getTime() - 864e5))) + '.', '');
+  L.push('LETZTE 7 TAGE');
+  L.push('  Neue Anfragen: ' + fresh.length);
+  fresh.slice(0, 15).forEach(function (r) { L.push('    ' + r[0] + ' · ' + r[5] + ' · ' + r[2]); });
+  L.push('  Gebucht: ' + booked + ' · Erledigt: ' + done);
+  L.push(views ? '  Website: ' + visits + ' Besuche, ' + views + ' Seitenaufrufe' : '  Website: keine Besuche gezählt');
+  L.push('', 'OFFEN');
+  L.push('  Neu: ' + (open['Neu'] || 0) + ' · In Arbeit: ' + (open['In Arbeit'] || 0) + ' · Angebot raus: ' + (open['Angebot raus'] || 0));
+  L.push('', 'DIESE WOCHE');
+  L.push('  Termine: ' + appts.length);
+  appts.slice(0, 15).forEach(function (a) { L.push('    ' + autoDe_(a.date) + ' ' + a.time + ' · ' + a.name + (a.address ? ' · ' + a.address : '')); });
+  L.push('  Geplante Beiträge: ' + posts.length);
+  posts.forEach(function (p) { L.push('    ' + autoDe_(p.date) + ' · ' + p.topic); });
+  L.push('', 'Admin: ' + adminUrl_(''));
+  return {subject: 'sos-abdichtung: Wochenbericht (' + fresh.length + ' neue Anfragen, ' + appts.length + ' Termine)', body: L.join('\n')};
+}
+function autoPostsToday_(now) {
+  var today = autoDay_(now), due = autoPosts_().filter(function (p) { return p.date === today && p.open.length; });
+  if (!due.length) return null;
+  var names = {facebook: 'Facebook', instagram: 'Instagram', tiktok: 'TikTok', youtube: 'YouTube', gbp: 'Google-Unternehmensprofil'};
+  var L = ['Guten Morgen,', '', 'für heute ' + (due.length === 1 ? 'ist ein Beitrag' : 'sind ' + due.length + ' Beiträge') + ' geplant:', ''];
+  due.forEach(function (p) { L.push('  ' + p.id + ' · ' + p.topic, '    noch offen: ' + p.open.map(function (k) { return names[k] || k; }).join(', ')); });
+  L.push('', 'Texte kopieren und abhaken: ' + adminUrl_('').replace(/\?.*$/, '') + '#beitraege');
+  return {subject: 'sos-abdichtung: ' + due.length + (due.length === 1 ? ' Beitrag' : ' Beiträge') + ' für heute geplant', body: L.join('\n')};
+}
+function autoReviews_(now) {
+  var y = autoDay_(new Date(now.getTime() - 864e5)), ids = {};
+  autoStatusLog_('Erledigt').forEach(function (x) { if (autoDay_(x.at) === y) ids[x.id] = true; });
+  var leads = autoRows_(TAB.leads).filter(function (r) { return ids[String(r[0])] && String(r[2]) === 'Erledigt'; });
+  if (!leads.length) return null;
+  var L = ['Guten Morgen,', '', 'gestern ' + (leads.length === 1 ? 'wurde ein Auftrag' : 'wurden ' + leads.length + ' Aufträge') + ' abgeschlossen. Jetzt ist der beste Moment, um eine Google-Bewertung zu bitten:', ''];
+  leads.forEach(function (r) {
+    var name = String(r[5] || ''), phone = String(r[6] || '').replace(/[^\d+]/g, '').replace(/^\+/, '').replace(/^00/, '').replace(/^0/, '49');
+    var text = 'Guten Tag ' + name + ', vielen Dank für Ihren Auftrag! Ich hoffe, Sie sind mit Ihrem Keller zufrieden. Wenn ja, würde mir eine kurze Bewertung bei Google sehr helfen. Sie dauert nur eine Minute: ' + REVIEW_LINK + ' Viele Grüße, Shahzad Mahmood, sos-abdichtung';
+    L.push('  ' + r[0] + ' · ' + name + (r[6] ? ' · ' + r[6] : ''));
+    if (phone.length >= 8) L.push('    WhatsApp mit fertigem Text: https://wa.me/' + phone + '?text=' + encodeURIComponent(text));
+    L.push('');
+  });
+  L.push('Bitte alle Kunden fragen, nicht nur die zufriedenen, und nichts als Gegenleistung anbieten (Regel von Google).');
+  return {subject: 'sos-abdichtung: ' + leads.length + (leads.length === 1 ? ' Kunde' : ' Kunden') + ' um Bewertung bitten', body: L.join('\n')};
+}
+/* Sends what is due today. opt.monday overrides the weekday (tests). Returns the keys that were sent. */
+function runAutomations_(now, opt) {
+  var to = officeTo_(), sent = [];
+  if (!to) return sent;
+  var monday = opt && opt.monday !== undefined ? !!opt.monday : Utilities.formatDate(now, 'Europe/Berlin', 'u') === '1';
+  var send = function (key, mail) { if (mail) { MailApp.sendEmail({to: to, subject: mail.subject, body: mail.body, name: 'sos-abdichtung Admin'}); sent.push(key); } };
+  [['weekly', function () { return monday ? autoWeekly_(now) : null; }], ['posts', function () { return autoPostsToday_(now); }], ['reviews', function () { return autoReviews_(now); }]]
+    .forEach(function (x) { if (!autoOn_(x[0])) return; try { send(x[0], x[1]()); } catch (err) { console.error('Automation ' + x[0] + ': ' + err); } });
+  return sent;
+}
