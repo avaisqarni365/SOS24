@@ -117,8 +117,24 @@ export default function DatenschutzPage() {
         </p>
       </section>
 
+      <section id="bewerbungen">
+        <h2>6. Bewerbungen</h2>
+        <p>
+          Wenn Sie sich auf eine unserer Stellen bewerben, per WhatsApp, Telefon oder E-Mail, verarbeiten wir die
+          Angaben, die Sie uns dabei machen (zum Beispiel Name, Kontaktdaten, Wohnort, Erfahrung, Lebenslauf), um über
+          die Besetzung der Stelle zu entscheiden. Rechtsgrundlage ist § 26 Abs. 1 BDSG in Verbindung mit Art. 6 Abs. 1
+          lit. b DSGVO. Die Angaben sieht nur der Inhaber. Bei WhatsApp gelten zusätzlich die Datenschutzbestimmungen
+          von WhatsApp; wenn Sie das nicht möchten, bewerben Sie sich bitte per Telefon oder E-Mail.
+        </p>
+        <p>
+          Kommt es zu einer Einstellung, übernehmen wir Ihre Angaben in die Personalunterlagen. Andernfalls löschen wir
+          sie spätestens sechs Monate nach Abschluss des Verfahrens, es sei denn, Sie haben einer längeren Aufbewahrung
+          für spätere Stellen ausdrücklich zugestimmt.
+        </p>
+      </section>
+
       <section id="besuchszaehlung">
-        <h2>6. Besuchszählung ohne Cookies</h2>
+        <h2>7. Besuchszählung ohne Cookies</h2>
         <p>
           Damit wir wissen, welche Seiten gelesen werden, zählt diese Website Seitenaufrufe selbst. Dabei wird kein
           Cookie gesetzt, nichts in Ihrem Browser gespeichert und keine Kennung vergeben. Bei einem Seitenaufruf
@@ -136,7 +152,7 @@ export default function DatenschutzPage() {
       </section>
 
       <section id="analyse">
-        <h2>7. Webanalyse mit Google Analytics (nur mit Ihrer Einwilligung)</h2>
+        <h2>8. Webanalyse mit Google Analytics (nur mit Ihrer Einwilligung)</h2>
         <p>
           Wenn Sie zustimmen, nutzen wir Google Analytics 4, einen Dienst der Google Ireland Limited, Gordon House,
           Barrow Street, Dublin 4, Irland. Google Analytics erfasst, welche Seiten Sie aufrufen, wie Sie auf unsere
@@ -159,7 +175,7 @@ export default function DatenschutzPage() {
       </section>
 
       <section>
-        <h2>8. Interaktive Karte (OpenStreetMap)</h2>
+        <h2>9. Interaktive Karte (OpenStreetMap)</h2>
         <p>
           Im Abschnitt Servicegebiet können Sie eine interaktive Karte laden. Sie stammt von der OpenStreetMap Foundation,
           St John&apos;s Innovation Centre, Cowley Road, Cambridge, CB4 0WS, Vereinigtes Königreich. Die Karte wird erst
@@ -171,7 +187,7 @@ export default function DatenschutzPage() {
       </section>
 
       <section>
-        <h2>9. Digitaler Fachberater</h2>
+        <h2>10. Digitaler Fachberater</h2>
         <p>
           Fragen, die Sie dem digitalen Fachberater unten rechts stellen, leiten wir über unser Büro-System an Google
           Gemini weiter, einen Dienst der Google Ireland Limited, der die Antwort formuliert. Bitte geben Sie dort keine
@@ -182,7 +198,7 @@ export default function DatenschutzPage() {
       </section>
 
       <section>
-        <h2>10. Speicherdauer</h2>
+        <h2>11. Speicherdauer</h2>
         <p>
           Anfragen speichern wir, solange sie für die Bearbeitung nötig sind. Kommt ein Auftrag zustande, gelten die
           gesetzlichen Aufbewahrungsfristen des Handels- und Steuerrechts (in der Regel sechs bzw. zehn Jahre).
@@ -190,7 +206,7 @@ export default function DatenschutzPage() {
       </section>
 
       <section>
-        <h2>11. Ihre Rechte</h2>
+        <h2>12. Ihre Rechte</h2>
         <p>Sie haben das Recht auf</p>
         <ul>
           <li>Auskunft über Ihre bei uns gespeicherten Daten (Art. 15 DSGVO),</li>

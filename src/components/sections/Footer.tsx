@@ -17,6 +17,7 @@ const PAGES: [string, string][] = [
   ["/filme/", "Filme"],
   ["/kostenrechner/", "Angebotsrechner"],
   ["/leistungen/#faq", "Häufige Fragen"],
+  ["/jobs/", "Jobs"],
   ["/kontakt/", "Kontakt"],
 ];
 
