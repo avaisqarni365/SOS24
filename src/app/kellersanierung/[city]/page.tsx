@@ -355,6 +355,10 @@ export default function CityPage({ params }: { params: { city: string } }) {
               }))}
             />
             {nearby.length > 0 && <LinkGrid title="In der Nähe" links={nearby} />}
+            <LinkGrid
+              title={`Arbeiten bei uns: Jobs in ${page.name}`}
+              links={[{ href: `/jobs/${page.slug}/`, label: `Jobs in ${page.name}`, sub: "Vollzeit, Teilzeit, Minijob, Studentenjob" }]}
+            />
           </div>
         </section>
 
