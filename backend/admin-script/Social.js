@@ -361,3 +361,46 @@ function api_postsAdd_(list) {
   out.added = ids;
   return out;
 }
+
+/* ---------- AI: content for a page ----------
+ * A draft for one own section or one own question on a town or service page.
+ * p: {path, kind: 'section' | 'faq', topic, name}. Nothing is saved; the owner edits and saves. */
+function api_aiPage_(p) {
+  guard_();
+  p = p || {};
+  var path = String(p.path || '');
+  if (!PAGE_PATH.test(path)) throw new Error('Unbekannte Seite: ' + path);
+  var kind = p.kind === 'faq' ? 'faq' : 'section';
+  var topic = pageText_(p.topic, 160, 'Stichwort'), name = pageText_(p.name, 80, 'Seite');
+  if (String(topic).length < 3) throw new Error('Bitte ein Stichwort eintragen, worum es gehen soll.');
+  var isTown = /^\/kellersanierung\//.test(path);
+  var about = isTown ? 'die Stadtseite „Kellersanierung ' + name + '“' : 'die Leistungsseite „' + name + '“';
+  var prompt = (kind === 'faq' ? [
+    'Schreibe eine Frage mit Antwort für ' + about + ' der Website.',
+    'Thema: ' + topic,
+    'Die Frage so formulieren, wie ein Hausbesitzer sie bei Google eingibt' + (isTown ? ', mit dem Ortsnamen ' + name : '') + '.',
+    'Die Antwort: 2 bis 4 Sätze, konkret und ehrlich, ohne Diagnose aus der Ferne.',
+    'Gib NUR ein JSON-Objekt mit den Schlüsseln "q" und "a" zurück.'
+  ] : [
+    'Schreibe einen Abschnitt für ' + about + ' der Website.',
+    'Thema: ' + topic,
+    'Der Abschnitt hat eine Überschrift mit höchstens 80 Zeichen' + (isTown ? ', die den Ort ' + name + ' nennt,' : '') + ' und zwei Absätze mit je 3 bis 4 Sätzen.',
+    'Erster Absatz: das Problem, so wie es der Hausbesitzer erlebt. Zweiter Absatz: was wir dagegen tun, von innen und ohne Aufgraben.',
+    isTown ? 'Nenne keine Stadtteile, Straßen oder Gebäude, die nicht im Thema stehen.' : '',
+    'Gib NUR ein JSON-Objekt mit den Schlüsseln "heading" und "text" zurück. Im "text" trennt eine Leerzeile die beiden Absätze.'
+  ]).filter(function (x) { return x !== ''; }).join('\n');
+  var raw = gemini_(prompt, {json: true, max: 900}), obj = null;
+  try { obj = JSON.parse(raw); } catch (err) {
+    var m = raw.match(/\{[\s\S]*\}/);
+    try { obj = m ? JSON.parse(m[0]) : null; } catch (err2) { obj = null; }
+  }
+  if (!obj || typeof obj !== 'object') throw new Error('Die KI-Antwort war nicht lesbar. Bitte noch einmal versuchen.');
+  if (kind === 'faq') {
+    var q = aiClean_(obj.q, 160).replace(/\n+/g, ' '), a = aiClean_(obj.a, 800).replace(/\n+/g, ' ');
+    if (q.length < 8 || a.length < 20) throw new Error('Die KI hat keinen brauchbaren Text geliefert. Bitte das Stichwort genauer fassen.');
+    return {kind: kind, q: q, a: a, warnings: aiWarnings_(q + ' ' + a)};
+  }
+  var heading = aiClean_(obj.heading, 120).replace(/\n+/g, ' '), text = aiClean_(obj.text, 2000);
+  if (heading.length < 3 || text.length < 40) throw new Error('Die KI hat keinen brauchbaren Text geliefert. Bitte das Stichwort genauer fassen.');
+  return {kind: kind, heading: heading, text: text, warnings: aiWarnings_(heading + ' ' + text)};
+}

@@ -10,7 +10,7 @@
 var MEDIA_FOLDER = 'SOS Abdichtung - Website-Medien';
 var MEDIA_TAB = 'Medien', PAGES_TAB = 'Seiten';
 var MEDIA_COLS = ['ID', 'Name', 'Typ', 'Breite', 'Höhe', 'Bytes', 'Hochgeladen', 'Von', 'Vorschau'];
-var PAGE_COLS = ['Pfad', 'Titel', 'Beschreibung', 'Überschrift', 'Einleitung', 'Fotos', 'Geändert', 'Von'];
+var PAGE_COLS = ['Pfad', 'Titel', 'Beschreibung', 'Überschrift', 'Einleitung', 'Fotos', 'Geändert', 'Von', 'Abschnitte', 'Fragen'];
 var MEDIA_IMG = ['image/jpeg', 'image/png', 'image/webp'];
 var MEDIA_VID = ['video/mp4', 'video/webm', 'video/quicktime'];
 var MEDIA_IMG_MAX = 8 * 1024 * 1024, MEDIA_VID_MAX = 25 * 1024 * 1024;
@@ -18,7 +18,7 @@ var MEDIA_EXT = {'image/jpeg': 'jpg', 'image/png': 'png', 'image/webp': 'webp', 
 var PAGE_PATH = /^\/(kellersanierung|leistungen)\/[a-z0-9-]{2,60}\/$/;
 /* field -> [label, max length, column] */
 var PAGE_TEXT = {title: ['Titel', 60, 2], metaDescription: ['Beschreibung', 160, 3], h1: ['Überschrift', 120, 4], lede: ['Einleitung', 600, 5]};
-var PAGE_PHOTOS_MAX = 12;
+var PAGE_PHOTOS_MAX = 12, PAGE_SECTIONS_MAX = 6, PAGE_FAQS_MAX = 8;
 
 function tab_(name, cols) {
   var sh = ss_().getSheetByName(name);
@@ -98,13 +98,20 @@ function api_mediaDelete_(id) {
 /* ---------- pages ---------- */
 function pageRows_() {
   return tabRows_(PAGES_TAB, PAGE_COLS).filter(function (r) { return r[0]; }).map(function (r) {
-    var photos = [];
-    try { photos = JSON.parse(String(r[5] || '[]')); } catch (err) { photos = []; }
-    if (!Array.isArray(photos)) photos = [];
+    var list = function (v) { var a = []; try { a = JSON.parse(String(v || '[]')); } catch (err) { a = []; } return Array.isArray(a) ? a : []; };
+    var photos = list(r[5]);
     return {path: String(r[0]), title: String(r[1] || ''), metaDescription: String(r[2] || ''), h1: String(r[3] || ''), lede: String(r[4] || ''),
       photos: photos.filter(function (p) { return p && p.id; }).map(function (p) { return {id: String(p.id), alt: String(p.alt || '')}; }),
+      sections: list(r[8]).filter(function (x) { return x && x.heading; }).map(function (x) { return {heading: String(x.heading), text: String(x.text || '')}; }),
+      faqs: list(r[9]).filter(function (x) { return x && x.q; }).map(function (x) { return {q: String(x.q), a: String(x.a || '')}; }),
       at: iso_(r[6]), by: String(r[7] || '')};
   });
+}
+/* Plain text with paragraphs: no markup, tidy blank lines, no leading formula characters. */
+function pageLong_(v, max, label) {
+  var s = String(v == null ? '' : v).replace(/[<>]/g, '').replace(/\r/g, '').replace(/[ \t]+\n/g, '\n').replace(/\n{3,}/g, '\n\n').trim();
+  if (s.length > max) throw new Error(label + ': höchstens ' + max + ' Zeichen (jetzt ' + s.length + ').');
+  return /^[=+\-@]/.test(s) ? "'" + s : s;
 }
 function api_pages_() {
   guard_();
@@ -137,17 +144,35 @@ function api_pageSave_(path, p) {
     seen[id] = true;
     return {id: id, alt: String(alt)};
   });
+  // own sections (heading + text) and own questions, added below the built-in ones
+  var secIn = (Array.isArray(p.sections) ? p.sections : []).filter(function (x) { return x && (String(x.heading || '').trim() || String(x.text || '').trim()); });
+  if (secIn.length > PAGE_SECTIONS_MAX) throw new Error('Höchstens ' + PAGE_SECTIONS_MAX + ' eigene Abschnitte pro Seite.');
+  var sections = secIn.map(function (x, i) {
+    var heading = String(pageText_(x.heading, 120, 'Abschnitt ' + (i + 1) + ', Überschrift')), text = String(pageLong_(x.text, 2000, 'Abschnitt ' + (i + 1) + ', Text'));
+    if (heading.length < 3) throw new Error('Abschnitt ' + (i + 1) + ': bitte eine Überschrift eintragen.');
+    if (text.length < 40) throw new Error('Abschnitt ' + (i + 1) + ': der Text ist zu kurz (mindestens 40 Zeichen).');
+    return {heading: heading, text: text};
+  });
+  var faqIn = (Array.isArray(p.faqs) ? p.faqs : []).filter(function (x) { return x && (String(x.q || '').trim() || String(x.a || '').trim()); });
+  if (faqIn.length > PAGE_FAQS_MAX) throw new Error('Höchstens ' + PAGE_FAQS_MAX + ' eigene Fragen pro Seite.');
+  var faqs = faqIn.map(function (x, i) {
+    var q = String(pageText_(x.q, 160, 'Frage ' + (i + 1))), a = String(pageLong_(x.a, 800, 'Antwort ' + (i + 1))).replace(/\n+/g, ' ');
+    if (q.length < 8) throw new Error('Frage ' + (i + 1) + ': bitte die Frage ausschreiben.');
+    if (a.length < 20) throw new Error('Frage ' + (i + 1) + ': die Antwort ist zu kurz (mindestens 20 Zeichen).');
+    return {q: q, a: a};
+  });
   var lock = LockService.getScriptLock(); lock.waitLock(20000);
   try {
     var sh = tab_(PAGES_TAB, PAGE_COLS), rows = tabRows_(PAGES_TAB, PAGE_COLS), at = -1;
+    sh.getRange(1, 1, 1, PAGE_COLS.length).setValues([PAGE_COLS]);   // older sheets get the two new columns
     rows.forEach(function (r, i) { if (String(r[0]) === path) at = i; });
-    var empty = !photos.length && Object.keys(vals).every(function (k) { return !vals[k]; });
-    var row = [path, vals.title, vals.metaDescription, vals.h1, vals.lede, JSON.stringify(photos), new Date(), user];
+    var empty = !photos.length && !sections.length && !faqs.length && Object.keys(vals).every(function (k) { return !vals[k]; });
+    var row = [path, vals.title, vals.metaDescription, vals.h1, vals.lede, JSON.stringify(photos), new Date(), user, JSON.stringify(sections), JSON.stringify(faqs)];
     if (empty) { if (at >= 0) sh.deleteRow(at + 2); }
     else if (at >= 0) sh.getRange(at + 2, 1, 1, PAGE_COLS.length).setValues([row]);
     else sh.appendRow(row);
     setConfig_('pages_dirty', 'ja');
-    sheet_(TAB.audit).appendRow([new Date(), user, PAGES_TAB, path, '', empty ? 'Auf Standard zurückgesetzt' : 'Seite gespeichert (' + photos.length + ' Fotos)']);
+    sheet_(TAB.audit).appendRow([new Date(), user, PAGES_TAB, path, '', empty ? 'Auf Standard zurückgesetzt' : 'Seite gespeichert (' + photos.length + ' Fotos, ' + sections.length + ' Abschnitte, ' + faqs.length + ' Fragen)']);
   } finally { lock.releaseLock(); }
   return api_pages_();
 }
@@ -188,6 +213,11 @@ function api_pagesPublish_() {
       return {src: '/media/' + file, alt: ph.alt, w: m.w, h: m.h};
     }).filter(Boolean);
     if (photos.length) entry.photos = photos;
+    var plain = function (s) { return String(s).replace(/^'/, ''); };
+    if (p.sections.length) entry.sections = p.sections.map(function (x) {
+      return {heading: plain(x.heading), paragraphs: plain(x.text).split(/\n{2,}/).map(function (t) { return t.replace(/\n/g, ' ').trim(); }).filter(Boolean)};
+    });
+    if (p.faqs.length) entry.faqs = p.faqs.map(function (x) { return {q: plain(x.q), a: plain(x.a)}; });
     if (Object.keys(entry).length) out.pages[p.path] = entry;
   });
 
