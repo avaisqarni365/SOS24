@@ -1684,6 +1684,13 @@ export const CITY_PAGES: CityPage[] = [
     ],
     sections: [
       {
+        "heading": "Kellerabdichtung Remscheid: gegen Hangwasser und Dauerregen",
+        "paragraphs": [
+          "Eine Kellerabdichtung in Remscheid muss mehr aushalten als anderswo, denn es regnet hier oft und lange. Das Wasser sickert durch die dünne Bodenschicht, folgt den Klüften im Schiefer und in der Grauwacke und tritt genau an der Kellerwand aus. An den Hängen zur Wupper drückt es gegen die bergseitige Wand. In den Schieferhäusern von Lennep und Lüttringhausen steigt es zusätzlich im Bruchsteinsockel auf.",
+          "Wir dichten die Wand deshalb von innen mehrlagig ab: mit mineralischer Dichtungsschlämme auf der Fläche und einer Hohlkehle am Übergang zum Boden, wo das Wasser zuerst durchkommt. Im Bruchstein verfüllen wir vorher die Hohlräume und setzen eine Horizontalsperre per Injektion. Wasserführende Risse und Fugen verpressen wir. Welche Wände betroffen sind, zeigt die kostenlose Messung; aufgegraben wird nicht."
+        ]
+      },
+      {
         heading: "Lennep und Lüttringhausen: Schiefer, Fachwerk und Bruchsteinkeller",
         paragraphs: [
           "Die Altstadt von Lennep, Geburtsort von Wilhelm Conrad Röntgen, ist ein weitgehend geschlossen erhaltenes historisches Ensemble. Häuser in den bergischen Farben, mit schwarzem Schiefer, weißen Fenstern und grünen Läden, stehen dicht an dicht in engen Gassen. Auch in Lüttringhausen ist der alte Ortskern erhalten. Unter diesen Häusern liegen Keller aus Bruchstein, oft mit Gewölbe, die über Generationen als Vorratsräume dienten und heute als Werkstatt, Lager oder Hobbyraum genutzt werden sollen.",
@@ -1756,6 +1763,10 @@ export const CITY_PAGES: CityPage[] = [
       {
         "q": "Keller trockenlegen in Remscheid: Was ist nötig?",
         "a": "Auf den regenreichen Höhen bleiben Remscheider Keller lange nass, und durch klüftigen Fels läuft Wasser bis an die Wand. Wir messen kostenlos, ob die Feuchte aufsteigt oder von außen kommt. Dann setzen wir eine Horizontalsperre, im Bruchstein von Lennep und Lüttringhausen nach dem Verfüllen der Hohlräume, und dichten erdberührte Wände von innen ab. Aufgegraben wird nicht."
+      },
+      {
+        "q": "Kellerabdichtung in Remscheid: von innen oder von außen?",
+        "a": "Am Hang und auf Fels ist das Aufgraben in Remscheid aufwendig, und in den Ortskernen von Lennep und Lüttringhausen stehen die Häuser zu dicht dafür. Die Abdichtung von innen erreicht jede Kellerwand. Mehrlagig aufgebaut und mit einer Horizontalsperre verbunden, hält sie Bodenfeuchte und zeitweise drückendes Wasser ab. Ob das bei Ihrem Haus genügt, klären wir bei der kostenlosen Messung."
       }
     ],
     wiki: "https://de.wikipedia.org/wiki/Remscheid",
@@ -1874,6 +1885,13 @@ export const CITY_PAGES: CityPage[] = [
     ],
     sections: [
       {
+        "heading": "Kellerabdichtung Velbert: von innen, passend zu Hang und Tal",
+        "paragraphs": [
+          "Eine Kellerabdichtung in Velbert muss zu der Stelle passen, an der das Haus steht. Auf dem Höhenrücken von Velbert-Mitte und in Tönisheide drückt nach Regen Sickerwasser gegen die bergseitige Wand. In den Tälern von Neviges und Langenberg steigt die Feuchte im Bruchstein von unten auf. Beides zeigt sich ähnlich, mit nassem Wandfuß und abplatzendem Putz, braucht aber verschiedene Abdichtungen.",
+          "Deshalb messen wir zuerst: die Feuchte in mehreren Höhen der Wand, die Salzbelastung und das Raumklima. Steigt die Feuchte auf, setzen wir eine Horizontalsperre per Injektion. Drückt Wasser von der Seite, dichten wir die Wandfläche mit mineralischer Dichtungsschlämme ab und formen am Übergang von Wand zu Boden eine Hohlkehle. Darauf kommt Sanierputz, der Salze aufnimmt. Alles geschieht von innen; Garten, Einfahrt und Terrasse bleiben, wie sie sind."
+        ]
+      },
+      {
         heading: "Neviges und Langenberg: historische Keller im Tal",
         paragraphs: [
           "Neviges ist vor allem durch den Mariendom bekannt, den markanten Betonbau von Gottfried Böhm. Rund um Schloss Hardenberg und im alten Ortskern stehen aber auch viele deutlich ältere Häuser. Noch geschlossener ist das historische Bild in Langenberg, wo sich Fachwerk- und Schieferhäuser im Deilbachtal aneinanderreihen. Die Keller dieser Häuser sind aus Bruchstein oder Ziegel gemauert, liegen häufig nah am Bach und wurden nie gegen Feuchte abgedichtet.",
@@ -1950,6 +1968,10 @@ export const CITY_PAGES: CityPage[] = [
       {
         "q": "Keller trockenlegen in Velbert: Geht das von innen?",
         "a": "Ja. In den historischen Ortskernen von Langenberg und Neviges steigt die Feuchte in Bruchsteinwänden auf; dort hilft eine Horizontalsperre, nachdem die Hohlräume verfüllt sind. An den Hängen in Velbert-Mitte und Tönisheide drückt Wasser seitlich; dort dichten wir die Wand von innen mit Dichtungsschlämme und Hohlkehle ab. Wir messen kostenlos, was Ihr Keller braucht."
+      },
+      {
+        "q": "Kellerabdichtung in Velbert: von innen oder von außen?",
+        "a": "Von außen abzudichten heißt, das Haus bis zur Kellersohle freizulegen. Am Hang in Velbert-Mitte und in den eng bebauten Ortskernen von Neviges und Langenberg ist das oft nicht möglich. Eine Abdichtung von innen hält Bodenfeuchte und zeitweise drückendes Wasser ab, wenn sie mehrlagig aufgebaut und mit einer Horizontalsperre verbunden ist. Welche Lösung bei Ihrem Haus trägt, zeigt die kostenlose Messung."
       }
     ],
     wiki: "https://de.wikipedia.org/wiki/Velbert",
@@ -2504,6 +2526,13 @@ export const CITY_PAGES: CityPage[] = [
     ],
     sections: [
       {
+        "heading": "Kellerabdichtung Essen: welche Abdichtung Ihr Keller braucht",
+        "paragraphs": [
+          "Kellerabdichtung ist in Essen kein einzelnes Verfahren, sondern die Antwort auf die Ursache. Im Gründerzeithaus in Rüttenscheid oder Holsterhausen steigt die Feuchte im Mauerwerk auf; dort hilft die Horizontalsperre. Im Essener Norden, in Karnap und Altenessen, steht das Grundwasser dicht unter der Kellersohle; dort muss die Abdichtung Wand, Boden und die Fuge dazwischen einschließen. In Werden und Kettwig drückt am Hang Sickerwasser gegen die bergseitige Wand.",
+          "Wir sitzen in Essen und messen bei Ihnen in der Regel innerhalb von 24 Stunden, kostenlos und unverbindlich. Danach wissen Sie, welche Wände betroffen sind und welches Verfahren passt: Horizontalsperre per Injektion, Innenabdichtung mit Dichtungsschlämme und Hohlkehle, Rissverpressung oder eine Verbindung davon. Abgedichtet wird von innen, ohne Aufgraben und zum Festpreis."
+        ]
+      },
+      {
         heading: "Bergsenkungen: warum so viele Essener Keller Risse haben",
         paragraphs: [
           "Essen ist mit dem Bergbau gewachsen, von den Stollen im Ruhrtal bis zu den großen Schachtanlagen im Norden. Wo unter Tage Kohle abgebaut wurde, hat sich das Gelände darüber gesenkt, nicht überall gleich, sondern in Mulden und Stufen. Ein Haus, das auf einer solchen Stufe steht, wird ungleichmäßig belastet: Die Bodenplatte reißt, an den Wandecken öffnen sich Fugen, im Beton entstehen Risse, die bis durch die Wand gehen.",
@@ -2638,6 +2667,10 @@ export const CITY_PAGES: CityPage[] = [
       {
         "q": "Keller trockenlegen in Essen: Welche Verfahren gibt es?",
         "a": "Gegen aufsteigende Feuchte, wie in den Altbauten in Rüttenscheid, Holsterhausen oder Frohnhausen, hilft eine Horizontalsperre per Injektion. Gegen Wasser von außen, im Norden an der Emscher oder im Süden an der Ruhr, hilft eine Innenabdichtung mit Hohlkehle. Wasserführende Bergsenkungsrisse verpressen wir. Welche Kombination Ihr Keller braucht, zeigt die kostenlose Messung."
+      },
+      {
+        "q": "Kellerabdichtung in Essen: Muss der ganze Keller abgedichtet werden?",
+        "a": "Nein, nicht immer. Wir dichten die Flächen ab, an denen die Messung Feuchte zeigt. Am Hang in Werden oder Kettwig ist das oft nur die bergseitige Wand, im Reihenhaus in Frohnhausen häufig die Außenwand zur Straße. Im Essener Norden mit hohem Grundwasser muss die Abdichtung dagegen rundum geschlossen sein. Das Angebot nennt genau die Flächen, die abgedichtet werden."
       }
     ],
     film: "kellersanierung",
@@ -3929,6 +3962,13 @@ export const CITY_PAGES: CityPage[] = [
     ],
     sections: [
       {
+        "heading": "Kellerabdichtung Gelsenkirchen: nasse Keller von innen abdichten",
+        "paragraphs": [
+          "Wer in Gelsenkirchen nach einer Kellerabdichtung sucht, hat meist einen nassen Keller und weiß noch nicht, warum. Drei Ursachen kommen hier häufig vor: Setzungsrisse aus der Bergbauzeit, durch die bei Regen Wasser kommt; aufsteigende Feuchte in den Ziegelkellern der Siedlungen in Bismarck, Hassel und Buer; und das Grundwasser zwischen Emscher und Rhein-Herne-Kanal, das dicht unter den Kellersohlen steht. Dazu kommt im Sommer Kondensat an kalten Wänden, das wie ein Wasserschaden aussieht, aber keine Abdichtung braucht.",
+          "Deshalb steht vor jeder Kellerabdichtung die Messung. Danach dichten wir gezielt von innen ab: Risse mit Injektionsharz, aufsteigende Feuchte mit einer Horizontalsperre, drückendes Wasser mit mehrlagiger Dichtungsschlämme und einer Hohlkehle an der Bodenfuge. Die Wände der Nachkriegshäuser in der Innenstadt, deren Bitumenanstrich außen spröde geworden ist, lassen sich so abdichten, ohne dass Gehweg oder Hof geöffnet werden."
+        ]
+      },
+      {
         heading: "Bergsenkungsrisse: erst prüfen, dann verpressen",
         paragraphs: [
           "Wo unter Tage Kohle abgebaut wurde, hat sich die Oberfläche gesenkt, nicht gleichmäßig, sondern in Mulden und Stufen. Ein Haus, das darauf steht, wird schief belastet, und im Keller zeigt sich das zuerst: Risse an den Wandecken, an Fenstern und quer durch die Bodenplatte. Solange sie trocken bleiben, sind viele davon harmlos.",
@@ -4030,6 +4070,10 @@ export const CITY_PAGES: CityPage[] = [
       {
         "q": "Keller trockenlegen in Gelsenkirchen: Was ist der erste Schritt?",
         "a": "Die Messung. Im Emschertal drückt oft Grundwasser, in den Zechenhäusern in Buer, Hassel oder Ückendorf steigt Feuchte im Ziegel auf, und Bergsenkungsrisse lassen nach Regen Wasser durch. Jede Ursache braucht ein anderes Verfahren: Innenabdichtung, Horizontalsperre oder Rissverpressung. Wir messen kostenlos und bieten dann genau die Kombination an, die Ihr Keller braucht."
+      },
+      {
+        "q": "Kellerabdichtung in Gelsenkirchen: von innen oder von außen?",
+        "a": "Von außen muss das Haus bis zur Kellersohle freigelegt werden. In Schalke, Ückendorf oder Bismarck stehen die Häuser dicht an Gehweg und Nachbarhaus; dort ist das kaum möglich. Die Abdichtung von innen erreicht alle Wände und die Bodenfuge. Mehrlagig aufgebaut und mit einer Horizontalsperre verbunden, hält sie Bodenfeuchte und zeitweise drückendes Wasser ab. Die kostenlose Messung zeigt, was Ihr Keller braucht."
       }
     ],
     nearby: ["essen", "bottrop", "bochum", "oberhausen", "dortmund", "gladbeck", "herten", "recklinghausen", "herne"],
@@ -4326,6 +4370,13 @@ export const CITY_PAGES: CityPage[] = [
     ],
     sections: [
       {
+        "heading": "Kellerabdichtung Mülheim an der Ruhr: am Hang anders als an der Ruhr",
+        "paragraphs": [
+          "Eine Kellerabdichtung in Mülheim an der Ruhr beginnt mit der Frage, von wo das Wasser kommt. An den Hängen von Saarn, Menden und Holthausen staut sich Sickerwasser an der bergseitigen Kellerwand. In Broich, Mintard und Styrum folgt das Grundwasser dem Pegel der Ruhr und steht bei Hochwasser an Bodenplatte und Wandfuß. In den Altbauten der Altstadt und in Speldorf steigt die Feuchte im Mauerwerk auf.",
+          "Am Hang dichten wir die betroffene Wand von innen mehrlagig mit Dichtungsschlämme ab und sichern den Anschluss zum Boden mit einer Hohlkehle. An der Ruhr beziehen wir die Bodenfuge mit ein, damit die Abdichtung auch zeitweise drückendem Wasser standhält. Im Altbau setzen wir zusätzlich eine Horizontalsperre per Injektion. Aufgegraben wird dafür nicht; Vorgarten und Pflaster bleiben unberührt."
+        ]
+      },
+      {
         heading: "Hangwasser in Saarn, Menden und Holthausen",
         paragraphs: [
           "Wer am Hang über der Ruhr wohnt, kennt das Bild: Die Wand zum Hang ist nass, die zum Tal trocken. Regen versickert oben, läuft im Boden abwärts und staut sich an der Kellerwand, die in den Hang hineingebaut ist. Bei Starkregen drückt das Wasser durch Fugen und am Wandfuß in den Keller.",
@@ -4427,6 +4478,10 @@ export const CITY_PAGES: CityPage[] = [
       {
         "q": "Keller trockenlegen in Mülheim: Was hilft am Hang in Saarn?",
         "a": "An den Hängen in Saarn, Menden und Holthausen drückt Schichtenwasser seitlich gegen die bergseitige Wand. Wir dichten sie von innen ab, mit Dichtungsschlämme in mehreren Lagen und einer Hohlkehle am Boden. In den Altbauten in Broich und Speldorf kommt oft eine Horizontalsperre gegen aufsteigende Feuchte dazu. Aufgegraben wird nicht, die Messung ist kostenlos."
+      },
+      {
+        "q": "Kellerabdichtung in Mülheim an der Ruhr: Reicht es, nur eine Wand abzudichten?",
+        "a": "Oft ja. Am Hang in Saarn oder Holthausen ist meist nur die bergseitige Wand nass; dann dichten wir diese Wand und ihren Anschluss an Boden und Nachbarwände ab. Steht das Haus in Broich oder Mintard im Grundwasserbereich der Ruhr, muss die Abdichtung rundum geschlossen sein. Die Messung zeigt, welche Wände betroffen sind, und das Angebot nennt genau diese Flächen."
       }
     ],
     nearby: ["essen", "oberhausen", "duisburg", "duesseldorf", "velbert", "gelsenkirchen", "bottrop"],
@@ -4897,6 +4952,13 @@ export const CITY_PAGES: CityPage[] = [
     ],
     sections: [
       {
+        "heading": "Kellerabdichtung Bottrop: was in Welheim, Eigen und Kirchhellen hilft",
+        "paragraphs": [
+          "Eine Kellerabdichtung in Bottrop sieht im Süden anders aus als im Norden. In Ebel und Welheim liegen die Kellersohlen nur knapp über dem Grundwasser, das dort mit Pumpen niedrig gehalten wird; die Abdichtung muss deshalb auch die Fuge zwischen Wand und Boden einschließen. In den Siedlungshäusern in Batenbrock, Boy und Eigen steigt die Feuchte im Ziegel auf. In Kirchhellen und Grafenwald sind es eher undichte Anschlüsse an der Bodenplatte.",
+          "Wir messen zuerst, welche dieser Ursachen bei Ihnen vorliegt, und dichten dann von innen ab: mit einer Horizontalsperre per Injektion, mit mineralischer Dichtungsschlämme und Hohlkehle am Wandfuß und mit der Rissverpressung, wenn ein Setzungsriss Wasser führt. Für die Arbeit muss weder der Garten aufgegraben noch die Einfahrt geöffnet werden."
+        ]
+      },
+      {
         heading: "Nach dem Bergbau: Risse, die Wasser führen",
         paragraphs: [
           "Als Prosper-Haniel 2018 schloss, endete die Kohle, nicht aber ihre Folgen. Wo unter Tage abgebaut wurde, hat sich die Oberfläche gesenkt, in Mulden und Stufen. Häuser darauf werden ungleich belastet, und im Keller zeigt sich das als Riss an Ecken, Fenstern und quer durch die Bodenplatte.",
@@ -4976,6 +5038,10 @@ export const CITY_PAGES: CityPage[] = [
       {
         "q": "Keller trockenlegen in Bottrop: Was hilft bei Setzungsrissen?",
         "a": "Führt ein Setzungsriss aus dem Bergbau Wasser, verpressen wir ihn mit PU-Harz, das im Riss aufschäumt und elastisch bleibt. Steigt in den Siedlungshäusern in Boy, Batenbrock oder Eigen zusätzlich Feuchte im Mauerwerk auf, setzen wir eine Horizontalsperre. Gegen Grundwasser im Süden an der Emscher dichten wir von innen ab. Die Messung vorab ist kostenlos."
+      },
+      {
+        "q": "Kellerabdichtung in Bottrop: von innen oder von außen?",
+        "a": "Von außen muss das Haus bis zur Kellersohle freigelegt werden. Bei den Reihenhäusern in Welheim, Batenbrock und Eigen ist das an den Wänden zum Nachbarn nicht möglich. Die Abdichtung von innen erreicht alle Wände und die Bodenfuge. Mehrlagig aufgebaut und mit einer Horizontalsperre verbunden, hält sie Bodenfeuchte und zeitweise drückendes Wasser ab. Die Messung zeigt, was Ihr Keller braucht."
       }
     ],
     nearby: ["gelsenkirchen", "oberhausen", "essen", "duisburg", "muelheim-an-der-ruhr", "gladbeck"],
@@ -5030,6 +5096,13 @@ export const CITY_PAGES: CityPage[] = [
       }
     ],
     "sections": [
+      {
+        "heading": "Kellerabdichtung Gladbeck: nasser Keller, feuchte Wände, Risse",
+        "paragraphs": [
+          "Wer in Gladbeck eine Kellerabdichtung sucht, hat meist eines von drei Problemen. Durch einen Riss aus der Bergbauzeit kommt bei Regen Wasser. Im Ziegelkeller eines Siedlungshauses in Brauck, Butendorf oder Zweckel steigt die Feuchte auf, der Putz platzt ab und Salze blühen aus. Oder das Wasser steht im tief liegenden Süden nach langem Regen nah an der Kellersohle und drückt durch die Fuge zwischen Wand und Boden.",
+          "Für jede Ursache gibt es ein eigenes Verfahren, und alle werden von innen ausgeführt. Risse verpressen wir mit Injektionsharz. Gegen aufsteigende Feuchte setzen wir eine Horizontalsperre per Injektion. Gegen seitlich drückendes Wasser dichten wir die Wand mit mineralischer Dichtungsschlämme ab und formen am Wandfuß eine Hohlkehle. Welches Verfahren Ihr Keller braucht, messen wir vorher, kostenlos und unverbindlich."
+        ]
+      },
       {
         "heading": "Brauck und Butendorf: Siedlungshäuser im Gladbecker Süden",
         "paragraphs": [
@@ -5095,6 +5168,18 @@ export const CITY_PAGES: CityPage[] = [
       {
         "q": "Ich wohne im Reihenhaus einer Zechensiedlung in Gladbeck. Muss der Nachbar mitmachen?",
         "a": "In der Regel nicht. Horizontalsperre und Innenabdichtung setzen wir nur in Ihrem Keller, auch an der Wand zum Nachbarhaus. Ist der Nachbarkeller ebenfalls nass, kann Feuchte über die gemeinsame Wand nachziehen; das sehen wir bei der Messung und sagen es Ihnen offen."
+      },
+      {
+        "q": "Kellerabdichtung oder Kellertrockenlegung: Was braucht ein Keller in Gladbeck?",
+        "a": "Beides gehört zusammen. Die Kellerabdichtung hält das Wasser ab: mit der Horizontalsperre gegen aufsteigende Feuchte, mit der Innenabdichtung gegen Wasser von der Seite, mit der Rissverpressung an undichten Rissen. Die Kellertrockenlegung ist das Ergebnis: Ist die Wand abgedichtet, trocknet das Mauerwerk aus, und der Sanierputz nimmt die Salze auf. Was in Ihrem Gladbecker Keller nötig ist, zeigt die Messung."
+      },
+      {
+        "q": "Nasser Keller und feuchte Wände in Gladbeck: Was tun?",
+        "a": "Zuerst Hausrat von der Wand rücken und Fotos machen, am besten gleich nach Regen. Wichtig ist, wo die Nässe sitzt: am Wandfuß, an einem Riss, an einer Rohrdurchführung oder flächig auf der kalten Wand. Daran und an den Messwerten erkennen wir, ob Feuchte aufsteigt, Wasser drückt oder Raumluft kondensiert. Erst dann lohnt sich eine Abdichtung. Die Messung in Gladbeck ist kostenlos."
+      },
+      {
+        "q": "Sanieren Sie auch Keller in Mehrfamilienhäusern und für Hausverwaltungen in Gladbeck?",
+        "a": "Ja. In Gladbeck-Mitte und in den Siedlungen arbeiten wir oft im bewohnten Haus. Die Kellerabteile werden abschnittsweise geräumt und abgedichtet, der Zugang zu Waschküche und Heizung bleibt frei. Hausverwaltungen bekommen ein Angebot zum Festpreis mit Messprotokoll und Fotos für die Eigentümerversammlung."
       }
     ],
     "localServices": [
@@ -5226,6 +5311,13 @@ export const CITY_PAGES: CityPage[] = [
     ],
     "sections": [
       {
+        "heading": "Kellerabdichtung Herten: feuchte Wände in Zechenhaus und Fachwerk",
+        "paragraphs": [
+          "In Herten hat fast jede Kellerabdichtung mit dem Bergbau zu tun. In den Siedlungshäusern in Disteln, Langenbochum und Scherlebeck steigt die Feuchte im Ziegel auf, weil die alte Sperrschicht nicht mehr wirkt. Durch Setzungsrisse in Wand und Bodenplatte kommt bei Regen Wasser. In Herten-Süd, am Rand des Emscherbruchs, steht das Grundwasser nah unter der Oberfläche und drückt nach langem Regen gegen Wand und Boden.",
+          "Wir dichten diese Keller von innen ab. Gegen aufsteigende Feuchte setzen wir eine Horizontalsperre per Injektion, wasserführende Risse verpressen wir mit Harz, und drückendes Wasser halten wir mit einer mehrlagigen Dichtungsschlämme und einer Hohlkehle am Wandfuß ab. Im Fachwerk von Westerholt arbeiten wir am Sockel besonders behutsam, damit das alte Mauerwerk weiter austrocknen kann. Vorher messen wir kostenlos, welche Ursache vorliegt."
+        ]
+      },
+      {
         "heading": "Nach der Zeche: Risse und nasse Keller in Disteln, Langenbochum und Scherlebeck",
         "paragraphs": [
           "Als Ewald und Schlägel & Eisen schlossen, endete die Förderung, nicht aber ihre Folgen. Wo unter Tage abgebaut wurde, hat sich die Oberfläche in Mulden und Stufen gesenkt. Häuser darauf werden ungleich belastet; im Keller zeigt sich das als Riss an Ecken, Fenstern und quer durch die Bodenplatte. Führt ein solcher Riss Wasser, reicht Zuspachteln nicht.",
@@ -5290,6 +5382,18 @@ export const CITY_PAGES: CityPage[] = [
       {
         "q": "Mein Keller in Herten riecht muffig, aber die Wände sehen trocken aus. Woran liegt das?",
         "a": "Oft steckt Feuchte im Mauerwerk, die man noch nicht sieht, oder es ist Kondensat: Im Sommer schlägt sich warme Luft an den kühlen Kellerwänden nieder. Steigt die Feuchte in der Wand auf, hilft eine Horizontalsperre; ist es Kondensat, helfen richtiges Lüften und Klimaplatten. Wir messen kostenlos und sagen Ihnen, was zutrifft."
+      },
+      {
+        "q": "Kellerabdichtung oder Kellertrockenlegung: Was braucht ein Keller in Herten?",
+        "a": "Die Kellerabdichtung ist die Arbeit, die Kellertrockenlegung das Ergebnis. Wir dichten ab, wo das Wasser hereinkommt: mit der Horizontalsperre gegen aufsteigende Feuchte, mit der Innenabdichtung gegen Wasser von der Seite, mit der Rissverpressung an Setzungsrissen. Danach trocknet das Mauerwerk aus, und der Sanierputz nimmt die Salze auf. Was Ihr Keller in Herten braucht, zeigt die Messung."
+      },
+      {
+        "q": "Nasser Keller und feuchte Wände in Herten: Was tun?",
+        "a": "Schauen Sie, wo die Nässe sitzt und wann sie kommt. Ein nasser Streifen am Wandfuß das ganze Jahr über spricht für aufsteigende Feuchte. Wasser an einem Riss nur nach Regen spricht für einen Setzungsriss. Nässe am Boden in Herten-Süd nach langen Regenphasen spricht für Grundwasser. Schicken Sie uns gern Fotos per WhatsApp; bei der kostenlosen Messung klären wir die Ursache vor Ort."
+      },
+      {
+        "q": "Kellerabdichtung in Herten: von innen oder von außen?",
+        "a": "Bei den Reihen- und Doppelhäusern der Hertener Zechensiedlungen kommt man von außen selten an alle Wände heran, und das Aufgraben zerstört Garten, Wege und Anbauten. Die Abdichtung von innen erreicht jede Kellerwand, auch die zum Nachbarn. Mehrlagig aufgebaut und mit einer Horizontalsperre verbunden, hält sie Bodenfeuchte und zeitweise drückendes Wasser ab."
       }
     ],
     "localServices": [
@@ -5433,6 +5537,13 @@ export const CITY_PAGES: CityPage[] = [
     ],
     "sections": [
       {
+        "heading": "Kellerabdichtung Recklinghausen: nasser Keller und feuchte Wände",
+        "paragraphs": [
+          "In Recklinghausen hängt die richtige Kellerabdichtung vom Viertel ab. Im Paulusviertel, im Nord- und im Ostviertel steigt die Feuchte in den Ziegelkellern der Altbauten auf, und Salze lassen den Putz abplatzen. In Hochlarmark, Grullbad und König-Ludwig kommt Wasser durch Setzungsrisse aus der Bergbauzeit. Im Süden, zum Rhein-Herne-Kanal hin, steht das Grundwasser nah unter der Oberfläche und drückt nach langem Regen gegen Wand und Boden.",
+          "Alle drei Ursachen lassen sich von innen beheben. Gegen aufsteigende Feuchte setzen wir eine Horizontalsperre per Injektion. Risse, die Wasser führen, verpressen wir mit Harz. Gegen drückendes Wasser dichten wir Wand und Bodenfuge mehrlagig mit Dichtungsschlämme ab und formen eine Hohlkehle. Zum Schluss kommt Sanierputz auf die Wand. Vorher messen wir kostenlos, welche Ursache in Ihrem Keller vorliegt."
+        ]
+      },
+      {
         "heading": "Paulusviertel, Nord- und Ostviertel: Altbaukeller rund um die Altstadt",
         "paragraphs": [
           "Rund um den alten Wallring stehen viele Mehrfamilienhäuser aus der Gründerzeit und den Jahrzehnten danach. Ihre Ziegelkeller wurden mit einer einfachen Sperrschicht oder ganz ohne gebaut. Heute steigt die Feuchte im Mauerwerk auf, an den Wänden zeigen sich weiße Salzränder, und der muffige Geruch zieht ins Treppenhaus.",
@@ -5497,6 +5608,18 @@ export const CITY_PAGES: CityPage[] = [
       {
         "q": "Mein Keller in Recklinghausen riecht muffig, aber die Wände sehen trocken aus. Woran liegt das?",
         "a": "Oft steckt Feuchte im Mauerwerk, die man noch nicht sieht, oder es ist Kondensat: Im Sommer schlägt sich warme Luft an den kühlen Kellerwänden nieder. Steigt die Feuchte in der Wand auf, hilft eine Horizontalsperre; ist es Kondensat, helfen richtiges Lüften und Klimaplatten. Wir messen kostenlos und sagen Ihnen, was zutrifft."
+      },
+      {
+        "q": "Kellerabdichtung oder Kellertrockenlegung: Was braucht ein Keller in Recklinghausen?",
+        "a": "Die Begriffe meinen zwei Seiten derselben Arbeit. Mit der Kellerabdichtung halten wir das Wasser ab: Horizontalsperre gegen aufsteigende Feuchte, Innenabdichtung gegen Wasser von der Seite, Rissverpressung an undichten Rissen. Die Kellertrockenlegung folgt daraus: Das Mauerwerk trocknet aus, der Sanierputz nimmt die Salze auf. Welche Schritte Ihr Keller in Recklinghausen braucht, zeigt die Messung."
+      },
+      {
+        "q": "Nasser Keller und feuchte Wände in Recklinghausen: Was tun?",
+        "a": "Achten Sie darauf, wo und wann die Wand nass ist. Ein feuchter Streifen am Wandfuß im Altbau rund um die Altstadt spricht für aufsteigende Feuchte. Wasser an einem Riss nach Regen spricht in Hochlarmark oder König-Ludwig für einen Setzungsriss. Feuchte auf der ganzen kalten Wand im Sommer ist oft Kondensat. Bei der kostenlosen Messung klären wir das vor Ort, bevor etwas abgedichtet wird."
+      },
+      {
+        "q": "Kellerabdichtung in Recklinghausen: von innen oder von außen?",
+        "a": "In der dichten Bebauung des Paulusviertels und in den Reihenhäusern der Zechensiedlungen im Süden kommt man von außen nicht an alle Kellerwände heran. Von innen erreichen wir jede Wand, auch die zum Nachbarhaus, ohne Vorgarten und Gehweg zu öffnen. Mehrlagig aufgebaut und mit einer Horizontalsperre verbunden, hält die Innenabdichtung Bodenfeuchte und zeitweise drückendes Wasser ab."
       }
     ],
     "localServices": [
