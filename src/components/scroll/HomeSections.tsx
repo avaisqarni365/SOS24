@@ -164,8 +164,67 @@ export function RegionSection() {
   );
 }
 
+/* ---------------------------------------------------------- home: Essen -- */
+/* The home page's title is "Abdichtung Essen"; this is the text that goes with
+   it: what we seal, from where, and the way into the service and town pages. */
+const ESSEN_BLOCKS: { title: string; text: string; href: string; link: string }[] = [
+  {
+    title: "Kellerabdichtung und Kellersanierung in Essen",
+    text: "Feuchte Kellerwände, Salzränder am Wandfuß, Wasser am Boden-Wand-Anschluss: In Essen sanieren wir Keller von innen, mit Horizontalsperre, Innenabdichtung und Sanierputz. Garten, Einfahrt und Pflaster bleiben, wie sie sind.",
+    href: "/kellersanierung/essen/",
+    link: "Kellersanierung Essen",
+  },
+  {
+    title: "Bauwerksabdichtung vom Sockel bis zum Dach",
+    text: "Abdichtung endet nicht im Keller. Wir dichten auch den Sockel gegen Spritzwasser ab, Balkone und Terrassen fugenlos mit Flüssigkunststoff und Flachdächer, Garagendächer und Dachterrassen mit verschweißten Bahnen.",
+    href: "/leistungen/",
+    link: "Alle neun Leistungen",
+  },
+  {
+    title: "Schimmelbeseitigung und Rissverpressung",
+    text: "Schimmel entfernen wir sporensicher und ohne Chlor, nachdem die Feuchtequelle gemessen ist. Wasserführende Risse in Beton und Mauerwerk schließen wir von innen per Injektion, ohne aufzugraben.",
+    href: "/leistungen/schimmelbeseitigung/",
+    link: "Schimmelbeseitigung",
+  },
+  {
+    title: "Erst messen, dann abdichten",
+    text: "Am Anfang steht immer die kostenlose Feuchtemessung vor Ort. Sie zeigt, woher das Wasser kommt und welche Abdichtung Ihr Haus wirklich braucht. Danach erhalten Sie ein schriftliches Festpreisangebot und 10 Jahre Garantie auf unsere Arbeit.",
+    href: "/leistungen/feuchtemessung/",
+    link: "Kostenlose Feuchtemessung",
+  },
+];
+
+export function EssenSection() {
+  return (
+    <section id="abdichtung-essen" className="sc-section" aria-labelledby="essen-title" data-sc-act="flow">
+      <div className="sc-wrap">
+        <p className="sc-label">Fachbetrieb aus Essen</p>
+        <h2 id="essen-title" className="sc-display mt-3">
+          Abdichtung in Essen <em>und im ganzen Ruhrgebiet.</em>
+        </h2>
+        <p className="sc-body">
+          {hy(
+            "sos-abdichtung ist ein Fachbetrieb für Abdichtung und Kellersanierung mit Sitz in Essen. Von hier aus arbeiten wir im Ruhrgebiet, im Bergischen Land und im Rheinland, für Hausbesitzer, Vermieter und Hausverwaltungen."
+          )}
+        </p>
+        <div className="mt-8 grid gap-x-10 gap-y-8 md:grid-cols-2">
+          {ESSEN_BLOCKS.map((b) => (
+            <div key={b.title}>
+              <h3 className="text-xl font-semibold leading-snug">{hy(b.title)}</h3>
+              <p className="mt-2 text-[1.0625rem] leading-normal text-[var(--ink-soft)]">{hy(b.text)}</p>
+              <a href={b.href} className="mt-3 inline-flex min-h-[44px] items-center font-semibold underline underline-offset-2">
+                {b.link} <span aria-hidden="true" className="ml-1">→</span>
+              </a>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 /* ------------------------------------------------------------------ faq -- */
-export function FaqSection() {
+export function FaqSection({ faqs = FAQS }: { faqs?: { q: string; a: string }[] }) {
   return (
     <section id="faq" className="sc-section" aria-labelledby="faq-title" data-sc-act="flow">
       <div className="sc-wrap faq-layout">
@@ -195,7 +254,7 @@ export function FaqSection() {
             </div>
           </div>
         </div>
-        <FaqCards faqs={FAQS} />
+        <FaqCards faqs={faqs} />
       </div>
     </section>
   );

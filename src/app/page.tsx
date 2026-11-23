@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Navbar from "@/components/sections/Navbar";
 import Footer from "@/components/sections/Footer";
 import Hero from "@/components/scroll/Hero";
-import { ServicesRail, RegionSection } from "@/components/scroll/HomeSections";
+import { ServicesRail, RegionSection, EssenSection, FaqSection } from "@/components/scroll/HomeSections";
 import MoreLinks from "@/components/sections/MoreLinks";
 import SiteFeed from "@/components/sections/SiteFeed";
 import HomeSteps from "@/components/sections/HomeSteps";
@@ -11,7 +11,8 @@ import ScrollSectionRail from "@/components/navigation/ScrollSectionRail";
 import ScrollEngine, { SC_BOOT } from "@/components/scroll/ScrollEngine";
 import JsonLd from "@/components/seo/JsonLd";
 import { SERVICE_CARDS } from "@/data/services";
-import { SITE_URL, BUSINESS_ID, WEBSITE_ID, abs, businessNode, websiteNode, breadcrumbNode, OG_IMAGE } from "@/lib/site";
+import { HOME_FAQS } from "@/data/content-data";
+import { SITE_URL, BUSINESS_ID, WEBSITE_ID, abs, businessNode, websiteNode, breadcrumbNode, faqNode, OG_IMAGE } from "@/lib/site";
 
 const TITLE = "Abdichtung Essen & Kellersanierung NRW | sos-abdichtung";
 const DESCRIPTION =
@@ -50,6 +51,7 @@ export default function Home() {
         name: s.title,
       })),
     },
+    faqNode(HOME_FAQS),
   ];
 
   return (
@@ -64,8 +66,9 @@ export default function Home() {
           the services and one row of links to the detail pages, the four
           steps from the call to the dry wall, the service area with every
           city page (the page ranks for "Kellersanierung Wuppertal", so the
-          area belongs here too), then the booking. The contact form has its
-          own page (/kontakt/). Who we work for and the FAQ live on
+          area belongs here too), the text for "Abdichtung Essen" and the home
+          page's own five questions, then the booking. The contact form has its
+          own page (/kontakt/). Who we work for and the general FAQ live on
           /leistungen/, the team in the Galerie, the process and the proof in
           the Scientific Lab. */}
       <main id="main" className="home">
@@ -74,6 +77,8 @@ export default function Home() {
         <MoreLinks />
         <HomeSteps />
         <RegionSection />
+        <EssenSection />
+        <FaqSection faqs={HOME_FAQS} />
         <SiteFeed />
         <OnlineAppointmentBooking />
       </main>
