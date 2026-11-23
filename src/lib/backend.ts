@@ -140,242 +140,14 @@ export interface LeadSubmissionResponse {
   error?: string;
 }
 
-const DEFAULT_LEADS: WorkspaceLead[] = [
-  {
-    id: 'A-1001',
-    received: '16.10.2026, 08:45',
-    status: 'Neu',
-    owner: 'Shahzad Mahmood',
-    name: 'Familie Thomas Berger',
-    phone: '+49 172 2064177',
-    email: 'berger@beispiel.de',
-    address: 'Friedrich-Ebert-Str. 40, 42103 Wuppertal',
-    damageType: 'Aufsteigende Feuchte / Horizontalsperre',
-    area: '14 lfm · 22 m²',
-    date: '2026-10-22',
-    notes: 'Altbau Bj. 1928, Ziegelmauerwerk 36,5 cm, Salzausblühungen an Nordwand.',
-    message:
-      'Putz blättert im Keller bis 60 cm Höhe ab, muffiger Geruch. Bitte um kostenlose Feuchtemessung.',
-    source: 'Kontaktformular (/kontakt/)',
-    photosDriveUrl: 'https://drive.google.com/drive/u/0/my-drive',
-    photos: [
-      {
-        name: 'A-1001_Kellerwand_Nord_Salzausbluehung.webp',
-        dataUrl: '/img/gallery/schimmel-ausbluehungen-480.webp',
-        uploadedAt: '16.10.2026, 08:46 Uhr',
-        driveFolder: 'SOS Abdichtung - Schadensfotos / A-1001',
-        fileType: 'image',
-      },
-      {
-        name: 'A-1001_Horizontalsperre_Bohrlochinjektion.webp',
-        dataUrl: '/img/gallery/bohrung-injektion.webp',
-        uploadedAt: '16.10.2026, 08:46 Uhr',
-        driveFolder: 'SOS Abdichtung - Schadensfotos / A-1001',
-        fileType: 'image',
-      },
-      {
-        name: 'A-1001_Feuchte_Kellerwand_Sockel.webp',
-        dataUrl: '/img/gallery/feuchterand-sockel-480.webp',
-        uploadedAt: '16.10.2026, 08:50 Uhr',
-        driveFolder: 'SOS Abdichtung - Schadensfotos / A-1001',
-        fileType: 'image',
-      },
-    ],
-    sigDriveUrl: 'https://drive.google.com/drive/u/0/my-drive',
-    signedBy: 'Thomas Berger',
-    signedAt: '16.10.2026, 09:15 Uhr',
-    token: '9f8e7d6c5b4a32109f8e7d6c5b4a3210',
-    handover: { moisture: true, salts: true, foil: true },
-    handoverNote: 'CM-Messung: 4,1 % Restfeuchte, Bohrlochraster 12 cm einplanen.',
-    lines: [
-      {
-        pos: 'Feuchte- & Salzanalyse vor Ort',
-        basis: 'Kapazitive Messung & Sanierungskonzept',
-        qty: 1,
-        unit: 'Pausch.',
-        price: 0,
-        labour: true,
-      },
-      {
-        pos: 'Nachträgliche Horizontalsperre (WTA-Injektion)',
-        basis: '36,5 cm Ziegelmauerwerk, Silan-Creme',
-        qty: 14,
-        unit: 'lfm',
-        price: 135,
-        labour: true,
-      },
-      {
-        pos: 'WTA-Sanierputzsystem (Porenputz)',
-        basis: 'Salzspeichernder Sanierputz inkl. Voranstrich',
-        qty: 14,
-        unit: 'm²',
-        price: 85,
-        labour: true,
-      },
-      {
-        pos: 'Anfahrt & Baustelleneinrichtung',
-        basis: '42103 Wuppertal-Elberfeld',
-        qty: 1,
-        unit: 'Pausch.',
-        price: 89,
-        labour: true,
-      },
-    ],
-  },
-  {
-    id: 'A-1002',
-    received: '16.10.2026, 09:30',
-    status: 'Angebot raus',
-    owner: 'Shahzad Mahmood',
-    name: 'Hausverwaltung Rhein-Wupper GmbH',
-    phone: '+49 202 5551234',
-    email: 'verwaltung@rhein-wupper.de',
-    address: 'Kölner Str. 88, 42651 Solingen',
-    damageType: 'Schimmelbefall / Klimaplatte',
-    area: '16 m²',
-    date: '2026-10-25',
-    notes: 'EG-Wohnung Schlafzimmer Außenwand, Taupunktunterschreitung an Wärmebrücke.',
-    message: 'Mieter meldet wiederkehrenden Schimmel in den Außenecken.',
-    source: 'Kontaktformular (/kontakt/)',
-    photosDriveUrl: 'https://drive.google.com/drive/u/0/my-drive',
-    photos: [
-      {
-        name: 'A-1002_Aussenecke_Schimmelbefall.webp',
-        dataUrl: '/img/sp/schimmel-raumecke-320.webp',
-        uploadedAt: '16.10.2026, 09:31 Uhr',
-        driveFolder: 'SOS Abdichtung - Schadensfotos / A-1002',
-        fileType: 'image',
-      },
-      {
-        name: 'A-1002_Wasserrand_Tapete.webp',
-        dataUrl: '/img/sp/schimmel-wasserrand-wand-320.webp',
-        uploadedAt: '16.10.2026, 09:32 Uhr',
-        driveFolder: 'SOS Abdichtung - Schadensfotos / A-1002',
-        fileType: 'image',
-      },
-      {
-        name: 'A-1002_Sanierputz_Vorbereitung.webp',
-        dataUrl: '/img/sp/sanierputz-spachteln-320.webp',
-        uploadedAt: '16.10.2026, 09:35 Uhr',
-        driveFolder: 'SOS Abdichtung - Schadensfotos / A-1002',
-        fileType: 'image',
-      },
-    ],
-    token: '1a2b3c4d5e6f7a8b9c0d1e2f3a4b5c6d',
-    handover: { moisture: true },
-    handoverNote: 'Oberflächentemperatur Ecke 11,4 °C bei 20 °C Raumluft.',
-    lines: [
-      {
-        pos: 'Sporensichere Schimmelbeseitigung',
-        basis: 'Tiefendesinfektion ohne Chlorbelastung',
-        qty: 16,
-        unit: 'm²',
-        price: 65,
-        labour: true,
-      },
-      {
-        pos: 'Calciumsilikat-Klimaplatte (25 mm)',
-        basis: 'Kapillaraktive Innendämmung inkl. Spezialkleber',
-        qty: 16,
-        unit: 'm²',
-        price: 110,
-        labour: true,
-      },
-      {
-        pos: 'Anfahrt & Baustelleneinrichtung',
-        basis: '42651 Solingen',
-        qty: 1,
-        unit: 'Pausch.',
-        price: 89,
-        labour: true,
-      },
-    ],
-  },
-];
-
-const DEFAULT_DOCS: WorkspaceGoBDDoc[] = [
-  {
-    nr: 'ANG-2026-0001',
-    type: 'offer',
-    typeLabel: 'Angebot',
-    leadId: 'A-1001',
-    name: 'Familie Thomas Berger',
-    address: 'Friedrich-Ebert-Str. 40, 42103 Wuppertal',
-    email: 'berger@beispiel.de',
-    phone: '+49 172 2064177',
-    service: 'Horizontalsperre & WTA-Sanierputz (Keller Nordwand)',
-    date: '2026-10-16',
-    dueOrValid: '2026-10-30',
-    status: 'Versendet',
-    vatRate: 19,
-    discountPct: 0,
-    driveFolder: 'SOS Abdichtung - Belege / 2026',
-    lines: DEFAULT_LEADS[0].lines,
-  },
-  {
-    nr: 'RE-2026-0001',
-    type: 'invoice',
-    typeLabel: 'Rechnung',
-    leadId: 'A-1001',
-    name: 'Familie Thomas Berger',
-    address: 'Friedrich-Ebert-Str. 40, 42103 Wuppertal',
-    email: 'berger@beispiel.de',
-    phone: '+49 172 2064177',
-    service: 'Horizontalsperre & WTA-Sanierputz (Keller Nordwand)',
-    date: '2026-10-16',
-    dueOrValid: '2026-10-30',
-    status: 'Offen',
-    vatRate: 19,
-    discountPct: 0,
-    driveFolder: 'SOS Abdichtung - Belege / 2026',
-    lines: DEFAULT_LEADS[0].lines,
-  },
-  {
-    nr: 'ANG-2026-0002',
-    type: 'offer',
-    typeLabel: 'Angebot',
-    leadId: 'A-1002',
-    name: 'Hausverwaltung Rhein-Wupper GmbH',
-    address: 'Kölner Str. 88, 42651 Solingen',
-    email: 'verwaltung@rhein-wupper.de',
-    phone: '+49 202 5551234',
-    service: 'Schimmelbeseitigung & Calciumsilikat-Klimaplatte',
-    date: '2026-10-16',
-    dueOrValid: '2026-10-30',
-    status: 'Versendet',
-    vatRate: 19,
-    discountPct: 0,
-    driveFolder: 'SOS Abdichtung - Belege / 2026',
-    lines: DEFAULT_LEADS[1].lines,
-  },
-];
-
-const DEFAULT_APPOINTMENTS: WorkspaceAppointment[] = [
-  {
-    nr: 'T-1001',
-    leadId: 'A-1001',
-    date: '2026-10-22',
-    time: '10:00',
-    type: 'Vor-Ort-Feuchtigkeitsmessung',
-    name: 'Familie Thomas Berger',
-    phone: '+49 172 2064177',
-    address: 'Friedrich-Ebert-Str. 40, 42103 Wuppertal',
-    damageType: 'Aufsteigende Feuchte / Horizontalsperre',
-    status: 'Im Kalender bestätigt',
-  },
-  {
-    nr: 'T-1002',
-    leadId: 'A-1002',
-    date: '2026-10-25',
-    time: '14:00',
-    type: 'Taupunkt- & Schimmelanalyse',
-    name: 'Hausverwaltung Rhein-Wupper GmbH',
-    phone: '+49 202 5551234',
-    address: 'Kölner Str. 88, 42651 Solingen',
-    damageType: 'Schimmelbefall / Klimaplatte',
-    status: 'Im Kalender bestätigt',
-  },
-];
+/* The admin starts empty: every list comes from the Google Sheet. Earlier versions shipped
+   sample enquiries, documents and appointments and saved them into the browser; those are
+   removed from the stored copy when it is read. */
+const SAMPLE_NAMES = ['Familie Thomas Berger', 'Hausverwaltung Rhein-Wupper GmbH'];
+const SAMPLE_EMAILS = ['berger@beispiel.de', 'verwaltung@rhein-wupper.de'];
+const notSample = (x: { name?: string; email?: string }) =>
+  !SAMPLE_NAMES.includes(x.name || '') && !SAMPLE_EMAILS.includes(x.email || '');
+const emptyStore = (): WorkspaceState => ({ leads: [], docs: [], appointments: [] });
 
 function buildDefaultLinesForDamage(damageType: string, areaNum: number): QuoteLineItem[] {
   const qty = Math.max(1, areaNum || 15);
@@ -447,34 +219,22 @@ function sanitizeStoredPhoto(ph: StoredDrivePhoto, leadId: string): StoredDriveP
 }
 
 export function getWorkspaceStore(): WorkspaceState {
-  if (typeof window === 'undefined') {
-    return { leads: DEFAULT_LEADS, docs: DEFAULT_DOCS, appointments: DEFAULT_APPOINTMENTS };
-  }
+  if (typeof window === 'undefined') return emptyStore();
   try {
     const raw = window.localStorage.getItem(WORKSPACE_STORAGE_KEY);
-    if (!raw) {
-      const init = { leads: DEFAULT_LEADS, docs: DEFAULT_DOCS, appointments: DEFAULT_APPOINTMENTS };
-      window.localStorage.setItem(WORKSPACE_STORAGE_KEY, JSON.stringify(init));
-      return init;
-    }
+    if (!raw) return emptyStore();
     const parsed = JSON.parse(raw) as WorkspaceState;
-    if (!Array.isArray(parsed.leads) || parsed.leads.length === 0) {
-      return { leads: DEFAULT_LEADS, docs: DEFAULT_DOCS, appointments: DEFAULT_APPOINTMENTS };
-    }
-    const sanitizedLeads = parsed.leads.map((l) => ({
+    const leads = (Array.isArray(parsed.leads) ? parsed.leads : []).filter(notSample).map((l) => ({
       ...l,
       photos: (l.photos || []).map((ph) => sanitizeStoredPhoto(ph, l.id)),
     }));
     return {
-      leads: sanitizedLeads,
-      docs: Array.isArray(parsed.docs) && parsed.docs.length > 0 ? parsed.docs : DEFAULT_DOCS,
-      appointments:
-        Array.isArray(parsed.appointments) && parsed.appointments.length > 0
-          ? parsed.appointments
-          : DEFAULT_APPOINTMENTS,
+      leads,
+      docs: (Array.isArray(parsed.docs) ? parsed.docs : []).filter(notSample),
+      appointments: (Array.isArray(parsed.appointments) ? parsed.appointments : []).filter(notSample),
     };
   } catch {
-    return { leads: DEFAULT_LEADS, docs: DEFAULT_DOCS, appointments: DEFAULT_APPOINTMENTS };
+    return emptyStore();
   }
 }
 
