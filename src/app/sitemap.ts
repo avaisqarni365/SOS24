@@ -37,6 +37,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     ...JOB_ROLES.map((r) => ({ url: abs(`/jobs/${r.slug}/`), lastModified: new Date("2026-11-21"), changeFrequency: "weekly" as const, priority: 0.7 })),
     ...CITY_PAGES.map((c) => ({ url: abs(`/jobs/${c.slug}/`), lastModified: new Date("2026-11-21"), changeFrequency: "monthly" as const, priority: 0.5 })),
     { url: abs("/kostenrechner/"), lastModified, changeFrequency: "monthly", priority: 0.7 },
+    { url: abs("/bewertung/"), lastModified: new Date("2026-11-23"), changeFrequency: "yearly", priority: 0.3 },
     { url: abs("/termin/"), lastModified, changeFrequency: "monthly", priority: 0.9 },
     { url: abs("/kontakt/"), lastModified, changeFrequency: "yearly", priority: 0.8 },
     { url: abs("/impressum/"), lastModified, changeFrequency: "yearly", priority: 0.2 },

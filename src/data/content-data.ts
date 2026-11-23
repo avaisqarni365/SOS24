@@ -21,6 +21,8 @@ export const COMPANY_INFO = {
   phoneDisplay: "+49 (0)172 2064177",
   phoneTel: "+491722064177",
   email: "info@sos-abdichtung.de",
+  // "write a review" on the Essen Google profile (the same link as on the printed card)
+  reviewUrl: "https://g.page/r/CQzHYAe67UCTEBM/review",
   whatsappUrl: "https://wa.me/491722064177?text=Hallo%20Herr%20Mahmood%2C%20ich%20habe%20ein%20Feuchtigkeitsproblem%20in%20meinem%20Geb%C3%A4ude%20im%20Raum%20Wuppertal%20(PLZ%2042)%20und%20w%C3%BCnsche%20eine%20kostenlose%20Beratung.",
   certifications: [
     { label: "Geschult bei SchimmelPeter®", desc: "Ausbildung in den SchimmelPeter-Schulungszentren, mehrmals jährlich Weiterbildung" },

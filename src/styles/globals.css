@@ -9442,6 +9442,11 @@ html[data-theme="dark"] .pg__have { color: #b8c4d3; }
 .td__list li > div { display: grid; gap: 0.15rem; min-width: 0; }
 .td__list strong { color: #071628; }
 .td__list span { font-size: 0.9rem; color: #3b4a5e; overflow-wrap: anywhere; }
+.rv__form { display: grid; gap: 0.7rem; grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr)); }
+.rv__form label { display: grid; gap: 0.3rem; font-size: 0.85rem; font-weight: 700; color: #24384f; }
+.rv__form input { min-height: 44px; padding: 0.5rem 0.75rem; border: 1px solid rgb(var(--c-line) / 0.25); border-radius: 12px; font: inherit; font-weight: 500; background: #ffffff; color: #071628; }
+html[data-theme="dark"] .rv__form label { color: #d7e0ea; }
+html[data-theme="dark"] .rv__form input { background: #0c131b; border-color: rgb(255 255 255 / 0.2); color: #f2f6fb; }
 .rv__head { display: flex; flex-wrap: wrap; align-items: flex-start; justify-content: space-between; gap: 0.5rem 1rem; }
 .rv__head h3 { margin: 0; font-size: 1.05rem; font-weight: 800; color: #071628; }
 .rv__head h3 small { font-weight: 600; font-size: 0.8rem; color: #5b6b80; margin-left: 0.35rem; }

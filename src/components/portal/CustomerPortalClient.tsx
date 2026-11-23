@@ -333,6 +333,26 @@ function CustomerPortalInner() {
               </div>
             </div>
 
+            {/* Finished job: every customer gets the same invitation, nothing is offered in return */}
+            {lead?.status === 'Erledigt' && (
+              <div className="bg-white border border-emerald-300 rounded-2xl p-6 shadow-xs flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                <div>
+                  <h2 className="text-lg font-extrabold text-slate-900">Ihre Sanierung ist abgeschlossen. Vielen Dank für Ihr Vertrauen!</h2>
+                  <p className="mt-1 text-sm text-slate-700">
+                    Ihre ehrliche Bewertung bei Google hilft anderen Hausbesitzern bei der Suche. Sie dauert etwa eine Minute.
+                  </p>
+                </div>
+                <a
+                  href={COMPANY_INFO.reviewUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex min-h-[48px] shrink-0 items-center justify-center rounded-full bg-emerald-700 px-6 text-sm font-bold text-white hover:bg-emerald-800"
+                >
+                  Bei Google bewerten
+                </a>
+              </div>
+            )}
+
             {/* Main Content Grid: Left (Offer, Details, Sign) & Right (Photos, Appointment, Calendar) */}
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
               {/* Left Column (8 cols): Offer & Invoicing Engine + E-Sign */}

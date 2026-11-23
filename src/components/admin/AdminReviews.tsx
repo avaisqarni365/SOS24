@@ -42,6 +42,9 @@ export default function AdminReviews({ t, onSessionEnd }: { t: T; onSessionEnd: 
   const [busy, setBusy] = useState("");
   const [copied, setCopied] = useState("");
   const [shown, setShown] = useState("");
+  // a customer from before the admin: not in the list, so the owner types name, mobile, town and job
+  const [past, setPast] = useState({ name: "", phone: "", plz: "", town: "", service: "" });
+  const [draft, setDraft] = useState<{ text: string; wa: string } | null>(null);
 
   useEffect(() => {
     adminCall<State>("api_reviews").then((r) => (r.ok ? setData(r.data) : r.error === "login" ? onSessionEnd() : setErr(r.error)));
@@ -53,6 +56,16 @@ export default function AdminReviews({ t, onSessionEnd }: { t: T; onSessionEnd: 
     const r = await adminCall<State>("api_reviewMark", x.id, field, on);
     setBusy("");
     if (r.ok) setData(r.data);
+    else if (r.error === "login") onSessionEnd();
+    else setErr(r.error);
+  };
+  const makeDraft = async () => {
+    setBusy("draft");
+    setErr("");
+    setDraft(null);
+    const r = await adminCall<{ text: string; wa: string }>("api_reviewDraft", past.name, past.phone, `${past.plz} ${past.town}`.trim(), past.service);
+    setBusy("");
+    if (r.ok) setDraft(r.data);
     else if (r.error === "login") onSessionEnd();
     else setErr(r.error);
   };
@@ -111,6 +124,60 @@ export default function AdminReviews({ t, onSessionEnd }: { t: T; onSessionEnd: 
         </a>
       </div>
       {err && <p className="at__err" role="alert">{err}</p>}
+      <section className="at__card rv__card" aria-labelledby="rv-past-title">
+        <div className="rv__head">
+          <div>
+            <h3 id="rv-past-title">{t("Früheren Kunden fragen", "Ask a past customer")}</h3>
+            <p>
+              {t(
+                "Für Kunden, die nicht in den Anfragen stehen, zum Beispiel Aufträge aus den letzten Jahren. Sie bekommen dieselbe Nachricht mit Ort, Leistung und Bewertungslink. Gespeichert wird nichts.",
+                "For customers who are not in the inquiries, for example jobs from the last years. They get the same message with town, service and review link. Nothing is stored."
+              )}
+            </p>
+          </div>
+        </div>
+        <div className="rv__form">
+          <label>
+            {t("Anrede und Name", "Salutation and name")}
+            <input value={past.name} placeholder="Herr Schmidt" autoComplete="off" onChange={(e) => setPast({ ...past, name: e.target.value })} />
+          </label>
+          <label>
+            {t("Mobilnummer", "Mobile number")}
+            <input value={past.phone} placeholder="0171 2345678" inputMode="tel" autoComplete="off" onChange={(e) => setPast({ ...past, phone: e.target.value })} />
+          </label>
+          <label>
+            {t("PLZ", "Postcode")}
+            <input value={past.plz} placeholder="45144" inputMode="numeric" maxLength={5} autoComplete="off" onChange={(e) => setPast({ ...past, plz: e.target.value })} />
+          </label>
+          <label>
+            {t("Ort", "Town")}
+            <input value={past.town} placeholder="Essen" autoComplete="off" onChange={(e) => setPast({ ...past, town: e.target.value })} />
+          </label>
+          <label>
+            {t("Was wurde gemacht?", "What was done?")}
+            <input value={past.service} placeholder="Kellerabdichtung von innen" autoComplete="off" onChange={(e) => setPast({ ...past, service: e.target.value })} />
+          </label>
+        </div>
+        <div className="dw__acts">
+          <button type="button" className="at__btn" disabled={busy === "draft" || past.name.trim().length < 2} onClick={makeDraft}>
+            {busy === "draft" ? t("Erstelle …", "Creating …") : t("Nachricht erstellen", "Create message")}
+          </button>
+          {draft &&
+            (draft.wa ? (
+              <a className="btn-shine at__new" href={draft.wa} target="_blank" rel="noopener noreferrer">
+                <MessageCircle aria-hidden="true" /> {t("WhatsApp mit Text öffnen", "Open WhatsApp with text")}
+              </a>
+            ) : (
+              <span className="pg__hint">{t("Ohne Mobilnummer: Text kopieren und per E-Mail oder SMS senden.", "Without a mobile number: copy the text and send it by e-mail or SMS.")}</span>
+            ))}
+          {draft && (
+            <button type="button" className="at__btn" onClick={() => copy("draft", draft.text)}>
+              {copied === "draft" ? <Check aria-hidden="true" /> : <Copy aria-hidden="true" />} {copied === "draft" ? t("Kopiert", "Copied") : t("Text kopieren", "Copy text")}
+            </button>
+          )}
+        </div>
+        {draft && <pre className="rv__text">{draft.text}</pre>}
+      </section>
       {rows.length === 0 && (
         <p className="at__empty">
           {data.items.length === 0

@@ -108,6 +108,7 @@ export default function Footer() {
             <p>
               © 2026 sos-abdichtung · Inh. {COMPANY_INFO.owner} · <a href="/impressum/">Impressum</a> ·{" "}
               <a href="/datenschutz/">Datenschutz</a> · <ConsentSettingsLink /> · <a href="/mein-auftrag/">Mein Auftrag</a> ·{" "}
+              <a href="/bewertung/">Bewertung schreiben</a> ·{" "}
               <a href="/admin/">Mitarbeiter-Login</a>
             </p>
             <p>
