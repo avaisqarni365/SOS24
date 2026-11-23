@@ -57,7 +57,7 @@ export const SERVICE_PAGES: ServicePage[] = [
     serviceName: "Kellersanierung von innen (ohne Aufgraben)",
     navTitle: "Kellersanierung",
     keyword: "Feuchte Kellerwände sanieren",
-    title: "Feuchte Kellerwände sanieren | Kellersanierung von innen",
+    title: "Kellersanierung von innen | Feuchte Kellerwände sanieren",
     metaDescription:
       "Feuchte Kellerwände sanieren ohne Aufgraben: Ursache messen, Keller von innen trockenlegen, Festpreis, 10 Jahre Garantie auf die Arbeit. Messung kostenlos.",
     h1: "Feuchte Kellerwände sanieren: den Keller von innen trockenlegen, ohne Aufgraben",
@@ -149,6 +149,19 @@ export const SERVICE_PAGES: ServicePage[] = [
           "Welche dieser Arbeiten Ihr Keller braucht, lässt sich nicht am Telefon sagen. Als Fachbetrieb messen wir deshalb zuerst, kostenlos, in mehreren Höhen und an mehreren Wänden, und erst aus dem Ergebnis entsteht das Angebot."
         ]
       },
+      {
+        "heading": "Wovon die Kosten einer Kellersanierung abhängen",
+        "paragraphs": [
+          "Was es kostet, feuchte Kellerwände zu sanieren, hängt weniger von der Größe des Kellers ab als von der Ursache. Braucht nur eine Wand eine Horizontalsperre, ist der Aufwand ein anderer als bei drückendem Wasser an drei Seiten mit Hohlkehle, Dichtungsschlämme und Rissverpressung. Dazu kommen der Wandbaustoff, die Mauerstärke, der Salzgehalt im alten Putz und die Frage, ob der Keller danach nur trocken sein oder als Hobbyraum genutzt werden soll.",
+          "Darum steht bei uns vor jedem Preis die Messung. Sie zeigt, welche Wand welche Maßnahme braucht, und ebenso, welche Arbeiten Sie sich sparen können. Das Festpreisangebot führt die Wände und Arbeitsschritte einzeln auf, damit Sie Angebote vergleichen und die Sanierung bei Bedarf in Abschnitten ausführen lassen können.",
+        ],
+        "bullets": [
+          "Ursache: aufsteigende Feuchte, seitlich eindringendes Wasser, Risse oder Kondensat",
+          "Länge, Stärke und Baustoff der betroffenen Wände",
+          "Salzbelastung und Zustand des alten Putzes",
+          "Geplante Nutzung des Kellers nach der Sanierung",
+        ],
+      },
     ],
     steps: [
       {
@@ -214,11 +227,11 @@ export const SERVICE_PAGES: ServicePage[] = [
     slug: "horizontalsperre",
     serviceName: "Horizontalsperre im Injektionsverfahren",
     navTitle: "Horizontalsperre",
-    keyword: "Feuchte Wände trockenlegen",
-    title: "Feuchte Wände trockenlegen | Horizontalsperre per Injektion",
+    keyword: "Horizontalsperre nachträglich",
+    title: "Horizontalsperre nachträglich einbauen | Injektion von innen",
     metaDescription:
-      "Feuchte Wände trockenlegen ohne Aufgraben: Horizontalsperre per SchimmelPeter-Injektion, keine Vortrocknung, 10 Jahre Garantie auf die Arbeit.",
-    h1: "Feuchte Wände trockenlegen mit einer Horizontalsperre im Injektionsverfahren",
+      "Horizontalsperre nachträglich einbauen ohne Aufgraben: Injektionsverfahren gegen aufsteigende Feuchte, keine Vortrocknung, 10 Jahre Garantie auf die Arbeit.",
+    h1: "Horizontalsperre nachträglich einbauen: feuchte Wände trockenlegen im Injektionsverfahren",
     lede:
       "Steigt Feuchtigkeit aus dem Fundament im Mauerwerk auf, hilft kein Anstrich und kein neuer Putz. Mit der Injektion von SchimmelPeter erneuern wir eine defekte Horizontalsperre direkt in der Wand, ohne aufwendige Erdarbeiten und in der Regel ohne Vortrocknung.",
     symptoms: [
@@ -298,6 +311,25 @@ export const SERVICE_PAGES: ServicePage[] = [
           "Ausgeführt wird die Injektion von Mitarbeitern, die in den Schulungszentren von SchimmelPeter ausgebildet wurden und mehrmals im Jahr an Schulungen teilnehmen, um auf dem aktuellen Stand zu bleiben. Für die Wirksamkeit des Produkts gibt es 25 Jahre Produktgarantie des Herstellers SchimmelPeter GmbH. Unabhängig davon übernimmt sos-abdichtung 10 Jahre Garantie auf die ausgeführten Arbeiten. Beide Zusagen stehen nebeneinander und decken unterschiedliche Dinge ab: die eine das Produkt, die andere die handwerkliche Ausführung bei Ihnen vor Ort.",
         ],
       },
+      {
+        "heading": "Horizontalsperre nachträglich: Injektion, Mauersäge und Blech im Vergleich",
+        "paragraphs": [
+          "Für eine nachträgliche Horizontalsperre gibt es zwei Wege. Bei den mechanischen Verfahren wird die Wand abschnittsweise aufgesägt oder es werden gewellte Edelstahlbleche in eine Lagerfuge eingeschlagen. Das trennt das Mauerwerk vollständig, verlangt aber eine durchgehende Fuge, freien Zugang auf ganzer Länge und Rücksicht auf die Statik, weil die Wand beim Sägen kurzzeitig unterbrochen ist. In Bruchstein, in Mischmauerwerk und in Reihenhäusern mit gemeinsamer Wand scheidet dieser Weg meist aus.",
+          "Beim Injektionsverfahren bleibt die Wand ganz. Wir bohren eine Lochreihe, bringen das Injektionsmittel ein, und die Sperrschicht entsteht in den Poren des Baustoffs. Erschütterungen gibt es dabei kaum, gearbeitet wird vom Keller oder vom Raum aus, und unregelmäßiges Mauerwerk ist kein Hindernis. Entscheidend für die Wirkung sind der richtige Bohrlochabstand, die berechnete Menge und ein Mittel, das sich auch in nasser Wand verteilt. Deshalb steht die Messung des Durchfeuchtungsgrads immer vor der Injektion.",
+        ],
+        "bullets": [
+          "Mauersägeverfahren: vollständige Trennung, aber nur bei durchgehender Fuge und freiem Zugang",
+          "Edelstahlbleche: werden eingeschlagen, nicht für Bruchstein und dicke Wände geeignet",
+          "Injektionsverfahren: von innen, ohne Aufgraben, auch in unregelmäßigem Mauerwerk",
+        ],
+      },
+      {
+        "heading": "Wovon die Kosten einer nachträglichen Horizontalsperre abhängen",
+        "paragraphs": [
+          "Die Kosten einer nachträglichen Horizontalsperre ergeben sich aus wenigen Größen, die sich alle messen lassen: der Länge der betroffenen Wände, der Wandstärke, dem Baustoff und dem Durchfeuchtungsgrad. Eine dicke Bruchsteinwand braucht mehr Bohrungen und mehr Injektionsmittel als eine schlanke Ziegelwand. Hinzu kommt, was um die Sperre herum nötig ist: versalzenen Putz abnehmen, Sanierputz aufbringen und, wo Wasser auch seitlich eindringt, eine Innenabdichtung.",
+          "Einen Meterpreis am Telefon nennen wir deshalb nicht, denn er würde entweder zu hoch oder zu niedrig liegen. Nach der kostenlosen Messung erhalten Sie ein schriftliches Festpreisangebot, in dem die Wände, die Bohrlochreihen und die Putzarbeiten einzeln aufgeführt sind. Wer vorab eine Größenordnung sucht, kann den Kostenrechner auf dieser Website nutzen; verbindlich ist erst das Angebot nach der Messung.",
+        ],
+      },
     ],
     steps: [
       {
@@ -341,6 +373,22 @@ export const SERVICE_PAGES: ServicePage[] = [
       {
         "q": "Kann eine Horizontalsperre nachträglich eingebaut werden?",
         "a": "Ja, das ist der Normalfall. Bei Altbauten fehlt die Sperrschicht oft ganz oder ist zerfallen. Wir bohren knapp über dem Kellerboden eine Reihe Löcher in die Wand und füllen sie mit Injektionscreme, die im Mauerwerk eine neue Sperrschicht bildet. Das geht ohne Aufgraben und ohne Vortrocknung, in Ziegel ebenso wie in Bruchstein. Fachlich ist das die klassische Kellertrockenlegung."
+      },
+      {
+        "q": "Was kostet eine nachträgliche Horizontalsperre?",
+        "a": "Das hängt von der Länge und Stärke der Wände, vom Baustoff und vom Durchfeuchtungsgrad ab, dazu kommen Putzarbeiten. Einen pauschalen Meterpreis nennen wir nicht, weil er ohne Messung nicht stimmen kann. Nach der kostenlosen Feuchtemessung erhalten Sie ein schriftliches Festpreisangebot."
+      },
+      {
+        "q": "Wie läuft das Injektionsverfahren bei einer Horizontalsperre ab?",
+        "a": "Zuerst messen wir, wie stark die Wand durchfeuchtet ist. Dann setzen wir im unteren Wandbereich eine Reihe von Bohrlöchern im Abstand von bis zu 20 cm und bringen die berechnete Menge Injektionsmittel ein. Es verteilt sich im Mauerwerk und bildet eine wasserabweisende Sperrschicht. Danach werden die Bohrlöcher verschlossen und der versalzene Putz durch Sanierputz ersetzt."
+      },
+      {
+        "q": "Wie lange dauert es, bis die Wand nach der Horizontalsperre trocken ist?",
+        "a": "Die Sperre stoppt den Nachschub sofort, das Wasser in der Wand verdunstet aber nur langsam. Je nach Wandstärke und Baustoff dauert die Austrocknung mehrere Monate. In dieser Zeit sollte die Wand nicht mit dichter Farbe oder Zementputz verschlossen werden; ein Sanierputz lässt die Feuchte entweichen."
+      },
+      {
+        "q": "Bauen Sie Horizontalsperren auch in Köln, Düsseldorf und im Ruhrgebiet ein?",
+        "a": "Ja. Von unserem Sitz in Essen aus bauen wir Horizontalsperren im ganzen Ruhrgebiet, im Bergischen Land und im Rheinland ein, auch in Köln und Düsseldorf. Die Messung vor Ort ist in allen Städten kostenlos."
       },
     ],
     related: ["kellersanierung", "kellerinnenabdichtung", "feuchtemessung", "sockelabdichtung"],
@@ -415,6 +463,26 @@ export const SERVICE_PAGES: ServicePage[] = [
           "Horizontalsperre oberhalb der Abdichtung",
         ],
       },
+      {
+        "heading": "Kellerabdichtung von innen: der Ablauf Schicht für Schicht",
+        "paragraphs": [
+          "Eine Kellerabdichtung von innen beginnt mit dem Rückbau. Alter Putz, Farbe und Bitumenanstriche kommen bis auf das Mauerwerk herunter, mürbe Fugen werden ausgekratzt und neu verfüllt. Erst auf diesem festen, sauberen Untergrund kann die Abdichtung haften. Danach öffnen wir den Boden-Wand-Anschluss und formen die Hohlkehle aus Sperrmörtel.",
+          "Es folgt die mineralische Dichtungsschlämme in mindestens zwei Lagen, von der Bodenkante über die Hohlkehle die Wand hinauf und ein Stück in die angrenzenden Querwände hinein. Rohr- und Kabeldurchführungen werden einzeln eingedichtet. Den Abschluss bildet der Sanierputz in zwei Schichten, der Salze aufnimmt und eine glatte, streichbare Oberfläche gibt. Gestrichen wird mit Silikat- oder Kalkfarbe, damit die Wand Feuchte an die Raumluft abgeben kann.",
+        ],
+        "bullets": [
+          "Altputz, Farbe und Bitumen bis auf das Mauerwerk entfernen",
+          "Hohlkehle aus Sperrmörtel am Boden-Wand-Anschluss",
+          "Mineralische Dichtungsschlämme in mindestens zwei Lagen",
+          "Sanierputz als Grund- und Oberputz, diffusionsoffener Anstrich",
+        ],
+      },
+      {
+        "heading": "Wovon die Kosten einer Kellerabdichtung von innen abhängen",
+        "paragraphs": [
+          "Die Kosten einer Innenabdichtung richten sich nach der Wandfläche, dem Untergrund und der Wasserbelastung. Eine ebene Ziegelwand mit Bodenfeuchte ist schneller abgedichtet als eine Bruchsteinwand am Hang, die erst egalisiert werden muss und mehr Lagen Dichtungsschlämme braucht. Auch die Zahl der Durchführungen, der Zustand des Boden-Wand-Anschlusses und wasserführende Risse spielen eine Rolle.",
+          "Weil das Aufgraben entfällt, liegt die Innenabdichtung deutlich unter den Kosten einer Außenabdichtung. Wie viel Ihre Wand tatsächlich braucht, zeigt die kostenlose Messung; danach erhalten Sie einen Festpreis, der sich nicht mehr ändert.",
+        ],
+      },
     ],
     steps: [
       {
@@ -462,6 +530,18 @@ export const SERVICE_PAGES: ServicePage[] = [
       {
         "q": "Ist eine Kellerabdichtung von innen so gut wie eine von außen?",
         "a": "Für die meisten Altbauten ja. Eine fachgerecht ausgeführte Innenabdichtung aus mehrlagiger Dichtungsschlämme mit Hohlkehle hält auch drückendem Wasser stand. Die Wand selbst bleibt dabei im Erdreich feucht, der Raum aber trocken. Eine Außenabdichtung schützt zusätzlich das Mauerwerk, verlangt aber Aufgraben, das bei Reihenhäusern, Anbauten und engen Grundstücken oft gar nicht möglich ist."
+      },
+      {
+        "q": "Was kostet es, einen Keller von innen abzudichten?",
+        "a": "Das hängt von der Wandfläche, vom Untergrund und davon ab, ob nur Bodenfeuchte oder drückendes Wasser anliegt. Weil keine Erdarbeiten anfallen, ist die Innenabdichtung deutlich günstiger als eine Außenabdichtung. Nach der kostenlosen Messung erhalten Sie ein schriftliches Festpreisangebot."
+      },
+      {
+        "q": "Wie lange dauert eine Kellerabdichtung von innen?",
+        "a": "Die Abdichtung eines üblichen Einfamilienhauskellers ist meist in wenigen Tagen erledigt. Zwischen den Lagen der Dichtungsschlämme und vor dem Sanierputz liegen Standzeiten, die eingehalten werden müssen. Den genauen Ablauf legen wir nach der Messung mit Ihnen fest."
+      },
+      {
+        "q": "Muss der Keller für die Innenabdichtung leer geräumt werden?",
+        "a": "Nicht der ganze Keller, aber die Wände, an denen gearbeitet wird, müssen frei sein. Wir legen die Reihenfolge der Räume vorher mit Ihnen fest, damit Sie gezielt umräumen können und nicht alles auf einmal ausräumen müssen."
       },
     ],
     related: ["kellersanierung", "horizontalsperre", "rissverpressung", "sockelabdichtung"],
@@ -545,6 +625,18 @@ export const SERVICE_PAGES: ServicePage[] = [
           "Für Eigentümer und Mieter erstellen wir eine nachvollziehbare schriftliche Dokumentation, die als Grundlage für Sanierungsentscheidungen und für Gespräche mit der Gegenseite oder einer Versicherung dienen. Mieter sollten einen Befall zuerst mit Fotos und Datum festhalten und den Vermieter schriftlich informieren. Eine Rechtsberatung ersetzen wir nicht, aber belastbare Messwerte machen jede Auseinandersetzung sachlicher und führen deutlich schneller zu einer Lösung, mit der beide Seiten leben können.",
         ],
       },
+      {
+        "heading": "Schimmel im Keller: die drei häufigsten Ursachen",
+        "paragraphs": [
+          "Schimmel im Keller hat meist eine von drei Ursachen. Die erste ist Sommerkondensat: Wer an warmen, schwülen Tagen lüftet, holt feuchte Luft in den kühlen Keller, und sie schlägt sich an Wänden, Rohren und gelagerten Sachen nieder. Der Befall sitzt dann oft auf Kartons, Holz und Textilien und in den Ecken, während das Mauerwerk selbst kaum feucht ist.",
+          "Die zweite Ursache ist aufsteigende Feuchte bei fehlender oder defekter Horizontalsperre, erkennbar an Salzrändern und abplatzendem Putz am Wandfuß. Die dritte ist Wasser, das seitlich durch die erdberührte Wand oder am Boden-Wand-Anschluss eindringt. In beiden Fällen bleibt die Wand dauerhaft nass, und der Schimmel kommt nach jeder Reinigung wieder. Welche Ursache vorliegt, zeigt die Messung von Wandfeuchte, Oberflächentemperatur und Raumklima; erst danach lohnt es sich, den Befall zu entfernen.",
+        ],
+        "bullets": [
+          "Sommerkondensat durch falsches Lüften: Befall auf Lagergut und in Ecken",
+          "Aufsteigende Feuchte: Salzränder und sandender Putz am Wandfuß",
+          "Seitlich eindringendes Wasser: nasse Flächen nach Regen, feuchter Boden-Wand-Anschluss",
+        ],
+      },
     ],
     steps: [
       {
@@ -584,6 +676,22 @@ export const SERVICE_PAGES: ServicePage[] = [
       {
         q: "Woran erkenne ich eine gute Fachfirma für Schimmelbeseitigung?",
         a: "An drei Dingen: Sie misst die Feuchte, bevor sie ein Angebot macht, und nennt Ihnen die Ursache. Sie entfernt den Befall sporensicher und ohne Chlor, statt ihn nur zu überstreichen. Und sie beseitigt die Ursache, damit der Schimmel nicht wiederkommt, mit schriftlicher Garantie. Wir sind SchimmelPeter-Partner, die Messung vor Ort ist kostenlos und auf die Arbeit geben wir 10 Jahre Garantie.",
+      },
+      {
+        "q": "Was kostet eine Schimmelbeseitigung?",
+        "a": "Das hängt von der befallenen Fläche, vom Untergrund und vor allem von der Ursache ab. Ein Befall durch Kondensat wird anders behoben als einer durch eine nasse Kellerwand. Die Messung vor Ort ist kostenlos; danach erhalten Sie ein Festpreisangebot für Entfernung und Ursachenbehebung."
+      },
+      {
+        "q": "Kommt der Schimmel nach der Sanierung wieder?",
+        "a": "Nicht, wenn die Feuchtequelle beseitigt ist. Schimmel wächst nur auf Flächen, die über längere Zeit feucht bleiben. Deshalb entfernen wir nicht nur den Befall, sondern beheben die Ursache, etwa mit einer Horizontalsperre, einer Innenabdichtung oder Klimaplatten gegen Kondensat."
+      },
+      {
+        "q": "Kann ich während der Schimmelsanierung in der Wohnung bleiben?",
+        "a": "In der Regel ja. Wir schotten den Arbeitsbereich ab und saugen den Staub mit geeigneten Filtergeräten ab, damit sich die Sporen nicht in der Wohnung verteilen. Nur den Raum, in dem gearbeitet wird, können Sie in dieser Zeit nicht nutzen."
+      },
+      {
+        "q": "Schimmel auf OSB-Platten und Holz im Keller: Was tun?",
+        "a": "Holz und OSB-Platten sind organisches Material und schimmeln schnell, wenn die Luft im Keller zu feucht ist oder sie direkt an einer nassen Wand stehen. Stark befallene Platten sollten ersetzt werden, weil das Pilzgeflecht im Material sitzt. Vorher muss geklärt sein, ob die Feuchte aus der Wand oder aus der Luft kommt, sonst schimmelt auch die neue Platte."
       },
     ],
     related: ["feuchtemessung", "kellersanierung", "horizontalsperre"],
@@ -715,6 +823,18 @@ export const SERVICE_PAGES: ServicePage[] = [
       {
         "q": "Bekomme ich das Ergebnis der Messung schriftlich?",
         "a": "Ja. Sie erhalten die Messwerte und unsere Einschätzung der Ursache schriftlich. Das hilft bei der Entscheidung, im Gespräch mit Vermieter, Hausverwaltung oder Versicherung und beim Immobilienkauf."
+      },
+      {
+        "q": "Wird die Wand bei der Feuchtemessung beschädigt?",
+        "a": "Die kapazitive Messung arbeitet zerstörungsfrei: Das Gerät wird nur an die Wand gehalten. Nur wenn Salze oder der Baustoff die Anzeige verfälschen, entnehmen wir für eine CM-Messung oder Bohrkernanalyse eine kleine Materialprobe. Das sprechen wir vorher mit Ihnen ab."
+      },
+      {
+        "q": "Messen Sie die Feuchte auch vor einem Hauskauf?",
+        "a": "Ja. Wir messen Keller und Wände in mehreren Räumen und Höhen und halten den Befund schriftlich fest. So wissen Sie vor der Kaufentscheidung, ob eine Sanierung ansteht. Der Befund ist eine fachliche Bestandsaufnahme, kein gerichtsfestes Gutachten."
+      },
+      {
+        "q": "In welchen Städten bieten Sie die Feuchtigkeitsmessung an?",
+        "a": "Von unserem Sitz in Essen aus im ganzen Ruhrgebiet, im Bergischen Land und im Rheinland, unter anderem in Essen, Bochum, Dortmund, Duisburg, Gelsenkirchen, Mülheim, Düsseldorf, Köln, Wuppertal, Solingen, Remscheid und Velbert. Die Erstmessung ist überall kostenlos."
       },
     ],
     related: ["schimmelbeseitigung", "horizontalsperre", "kellersanierung"],
@@ -922,6 +1042,26 @@ export const SERVICE_PAGES: ServicePage[] = [
           "Wir suchen die Eintrittsstelle systematisch, nehmen dafür bei Bedarf den Belag an den verdächtigen Stellen auf und dichten Anschlüsse und Fläche neu ab. Danach kommt wieder ein begehbarer Belag auf die Terrasse."
         ]
       },
+      {
+        "heading": "Flachdach reparieren oder neu abdichten?",
+        "paragraphs": [
+          "Nicht jedes undichte Flachdach braucht eine neue Abdichtung. Ist die Dachbahn noch elastisch, die Dämmung trocken und der Schaden auf einen Anschluss, eine Naht oder einen Ablauf begrenzt, genügt eine fachgerechte Reparatur an dieser Stelle. Das prüfen wir vor dem Angebot und sagen es Ihnen offen.",
+          "Ist die Bahn dagegen in der Fläche spröde, wirft sie Blasen oder wurde schon mehrfach geflickt, wandert das Wasser unter der alten Lage weiter, und jede weitere Reparatur hält nur bis zum nächsten Winter. Dann ist die vollflächige Dachabdichtung mit zwei verschweißten Lagen die wirtschaftlichere Lösung, weil sie das Dach für viele Jahre dicht macht.",
+        ],
+      },
+      {
+        "heading": "Wovon die Kosten einer Dachabdichtung abhängen",
+        "paragraphs": [
+          "Die Kosten einer Dachabdichtung richten sich nach der Fläche, dem Zustand des Untergrunds und der Zahl der Details. Ein Garagendach mit einem Ablauf und umlaufender Attika ist schnell kalkuliert. Eine Dachterrasse mit Türanschluss, Geländerfüßen und Belag oder ein Flachdach mit Lichtkuppeln und vielen Durchdringungen braucht deutlich mehr Detailarbeit.",
+          "Den größten Unterschied macht die Dämmung: Ist sie trocken, kann die alte Lage als Untergrund bleiben. Ist sie durchfeuchtet, muss der nasse Bereich heraus und neu aufgebaut werden. Deshalb prüfen wir das Dach vor dem Angebot kostenlos und nennen danach einen Festpreis für genau den Aufbau, den Ihr Dach braucht.",
+        ],
+        "bullets": [
+          "Dachfläche und Zugänglichkeit",
+          "Zustand der alten Dachbahn und der Dämmung",
+          "Zahl der Anschlüsse: Attika, Abläufe, Lichtkuppeln, Türen",
+          "Gewünschte Oberfläche, etwa Kies oder begehbarer Belag",
+        ],
+      },
     ],
     steps: [
       { title: "Dachpr\u00fcfung", text: "Besichtigung von Fl\u00e4che, N\u00e4hten und Anschl\u00fcssen; bei Bedarf Feuchtemessung in der D\u00e4mmung." },
@@ -949,6 +1089,18 @@ export const SERVICE_PAGES: ServicePage[] = [
       {
         "q": "Kann bei Regen abgedichtet werden?",
         "a": "Nein. Die Bahnen werden nur auf trockenem Untergrund verschweißt, sonst hält die Verbindung nicht. Wir planen die Arbeiten deshalb nach dem Wetter und sichern ein geöffnetes Dach bei Regen ab."
+      },
+      {
+        "q": "Was kostet eine Dachabdichtung?",
+        "a": "Das hängt von der Fläche, vom Zustand der alten Bahn und der Dämmung und von der Zahl der Anschlüsse ab. Ein Garagendach ist anders zu kalkulieren als eine Dachterrasse über Wohnraum. Die Prüfung am Dach ist kostenlos; danach erhalten Sie ein verbindliches Festpreisangebot."
+      },
+      {
+        "q": "Woran erkenne ich einen Fachbetrieb für Flachdachabdichtung?",
+        "a": "Er prüft das Dach, bevor er ein Angebot macht, und sagt Ihnen, ob eine Reparatur reicht. Er dichtet vollflächig ab, statt nur die Leckstelle zu flicken, arbeitet die Anschlüsse zuerst ein und prüft jede Naht. Und er übergibt das Dach mit Protokoll und schriftlicher Garantie; bei uns sind es 10 Jahre auf die Arbeit."
+      },
+      {
+        "q": "Dichten Sie auch Garagendächer und Dachterrassen ab?",
+        "a": "Ja. Garagendächer, Flachdächer auf Anbauten und Dachterrassen über Wohnraum gehören zu unseren häufigsten Aufträgen. Bei der Dachterrasse dichten wir zuerst Türanschluss, Ränder und Abläufe ab; danach kommt wieder ein begehbarer Belag auf die Fläche."
       },
     ],
     related: ["balkon-terrasse", "sockelabdichtung", "rissverpressung"],
@@ -1016,6 +1168,13 @@ export const SERVICE_PAGES: ServicePage[] = [
           "Wir prüfen zuerst, ob die Balkonplatte selbst tragfähig ist. Ist sie das, dichten wir mit Flüssigkunststoff fugenlos ab, über die Fläche und hoch an Wand und Türanschluss. Ist der Beton geschädigt, sagen wir Ihnen das offen; dann gehört zuerst ein Tragwerksplaner dazu."
         ]
       },
+      {
+        "heading": "Balkon undicht: wo das Wasser eintritt und wo es sich zeigt",
+        "paragraphs": [
+          "Ein undichter Balkon zeigt sich selten auf dem Balkon selbst. Das Wasser läuft unter dem Belag in die Balkonplatte und tritt an der Unterseite, an der Stirnkante oder in der Wand darunter wieder aus. Typisch sind Kalkfahnen und abplatzender Putz an der Unterseite, Rostspuren an der Kante und ein feuchter Fleck innen neben der Balkontür.",
+          "Die Eintrittsstelle liegt fast immer an einem Anschluss: unter der Türschwelle, an der Aufkantung zur Hauswand, am Geländerfuß oder am Ablauf. Deshalb prüfen wir vor dem Angebot genau diese Stellen sowie das Gefälle. Steht nach Regen Wasser auf der Fläche, muss das Gefälle mit ausgeglichen werden, sonst arbeitet der Frost im nächsten Winter weiter.",
+        ],
+      },
     ],
     steps: [
       { title: "Pr\u00fcfung vor Ort", text: "Belag, Gef\u00e4lle, T\u00fcranschluss und Entw\u00e4sserung: wir suchen die tats\u00e4chliche Eintrittsstelle." },
@@ -1043,6 +1202,18 @@ export const SERVICE_PAGES: ServicePage[] = [
       {
         "q": "Kann bei jedem Wetter abgedichtet werden?",
         "a": "Nein. Flüssigkunststoff braucht einen trockenen Untergrund und geeignete Temperaturen. Wir planen die Arbeiten deshalb nach dem Wetter; nach dem Auftrag ist die Fläche nach wenigen Stunden regenfest."
+      },
+      {
+        "q": "Was kostet es, einen Balkon abzudichten?",
+        "a": "Das hängt von der Fläche, vom Zustand des Untergrunds, von der Zahl der Anschlüsse und von der gewünschten Nutzschicht ab. Kann auf dem vorhandenen Belag gearbeitet werden, entfällt der Abriss. Nach der Prüfung vor Ort erhalten Sie einen Festpreis, in dem die Nutzschicht enthalten ist."
+      },
+      {
+        "q": "Woran erkenne ich, dass mein Balkon undicht ist?",
+        "a": "An feuchten Flecken, Kalkfahnen oder abplatzendem Putz an der Unterseite, an Rost an der Balkonkante, an losen oder gerissenen Fliesen und an Wasserrändern neben der Balkontür. Je früher abgedichtet wird, desto eher bleibt die Balkonplatte selbst unbeschädigt."
+      },
+      {
+        "q": "Dichten Sie Balkone auch in Wuppertal und Düsseldorf ab?",
+        "a": "Ja. Von unserem Sitz in Essen aus dichten wir Balkone, Loggien und Terrassen im ganzen Ruhrgebiet, im Bergischen Land und im Rheinland ab, auch in Wuppertal und Düsseldorf."
       },
     ],
     related: ["dachabdichtung", "sockelabdichtung", "rissverpressung"],
