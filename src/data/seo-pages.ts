@@ -327,7 +327,7 @@ export const SERVICE_PAGES: ServicePage[] = [
         "heading": "Wovon die Kosten einer nachträglichen Horizontalsperre abhängen",
         "paragraphs": [
           "Die Kosten einer nachträglichen Horizontalsperre ergeben sich aus wenigen Größen, die sich alle messen lassen: der Länge der betroffenen Wände, der Wandstärke, dem Baustoff und dem Durchfeuchtungsgrad. Eine dicke Bruchsteinwand braucht mehr Bohrungen und mehr Injektionsmittel als eine schlanke Ziegelwand. Hinzu kommt, was um die Sperre herum nötig ist: versalzenen Putz abnehmen, Sanierputz aufbringen und, wo Wasser auch seitlich eindringt, eine Innenabdichtung.",
-          "Einen Meterpreis am Telefon nennen wir deshalb nicht, denn er würde entweder zu hoch oder zu niedrig liegen. Nach der kostenlosen Messung erhalten Sie ein schriftliches Festpreisangebot, in dem die Wände, die Bohrlochreihen und die Putzarbeiten einzeln aufgeführt sind. Wer vorab eine Größenordnung sucht, kann den Kostenrechner auf dieser Website nutzen; verbindlich ist erst das Angebot nach der Messung.",
+          "Einen Meterpreis am Telefon nennen wir deshalb nicht, denn er würde entweder zu hoch oder zu niedrig liegen. Nach der kostenlosen Messung erhalten Sie ein schriftliches Festpreisangebot, in dem die Wände, die Bohrlochreihen und die Putzarbeiten einzeln aufgeführt sind. Wer vorab den Umfang einschätzen möchte, kann den Angebotsrechner auf dieser Website nutzen; einen Preis nennen wir erst im Angebot nach der Messung.",
         ],
       },
     ],
