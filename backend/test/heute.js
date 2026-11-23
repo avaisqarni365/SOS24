@@ -48,6 +48,14 @@ sheets['Konfiguration'].data.pop();
 rv = api('api_reviewMark', 'A-3002', 'asked', true);
 assert.deepStrictEqual([rv.open, rv.asked, rv.got], [1, 1, 0]);
 assert.deepStrictEqual(rv.items.map(x => x.id), ['A-3003', 'A-3002'], 'still open comes first');
+// a customer from before the admin: the same message, and nothing is stored
+const rvRows = sheets['Bewertungsanfragen'].data.length;
+const dr = api('api_reviewDraft', ' Herr  Schmidt ', '0171 2223344', '45144 Essen', 'Horizontalsperre');
+assert(dr.wa.startsWith('https://wa.me/491712223344?text='), dr.wa);
+assert(dr.text.includes('Guten Tag Herr Schmidt,') && dr.text.includes('in Essen und im Ruhrgebiet') && dr.text.includes('(Horizontalsperre)') && dr.text.includes(rv.link), dr.text);
+assert.strictEqual(api('api_reviewDraft', 'Frau Demir', '', '', '').wa, '', 'no phone: text only');
+assert.throws(() => api('api_reviewDraft', '', '0171 2223344', '45144 Essen', ''), /Namen des Kunden/);
+assert.strictEqual(sheets['Bewertungsanfragen'].data.length, rvRows, 'a draft stores nothing');
 assert.strictEqual(rv.items[1].asked, iso(NOW));
 rv = api('api_reviewMark', 'A-3003', 'got', true);
 assert.deepStrictEqual([rv.open, rv.asked, rv.got], [0, 2, 1], 'a review received counts as asked');

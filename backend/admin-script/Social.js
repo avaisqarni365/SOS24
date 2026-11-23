@@ -282,6 +282,15 @@ function api_reviewMark_(id, field, on) {
   } finally { lock.releaseLock(); }
   return api_reviews_();
 }
+/* The same message for a customer who is not in the enquiries (jobs from before the admin).
+ * address: "45144 Essen" or a full address. Nothing is stored; the owner sends it himself. */
+function api_reviewDraft_(name, phone, address, service) {
+  guard_();
+  name = String(name || '').replace(/\s+/g, ' ').trim().slice(0, 60);
+  if (name.length < 2) throw new Error('Bitte den Namen des Kunden eintragen, zum Beispiel „Herr Schmidt“.');
+  var a = reviewAsk_(name, String(phone || '').slice(0, 30), String(address || '').slice(0, 120), String(service || '').slice(0, 80));
+  return {text: a.text, wa: a.wa, town: a.town, area: a.area};
+}
 
 /* ---------- Today: what needs doing, for the overview ---------- */
 function api_today_() {
