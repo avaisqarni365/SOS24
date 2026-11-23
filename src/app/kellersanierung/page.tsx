@@ -3,9 +3,9 @@ import Navbar from "@/components/sections/Navbar";
 import Footer from "@/components/sections/Footer";
 import HomeSteps from "@/components/sections/HomeSteps";
 import JsonLd from "@/components/seo/JsonLd";
-import { Breadcrumbs, Prose, LinkGrid } from "@/components/seo/SubpageParts";
+import { Breadcrumbs, Prose, LinkGrid, FaqList } from "@/components/seo/SubpageParts";
 import { CITY_PAGES } from "@/data/seo-pages";
-import { abs, businessNode, websiteNode, breadcrumbNode, BUSINESS_ID, WEBSITE_ID, OG_IMAGE } from "@/lib/site";
+import { abs, businessNode, websiteNode, breadcrumbNode, faqNode, BUSINESS_ID, WEBSITE_ID, OG_IMAGE } from "@/lib/site";
 import { hy } from "@/lib/hyphenate";
 
 const TITLE = "Kellersanierung NRW: alle Städte | sos-abdichtung";
@@ -80,6 +80,49 @@ const SECTIONS = [
       "Unser Sitz ist in Essen. Von hier sind wir im Ruhrgebiet meist innerhalb von 24 bis 48 Stunden vor Ort, im Bergischen Land und im Rheinland nach Absprache. Wir sanieren von innen, ohne Aufgraben: mit Horizontalsperre, Innenabdichtung, Rissverpressung und Sanierputz, dazu Sockel, Balkon und Terrasse. Ihre Stadt ist nicht dabei? Rufen Sie an oder schicken Sie Fotos per WhatsApp an 0172 2064177.",
     ],
   },
+  {
+    heading: "Kellerabdichtung, Kellertrockenlegung, Kellersanierung: was wir in NRW ausführen",
+    paragraphs: [
+      "Wer in NRW einen nassen Keller hat, sucht je nach Region nach Kellerabdichtung, Kellertrockenlegung oder Kellersanierung. Gemeint ist meist dasselbe Ziel: ein trockener Keller. Die Kellertrockenlegung stoppt aufsteigende Feuchte mit einer Horizontalsperre im Injektionsverfahren. Die Kellerabdichtung von innen hält Wasser zurück, das seitlich durch die Wand drückt, mit Hohlkehle und mineralischer Dichtungsschlämme. Wasserführende Risse, wie sie Bergsenkungen im Ruhrgebiet hinterlassen, schließen wir per Rissverpressung.",
+      "Welche dieser Arbeiten ein Keller braucht, hängt vom Haus ab und nicht von der Stadt. Darum messen wir in Dortmund genauso wie in Wuppertal oder Köln zuerst die Feuchte in mehreren Höhen und an mehreren Wänden. Erst danach steht fest, ob eine Horizontalsperre genügt oder die Wand zusätzlich abgedichtet werden muss.",
+    ],
+    bullets: [
+      "Horizontalsperre gegen aufsteigende Feuchte, ohne Aufgraben",
+      "Kellerabdichtung von innen, auch gegen drückendes Wasser",
+      "Rissverpressung bei wasserführenden Rissen in Wand und Boden",
+      "Sanierputz, Schimmelbeseitigung und Sockelabdichtung als Ergänzung",
+    ],
+  },
+  {
+    heading: "Nasser Keller in NRW: die typischen Ursachen nach Region",
+    paragraphs: [
+      "Im Ruhrgebiet, von Duisburg über Essen, Gelsenkirchen und Bochum bis Dortmund, stehen viele Zechen- und Gründerzeithäuser mit Ziegelkellern ohne Sperrschicht. Dazu kommen Risse aus Bergsenkungen und hohes Grundwasser an Emscher, Ruhr und Kanal. Im Bergischen Land, in Wuppertal, Solingen, Remscheid und Velbert, trifft Hang- und Schichtenwasser bergseitig auf Keller aus Bruchstein. Im Rheinland, in Düsseldorf, Köln und Leverkusen, steigt mit dem Rheinpegel das Grundwasser und drückt gegen Kellerwand und Bodenplatte.",
+      "Auf den Stadtseiten steht das genauer: welche Stadtteile betroffen sind, welche Baujahre und Baustoffe dort üblich sind und welches Verfahren in der Regel hilft.",
+    ],
+  },
+];
+
+const HUB_FAQS = [
+  {
+    q: "In welchen Städten in NRW sanieren Sie Keller?",
+    a: "Im Ruhrgebiet unter anderem in Essen, Mülheim, Oberhausen, Bottrop, Gelsenkirchen, Bochum, Dortmund und Duisburg, im Bergischen Land in Wuppertal, Solingen, Remscheid, Velbert, Haan und Wermelskirchen und im Rheinland in Düsseldorf, Köln und Leverkusen. Alle Städte mit eigener Seite finden Sie oben auf dieser Seite.",
+  },
+  {
+    q: "Meine Stadt steht nicht in der Liste. Kommen Sie trotzdem?",
+    a: "In der Regel ja. Wir arbeiten von Essen aus im ganzen Ruhrgebiet, im Bergischen Land und im Rheinland, auch in Städten ohne eigene Seite. Rufen Sie an oder schreiben Sie per WhatsApp an 0172 2064177, dann klären wir das sofort.",
+  },
+  {
+    q: "Kostet die Feuchtemessung außerhalb von Essen etwas?",
+    a: "Nein. Die Besichtigung mit Feuchtemessung ist in allen Städten kostenlos und unverbindlich. Danach erhalten Sie ein schriftliches Angebot zum Festpreis.",
+  },
+  {
+    q: "Wie schnell sind Sie vor Ort?",
+    a: "Im Ruhrgebiet meist innerhalb von 24 bis 48 Stunden, im Bergischen Land und im Rheinland nach Absprache. Fotos vom Schaden können Sie vorab per WhatsApp schicken.",
+  },
+  {
+    q: "Muss für die Kellersanierung aufgegraben werden?",
+    a: "Nein. Wir sanieren von innen: Horizontalsperre, Innenabdichtung und Rissverpressung werden vom Keller aus ausgeführt. Garten, Einfahrt und Pflaster bleiben unberührt, und auch bei Reihenhäusern mit Nachbarwand ist die Sanierung möglich.",
+  },
 ];
 
 export default function KellersanierungHub() {
@@ -113,6 +156,7 @@ export default function KellersanierungHub() {
       },
     },
     { ...breadcrumbNode(crumbs), "@id": `${abs(PATH)}#breadcrumb` },
+    faqNode(HUB_FAQS),
   ];
 
   return (
@@ -149,6 +193,12 @@ export default function KellersanierungHub() {
         <section className="surface-bone-2 sc-section">
           <div className="sc-wrap max-w-4xl">
             <Prose sections={SECTIONS} />
+          </div>
+        </section>
+
+        <section className="sc-section">
+          <div className="sc-wrap max-w-4xl">
+            <FaqList faqs={HUB_FAQS} title="Fragen zur Kellersanierung in NRW" />
           </div>
         </section>
 
