@@ -3630,7 +3630,7 @@ export default function AdminPortalClient() {
                 </div>
                 <div className="pt-2 flex flex-wrap gap-2">
                   <a
-                    href="https://drive.google.com/open?id=1Qhyu32zpLQ-eFbvh6UPAvcoBdn6kTf1nOxx2GtFI5Gw"
+                    href="https://drive.google.com/open?id=13tKv0uH-iFvJZhQ09-YnAALKt2VUyG7cOTd1jgKhDfI"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs transition"
@@ -3671,7 +3671,7 @@ export default function AdminPortalClient() {
 
               <div className="flex flex-wrap items-center gap-2 shrink-0">
                 <a
-                  href="https://drive.google.com/open?id=1Qhyu32zpLQ-eFbvh6UPAvcoBdn6kTf1nOxx2GtFI5Gw"
+                  href="https://drive.google.com/open?id=13tKv0uH-iFvJZhQ09-YnAALKt2VUyG7cOTd1jgKhDfI"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="px-3.5 py-2 rounded-xl bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs inline-flex items-center gap-1.5 transition shadow-xs"

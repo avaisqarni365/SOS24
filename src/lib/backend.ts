@@ -8,11 +8,11 @@ import { trackConversion } from './analytics';
 
 export const GAS_API_URL =
   process.env.NEXT_PUBLIC_GAS_API_URL ||
-  'https://script.google.com/macros/s/AKfycbzBjzDgaBJDMy-ctRI_PaGKdBe8z-CvzFW-bRv_TAvhLL-Fnr0I8r8QAo5DN9cxQoTK/exec';
+  'https://script.google.com/macros/s/AKfycbxPDHAK9nPagE7nxfm4Z9iuNWeBFY1ZDKmMW3SDhiLgpVJhIHigOmOjwdgHwsHEp0aa/exec';
 
 export const ADMIN_WEBAPP_URL =
   process.env.NEXT_PUBLIC_ADMIN_WEBAPP_URL ||
-  'https://script.google.com/macros/s/AKfycbxVcjb2Or5MQ2uJZjiO0rk_w5Dtc194XR4z0xRPb0p4m13Dr0JPdHg72tW1Z7V-1kkw/exec';
+  'https://script.google.com/macros/s/AKfycbwgDnUbADS4i22fzphVnv-Z3yUJLHZc--6eezTOoEwpxEpcmmtAF0OUrKJrxwc8JKiF/exec';
 
 export const OWNER_WHATSAPP = '491722064177';
 export const NOTIFY_EMAIL_DEFAULT = 'simplypizza2020@gmail.com';
