@@ -149,3 +149,27 @@ export const FAQS = [
     a: "Ja, immer. Nach jeder Phase erhalten Sie das Protokoll: die Nullmessung mit Messpunktplan, das Injektionsprotokoll, die Kontrollmessungen und das Abnahmeprotokoll mit den Vorher-nachher-Werten. So können Sie den Erfolg der Sanierung jederzeit selbst nachvollziehen."
   }
 ];
+
+/** The home page's own questions: the firm, the area and the first step. */
+export const HOME_FAQS = [
+  {
+    q: "Welche Abdichtungen führt sos-abdichtung in Essen aus?",
+    a: "Kellersanierung von innen, Horizontalsperre im Injektionsverfahren, Kellerinnenabdichtung, Rissverpressung, Schimmelbeseitigung und Sockelabdichtung, dazu die Abdichtung von Balkonen, Terrassen und Flachdächern. Vor jeder Arbeit steht die kostenlose Feuchtemessung."
+  },
+  {
+    q: "Ich suche eine Abdichtungsfirma in der Nähe: Wo arbeiten Sie?",
+    a: "Unser Sitz ist in Essen. Von dort arbeiten wir im ganzen Ruhrgebiet, im Bergischen Land und im Rheinland, unter anderem in Mülheim, Gelsenkirchen, Bochum, Oberhausen, Bottrop, Duisburg, Dortmund, Düsseldorf, Köln und Wuppertal. Für jede Stadt gibt es eine eigene Seite mit den typischen Schäden vor Ort."
+  },
+  {
+    q: "Was ist der Unterschied zwischen Bauwerksabdichtung und Kellersanierung?",
+    a: "Bauwerksabdichtung ist der Oberbegriff für alles, was ein Gebäude gegen Wasser schützt: Keller, Sockel, Balkon, Terrasse und Dach. Die Kellersanierung ist ein Teil davon. Sie macht einen bereits feuchten Keller wieder trocken, mit Horizontalsperre, Innenabdichtung und Sanierputz."
+  },
+  {
+    q: "Was kostet die erste Besichtigung?",
+    a: "Nichts. Die Besichtigung mit Feuchtemessung ist kostenlos und unverbindlich. Danach wissen Sie, woher die Feuchte kommt, und erhalten auf Wunsch ein schriftliches Angebot zum Festpreis."
+  },
+  {
+    q: "Wie bekomme ich einen Termin für die Feuchtemessung?",
+    a: "Rufen Sie an oder schreiben Sie per WhatsApp an 0172 2064177, gern mit Fotos. Einen Termin für die Feuchtemessung können Sie auch direkt online buchen."
+  }
+];
