@@ -354,6 +354,13 @@ export default function CityPage({ params }: { params: { city: string } }) {
                 sub: `Film, ${f.film.seconds} Sekunden`,
               }))}
             />
+            {/* "Abdichtung Essen" belongs to the home page; the Essen page says so with a link */}
+            {page.slug === "essen" && (
+              <LinkGrid
+                title="Alle Abdichtungsarbeiten in Essen"
+                links={[{ href: "/#abdichtung-essen", label: "Abdichtung in Essen", sub: "Keller, Sockel, Balkon, Terrasse und Flachdach" }]}
+              />
+            )}
             {nearby.length > 0 && <LinkGrid title="In der Nähe" links={nearby} />}
             <LinkGrid
               title={`Arbeiten bei uns: Jobs in ${page.name}`}

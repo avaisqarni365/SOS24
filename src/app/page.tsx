@@ -16,7 +16,7 @@ import { SITE_URL, BUSINESS_ID, WEBSITE_ID, abs, businessNode, websiteNode, brea
 
 const TITLE = "Abdichtung Essen & Kellersanierung NRW | sos-abdichtung";
 const DESCRIPTION =
-  "Abdichtung und Kellersanierung aus Essen für ganz NRW: ohne Aufgraben, dazu Sockel, Balkon, Rissverpressung. Kostenlose Feuchtemessung, 10 Jahre Garantie.";
+  "Abdichtung in Essen und Kellersanierung in ganz NRW: ohne Aufgraben, dazu Sockel, Balkon, Rissverpressung. Kostenlose Feuchtemessung, 10 Jahre Garantie.";
 
 export const metadata: Metadata = {
   title: TITLE,

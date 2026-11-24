@@ -2632,10 +2632,10 @@ export const CITY_PAGES: CityPage[] = [
     slug: "essen",
     name: "Essen",
     keyword: "Kellersanierung Essen",
-    title: "Kellersanierung Essen | Abdichtung & Rissverpressung Essen",
+    title: "Kellersanierung Essen | Kellerabdichtung & Rissverpressung",
     metaDescription:
-      "Kellersanierung Essen und Abdichtung vom Betrieb vor Ort, Niebuhrstraße 46: Keller, Sockel, Balkon, Dach, Rissverpressung. Kostenlose Feuchtemessung.",
-    h1: "Kellersanierung Essen: Abdichtung vom Fachbetrieb vor Ort",
+      "Kellersanierung in Essen vom Betrieb vor Ort, Niebuhrstraße 46: Kellerabdichtung von innen, Horizontalsperre, Rissverpressung. Kostenlose Feuchtemessung.",
+    h1: "Kellersanierung Essen: Ihr Fachbetrieb vor Ort",
     lede:
       "Unser Sitz ist in Essen, in der Niebuhrstraße 46. Von Karnap bis Kettwig sind wir in der Regel innerhalb von 24 Stunden bei Ihnen, messen kostenlos, woher die Feuchte kommt, und dichten Ihren Keller dann von innen ab, ohne Aufgraben und zum Festpreis.",
     plz: [
@@ -2789,7 +2789,7 @@ export const CITY_PAGES: CityPage[] = [
         ]
       },
       {
-        "heading": "Abdichtung in Essen: vom Keller bis zum Flachdach",
+        "heading": "Nicht nur der Keller: Sockel, Balkon und Flachdach",
         "paragraphs": [
           "Abdichtung heißt für uns nicht nur Keller. In Essen dichten wir überall dort ab, wo Wasser ins Haus kommt: erdberührte Kellerwände und Bodenplatten von innen, Risse per Injektion, den Sockel in der Spritzwasserzone, Balkone und Terrassen mit Flüssigkunststoff sowie Flachdächer und Garagendächer mit Elastomerbitumen.",
           "Typisch für Essen sind zwei Schwachstellen. Im Süden, in Bredeney, Werden und Kettwig, stehen viele Häuser am Hang, und das Wasser drückt seitlich gegen Kellerwand und Sockel. Im Norden, in den Zechensiedlungen von Katernberg bis Karnap, sind es Setzungsrisse aus dem Bergbau und flache Garagendächer aus der Nachkriegszeit. Wir messen vorher kostenlos, woher das Wasser kommt, und schlagen nur die Abdichtung vor, die an dieser Stelle wirkt."
@@ -2848,7 +2848,7 @@ export const CITY_PAGES: CityPage[] = [
         "a": "Ja. Für Hausverwaltungen und Eigentümergemeinschaften erstellen wir ein schriftliches Angebot mit Messprotokoll für die Eigentümerversammlung. Wir arbeiten raumweise im bewohnten Haus, damit die Mieter ihre Keller möglichst weiter nutzen können."
       },
       {
-        "q": "Welche Abdichtungsarbeiten übernehmen Sie in Essen?",
+        "q": "Arbeiten Sie in Essen auch außerhalb des Kellers?",
         "a": "Alles, wo Wasser ins Haus kommt: Kellerabdichtung von innen, Horizontalsperre gegen aufsteigende Feuchte, Rissverpressung, Sockelabdichtung, Balkon- und Terrassenabdichtung sowie Flachdach- und Garagendachabdichtung. Unser Sitz ist in der Niebuhrstraße 46, deshalb sind wir in ganz Essen meist innerhalb von 24 Stunden bei Ihnen."
       },
       {
