@@ -33,7 +33,7 @@ export default function Hero() {
             <em>Trocken, Schicht für Schicht.</em>
           </h1>
           <p className="sc-lede mt-6">
-            Abdichtung und Kellersanierung aus Essen: Wir stoppen Feuchtigkeit
+            Abdichtung in Essen und Kellersanierung in ganz NRW: Wir stoppen Feuchtigkeit
             von innen — ohne Bagger, ohne aufgerissenen Garten.
           </p>
 
