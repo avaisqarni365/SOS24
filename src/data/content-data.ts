@@ -156,7 +156,7 @@ export const FAQS = [
 export const HOME_FAQS = [
   {
     q: "Welche Abdichtungen führt sos-abdichtung in Essen aus?",
-    a: "Kellersanierung von innen, Horizontalsperre im Injektionsverfahren, Kellerinnenabdichtung, Rissverpressung, Schimmelbeseitigung und Sockelabdichtung, dazu die Abdichtung von Balkonen, Terrassen und Flachdächern. Vor jeder Arbeit steht die kostenlose Feuchtemessung."
+    a: "Kellersanierung von innen, Horizontalsperre im Injektionsverfahren, Kellerinnenabdichtung, Rissverpressung, Schimmelsanierung und Sockelabdichtung, dazu die Abdichtung von Balkonen, Terrassen und Flachdächern. Vor jeder Arbeit steht die kostenlose Feuchtemessung."
   },
   {
     q: "Ich suche eine Abdichtungsfirma in der Nähe: Wo arbeiten Sie?",

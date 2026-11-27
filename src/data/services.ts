@@ -33,7 +33,7 @@ export const SERVICE_CARDS: ServiceCard[] = [
   {
     slug: "schimmelbeseitigung",
     title: "Schimmelbeseitigung",
-    text: "Ursache finden, Befall sporensicher entfernen, Oberfläche mit Calciumsilikat schützen.",
+    text: "Schimmelsanierung: Ursache finden, Befall sporensicher entfernen, Oberfläche mit Calciumsilikat schützen.",
     art: "schimmel",
     image: { src: "/img/3d/wohnraum-1-640.webp", alt: "3D-Modell: Wohnraum mit Wärmebild der kalten Ecke und Schimmel", fit: "contain" },
   },

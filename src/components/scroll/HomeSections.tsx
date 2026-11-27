@@ -181,10 +181,10 @@ const ESSEN_BLOCKS: { title: string; text: string; href: string; link: string }[
     link: "Alle neun Leistungen",
   },
   {
-    title: "Schimmelbeseitigung und Rissverpressung",
+    title: "Schimmelsanierung und Rissverpressung",
     text: "Schimmel entfernen wir sporensicher und ohne Chlor, nachdem die Feuchtequelle gemessen ist. Wasserführende Risse in Beton und Mauerwerk schließen wir von innen per Injektion, ohne aufzugraben.",
     href: "/leistungen/schimmelbeseitigung/",
-    link: "Schimmelbeseitigung",
+    link: "Schimmelsanierung",
   },
   {
     title: "Erst messen, dann abdichten",

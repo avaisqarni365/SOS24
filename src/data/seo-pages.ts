@@ -553,10 +553,10 @@ export const SERVICE_PAGES: ServicePage[] = [
     serviceName: "Schimmelbeseitigung & Klimaplatten",
     navTitle: "Schimmelbeseitigung",
     keyword: "Schimmel im Keller",
-    title: "Schimmel im Keller entfernen | Schimmelbeseitigung NRW",
+    title: "Schimmelsanierung | Schimmel im Keller & Wohnung entfernen",
     metaDescription:
-      "Schimmel im Keller oder in der Wohnung? Schimmelsanierung mit Ursachenmessung, sporensicherer Entfernung ohne Chlor und Klimaplatten gegen Kondensat.",
-    h1: "Schimmel im Keller und in der Wohnung: erst die Ursache, dann der Schimmel",
+      "Schimmelsanierung vom Fachbetrieb aus Essen: Schimmel im Keller oder in der Wohnung, Ursache gemessen, sporensicher ohne Chlor entfernt. Messung kostenlos.",
+    h1: "Schimmelsanierung: Schimmel im Keller und in der Wohnung dauerhaft beseitigen",
     lede:
       "Schimmel wächst nur dort, wo über längere Zeit zu viel Feuchtigkeit ist. Wer ihn nur abwischt, sieht ihn wieder. Wir finden heraus, woher die Feuchte kommt, entfernen den Befall sporensicher und sorgen dafür, dass die Fläche trocken bleibt.",
     symptoms: [
@@ -589,6 +589,19 @@ export const SERVICE_PAGES: ServicePage[] = [
       },
     ],
     sections: [
+      {
+        heading: "Schimmelsanierung vom Fachbetrieb: was dazugehört",
+        paragraphs: [
+          "Schimmelsanierung, Schimmelbeseitigung, Schimmelentfernung: Die Begriffe werden oft gleich verwendet. Wir verstehen unter einer Schimmelsanierung mehr als das Entfernen der Flecken. Sie umfasst vier Dinge: die Messung der Ursache, das sporensichere Entfernen der befallenen Schichten, den Neuaufbau der Oberfläche mit mineralischen Materialien und die Beseitigung der Feuchtequelle. Fehlt einer dieser Schritte, kommt der Schimmel in der Regel wieder.",
+          "Im Keller heißt das meist: eine Horizontalsperre oder eine Innenabdichtung, damit die Wand trocken wird. In der Wohnung sind es häufig Klimaplatten aus Calciumsilikat an kalten Außenwänden und in Ecken. Wir führen beides selbst aus, sodass Sie für die Schimmelsanierung und die Abdichtung nur einen Ansprechpartner haben. Unser Sitz ist in Essen; von dort arbeiten wir im Ruhrgebiet, im Bergischen Land und im Rheinland.",
+        ],
+        bullets: [
+          "Ursache messen: Wandfeuchte, Oberflächentemperatur, Raumklima",
+          "Befall sporensicher und ohne Chlor entfernen",
+          "Oberfläche mit mineralischen Materialien neu aufbauen",
+          "Feuchtequelle beseitigen, damit der Schimmel nicht wiederkommt",
+        ],
+      },
       {
         heading: "Schimmelsanierung: warum wir immer mit der Ursache anfangen",
         paragraphs: [
@@ -678,7 +691,7 @@ export const SERVICE_PAGES: ServicePage[] = [
         a: "An drei Dingen: Sie misst die Feuchte, bevor sie ein Angebot macht, und nennt Ihnen die Ursache. Sie entfernt den Befall sporensicher und ohne Chlor, statt ihn nur zu überstreichen. Und sie beseitigt die Ursache, damit der Schimmel nicht wiederkommt, mit schriftlicher Garantie. Wir sind SchimmelPeter-Partner, die Messung vor Ort ist kostenlos und auf die Arbeit geben wir 10 Jahre Garantie.",
       },
       {
-        "q": "Was kostet eine Schimmelbeseitigung?",
+        "q": "Was kostet eine Schimmelsanierung?",
         "a": "Das hängt von der befallenen Fläche, vom Untergrund und vor allem von der Ursache ab. Ein Befall durch Kondensat wird anders behoben als einer durch eine nasse Kellerwand. Die Messung vor Ort ist kostenlos; danach erhalten Sie ein Festpreisangebot für Entfernung und Ursachenbehebung."
       },
       {
@@ -688,6 +701,14 @@ export const SERVICE_PAGES: ServicePage[] = [
       {
         "q": "Kann ich während der Schimmelsanierung in der Wohnung bleiben?",
         "a": "In der Regel ja. Wir schotten den Arbeitsbereich ab und saugen den Staub mit geeigneten Filtergeräten ab, damit sich die Sporen nicht in der Wohnung verteilen. Nur den Raum, in dem gearbeitet wird, können Sie in dieser Zeit nicht nutzen."
+      },
+      {
+        "q": "Was ist der Unterschied zwischen Schimmelbeseitigung und Schimmelsanierung?",
+        "a": "Im Alltag meinen beide Begriffe dasselbe. Fachlich ist die Schimmelbeseitigung das Entfernen des Befalls; die Schimmelsanierung schließt die Ursache mit ein: messen, entfernen, die Oberfläche neu aufbauen und die Feuchtequelle abstellen. Wir bieten immer die vollständige Sanierung an, weil der Schimmel sonst wiederkommt."
+      },
+      {
+        "q": "Bieten Sie Schimmelsanierung auch in Essen und im Ruhrgebiet an?",
+        "a": "Ja. Unser Sitz ist in Essen, in der Niebuhrstraße 46. Von dort sanieren wir Schimmelschäden in Kellern und Wohnungen im ganzen Ruhrgebiet, im Bergischen Land und im Rheinland. Die Messung vor Ort ist kostenlos; Fotos können Sie vorab per WhatsApp an 0172 2064177 schicken."
       },
       {
         "q": "Schimmel auf OSB-Platten und Holz im Keller: Was tun?",
@@ -1556,7 +1577,7 @@ export const CITY_PAGES: CityPage[] = [
       },
       {
         slug: "schimmelbeseitigung",
-        heading: "Schimmel im Keller in Wuppertal",
+        heading: "Schimmelsanierung im Keller in Wuppertal",
         text: "Feuchte Hangwände kühlen aus, die Luft kondensiert daran, und es entsteht Schimmel, oft auch im Souterrain. Wir messen, ob die Nässe aus der Wand oder aus der Luft kommt, entfernen den Befall sporensicher und beseitigen die Ursache."
       },
       {
@@ -1784,7 +1805,7 @@ export const CITY_PAGES: CityPage[] = [
       },
       {
         "slug": "schimmelbeseitigung",
-        "heading": "Schimmel im Keller in Solingen",
+        "heading": "Schimmelsanierung im Keller in Solingen",
         "text": "Nasse Wände nach Hochwasser oder Hangwasser sind ideale Bedingungen für Schimmel. Wir entfernen ihn sporensicher und beseitigen die Ursache, damit er nicht wiederkommt."
       },
       {
@@ -1986,7 +2007,7 @@ export const CITY_PAGES: CityPage[] = [
       },
       {
         slug: "schimmelbeseitigung",
-        heading: "Schimmel im Keller in Remscheid",
+        heading: "Schimmelsanierung im Keller in Remscheid",
         text: "Dauerhaft nasse Wände und kühle Keller sind ideale Bedingungen für Schimmel. Wir entfernen ihn sporensicher und beseitigen die Ursache, damit er nicht wiederkommt."
       },
       {
@@ -2191,7 +2212,7 @@ export const CITY_PAGES: CityPage[] = [
       },
       {
         slug: "schimmelbeseitigung",
-        heading: "Schimmel im Keller in Velbert",
+        heading: "Schimmelsanierung im Keller in Velbert",
         text: "Feuchte Talkeller und kühle Hangwände begünstigen Schimmel. Wir klären per Messung die Ursache, entfernen den Befall sporensicher und beseitigen die Feuchte."
       },
       {
@@ -2582,7 +2603,7 @@ export const CITY_PAGES: CityPage[] = [
       },
       {
         "slug": "schimmelbeseitigung",
-        "heading": "Schimmel im Keller in Wermelskirchen",
+        "heading": "Schimmelsanierung im Keller in Wermelskirchen",
         "text": "Dauerhaft nasse Wände und kühle Keller sind ideale Bedingungen für Schimmel. Wir entfernen ihn sporensicher und beseitigen die Ursache, damit er nicht wiederkommt."
       },
       {
@@ -2634,7 +2655,7 @@ export const CITY_PAGES: CityPage[] = [
     keyword: "Kellersanierung Essen",
     title: "Kellersanierung Essen | Kellerabdichtung & Rissverpressung",
     metaDescription:
-      "Kellersanierung in Essen vom Betrieb vor Ort, Niebuhrstraße 46: Kellerabdichtung von innen, Horizontalsperre, Rissverpressung. Kostenlose Feuchtemessung.",
+      "Kellersanierung Essen vom Betrieb vor Ort, Niebuhrstraße 46: Kellerabdichtung von innen, Horizontalsperre, Rissverpressung. Kostenlose Feuchtemessung.",
     h1: "Kellersanierung Essen: Ihr Fachbetrieb vor Ort",
     lede:
       "Unser Sitz ist in Essen, in der Niebuhrstraße 46. Von Karnap bis Kettwig sind wir in der Regel innerhalb von 24 Stunden bei Ihnen, messen kostenlos, woher die Feuchte kommt, und dichten Ihren Keller dann von innen ab, ohne Aufgraben und zum Festpreis.",
@@ -2688,7 +2709,7 @@ export const CITY_PAGES: CityPage[] = [
       },
       {
         slug: "schimmelbeseitigung",
-        heading: "Schimmel im Keller in Essen",
+        heading: "Schimmelsanierung im Keller in Essen",
         text: "Schimmel im Keller ist fast immer ein Feuchteproblem. Wir klären per Messung, ob die Nässe aus der Wand kommt oder als Kondensat aus der Luft, entfernen den Befall sporensicher und beseitigen die Ursache, damit er nicht wiederkommt.",
       },
       {
@@ -3351,7 +3372,7 @@ export const CITY_PAGES: CityPage[] = [
       },
       {
         slug: "schimmelbeseitigung",
-        heading: "Schimmel im Keller in Bochum",
+        heading: "Schimmelsanierung im Keller in Bochum",
         text: "Feuchte Ziegelwände und kühle Keller lassen Schimmel wachsen. Wir entfernen ihn sporensicher und beseitigen die Ursache."
       },
       {
@@ -3639,7 +3660,7 @@ export const CITY_PAGES: CityPage[] = [
       },
       {
         slug: "schimmelbeseitigung",
-        heading: "Schimmel im Keller in Dortmund",
+        heading: "Schimmelsanierung im Keller in Dortmund",
         text: "Ob im Altbau oder im modernisierten Souterrain: Wir klären per Messung, woher die Feuchte kommt, entfernen den Schimmel sporensicher und beseitigen die Ursache."
       },
       {
@@ -3980,7 +4001,7 @@ export const CITY_PAGES: CityPage[] = [
       },
       {
         slug: "schimmelbeseitigung",
-        heading: "Schimmel im Keller in Duisburg",
+        heading: "Schimmelsanierung im Keller in Duisburg",
         text: "Wo Kellerräume als Lager oder Hobbyraum genutzt werden, folgt auf die Feuchte oft der Schimmel. Wir entfernen ihn sporensicher und beseitigen die Ursache, damit er nicht wiederkommt.",
       },
       {
@@ -4051,7 +4072,7 @@ export const CITY_PAGES: CityPage[] = [
         ],
       },
       {
-        heading: "Schimmel im Keller in Duisburger Altbauten",
+        heading: "Schimmelsanierung im Keller in Duisburger Altbauten",
         paragraphs: [
           "Schimmel im Keller ist fast immer eine Folge von Feuchte in der Wand oder von Kondensat an kalten Flächen. Die Messung zeigt, welche Ursache vorliegt; danach entfernen wir den Befall und beheben den Grund.",
         ],
@@ -4206,7 +4227,7 @@ export const CITY_PAGES: CityPage[] = [
       },
       {
         slug: "schimmelbeseitigung",
-        heading: "Schimmel im Keller in Gelsenkirchen",
+        heading: "Schimmelsanierung im Keller in Gelsenkirchen",
         text: "Ob der Schimmel aus der nassen Wand kommt oder aus Kondensat, zeigt die Messung von Wandfeuchte, Oberflächentemperatur und Raumklima. Wir entfernen den Befall sporensicher und beseitigen dann die Ursache, damit er nicht zurückkommt.",
       },
       {
@@ -4412,7 +4433,7 @@ export const CITY_PAGES: CityPage[] = [
       },
       {
         slug: "schimmelbeseitigung",
-        heading: "Schimmel im Keller in Oberhausen",
+        heading: "Schimmelsanierung im Keller in Oberhausen",
         text: "Riecht der Keller muffig oder zeigen sich dunkle Flecken, ist meist schon Schimmel da. Wir entfernen ihn sporensicher, klären per Messung, ob die Nässe aus der Wand oder aus der Luft kommt, und beseitigen die Ursache.",
       },
       {
@@ -4836,7 +4857,7 @@ export const CITY_PAGES: CityPage[] = [
       },
       {
         slug: "schimmelbeseitigung",
-        heading: "Schimmel im Keller in Hagen",
+        heading: "Schimmelsanierung im Keller in Hagen",
         text: "Feuchte Bruchsteinwände kühlen stark aus, warme Luft kondensiert daran. Wir beseitigen den Schimmel sporensicher und die Ursache gleich mit, wo nötig mit Klimaplatten.",
       },
       {
@@ -5223,7 +5244,7 @@ export const CITY_PAGES: CityPage[] = [
       },
       {
         "slug": "schimmelbeseitigung",
-        "heading": "Schimmel im Keller in Bottrop",
+        "heading": "Schimmelsanierung im Keller in Bottrop",
         "text": "In den Siedlungshäusern kommt der Schimmel meist aus der nassen Wand, in den kühlen Kellern der Einfamilienhäuser in Kirchhellen oft aus Kondensat beim Lüften im Sommer. Die Messung zeigt, was bei Ihnen zutrifft. Wir entfernen den Befall sporensicher und beseitigen dann die Ursache."
       },
       {
@@ -5514,7 +5535,7 @@ export const CITY_PAGES: CityPage[] = [
       },
       {
         "slug": "schimmelbeseitigung",
-        "heading": "Schimmel im Keller in Gladbeck",
+        "heading": "Schimmelsanierung im Keller in Gladbeck",
         "text": "In den Siedlungshäusern kommt der Schimmel meist aus der nassen Wand, in den Einfamilienhäusern im Norden oft aus Kondensat. Wir entfernen ihn sporensicher und beseitigen die Ursache."
       },
       {
@@ -5728,7 +5749,7 @@ export const CITY_PAGES: CityPage[] = [
       },
       {
         "slug": "schimmelbeseitigung",
-        "heading": "Schimmel im Keller in Herten",
+        "heading": "Schimmelsanierung im Keller in Herten",
         "text": "Feuchte Ziegelwände und kühle Keller lassen Schimmel wachsen. Wir entfernen ihn sporensicher und beseitigen die Ursache, damit er nicht wiederkommt."
       },
       {
@@ -5954,7 +5975,7 @@ export const CITY_PAGES: CityPage[] = [
       },
       {
         "slug": "schimmelbeseitigung",
-        "heading": "Schimmel im Keller in Recklinghausen",
+        "heading": "Schimmelsanierung im Keller in Recklinghausen",
         "text": "In den Altbaukellern kommt der Schimmel meist aus der nassen Wand, in den Einfamilienhäusern im Norden oft aus Kondensat. Wir entfernen ihn sporensicher und beseitigen die Ursache."
       },
       {
@@ -6190,7 +6211,7 @@ export const CITY_PAGES: CityPage[] = [
       },
       {
         "slug": "schimmelbeseitigung",
-        "heading": "Schimmel im Keller in Herne",
+        "heading": "Schimmelsanierung im Keller in Herne",
         "text": "In den Kellerverschlägen der Mietshäuser wächst Schimmel an der nassen Wand und auf eingelagerten Sachen. Wir entfernen ihn sporensicher und beseitigen die Ursache."
       },
       {
@@ -6421,7 +6442,7 @@ export const CITY_PAGES: CityPage[] = [
       },
       {
         "slug": "schimmelbeseitigung",
-        "heading": "Schimmel im Keller in Witten",
+        "heading": "Schimmelsanierung im Keller in Witten",
         "text": "Feuchte Wände und kühle Keller lassen Schimmel wachsen. Wir entfernen ihn sporensicher und beseitigen die Ursache, damit er nicht wiederkommt."
       },
       {
@@ -6635,7 +6656,7 @@ export const CITY_PAGES: CityPage[] = [
       },
       {
         "slug": "schimmelbeseitigung",
-        "heading": "Schimmel im Keller in Hattingen",
+        "heading": "Schimmelsanierung im Keller in Hattingen",
         "text": "In alten Gewölbekellern und kühlen Hangkellern wächst Schimmel leicht. Wir entfernen ihn sporensicher und beseitigen die Ursache."
       },
       {
