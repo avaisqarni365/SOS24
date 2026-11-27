@@ -19,6 +19,19 @@ import PagePhotos from "@/components/seo/PagePhotos";
 
 export const dynamicParams = false;
 
+
+/* Schimmelsanierung is one of the main services; every town page answers it once. */
+function withSchimmelFaq(page: { name: string; faqs: { q: string; a: string }[] }) {
+  if (page.faqs.some((f) => f.q.includes("Schimmelsanierung"))) return page.faqs;
+  return [
+    ...page.faqs,
+    {
+      q: `Schimmelsanierung in ${page.name}: Wie gehen Sie vor?`,
+      a: `Zuerst messen wir in ${page.name} vor Ort, ob die Feuchte aus der Wand kommt oder als Kondensat aus der Luft. Dann entfernen wir den Befall sporensicher und ohne Chlor, bauen die Oberfläche mineralisch neu auf und beseitigen die Ursache, zum Beispiel mit einer Horizontalsperre, einer Innenabdichtung oder Klimaplatten. Die Messung ist kostenlos, das Angebot ein Festpreis.`,
+    },
+  ];
+}
+
 export function generateStaticParams() {
   return CITY_PAGES.map((c) => ({ city: c.slug }));
 }
@@ -128,7 +141,7 @@ export default function CityPage({ params }: { params: { city: string } }) {
           }
         : {}),
     },
-    faqNode(page.faqs),
+    faqNode(withSchimmelFaq(page)),
   ];
 
   const nearby = page.nearby
@@ -344,7 +357,7 @@ export default function CityPage({ params }: { params: { city: string } }) {
 
         <section className="surface-bone-2 sc-section">
           <div className="sc-wrap grid gap-12">
-            <FaqList faqs={page.faqs} title={`Fragen aus ${page.name}`} />
+            <FaqList faqs={withSchimmelFaq(page)} title={`Fragen aus ${page.name}`} />
             <LinkGrid title={local.length ? `Weitere Leistungen in ${page.name}` : `Leistungen in ${page.name}`} links={otherServices} />
             <LinkGrid
               title="Filme aus unserer Arbeit"

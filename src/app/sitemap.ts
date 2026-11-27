@@ -7,7 +7,7 @@ import { abs } from "@/lib/site";
 export const dynamic = "force-static";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const lastModified = new Date("2026-11-04");
+  const lastModified = new Date("2026-11-27");
   return [
     { url: abs("/"), lastModified, changeFrequency: "monthly", priority: 1 },
     ...SERVICE_PAGES.map((s) => ({
